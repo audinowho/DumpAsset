@@ -321,6 +321,7 @@ COMMON.ORBS = {
   { Index = 257, Hidden = 0, Price = 150},
   { Index = 258, Hidden = 0, Price = 150},
   { Index = 259, Hidden = 0, Price = 350},
+  { Index = 261, Hidden = 0, Price = 350},
   { Index = 263, Hidden = 0, Price = 150},
   { Index = 264, Hidden = 0, Price = 300},
   { Index = 265, Hidden = 0, Price = 150},

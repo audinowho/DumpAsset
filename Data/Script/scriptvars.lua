@@ -72,6 +72,8 @@ SV.base_trades = {
 	{ Item=908, ReqItem={-1,-1}},
 	{ Item=914, ReqItem={-1,-1}}
 }
+SV.unlocked_trades = {
+}
 
 SV.base_town = 
 {

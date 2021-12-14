@@ -1169,12 +1169,37 @@ function COMMON.EndDayCycle()
   local catalog = {}
   
   for ii = 1, #COMMON_GEN.TRADES_RANDOM, 1 do
-	local base_data = COMMON_GEN.TRADES_RANDOM[ii]
-	table.insert(catalog, base_data)
+    local base_data = { Item=COMMON_GEN.TRADES_RANDOM[ii].Item, ReqItem=COMMON_GEN.TRADES_RANDOM[ii].ReqItem }
+    
+    -- check if the item has been acquired before, or if it's a 1* item and dex has been seen
+    if SV.unlocked_trades[COMMON_GEN.TRADES_RANDOM[ii].Item] ~= nil then
+      table.insert(catalog, base_data)
+    elseif #COMMON_GEN.TRADES_RANDOM[ii].ReqItem == 2 then
+      if _DATA.Save:GetMonsterUnlock(COMMON_GEN.TRADES_RANDOM[ii].Dex) == RogueEssence.Data.GameProgress.UnlockState.Discovered then
+        table.insert(catalog, base_data)
+      end
+    end
   end
 
   SV.base_trades = { }
-  type_count = 5
+  if #catalog < 25 then
+    type_count = 0
+  elseif #catalog < 50 then
+    type_count = 1
+  elseif #catalog < 75 then
+    type_count = 2
+  elseif #catalog < 100 then
+    type_count = 3
+  elseif #catalog < 150 then
+    type_count = 4
+  elseif #catalog < 250 then
+    type_count = 5
+  elseif #catalog < 350 then
+    type_count = 6
+  else
+    type_count = 7
+  end
+  
 	for ii = 1, type_count, 1 do
 		local idx = math.random(1, #catalog)
 		local base_data = catalog[idx]

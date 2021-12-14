@@ -218,27 +218,6 @@ function test_grounds.Sign3_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   local chara = CH('PLAYER')
   PrintInfo('Sign3_Action')
-  UI:ResetSpeaker()
-  UI:SetCenter(true, true)
-  UI:WaitShowDialogue("Try to show a custom menu.[scroll]Are you ready?")
-  
-  local choices = LUA_ENGINE:MakeGenericType(ListType, { MenuTextChoiceType }, { })
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice 0", UI:GetChoiceAction(0)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice one", UI:GetChoiceAction(1)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice two", UI:GetChoiceAction(2)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice tres", UI:GetChoiceAction(3)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice quatro", UI:GetChoiceAction(4)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice V", UI:GetChoiceAction(5)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice VI", UI:GetChoiceAction(6)))
-  local custom_menu = RogueEssence.Menu.CustomMultiPageMenu(RogueElements.Loc(8, 16), 144, "Custom Menu Test", choices:ToArray(), 5, 4, UI:GetChoiceAction(-1), nil)
-  UI:ChooseCustomMenu(custom_menu)
-  UI:WaitForChoice()
-  local chres = UI:ChoiceResult()
-  if chres > -1 then
-	UI:WaitShowDialogue("You chose option " .. tostring(chres))
-  else
-	UI:WaitShowDialogue("You cancelled.")
-  end
 end
 
 function test_grounds.Assembly_Action(obj, activator)

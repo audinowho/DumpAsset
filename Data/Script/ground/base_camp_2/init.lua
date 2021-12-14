@@ -110,6 +110,27 @@ end
 function base_camp_2.Mission_Board_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  UI:ResetSpeaker()
+  UI:SetCenter(true, true)
+  UI:WaitShowDialogue("Try to show a custom menu.[scroll]Are you ready?")
+  
+  local choices = LUA_ENGINE:MakeGenericType(ListType, { MenuTextChoiceType }, { })
+  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice 0", UI:GetChoiceAction(0)))
+  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice one", UI:GetChoiceAction(1)))
+  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice two", UI:GetChoiceAction(2)))
+  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice tres", UI:GetChoiceAction(3)))
+  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice quatro", UI:GetChoiceAction(4)))
+  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice V", UI:GetChoiceAction(5)))
+  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice VI", UI:GetChoiceAction(6)))
+  local custom_menu = RogueEssence.Menu.CustomMultiPageMenu(RogueElements.Loc(8, 16), 144, "Custom Menu Test", choices:ToArray(), 5, 4, UI:GetChoiceAction(-1), nil)
+  UI:ChooseCustomMenu(custom_menu)
+  UI:WaitForChoice()
+  local chres = UI:ChoiceResult()
+  if chres > -1 then
+    UI:WaitShowDialogue("You chose option " .. tostring(chres))
+  else
+    UI:WaitShowDialogue("You cancelled.")
+  end
 end
 
 function base_camp_2.Shop_Action(obj, activator)
@@ -378,6 +399,11 @@ function base_camp_2.Appraisal_Action(obj, activator)
 						local itemEntry = _DATA:GetItem(box.HiddenValue)
 						local treasure_choice = { Box = box, Item = RogueEssence.Dungeon.InvItem(box.HiddenValue,false,itemEntry.MaxStack)}
 						table.insert(treasure, treasure_choice)
+						
+						-- note high rarity items
+						if itemEntry.Rarity > 0 then
+							SV.unlocked_trades[box.HiddenValue] = true
+						end
 					end
 					SOUND:PlayBattleSE("DUN_Money")
 					GAME:RemoveFromPlayerMoney(total)
@@ -401,6 +427,7 @@ function base_camp_2.Appraisal_Action(obj, activator)
 					
 					for ii = 1, #treasure, 1 do
 						local item = treasure[ii].Item
+						
 						GAME:GivePlayerItem(item.ID, 1, false, item.HiddenValue)
 					end
 					
@@ -413,9 +440,7 @@ function base_camp_2.Appraisal_Action(obj, activator)
 	end
 end
 
-function base_camp_2.Swap_Action(obj, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+function base_camp_2.Compute_Swap_Catalog()
   --silk/dust/gem/globes
   local catalog = { 
 	{ Item=702, ReqItem={700,701}},
@@ -455,12 +480,7 @@ function base_camp_2.Swap_Action(obj, activator)
 	{ Item=770, ReqItem={768,769}},
 	{ Item=771, ReqItem={768, 769, 770}}
 }
-  
-  local state = 0
-  local repeated = false
-  local cart = {} --catalog element chosen to trade for
-  local tribute = {} --item IDs chosen to trade in
-  
+
   --normal trades
   for ii = 1, #COMMON_GEN.TRADES, 1 do
 	local base_data = COMMON_GEN.TRADES[ii]
@@ -472,6 +492,20 @@ function base_camp_2.Swap_Action(obj, activator)
 	local base_data = SV.base_trades[ii]
 	table.insert(catalog, base_data)
   end
+  return catalog
+end
+
+function base_camp_2.Swap_Action(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local catalog = base_camp_2.Compute_Swap_Catalog()
+  
+  local state = 0
+  local repeated = false
+  local cart = -1 --catalog element chosen to trade for
+  local tribute = {} --item IDs chosen to trade in
+  
+
   
   local Prices = { 1000, 5000, 20000, 50000, 100000 }
   local player = CH('PLAYER')
@@ -492,7 +526,6 @@ function base_camp_2.Swap_Action(obj, activator)
 			local result = UI:ChoiceResult()
 			repeated = true
 			if result == 1 then
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Choose']))
 				state = 1
 			elseif result == 2 then
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Info_001']))
@@ -505,14 +538,22 @@ function base_camp_2.Swap_Action(obj, activator)
 		elseif state == 1 then
 			--only show the items that can be swapped for, checking inv, held, and storage
 			--allow trade from storage, and find a way around multi-select for storage.
-			UI:SwapMenu(catalog, Prices)
-			UI:WaitForChoice()
-			local result = UI:ChoiceResult()
-			if result > -1 then
-				cart = result
-				state = 2
-			else
+			if not UI:CanSwapMenu(catalog) then
+				UI:SetSpeakerEmotion("Sigh")
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_None']))
+				UI:SetSpeaker(chara)
 				state = 0
+			else
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Choose']))
+				UI:SwapMenu(catalog, Prices)
+				UI:WaitForChoice()
+				local result = UI:ChoiceResult()
+				if result > -1 then
+					cart = result
+					state = 2
+				else
+					state = 0
+				end
 			end
 		elseif state == 2 then
 			local trade = catalog[cart]
@@ -598,8 +639,18 @@ function base_camp_2.Swap_Action(obj, activator)
 				--end
 				
 				UI:SetSpeaker(chara)
+				
+				--remove the trade if it was a base trade
+				local base_trade_idx = cart - (#catalog - #SV.base_trades)
+				if base_trade_idx > 0 then
+					table.remove(SV.base_trades, base_trade_idx)
+				end
+				-- recompute the available trades
+				catalog = base_camp_2.Compute_Swap_Catalog()
+				
 				tribute = {}
-				cart = {}
+				cart = -1
+				
 				state = 0
 			else
 				state = 1

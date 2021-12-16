@@ -98,10 +98,10 @@ function DebugTools:OnNewGame()
       _DATA.Save.DungeonUnlocks[ii-1] = RogueEssence.Data.GameProgress.UnlockState.Discovered
     end
   
-    for ii = 900, 2370, 1 do
-      GAME:GivePlayerStorageItem(ii)
-      SV.unlocked_trades[ii] = true
-    end
+    --for ii = 900, 2370, 1 do
+    --  GAME:GivePlayerStorageItem(ii)
+    --  SV.unlocked_trades[ii] = true
+    --end
   
     SV.base_camp.ExpositionComplete = true
     SV.base_camp.IntroComplete = true

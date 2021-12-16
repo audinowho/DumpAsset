@@ -78,6 +78,15 @@ function test_grounds.Init(map)
   GROUND:SpawnerDoSpawn('MerchantSpawner2')
 end
 
+function test_grounds.GameLoad(map)
+  PrintInfo('GameLoad_test_grounds')
+
+end
+
+function test_grounds.GameSave(map)
+  PrintInfo('GameSave_test_grounds')
+
+end
 
 --Called when the screen fades in as the player enters the map
 function test_grounds.Enter(map)

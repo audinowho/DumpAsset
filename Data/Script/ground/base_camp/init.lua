@@ -26,6 +26,9 @@ function base_camp.Enter(map)
   -- _DATA.Save.ActiveTeam:SetRank(1)
   
   -- end
+  if SV.unlocked_trades == nil then
+    SV.unlocked_trades = {}
+  end
   
   SV.checkpoint = 
   {

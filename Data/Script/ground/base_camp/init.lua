@@ -26,8 +26,17 @@ function base_camp.Enter(map)
   -- _DATA.Save.ActiveTeam:SetRank(1)
   
   -- end
-  if SV.unlocked_trades == nil then
+  if SV.unlocked_trades ~= nil then
+  else
     SV.unlocked_trades = {}
+  end
+  
+  if SV.file ~= nil then
+  else
+    SV.file =
+    {
+      Starter = MonsterID(1, 0, 0, Gender.Male)
+    }
   end
   
   SV.checkpoint = 

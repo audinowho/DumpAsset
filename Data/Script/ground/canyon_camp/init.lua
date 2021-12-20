@@ -10,6 +10,23 @@ function canyon_camp.Init(map)
   PrintInfo("=>> Init_canyon_camp")
   MapStrings = COMMON.AutoLoadLocalizedStrings()
   COMMON.RespawnAllies()
+  
+  --set the tutor's appearance based on 
+  local tutor = CH('NPC_Tutor')
+  
+  local charData = RogueEssence.Dungeon.CharData()
+  local tutor_species = 0
+  if SV.file.Starter.Species == 1 then
+    tutor_species = 254
+  elseif SV.file.Starter.Species == 4 then
+    tutor_species = 257
+  elseif SV.file.Starter.Species == 7 then
+    tutor_species = 210
+  elseif SV.file.Starter.Species == 25 then
+    tutor_species = 26
+  end
+  charData.BaseForm = RogueEssence.Dungeon.MonsterID(tutor_species, 0, 0, Gender.Female)
+  tutor.Data = charData
 end
 
 function canyon_camp.Enter(map)
@@ -68,6 +85,78 @@ function canyon_camp.West_Exit_Touch(obj, activator)
   {Flag=SV.cliff_camp.ExpositionComplete,Zone=1,ID=4,Entry=2}}
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
+
+  
+function canyon_camp.NPC_Dragon_1_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+end
+  
+function canyon_camp.NPC_Dragon_2_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+end
+  
+function canyon_camp.NPC_Dragon_3_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+end
+  
+function canyon_camp.NPC_Shiny_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  GROUND:CharTurnToChar(chara, player)--make the chara turn to the player
+  if not SV.canyon_camp.ShinyIntro then
+    if player.CurrentForm.Skin == 0 then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shiny_Line_001']))
+    else
+      SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
+      GROUND:CharSetEmote(chara, 3, 1)
+	  GAME:WaitFrames(30)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shiny_Line_002']))
+	  SV.canyon_camp.ShinyIntro = true
+    end
+  else
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shiny_Line_003']))
+  end
+end
+  
+function canyon_camp.NPC_Tutor_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local tutor_skill = 0
+  if SV.file.Starter.Species == 1 then
+    tutor_skill = 520
+  elseif SV.file.Starter.Species == 4 then
+    tutor_skill = 519
+  elseif SV.file.Starter.Species == 7 then
+    tutor_skill = 518
+  elseif SV.file.Starter.Species == 25 then
+    tutor_skill = 344
+  end
+  
+  
+  --after teaching, unlock the tutor back at the hub for ALL moves
+  
+end
+  
+function canyon_camp.NPC_Argue_1_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+end
+  
+function canyon_camp.NPC_Argue_2_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+end
+  
+function canyon_camp.NPC_Hidden_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+end
+
 
 function canyon_camp.Assembly_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

@@ -147,5 +147,24 @@ else
   GROUND:EntTurn(chara, Direction.UpLeft)
 end
   end
+  
+function cliff_camp.Rival_Early_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  if not SV.cliff_camp.RivalEarlyIntro then
+    GROUND:CharTurnToChar(chara, player)--make the chara turn to the player
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_Line_001']))
+	local receive_item = RogueEssence.Dungeon.InvItem(250)
+	COMMON.GiftItem(player, receive_item)
+	UI:SetSpeaker(chara)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_Line_002']))
+    SV.cliff_camp.RivalEarlyIntro = true
+	GROUND:EntTurn(chara, Direction.Right)
+  else
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_Line_003']))
+  end
+end
 
 return cliff_camp

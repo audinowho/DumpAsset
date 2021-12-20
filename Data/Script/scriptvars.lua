@@ -52,6 +52,10 @@ SV.test_grounds =
   Partner = { Species=133, Form=0, Skin=0, Gender=1 },
 }
 
+SV.file =
+{
+  Starter = MonsterID(0, 0, 0, Gender.Genderless)
+}
 
 SV.base_camp = 
 {
@@ -98,12 +102,14 @@ SV.forest_camp =
 SV.cliff_camp = 
 {
   ExpositionComplete  = false,
-  TeamRetreatIntro = false
+  TeamRetreatIntro = false,
+  RivalEarlyIntro = false
 }
 
 SV.canyon_camp = 
 {
-  ExpositionComplete  = false
+  ExpositionComplete  = false,
+  ShinyIntro = false
 }
 
 SV.rest_stop = 

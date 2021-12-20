@@ -14,7 +14,6 @@ function forest_camp.Init(map)
   
   local snorlax = CH('Snorlax')
   GROUND:CharSetAnim(snorlax, "Sleep", true)
-  GROUND:Hide("Snorlax")
 end
 
 function forest_camp.Enter(map)
@@ -90,10 +89,6 @@ end
 
 function forest_camp.Snorlax_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  UI:SetSpeaker(chara)
-  UI:WaitShowDialogue("Begin boss battle.")
-  
   
   SOUND:PlayBattleSE("EVT_Battle_Transition")
   GAME:FadeOut(true, 60)

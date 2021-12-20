@@ -16,12 +16,12 @@ function base_camp_2.Init(map)
   local assemblyCount = GAME:GetPlayerAssemblyCount()
   
   --Place player teammates
-  for i = 1,40,1 do
+  for i = 1,26,1 do
     GROUND:RemoveCharacter("Assembly" .. tostring(i))
   end
   total = assemblyCount
-  if total > 40 then
-    total = 40
+  if total > 26 then
+    total = 26
   end
   --TODO: randomly add the spawns
   
@@ -32,18 +32,18 @@ function base_camp_2.Init(map)
     --GROUND:GiveCharIdleChatter(chara)
   end
   
-  base_camp_2.CreateWalkArea(3, 352, 296, 48, 48)
-  base_camp_2.CreateWalkArea(4, 424, 384, 48, 48)
-  base_camp_2.CreateWalkArea(7, 576, 272, 56, 64)
-  base_camp_2.CreateWalkArea(8, 336, 208, 64, 80)
-  base_camp_2.CreateWalkArea(10, 248, 592, 64, 40)
-  base_camp_2.CreateWalkArea(16, 96, 176, 32, 72)
-  base_camp_2.CreateWalkArea(19, 216, 256, 48, 64)
-  base_camp_2.CreateWalkArea(25, 72, 264, 64, 64)
-  base_camp_2.CreateWalkArea(31, 400, 592, 56, 48)
-  base_camp_2.CreateWalkArea(35, 728, 352, 64, 48)
-  base_camp_2.CreateWalkArea(36, 584, 608, 72, 56)
+  base_camp_2.CreateWalkArea("Assembly" .. tostring(2), 424, 384, 48, 48)
+  base_camp_2.CreateWalkArea("Assembly" .. tostring(4), 576, 272, 56, 64)
+  base_camp_2.CreateWalkArea("Assembly" .. tostring(5), 336, 208, 64, 80)
+  base_camp_2.CreateWalkArea("Assembly" .. tostring(6), 248, 592, 64, 40)
+  base_camp_2.CreateWalkArea("Assembly" .. tostring(10), 96, 176, 32, 72)
+  base_camp_2.CreateWalkArea("Assembly" .. tostring(12), 216, 256, 48, 64)
+  base_camp_2.CreateWalkArea("Assembly" .. tostring(14), 72, 264, 64, 64)
+  base_camp_2.CreateWalkArea("Assembly" .. tostring(19), 400, 592, 56, 48)
+  base_camp_2.CreateWalkArea("Assembly" .. tostring(22), 728, 352, 64, 48)
+  base_camp_2.CreateWalkArea("Assembly" .. tostring(23), 584, 608, 72, 56)
   
+  base_camp_2.CreateWalkArea("NPC_Square_Left", 344, 288, 48, 48)
   
   if SOUND:GetCurrentSong() ~= SV.base_town.Song then
     SOUND:PlayBGM(SV.base_town.Song, true)
@@ -68,10 +68,10 @@ end
 --------------------------------------------------
 -- Map Begin Functions
 --------------------------------------------------
-function base_camp_2.CreateWalkArea(assemblyIndex, x, y, w, h)
+function base_camp_2.CreateWalkArea(name, x, y, w, h)
 
   --Set Char AI
-  local chara = CH("Assembly" .. tostring(assemblyIndex))
+  local chara = CH(name)
   if chara == nil then
     return
   end

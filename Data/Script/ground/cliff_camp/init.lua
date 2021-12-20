@@ -97,7 +97,7 @@ function cliff_camp.Teammate3_Action(chara, activator)
   COMMON.GroundInteract(activator, chara, true)
 end
 
-function cliff_camp.Doduo_Action(chara, activator)
+function cliff_camp.Speedster_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
@@ -123,7 +123,7 @@ else
 end
   end
   
-  function cliff_camp.Pachirisu_Action(chara, activator)
+function cliff_camp.Speedster_2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character

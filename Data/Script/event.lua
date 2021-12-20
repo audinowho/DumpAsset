@@ -271,7 +271,7 @@ function BATTLE_SCRIPT.RescueReached(owner, ownerChar, context, args)
   mission.Complete = 1
   
   local oldDir = context.Target.CharDir
-  DUNGEON:CharTurnToChar(context.Target, chara)
+  DUNGEON:CharTurnToChar(context.Target, context.User)
   
   UI:SetSpeaker(context.Target)
   UI:WaitShowDialogue("Yay, you found me!")
@@ -296,7 +296,7 @@ function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
     mission.Complete = 1
   
     local oldDir = context.Target.CharDir
-    DUNGEON:CharTurnToChar(context.Target, chara)
+    DUNGEON:CharTurnToChar(context.Target, context.User)
   
     UI:SetSpeaker(context.Target)
     UI:WaitShowDialogue("Yay, you brought the escort to me!")
@@ -319,7 +319,7 @@ function BATTLE_SCRIPT.CountTalkTest(owner, ownerChar, context, args)
   local tbl = LTBL(context.Target)
   
   local oldDir = context.Target.CharDir
-  DUNGEON:CharTurnToChar(context.Target, chara)
+  DUNGEON:CharTurnToChar(context.Target, context.User)
   
   UI:SetSpeaker(context.Target)
   
@@ -330,6 +330,29 @@ function BATTLE_SCRIPT.CountTalkTest(owner, ownerChar, context, args)
 	tbl.TalkAmount = tbl.TalkAmount + 1
   end
   UI:WaitShowDialogue("You've talked to me "..tostring(tbl.TalkAmount).." times.")
+  
+  context.Target.CharDir = oldDir
+end
+
+
+function BATTLE_SCRIPT.PairTalk(owner, ownerChar, context, args)
+  context.CancelState.Cancel = true
+  
+  local oldDir = context.Target.CharDir
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  
+  UI:SetSpeaker(context.Target)
+  
+  if args.Pair == 0 then
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_ADVICE_TEAM_MODE"):ToLocal(), _DIAG:GetControlString(RogueEssence.FrameInput.InputType.TeamMode)))
+  else
+    if _DIAG.GamePadActive then
+	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_ADVICE_SWITCH_GAMEPAD"):ToLocal(), _DIAG:GetControlString(RogueEssence.FrameInput.InputType.LeaderSwapBack), _DIAG:GetControlString(RogueEssence.FrameInput.InputType.LeaderSwapForth)))
+	else
+	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_ADVICE_SWITCH_KEYBOARD"):ToLocal(), _DIAG:GetControlString(RogueEssence.FrameInput.InputType.LeaderSwap1), _DIAG:GetControlString(RogueEssence.FrameInput.InputType.LeaderSwap2), _DIAG:GetControlString(RogueEssence.FrameInput.InputType.LeaderSwap3), _DIAG:GetControlString(RogueEssence.FrameInput.InputType.LeaderSwap4)))
+	end
+  end
+  
   
   context.Target.CharDir = oldDir
 end

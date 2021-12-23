@@ -183,7 +183,7 @@ function test_grounds.Concurrent_Sequence(turnTime)
   GROUND:CharSetAnim(chara, "None", false)
 end
 
-function test_grounds.Sign2_Action(obj, activator)
+function test_grounds.Sign3_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   local chara = CH('PLAYER')
   PrintInfo('Sign2_Action')
@@ -223,10 +223,20 @@ end
 ListType = luanet.import_type('System.Collections.Generic.List`1')
 MenuTextChoiceType = luanet.import_type('RogueEssence.Menu.MenuTextChoice')
 
-function test_grounds.Sign3_Action(obj, activator)
+function test_grounds.Sign2_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   local chara = CH('PLAYER')
-  PrintInfo('Sign3_Action')
+  GROUND:Unhide('Activation')
+end
+
+function test_grounds.Entrance_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  PrintInfo('Entrance_Action')
+end
+
+function test_grounds.Activation_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  PrintInfo('Activation_Action')
 end
 
 function test_grounds.Assembly_Action(obj, activator)

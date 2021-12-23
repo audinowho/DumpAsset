@@ -16,13 +16,13 @@ function canyon_camp.Init(map)
   
   local charData = RogueEssence.Dungeon.CharData()
   local tutor_species = 0
-  if SV.file.Starter.Species == 1 then
-    tutor_species = 254
-  elseif SV.file.Starter.Species == 4 then
-    tutor_species = 257
-  elseif SV.file.Starter.Species == 7 then
-    tutor_species = 210
-  elseif SV.file.Starter.Species == 25 then
+  if SV.General.Starter.Species == 1 then
+    tutor_species = 154
+  elseif SV.General.Starter.Species == 4 then
+    tutor_species = 157
+  elseif SV.General.Starter.Species == 7 then
+    tutor_species = 160
+  elseif SV.General.Starter.Species == 25 then
     tutor_species = 26
   end
   charData.BaseForm = RogueEssence.Dungeon.MonsterID(tutor_species, 0, 0, Gender.Female)
@@ -127,13 +127,13 @@ function canyon_camp.NPC_Tutor_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   local tutor_skill = 0
-  if SV.file.Starter.Species == 1 then
+  if SV.General.Starter.Species == 1 then
     tutor_skill = 520
-  elseif SV.file.Starter.Species == 4 then
+  elseif SV.General.Starter.Species == 4 then
     tutor_skill = 519
-  elseif SV.file.Starter.Species == 7 then
+  elseif SV.General.Starter.Species == 7 then
     tutor_skill = 518
-  elseif SV.file.Starter.Species == 25 then
+  elseif SV.General.Starter.Species == 25 then
     tutor_skill = 344
   end
   

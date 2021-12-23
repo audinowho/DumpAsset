@@ -28,7 +28,8 @@ SV.Services =
 -----------------------------------------------
 SV.General =
 {
-  Rescue = nil
+  Rescue = nil,
+  Starter = MonsterID(0, 0, 0, Gender.Genderless)
   --Anything that applies to more than a single level, and that is too small to make a sub-table for, should be put in here ideally, or a sub-table of this
 }
 
@@ -50,11 +51,6 @@ SV.test_grounds =
   FinishedMissions = { },
   Starter = { Species=25, Form=0, Skin=0, Gender=2 },
   Partner = { Species=133, Form=0, Skin=0, Gender=1 },
-}
-
-SV.file =
-{
-  Starter = MonsterID(0, 0, 0, Gender.Genderless)
 }
 
 SV.base_camp = 

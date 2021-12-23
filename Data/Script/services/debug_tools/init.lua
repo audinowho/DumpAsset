@@ -67,7 +67,7 @@ function DebugTools:OnNewGame()
 	if not GAME:InRogueMode() then
       _DATA.Save.ActiveTeam.Bank = 1000
 	end
-	SV.file.Starter = _DATA.Save.ActiveTeam.Players[0].BaseForm
+	SV.General.Starter = _DATA.Save.ActiveTeam.Players[0].BaseForm
   else
     PrintInfo("\n<!> ExampleSvc: Preparing debug save file")
     _DATA.Save.ActiveTeam:SetRank(1)
@@ -106,7 +106,7 @@ function DebugTools:OnNewGame()
   
     SV.base_camp.ExpositionComplete = true
     SV.base_camp.IntroComplete = true
-	SV.file.Starter = _DATA.Save.ActiveTeam.Players[0].BaseForm
+	SV.General.Starter = _DATA.Save.ActiveTeam.Players[0].BaseForm
   end
 end
 

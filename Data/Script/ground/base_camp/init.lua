@@ -31,12 +31,8 @@ function base_camp.Enter(map)
     SV.unlocked_trades = {}
   end
   
-  if SV.file ~= nil then
-  else
-    SV.file =
-    {
-      Starter = MonsterID(1, 0, 0, Gender.Male)
-    }
+  if SV.General.Starter == nil then
+    SV.General.Starter = MonsterID(1, 0, 0, Gender.Male)
   end
   
   SV.checkpoint = 

@@ -946,7 +946,8 @@ end
 
 function COMMON.GiftItem(player, receive_item)
   SOUND:PlayFanfare("Fanfare/Item")
-  UI:ResetSpeaker()
+  UI:ResetSpeaker(false)
+  UI:SetCenter(true)
   if GAME:GetPlayerBagCount() < GAME:GetPlayerBagLimit() then
     --give to inventory
 	UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_RECEIVE_ITEM"):ToLocal(), player:GetDisplayName(), receive_item:GetDisplayName()))
@@ -956,6 +957,8 @@ function COMMON.GiftItem(player, receive_item)
 	UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_RECEIVE_ITEM_STORAGE"):ToLocal(), player:GetDisplayName(), receive_item:GetDisplayName()))
 	GAME:GivePlayerStorageItem(receive_item)
   end
+  UI:SetCenter(false)
+  UI:ResetSpeaker()
 end
 
 function COMMON.Rescued(zone, name, mail)

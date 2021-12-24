@@ -39,6 +39,12 @@ SV.checkpoint =
   Map  = 1, Entry  = 0
 }
 
+
+SV.adventure = 
+{
+  Thief    = false
+}
+
 -----------------------------------------------
 -- Level Specific Defaults
 -----------------------------------------------
@@ -57,7 +63,8 @@ SV.base_camp =
 {
   IntroComplete    = false,
   ExpositionComplete  = false,
-  FirstTalkComplete  = false
+  FirstTalkComplete  = false,
+  FoodIntro  = false
 }
 
 SV.base_shop = {
@@ -78,11 +85,6 @@ SV.unlocked_trades = {
 SV.base_town = 
 {
   Song    = "A02. Base Town.ogg"
-}
-
-SV.adventure = 
-{
-  Thief    = false
 }
 
 SV.luminous_spring = 

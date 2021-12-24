@@ -112,6 +112,10 @@ function base_camp.PrepareFirstTimeVisit()
   GROUND:Hide("Storage")
   GROUND:Hide("North_Exit")
   GROUND:Hide("Noctowl")
+  GROUND:Hide("NPC_Entrance")
+  GROUND:Hide("NPC_Food")
+  GROUND:Hide("NPC_Coast")
+  GROUND:Hide("NPC_Hopeful")
   GROUND:Unhide("East_LogPile")
   GROUND:Unhide("West_LogPile")
   GROUND:Unhide("First_North_Exit")
@@ -268,21 +272,18 @@ function base_camp.Noctowl_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
   
-  local zone = RogueEssence.Data.DataManager.Instance.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[19]
   if not SV.base_camp.FirstTalkComplete then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Action_Line_001'], zone:GetColoredName()))
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Action_Line_002']))
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Action_Line_003']))
+    -- UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Action_Line_003']))
     SV.base_camp.FirstTalkComplete = true
   end
   
-  tutorial_choices = {STRINGS:FormatKey("DLG_CHOICE_YES"),
+  local tutorial_choices = {STRINGS:FormatKey("DLG_CHOICE_YES"),
     STRINGS:FormatKey("MENU_INFO"),
     STRINGS:FormatKey("DLG_CHOICE_NO")}
   
-  zone = RogueEssence.Data.DataManager.Instance.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[35]
+  local zone = RogueEssence.Data.DataManager.Instance.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[35]
   
-  result = 2
+  local result = 2
   while result == 2 do
     UI:BeginChoiceMenu(STRINGS:Format(MapStrings['Noctowl_Ask_Tutorial'], zone:GetColoredName()), tutorial_choices, 1, 3)
     UI:WaitForChoice()
@@ -303,6 +304,37 @@ function base_camp.Noctowl_Action(chara, activator)
   
 end
 
+
+function base_camp.NPC_Entrance_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Warn_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Warn_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Warn_Line_003']))
+end
+
+function base_camp.NPC_Coast_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Outside_Line_001']))
+  GROUND:EntTurn(chara, Direction.Down)
+end
+
+function base_camp.NPC_Food_Action(chara, activator)
+  local player = CH('PLAYER')
+  GROUND:CharTurnToChar(chara,player)
+  UI:SetSpeaker(chara)
+  if not SV.base_camp.FoodIntro then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Food_Line_001']))
+	local receive_item = RogueEssence.Dungeon.InvItem(2)
+	COMMON.GiftItem(player, receive_item)
+	SV.base_camp.FoodIntro = true
+	UI:SetSpeaker(chara)
+  end
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Food_Line_002']))
+end
 
 function base_camp.Teammate1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

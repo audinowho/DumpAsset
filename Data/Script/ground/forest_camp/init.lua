@@ -90,9 +90,47 @@ end
 function forest_camp.Snorlax_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  SOUND:PlayBattleSE("EVT_Battle_Transition")
-  GAME:FadeOut(true, 60)
-  GAME:EnterDungeon(1, 0, 3, 0, RogueEssence.Data.GameProgress.DungeonStakes.Progress, true, true)
+  UI:ResetSpeaker()
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_001']))
+  
+  
+  --SOUND:PlayBattleSE("EVT_Battle_Transition")
+  --GAME:FadeOut(true, 60)
+  --GAME:EnterDungeon(1, 0, 3, 0, RogueEssence.Data.GameProgress.DungeonStakes.Progress, true, true)
+end
+
+function forest_camp.NPC_Carry_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  UI:SetSpeakerEmotion("Angry")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_001']))
+  UI:SetSpeakerEmotion("Stunned")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_002']))
+  GROUND:EntTurn(chara, Direction.Left)
+end
+
+function forest_camp.NPC_Deliver_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  UI:SetSpeakerEmotion("Pain")
+  
+  SOUND:PlayBattleSE("EVT_Emote_Sweating")
+  GROUND:CharSetEmote(chara, 5, 1)
+  GAME:WaitFrames(30)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_001']))
+  GROUND:EntTurn(chara, Direction.Right)
+end
+
+function forest_camp.NPC_Camps_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Camps_Line_001']))
 end
 
 

@@ -156,6 +156,15 @@ function canyon_camp.NPC_Hidden_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
 end
+  
+function canyon_camp.NPC_Shortcut_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Line_002']))
+end
 
 
 function canyon_camp.Assembly_Action(obj, activator)

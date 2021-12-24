@@ -166,5 +166,35 @@ function cliff_camp.Rival_Early_Action(chara, activator)
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_Line_003']))
   end
 end
+  
+function cliff_camp.Monk_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+  UI:SetSpeaker(chara)
+  GROUND:CharTurnToChar(chara, player)
+  
+  local quest_choices = {STRINGS:Format(MapStrings['Monk_Option_Fame']), STRINGS:Format(MapStrings['Monk_Option_Fortune']),
+    STRINGS:Format(MapStrings['Monk_Option_Curiosity']), STRINGS:Format(MapStrings['Monk_Option_Strength']),
+    STRINGS:Format(MapStrings['Monk_Option_Unknown'])}
+  
+  UI:BeginChoiceMenu(STRINGS:Format(MapStrings['Monk_Line_001']), quest_choices, 1, 5)
+  UI:WaitForChoice()
+  local result = UI:ChoiceResult()
+  if result == 1 then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Monk_Line_Fame']))
+  elseif result == 2 then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Monk_Line_Fortune']))
+  elseif result == 3 then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Monk_Line_Curiosity']))
+  elseif result == 4 then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Monk_Line_Strength']))
+  else
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Monk_Line_Unknown']))
+  end
+  
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Monk_Line_002']))
+  GROUND:EntTurn(chara, Direction.Up)
+end
 
 return cliff_camp

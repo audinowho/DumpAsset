@@ -848,6 +848,32 @@ end
 
 
 
+function base_camp_2.NPC_Treasure_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_002']))
+end
+
+
+
+function base_camp_2.NPC_Settling_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Settling_Line_001']))
+end
+
+
+function base_camp_2.NPC_Father_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Father_Line_001']))
+end
+
+
 function base_camp_2.Assembly1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   COMMON.GroundInteract(activator, chara, false)

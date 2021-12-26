@@ -468,6 +468,26 @@ function COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
   end
 end
 
+function COMMON.CreateWalkArea(name, x, y, w, h)
+
+  --Set Char AI
+  local chara = CH(name)
+  if chara == nil then
+    return
+  end
+  --Set the area to wander in
+  AI:SetCharacterAI(chara,                                      --[[Entity that will use the AI]]--
+                    "ai.ground_default",                         --[[Class path to the AI class to use]]--
+                    RogueElements.Loc(x, y), --[[Top left corner pos of the allowed idle wander area]]--
+                    RogueElements.Loc(w, h), --[[Width and Height of the allowed idle wander area]]--
+                    1,                                         --[[Wandering speed]]--
+                    16,                                          --[[Min move distance for a single wander]]--
+                    32,                                          --[[Max move distance for a single wander]]--
+                    40,                                         --[[Min delay between idle actions]]--
+                    180)                                        --[[Max delay between idle actions]]--
+  --chara:EnableCharacterAI(chara)
+end
+
 function COMMON.GiftItem(player, receive_item)
   SOUND:PlayFanfare("Fanfare/Item")
   UI:ResetSpeaker(false)

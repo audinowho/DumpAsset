@@ -11,10 +11,15 @@ function forest_camp.Init(map)
   MapStrings = COMMON.AutoLoadLocalizedStrings()
   COMMON.RespawnAllies()
   
+  COMMON.CreateWalkArea("NPC_Camps", 168, 184, 48, 48)
   
   local snorlax = CH('Snorlax')
   GROUND:CharSetAnim(snorlax, "Sleep", true)
 end
+
+--------------------------------------------------
+-- Map Begin Functions
+--------------------------------------------------
 
 function forest_camp.Enter(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

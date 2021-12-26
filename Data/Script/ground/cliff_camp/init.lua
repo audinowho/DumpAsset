@@ -10,6 +10,8 @@ function cliff_camp.Init(map)
   PrintInfo("=>> Init_cliff_camp")
   MapStrings = COMMON.AutoLoadLocalizedStrings()
   COMMON.RespawnAllies()
+  
+  COMMON.CreateWalkArea("NPC_Sightseer", 144, 328, 48, 48)
 end
 
 function cliff_camp.Enter(map)

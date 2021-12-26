@@ -15,13 +15,14 @@ function base_camp_2.Init(map)
   --get assembly ready
   local assemblyCount = GAME:GetPlayerAssemblyCount()
   
-  --Place player teammates
-  for i = 1,26,1 do
-    GROUND:RemoveCharacter("Assembly" .. tostring(i))
-  end
-  total = assemblyCount
+  local total = assemblyCount
   if total > 26 then
     total = 26
+  end
+  
+  --Place player teammates
+  for i = 1,total,1 do
+    GROUND:RemoveCharacter("Assembly" .. tostring(i))
   end
   --TODO: randomly add the spawns
   
@@ -32,18 +33,32 @@ function base_camp_2.Init(map)
     --GROUND:GiveCharIdleChatter(chara)
   end
   
-  base_camp_2.CreateWalkArea("Assembly" .. tostring(2), 424, 384, 48, 48)
-  base_camp_2.CreateWalkArea("Assembly" .. tostring(4), 576, 272, 56, 64)
-  base_camp_2.CreateWalkArea("Assembly" .. tostring(5), 336, 208, 64, 80)
-  base_camp_2.CreateWalkArea("Assembly" .. tostring(6), 248, 592, 64, 40)
-  base_camp_2.CreateWalkArea("Assembly" .. tostring(10), 96, 176, 32, 72)
-  base_camp_2.CreateWalkArea("Assembly" .. tostring(12), 216, 256, 48, 64)
-  base_camp_2.CreateWalkArea("Assembly" .. tostring(14), 72, 264, 64, 64)
-  base_camp_2.CreateWalkArea("Assembly" .. tostring(19), 400, 592, 56, 48)
-  base_camp_2.CreateWalkArea("Assembly" .. tostring(22), 728, 352, 64, 48)
-  base_camp_2.CreateWalkArea("Assembly" .. tostring(23), 584, 608, 72, 56)
+  COMMON.CreateWalkArea("Assembly" .. tostring(2), 424, 384, 48, 48)
+  COMMON.CreateWalkArea("Assembly" .. tostring(4), 576, 272, 56, 64)
+  COMMON.CreateWalkArea("Assembly" .. tostring(5), 336, 208, 64, 80)
+  COMMON.CreateWalkArea("Assembly" .. tostring(6), 248, 592, 64, 40)
+  COMMON.CreateWalkArea("Assembly" .. tostring(10), 96, 176, 32, 72)
+  COMMON.CreateWalkArea("Assembly" .. tostring(12), 216, 256, 48, 64)
+  COMMON.CreateWalkArea("Assembly" .. tostring(14), 72, 264, 64, 64)
+  COMMON.CreateWalkArea("Assembly" .. tostring(19), 400, 592, 56, 48)
+  COMMON.CreateWalkArea("Assembly" .. tostring(22), 728, 352, 64, 48)
+  COMMON.CreateWalkArea("Assembly" .. tostring(23), 584, 608, 72, 56)
   
-  base_camp_2.CreateWalkArea("NPC_Square_Left", 344, 288, 48, 48)
+  COMMON.CreateWalkArea("NPC_Food", 144, 592, 32, 32)
+  COMMON.CreateWalkArea("NPC_Square_Left", 344, 288, 48, 48)
+  
+  local can_talk_to = false
+  
+  if total >= 3 then
+    --local talk_to = CH('Assembly3')
+    --local tbl = LTBL(talk_to)
+	can_talk_to = true
+  end
+  
+  if can_talk_to then
+    local talker = CH('NPC_Interactive')
+	GROUND:EntTurn(talker, Direction.UpRight)
+  end
   
   if SOUND:GetCurrentSong() ~= SV.base_town.Song then
     SOUND:PlayBGM(SV.base_town.Song, true)
@@ -65,27 +80,6 @@ end
 function base_camp_2.Update(map, time)
 end
 
---------------------------------------------------
--- Map Begin Functions
---------------------------------------------------
-function base_camp_2.CreateWalkArea(name, x, y, w, h)
-
-  --Set Char AI
-  local chara = CH(name)
-  if chara == nil then
-    return
-  end
-  --Set the area to wander in
-  AI:SetCharacterAI(chara,                                      --[[Entity that will use the AI]]--
-                    "ai.ground_default",                         --[[Class path to the AI class to use]]--
-                    RogueElements.Loc(x, y), --[[Top left corner pos of the allowed idle wander area]]--
-                    RogueElements.Loc(w, h), --[[Width and Height of the allowed idle wander area]]--
-                    1,                                         --[[Wandering speed]]--
-                    16,                                          --[[Min move distance for a single wander]]--
-                    32,                                          --[[Max move distance for a single wander]]--
-                    40,                                         --[[Min delay between idle actions]]--
-                    180);                                        --[[Max delay between idle actions]]--
-end
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
@@ -871,6 +865,19 @@ function base_camp_2.NPC_Treasure_Action(chara, activator)
 end
 
 
+function base_camp_2.NPC_Interactive_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+end
+
+
+function base_camp_2.NPC_Broke_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+end
+
 
 function base_camp_2.NPC_Settling_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
@@ -885,6 +892,14 @@ function base_camp_2.NPC_Father_Action(chara, activator)
   UI:SetSpeaker(chara)
 
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Father_Line_001']))
+end
+
+
+function base_camp_2.NPC_Mother_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mother_Line_001']))
 end
 
 

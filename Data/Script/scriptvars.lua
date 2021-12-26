@@ -101,6 +101,7 @@ SV.cliff_camp =
 {
   ExpositionComplete  = false,
   TeamRetreatIntro = false,
+  TeamUndergrowthIntro = false,
   RivalEarlyIntro = false
 }
 

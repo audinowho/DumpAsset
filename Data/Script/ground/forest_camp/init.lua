@@ -133,6 +133,33 @@ function forest_camp.NPC_Camps_Action(chara, activator)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Camps_Line_001']))
 end
 
+function forest_camp.NPC_Parent_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  forest_camp.Parent_Child_Action()
+end
+
+function forest_camp.NPC_Child_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  forest_camp.Parent_Child_Action()
+end
+
+
+function forest_camp.Parent_Child_Action()
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local parent = CH('NPC_Parent')
+  local child = CH('NPC_Child')
+  local player = CH('PLAYER')
+  
+  GROUND:CharTurnToChar(player, child)
+  UI:SetSpeaker(child)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Parent_Child_Line_001']))
+  GROUND:CharTurnToChar(player, parent)
+  UI:SetSpeaker(parent)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Parent_Child_Line_002']))
+end
 
 
 

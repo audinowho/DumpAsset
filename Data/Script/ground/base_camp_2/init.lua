@@ -847,6 +847,20 @@ function base_camp_2.Juice_Action(obj, activator)
 end
 
 
+function base_camp_2.NPC_Food_Action(chara, activator)
+  local player = CH('PLAYER')
+  GROUND:CharTurnToChar(chara,player)
+  UI:SetSpeaker(chara)
+  if not SV.base_camp.FoodIntro then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Food_Line_001']))
+	local receive_item = RogueEssence.Dungeon.InvItem(2)
+	COMMON.GiftItem(player, receive_item)
+	SV.base_camp.FoodIntro = true
+	UI:SetSpeaker(chara)
+  end
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Food_Line_002']))
+end
+
 
 function base_camp_2.NPC_Treasure_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))

@@ -152,9 +152,39 @@ function canyon_camp.NPC_Argue_2_Action(chara, activator)
   
 end
   
+function canyon_camp.NPC_Seeker_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seeker_Line_001']))
+  SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
+  GROUND:CharSetEmote(chara, 3, 1)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  GAME:WaitFrames(30)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seeker_Line_002']))
+  GROUND:CharSetEmote(chara, 4, 4)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seeker_Line_003']))
+end
+  
 function canyon_camp.NPC_Hidden_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  
+  local dungeon_id = 30
+  if not GAME:DungeonUnlocked(dungeon_id) then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hidden_Line_001']))
+    GAME:FadeOut(false, 20)
+    GAME:WaitFrames(30)
+    COMMON.UnlockWithFanfare(dungeon_id, false)
+    GAME:WaitFrames(30)
+    GAME:FadeIn(20)
+  end
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hidden_Line_002']))
+  UI:SetSpeakerEmotion("Pain")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hidden_Line_003']))
 end
   
 function canyon_camp.NPC_Shortcut_Action(chara, activator)

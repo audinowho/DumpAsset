@@ -468,14 +468,39 @@ function COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
   end
 end
 
+function COMMON.GiftItem(player, receive_item)
+  SOUND:PlayFanfare("Fanfare/Item")
+  UI:ResetSpeaker(false)
+  UI:SetCenter(true)
+  if GAME:GetPlayerBagCount() < GAME:GetPlayerBagLimit() then
+    --give to inventory
+	UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_RECEIVE_ITEM"):ToLocal(), player:GetDisplayName(), receive_item:GetDisplayName()))
+	GAME:GivePlayerItem(receive_item)
+  else
+    --give to storage
+	UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_RECEIVE_ITEM_STORAGE"):ToLocal(), player:GetDisplayName(), receive_item:GetDisplayName()))
+	GAME:GivePlayerStorageItem(receive_item)
+  end
+  UI:SetCenter(false)
+  UI:ResetSpeaker()
+end
 
-function COMMON.UnlockWithFanfare(dungeon_id)
+
+function COMMON.UnlockWithFanfare(dungeon_id, from_dungeon)
   if not GAME:DungeonUnlocked(dungeon_id) then
-    UI:WaitShowDialogue(STRINGS:FormatKey("DLG_NEW_AREA_TO"))
+    if from_dungeon then
+      UI:ResetSpeaker()
+      UI:SetCenter(true)
+      UI:WaitShowDialogue(STRINGS:FormatKey("DLG_NEW_AREA_TO"))
+	end
     GAME:UnlockDungeon(dungeon_id)
+    UI:ResetSpeaker(false)
+	UI:SetCenter(true)
 	local zone = RogueEssence.Data.DataManager.Instance.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[dungeon_id]
     SOUND:PlayFanfare("Fanfare/NewArea")
     UI:WaitShowDialogue(STRINGS:FormatKey("DLG_NEW_AREA", zone:GetColoredName()))
+    UI:SetCenter(false)
+    UI:ResetSpeaker()
   end
 
 end
@@ -942,23 +967,6 @@ function COMMON.GroundInteract(chara, target)
   
   
   UI:WaitShowDialogue(chosen_quote)
-end
-
-function COMMON.GiftItem(player, receive_item)
-  SOUND:PlayFanfare("Fanfare/Item")
-  UI:ResetSpeaker(false)
-  UI:SetCenter(true)
-  if GAME:GetPlayerBagCount() < GAME:GetPlayerBagLimit() then
-    --give to inventory
-	UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_RECEIVE_ITEM"):ToLocal(), player:GetDisplayName(), receive_item:GetDisplayName()))
-	GAME:GivePlayerItem(receive_item)
-  else
-    --give to storage
-	UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_RECEIVE_ITEM_STORAGE"):ToLocal(), player:GetDisplayName(), receive_item:GetDisplayName()))
-	GAME:GivePlayerStorageItem(receive_item)
-  end
-  UI:SetCenter(false)
-  UI:ResetSpeaker()
 end
 
 function COMMON.Rescued(zone, name, mail)

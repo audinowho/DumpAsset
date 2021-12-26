@@ -35,7 +35,7 @@ function zone_3.ExitSegment(zone, result, rescue, segmentID, mapID)
     if segmentID == 0 then
       COMMON.EndDungeonDay(result, 1, -1, 4, 0)
     elseif segmentID == 1 then
-      COMMON.UnlockWithFanfare(10)
+      COMMON.UnlockWithFanfare(10, true)
       COMMON.EndDungeonDay(result, 1, -1, 1, 3)
     else
       PrintInfo("No exit procedure found!")

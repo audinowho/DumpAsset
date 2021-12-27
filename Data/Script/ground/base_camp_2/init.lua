@@ -45,14 +45,18 @@ function base_camp_2.Init(map)
   COMMON.CreateWalkArea("Assembly" .. tostring(23), 584, 608, 72, 56)
   
   COMMON.CreateWalkArea("NPC_Food", 144, 592, 32, 32)
-  COMMON.CreateWalkArea("NPC_Square_Left", 344, 288, 48, 48)
+  COMMON.CreateWalkArea("NPC_Settling", 344, 288, 48, 48)
   
   local can_talk_to = false
   
   if total >= 3 then
-    --local talk_to = CH('Assembly3')
+    local talk_to = CH('Assembly3')
     --local tbl = LTBL(talk_to)
-	can_talk_to = true
+	if talk_to.Data.MetLoc.ID > -1 then
+	  if base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] ~= -1 then
+	    can_talk_to = true
+	  end
+	end
   end
   
   if can_talk_to then
@@ -862,20 +866,115 @@ function base_camp_2.NPC_Treasure_Action(chara, activator)
 
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_001']))
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_002']))
+  GROUND:EntTurn(chara, Direction.Right)
 end
 
+base_camp_2.difficulty_tbl = { }
+base_camp_2.difficulty_tbl[-1] = -1
+base_camp_2.difficulty_tbl[0] = 4
+base_camp_2.difficulty_tbl[1] = -1
+base_camp_2.difficulty_tbl[2] = 0
+base_camp_2.difficulty_tbl[3] = 1
+base_camp_2.difficulty_tbl[4] = 2
+base_camp_2.difficulty_tbl[5] = 3
+base_camp_2.difficulty_tbl[6] = 3
+base_camp_2.difficulty_tbl[7] = 4
+base_camp_2.difficulty_tbl[8] = 4
+base_camp_2.difficulty_tbl[9] = 3
+base_camp_2.difficulty_tbl[10] = 0
+base_camp_2.difficulty_tbl[11] = 3
+base_camp_2.difficulty_tbl[12] = 1
+base_camp_2.difficulty_tbl[13] = 1
+base_camp_2.difficulty_tbl[14] = 3
+base_camp_2.difficulty_tbl[15] = 3
+base_camp_2.difficulty_tbl[16] = 3
+base_camp_2.difficulty_tbl[17] = 3
+base_camp_2.difficulty_tbl[18] = 3
+base_camp_2.difficulty_tbl[19] = 0
+base_camp_2.difficulty_tbl[20] = 1
+base_camp_2.difficulty_tbl[21] = 3
+base_camp_2.difficulty_tbl[22] = 4
+base_camp_2.difficulty_tbl[23] = 4
+base_camp_2.difficulty_tbl[24] = 4
+base_camp_2.difficulty_tbl[25] = 4
+base_camp_2.difficulty_tbl[26] = 4
+base_camp_2.difficulty_tbl[27] = 4
+base_camp_2.difficulty_tbl[28] = 4
+base_camp_2.difficulty_tbl[29] = 4
+base_camp_2.difficulty_tbl[30] = 4
+base_camp_2.difficulty_tbl[31] = 4
+base_camp_2.difficulty_tbl[32] = 4
+base_camp_2.difficulty_tbl[33] = 4
+base_camp_2.difficulty_tbl[34] = 4
+base_camp_2.difficulty_tbl[35] = 0
+base_camp_2.difficulty_tbl[36] = 1
+base_camp_2.difficulty_tbl[37] = 1
+base_camp_2.difficulty_tbl[38] = 4
+base_camp_2.difficulty_tbl[39] = 4
+base_camp_2.difficulty_tbl[40] = 4
+base_camp_2.difficulty_tbl[41] = 4
+base_camp_2.difficulty_tbl[42] = 4
+base_camp_2.difficulty_tbl[43] = 4
+base_camp_2.difficulty_tbl[44] = 4
+base_camp_2.difficulty_tbl[45] = 4
+base_camp_2.difficulty_tbl[46] = 4
+base_camp_2.difficulty_tbl[47] = 4
+base_camp_2.difficulty_tbl[48] = 4
+base_camp_2.difficulty_tbl[49] = 4
 
 function base_camp_2.NPC_Interactive_Action(chara, activator)
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  
+  local assemblyCount = GAME:GetPlayerAssemblyCount()
   UI:SetSpeaker(chara)
-
-end
-
-
-function base_camp_2.NPC_Broke_Action(chara, activator)
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
-  UI:SetSpeaker(chara)
-
+  
+  
+  local can_talk_to = false
+  if assemblyCount >= 3 then
+    talk_to = CH('Assembly3')
+    --local tbl = LTBL(talk_to)
+	can_talk_to = true
+	if base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == -1 then
+	  can_talk_to = false
+	else
+	  local zone = RogueEssence.Data.DataManager.Instance.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[talk_to.Data.MetLoc.ID]
+	  local zone_name = zone:GetColoredName()
+	  local cur_team = _DATA.Save.ActiveTeam.Name
+	  if talk_to.Data.OriginalUUID ~= _DATA.Save.UUID then
+	    local old_team = talk_to.Data.OriginalTeam
+		UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Trade_Line_001'], cur_team, old_team))
+	  elseif base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == 0 then
+	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_001_Line_001'], zone_name, cur_team))
+	  elseif base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == 1 then
+	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_002_Line_001'], zone_name, cur_team))
+	    UI:SetSpeakerEmotion("Happy")
+	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_002_Line_002']))
+	  elseif base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == 2 then
+	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_003_Line_001'], zone_name))
+	    UI:SetSpeakerEmotion("Sigh")
+	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_003_Line_002']))
+	  elseif base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == 3 then
+	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_004_Line_001'], zone_name))
+	    UI:SetSpeakerEmotion("Happy")
+	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_004_Line_002'], cur_team))
+	  else
+        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_005_Line_001'], zone_name))
+		
+        GAME:WaitFrames(30)
+        GROUND:CharSetEmote(chara, 8, 1)
+        SOUND:PlayBattleSE("EVT_Emote_Shock_Bad")
+        GAME:WaitFrames(30)
+  
+        UI:SetSpeakerEmotion("Surprised")
+        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_005_Line_002'], cur_team))
+	  end
+	end
+  end
+  
+  if not can_talk_to then
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Line_001']))
+  end
+  
 end
 
 
@@ -887,11 +986,59 @@ function base_camp_2.NPC_Settling_Action(chara, activator)
 end
 
 
+function base_camp_2.NPC_Broke_Action(chara, activator)
+  UI:SetSpeaker(chara)
+
+  UI:SetSpeakerEmotion("Sad")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_001']))
+  GROUND:CharSetEmote(partner, 5, 1)
+  SOUND:PlayBattleSE("EVT_Emote_Sweating")
+  UI:SetSpeakerEmotion("Crying")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_002']))
+end
+
+
+function base_camp_2.NPC_Hesitant_Action(chara, activator)
+  UI:SetSpeaker(chara)
+
+  UI:SetSpeakerEmotion("Sigh")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hesitant_Line_001']))
+end
+
+
+function base_camp_2.NPC_Elder_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Line_001']))
+end
+
+
+function base_camp_2.NPC_History_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['History_Line_001']))
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['History_Line_002']))
+end
+
+
 function base_camp_2.NPC_Father_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Father_Line_001']))
+  GROUND:EntTurn(chara, Direction.DownLeft)
+end
+
+
+function base_camp_2.NPC_Mother_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mother_Line_001']))
+  GROUND:EntTurn(chara, Direction.UpRight)
 end
 
 

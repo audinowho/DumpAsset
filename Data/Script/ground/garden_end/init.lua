@@ -165,8 +165,11 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
     GAME:WaitFrames(30)
 	
     -- if not in rogue mode, have them join the team
-    mon_id = RogueEssence.Dungeon.MonsterID(492, 0, 0, Gender.Genderless)
-    _DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, -1, 0))
+    local mon_id = RogueEssence.Dungeon.MonsterID(492, 0, 0, Gender.Genderless)
+	local player = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, -1, 0)
+    player.MetAt = _ZONE.CurrentGround:GetColoredName()
+    player.MetLoc = RogueEssence.Dungeon.ZoneLoc(_ZONE.CurrentZoneID, _ZONE.CurrentMapID)
+    _DATA.Save.ActiveTeam.Players:Add(player)
 	SOUND:PlayFanfare("Fanfare/JoinTeam")
 	
 	UI:ResetSpeaker()

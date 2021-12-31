@@ -753,8 +753,8 @@ function base_camp_2.Tutor_Action(obj, activator)
 				GAME:RemoveFromPlayerMoney(price)
 				GAME:LearnSkill(member, move)
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Begin']))
-				base_camp_2.Tutor_Sequence()	
-				SOUND:PlayBattleSE("DUN_Learn_Move")
+				base_camp_2.Tutor_Sequence()
+				SOUND:PlayFanfare("Fanfare/LearnSkill")
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
 				state = 0
 			else
@@ -768,7 +768,7 @@ function base_camp_2.Tutor_Action(obj, activator)
 					GAME:SetCharacterSkill(member, move, result)
 					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Begin']))
 					base_camp_2.Tutor_Sequence()	
-					SOUND:PlayBattleSE("DUN_Learn_Move")
+				    SOUND:PlayFanfare("Fanfare/LearnSkill")
 					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
 					state = 0
 				else
@@ -801,7 +801,7 @@ function base_camp_2.Tutor_Action(obj, activator)
 				move = GAME:GetCharacterSkill(member, result)
 				local moveEntry = _DATA:GetSkill(move)
 				GAME:ForgetSkill(member, result)
-				SOUND:PlayBattleSE("DUN_Learn_Move")
+				SOUND:PlayFanfare("Fanfare/LearnSkill")
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
 				state = 0
 			else
@@ -866,7 +866,97 @@ function base_camp_2.NPC_Treasure_Action(chara, activator)
 
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_001']))
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_002']))
+  UI:SetSpeakerEmotion("Happy")
+  GROUND:CharSetEmote(chara, 4, 4)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_003']))
+end
+
+
+function base_camp_2.NPC_Nonbeliever_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Nonbeliever_Line_001']))
+  UI:SetSpeakerEmotion("Sigh")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Nonbeliever_Line_002']))
   GROUND:EntTurn(chara, Direction.Right)
+end
+
+function base_camp_2.NPC_Catch_1_Action(chara, activator)
+  DEBUG.EnableDbgCoro()
+  
+  base_camp_2.Catch_Action()
+end
+
+function base_camp_2.NPC_Catch_2_Action(chara, activator)
+  DEBUG.EnableDbgCoro()
+  base_camp_2.Catch_Action()
+  
+end
+
+function base_camp_2.Catch_Action()
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local catch1 = CH('NPC_Catch_1')
+  local catch2 = CH('NPC_Catch_2')
+  local player = CH('PLAYER')
+  local itemAnim = nil
+  
+  GROUND:CharTurnToChar(player, catch1)
+  UI:SetSpeaker(catch1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_001']))
+  SOUND:PlayBattleSE("DUN_Throw_Start")
+  GROUND:CharSetAnim(catch1, "Rotate", false)
+  GAME:WaitFrames(18)
+  SOUND:PlayBattleSE("DUN_Throw_Arc")
+  itemAnim = RogueEssence.Content.ItemAnim(catch1.MapLoc, catch2.MapLoc, "Rock_Gray", 48, 1)
+  GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
+  
+  GROUND:CharTurnToChar(player, catch2)
+  GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
+	
+  SOUND:PlayBattleSE("DUN_Equip")
+  UI:SetSpeaker(catch2)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_002']))
+  SOUND:PlayBattleSE("DUN_Throw_Start")
+  GROUND:CharSetAnim(catch2, "Rotate", false)
+  GAME:WaitFrames(18)
+  SOUND:PlayBattleSE("DUN_Throw_Arc")
+  itemAnim = RogueEssence.Content.ItemAnim(catch2.MapLoc, catch1.MapLoc, "Rock_Gray", 48, 1)
+  GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
+  
+  GROUND:CharTurnToChar(player, catch1)
+  GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
+  
+  SOUND:PlayBattleSE("DUN_Equip")
+  UI:SetSpeaker(catch1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_003']))
+  SOUND:PlayBattleSE("DUN_Throw_Start")
+  GROUND:CharSetAnim(catch1, "Rotate", false)
+  GAME:WaitFrames(18)
+  SOUND:PlayBattleSE("DUN_Throw_Arc")
+  itemAnim = RogueEssence.Content.ItemAnim(catch1.MapLoc, catch2.MapLoc, "Rock_Gray", 48, 1)
+  GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
+  
+  GROUND:CharTurnToChar(player, catch2)
+  GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
+  
+  SOUND:PlayBattleSE("DUN_Equip")
+  UI:SetSpeaker(catch2)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_004']))
+  SOUND:PlayBattleSE("DUN_Throw_Start")
+  GROUND:CharSetAnim(catch2, "Rotate", false)
+  GAME:WaitFrames(18)
+  SOUND:PlayBattleSE("DUN_Throw_Arc")
+  itemAnim = RogueEssence.Content.ItemAnim(catch2.MapLoc, catch1.MapLoc, "Rock_Gray", 48, 1)
+  GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
+  
+  GROUND:CharTurnToChar(player, catch1)
+  GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
+  
+  SOUND:PlayBattleSE("DUN_Equip")
+  UI:SetSpeaker(catch1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_005']))
 end
 
 base_camp_2.difficulty_tbl = { }

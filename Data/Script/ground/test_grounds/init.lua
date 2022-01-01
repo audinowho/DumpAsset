@@ -156,6 +156,24 @@ function test_grounds.Sign1_Action(obj, activator)
   UI:SetAutoFinish(false)
   TASK:WaitEntityTask(activator)
   UI:WaitShowDialogue("Ye,[pause=0] you just moved around by yourself.")
+  
+  SOUND:PlayBattleSE("DUN_Explosion")
+  local emitter = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData("Flamethrower", 3))
+  emitter.LocHeight = 14
+  GROUND:PlayVFX(emitter, activator.MapLoc.X, activator.MapLoc.Y)
+  
+  GAME:WaitFrames(60)
+  UI:WaitShowDialogue("BOOM.")
+  
+  SOUND:PlayBattleSE("DUN_Explosion")
+  emitter = RogueEssence.Content.FiniteAreaEmitter(RogueEssence.Content.AnimData("Explosion", 3))
+  emitter.Range = 72
+  emitter.Speed = 72
+  emitter.TotalParticles = 12
+  GROUND:PlayVFX(emitter, activator.MapLoc.X, activator.MapLoc.Y)
+  
+  GAME:WaitFrames(60)
+  UI:WaitShowDialogue("BOOM BOOM BOOM.")
 end
 
 

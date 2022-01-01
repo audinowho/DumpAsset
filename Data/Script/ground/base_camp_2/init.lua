@@ -826,7 +826,11 @@ function base_camp_2.Music_Action(obj, activator)
   local chara = CH('Music_Owner')
   UI:SetSpeaker(chara)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Music_Intro']))
-  UI:ShowMusicMenu()
+  local unlocks = {}
+  if SV.cliff_camp.ExpositionComplete then
+    table.insert(unlocks, "MAIN_001")
+  end
+  UI:ShowMusicMenu(unlocks)
   UI:WaitForChoice()
   local result = UI:ChoiceResult()
   if result ~= nil then

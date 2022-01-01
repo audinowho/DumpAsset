@@ -186,8 +186,14 @@
   <data name="DLG_LOCK_KEY" xml:space="preserve">
     <value>Willst du einen Schlüssel benutzen?</value>
     <comment></comment>  </data>
+  <data name="DLG_RECEIVE_ITEM" xml:space="preserve">
+    <value>{0} erhält das Item {1}!</value>
+    <comment></comment>  </data>
   <data name="DLG_STORAGE_EMPTY" xml:space="preserve">
     <value>Es sind keine Items in deinem Lager.</value>
+    <comment></comment>  </data>
+  <data name="DLG_WHICH_FORM" xml:space="preserve">
+    <value>Welche Form soll {0} annehmen?</value>
     <comment></comment>  </data>
   <data name="EVO_REQ_ALLIES" xml:space="preserve">
     <value>{0} Verbündete haben</value>
@@ -312,6 +318,9 @@
   <data name="MSG_ASSEMBLY_TAKE_ANY" xml:space="preserve">
     <value>{0} ist vom Treffpunkt des Teams zum aktuellen Team beigetreten!</value>
     <comment>The version for when the player doesn't have a team name.</comment>  </data>
+  <data name="MSG_ATTACK_USE" xml:space="preserve">
+    <value>{0} verwendet einen normalen Angriff!</value>
+    <comment></comment>  </data>
   <data name="MSG_AVOID" xml:space="preserve">
     <value>{0} vermeidet mithilfe von {1} den Angriff!</value>
     <comment></comment>  </data>
@@ -720,6 +729,9 @@
   <data name="MSG_FLOOR_ROOM" xml:space="preserve">
     <value>Die Wände wurden entfernt, sodass nur ein großer Raum übrig ist!</value>
     <comment></comment>  </data>
+  <data name="MSG_FLOOR_SCAN" xml:space="preserve">
+    <value>Items und Gegner wurden aufgedeckt!</value>
+    <comment></comment>  </data>
   <data name="MSG_FLOOR_TRAPBUST" xml:space="preserve">
     <value>Alle Fallen auf dieser Ebene wurden zerstört!</value>
     <comment></comment>  </data>
@@ -840,6 +852,9 @@
   <data name="MSG_HEAL_WITH" xml:space="preserve">
     <value>{0} regenerierte KP mit {1}!</value>
     <comment></comment>  </data>
+  <data name="MSG_HEAL_WITH_OTHER" xml:space="preserve">
+    <value>{0}s KP wurden durch {2}s {1} regeneriert!</value>
+    <comment></comment>  </data>
   <data name="MSG_HEALER" xml:space="preserve">
     <value>{0}s Heilherz entfernte {1}s Statusprobleme!</value>
     <comment></comment>  </data>
@@ -927,8 +942,23 @@
   <data name="MSG_INVERSE_START" xml:space="preserve">
     <value>Alle Typ Vor- und Nachteile sind nun umgekehrt!</value>
     <comment></comment>  </data>
+  <data name="MSG_INVISIBLE_ALREADY" xml:space="preserve">
+    <value>{0} ist bereits unsichtbar!</value>
+    <comment></comment>  </data>
+  <data name="MSG_INVISIBLE_END" xml:space="preserve">
+    <value>{0} ist nicht mehr unsichtbar!</value>
+    <comment></comment>  </data>
+  <data name="MSG_INVISIBLE_START" xml:space="preserve">
+    <value>{0} ist jetzt unsichtbar!</value>
+    <comment></comment>  </data>
   <data name="MSG_ITEM_BAN" xml:space="preserve">
     <value>Eine geheimnisvolle Kraft verhindert {0} daran das Item zu nutzen!</value>
+    <comment></comment>  </data>
+  <data name="MSG_ITEM_CANT_USE_NOW" xml:space="preserve">
+    <value>Dieses Item kann momentan nicht verwendet werden</value>
+    <comment></comment>  </data>
+  <data name="MSG_ITEM_NO_EFFECT" xml:space="preserve">
+    <value>Es wird auf {0} keine Wirkung haben.</value>
     <comment></comment>  </data>
   <data name="MSG_JUSTIFIED" xml:space="preserve">
     <value>{0}s Redlichkeit erhöht dessen Angriff!</value>
@@ -1541,6 +1571,9 @@
     <comment></comment>  </data>
   <data name="MSG_SPEED_TRIPLE" xml:space="preserve">
     <value>{0} besitzt dreifaches Tempo!</value>
+    <comment></comment>  </data>
+  <data name="MSG_STAIR_SENSOR" xml:space="preserve">
+    <value>Die Treppe ist hier entlang!</value>
     <comment></comment>  </data>
   <data name="MSG_STAT_BOOST" xml:space="preserve">
     <value>{0}s Basis-{1} wurde um {2} verstärkt.</value>
@@ -3089,6 +3122,114 @@
     <comment></comment>  </data>
   <data name="TALK_PINCH_0200" xml:space="preserve">
     <value>Das war es wohl für mich...</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_0000" xml:space="preserve">
+    <value>Ich bin immer froh dir zu Diensten zu sein! ~\u266A</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_0001" xml:space="preserve">
+    <value>Schau mal! Schau! Die glänzen so schön!</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_0002" xml:space="preserve">
+    <value>UNSERE WAREN SIND GARANTIERT VON HÖCHSTER QUALITÄT.</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_END_0000" xml:space="preserve">
+    <value>Vielen Dank! Bitte komme wieder! ~\u266A</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_END_0001" xml:space="preserve">
+    <value>Vielen Dank fürs Vorbeischauen!</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_END_0002" xml:space="preserve">
+    <value>EINEN SCHÖNEN TAG NOCH.</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_PAY_0000" xml:space="preserve">
+    <value>Diese Ware kostet {0}. Bist du am Kauf interessiert?</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_PAY_0001" xml:space="preserve">
+    <value>Eins...[pause=10] Zwei...[pause=10] Drei...[pause=10] Das wären {0}!</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_PAY_0002" xml:space="preserve">
+    <value>DEINE RECHNUNG BETRÄGT {0}.\nBITTE BESTÄTIGE DEINEN EINKAUF.</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_PAY_DONE_0000" xml:space="preserve">
+    <value>Danke dir! Vielen, vielen Dank! ~\u266A</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_PAY_DONE_0001" xml:space="preserve">
+    <value>Komme bald wieder!</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_PAY_DONE_0002" xml:space="preserve">
+    <value>TRANSAKTION ABGESCHLOSSEN. VERKAUF IST BEENDET.</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_PAY_REFUSE_0000" xml:space="preserve">
+    <value>Welch eine Enttäuschung.</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_PAY_REFUSE_0001" xml:space="preserve">
+    <value>Oooooh, du willst doch nichts?</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_PAY_REFUSE_0002" xml:space="preserve">
+    <value>TRANSAKTION ABGEBROCHEN.</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_PAY_SHORT_0000" xml:space="preserve">
+    <value>Das sieht nicht so aus, als hättest du genug Geld.</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_PAY_SHORT_0001" xml:space="preserve">
+    <value>Huch? Das reicht nicht...</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_PAY_SHORT_0002" xml:space="preserve">
+    <value>FEHLER. GELDMITTEL SIND NICHT AUSREICHEND.</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_SELL_0000" xml:space="preserve">
+    <value>Dafür biete ich dir {0}! Möchtest du das verkaufen?</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_SELL_0001" xml:space="preserve">
+    <value>Ich kann dir deine Sachen für,[pause=10] äh,[pause=10] {0} abkaufen![pause=30] Ist das ok?</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_SELL_0002" xml:space="preserve">
+    <value>DU ERHÄLST {0} FÜR DIE ANGEBOTENEN GÜTER.\nBESTÄTIGEN?</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_SELL_DONE_0000" xml:space="preserve">
+    <value>Danke! Ich weiß deine Kundschaft zu schätzen! ~\u266A</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_SELL_DONE_0001" xml:space="preserve">
+    <value>Juchu! Vielen Dank!</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_SELL_DONE_0002" xml:space="preserve">
+    <value>AUSTAUSCH ABGESCHLOSSEN.</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_START_0000" xml:space="preserve">
+    <value>Willkommen! Sei herzlich willkommen! ~\u266A</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_START_0001" xml:space="preserve">
+    <value>Willkommen in meinem eigenen Laden!</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_START_0002" xml:space="preserve">
+    <value>SEI GEGRÜẞT, GEEHRTER KUNDE.</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_SUSPECT_0000" xml:space="preserve">
+    <value>Meinst du etwa ich sei ein Narr?[pause=0]\nJeder in diesem Dungeon weiß was du getan hast.</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_SUSPECT_0001" xml:space="preserve">
+    <value>Hey, moment mal![pause=10] Ich habe von dir gehört![pause=0]\nDu hast von meinen Freunden gestohlen!</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_SUSPECT_0002" xml:space="preserve">
+    <value>PROZESS PAUSIERT.[pause=0]\nDURCHSUCHE DATENBANK...[br].[pause=4].[pause=4].[pause=4].[pause=4]ÜBEREINSTIMMUNG IN VERBRECHER DATENBANK.</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_THIEF_0000" xml:space="preserve">
+    <value>Meine kostbare Ware! Schnappt den Dieb!</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_THIEF_0001" xml:space="preserve">
+    <value>Aaaaah! Dieser Fiesling hat mein Glänziges gestohlen!</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_THIEF_0002" xml:space="preserve">
+    <value>DIEBSTAHL WIRD NICHT TOLERIERT.</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_THIEF_RETURN_0000" xml:space="preserve">
+    <value>Schnappt den Dieb!</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_THIEF_RETURN_0001" xml:space="preserve">
+    <value>Hilfe! Der Klauer ist zurück!</value>
+    <comment></comment>  </data>
+  <data name="TALK_SHOP_THIEF_RETURN_0002" xml:space="preserve">
+    <value>DIEBSTAHL WIRD NICHT TOLERIERT.</value>
     <comment></comment>  </data>
   <data name="TALK_WAIT_0000" xml:space="preserve">
     <value>Noch ein spannendes Abenteuer! Wo gehen wir hin?</value>

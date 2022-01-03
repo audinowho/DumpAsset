@@ -438,6 +438,7 @@ function COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 	    dest = RogueEssence.Dungeon.ZoneLoc(open_dungeons[1], RogueEssence.Dungeon.SegLoc(0,0))
 	  end
 	elseif #open_grounds == 1 then
+      UI:ResetSpeaker()
 	  local ground_id = open_grounds[1].Zone
 	  local zone = RogueEssence.Data.DataManager.Instance:GetZone(ground_id)
 	  local ground = RogueEssence.Data.DataManager.Instance:GetGround(zone.GroundMaps[open_grounds[1].ID])

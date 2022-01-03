@@ -59,7 +59,7 @@ Unix:
 -Any wild Pokémon that faints will drop its item.
 -Press Alt in text input to change the accent of the last letter you typed (ex. "e" becomes "é")
 -Many traps (including Wonder Tiles) affect all tiles adjacent to them.  Keep this in mind when positioning.
--Pokémon that evolve by friendship need to be surrounded by a full team.
+-Pokémon that evolve by friendship need to have a certain number of evolved allies with them.
 -Pokémon that evolve by location need to be in the correct environment.
 -If you throw held items at an enemy, they will catch it if they aren't holding one already.
 

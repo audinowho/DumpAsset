@@ -97,6 +97,7 @@ Translation:
 [DE] https://twitter.com/Scout_1942 Scout
 [DE] https://www.reddit.com/user/P1ka-/ P1ka
 [DE] https://athaleprime.wixsite.com/athaleprimegames AthalePrime
+[DE] https://twitter.com/NanashiRikai Mario Brand
 [PT] https://twitter.com/SquishyTheMew Squishy
 [KO] https://www.reddit.com/user/Bashful_Barry/ Barry
 [ZH] https://twitter.com/Dewpoleon Dew

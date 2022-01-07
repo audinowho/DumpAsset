@@ -156,6 +156,9 @@
   <data name="_ENUM_DisconnectReason_InvalidProtocol_msg" xml:space="preserve">
     <value>Protocole invalide</value>
     <comment></comment>  </data>
+  <data name="_ENUM_DisconnectReason_RemoteConnectionClose_msg" xml:space="preserve">
+    <value>Le serveur a interrompu la connexion</value>
+    <comment></comment>  </data>
   <data name="_ENUM_DisconnectReason_Timeout_msg" xml:space="preserve">
     <value>La connexion a expiré</value>
     <comment></comment>  </data>
@@ -171,6 +174,9 @@
   <data name="_ENUM_ExchangeState_Viewing_msg" xml:space="preserve">
     <value>Examine...</value>
     <comment>The status for a player when they're viewing the Pokemon they can trade.</comment>  </data>
+  <data name="_ENUM_ExchangeState_Waiting_msg" xml:space="preserve">
+    <value>En attente...</value>
+    <comment></comment>  </data>
   <data name="_ENUM_GameSpeed_Double" xml:space="preserve">
     <value>Double</value>
     <comment></comment>  </data>
@@ -411,6 +417,9 @@
   <data name="DLG_ERR_READ_FILE" xml:space="preserve">
     <value>Le dossier ne peut pas être lu car son format est invalide ou a été corrompu.</value>
     <comment></comment>  </data>
+  <data name="DLG_ERR_READ_FILE_FALLBACK" xml:space="preserve">
+    <value>Veuillez le supprimer, ou bien le déplacer de {0}.</value>
+    <comment></comment>  </data>
   <data name="DLG_ERR_READ_SAVE" xml:space="preserve">
     <value>Le fichier de sauvegarde n'a pas pu être lu car son format est invalide ou a été corrompu.</value>
     <comment></comment>  </data>
@@ -429,11 +438,17 @@
   <data name="DLG_NEW_AREA" xml:space="preserve">
     <value>Vous pouvez maintenant accéder à {0} !</value>
     <comment></comment>  </data>
+  <data name="DLG_NEW_AREA_TO" xml:space="preserve">
+    <value>Une nouvelle zone apparaît au-delà du donjon</value>
+    <comment></comment>  </data>
   <data name="DLG_NEW_CHARS" xml:space="preserve">
     <value>De nouveaux Pokémon sont apparus comme starters !</value>
     <comment></comment>  </data>
   <data name="DLG_NO_ADVENTURE" xml:space="preserve">
     <value>Mais l'aventure s'est déjà terminée avant même qu'elle ne commence...</value>
+    <comment></comment>  </data>
+  <data name="DLG_ONLINE_TRADE_END_ASK" xml:space="preserve">
+    <value>Voulez-vous abandonner l'échange avec votre partenaire ?</value>
     <comment></comment>  </data>
   <data name="DLG_QUIT_ASK" xml:space="preserve">
     <value>Abandonner l'aventure ? Ce sera considéré comme une défaire..</value>
@@ -444,62 +459,110 @@
   <data name="DLG_RESCUE_ADD_REWARD_ASK" xml:space="preserve">
     <value>Que voulez-vous offrir ?</value>
     <comment></comment>  </data>
+  <data name="DLG_RESCUE_ASK" xml:space="preserve">
+    <value>Voulez-vous demander du secours ?</value>
+    <comment></comment>  </data>
   <data name="DLG_RESCUE_GET_AOK_ASK" xml:space="preserve">
     <value>Recevoir cette lettre OK de {0} ?</value>
     <comment></comment>  </data>
   <data name="DLG_RESCUE_GET_AOK_ASK_REWARD" xml:space="preserve">
     <value>Recevoir cette lettre OK de {0} ? Vous allez aussi lui envoyer les récompenses listées.</value>
     <comment></comment>  </data>
+  <data name="DLG_RESCUE_GOT_AOK" xml:space="preserve">
+    <value>La lettre OK a été reçu de {0}.</value>
+    <comment></comment>  </data>
   <data name="DLG_RESCUE_GOT_AOK_REWARD" xml:space="preserve">
     <value>Vous avez envoyé une récompense de remerciement !</value>
+    <comment></comment>  </data>
+  <data name="DLG_RESCUE_INFO_1" xml:space="preserve">
+    <value>Pour demander du secours, sélectionner Obtenir de l'aide dans En attente de secours.</value>
     <comment></comment>  </data>
   <data name="DLG_RESCUE_QUIT_ASK" xml:space="preserve">
     <value>Arrêter d'attendre les secours et abandonner la mission ?</value>
     <comment></comment>  </data>
+  <data name="DLG_RESCUE_RECEIVE_SOS" xml:space="preserve">
+    <value>La lettre SOS a été reçue de {0}.</value>
+    <comment></comment>  </data>
+  <data name="DLG_RESCUE_RECEIVE_SOS_ASK" xml:space="preserve">
+    <value>Recevoir cette lettre SOS de {0}.</value>
+    <comment></comment>  </data>
+  <data name="DLG_RESCUE_SEND_AOK" xml:space="preserve">
+    <value>La lettre OK a été envoyée à {0}.</value>
+    <comment></comment>  </data>
+  <data name="DLG_RESCUE_SEND_AOK_ASK" xml:space="preserve">
+    <value>Envoyer cette lettre OK à {0} ?</value>
+    <comment></comment>  </data>
+  <data name="DLG_RESCUE_SEND_AOK_ASK_REWARD" xml:space="preserve">
+    <value>Envoyer cette lettre OK à {0} ? Vous recevrez les récompenses listées.</value>
+    <comment></comment>  </data>
+  <data name="DLG_RESCUE_SEND_AOK_REWARD" xml:space="preserve">
+    <value>Vous avez reçu une récompense en remerciement !</value>
+    <comment></comment>  </data>
+  <data name="DLG_RESCUE_SEND_SOS" xml:space="preserve">
+    <value>La lettre SOS a été envoyée à {0}.</value>
+    <comment></comment>  </data>
+  <data name="DLG_RESCUE_SEND_SOS_ASK" xml:space="preserve">
+    <value>Envoyer cette lettre SOS à {0}?</value>
+    <comment></comment>  </data>
   <data name="DLG_RESTRICT_BAG" xml:space="preserve">
-    <value>{0} ont entreposé.</value>
+    <value>{0} ont été entreposés.</value>
     <comment>ex. "All (P), and items beyond the Xth slot have been stored away."</comment>  </data>
   <data name="DLG_RESTRICT_ITEM_ALL" xml:space="preserve">
     <value>tous les objets</value>
     <comment>Will be used in the sentence "All items have been stored away." May be used in the middle of a sentence so do not capitalize.</comment>  </data>
   <data name="DLG_RESTRICT_ITEM_SLOT" xml:space="preserve">
-    <value>objets au-delà la {0}e fente</value>
+    <value>objets au-delà du {0}ème slot</value>
     <comment>Will be used in the sentence "Items beyond the Xth slot have been stored away." May be used in the middleof a sentence so do not capitalize.</comment>  </data>
   <data name="DLG_RESTRICT_LEVEL" xml:space="preserve">
-    <value>Les members d'équipe a été reduit à N.{0} temporairement</value>
+    <value>Les membres de l'équipe ont temporairement baissé au niveau {0}.</value>
     <comment></comment>  </data>
   <data name="DLG_RESTRICT_MONEY" xml:space="preserve">
     <value>tout \uE024</value>
     <comment>Will be used in the sentence "All (P) have been stored away." May be used in the middle of a sentence so do not capitalize.</comment>  </data>
   <data name="DLG_ROGUE_INFO_1" xml:space="preserve">
-    <value>Dans la mode Roguelocke, vous allez entrer le donjon que vous aves selectionné(e) avec une nouvelle équipe. </value>
+    <value>Dans le mode Roguelocke, vous allez entrer dans le donjon que vous avez selectionnée avec une toute nouvelle équipe. </value>
     <comment></comment>  </data>
   <data name="DLG_ROGUE_INFO_2" xml:space="preserve">
-    <value>Vous pouvez choisir quoi Pokémon vous êtes, et selectionner son talent, sexe, ou couleur. </value>
+    <value>Vous pouvez choisir avec quelle Pokémon vous allez commencer, ainsi que sa capacité spéciale, son genre et sa couleur. </value>
     <comment></comment>  </data>
   <data name="DLG_ROGUE_INFO_3" xml:space="preserve">
     <value>Si votre équipe terminerait le donjon, tous les objets et Pokémon peuvent transfert à la partie principle.</value>
     <comment></comment>  </data>
   <data name="DLG_ROGUE_INFO_4" xml:space="preserve">
-    <value>Mais, si l'équipe est K.O. dans leur aventure, ils sera absents pour toujours.</value>
+    <value>Mais, si l'équipe tombe K.O. dans leur aventure, ils disparaitrons pour toujours.</value>
+    <comment></comment>  </data>
+  <data name="DLG_ROGUE_SEED_INFO_1" xml:space="preserve">
+    <value>Vous pouvez spécifier une graine de génération quand vous sélectionnez un donjon pour jouer.</value>
+    <comment></comment>  </data>
+  <data name="DLG_ROGUE_SEED_INFO_2" xml:space="preserve">
+    <value>Les donjons générés manuellement via une graine auront toujours le même pattern, peu importe le nombre de fois qu'ils auront été joués.</value>
+    <comment></comment>  </data>
+  <data name="DLG_ROGUE_SEED_INFO_3" xml:space="preserve">
+    <value>Vous pouvez reprendre la génération du donjon en copiant la graine de génération d'un enregistrement d'une partie terminée.</value>
+    <comment></comment>  </data>
+  <data name="DLG_ROGUE_SEED_INFO_4" xml:space="preserve">
+    <value>Cependant, vous ne pourrez pas transférer des objets ou des Pokémon dans une partie générée manuellement</value>
     <comment></comment>  </data>
   <data name="DLG_ROGUE_SPECIAL_INFO_1" xml:space="preserve">
-    <value>Dans la mode Rougelocke, les Pokémon chromatiques sont plus courant, et vous peuvez commencez chromatique! </value>
+    <value>Dans la mode Roguelocke, les Pokémon chromatiques sont plus courant, et vous pouvez commencer avec un d'eux ! </value>
+    <comment></comment>  </data>
+  <data name="DLG_ROGUE_SPECIAL_INFO_2" xml:space="preserve">
+    <value>Cependant, vous ne pourrez pas les envoyer à la base dans ce mode, et ne pourront pas être transférés si ils sont K.O.</value>
     <comment></comment>  </data>
   <data name="DLG_SAVE_COMPLETE" xml:space="preserve">
-    <value>Partie sauvegarde!</value>
+    <value>Partie sauvegardée!</value>
     <comment></comment>  </data>
   <data name="DLG_SEND_HOME_ASK" xml:space="preserve">
-    <value>Envoyer {0} à la maison?</value>
+    <value>Envoyer {0} à la base?</value>
     <comment></comment>  </data>
   <data name="DLG_SKILL_DELETE" xml:space="preserve">
-    <value>Allez-vous oublier une capacitié pour apprendre {0}?</value>
+    <value>Voulez-vous oublier une capacitié pour apprendre {0}?</value>
     <comment></comment>  </data>
   <data name="DLG_SKILL_FULL" xml:space="preserve">
-    <value>{0} essaye apprendre {1}, mais {0} déjà connaît 4 capacitiés.</value>
+    <value>{0} essaye d'apprendre {1}, mais {0} connait déjà 4 capacitiés.</value>
     <comment></comment>  </data>
   <data name="DLG_SKILL_LEARN" xml:space="preserve">
-    <value>{0} a appris {1}!</value>
+    <value>{0} a appris {1} !</value>
     <comment></comment>  </data>
   <data name="DLG_SKILL_NO_LEARN" xml:space="preserve">
     <value>{0} n'a pas appris {1}.</value>
@@ -508,25 +571,43 @@
     <value>{0} a oublié {2},[pause=0] et a appris {1}!</value>
     <comment></comment>  </data>
   <data name="DLG_SKILL_STOP_LEARN" xml:space="preserve">
-    <value>Arrêter apprendre {0} ?</value>
+    <value>Arrêter d'apprendre {0} ?</value>
     <comment></comment>  </data>
   <data name="DLG_SUSPEND_ASK" xml:space="preserve">
-    <value>Allez-vous sauvegarder la partie et retournez à l'écrean du titre?</value>
+    <value>Allez-vous sauvegarder la partie et retournez à l'écran de démarrage ?</value>
     <comment></comment>  </data>
   <data name="DLG_TEAM_FULL" xml:space="preserve">
     <value>Votre équipe est plein! Selectionner un Pokémon retourner à la maison.</value>
     <comment></comment>  </data>
   <data name="DLG_TEAM_SENT_HOME" xml:space="preserve">
-    <value>{0} est retourné.</value>
+    <value>{0} est sorti.</value>
+    <comment></comment>  </data>
+  <data name="DLG_TRADE_CANCELED" xml:space="preserve">
+    <value>L'autre joueur a arrêté l'échange.</value>
+    <comment></comment>  </data>
+  <data name="DLG_TRADE_ITEM_ASK" xml:space="preserve">
+    <value>Voulez-vous échanger ces objets ?</value>
+    <comment></comment>  </data>
+  <data name="DLG_TRADE_ITEM_COMPLETE" xml:space="preserve">
+    <value>Echange terminée ! Les items ont été envoyés à la réserve.</value>
+    <comment></comment>  </data>
+  <data name="DLG_TRADE_TEAM_AND" xml:space="preserve">
+    <value>Et en échange...</value>
+    <comment></comment>  </data>
+  <data name="DLG_TRADE_TEAM_ASK" xml:space="preserve">
+    <value>Voulez-vous échanger {0} contre {1} ?</value>
+    <comment></comment>  </data>
+  <data name="DLG_TRADE_TEAM_RECEIVED" xml:space="preserve">
+    <value>{1} a envoyé {0} rejoindre vos aventures !</value>
     <comment></comment>  </data>
   <data name="DLG_TRANSFER_ASK" xml:space="preserve">
-    <value>Les objets, argent et Pokémon qui n'ont pas K.O. peuvent transférer à la partie principle. Allez-vous fair le transfert?</value>
+    <value>Les objets, argent et Pokémon qui ne sont pas K.O. peuvent être transférer à la sauvegarde principale. Commencer le transfert ?</value>
     <comment></comment>  </data>
   <data name="DLG_TRANSFER_COMPLETE" xml:space="preserve">
     <value>Transfert termine!</value>
     <comment></comment>  </data>
   <data name="DLG_WHAT_DO" xml:space="preserve">
-    <value>Que allez-vous faire?</value>
+    <value>Qu'allez-vous faire?</value>
     <comment></comment>  </data>
   <data name="GAME_SPLASH" xml:space="preserve">
     <value>Cet est un fangame gratuit\ncree par les fans de\nPokemon Donjon Mystere.\nSoutenir la serie\npar acheter un jeux officiel\n\n\n\nPokemon Donjon Mystere est appartenir a\n\nNintendo\nPokemon\nCreatures Inc\nGAME FREAK Inc\nSpike Chunsoft</value>

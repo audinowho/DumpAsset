@@ -112,9 +112,9 @@ function luminous_spring.Spring_Touch(obj, activator)
 					if member.EquippedItem.ID == 349 then
 						evo_item = 349
 					end
-					local mon = RogueEssence.Data.DataManager.Instance:GetMonster(branch.Result)
+					local mon = _DATA:GetMonster(branch.Result)
 					if evo_item > -1 then
-						local item = RogueEssence.Data.DataManager.Instance:GetItem(evo_item)
+						local item = _DATA:GetItem(evo_item)
 						UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Evo_Confirm_Item'], member:GetDisplayName(true), item:GetIconName(), mon:GetColoredName()), false)
 					else
 						UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Evo_Confirm'], member:GetDisplayName(true), mon:GetColoredName()), false)
@@ -130,7 +130,7 @@ function luminous_spring.Spring_Touch(obj, activator)
 				else
 					local evo_names = {}
 					for branch_idx = 1, #branches do
-						local mon = RogueEssence.Data.DataManager.Instance:GetMonster(branches[branch_idx].Result)
+						local mon = _DATA:GetMonster(branches[branch_idx].Result)
 						table.insert(evo_names, mon:GetColoredName())
 					end
 					table.insert(evo_names, STRINGS:FormatKey("MENU_CANCEL"))
@@ -147,7 +147,7 @@ function luminous_spring.Spring_Touch(obj, activator)
 			end
 		elseif state == 3 then
 			--execute evolution
-			local mon = RogueEssence.Data.DataManager.Instance:GetMonster(evo.Result)
+			local mon = _DATA:GetMonster(evo.Result)
 			
 			GROUND:SpawnerSetSpawn("EVO_SUBJECT",member)
 			local subject = GROUND:SpawnerDoSpawn("EVO_SUBJECT")

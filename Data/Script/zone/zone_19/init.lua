@@ -57,7 +57,7 @@ function zone_19.ExitSegment(zone, result, rescue, segmentID, mapID)
         GAME:EnterZone(1, -1, 8, 0)
       else
         PrintInfo("No exit procedure found!")
-	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
+	    COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
       end
     end
   end

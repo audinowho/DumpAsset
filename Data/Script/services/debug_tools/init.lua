@@ -106,6 +106,7 @@ function DebugTools:OnNewGame()
   
     SV.base_camp.ExpositionComplete = true
     SV.base_camp.IntroComplete = true
+	SV.test_grounds.DemoComplete = true
 	SV.General.Starter = _DATA.Save.ActiveTeam.Players[0].BaseForm
   end
 end

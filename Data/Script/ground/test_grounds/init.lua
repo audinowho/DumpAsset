@@ -49,28 +49,6 @@ function test_grounds.Init(map)
     
 
 
-  local coord_table = {}
-  coord_table[1] = { 200, 192, Direction.Down }
-  coord_table[2] = { 200, 224, Direction.Down }
-  coord_table[3] = { 200, 256, Direction.Down }
-  
-  --get assembly ready
-  local assemblyCount = GAME:GetPlayerAssemblyCount()
-  
-  --Place player teammates
-  for i = 1,5,1 do
-    GROUND:RemoveCharacter("Assembly" .. tostring(i))
-  end
-  total = assemblyCount
-  if total > 5 then
-    total = 5
-  end
-  for i = 1,total,1 do
-    p = GAME:GetPlayerAssemblyMember(i-1)
-    GROUND:SpawnerSetSpawn("ASSEMBLY_" .. tostring(i),p)
-    local chara = GROUND:SpawnerDoSpawn("ASSEMBLY_" .. tostring(i))
-    --GROUND:GiveCharIdleChatter(chara)
-  end
   
   --Spawn our spawner npcs
   GROUND:SpawnerDoSpawn('MerchantSpawner')
@@ -104,13 +82,15 @@ function test_grounds.Enter(map)
 	GROUND:Hide("Illumise")
   end
   
-  GAME:SetTeamName(STRINGS:FormatKey("TEAM_NAME", "Guildmaster"))
   GAME:FadeIn(60)
-  GAME:MoveCamera(0, 0, 60, true)
   UI:ResetSpeaker()
-  --UI:WaitShowDialogue(STRINGS:Format("Congratulations on completing the toughest dungeon in the demo![pause=0] Enjoy the debug room!"))
-  entrance = MRKR("entrance")
-  PrintInfo("Entrance Loc: X"..tostring(entrance.Position.X).." Y"..tostring(entrance.Position.Y))
+  
+  if not SV.test_grounds.DemoComplete then
+    GAME:SetTeamName(STRINGS:FormatKey("TEAM_NAME", "Guildmaster"))
+    UI:WaitShowDialogue(STRINGS:Format("Congratulations on completing the toughest dungeon in the demo![pause=0] Enjoy the debug room!"))
+	_DATA.Save.DungeonUnlocks[0] = RogueEssence.Data.GameProgress.UnlockState.Discovered
+  end
+  SV.test_grounds.DemoComplete = true
 end
 
 --Called constantly while the map is running
@@ -137,10 +117,10 @@ function test_grounds.Sign1_Action(obj, activator)
   UI:ResetSpeaker()
   UI:SetCenter(true)
   UI:WaitShowDialogue(MapStrings['Sign1_Action_Line0'])
-  UI:WaitShowVoiceOver("Test Voice Over[pause=0]\n1 2 3[br]Extracted Graphics from\n\nPokémon Emerald\nPokémon Mystery Dungeon: Red Rescue Team\nPokémon Mystery Dungeon: Explorers of Sky\nPokémon Ranger: Guardian Signs[scroll]Test Voice Over[scroll]Test Voice Over", -1)
+  UI:WaitShowVoiceOver("This room features many[pause=0]\nmechanics useful for scripting.[br]Some of which\n\nmay never be used\nin the final game.[scroll]To enable developer mode,[scroll]run dev.bat in the game folder.", -1)
   GAME:WaitFrames(30)
   UI:SetAutoFinish(true)
-  UI:WaitShowVoiceOver("Test Voice Over[pause=0]\n1 2 3[br]Test Voice Over\n4 5 6[scroll]Test Voice Over\n7 8 9", -1)
+  UI:WaitShowVoiceOver("Fork us at[pause=0]\nhttps://github.com/audinowho/PMDODump![br]Now...\nLet's move you around![scroll]Ready in\n3 2 1", -1)
   
   TASK:WaitStartEntityTask(activator, function()
     SOUND:PlayBattleSE("EVT_Emote_Confused")
@@ -226,14 +206,14 @@ end
 
 function test_grounds.Concurrent_Title()
 
-  UI:WaitShowTitle("AAA\nbbb\nccc", 60)
+  UI:WaitShowTitle("Like\nComment\nSubscribe", 60)
   GAME:WaitFrames(120)
   UI:WaitHideTitle(60)
 end
 
 function test_grounds.Concurrent_BG()
 
-  UI:WaitShowBG("Sky", 1, 60)
+  UI:WaitShowBG("Cosmic_Power", 1, 60)
   GAME:WaitFrames(120)
   UI:WaitHideBG(60)
 end
@@ -245,6 +225,10 @@ function test_grounds.Sign2_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   local chara = CH('PLAYER')
   GROUND:Unhide('Activation')
+  UI:WaitShowDialogue("The Debug Dungeon is accessible from here.")
+  UI:WaitShowDialogue("We do not take responsibility for broken things you encounter there.")
+  UI:WaitShowDialogue("If you get stuck inside, try deleting SAVE/QUICKSAVE.rsqs")
+  UI:WaitShowDialogue("Maybe back up your main save too. (SAVE/SAVE.rssv)")
 end
 
 function test_grounds.Entrance_Touch(obj, activator)
@@ -269,17 +253,29 @@ end
 
 function test_grounds.SouthExit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-
-  local dungeon_entrances = { 0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40 }
-  local ground_entrances = { {Flag=true,Zone=1,ID=1,Entry=3},
-  {Flag=true,Zone=1,ID=3,Entry=0},
-  {Flag=true,Zone=1,ID=4,Entry=0},
-  {Flag=true,Zone=1,ID=5,Entry=0},
-  {Flag=true,Zone=1,ID=6,Entry=0},
-  {Flag=true,Zone=1,ID=7,Entry=0},
-  {Flag=true,Zone=1,ID=8,Entry=0}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
   
+  local open_dests = {
+    { Name="Replay Test Zone", Dest=RogueEssence.Dungeon.ZoneLoc(0, 4, 0, 0) },
+    { Name="Base Camp", Dest=RogueEssence.Dungeon.ZoneLoc(1, -1, 1, 0) }
+  }
+  local open_dungeons = { 0 }
+  local ground_entrances = { 1 }
+  
+  UI:ResetSpeaker()
+  SOUND:PlaySE("Menu/Skip")
+  UI:DestinationMenu(open_dests)
+  UI:WaitForChoice()
+  dest = UI:ChoiceResult()
+
+  if dest:IsValid() then
+    SOUND:PlayBGM("", true)
+    GAME:FadeOut(false, 20)
+	if dest.StructID.Segment > -1 then
+	  GAME:EnterDungeon(dest.ID, dest.StructID.Segment, dest.StructID.ID, dest.EntryPoint, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
+	else
+	  GAME:EnterZone(dest.ID, dest.StructID.Segment, dest.StructID.ID, dest.EntryPoint)
+	end
+  end
 end
 --------------------------------------------------
 -- Characters Callbacks
@@ -294,7 +290,7 @@ function test_grounds.Mew_Action(chara, activator)
   GROUND:CharSetEmote(mew, -1, 0)
 
   UI:SetSpeaker(mew)
-  UI:WaitShowTimedDialogue(STRINGS:Format(MapStrings['Mew_Action_Line0']), 120)
+  UI:WaitShowTimedDialogue("Walk with me!", 120)
   GROUND:CharSetEmote(mew, 1, 0)
 
   local coro1 = TASK:BranchCoroutine(function() test_grounds.Walk_Sequence(mew) end)
@@ -544,7 +540,9 @@ function test_grounds.Merchant_Action(chara, activator)
   GROUND:CharTurnToCharAnimated(chara, activator, 4)
   UI:SetSpeaker(chara)
   
-  UI:TextDialogue(STRINGS:Format(MapStrings['Merchant_Greet']))
+  
+  UI:WaitShowDialogue("Your sprite will always be Pikachu and Eevee, only on this map.")
+  UI:WaitShowDialogue("Handy for mods that want to imitate Explorers-style hub!")
   UI:WaitDialog()
   GROUND:CharAnimateTurnTo(chara, olddir, 4)
 end

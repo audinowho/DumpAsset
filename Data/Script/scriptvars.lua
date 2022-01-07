@@ -57,6 +57,7 @@ SV.test_grounds =
   FinishedMissions = { },
   Starter = { Species=25, Form=0, Skin=0, Gender=2 },
   Partner = { Species=133, Form=0, Skin=0, Gender=1 },
+  DemoComplete = false,
 }
 
 SV.base_camp = 

@@ -411,49 +411,52 @@ end
 function COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
   
   --check for unlock of dungeons
-  local open_dungeons = {}
-  for i = 1,#dungeon_entrances,1 do
-    if GAME:DungeonUnlocked(dungeon_entrances[i]) then
-      table.insert(open_dungeons, dungeon_entrances[i])
+  local open_dests = {}
+  for ii = 1,#dungeon_entrances,1 do
+    if GAME:DungeonUnlocked(dungeon_entrances[ii]) then
+	  local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[dungeon_entrances[ii]]
+	  local zone_name = zone_summary:GetColoredName()
+      table.insert(open_dests, { Name=zone_name, Dest=RogueEssence.Dungeon.ZoneLoc(dungeon_entrances[ii], 0, 0, 0) })
 	end
   end
   
   --check for unlock of grounds
-  local open_grounds = {}
-  for i = 1,#ground_entrances,1 do
-    if ground_entrances[i].Flag then
-      table.insert(open_grounds, ground_entrances[i])
+  for ii = 1,#ground_entrances,1 do
+    if ground_entrances[ii].Flag then
+	  local ground_id = ground_entrances[ii].Zone
+	  local zone = _DATA:GetZone(ground_id)
+	  local ground = _DATA:GetGround(zone.GroundMaps[ground_entrances[ii].ID])
+	  local ground_name = ground:GetColoredName()
+      table.insert(open_dests, { Name=ground_name, Dest=RogueEssence.Dungeon.ZoneLoc(ground_id, -1, ground_entrances[ii].ID, ground_entrances[ii].Entry) })
 	end
   end
   
   local dest = RogueEssence.Dungeon.ZoneLoc.Invalid
-  if #open_dungeons + #open_grounds == 1 then
-    if #open_dungeons == 1 then
+  if #open_dests == 1 then
+    if open_dests[1].Dest.StructID.Segment < 0 then
+	  --single ground entry
+      UI:ResetSpeaker()
       
+	  UI:ChoiceMenuYesNo(STRINGS:FormatKey("DLG_ASK_ENTER_GROUND", open_dests[1].Name))
+      UI:WaitForChoice()
+      if UI:ChoiceResult() then
+	    dest = open_dests[1].Dest
+	  end
+	else
+	  --single dungeon entry
       UI:ResetSpeaker()
       SOUND:PlaySE("Menu/Skip")
-	  UI:DungeonChoice(open_dungeons[1])
+	  UI:DungeonChoice(open_dests[1].Name, open_dests[1].Dest)
       UI:WaitForChoice()
       if UI:ChoiceResult() then
-	    dest = RogueEssence.Dungeon.ZoneLoc(open_dungeons[1], RogueEssence.Dungeon.SegLoc(0,0))
-	  end
-	elseif #open_grounds == 1 then
-      UI:ResetSpeaker()
-	  local ground_id = open_grounds[1].Zone
-	  local zone = RogueEssence.Data.DataManager.Instance:GetZone(ground_id)
-	  local ground = RogueEssence.Data.DataManager.Instance:GetGround(zone.GroundMaps[open_grounds[1].ID])
-	  local ground_name = ground:GetColoredName()
-      
-	  UI:ChoiceMenuYesNo(STRINGS:FormatKey("DLG_ASK_ENTER_GROUND", ground_name))
-      UI:WaitForChoice()
-      if UI:ChoiceResult() then
-	    dest = RogueEssence.Dungeon.ZoneLoc(open_grounds[1].Zone, RogueEssence.Dungeon.SegLoc(-1, open_grounds[1].ID), open_grounds[1].Entry)
+	    dest = open_dests[1].Dest
 	  end
 	end
-  elseif #open_dungeons + #open_grounds > 1 then
+  elseif #open_dests > 1 then
+    
     UI:ResetSpeaker()
     SOUND:PlaySE("Menu/Skip")
-    UI:DungeonMenu(open_dungeons, open_grounds)
+    UI:DestinationMenu(open_dests)
 	UI:WaitForChoice()
 	dest = UI:ChoiceResult()
   end
@@ -517,7 +520,7 @@ function COMMON.UnlockWithFanfare(dungeon_id, from_dungeon)
     GAME:UnlockDungeon(dungeon_id)
     UI:ResetSpeaker(false)
 	UI:SetCenter(true)
-	local zone = RogueEssence.Data.DataManager.Instance.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[dungeon_id]
+	local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[dungeon_id]
     SOUND:PlayFanfare("Fanfare/NewArea")
     UI:WaitShowDialogue(STRINGS:FormatKey("DLG_NEW_AREA", zone:GetColoredName()))
     UI:SetCenter(false)
@@ -721,7 +724,7 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
     
     local ratio = target.HP * 100 // target.MaxHP
     
-    local mon = RogueEssence.Data.DataManager.Instance:GetMonster(target.BaseForm.Species)
+    local mon = _DATA:GetMonster(target.BaseForm.Species)
     local form = mon.Forms[target.BaseForm.Form]
     
     local personality = form:GetPersonalityType(target.Discriminator)
@@ -763,7 +766,7 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
   	      end
   	    end
   	    if #moves > 0 then
-  	      local chosen_move = RogueEssence.Data.DataManager.Instance:GetSkill(moves[math.random(1, #moves)])
+  	      local chosen_move = _DATA:GetSkill(moves[math.random(1, #moves)])
   	      chosen_quote = string.gsub(chosen_quote, "%[move%]", chosen_move:GetIconName())
   	    else
   	      valid_quote = false
@@ -776,7 +779,7 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
   	      local chosen_list = team_spawn:ChooseSpawns(GAME.Rand)
   	      if chosen_list.Count > 0 then
   	        local chosen_mob = chosen_list[math.random(0, chosen_list.Count-1)]
-  	        local mon = RogueEssence.Data.DataManager.Instance:GetMonster(chosen_mob.BaseForm.Species)
+  	        local mon = _DATA:GetMonster(chosen_mob.BaseForm.Species)
             chosen_quote = string.gsub(chosen_quote, "%[kind%]", mon:GetColoredName())
   	      else
   	        valid_quote = false
@@ -957,7 +960,7 @@ function COMMON.GroundInteract(chara, target)
   GROUND:CharTurnToChar(target, chara)
   UI:SetSpeaker(target)
   
-  local mon = RogueEssence.Data.DataManager.Instance:GetMonster(target.CurrentForm.Species)
+  local mon = _DATA:GetMonster(target.CurrentForm.Species)
   local form = mon.Forms[target.CurrentForm.Form]
   
   local personality = form:GetPersonalityType(target.Data.Discriminator)

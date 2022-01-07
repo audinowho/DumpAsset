@@ -1030,7 +1030,7 @@ function base_camp_2.NPC_Interactive_Action(chara, activator)
 	if base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == -1 then
 	  can_talk_to = false
 	else
-	  local zone = RogueEssence.Data.DataManager.Instance.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[talk_to.Data.MetLoc.ID]
+	  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[talk_to.Data.MetLoc.ID]
 	  local zone_name = zone:GetColoredName()
 	  local cur_team = _DATA.Save.ActiveTeam.Name
 	  if talk_to.Data.OriginalUUID ~= _DATA.Save.UUID then

@@ -19,11 +19,19 @@ function base_camp.Enter(map)
   -- TODO: v0.5: remove this
   -- hacky upgrade script that always runs when entering the map, guaranteed for save files that up-port because they always start here.
   
-  -- SV.garden_end = 
-  -- {
-  --   ExpositionComplete    = false
-  -- }
-  -- _DATA.Save.ActiveTeam:SetRank(1)
+  if SV.test_grounds.DemoComplete == nil then
+    SV.test_grounds =
+    {
+      SpokeToPooch = false,
+      AcceptedPooch = false,
+      Missions = { },
+      CurrentOutlaws = { },
+      FinishedMissions = { },
+      Starter = { Species=25, Form=0, Skin=0, Gender=2 },
+      Partner = { Species=133, Form=0, Skin=0, Gender=1 },
+      DemoComplete = false,
+    }
+  end
   
   -- end
   if SV.unlocked_trades ~= nil then
@@ -43,6 +51,11 @@ function base_camp.Enter(map)
   
   if not SV.base_camp.IntroComplete then
     base_camp.PrepareFirstTimeVisit()
+	GAME:FadeIn(20)
+  elseif SV.test_grounds.DemoComplete then
+    local noctowl = CH('Noctowl')
+    GROUND:TeleportTo(noctowl, 80, 288, Direction.Right)
+	GAME:FadeIn(20)
   elseif not SV.base_camp.ExpositionComplete then
 	-- move founder to team if not in party
 	-- get party
@@ -87,14 +100,15 @@ function base_camp.Enter(map)
     GAME:CutsceneMode(true)
     UI:SetSpeaker(STRINGS:Format("\\uE040"), true, -1, -1, -1, RogueEssence.Data.Gender.Unknown)
 	
-    local zone = RogueEssence.Data.DataManager.Instance.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[19]
+    local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[19]
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001'], zone:GetColoredName()))
     --move the noctowl to a new position
     local noctowl = CH('Noctowl')
     GROUND:TeleportTo(noctowl, 244, 286, Direction.Up)
+    GAME:FadeIn(20)
+  else
+    GAME:FadeIn(20)
   end
-  GAME:FadeIn(20)
-  
   --When the player gets back after fainting for the first time, play this cutscene
   if SV.base_camp.IntroComplete and not SV.base_camp.ExpositionComplete then
     base_camp.BeginExposition()
@@ -161,7 +175,7 @@ function base_camp.BeginExposition()
   
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_006']))
   
-  local zone = RogueEssence.Data.DataManager.Instance.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[19]
+  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[19]
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_007'], zone:GetColoredName()))
   
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_008']))
@@ -179,7 +193,7 @@ function base_camp.BeginExposition()
   GROUND:EntTurn(player, Direction.Up)
   GROUND:EntTurn(noctowl, Direction.Down)
   
-  zone = RogueEssence.Data.DataManager.Instance.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[2]
+  zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[2]
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_010'], zone:GetColoredName()))
   
   --UI:WaitShowDialogue("It amazes me that the likes of you still come to this island.")
@@ -228,7 +242,7 @@ function base_camp.First_North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   UI:ResetSpeaker()
-  local zone = RogueEssence.Data.DataManager.Instance.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[19]
+  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[19]
   UI:ChoiceMenuYesNo(STRINGS:FormatKey("DLG_ASK_ENTER_DUNGEON", zone:GetColoredName()), false)
   UI:WaitForChoice()
   ch = UI:ChoiceResult()
@@ -282,7 +296,7 @@ function base_camp.Noctowl_Action(chara, activator)
     STRINGS:FormatKey("MENU_INFO"),
     STRINGS:FormatKey("DLG_CHOICE_NO")}
   
-  local zone = RogueEssence.Data.DataManager.Instance.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[35]
+  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[35]
   
   local result = 2
   while result == 2 do

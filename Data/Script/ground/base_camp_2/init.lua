@@ -1136,14 +1136,6 @@ function base_camp_2.NPC_Mother_Action(chara, activator)
 end
 
 
-function base_camp_2.NPC_Mother_Action(chara, activator)
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
-  UI:SetSpeaker(chara)
-
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mother_Line_001']))
-end
-
-
 function base_camp_2.Assembly1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   COMMON.GroundInteract(activator, chara, false)

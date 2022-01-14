@@ -117,10 +117,9 @@ function cliff_camp.Speedster_1_Action(chara, activator)
 	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_002']))
 	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_003']))
 	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_004']))
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_005']))
 	  GROUND:CharSetEmote(chara, 5, 1)
 	  SOUND:PlayBattleSE("EVT_Emote_Sweating")
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_006']))
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_005']))
 	  GROUND:EntTurn(chara, Direction.DownLeft)
 	end
 end

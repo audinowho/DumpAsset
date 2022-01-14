@@ -84,8 +84,10 @@ http://musicalcombusken.deviantart.com/ MusicalCombusken, for the title logo
 https://www.reddit.com/user/SilverDeoxys563 SilverDeoxys563, for various Trap graphics
 http://fable-amare.deviantart.com/ Fable, for custom portraits
 http://poyo-journal.tumblr.com/ Lurils, for custom map edits
-https://twitter.com/RaoKurai Rao Kurai, for custom sprites
+https://twitter.com/RaoKurai Rao Kurai, for custom sprites, music
+https://soundcloud.com/skelothan Skelothan, for custom music
 Chi, Lovi, Moo, Reppamon, and 2 Anonymous, for custom sprites and portraits
+
 
 Translation:
 [FR] https://www.vg-resource.com/user-25643.html Van-Tazen

@@ -88,7 +88,7 @@ function test_grounds.Enter(map)
   if not SV.test_grounds.DemoComplete then
     GAME:SetTeamName(STRINGS:FormatKey("TEAM_NAME", "Guildmaster"))
     UI:WaitShowDialogue(STRINGS:Format("Congratulations on completing the toughest dungeon in the demo![pause=0] Enjoy the debug room!"))
-	_DATA.Save.DungeonUnlocks[0] = RogueEssence.Data.GameProgress.UnlockState.Discovered
+	GAME:UnlockDungeon(0)
   end
   SV.test_grounds.DemoComplete = true
 end

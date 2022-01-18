@@ -103,6 +103,7 @@ Translation:
 [PT] https://twitter.com/SquishyTheMew Squishy
 [KO] https://www.reddit.com/user/Bashful_Barry/ Barry
 [ZH] https://twitter.com/Dewpoleon Dew
+[ZH] https://sites.google.com/view/daniel-lee-site/home PikaNiko
 [FR] Blackun
 And 1 Anonymous
 

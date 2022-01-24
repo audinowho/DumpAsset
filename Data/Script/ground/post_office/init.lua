@@ -185,15 +185,14 @@ function post_office.Main_Desk_Action(obj, activator)
 			UI:WaitForChoice()
 			state = 4
 		elseif state == 7 then
-			local end_choice = 7
+			local end_choice = 6
 			local connect_choices = {}
 			connect_choices[1] = STRINGS:Format(MapStrings['Connect_Option_Friends'])
-			connect_choices[2] = STRINGS:Format(MapStrings['Connect_Option_Friend_Rescue'])
-			connect_choices[3] = STRINGS:Format(MapStrings['Connect_Option_Teammate'])
-			connect_choices[4] = STRINGS:Format(MapStrings['Connect_Option_Treasure'])
-			-- connect_choices[5] = "Mail Exchange"
-			connect_choices[6] = STRINGS:Format(MapStrings['Connect_Option_Advanced'])
-			connect_choices[7] = STRINGS:FormatKey("MENU_CANCEL")
+			connect_choices[2] = STRINGS:Format(MapStrings['Connect_Option_Teammate'])
+			connect_choices[3] = STRINGS:Format(MapStrings['Connect_Option_Treasure'])
+			-- connect_choices[4] = "Mail Exchange"
+			connect_choices[5] = STRINGS:Format(MapStrings['Connect_Option_Advanced'])
+			connect_choices[6] = STRINGS:FormatKey("MENU_CANCEL")
 			
 				-- Connecting Peer-to-Peer
 				-- File Rescue
@@ -209,36 +208,27 @@ function post_office.Main_Desk_Action(obj, activator)
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Friends_003']))
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Friends_004']))
 			elseif result == 2 then
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Rescue_001']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Rescue_002']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Rescue_003']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Rescue_004']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Rescue_005']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Rescue_006']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Rescue_007']))
-			elseif result == 3 then
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Trade_Team_001']))
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Trade_Team_002']))
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Trade_Team_003']))
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Trade_Team_004']))
-			elseif result == 4 then
+			elseif result == 3 then
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Trade_Item_001']))
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Trade_Item_002']))
-			elseif result == 5 then
+			elseif result == 4 then
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Trade_Mail_001']))
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Trade_Mail_002']))
-			elseif result == 6 then
+			elseif result == 5 then
 				state = 8
 			else
 				state = 0
 			end
 		elseif state == 8 then
-			local end_choice = 4
+			local end_choice = 3
 			local connect_choices = {}
 			connect_choices[1] = STRINGS:Format(MapStrings['Connect_Option_P2P'])
-			connect_choices[2] = STRINGS:Format(MapStrings['Connect_Option_File_Rescue'])
-			connect_choices[3] = STRINGS:Format(MapStrings['Connect_Option_Host'])
-			connect_choices[4] = STRINGS:FormatKey("MENU_CANCEL")
+			connect_choices[2] = STRINGS:Format(MapStrings['Connect_Option_Host'])
+			connect_choices[3] = STRINGS:FormatKey("MENU_CANCEL")
 			
 			UI:BeginChoiceMenu(STRINGS:Format(MapStrings['Connect_Info_Ask']), connect_choices, 1, end_choice)
 			UI:WaitForChoice()
@@ -255,15 +245,6 @@ function post_office.Main_Desk_Action(obj, activator)
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_P2P_008']))
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_P2P_009']))
 			elseif result == 2 then
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_File_Rescue_001']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_File_Rescue_002']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_File_Rescue_003']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_File_Rescue_004']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_File_Rescue_005']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_File_Rescue_006']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_File_Rescue_007']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_File_Rescue_008']))
-			elseif result == 3 then
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Server_Host_001']))
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Server_Host_002']))
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Connect_Info_Server_Host_003']))
@@ -292,8 +273,9 @@ function post_office.Side_Desk_Action(obj, activator)
 			
 			local connect_choices = {STRINGS:Format(MapStrings['Rescue_Option_SOS']),
 			STRINGS:Format(MapStrings['Rescue_Option_AOK']),
+			STRINGS:FormatKey("MENU_INFO"),
 			STRINGS:FormatKey("MENU_EXIT")}
-			UI:BeginChoiceMenu(msg, connect_choices, 1, 3)
+			UI:BeginChoiceMenu(msg, connect_choices, 1, 4)
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
 			repeated = true
@@ -310,6 +292,8 @@ function post_office.Side_Desk_Action(obj, activator)
 				else
 					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_AOK_None']))
 				end
+			elseif result == 3 then
+				state = 3
 			else
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_Goodbye']))
 				state = -1
@@ -335,6 +319,36 @@ function post_office.Side_Desk_Action(obj, activator)
 			else
 				sos = nil
 				state = 1
+			end
+		elseif state == 3 then
+			local end_choice = 3
+			local info_choices = {}
+			info_choices[1] = STRINGS:Format(MapStrings['Connect_Option_Friend_Rescue'])
+			info_choices[2] = STRINGS:Format(MapStrings['Connect_Option_File_Rescue'])
+			info_choices[3] = STRINGS:FormatKey("MENU_CANCEL")
+			UI:BeginChoiceMenu(STRINGS:Format(MapStrings['Connect_Info_Ask']), info_choices, 1, end_choice)
+			UI:WaitForChoice()
+			local result = UI:ChoiceResult()
+			
+			if result == 1 then
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_Info_Rescue_001']))
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_Info_Rescue_002']))
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_Info_Rescue_003']))
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_Info_Rescue_004']))
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_Info_Rescue_005']))
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_Info_Rescue_006']))
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_Info_Rescue_007']))
+			elseif result == 2 then
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_Info_File_Rescue_001']))
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_Info_File_Rescue_002']))
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_Info_File_Rescue_003']))
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_Info_File_Rescue_004']))
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_Info_File_Rescue_005']))
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_Info_File_Rescue_006']))
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_Info_File_Rescue_007']))
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rescue_Info_File_Rescue_008']))
+			else
+				state = 0
 			end
 		end
 	end

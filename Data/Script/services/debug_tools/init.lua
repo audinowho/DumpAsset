@@ -85,7 +85,6 @@ function DebugTools:OnNewGame()
 	
     local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
     _DATA.Save.ActiveTeam.Players[0].ActionEvents:Add(talk_evt)
-	_DATA.Save.ActiveTeam:SetRank(1)
 	talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
     _DATA.Save.ActiveTeam.Players[1].ActionEvents:Add(talk_evt)
 	talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")

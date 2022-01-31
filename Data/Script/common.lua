@@ -408,6 +408,7 @@ function COMMON.ShowTeamAssemblyMenu(obj, init_fun)
     GAME:FadeIn(20)
   end
 end
+
 function COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
   
   --check for unlock of dungeons

@@ -44,6 +44,10 @@ Unix:
   /var/tmp/.net/${UID} if /var/tmp exists, and is writable; otherwise,
   /tmp/.net/${UID} if /tmp exists, and is writable; otherwise fail.
 
+Editors Only: On linux distributions, opening up the Ground Editor may result in repeated errors that reference a "libgdiplus" not found. You will need to install libgdiplus.
+Ubuntu/Debian: sudo apt-get install libgdiplus
+CentOS: sudo yum install libgdiplus
+
 
 
 [PLAYER TIPS - for if you want to win]

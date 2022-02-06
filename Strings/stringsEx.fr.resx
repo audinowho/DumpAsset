@@ -120,6 +120,75 @@
   <data name="BASE_STAT" xml:space="preserve">
     <value>{0} Base</value>
     <comment>Ex. "Base Attack", "Base Speed", "Base Sp. Defense"</comment>  </data>
+  <data name="DLG_ASK_FREE_REVIVE" xml:space="preserve">
+    <value>Voulez-vous réanimer {0}?</value>
+    <comment></comment>  </data>
+  <data name="DLG_ASK_REVIVE" xml:space="preserve">
+    <value>Voulez-vous utiliser un objet de réanimation?</value>
+    <comment>Keep in mind there is an option to cancel and not revive.</comment>  </data>
+  <data name="DLG_ASK_STORAGE" xml:space="preserve">
+    <value>Que voulez-vous retirer?</value>
+    <comment></comment>  </data>
+  <data name="DLG_CANT_FORGET_SKILL" xml:space="preserve">
+    <value>{0} ne peut pas oublier d'autres capacités.</value>
+    <comment></comment>  </data>
+  <data name="DLG_CANT_RECALL_INTRINSIC" xml:space="preserve">
+    <value>{0} n'a pas d'autres capacités spéciales.</value>
+    <comment></comment>  </data>
+  <data name="DLG_DUNGEON_UNLOCK" xml:space="preserve">
+    <value>Un nouveau donjon vient d'être découvert!</value>
+    <comment></comment>  </data>
+  <data name="DLG_EVO_ASK" xml:space="preserve">
+    <value>Vous qui cherchez l'éveil... Souhaitez-vous évoluer?</value>
+    <comment>This text is made to be very similar to the dialogue in Luminous Cave/Luminous Spring</comment>  </data>
+  <data name="DLG_EVO_BEGIN" xml:space="preserve">
+    <value>Vous qui cherchez l'éveil,[pause=0] commençons.</value>
+    <comment></comment>  </data>
+  <data name="DLG_EVO_CHOICE" xml:space="preserve">
+    <value>En quoi évoluera {0}?</value>
+    <comment></comment>  </data>
+  <data name="DLG_EVO_COMPLETE" xml:space="preserve">
+    <value>{0} a évolué en {1}!</value>
+    <comment></comment>  </data>
+  <data name="DLG_EVO_CONFIRM" xml:space="preserve">
+    <value>{0} va évoluer en {1}. Êtes-vous sur?</value>
+    <comment></comment>  </data>
+  <data name="DLG_EVO_CONFIRM_ITEM" xml:space="preserve">
+    <value>{0} donnera un {1}, et évoluera en {2}.[pause=20] Êtes-vous sur?</value>
+    <comment></comment>  </data>
+  <data name="DLG_EVO_END" xml:space="preserve">
+    <value>Vous reviendrez si l'évolution est ce que vous cherchez...</value>
+    <comment></comment>  </data>
+  <data name="DLG_EVO_INTRO" xml:space="preserve">
+    <value>...[pause=0]Une voix émane de quelque part.</value>
+    <comment></comment>  </data>
+  <data name="DLG_EVO_NONE" xml:space="preserve">
+    <value>...[pause=0]{0} ne peut plus évoluer.</value>
+    <comment></comment>  </data>
+  <data name="DLG_EVO_NONE_NOW" xml:space="preserve">
+    <value>...[pause=0]{0} ne peut pas évoluer maintenant.</value>
+    <comment></comment>  </data>
+  <data name="DLG_FORGET_INTRINSIC" xml:space="preserve">
+    <value>{0} perd la capacité spéciale {1}.</value>
+    <comment></comment>  </data>
+  <data name="DLG_FORGET_SKILL" xml:space="preserve">
+    <value>{0} oublie la </value>
+    <comment></comment>  </data>
+  <data name="DLG_LOCK" xml:space="preserve">
+    <value>C'est verrouillé...</value>
+    <comment></comment>  </data>
+  <data name="DLG_LOCK_KEY" xml:space="preserve">
+    <value>Voulez-vous utiliser une clé?</value>
+    <comment></comment>  </data>
+  <data name="DLG_RECEIVE_ITEM" xml:space="preserve">
+    <value>{0} a reçu l'objet {1}!</value>
+    <comment></comment>  </data>
+  <data name="DLG_RECEIVE_ITEM_STORAGE" xml:space="preserve">
+    <value>{0} a reçu l'objet {1}!\nL'objet a été envoyé au stockage.</value>
+    <comment></comment>  </data>
+  <data name="DLG_STORAGE_EMPTY" xml:space="preserve">
+    <value>Il n'y a pas d'objets en stock.</value>
+    <comment></comment>  </data>
   <data name="EVO_REQ_ALLY_ELEMENT" xml:space="preserve">
     <value>avoir un allié de type {0}</value>
     <comment>Evolution requirement: must learn an ally of a certain type</comment>  </data>
@@ -135,6 +204,12 @@
   <data name="EVO_REQ_ATK_DEF_LESS" xml:space="preserve">
     <value>Attaque inférieure à Défense</value>
     <comment>Evolution requirement: the attack stat must be lower than defense</comment>  </data>
+  <data name="EVO_REQ_HUNGER_HIGH" xml:space="preserve">
+    <value>est plein</value>
+    <comment></comment>  </data>
+  <data name="EVO_REQ_HUNGER_LOW" xml:space="preserve">
+    <value>a faim</value>
+    <comment></comment>  </data>
   <data name="EVO_REQ_ITEM" xml:space="preserve">
     <value>tenir {0}</value>
     <comment>Evolution requirement: hold a certain item</comment>  </data>
@@ -142,7 +217,7 @@
     <value>monter au niveau {0}</value>
     <comment>Evolution requirement: reach a certain level</comment>  </data>
   <data name="EVO_REQ_MAP" xml:space="preserve">
-    <value>l'étage a le temps fait {0}</value>
+    <value>l'étage doit faire le temps de {0}</value>
     <comment>Evolution requirement: the floor must have a certain map condition (rain, etc)</comment>  </data>
   <data name="EVO_REQ_SKILL" xml:space="preserve">
     <value>appendre {0}</value>
@@ -150,15 +225,57 @@
   <data name="EVO_REQ_SKILL_ELEMENT" xml:space="preserve">
     <value>appendre un capacitié du type {0}</value>
     <comment>Evolution requirement: must learn a move of a certain type</comment>  </data>
+  <data name="EVO_REQ_STAT_BOOST" xml:space="preserve">
+    <value>lancer {0} dans la bataille</value>
+    <comment></comment>  </data>
   <data name="EVO_REQ_TILE_ELEMENT" xml:space="preserve">
-    <value>être en un région du type {0}</value>
+    <value>être dans une région de type {0}</value>
     <comment>Evolution requirement: must be at a location with a certain element (mossy rock, coronet, etc)</comment>  </data>
   <data name="EVO_REQ_TIME" xml:space="preserve">
     <value>pendant le {0}</value>
     <comment>Evolution requirement: it must be a certain time of day (day, night)</comment>  </data>
   <data name="EVO_REQ_TRADE" xml:space="preserve">
-    <value>être de un autre équipe</value>
+    <value>être dans une autre équipe</value>
     <comment>Evolution requirement: must be from another team</comment>  </data>
+  <data name="MENU_FORGET_SKILL" xml:space="preserve">
+    <value>Oublier Capacité</value>
+    <comment></comment>  </data>
+  <data name="MENU_RECALL_SKILL" xml:space="preserve">
+    <value>Rappeler Capacité</value>
+    <comment></comment>  </data>
+  <data name="MSG_ABSORB" xml:space="preserve">
+    <value>{0} a absorbé la capacité avec {1}!</value>
+    <comment></comment>  </data>
+  <data name="MSG_ACUTE_SNIFFER" xml:space="preserve">
+    <value>{0} a trouvé {2} objets sur le sol avec son {1}!</value>
+    <comment></comment>  </data>
+  <data name="MSG_AIR_LOCK" xml:space="preserve">
+    <value>Air Lock de {0} fait disparaître la météo!</value>
+    <comment></comment>  </data>
+  <data name="MSG_ALREADY_CURSED" xml:space="preserve">
+    <value>L'objet {0} de {1} est déja collant!</value>
+    <comment></comment>  </data>
+  <data name="MSG_ALREADY_HAS_ELEMENT" xml:space="preserve">
+    <value>{0} est déja de type {1}!</value>
+    <comment></comment>  </data>
+  <data name="MSG_ALREADY_HAS_SKILL" xml:space="preserve">
+    <value>{0} connait déja {1}!</value>
+    <comment></comment>  </data>
+  <data name="MSG_ALREADY_HAS_SPECIES" xml:space="preserve">
+    <value>{0} est déja un {1}!</value>
+    <comment></comment>  </data>
+  <data name="MSG_ALREADY_PROTECTED" xml:space="preserve">
+    <value>{0} est déja protégé par {1}!</value>
+    <comment></comment>  </data>
+  <data name="MSG_ALREADY_TRANSFORMED" xml:space="preserve">
+    <value>{0} est déja transformé!</value>
+    <comment></comment>  </data>
+  <data name="MSG_ANCHORED" xml:space="preserve">
+    <value>{0} est fermement ancré au sol!</value>
+    <comment></comment>  </data>
+  <data name="MSG_ANGER_POINT" xml:space="preserve">
+    <value>Le coup critique a rendu Colérique {0}!</value>
+    <comment></comment>  </data>
   <data name="MSG_AQUA_RING_START" xml:space="preserve">
     <value>{0} est entouré d'un anneau d'eau!</value>
     <comment></comment>  </data>
@@ -168,6 +285,27 @@
   <data name="MSG_AREA_COUNTER_START" xml:space="preserve">
     <value>{0} reflette les dégâts de {1}!</value>
     <comment></comment>  </data>
+  <data name="MSG_ARENA_TRAP" xml:space="preserve">
+    <value>Piège Sable de {0} empêche la fuite!</value>
+    <comment></comment>  </data>
+  <data name="MSG_ASK_ASSEMBLY" xml:space="preserve">
+    <value>À qui voulez-vous envoyer?</value>
+    <comment></comment>  </data>
+  <data name="MSG_ASK_NICKNAME" xml:space="preserve">
+    <value>Voulez-vous lui donner un surnom?</value>
+    <comment></comment>  </data>
+  <data name="MSG_ASLEEP" xml:space="preserve">
+    <value>{0} est profondément endormi...</value>
+    <comment></comment>  </data>
+  <data name="MSG_ASSEMBLY_EMPTY" xml:space="preserve">
+    <value>Il n'y a pas de recrues dans l'assemblée.</value>
+    <comment></comment>  </data>
+  <data name="MSG_ASSEMBLY_TAKE" xml:space="preserve">
+    <value>{0} a rejoint {1} depuis l'assemblée</value>
+    <comment>Ex. "Bulby joined Team Bulbasour from the assembly!"</comment>  </data>
+  <data name="MSG_ASSEMBLY_TAKE_ANY" xml:space="preserve">
+    <value>{0} a rejoint l'équipe depuis l'assemblée</value>
+    <comment>The version for when the player doesn't have a team name.</comment>  </data>
   <data name="MSG_BELCH_ALREADY" xml:space="preserve">
     <value>{0} est déjà prêt à éructer!</value>
     <comment></comment>  </data>

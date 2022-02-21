@@ -110,12 +110,50 @@ function DebugTools:OnNewGame()
   end
 end
 
+--[[---------------------------------------------------------------
+    DebugTools:OnUpgrade()
+      When a save file in an old version is loaded this is called!
+---------------------------------------------------------------]]
+function DebugTools:OnUpgrade()
+  assert(self, 'DebugTools:OnUpgrade() : self is null!')
+  
+  PrintInfo("=>> Loading version")
+  _DATA.Save.NextDest = _DATA.StartMap
+    
+  if SV.test_grounds.DemoComplete == nil then
+    SV.test_grounds =
+    {
+      SpokeToPooch = false,
+      AcceptedPooch = false,
+      Missions = { },
+      CurrentOutlaws = { },
+      FinishedMissions = { },
+      Starter = { Species=25, Form=0, Skin=0, Gender=2 },
+      Partner = { Species=133, Form=0, Skin=0, Gender=1 },
+      DemoComplete = false,
+    }
+  end
+  
+  -- end
+  if SV.unlocked_trades ~= nil then
+  else
+    SV.unlocked_trades = {}
+  end
+  
+  if SV.General.Starter == nil then
+    SV.General.Starter = MonsterID(1, 0, 0, Gender.Male)
+  end
+  
+  PrintInfo("=>> Loaded version")
+end
+
 ---Summary
 -- Subscribe to all channels this service wants callbacks from
 function DebugTools:Subscribe(med)
   med:Subscribe("DebugTools", EngineServiceEvents.Init,                function() self.OnInit(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.Deinit,              function() self.OnDeinit(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.NewGame,        function() self.OnNewGame(self) end )
+  med:Subscribe("DebugTools", EngineServiceEvents.UpgradeSave,        function() self.OnUpgrade(self) end )
 --  med:Subscribe("DebugTools", EngineServiceEvents.GraphicsUnload,      function() self.OnGraphicsUnload(self) end )
 --  med:Subscribe("DebugTools", EngineServiceEvents.Restart,             function() self.OnRestart(self) end )
 end

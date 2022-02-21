@@ -16,32 +16,6 @@ end
 function base_camp.Enter(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  -- TODO: v0.5: remove this
-  -- hacky upgrade script that always runs when entering the map, guaranteed for save files that up-port because they always start here.
-  
-  if SV.test_grounds.DemoComplete == nil then
-    SV.test_grounds =
-    {
-      SpokeToPooch = false,
-      AcceptedPooch = false,
-      Missions = { },
-      CurrentOutlaws = { },
-      FinishedMissions = { },
-      Starter = { Species=25, Form=0, Skin=0, Gender=2 },
-      Partner = { Species=133, Form=0, Skin=0, Gender=1 },
-      DemoComplete = false,
-    }
-  end
-  
-  -- end
-  if SV.unlocked_trades ~= nil then
-  else
-    SV.unlocked_trades = {}
-  end
-  
-  if SV.General.Starter == nil then
-    SV.General.Starter = MonsterID(1, 0, 0, Gender.Male)
-  end
   
   SV.checkpoint = 
   {

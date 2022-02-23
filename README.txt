@@ -81,7 +81,7 @@ To deploy the server on a linux machine:
 [CREDITS AND ATTRIBUTIONS - for the indespensible contributors]
 For modifications of this software, these attributions are not to be removed.
 https://github.com/PsyCommando PsyCommando, for code contributions and PMD insight
-https://github.com/anty-lemon Anty-Lemon, for code contributions and platform compatibility insight
+https://github.com/AntyMew AntyMew, for code contributions and platform compatibility insight
 https://twitter.com/_palika_ Palika, for script contributions
 https://github.com/Parakoopa Parakoopa, for tiles dtef parsing
 http://musicalcombusken.deviantart.com/ MusicalCombusken, for the title logo

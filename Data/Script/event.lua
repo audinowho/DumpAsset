@@ -48,8 +48,6 @@ function SINGLE_CHAR_SCRIPT.ThiefCheck(owner, ownerChar, character, args)
   end
 end
 
-AnchorType = luanet.import_type('PMDC.Dungeon.AnchorState')
-
 function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, character, args)
   local baseLoc = _DUNGEON.ActiveTeam.Leader.CharLoc
   local tile = _ZONE.CurrentMap.Tiles[baseLoc.X][baseLoc.Y]
@@ -73,7 +71,7 @@ function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, character, args)
 		    end
 		  end
 		  
-		  if (near_mat or found_shopkeep:CanSeeCharacter(_DUNGEON.ActiveTeam.Leader)) and not found_shopkeep.CharStates:Contains(luanet.ctype(AnchorType)) then
+		  if (near_mat or found_shopkeep:CanSeeCharacter(_DUNGEON.ActiveTeam.Leader)) then
 	        -- attempt to warp the shopkeeper next to the player
 		    local cand_locs = _ZONE.CurrentMap:FindNearLocs(found_shopkeep, baseLoc, 1)
 		    if cand_locs.Count > 0 then

@@ -53,98 +53,30 @@ end
 ---------------------------------------------------------------]]
 function DebugTools:OnNewGame()
   assert(self, 'DebugTools:OnNewGame() : self is null!')
+  PrintInfo("\n<!> ExampleSvc: Preparing debug save file")
+  _DATA.Save.ActiveTeam:SetRank(1)
+  _DATA.Save.ActiveTeam.Name = "Debug"
+  _DATA.Save.ActiveTeam.Money = 1000
+  _DATA.Save.ActiveTeam.Bank = 1000000
   
-  for ii = 1, _DATA.StartChars.Count, 1 do
-    _DATA.Save:RogueUnlockMonster(_DATA.StartChars[ii-1].Item1.Species)
-  end
-  
-  if _DATA.Save.ActiveTeam.Players.Count > 0 then
-    local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
-    _DATA.Save.ActiveTeam.Players[0].ActionEvents:Add(talk_evt)
-	_DATA.Save:RegisterMonster(_DATA.Save.ActiveTeam.Players[0].BaseForm.Species)
-	
-	_DATA.Save.ActiveTeam:SetRank(1)
-	if not GAME:InRogueMode() then
-      _DATA.Save.ActiveTeam.Bank = 1000
-	end
-	SV.General.Starter = _DATA.Save.ActiveTeam.Players[0].BaseForm
-  else
-    PrintInfo("\n<!> ExampleSvc: Preparing debug save file")
-    _DATA.Save.ActiveTeam:SetRank(1)
-    _DATA.Save.ActiveTeam.Name = "Debug"
-    _DATA.Save.ActiveTeam.Money = 1000
-    _DATA.Save.ActiveTeam.Bank = 1000000
-  
-    local mon_id = RogueEssence.Dungeon.MonsterID(1, 0, 0, Gender.Male)
-    _DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, -1, 0))
-    mon_id = RogueEssence.Dungeon.MonsterID(4, 0, 0, Gender.Male)
-    _DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, -1, 0))
-    mon_id = RogueEssence.Dungeon.MonsterID(7, 0, 0, Gender.Male)
-    _DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, -1, 0))
-	
-	
-    local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
-    _DATA.Save.ActiveTeam.Players[0].ActionEvents:Add(talk_evt)
-	talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
-    _DATA.Save.ActiveTeam.Players[1].ActionEvents:Add(talk_evt)
-	talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
-    _DATA.Save.ActiveTeam.Players[2].ActionEvents:Add(talk_evt)
-	
-    _DATA.Save.ActiveTeam.Leader.IsFounder = true
-	
-	_DATA.Save:UpdateTeamProfile(true)
-  
-    for ii = 1, _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Count, 1 do
-      GAME:UnlockDungeon(ii-1)
-    end
-  
-    --for ii = 900, 2370, 1 do
-    --  GAME:GivePlayerStorageItem(ii)
-    --  SV.unlocked_trades[ii] = true
-    --end
-  
-    SV.base_camp.ExpositionComplete = true
-    SV.base_camp.IntroComplete = true
-	SV.test_grounds.DemoComplete = true
-	SV.General.Starter = _DATA.Save.ActiveTeam.Players[0].BaseForm
-  end
-end
+  local mon_id = RogueEssence.Dungeon.MonsterID(1, 0, 0, Gender.Male)
+  _DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, -1, 0))
+  mon_id = RogueEssence.Dungeon.MonsterID(4, 0, 0, Gender.Male)
+  _DATA.Save.ActiveTeam.Assembly:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, -1, 0))
+  mon_id = RogueEssence.Dungeon.MonsterID(7, 0, 0, Gender.Male)
+  _DATA.Save.ActiveTeam.Assembly:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, -1, 0))
+  mon_id = RogueEssence.Dungeon.MonsterID(25, 0, 0, Gender.Male)
+  _DATA.Save.ActiveTeam.Assembly:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, -1, 0))
+  mon_id = RogueEssence.Dungeon.MonsterID(151, 0, 0, Gender.Unknown)
+  _DATA.Save.ActiveTeam.Assembly:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, -1, 0))
+  _DATA.Save:UpdateTeamProfile(true)
 
---[[---------------------------------------------------------------
-    DebugTools:OnUpgrade()
-      When a save file in an old version is loaded this is called!
----------------------------------------------------------------]]
-function DebugTools:OnUpgrade()
-  assert(self, 'DebugTools:OnUpgrade() : self is null!')
+  _DATA.Save.ActiveTeam.Leader.IsFounder = true
   
-  PrintInfo("=>> Loading version")
-  _DATA.Save.NextDest = _DATA.StartMap
-    
-  if SV.test_grounds.DemoComplete == nil then
-    SV.test_grounds =
-    {
-      SpokeToPooch = false,
-      AcceptedPooch = false,
-      Missions = { },
-      CurrentOutlaws = { },
-      FinishedMissions = { },
-      Starter = { Species=25, Form=0, Skin=0, Gender=2 },
-      Partner = { Species=133, Form=0, Skin=0, Gender=1 },
-      DemoComplete = false,
-    }
+  for ii = 1, _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Count, 1 do
+    GAME:UnlockDungeon(ii-1)
   end
   
-  -- end
-  if SV.unlocked_trades ~= nil then
-  else
-    SV.unlocked_trades = {}
-  end
-  
-  if SV.General.Starter == nil then
-    SV.General.Starter = MonsterID(1, 0, 0, Gender.Male)
-  end
-  
-  PrintInfo("=>> Loaded version")
 end
 
 ---Summary
@@ -153,7 +85,6 @@ function DebugTools:Subscribe(med)
   med:Subscribe("DebugTools", EngineServiceEvents.Init,                function() self.OnInit(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.Deinit,              function() self.OnDeinit(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.NewGame,        function() self.OnNewGame(self) end )
-  med:Subscribe("DebugTools", EngineServiceEvents.UpgradeSave,        function() self.OnUpgrade(self) end )
 --  med:Subscribe("DebugTools", EngineServiceEvents.GraphicsUnload,      function() self.OnGraphicsUnload(self) end )
 --  med:Subscribe("DebugTools", EngineServiceEvents.Restart,             function() self.OnRestart(self) end )
 end

@@ -42,8 +42,9 @@ function forest_camp.Sign_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   UI:ResetSpeaker()
-  UI:WaitShowMonologue(STRINGS:Format(MapStrings['Sign_000']))
-  UI:WaitShowMonologue(STRINGS:Format(MapStrings['Sign_001']))
+  UI:SetAutoFinish(true)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sign_000']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sign_001']))
 end
 
 function forest_camp.Assembly_Action(obj, activator)

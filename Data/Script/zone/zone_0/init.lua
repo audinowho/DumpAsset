@@ -17,15 +17,12 @@ end
 
 function zone_0.EnterSegment(zone, rescuing, segmentID, mapID)
   PrintInfo("=>> EnterSegment_zone_0")
-  if rescuing ~= true then
-    COMMON.BeginDungeon(zone.ID, segmentID, mapID)
-  end
+  
 end
 
 function zone_0.ExitSegment(zone, result, rescue, segmentID, mapID)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  COMMON.ExitDungeonMissionCheck(zone.ID, segmentID)
   COMMON.EndSession(result, 0, -1, 0, 0)
 end
 

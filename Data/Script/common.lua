@@ -541,6 +541,21 @@ function COMMON.ClearPlayerPrices()
     local inv_item = GAME:GetPlayerEquippedItem(player_idx)
 	inv_item.Price = 0
   end
+  
+  COMMON.ClearMapTeamPrices(_ZONE.CurrentMap.AllyTeams)
+  COMMON.ClearMapTeamPrices(_ZONE.CurrentMap.MapTeams)
+end
+
+function COMMON.ClearMapTeamPrices(team_list)
+
+  local team_count = team_list.Count
+  for team_idx = 0, team_count-1, 1 do
+	local player_count = team_list[team_idx].Players.Count
+	for player_idx = 0, player_count-1, 1 do
+      local inv_item = team_list[team_idx].Players[player_idx].EquippedItem
+	  inv_item.Price = 0
+	end
+  end
 end
 
 function COMMON.ClearAllPrices()

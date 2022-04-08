@@ -14,11 +14,31 @@ MapIndexType = luanet.import_type('RogueEssence.Dungeon.MapIndexState')
 function SINGLE_CHAR_SCRIPT.ThiefCheck(owner, ownerChar, character, args)
   local baseLoc = _DUNGEON.ActiveTeam.Leader.CharLoc
   local tile = _ZONE.CurrentMap.Tiles[baseLoc.X][baseLoc.Y]
-
+  
   local thief_idx = 31
+  
+  local price = COMMON.GetDungeonCartPrice()
+  local security_price = COMMON.GetShopPriceState()
+  if price < 0 then
+    --lost merchandise was placed back in shop, readjust the security price and clear the current price
+    security_price.Amount = security_price.Amount - price
+  elseif price < security_price.Cart then
+    --merchandise was returned.  doesn't matter who did it.
+    security_price.Cart = price
+  elseif price > security_price.Cart then
+    local char_index = _ZONE.CurrentMap:GetCharIndex(character)
+    if char_index.Faction ~= RogueEssence.Dungeon.Faction.Player then
+      --non-player was responsible for taking/destroying merchandise, just readjust the security price and clear the current price
+      security_price.Amount = security_price.Amount - price + security_price.Cart
+	else
+	  --player was responsible for taking/destroying merchandise, add to the cart
+      security_price.Cart = price
+    end
+  end
+
+  
   if tile.Effect.ID ~= 45 then
-    local price = COMMON.GetDungeonCartPrice()
-	if price > 0 then
+	if security_price.Cart > 0 then
 	  _GAME:BGM("", false)
       COMMON.ClearAllPrices()
 	  
@@ -55,7 +75,8 @@ function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, character, args)
   if tile.Effect.ID ~= 45 then
 	local found_shopkeep = COMMON.FindNpcWithTable(false, "Role", "Shopkeeper")
     if found_shopkeep and COMMON.CanTalk(found_shopkeep) then
-      local price = COMMON.GetDungeonCartPrice()
+	  local security_state = COMMON.GetShopPriceState()
+      local price = security_state.Cart
 	  local sell_price = COMMON.GetDungeonSellPrice()
   
       if price > 0 or sell_price > 0 then
@@ -190,7 +211,8 @@ end
 function BATTLE_SCRIPT.ShopkeeperInteract(owner, ownerChar, context, args)
 
   if COMMON.CanTalk(context.Target) then
-    local price = COMMON.GetDungeonCartPrice()
+	local security_state = COMMON.GetShopPriceState()
+    local price = security_state.Cart
     local sell_price = COMMON.GetDungeonSellPrice()
   
     local oldDir = context.Target.CharDir

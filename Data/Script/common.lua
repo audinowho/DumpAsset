@@ -572,14 +572,10 @@ end
 function COMMON.PayDungeonCartPrice(price)
   COMMON.ClearPlayerPrices()
   GAME:RemoveFromPlayerMoney(price)
-  local security_status = 38
-  if _ZONE.CurrentMap.Status:ContainsKey(security_status) then
-    local status = _ZONE.CurrentMap.Status[security_status]
-	if status.StatusStates:Contains(luanet.ctype(ShopPriceType)) then
-	  local security_price = status.StatusStates:Get(luanet.ctype(ShopPriceType))
-	  security_price.Amount = security_price.Amount - price
-	end
-  end
+  
+  local security_price = COMMON.GetShopPriceState()
+  security_price.Amount = security_price.Amount - price
+  security_price.Cart = 0
 end
 
 function COMMON.PayDungeonSellPrice(price)
@@ -602,29 +598,27 @@ function COMMON.PayDungeonSellPrice(price)
   end
   
   GAME:AddToPlayerMoney(price)
+  local security_price = COMMON.GetShopPriceState()
+  security_price.Amount = security_price.Amount + price * 2
+end
+
+ShopPriceType = luanet.import_type('PMDC.Dungeon.ShopPriceState')
+function COMMON.GetShopPriceState()
   local security_status = 38
   if _ZONE.CurrentMap.Status:ContainsKey(security_status) then
     local status = _ZONE.CurrentMap.Status[security_status]
 	if status.StatusStates:Contains(luanet.ctype(ShopPriceType)) then
-	  local security_price = status.StatusStates:Get(luanet.ctype(ShopPriceType))
-	  security_price.Amount = security_price.Amount + price * 2
+	  return status.StatusStates:Get(luanet.ctype(ShopPriceType))
 	end
   end
+  return nil
 end
-
-ShopPriceType = luanet.import_type('PMDC.Dungeon.ShopPriceState')
 
 function COMMON.GetDungeonCartPrice()
 
   local price = 0
-  local security_status = 38
-  if _ZONE.CurrentMap.Status:ContainsKey(security_status) then
-    local status = _ZONE.CurrentMap.Status[security_status]
-	if status.StatusStates:Contains(luanet.ctype(ShopPriceType)) then
-	  local security_price = status.StatusStates:Get(luanet.ctype(ShopPriceType))
-	  price = security_price.Amount
-	end
-  end
+  local security_price = COMMON.GetShopPriceState()
+  price = security_price.Amount
   
   -- iterate items on shop mats and subtract total price
   local item_count = _ZONE.CurrentMap.Items.Count

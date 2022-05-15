@@ -89,6 +89,7 @@ function test_grounds.Enter(map)
     GAME:SetTeamName(STRINGS:FormatKey("TEAM_NAME", "Guildmaster"))
     UI:WaitShowDialogue(STRINGS:Format("Congratulations on completing the toughest dungeon in the demo![pause=0] Enjoy the debug room!"))
 	GAME:UnlockDungeon(0)
+	GAME:UnlockDungeon(2)
   end
   SV.test_grounds.DemoComplete = true
 end

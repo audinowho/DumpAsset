@@ -1,0 +1,331 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PMDC</name>
+    </assembly>
+    <members>
+        <member name="F:PMDC.Data.MonsterFeatureData.FeatureData">
+            <summary>
+            Maps monster, form to summary
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.RarityData.RarityMap">
+            <summary>
+            Maps monster, rarity to list of applicable items 
+            </summary>
+        </member>
+        <member name="M:PMDC.Dev.DevHelper.PrintAllUnfinishedMoves">
+            <summary>
+            Prints all the moves that can appear in the game due to the monsters appearing in the game, and alerts which unfinished ones need to be finished
+            </summary>
+        </member>
+        <member name="M:PMDC.Dev.DevHelper.PrintAbilityUsers(System.String)">
+            <summary>
+            Gets the abilities from a text file in the path, and prints the monsters that are capable of each.
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:PMDC.Dev.DevHelper.PrintMoveUsers(System.String)">
+            <summary>
+            Gets the moves from a text file in the path, and prints the monsters that are capable of using each.
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="F:PMDC.Dungeon.AIFlags.TeamPartner">
+            <summary>
+            will not attack enemyoffriend
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIFlags.Cannibal">
+            <summary>
+            will attack allies if given the opportunity
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIFlags.ItemGrabber">
+            <summary>
+            will pick up items
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIFlags.ItemMaster">
+            <summary>
+            Knows how to use items
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIFlags.KnowsMatchups">
+            <summary>
+            Is aware of move-neutralizing abilities
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIFlags.AttackToEscape">
+            <summary>
+            Uses moves to escape
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIFlags.WontDisturb">
+            <summary>
+            will not attack sleepers/the frozen
+            but will still wait on them to thaw out instead of walking away
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIFlags.TrapAvoider">
+            <summary>
+            Avoids traps
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIFlags.PlayerSense">
+            <summary>
+            Has the sensibilities of a player team's ally
+            will not walk into silcoon/cascoon
+            will not hit allies even if it's worth it to hit more foes
+            will not path to the last seen location of an enemy if it finds no enemies
+            will not attack or target certain AI
+            will not attack or target sleepers and frozen, full stop
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIPlan.IQ">
+            <summary>
+            The strategy that the monster takes when it goes aggro
+            </summary>
+        </member>
+        <member name="M:PMDC.Dungeon.AIPlan.playerSensibleToAttack(RogueEssence.Dungeon.Character)">
+            <summary>
+            Is it sensible for a player character to attack this way?
+            </summary>
+            <param name="seenChar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.Dungeon.AIPlan.GetPaths(RogueEssence.Dungeon.Character,RogueElements.Loc[],System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            Gets the path directly to a target
+            </summary>
+            <param name="controlledChar"></param>
+            <param name="end"></param>
+            <param name="freeGoal">Determines whether the goal should be reachable even if blocked.</param>
+            <param name="respectPeers">Considers entities as blockers</param>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.Dungeon.AIPlan.GetPathsImpassable(RogueEssence.Dungeon.Character,System.Collections.Generic.List{RogueElements.Loc})">
+            <summary>
+            Gets all paths to all targets, only considering impassable blocks as blockers.
+            </summary>
+            <param name="controlledChar"></param>
+            <param name="ends"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.Dungeon.AIPlan.TryAttackChoice(RogueElements.IRandom,RogueEssence.Dungeon.Character,PMDC.Dungeon.AIPlan.AttackChoice,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="rand"></param>
+            <param name="controlledChar"></param>
+            <param name="attackPattern"></param>
+            <param name="includeImagine">Excludes imaginary hits from causing attack fallthrough.  This will also skip threat checking.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.Dungeon.AIPlan.TryBestAttackChoice(RogueElements.IRandom,RogueEssence.Dungeon.Character,System.Collections.Generic.List{RogueEssence.Dungeon.Character},RogueEssence.Dungeon.Character)">
+            <summary>
+            Always chooses the best attack
+            </summary>
+            <param name="rand"></param>
+            <param name="controlledChar"></param>
+            <param name="defaultDir"></param>
+            <param name="seenChars"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.Dungeon.AIPlan.GetActionValues(RogueEssence.Dungeon.Character,System.Collections.Generic.List{RogueEssence.Dungeon.Character},RogueEssence.Dungeon.Character,System.Int32,PMDC.Dungeon.HitValue[],System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="controlledChar"></param>
+            <param name="closestThreat">A character that will be used to judge an imagined hit. Leave blank for no imagined hits.</param>
+            <param name="seenChars"></param>
+            <param name="moveIndex"></param>
+            <param name="dirs"></param>
+            <param name="includeImagined">Whether or not we want to consider hypothetical hit weights.</param>
+        </member>
+        <member name="M:PMDC.Dungeon.AIPlan.FillRangeTargets(RogueEssence.Dungeon.Character,System.Collections.Generic.List{RogueEssence.Dungeon.Character},System.Collections.Generic.Dictionary{RogueElements.Loc,PMDC.Dungeon.RangeTarget},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="controlledChar"></param>
+            <param name="seenChars"></param>
+            <param name="endHash"></param>
+            <param name="blindspotOnly">Will only treat blindspot attacks as attacks that need to path to tiles.</param>
+        </member>
+        <member name="M:PMDC.Dungeon.AIPlan.GetTargetEffect(RogueEssence.Dungeon.Character,System.Int32,RogueEssence.Data.SkillData,System.Collections.Generic.List{RogueEssence.Dungeon.Character},RogueEssence.Dungeon.Character,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="controlledChar"></param>
+            <param name="moveIndex"></param>
+            <param name="entry"></param>
+            <param name="seenChars"></param>
+            <param name="target"></param>
+            <param name="rangeMod"></param>
+            <returns>Positive number means a positive effect for the target, negative number means a negative effect for the target.</returns>
+        </member>
+        <member name="M:PMDC.Dungeon.AttackFoesPlan.comparePathValues(PMDC.Dungeon.AIPlan.PositionChoice,PMDC.Dungeon.RangeTarget,PMDC.Dungeon.RangeTarget)">
+            <summary>
+            1 = better, -1 worse, 0 = equal 
+            </summary>
+            <param name="newVal"></param>
+            <param name="curBest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:PMDC.Dungeon.ThiefPlan">
+            <summary>
+            will attack players if its original item is their current item, or if its has no item
+            will use dash moves to get away, if given the chance
+            runs away using A*
+            does not pick up items
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:PMDC.Dungeon.DmgMult" -->
+        <!-- Badly formed XML comment ignored for member "T:PMDC.Dungeon.AccMult" -->
+        <member name="M:PMDC.LevelGen.AddBossRoomStep`1.PrepareBossRoom(RogueElements.IRandom,RogueElements.FloorPlan,System.Boolean)">
+            <summary>
+            Returns a random boss room or hall that can fit in the specified floor.
+            </summary>
+            <param name="rand"></param>
+            <param name="floorPlan"></param>
+            <param name="isHall"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.LevelGen.AddBossRoomStep`1.PrepareTreasureRoom(RogueElements.IRandom,RogueElements.FloorPlan,System.Boolean)">
+            <summary>
+            Returns a random boss room or hall that can fit in the specified floor.
+            </summary>
+            <param name="rand"></param>
+            <param name="floorPlan"></param>
+            <param name="isHall"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.LevelGen.BaseSealStep`1.sealBorderRay(`0,System.Collections.Generic.Dictionary{RogueElements.Loc,PMDC.LevelGen.BaseSealStep{`0}.SealType},RogueElements.IFloorRoomPlan,RogueElements.LocRay8,RogueElements.Dir8,RogueElements.Dir8)">
+            <summary>
+            chooses and caegorizes the tile to be sealed
+            </summary>
+            <param name="map"></param>
+            <param name="sealList"></param>
+            <param name="plan"></param>
+            <param name="loc"></param>
+            <param name="dir"></param>
+            <returns>Whether it affected the tile outwards or not</returns>
+        </member>
+        <member name="T:PMDC.LevelGen.MobCheckVersionDiff">
+            <summary>
+            Spawns the mob if it matches version ID.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobSpawnWeak">
+            <summary>
+            Spawns the mob with a 35% fullness and 50% PP.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobSpawnAltColor">
+            <summary>
+            Spawns the mob with a custom shiny chance.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobSpawnMovesOff">
+            <summary>
+            Spawns the mob with moves turned off.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobSpawnBoost">
+            <summary>
+            Spawn the mob with stat boosts (vitamin boosts)
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobSpawnScaledBoost">
+            <summary>
+            Spawn the mob with stat boosts (vitamin boosts) that scale based on level
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobSpawnItem">
+            <summary>
+            Spawn the mob an item
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobSpawnInv">
+            <summary>
+            Spawn the mob an item
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobSpawnLevelScale">
+            <summary>
+            Spawn the mob with a level that scales based on the current floor
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobSpawnLoc">
+            <summary>
+            Spawn the mob with a specific location and direction
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobSpawnUnrecruitable">
+            <summary>
+            Spawn the mob with recruitment turned off
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobSpawnFoeConflict">
+            <summary>
+            Spawn the mob with recruitment turned off
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobSpawnInteractable">
+            <summary>
+            Spawn the mob with an effect on interaction (shows up for allies only)
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobSpawnLuaTable">
+            <summary>
+            Spawn the mob with a lua data table
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobSpawnDiscriminator">
+            <summary>
+            Spawn the mob with a lua data table
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SpreadBossZoneStep.ItemAmount">
+            <summary>
+            Amount for the items randomly chosen from spawnlist
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SpreadVaultZoneStep.ItemAmount">
+            <summary>
+            Amount for the items randomly chosen from spawnlist
+            </summary>
+        </member>
+        <member name="T:PMDC.Program">
+            <summary>
+            The main class.
+            </summary>
+        </member>
+        <member name="M:PMDC.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:PMDC.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PMDC.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PMDC.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:PMDC.Properties.Resources.Icon">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -447,7 +447,7 @@
         </member>
         <member name="P:RogueElements.FloorPathBranch`1.FillPercent">
             <summary>
-            The amount of space in the floor plan that the step aims to fill with rooms.
+            The percentage of total space in the floor plan that the step aims to fill with rooms.
             </summary>
         </member>
         <member name="P:RogueElements.FloorPathBranch`1.HallPercent">
@@ -466,7 +466,7 @@
         </member>
         <member name="P:RogueElements.FloorPathBranch`1.NoForcedBranches">
             <summary>
-            Prevents the step from making branches in the path, even if it's necessary to make the space-fill quota.
+            Prevents the step from making branches in the path, even if it would fail the space-fill quota.
             </summary>
         </member>
         <member name="M:RogueElements.FloorPathBranch`1.GetPossibleExpansions(RogueElements.FloorPlan,System.Boolean)">
@@ -773,6 +773,25 @@
             Populates the empty grid plan of a map by creating a minimum spanning tree of connected rooms and halls.
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.GridPathBranch`1.RoomRatio">
+            <summary>
+            The percentage of total rooms in the grid plan that the step aims to fill.
+            </summary>
+        </member>
+        <member name="P:RogueElements.GridPathBranch`1.BranchRatio">
+            <summary>
+            The percent amount of branching paths the layout will have in relation to its straight paths.
+            0 = A layout without branches. (Worm)
+            50 = A layout that branches once for every two extensions. (Tree)
+            100 = A layout that branches once for every extension. (Branchier Tree)
+            200 = A layout that branches twice for every extension. (Fuzzy Worm)
+            </summary>
+        </member>
+        <member name="P:RogueElements.GridPathBranch`1.NoForcedBranches">
+            <summary>
+            Prevents the step from making branches in the path, even if it would fail the space-fill quota.
+            </summary>
         </member>
         <member name="M:RogueElements.GridPathBranch`1.GetRoomExpandDirs(RogueElements.GridPlan,RogueElements.Loc)">
             <summary>
@@ -1228,10 +1247,15 @@
         </member>
         <member name="T:RogueElements.MultiStepSpawner`2">
             <summary>
-            Chooses an IStepSpawner from a specifically defined IMultiRandPicker, then generates the Spawnables from that IStepSpawner.
+            Randomly chooses an IStepSpawner from a spawner of spawners, then generates the objects from the chosen IStepSpawner.
             </summary>
             <typeparam name="TGenContext"></typeparam>
             <typeparam name="TSpawnable"></typeparam>
+        </member>
+        <member name="P:RogueElements.MultiStepSpawner`2.Picker">
+            <summary>
+            The spawner of spawners.
+            </summary>
         </member>
         <member name="T:RogueElements.PickerSpawner`2">
             <summary>
@@ -1239,6 +1263,11 @@
             </summary>
             <typeparam name="TGenContext"></typeparam>
             <typeparam name="TSpawnable"></typeparam>
+        </member>
+        <member name="P:RogueElements.PickerSpawner`2.Picker">
+            <summary>
+            The IMultiRandPicker that decides the objects to spawn.
+            </summary>
         </member>
         <member name="M:RogueElements.ISpawnable.Copy">
             <summary>

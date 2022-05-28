@@ -692,7 +692,17 @@
         </member>
         <member name="T:PMDC.LevelGen.MobCheckVersionDiff">
             <summary>
-            Spawns the mob if it matches version ID.
+            Spawns the mob if the player's random seed has a specific remainder when divided by a specific number.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobCheckVersionDiff.Div">
+            <summary>
+            The number to divide the player's seed by.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobCheckVersionDiff.Remainder">
+            <summary>
+            The remainder to check for when dividing the player's seed.
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.MobSpawnWeak">
@@ -705,9 +715,24 @@
             Spawns the mob with a custom shiny chance.
             </summary>
         </member>
+        <member name="F:PMDC.LevelGen.MobSpawnAltColor.Odds">
+            <summary>
+            One-in-this chance.
+            </summary>
+        </member>
         <member name="T:PMDC.LevelGen.MobSpawnMovesOff">
             <summary>
             Spawns the mob with moves turned off.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobSpawnMovesOff.StartAt">
+            <summary>
+            The move index to start turning moves off.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobSpawnMovesOff.Remove">
+            <summary>
+            Remove the moves entirely.
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.MobSpawnBoost">
@@ -717,17 +742,40 @@
         </member>
         <member name="T:PMDC.LevelGen.MobSpawnScaledBoost">
             <summary>
-            Spawn the mob with stat boosts (vitamin boosts) that scale based on level
+            Spawn the mob with stat boosts (vitamin boosts) that scale based on its level
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.MobSpawnItem">
             <summary>
-            Spawn the mob an item
+            Spawn the mob with an item.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobSpawnItem.Items">
+            <summary>
+            The possible items.  Picks one.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobSpawnItem.MapStartOnly">
+            <summary>
+            Only give it the item on map generation.
+            Respawns that occur after the map is generated do not get the item.
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.MobSpawnInv">
             <summary>
-            Spawn the mob an item
+            Spawn the mob with its inventory filled with the specified items.
+            Inventory items are not dropped when the mob is defeated.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobSpawnInv.Items">
+            <summary>
+            Items to give.  All of them will be placed in the mob's inventory.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobSpawnInv.MapStartOnly">
+            <summary>
+            Only give it the item on map generation.
+            Respawns that occur after the map is generated do not get the item.
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.MobSpawnLevelScale">
@@ -735,34 +783,64 @@
             Spawn the mob with a level that scales based on the current floor
             </summary>
         </member>
+        <member name="F:PMDC.LevelGen.MobSpawnLevelScale.StartFromID">
+            <summary>
+            The floor to start scaling level at.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobSpawnLevelScale.AddNumerator">
+            <summary>
+            The numerator for the fractional level to add per floor.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobSpawnLevelScale.AddDenominator">
+            <summary>
+            The denominator for the fractional level to add per floor.
+            </summary>
+        </member>
         <member name="T:PMDC.LevelGen.MobSpawnLoc">
             <summary>
             Spawn the mob with a specific location and direction
             </summary>
         </member>
+        <member name="F:PMDC.LevelGen.MobSpawnLoc.Loc">
+            <summary>
+            The location.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobSpawnLoc.Dir">
+            <summary>
+            The direction.
+            </summary>
+        </member>
         <member name="T:PMDC.LevelGen.MobSpawnUnrecruitable">
             <summary>
-            Spawn the mob with recruitment turned off
+            Spawn the mob with recruitment turned off.
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.MobSpawnFoeConflict">
             <summary>
-            Spawn the mob with recruitment turned off
+            Spawns the mob with aggression towards enemy mobs.  Only applies to neutral mobs.
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.MobSpawnInteractable">
             <summary>
-            Spawn the mob with an effect on interaction (shows up for allies only)
+            Spawn the mob with an effect on interaction.  Only applies to allies or neutral mobs.
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.MobSpawnLuaTable">
             <summary>
-            Spawn the mob with a lua data table
+            Spawn the mob with a lua data table.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobSpawnLuaTable.LuaTable">
+            <summary>
+            The lua table.
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.MobSpawnDiscriminator">
             <summary>
-            Spawn the mob with a lua data table
+            Spawn the mob with a discriminator.  This is used for personality calculations.
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.RescueSpawner`1">
@@ -773,14 +851,95 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="T:PMDC.LevelGen.SaveVarsZoneStep">
+            <summary>
+            The zone step responsible for placing the rescue tile and monster house when a rescue is active.
+            Does nothing otherwise.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SaveVarsZoneStep.Priority">
+            <summary>
+            At what point in the map gen process to run the step in.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.ScriptZoneStep">
+            <summary>
+            Calls a lua script function that acts as the map gen step.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.ScriptZoneStep.Script">
+            <summary>
+            The name of the script.  The resulting function will be ZONE_GEN_SCRIPT.[Script Name]
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.ScriptZoneStep.ArgTable">
+            <summary>
+            Additional arguments that will be passed into the script.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.SpreadBossZoneStep">
+            <summary>
+            Generates boss battles randomly across the whole dungeon segment.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SpreadBossZoneStep.SpreadPlan">
+            <summary>
+            Determines how many floors to distribute the step to, and how spread apart they are.
+            </summary>
+        </member>
         <member name="F:PMDC.LevelGen.SpreadBossZoneStep.ItemAmount">
             <summary>
             Amount for the items randomly chosen from spawnlist
             </summary>
         </member>
+        <member name="T:PMDC.LevelGen.SpreadHouseZoneStep">
+            <summary>
+            Generates monster houses randomly across the whole dungeon segment.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SpreadHouseZoneStep.SpreadPlan">
+            <summary>
+            Determines how many floors to distribute the step to, and how spread apart they are.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SpreadHouseZoneStep.Priority">
+            <summary>
+            At what point in the map gen process to run the step in.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.SpreadVaultZoneStep">
+            <summary>
+            Generates vaults randomly across the whole dungeon segment.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SpreadVaultZoneStep.SpreadPlan">
+            <summary>
+            Determines how many floors to distribute the step to, and how spread apart they are.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SpreadVaultZoneStep.ItemPriority">
+            <summary>
+            At what point in the map gen process to run the item placement steps in.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SpreadVaultZoneStep.MobPriority">
+            <summary>
+            At what point in the map gen process to run the mob placement steps in.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SpreadVaultZoneStep.Items">
+            <summary>
+            Encounter table for items found in the vault.
+            </summary>
+        </member>
         <member name="F:PMDC.LevelGen.SpreadVaultZoneStep.ItemAmount">
             <summary>
-            Amount for the items randomly chosen from spawnlist
+            Amount of the items randomly chosen from spawnlist
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SpreadVaultZoneStep.Mobs">
+            <summary>
+            Encounter table for mobs found in the vault.
             </summary>
         </member>
         <member name="T:PMDC.Program">

@@ -689,7 +689,7 @@
         </member>
         <member name="P:RogueEssence.Data.IEntryData.Comment">
             <summary>
-            Additional comments for this asset.
+            Developer-only comments for this asset.
             </summary>
         </member>
         <member name="M:RogueEssence.Data.RecordHeaderData.LoadHighScores">
@@ -702,6 +702,26 @@
             <summary>
             A value that is temporarily set when deserializing a data object, serving as a global old version for converters in UpgradeConverters.cs to recognize the version.
             A bit hacky, but is currently the only way for converters to recognize version.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.RogueStatus.None">
+            <summary>
+            Disallowed for Rogue mode.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.RogueStatus.NoTransfer">
+            <summary>
+            Allowed for rogue mode, cannot transfer anything.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.RogueStatus.ItemTransfer">
+            <summary>
+            Allowed for rogue mode, can only transfer items to main save.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.RogueStatus.AllTransfer">
+            <summary>
+            Allowed for rogue mode, can transfer items and characters to main save.
             </summary>
         </member>
         <member name="P:RogueEssence.Data.ZoneData.NoEXP">
@@ -2013,9 +2033,81 @@
             Tile representing the water terrain to paint with.
             </summary>
         </member>
+        <member name="T:RogueEssence.LevelGen.GridFloorGen">
+            <summary>
+            A floor generator that utilizes a grid plan.
+            The grid plan is a grid of X by Y cells, which can be filled by a room generator.
+            Additionally, horizontal and vertical hallways connect the cells to each other.
+            Using this generator allows for gen steps that operate on grid plans.
+            It also allows everything RoomFloorGen allows.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.RoomFloorGen">
+            <summary>
+            A floor generator that utilizes a floor plan.
+            The floor plan a list of rooms and hallways, which can be placed in any location.
+            The room and hall positions are not confined to a grid.
+            Using this generator allows for gen steps that operate on floor plans.
+            It also allows everything StairsFloorGen allows.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.StairsFloorGen">
+            <summary>
+            A floor generator that utilizes stairs.
+            Using this generator allows for gen steps that operate on stairs.
+            It also allows basic tile and spawning gen steps.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.LoadGen">
+            <summary>
+            A floor generator that is suited for loading maps created by the editor.
+            Using this generator allows for gen steps that load maps.
+            It also allows basic tile and spawning gen steps.
+            </summary>
+        </member>
         <member name="T:RogueEssence.LevelGen.RandDecay">
             <summary>
             Selects an integer in a predefined range.  Starts with minimum and continually rolls until a failure.  Chance of higher numbers decays exponentially.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.BoxSpawner`1">
+            <summary>
+            Spawns a box with a random item in it.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+        </member>
+        <member name="P:RogueEssence.LevelGen.BoxSpawner`1.BoxID">
+            <summary>
+            The item ID of the box containing the item.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.BoxSpawner`1.BaseSpawner">
+            <summary>
+            The spawner that decides what item the box holds.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.BulkSpawner`2">
+            <summary>
+            Generates spawnable objects using a spawnlist and a regular list.
+            The normal list is for choosing specific objects that are ALWAYS spawned.
+            The spawnlist is for choosing several items randomly.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TSpawnable"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.BulkSpawner`2.SpecificSpawns">
+            <summary>
+            Objects that are always spawned.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.BulkSpawner`2.RandomSpawns">
+            <summary>
+            An encounter/loot table of random spawnable objects.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.BulkSpawner`2.SpawnAmount">
+            <summary>
+            The number of objects to roll from Random Spawns.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.DisconnectedSpawnStep`3">
@@ -2025,15 +2117,99 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="F:RogueEssence.LevelGen.MobSpawn.BaseForm">
+            <summary>
+            The species, form, etc. of the mob spawned.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MobSpawn.Level">
+            <summary>
+            The level of the monster spawned.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MobSpawn.SpecifiedSkills">
+            <summary>
+            The skills for the mob.  Empty spaces will be filled based on its current level.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MobSpawn.Intrinsic">
+            <summary>
+            The passive skill for the mob.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MobSpawn.Tactic">
+            <summary>
+            The mob's AI.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MobSpawn.SpawnConditions">
+            <summary>
+            Conditions that must be met in order for the mob to spawn.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MobSpawn.SpawnFeatures">
+            <summary>
+            Additional alterations made to the mob after it is created but before it is spawned.
+            </summary>
+        </member>
         <member name="T:RogueEssence.LevelGen.MobSpawnStatus">
             <summary>
             Spawns the mob with a status problem.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MobSpawnStatus.Statuses">
+            <summary>
+            The possible statuses.  Picks one.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.MoneyDivSpawner`1">
+            <summary>
+            Divides a given amount of money into a specified number of pickups.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MoneyDivSpawner`1.DivAmount">
+            <summary>
+            The number of pickups to split the total sum of money into.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.MoneySpawnRange">
             <summary>
             Selects a MoneySpawn with an amount in a predefined range.
             </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.LoopedTeamSpawner`1">
+            <summary>
+            Spawns mob teams from a specified team builder, at a specified amount.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.LoopedTeamSpawner`1.Picker">
+            <summary>
+            Builds the team to be spawned.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.LoopedTeamSpawner`1.AmountSpawner">
+            <summary>
+            Decides how many teams to spawn.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.PresetMultiTeamSpawner`1">
+            <summary>
+            Spawns specific mob teams defined in a list.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.PresetMultiTeamSpawner`1.Spawns">
+            <summary>
+            The list of teams to spawn.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.TeamContextSpawner`1">
+            <summary>
+            Spawns mob teams to the map based on the map's encounter table.
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="P:RogueEssence.LevelGen.TeamContextSpawner`1.Amount">
             <summary>
@@ -2106,14 +2282,132 @@
             Used to filter out rooms unsuitable for spawning the mobs in.
             </summary>
         </member>
+        <member name="F:RogueEssence.LevelGen.TeamMemberSpawn.MemberRole.Normal">
+            <summary>
+            Can be put in teams of any size at any quantity.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.TeamMemberSpawn.MemberRole.Support">
+            <summary>
+            Only one of this variety can spawn in a team.  Requires team size > 1.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.TeamMemberSpawn.MemberRole.Leader">
+            <summary>
+            Only one of this variety can spawn in a team.  Can be any team size.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.TeamMemberSpawn.MemberRole.Loner">
+            <summary>
+            Only one of this variety can spawn in a team.  Requires team size = 1.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.TeamMemberSpawn.Spawn">
+            <summary>
+            The mob to spawn.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.TeamMemberSpawn.Role">
+            <summary>
+            The role of the mob in the team.
+            Determines how many can be spawned in a team and when.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.PoolTeamSpawner">
+            <summary>
+            Spawns a team by randomly rolling a team size and filling it with randomly rolled team members.
+            </summary>
+        </member>
         <member name="F:RogueEssence.LevelGen.PoolTeamSpawner.Spawns">
             <summary>
             Normal spawns.  Can be put in teams of any size at any quantity.
             </summary>
         </member>
+        <member name="F:RogueEssence.LevelGen.PoolTeamSpawner.TeamSizes">
+            <summary>
+            Possible team sizes.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.SpecificTeamSpawner">
+            <summary>
+            Spawns a team with specific members.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpecificTeamSpawner.Spawns">
+            <summary>
+            The members of the team.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.LayeredSegment">
+            <summary>
+            A dungeon segment where each floor has its own map generator, with no gaps in between floors.
+            Players attempting to enter a floor in this segment will be served by the generator corresponding to the floor number they requested.
+            An error will occur if the requested floor is out of range.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.SingularSegment">
+            <summary>
+            A dungeon segment where each floor has the same map generator.
+            Players attempting to enter a floor in this segment will be served by the same generator no matter what.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.RangeDictSegment">
+            <summary>
+            A dungeon segment where multiple floors can be mapped to the same map generator.
+            Players attempting to enter a floor in this segment will be served by the generator corresponding to the floor range that covers the number they requested.
+            An error will occur if the requested floor is out of range.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.DictionarySegment">
+            <summary>
+            A dungeon segment where each floor has its own map generator, with gaps between floors allowed.
+            Players attempting to enter a floor in this segment will be served by the generator corresponding to the floor number they requested.
+            An error will occur if the requested floor does not have a generator.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.FloorNameIDZoneStep">
+            <summary>
+            Names all floors of the dungeon segment according to a naming convention.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.FloorNameIDZoneStep.Name">
+            <summary>
+            The name to give the floors.  Can use {0} for floor number.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.FloorNameIDZoneStep.Priority">
+            <summary>
+            At what point in the map gen process to run the naming step in.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.CategorySpawn`1.Spawns">
+            <summary>
+            The objects to spawn within this category.
+            Assuming that this category was chosen for spawning,
+            the chance that an object will spawn on a given floor is its spawn rate for that floor,
+            divided by the sum of all objects' spawn rates on that floor.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.CategorySpawn`1.SpawnRates">
+            <summary>
+            The spawn rate of the entire category across the entire dungeon segment.
+            The chance that this category is chosen on a given floor is the spawn rate for that floor,
+            divided by the sum of all categories' spawn rates on that floor.
+            </summary>
+        </member>
         <member name="T:RogueEssence.LevelGen.ItemSpawnZoneStep">
             <summary>
-            Generates the table of items to spawn on all floors
+            Generates the table of items to spawn on all floors.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.ItemSpawnZoneStep.Priority">
+            <summary>
+            At what point in the map gen process to run the item spawning in.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.ItemSpawnZoneStep.Spawns">
+            <summary>
+            The spawn table, organized by category.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.MoneySpawnZoneStep">
@@ -2121,34 +2415,187 @@
             Generates the table of items to spawn on all floors
             </summary>
         </member>
+        <member name="F:RogueEssence.LevelGen.MoneySpawnZoneStep.Priority">
+            <summary>
+            At what point in the map gen process to run the money spawning in.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MoneySpawnZoneStep.StartAmount">
+            <summary>
+            The amount of money spawned on the first floor.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MoneySpawnZoneStep.AddAmount">
+            <summary>
+            The amount of money that is added on each increasing floor.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MoneySpawnZoneStep.ModStates">
+            <summary>
+            Flags from the player's passives that will affect the money spawned.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadPlanBase.FloorRange">
+            <summary>
+            The range of floors that can be spawned in.
+            </summary>
+        </member>
         <member name="T:RogueEssence.LevelGen.SpreadPlanChance">
             <summary>
-            Spreads the item across floors by rolling a fixed chance for each
+            Spreads the item across floors by rolling a fixed chance on each floor.
             </summary>
         </member>
         <member name="F:RogueEssence.LevelGen.SpreadPlanChance.Chance">
             <summary>
-            In percent
+            In percent.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.SpreadPlanSpaced">
             <summary>
-            Spreads the item across floors with specified spacing between
+            Spreads the object across floors with specified spacing between.
+            Good for ensuring a steady supply of food, etc.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadPlanSpaced.FloorSpacing">
+            <summary>
+            The object spawns will never be found LESS than FloorSpacing.Min floors apart,
+            and never MORE than FloorSpacing.Max floors apart.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.SpreadPlanQuota">
             <summary>
-            Spreads the item across floors by randomly distributing across them without repetition
+            Spreads the spawn across floors based on a quota.  Thus, the dungeon segment is guaranteed to have this many spawns.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadPlanQuota.Quota">
+            <summary>
+            Determines the amount to spawn.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadPlanQuota.Replaceable">
+            <summary>
+            Can spawn on the same floor multiple times.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.SpreadRoomZoneStep">
+            <summary>
+            Generates specific rooms randomly across the whole dungeon segment.  This is done by replacing an existing room on the floor.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadRoomZoneStep.SpreadPlan">
+            <summary>
+            Determines how many floors to distribute the step to, and how spread apart they are.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadRoomZoneStep.Spawns">
+            <summary>
+            The rooms to distribute.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadRoomZoneStep.PriorityGrid">
+            <summary>
+            At what point in the map gen process to add the room in, if the floor gen uses a grid plan.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadRoomZoneStep.PriorityList">
+            <summary>
+            At what point in the map gen process to add the room in, if the floor gen uses a floor plan.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.RoomGenOption.GridOption">
+            <summary>
+            The room generator used if the floor gen uses a grid plan.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.RoomGenOption.ListOption">
+            <summary>
+            The room generator used if the floor gen uses a floor plan.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.RoomGenOption.Filters">
+            <summary>
+            Determines which rooms are eligible to be replaced.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.SpreadStepZoneStep">
+            <summary>
+            Spreads a map gen step randomly across the dungeon segment.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadStepZoneStep.SpreadPlan">
+            <summary>
+            Determines how many floors to distribute the step to, and how spread apart they are.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadStepZoneStep.Spawns">
+            <summary>
+            The steps to distribute.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadStepZoneStep.ModStates">
+            <summary>
+            Flags from the player's passives that will affect the appearance rate of the step.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.SpreadStepRangeZoneStep">
+            <summary>
+            Spreads a map gen step randomly across the dungeon segment, allowing precise control over the spawn rate across different floors.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadStepRangeZoneStep.SpreadPlan">
+            <summary>
+            Determines how many floors to distribute the step to, and how spread apart they are.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadStepRangeZoneStep.Spawns">
+            <summary>
+            The steps to distribute.  Probabilities can be customized across floors.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadStepRangeZoneStep.ModStates">
+            <summary>
+            Flags from the player's passives that will affect the appearance rate of the step.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.TeamSpawnZoneStep">
             <summary>
-            Generates the table of items to spawn on all floors
+            Generates the table of mobs to spawn on all floors.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.TeamSpawnZoneStep.Priority">
+            <summary>
+            At what point in the map gen process to run the mob spawning in.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.TeamSpawnZoneStep.Spawns">
+            <summary>
+            The encounter table for mobs across all floors of the dungeon segment.
+            When spawning, the chosen mobs will be grouped into teams of a size described in Team Sizes.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.TeamSpawnZoneStep.TeamSizes">
+            <summary>
+            The size of teams across all floors of the dungeon segment.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.TeamSpawnZoneStep.SpecificSpawns">
+            <summary>
+            Pre-made teams and their spawn chances across floors.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.TileSpawnZoneStep">
             <summary>
             Generates the table of trap tiles to spawn on all floors
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.TileSpawnZoneStep.Priority">
+            <summary>
+            At what point in the map gen process to run the trap spawning in.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.TileSpawnZoneStep.Spawns">
+            <summary>
+            The encounter table for traps across all floors of the dungeon segment.
             </summary>
         </member>
         <member name="M:RogueEssence.LevelGen.ZoneStep.Instantiate(System.UInt64)">

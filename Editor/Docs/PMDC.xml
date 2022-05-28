@@ -182,6 +182,139 @@
         </member>
         <!-- Badly formed XML comment ignored for member "T:PMDC.Dungeon.DmgMult" -->
         <!-- Badly formed XML comment ignored for member "T:PMDC.Dungeon.AccMult" -->
+        <member name="T:PMDC.LevelGen.ChestStep`1">
+            <summary>
+            A monster house that takes the form of a booby-trapped chest.
+            Once opened, items spill out, the walls lock down, and monsters appear.
+            All must be defeated in order to unlock.
+            It could also just be a normal chest.
+            This step chooses an existing room to put the house in.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.ChestStep`1.Ambush">
+            <summary>
+            Determines if this is actually a monster house and not just a chest with treasure.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.ChestStep`1.Filters">
+            <summary>
+            Used to filter out unwanted rooms to be used for this monster house.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.BaseDetourStep`1.Treasures">
+            <summary>
+            Treasures found in the detour room.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.BaseDetourStep`1.TileTreasures">
+            <summary>
+            Tiles (such as exits or traps) found in the detour room.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.BaseDetourStep`1.GuardTypes">
+            <summary>
+            Enemies found in the detour room.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.BaseDetourStep`1.HallLength">
+            <summary>
+            Length of the hall connecting the main path to the detour room.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.BaseDetourStep`1.GenericRooms">
+            <summary>
+            The possible types of room shapes.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.KeyDetourStep`1">
+            <summary>
+            Adds an extra room to the layout that can only be accessed by using a key item.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.KeyDetourStep`1.LockedTile">
+            <summary>
+            The tile with which to lock the room with.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.KeyDetourStep`1.KeyItem">
+            <summary>
+            The item with which to unlock the room with.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.SwitchDetourStep`1">
+            <summary>
+            Adds an extra room to the layout that can only be accessed by pushing a switch.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.SwitchDetourStep`1.SealedTile">
+            <summary>
+            The tile with which to lock the room with.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SwitchDetourStep`1.SwitchTile">
+            <summary>
+            The tile that serves as the switch to open the door.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SwitchDetourStep`1.TimeLimit">
+            <summary>
+            Determines if a time limit is triggered when pressing the switch.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SwitchDetourStep`1.EntranceCount">
+            <summary>
+            The number of detours created.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.AddBossRoomStep`1">
+            <summary>
+            Given a floor plan, this step attaches a boss room connected to an existing room, and then attaches a vault room that is unlocked when the player defeats the boss.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:PMDC.LevelGen.AddBossRoomStep`1.Filters">
+            <summary>
+            Determines which rooms are eligible to have the boss room added on.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.AddBossRoomStep`1.BossRooms">
+            <summary>
+            The room types that can be used for the boss room being added.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.AddBossRoomStep`1.BossComponents">
+            <summary>
+            Components that the newly added boss room will be labeled with.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.AddBossRoomStep`1.TreasureRooms">
+            <summary>
+            The room types that can be used for the treasure room being added.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.AddBossRoomStep`1.VaultComponents">
+            <summary>
+            Components that the newly added treasure room will be labeled with.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.AddBossRoomStep`1.GenericHalls">
+            <summary>
+            The room types that can be used as the intermediate hall.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.AddBossRoomStep`1.BossHallComponents">
+            <summary>
+            Components that the hall between the boss room and the rest of the layout will be labeled with.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.AddBossRoomStep`1.VaultHallComponents">
+            <summary>
+            Components that the hall between the boss room and the vault room will be labeled with.
+            </summary>
+        </member>
         <member name="M:PMDC.LevelGen.AddBossRoomStep`1.PrepareBossRoom(RogueElements.IRandom,RogueElements.FloorPlan,System.Boolean)">
             <summary>
             Returns a random boss room or hall that can fit in the specified floor.
@@ -200,6 +333,235 @@
             <param name="isHall"></param>
             <returns></returns>
         </member>
+        <member name="T:PMDC.LevelGen.GridPathBeetle`1">
+            <summary>
+            Populates the empty floor plan of a map by creating a path consisting of one big room in the middle, with normal rooms connected to it.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.GridPathBeetle`1.Vertical">
+            <summary>
+            Choose a horizontal or vertical orientation.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.GridPathBeetle`1.LegPercent">
+            <summary>
+            The number of small rooms attached to the main large room, as a percent of the rooms possible.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.GridPathBeetle`1.ConnectPercent">
+            <summary>
+            The number of connections between adjacent small rooms, as a percent of the connections possible.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.GridPathBeetle`1.FromCorners">
+            <summary>
+            Allows the main body to be in a corner instead of in the center.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.GridPathBeetle`1.GiantHallGen">
+            <summary>
+            The room types that can be used for the giant room in the layout.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.GridPathBeetle`1.LargeRoomComponents">
+            <summary>
+            Components that the giant room will be labeled with.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MapDataStep`1">
+            <summary>
+            Sets various attributes about the map.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.MapDataStep`1.Music">
+            <summary>
+            The default map music.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MapDataStep`1.TimeLimit">
+            <summary>
+            How many turns the player can spend on the map before an instant game over.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MapDataStep`1.TileSight">
+            <summary>
+            The darkness level for map exploration.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MapDataStep`1.CharSight">
+            <summary>
+            The darkness level for character viewing.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.DefaultMapStatusStep`1">
+            <summary>
+            Adds a map status that is considered the "default" for that map.
+            The map will always revert back to this status even if replaced (it will wait for the replacing status to run out).
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.DefaultMapStatusStep`1.SetterID">
+            <summary>
+            The map status used to set the default map status.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.DefaultMapStatusStep`1.DefaultMapStatus">
+            <summary>
+            The possible default map statuses.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.StateMapStatusStep`1">
+            <summary>
+            Adds a map status to the map, with the specified MapStatusStates
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:PMDC.LevelGen.MonsterHallStep`1">
+            <summary>
+            A monster house that occurs in hallways.
+            The room will gradually crumble away to reveal all monsters and items.
+            This step chooses an existing room (hallways are rooms) to put the house in.  The room must have a one-tile chokepoint to be selected.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:PMDC.LevelGen.MonsterHallStep`1.Filters">
+            <summary>
+            Used to filter out unwanted rooms to be used for this monster house.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.MonsterHallStep`1.Size">
+            <summary>
+            The final size of the room after the crumbling finishes.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.MonsterHouseBaseStep`1.Items">
+            <summary>
+            Items that can be found in the monster house.
+            This is in addition to the items naturally found on the map.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.MonsterHouseBaseStep`1.ItemThemes">
+            <summary>
+            Themes that items in the item pool will be filtered by.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.MonsterHouseBaseStep`1.Mobs">
+            <summary>
+            Mobs that can be found in the monster house.
+            This is in addition to the mobs naturally found on the map.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.MonsterHouseBaseStep`1.MobThemes">
+            <summary>
+            Themes that mobs in the mob pool will be filtered by.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MonsterHouseStep`1">
+            <summary>
+            A standard monster house that appears as a room filled with treasure.
+            When an explorer enters the premises, the monsters appear.
+            This step chooses an existing room to put the house in.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:PMDC.LevelGen.MonsterHouseStep`1.Filters">
+            <summary>
+            Used to filter out unwanted rooms to be used for this monster house.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MonsterMansionStep`1">
+            <summary>
+            A monster house that consists of the entire floor.
+            When it activates, you can see all enemies on the map, and all enemies can see you.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:PMDC.LevelGen.PatternTrapsStep`1">
+            <summary>
+            Litters traps on a room in specified patterns.
+            UNFINISHED DOES NOT WORK
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:PMDC.LevelGen.RoomGenEvo`1">
+            <summary>
+            Generates an evolution room.  It's 7x6 in size and hardcoded to look a specific way.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:PMDC.LevelGen.RoomGenEvoSmall`1">
+            <summary>
+            Generates an evolution room.  It's 5x6 in size and hardcoded to look a specific way.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:PMDC.LevelGen.RoomGenGuardedCave`1">
+            <summary>
+            Generates a cave guarded by a single mob.  It's hardcoded to look a specific way.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:PMDC.LevelGen.RoomGenSpecificBoss`1">
+            <summary>
+            Generates a boss room with specific tiles and mobs.
+            EDITOR UNFRIENDLY
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:PMDC.LevelGen.RoomGenWaterRing`1">
+            <summary>
+            Generates a room containing a ring of water encircling treasure.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.RoomGenWaterRing`1.PadWidth">
+            <summary>
+            The extra width of the room added to the area occupied by the water ring.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.RoomGenWaterRing`1.PadHeight">
+            <summary>
+            The extra height of the room added to the area occupied by the water ring.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.RoomGenWaterRing`1.ItemAmount">
+            <summary>
+            The amount of items to spawn.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.RoomGenWaterRing`1.Treasures">
+            <summary>
+            Which items to spawn.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.RoomGenWaterRing`1.WaterTerrain">
+            <summary>
+            The terrain used for the water ring.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.ScriptGenStep`1">
+            <summary>
+            Calls a lua script function that acts as the map gen step.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.ScriptGenStep`1.Script">
+            <summary>
+            The name of the script.  The resulting function will be FLOOR_GEN_SCRIPT.[Script Name]
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.ScriptGenStep`1.ArgTable">
+            <summary>
+            Additional arguments that will be passed into the script.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.BaseSealStep`1.Filters">
+            <summary>
+            Determines the rooms that serve as a vault and are to be locked away.
+            </summary>
+        </member>
         <member name="M:PMDC.LevelGen.BaseSealStep`1.sealBorderRay(`0,System.Collections.Generic.Dictionary{RogueElements.Loc,PMDC.LevelGen.BaseSealStep{`0}.SealType},RogueElements.IFloorRoomPlan,RogueElements.LocRay8,RogueElements.Dir8,RogueElements.Dir8)">
             <summary>
             chooses and caegorizes the tile to be sealed
@@ -210,6 +572,123 @@
             <param name="loc"></param>
             <param name="dir"></param>
             <returns>Whether it affected the tile outwards or not</returns>
+        </member>
+        <member name="T:PMDC.LevelGen.BossSealStep`1">
+            <summary>
+            One part of several steps used to create a boss room.
+            This step takes an already-placed boss room, with an already-placed summoning tile and fills it with data on which tiles to lock down before summoning the boss.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.BossSealStep`1.SealedTile">
+            <summary>
+            The tile used to seal the room.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.BossSealStep`1.BossTile">
+            <summary>
+            The tile used to summon the battle.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.BossSealStep`1.BossFilters">
+            <summary>
+            Singles out the boss room intended for this process.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.KeySealStep`1">
+            <summary>
+            One part of several steps used to create a sealed key room, or several thereof.
+            This step takes the target rooms and surrounds them with unbreakable walls, with one key block used to unlock them.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.KeySealStep`1.LockedTile">
+            <summary>
+            The tile that is used to block off the room.
+            It is removed when the player inserts the key into the Key Tile.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.KeySealStep`1.KeyTile">
+            <summary>
+            The tile with which to lock the room with, requiring a key to open.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.KeySealStep`1.KeyItem">
+            <summary>
+            The item to be used as a key to unlock the vault.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.SwitchSealStep`1">
+            <summary>
+            One part of several steps used to create a switch-opened sealed room, or several thereof.
+            This step takes the target rooms and surrounds them with unbreakable walls, with one key block used to unlock them.
+            The filter must be able to single out the key rooms intended for this process.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.SwitchSealStep`1.SealedTile">
+            <summary>
+            The tile that is used to block off the room.
+            It is removed when the player pressed the switch.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SwitchSealStep`1.SwitchTile">
+            <summary>
+            The switch tile that unlocked the vaults.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SwitchSealStep`1.TimeLimit">
+            <summary>
+            Determines if a time limit is triggered when pressing the switch.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.SwitchSealStep`1.SwitchFilters">
+            <summary>
+            Determines the rooms that the switch can be placed in.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.ShopStep`1">
+            <summary>
+            Spawns a shop somewhere in the map.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.ShopStep`1.SecurityStatus">
+            <summary>
+            The map status used to check for thievery.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.ShopStep`1.Items">
+            <summary>
+            The items that can be sold in the shop.
+            This is filtered by Item Themes when generating.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.ShopStep`1.ItemThemes">
+            <summary>
+            Every shop chooses a theme to populate its catalog with.
+            This variable determines the possible themes to filter the items with.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.ShopStep`1.Mobs">
+            <summary>
+            The mobs that will be spawned if the player is caught stealing.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.ShopStep`1.StartMob">
+            <summary>
+            The mob that will run the shop.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.ShopStep`1.Filters">
+            <summary>
+            Narrows down the rooms in the map that the shop can spawn in.  No boss rooms, etc.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.ShopStep`1.Personality">
+            <summary>
+            The personality of the shopkeeper.
+            </summary>
         </member>
         <member name="T:PMDC.LevelGen.MobCheckVersionDiff">
             <summary>
@@ -285,6 +764,14 @@
             <summary>
             Spawn the mob with a lua data table
             </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.RescueSpawner`1">
+            <summary>
+            Spawns a rescue flag somewhere on the map, complete with a Monster House.
+            This step should never be explicitly added to a map's gen steps.
+            Instead, it needs to be dynamically added only when in rescue mode.
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="F:PMDC.LevelGen.SpreadBossZoneStep.ItemAmount">
             <summary>

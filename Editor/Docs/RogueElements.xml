@@ -228,9 +228,56 @@
         </member>
         <member name="T:RogueElements.ClampFloorStep`1">
             <summary>
-            Clamps the floor plan to at least a minimum size, at most a maximum size. If roomplan draw rects exceed the intended bounds, the size will extend to include them.
+            Clamps the floor plan to at least a minimum size, at most a maximum size.
+            If the bounds of the current roomplan maximum, the size will increase to include them.
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.ConnectBranchStep`1">
+            <summary>
+            Takes the current floor plan and connects the ends of its branches to other rooms.
+            A room is considered the end of a branch when it is connected to only one other room.
+            ie, a dead end.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.ConnectBranchStep`1.ConnectPercent">
+            <summary>
+            The percentage of eligible branches to connect.
+            </summary>
+        </member>
+        <member name="T:RogueElements.ConnectStep`1">
+            <summary>
+            Finds rooms in the floor plan that can be connected and connects them.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.ConnectStep`1.Filters">
+            <summary>
+            Determines which rooms are eligible to be connected.
+            </summary>
+        </member>
+        <member name="P:RogueElements.ConnectStep`1.GenericHalls">
+            <summary>
+            The room types that can be used as the hall connecting the two base rooms.
+            </summary>
+        </member>
+        <member name="P:RogueElements.ConnectStep`1.Components">
+            <summary>
+            Components that the newly added halls will be labeled with.
+            </summary>
+        </member>
+        <member name="T:RogueElements.DrawFloorToTileStep`1">
+            <summary>
+            Takes the floor plan of the map and draws all tiles in all rooms to the actual map.
+            This is typically done once per floor generation.  It must only be done after the floor plan itself is complete.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.DrawFloorToTileStep`1.Padding">
+            <summary>
+            Adds the specified number of tiles to the border of the map as wall terrain.
+            </summary>
         </member>
         <member name="M:RogueElements.FloorPlan.Resize(RogueElements.Loc,RogueElements.Dir8,RogueElements.Dir8)">
             <summary>
@@ -245,6 +292,30 @@
             Contains data about which cells a room occupies in a FloorPlan.
             </summary>
         </member>
+        <member name="T:RogueElements.FloorStairsStep`3">
+            <summary>
+            Adds the entrance and exit to the floor.  Is room-conscious.
+            The algorithm will try to place them far away from each other in different rooms.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TEntrance"></typeparam>
+            <typeparam name="TExit"></typeparam>
+        </member>
+        <member name="P:RogueElements.FloorStairsStep`3.Entrances">
+            <summary>
+            List of entrance objects to spawn.
+            </summary>
+        </member>
+        <member name="P:RogueElements.FloorStairsStep`3.Exits">
+            <summary>
+            List of exit objects to spawn.
+            </summary>
+        </member>
+        <member name="P:RogueElements.FloorStairsStep`3.Filters">
+            <summary>
+            Used to filter out rooms that do not make suitable entrances/exits, such as boss rooms.
+            </summary>
+        </member>
         <member name="M:RogueElements.FloorStairsStep`3.NextRoom(RogueElements.IRandom,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32})">
             <summary>
             Attempt to choose a room with no entrance/exit, and updates their availability.  If none exists, default to a chosen room.
@@ -254,6 +325,47 @@
             <param name="used_indices">todo: describe used_indices parameter on NextRoom</param>
             <returns></returns>
         </member>
+        <member name="T:RogueElements.AddConnectedRoomsStep`1">
+            <summary>
+            Takes the current floor plan and adds new rooms that are connected to existing rooms.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.AddConnectedRoomsStep`1.Amount">
+            <summary>
+            The number of rooms to add.
+            </summary>
+        </member>
+        <member name="P:RogueElements.AddConnectedRoomsStep`1.HallPercent">
+            <summary>
+            The chance that an added room is attached using an intermediate hallway.
+            </summary>
+        </member>
+        <member name="P:RogueElements.AddConnectedRoomsStep`1.Filters">
+            <summary>
+            Determines which rooms are eligible to have the new rooms added on.
+            </summary>
+        </member>
+        <member name="P:RogueElements.AddConnectedRoomsStep`1.GenericRooms">
+            <summary>
+            The room types that can be used for the room being added.
+            </summary>
+        </member>
+        <member name="P:RogueElements.AddConnectedRoomsStep`1.RoomComponents">
+            <summary>
+            Components that the newly added rooms will be labeled with.
+            </summary>
+        </member>
+        <member name="P:RogueElements.AddConnectedRoomsStep`1.GenericHalls">
+            <summary>
+            The room types that can be used as the intermediate hall.
+            </summary>
+        </member>
+        <member name="P:RogueElements.AddConnectedRoomsStep`1.HallComponents">
+            <summary>
+            Components that the newly added halls will be labeled with.
+            </summary>
+        </member>
         <member name="M:RogueElements.AddConnectedRoomsStep`1.PrepareRoom(RogueElements.IRandom,RogueElements.FloorPlan,System.Boolean)">
             <summary>
             Returns a random generic room or hall that can fit in the specified floor.
@@ -262,6 +374,100 @@
             <param name="floorPlan"></param>
             <param name="isHall"></param>
             <returns></returns>
+        </member>
+        <member name="T:RogueElements.AddDisconnectedRoomsStep`1">
+            <summary>
+            Takes the current floor plan and adds new rooms that are disconnected from existing rooms.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.AddDisconnectedRoomsStep`1.Amount">
+            <summary>
+            The number of rooms to add.
+            </summary>
+        </member>
+        <member name="P:RogueElements.AddDisconnectedRoomsStep`1.GenericRooms">
+            <summary>
+            The room types that can be used for the room being added.
+            </summary>
+        </member>
+        <member name="P:RogueElements.AddDisconnectedRoomsStep`1.Components">
+            <summary>
+            Components that the newly added rooms will be labeled with.
+            </summary>
+        </member>
+        <member name="T:RogueElements.ConnectRoomStep`1">
+            <summary>
+            Takes the current floor plan and connects its rooms with other rooms.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.ConnectRoomStep`1.ConnectFactor">
+            <summary>
+            Determines the number of connections to make.
+            0 = No Connections
+            50 = Half of all rooms connected
+            100 = All rooms connected
+            200 = All rooms connected twice over
+            </summary>
+        </member>
+        <member name="T:RogueElements.InitFloorPlanStep`1">
+            <summary>
+            Initializes an empty floor plan, which is a list of rooms that keep track of their size, position, and connectivity with each other.
+            Gen Steps that operate on the floor plan can add rooms, delete them, or change the rooms in some way.
+            Once finished, apply DrawFloorToTileStep to draw the actual tiles of the rooms.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.FloorPathStartStepGeneric`1.GenericRooms">
+            <summary>
+            The room types that can be used for the rooms of the layout.
+            </summary>
+        </member>
+        <member name="P:RogueElements.FloorPathStartStepGeneric`1.RoomComponents">
+            <summary>
+            Components that the newly added rooms will be labeled with.
+            </summary>
+        </member>
+        <member name="P:RogueElements.FloorPathStartStepGeneric`1.GenericHalls">
+            <summary>
+            The room types that can be used for the halls of the layout.
+            </summary>
+        </member>
+        <member name="P:RogueElements.FloorPathStartStepGeneric`1.HallComponents">
+            <summary>
+            Components that the newly added halls will be labeled with.
+            </summary>
+        </member>
+        <member name="T:RogueElements.FloorPathBranch`1">
+            <summary>
+            Populates the empty floor plan of a map by creating a minimum spanning tree of connected rooms and halls.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.FloorPathBranch`1.FillPercent">
+            <summary>
+            The amount of space in the floor plan that the step aims to fill with rooms.
+            </summary>
+        </member>
+        <member name="P:RogueElements.FloorPathBranch`1.HallPercent">
+            <summary>
+            The chance that rooms are attached ot each other using an intermediate hallway.
+            </summary>
+        </member>
+        <member name="P:RogueElements.FloorPathBranch`1.BranchRatio">
+            <summary>
+            The percent amount of branching paths the layout will have in relation to its straight paths.
+            0 = A layout without branches. (Worm)
+            50 = A layout that branches once for every two extensions. (Tree)
+            100 = A layout that branches once for every extension. (Branchier Tree)
+            200 = A layout that branches twice for every extension. (Fuzzy Worm)
+            </summary>
+        </member>
+        <member name="P:RogueElements.FloorPathBranch`1.NoForcedBranches">
+            <summary>
+            Prevents the step from making branches in the path, even if it's necessary to make the space-fill quota.
+            </summary>
         </member>
         <member name="M:RogueElements.FloorPathBranch`1.GetPossibleExpansions(RogueElements.FloorPlan,System.Boolean)">
             <summary>
@@ -290,6 +496,102 @@
             <param name="floorPlan"></param>
             <param name="isHall"></param>
             <returns></returns>
+        </member>
+        <member name="T:RogueElements.ResizeFloorStep`1">
+            <summary>
+            Resizes the floor plan.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.ResizeFloorStep`1.AddedSize">
+            <summary>
+            The number of tiles to add to each dimension.
+            </summary>
+        </member>
+        <member name="P:RogueElements.ResizeFloorStep`1.ExpandDir">
+            <summary>
+            The direction in which to expand.
+            </summary>
+        </member>
+        <member name="T:RogueElements.SetFloorPlanComponentStep`1">
+            <summary>
+            Takes all rooms in the map's floor plan and gives them a specified component.
+            These components can be used to identify the room in some way for future filtering.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.SetFloorPlanComponentStep`1.Components">
+            <summary>
+            Components to add.
+            </summary>
+        </member>
+        <member name="T:RogueElements.SetSpecialRoomStep`1">
+            <summary>
+            Takes an existing floor plan and changes one of the rooms into the specified room type.
+            The size of the room may change because of this, and thus may also require the addition of a supporting hallway.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.SetSpecialRoomStep`1.Rooms">
+            <summary>
+            The room to place.  It can be chosen out of several possibilities, but only one room will be placed.
+            </summary>
+        </member>
+        <member name="P:RogueElements.SetSpecialRoomStep`1.Filters">
+            <summary>
+            Determines which rooms are eligible to be turned into the new room type.
+            </summary>
+        </member>
+        <member name="P:RogueElements.SetSpecialRoomStep`1.RoomComponents">
+            <summary>
+            Components that the newly added room will be labeled with.
+            </summary>
+        </member>
+        <member name="P:RogueElements.SetSpecialRoomStep`1.Halls">
+            <summary>
+            When changing a room to a new type, the new type may be smaller and require a supporting hallway.
+            This variable determines the room types that can be used as the intermediate hall.
+            </summary>
+        </member>
+        <member name="P:RogueElements.SetSpecialRoomStep`1.HallComponents">
+            <summary>
+            Components that the newly added halls will be labeled with.
+            </summary>
+        </member>
+        <member name="T:RogueElements.ConnectGridBranchStep`1">
+            <summary>
+            Takes the current grid plan and connects the ends of its branches to other rooms.
+            A room is considered the end of a branch when it is connected to only one other room.
+            ie, a dead end.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.ConnectGridBranchStep`1.ConnectPercent">
+            <summary>
+            The percentage of eligible branches to connect.
+            </summary>
+        </member>
+        <member name="P:RogueElements.ConnectGridBranchStep`1.Filters">
+            <summary>
+            Determines which rooms are eligible to be connected.
+            </summary>
+        </member>
+        <member name="P:RogueElements.ConnectGridBranchStep`1.GenericHalls">
+            <summary>
+            The room types that can be used as the hall connecting the two base rooms.
+            </summary>
+        </member>
+        <member name="P:RogueElements.ConnectGridBranchStep`1.HallComponents">
+            <summary>
+            Components that the newly added halls will be labeled with.
+            </summary>
+        </member>
+        <member name="T:RogueElements.DrawGridToFloorStep`1">
+            <summary>
+            Takes the grid plan of the map and draws all cells and halls into rooms of a floor plan.
+            This is typically done once per floor generation.  It must only be done after the grid plan itself is complete.
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="T:RogueElements.GridHallGroup">
             <summary>
@@ -358,6 +660,120 @@
             Contains data about which cells a room occupies in a GridFloorPlan.
             </summary>
         </member>
+        <member name="T:RogueElements.InitGridPlanStep`1">
+            <summary>
+            Initializes an empty grid plan, which is a grid of rooms and connecting hallways.
+            Unlike a floor plan, the rooms in a grid plan are rigidly defined to be cells in a grid, instead of being placed in freestyle.
+            Gen Steps that operate on the grid plan can add, erase, or change rooms/hallways.
+            Once finished, apply DrawGridToFloorStep to take the grid and create a floor plan.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.InitGridPlanStep`1.CellWidth">
+            <summary>
+            The width of all cells in the grid.
+            </summary>
+        </member>
+        <member name="P:RogueElements.InitGridPlanStep`1.CellHeight">
+            <summary>
+            The height of all cells in the grid.
+            </summary>
+        </member>
+        <member name="P:RogueElements.InitGridPlanStep`1.CellX">
+            <summary>
+            The number of columns in the grid.
+            </summary>
+        </member>
+        <member name="P:RogueElements.InitGridPlanStep`1.CellY">
+            <summary>
+            The number of rows in the grid.
+            </summary>
+        </member>
+        <member name="P:RogueElements.InitGridPlanStep`1.CellWall">
+            <summary>
+            The thickness of the dividers between cells in the grid, in tiles.
+            </summary>
+        </member>
+        <member name="T:RogueElements.GridPathGrid`1">
+            <summary>
+            Populates the empty floor plan of a map by creating a path consisting of rooms on the perimeter, with hallways creating a grid inwards.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.GridPathGrid`1.RoomRatio">
+            <summary>
+            The percentage of rooms at the perimeter that are NOT default 1-tile halls.
+            </summary>
+        </member>
+        <member name="P:RogueElements.GridPathGrid`1.HallRatio">
+            <summary>
+            The amount of additional halls added to connect adjacent rooms at the perimeter.
+            </summary>
+        </member>
+        <member name="T:RogueElements.GridPathSpecific`1">
+            <summary>
+            Populates an empty grid plan of a map by creating a specific path of rooms and hallways.
+            VERY EDITOR UNFRIENDLY
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.GridPathSpecific`1.SpecificRooms">
+            <summary>
+            The rooms to place, and where they go.
+            </summary>
+        </member>
+        <member name="P:RogueElements.GridPathSpecific`1.SpecificVHalls">
+            <summary>
+            The full array of vertical halls.
+            </summary>
+        </member>
+        <member name="P:RogueElements.GridPathSpecific`1.SpecificHHalls">
+            <summary>
+            The full array of horizontal halls.
+            </summary>
+        </member>
+        <member name="P:RogueElements.GridPathSpecific`1.HallComponents">
+            <summary>
+            Components that the halls will be labeled with.
+            </summary>
+        </member>
+        <member name="P:RogueElements.GridPathStartStepGeneric`1.GenericRooms">
+            <summary>
+            The room types that can be used for the rooms of the layout.
+            </summary>
+        </member>
+        <member name="P:RogueElements.GridPathStartStepGeneric`1.RoomComponents">
+            <summary>
+            Components that the newly added rooms will be labeled with.
+            </summary>
+        </member>
+        <member name="P:RogueElements.GridPathStartStepGeneric`1.GenericHalls">
+            <summary>
+            The room types that can be used for the halls of the layout.
+            </summary>
+        </member>
+        <member name="P:RogueElements.GridPathStartStepGeneric`1.HallComponents">
+            <summary>
+            Components that the newly added halls will be labeled with.
+            </summary>
+        </member>
+        <member name="T:RogueElements.GridPathTwoSides`1">
+            <summary>
+            Populates the empty floor plan of a map by creating a path consisting of rooms on the far left and far right, with hallways connecting the two sides.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.GridPathTwoSides`1.GapAxis">
+            <summary>
+            Choose a horizontal or vertical orientation.
+            </summary>
+        </member>
+        <member name="T:RogueElements.GridPathBranch`1">
+            <summary>
+            Populates the empty grid plan of a map by creating a minimum spanning tree of connected rooms and halls.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
         <member name="M:RogueElements.GridPathBranch`1.GetRoomExpandDirs(RogueElements.GridPlan,RogueElements.Loc)">
             <summary>
             Gets the directions a room can expand in.
@@ -365,6 +781,67 @@
             <param name="floorPlan"></param>
             <param name="loc"></param>
             <returns></returns>
+        </member>
+        <member name="T:RogueElements.GridPathCircle`1">
+            <summary>
+            Populates the empty grid plan of a map by creating a ring of rooms and halls at the outer cells of the grid.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.GridPathCircle`1.CircleRoomRatio">
+            <summary>
+            The percentage of rooms in the outer circle that are NOT treated as 1-tile halls.
+            </summary>
+        </member>
+        <member name="P:RogueElements.GridPathCircle`1.Paths">
+            <summary>
+            The number of paths going to the inner circle.
+            </summary>
+        </member>
+        <member name="T:RogueElements.SetGridDefaultsStep`1">
+            <summary>
+            Takes an existing grid plan and changes one of the rooms into the default room type.
+            The default room is a single tile in size and effectively acts as a hallway.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.SetGridDefaultsStep`1.DefaultRatio">
+            <summary>
+            Determines the percentage of eligible rooms that will be turned into default.
+            </summary>
+        </member>
+        <member name="P:RogueElements.SetGridDefaultsStep`1.Filters">
+            <summary>
+            Determines which rooms are eligible to be turned into default.
+            </summary>
+        </member>
+        <member name="T:RogueElements.SetGridPlanComponentStep`1">
+            <summary>
+            Takes all rooms in the map's grid plan and gives them a specified component.
+            These components can be used to identify the room in some way for future filtering.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.SetGridSpecialRoomStep`1">
+            <summary>
+            Takes an existing grid plan and changes one of the rooms into the specified room type.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.SetGridSpecialRoomStep`1.Rooms">
+            <summary>
+            The type of room to place.  It can be chosen out of several possibilities, but only one room will be placed.
+            </summary>
+        </member>
+        <member name="P:RogueElements.SetGridSpecialRoomStep`1.Filters">
+            <summary>
+            Determines which rooms are eligible to be turned into the new room type.
+            </summary>
+        </member>
+        <member name="P:RogueElements.SetGridSpecialRoomStep`1.RoomComponents">
+            <summary>
+            Components that the newly added room will be labeled with.
+            </summary>
         </member>
         <member name="P:RogueElements.BaseHallBrush.Size">
             <summary>
@@ -375,6 +852,13 @@
             <summary>
             Communicates to the Hoom/HallGen the center location of the brush, for alignment purposes.
             </summary>
+        </member>
+        <member name="T:RogueElements.RoomGenAngledHall`1">
+            <summary>
+            A room that connects its exits with a narrow hallway.
+            It is able to handle all combinations of exits from all combination of directions.
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="P:RogueElements.RoomGenAngledHall`1.HallTurnBias">
             <summary>
@@ -458,6 +942,32 @@
         <member name="P:RogueElements.SquareHallBrush.Dims">
             <summary>
             Dimensions of the brush, in Tiles
+            </summary>
+        </member>
+        <member name="T:RogueElements.RoomGenCross`1">
+            <summary>
+            Generates a room composed of two rectangles, one vertical and one horizontal.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.RoomGenCross`1.MajorWidth">
+            <summary>
+            The width of the horizontal rectangle.
+            </summary>
+        </member>
+        <member name="P:RogueElements.RoomGenCross`1.MinorHeight">
+            <summary>
+            The height of the horizontal rectangle.
+            </summary>
+        </member>
+        <member name="P:RogueElements.RoomGenCross`1.MajorHeight">
+            <summary>
+            The height of the vertical rectangle.
+            </summary>
+        </member>
+        <member name="P:RogueElements.RoomGenCross`1.MinorWidth">
+            <summary>
+            The width of the vertical rectangle.
             </summary>
         </member>
         <member name="T:RogueElements.PermissiveRoomGen`1">
@@ -557,13 +1067,120 @@
             <param name="origSideReqs">todo: describe origSideReqs parameter on ChoosePossibleStartRanges</param>
             <returns></returns>
         </member>
+        <member name="T:RogueElements.RoomGenBlocked`1">
+            <summary>
+            Generates a rectangular room with the specified width and height, and with a rectangular block with specified width and height.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.RoomGenBlocked`1.Width">
+            <summary>
+            Width of the room.
+            </summary>
+        </member>
+        <member name="P:RogueElements.RoomGenBlocked`1.Height">
+            <summary>
+            Height of the room.
+            </summary>
+        </member>
+        <member name="P:RogueElements.RoomGenBlocked`1.BlockWidth">
+            <summary>
+            Width of the block.
+            </summary>
+        </member>
+        <member name="P:RogueElements.RoomGenBlocked`1.BlockHeight">
+            <summary>
+            Height of the block.
+            </summary>
+        </member>
+        <member name="P:RogueElements.RoomGenBlocked`1.BlockTerrain">
+            <summary>
+            The terrain used for the block.
+            </summary>
+        </member>
+        <member name="T:RogueElements.RoomGenBump`1">
+            <summary>
+            Generates a rectangular room with the specified width and height, and with the tiles at the perimeter randomly blocked.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.RoomGenBump`1.Width">
+            <summary>
+            Width of the room.
+            </summary>
+        </member>
+        <member name="P:RogueElements.RoomGenBump`1.Height">
+            <summary>
+            Height of the room.
+            </summary>
+        </member>
+        <member name="P:RogueElements.RoomGenBump`1.BumpPercent">
+            <summary>
+            Chance of a block tile at the room's perimeter.
+            </summary>
+        </member>
         <member name="T:RogueElements.RoomGenCave`1">
             <summary>
-            Generates a cave-like room.
+            Generates a cave-like room using cellular automata.
             Will generate a square if asked to generate for a size it did not propose.
             For square-looking rooms, check to make sure the room was not cut down.
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.RoomGenCave`1.Width">
+            <summary>
+            The max width of the room.  The actual cave will tend to be smaller.
+            </summary>
+        </member>
+        <member name="P:RogueElements.RoomGenCave`1.Height">
+            <summary>
+            The max height of the room.  The actual cave will tend to be smaller.
+            </summary>
+        </member>
+        <member name="T:RogueElements.RoomGenDefault`1">
+            <summary>
+            Generates a one-tile room.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.RoomGenRound`1">
+            <summary>
+            Generates a rounded room.  Square dimensions result in a circle, while rectangular dimensions result in capsules.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.RoomGenRound`1.Width">
+            <summary>
+            Width of the room.
+            </summary>
+        </member>
+        <member name="P:RogueElements.RoomGenRound`1.Height">
+            <summary>
+            Height of the room.
+            </summary>
+        </member>
+        <member name="T:RogueElements.RoomGenSpecific`1">
+            <summary>
+            Generates a room with specific tiles and borders.
+            EDITOR UNFRIENDLY
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.RoomGenSquare`1">
+            <summary>
+            Generates a rectangular room with the specified width and height.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.RoomGenSquare`1.Width">
+            <summary>
+            Width of the room.
+            </summary>
+        </member>
+        <member name="P:RogueElements.RoomGenSquare`1.Height">
+            <summary>
+            Height of the room.
+            </summary>
         </member>
         <member name="T:RogueElements.BaseSpawnStep`2">
             <summary>
@@ -572,6 +1189,11 @@
             </summary>
             <typeparam name="TGenContext"></typeparam>
             <typeparam name="TSpawnable"></typeparam>
+        </member>
+        <member name="P:RogueElements.BaseSpawnStep`2.Spawn">
+            <summary>
+            The generator that creates a list of items for the step to spawn.
+            </summary>
         </member>
         <member name="T:RogueElements.DueSpawnStep`3">
             <summary>
@@ -586,6 +1208,23 @@
             <summary>
             The percentage chance to multiply a room's spawning chance when it successfully spawns an item.
             </summary>
+        </member>
+        <member name="P:RogueElements.DueSpawnStep`3.IncludeHalls">
+            <summary>
+            Makes halls eligible for spawn.
+            </summary>
+        </member>
+        <member name="P:RogueElements.IContextSpawner.Amount">
+            <summary>
+            The amount of spawns to roll from the spawn tables.
+            </summary>
+        </member>
+        <member name="T:RogueElements.ContextSpawner`2">
+            <summary>
+            Spawns items from the map's own spawn tables.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TSpawnable"></typeparam>
         </member>
         <member name="T:RogueElements.MultiStepSpawner`2">
             <summary>
@@ -614,12 +1253,79 @@
             <typeparam name="TGenContext">The IGenContext to place the spawns in.</typeparam>
             <typeparam name="TSpawnable">The type of the spawn to place in IGenContext</typeparam>
         </member>
-        <member name="T:RogueElements.TerminalSpawnStep`2">
+        <member name="T:RogueElements.RandomRoomSpawnStep`2">
             <summary>
-            Spawns the placeables in terminal (dead-end) rooms, falls back on normal rooms if there are some left over.
+            Spawns objects in randoly chosen rooms.
+            Large rooms have the same probability as small rooms.
             </summary>
             <typeparam name="TGenContext"></typeparam>
             <typeparam name="TSpawnable"></typeparam>
+        </member>
+        <member name="P:RogueElements.RandomRoomSpawnStep`2.IncludeHalls">
+            <summary>
+            Makes halls eligible for spawn.
+            </summary>
+        </member>
+        <member name="T:RogueElements.RandomSpawnStep`2">
+            <summary>
+            Spawns objects on randomly chosen tiles.
+            The tile is chosen from the set of tiles where the object is allowed to be placed.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TSpawnable"></typeparam>
+        </member>
+        <member name="P:RogueElements.RoomSpawnStep`2.Filters">
+            <summary>
+            Determines the rooms eligible to spawn the objects in.
+            </summary>
+        </member>
+        <member name="T:RogueElements.SpecificSpawnStep`2">
+            <summary>
+            Spawns objects on specific locations.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TSpawnable"></typeparam>
+        </member>
+        <member name="P:RogueElements.SpecificSpawnStep`2.SpawnLocs">
+            <summary>
+            The locations to spawn the objects.
+            </summary>
+        </member>
+        <member name="T:RogueElements.TerminalSpawnStep`2">
+            <summary>
+            Spawns the objects in terminal (dead-end) rooms.
+            Falls back on normal rooms if all dead-end rooms are taken.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TSpawnable"></typeparam>
+        </member>
+        <member name="T:RogueElements.TerrainSpawnStep`2">
+            <summary>
+            Spawns objects randomly on tiles of a specific terrain.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TSpawnable"></typeparam>
+        </member>
+        <member name="P:RogueElements.TerrainSpawnStep`2.Terrain">
+            <summary>
+            The type of tile to spawn in.
+            </summary>
+        </member>
+        <member name="T:RogueElements.DetectIsolatedStairsStep`3">
+            <summary>
+            A debug step that can be used to generate an error if the map generator created an unreachable stairs.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TEntrance"></typeparam>
+            <typeparam name="TExit"></typeparam>
+        </member>
+        <member name="T:RogueElements.DetectIsolatedStep`2">
+            <summary>
+            A debug step that can be used to generate an error if the map generator created a map with unreachable walkable tiles.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TEntrance"></typeparam>
+            <typeparam name="TExit"></typeparam>
         </member>
         <member name="T:RogueElements.DropDiagonalBlockStep`1">
             <summary>
@@ -633,16 +1339,99 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="T:RogueElements.InitTilesStep`1">
+            <summary>
+            Initializes a map of Width x Height tiles.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
         <member name="M:RogueElements.ITile.Copy">
             <summary>
             Creates a copy of the object, to be placed in the generated layout.
             </summary>
             <returns></returns>
         </member>
+        <member name="T:RogueElements.SpecificTilesStep`1">
+            <summary>
+            Creates a map out of specific tiles.
+            Not very editor-friendly.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.StairsStep`3">
+            <summary>
+            Adds the entrance and exit to the floor.  Is not room-conscious and only picks random tiles.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TEntrance"></typeparam>
+            <typeparam name="TExit"></typeparam>
+        </member>
+        <member name="T:RogueElements.BlobWaterStep`1">
+            <summary>
+            Creates blobs of water using cellular automata, and places them around the map.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.BlobWaterStep`1.Blobs">
+            <summary>
+            The number of blobs to place.
+            </summary>
+        </member>
+        <member name="P:RogueElements.BlobWaterStep`1.MinScale">
+            <summary>
+            The minimum size of the area creating the blob.  It is measured in percentage of the full map size.
+            </summary>
+        </member>
+        <member name="P:RogueElements.BlobWaterStep`1.StartScale">
+            <summary>
+            The maximum size of the area creating the blob.  It is measured in percentage of the full map size.
+            </summary>
+        </member>
+        <member name="T:RogueElements.DefaultTerrainStencil`1">
+            <summary>
+            A filter for determining the eligible tiles for an operation.
+            All tiles are eligible.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.MapTerrainStencil`1">
+            <summary>
+            A filter for determining the eligible tiles for an operation.
+            Tiles of a certain type are eligible.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.MapTerrainStencil`1.Room">
+            <summary>
+            Allows tiles specified as the map's walkable terrain.
+            </summary>
+        </member>
+        <member name="P:RogueElements.MapTerrainStencil`1.Wall">
+            <summary>
+            Allows tiles specified as the map's wall terrain.
+            </summary>
+        </member>
+        <member name="P:RogueElements.MapTerrainStencil`1.Not">
+            <summary>
+            Reverses the policy, allowing all tiles EXCEPT the ones selected above.
+            </summary>
+        </member>
+        <member name="T:RogueElements.MatchTerrainStencil`1">
+            <summary>
+            A filter for determining the eligible tiles for an operation.
+            Tiles in a list of allowed tile types are eligible.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.MatchTerrainStencil`1.MatchTiles">
+            <summary>
+            The allowed tile types.
+            </summary>
+        </member>
         <member name="T:RogueElements.PerlinWaterStep`1">
             <summary>
-            Generates a random spread of water on the map. This is achieved by generating a heighTContext using Perlin Noise,
-            then converting all tiles with a height value below a certain threshold to water.
+            Generates a random spread of water on the map. This is achieved by generating a heightContext using Perlin Noise,
+            then converting all tiles with a height value below the specified threshold to water.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
@@ -653,7 +1442,7 @@
         </member>
         <member name="P:RogueElements.PerlinWaterStep`1.OrderSoftness">
             <summary>
-            Determines the smallest uit of water tiles on the map. 0 = 1x1 tile of water, 1 = 2x2 tile of water, etc.
+            Determines the smallest unit of water tiles on the map. 0 = 1x1 tile of water, 1 = 2x2 tile of water, etc.
             </summary>
         </member>
         <member name="P:RogueElements.PerlinWaterStep`1.WaterPercent">
@@ -664,6 +1453,11 @@
         <member name="P:RogueElements.WaterStep`1.Terrain">
             <summary>
             Tile representing the water terrain to paint with.
+            </summary>
+        </member>
+        <member name="P:RogueElements.WaterStep`1.TerrainStencil">
+            <summary>
+            Determines which tiles are eligible to be painted on.
             </summary>
         </member>
         <member name="M:RogueElements.MathUtils.ChooseFromHash``1(System.Collections.Generic.HashSet{``0},RogueElements.IRandom)">

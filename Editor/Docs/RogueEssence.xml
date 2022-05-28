@@ -665,11 +665,31 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="P:RogueEssence.Data.IDescribedData.Desc">
+            <summary>
+            The description of the asset as the player sees it, including translations.
+            </summary>
+        </member>
         <member name="T:RogueEssence.Data.IEntryData">
             <summary>
             All classes that represent indexed data such as monsters, items, etc. implement this class.
             This is used for editor lists that need to load the names of all monsters, items, etc. without actually loading all data files.
             Also for localization.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.IEntryData.Name">
+            <summary>
+            The name of the asset as the player sees it, including translations.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.IEntryData.Released">
+            <summary>
+            If released, this asset can be found/accessed in the game.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.IEntryData.Comment">
+            <summary>
+            Additional comments for this asset.
             </summary>
         </member>
         <member name="M:RogueEssence.Data.RecordHeaderData.LoadHighScores">
@@ -726,7 +746,8 @@
         </member>
         <member name="P:RogueEssence.Data.ZoneData.Persistent">
             <summary>
-            Turn this on for the zone to remember map layouts and load the old state when returning to the floor. It's not nice on memory though...
+            Turn this on for the zone to remember map layouts and load the old state when returning to the floor.
+            It's not nice on memory though...
             </summary>
         </member>
         <member name="P:RogueEssence.Data.ZoneData.Rescues">
@@ -1696,21 +1717,294 @@
             Represents a physical body in the world that can collide with others.
             </summary>
         </member>
+        <member name="T:RogueEssence.LevelGen.DetourStep`1">
+            <summary>
+            Deprecated.  DO NOT USE.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueEssence.LevelGen.AddLargeRoomStep`1">
+            <summary>
+            Adds large rooms to the grid plan.
+            This is done by choosing an area that contains at least one eligible room, and no ineligible rooms.
+            The step then bulldozes the area and places the new room in it.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.AddLargeRoomStep`1.RoomAmount">
+            <summary>
+            The amount of rooms to place.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.AddLargeRoomStep`1.GiantRooms">
+            <summary>
+            The types of rooms to place.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.AddLargeRoomStep`1.Filters">
+            <summary>
+            Determines which rooms are eligible to be replaced with the new room.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.AddLargeRoomStep`1.RoomComponents">
+            <summary>
+            Components that the newly added room will be labeled with.
+            </summary>
+        </member>
         <member name="T:RogueEssence.LevelGen.CombineGridRoomStep`1">
             <summary>
             Merges single-cell rooms together into larger rooms, specified in Combos
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="F:RogueEssence.LevelGen.CombineGridRoomStep`1.MergeRate">
+            <summary>
+            The number of merges to add to the grid plan.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.CombineGridRoomStep`1.Combos">
+            <summary>
+            List of possible merges that can be done.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.CombineGridRoomStep`1.Filters">
+            <summary>
+            Determines which rooms are eligible to be merged into a new room.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.CombineGridRoomStep`1.RoomComponents">
+            <summary>
+            Components that the newly added room will be labeled with.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.MarkAsHallStep`1">
+            <summary>
+            Categorizes the filtered rooms in the grid plan as halls.
+            The targeted rooms must be permissive room gens.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueEssence.LevelGen.MarkAsHallStep`1.Filters">
+            <summary>
+            Determines which rooms are eligible to be marked as halls.
+            </summary>
+        </member>
         <member name="T:RogueEssence.LevelGen.ItemSpawnStep`1">
             <summary>
-            Generates the table of items to spawn on a floor
+            Sets the floor's item spawn tables.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueEssence.LevelGen.MapEffectStep`1">
+            <summary>
+            Sets the map's own events.  These events work similarly to the Universal Event, which works game-wide.
+            These events work map-wide.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapEffectStep`1.Effect">
+            <summary>
+            The object containing the events.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.MapExtraStatusStep`1">
+            <summary>
+            Adds map statuses to the floor.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapExtraStatusStep`1.ExtraMapStatus">
+            <summary>
+            The array of statuses to add to the map.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.MapNameIDStep`1">
+            <summary>
+            Sets the ID and title of the floor.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapNameIDStep`1.ID">
+            <summary>
+            The floor ID.  This is typically the floor number and must be equal to the ID being requested.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapNameIDStep`1.Name">
+            <summary>
+            The title of the map.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.MappedRoomStep`1">
+            <summary>
+            Loads a file from the Map directory to be used as the dungeon floor.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MappedRoomStep`1.MapID">
+            <summary>
+            Map file to load
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.MapTextureStep`1">
+            <summary>
+            Decides the tileset for the walls, ground, etc.
+            This is done by setting the map's TextureMap to the specified textures.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapTextureStep`1.GroundTileset">
+            <summary>
+            The tileset used for walkable tiles.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapTextureStep`1.BlockTileset">
+            <summary>
+            The tileset used for walls, both breakable and unbreakable.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapTextureStep`1.WaterTileset">
+            <summary>
+            The tileset used for water, lava, etc.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapTextureStep`1.LayeredGround">
+            <summary>
+            Adds an additional ground texture beneath all textures.
+            Useful for wall textures that contain transparent pixels.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapTextureStep`1.IndependentGround">
+            <summary>
+            Turns off border textures for the ground tileset when near walls.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapTextureStep`1.GroundElement">
+            <summary>
+            The map's elemental aligment.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.MapDictTextureStep`1">
+            <summary>
+            Decides the tileset for the walls, ground, etc.
+            This is done by setting the map's TextureMap to the specified textures.
+            A more fine-tuned version of MapTextureStep that allows mapping of more than just Ground+Wall+Secondary.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapDictTextureStep`1.TextureMap">
+            <summary>
+            Maps the terrain type to the specified autotile.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapDictTextureStep`1.GroundTexture">
+            <summary>
+            The texture considered to be the ground for this map.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapDictTextureStep`1.BlankBG">
+            <summary>
+            The repeated texture used for the border.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapDictTextureStep`1.LayeredGround">
+            <summary>
+            Adds an additional ground texture beneath all textures.
+            Useful for wall textures that contain transparent pixels.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapDictTextureStep`1.IndependentGround">
+            <summary>
+            Turns off border textures for the ground tileset when near walls.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapDictTextureStep`1.GroundElement">
+            <summary>
+            The map's elemental aligment.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.MobSpawnSettingsStep`1">
+            <summary>
+            Chooses the enemy limit and respawn time for the map.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MobSpawnSettingsStep`1.MaxFoes">
+            <summary>
+            The limit to the number of enemies on the map.  If this number is reached or exceeded, no more respawns will occur.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MobSpawnSettingsStep`1.RespawnTime">
+            <summary>
+            The amount of time it takes for a new enemy team to respawn, in turns.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.MobSpawnStep`1">
+            <summary>
+            Generates the encounter table of enemies to spawn on a floor.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueEssence.LevelGen.MoneySpawnStep`1">
+            <summary>
+            Determines the total amount of money that will be spawned on the whole floor.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueEssence.LevelGen.ReachableBlobWaterStep`1">
+            <summary>
+            Creates blobs of water using cellular automata, and places them around the map.
+            The water must be reachable from the stairs.
+            WIP DOES NOT WORK
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueEssence.LevelGen.RoomGenCoated`1">
+            <summary>
+            Generates a room, and then coats it with additional tiles.
+            INCOMPLETE
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueEssence.LevelGen.RoomGenEdgeIn`1">
+            <summary>
+            Generates a rectangular room with the specified width and height, and blocks off the tiles at the edges.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.RoomGenEdgeIn`1.Width">
+            <summary>
+            Width of the room.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.RoomGenEdgeIn`1.Height">
+            <summary>
+            Height of the room.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.RoomGenPostProcSpecific`1">
+            <summary>
+            Generates a room with specific tiles, borders, and post-processing mask.
+            EDITOR UNFRIENDLY
             </summary>
             <typeparam name="T"></typeparam>
         </member>
         <member name="T:RogueEssence.LevelGen.TileSpawnStep`1">
             <summary>
-            Generates the table of trap tiles to spawn on a floor
+            Generates the encounter table of trap tiles to spawn on a floor.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueEssence.LevelGen.UnbreakableBorderStep`1">
+            <summary>
+            Turns the tiles at the edge of the map into the Unbreakable terrain.
+            Thickness can be customized.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueEssence.LevelGen.TileBorderStep`1">
+            <summary>
+            Turns the tiles at the edge of the map into the specified terrain.
+            Thickness and tile type can be customized.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
@@ -1726,6 +2020,7 @@
         </member>
         <member name="T:RogueEssence.LevelGen.DisconnectedSpawnStep`3">
             <summary>
+            Spawns objects on tiles that are not connected to the main path.
             Mostly obsolete; use regular spawning and pick rooms marked as disconnected
             </summary>
             <typeparam name="T"></typeparam>
@@ -1747,22 +2042,69 @@
         </member>
         <member name="T:RogueEssence.LevelGen.NearSpawnableSpawnStep`3">
             <summary>
-            Places items on the map near the room as an existing spawnable.
+            Places objects on the floor in the room of an existing spawnable, or as close to it as possible.
             </summary>
             <typeparam name="TGenContext">Type of the MapGenContext.</typeparam>
-            <typeparam name="TSpawnable">Type of the item to spawn.</typeparam>
+            <typeparam name="TSpawnable">Type of the object to spawn.</typeparam>
             <typeparam name="TPriorSpawn">Type of the spawnable to refer to.</typeparam>
         </member>
         <member name="P:RogueEssence.LevelGen.NearSpawnableSpawnStep`3.SuccessPercent">
             <summary>
-            The percentage chance to multiply a room's spawning chance when it successfully spawns an item.
+            The percentage chance to multiply a room's spawning chance when it successfully spawns an object.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.PlaceDisconnectedMobsStep`1">
             <summary>
-            Mostly obsolete; use regular spawning and pick rooms marked as disconnected
+            Picks tiles that cannot be reached by walking from the entrance and spawns the mobs there.
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.PlaceDisconnectedMobsStep`1.AcceptedTiles">
+            <summary>
+            The terrain types to spawn the mobs in.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.PlaceEntranceMobsStep`2">
+            <summary>
+            Places mobs in the room where the entrance is.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TEntrance"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.PlaceMobsStep`1.Spawn">
+            <summary>
+            The generator responsible for creating the list of teams to spawn.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.PlaceMobsStep`1.Ally">
+            <summary>
+            Determines if the mobs should be spawned as allies.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.PlaceNoLocMobsStep`1">
+            <summary>
+            Places the mobs without altering their location in any way.
+            This is useful for mobs that already have their location set on creation.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueEssence.LevelGen.PlaceRandomMobsStep`1">
+            <summary>
+            Places mobs in random rooms.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.PlaceRandomMobsStep`1.ClumpFactor">
+            <summary>
+            A percentage value at or above 0.
+            Lower numbers make enemies spread out more evenly.
+            Higher numbers cause them to spawn in bigger groups.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.PlaceRandomMobsStep`1.Filters">
+            <summary>
+            Used to filter out rooms unsuitable for spawning the mobs in.
+            </summary>
         </member>
         <member name="F:RogueEssence.LevelGen.PoolTeamSpawner.Spawns">
             <summary>
@@ -1815,6 +2157,51 @@
             </summary>
             <param name="seed"></param>
             <returns></returns>
+        </member>
+        <member name="T:RogueEssence.AddTunnelStep`1">
+            <summary>
+            Draws a specified number of angular tunnels starting from the edge of any room or hall.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueEssence.AddTunnelStep`1.TurnLength">
+            <summary>
+            The number of tiles to dig the tunnel forward before changing direction.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.AddTunnelStep`1.MaxLength">
+            <summary>
+            The expected length of the whole tunnel.
+            Actual tunnels can be shorter if they dig into a room or hall, but cannot exceed the chosen max.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.AddTunnelStep`1.AllowDeadEnd">
+            <summary>
+            Allows tunnels to be dead ends.  Forces tunnels to touch another room or hall if turned off.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.AddTunnelStep`1.Halls">
+            <summary>
+            The number of tunnels to draw.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.AddTunnelStep`1.Brush">
+            <summary>
+            The brush to draw the halls with.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.FillImpassableStep`1">
+            <summary>
+            Finds all fully unreachable tiles that aren't impassable and turns them impassable.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueEssence.MinimizeBarrierStep`1">
+            <summary>
+            Removes extraneous unbreakable wall tiles by turning them into regular wall tiles.
+            THIS DOES NOT WORK YET
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="T:RogueEssence.Script.IEntityWithLuaData">
             <summary>

@@ -100,8 +100,89 @@ FLOOR_GEN_SCRIPT = {}
 
 function FLOOR_GEN_SCRIPT.Test(map, args)
   PrintInfo("Test")
+  
+  --A demo of various tile operations possible with scripting
+  
+  --Set the top-left corner to room tile. Note that unbreakable blocks are left untouched.
+  for xx = 0, map.Width / 2, 1 do
+    for yy = 0, map.Height / 2, 1 do
+      map:TrySetTile(RogueElements.Loc(xx, yy), map.RoomTerrain)
+    end  
+  end
+  
+  --Set the center of the corner to Block tile
+  for xx = map.Width / 4 - 1, map.Width / 4 + 1, 1 do
+    for yy = map.Height / 4 - 1, map.Height / 4 + 1, 1 do
+      map:TrySetTile(RogueElements.Loc(xx, yy), map.WallTerrain)
+    end
+  end
+  
+  --set a single coordinate to unbreakable
+  map:TrySetTile(RogueElements.Loc(map.Width / 2 - 1, map.Height / 2 - 1), map.UnbreakableTerrain)
+  
+  --Set the bottom-right corner to water, but only if the existing tiles aren't ground.  MapGenContext has built-in members for Ground, Wall, and Impassable, but the rest must be specified.
+  for xx = map.Width / 2, map.Width - 1, 1 do
+    for yy = map.Height / 2, map.Height - 1, 1 do
+	  local loc = RogueElements.Loc(xx, yy)
+	  if not map:GetTile(loc):TileEquivalent(map.RoomTerrain) then
+        map:TrySetTile(loc, RogueEssence.Dungeon.Tile(3))
+	  end
+    end  
+  end
+  
+  --Place a trap on 2,2.  Slumber trap, revealed.
+  --map:PlaceItem(RogueElements.Loc(2, 2), RogueEssence.Dungeon.EffectTile(4, true))
+  local trap_tile = map:GetTile(RogueElements.Loc(2, 2))
+  trap_tile.Effect = RogueEssence.Dungeon.EffectTile(4, true)
+  
+  --Place item on 3,2.  Banana, sticky
+  --map:PlaceItem(RogueElements.Loc(3, 2), RogueEssence.Dungeon.MapItem(6))
+  local new_item = RogueEssence.Dungeon.MapItem(6)
+  new_item.Cursed = true
+  new_item.TileLoc = RogueElements.Loc(3, 2)
+  map.Items:Add(new_item)
+  
+  --Place item on 3,3.  100g
+  --map:PlaceItem(RogueElements.Loc(3, 3), RogueEssence.Dungeon.MapItem(true, 100))
+  new_item = RogueEssence.Dungeon.MapItem(true, 100)
+  new_item.TileLoc = RogueElements.Loc(3, 3)
+  map.Items:Add(new_item)
+  
+  --Place enemies on 4,4, 4,5, together in a team, with AI of Normal Wander
+  local new_team = RogueEssence.Dungeon.MonsterTeam()
+  
+  local mob_data = RogueEssence.Dungeon.CharData()
+  mob_data.BaseForm = RogueEssence.Dungeon.MonsterID(150, 0, 0, Gender.Male)
+  mob_data.Level = 20;
+  mob_data.BaseSkills[0] = RogueEssence.Dungeon.SlotSkill(1)
+  mob_data.BaseSkills[1] = RogueEssence.Dungeon.SlotSkill(2)
+  mob_data.BaseSkills[2] = RogueEssence.Dungeon.SlotSkill(3)
+  mob_data.BaseSkills[3] = RogueEssence.Dungeon.SlotSkill(4)
+  mob_data.BaseIntrinsics[0] = 2
+  local new_mob = RogueEssence.Dungeon.Character(mob_data)
+  local tactic = _DATA:GetAITactic(7)
+  new_mob.Tactic = RogueEssence.Data.AITactic(tactic)
+  new_mob.CharLoc = RogueElements.Loc(4, 4)
+  new_mob.CharDir = Dir8.Down
+  new_team.Players:Add(new_mob)
+  
+  mob_data = RogueEssence.Dungeon.CharData()
+  mob_data.BaseForm = RogueEssence.Dungeon.MonsterID(151, 0, 0, Gender.Female)
+  mob_data.Level = 25
+  mob_data.BaseSkills[0] = RogueEssence.Dungeon.SlotSkill(5)
+  mob_data.BaseIntrinsics[0] = 3
+  new_mob = RogueEssence.Dungeon.Character(mob_data)
+  tactic = _DATA:GetAITactic(7)
+  new_mob.Tactic = RogueEssence.Data.AITactic(tactic)
+  new_mob.CharLoc = RogueElements.Loc(5, 4)
+  new_mob.CharDir = Dir8.Up
+  new_team.Players:Add(new_mob)
+  
+  map.MapTeams:Add(new_team)
+  
+  --Place the player spawn just above the unbreakable wall (doesn't work if you already have one)
+  map.GenEntrances:Add(RogueEssence.LevelGen.MapGenEntrance(RogueElements.Loc(map.Width / 2 - 1, map.Height / 2 - 2), Dir8.UpRight))
 end
-
 
 
 

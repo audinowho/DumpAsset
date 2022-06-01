@@ -175,6 +175,26 @@
             <param name="bounds"></param>
             <returns>Rectangle bounds relative to input bounds.</returns>
         </member>
+        <member name="F:RogueEssence.Content.BattleFX.Delay">
+            <summary>
+            After playing this VFX, will wait this many milliseconds before moving to the next one.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.BattleFX.Sound">
+            <summary>
+            The sound effect of the VFX
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.BattleFX.Emitter">
+            <summary>
+            The Particle FX
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.BattleFX.ScreenMovement">
+            <summary>
+            Screen shake and other effects.
+            </summary>
+        </member>
         <member name="M:RogueEssence.Content.CharSheet.imgsEqual(Microsoft.Xna.Framework.Color[],Microsoft.Xna.Framework.Color[],Microsoft.Xna.Framework.Point,Microsoft.Xna.Framework.Point,System.Boolean)">
             <summary>
             Assume 0,0 to be the center of their respective images. Images can be of different sizes.
@@ -341,6 +361,71 @@
             Cleanup references and etc from the script engine if needed
             </summary>
         </member>
+        <member name="T:RogueEssence.Dungeon.SelfAction">
+            <summary>
+            A hitbox that targets the self.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.SelfAction.CharAnimData">
+            <summary>
+            The animation the user plays when using the skill.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Dungeon.AttackAction">
+            <summary>
+            A hitbox that works a melee attack.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.AttackAction.HitTiles">
+            <summary>
+            Determines if tiles are targeted.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.AttackAction.BurstTiles">
+            <summary>
+            Determines which tiles will trigger the explosion hitbox, as opposed to hitting the tile directly.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.AttackAction.Emitter">
+            <summary>
+            The Particle FX to play when the 
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.AttackAction.WideAngle">
+            <summary>
+            Determines if it hits only in front, front and sides, etc.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.AttackAction.CharAnimData">
+            <summary>
+            The animation the user plays when using the skill.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Dungeon.AreaAction">
+            <summary>
+            A hitbox that hits in an area-of-effect around the user.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.AreaAction.Emitter">
+            <summary>
+            The Particle FX for the area effect that scales in radius to the attack's radius.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.AreaAction.HitTiles">
+            <summary>
+            Determines if the hitbox targets tiles or not.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.AreaAction.BurstTiles">
+            <summary>
+            Determines which tiles will trigger the explosion hitbox, as opposed to hitting the tile directly.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.AreaAction.HitArea">
+            <summary>
+            Determines the shape of the hitbox.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Dungeon.AreaAction.Range">
             <summary>
             In Tiles
@@ -351,14 +436,74 @@
             Speed to Spread from 0 to Range in Tiles Per Second
             </summary>
         </member>
+        <member name="F:RogueEssence.Dungeon.AreaAction.CharAnimData">
+            <summary>
+            The animation the user plays when using the skill.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Dungeon.OffsetAction">
+            <summary>
+            A hitbox that hits a tile or area several tiles in front of the attacker.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.OffsetAction.OffsetArea.Tile">
+            <summary>
+            Hits only the targeted tile.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.OffsetAction.OffsetArea.Sides">
+            <summary>
+            Hits the targeted tile, and the tiles to the left and right of it.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.OffsetAction.OffsetArea.Area">
+            <summary>
+            Hits the targeted tile, and all adjacent tiles.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.OffsetAction.Emitter">
+            <summary>
+            The Particle FX for the area effect that scales in radius to the attack's radius.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.OffsetAction.HitTiles">
+            <summary>
+            Determines if the hitbox targets tiles or not.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.OffsetAction.BurstTiles">
+            <summary>
+            Determines which tiles will trigger the explosion hitbox, as opposed to hitting the tile directly.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.OffsetAction.HitArea">
+            <summary>
+            The shape of the hitbox.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Dungeon.OffsetAction.Range">
             <summary>
-            In Tiles
+            The number of tiles away from the attacker the hitbox appears.
             </summary>
         </member>
         <member name="F:RogueEssence.Dungeon.OffsetAction.Speed">
             <summary>
             Speed to Spread from 0 to Range in Tiles Per Second.  Use 0 for instant travel.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.OffsetAction.CharAnimData">
+            <summary>
+            The animation the user plays when using the skill.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.LinearAction.HitTiles">
+            <summary>
+            Determines if the hitbox targets tiles or not.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.LinearAction.Range">
+            <summary>
+            The range of the attack in tiles.
             </summary>
         </member>
         <member name="F:RogueEssence.Dungeon.LinearAction.StopAtHit">
@@ -368,7 +513,57 @@
         </member>
         <member name="F:RogueEssence.Dungeon.LinearAction.StopAtWall">
             <summary>
-            When set, will explode on a wall and stop there.  When unset, it will move past the wall and not explode.
+            When set, will stop when it hits a wall, deploying the attack's explosion.  When unset, it will move past the wall and not explode.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Dungeon.ProjectileAction">
+            <summary>
+            A projectile hitbox that is shot forward or in rays.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ProjectileAction.RayCount.One">
+            <summary>
+            Shoots forward.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ProjectileAction.RayCount.Three">
+            <summary>
+            Shoots forward and the diagonal sides.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ProjectileAction.RayCount.FourCross">
+            <summary>
+            Shoots in an X-shape.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ProjectileAction.RayCount.Five">
+            <summary>
+            Shoots in a star shape.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ProjectileAction.RayCount.Eight">
+            <summary>
+            Shoots outward in 8 directions.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ProjectileAction.Anim">
+            <summary>
+            The animation of the projectile being thrown.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ProjectileAction.Emitter">
+            <summary>
+            The Particle FX attached to the projectile being thrown.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ProjectileAction.StreamEmitter">
+            <summary>
+            The Particle FX for a stream coming out of the attacker.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ProjectileAction.Rays">
+            <summary>
+            Determines how many directions the projectile is shot out in.
             </summary>
         </member>
         <member name="F:RogueEssence.Dungeon.ProjectileAction.Speed">
@@ -376,9 +571,65 @@
             Tiles per Second.  Use 0 for instant travel.
             </summary>
         </member>
+        <member name="F:RogueEssence.Dungeon.ProjectileAction.Boomerang">
+            <summary>
+            If turned on, the projectile will travel back to the attacker with its hitbox still live.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ProjectileAction.ItemSprite">
+            <summary>
+            Item sprites can be used for the sprite of the projectile.
+            This overrides Anim.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ProjectileAction.CharAnimData">
+            <summary>
+            The animation the user plays when using the skill.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Dungeon.WaveMotionAction">
+            <summary>
+            A beam hitbox that sweeps forward.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.WaveMotionAction.Anim">
+            <summary>
+            The animationf for the beam being fired.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.WaveMotionAction.Wide">
+            <summary>
+            Makes the beam 3 tiles wide.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Dungeon.WaveMotionAction.Speed">
             <summary>
             Tiles per Second.  Use 0 for instant travel.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.WaveMotionAction.Linger">
+            <summary>
+            The amount of frames for the animation to linger after reaching max range.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.WaveMotionAction.CharAnimData">
+            <summary>
+            The animation the user plays when using the skill.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Dungeon.ThrowAction">
+            <summary>
+            A hitbox that flies in an arc to hit the enemy.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ThrowAction.Anim">
+            <summary>
+            The animation of the projectile being thrown.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ThrowAction.Emitter">
+            <summary>
+            The Particle FX attached to the projectile being thrown.
             </summary>
         </member>
         <member name="F:RogueEssence.Dungeon.ThrowAction.Range">
@@ -388,7 +639,38 @@
         </member>
         <member name="F:RogueEssence.Dungeon.ThrowAction.Speed">
             <summary>
-            Tiles per Second.  Use 0 for instant travel.
+            Travel time of the projectile in tiles per Second.  Use 0 for instant travel.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ThrowAction.Coverage">
+            <summary>
+            Determines the area that the arc can target.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ThrowAction.ItemSprite">
+            <summary>
+            Item sprites can be used for the sprite of the projectile.
+            This overrides Anim.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ThrowAction.CharAnimData">
+            <summary>
+            The animation the user plays when using the skill.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Dungeon.DashAction">
+            <summary>
+            A hitbox that has the attacker lunge forward.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.DashAction.CharAnim">
+            <summary>
+            The animation the user plays when using the skill.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.DashAction.AppearanceMod">
+            <summary>
+            Visual modifier for when the dash animation is executed.
             </summary>
         </member>
         <member name="F:RogueEssence.Dungeon.CharData.IsFounder">
@@ -401,14 +683,61 @@
             Cannot be removed from team.
             </summary>
         </member>
+        <member name="F:RogueEssence.Dungeon.ExplosionData.TargetAlignments">
+            <summary>
+            Which entities are targeted by the explosion.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ExplosionData.HitTiles">
+            <summary>
+            Determines if the explosion targets tiles or not.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Dungeon.ExplosionData.Range">
             <summary>
-            In Tiles
+            The range of the explosion in Tiles.
+            Skills that do not have a splash effect use 0.
             </summary>
         </member>
         <member name="F:RogueEssence.Dungeon.ExplosionData.Speed">
             <summary>
-            Speed to Spread from 0 to Range in Tiles Per Second
+            Speed to Spread from a radius of 0 to a radius of the explosion's max range.
+            In Tiles Per Second
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ExplosionData.TileEmitter">
+            <summary>
+            The Particle FX that plays on each tile covered by the explosion.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ExplosionData.Emitter">
+            <summary>
+            The Particle FX for the explosion that scales in radius to the explosion's radius.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ExplosionData.IntroFX">
+            <summary>
+            VFX that plays before the explosion goes off.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ExplosionData.ExplodeFX">
+            <summary>
+            VFX that plays when the explosion goes off.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.Hitbox.AreaLimit.Full">
+            <summary>
+            Hits in all directions.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.Hitbox.AreaLimit.Cone">
+            <summary>
+            Hits the front and sides in a cone shape.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.Hitbox.AreaLimit.Sides">
+            <summary>
+            Hits the tiles left and right of the center.
             </summary>
         </member>
         <member name="F:RogueEssence.Dungeon.CircleSquareHitbox.MaxRadius">
@@ -530,9 +859,15 @@
             If set to true, will attack/be attacked by Foe faction when in Ally faction.
             </summary>
         </member>
+        <member name="F:RogueEssence.Dungeon.AutoTile.Layers">
+            <summary>
+            If AutoTileSet is set to -1, this variable can be specified to make a hand-crafted texture.
+            </summary>
+        </member>
         <member name="P:RogueEssence.Dungeon.AutoTile.Associates">
             <summary>
-            Tilesets that are considered this tileset for texture computing purposes.  Only used for Autotiles
+            Associates are autotiles that will be considered the same as the autotile this object is using.
+            Only used for texture computation, and only relevant for edge cases involving when two different autotiles meet.
             </summary>
         </member>
         <member name="M:RogueEssence.Dungeon.AutoTileBase.GetLayers(System.Int32)">
@@ -605,6 +940,89 @@
         <member name="F:RogueEssence.Data.AITactic.Assignable">
             <summary>
             Can be assigned via tactics menu
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BattleData.HitRate">
+            <summary>
+            The chance of the attack hitting.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BattleData.SkillStates">
+            <summary>
+            Special variables that this skill contains.
+            They are potentially checked against in a select number of battle events.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BattleData.BeforeTryActions">
+            <summary>
+            Occurs before the attacker tries to use the skill.
+            If the skill is cancelled here, the turn and skill are not used.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BattleData.BeforeActions">
+            <summary>
+            Occurs before the attacker uses the skill.
+            If the skill is cancelled here, the turn will still be passed.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BattleData.OnActions">
+            <summary>
+            Occurs right after the attacker uses the skill.
+            The skill will have been called out, and the turn will be passed.
+            In a skill with multiple strikes, this event will be called at the beginning of each strike.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BattleData.BeforeExplosions">
+            <summary>
+            Occurs after a tile is targeted and before it creates a splash damage hitbox.
+            Can be used to alter the hitbox or redirect it.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BattleData.BeforeHits">
+            <summary>
+            Occurs before the target is hit.
+            At this point, the target variable is available for calculations.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BattleData.OnHits">
+            <summary>
+            Occurs when the target is hit.
+            Does not occur if the target evaded the attack.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BattleData.OnHitTiles">
+            <summary>
+            Occurs when the attack hits a tile.
+            Can be used for terrain deformation.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BattleData.AfterActions">
+            <summary>
+            Occurs after all targets are hit by the skill.
+            In a skill with multiple strikes, this event will be called at the end of each strike.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BattleData.ElementEffects">
+            <summary>
+            Modifies the elemental effect system.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BattleData.IntroFX">
+            <summary>
+            VFX that play target before they are hit.
+            Will always play, even if the evasion roll results in a miss.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BattleData.HitFX">
+            <summary>
+            VFX that play when the target is hit.
+            Only plays if the target is actually hit.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BattleData.HitCharAction">
+            <summary>
+            Target character animation when it is hit.
+            Only plays if the target is actually hit.
             </summary>
         </member>
         <member name="M:RogueEssence.Data.DataManager.GetIndex(RogueEssence.Data.DataManager.DataType)">
@@ -692,6 +1110,248 @@
             Developer-only comments for this asset.
             </summary>
         </member>
+        <member name="F:RogueEssence.Data.ItemData.Sprite">
+            <summary>
+            How the item looks in the game.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ItemData.Icon">
+            <summary>
+            The icon displayed next to the item's name.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ItemData.Price">
+            <summary>
+            How much the item sells for.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ItemData.Rarity">
+            <summary>
+            The rarity rating of the item.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ItemData.MaxStack">
+            <summary>
+            The maximum amount a single slot of this item can be stacked.
+            0 is unstackable.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ItemData.CannotDrop">
+            <summary>
+            Cannot be manually dropped, cannot be lost, cannot be stolen.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ItemData.BagEffect">
+            <summary>
+            Determines whether the item activates in bag or on equip.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ItemData.ItemStates">
+            <summary>
+            Special variables that this item contains.
+            They are potentially checked against in a select number of battle events.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ItemData.UseAction">
+            <summary>
+            The hitbox of the attack that comes out when the item is used.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ItemData.Explosion">
+            <summary>
+            The splash effect that is triggered for each target of the UseAction hitbox.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ItemData.UseEvent">
+            <summary>
+            The effects of using the item.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ItemData.UsageType">
+            <summary>
+            Define whether this is a food, drink, etc for the proper sound/animation on use
+            "None" and "ammo" will prevent use, but UseEffect can still be triggered by throwing it.
+            This means that throw effect is the same as use effect.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ItemData.ArcThrow">
+            <summary>
+            Defines whether this item flies in an arc or in a straight line.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ItemData.ThrowAnim">
+            <summary>
+            Defines the custom graphics for the item when it is thrown.
+            Set to an empty anim to use the item's own sprite.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.MonsterData.EXPTable">
+            <summary>
+            How fast this unit levels up.  Uses the Growth Group EXP tables.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.OnEquips">
+            <summary>
+            Triggered when the character equips an item.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.OnPickups">
+            <summary>
+            Triggered when the character picks up an item.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.BeforeStatusAdds">
+            <summary>
+            Occurs before a status condition is added to the player.
+            Can be used to cancel the operation.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.OnStatusAdds">
+            <summary>
+            Occurs after a status condition is added to the player.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.OnStatusRemoves">
+            <summary>
+            Occurs after a status condition is removed from the player.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.OnMapStatusAdds">
+            <summary>
+            Occurs after a status condition is added to the map.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.OnMapStatusRemoves">
+            <summary>
+            Occurs after a status condition is removed from the map.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.OnMapStarts">
+            <summary>
+            Occurs when the map starts, or when the character is spawned.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.OnTurnStarts">
+            <summary>
+            Occurs when the character's turn begins.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.OnTurnEnds">
+            <summary>
+            Occurs when the character's turn ends.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.OnMapTurnEnds">
+            <summary>
+            Occurs when the map's global turn ends.
+            Distinct from character turn ends because a character may move multiple times a turn.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.OnWalks">
+            <summary>
+            Occurs when the character walks.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.OnDeaths">
+            <summary>
+            Occurs when the character dies.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.OnRefresh">
+            <summary>
+            Occurs whenever the character's features need to be updated.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.BeforeTryActions">
+            <summary>
+            Occurs before the character attempts a battle action,
+            such as attacking, using an item, activating a tile, etc.
+            Cancelling the action at this phase prevents the turn from completing.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.BeforeActions">
+            <summary>
+            Occurs before the character executes a battle action,
+            such as attacking, using an item, activating a tile, etc.
+            Cancelling the action at this phase will still result in the turn completing.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.OnActions">
+            <summary>
+            Occurs after the character initiates the battle action.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.BeforeHittings">
+            <summary>
+            Before the character hits a target in a battle action.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.BeforeBeingHits">
+            <summary>
+            Before the character gets hit in a battle action.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.AfterHittings">
+            <summary>
+            After the character hits a target in a battle action.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.AfterBeingHits">
+            <summary>
+            After the character gets hit in a battle action.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.OnHitTiles">
+            <summary>
+            Effects for when the character hits a tile in a battle action.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.AfterActions">
+            <summary>
+            Occurs after the character finishes the battle action.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.UserElementEffects">
+            <summary>
+            Modifies the elemental effect system when attacking.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.TargetElementEffects">
+            <summary>
+            Modifies the elemental effect system when being targeted by an attack.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.ModifyHPs">
+            <summary>
+            Used to modify HP regen values.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.RestoreHPs">
+            <summary>
+            Used to modify healing events.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ProximityData.Radius">
+            <summary>
+            The radius of the effect.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ProximityData.TargetAlignments">
+            <summary>
+            Who it affects.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ProximityData.BeforeExplosions">
+            <summary>
+            Triggers before a hitbox explodes for an affected character in radius of effect.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ProximityPassive.ProximityEvent">
+            <summary>
+            The passive effect applied to entities near the character with this effect.
+            DO NOT ADD ANYTHING TO A PROXIMITY PASSIVE'S ONREFRESH
+            </summary>
+        </member>
         <member name="M:RogueEssence.Data.RecordHeaderData.LoadHighScores">
             <summary>
             Generate all high score tables in real time, organized by dungeon, by going through all replays
@@ -702,6 +1362,83 @@
             <summary>
             A value that is temporarily set when deserializing a data object, serving as a global old version for converters in UpgradeConverters.cs to recognize the version.
             A bit hacky, but is currently the only way for converters to recognize version.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.SkillData.BaseCharges">
+            <summary>
+            The number of times the skill can be used.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.SkillData.Strikes">
+            <summary>
+            How many times the skill attacks.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.SkillData.HitboxAction">
+            <summary>
+            Data on the hitbox of the attack.  Controls range and targeting.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.SkillData.Explosion">
+            <summary>
+            Optional data to specify a splash effect on the tiles hit.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.SkillData.Data">
+            <summary>
+            Events that occur with this skill.
+            Before it's used, when it hits, after it's used, etc.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.StatusData.MenuName">
+            <summary>
+            Determines if it shows up in the status menu.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.StatusData.CarryOver">
+            <summary>
+            Determines if the status stays when changing floors.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.StatusData.Emoticon">
+            <summary>
+            The icon that appears over the character's head when they have the status.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.StatusData.DropEmoticon">
+            <summary>
+            The icon that appears over the character's head when they have this status with a stack below 0
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.StatusData.FreeEmote">
+            <summary>
+            Icon that appears on the character's body when they have the status.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.StatusData.DrawEffect">
+            <summary>
+            Special visual effects applied to the character with this status.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.StatusData.Targeted">
+            <summary>
+            Will keep track of the character that inflicted the status.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.StatusData.StatusStates">
+            <summary>
+            Special variables that this status contains.
+            They are potentially checked against in a select number of battle events.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.StatusData.OnSkillChanges">
+            <summary>
+            Event for when the character's skills are changed or swapped around.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.StatusData.TargetPassive">
+            <summary>
+            Passive effects applied to the character that inflicted the status.
             </summary>
         </member>
         <member name="F:RogueEssence.Data.RogueStatus.None">
@@ -1970,14 +2707,6 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="T:RogueEssence.LevelGen.ReachableBlobWaterStep`1">
-            <summary>
-            Creates blobs of water using cellular automata, and places them around the map.
-            The water must be reachable from the stairs.
-            WIP DOES NOT WORK
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
         <member name="T:RogueEssence.LevelGen.RoomGenCoated`1">
             <summary>
             Generates a room, and then coats it with additional tiles.
@@ -2008,9 +2737,33 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="T:RogueEssence.LevelGen.ScriptGenStep`1">
+            <summary>
+            Calls a lua script function that acts as the map gen step.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.ScriptGenStep`1.Script">
+            <summary>
+            The name of the script.  The resulting function will be FLOOR_GEN_SCRIPT.[Script Name]
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.ScriptGenStep`1.ArgTable">
+            <summary>
+            Additional arguments that will be passed into the script.
+            </summary>
+        </member>
         <member name="T:RogueEssence.LevelGen.TileSpawnStep`1">
             <summary>
             Generates the encounter table of trap tiles to spawn on a floor.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueEssence.LevelGen.ReachableBlobWaterStep`1">
+            <summary>
+            Creates blobs of water using cellular automata, and places them around the map.
+            The water must be reachable from the stairs.
+            WIP DOES NOT WORK
             </summary>
             <typeparam name="T"></typeparam>
         </member>
@@ -2433,6 +3186,23 @@
         <member name="F:RogueEssence.LevelGen.MoneySpawnZoneStep.ModStates">
             <summary>
             Flags from the player's passives that will affect the money spawned.
+            If a player enters a floor and is carrying an item, intrinsic, etc. that has a ModGenState listed here,
+            The amount of money spawned will be increased by the ModGenState's value.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.ScriptZoneStep">
+            <summary>
+            Calls a lua script function that acts as the map gen step.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.ScriptZoneStep.Script">
+            <summary>
+            The name of the script.  The resulting function will be ZONE_GEN_SCRIPT.[Script Name]
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.ScriptZoneStep.ArgTable">
+            <summary>
+            Additional arguments that will be passed into the script.
             </summary>
         </member>
         <member name="F:RogueEssence.LevelGen.SpreadPlanBase.FloorRange">
@@ -2535,6 +3305,8 @@
         <member name="F:RogueEssence.LevelGen.SpreadStepZoneStep.ModStates">
             <summary>
             Flags from the player's passives that will affect the appearance rate of the step.
+            If a player enters a floor and is carrying an item, intrinsic, etc. that has a ModGenState listed here,
+            The chance of the step appearing will be increased by the ModGenState's value.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.SpreadStepRangeZoneStep">
@@ -2555,6 +3327,8 @@
         <member name="F:RogueEssence.LevelGen.SpreadStepRangeZoneStep.ModStates">
             <summary>
             Flags from the player's passives that will affect the appearance rate of the step.
+            If a player enters a floor and is carrying an item, intrinsic, etc. that has a ModGenState listed here,
+            The chance of the step appearing will be increased by the ModGenState's value.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.TeamSpawnZoneStep">
@@ -2604,6 +3378,13 @@
             </summary>
             <param name="seed"></param>
             <returns></returns>
+        </member>
+        <member name="T:RogueEssence.IntrudingBlobWaterStep`1">
+            <summary>
+            Creates blobs of water using cellular automata, and places them around the map.
+            It will allow itself to be placed in locations that overlap walkable area, but never in a way that disconnects it.
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="T:RogueEssence.AddTunnelStep`1">
             <summary>
@@ -3671,6 +4452,44 @@
         <member name="M:RogueEssence.Script.ScriptUI._WaitForChoice">
             <summary>
             Let the scripts wait for the result of a choice
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:RogueEssence.Menu.DialogueText.textColor">
+            <summary>
+            Text color starts and stops.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Menu.DialogueText.trimmedStarts">
+            <summary>
+            The amount of space to trim when the lines were broken up.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Menu.DialogueText.fullLines">
+            <summary>
+            Formatted lines after breaking the text down and trimming the spaces at the edges.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Menu.DialogueText.formattedTextLength">
+            <summary>
+            The sum of the length of all lines in fullLines.  Saves computation.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Menu.DialogueText.SplitFormattedText(System.String,RogueElements.Rect,System.Int32,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            Splits the text into multiple textboxes worth of text, or just one if it can fit in the textbox.
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:RogueEssence.Menu.DialogueText.SetAndFormatText(System.String)">
+            <summary>
+            Sets the text and formats/spaces it properly.
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:RogueEssence.Menu.DialogueText.GetLineTrim(System.Int32)">
+            <summary>
+            When a text is broken up into lines, some trimming occurs at the beginning.  This obtains that value so callers can keep in sync with the character position mappings.
             </summary>
             <returns></returns>
         </member>

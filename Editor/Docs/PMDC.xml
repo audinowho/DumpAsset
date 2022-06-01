@@ -541,22 +541,6 @@
             The terrain used for the water ring.
             </summary>
         </member>
-        <member name="T:PMDC.LevelGen.ScriptGenStep`1">
-            <summary>
-            Calls a lua script function that acts as the map gen step.
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="F:PMDC.LevelGen.ScriptGenStep`1.Script">
-            <summary>
-            The name of the script.  The resulting function will be FLOOR_GEN_SCRIPT.[Script Name]
-            </summary>
-        </member>
-        <member name="F:PMDC.LevelGen.ScriptGenStep`1.ArgTable">
-            <summary>
-            Additional arguments that will be passed into the script.
-            </summary>
-        </member>
         <member name="P:PMDC.LevelGen.BaseSealStep`1.Filters">
             <summary>
             Determines the rooms that serve as a vault and are to be locked away.
@@ -862,21 +846,6 @@
             At what point in the map gen process to run the step in.
             </summary>
         </member>
-        <member name="T:PMDC.LevelGen.ScriptZoneStep">
-            <summary>
-            Calls a lua script function that acts as the map gen step.
-            </summary>
-        </member>
-        <member name="F:PMDC.LevelGen.ScriptZoneStep.Script">
-            <summary>
-            The name of the script.  The resulting function will be ZONE_GEN_SCRIPT.[Script Name]
-            </summary>
-        </member>
-        <member name="F:PMDC.LevelGen.ScriptZoneStep.ArgTable">
-            <summary>
-            Additional arguments that will be passed into the script.
-            </summary>
-        </member>
         <member name="T:PMDC.LevelGen.SpreadBossZoneStep">
             <summary>
             Generates boss battles randomly across the whole dungeon segment.
@@ -905,6 +874,13 @@
         <member name="F:PMDC.LevelGen.SpreadHouseZoneStep.Priority">
             <summary>
             At what point in the map gen process to run the step in.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SpreadHouseZoneStep.ModStates">
+            <summary>
+            Flags from the player's passives that will affect the appearance rate of the monster house.
+            If a player enters a floor and is carrying an item, intrinsic, etc. that has a ModGenState listed here,
+            The chance of the monster house appearing will be increased by the ModGenState's value.
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.SpreadVaultZoneStep">

@@ -182,6 +182,23 @@
         </member>
         <!-- Badly formed XML comment ignored for member "T:PMDC.Dungeon.DmgMult" -->
         <!-- Badly formed XML comment ignored for member "T:PMDC.Dungeon.AccMult" -->
+        <member name="T:PMDC.Dungeon.HandoutScaledExpEvent">
+            <summary>
+            EXP handed out for defeating an enemy is scaled based on the enemy's level.
+            BaseEXP * Numerator * Level / Denominator + 1
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.HandoutConstantExpEvent">
+            <summary>
+            EXP handed out for defeating an enemy is equal to its base EXP yield without any changes.
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.HandoutRelativeExpEvent">
+            <summary>
+            EXP handed out to each team member is scaled based on the team member's level relative to the defeated enemy's level.
+            BaseEXP * Numerator * (2 * EnemyLv + LevelBuffer) ^ 3 / (EnemyLv + PlayerLv + LevelBuffer) ^ 3 / Denominator + 1
+            </summary>
+        </member>
         <member name="T:PMDC.LevelGen.ChestStep`1">
             <summary>
             A monster house that takes the form of a booby-trapped chest.
@@ -687,6 +704,16 @@
         <member name="F:PMDC.LevelGen.MobCheckVersionDiff.Remainder">
             <summary>
             The remainder to check for when dividing the player's seed.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobCheckTimeOfDay">
+            <summary>
+            Spawns the mob if the time of day is right.  DOESNT WORK.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobCheckTimeOfDay.Time">
+            <summary>
+            The time of day
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.MobSpawnWeak">

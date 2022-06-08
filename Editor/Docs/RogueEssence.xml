@@ -4,24 +4,242 @@
         <name>RogueEssence</name>
     </assembly>
     <members>
+        <member name="P:RogueEssence.Content.AnimDataBase.AnimIndex">
+            <summary>
+            The graphics of the animation.
+            </summary>
+        </member>
         <member name="P:RogueEssence.Content.AnimDataBase.FrameTime">
             <summary>
             Time spent on each frame of animation, in frames (time unit)
             </summary>
         </member>
+        <member name="P:RogueEssence.Content.AnimDataBase.StartFrame">
+            <summary>
+            The first frame of the animation, inclusive.
+            -1 defaults to 0.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Content.AnimDataBase.EndFrame">
+            <summary>
+            The last frame of the animation, inclusive.
+            -1 defaults to the last frame possible.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Content.AnimDataBase.AnimDir">
+            <summary>
+            The direction of the animation.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Content.AnimDataBase.Alpha">
+            <summary>
+            Transparency.  0 for invisible, 255 for opaque.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Content.AnimDataBase.AnimFlip">
+            <summary>
+            Horizontal or vertical flip effects.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.AfterImageEmitter">
+            <summary>
+            Creates after-images of the moving character.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.StaticAreaEmitter">
+            <summary>
+            Emits particles within a specified circular area.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.StaticAreaEmitter.Anims">
+            <summary>
+            The particles to emit.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.StaticAreaEmitter.BurstTime">
+            <summary>
+            Number of frames between bursts.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.StaticAreaEmitter.Range">
+            <summary>
+            Radius of the emitting area in pixels.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.FiniteAreaEmitter">
+            <summary>
+            Emits particles within a specified circular area.
+            The area of emission starts at a radius of 0 and grows to a maximum range.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.FiniteAreaEmitter.Anims">
+            <summary>
+            The particles to emit.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Content.FiniteAreaEmitter.Range">
             <summary>
+            The maximum radius of the emitting area.
             In Pixels
             </summary>
         </member>
         <member name="F:RogueEssence.Content.FiniteAreaEmitter.Speed">
             <summary>
+            Speed of the radius's increase.
             In Pixels Per Second
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.FiniteAreaEmitter.TotalParticles">
+            <summary>
+            Total particles to emit by the time the emitter finishes.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.FiniteAreaEmitter.Layer">
+            <summary>
+            The draw layer to put the particles on.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.AttachAreaEmitter">
+            <summary>
+            Emits particles within a specified circular area, attached to a moving user or object.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.AttachAreaEmitter.Anims">
+            <summary>
+            The particles to emit.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.AttachAreaEmitter.Range">
+            <summary>
+            Radius of the emitting area in pixels.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.AttachAreaEmitter.AddHeight">
+            <summary>
+            The amount of height to add to the particles.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.AttachAreaEmitter.BurstTime">
+            <summary>
+            Number of frames between bursts.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.AttachAreaEmitter.Layer">
+            <summary>
+            The draw layer to put the particles on.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.CircleSquareAreaEmitter">
+            <summary>
+            Emits particles within the range of the hitbox that owns it.
+            The area of emission is a circle that starts at a radius of 0 and grows to the range of the square-shaped hitbox.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.CircleSquareAreaEmitter.Anims">
+            <summary>
+            The particles to emit.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.CircleSquareAreaEmitter.ParticlesPerTile">
+            <summary>
+            The amount of particles to emit per tile covered by the hitbox.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.CircleSquareAreaEmitter.RangeDiff">
+            <summary>
+            A modification to the emission radius initially supplied by the hitbox, in pixels.
+            Negative numbers take the hitbox's radius and decrease it.
+            Positive numbers take the hitbox's radius and increase it.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.CircleSquareAreaEmitter.Layer">
+            <summary>
+            The draw layer to put the particles on.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.BetweenEmitter">
+            <summary>
+            Creates an animation (Or particle emitter) behind and in front of the target sprite.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.BetweenEmitter.AnimBack">
+            <summary>
+            The animation or particle emitter behind the target sprite.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.BetweenEmitter.AnimFront">
+            <summary>
+            The animation or particle emitter in front of the target sprite.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.BetweenEmitter.HeightBack">
+            <summary>
+            The height of the animation or particle emitter behind the target sprite.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.BetweenEmitter.HeightFront">
+            <summary>
+            The height of the animation or particle emitter in front of the target sprite.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.BetweenEmitter.Offset">
+            <summary>
+            The number of pixels to offset both animations forward, in the direction of the animation.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.ClampEmitter">
+            <summary>
+            Creates two anims, separated by a width or a height, and then moves them towards each other in a clamping motion.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.ClampEmitter.Anim1">
+            <summary>
+            Anim at the bottom.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.ClampEmitter.Anim2">
+            <summary>
+            Anim at the top.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.ClampEmitter.Offset">
+            <summary>
+            The number of pixels to move both animations forward, in the direction of the animation.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.ClampEmitter.HalfOffset">
+            <summary>
+            The number of pixels to offset the bottom anim one way, and the top anim in the reverse way, before clamping them together.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.ClampEmitter.HalfHeight">
+            <summary>
+            The number of pixels in height to move the bottom anim down, and the top anim up, before clamping them together.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.ClampEmitter.LingerStart">
+            <summary>
+            The number of frames for animations to linger before starting the clamp.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.ClampEmitter.MoveTime">
+            <summary>
+            The number of frames it takes for the clamp to complete from start to finish.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.ClampEmitter.LingerEnd">
+            <summary>
+            The number of frames for animations to linger after the clamp is complete.
             </summary>
         </member>
         <member name="F:RogueEssence.Content.BaseEmitter.Coverages">
             <summary>
             Used to keep track of where particles have previously spawned relative to the origin.  Used for balancing particle spawns.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.EmptyFiniteEmitter">
+            <summary>
+            An emitter that does nothing.
             </summary>
         </member>
         <member name="F:RogueEssence.Content.CircleSquareEmitter.Range">
@@ -34,6 +252,11 @@
             In Pixels Per Second
             </summary>
         </member>
+        <member name="T:RogueEssence.Content.EmptyCircleSquareEmitter">
+            <summary>
+            An emitter that does nothing.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Content.ShootingEmitter.Range">
             <summary>
             Pixels
@@ -44,9 +267,133 @@
             Pixels per second
             </summary>
         </member>
+        <member name="T:RogueEssence.Content.EmptyShootingEmitter">
+            <summary>
+            An emitter that does nothing.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.EmptyAttachEmitter">
+            <summary>
+            An emitter that does nothing.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.EmptySwitchOffEmitter">
+            <summary>
+            An emitter that does nothing.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.ExpandableEmitter">
+            <summary>
+            Emits multiple animations or particles.
+            Not very used.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Content.ExpandableEmitter.DefaultRadius">
             <summary>
             In pixels
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.FlashEmitter">
+            <summary>
+            Flashes a background image once.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.CircleSquareFountainEmitter">
+            <summary>
+            Emits particles within a specified range.
+            Particles emitted in this manner utilize the trajectory they are fired in.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.CircleSquareFountainEmitter.Anims">
+            <summary>
+            The particles to emit.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.FiniteGatherEmitter">
+            <summary>
+            Emits particles at the circumference of a specified range, which all move inwards to the center.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.FiniteGatherEmitter.Anims">
+            <summary>
+            The particles to emit.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.FiniteGatherEmitter.UseDest">
+            <summary>
+            The animation will start at a cirumference that encircles the other entity being targeted.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.ListEmitter">
+            <summary>
+            Emits several particles or particle emitters specified in a list.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.MoveToEmitter">
+            <summary>
+            Creates an animation that starts at one location and moves to another.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.MoveToEmitter.Anim">
+            <summary>
+            The animation to create.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.MoveToEmitter.OffsetStart">
+            <summary>
+            The number of pixels to offset both the animation forward, in the direction of the animation.
+            This will be for the starting position.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.MoveToEmitter.OffsetEnd">
+            <summary>
+            The number of pixels to offset both the animation forward, in the direction of the animation.
+            This will be for the ending position.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.MoveToEmitter.HeightStart">
+            <summary>
+            The initial height the animation will appear at.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.MoveToEmitter.HeightEnd">
+            <summary>
+            The height that the animation will end at.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.MoveToEmitter.LingerStart">
+            <summary>
+            The number of frames for the animation to stay at its starting position, before moving.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.MoveToEmitter.LingerEnd">
+            <summary>
+            The number of frames for the animation to stay at its ending position, after moving.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.MoveToEmitter.MoveTime">
+            <summary>
+            The number of frames it takes to move the animation.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.MoveToEmitter.ResultAnim">
+            <summary>
+            The animation to play once the movement is complete.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.MoveToEmitter.ResultLayer">
+            <summary>
+            The layer to put the result animation in.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.FiniteOverlayEmitter">
+            <summary>
+            Creates an overlay effect using a background texture.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.FiniteOverlayEmitter.Anim">
+            <summary>
+            The background texture to show.
             </summary>
         </member>
         <member name="F:RogueEssence.Content.FiniteOverlayEmitter.Movement">
@@ -54,9 +401,24 @@
             Pixels per second
             </summary>
         </member>
+        <member name="F:RogueEssence.Content.FiniteOverlayEmitter.TotalTime">
+            <summary>
+            The total time the animation appears, in frames.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.FiniteOverlayEmitter.Color">
+            <summary>
+            The color to shift the background texture.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Content.OverlayEmitter.Movement">
             <summary>
             Pixels per second
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.FiniteReleaseRangeEmitter">
+            <summary>
+            Emits particles within a specified start range, which all move outwards to the maximum radius.
             </summary>
         </member>
         <member name="F:RogueEssence.Content.FiniteReleaseRangeEmitter.Range">
@@ -64,9 +426,19 @@
             In Pixels
             </summary>
         </member>
+        <member name="T:RogueEssence.Content.FiniteReleaseEmitter">
+            <summary>
+            Emits particles within a specified start range, which all move outwards until they finish animating.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Content.FiniteReleaseEmitter.Speed">
             <summary>
             In Pixels Per Second
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.AttachReleaseRangeEmitter">
+            <summary>
+            Emits particles within a specified start range, which all move outwards until they reach the maximum range.
             </summary>
         </member>
         <member name="F:RogueEssence.Content.AttachReleaseRangeEmitter.Range">
@@ -74,29 +446,281 @@
             In Pixels
             </summary>
         </member>
+        <member name="T:RogueEssence.Content.AttachReleaseEmitter">
+            <summary>
+            Emits particles within a specified start range, which all move outwards until they finish animating.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Content.AttachReleaseEmitter.Speed">
             <summary>
             In Pixels Per Second
             </summary>
         </member>
+        <member name="T:RogueEssence.Content.CircleSquareReleaseEmitter">
+            <summary>
+            Emits particles within a specified start range, which all move outwards until they reach the max range specified by the hitbox.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.RepeatEmitter">
+            <summary>
+            An emitter that releases a single animation, or particle emitter, several times.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.RepeatEmitter.Anim">
+            <summary>
+            The animation to play.  Can also be an emitter.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.RepeatEmitter.Bursts">
+            <summary>
+            The number of times to release the animation.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.RepeatEmitter.BurstTime">
+            <summary>
+            The number of frames between emissions.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.RepeatEmitter.Layer">
+            <summary>
+            The layer to put the animation on.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.RepeatEmitter.Offset">
+            <summary>
+            Shifts the animation in the given number of pixels, based on the direction of the origin entity.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.ScreenRainEmitter">
+            <summary>
+            Emits particles falling downwards in a rain.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.SingleEmitter">
+            <summary>
+            A simple emitter that releases a single animation, or particle emitter.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.SingleEmitter.Offset">
+            <summary>
+            Shifts the animation in the given number of pixels, based on the direction of the origin entity.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.SingleEmitter.Anim">
+            <summary>
+            The animation to play.  Can also be an emitter.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.SingleEmitter.Layer">
+            <summary>
+            The layer to put the animation on.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.SingleEmitter.UseDest">
+            <summary>
+            Uses the other entity as the origin point of the animation, if there is one.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.SpinEmitter">
+            <summary>
+            Emits particles that spin around the origin in a consistent radius.
+            Not very used.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.FiniteSprinkleEmitter">
+            <summary>
+            Emits particles within a specified circular area.
+            The area of emission starts at a radius of 0 and grows to a maximum range.
+            The particles themselves will move in the specified direction.
+            Often used to simulate confetti-like objects that float downwards.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.FiniteSprinkleEmitter.Anims">
+            <summary>
+            The particles to emit.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Content.FiniteSprinkleEmitter.Range">
             <summary>
+            The maximum radius of the emitting area.
             In Pixels
             </summary>
         </member>
         <member name="F:RogueEssence.Content.FiniteSprinkleEmitter.Speed">
             <summary>
+            Speed of the radius's increase.
             In Pixels Per Second
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.FiniteSprinkleEmitter.TotalParticles">
+            <summary>
+            Total particles to emit by the time the emitter finishes.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.FiniteSprinkleEmitter.HeightSpeed">
+            <summary>
+            The speed for the particles to travel in height.
+            In pixels per second.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.FiniteSprinkleEmitter.SpeedDiff">
+            <summary>
+            How far left or right the particle's trajectory will drift as it moves.
+            In pixels per second.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.FiniteSprinkleEmitter.StartHeight">
+            <summary>
+            Height added to the particles when they are initialy created.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.FiniteSprinkleEmitter.Layer">
+            <summary>
+            The draw layer to put the particles on.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.AttachSprinkleEmitter">
+            <summary>
+            Emits particles within a specified circular area, attached to a moving user or object.
+            The particles themselves will move in the specified direction.
+            Often used to simulate confetti-like objects that float downwards.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.AttachSprinkleEmitter.Anims">
+            <summary>
+            The particles to emit.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.AttachSprinkleEmitter.Range">
+            <summary>
+            Radius of the emitting area in pixels.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.AttachSprinkleEmitter.BurstTime">
+            <summary>
+            Number of frames between bursts.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.AttachSprinkleEmitter.HeightSpeed">
+            <summary>
+            The speed for the particles to travel in height.
+            In pixels per second.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.AttachSprinkleEmitter.SpeedDiff">
+            <summary>
+            How far left or right the particle's trajectory will drift as it moves.
+            In pixels per second.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.AttachSprinkleEmitter.StartHeight">
+            <summary>
+            The amount of height to add to the particles when they initially spawn.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.AttachSprinkleEmitter.Layer">
+            <summary>
+            The draw layer to put the particles on.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.CircleSquareSprinkleEmitter">
+            <summary>
+            Emits particles within the range of the hitbox that owns it.
+            The area of emission is a circle that starts at a radius of 0 and grows to the range of the square-shaped hitbox.
+            The particles themselves will move in the specified direction.
+            Often used to simulate confetti-like objects that float downwards.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.CircleSquareSprinkleEmitter.Anims">
+            <summary>
+            The particles to emit.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.CircleSquareSprinkleEmitter.ParticlesPerTile">
+            <summary>
+            The amount of particles to emit per tile covered by the hitbox.
             </summary>
         </member>
         <member name="F:RogueEssence.Content.CircleSquareSprinkleEmitter.HeightSpeed">
             <summary>
-            Pixels Per Second
+            The speed for the particles to travel in height.
+            In pixels per second.
             </summary>
         </member>
         <member name="F:RogueEssence.Content.CircleSquareSprinkleEmitter.SpeedDiff">
             <summary>
-            Pixels Per Second
+            How far left or right the particle's trajectory will drift as it moves.
+            In pixels per second.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.CircleSquareSprinkleEmitter.StartHeight">
+            <summary>
+            The amount of height to add to the particles when they initially spawn.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.CircleSquareSprinkleEmitter.Layer">
+            <summary>
+            The draw layer to put the particles on.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.SqueezedAreaEmitter">
+            <summary>
+            Area Emitter but instead of a perfect circle, it is vertically squeezed into a short ellipse.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.StreamEmitter">
+            <summary>
+            Emits particles in a stream, traveling in the trajectory of the hitbox.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.StreamEmitter.Anims">
+            <summary>
+            Particles to emit.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.StreamEmitter.Shots">
+            <summary>
+            The number of times to repeat emitting.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.StreamEmitter.BurstTime">
+            <summary>
+            The number of frames between each shot.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.StreamEmitter.StartDistance">
+            <summary>
+            The starting distance of the emitted particle, in pixels from the origin.
+            A positive number shifts the spawn to be further in the direction being fired.
+            A negative number shifts it back.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.StreamEmitter.EndDiff">
+            <summary>
+            Modifies the end distance of the emitted particle, in pixels.
+            A positive number shifts the spawn to be further in the direction being fired.
+            A negative number shifts it back.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.StreamEmitter.Layer">
+            <summary>
+            The layer to spawn the particles in.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.SwingSwitchEmitter">
+            <summary>
+            Emits a particle that moves from the source to the target, with a parabolic circular motion.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.VortexEmitter">
+            <summary>
+            Emits particles that spin around the origin in a changing radius.
+            Not very used.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Content.WindEmitter">
+            <summary>
+            Emits particles traveling horizontally over the screen in varying speed.
             </summary>
         </member>
         <member name="F:RogueEssence.Content.WindEmitter.Speed">
@@ -157,6 +781,36 @@
         <member name="F:RogueEssence.Content.ParticleAnim.HeightAcceleration">
             <summary>
             Pixels Per Second Per Second 
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.DrawLayer.Bottom">
+            <summary>
+            Draws on the floor, behind all entities.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.DrawLayer.Back">
+            <summary>
+            Draws in front of entities if placed at a higher Y coordinate, but draws behind entities in a tie.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.DrawLayer.Normal">
+            <summary>
+            Draws in behind of entities if placed at a lower Y coordinate, but draws in front of entities in a tie.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.DrawLayer.Front">
+            <summary>
+            Draws in front of entities.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.DrawLayer.Top">
+            <summary>
+            Draws on top of everything else.  Often used for overlay.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.DrawLayer.NoDraw">
+            <summary>
+            Does not draw.
             </summary>
         </member>
         <member name="M:RogueEssence.Content.BaseSheet.premultiply(Microsoft.Xna.Framework.Graphics.Texture2D,System.Boolean)">
@@ -330,6 +984,14 @@
             <summary>
             Can only use basic attack as an action.
             </summary>
+        </member>
+        <member name="M:RogueEssence.Dungeon.Character.DieSilent">
+            <summary>
+            Makes the character disappear but also causes it to let go of its item.
+            Technically should be handled by the scripts calling it.
+            TODO: remove this method, after removing calls from rescue to script
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:RogueEssence.Dungeon.Character.EditSkill(System.Int32,System.Int32,System.Boolean)">
             <summary>

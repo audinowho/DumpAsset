@@ -130,6 +130,15 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
     end  
   end
   
+  --Set the center of the corner to Block tile of a custom tileset.
+  for xx = map.Width * 3 / 4 - 1, map.Width * 3 / 4 + 1, 1 do
+    for yy = map.Height * 3 / 4 - 1, map.Height * 3 / 4 + 1, 1 do
+	  local customTerrain = RogueEssence.Dungeon.Tile(2, true) -- set StableTex to true, which prevents the map's autotexturing
+	  customTerrain.Data.TileTex = RogueEssence.Dungeon.AutoTile(6)
+      map:TrySetTile(RogueElements.Loc(xx, yy), customTerrain)
+    end
+  end
+  
   --Place a trap on 2,2.  Slumber trap, revealed.
   --map:PlaceItem(RogueElements.Loc(2, 2), RogueEssence.Dungeon.EffectTile(4, true))
   local trap_tile = map:GetTile(RogueElements.Loc(2, 2))
@@ -142,9 +151,9 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
   new_item.TileLoc = RogueElements.Loc(3, 2)
   map.Items:Add(new_item)
   
-  --Place item on 3,3.  100g
+  --Place item on 3,3.  Random amount of G between 50 and 100
   --map:PlaceItem(RogueElements.Loc(3, 3), RogueEssence.Dungeon.MapItem(true, 100))
-  new_item = RogueEssence.Dungeon.MapItem(true, 100)
+  new_item = RogueEssence.Dungeon.MapItem(true, map.Rand:Next(50, 101)) -- you must use the map.Rand, or else seeds wont be consistent
   new_item.TileLoc = RogueElements.Loc(3, 3)
   map.Items:Add(new_item)
   

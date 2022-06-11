@@ -98,10 +98,73 @@ end
 
 FLOOR_GEN_SCRIPT = {}
 
+RoomGenBlockedType = luanet.import_type('RogueElements.RoomGenBlocked`1')
+RoomGenEvoType = luanet.import_type('PMDC.LevelGen.RoomGenEvo`1')
+
+function FLOOR_GEN_SCRIPT.TestGrid(map, args)
+  PrintInfo("Test Grid")
+  
+  -- this step operates on the grid floor of the map, assuming it has one
+  -- free-form floors do not have a grid
+  local floorPlan = map.GridPlan
+  -- these changes will only affect the map if they are done after the grid is created (after priority -5)
+  -- these changes will only affect the map if they are done before the grid is drawn to the floor plan (before priority -3)
+  
+  
+  -- set the brush for all vertical hallways on the right half to be blocked rooms 
+  for xx = floorPlan.GridWidth / 2, floorPlan.GridWidth - 1, 1 do
+    for yy = 0, floorPlan.GridHeight - 2, 1 do
+	  local hall = floorPlan:GetHall(RogueElements.LocRay4(RogueElements.Loc(xx, yy), Dir4.Down))
+	  -- only modify existing halls
+	  if hall ~= nil then
+	    local hallGen = LUA_ENGINE:MakeGenericType(RoomGenBlockedType, { map:GetType() }, {  })
+	    -- no need to change width and height since they will be ordered by the floors
+	    hallGen.BlockWidth = RogueElements.RandRange(2)
+	    hallGen.BlockHeight = RogueElements.RandRange(10)
+		hallGen.BlockTerrain = RogueEssence.Dungeon.Tile(3)
+		floorPlan:SetHall(RogueElements.LocRay4(RogueElements.Loc(xx, yy), Dir4.Down), hallGen, hall.Components)
+	  end
+	end
+  end
+  
+  -- turns all rooms on the left side into evo rooms
+  for yy = 0, floorPlan.GridHeight - 1, 1 do
+	local room = floorPlan:GetRoomPlan(RogueElements.Loc(0, yy))
+	if room ~= nil then
+	  local roomGen = LUA_ENGINE:MakeGenericType(RoomGenEvoType, { map:GetType() }, {  })
+	  room.RoomGen = roomGen
+	end
+  end
+  
+end
+
+function FLOOR_GEN_SCRIPT.TestRooms(map, args)
+  PrintInfo("Test Floor")
+  
+  --this step just finds all hallways and rooms and prints out their areas
+  --since this step does not alter the floor, it only needs to take place after the floor plan is created (after priority -3)
+  
+  local floorPlan = map.RoomPlan
+  
+  -- coordinates are offset by the start amount.  Add them to get the true amount
+  local offset = floorPlan.Start
+  
+  for ii = 0, floorPlan.RoomCount - 1, 1 do
+    local room = floorPlan:GetRoom(ii)
+	PrintInfo("Room " .. ii .. ": X".. room.Draw.Start.X + offset.X .. " Y" .. room.Draw.Start.Y + offset.Y .. " W" .. room.Draw.Size.X .. " H" .. room.Draw.Size.Y  )
+  end
+  
+  for ii = 0, floorPlan.HallCount - 1, 1 do
+    local hall = floorPlan:GetHall(ii)
+	PrintInfo("Hall " .. ii .. ": X".. hall.Draw.Start.X + offset.X .. " Y" .. hall.Draw.Start.Y + offset.Y .. " W" .. hall.Draw.Size.X .. " H" .. hall.Draw.Size.Y  )
+  end
+end
+  
 function FLOOR_GEN_SCRIPT.Test(map, args)
-  PrintInfo("Test")
+  PrintInfo("Test Tile")
   
   --A demo of various tile operations possible with scripting
+  --This step should be added after everything else. (prefer 7)
   
   --Set the top-left corner to room tile. Note that unbreakable blocks are left untouched.
   for xx = 0, map.Width / 2, 1 do

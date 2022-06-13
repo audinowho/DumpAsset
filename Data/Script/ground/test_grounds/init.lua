@@ -107,6 +107,8 @@ function test_grounds.Test_Action()
   UI:WaitShowDialogue("So cool!")
   GROUND:Unhide("Illumise")
   GROUND:Unhide("Caterpie")
+  local groundObject = RogueEssence.Ground.GroundObject(RogueEssence.Content.ObjAnimData("Sign", 1), RogueElements.Rect(244, 180, 24, 24), RogueElements.Loc(8, 0), false, "Sign2")
+  _ZONE.CurrentGround:AddTempObject(groundObject)
 end
 
 --------------------------------------------------

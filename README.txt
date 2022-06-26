@@ -94,21 +94,27 @@ Chi, Lovi, Moo, Reppamon, and 2 Anonymous, for custom sprites and portraits
 
 
 Translation:
-[FR] https://www.vg-resource.com/user-25643.html Van-Tazen
-[FR] Alicia
-[ES] https://twitter.com/lagpu1 lagpu1
-[ES] https://www.reddit.com/u/thedask Dask
 [DE] https://twitter.com/dsgamer93 DSgamer93
 [DE] https://twitter.com/LarsPreston Lars Preston
 [DE] https://twitter.com/Scout_1942 Scout
 [DE] https://www.reddit.com/user/P1ka-/ P1ka
 [DE] https://athaleprime.wixsite.com/athaleprimegames AthalePrime
 [DE] https://twitter.com/NanashiRikai Mario Brand
-[PT] https://twitter.com/SquishyTheMew Squishy
+[DE] KomischerTypus#9155 KomischerTypus
+[ES] https://twitter.com/lagpu1 lagpu1
+[ES] https://www.reddit.com/u/thedask Dask
+[FR] https://www.vg-resource.com/user-25643.html Van-Tazen
+[FR] https://www.twitter.com/Kuramarts Kurama
+[FR] https://www.twitter.com/Vladcik Aligatueur
+[FR] Tabarnak
+[FR] Buxrart
+[FR] Alicia
+[FR] Blackun
 [KO] https://www.reddit.com/user/Bashful_Barry/ Barry
+[PT] https://twitter.com/SquishyTheMew Squishy
 [ZH] https://twitter.com/Dewpoleon Dew
 [ZH] https://sites.google.com/view/daniel-lee-site/home PikaNiko
-[FR] Blackun
+[ZH] Rockdu
 And 1 Anonymous
 
 http://www.spike-chunsoft.co.jp/ Chunsoft, for the Pokémon Mystery Dungeon Red, Blue, Time, Darkness, and Sky resources

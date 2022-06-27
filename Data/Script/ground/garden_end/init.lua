@@ -31,7 +31,7 @@ end
 ---garden_end.Enter
 --Engine callback function
 function garden_end.Enter(map)
-  if SV.garden_end.ExpositionComplete then
+  if SV.garden_end.ExpositionComplete or GAME:InRogueMode() then
     garden_end.PrepareReturnVisit()
   end
   
@@ -56,6 +56,7 @@ function garden_end.PrepareReturnVisit()
   GROUND:Hide("Berry_Basket_Blue_2")
   GROUND:Hide("Berry_Basket_Blue_3")
   GROUND:Hide("Berry_Basket_Blue_4")
+  GROUND:Unhide("Gracidea")
 end
 
 
@@ -171,6 +172,8 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
     player.MetLoc = RogueEssence.Dungeon.ZoneLoc(_ZONE.CurrentZoneID, _ZONE.CurrentMapID)
     _DATA.Save.ActiveTeam.Players:Add(player)
 	SOUND:PlayFanfare("Fanfare/JoinTeam")
+	_DATA.Save:RegisterMonster(mon_id.Species)
+    _DATA.Save:RogueUnlockMonster(492)
 	
 	UI:ResetSpeaker()
     UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT"):ToLocal(), shaymin:GetDisplayName(), _DATA.Save.ActiveTeam.Name))
@@ -201,6 +204,19 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
   COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 1, -1, 3, 2)
 end
 
+function garden_end.Gracidea_Action(obj, activator)
+  local player = CH('PLAYER')
+  SOUND:PlayFanfare("Fanfare/Treasure")
+  local receive_item = RogueEssence.Dungeon.InvItem(491)
+  COMMON.GiftItemFull(player, receive_item, false, false)
+  GROUND:Hide("Gracidea")
+  _DATA.Save:RogueUnlockMonster(492)
+  
+  SOUND:FadeOutBGM()
+  GAME:FadeOut(false, 30)
+  GAME:WaitFrames(90)
+  COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 1, -1, 3, 2)
+end
 
 function garden_end.South_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

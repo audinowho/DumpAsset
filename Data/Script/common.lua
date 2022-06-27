@@ -235,10 +235,16 @@ function COMMON.CreateWalkArea(name, x, y, w, h)
 end
 
 function COMMON.GiftItem(player, receive_item)
-  SOUND:PlayFanfare("Fanfare/Item")
+  COMMON.GiftItem(player, receive_item, true, false)
+end
+
+function COMMON.GiftItemFull(player, receive_item, fanfare, force_storage)
+  if fanfare then
+    SOUND:PlayFanfare("Fanfare/Item")
+  end
   UI:ResetSpeaker(false)
   UI:SetCenter(true)
-  if GAME:GetPlayerBagCount() < GAME:GetPlayerBagLimit() then
+  if not force_storage and GAME:GetPlayerBagCount() < GAME:GetPlayerBagLimit() then
     --give to inventory
 	UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_RECEIVE_ITEM"):ToLocal(), player:GetDisplayName(), receive_item:GetDisplayName()))
 	GAME:GivePlayerItem(receive_item)

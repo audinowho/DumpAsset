@@ -33,11 +33,7 @@ function zone_30.ExitSegment(zone, result, rescue, segmentID, mapID)
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
     if segmentID == 0 then
-	  if GAME:InRogueMode() then
-	    COMMON.EndDungeonDay(result, 1,-1,1,0)
-	  else
-        GAME:EnterZone(30, -1, 0, 0)
-	  end
+      GAME:EnterZone(30, -1, 0, 0)
     else
       PrintInfo("No exit procedure found!")
 	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

@@ -93,10 +93,11 @@ function DebugTools:OnNewGame()
     _DATA.Save.ActiveTeam.Leader.IsFounder = true
 	
 	_DATA.Save:UpdateTeamProfile(true)
-  
-    for ii = 1, _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Count, 1 do
-      GAME:UnlockDungeon(ii-1)
-    end
+    
+	local dungeon_dict = LUA_ENGINE:MakeTable(_DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries)
+	for k, v in pairs(dungeon_dict) do
+		GAME:UnlockDungeon(k)
+	end
   
     --for ii = 900, 2370, 1 do
     --  GAME:GivePlayerStorageItem(ii)

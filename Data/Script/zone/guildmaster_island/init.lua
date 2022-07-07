@@ -32,7 +32,7 @@ function guildmaster_island.ExitSegment(zone, result, rescue, segmentID, mapID)
   else
     if segmentID == 0 then
 	  if mapID == 3 then
-	    COMMON.EndSession(result, 1,-1,3,0)
+	    COMMON.EndSession(result, 'guildmaster_island', -1,3,0)
 	  else
 	    PrintInfo("No exit procedure found!")
 		COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

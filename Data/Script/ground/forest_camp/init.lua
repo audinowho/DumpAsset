@@ -26,7 +26,7 @@ function forest_camp.Enter(map)
 
   SV.checkpoint = 
   {
-    Zone    = 1, Segment  = -1,
+    Zone    = 'guildmaster_island', Segment  = -1,
     Map  = 3, Entry  = 1
   }
   
@@ -39,8 +39,8 @@ function forest_camp.Enter(map)
   end
   
   -- TODO: move this back to BeginExposition
-  GAME:UnlockDungeon(3)
-  GAME:UnlockDungeon(36)
+  GAME:UnlockDungeon('faded_trail')
+  GAME:UnlockDungeon('bramble_woods')
 end
 
 function forest_camp.Update(map, time)
@@ -64,12 +64,12 @@ end
 --------------------------------------------------
 function forest_camp.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  local dungeon_entrances = { 3, 36, 13, 14, 20, 30, 37}
-  local ground_entrances = {{Flag=SV.cliff_camp.ExpositionComplete,Zone=1,ID=4,Entry=0},
-  {Flag=SV.canyon_camp.ExpositionComplete,Zone=1,ID=5,Entry=0},
-  {Flag=SV.rest_stop.ExpositionComplete,Zone=1,ID=6,Entry=0},
-  {Flag=SV.final_stop.ExpositionComplete,Zone=1,ID=7,Entry=0},
-  {Flag=SV.guildmaster_summit.ExpositionComplete,Zone=1,ID=8,Entry=0}}
+  local dungeon_entrances = { 'faded_trail', 'bramble_woods', 'windy_valley', 'ambush_forest', 'overgrown_wilds', 'sickly_hollow', 'secret_garden'}
+  local ground_entrances = {{Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=0},
+  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
+  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
+  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
+  {Flag=SV.guildmaster_summit.ExpositionComplete,Zone='guildmaster_island',ID=8,Entry=0}}
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
@@ -77,7 +77,7 @@ function forest_camp.South_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   local dungeon_entrances = { }
-  local ground_entrances = {{Flag=true,Zone=1,ID=1,Entry=3}}
+  local ground_entrances = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3}}
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
@@ -101,7 +101,7 @@ function forest_camp.Snorlax_Action(chara, activator)
   
   --SOUND:PlayBattleSE("EVT_Battle_Transition")
   --GAME:FadeOut(true, 60)
-  --GAME:EnterDungeon(1, 0, 3, 0, RogueEssence.Data.GameProgress.DungeonStakes.Progress, true, true)
+  --GAME:EnterDungeon('guildmaster_island', 0, 3, 0, RogueEssence.Data.GameProgress.DungeonStakes.Progress, true, true)
 end
 
 function forest_camp.NPC_Carry_Action(chara, activator)

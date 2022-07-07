@@ -19,7 +19,7 @@ function final_stop.Enter(map)
 
   SV.checkpoint = 
   {
-    Zone    = 1, Segment  = -1,
+    Zone    = 'guildmaster_island', Segment  = -1,
     Map  = 7, Entry  = 1
   }
   
@@ -45,7 +45,7 @@ function final_stop.BeginExposition()
   UI:WaitHideTitle(20);
   GAME:FadeIn(20)
   
-  GAME:UnlockDungeon(7)
+  GAME:UnlockDungeon('champions_road')
 end
 
 --------------------------------------------------
@@ -54,20 +54,20 @@ end
 function final_stop.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local dungeon_entrances = { 7 }
+  local dungeon_entrances = { 'champions_road' }
   --also dungeon 23: the sky is accessible by talking to a shaymin
-  local ground_entrances = {{Flag=SV.guildmaster_summit.ExpositionComplete,Zone=1,ID=8,Entry=0}}
+  local ground_entrances = {{Flag=SV.guildmaster_summit.ExpositionComplete,Zone='guildmaster_island',ID=8,Entry=0}}
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
 function final_stop.South_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   local dungeon_entrances = { }
-  local ground_entrances = {{Flag=true,Zone=1,ID=1,Entry=3},
-  {Flag=SV.forest_camp.ExpositionComplete,Zone=1,ID=3,Entry=2},
-  {Flag=SV.cliff_camp.ExpositionComplete,Zone=1,ID=4,Entry=2},
-  {Flag=SV.canyon_camp.ExpositionComplete,Zone=1,ID=5,Entry=2},
-  {Flag=SV.rest_stop.ExpositionComplete,Zone=1,ID=6,Entry=2}}
+  local ground_entrances = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
+  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
+  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2},
+  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=2},
+  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=2}}
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 

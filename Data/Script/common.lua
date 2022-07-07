@@ -150,7 +150,7 @@ function COMMON.ShowTeamAssemblyMenu(obj, init_fun)
   end
 end
 
-function COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
   
   --check for unlock of dungeons
   local open_dests = {}
@@ -833,7 +833,7 @@ end
 
 function COMMON.EndRescue(zone, result, rescue, segmentID)
   COMMON.EndDayCycle()
-  local zoneId = 1
+  local zoneId = 'guildmaster_island'
   local structureId = -1
   local mapId = 12
   local entryId = 1

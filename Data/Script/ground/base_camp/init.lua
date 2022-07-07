@@ -19,7 +19,7 @@ function base_camp.Enter(map)
   
   SV.checkpoint = 
   {
-    Zone    = 1, Segment  = -1,
+    Zone    = 'guildmaster_island', Segment  = -1,
     Map  = 1, Entry  = 0
   }
   
@@ -74,7 +74,7 @@ function base_camp.Enter(map)
     GAME:CutsceneMode(true)
     UI:SetSpeaker(STRINGS:Format("\\uE040"), true, -1, -1, -1, RogueEssence.Data.Gender.Unknown)
 	
-    local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[19]
+    local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries['guildmaster_trail']
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001'], zone:GetColoredName()))
     --move the noctowl to a new position
     local noctowl = CH('Noctowl')
@@ -108,7 +108,7 @@ function base_camp.PrepareFirstTimeVisit()
   GROUND:Unhide("East_LogPile")
   GROUND:Unhide("West_LogPile")
   GROUND:Unhide("First_North_Exit")
-  GAME:UnlockDungeon(19)
+  GAME:UnlockDungeon('guildmaster_trail')
 end
 
 --------------------------------------------------
@@ -149,7 +149,7 @@ function base_camp.BeginExposition()
   
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_006']))
   
-  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[19]
+  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries['guildmaster_trail']
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_007'], zone:GetColoredName()))
   
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_008']))
@@ -167,7 +167,7 @@ function base_camp.BeginExposition()
   GROUND:EntTurn(player, Direction.Up)
   GROUND:EntTurn(noctowl, Direction.Down)
   
-  zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[2]
+  zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries['tropical_path']
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_010'], zone:GetColoredName()))
   
   --UI:WaitShowDialogue("It amazes me that the likes of you still come to this island.")
@@ -191,7 +191,7 @@ function base_camp.BeginExposition()
   --walk to block off the main entrance
   
   --speak, and then unlock the new dungeon
-  GAME:UnlockDungeon(2)
+  GAME:UnlockDungeon('tropical_path')
   GAME:CutsceneMode(false)
   
 end
@@ -202,13 +202,13 @@ end
 
 function base_camp.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  local dungeon_entrances = { 2, 10, 8, 12, 19 }
+  local dungeon_entrances = { 'tropical_path', 'faulted_cliffs', 'cave_of_whispers', 'shimmer_bay', 'guildmaster_trail' }
   local ground_entrances = {{Flag=SV.forest_camp.ExpositionComplete,Zone=1,ID=3,Entry=0},
-  {Flag=SV.cliff_camp.ExpositionComplete,Zone=1,ID=4,Entry=0},
-  {Flag=SV.canyon_camp.ExpositionComplete,Zone=1,ID=5,Entry=0},
-  {Flag=SV.rest_stop.ExpositionComplete,Zone=1,ID=6,Entry=0},
-  {Flag=SV.final_stop.ExpositionComplete,Zone=1,ID=7,Entry=0},
-  {Flag=SV.guildmaster_summit.ExpositionComplete,Zone=1,ID=8,Entry=0}}
+  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=0},
+  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
+  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
+  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
+  {Flag=SV.guildmaster_summit.ExpositionComplete,Zone='guildmaster_island',ID=8,Entry=0}}
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
@@ -216,13 +216,13 @@ function base_camp.First_North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   UI:ResetSpeaker()
-  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[19]
+  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries['guildmaster_trail']
   UI:ChoiceMenuYesNo(STRINGS:FormatKey("DLG_ASK_ENTER_DUNGEON", zone:GetColoredName()), false)
   UI:WaitForChoice()
   ch = UI:ChoiceResult()
   if ch then
     GAME:FadeOut(false, 20)
-    GAME:EnterDungeon(19, 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, true)
+    GAME:EnterDungeon('guildmaster_trail', 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, true)
   end
 end
 
@@ -270,7 +270,7 @@ function base_camp.Noctowl_Action(chara, activator)
     STRINGS:FormatKey("MENU_INFO"),
     STRINGS:FormatKey("DLG_CHOICE_NO")}
   
-  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[35]
+  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries['training_maze']
   
   local result = 2
   while result == 2 do
@@ -279,7 +279,7 @@ function base_camp.Noctowl_Action(chara, activator)
     result = UI:ChoiceResult()
     if result == 1 then
       GAME:FadeOut(false, 20)
-      GAME:EnterDungeon(35, 0, 9, 0, RogueEssence.Data.GameProgress.DungeonStakes.None, false, true)
+      GAME:EnterDungeon('training_maze', 0, 9, 0, RogueEssence.Data.GameProgress.DungeonStakes.None, false, true)
       break
     elseif result == 3 then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Tutorial_End']))

@@ -35,7 +35,7 @@ SV.General =
 
 SV.checkpoint = 
 {
-  Zone    = 1, Segment  = -1,
+  Zone    = 'guildmaster_island', Segment  = -1,
   Map  = 1, Entry  = 0
 }
 

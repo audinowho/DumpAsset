@@ -201,7 +201,7 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
   GAME:CutsceneMode(false)
   GAME:WaitFrames(90)
 
-  COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 1, -1, 3, 2)
+  COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 3, 2)
 end
 
 function garden_end.Gracidea_Action(obj, activator)
@@ -215,7 +215,7 @@ function garden_end.Gracidea_Action(obj, activator)
   SOUND:FadeOutBGM()
   GAME:FadeOut(false, 30)
   GAME:WaitFrames(90)
-  COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 1, -1, 3, 2)
+  COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 3, 2)
 end
 
 function garden_end.South_Exit_Touch(obj, activator)
@@ -233,7 +233,7 @@ function garden_end.South_Exit_Touch(obj, activator)
     if GAME:InRogueMode() then
       GAME:AddToPlayerMoneyBank(100000)
     end
-    COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 1, -1, 3, 2)
+    COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 3, 2)
   end
 end
 

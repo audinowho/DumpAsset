@@ -88,8 +88,8 @@ function test_grounds.Enter(map)
   if not SV.test_grounds.DemoComplete then
     GAME:SetTeamName(STRINGS:FormatKey("TEAM_NAME", "Guildmaster"))
     UI:WaitShowDialogue(STRINGS:Format("Congratulations on completing the toughest dungeon in the demo![pause=0] Enjoy the debug room!"))
-	GAME:UnlockDungeon(0)
-	GAME:UnlockDungeon(2)
+	GAME:UnlockDungeon('debug')
+	GAME:UnlockDungeon('tropical_path')
   end
   SV.test_grounds.DemoComplete = true
 end
@@ -258,8 +258,8 @@ function test_grounds.SouthExit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   local open_dests = {
-    { Name="Replay Test Zone", Dest=RogueEssence.Dungeon.ZoneLoc(0, 4, 0, 0) },
-    { Name="Base Camp", Dest=RogueEssence.Dungeon.ZoneLoc(1, -1, 1, 0) }
+    { Name="Replay Test Zone", Dest=RogueEssence.Dungeon.ZoneLoc('debug', 4, 0, 0) },
+    { Name="Base Camp", Dest=RogueEssence.Dungeon.ZoneLoc('guildmaster_island', -1, 1, 0) }
   }
   local open_dungeons = { 0 }
   local ground_entrances = { 1 }

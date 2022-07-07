@@ -44,17 +44,17 @@ function guildmaster_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
       if segmentID == 0 then
         --if the result is victory, send to the destination zone, or just win to the destination zone
 	    if SV.guildmaster_summit.ExpositionComplete then
-          COMMON.EndDungeonDay(result, 1,-1,8,0)
+          COMMON.EndDungeonDay(result, 'guildmaster_island', -1,8,0)
 	    else
-	      --GAME:EnterZone(1,-1,8, 0)
-		  COMMON.EndDungeonDay(result, 1,-1,0,0)
+	      --GAME:EnterZone('guildmaster_island',-1,8, 0)
+		  COMMON.EndDungeonDay(result, 'guildmaster_island', -1,0,0)
 	    end
       elseif segmentID == 1 then
     --for the boss segment, set a save variable
     --the MAP's script will play the final cutscene
     --AND it will end the game
         SV.guildmaster_summit.BattleComplete = true
-        GAME:EnterZone(1, -1, 8, 0)
+        GAME:EnterZone('guildmaster_island', -1, 8, 0)
       else
         PrintInfo("No exit procedure found!")
 	    COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

@@ -34,7 +34,7 @@ function canyon_camp.Enter(map)
 
   SV.checkpoint = 
   {
-    Zone    = 1, Segment  = -1,
+    Zone    = 'guildmaster_island', Segment  = -1,
     Map  = 5, Entry  = 1
   }
   
@@ -60,7 +60,7 @@ function canyon_camp.BeginExposition()
   UI:WaitHideTitle(20);
   GAME:FadeIn(20)
   
-  GAME:UnlockDungeon(16)
+  GAME:UnlockDungeon('forsaken_desert')
 end
 
 --------------------------------------------------
@@ -69,10 +69,10 @@ end
 function canyon_camp.East_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local dungeon_entrances = { 5, 9, 16, 18 }
-  local ground_entrances = {{Flag=SV.rest_stop.ExpositionComplete,Zone=1,ID=6,Entry=0},
-  {Flag=SV.final_stop.ExpositionComplete,Zone=1,ID=7,Entry=0},
-  {Flag=SV.guildmaster_summit.ExpositionComplete,Zone=1,ID=8,Entry=0}}
+  local dungeon_entrances = { 'thunderstruck_pass', 'lunar_range', 'forsaken_desert', 'relic_tower' }
+  local ground_entrances = {{Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
+  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
+  {Flag=SV.guildmaster_summit.ExpositionComplete,Zone='guildmaster_island',ID=8,Entry=0}}
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
@@ -80,9 +80,9 @@ function canyon_camp.West_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   local dungeon_entrances = { }
-  local ground_entrances = {{Flag=true,Zone=1,ID=1,Entry=3},
-  {Flag=SV.forest_camp.ExpositionComplete,Zone=1,ID=3,Entry=2},
-  {Flag=SV.cliff_camp.ExpositionComplete,Zone=1,ID=4,Entry=2}}
+  local ground_entrances = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
+  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
+  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2}}
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
@@ -171,7 +171,7 @@ function canyon_camp.NPC_Hidden_Action(chara, activator)
   
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   
-  local dungeon_id = 30
+  local dungeon_id = 'secret_garden'
   if not GAME:DungeonUnlocked(dungeon_id) then
     UI:SetSpeaker(chara)
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hidden_Line_001']))

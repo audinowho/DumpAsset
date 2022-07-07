@@ -144,7 +144,7 @@ function guildmaster_summit.PreBattle()
   GAME:FadeOut(true, 80)
   GAME:CutsceneMode(false)
   
-  GAME:ContinueDungeon(19, 1,0, 0)
+  GAME:ContinueDungeon('guildmaster_trail', 1,0, 0)
 end
 
 function guildmaster_summit.PostBattle()
@@ -249,7 +249,7 @@ function guildmaster_summit.PostBattle()
   GAME:WaitFrames(160);
 
   COMMON.EndDayCycle()
-  GAME:EndDungeonRun(RogueEssence.Data.GameProgress.ResultType.Cleared, 1, -1, 1, 0, true, false)
+  GAME:EndDungeonRun(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 1, 0, true, false)
   GAME:RestartToTitle()
 end
 
@@ -261,12 +261,12 @@ function guildmaster_summit.South_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   local dungeon_entrances = { }
-  local ground_entrances = {{Flag=true,Zone=1,ID=1,Entry=3},
-  {Flag=SV.forest_camp.ExpositionComplete,Zone=1,ID=3,Entry=2},
-  {Flag=SV.cliff_camp.ExpositionComplete,Zone=1,ID=4,Entry=2},
-  {Flag=SV.canyon_camp.ExpositionComplete,Zone=1,ID=5,Entry=2},
-  {Flag=SV.rest_stop.ExpositionComplete,Zone=1,ID=6,Entry=2},
-  {Flag=SV.final_stop.ExpositionComplete,Zone=1,ID=7,Entry=2}}
+  local ground_entrances = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
+  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
+  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2},
+  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=2},
+  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=2},
+  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=2}}
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 

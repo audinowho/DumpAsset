@@ -27,10 +27,10 @@ function training_maze.ExitSegment(zone, result, rescue, segmentID, mapID)
   
   --first check for rescue flag; if we're in rescue mode then take a different path
   if result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
-    COMMON.EndSession(result, 1, -1, 1, 0)
+    COMMON.EndSession(result, 'guildmaster_island', -1, 1, 0)
   else
     -- TODO: make noctowl say something.  requires setting save variables
-    COMMON.EndSession(result, 1, -1, 1, 0)
+    COMMON.EndSession(result, 'guildmaster_island', -1, 1, 0)
   end
   
 end

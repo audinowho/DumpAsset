@@ -19,7 +19,7 @@ function cliff_camp.Enter(map)
 
   SV.checkpoint = 
   {
-    Zone    = 1, Segment  = -1,
+    Zone    = 'guildmaster_island', Segment  = -1,
     Map  = 4, Entry  = 1
   }
   
@@ -45,7 +45,7 @@ function cliff_camp.BeginExposition()
   GAME:WaitFrames(30);
   UI:WaitHideTitle(20);
   GAME:FadeIn(20)
-  GAME:UnlockDungeon(4)
+  GAME:UnlockDungeon('flyaway_cliffs')
 end
 --------------------------------------------------
 -- Objects Callbacks
@@ -55,19 +55,19 @@ function cliff_camp.East_Exit_Touch(obj, activator)
   UI:ResetSpeaker()
   UI:WaitShowDialogue(STRINGS:Format("You've reached the end of the demo![pause=0] A winner is you!"))
   
-  -- local dungeon_entrances = { 4, 11, 15, 17 }
-  -- local ground_entrances = {{Flag=SV.canyon_camp.ExpositionComplete,Zone=1,ID=5,Entry=0},
-  -- {Flag=SV.rest_stop.ExpositionComplete,Zone=1,ID=6,Entry=0},
-  -- {Flag=SV.final_stop.ExpositionComplete,Zone=1,ID=7,Entry=0},
-  -- {Flag=SV.guildmaster_summit.ExpositionComplete,Zone=1,ID=8,Entry=0}}
+  -- local dungeon_entrances = { 'flyaway_cliffs', 'igneous_tunnel', 'treacherous_mountain', 'snowbound_path' }
+  -- local ground_entrances = {{Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
+  -- {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
+  -- {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
+  -- {Flag=SV.guildmaster_summit.ExpositionComplete,Zone='guildmaster_island',ID=8,Entry=0}}
   -- COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
 function cliff_camp.West_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   local dungeon_entrances = { }
-  local ground_entrances = {{Flag=true,Zone=1,ID=1,Entry=3},
-  {Flag=SV.forest_camp.ExpositionComplete,Zone=1,ID=3,Entry=2}}
+  local ground_entrances = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
+  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2}}
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 

@@ -29,7 +29,7 @@ function debug.ExitSegment(zone, result, rescue, segmentID, mapID)
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)
   else
-    COMMON.EndSession(result, 0, -1, 0, 0)
+    COMMON.EndSession(result, 'debug', -1, 0, 0)
   end
 end
 

@@ -17,7 +17,7 @@ function rest_stop.Enter(map)
 
   SV.checkpoint = 
   {
-    Zone    = 1, Segment  = -1,
+    Zone    = 'guildmaster_island', Segment  = -1,
     Map  = 6, Entry  = 1
   }
   
@@ -43,7 +43,7 @@ function rest_stop.BeginExposition()
   UI:WaitHideTitle(20);
   GAME:FadeIn(20)
   
-  GAME:UnlockDungeon(6)
+  GAME:UnlockDungeon('illusion_ridge')
 end
 
 --------------------------------------------------
@@ -52,11 +52,11 @@ end
 function rest_stop.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local dungeon_entrances = { 6 }
+  local dungeon_entrances = { 'illusion_ridge' }
   --also dungeon 21: royal halls, is accessible by ???
   --also dungeon 22: cave of solace, is accessible by having 8 key items
-  local ground_entrances = {{Flag=SV.final_stop.ExpositionComplete,Zone=1,ID=7,Entry=0},
-  {Flag=SV.guildmaster_summit.ExpositionComplete,Zone=1,ID=8,Entry=0}}
+  local ground_entrances = {{Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
+  {Flag=SV.guildmaster_summit.ExpositionComplete,Zone='guildmaster_island',ID=8,Entry=0}}
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
@@ -64,10 +64,10 @@ function rest_stop.South_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   local dungeon_entrances = { }
-  local ground_entrances = {{Flag=true,Zone=1,ID=1,Entry=3},
-  {Flag=SV.forest_camp.ExpositionComplete,Zone=1,ID=3,Entry=2},
-  {Flag=SV.cliff_camp.ExpositionComplete,Zone=1,ID=4,Entry=2},
-  {Flag=SV.canyon_camp.ExpositionComplete,Zone=1,ID=5,Entry=2}}
+  local ground_entrances = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
+  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
+  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2},
+  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=2}}
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 

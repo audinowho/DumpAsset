@@ -33,10 +33,10 @@ function bramble_woods.ExitSegment(zone, result, rescue, segmentID, mapID)
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
     if segmentID == 0 then
-      COMMON.EndDungeonDay(result, 1, -1, 3, 2)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 3, 2)
     elseif segmentID == 1 then
-      COMMON.UnlockWithFanfare(37, true)
-      COMMON.EndDungeonDay(result, 1, -1, 3, 2)
+      COMMON.UnlockWithFanfare('sickly_hollow', true)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 3, 2)
     else
       PrintInfo("No exit procedure found!")
 	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

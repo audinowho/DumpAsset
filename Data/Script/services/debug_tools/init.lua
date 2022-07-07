@@ -120,7 +120,13 @@ function DebugTools:OnUpgrade()
   
   PrintInfo("=>> Loading version")
   _DATA.Save.NextDest = _DATA.StartMap
-    
+  
+  SV.checkpoint = 
+  {
+    Zone    = 'guildmaster_island', Segment  = -1,
+    Map  = 1, Entry  = 0
+  }
+  
   if SV.test_grounds.DemoComplete == nil then
     SV.test_grounds =
     {

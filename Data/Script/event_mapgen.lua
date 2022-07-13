@@ -197,7 +197,7 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
   for xx = map.Width * 3 / 4 - 1, map.Width * 3 / 4 + 1, 1 do
     for yy = map.Height * 3 / 4 - 1, map.Height * 3 / 4 + 1, 1 do
 	  local customTerrain = RogueEssence.Dungeon.Tile("wall", true) -- set StableTex to true, which prevents the map's autotexturing
-	  customTerrain.Data.TileTex = RogueEssence.Dungeon.AutoTile(6)
+	  customTerrain.Data.TileTex = RogueEssence.Dungeon.AutoTile("tiny_woods_wall")
       map:TrySetTile(RogueElements.Loc(xx, yy), customTerrain)
     end
   end
@@ -216,7 +216,7 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
   
   --Place item on 3,3.  Random amount of G between 50 and 100
   --map:PlaceItem(RogueElements.Loc(3, 3), RogueEssence.Dungeon.MapItem(true, 100))
-  new_item = RogueEssence.Dungeon.MapItem(true, map.Rand:Next(50, 101)) -- you must use the map.Rand, or else seeds wont be consistent
+  new_item = RogueEssence.Dungeon.MapItem.CreateMoney(map.Rand:Next(50, 101)) -- you must use the map.Rand, or else seeds wont be consistent
   new_item.TileLoc = RogueElements.Loc(3, 3)
   map.Items:Add(new_item)
   

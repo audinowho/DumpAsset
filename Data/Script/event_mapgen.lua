@@ -121,7 +121,7 @@ function FLOOR_GEN_SCRIPT.TestGrid(map, args)
 	    -- no need to change width and height since they will be ordered by the floors
 	    hallGen.BlockWidth = RogueElements.RandRange(2)
 	    hallGen.BlockHeight = RogueElements.RandRange(10)
-		hallGen.BlockTerrain = RogueEssence.Dungeon.Tile(3)
+		hallGen.BlockTerrain = RogueEssence.Dungeon.Tile("water")
 		floorPlan:SetHall(RogueElements.LocRay4(RogueElements.Loc(xx, yy), Dir4.Down), hallGen, hall.Components)
 	  end
 	end
@@ -188,7 +188,7 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
     for yy = map.Height / 2, map.Height - 1, 1 do
 	  local loc = RogueElements.Loc(xx, yy)
 	  if not map:GetTile(loc):TileEquivalent(map.RoomTerrain) then
-        map:TrySetTile(loc, RogueEssence.Dungeon.Tile(3))
+        map:TrySetTile(loc, RogueEssence.Dungeon.Tile("water"))
 	  end
     end  
   end
@@ -196,7 +196,7 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
   --Set the center of the corner to Block tile of a custom tileset.
   for xx = map.Width * 3 / 4 - 1, map.Width * 3 / 4 + 1, 1 do
     for yy = map.Height * 3 / 4 - 1, map.Height * 3 / 4 + 1, 1 do
-	  local customTerrain = RogueEssence.Dungeon.Tile(2, true) -- set StableTex to true, which prevents the map's autotexturing
+	  local customTerrain = RogueEssence.Dungeon.Tile("wall", true) -- set StableTex to true, which prevents the map's autotexturing
 	  customTerrain.Data.TileTex = RogueEssence.Dungeon.AutoTile(6)
       map:TrySetTile(RogueElements.Loc(xx, yy), customTerrain)
     end

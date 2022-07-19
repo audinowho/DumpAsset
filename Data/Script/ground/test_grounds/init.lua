@@ -127,7 +127,7 @@ function test_grounds.Sign1_Action(obj, activator)
   
   TASK:WaitStartEntityTask(activator, function()
     SOUND:PlayBattleSE("EVT_Emote_Confused")
-    GROUND:CharSetEmote(activator, 6, 1)
+    GROUND:CharSetEmote(activator, "question", 1)
     GAME:WaitFrames(60)
     GROUND:MoveInDirection(activator, Direction.Down, 30, false, 2)
     GROUND:MoveInDirection(activator, Direction.DownLeft, 30, false, 2)
@@ -179,7 +179,7 @@ function test_grounds.Concurrent_Sequence(turnTime)
   GROUND:CharAnimateTurnTo(chara, Direction.Up, turnTime)
   GAME:WaitFrames(20)
   SOUND:PlayBattleSE("EVT_Emote_Confused")
-  GROUND:CharSetEmote(chara, 6, 1)
+  GROUND:CharSetEmote(chara, "question", 1)
   GAME:WaitFrames(20)
   GROUND:CharSetAnim(chara, "None", false)
 end
@@ -290,11 +290,11 @@ function test_grounds.Mew_Action(chara, activator)
   local state = {olddir = mew.CharDir}
 
   GROUND:CharTurnToChar(mew,player)
-  GROUND:CharSetEmote(mew, -1, 0)
+  GROUND:CharSetEmote(mew, "", 0)
 
   UI:SetSpeaker(mew)
   UI:WaitShowTimedDialogue("Walk with me!", 120)
-  GROUND:CharSetEmote(mew, 1, 0)
+  GROUND:CharSetEmote(mew, "happy", 0)
 
   local coro1 = TASK:BranchCoroutine(function() test_grounds.Walk_Sequence(mew) end)
   local coro2 = TASK:BranchCoroutine(function() test_grounds.Walk_Sequence(player) end)

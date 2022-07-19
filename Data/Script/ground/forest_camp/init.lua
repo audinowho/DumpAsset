@@ -124,7 +124,7 @@ function forest_camp.NPC_Deliver_Action(chara, activator)
   UI:SetSpeakerEmotion("Pain")
   
   SOUND:PlayBattleSE("EVT_Emote_Sweating")
-  GROUND:CharSetEmote(chara, 5, 1)
+  GROUND:CharSetEmote(chara, "sweating", 1)
   GAME:WaitFrames(30)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_001']))
   GROUND:EntTurn(chara, Direction.Right)

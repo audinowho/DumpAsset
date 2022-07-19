@@ -113,7 +113,7 @@ function canyon_camp.NPC_Shiny_Action(chara, activator)
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shiny_Line_001']))
     else
       SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
-      GROUND:CharSetEmote(chara, 3, 1)
+      GROUND:CharSetEmote(chara, "exclaim", 1)
 	  GAME:WaitFrames(30)
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shiny_Line_002']))
 	  SV.canyon_camp.ShinyIntro = true
@@ -158,11 +158,11 @@ function canyon_camp.NPC_Seeker_Action(chara, activator)
   UI:SetSpeaker(chara)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seeker_Line_001']))
   SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
-  GROUND:CharSetEmote(chara, 3, 1)
+  GROUND:CharSetEmote(chara, "exclaim", 1)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   GAME:WaitFrames(30)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seeker_Line_002']))
-  GROUND:CharSetEmote(chara, 4, 4)
+  GROUND:CharSetEmote(chara, "glowing", 4)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seeker_Line_003']))
 end
   

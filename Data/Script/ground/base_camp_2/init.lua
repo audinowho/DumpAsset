@@ -871,7 +871,7 @@ function base_camp_2.NPC_Treasure_Action(chara, activator)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_001']))
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_002']))
   UI:SetSpeakerEmotion("Happy")
-  GROUND:CharSetEmote(chara, 4, 4)
+  GROUND:CharSetEmote(chara, "glowing", 4)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_003']))
 end
 
@@ -1054,7 +1054,7 @@ function base_camp_2.NPC_Interactive_Action(chara, activator)
         UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_005_Line_001'], zone_name))
 		
         GAME:WaitFrames(30)
-        GROUND:CharSetEmote(chara, 8, 1)
+        GROUND:CharSetEmote(chara, "shock", 1)
         SOUND:PlayBattleSE("EVT_Emote_Shock_Bad")
         GAME:WaitFrames(30)
   
@@ -1085,7 +1085,7 @@ function base_camp_2.NPC_Broke_Action(chara, activator)
 
   UI:SetSpeakerEmotion("Sad")
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_001']))
-  GROUND:CharSetEmote(partner, 5, 1)
+  GROUND:CharSetEmote(partner, "sweating", 1)
   SOUND:PlayBattleSE("EVT_Emote_Sweating")
   UI:SetSpeakerEmotion("Crying")
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_002']))

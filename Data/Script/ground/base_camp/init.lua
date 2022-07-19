@@ -122,7 +122,7 @@ function base_camp.BeginExposition()
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002']))
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_003']))
   
-  GROUND:CharSetEmote(player, 8, 1)
+  GROUND:CharSetEmote(player, "shock", 1)
   SOUND:PlayBattleSE("EVT_Emote_Shock_Bad")
   GAME:WaitFrames(60)
   
@@ -318,7 +318,7 @@ function base_camp.NPC_Range_Action(chara, activator)
   
   
   SOUND:PlayBattleSE("EVT_Emote_Sweating")
-  GROUND:CharSetEmote(chara, 5, 1)
+  GROUND:CharSetEmote(chara, "sweating", 1)
   GAME:WaitFrames(30)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Range_Line_001']))
   UI:SetSpeakerEmotion("Sad")

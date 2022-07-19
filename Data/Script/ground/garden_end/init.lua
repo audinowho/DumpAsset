@@ -87,7 +87,7 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
   GAME:WaitFrames(40)
   -- exclaim
   SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
-  GROUND:CharSetEmote(shaymin, 3, 1)
+  GROUND:CharSetEmote(shaymin, "exclaim", 1)
   -- turn around
   GROUND:CharAnimateTurnTo(shaymin, Direction.Down, turnTime)
   
@@ -95,7 +95,7 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
   UI:SetSpeaker(STRINGS:Format("\\uE040"), true, 492, 0, 0, RogueEssence.Data.Gender.Unknown)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
   
-  GROUND:CharSetEmote(shaymin, 4, 4)
+  GROUND:CharSetEmote(shaymin, "glowing", 4)
   GAME:WaitFrames(30)
   -- introduce self
   UI:SetSpeaker(shaymin)
@@ -131,7 +131,7 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
     GAME:WaitFrames(60)
     UI:SetSpeakerEmotion("Happy")
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_006'], _DATA.Save.ActiveTeam.Name))
-    GROUND:CharSetEmote(shaymin, 4, 4)
+    GROUND:CharSetEmote(shaymin, "glowing", 4)
     GAME:WaitFrames(60)
     UI:SetSpeakerEmotion("Normal")
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_007']))
@@ -162,7 +162,7 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_017']))
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_018']))
 	
-    GROUND:CharSetEmote(shaymin, 4, 4)
+    GROUND:CharSetEmote(shaymin, "glowing", 4)
     GAME:WaitFrames(30)
 	
     -- if not in rogue mode, have them join the team

@@ -63,14 +63,14 @@ function DebugTools:OnNewGame()
     _DATA.Save.ActiveTeam.Players[0].ActionEvents:Add(talk_evt)
 	_DATA.Save:RegisterMonster(_DATA.Save.ActiveTeam.Players[0].BaseForm.Species)
 	
-	_DATA.Save.ActiveTeam:SetRank(1)
+	_DATA.Save.ActiveTeam:SetRank("normal")
 	if not GAME:InRogueMode() then
       _DATA.Save.ActiveTeam.Bank = 1000
 	end
 	SV.General.Starter = _DATA.Save.ActiveTeam.Players[0].BaseForm
   else
     PrintInfo("\n<!> ExampleSvc: Preparing debug save file")
-    _DATA.Save.ActiveTeam:SetRank(1)
+    _DATA.Save.ActiveTeam:SetRank("normal")
     _DATA.Save.ActiveTeam.Name = "Debug"
     _DATA.Save.ActiveTeam.Money = 1000
     _DATA.Save.ActiveTeam.Bank = 1000000

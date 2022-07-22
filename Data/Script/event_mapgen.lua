@@ -232,7 +232,7 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
   mob_data.BaseSkills[3] = RogueEssence.Dungeon.SlotSkill(4)
   mob_data.BaseIntrinsics[0] = 2
   local new_mob = RogueEssence.Dungeon.Character(mob_data)
-  local tactic = _DATA:GetAITactic("normal_wander")
+  local tactic = _DATA:GetAITactic("wander_normal")
   new_mob.Tactic = RogueEssence.Data.AITactic(tactic)
   new_mob.CharLoc = RogueElements.Loc(4, 4)
   new_mob.CharDir = Dir8.Down
@@ -244,7 +244,7 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
   mob_data.BaseSkills[0] = RogueEssence.Dungeon.SlotSkill(5)
   mob_data.BaseIntrinsics[0] = 3
   new_mob = RogueEssence.Dungeon.Character(mob_data)
-  tactic = _DATA:GetAITactic("normal_wander")
+  tactic = _DATA:GetAITactic("wander_normal")
   new_mob.Tactic = RogueEssence.Data.AITactic(tactic)
   new_mob.CharLoc = RogueElements.Loc(5, 4)
   new_mob.CharDir = Dir8.Up

@@ -203,9 +203,9 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
   end
   
   --Place a trap on 2,2.  Slumber trap, revealed.
-  --map:PlaceItem(RogueElements.Loc(2, 2), RogueEssence.Dungeon.EffectTile(4, true))
+  --map:PlaceItem(RogueElements.Loc(2, 2), RogueEssence.Dungeon.EffectTile("trap_slumber", true))
   local trap_tile = map:GetTile(RogueElements.Loc(2, 2))
-  trap_tile.Effect = RogueEssence.Dungeon.EffectTile(4, true)
+  trap_tile.Effect = RogueEssence.Dungeon.EffectTile("trap_slumber", true)
   
   --Place item on 3,2.  Banana, sticky
   --map:PlaceItem(RogueElements.Loc(3, 2), RogueEssence.Dungeon.MapItem(6))

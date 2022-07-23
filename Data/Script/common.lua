@@ -337,7 +337,7 @@ function COMMON.PayDungeonSellPrice(price)
 	  if sell_value > 0 then
 	    local tile = _ZONE.CurrentMap.Tiles[map_item.TileLoc.X][map_item.TileLoc.Y]
 	    -- only add price if on shop mat
-	    if tile.Effect.ID == 45 then
+	    if tile.Effect.ID == "area_shop" then
 	      map_item.Price = sell_value * 2
 	    end
 	  end
@@ -374,7 +374,7 @@ function COMMON.GetDungeonCartPrice()
 	if map_item.Price > 0 then
 	  local tile = _ZONE.CurrentMap.Tiles[map_item.TileLoc.X][map_item.TileLoc.Y]
 	  -- only subtract price if on shop mat
-	  if tile.Effect.ID == 45 then
+	  if tile.Effect.ID == "area_shop" then
 	    price = price - map_item.Price
 	  end
 	end
@@ -396,7 +396,7 @@ function COMMON.GetDungeonSellPrice()
 	  if sell_value > 0 then
 	    local tile = _ZONE.CurrentMap.Tiles[map_item.TileLoc.X][map_item.TileLoc.Y]
 	    -- only add price if on shop mat
-	    if tile.Effect.ID == 45 then
+	    if tile.Effect.ID == "area_shop" then
 	      price = price + sell_value
 	    end
 	  end
@@ -435,7 +435,7 @@ function COMMON.ShopTileCheck(baseLoc, dir)
   if not RogueElements.Collision.InBounds(_ZONE.CurrentMap.Width, _ZONE.CurrentMap.Height, loc) then
     return false
   end
-  return (_ZONE.CurrentMap.Tiles[loc.X][loc.Y].Effect.ID == 45)
+  return (_ZONE.CurrentMap.Tiles[loc.X][loc.Y].Effect.ID == "area_shop")
 end
 
 

@@ -410,8 +410,8 @@ function COMMON.ThiefReturn()
   _GAME:BGM("", false)
   COMMON.ClearAllPrices()
   
-  local thief_check_idx = 38
-  local thief_idx = 31
+  local thief_check_idx = "shop_security"
+  local thief_idx = "thief"
   local check_status = _ZONE.CurrentMap.Status[thief_check_idx]
   
   local index_from = check_status.StatusStates:Get(luanet.ctype(MapIndexType))
@@ -825,7 +825,7 @@ function COMMON.Rescued(zone, name, mail)
                 --RemoveDeadTeams();
   end
   
-  local rescue_idx = 39
+  local rescue_idx = "rescued"
   local rescue_status = RogueEssence.Dungeon.MapStatus(rescue_idx)
   rescue_status:LoadFromData()
   TASK:WaitTask(_DUNGEON:AddMapStatus(rescue_status))

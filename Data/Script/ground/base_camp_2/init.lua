@@ -69,7 +69,7 @@ function base_camp_2.Init(map)
   end
   
   
-  GROUND:AddMapStatus(6)
+  GROUND:AddMapStatus("cloudy")
 end
 
 function base_camp_2.Enter(map)

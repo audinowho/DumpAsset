@@ -11,7 +11,7 @@ function final_stop.Init(map)
   MapStrings = COMMON.AutoLoadLocalizedStrings()
   COMMON.RespawnAllies()
   
-  GROUND:AddMapStatus(7)
+  GROUND:AddMapStatus("snow")
 end
 
 function final_stop.Enter(map)

@@ -52,7 +52,7 @@ function base_camp_2.Init(map)
   if total >= 3 then
     local talk_to = CH('Assembly3')
     --local tbl = LTBL(talk_to)
-	if talk_to.Data.MetLoc.ID > -1 then
+	if talk_to.Data.MetLoc.ID ~= "" then
 	  if base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] ~= -1 then
 	    can_talk_to = true
 	  end

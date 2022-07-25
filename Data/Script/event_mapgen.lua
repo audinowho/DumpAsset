@@ -230,7 +230,7 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
   mob_data.BaseSkills[1] = RogueEssence.Dungeon.SlotSkill(2)
   mob_data.BaseSkills[2] = RogueEssence.Dungeon.SlotSkill(3)
   mob_data.BaseSkills[3] = RogueEssence.Dungeon.SlotSkill(4)
-  mob_data.BaseIntrinsics[0] = 2
+  mob_data.BaseIntrinsics[0] = "drizzle"
   local new_mob = RogueEssence.Dungeon.Character(mob_data)
   local tactic = _DATA:GetAITactic("wander_normal")
   new_mob.Tactic = RogueEssence.Data.AITactic(tactic)
@@ -242,7 +242,7 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
   mob_data.BaseForm = RogueEssence.Dungeon.MonsterID(151, 0, 0, Gender.Female)
   mob_data.Level = 25
   mob_data.BaseSkills[0] = RogueEssence.Dungeon.SlotSkill(5)
-  mob_data.BaseIntrinsics[0] = 3
+  mob_data.BaseIntrinsics[0] = "speed_boost"
   new_mob = RogueEssence.Dungeon.Character(mob_data)
   tactic = _DATA:GetAITactic("wander_normal")
   new_mob.Tactic = RogueEssence.Data.AITactic(tactic)

@@ -76,11 +76,11 @@ function DebugTools:OnNewGame()
     _DATA.Save.ActiveTeam.Bank = 1000000
   
     local mon_id = RogueEssence.Dungeon.MonsterID(1, 0, 0, Gender.Male)
-    _DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, -1, 0))
+    _DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, "", 0))
     mon_id = RogueEssence.Dungeon.MonsterID(4, 0, 0, Gender.Male)
-    _DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, -1, 0))
+    _DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, "", 0))
     mon_id = RogueEssence.Dungeon.MonsterID(7, 0, 0, Gender.Male)
-    _DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, -1, 0))
+    _DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, "", 0))
 	
 	
     local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")

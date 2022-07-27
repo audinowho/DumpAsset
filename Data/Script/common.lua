@@ -351,9 +351,9 @@ end
 
 ShopPriceType = luanet.import_type('PMDC.Dungeon.ShopPriceState')
 function COMMON.GetShopPriceState()
-  local security_status = 38
-  if _ZONE.CurrentMap.Status:ContainsKey(security_status) then
-    local status = _ZONE.CurrentMap.Status[security_status]
+  local security_status = "shop_security"
+  local status = _DUNGEON:GetMapStatus(security_status)
+  if status then
 	if status.StatusStates:Contains(luanet.ctype(ShopPriceType)) then
 	  return status.StatusStates:Get(luanet.ctype(ShopPriceType))
 	end
@@ -412,7 +412,7 @@ function COMMON.ThiefReturn()
   
   local thief_check_idx = "shop_security"
   local thief_idx = "thief"
-  local check_status = _ZONE.CurrentMap.Status[thief_check_idx]
+  local check_status = _DUNGEON:GetMapStatus(thief_check_idx)
   
   local index_from = check_status.StatusStates:Get(luanet.ctype(MapIndexType))
   UI:WaitShowDialogue(RogueEssence.StringKey(string.format("TALK_SHOP_SUSPECT_%04d", index_from.Index)):ToLocal())

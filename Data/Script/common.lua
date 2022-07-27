@@ -461,13 +461,13 @@ function COMMON.FindNpcWithTable(foes, key, value)
 end
 
 function COMMON.CanTalk(chara)
-  if chara:GetStatusEffect(1) ~= nil then
+  if chara:GetStatusEffect("sleep") ~= nil then
     return false
   end
-  if chara:GetStatusEffect(3) ~= nil then
+  if chara:GetStatusEffect("freeze") ~= nil then
     return false
   end
-  if chara:GetStatusEffect(7) ~= nil then
+  if chara:GetStatusEffect("confuse") ~= nil then
     return false
   end
   return true

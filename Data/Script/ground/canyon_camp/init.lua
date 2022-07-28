@@ -128,13 +128,13 @@ function canyon_camp.NPC_Tutor_Action(chara, activator)
   
   local tutor_skill = 0
   if SV.General.Starter.Species == 1 then
-    tutor_skill = 520
+    tutor_skill = "grass_pledge"
   elseif SV.General.Starter.Species == 4 then
-    tutor_skill = 519
+    tutor_skill = "fire_pledge"
   elseif SV.General.Starter.Species == 7 then
-    tutor_skill = 518
+    tutor_skill = "water_pledge"
   elseif SV.General.Starter.Species == 25 then
-    tutor_skill = 344
+    tutor_skill = "volt_tackle"
   end
   
   

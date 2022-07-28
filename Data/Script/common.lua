@@ -518,7 +518,7 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
       if string.find(chosen_quote, "%[move%]") then
         local moves = {}
   	    for move_idx = 0, 3 do
-  	      if target.BaseSkills[move_idx].SkillNum > 0 then
+  	      if target.BaseSkills[move_idx].SkillNum ~= "" then
   	        table.insert(moves, target.BaseSkills[move_idx].SkillNum)
   	      end
   	    end

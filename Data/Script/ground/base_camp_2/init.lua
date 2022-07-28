@@ -739,7 +739,7 @@ function base_camp_2.Tutor_Action(obj, activator)
 				UI:RelearnMenu(member)
 				UI:WaitForChoice()
 				local result = UI:ChoiceResult()
-				if result > -1 then
+				if result ~= "" then
 					move = result
 					state = 3
 				else

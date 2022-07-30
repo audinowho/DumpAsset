@@ -75,11 +75,11 @@ function DebugTools:OnNewGame()
     _DATA.Save.ActiveTeam.Money = 1000
     _DATA.Save.ActiveTeam.Bank = 1000000
   
-    local mon_id = RogueEssence.Dungeon.MonsterID(1, 0, 0, Gender.Male)
+    local mon_id = RogueEssence.Dungeon.MonsterID("bulbasaur", 0, "normal", Gender.Male)
     _DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, "", 0))
-    mon_id = RogueEssence.Dungeon.MonsterID(4, 0, 0, Gender.Male)
+    mon_id = RogueEssence.Dungeon.MonsterID("charmander", 0, "normal", Gender.Male)
     _DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, "", 0))
-    mon_id = RogueEssence.Dungeon.MonsterID(7, 0, 0, Gender.Male)
+    mon_id = RogueEssence.Dungeon.MonsterID("squirtle", 0, "normal", Gender.Male)
     _DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, "", 0))
 	
 	
@@ -135,8 +135,8 @@ function DebugTools:OnUpgrade()
       Missions = { },
       CurrentOutlaws = { },
       FinishedMissions = { },
-      Starter = { Species=25, Form=0, Skin=0, Gender=2 },
-      Partner = { Species=133, Form=0, Skin=0, Gender=1 },
+      Starter = { Species="pikachu", Form=0, Skin=0, Gender=2 },
+      Partner = { Species="eevee", Form=0, Skin=0, Gender=1 },
       DemoComplete = false,
     }
   end
@@ -148,7 +148,7 @@ function DebugTools:OnUpgrade()
   end
   
   if SV.General.Starter == nil then
-    SV.General.Starter = MonsterID(1, 0, 0, Gender.Male)
+    SV.General.Starter = MonsterID("bulbasaur", 0, "normal", Gender.Male)
   end
   
   PrintInfo("=>> Loaded version")

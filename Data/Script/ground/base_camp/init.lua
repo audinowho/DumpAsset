@@ -72,7 +72,7 @@ function base_camp.Enter(map)
 	
 	
     GAME:CutsceneMode(true)
-    UI:SetSpeaker(STRINGS:Format("\\uE040"), true, -1, -1, -1, RogueEssence.Data.Gender.Unknown)
+    UI:SetSpeaker(STRINGS:Format("\\uE040"), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	
     local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries['guildmaster_trail']
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001'], zone:GetColoredName()))

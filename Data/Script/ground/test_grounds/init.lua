@@ -343,7 +343,7 @@ function test_grounds.Magnezone_Action(chara, activator)
     local chres = UI:ChoiceResult() 
     if chres then
 	  -- Type 0 = Rescue
-	  SV.test_grounds.Missions["OutlawQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW, DestZone = 0, DestSegment = 4, DestFloor = 9, TargetSpecies = 447 }
+	  SV.test_grounds.Missions["OutlawQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW, DestZone = "debug", DestSegment = 4, DestFloor = 9, TargetSpecies = "riolu" }
       UI:WaitShowDialogue("You can find the perpetrator at Replay Test Zone 10F.  Good luck!")
     end
   else
@@ -382,7 +382,7 @@ function test_grounds.Butterfree_Action(chara, activator)
     local chres = UI:ChoiceResult() 
     if chres then
 	  -- Type 0 = Rescue
-	  SV.test_grounds.Missions["CaterQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE, DestZone = 0, DestSegment = 4, DestFloor = 4, TargetSpecies = 10 }
+	  SV.test_grounds.Missions["CaterQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE, DestZone = "debug", DestSegment = 4, DestFloor = 4, TargetSpecies = "caterpie" }
       UI:WaitShowDialogue("You can find Caterpie at Replay Test Zone 5F.  Good luck!")
     end
   else
@@ -432,7 +432,7 @@ function test_grounds.Volbeat_Action(chara, activator)
     local chres = UI:ChoiceResult() 
     if chres then
 	  -- Type 1 = Escort
-	  SV.test_grounds.Missions["VolmiseQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_ESCORT, DestZone = 0, DestSegment = 4, DestFloor = 3, TargetSpecies = 314, EscortSpecies = 313 }
+	  SV.test_grounds.Missions["VolmiseQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_ESCORT, DestZone = "debug", DestSegment = 4, DestFloor = 3, TargetSpecies = "illumise", EscortSpecies = "volbeat" }
       UI:WaitShowDialogue("You can find Illumise at Replay Test Zone 4F.  I'll join you when you enter!")
     end
   else

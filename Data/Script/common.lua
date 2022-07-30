@@ -853,14 +853,14 @@ function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
 	  if mission.Type == 1 then -- escort
 		
 		-- add escort to team
-		local mon_id = RogueEssence.Dungeon.MonsterID(mission.EscortSpecies, 0, 0, Gender.Male)
+		local mon_id = RogueEssence.Dungeon.MonsterID(mission.EscortSpecies, 0, "normal", Gender.Male)
         local new_mob = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, "", -1)
         _DATA.Save.ActiveTeam.Guests:Add(new_mob)
 		
 		-- place in a legal position on map
 		local dest = _ZONE.CurrentMap:GetClosestTileForChar(new_mob, _DATA.Save.ActiveTeam.Leader.CharLoc)
         local endLoc = _DATA.Save.ActiveTeam.Leader.CharLoc
-		if dest.HasValue then
+		if dest ~= nil then
 		  endLoc = dest
 		end
         new_mob.CharLoc = endLoc

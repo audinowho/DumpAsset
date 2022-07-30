@@ -15,17 +15,17 @@ function canyon_camp.Init(map)
   local tutor = CH('NPC_Tutor')
   
   local charData = RogueEssence.Dungeon.CharData()
-  local tutor_species = 0
-  if SV.General.Starter.Species == 1 then
-    tutor_species = 154
-  elseif SV.General.Starter.Species == 4 then
-    tutor_species = 157
-  elseif SV.General.Starter.Species == 7 then
-    tutor_species = 160
-  elseif SV.General.Starter.Species == 25 then
-    tutor_species = 26
+  local tutor_species = "missingno"
+  if SV.General.Starter.Species == "bulbasaur" then
+    tutor_species = "meganium"
+  elseif SV.General.Starter.Species == "charmander" then
+    tutor_species = "typhlosion"
+  elseif SV.General.Starter.Species == "squirtle" then
+    tutor_species = "feraligatr"
+  elseif SV.General.Starter.Species == "pikachu" then
+    tutor_species = "raichu"
   end
-  charData.BaseForm = RogueEssence.Dungeon.MonsterID(tutor_species, 0, 0, Gender.Female)
+  charData.BaseForm = RogueEssence.Dungeon.MonsterID(tutor_species, 0, "normal", Gender.Female)
   tutor.Data = charData
 end
 
@@ -127,13 +127,13 @@ function canyon_camp.NPC_Tutor_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   local tutor_skill = 0
-  if SV.General.Starter.Species == 1 then
+  if SV.General.Starter.Species == "bulbasaur" then
     tutor_skill = "grass_pledge"
-  elseif SV.General.Starter.Species == 4 then
+  elseif SV.General.Starter.Species == "charmander" then
     tutor_skill = "fire_pledge"
-  elseif SV.General.Starter.Species == 7 then
+  elseif SV.General.Starter.Species == "squirtle" then
     tutor_skill = "water_pledge"
-  elseif SV.General.Starter.Species == 25 then
+  elseif SV.General.Starter.Species == "pikachu" then
     tutor_skill = "volt_tackle"
   end
   

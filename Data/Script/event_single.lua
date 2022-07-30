@@ -154,6 +154,9 @@ function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, character, args)
 end
 
 function SINGLE_CHAR_SCRIPT.DestinationFloor(owner, ownerChar, character, args)
+  if character ~= nil then
+    return
+  end
   SOUND:PlayFanfare("Fanfare/Note")
   UI:ResetSpeaker()
   UI:WaitShowDialogue("You've reached a destination floor!")
@@ -161,6 +164,9 @@ end
 
 
 function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, character, args)
+  if character ~= nil then
+    return
+  end
   SOUND:PlayBGM("C07. Outlaw.ogg", false)
   UI:ResetSpeaker()
   UI:WaitShowDialogue("Wanted outlaw spotted!")

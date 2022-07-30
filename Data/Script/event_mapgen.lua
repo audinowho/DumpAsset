@@ -26,8 +26,8 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
 	  if mission.Type == COMMON.MISSION_TYPE_OUTLAW then -- outlaw
         local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
         local post_mob = RogueEssence.LevelGen.MobSpawn()
-        post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(mission.TargetSpecies, 0, 0, Gender.Unknown)
-        post_mob.Tactic = 20
+        post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(mission.TargetSpecies, 0, "normal", Gender.Unknown)
+        post_mob.Tactic = "boss"
         post_mob.Level = RogueElements.RandRange(50)
 		post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable('{ Mission = "'..name..'" }'))
 	    specificTeam.Spawns:Add(post_mob)
@@ -45,8 +45,8 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
 	  else
         local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
         local post_mob = RogueEssence.LevelGen.MobSpawn()
-        post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(mission.TargetSpecies, 0, 0, Gender.Unknown)
-        post_mob.Tactic = 21
+        post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(mission.TargetSpecies, 0, "normal", Gender.Unknown)
+        post_mob.Tactic = "slow_patrol"
         post_mob.Level = RogueElements.RandRange(50)
 	    if mission.Type == COMMON.MISSION_TYPE_RESCUE then -- rescue
 	      local dialogue = RogueEssence.Dungeon.BattleScriptEvent("RescueReached")
@@ -224,7 +224,7 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
   local new_team = RogueEssence.Dungeon.MonsterTeam()
   
   local mob_data = RogueEssence.Dungeon.CharData()
-  mob_data.BaseForm = RogueEssence.Dungeon.MonsterID(150, 0, 0, Gender.Male)
+  mob_data.BaseForm = RogueEssence.Dungeon.MonsterID("mewtwo", 0, "normal", Gender.Male)
   mob_data.Level = 20;
   mob_data.BaseSkills[0] = RogueEssence.Dungeon.SlotSkill("pound")
   mob_data.BaseSkills[1] = RogueEssence.Dungeon.SlotSkill("fire_punch")
@@ -239,9 +239,9 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
   new_team.Players:Add(new_mob)
   
   mob_data = RogueEssence.Dungeon.CharData()
-  mob_data.BaseForm = RogueEssence.Dungeon.MonsterID(151, 0, 0, Gender.Female)
+  mob_data.BaseForm = RogueEssence.Dungeon.MonsterID("mew", 0, "normal", Gender.Female)
   mob_data.Level = 25
-  mob_data.BaseSkills[0] = RogueEssence.Dungeon.SlotSkill(5)
+  mob_data.BaseSkills[0] = RogueEssence.Dungeon.SlotSkill("pound")
   mob_data.BaseIntrinsics[0] = "speed_boost"
   new_mob = RogueEssence.Dungeon.Character(mob_data)
   tactic = _DATA:GetAITactic("wander_normal")

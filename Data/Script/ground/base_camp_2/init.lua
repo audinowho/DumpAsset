@@ -441,42 +441,42 @@ end
 function base_camp_2.Compute_Swap_Catalog()
   --silk/dust/gem/globes
   local catalog = { 
-	{ Item=702, ReqItem={700,701}},
-	{ Item=703, ReqItem={700, 701, 702}},
-	{ Item=706, ReqItem={704,705}},
-	{ Item=707, ReqItem={704, 705, 706}},
-	{ Item=710, ReqItem={708,709}},
-	{ Item=711, ReqItem={708, 709, 710}},
-	{ Item=714, ReqItem={712,713}},
-	{ Item=715, ReqItem={712, 713, 714}},
-	{ Item=718, ReqItem={716,717}},
-	{ Item=719, ReqItem={716, 717, 718}},
-	{ Item=722, ReqItem={720,721}},
-	{ Item=723, ReqItem={720, 721, 722}},
-	{ Item=726, ReqItem={724,725}},
-	{ Item=727, ReqItem={724, 725, 726}},
-	{ Item=730, ReqItem={728,729}},
-	{ Item=731, ReqItem={728, 729, 730}},
-	{ Item=734, ReqItem={732,733}},
-	{ Item=735, ReqItem={732, 733, 734}},
-	{ Item=738, ReqItem={736,737}},
-	{ Item=739, ReqItem={736, 737, 738}},
-	{ Item=742, ReqItem={740,741}},
-	{ Item=743, ReqItem={740, 741, 742}},
-	{ Item=746, ReqItem={744,745}},
-	{ Item=747, ReqItem={744, 745, 746}},
-	{ Item=750, ReqItem={748,749}},
-	{ Item=751, ReqItem={748, 749, 750}},
-	{ Item=754, ReqItem={752,753}},
-	{ Item=755, ReqItem={752, 753, 754}},
-	{ Item=758, ReqItem={756,757}},
-	{ Item=759, ReqItem={756, 757, 758}},
-	{ Item=762, ReqItem={760,761}},
-	{ Item=763, ReqItem={760, 761, 762}},
-	{ Item=766, ReqItem={764,765}},
-	{ Item=767, ReqItem={764, 765, 766}},
-	{ Item=770, ReqItem={768,769}},
-	{ Item=771, ReqItem={768, 769, 770}}
+	{ Item="xcl_element_bug_gem", ReqItem={"xcl_element_bug_silk","xcl_element_bug_dust"}},
+	{ Item="xcl_element_bug_globe", ReqItem={"xcl_element_bug_silk", "xcl_element_bug_dust", "xcl_element_bug_gem"}},
+	{ Item="xcl_element_dark_gem", ReqItem={"xcl_element_dark_silk","xcl_element_dark_dust"}},
+	{ Item="xcl_element_dark_globe", ReqItem={"xcl_element_dark_silk", "xcl_element_dark_dust", "xcl_element_dark_gem"}},
+	{ Item="xcl_element_dragon_gem", ReqItem={"xcl_element_dragon_silk","xcl_element_dragon_dust"}},
+	{ Item="xcl_element_dragon_globe", ReqItem={"xcl_element_dragon_silk", "xcl_element_dragon_dust", "xcl_element_dragon_gem"}},
+	{ Item="xcl_element_electric_gem", ReqItem={"xcl_element_electric_silk","xcl_element_electric_dust"}},
+	{ Item="xcl_element_electric_globe", ReqItem={"xcl_element_electric_silk", "xcl_element_electric_dust", "xcl_element_electric_gem"}},
+	{ Item="xcl_element_fairy_gem", ReqItem={"xcl_element_fairy_silk","xcl_element_fairy_dust"}},
+	{ Item="xcl_element_fairy_globe", ReqItem={"xcl_element_fairy_silk", "xcl_element_fairy_dust", "xcl_element_fairy_gem"}},
+	{ Item="xcl_element_fighting_gem", ReqItem={"xcl_element_fighting_silk","xcl_element_fighting_dust"}},
+	{ Item="xcl_element_fighting_globe", ReqItem={"xcl_element_fighting_silk", "xcl_element_fighting_dust", "xcl_element_fighting_gem"}},
+	{ Item="xcl_element_fire_gem", ReqItem={"xcl_element_fire_silk","xcl_element_fire_dust"}},
+	{ Item="xcl_element_fire_globe", ReqItem={"xcl_element_fire_silk", "xcl_element_fire_dust", "xcl_element_fire_gem"}},
+	{ Item="xcl_element_flying_gem", ReqItem={"xcl_element_flying_silk","xcl_element_flying_dust"}},
+	{ Item="xcl_element_flying_globe", ReqItem={"xcl_element_flying_silk", "xcl_element_flying_dust", "xcl_element_flying_gem"}},
+	{ Item="xcl_element_ghost_gem", ReqItem={"xcl_element_ghost_silk","xcl_element_ghost_dust"}},
+	{ Item="xcl_element_ghost_globe", ReqItem={"xcl_element_ghost_silk", "xcl_element_ghost_dust", "xcl_element_ghost_gem"}},
+	{ Item="xcl_element_grass_gem", ReqItem={"xcl_element_grass_silk","xcl_element_grass_dust"}},
+	{ Item="xcl_element_grass_globe", ReqItem={"xcl_element_grass_silk", "xcl_element_grass_dust", "xcl_element_grass_gem"}},
+	{ Item="xcl_element_ground_gem", ReqItem={"xcl_element_ground_silk","xcl_element_ground_dust"}},
+	{ Item="xcl_element_ground_globe", ReqItem={"xcl_element_ground_silk", "xcl_element_ground_dust", "xcl_element_ground_gem"}},
+	{ Item="xcl_element_ice_gem", ReqItem={"xcl_element_ice_silk","xcl_element_ice_dust"}},
+	{ Item="xcl_element_ice_globe", ReqItem={"xcl_element_ice_silk", "xcl_element_ice_dust", "xcl_element_ice_gem"}},
+	{ Item="xcl_element_normal_gem", ReqItem={"xcl_element_normal_silk","xcl_element_normal_dust"}},
+	{ Item="xcl_element_normal_globe", ReqItem={"xcl_element_normal_silk", "xcl_element_normal_dust", "xcl_element_normal_gem"}},
+	{ Item="xcl_element_poison_gem", ReqItem={"xcl_element_poison_silk","xcl_element_poison_dust"}},
+	{ Item="xcl_element_poison_globe", ReqItem={"xcl_element_poison_silk", "xcl_element_poison_dust", "xcl_element_poison_gem"}},
+	{ Item="xcl_element_psychic_gem", ReqItem={"xcl_element_psychic_silk","xcl_element_psychic_dust"}},
+	{ Item="xcl_element_psychic_globe", ReqItem={"xcl_element_psychic_silk", "xcl_element_psychic_dust", "xcl_element_psychic_gem"}},
+	{ Item="xcl_element_rock_gem", ReqItem={"xcl_element_rock_silk","xcl_element_rock_dust"}},
+	{ Item="xcl_element_rock_globe", ReqItem={"xcl_element_rock_silk", "xcl_element_rock_dust", "xcl_element_rock_gem"}},
+	{ Item="xcl_element_steel_gem", ReqItem={"xcl_element_steel_silk","xcl_element_steel_dust"}},
+	{ Item="xcl_element_steel_globe", ReqItem={"xcl_element_steel_silk", "xcl_element_steel_dust", "xcl_element_steel_gem"}},
+	{ Item="xcl_element_water_gem", ReqItem={"xcl_element_water_silk","xcl_element_water_dust"}},
+	{ Item="xcl_element_water_globe", ReqItem={"xcl_element_water_silk", "xcl_element_water_dust", "xcl_element_water_gem"}}
 }
 
   --normal trades
@@ -855,7 +855,7 @@ function base_camp_2.NPC_Food_Action(chara, activator)
   UI:SetSpeaker(chara)
   if not SV.base_camp.FoodIntro then
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Food_Line_001']))
-	local receive_item = RogueEssence.Dungeon.InvItem(2)
+	local receive_item = RogueEssence.Dungeon.InvItem("food_apple_big")
 	COMMON.GiftItem(player, receive_item)
 	SV.base_camp.FoodIntro = true
 	UI:SetSpeaker(chara)

@@ -182,7 +182,7 @@ function cliff_camp.Rival_Early_Action(chara, activator)
   if not SV.cliff_camp.RivalEarlyIntro then
     GROUND:CharTurnToChar(chara, player)--make the chara turn to the player
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_Line_001']))
-	local receive_item = RogueEssence.Dungeon.InvItem(250)
+	local receive_item = RogueEssence.Dungeon.InvItem("orb_escape")
 	COMMON.GiftItem(player, receive_item)
 	UI:SetSpeaker(chara)
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_Line_002']))

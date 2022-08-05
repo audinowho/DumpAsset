@@ -94,13 +94,13 @@ function luminous_spring.Spring_Touch(obj, activator)
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_None'], member:GetDisplayName(true)))
 				state = 1
 			else
-				local branches = GAME:GetAvailablePromotions(member, 349)
+				local branches = GAME:GetAvailablePromotions(member, "evo_harmony_scarf")
 				if #branches == 0 then
 					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_None_Now'], member:GetDisplayName(true)))
 					state = 1
 				elseif #branches == 1 then
 					local branch = branches[1]
-					local evo_item = -1
+					local evo_item = ""
 					for detail_idx = 0, branch.Details.Count  - 1 do
 						local detail = branch.Details[detail_idx]
 						if detail.GiveItem > -1 then
@@ -109,11 +109,11 @@ function luminous_spring.Spring_Touch(obj, activator)
 						end
 					end
 					-- harmony scarf hack-in
-					if member.EquippedItem.ID == 349 then
-						evo_item = 349
+					if member.EquippedItem.ID == "evo_harmony_scarf" then
+						evo_item = "evo_harmony_scarf"
 					end
 					local mon = _DATA:GetMonster(branch.Result)
-					if evo_item > -1 then
+					if evo_item ~= "" then
 						local item = _DATA:GetItem(evo_item)
 						UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Evo_Confirm_Item'], member:GetDisplayName(true), item:GetIconName(), mon:GetColoredName()), false)
 					else
@@ -161,7 +161,7 @@ function luminous_spring.Spring_Touch(obj, activator)
 			GAME:FadeOut(true, 20)
 			
 			local pastName = member:GetDisplayName(true)
-			GAME:PromoteCharacter(member, evo, 349)
+			GAME:PromoteCharacter(member, evo, "evo_harmony_scarf")
 			COMMON.RespawnAllies()
 			GROUND:RemoveCharacter("EvoSubject")
 			--GROUND:SpawnerSetSpawn("EVO_SUBJECT",member)

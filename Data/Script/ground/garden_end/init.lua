@@ -207,7 +207,7 @@ end
 function garden_end.Gracidea_Action(obj, activator)
   local player = CH('PLAYER')
   SOUND:PlayFanfare("Fanfare/Treasure")
-  local receive_item = RogueEssence.Dungeon.InvItem(491)
+  local receive_item = RogueEssence.Dungeon.InvItem("loot_gracidea")
   COMMON.GiftItemFull(player, receive_item, false, false)
   GROUND:Hide("Gracidea")
   _DATA.Save:RogueUnlockMonster("shaymin")

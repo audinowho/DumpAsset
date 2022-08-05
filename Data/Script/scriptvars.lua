@@ -69,16 +69,16 @@ SV.base_camp =
 }
 
 SV.base_shop = {
-	{ Index = 1, Hidden = 0, Price = 50},
-	{ Index = 2, Hidden = 0, Price = 150},
-	{ Index = 6, Hidden = 0, Price = 500},
-	{ Index = 9, Hidden = 0, Price = 80},
-	{ Index = 11, Hidden = 0, Price = 80}
+	{ Index = "food_apple", Hidden = "", Price = 50},
+	{ Index = "food_apple_big", Hidden = "", Price = 150},
+	{ Index = "food_banana", Hidden = "", Price = 500},
+	{ Index = "food_chestnut", Hidden = "", Price = 80},
+	{ Index = "berry_leppa", Hidden = "", Price = 80}
 }
 SV.base_trades = {
-	{ Item=902, ReqItem={-1,-1}},
-	{ Item=908, ReqItem={-1,-1}},
-	{ Item=914, ReqItem={-1,-1}}
+	{ Item="xcl_family_bulbasaur_02", ReqItem={"",""}},
+	{ Item="xcl_family_charmander_02", ReqItem={"",""}},
+	{ Item="xcl_family_squirtle_02", ReqItem={"",""}}
 }
 SV.unlocked_trades = {
 }

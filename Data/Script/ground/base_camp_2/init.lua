@@ -140,7 +140,7 @@ function base_camp_2.Shop_Action(obj, activator)
   local catalog = { }
   for ii = 1, #SV.base_shop, 1 do
 	local base_data = SV.base_shop[ii]
-	local item_data = { Item = RogueEssence.Dungeon.InvItem(base_data.Index,false,base_data.Hidden), Price = base_data.Price }
+	local item_data = { Item = RogueEssence.Dungeon.InvItem(base_data.Index, false, base_data.Amount), Price = base_data.Price }
 	table.insert(catalog, item_data)
   end
   
@@ -234,7 +234,7 @@ function base_camp_2.Shop_Action(obj, activator)
 					GAME:RemoveFromPlayerMoney(total)
 					for ii = 1, #cart, 1 do
 						local item = catalog[cart[ii]].Item
-						GAME:GivePlayerItem(item.ID, 1, false, item.HiddenValue)
+						GAME:GivePlayerItem(item.ID, item.Amount, false)
 					end
 					for ii = #cart, 1, -1 do
 						table.remove(catalog, cart[ii])
@@ -426,7 +426,7 @@ function base_camp_2.Appraisal_Action(obj, activator)
 					for ii = 1, #treasure, 1 do
 						local item = treasure[ii].Item
 						
-						GAME:GivePlayerItem(item.ID, 1, false, item.HiddenValue)
+						GAME:GivePlayerItem(item.ID, item.Amount, false, item.HiddenValue)
 					end
 					
 					state = 0
@@ -633,7 +633,7 @@ function base_camp_2.Swap_Action(obj, activator)
 				--	GAME:GivePlayerItem(trade.Item, 1, false, 0)
 				--else--TODO: load universal strings alongside local strings
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Item_Give_Storage'], receive_item:GetDisplayName()))
-				GAME:GivePlayerStorageItem(trade.Item, 1, false, 0)
+				GAME:GivePlayerStorageItem(trade.Item, 1, false, "")
 				--end
 				
 				UI:SetSpeaker(chara)

@@ -69,11 +69,11 @@ SV.base_camp =
 }
 
 SV.base_shop = {
-	{ Index = "food_apple", Hidden = "", Price = 50},
-	{ Index = "food_apple_big", Hidden = "", Price = 150},
-	{ Index = "food_banana", Hidden = "", Price = 500},
-	{ Index = "food_chestnut", Hidden = "", Price = 80},
-	{ Index = "berry_leppa", Hidden = "", Price = 80}
+	{ Index = "food_apple", Amount = 0, Price = 50},
+	{ Index = "food_apple_big", Amount = 0, Price = 150},
+	{ Index = "food_banana", Amount = 0, Price = 500},
+	{ Index = "food_chestnut", Amount = 0, Price = 80},
+	{ Index = "berry_leppa", Amount = 0, Price = 80}
 }
 SV.base_trades = {
 	{ Item="xcl_family_bulbasaur_02", ReqItem={"",""}},

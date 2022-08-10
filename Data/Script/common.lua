@@ -235,7 +235,7 @@ function COMMON.CreateWalkArea(name, x, y, w, h)
 end
 
 function COMMON.GiftItem(player, receive_item)
-  COMMON.GiftItem(player, receive_item, true, false)
+  COMMON.GiftItemFull(player, receive_item, true, false)
 end
 
 function COMMON.GiftItemFull(player, receive_item, fanfare, force_storage)

@@ -243,6 +243,7 @@ function base_camp.Sign_Action(obj, activator)
   UI:ResetSpeaker()
   UI:SetAutoFinish(true)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sign_Action_Text']))
+  UI:SetAutoFinish(false)
 end
 
 function base_camp.Assembly_Action(obj, activator)

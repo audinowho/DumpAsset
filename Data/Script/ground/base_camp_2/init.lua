@@ -684,7 +684,7 @@ function base_camp_2.Tutor_Action(obj, activator)
   local state = 0
   local repeated = false
   local member = nil
-  local move = -1
+  local move = ""
   local chara = CH('Tutor_Owner')
   UI:SetSpeaker(chara)
   

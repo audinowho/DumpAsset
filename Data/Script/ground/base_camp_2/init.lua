@@ -965,7 +965,7 @@ end
 
 base_camp_2.difficulty_tbl = { }
 base_camp_2.difficulty_tbl[""] = -1
-base_camp_2.difficulty_tbl["debug"] = 4
+base_camp_2.difficulty_tbl["debug_zone"] = 4
 base_camp_2.difficulty_tbl["guildmaster_island"] = -1
 base_camp_2.difficulty_tbl["tropical_path"] = 0
 base_camp_2.difficulty_tbl["faded_trail"] = 1

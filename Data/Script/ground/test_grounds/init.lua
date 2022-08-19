@@ -459,15 +459,18 @@ end
 function test_grounds.Hungrybox_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo('Hungrybox_Action')
-  --local player = CH('PLAYER')
-  --local hbox = chara
-  --local olddir = hbox.CharDir
+  local player = CH('PLAYER')
+  local hbox = chara
+  local olddir = hbox.CharDir
   --GROUND:Hide("PLAYER")
-  --GROUND:CharTurnToCharAnimated(hbox, player, 4)
+  GROUND:CharTurnToCharAnimated(hbox, player, 4)
   --UI:SetSpeaker(hbox)
   --UI:TextDialogue(STRINGS:Format(MapStrings['Hungrybox_Action_Line0']), 120)
   --UI:WaitDialog()
-  --GROUND:CharAnimateTurnTo(hbox, olddir, 4)
+  GROUND:CharSetDrawEffect(hbox, DrawEffect.Trembling)
+  GAME:WaitFrames(120)
+  GROUND:CharEndDrawEffect(hbox, DrawEffect.Trembling)
+  GROUND:CharAnimateTurnTo(hbox, olddir, 4)
   --chara.CollisionDisabled = true
   --GROUND:Unhide("PLAYER")
   

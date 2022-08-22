@@ -310,7 +310,7 @@ function post_office.Side_Desk_Action(obj, activator)
 			end
 		elseif state == 2 then
 			local mail = RogueEssence.Data.DataManager.LoadRescueMail(sos);
-			local dungeon = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries[mail.Goal.ID]
+			local dungeon = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(mail.Goal.ID)
 			UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Rescue_Confirm'], dungeon:GetColoredName()), false)
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()

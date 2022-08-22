@@ -74,7 +74,7 @@ function base_camp.Enter(map)
     GAME:CutsceneMode(true)
     UI:SetSpeaker(STRINGS:Format("\\uE040"), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	
-    local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries['guildmaster_trail']
+    local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get('guildmaster_trail')
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001'], zone:GetColoredName()))
     --move the noctowl to a new position
     local noctowl = CH('Noctowl')
@@ -149,7 +149,7 @@ function base_camp.BeginExposition()
   
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_006']))
   
-  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries['guildmaster_trail']
+  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get('guildmaster_trail')
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_007'], zone:GetColoredName()))
   
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_008']))
@@ -167,7 +167,7 @@ function base_camp.BeginExposition()
   GROUND:EntTurn(player, Direction.Up)
   GROUND:EntTurn(noctowl, Direction.Down)
   
-  zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries['tropical_path']
+  zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get('tropical_path')
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_010'], zone:GetColoredName()))
   
   --UI:WaitShowDialogue("It amazes me that the likes of you still come to this island.")
@@ -216,7 +216,7 @@ function base_camp.First_North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   UI:ResetSpeaker()
-  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries['guildmaster_trail']
+  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get('guildmaster_trail')
   UI:ChoiceMenuYesNo(STRINGS:FormatKey("DLG_ASK_ENTER_DUNGEON", zone:GetColoredName()), false)
   UI:WaitForChoice()
   ch = UI:ChoiceResult()
@@ -271,7 +271,7 @@ function base_camp.Noctowl_Action(chara, activator)
     STRINGS:FormatKey("MENU_INFO"),
     STRINGS:FormatKey("DLG_CHOICE_NO")}
   
-  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone].Entries['training_maze']
+  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get('training_maze')
   
   local result = 2
   while result == 2 do

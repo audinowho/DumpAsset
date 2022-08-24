@@ -134,10 +134,16 @@ function guildmaster_summit.PreBattle()
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_014'], GAME:GetTeamName()))
   GAME:WaitFrames(10)
   SOUND:PlayBattleSE("DUN_Bird_Caw")
-  GROUND:CharPoseAnim(xatu, "Shoot")--110
+  
+  
+  local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Shoot")
+  GROUND:CharSetAction(xatu, RogueEssence.Ground.PoseGroundAction(xatu.Position, xatu.Direction, animId))--110
   GAME:WaitFrames(10)
-  GROUND:CharPoseAnim(lucario, "Chop")--100
-  GROUND:CharPoseAnim(wigglytuff, "Shoot")--100
+  animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Chop")
+  GROUND:CharSetAction(lucario, RogueEssence.Ground.PoseGroundAction(lucario.Position, lucario.Direction, animId))--100
+  
+  animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Shoot")
+  GROUND:CharSetAction(wigglytuff, RogueEssence.Ground.PoseGroundAction(wigglytuff.Position, wigglytuff.Direction, animId))--100
   
   GAME:WaitFrames(10)
   SOUND:PlayBattleSE("EVT_Fade_White")
@@ -200,7 +206,8 @@ function guildmaster_summit.PostBattle()
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_007'], GAME:GetTeamName()))
 
   SOUND:PlayBattleSE("DUN_Bird_Caw")
-  GROUND:CharPoseAnim(xatu, "Shoot")--200
+  local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Shoot")
+  GROUND:CharSetAction(xatu, RogueEssence.Ground.PoseGroundAction(xatu.Position, xatu.Direction, animId))--200
   GAME:WaitFrames(80)
 
   GAME:FadeOut(false, 40)

@@ -132,13 +132,18 @@ function DebugTools:OnUpgrade()
     {
       SpokeToPooch = false,
       AcceptedPooch = false,
-      Missions = { },
-      CurrentOutlaws = { },
-      FinishedMissions = { },
       Starter = { Species="pikachu", Form=0, Skin=0, Gender=2 },
       Partner = { Species="eevee", Form=0, Skin=0, Gender=1 },
       DemoComplete = false,
     }
+  end
+  
+  if SV.missions == nil then
+    SV.missions =
+	{
+	  Missions = { },
+	  FinishedMissions = { },
+	}
   end
   
   -- end

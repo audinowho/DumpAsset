@@ -73,12 +73,12 @@ function test_grounds.Enter(map)
   SV.base_camp.ExpositionComplete = true
   SV.base_camp.FirstTalkComplete = true
   
-  local caterQuest = SV.test_grounds.Missions["CaterQuest"]
-  if caterQuest == nil or caterQuest.Complete == COMMON.MISSION_INCOMPLETE then
+  local caterQuest = SV.missions.FinishedMissions["CaterQuest"]
+  if caterQuest == nil then
 	GROUND:Hide("Caterpie")
   end
-  local volmiseQuest = SV.test_grounds.Missions["VolmiseQuest"]
-  if volmiseQuest == nil or volmiseQuest.Complete == COMMON.MISSION_INCOMPLETE then
+  local volmiseQuest = SV.missions.FinishedMissions["VolmiseQuest"]
+  if volmiseQuest == nil then
 	GROUND:Hide("Illumise")
   end
   
@@ -339,31 +339,34 @@ function test_grounds.Magnezone_Action(chara, activator)
   
   UI:SetSpeaker(chara)
   -- check for quest presence
-  local quest = SV.test_grounds.Missions["OutlawQuest"]
-  if quest == nil then
+  local quest = SV.missions.Missions["OutlawQuest"]
+  local finishedquest = SV.missions.FinishedMissions["OutlawQuest"]
+  if finishedquest ~= nil then
+	  -- there is an outlaw quest, and it has been completed- thank you note
+	  UI:WaitShowDialogue("Outlaw mission state: Rewarded.  Thank you for apprehending Riolu!")
+  elseif quest == nil then
     -- no outlaw quest? ask to start one
     UI:ChoiceMenuYesNo("No Outlaw mission detected. Do you want to start one?")
     UI:WaitForChoice()
     local chres = UI:ChoiceResult() 
     if chres then
 	  -- Type 0 = Rescue
-	  SV.test_grounds.Missions["OutlawQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW, DestZone = "debug_zone", DestSegment = 4, DestFloor = 9, TargetSpecies = "riolu" }
+	  SV.missions.Missions["OutlawQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW, DestZone = "debug_zone", DestSegment = 4, DestFloor = 9, TargetSpecies = "riolu" }
       UI:WaitShowDialogue("You can find the perpetrator at Replay Test Zone 10F.  Good luck!")
     end
   else
-    if quest.Complete == 2 then
-	  -- there is an outlaw quest, and it has been completed- thank you note
-	  UI:WaitShowDialogue("Outlaw mission state: Rewarded.  Thank you for apprehending Riolu!")
-	elseif quest.Complete == 1 then
+    if quest.Complete == 1 then
 	  UI:WaitShowDialogue("Outlaw mission state: Complete.  Give a reward and mark mission as rewarded.")
 	  quest.Complete = 2
+	  SV.missions.FinishedMissions["OutlawQuest"] = quest
+	  table.remove(SV.missions.Missions, "OutlawQuest")
 	else
 	  -- there is an outlaw quest, but it hasn't been completed?  ask to abandon
       UI:ChoiceMenuYesNo("Outlaw mission state: Incomplete.  Do you want to abandon the mission?")
       UI:WaitForChoice()
       local chres = UI:ChoiceResult() 
       if chres then
-	    SV.test_grounds.Missions["OutlawQuest"] = nil
+	    SV.missions.Missions["OutlawQuest"] = nil
         UI:WaitShowDialogue("Outlaw mission removed.")
       end
 	end
@@ -378,31 +381,34 @@ function test_grounds.Butterfree_Action(chara, activator)
   
   UI:SetSpeaker(chara)
   -- check for quest presence
-  local quest = SV.test_grounds.Missions["CaterQuest"]
-  if quest == nil then
+  local quest = SV.missions.Missions["CaterQuest"]
+  local finishedquest = SV.missions.FinishedMissions["CaterQuest"]
+  if finishedquest ~= nil then
+	  -- there is a caterpie quest, and it has been completed- thank you note
+	  UI:WaitShowDialogue("Caterpie mission state: Rewarded.  Thank you for rescuing Caterpie!")
+  elseif quest == nil then
     -- no caterpie quest? ask to start one
     UI:ChoiceMenuYesNo("No Caterpie mission detected. Do you want to start one?")
     UI:WaitForChoice()
     local chres = UI:ChoiceResult() 
     if chres then
 	  -- Type 0 = Rescue
-	  SV.test_grounds.Missions["CaterQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE, DestZone = "debug_zone", DestSegment = 4, DestFloor = 4, TargetSpecies = "caterpie" }
+	  SV.missions.Missions["CaterQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE, DestZone = "debug_zone", DestSegment = 4, DestFloor = 4, TargetSpecies = "caterpie" }
       UI:WaitShowDialogue("You can find Caterpie at Replay Test Zone 5F.  Good luck!")
     end
   else
-    if quest.Complete == 2 then
-	  -- there is a caterpie quest, and it has been completed- thank you note
-	  UI:WaitShowDialogue("Caterpie mission state: Rewarded.  Thank you for rescuing Caterpie!")
-	elseif quest.Complete == 1 then
+    if quest.Complete == 1 then
 	  UI:WaitShowDialogue("Caterpie mission state: Complete.  Give a reward and mark mission as rewarded.")
 	  quest.Complete = 2
+	  SV.missions.FinishedMissions["CaterQuest"] = quest
+	  table.remove(SV.missions.Missions, "CaterQuest")
 	else
 	  -- there is a caterpie quest, but it hasn't been completed?  ask to abandon
       UI:ChoiceMenuYesNo("Caterpie mission state: Incomplete.  Do you want to abandon the mission?")
       UI:WaitForChoice()
       local chres = UI:ChoiceResult() 
       if chres then
-	    SV.test_grounds.Missions["CaterQuest"] = nil
+	    SV.missions.Missions["CaterQuest"] = nil
         UI:WaitShowDialogue("Caterpie mission removed.")
       end
 	end
@@ -428,31 +434,34 @@ function test_grounds.Volbeat_Action(chara, activator)
   
   UI:SetSpeaker(chara)
   -- check for quest presence
-  local quest = SV.test_grounds.Missions["VolmiseQuest"]
-  if quest == nil then
+  local quest = SV.missions.Missions["VolmiseQuest"]
+  local finishedquest = SV.missions.FinishedMissions["VolmiseQuest"]
+  if finishedquest ~= nil then
+	  -- there is an outlaw quest, and it has been completed- thank you note
+	  UI:WaitShowDialogue("Volmise mission state: Rewarded.  Thank you for rescuing Illumise!")
+  elseif quest == nil then
     -- no caterpie quest? ask to start one
     UI:ChoiceMenuYesNo("No Volmise mission detected. Do you want to start one?")
     UI:WaitForChoice()
     local chres = UI:ChoiceResult() 
     if chres then
 	  -- Type 1 = Escort
-	  SV.test_grounds.Missions["VolmiseQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_ESCORT, DestZone = "debug_zone", DestSegment = 4, DestFloor = 3, TargetSpecies = "illumise", EscortSpecies = "volbeat" }
+	  SV.missions.Missions["VolmiseQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_ESCORT, DestZone = "debug_zone", DestSegment = 4, DestFloor = 3, TargetSpecies = "illumise", EscortSpecies = "volbeat" }
       UI:WaitShowDialogue("You can find Illumise at Replay Test Zone 4F.  I'll join you when you enter!")
     end
   else
-    if quest.Complete == 2 then
-	  -- there is a caterpie quest, and it has been completed- thank you note
-	  UI:WaitShowDialogue("Volmise mission state: Rewarded.  Thank you for rescuing Illumise!")
-	elseif quest.Complete == 1 then
+    if quest.Complete == 1 then
 	  UI:WaitShowDialogue("Volmise mission state: Complete.  Give a reward and mark mission as rewarded.")
 	  quest.Complete = 2
+	  SV.missions.FinishedMissions["VolmiseQuest"] = quest
+	  table.remove(SV.missions.Missions, "VolmiseQuest")
 	else
 	  -- there is a caterpie quest, but it hasn't been completed?  ask to abandon
       UI:ChoiceMenuYesNo("Volmise mission state: Incomplete.  Do you want to abandon the mission?")
       UI:WaitForChoice()
       local chres = UI:ChoiceResult() 
       if chres then
-	    SV.test_grounds.Missions["VolmiseQuest"] = nil
+	    SV.missions.Missions["VolmiseQuest"] = nil
         UI:WaitShowDialogue("Volmise mission removed.")
       end
 	end

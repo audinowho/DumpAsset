@@ -181,7 +181,7 @@ end
 function SINGLE_CHAR_SCRIPT.OutlawClearCheck(owner, ownerChar, character, args)
   -- check for no outlaw in the mission list
   remaining_outlaw = false
-  for name, mission in pairs(SV.test_grounds.Missions) do
+  for name, mission in pairs(SV.missions.Missions) do
     PrintInfo("Checking Mission: "..tostring(name))
     if mission.Complete == COMMON.MISSION_INCOMPLETE and _ZONE.CurrentZoneID == mission.DestZone
 	  and _ZONE.CurrentMapID.Segment == mission.DestSegment and _ZONE.CurrentMapID.ID == mission.DestFloor then

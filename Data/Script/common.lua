@@ -901,7 +901,7 @@ function COMMON.BeginDungeon(zoneId, segmentID, mapId)
 end
 
 function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
-  for name, mission in pairs(SV.test_grounds.Missions) do
+  for name, mission in pairs(SV.missions.Missions) do
     PrintInfo("Checking Mission: "..tostring(name))
 	if mission.Complete == 0 and zoneId == mission.DestZone and segmentID == mission.DestSegment then
 	  if mission.Type == 1 then -- escort
@@ -934,7 +934,7 @@ end
 
 
 function COMMON.ExitDungeonMissionCheck(zoneId, segmentID)
-  for name, mission in pairs(SV.test_grounds.Missions) do
+  for name, mission in pairs(SV.missions.Missions) do
     PrintInfo("Checking Mission: "..tostring(name))
 	if mission.Complete == 0 and zoneId == mission.DestZone and segmentID == mission.DestSegment then
 	  if mission.Type == 1 then -- escort

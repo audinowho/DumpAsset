@@ -52,12 +52,15 @@ SV.test_grounds =
 {
   SpokeToPooch = false,
   AcceptedPooch = false,
-  Missions = { },
-  CurrentOutlaws = { },
-  FinishedMissions = { },
   Starter = { Species="pikachu", Form=0, Skin="normal", Gender=2 },
   Partner = { Species="eevee", Form=0, Skin="normal", Gender=1 },
   DemoComplete = false,
+}
+
+SV.missions =
+{
+  Missions = { },
+  FinishedMissions = { },
 }
 
 SV.base_camp = 

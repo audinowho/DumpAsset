@@ -18,7 +18,7 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
   -- choose a the floor to spawn it on
   local destinationFloor = false
   local outlawFloor = false
-  for name, mission in pairs(SV.test_grounds.Missions) do
+  for name, mission in pairs(SV.missions.Missions) do
     PrintInfo("Checking Mission: "..tostring(name))
     if mission.Complete == COMMON.MISSION_INCOMPLETE and zoneContext.CurrentZone == mission.DestZone
 	  and zoneContext.CurrentSegment == mission.DestSegment and zoneContext.CurrentID == mission.DestFloor then

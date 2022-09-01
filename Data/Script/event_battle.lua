@@ -89,7 +89,7 @@ end
 function BATTLE_SCRIPT.RescueReached(owner, ownerChar, context, args)
 
   local tbl = LTBL(context.Target)
-  local mission = SV.test_grounds.Missions[tbl.Mission]
+  local mission = SV.missions.Missions[tbl.Mission]
   mission.Complete = 1
   
   local oldDir = context.Target.CharDir
@@ -114,7 +114,7 @@ function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
   
   if escort then
     
-    local mission = SV.test_grounds.Missions[tbl.Mission]
+    local mission = SV.missions.Missions[tbl.Mission]
     mission.Complete = 1
   
     local oldDir = context.Target.CharDir

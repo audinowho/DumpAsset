@@ -488,8 +488,21 @@ function test_grounds.Hungrybox_Action(chara, activator)
   --GROUND:Unhide("PLAYER")
   
   COMMON.BossTransition()
+  
+  local menu = RogueEssence.Menu.ScriptableMenu(24, 24, 196, 128, test_grounds.Custom_Menu_Update)
+  local cursor = RogueEssence.Menu.MenuCursor(menu)
+  cursor.Loc = RogueElements.Loc(48, 48)
+  menu.MenuElements:Add(cursor)
+  menu.MenuElements:Add(RogueEssence.Menu.MenuText("Test String", RogueElements.Loc(48, 64)))
+  UI:SetCustomMenu(menu)
+  UI:WaitForChoice()
 end
 
+function test_grounds.Custom_Menu_Update(input)
+  if input:JustPressed(RogueEssence.FrameInput.InputType.Confirm) then
+    RogueEssence.MenuManager.Instance:RemoveMenu()
+  end
+end
 
 function test_grounds.Poochy_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

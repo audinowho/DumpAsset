@@ -4,31 +4,11 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Slash",
-"LocalTexts": {
-"fr": "Tranche",
-"de": "Schlitzer",
-"es": "Cuchillada",
-"it": "Lacerazione",
-"ko": "베어가르기",
-"ja": "きりさく",
-"ja-jp": "きりさく",
-"zh-hans": "劈开",
-"zh-hant": "劈開"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "The target is attacked with a slash of claws or blades. Critical hits land more easily.",
-"LocalTexts": {
-"fr": "Un coup de griffe ou autre tranche l’ennemi. Taux de critiques élevé.",
-"de": "Hieb mit Klauen oder Ähnlichem. Hohe Volltrefferquote.",
-"es": "Ataca con cuchillas o con pinzas. Suele dar un golpe  crítico.",
-"it": "Attacca il bersaglio con artigli, falci o altro. Probabile brutto colpo.",
-"ko": "발톱이나 낫 등으로 상대를 베어 갈라서 공격한다. 급소에 맞기 쉽다.",
-"ja": "ツメや　カマ　などで あいてを　きりさいて　こうげきする。 きゅうしょに　あたりやすい。",
-"ja-jp": "ツメや　カマなどで 相手を　切り裂いて　攻撃する。 急所に　当たりやすい。",
-"zh-hans": "用爪子或镰刀等 劈开对手进行攻击。 容易击中要害。",
-"zh-hant": "用爪子或鐮刀等 劈開對手進行攻擊。 容易擊中要害。"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -158,7 +138,45 @@
 }
 }
 ],
-"OnHitTiles": [],
+"OnHitTiles": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveTerrainEvent, PMDC",
+"TileTypes": [
+"grass"
+],
+"RemoveSound": "DUN_Charge_Start",
+"RemoveAnim": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Grass_Clear",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+}
+}
+}
+],
 "AfterActions": [],
 "ElementEffects": [],
 "IntroFX": [],
@@ -176,8 +194,8 @@
 }
 },
 "HitCharAction": {
-"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 0
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0
 }
 }
 }

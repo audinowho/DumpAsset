@@ -82,6 +82,7 @@ To deploy the server on a linux machine:
 For modifications of this software, these attributions are not to be removed.
 https://github.com/PsyCommando PsyCommando, for code contributions and PMD insight
 https://github.com/AntyMew AntyMew, for code contributions and platform compatibility insight
+https://github.com/purpasmart96 Rev, for code contributions
 https://twitter.com/_palika_ Palika, for script contributions
 https://github.com/Parakoopa Parakoopa, for tiles dtef parsing
 http://musicalcombusken.deviantart.com/ MusicalCombusken, for the title logo

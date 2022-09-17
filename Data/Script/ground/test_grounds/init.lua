@@ -500,7 +500,7 @@ end
 
 function test_grounds.Custom_Menu_Update(input)
   if input:JustPressed(RogueEssence.FrameInput.InputType.Confirm) then
-    RogueEssence.MenuManager.Instance:RemoveMenu()
+    _MENU:RemoveMenu()
   end
 end
 

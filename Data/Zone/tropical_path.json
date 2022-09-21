@@ -1,10 +1,13 @@
 ﻿{
-"Version": "0.6.3.0",
+"Version": "0.6.4.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Tropical Path",
-"LocalTexts": {}
+"LocalTexts": {
+"de": "Tropischer Pfad",
+"es": "Paso Tropical"
+}
 },
 "Released": true,
 "Comment": "",
@@ -238,9 +241,19 @@
 ]
 },
 "Value": {
-"$type": "RogueEssence.LevelGen.MobSpawnSettingsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"$type": "PMDC.LevelGen.MobSpawnSettingsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Priority": {
+"str": [
+15
+]
+},
+"Respawn": {
+"$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 3,
 "RespawnTime": 80
+},
+"MaxFoes": 0,
+"RespawnTime": 0
 }
 },
 {
@@ -790,9 +803,19 @@
 ]
 },
 "Value": {
-"$type": "RogueEssence.LevelGen.MobSpawnSettingsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"$type": "PMDC.LevelGen.MobSpawnSettingsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Priority": {
+"str": [
+15
+]
+},
+"Respawn": {
+"$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 3,
 "RespawnTime": 80
+},
+"MaxFoes": 0,
+"RespawnTime": 0
 }
 },
 {
@@ -1342,9 +1365,19 @@
 ]
 },
 "Value": {
-"$type": "RogueEssence.LevelGen.MobSpawnSettingsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"$type": "PMDC.LevelGen.MobSpawnSettingsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Priority": {
+"str": [
+15
+]
+},
+"Respawn": {
+"$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 3,
 "RespawnTime": 80
+},
+"MaxFoes": 0,
+"RespawnTime": 0
 }
 },
 {
@@ -1894,9 +1927,19 @@
 ]
 },
 "Value": {
-"$type": "RogueEssence.LevelGen.MobSpawnSettingsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"$type": "PMDC.LevelGen.MobSpawnSettingsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Priority": {
+"str": [
+15
+]
+},
+"Respawn": {
+"$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 3,
 "RespawnTime": 80
+},
+"MaxFoes": 0,
+"RespawnTime": 0
 }
 },
 {
@@ -2287,8 +2330,11 @@
 {
 "$type": "RogueEssence.LevelGen.FloorNameIDZoneStep, RogueEssence",
 "Name": {
-"DefaultText": "Tropical Path\n{0}F",
-"LocalTexts": {}
+"DefaultText": "Tropical Path\\n{0}F",
+"LocalTexts": {
+"de": "Tropischer Pfad\\n{0}.OG",
+"es": "Paso Tropical\\nP{0}"
+}
 },
 "Priority": {
 "str": [
@@ -2313,7 +2359,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.6.3.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.4.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]

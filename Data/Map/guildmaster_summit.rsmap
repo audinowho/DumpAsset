@@ -1,10 +1,13 @@
 ﻿{
-"Version": "0.6.3.0",
+"Version": "0.6.4.0",
 "Object": {
 "$type": "RogueEssence.Dungeon.Map, RogueEssence",
 "Name": {
 "DefaultText": "Guildmaster Summit",
-"LocalTexts": {}
+"LocalTexts": {
+"de": "Gildenmeister-Gipfel",
+"es": "Cima del Maestro"
+}
 },
 "Released": false,
 "Comment": "",
@@ -20,6 +23,7 @@
 "Element1": "psychic",
 "Element2": "flying",
 "movementSpeed": 0,
+"dead": false,
 "serializationLoc": {
 "X": 8,
 "Y": 5
@@ -102,7 +106,6 @@
 "Fullness": 100,
 "FullnessRemainder": 0,
 "MaxFullness": 100,
-"Dead": false,
 "StatusEffects": {},
 "MustHitNext": false,
 "TurnWait": 0,
@@ -153,7 +156,6 @@
 "SeeTraps": false,
 "CharStates": [],
 "WarpHistory": [],
-"Proximity": -1,
 "BackRef": {
 "Assembly": false,
 "Index": -1
@@ -226,6 +228,7 @@
 "Element1": "fighting",
 "Element2": "steel",
 "movementSpeed": 0,
+"dead": false,
 "serializationLoc": {
 "X": 6,
 "Y": 6
@@ -308,7 +311,6 @@
 "Fullness": 100,
 "FullnessRemainder": 0,
 "MaxFullness": 100,
-"Dead": false,
 "StatusEffects": {},
 "MustHitNext": false,
 "TurnWait": 0,
@@ -359,7 +361,6 @@
 "SeeTraps": false,
 "CharStates": [],
 "WarpHistory": [],
-"Proximity": -1,
 "BackRef": {
 "Assembly": false,
 "Index": -1
@@ -432,6 +433,7 @@
 "Element1": "normal",
 "Element2": "fairy",
 "movementSpeed": 0,
+"dead": false,
 "serializationLoc": {
 "X": 10,
 "Y": 6
@@ -514,7 +516,6 @@
 "Fullness": 100,
 "FullnessRemainder": 0,
 "MaxFullness": 100,
-"Dead": false,
 "StatusEffects": {},
 "MustHitNext": false,
 "TurnWait": 0,
@@ -565,7 +566,6 @@
 "SeeTraps": false,
 "CharStates": [],
 "WarpHistory": [],
-"Proximity": -1,
 "BackRef": {
 "Assembly": false,
 "Index": -1
@@ -760,8 +760,6 @@
 "RestoreHPs": [],
 "InitActionData": []
 },
-"MaxFoes": 0,
-"RespawnTime": 0,
 "TeamSpawns": [],
 "MoneyAmount": {
 "Min": 0,

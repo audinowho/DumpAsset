@@ -744,7 +744,7 @@ function COMMON.ShowTeamStorageMenu()
 	
 	local storage_choices = { { STRINGS:FormatKey('MENU_STORAGE_STORE'), has_items},
 	{ STRINGS:FormatKey('MENU_STORAGE_TAKE_ITEM'), has_storage},
-	{ STRINGS:FormatKey('MENU_STORAGE_DEPOSIT_ALL'), has_items},
+	{ STRINGS:FormatKey('MENU_STORAGE_STORE_ALL'), has_items},
 	{ STRINGS:FormatKey("MENU_STORAGE_MONEY"), true},
 	{ STRINGS:FormatKey("MENU_CANCEL"), true}}
 	UI:BeginChoiceMenu(STRINGS:FormatKey('DLG_WHAT_DO'), storage_choices, 1, 5)
@@ -758,7 +758,7 @@ function COMMON.ShowTeamStorageMenu()
 	  UI:WithdrawMenu()
 	  UI:WaitForChoice()
     elseif result == 3 then
-	    UI:ChoiceMenuYesNo("Are you sure you want to deposit all items?", false);
+	    UI:ChoiceMenuYesNo(STRINGS:FormatKey('DLG_STORE_ALL_CONFIRM'), false);
 	    UI:WaitForChoice()
 	    if UI:ChoiceResult() then
 	         UI:DepositAll()

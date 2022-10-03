@@ -744,7 +744,7 @@ function COMMON.ShowTeamStorageMenu()
 	
 	local storage_choices = { { STRINGS:FormatKey('MENU_STORAGE_STORE'), has_items},
 	{ STRINGS:FormatKey('MENU_STORAGE_TAKE_ITEM'), has_storage},
-	{ STRINGS:FormatKey('MENU_STORAGE_DEPOSIT_ALL'), true},
+	{ STRINGS:FormatKey('MENU_STORAGE_DEPOSIT_ALL'), has_items},
 	{ STRINGS:FormatKey("MENU_STORAGE_MONEY"), true},
 	{ STRINGS:FormatKey("MENU_CANCEL"), true}}
 	UI:BeginChoiceMenu(STRINGS:FormatKey('DLG_WHAT_DO'), storage_choices, 1, 5)

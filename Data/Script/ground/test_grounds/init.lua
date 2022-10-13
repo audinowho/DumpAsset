@@ -579,6 +579,15 @@ function test_grounds.Merchant_Action(chara, activator)
   UI:WaitShowDialogue("Handy for mods that want to imitate Explorers-style hub!")
   UI:WaitDialog()
   GROUND:CharAnimateTurnTo(chara, olddir, 4)
+  
+  
+  local tutor_choices = {RogueEssence.StringKey("MENU_RECALL_SKILL"):ToLocal(),
+  RogueEssence.StringKey("MENU_FORGET_SKILL"):ToLocal(),
+  STRINGS:FormatKey("MENU_INFO"),
+  STRINGS:FormatKey("MENU_EXIT")}
+  UI:BeginMultiPageMenu(24, 24, 196, "Title Name", tutor_choices, 8, 1, 4)
+  UI:WaitForChoice()
+  PrintInfo(UI:ChoiceResult())
 end
 
 --[[

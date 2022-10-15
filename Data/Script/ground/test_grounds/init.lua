@@ -468,6 +468,48 @@ function test_grounds.Volbeat_Action(chara, activator)
   end
 end
 
+-- equivalent to defining a class
+local ExampleMenu = Class('ExampleMenu')
+
+function ExampleMenu:initialize()
+  assert(self, "ExampleMenu:initialize(): Error, self is nil!")
+  self.menu = RogueEssence.Menu.ScriptableMenu(24, 24, 196, 128, function(input) self:Update(input) end)
+  
+  self.cursor = RogueEssence.Menu.MenuCursor(self.menu)
+  self.menu.MenuElements:Add(self.cursor)
+  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Test String", RogueElements.Loc(16, 8 + 12 * 0)))
+  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Apple", RogueElements.Loc(88, 8 + 12 * 0)))
+  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Test String 2", RogueElements.Loc(16, 8 + 12 * 1)))
+  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Orange", RogueElements.Loc(88, 8 + 12 * 1)))
+  self.total_items = 4
+  self.current_item = 0
+  self.cursor.Loc = RogueElements.Loc(8 + 12 * (self.current_item % 2), 8 + 80 * (self.current_item // 2))
+end
+
+function ExampleMenu:Update(input)
+  assert(self, "BaseState:Begin(): Error, self is nil!")
+  -- default does nothing
+  if input:JustPressed(RogueEssence.FrameInput.InputType.Confirm) then
+    _GAME:SE("Menu/Confirm")
+  elseif input:JustPressed(RogueEssence.FrameInput.InputType.Cancel) then
+    _GAME:SE("Menu/Cancel")
+    _MENU:RemoveMenu()
+  else
+    moved = false
+    if RogueEssence.Menu.InteractableMenu.IsInputting(input, LUA_ENGINE:MakeLuaArray(Dir8, { Dir8.Down, Dir8.DownLeft, Dir8.DownRight })) then
+      moved = true
+      self.current_item = (self.current_item + 1) % self.total_items
+    elseif RogueEssence.Menu.InteractableMenu.IsInputting(input, LUA_ENGINE:MakeLuaArray(Dir8, { Dir8.Up, Dir8.UpLeft, Dir8.UpRight })) then
+      moved = true
+      self.current_item = (self.current_item + self.total_items - 1) % self.total_items
+    end
+    if moved then
+      _GAME:SE("Menu/Select")
+      self.cursor:ResetTimeOffset()
+      self.cursor.Loc = RogueElements.Loc(8 + 80 * (self.current_item % 2), 8 + 12 * (self.current_item // 2))
+    end
+  end
+end
 
 function test_grounds.Hungrybox_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
@@ -489,12 +531,9 @@ function test_grounds.Hungrybox_Action(chara, activator)
   
   COMMON.BossTransition()
   
-  local menu = RogueEssence.Menu.ScriptableMenu(24, 24, 196, 128, test_grounds.Custom_Menu_Update)
-  local cursor = RogueEssence.Menu.MenuCursor(menu)
-  cursor.Loc = RogueElements.Loc(48, 48)
-  menu.MenuElements:Add(cursor)
-  menu.MenuElements:Add(RogueEssence.Menu.MenuText("Test String", RogueElements.Loc(48, 64)))
-  UI:SetCustomMenu(menu)
+  
+  local menu = ExampleMenu:new()
+  UI:SetCustomMenu(menu.menu)
   UI:WaitForChoice()
 end
 

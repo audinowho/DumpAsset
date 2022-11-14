@@ -132,11 +132,14 @@ function DebugTools:OnUpgrade()
     {
       SpokeToPooch = false,
       AcceptedPooch = false,
-      Starter = { Species="pikachu", Form=0, Skin=0, Gender=2 },
-      Partner = { Species="eevee", Form=0, Skin=0, Gender=1 },
+      Starter = { Species="pikachu", Form=0, Skin="normal", Gender=2 },
+      Partner = { Species="eevee", Form=0, Skin="normal", Gender=1 },
       DemoComplete = false,
     }
   end
+  
+  SV.test_grounds.Starter = { Species="pikachu", Form=0, Skin="normal", Gender=2 }
+  SV.test_grounds.Partner = { Species="eevee", Form=0, Skin="normal", Gender=1 }
   
   if SV.missions == nil then
     SV.missions =

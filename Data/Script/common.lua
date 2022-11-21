@@ -538,6 +538,8 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
     local mon = _DATA:GetMonster(target.BaseForm.Species)
     local form = mon.Forms[target.BaseForm.Form]
     
+    UI:SetSpeaker(target)
+  
     local personality = form:GetPersonalityType(target.Discriminator)
     
     local personality_group = COMMON.PERSONALITY[personality]
@@ -619,8 +621,6 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
 	
 	local oldDir = target.CharDir
     DUNGEON:CharTurnToChar(target, chara)
-  
-    UI:SetSpeaker(target)
   
     UI:WaitShowDialogue(chosen_quote)
   

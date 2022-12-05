@@ -85,6 +85,7 @@ https://github.com/AntyMew AntyMew, for code contributions and platform compatib
 https://github.com/purpasmart96 Rev, for code contributions
 https://github.com/fa6ex Rings, for code contributions
 https://github.com/Buwwet Buwwet, for code contributions
+https://github.com/DoubleTrio Trio~, for code contributions
 https://twitter.com/_palika_ Palika, for script contributions
 https://github.com/Parakoopa Parakoopa, for tiles dtef parsing
 http://musicalcombusken.deviantart.com/ MusicalCombusken, for the title logo

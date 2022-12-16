@@ -8,6 +8,10 @@
       You don't need to write a default value in this lua script to add a new value.
       However its good practice to set a default value when you can!
       
+      It is important to stress that this file initializes the SV table ONCE when the player begins a new save file, and NEVER EVER again.
+      This means that edits on this file will NOT be added on the script variables of an already existing file!
+      To upgrade existing script variables, use the OnUpgrade in script services.  Example found in Data/Script/services/debug_tools/init.lua
+      
     --Examples:
     SV.SomeVariable = "Smiles go for miles!"
     SV.AnotherVariable = 2526

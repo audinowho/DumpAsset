@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.6.0",
+"Version": "0.6.7.0",
 "Object": {
 "$type": "RogueEssence.Data.StatusData, RogueEssence",
 "Name": {
@@ -13,13 +13,8 @@
 }
 },
 "Desc": {
-"DefaultText": "The Pokémon gradually takes damage every time it attacks. Its natural HP recovery is also stopped.",
-"LocalTexts": {
-"fr": "Le Pokémon subit progressiment des dégâts et ne regagne plus ses PV.",
-"de": "Das Pokémon nimmt nach und nach Schaden, sobald es angreift. Des Weiteren verliert es seine natürliche KP-Regeneration.",
-"es": "El Pokémon recibe daño gradualmente cada vez que ataque. También la recuperación natural de PS se para. ",
-"zh-hans": "这只宝可梦每次攻击时都会受到伤害，且无法自然回复HP。"
-}
+"DefaultText": "The Pokémon takes damage on every action, and its ability to recover HP is reduced. This status wears off after a few turns.",
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -43,6 +38,14 @@
 {
 "$type": "RogueEssence.Dungeon.CountState, RogueEssence",
 "Count": 2
+},
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": 6
+},
+{
+"$type": "PMDC.Dungeon.AttackedThisTurnState, PMDC",
+"Attacked": false
 }
 ],
 "OnSkillChanges": [],
@@ -226,7 +229,30 @@
 "OnMapStatusRemoves": [],
 "OnMapStarts": [],
 "OnTurnStarts": [],
-"OnTurnEnds": [],
+"OnTurnEnds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.CountDownRemoveEvent, PMDC",
+"ShowMessage": true
+}
+},
+{
+"Key": {
+"str": [
+1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.PoisonSingleEvent, PMDC",
+"Toxic": false
+}
+}
+],
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
@@ -255,6 +281,21 @@
 }
 ]
 }
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.OnAggressionEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.AttackedThisTurnEvent, PMDC"
+}
+]
+}
 }
 ],
 "UserElementEffects": [],
@@ -273,6 +314,19 @@
 }
 }
 ],
-"RestoreHPs": []
+"RestoreHPs": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.HealMultEvent, PMDC",
+"Numerator": 1,
+"Denominator": 2
+}
+}
+]
 }
 }

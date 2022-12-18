@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.6.0",
+"Version": "0.6.7.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -3760,7 +3760,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.6.6.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.7.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -4220,22 +4220,29 @@
 "Gender": -1
 },
 "Level": {
-"Min": 5,
-"Max": 5
+"Min": 7,
+"Max": 7
 },
 "SpecifiedSkills": [
+"leer",
 "peck"
 ],
 "Intrinsic": "poison_point",
-"Tactic": "wander_dumb",
-"SpawnConditions": [],
+"Tactic": "wander_normal",
+"SpawnConditions": [
+{
+"$type": "PMDC.LevelGen.MobCheckVersionDiff, PMDC",
+"Div": 2,
+"Remainder": 0
+}
+],
 "SpawnFeatures": [
 {
 "$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 1,
+"StartAt": 2,
 "Remove": false
 }
 ]
@@ -4245,35 +4252,42 @@
 "Rate": 10,
 "Range": {
 "Min": 0,
-"Max": 3
+"Max": 7
 }
 },
 {
 "Spawn": {
 "Spawn": {
 "BaseForm": {
-"Species": "nidoran_m",
+"Species": "nidoran_f",
 "Form": 0,
 "Skin": "",
 "Gender": -1
 },
 "Level": {
-"Min": 8,
-"Max": 8
+"Min": 7,
+"Max": 7
 },
 "SpecifiedSkills": [
-"peck"
+"growl",
+"scratch"
 ],
 "Intrinsic": "poison_point",
-"Tactic": "wander_dumb",
-"SpawnConditions": [],
+"Tactic": "wander_normal",
+"SpawnConditions": [
+{
+"$type": "PMDC.LevelGen.MobCheckVersionDiff, PMDC",
+"Div": 2,
+"Remainder": 1
+}
+],
 "SpawnFeatures": [
 {
 "$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 1,
+"StartAt": 2,
 "Remove": false
 }
 ]
@@ -4282,7 +4296,7 @@
 },
 "Rate": 10,
 "Range": {
-"Min": 3,
+"Min": 0,
 "Max": 7
 }
 },
@@ -4380,7 +4394,7 @@
 "absorb",
 "stun_spore"
 ],
-"Intrinsic": "natural_cure",
+"Intrinsic": "poison_point",
 "Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
@@ -6193,7 +6207,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.6.6.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.7.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -6259,7 +6273,7 @@
 "Amount": 0,
 "Price": 0
 },
-"Rate": 40,
+"Rate": 35,
 "Range": {
 "Min": 0,
 "Max": 3
@@ -6283,7 +6297,7 @@
 "SpawnRates": {
 "nodes": [
 {
-"Item": 20,
+"Item": 15,
 "Range": {
 "Min": 0,
 "Max": 3
@@ -6690,6 +6704,96 @@
 "Spawn": {
 "Spawn": {
 "BaseForm": {
+"Species": "nidoran_m",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 7,
+"Max": 7
+},
+"SpecifiedSkills": [
+"leer",
+"peck"
+],
+"Intrinsic": "poison_point",
+"Tactic": "wander_normal",
+"SpawnConditions": [
+{
+"$type": "PMDC.LevelGen.MobCheckVersionDiff, PMDC",
+"Div": 2,
+"Remainder": 0
+}
+],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+},
+"Role": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 3
+}
+},
+{
+"Spawn": {
+"Spawn": {
+"BaseForm": {
+"Species": "nidoran_f",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 7,
+"Max": 7
+},
+"SpecifiedSkills": [
+"growl",
+"scratch"
+],
+"Intrinsic": "poison_point",
+"Tactic": "wander_normal",
+"SpawnConditions": [
+{
+"$type": "PMDC.LevelGen.MobCheckVersionDiff, PMDC",
+"Div": 2,
+"Remainder": 1
+}
+],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+},
+"Role": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 3
+}
+},
+{
+"Spawn": {
+"Spawn": {
+"BaseForm": {
 "Species": "budew",
 "Form": 0,
 "Skin": "",
@@ -6701,7 +6805,7 @@
 },
 "SpecifiedSkills": [
 "absorb",
-"stun_spore"
+"poison_powder"
 ],
 "Intrinsic": "natural_cure",
 "Tactic": "wander_dumb",
@@ -6996,74 +7100,6 @@
 ]
 },
 "Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 3
-}
-},
-{
-"Spawn": {
-"Explorer": false,
-"Spawns": [
-{
-"BaseForm": {
-"Species": "nidoran_m",
-"Form": 0,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 10,
-"Max": 10
-},
-"SpecifiedSkills": [
-"double_kick"
-],
-"Intrinsic": "poison_point",
-"Tactic": "wander_dumb",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 1,
-"Remove": false
-}
-]
-},
-{
-"BaseForm": {
-"Species": "nidoran_f",
-"Form": 0,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 10,
-"Max": 10
-},
-"SpecifiedSkills": [
-"double_kick"
-],
-"Intrinsic": "poison_point",
-"Tactic": "wander_dumb",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 1,
-"Remove": false
-}
-]
-}
-]
-},
-"Rate": 16,
 "Range": {
 "Min": 0,
 "Max": 3

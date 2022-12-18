@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.6.0",
+"Version": "0.6.7.0",
 "Object": {
 "$type": "RogueEssence.Data.StatusData, RogueEssence",
 "Name": {
@@ -13,14 +13,8 @@
 }
 },
 "Desc": {
-"DefaultText": "The Pokémon takes gradually worsening damage every time it attacks. Its natural HP recovery is also stopped.",
-"LocalTexts": {
-"fr": "Le Pokémon subit progressivement des dégâts de plus en plus importants et ne regagne plus ses PV.",
-"de": "Das Pokémon nimmt nach und nach steigerenden Schaden, sobald es angreift. Des Weiteren verliert es seine natürliche KP-Regeneration.",
-"es": "El Pokémon recibe daño gradualmente y empeora cada vez que ataque. También la recuperación natural de PS se para. ",
-"pt": "O Pokémon sofre dano que se intensifica após cada golpe. Sua regeneração natural de PS também é interrompida.",
-"zh-hans": "这只宝可梦每次攻击时都会受到伤害，且每次受到的伤害会增加。这只宝可梦无法自然回复HP。"
-}
+"DefaultText": "The Pokémon takes damage on every action, with the damage worsening if it attacks. Its ability to recover HP is also reduced. This status wears off after a few turns.",
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -43,7 +37,15 @@
 },
 {
 "$type": "RogueEssence.Dungeon.CountState, RogueEssence",
-"Count": 0
+"Count": 2
+},
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": 6
+},
+{
+"$type": "PMDC.Dungeon.AttackedThisTurnState, PMDC",
+"Attacked": false
 }
 ],
 "OnSkillChanges": [],
@@ -227,7 +229,30 @@
 "OnMapStatusRemoves": [],
 "OnMapStarts": [],
 "OnTurnStarts": [],
-"OnTurnEnds": [],
+"OnTurnEnds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.CountDownRemoveEvent, PMDC",
+"ShowMessage": true
+}
+},
+{
+"Key": {
+"str": [
+1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.PoisonSingleEvent, PMDC",
+"Toxic": false
+}
+}
+],
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
@@ -256,6 +281,21 @@
 }
 ]
 }
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.OnAggressionEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.AttackedThisTurnEvent, PMDC"
+}
+]
+}
 }
 ],
 "UserElementEffects": [],
@@ -274,6 +314,19 @@
 }
 }
 ],
-"RestoreHPs": []
+"RestoreHPs": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.HealMultEvent, PMDC",
+"Numerator": 1,
+"Denominator": 2
+}
+}
+]
 }
 }

@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.6.0",
+"Version": "0.6.7.0",
 "Object": {
 "$type": "RogueEssence.Data.StatusData, RogueEssence",
 "Name": {
@@ -13,14 +13,8 @@
 }
 },
 "Desc": {
-"DefaultText": "The Pokémon will take some damage every turn, and its Attack will be lowered. This status wears off after a few turns.",
-"LocalTexts": {
-"fr": "Le Pokémon subit des dégâts à chaque tour. Ce statut disparaît après quelques tours.",
-"de": "Das Pokémon nimmt jeden Zug etwas Schaden und sein Angriff ist verringert. Dieser Status lässt nach einigen Zügen nach.",
-"es": "El Pokémon recibirá daño cada turno, y su Ataque bajará. Este estado desparece después de unos turnos.",
-"pt": "O Pokémon receberá um pouco de dano a cada turno, e seu Ataque cairá. Este efeito desaparece depois de alguns turnos.",
-"zh-hans": "这只宝可梦每回合会持续受到伤害，且攻击会下降。该状态在几个回合后解除。"
-}
+"DefaultText": "The Pokémon will take some damage every turn it attacks, and its Attack will be lowered.",
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -42,8 +36,8 @@
 "$type": "PMDC.Dungeon.TransferStatusState, PMDC"
 },
 {
-"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
-"Counter": 6
+"$type": "PMDC.Dungeon.AttackedThisTurnState, PMDC",
+"Attacked": false
 }
 ],
 "OnSkillChanges": [],
@@ -198,19 +192,7 @@
 "OnMapStatusRemoves": [],
 "OnMapStarts": [],
 "OnTurnStarts": [],
-"OnTurnEnds": [],
-"OnMapTurnEnds": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.CountDownRemoveEvent, PMDC",
-"ShowMessage": true
-}
-},
+"OnTurnEnds": [
 {
 "Key": {
 "str": [
@@ -222,6 +204,7 @@
 }
 }
 ],
+"OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
 "OnRefresh": [],
@@ -248,7 +231,23 @@
 "AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],
-"AfterActions": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.OnAggressionEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.AttackedThisTurnEvent, PMDC"
+}
+]
+}
+}
+],
 "UserElementEffects": [],
 "TargetElementEffects": [],
 "ModifyHPs": [],

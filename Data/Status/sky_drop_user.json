@@ -3,11 +3,11 @@
 "Object": {
 "$type": "RogueEssence.Data.StatusData, RogueEssence",
 "Name": {
-"DefaultText": "Paused",
+"DefaultText": "Sky Drop",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "The Pokémon is rendered incapable of taking any action. This status wears off after a few turns.",
+"DefaultText": "The Pokémon is holding its target in the sky and can avoid most moves. It will drop back down on the next turn.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -17,20 +17,9 @@
 "Emoticon": "",
 "DropEmoticon": "",
 "FreeEmote": "",
-"DrawEffect": -1,
-"Targeted": false,
-"StatusStates": [
-{
-"$type": "PMDC.Dungeon.BadStatusState, PMDC"
-},
-{
-"$type": "PMDC.Dungeon.TransferStatusState, PMDC"
-},
-{
-"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
-"Counter": 2
-}
-],
+"DrawEffect": 4,
+"Targeted": true,
+"StatusStates": [],
 "OnSkillChanges": [],
 "TargetPassive": {
 "OnEquips": [],
@@ -104,9 +93,9 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.StatusBattleLogEvent, PMDC",
+"$type": "PMDC.Dungeon.TargetedBattleLogEvent, PMDC",
 "Message": {
-"Key": "MSG_PAUSE_START"
+"Key": "MSG_SKY_DROP_CHARGE"
 },
 "Delay": true
 }
@@ -122,9 +111,21 @@
 "Value": {
 "$type": "PMDC.Dungeon.StatusBattleLogEvent, PMDC",
 "Message": {
-"Key": "MSG_PAUSE_END"
+"Key": "MSG_FLY_END"
 },
 "Delay": false
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveTargetStatusEvent, PMDC",
+"StatusID": "sky_drop_target",
+"ShowMessage": false
 }
 }
 ],
@@ -139,7 +140,7 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.CountDownRemoveEvent, PMDC",
+"$type": "PMDC.Dungeon.CheckNullTargetEvent, PMDC",
 "ShowMessage": true
 }
 }
@@ -156,8 +157,7 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.ImmobilizationEvent, PMDC",
-"States": []
+"$type": "PMDC.Dungeon.AttackOnlyEvent, PMDC"
 }
 },
 {
@@ -167,11 +167,37 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.AttackOnlyEvent, PMDC"
+"$type": "PMDC.Dungeon.ImmobilizationEvent, PMDC",
+"States": []
 }
 }
 ],
 "BeforeTryActions": [
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.ForceMoveEvent, PMDC",
+"MoveIndex": "sky_drop"
+}
+},
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AddContextStateEvent, PMDC",
+"AddedState": {
+"$type": "PMDC.Dungeon.MoveCharge, PMDC"
+},
+"Global": false
+}
+},
 {
 "Key": {
 "str": [
@@ -181,26 +207,8 @@
 "Value": {
 "$type": "PMDC.Dungeon.PreventActionEvent, PMDC",
 "Actions": [
+1,
 2
-],
-"Message": {
-"Key": "MSG_CANT_USE_ITEM"
-}
-}
-},
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.PreventItemActionEvent, PMDC",
-"ExceptTypes": [
-{
-"assembly": "PMDC, Version=0.6.7.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.CurerState"
-}
 ],
 "Message": {
 "Key": "MSG_CANT_USE_ITEM"
@@ -216,14 +224,7 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.PreventActionEvent, PMDC",
-"Actions": [
-2,
-0
-],
-"Message": {
-"Key": "MSG_PAUSE"
-}
+"$type": "PMDC.Dungeon.ForceFaceTargetEvent, PMDC"
 }
 },
 {
@@ -233,22 +234,35 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.PreventItemActionEvent, PMDC",
-"ExceptTypes": [
-{
-"assembly": "PMDC, Version=0.6.7.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.CurerState"
-}
-],
-"Message": {
-"Key": "MSG_PAUSE"
-}
+"$type": "PMDC.Dungeon.RemoveOnActionEvent, PMDC",
+"ShowMessage": false
 }
 }
 ],
 "OnActions": [],
 "BeforeHittings": [],
-"BeforeBeingHits": [],
+"BeforeBeingHits": [
+{
+"Key": {
+"str": [
+-2
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.SemiInvulEvent, PMDC",
+"ExceptionMoves": [
+"gust",
+"whirlwind",
+"thunder",
+"twister",
+"sky_uppercut",
+"smack_down",
+"hurricane",
+"thousand_arrows"
+]
+}
+}
+],
 "AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],

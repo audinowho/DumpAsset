@@ -3,11 +3,11 @@
 "Object": {
 "$type": "RogueEssence.Data.StatusData, RogueEssence",
 "Name": {
-"DefaultText": "Paused",
+"DefaultText": "Sky Drop",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "The Pokémon is rendered incapable of taking any action. This status wears off after a few turns.",
+"DefaultText": "The Pokémon is being held in the sky and is rendered incapable of any action. Most moves will miss the Pokémon during this time.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -17,20 +17,9 @@
 "Emoticon": "",
 "DropEmoticon": "",
 "FreeEmote": "",
-"DrawEffect": -1,
-"Targeted": false,
-"StatusStates": [
-{
-"$type": "PMDC.Dungeon.BadStatusState, PMDC"
-},
-{
-"$type": "PMDC.Dungeon.TransferStatusState, PMDC"
-},
-{
-"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
-"Counter": 2
-}
-],
+"DrawEffect": 4,
+"Targeted": true,
+"StatusStates": [],
 "OnSkillChanges": [],
 "TargetPassive": {
 "OnEquips": [],
@@ -95,8 +84,7 @@
 },
 "OnEquips": [],
 "OnPickups": [],
-"BeforeStatusAdds": [],
-"OnStatusAdds": [
+"BeforeStatusAdds": [
 {
 "Key": {
 "str": [
@@ -104,14 +92,14 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.StatusBattleLogEvent, PMDC",
+"$type": "PMDC.Dungeon.SameTargetedStatusCheck, PMDC",
 "Message": {
-"Key": "MSG_PAUSE_START"
-},
-"Delay": true
+"Key": "MSG_SKILL_FAILED"
+}
 }
 }
 ],
+"OnStatusAdds": [],
 "OnStatusRemoves": [
 {
 "Key": {
@@ -122,9 +110,36 @@
 "Value": {
 "$type": "PMDC.Dungeon.StatusBattleLogEvent, PMDC",
 "Message": {
-"Key": "MSG_PAUSE_END"
+"Key": "MSG_TRAP_END"
 },
 "Delay": false
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveTargetStatusEvent, PMDC",
+"StatusID": "sky_drop_user",
+"ShowMessage": true
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatusCharAnimEvent, PMDC",
+"CharAnim": {
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 2,
+"AnimOverride": 4
+}
 }
 }
 ],
@@ -139,7 +154,7 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.CountDownRemoveEvent, PMDC",
+"$type": "PMDC.Dungeon.CheckNullTargetEvent, PMDC",
 "ShowMessage": true
 }
 }
@@ -181,26 +196,8 @@
 "Value": {
 "$type": "PMDC.Dungeon.PreventActionEvent, PMDC",
 "Actions": [
+1,
 2
-],
-"Message": {
-"Key": "MSG_CANT_USE_ITEM"
-}
-}
-},
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.PreventItemActionEvent, PMDC",
-"ExceptTypes": [
-{
-"assembly": "PMDC, Version=0.6.7.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.CurerState"
-}
 ],
 "Message": {
 "Key": "MSG_CANT_USE_ITEM"
@@ -218,37 +215,40 @@
 "Value": {
 "$type": "PMDC.Dungeon.PreventActionEvent, PMDC",
 "Actions": [
-2,
-0
+0,
+1,
+2
 ],
 "Message": {
-"Key": "MSG_PAUSE"
-}
-}
-},
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.PreventItemActionEvent, PMDC",
-"ExceptTypes": [
-{
-"assembly": "PMDC, Version=0.6.7.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.CurerState"
-}
-],
-"Message": {
-"Key": "MSG_PAUSE"
+"Key": null
 }
 }
 }
 ],
 "OnActions": [],
 "BeforeHittings": [],
-"BeforeBeingHits": [],
+"BeforeBeingHits": [
+{
+"Key": {
+"str": [
+-2
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.SemiInvulEvent, PMDC",
+"ExceptionMoves": [
+"gust",
+"whirlwind",
+"thunder",
+"twister",
+"sky_uppercut",
+"smack_down",
+"hurricane",
+"thousand_arrows"
+]
+}
+}
+],
 "AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],

@@ -4,18 +4,11 @@
 "$type": "RogueEssence.Data.MapStatusData, RogueEssence",
 "Name": {
 "DefaultText": "Gravity",
-"LocalTexts": {
-"fr": "Gravitée",
-"de": "Erdanziehung",
-"es": "Gravedad"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "All Pokémon on the floor become less evasive and are forced to drop to the ground.",
-"LocalTexts": {
-"de": "Alle Pokémon auf der Ebene können weniger ausweichen und sind gezwungen, auf den Boden zu fallen.",
-"es": "Todos los Pokémon del piso se vuelven menos evasivos y están forzados a caer al suelo."
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -114,6 +107,21 @@
 },
 "Value": {
 "$type": "PMDC.Dungeon.PreventStatusCheck, PMDC",
+"StatusID": "sky_drop_target",
+"Message": {
+"Key": "MSG_GRAVITY_NO_FLY"
+},
+"Anims": []
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.PreventStatusCheck, PMDC",
 "StatusID": "bouncing",
 "Message": {
 "Key": "MSG_GRAVITY_NO_BOUNCE"
@@ -191,6 +199,20 @@
 "BaseEvent": {
 "$type": "PMDC.Dungeon.RemoveStatusEvent, PMDC",
 "StatusID": "flying"
+}
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MapStatusCharEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.RemoveStatusEvent, PMDC",
+"StatusID": "sky_drop_target"
 }
 }
 },

@@ -115,19 +115,28 @@
 "Value": {
 "$type": "PMDC.Dungeon.ChargeCustomEvent, PMDC",
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
+"$type": "RogueEssence.Dungeon.DashAction, RogueEssence",
+"Anim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"AnimOffset": 0,
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
 },
 "WideAngle": 0,
-"CharAnimData": {
-"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
-"Process": 4,
-"AnimOverride": 5
-},
+"SnapBack": false,
+"CharAnim": 5,
+"AppearanceMod": 3,
+"HitTiles": true,
+"Range": 2,
+"StopAtHit": true,
+"StopAtWall": true,
 "TargetAlignments": 6,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
@@ -136,7 +145,7 @@
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "DUN_Fly",
+"Sound": "DUN_Thief",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -183,8 +192,32 @@
 "HitRate": -1,
 "SkillStates": [],
 "BeforeTryActions": [],
-"BeforeActions": [],
-"OnActions": [],
+"BeforeActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.SingleStrikeEvent, PMDC"
+}
+}
+],
+"OnActions": [
+{
+"Key": {
+"str": [
+1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.NoPierceEvent, PMDC",
+"PierceEnemies": true,
+"PierceWalls": false
+}
+}
+],
 "BeforeExplosions": [],
 "BeforeHits": [],
 "OnHits": [
@@ -195,7 +228,7 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.CoupledStatusBattleEvent, PMDC",
+"$type": "PMDC.Dungeon.SkyDropStatusBattleEvent, PMDC",
 "AltStatusID": "sky_drop_user",
 "StatusID": "sky_drop_target",
 "AffectTarget": true,

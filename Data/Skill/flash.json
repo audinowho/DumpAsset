@@ -4,36 +4,16 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Flash",
-"LocalTexts": {
-"fr": "Flash",
-"de": "Blitz",
-"es": "Destello",
-"it": "Flash",
-"ko": "플래시",
-"ja": "フラッシュ",
-"ja-jp": "フラッシュ",
-"zh-hans": "闪光",
-"zh-hant": "閃光"
-}
+"LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "The user flashes a bright light that cuts the target’s accuracy.",
-"LocalTexts": {
-"fr": "Explosion lumineuse qui fait baisser la Précision de l’ennemi.",
-"de": "Erzeugt helles Licht, das die Genauigkeit des Zieles senkt.",
-"es": "Luz cegadora que baja la Precisión del objetivo.",
-"it": "Investe il bersaglio con una luce abbagliante che ne riduce la precisione.",
-"ko": "눈이 부신 빛으로 상대의 명중률을 떨어뜨린다.",
-"ja": "まぶしい　ひかりで　あいての めいちゅうりつを　さげる。",
-"ja-jp": "まぶしい　光で　相手の 命中率を　さげる。",
-"zh-hans": "使出耀眼光芒， 从而降低对手的命中率。",
-"zh-hant": "放出耀眼的光芒， 降低對手的命中率。"
-}
+"DefaultText": "The user flashes a bright light that cuts the target's accuracy. It also reveals part of the floor.",
+"LocalTexts": {}
 },
 "Released": true,
-"Comment": "No Intro Sound",
+"Comment": "",
 "IndexNum": 148,
-"BaseCharges": 15,
+"BaseCharges": 12,
 "Strikes": 1,
 "HitboxAction": {
 "$type": "RogueEssence.Dungeon.AreaAction, RogueEssence",
@@ -80,8 +60,30 @@
 "Delay": 0,
 "Sound": "DUN_Disable",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.FiniteOverlayEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"AnimIndex": "White",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 128,
+"AnimFlip": 0
+},
+"Movement": {
+"X": 0,
+"Y": -1
+},
+"RepeatX": false,
+"RepeatY": false,
+"FadeIn": 0,
+"FadeOut": 0,
+"TotalTime": 60,
+"Layer": 0,
+"Color": "255, 255, 255, 255"
 },
 "ScreenMovement": {
 "MinShake": 0,
@@ -151,7 +153,19 @@
 }
 ],
 "OnHitTiles": [],
-"AfterActions": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MapOutRadiusEvent, PMDC",
+"Radius": 20
+}
+}
+],
 "ElementEffects": [],
 "IntroFX": [],
 "HitFX": {
@@ -168,8 +182,9 @@
 }
 },
 "HitCharAction": {
-"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 0
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
 }
 }
 }

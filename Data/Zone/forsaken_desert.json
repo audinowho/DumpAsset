@@ -6,7 +6,7 @@
 "DefaultText": "Forsaken Desert",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "NoEXP": false,
 "Level": -1,
@@ -51,8 +51,8 @@
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "CellWidth": 8,
 "CellHeight": 8,
-"CellX": 30,
-"CellY": 30,
+"CellX": 32,
+"CellY": 32,
 "CellWall": 1,
 "Wrap": false
 }
@@ -239,6 +239,60 @@
 ]
 },
 "Value": {
+"$type": "RogueEssence.LevelGen.MapEffectStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Effect": {
+"UniversalStates": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeExplosions": [],
+"BeforeHits": [],
+"OnHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"ElementEffects": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [
+{
+"Key": {
+"str": [
+15
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.DespawnRadiusEvent, PMDC",
+"Radius": 160,
+"DespawnTime": 160
+}
+}
+],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"OnMapRefresh": [],
+"ModifyHPs": [],
+"RestoreHPs": [],
+"InitActionData": []
+}
+}
+},
+{
+"Key": {
+"str": [
+1,
+2
+]
+},
+"Value": {
 "$type": "PMDC.LevelGen.MobSpawnSettingsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
 "Priority": {
 "str": [
@@ -246,8 +300,9 @@
 ]
 },
 "Respawn": {
-"$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
-"MaxFoes": 3,
+"$type": "PMDC.Dungeon.RespawnFromRandomEvent, PMDC",
+"Radius": 120,
+"MaxFoes": 100,
 "RespawnTime": 80
 },
 "MaxFoes": 0,
@@ -453,8 +508,8 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.MoneyDivSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "DivAmount": {
-"Min": 2,
-"Max": 4
+"Min": 250,
+"Max": 250
 }
 }
 }
@@ -479,8 +534,8 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 3,
-"Max": 6
+"Min": 250,
+"Max": 250
 }
 }
 }
@@ -493,19 +548,13 @@
 ]
 },
 "Value": {
-"$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"Filters": [
-{
-"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
-"Connection": 1
-}
-],
-"ClumpFactor": 20,
+"$type": "RogueEssence.LevelGen.PlaceRadiusMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Radius": 120,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
-"Min": 200,
-"Max": 250
+"Min": 100,
+"Max": 100
 }
 },
 "Ally": false
@@ -897,6 +946,60 @@
 ]
 },
 "Value": {
+"$type": "RogueEssence.LevelGen.MapEffectStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Effect": {
+"UniversalStates": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeExplosions": [],
+"BeforeHits": [],
+"OnHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"ElementEffects": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [
+{
+"Key": {
+"str": [
+15
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.DespawnRadiusEvent, PMDC",
+"Radius": 160,
+"DespawnTime": 120
+}
+}
+],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"OnMapRefresh": [],
+"ModifyHPs": [],
+"RestoreHPs": [],
+"InitActionData": []
+}
+}
+},
+{
+"Key": {
+"str": [
+1,
+2
+]
+},
+"Value": {
 "$type": "PMDC.LevelGen.MobSpawnSettingsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
 "Priority": {
 "str": [
@@ -904,9 +1007,10 @@
 ]
 },
 "Respawn": {
-"$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
-"MaxFoes": 3,
-"RespawnTime": 80
+"$type": "PMDC.Dungeon.RespawnFromRandomEvent, PMDC",
+"Radius": 120,
+"MaxFoes": 120,
+"RespawnTime": 60
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -1111,8 +1215,8 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.MoneyDivSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "DivAmount": {
-"Min": 2,
-"Max": 4
+"Min": 250,
+"Max": 250
 }
 }
 }
@@ -1137,8 +1241,8 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 3,
-"Max": 6
+"Min": 250,
+"Max": 250
 }
 }
 }
@@ -1151,19 +1255,13 @@
 ]
 },
 "Value": {
-"$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"Filters": [
-{
-"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
-"Connection": 1
-}
-],
-"ClumpFactor": 20,
+"$type": "RogueEssence.LevelGen.PlaceRadiusMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Radius": 120,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
-"Min": 200,
-"Max": 250
+"Min": 120,
+"Max": 120
 }
 },
 "Ally": false
@@ -1612,6 +1710,60 @@
 ]
 },
 "Value": {
+"$type": "RogueEssence.LevelGen.MapEffectStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Effect": {
+"UniversalStates": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeExplosions": [],
+"BeforeHits": [],
+"OnHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"ElementEffects": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [
+{
+"Key": {
+"str": [
+15
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.DespawnRadiusEvent, PMDC",
+"Radius": 160,
+"DespawnTime": 120
+}
+}
+],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"OnMapRefresh": [],
+"ModifyHPs": [],
+"RestoreHPs": [],
+"InitActionData": []
+}
+}
+},
+{
+"Key": {
+"str": [
+1,
+2
+]
+},
+"Value": {
 "$type": "PMDC.LevelGen.MobSpawnSettingsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
 "Priority": {
 "str": [
@@ -1619,9 +1771,10 @@
 ]
 },
 "Respawn": {
-"$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
-"MaxFoes": 3,
-"RespawnTime": 80
+"$type": "PMDC.Dungeon.RespawnFromRandomEvent, PMDC",
+"Radius": 120,
+"MaxFoes": 120,
+"RespawnTime": 60
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -1826,8 +1979,8 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.MoneyDivSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "DivAmount": {
-"Min": 2,
-"Max": 4
+"Min": 250,
+"Max": 250
 }
 }
 }
@@ -1852,8 +2005,8 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 3,
-"Max": 6
+"Min": 250,
+"Max": 250
 }
 }
 }
@@ -1866,19 +2019,13 @@
 ]
 },
 "Value": {
-"$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"Filters": [
-{
-"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
-"Connection": 1
-}
-],
-"ClumpFactor": 20,
+"$type": "RogueEssence.LevelGen.PlaceRadiusMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Radius": 120,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
-"Min": 200,
-"Max": 250
+"Min": 120,
+"Max": 120
 }
 },
 "Ally": false
@@ -2349,6 +2496,60 @@
 ]
 },
 "Value": {
+"$type": "RogueEssence.LevelGen.MapEffectStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Effect": {
+"UniversalStates": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeExplosions": [],
+"BeforeHits": [],
+"OnHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"ElementEffects": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [
+{
+"Key": {
+"str": [
+15
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.DespawnRadiusEvent, PMDC",
+"Radius": 160,
+"DespawnTime": 120
+}
+}
+],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"OnMapRefresh": [],
+"ModifyHPs": [],
+"RestoreHPs": [],
+"InitActionData": []
+}
+}
+},
+{
+"Key": {
+"str": [
+1,
+2
+]
+},
+"Value": {
 "$type": "PMDC.LevelGen.MobSpawnSettingsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
 "Priority": {
 "str": [
@@ -2356,9 +2557,10 @@
 ]
 },
 "Respawn": {
-"$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
-"MaxFoes": 3,
-"RespawnTime": 80
+"$type": "PMDC.Dungeon.RespawnFromRandomEvent, PMDC",
+"Radius": 120,
+"MaxFoes": 120,
+"RespawnTime": 60
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -2563,8 +2765,8 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.MoneyDivSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "DivAmount": {
-"Min": 2,
-"Max": 4
+"Min": 250,
+"Max": 250
 }
 }
 }
@@ -2589,8 +2791,8 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 3,
-"Max": 6
+"Min": 250,
+"Max": 250
 }
 }
 }
@@ -2603,19 +2805,13 @@
 ]
 },
 "Value": {
-"$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"Filters": [
-{
-"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
-"Connection": 1
-}
-],
-"ClumpFactor": 20,
+"$type": "RogueEssence.LevelGen.PlaceRadiusMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Radius": 120,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
-"Min": 200,
-"Max": 250
+"Min": 120,
+"Max": 120
 }
 },
 "Ally": false
@@ -3129,12 +3325,12 @@
 ]
 },
 "StartAmount": {
-"Min": 1,
-"Max": 1
+"Min": 10,
+"Max": 21
 },
 "AddAmount": {
-"Min": 0,
-"Max": 0
+"Min": 10,
+"Max": 10
 },
 "ModStates": [
 {
@@ -3151,7 +3347,93 @@
 1
 ]
 },
-"Spawns": {}
+"Spawns": {
+"necessities": {
+"Spawns": [
+{
+"Spawn": {
+"ID": "berry_leppa",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 9,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+},
+{
+"Spawn": {
+"ID": "berry_oran",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 12,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+},
+{
+"Spawn": {
+"ID": "berry_lum",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+},
+{
+"Spawn": {
+"ID": "seed_reviver",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 5,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+},
+{
+"Spawn": {
+"ID": "seed_blast",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 9,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+}
+],
+"SpawnRates": {
+"nodes": [
+{
+"Item": 14,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+}
+]
+}
+}
+}
 },
 {
 "$type": "RogueEssence.LevelGen.TeamSpawnZoneStep, RogueEssence",

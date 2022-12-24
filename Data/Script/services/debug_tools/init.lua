@@ -159,6 +159,11 @@ function DebugTools:OnUpgrade()
     SV.General.Starter = MonsterID("bulbasaur", 0, "normal", Gender.Male)
   end
   
+  local oldVersion = _DATA.Save.GameVersion
+  if oldVersion.Major <= 0 and oldVersion.Minor <= 6 and oldVersion.Build <= 7 then
+    _DATA.Save:DeleteOutdatedAssets(RogueEssence.Data.DataManager.DataType.Item)
+  end
+  
   PrintInfo("=>> Loaded version")
 end
 

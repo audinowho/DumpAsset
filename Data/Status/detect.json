@@ -7,7 +7,7 @@
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "The Pokémon is protected from all moves. This status wears off after a few turns, or if the Pokémon attacks.",
+"DefaultText": "The Pokémon is protected from all moves. This status wears off after a few turns.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -22,9 +22,6 @@
 "StatusStates": [
 {
 "$type": "PMDC.Dungeon.TransferStatusState, PMDC"
-},
-{
-"$type": "PMDC.Dungeon.RecentState, PMDC"
 },
 {
 "$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
@@ -164,18 +161,7 @@
 "OnDeaths": [],
 "OnRefresh": [],
 "BeforeTryActions": [],
-"BeforeActions": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.RemoveRecentEvent, PMDC"
-}
-}
-],
+"BeforeActions": [],
 "OnActions": [],
 "BeforeHittings": [],
 "BeforeBeingHits": [
@@ -223,28 +209,7 @@
 "AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],
-"AfterActions": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.ExceptionStatusEvent, PMDC",
-"States": [
-{
-"assembly": "PMDC, Version=0.6.7.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.RecentState"
-}
-],
-"BaseEvent": {
-"$type": "PMDC.Dungeon.RemoveOnActionEvent, PMDC",
-"ShowMessage": true
-}
-}
-}
-],
+"AfterActions": [],
 "UserElementEffects": [],
 "TargetElementEffects": [],
 "ModifyHPs": [],

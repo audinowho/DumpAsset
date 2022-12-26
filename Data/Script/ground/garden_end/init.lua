@@ -92,7 +92,7 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
   GROUND:CharAnimateTurnTo(shaymin, Direction.Down, turnTime)
   
   -- oh, a visitor?
-  UI:SetSpeaker(STRINGS:Format("\\uE040"), true, 492, 0, 0, RogueEssence.Data.Gender.Unknown)
+  UI:SetSpeaker(STRINGS:Format("\\uE040"), true, "shaymin", 0, "normal", RogueEssence.Data.Gender.Unknown)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
   
   GROUND:CharSetEmote(shaymin, "glowing", 4)

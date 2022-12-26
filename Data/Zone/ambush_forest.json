@@ -9,7 +9,7 @@
 "Released": false,
 "Comment": "",
 "NoEXP": false,
-"Level": -1,
+"Level": 30,
 "LevelCap": false,
 "TeamRestrict": false,
 "TeamSize": -1,
@@ -14129,12 +14129,12 @@
 ]
 },
 "StartAmount": {
-"Min": 1,
-"Max": 1
+"Min": 235,
+"Max": 280
 },
 "AddAmount": {
-"Min": 0,
-"Max": 0
+"Min": 20,
+"Max": 24
 },
 "ModStates": [
 {
@@ -16010,7 +16010,7 @@
 "flame_charge"
 ],
 "Intrinsic": "magician",
-"Tactic": "wander_normal",
+"Tactic": "thief",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -16518,7 +16518,7 @@
 "fury_swipes"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "thief",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -16713,8 +16713,8 @@
 "howl",
 "fire_spin"
 ],
-"Intrinsic": "",
-"Tactic": "wander_normal",
+"Intrinsic": "magician",
+"Tactic": "thief",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -16902,10 +16902,13 @@
 "Gender": -1
 },
 "Level": {
-"Min": 5,
-"Max": 5
+"Min": 31,
+"Max": 31
 },
-"SpecifiedSkills": [],
+"SpecifiedSkills": [
+"hypnosis",
+"dream_eater"
+],
 "Intrinsic": "",
 "Tactic": "wander_normal",
 "SpawnConditions": [],
@@ -16915,7 +16918,7 @@
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 0,
+"StartAt": 2,
 "Remove": false
 }
 ]
@@ -16935,6 +16938,30 @@
 "Rate": 12,
 "Range": {
 "Min": 0,
+"Max": 25
+}
+},
+{
+"Spawn": 2,
+"Rate": 3,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": 2,
+"Rate": 4,
+"Range": {
+"Min": 10,
+"Max": 25
+}
+},
+{
+"Spawn": 3,
+"Rate": 3,
+"Range": {
+"Min": 15,
 "Max": 25
 }
 }

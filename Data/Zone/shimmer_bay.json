@@ -9,7 +9,7 @@
 "Released": true,
 "Comment": "",
 "NoEXP": false,
-"Level": -1,
+"Level": 25,
 "LevelCap": false,
 "TeamRestrict": false,
 "TeamSize": -1,
@@ -7281,12 +7281,12 @@
 ]
 },
 "StartAmount": {
-"Min": 15,
-"Max": 19
+"Min": 120,
+"Max": 145
 },
 "AddAmount": {
-"Min": 15,
-"Max": 19
+"Min": 18,
+"Max": 22
 },
 "ModStates": [
 {
@@ -8364,7 +8364,7 @@
 "encore"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -8443,7 +8443,7 @@
 "water_pulse"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -8482,7 +8482,7 @@
 "bubble_beam"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -8521,7 +8521,7 @@
 "twister"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -8560,7 +8560,7 @@
 "screech"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -8599,7 +8599,7 @@
 "astonish"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -8638,7 +8638,7 @@
 "wrap"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -8677,7 +8677,7 @@
 "lucky_chant"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -8716,7 +8716,7 @@
 "spark"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -8755,7 +8755,7 @@
 "bubble_beam"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -8795,7 +8795,7 @@
 "acid_armor"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -8835,7 +8835,7 @@
 "dive"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -8875,7 +8875,7 @@
 "dive"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -8914,7 +8914,7 @@
 "dragon_rage"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -8945,10 +8945,14 @@
 "Gender": -1
 },
 "Level": {
-"Min": 5,
-"Max": 5
+"Min": 50,
+"Max": 50
 },
-"SpecifiedSkills": [],
+"SpecifiedSkills": [
+"aqua_ring",
+"acid_armor",
+"muddy_water"
+],
 "Intrinsic": "",
 "Tactic": "wander_normal",
 "SpawnConditions": [],
@@ -8958,7 +8962,7 @@
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 0,
+"StartAt": 3,
 "Remove": false
 }
 ]
@@ -8976,6 +8980,14 @@
 {
 "Spawn": 1,
 "Rate": 12,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": 2,
+"Rate": 3,
 "Range": {
 "Min": 0,
 "Max": 12

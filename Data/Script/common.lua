@@ -283,9 +283,6 @@ function COMMON.BossTransition()
     GAME:WaitFrames(40)
     GAME:FadeOut(true, 30)
     GAME:WaitFrames(80)
-	
-	
-    GAME:FadeIn(20)
 end
 
 function COMMON.GiftItem(player, receive_item)

@@ -369,14 +369,77 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 3,
-"OrderSoftness": 1,
-"WaterPercent": {
-"Min": 30,
-"Max": 30
+"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Blobs": {
+"Min": 0,
+"Max": 3
 },
-"Bowl": true,
+"AreaScale": {
+"Min": 1,
+"Max": 20
+},
+"GenerateScale": {
+"Min": 1,
+"Max": 20
+},
+"BlobStencil": {
+"$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MatchTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"MatchTiles": [
+{
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "grass",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+}
+]
+},
+"Global": false,
+"Negate": false
+},
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -402,80 +465,7 @@
 }
 },
 "TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": true,
-"Not": false
-}
-}
-},
-{
-"Key": {
-"str": [
-3,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "water",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Danger": false,
-"Owner": 0,
-"TileStates": []
-}
-}
-}
-},
-{
-"Key": {
-"str": [
-3,
-2
-]
-},
-"Value": {
-"$type": "RogueElements.EraseIsolatedStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "water",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Danger": false,
-"Owner": 0,
-"TileStates": []
-}
+"$type": "RogueElements.DefaultTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements"
 }
 }
 },
@@ -487,9 +477,9 @@
 },
 "Value": {
 "$type": "RogueEssence.LevelGen.MapTextureStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"GroundTileset": "northern_desert_1_floor",
-"BlockTileset": "northern_desert_1_wall",
-"WaterTileset": "northern_desert_1_secondary",
+"GroundTileset": "desert_region_floor",
+"BlockTileset": "desert_region_wall",
+"WaterTileset": "desert_region_secondary",
 "LayeredGround": false,
 "IndependentGround": false,
 "GroundElement": "ground"
@@ -1076,14 +1066,77 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 3,
-"OrderSoftness": 1,
-"WaterPercent": {
-"Min": 30,
-"Max": 30
+"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Blobs": {
+"Min": 0,
+"Max": 3
 },
-"Bowl": true,
+"AreaScale": {
+"Min": 1,
+"Max": 20
+},
+"GenerateScale": {
+"Min": 1,
+"Max": 20
+},
+"BlobStencil": {
+"$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MatchTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"MatchTiles": [
+{
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "grass",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+}
+]
+},
+"Global": false,
+"Negate": false
+},
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -1109,80 +1162,7 @@
 }
 },
 "TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": true,
-"Not": false
-}
-}
-},
-{
-"Key": {
-"str": [
-3,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "water",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Danger": false,
-"Owner": 0,
-"TileStates": []
-}
-}
-}
-},
-{
-"Key": {
-"str": [
-3,
-2
-]
-},
-"Value": {
-"$type": "RogueElements.EraseIsolatedStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "water",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Danger": false,
-"Owner": 0,
-"TileStates": []
-}
+"$type": "RogueElements.DefaultTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements"
 }
 }
 },
@@ -1840,14 +1820,77 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 3,
-"OrderSoftness": 1,
-"WaterPercent": {
-"Min": 30,
-"Max": 30
+"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Blobs": {
+"Min": 0,
+"Max": 3
 },
-"Bowl": true,
+"AreaScale": {
+"Min": 1,
+"Max": 20
+},
+"GenerateScale": {
+"Min": 1,
+"Max": 20
+},
+"BlobStencil": {
+"$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MatchTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"MatchTiles": [
+{
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "grass",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+}
+]
+},
+"Global": false,
+"Negate": false
+},
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -1873,80 +1916,7 @@
 }
 },
 "TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": true,
-"Not": false
-}
-}
-},
-{
-"Key": {
-"str": [
-3,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "water",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Danger": false,
-"Owner": 0,
-"TileStates": []
-}
-}
-}
-},
-{
-"Key": {
-"str": [
-3,
-2
-]
-},
-"Value": {
-"$type": "RogueElements.EraseIsolatedStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "water",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Danger": false,
-"Owner": 0,
-"TileStates": []
-}
+"$type": "RogueElements.DefaultTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements"
 }
 }
 },
@@ -2626,14 +2596,77 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 3,
-"OrderSoftness": 1,
-"WaterPercent": {
-"Min": 30,
-"Max": 30
+"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Blobs": {
+"Min": 0,
+"Max": 3
 },
-"Bowl": true,
+"AreaScale": {
+"Min": 1,
+"Max": 20
+},
+"GenerateScale": {
+"Min": 1,
+"Max": 20
+},
+"BlobStencil": {
+"$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MatchTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"MatchTiles": [
+{
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "grass",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+}
+]
+},
+"Global": false,
+"Negate": false
+},
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -2659,80 +2692,7 @@
 }
 },
 "TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": true,
-"Not": false
-}
-}
-},
-{
-"Key": {
-"str": [
-3,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "water",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Danger": false,
-"Owner": 0,
-"TileStates": []
-}
-}
-}
-},
-{
-"Key": {
-"str": [
-3,
-2
-]
-},
-"Value": {
-"$type": "RogueElements.EraseIsolatedStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "water",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Danger": false,
-"Owner": 0,
-"TileStates": []
-}
+"$type": "RogueElements.DefaultTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements"
 }
 }
 },
@@ -2744,9 +2704,9 @@
 },
 "Value": {
 "$type": "RogueEssence.LevelGen.MapTextureStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"GroundTileset": "great_canyon_floor",
-"BlockTileset": "great_canyon_wall",
-"WaterTileset": "great_canyon_secondary",
+"GroundTileset": "northern_desert_2_floor",
+"BlockTileset": "northern_desert_2_wall",
+"WaterTileset": "northern_desert_2_secondary",
 "LayeredGround": false,
 "IndependentGround": false,
 "GroundElement": "ground"

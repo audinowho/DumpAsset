@@ -7,10 +7,10 @@
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "Boosts the Pokémon's Sp. Atk stat when it takes a hit that causes its HP to become half or less.",
+"DefaultText": "Boosts the Pokémon's Sp. Atk stat when its HP is half or less.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 201,
 "ProximityEvent": {
@@ -61,7 +61,29 @@
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [],
+"OnActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.PinchNeededEvent, PMDC",
+"Denominator": 2,
+"AffectTarget": false,
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.MultiplyCategoryEvent, PMDC",
+"Category": 2,
+"Numerator": 4,
+"Denominator": 3,
+"Anims": []
+}
+]
+}
+}
+],
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],

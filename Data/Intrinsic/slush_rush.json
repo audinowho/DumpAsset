@@ -10,7 +10,7 @@
 "DefaultText": "Boosts the Pokémon's Speed stat in a hailstorm.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 202,
 "ProximityEvent": {
@@ -58,7 +58,32 @@
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
-"OnRefresh": [],
+"OnRefresh": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MiscEvent, PMDC",
+"Effect": {
+"$type": "PMDC.Dungeon.HailState, PMDC"
+}
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.WeatherSpeedEvent, PMDC",
+"WeatherID": "hail"
+}
+}
+],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],

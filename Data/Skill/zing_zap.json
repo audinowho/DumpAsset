@@ -4,56 +4,79 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Zing Zap",
-"LocalTexts": {
-"fr": "Électrikipik",
-"de": "Elektropikser",
-"es": "Electropunzada",
-"it": "Elettropizzico",
-"ko": "찌리리따끔따끔",
-"ja": "びりびりちくちく",
-"ja-jp": "びりびりちくちく",
-"zh-hans": "麻麻刺刺",
-"zh-hant": "麻麻刺刺"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "A strong electric blast crashes down on the target, giving it an electric shock. This may also make the target flinch.",
-"LocalTexts": {
-"fr": "Le lanceur fonce sur la cible et lui envoie un puissant choc électrique. Peut aussi l'effrayer.",
-"de": "Der Anwender rammt das Ziel und schockt es mit starkem Strom. Das Ziel schreckt eventuell zurück.",
-"es": "El usuario se lanza contra el objetivo y le suelta una potente descarga eléctrica que puede hacerlo retroceder.",
-"it": "Chi la usa colpisce il bersaglio investendolo con una potente scarica elettrica che può anche farlo tentennare.",
-"ko": "상대에게 부딪쳐 강력한 전기를 날려서 찌리리따끔따끔하게 만든다. 상대를 풀죽게 만들 때가 있다.",
-"ja": "あいてに　ぶつかって　きょうりょくな でんきをあびせ　びりびりちくちく　させる。 あいてを　ひるませる　ことが　ある。",
-"ja-jp": "相手に　ぶつかって　強力な 電気を浴びせ　びりびりちくちく　させる。 相手を　ひるませる　ことが　ある。",
-"zh-hans": "撞向对手，并发出强电， 使其感到麻麻刺刺的。 有时会使对手畏缩。",
-"zh-hant": "撞向對手，並利用 強電流使其感到麻麻刺刺的。 有時會使對手畏縮。"
-}
+"LocalTexts": {}
 },
-"Released": false,
-"Comment": "",
+"Released": true,
+"Comment": "No Anim",
 "IndexNum": 716,
-"BaseCharges": 10,
+"BaseCharges": 15,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
+"$type": "RogueEssence.Dungeon.DashAction, RogueEssence",
+"Anim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"AnimOffset": 0,
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
 },
 "WideAngle": 0,
-"CharAnimData": {
-"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
-},
+"SnapBack": false,
+"CharAnim": 0,
+"AppearanceMod": 0,
+"HitTiles": true,
+"Range": 2,
+"StopAtHit": true,
+"StopAtWall": true,
 "TargetAlignments": 4,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"PreActions": [],
+"PreActions": [
+{
+"Delay": 0,
+"Sound": "DUN_Spark",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Spark",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
 "ActionFX": {
 "Delay": 0,
 "Sound": "",
@@ -105,6 +128,10 @@
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
 "Power": 80
+},
+{
+"$type": "PMDC.Dungeon.AdditionalEffectState, PMDC",
+"EffectChance": 35
 }
 ],
 "BeforeTryActions": [],
@@ -122,6 +149,29 @@
 "Value": {
 "$type": "PMDC.Dungeon.DamageFormulaEvent, PMDC"
 }
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AdditionalEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
+"StatusID": "flinch",
+"AffectTarget": true,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+]
+}
 }
 ],
 "OnHitTiles": [],
@@ -130,10 +180,29 @@
 "IntroFX": [],
 "HitFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Spark",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Spark",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,
@@ -143,7 +212,8 @@
 },
 "HitCharAction": {
 "$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
-"Process": 0
+"Process": 0,
+"AnimOverride": 0
 }
 }
 }

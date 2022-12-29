@@ -4,51 +4,48 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Spirit Shackle",
-"LocalTexts": {
-"fr": "Tisse Ombre",
-"de": "Schattenfessel",
-"es": "Puntada Sombría",
-"it": "Cucitura d'Ombra",
-"ko": "그림자꿰매기",
-"ja": "かげぬい",
-"ja-jp": "かげぬい",
-"zh-hans": "缝影",
-"zh-hant": "縫影"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "The user attacks while simultaneously stitching the target's shadow to the ground to prevent the target from escaping.",
-"LocalTexts": {
-"fr": "Une attaque qui coud l'ennemi à son ombre, ce qui l'empêche de s'enfuir.",
-"de": "Der Anwender greift das Ziel an und näht zugleich dessen Schatten am Boden fest, sodass es nicht entkommen kann.",
-"es": "Ataca al oponente y, al mismo tiempo, fija su sombra al terreno, impidiendo su huida.",
-"it": "Chi la usa attacca il bersaglio e fissa la sua ombra a terra impedendogli di fuggire.",
-"ko": "공격과 동시에 상대의 그림자를 꿰매 도망칠 수 없게 한다.",
-"ja": "こうげきと　どうじに あいての　かげを　ぬいつけて にげられなくする。",
-"ja-jp": "攻撃と　同時に 相手の　影を　縫い付けて 逃げられなくする。",
-"zh-hans": "攻击的同时， 缝住对手的影子， 使其无法逃走。",
-"zh-hant": "攻擊的同時， 縫住對手的影子， 使其無法逃走。"
-}
+"LocalTexts": {}
 },
-"Released": false,
-"Comment": "",
+"Released": true,
+"Comment": "No Anim",
 "IndexNum": 662,
-"BaseCharges": 10,
+"BaseCharges": 13,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
+"$type": "RogueEssence.Dungeon.ProjectileAction, RogueEssence",
+"Anim": {
+"AnimIndex": "Wave_Circle_Blue",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+},
+"StreamEmitter": {
+"$type": "RogueEssence.Content.EmptyShootingEmitter, RogueEssence",
 "LocHeight": 0
 },
-"WideAngle": 0,
+"Rays": 0,
+"Speed": 10,
+"Boomerang": false,
+"ItemSprite": "",
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
+"ActionType": 7
 },
-"TargetAlignments": 4,
+"HitTiles": true,
+"Range": 6,
+"StopAtHit": true,
+"StopAtWall": true,
+"TargetAlignments": 6,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -56,7 +53,7 @@
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "_UNK_DUN_Water_Echo_2",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -70,7 +67,7 @@
 "LagBehindTime": 0
 },
 "Explosion": {
-"TargetAlignments": 4,
+"TargetAlignments": 6,
 "HitTiles": false,
 "Range": 0,
 "Speed": 0,
@@ -104,7 +101,11 @@
 "SkillStates": [
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 80
+"Power": 40
+},
+{
+"$type": "PMDC.Dungeon.AdditionalEffectState, PMDC",
+"EffectChance": 100
 }
 ],
 "BeforeTryActions": [],
@@ -121,6 +122,29 @@
 },
 "Value": {
 "$type": "PMDC.Dungeon.DamageFormulaEvent, PMDC"
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AdditionalEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
+"StatusID": "immobilized",
+"AffectTarget": true,
+"SilentCheck": false,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+]
 }
 }
 ],
@@ -143,7 +167,8 @@
 },
 "HitCharAction": {
 "$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
-"Process": 0
+"Process": 0,
+"AnimOverride": 0
 }
 }
 }

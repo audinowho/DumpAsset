@@ -4,36 +4,38 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Grav Apple",
-"LocalTexts": {
-"fr": "Force G",
-"de": "Gravitation",
-"es": "Fuerza G",
-"it": "Forza G",
-"zh-hans": "萬有引力",
-"zh-hant": "萬有引力"
-}
-},
-"Desc": {
-"DefaultText": "",
 "LocalTexts": {}
 },
-"Released": false,
-"Comment": "",
+"Desc": {
+"DefaultText": "The user inflicts damage by dropping an apple from high above. This also lowers the target's Defense stat.",
+"LocalTexts": {}
+},
+"Released": true,
+"Comment": "No Anim",
 "IndexNum": 788,
 "BaseCharges": 10,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Dungeon.ThrowAction, RogueEssence",
+"Anim": {
+"AnimIndex": "Rock_Pieces",
+"FrameTime": 3,
+"StartFrame": 5,
+"EndFrame": 5,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
 },
-"WideAngle": 0,
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+},
+"Range": 3,
+"Speed": 10,
+"Coverage": 2,
+"ItemSprite": "",
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
+"ActionType": 7
 },
 "TargetAlignments": 4,
 "TileEmitter": {
@@ -43,7 +45,7 @@
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Rock_Throw",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -91,7 +93,11 @@
 "SkillStates": [
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 80
+"Power": 50
+},
+{
+"$type": "PMDC.Dungeon.AdditionalEffectState, PMDC",
+"EffectChance": 100
 }
 ],
 "BeforeTryActions": [],
@@ -109,6 +115,30 @@
 "Value": {
 "$type": "PMDC.Dungeon.DamageFormulaEvent, PMDC"
 }
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AdditionalEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
+"Stack": -1,
+"StatusID": "mod_defense",
+"AffectTarget": true,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+]
+}
 }
 ],
 "OnHitTiles": [],
@@ -119,8 +149,27 @@
 "Delay": 0,
 "Sound": "",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Bonemarang_Hit",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,
@@ -130,7 +179,8 @@
 },
 "HitCharAction": {
 "$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
-"Process": 0
+"Process": 0,
+"AnimOverride": 0
 }
 }
 }

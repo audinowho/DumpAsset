@@ -4,41 +4,33 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Court Change",
-"LocalTexts": {
-"fr": "Change-Côté",
-"de": "Seitenwechsel",
-"es": "Cambio de Cancha",
-"it": "Cambiocampo",
-"ko": "코트체인지",
-"ja": "コートチェンジ",
-"ja-jp": "コートチェンジ",
-"zh-hans": "換場",
-"zh-hant": "換場"
-}
-},
-"Desc": {
-"DefaultText": "",
 "LocalTexts": {}
 },
-"Released": false,
-"Comment": "",
+"Desc": {
+"DefaultText": "The user successively switches its position with the positions of other Pokémon.",
+"LocalTexts": {}
+},
+"Released": true,
+"Comment": "No Anim",
 "IndexNum": 756,
 "BaseCharges": 10,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
+"$type": "RogueEssence.Dungeon.AreaAction, RogueEssence",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
 "LocHeight": 0
 },
-"WideAngle": 0,
+"HitTiles": false,
+"BurstTiles": 0,
+"HitArea": 0,
+"Range": 5,
+"Speed": 10,
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
+"ActionType": 36
 },
-"TargetAlignments": 4,
+"TargetAlignments": 7,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -46,7 +38,7 @@
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "_UNK_DUN_Flash",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -60,7 +52,7 @@
 "LagBehindTime": 0
 },
 "Explosion": {
-"TargetAlignments": 4,
+"TargetAlignments": 7,
 "HitTiles": false,
 "Range": 0,
 "Speed": 0,
@@ -90,14 +82,25 @@
 "Data": {
 "Element": "normal",
 "Category": 3,
-"HitRate": 100,
+"HitRate": -1,
 "SkillStates": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
 "BeforeExplosions": [],
 "BeforeHits": [],
-"OnHits": [],
+"OnHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.SwitcherEvent, PMDC"
+}
+}
+],
 "OnHitTiles": [],
 "AfterActions": [],
 "ElementEffects": [],
@@ -117,7 +120,8 @@
 },
 "HitCharAction": {
 "$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
-"Process": 0
+"Process": 0,
+"AnimOverride": 0
 }
 }
 }

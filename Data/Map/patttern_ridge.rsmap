@@ -8,7 +8,7 @@
 },
 "Released": false,
 "Comment": "",
-"AssetName": "test_blob",
+"AssetName": "patttern_ridge",
 "Begun": false,
 "ID": 0,
 "MapTeams": [],
@@ -75,7 +75,20 @@
 "Layers": [],
 "NeighborCode": -1
 },
-"TextureMap": {},
+"TextureMap": {
+"floor": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"unbreakable": {
+"AutoTileset": "test_dungeon_wall",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+}
+},
 "Element": "none",
 "Background": {
 "$type": "RogueEssence.Dungeon.MapBG, RogueEssence",
@@ -118,6 +131,18 @@
 "TurnToChar": []
 },
 "DiscoveryArray": [
+[
+0,
+0,
+0,
+0
+],
+[
+0,
+0,
+0,
+0
+],
 [
 0,
 0,
@@ -253,6 +278,58 @@
 "Layers": [],
 "NeighborCode": -1
 }
+],
+[
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+}
+],
+[
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+}
 ]
 ]
 }
@@ -261,12 +338,12 @@
 [
 {
 "Data": {
-"ID": "wall",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 55
 },
 "StableTex": false
 },
@@ -284,12 +361,12 @@
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 55
 },
 "StableTex": false
 },
@@ -307,12 +384,12 @@
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 55
 },
 "StableTex": false
 },
@@ -330,18 +407,112 @@
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 191
 },
 "StableTex": false
 },
 "Effect": {
 "TileLoc": {
 "X": 0,
+"Y": 3
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+}
+],
+[
+{
+"Data": {
+"ID": "unbreakable",
+"TileTex": {
+"AutoTileset": "test_dungeon_wall",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 5
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 1,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "unbreakable",
+"TileTex": {
+"AutoTileset": "test_dungeon_wall",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 5
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 1,
+"Y": 1
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "unbreakable",
+"TileTex": {
+"AutoTileset": "test_dungeon_wall",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 4
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 1,
+"Y": 2
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 155
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 1,
 "Y": 3
 },
 "ID": "",
@@ -357,137 +528,12 @@
 "Data": {
 "ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 205
 },
 "StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 1,
-"Y": 0
-},
-"ID": "sign",
-"Revealed": true,
-"Danger": false,
-"Owner": 0,
-"TileStates": [
-{
-"$type": "PMDC.Dungeon.NoticeState, PMDC",
-"Title": {
-"$type": "RogueEssence.LocalFormatSimple, RogueEssence",
-"Args": [],
-"Key": {
-"Key": ""
-}
-},
-"Content": {
-"$type": "RogueEssence.LocalFormatSimple, RogueEssence",
-"Args": [],
-"Key": {
-"Key": "DLG_DUNGEON_UNLOCK"
-}
-}
-}
-]
-}
-},
-{
-"Data": {
-"ID": "wall",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 1,
-"Y": 1
-},
-"ID": "",
-"Revealed": false,
-"Danger": false,
-"Owner": 0,
-"TileStates": []
-}
-},
-{
-"Data": {
-"ID": "wall",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 1,
-"Y": 2
-},
-"ID": "",
-"Revealed": false,
-"Danger": false,
-"Owner": 0,
-"TileStates": []
-}
-},
-{
-"Data": {
-"ID": "wall",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 1,
-"Y": 3
-},
-"ID": "",
-"Revealed": false,
-"Danger": false,
-"Owner": 0,
-"TileStates": []
-}
-}
-],
-[
-{
-"Data": {
-"ID": "unbreakable",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "CliffCamp",
-"TexLoc": {
-"X": 24,
-"Y": 13
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-"StableTex": true
 },
 "Effect": {
 "TileLoc": {
@@ -503,27 +549,14 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "CliffCamp",
-"TexLoc": {
-"X": 24,
-"Y": 14
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
+"Layers": [],
+"NeighborCode": 205
 },
-"StableTex": true
+"StableTex": false
 },
 "Effect": {
 "TileLoc": {
@@ -539,12 +572,12 @@
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 205
 },
 "StableTex": false
 },
@@ -562,12 +595,12 @@
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 223
 },
 "StableTex": false
 },
@@ -587,27 +620,14 @@
 [
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "CliffCamp",
-"TexLoc": {
-"X": 25,
-"Y": 13
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
+"Layers": [],
+"NeighborCode": 127
 },
-"StableTex": true
+"StableTex": false
 },
 "Effect": {
 "TileLoc": {
@@ -623,27 +643,14 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "CliffCamp",
-"TexLoc": {
-"X": 25,
-"Y": 14
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
+"Layers": [],
+"NeighborCode": 55
 },
-"StableTex": true
+"StableTex": false
 },
 "Effect": {
 "TileLoc": {
@@ -659,12 +666,12 @@
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 55
 },
 "StableTex": false
 },
@@ -682,18 +689,206 @@
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 55
 },
 "StableTex": false
 },
 "Effect": {
 "TileLoc": {
 "X": 3,
+"Y": 3
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+}
+],
+[
+{
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 110
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 4,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "unbreakable",
+"TileTex": {
+"AutoTileset": "test_dungeon_wall",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 4,
+"Y": 1
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "unbreakable",
+"TileTex": {
+"AutoTileset": "test_dungeon_wall",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 5
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 4,
+"Y": 2
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "unbreakable",
+"TileTex": {
+"AutoTileset": "test_dungeon_wall",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 5
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 4,
+"Y": 3
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+}
+],
+[
+{
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 239
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 5,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 205
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 5,
+"Y": 1
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 205
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 5,
+"Y": 2
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 205
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 5,
 "Y": 3
 },
 "ID": "",

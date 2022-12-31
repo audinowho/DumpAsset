@@ -8,7 +8,7 @@
 },
 "Released": false,
 "Comment": "",
-"AssetName": "test_blob",
+"AssetName": "pattern_blob",
 "Begun": false,
 "ID": 0,
 "MapTeams": [],
@@ -75,7 +75,20 @@
 "Layers": [],
 "NeighborCode": -1
 },
-"TextureMap": {},
+"TextureMap": {
+"floor": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"unbreakable": {
+"AutoTileset": "test_dungeon_wall",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+}
+},
 "Element": "none",
 "Background": {
 "$type": "RogueEssence.Dungeon.MapBG, RogueEssence",
@@ -122,11 +135,6 @@
 0,
 0,
 0,
-0
-],
-[
-0,
-0,
 0,
 0
 ],
@@ -134,9 +142,25 @@
 0,
 0,
 0,
+0,
 0
 ],
 [
+0,
+0,
+0,
+0,
+0
+],
+[
+0,
+0,
+0,
+0,
+0
+],
+[
+0,
 0,
 0,
 0,
@@ -174,26 +198,6 @@
 "Associates": [],
 "Layers": [],
 "NeighborCode": -1
-}
-],
-[
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
 },
 {
 "AutoTileset": "",
@@ -226,9 +230,85 @@
 "Associates": [],
 "Layers": [],
 "NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
 }
 ],
 [
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+}
+],
+[
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+}
+],
+[
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
 {
 "AutoTileset": "",
 "Associates": [],
@@ -261,12 +341,12 @@
 [
 {
 "Data": {
-"ID": "wall",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 127
 },
 "StableTex": false
 },
@@ -284,12 +364,12 @@
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 55
 },
 "StableTex": false
 },
@@ -307,12 +387,12 @@
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 55
 },
 "StableTex": false
 },
@@ -330,12 +410,12 @@
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 55
 },
 "StableTex": false
 },
@@ -343,6 +423,29 @@
 "TileLoc": {
 "X": 0,
 "Y": 3
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 191
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 4
 },
 "ID": "",
 "Revealed": false,
@@ -357,10 +460,10 @@
 "Data": {
 "ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 110
 },
 "StableTex": false
 },
@@ -369,39 +472,21 @@
 "X": 1,
 "Y": 0
 },
-"ID": "sign",
-"Revealed": true,
+"ID": "",
+"Revealed": false,
 "Danger": false,
 "Owner": 0,
-"TileStates": [
-{
-"$type": "PMDC.Dungeon.NoticeState, PMDC",
-"Title": {
-"$type": "RogueEssence.LocalFormatSimple, RogueEssence",
-"Args": [],
-"Key": {
-"Key": ""
-}
-},
-"Content": {
-"$type": "RogueEssence.LocalFormatSimple, RogueEssence",
-"Args": [],
-"Key": {
-"Key": "DLG_DUNGEON_UNLOCK"
-}
-}
-}
-]
+"TileStates": []
 }
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "unbreakable",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_wall",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 137
 },
 "StableTex": false
 },
@@ -419,12 +504,12 @@
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "unbreakable",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_wall",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 205
 },
 "StableTex": false
 },
@@ -442,12 +527,12 @@
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "unbreakable",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_wall",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 76
 },
 "StableTex": false
 },
@@ -455,6 +540,29 @@
 "TileLoc": {
 "X": 1,
 "Y": 3
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 155
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 1,
+"Y": 4
 },
 "ID": "",
 "Revealed": false,
@@ -467,27 +575,14 @@
 [
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "CliffCamp",
-"TexLoc": {
-"X": 24,
-"Y": 13
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
+"Layers": [],
+"NeighborCode": 110
 },
-"StableTex": true
+"StableTex": false
 },
 "Effect": {
 "TileLoc": {
@@ -505,25 +600,12 @@
 "Data": {
 "ID": "unbreakable",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_wall",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "CliffCamp",
-"TexLoc": {
-"X": 24,
-"Y": 14
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
+"Layers": [],
+"NeighborCode": 155
 },
-"StableTex": true
+"StableTex": false
 },
 "Effect": {
 "TileLoc": {
@@ -539,12 +621,12 @@
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "unbreakable",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_wall",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 255
 },
 "StableTex": false
 },
@@ -562,12 +644,12 @@
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "unbreakable",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_wall",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 110
 },
 "StableTex": false
 },
@@ -575,6 +657,29 @@
 "TileLoc": {
 "X": 2,
 "Y": 3
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 155
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 2,
+"Y": 4
 },
 "ID": "",
 "Revealed": false,
@@ -587,27 +692,14 @@
 [
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "CliffCamp",
-"TexLoc": {
-"X": 25,
-"Y": 13
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
+"Layers": [],
+"NeighborCode": 110
 },
-"StableTex": true
+"StableTex": false
 },
 "Effect": {
 "TileLoc": {
@@ -625,25 +717,12 @@
 "Data": {
 "ID": "unbreakable",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_wall",
 "Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "CliffCamp",
-"TexLoc": {
-"X": 25,
-"Y": 14
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
+"Layers": [],
+"NeighborCode": 19
 },
-"StableTex": true
+"StableTex": false
 },
 "Effect": {
 "TileLoc": {
@@ -659,12 +738,12 @@
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "unbreakable",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_wall",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 55
 },
 "StableTex": false
 },
@@ -682,12 +761,12 @@
 },
 {
 "Data": {
-"ID": "wall",
+"ID": "unbreakable",
 "TileTex": {
-"AutoTileset": "",
+"AutoTileset": "test_dungeon_wall",
 "Associates": [],
 "Layers": [],
-"NeighborCode": -1
+"NeighborCode": 38
 },
 "StableTex": false
 },
@@ -695,6 +774,146 @@
 "TileLoc": {
 "X": 3,
 "Y": 3
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 155
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 3,
+"Y": 4
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+}
+],
+[
+{
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 239
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 4,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 205
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 4,
+"Y": 1
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 205
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 4,
+"Y": 2
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 205
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 4,
+"Y": 3
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+{
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "test_dungeon_floor",
+"Associates": [],
+"Layers": [],
+"NeighborCode": 223
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 4,
+"Y": 4
 },
 "ID": "",
 "Revealed": false,

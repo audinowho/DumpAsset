@@ -1,29 +1,29 @@
 require 'common'
 
-local faulted_cliffs = {}
+local trickster_woods = {}
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
-function faulted_cliffs.Init(zone)
+function trickster_woods.Init(zone)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  PrintInfo("=>> Init_faulted_cliffs")
+  PrintInfo("=>> Init_trickster_woods")
   
 
 end
 
-function faulted_cliffs.Rescued(zone, name, mail)
+function trickster_woods.Rescued(zone, name, mail)
   COMMON.Rescued(zone, name, mail)
 end
 
-function faulted_cliffs.EnterSegment(zone, rescuing, segmentID, mapID)
+function trickster_woods.EnterSegment(zone, rescuing, segmentID, mapID)
   if rescuing ~= true then
     COMMON.BeginDungeon(zone.ID, segmentID, mapID)
   end
 end
 
-function faulted_cliffs.ExitSegment(zone, result, rescue, segmentID, mapID)
+function trickster_woods.ExitSegment(zone, result, rescue, segmentID, mapID)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  PrintInfo("=>> ExitSegment_faulted_cliffs result "..tostring(result).." segment "..tostring(segmentID))
+  PrintInfo("=>> ExitSegment_trickster_woods result "..tostring(result).." segment "..tostring(segmentID))
   
   --first check for rescue flag; if we're in rescue mode then take a different path
   COMMON.ExitDungeonMissionCheck(zone.ID, segmentID)
@@ -33,7 +33,7 @@ function faulted_cliffs.ExitSegment(zone, result, rescue, segmentID, mapID)
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
     if segmentID == 0 then
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 4, 0)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 3, 0)
     else
       PrintInfo("No exit procedure found!")
 	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
@@ -42,4 +42,4 @@ function faulted_cliffs.ExitSegment(zone, result, rescue, segmentID, mapID)
   
 end
 
-return faulted_cliffs
+return trickster_woods

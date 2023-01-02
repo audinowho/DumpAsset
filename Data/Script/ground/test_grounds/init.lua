@@ -491,6 +491,13 @@ function ExampleMenu:Update(input)
   -- default does nothing
   if input:JustPressed(RogueEssence.FrameInput.InputType.Confirm) then
     _GAME:SE("Menu/Confirm")
+	if self.current_item > 2 then
+	  local choices = { {STRINGS:FormatKey("DLG_CHOICE_YES"), true, function()  end },
+        { STRINGS:FormatKey("MENU_INFO"), false, function() end  },
+        { STRINGS:FormatKey("DLG_CHOICE_NO"), true, function() _MENU:RemoveMenu() end }}
+	  submenu = RogueEssence.Menu.ScriptableSingleStripMenu(220, 24, 24, choices, 1)
+	  _MENU:AddMenu(submenu, true)
+	end
   elseif input:JustPressed(RogueEssence.FrameInput.InputType.Cancel) then
     _GAME:SE("Menu/Cancel")
     _MENU:RemoveMenu()
@@ -535,6 +542,8 @@ function test_grounds.Hungrybox_Action(chara, activator)
   local menu = ExampleMenu:new()
   UI:SetCustomMenu(menu.menu)
   UI:WaitForChoice()
+  
+  GAME:FadeIn(60)
 end
 
 function test_grounds.Custom_Menu_Update(input)

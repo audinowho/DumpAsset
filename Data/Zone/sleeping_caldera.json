@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.7.0",
+"Version": "0.6.8.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -352,14 +352,60 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 3,
-"OrderSoftness": 1,
-"WaterPercent": {
-"Min": 30,
-"Max": 30
+"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Blobs": {
+"Min": 2,
+"Max": 5
 },
-"Bowl": true,
+"AreaScale": {
+"Min": 2,
+"Max": 8
+},
+"GenerateScale": {
+"Min": 7,
+"Max": 12
+},
+"BlobStencil": {
+"$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"RequireAny": true
+},
+{
+"$type": "RogueEssence.LevelGen.StairsStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+"RequireAny": false
+},
+{
+"$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -385,27 +431,12 @@
 }
 },
 "TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": true,
-"Blocked": false,
-"Not": false
-}
-}
-},
+"$type": "RogueElements.MatchTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"MatchTiles": [
 {
-"Key": {
-"str": [
-3,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
-"ID": "water",
+"ID": "unbreakable",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -426,17 +457,20 @@
 "TileStates": []
 }
 }
+],
+"Negate": true
+}
 }
 },
 {
 "Key": {
 "str": [
 3,
-2
+1
 ]
 },
 "Value": {
-"$type": "RogueElements.EraseIsolatedStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -954,14 +988,60 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 3,
-"OrderSoftness": 1,
-"WaterPercent": {
-"Min": 30,
-"Max": 30
+"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Blobs": {
+"Min": 2,
+"Max": 5
 },
-"Bowl": true,
+"AreaScale": {
+"Min": 2,
+"Max": 8
+},
+"GenerateScale": {
+"Min": 7,
+"Max": 12
+},
+"BlobStencil": {
+"$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"RequireAny": true
+},
+{
+"$type": "RogueEssence.LevelGen.StairsStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+"RequireAny": false
+},
+{
+"$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -987,27 +1067,12 @@
 }
 },
 "TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": true,
-"Blocked": false,
-"Not": false
-}
-}
-},
+"$type": "RogueElements.MatchTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"MatchTiles": [
 {
-"Key": {
-"str": [
-3,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
-"ID": "water",
+"ID": "unbreakable",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -1028,17 +1093,20 @@
 "TileStates": []
 }
 }
+],
+"Negate": true
+}
 }
 },
 {
 "Key": {
 "str": [
 3,
-2
+1
 ]
 },
 "Value": {
-"$type": "RogueElements.EraseIsolatedStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -1556,14 +1624,60 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 3,
-"OrderSoftness": 1,
-"WaterPercent": {
-"Min": 30,
-"Max": 30
+"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Blobs": {
+"Min": 2,
+"Max": 5
 },
-"Bowl": true,
+"AreaScale": {
+"Min": 2,
+"Max": 8
+},
+"GenerateScale": {
+"Min": 7,
+"Max": 12
+},
+"BlobStencil": {
+"$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"RequireAny": true
+},
+{
+"$type": "RogueEssence.LevelGen.StairsStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+"RequireAny": false
+},
+{
+"$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -1589,27 +1703,12 @@
 }
 },
 "TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": true,
-"Blocked": false,
-"Not": false
-}
-}
-},
+"$type": "RogueElements.MatchTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"MatchTiles": [
 {
-"Key": {
-"str": [
-3,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
-"ID": "water",
+"ID": "unbreakable",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -1630,17 +1729,20 @@
 "TileStates": []
 }
 }
+],
+"Negate": true
+}
 }
 },
 {
 "Key": {
 "str": [
 3,
-2
+1
 ]
 },
 "Value": {
-"$type": "RogueElements.EraseIsolatedStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -2158,14 +2260,60 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 3,
-"OrderSoftness": 1,
-"WaterPercent": {
-"Min": 30,
-"Max": 30
+"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Blobs": {
+"Min": 2,
+"Max": 5
 },
-"Bowl": true,
+"AreaScale": {
+"Min": 2,
+"Max": 8
+},
+"GenerateScale": {
+"Min": 7,
+"Max": 12
+},
+"BlobStencil": {
+"$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"RequireAny": true
+},
+{
+"$type": "RogueEssence.LevelGen.StairsStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+"RequireAny": false
+},
+{
+"$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -2191,27 +2339,12 @@
 }
 },
 "TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": true,
-"Blocked": false,
-"Not": false
-}
-}
-},
+"$type": "RogueElements.MatchTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"MatchTiles": [
 {
-"Key": {
-"str": [
-3,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
-"ID": "water",
+"ID": "unbreakable",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -2232,17 +2365,20 @@
 "TileStates": []
 }
 }
+],
+"Negate": true
+}
 }
 },
 {
 "Key": {
 "str": [
 3,
-2
+1
 ]
 },
 "Value": {
-"$type": "RogueElements.EraseIsolatedStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -2760,14 +2896,60 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 3,
-"OrderSoftness": 1,
-"WaterPercent": {
-"Min": 30,
-"Max": 30
+"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Blobs": {
+"Min": 2,
+"Max": 5
 },
-"Bowl": true,
+"AreaScale": {
+"Min": 2,
+"Max": 8
+},
+"GenerateScale": {
+"Min": 7,
+"Max": 12
+},
+"BlobStencil": {
+"$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"RequireAny": true
+},
+{
+"$type": "RogueEssence.LevelGen.StairsStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+"RequireAny": false
+},
+{
+"$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -2793,27 +2975,12 @@
 }
 },
 "TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": true,
-"Blocked": false,
-"Not": false
-}
-}
-},
+"$type": "RogueElements.MatchTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"MatchTiles": [
 {
-"Key": {
-"str": [
-3,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
-"ID": "water",
+"ID": "unbreakable",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -2834,17 +3001,20 @@
 "TileStates": []
 }
 }
+],
+"Negate": true
+}
 }
 },
 {
 "Key": {
 "str": [
 3,
-2
+1
 ]
 },
 "Value": {
-"$type": "RogueElements.EraseIsolatedStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -3362,14 +3532,60 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 3,
-"OrderSoftness": 1,
-"WaterPercent": {
-"Min": 30,
-"Max": 30
+"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Blobs": {
+"Min": 2,
+"Max": 5
 },
-"Bowl": true,
+"AreaScale": {
+"Min": 2,
+"Max": 8
+},
+"GenerateScale": {
+"Min": 7,
+"Max": 12
+},
+"BlobStencil": {
+"$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"RequireAny": true
+},
+{
+"$type": "RogueEssence.LevelGen.StairsStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+"RequireAny": false
+},
+{
+"$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -3395,27 +3611,12 @@
 }
 },
 "TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": true,
-"Blocked": false,
-"Not": false
-}
-}
-},
+"$type": "RogueElements.MatchTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"MatchTiles": [
 {
-"Key": {
-"str": [
-3,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
-"ID": "water",
+"ID": "unbreakable",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -3436,17 +3637,20 @@
 "TileStates": []
 }
 }
+],
+"Negate": true
+}
 }
 },
 {
 "Key": {
 "str": [
 3,
-2
+1
 ]
 },
 "Value": {
-"$type": "RogueElements.EraseIsolatedStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -3964,14 +4168,60 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 3,
-"OrderSoftness": 1,
-"WaterPercent": {
-"Min": 30,
-"Max": 30
+"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Blobs": {
+"Min": 2,
+"Max": 5
 },
-"Bowl": true,
+"AreaScale": {
+"Min": 2,
+"Max": 8
+},
+"GenerateScale": {
+"Min": 7,
+"Max": 12
+},
+"BlobStencil": {
+"$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"RequireAny": true
+},
+{
+"$type": "RogueEssence.LevelGen.StairsStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+"RequireAny": false
+},
+{
+"$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -3997,27 +4247,12 @@
 }
 },
 "TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": true,
-"Blocked": false,
-"Not": false
-}
-}
-},
+"$type": "RogueElements.MatchTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"MatchTiles": [
 {
-"Key": {
-"str": [
-3,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
-"ID": "water",
+"ID": "unbreakable",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -4038,17 +4273,20 @@
 "TileStates": []
 }
 }
+],
+"Negate": true
+}
 }
 },
 {
 "Key": {
 "str": [
 3,
-2
+1
 ]
 },
 "Value": {
-"$type": "RogueElements.EraseIsolatedStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -4566,14 +4804,60 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 3,
-"OrderSoftness": 1,
-"WaterPercent": {
-"Min": 30,
-"Max": 30
+"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Blobs": {
+"Min": 2,
+"Max": 5
 },
-"Bowl": true,
+"AreaScale": {
+"Min": 2,
+"Max": 8
+},
+"GenerateScale": {
+"Min": 7,
+"Max": 12
+},
+"BlobStencil": {
+"$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"RequireAny": true
+},
+{
+"$type": "RogueEssence.LevelGen.StairsStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+"RequireAny": false
+},
+{
+"$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -4599,27 +4883,12 @@
 }
 },
 "TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": true,
-"Blocked": false,
-"Not": false
-}
-}
-},
+"$type": "RogueElements.MatchTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"MatchTiles": [
 {
-"Key": {
-"str": [
-3,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
-"ID": "water",
+"ID": "unbreakable",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -4640,17 +4909,20 @@
 "TileStates": []
 }
 }
+],
+"Negate": true
+}
 }
 },
 {
 "Key": {
 "str": [
 3,
-2
+1
 ]
 },
 "Value": {
-"$type": "RogueElements.EraseIsolatedStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -5168,14 +5440,60 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 3,
-"OrderSoftness": 1,
-"WaterPercent": {
-"Min": 30,
-"Max": 30
+"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Blobs": {
+"Min": 2,
+"Max": 5
 },
-"Bowl": true,
+"AreaScale": {
+"Min": 2,
+"Max": 8
+},
+"GenerateScale": {
+"Min": 7,
+"Max": 12
+},
+"BlobStencil": {
+"$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"RequireAny": true
+},
+{
+"$type": "RogueEssence.LevelGen.StairsStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+"RequireAny": false
+},
+{
+"$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -5201,27 +5519,12 @@
 }
 },
 "TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": true,
-"Blocked": false,
-"Not": false
-}
-}
-},
+"$type": "RogueElements.MatchTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"MatchTiles": [
 {
-"Key": {
-"str": [
-3,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
-"ID": "water",
+"ID": "unbreakable",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -5242,17 +5545,20 @@
 "TileStates": []
 }
 }
+],
+"Negate": true
+}
 }
 },
 {
 "Key": {
 "str": [
 3,
-2
+1
 ]
 },
 "Value": {
-"$type": "RogueElements.EraseIsolatedStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -5770,14 +6076,60 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 3,
-"OrderSoftness": 1,
-"WaterPercent": {
-"Min": 30,
-"Max": 30
+"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Blobs": {
+"Min": 2,
+"Max": 5
 },
-"Bowl": true,
+"AreaScale": {
+"Min": 2,
+"Max": 8
+},
+"GenerateScale": {
+"Min": 7,
+"Max": 12
+},
+"BlobStencil": {
+"$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"RequireAny": true
+},
+{
+"$type": "RogueEssence.LevelGen.StairsStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+"RequireAny": false
+},
+{
+"$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -5803,27 +6155,12 @@
 }
 },
 "TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": true,
-"Blocked": false,
-"Not": false
-}
-}
-},
+"$type": "RogueElements.MatchTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"MatchTiles": [
 {
-"Key": {
-"str": [
-3,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
-"ID": "water",
+"ID": "unbreakable",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -5844,17 +6181,20 @@
 "TileStates": []
 }
 }
+],
+"Negate": true
+}
 }
 },
 {
 "Key": {
 "str": [
 3,
-2
+1
 ]
 },
 "Value": {
-"$type": "RogueElements.EraseIsolatedStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -6372,14 +6712,60 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 3,
-"OrderSoftness": 1,
-"WaterPercent": {
-"Min": 30,
-"Max": 30
+"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Blobs": {
+"Min": 2,
+"Max": 5
 },
-"Bowl": true,
+"AreaScale": {
+"Min": 2,
+"Max": 8
+},
+"GenerateScale": {
+"Min": 7,
+"Max": 12
+},
+"BlobStencil": {
+"$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"RequireAny": true
+},
+{
+"$type": "RogueEssence.LevelGen.StairsStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+"RequireAny": false
+},
+{
+"$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -6405,27 +6791,12 @@
 }
 },
 "TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": true,
-"Blocked": false,
-"Not": false
-}
-}
-},
+"$type": "RogueElements.MatchTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"MatchTiles": [
 {
-"Key": {
-"str": [
-3,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
-"ID": "water",
+"ID": "unbreakable",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -6446,17 +6817,20 @@
 "TileStates": []
 }
 }
+],
+"Negate": true
+}
 }
 },
 {
 "Key": {
 "str": [
 3,
-2
+1
 ]
 },
 "Value": {
-"$type": "RogueElements.EraseIsolatedStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -6974,14 +7348,60 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 3,
-"OrderSoftness": 1,
-"WaterPercent": {
-"Min": 30,
-"Max": 30
+"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Blobs": {
+"Min": 2,
+"Max": 5
 },
-"Bowl": true,
+"AreaScale": {
+"Min": 2,
+"Max": 8
+},
+"GenerateScale": {
+"Min": 7,
+"Max": 12
+},
+"BlobStencil": {
+"$type": "RogueElements.MultiBlobStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"RequireAny": true
+},
+{
+"$type": "RogueEssence.LevelGen.StairsStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+{
+"$type": "RogueElements.BlobTileStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueEssence.LevelGen.TileEffectStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Not": true
+},
+"RequireAny": false
+},
+{
+"$type": "RogueElements.NoChokepointStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Room": false,
+"Wall": false,
+"Blocked": true,
+"Not": true
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -7007,27 +7427,12 @@
 }
 },
 "TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": true,
-"Blocked": false,
-"Not": false
-}
-}
-},
+"$type": "RogueElements.MatchTerrainStencil`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"MatchTiles": [
 {
-"Key": {
-"str": [
-3,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
-"ID": "water",
+"ID": "unbreakable",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -7048,17 +7453,20 @@
 "TileStates": []
 }
 }
+],
+"Negate": true
+}
 }
 },
 {
 "Key": {
 "str": [
 3,
-2
+1
 ]
 },
 "Value": {
-"$type": "RogueElements.EraseIsolatedStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueElements.DropDiagonalBlockStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Terrain": {
 "$type": "RogueEssence.Dungeon.Tile, RogueEssence",
 "Data": {
@@ -7287,7 +7695,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.6.7.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -10185,7 +10593,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.7.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -10249,7 +10657,7 @@
 ],
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.6.7.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ChestModGenState"
 }
 ]

@@ -1,29 +1,29 @@
 require 'common'
 
-local fissure_quarry = {}
+local copper_quarry = {}
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
-function fissure_quarry.Init(zone)
+function copper_quarry.Init(zone)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  PrintInfo("=>> Init_fissure_quarry")
+  PrintInfo("=>> Init_copper_quarry")
   
 
 end
 
-function fissure_quarry.Rescued(zone, name, mail)
+function copper_quarry.Rescued(zone, name, mail)
   COMMON.Rescued(zone, name, mail)
 end
 
-function fissure_quarry.EnterSegment(zone, rescuing, segmentID, mapID)
+function copper_quarry.EnterSegment(zone, rescuing, segmentID, mapID)
   if rescuing ~= true then
     COMMON.BeginDungeon(zone.ID, segmentID, mapID)
   end
 end
 
-function fissure_quarry.ExitSegment(zone, result, rescue, segmentID, mapID)
+function copper_quarry.ExitSegment(zone, result, rescue, segmentID, mapID)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  PrintInfo("=>> ExitSegment_fissure_quarry result "..tostring(result).." segment "..tostring(segmentID))
+  PrintInfo("=>> ExitSegment_copper_quarry result "..tostring(result).." segment "..tostring(segmentID))
   
   --first check for rescue flag; if we're in rescue mode then take a different path
   COMMON.ExitDungeonMissionCheck(zone.ID, segmentID)
@@ -42,4 +42,4 @@ function fissure_quarry.ExitSegment(zone, result, rescue, segmentID, mapID)
   
 end
 
-return fissure_quarry
+return copper_quarry

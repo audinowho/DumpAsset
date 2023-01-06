@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.7.0",
+"Version": "0.6.8.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -49,9 +49,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -66,8 +66,8 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 100,
+"Max": 100
 },
 "BranchRatio": {
 "Min": 0,
@@ -79,39 +79,81 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
-"Min": 4,
-"Max": 11
-},
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
-"Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
-"Min": 5,
+"Min": 9,
 "Max": 9
 },
 "Height": {
-"Min": 5,
+"Min": 9,
 "Max": 9
+},
+"Corner": {
+"Min": 3,
+"Max": 3
 }
 },
-"Rate": 10
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+},
+"Corner": {
+"Min": 2,
+"Max": 2
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -127,7 +169,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -176,7 +218,7 @@
 "$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "ToSpawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -647,9 +689,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -664,8 +706,8 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 100,
+"Max": 100
 },
 "BranchRatio": {
 "Min": 0,
@@ -677,39 +719,81 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
-"Min": 4,
-"Max": 11
-},
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
-"Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
-"Min": 5,
+"Min": 9,
 "Max": 9
 },
 "Height": {
-"Min": 5,
+"Min": 9,
 "Max": 9
+},
+"Corner": {
+"Min": 3,
+"Max": 3
 }
 },
-"Rate": 10
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+},
+"Corner": {
+"Min": 2,
+"Max": 2
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -725,7 +809,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -774,7 +858,7 @@
 "$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "ToSpawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -1245,9 +1329,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -1262,8 +1346,8 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 100,
+"Max": 100
 },
 "BranchRatio": {
 "Min": 0,
@@ -1275,39 +1359,81 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
-"Min": 4,
-"Max": 11
-},
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
-"Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
-"Min": 5,
+"Min": 9,
 "Max": 9
 },
 "Height": {
-"Min": 5,
+"Min": 9,
 "Max": 9
+},
+"Corner": {
+"Min": 3,
+"Max": 3
 }
 },
-"Rate": 10
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+},
+"Corner": {
+"Min": 2,
+"Max": 2
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -1323,7 +1449,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -1372,7 +1498,7 @@
 "$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "ToSpawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -1843,9 +1969,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -1860,8 +1986,8 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 100,
+"Max": 100
 },
 "BranchRatio": {
 "Min": 0,
@@ -1873,39 +1999,81 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
-"Min": 4,
-"Max": 11
-},
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
-"Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
-"Min": 5,
+"Min": 9,
 "Max": 9
 },
 "Height": {
-"Min": 5,
+"Min": 9,
 "Max": 9
+},
+"Corner": {
+"Min": 3,
+"Max": 3
 }
 },
-"Rate": 10
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+},
+"Corner": {
+"Min": 2,
+"Max": 2
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -1921,7 +2089,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -1970,7 +2138,7 @@
 "$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "ToSpawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -2441,9 +2609,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -2458,8 +2626,8 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 100,
+"Max": 100
 },
 "BranchRatio": {
 "Min": 0,
@@ -2471,39 +2639,81 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
-"Min": 4,
-"Max": 11
-},
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
-"Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
-"Min": 5,
+"Min": 9,
 "Max": 9
 },
 "Height": {
-"Min": 5,
+"Min": 9,
 "Max": 9
+},
+"Corner": {
+"Min": 3,
+"Max": 3
 }
 },
-"Rate": 10
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+},
+"Corner": {
+"Min": 2,
+"Max": 2
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -2519,7 +2729,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -2568,7 +2778,7 @@
 "$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "ToSpawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -2887,9 +3097,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -2904,8 +3114,8 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 100,
+"Max": 100
 },
 "BranchRatio": {
 "Min": 0,
@@ -2917,39 +3127,81 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
-"Min": 4,
-"Max": 11
-},
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
-"Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
-"Min": 5,
+"Min": 9,
 "Max": 9
 },
 "Height": {
-"Min": 5,
+"Min": 9,
 "Max": 9
+},
+"Corner": {
+"Min": 3,
+"Max": 3
 }
 },
-"Rate": 10
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+},
+"Corner": {
+"Min": 2,
+"Max": 2
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -2965,7 +3217,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -3014,7 +3266,7 @@
 "$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "ToSpawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -3333,9 +3585,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -3350,8 +3602,8 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 100,
+"Max": 100
 },
 "BranchRatio": {
 "Min": 0,
@@ -3363,39 +3615,81 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
-"Min": 4,
-"Max": 11
-},
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
-"Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
-"Min": 5,
+"Min": 9,
 "Max": 9
 },
 "Height": {
-"Min": 5,
+"Min": 9,
 "Max": 9
+},
+"Corner": {
+"Min": 3,
+"Max": 3
 }
 },
-"Rate": 10
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+},
+"Corner": {
+"Min": 2,
+"Max": 2
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -3411,7 +3705,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -3460,7 +3754,7 @@
 "$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "ToSpawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -3779,9 +4073,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -3796,8 +4090,8 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 100,
+"Max": 100
 },
 "BranchRatio": {
 "Min": 0,
@@ -3809,39 +4103,81 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
-"Min": 4,
-"Max": 11
-},
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
-"Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
-"Min": 5,
+"Min": 9,
 "Max": 9
 },
 "Height": {
-"Min": 5,
+"Min": 9,
 "Max": 9
+},
+"Corner": {
+"Min": 3,
+"Max": 3
 }
 },
-"Rate": 10
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+},
+"Corner": {
+"Min": 2,
+"Max": 2
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -3857,7 +4193,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -3906,7 +4242,7 @@
 "$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "ToSpawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -4225,9 +4561,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -4242,8 +4578,8 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 100,
+"Max": 100
 },
 "BranchRatio": {
 "Min": 0,
@@ -4255,39 +4591,81 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
-"Min": 4,
-"Max": 11
-},
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
-"Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
-"Min": 5,
+"Min": 9,
 "Max": 9
 },
 "Height": {
-"Min": 5,
+"Min": 9,
 "Max": 9
+},
+"Corner": {
+"Min": 3,
+"Max": 3
 }
 },
-"Rate": 10
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+},
+"Corner": {
+"Min": 2,
+"Max": 2
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -4303,7 +4681,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -4352,7 +4730,7 @@
 "$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "ToSpawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -4671,9 +5049,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -4688,8 +5066,8 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 100,
+"Max": 100
 },
 "BranchRatio": {
 "Min": 0,
@@ -4701,39 +5079,81 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
-"Min": 4,
-"Max": 11
-},
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
-"Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
-"Min": 5,
+"Min": 9,
 "Max": 9
 },
 "Height": {
-"Min": 5,
+"Min": 9,
 "Max": 9
+},
+"Corner": {
+"Min": 3,
+"Max": 3
 }
 },
-"Rate": 10
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+},
+"Corner": {
+"Min": 2,
+"Max": 2
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -4749,7 +5169,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -4798,7 +5218,7 @@
 "$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "ToSpawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -5117,9 +5537,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -5134,8 +5554,8 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 100,
+"Max": 100
 },
 "BranchRatio": {
 "Min": 0,
@@ -5147,39 +5567,81 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
-"Min": 4,
-"Max": 11
-},
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
-"Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
-"Min": 5,
+"Min": 9,
 "Max": 9
 },
 "Height": {
-"Min": 5,
+"Min": 9,
 "Max": 9
+},
+"Corner": {
+"Min": 3,
+"Max": 3
 }
 },
-"Rate": 10
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+},
+"Corner": {
+"Min": 2,
+"Max": 2
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -5195,7 +5657,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -5244,7 +5706,7 @@
 "$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "ToSpawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -5563,9 +6025,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -5580,8 +6042,8 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 100,
+"Max": 100
 },
 "BranchRatio": {
 "Min": 0,
@@ -5593,39 +6055,81 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
-"Min": 4,
-"Max": 11
-},
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
-"Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
-"Min": 5,
+"Min": 9,
 "Max": 9
 },
 "Height": {
-"Min": 5,
+"Min": 9,
 "Max": 9
+},
+"Corner": {
+"Min": 3,
+"Max": 3
 }
 },
-"Rate": 10
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+},
+"Corner": {
+"Min": 2,
+"Max": 2
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -5641,7 +6145,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -5690,7 +6194,7 @@
 "$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "ToSpawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -6009,9 +6513,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -6026,8 +6530,8 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 100,
+"Max": 100
 },
 "BranchRatio": {
 "Min": 0,
@@ -6039,39 +6543,81 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
-"Min": 4,
-"Max": 11
-},
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
-"Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
-"Min": 5,
+"Min": 9,
 "Max": 9
 },
 "Height": {
-"Min": 5,
+"Min": 9,
 "Max": 9
+},
+"Corner": {
+"Min": 3,
+"Max": 3
 }
 },
-"Rate": 10
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenPlus`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+},
+"Corner": {
+"Min": 2,
+"Max": 2
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 7
+},
+"Height": {
+"Min": 7,
+"Max": 7
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -6087,7 +6633,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -6136,7 +6682,7 @@
 "$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "ToSpawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -6469,7 +7015,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.6.7.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]

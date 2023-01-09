@@ -171,7 +171,7 @@
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "HallTurnBias": 0,
 "Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
+"$type": "RogueEssence.LevelGen.ColumnHallBrush, RogueEssence"
 },
 "Width": {
 "Min": 0,
@@ -183,6 +183,24 @@
 }
 },
 "Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"HallTurnBias": 0,
+"Brush": {
+"$type": "RogueElements.DefaultHallBrush, RogueElements"
+},
+"Width": {
+"Min": 0,
+"Max": 0
+},
+"Height": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -345,6 +363,99 @@
 "$type": "PMDC.LevelGen.BossRoom, PMDC"
 }
 ]
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternTerrainStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": true,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 6
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_blob",
+"Pattern": 0
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_double_colon",
+"Pattern": 0
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"MapID": "pattern_plus",
+"Pattern": 0
+},
+"Rate": 20
 }
 ]
 }
@@ -811,7 +922,7 @@
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "HallTurnBias": 0,
 "Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
+"$type": "RogueEssence.LevelGen.ColumnHallBrush, RogueEssence"
 },
 "Width": {
 "Min": 0,
@@ -823,6 +934,24 @@
 }
 },
 "Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"HallTurnBias": 0,
+"Brush": {
+"$type": "RogueElements.DefaultHallBrush, RogueElements"
+},
+"Width": {
+"Min": 0,
+"Max": 0
+},
+"Height": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -985,6 +1114,99 @@
 "$type": "PMDC.LevelGen.BossRoom, PMDC"
 }
 ]
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternTerrainStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": true,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 6
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_blob",
+"Pattern": 0
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_double_colon",
+"Pattern": 0
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"MapID": "pattern_plus",
+"Pattern": 0
+},
+"Rate": 20
 }
 ]
 }
@@ -1451,7 +1673,7 @@
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "HallTurnBias": 0,
 "Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
+"$type": "RogueEssence.LevelGen.ColumnHallBrush, RogueEssence"
 },
 "Width": {
 "Min": 0,
@@ -1463,6 +1685,24 @@
 }
 },
 "Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"HallTurnBias": 0,
+"Brush": {
+"$type": "RogueElements.DefaultHallBrush, RogueElements"
+},
+"Width": {
+"Min": 0,
+"Max": 0
+},
+"Height": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -1625,6 +1865,99 @@
 "$type": "PMDC.LevelGen.BossRoom, PMDC"
 }
 ]
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternTerrainStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": true,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 6
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_blob",
+"Pattern": 0
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_double_colon",
+"Pattern": 0
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"MapID": "pattern_plus",
+"Pattern": 0
+},
+"Rate": 20
 }
 ]
 }
@@ -2091,7 +2424,7 @@
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "HallTurnBias": 0,
 "Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
+"$type": "RogueEssence.LevelGen.ColumnHallBrush, RogueEssence"
 },
 "Width": {
 "Min": 0,
@@ -2103,6 +2436,24 @@
 }
 },
 "Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"HallTurnBias": 0,
+"Brush": {
+"$type": "RogueElements.DefaultHallBrush, RogueElements"
+},
+"Width": {
+"Min": 0,
+"Max": 0
+},
+"Height": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -2265,6 +2616,99 @@
 "$type": "PMDC.LevelGen.BossRoom, PMDC"
 }
 ]
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternTerrainStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": true,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 6
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_blob",
+"Pattern": 0
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_double_colon",
+"Pattern": 0
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"MapID": "pattern_plus",
+"Pattern": 0
+},
+"Rate": 20
 }
 ]
 }
@@ -2731,7 +3175,7 @@
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "HallTurnBias": 0,
 "Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
+"$type": "RogueEssence.LevelGen.ColumnHallBrush, RogueEssence"
 },
 "Width": {
 "Min": 0,
@@ -2743,6 +3187,24 @@
 }
 },
 "Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"HallTurnBias": 0,
+"Brush": {
+"$type": "RogueElements.DefaultHallBrush, RogueElements"
+},
+"Width": {
+"Min": 0,
+"Max": 0
+},
+"Height": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -2905,6 +3367,99 @@
 "$type": "PMDC.LevelGen.BossRoom, PMDC"
 }
 ]
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternTerrainStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": true,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 6
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_blob",
+"Pattern": 0
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_double_colon",
+"Pattern": 0
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"MapID": "pattern_plus",
+"Pattern": 0
+},
+"Rate": 20
 }
 ]
 }
@@ -3219,7 +3774,7 @@
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "HallTurnBias": 0,
 "Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
+"$type": "RogueEssence.LevelGen.ColumnHallBrush, RogueEssence"
 },
 "Width": {
 "Min": 0,
@@ -3231,6 +3786,24 @@
 }
 },
 "Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"HallTurnBias": 0,
+"Brush": {
+"$type": "RogueElements.DefaultHallBrush, RogueElements"
+},
+"Width": {
+"Min": 0,
+"Max": 0
+},
+"Height": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -3393,6 +3966,99 @@
 "$type": "PMDC.LevelGen.BossRoom, PMDC"
 }
 ]
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternTerrainStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": true,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 6
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_blob",
+"Pattern": 0
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_double_colon",
+"Pattern": 0
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"MapID": "pattern_plus",
+"Pattern": 0
+},
+"Rate": 20
 }
 ]
 }
@@ -3707,7 +4373,7 @@
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "HallTurnBias": 0,
 "Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
+"$type": "RogueEssence.LevelGen.ColumnHallBrush, RogueEssence"
 },
 "Width": {
 "Min": 0,
@@ -3719,6 +4385,24 @@
 }
 },
 "Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"HallTurnBias": 0,
+"Brush": {
+"$type": "RogueElements.DefaultHallBrush, RogueElements"
+},
+"Width": {
+"Min": 0,
+"Max": 0
+},
+"Height": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -3881,6 +4565,99 @@
 "$type": "PMDC.LevelGen.BossRoom, PMDC"
 }
 ]
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternTerrainStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": true,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 6
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_blob",
+"Pattern": 0
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_double_colon",
+"Pattern": 0
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"MapID": "pattern_plus",
+"Pattern": 0
+},
+"Rate": 20
 }
 ]
 }
@@ -4195,7 +4972,7 @@
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "HallTurnBias": 0,
 "Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
+"$type": "RogueEssence.LevelGen.ColumnHallBrush, RogueEssence"
 },
 "Width": {
 "Min": 0,
@@ -4207,6 +4984,24 @@
 }
 },
 "Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"HallTurnBias": 0,
+"Brush": {
+"$type": "RogueElements.DefaultHallBrush, RogueElements"
+},
+"Width": {
+"Min": 0,
+"Max": 0
+},
+"Height": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 5
 }
 ]
 },
@@ -4369,6 +5164,99 @@
 "$type": "PMDC.LevelGen.BossRoom, PMDC"
 }
 ]
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternTerrainStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": true,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 6
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_blob",
+"Pattern": 0
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_double_colon",
+"Pattern": 0
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"MapID": "pattern_plus",
+"Pattern": 0
+},
+"Rate": 20
 }
 ]
 }
@@ -4683,7 +5571,7 @@
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "HallTurnBias": 0,
 "Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
+"$type": "RogueEssence.LevelGen.ColumnHallBrush, RogueEssence"
 },
 "Width": {
 "Min": 0,
@@ -4857,6 +5745,99 @@
 "$type": "PMDC.LevelGen.BossRoom, PMDC"
 }
 ]
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternTerrainStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": true,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 6
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_blob",
+"Pattern": 0
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_double_colon",
+"Pattern": 0
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"MapID": "pattern_plus",
+"Pattern": 0
+},
+"Rate": 20
 }
 ]
 }
@@ -5171,7 +6152,7 @@
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "HallTurnBias": 0,
 "Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
+"$type": "RogueEssence.LevelGen.ColumnHallBrush, RogueEssence"
 },
 "Width": {
 "Min": 0,
@@ -5345,6 +6326,99 @@
 "$type": "PMDC.LevelGen.BossRoom, PMDC"
 }
 ]
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternTerrainStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": true,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 6
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_blob",
+"Pattern": 0
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_double_colon",
+"Pattern": 0
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"MapID": "pattern_plus",
+"Pattern": 0
+},
+"Rate": 20
 }
 ]
 }
@@ -5659,7 +6733,7 @@
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "HallTurnBias": 0,
 "Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
+"$type": "RogueEssence.LevelGen.ColumnHallBrush, RogueEssence"
 },
 "Width": {
 "Min": 0,
@@ -5833,6 +6907,99 @@
 "$type": "PMDC.LevelGen.BossRoom, PMDC"
 }
 ]
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternTerrainStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": true,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 6
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_blob",
+"Pattern": 0
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_double_colon",
+"Pattern": 0
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"MapID": "pattern_plus",
+"Pattern": 0
+},
+"Rate": 20
 }
 ]
 }
@@ -6147,7 +7314,7 @@
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "HallTurnBias": 0,
 "Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
+"$type": "RogueEssence.LevelGen.ColumnHallBrush, RogueEssence"
 },
 "Width": {
 "Min": 0,
@@ -6321,6 +7488,99 @@
 "$type": "PMDC.LevelGen.BossRoom, PMDC"
 }
 ]
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternTerrainStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": true,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 6
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_blob",
+"Pattern": 0
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_double_colon",
+"Pattern": 0
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"MapID": "pattern_plus",
+"Pattern": 0
+},
+"Rate": 20
 }
 ]
 }
@@ -6635,7 +7895,7 @@
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "HallTurnBias": 0,
 "Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
+"$type": "RogueEssence.LevelGen.ColumnHallBrush, RogueEssence"
 },
 "Width": {
 "Min": 0,
@@ -6809,6 +8069,99 @@
 "$type": "PMDC.LevelGen.BossRoom, PMDC"
 }
 ]
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternTerrainStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": true,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 6
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_blob",
+"Pattern": 0
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_double_colon",
+"Pattern": 0
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"MapID": "pattern_plus",
+"Pattern": 0
+},
+"Rate": 20
 }
 ]
 }

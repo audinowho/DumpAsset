@@ -49,7 +49,7 @@
 },
 "Value": {
 "$type": "RogueElements.InitFloorPlanStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Width": 54,
+"Width": 52,
 "Height": 40,
 "Wrap": false
 }
@@ -63,10 +63,10 @@
 "Value": {
 "$type": "RogueElements.FloorPathBranch`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "FillPercent": {
-"Min": 45,
-"Max": 45
+"Min": 50,
+"Max": 50
 },
-"HallPercent": 70,
+"HallPercent": 50,
 "BranchRatio": {
 "Min": 0,
 "Max": 25
@@ -77,22 +77,14 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 4,
-"Max": 11
+"Max": 15
 },
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
+"Height": {
 "Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
+"Max": 15
 }
 },
 "Rate": 10
@@ -109,7 +101,7 @@
 "Max": 9
 }
 },
-"Rate": 10
+"Rate": 5
 }
 ]
 },
@@ -124,60 +116,6 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 3
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 3
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 5
-},
-{
-"Spawn": {
 "$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 1,
@@ -188,7 +126,7 @@
 "Max": 1
 }
 },
-"Rate": 20
+"Rate": 10
 }
 ]
 },
@@ -208,7 +146,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectBranchStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 100,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -343,6 +281,60 @@
 ]
 }
 ]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 2,
+"Max": 5
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "water",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 2,
+"Y": 2
+}
+}
 }
 },
 {
@@ -685,7 +677,7 @@
 },
 "Value": {
 "$type": "RogueElements.InitFloorPlanStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Width": 54,
+"Width": 52,
 "Height": 40,
 "Wrap": false
 }
@@ -699,10 +691,10 @@
 "Value": {
 "$type": "RogueElements.FloorPathBranch`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "FillPercent": {
-"Min": 45,
-"Max": 45
+"Min": 50,
+"Max": 50
 },
-"HallPercent": 70,
+"HallPercent": 50,
 "BranchRatio": {
 "Min": 0,
 "Max": 25
@@ -713,22 +705,14 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 4,
-"Max": 11
+"Max": 15
 },
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
+"Height": {
 "Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
+"Max": 15
 }
 },
 "Rate": 10
@@ -745,7 +729,7 @@
 "Max": 9
 }
 },
-"Rate": 10
+"Rate": 5
 }
 ]
 },
@@ -760,60 +744,6 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 3
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 3
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 5
-},
-{
-"Spawn": {
 "$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 1,
@@ -824,7 +754,7 @@
 "Max": 1
 }
 },
-"Rate": 20
+"Rate": 10
 }
 ]
 },
@@ -844,7 +774,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectBranchStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 100,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -979,6 +909,60 @@
 ]
 }
 ]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 2,
+"Max": 5
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "water",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 2,
+"Y": 2
+}
+}
 }
 },
 {
@@ -1321,7 +1305,7 @@
 },
 "Value": {
 "$type": "RogueElements.InitFloorPlanStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Width": 54,
+"Width": 52,
 "Height": 40,
 "Wrap": false
 }
@@ -1335,10 +1319,10 @@
 "Value": {
 "$type": "RogueElements.FloorPathBranch`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "FillPercent": {
-"Min": 45,
-"Max": 45
+"Min": 50,
+"Max": 50
 },
-"HallPercent": 70,
+"HallPercent": 50,
 "BranchRatio": {
 "Min": 0,
 "Max": 25
@@ -1349,22 +1333,14 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 4,
-"Max": 11
+"Max": 15
 },
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
+"Height": {
 "Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
+"Max": 15
 }
 },
 "Rate": 10
@@ -1381,7 +1357,7 @@
 "Max": 9
 }
 },
-"Rate": 10
+"Rate": 5
 }
 ]
 },
@@ -1396,60 +1372,6 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 3
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 3
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 5
-},
-{
-"Spawn": {
 "$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 1,
@@ -1460,7 +1382,7 @@
 "Max": 1
 }
 },
-"Rate": 20
+"Rate": 10
 }
 ]
 },
@@ -1480,7 +1402,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectBranchStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 100,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -1615,6 +1537,60 @@
 ]
 }
 ]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 2,
+"Max": 5
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "water",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 2,
+"Y": 2
+}
+}
 }
 },
 {
@@ -1957,7 +1933,7 @@
 },
 "Value": {
 "$type": "RogueElements.InitFloorPlanStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Width": 54,
+"Width": 52,
 "Height": 40,
 "Wrap": false
 }
@@ -1971,10 +1947,10 @@
 "Value": {
 "$type": "RogueElements.FloorPathBranch`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "FillPercent": {
-"Min": 45,
-"Max": 45
+"Min": 50,
+"Max": 50
 },
-"HallPercent": 70,
+"HallPercent": 50,
 "BranchRatio": {
 "Min": 0,
 "Max": 25
@@ -1985,22 +1961,14 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 4,
-"Max": 11
+"Max": 15
 },
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
+"Height": {
 "Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
+"Max": 15
 }
 },
 "Rate": 10
@@ -2017,7 +1985,7 @@
 "Max": 9
 }
 },
-"Rate": 10
+"Rate": 5
 }
 ]
 },
@@ -2032,60 +2000,6 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 3
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 3
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 5
-},
-{
-"Spawn": {
 "$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 1,
@@ -2096,7 +2010,7 @@
 "Max": 1
 }
 },
-"Rate": 20
+"Rate": 10
 }
 ]
 },
@@ -2116,7 +2030,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectBranchStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 100,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -2251,6 +2165,60 @@
 ]
 }
 ]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 2,
+"Max": 5
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "water",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 2,
+"Y": 2
+}
+}
 }
 },
 {
@@ -2593,7 +2561,7 @@
 },
 "Value": {
 "$type": "RogueElements.InitFloorPlanStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Width": 54,
+"Width": 52,
 "Height": 40,
 "Wrap": false
 }
@@ -2607,10 +2575,10 @@
 "Value": {
 "$type": "RogueElements.FloorPathBranch`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "FillPercent": {
-"Min": 45,
-"Max": 45
+"Min": 50,
+"Max": 50
 },
-"HallPercent": 70,
+"HallPercent": 50,
 "BranchRatio": {
 "Min": 0,
 "Max": 25
@@ -2621,22 +2589,14 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 4,
-"Max": 11
+"Max": 15
 },
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
+"Height": {
 "Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
+"Max": 15
 }
 },
 "Rate": 10
@@ -2653,7 +2613,7 @@
 "Max": 9
 }
 },
-"Rate": 10
+"Rate": 5
 }
 ]
 },
@@ -2668,60 +2628,6 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 3
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 3
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 5
-},
-{
-"Spawn": {
 "$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 1,
@@ -2732,7 +2638,7 @@
 "Max": 1
 }
 },
-"Rate": 20
+"Rate": 10
 }
 ]
 },
@@ -2752,7 +2658,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectBranchStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 100,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -2887,6 +2793,60 @@
 ]
 }
 ]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 2,
+"Max": 5
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "water",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 2,
+"Y": 2
+}
+}
 }
 },
 {
@@ -3229,7 +3189,7 @@
 },
 "Value": {
 "$type": "RogueElements.InitFloorPlanStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Width": 54,
+"Width": 52,
 "Height": 40,
 "Wrap": false
 }
@@ -3243,10 +3203,10 @@
 "Value": {
 "$type": "RogueElements.FloorPathBranch`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "FillPercent": {
-"Min": 45,
-"Max": 45
+"Min": 50,
+"Max": 50
 },
-"HallPercent": 70,
+"HallPercent": 50,
 "BranchRatio": {
 "Min": 0,
 "Max": 25
@@ -3257,22 +3217,14 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 4,
-"Max": 11
+"Max": 15
 },
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
+"Height": {
 "Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
+"Max": 15
 }
 },
 "Rate": 10
@@ -3289,7 +3241,7 @@
 "Max": 9
 }
 },
-"Rate": 10
+"Rate": 5
 }
 ]
 },
@@ -3304,60 +3256,6 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 3
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 3
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 5
-},
-{
-"Spawn": {
 "$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 1,
@@ -3368,7 +3266,7 @@
 "Max": 1
 }
 },
-"Rate": 20
+"Rate": 10
 }
 ]
 },
@@ -3388,7 +3286,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectBranchStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 100,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -3523,6 +3421,60 @@
 ]
 }
 ]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 2,
+"Max": 5
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "water",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 2,
+"Y": 2
+}
+}
 }
 },
 {
@@ -3865,8 +3817,8 @@
 },
 "Value": {
 "$type": "RogueElements.InitFloorPlanStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Width": 54,
-"Height": 40,
+"Width": 58,
+"Height": 46,
 "Wrap": false
 }
 },
@@ -3879,10 +3831,10 @@
 "Value": {
 "$type": "RogueElements.FloorPathBranch`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "FillPercent": {
-"Min": 45,
-"Max": 45
+"Min": 55,
+"Max": 55
 },
-"HallPercent": 70,
+"HallPercent": 50,
 "BranchRatio": {
 "Min": 0,
 "Max": 25
@@ -3893,22 +3845,28 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 12,
+"Max": 15
+},
+"Height": {
+"Min": 12,
+"Max": 15
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 4,
-"Max": 11
+"Max": 15
 },
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
+"Height": {
 "Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
+"Max": 15
 }
 },
 "Rate": 10
@@ -3925,7 +3883,7 @@
 "Max": 9
 }
 },
-"Rate": 10
+"Rate": 5
 }
 ]
 },
@@ -3940,60 +3898,6 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 3
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 3
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 5
-},
-{
-"Spawn": {
 "$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 1,
@@ -4004,7 +3908,7 @@
 "Max": 1
 }
 },
-"Rate": 20
+"Rate": 10
 }
 ]
 },
@@ -4024,7 +3928,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectBranchStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 100,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -4159,6 +4063,60 @@
 ]
 }
 ]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 2,
+"Max": 5
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "water",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 2,
+"Y": 2
+}
+}
 }
 },
 {
@@ -4501,8 +4459,8 @@
 },
 "Value": {
 "$type": "RogueElements.InitFloorPlanStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Width": 54,
-"Height": 40,
+"Width": 58,
+"Height": 46,
 "Wrap": false
 }
 },
@@ -4515,10 +4473,10 @@
 "Value": {
 "$type": "RogueElements.FloorPathBranch`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "FillPercent": {
-"Min": 45,
-"Max": 45
+"Min": 55,
+"Max": 55
 },
-"HallPercent": 70,
+"HallPercent": 50,
 "BranchRatio": {
 "Min": 0,
 "Max": 25
@@ -4529,22 +4487,28 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 12,
+"Max": 15
+},
+"Height": {
+"Min": 12,
+"Max": 15
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 4,
-"Max": 11
+"Max": 15
 },
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
+"Height": {
 "Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
+"Max": 15
 }
 },
 "Rate": 10
@@ -4561,7 +4525,7 @@
 "Max": 9
 }
 },
-"Rate": 10
+"Rate": 5
 }
 ]
 },
@@ -4576,60 +4540,6 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 3
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 3
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 5
-},
-{
-"Spawn": {
 "$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 1,
@@ -4640,7 +4550,7 @@
 "Max": 1
 }
 },
-"Rate": 20
+"Rate": 10
 }
 ]
 },
@@ -4660,7 +4570,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectBranchStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 100,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -4795,6 +4705,60 @@
 ]
 }
 ]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 2,
+"Max": 5
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "water",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 2,
+"Y": 2
+}
+}
 }
 },
 {
@@ -5137,8 +5101,8 @@
 },
 "Value": {
 "$type": "RogueElements.InitFloorPlanStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Width": 54,
-"Height": 40,
+"Width": 58,
+"Height": 46,
 "Wrap": false
 }
 },
@@ -5151,10 +5115,10 @@
 "Value": {
 "$type": "RogueElements.FloorPathBranch`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "FillPercent": {
-"Min": 45,
-"Max": 45
+"Min": 55,
+"Max": 55
 },
-"HallPercent": 70,
+"HallPercent": 50,
 "BranchRatio": {
 "Min": 0,
 "Max": 25
@@ -5165,22 +5129,28 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 12,
+"Max": 15
+},
+"Height": {
+"Min": 12,
+"Max": 15
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 4,
-"Max": 11
+"Max": 15
 },
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
+"Height": {
 "Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
+"Max": 15
 }
 },
 "Rate": 10
@@ -5197,7 +5167,7 @@
 "Max": 9
 }
 },
-"Rate": 10
+"Rate": 5
 }
 ]
 },
@@ -5212,60 +5182,6 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 3
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 3
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 5
-},
-{
-"Spawn": {
 "$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 1,
@@ -5276,7 +5192,7 @@
 "Max": 1
 }
 },
-"Rate": 20
+"Rate": 10
 }
 ]
 },
@@ -5296,7 +5212,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectBranchStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 100,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -5431,6 +5347,60 @@
 ]
 }
 ]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 2,
+"Max": 5
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "water",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 2,
+"Y": 2
+}
+}
 }
 },
 {
@@ -5773,8 +5743,8 @@
 },
 "Value": {
 "$type": "RogueElements.InitFloorPlanStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Width": 54,
-"Height": 40,
+"Width": 58,
+"Height": 46,
 "Wrap": false
 }
 },
@@ -5787,10 +5757,10 @@
 "Value": {
 "$type": "RogueElements.FloorPathBranch`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "FillPercent": {
-"Min": 45,
-"Max": 45
+"Min": 55,
+"Max": 55
 },
-"HallPercent": 70,
+"HallPercent": 50,
 "BranchRatio": {
 "Min": 0,
 "Max": 25
@@ -5801,22 +5771,28 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 12,
+"Max": 15
+},
+"Height": {
+"Min": 12,
+"Max": 15
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 4,
-"Max": 11
+"Max": 15
 },
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
+"Height": {
 "Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
+"Max": 15
 }
 },
 "Rate": 10
@@ -5833,7 +5809,7 @@
 "Max": 9
 }
 },
-"Rate": 10
+"Rate": 5
 }
 ]
 },
@@ -5848,60 +5824,6 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 3
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 3
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 5
-},
-{
-"Spawn": {
 "$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 1,
@@ -5912,7 +5834,7 @@
 "Max": 1
 }
 },
-"Rate": 20
+"Rate": 10
 }
 ]
 },
@@ -5932,7 +5854,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectBranchStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 100,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -6067,6 +5989,60 @@
 ]
 }
 ]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 2,
+"Max": 5
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "water",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 2,
+"Y": 2
+}
+}
 }
 },
 {
@@ -6409,8 +6385,8 @@
 },
 "Value": {
 "$type": "RogueElements.InitFloorPlanStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Width": 54,
-"Height": 40,
+"Width": 58,
+"Height": 46,
 "Wrap": false
 }
 },
@@ -6423,10 +6399,10 @@
 "Value": {
 "$type": "RogueElements.FloorPathBranch`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "FillPercent": {
-"Min": 45,
-"Max": 45
+"Min": 55,
+"Max": 55
 },
-"HallPercent": 70,
+"HallPercent": 50,
 "BranchRatio": {
 "Min": 0,
 "Max": 25
@@ -6437,22 +6413,28 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 12,
+"Max": 15
+},
+"Height": {
+"Min": 12,
+"Max": 15
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 4,
-"Max": 11
+"Max": 15
 },
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
+"Height": {
 "Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
+"Max": 15
 }
 },
 "Rate": 10
@@ -6469,7 +6451,7 @@
 "Max": 9
 }
 },
-"Rate": 10
+"Rate": 5
 }
 ]
 },
@@ -6484,60 +6466,6 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 3
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 3
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 5
-},
-{
-"Spawn": {
 "$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 1,
@@ -6548,7 +6476,7 @@
 "Max": 1
 }
 },
-"Rate": 20
+"Rate": 10
 }
 ]
 },
@@ -6568,7 +6496,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectBranchStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 100,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -6703,6 +6631,60 @@
 ]
 }
 ]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 2,
+"Max": 5
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "water",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 2,
+"Y": 2
+}
+}
 }
 },
 {
@@ -7045,8 +7027,8 @@
 },
 "Value": {
 "$type": "RogueElements.InitFloorPlanStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"Width": 54,
-"Height": 40,
+"Width": 58,
+"Height": 46,
 "Wrap": false
 }
 },
@@ -7059,10 +7041,10 @@
 "Value": {
 "$type": "RogueElements.FloorPathBranch`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "FillPercent": {
-"Min": 45,
-"Max": 45
+"Min": 55,
+"Max": 55
 },
-"HallPercent": 70,
+"HallPercent": 50,
 "BranchRatio": {
 "Min": 0,
 "Max": 25
@@ -7073,22 +7055,28 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 12,
+"Max": 15
+},
+"Height": {
+"Min": 12,
+"Max": 15
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 4,
-"Max": 11
+"Max": 15
 },
-"MinorHeight": {
-"Min": 2,
-"Max": 6
-},
-"MajorHeight": {
+"Height": {
 "Min": 4,
-"Max": 11
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 6
+"Max": 15
 }
 },
 "Rate": 10
@@ -7105,7 +7093,7 @@
 "Max": 9
 }
 },
-"Rate": 10
+"Rate": 5
 }
 ]
 },
@@ -7120,60 +7108,6 @@
 "$values": [
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 3
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 3
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 3,
-"Max": 7
-},
-"Height": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 5
-},
-{
-"Spawn": {
 "$type": "RogueElements.RoomGenSquare`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 1,
@@ -7184,7 +7118,7 @@
 "Max": 1
 }
 },
-"Rate": 20
+"Rate": 10
 }
 ]
 },
@@ -7204,7 +7138,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectBranchStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 100,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -7339,6 +7273,60 @@
 ]
 }
 ]
+}
+},
+{
+"Key": {
+"str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 2,
+"Max": 5
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "water",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 2,
+"Y": 2
+}
+}
 }
 },
 {
@@ -10089,576 +10077,6 @@
 "Min": 0,
 "Max": 12
 }
-}
-]
-},
-{
-"$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
-"SpreadPlan": {
-"$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
-"FloorSpacing": {
-"Min": 1,
-"Max": 1
-},
-"FloorRange": {
-"Min": 0,
-"Max": 13
-}
-},
-"Spawns": {
-"$type": "RogueElements.SpawnList`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
-"$values": [
-{
-"Spawn": {
-"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence]], RogueElements]], RogueEssence",
-"Priority": {
-"str": [
-5,
-1
-]
-},
-"Item": {
-"$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-"Spawn": {
-"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-"Picker": {
-"$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-"ToSpawn": [
-{
-"$type": "RogueElements.PresetPicker`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-"ToSpawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "food_apple",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-}
-}
-]
-}
-}
-}
-},
-"Rate": 10
-}
-]
-},
-"ModStates": []
-},
-{
-"$type": "RogueEssence.LevelGen.SpreadRoomZoneStep, RogueEssence",
-"SpreadPlan": {
-"$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
-"FloorSpacing": {
-"Min": 1,
-"Max": 1
-},
-"FloorRange": {
-"Min": 0,
-"Max": 13
-}
-},
-"Spawns": [
-{
-"Spawn": {
-"GridOption": {
-"$type": "PMDC.LevelGen.RoomGenEvo`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC"
-},
-"ListOption": {
-"$type": "PMDC.LevelGen.RoomGenEvo`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], PMDC"
-},
-"Filters": [
-{
-"$type": "RogueElements.RoomFilterComponent, RogueElements",
-"Negate": true,
-"Components": [
-{
-"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
-}
-]
-},
-{
-"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
-"Connection": 1
-}
-]
-},
-"Rate": 10
-}
-],
-"PriorityGrid": {
-"str": [
--4,
-1
-]
-},
-"PriorityList": {
-"str": [
--2,
-1
-]
-}
-},
-{
-"$type": "PMDC.LevelGen.SpreadHouseZoneStep, PMDC",
-"SpreadPlan": {
-"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
-"Quota": {
-"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
-"Min": 3,
-"Max": 100,
-"Rate": 50
-},
-"Replaceable": false,
-"FloorRange": {
-"Min": 5,
-"Max": 13
-}
-},
-"Priority": {
-"str": [
-6
-]
-},
-"Items": [
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_wonder",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_blue",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_black",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_clear",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_grass",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_green",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_brown",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_orange",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_gold",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_pink",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_purple",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_red",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_royal",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_silver",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_white",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_yellow",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_sky",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_gray",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_magenta",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-}
-],
-"ItemThemes": [
-{
-"Spawn": {
-"$type": "PMDC.LevelGen.ItemStateType, PMDC",
-"UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.GummiState"
-},
-"UseMapItems": true,
-"UseSpecialItems": true,
-"Amount": {
-"Min": 4,
-"Max": 9
-}
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-}
-],
-"Mobs": [],
-"MobThemes": [
-{
-"Spawn": {
-"$type": "PMDC.LevelGen.MobThemeTypingSeeded, PMDC",
-"EvoAllowance": 13,
-"Amount": {
-"Min": 7,
-"Max": 13
-}
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 13
-}
-}
-],
-"HouseStepSpawns": [
-{
-"Spawn": {
-"$type": "PMDC.LevelGen.ChestStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], PMDC",
-"Filters": [
-{
-"$type": "RogueElements.RoomFilterComponent, RogueElements",
-"Negate": true,
-"Components": [
-{
-"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
-},
-{
-"$type": "PMDC.LevelGen.NoEventRoom, PMDC"
-}
-]
-}
-],
-"Items": [],
-"ItemThemes": [],
-"Mobs": [],
-"MobThemes": [],
-"Ambush": true
-},
-"Rate": 10
-}
-],
-"ModStates": [
-{
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.ChestModGenState"
 }
 ]
 }

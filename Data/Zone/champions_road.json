@@ -50,9 +50,9 @@
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
-"CellY": 4,
+"CellHeight": 14,
+"CellX": 5,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -64,16 +64,8 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"RoomRatio": {
-"Min": 90,
-"Max": 90
-},
-"BranchRatio": {
-"Min": 0,
-"Max": 25
-},
-"NoForcedBranches": false,
+"$type": "RogueElements.GridPathTwoSides`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"GapAxis": 0,
 "GenericRooms": {
 "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "$values": [
@@ -81,20 +73,20 @@
 "Spawn": {
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
-"Min": 4,
+"Min": 5,
 "Max": 11
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
-"Min": 4,
-"Max": 11
+"Min": 7,
+"Max": 14
 },
 "MinorWidth": {
-"Min": 2,
-"Max": 6
+"Min": 4,
+"Max": 8
 }
 },
 "Rate": 10
@@ -107,8 +99,22 @@
 "Max": 9
 },
 "Height": {
+"Min": 7,
+"Max": 14
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 5,
-"Max": 9
+"Max": 11
+},
+"Height": {
+"Min": 7,
+"Max": 14
 }
 },
 "Rate": 10
@@ -127,7 +133,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -160,7 +166,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -194,6 +200,63 @@
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"RoomComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 1
+}
+],
+"MergeRate": {
+"Min": 1,
+"Max": 4
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 5,
+"Max": 9
+},
+"Height": {
+"Min": 20,
+"Max": 27
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -310,6 +373,60 @@
 {
 "Key": {
 "str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 3,
+"Max": 7
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "pit",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 1,
+"Y": 1
+}
+}
+}
+},
+{
+"Key": {
+"str": [
 4
 ]
 },
@@ -377,6 +494,76 @@
 }
 }
 }
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
 }
 },
 {
@@ -504,9 +691,9 @@
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
-"CellY": 4,
+"CellHeight": 14,
+"CellX": 5,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -518,16 +705,8 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"RoomRatio": {
-"Min": 90,
-"Max": 90
-},
-"BranchRatio": {
-"Min": 0,
-"Max": 25
-},
-"NoForcedBranches": false,
+"$type": "RogueElements.GridPathTwoSides`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"GapAxis": 0,
 "GenericRooms": {
 "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "$values": [
@@ -535,20 +714,20 @@
 "Spawn": {
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
-"Min": 4,
+"Min": 5,
 "Max": 11
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
-"Min": 4,
-"Max": 11
+"Min": 7,
+"Max": 14
 },
 "MinorWidth": {
-"Min": 2,
-"Max": 6
+"Min": 4,
+"Max": 8
 }
 },
 "Rate": 10
@@ -561,8 +740,22 @@
 "Max": 9
 },
 "Height": {
+"Min": 7,
+"Max": 14
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 5,
-"Max": 9
+"Max": 11
+},
+"Height": {
+"Min": 7,
+"Max": 14
 }
 },
 "Rate": 10
@@ -581,7 +774,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -614,7 +807,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -648,6 +841,63 @@
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"RoomComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 1
+}
+],
+"MergeRate": {
+"Min": 1,
+"Max": 4
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 5,
+"Max": 9
+},
+"Height": {
+"Min": 20,
+"Max": 27
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -764,6 +1014,60 @@
 {
 "Key": {
 "str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 3,
+"Max": 7
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "pit",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 1,
+"Y": 1
+}
+}
+}
+},
+{
+"Key": {
+"str": [
 4
 ]
 },
@@ -831,6 +1135,76 @@
 }
 }
 }
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
 }
 },
 {
@@ -958,9 +1332,9 @@
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
-"CellY": 4,
+"CellHeight": 14,
+"CellX": 5,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -972,16 +1346,8 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"RoomRatio": {
-"Min": 90,
-"Max": 90
-},
-"BranchRatio": {
-"Min": 0,
-"Max": 25
-},
-"NoForcedBranches": false,
+"$type": "RogueElements.GridPathTwoSides`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"GapAxis": 0,
 "GenericRooms": {
 "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "$values": [
@@ -989,20 +1355,20 @@
 "Spawn": {
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
-"Min": 4,
+"Min": 5,
 "Max": 11
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
-"Min": 4,
-"Max": 11
+"Min": 7,
+"Max": 14
 },
 "MinorWidth": {
-"Min": 2,
-"Max": 6
+"Min": 4,
+"Max": 8
 }
 },
 "Rate": 10
@@ -1015,8 +1381,22 @@
 "Max": 9
 },
 "Height": {
+"Min": 7,
+"Max": 14
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 5,
-"Max": 9
+"Max": 11
+},
+"Height": {
+"Min": 7,
+"Max": 14
 }
 },
 "Rate": 10
@@ -1035,7 +1415,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -1068,7 +1448,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -1102,6 +1482,63 @@
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"RoomComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 1
+}
+],
+"MergeRate": {
+"Min": 1,
+"Max": 4
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 5,
+"Max": 9
+},
+"Height": {
+"Min": 20,
+"Max": 27
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -1218,6 +1655,60 @@
 {
 "Key": {
 "str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 3,
+"Max": 7
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "pit",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 1,
+"Y": 1
+}
+}
+}
+},
+{
+"Key": {
+"str": [
 4
 ]
 },
@@ -1285,6 +1776,76 @@
 }
 }
 }
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
 }
 },
 {
@@ -1412,9 +1973,9 @@
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
-"CellY": 4,
+"CellHeight": 14,
+"CellX": 5,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -1426,16 +1987,8 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"RoomRatio": {
-"Min": 90,
-"Max": 90
-},
-"BranchRatio": {
-"Min": 0,
-"Max": 25
-},
-"NoForcedBranches": false,
+"$type": "RogueElements.GridPathTwoSides`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"GapAxis": 0,
 "GenericRooms": {
 "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "$values": [
@@ -1443,20 +1996,20 @@
 "Spawn": {
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
-"Min": 4,
+"Min": 5,
 "Max": 11
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
-"Min": 4,
-"Max": 11
+"Min": 7,
+"Max": 14
 },
 "MinorWidth": {
-"Min": 2,
-"Max": 6
+"Min": 4,
+"Max": 8
 }
 },
 "Rate": 10
@@ -1469,8 +2022,22 @@
 "Max": 9
 },
 "Height": {
+"Min": 7,
+"Max": 14
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 5,
-"Max": 9
+"Max": 11
+},
+"Height": {
+"Min": 7,
+"Max": 14
 }
 },
 "Rate": 10
@@ -1489,7 +2056,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -1522,7 +2089,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -1556,6 +2123,63 @@
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"RoomComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 1
+}
+],
+"MergeRate": {
+"Min": 1,
+"Max": 4
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 5,
+"Max": 9
+},
+"Height": {
+"Min": 20,
+"Max": 27
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -1672,6 +2296,60 @@
 {
 "Key": {
 "str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 3,
+"Max": 7
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "pit",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 1,
+"Y": 1
+}
+}
+}
+},
+{
+"Key": {
+"str": [
 4
 ]
 },
@@ -1739,6 +2417,76 @@
 }
 }
 }
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
 }
 },
 {
@@ -1866,9 +2614,9 @@
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
-"CellY": 4,
+"CellHeight": 14,
+"CellX": 5,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -1880,16 +2628,8 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"RoomRatio": {
-"Min": 90,
-"Max": 90
-},
-"BranchRatio": {
-"Min": 0,
-"Max": 25
-},
-"NoForcedBranches": false,
+"$type": "RogueElements.GridPathTwoSides`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"GapAxis": 0,
 "GenericRooms": {
 "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "$values": [
@@ -1897,20 +2637,20 @@
 "Spawn": {
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
-"Min": 4,
+"Min": 5,
 "Max": 11
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
-"Min": 4,
-"Max": 11
+"Min": 7,
+"Max": 14
 },
 "MinorWidth": {
-"Min": 2,
-"Max": 6
+"Min": 4,
+"Max": 8
 }
 },
 "Rate": 10
@@ -1923,8 +2663,22 @@
 "Max": 9
 },
 "Height": {
+"Min": 7,
+"Max": 14
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 5,
-"Max": 9
+"Max": 11
+},
+"Height": {
+"Min": 7,
+"Max": 14
 }
 },
 "Rate": 10
@@ -1943,7 +2697,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -1976,7 +2730,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -2010,6 +2764,63 @@
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"RoomComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 1
+}
+],
+"MergeRate": {
+"Min": 1,
+"Max": 4
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 5,
+"Max": 9
+},
+"Height": {
+"Min": 20,
+"Max": 27
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -2126,6 +2937,60 @@
 {
 "Key": {
 "str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 3,
+"Max": 7
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "pit",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 1,
+"Y": 1
+}
+}
+}
+},
+{
+"Key": {
+"str": [
 4
 ]
 },
@@ -2193,6 +3058,76 @@
 }
 }
 }
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
 }
 },
 {
@@ -2320,9 +3255,9 @@
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
-"CellY": 4,
+"CellHeight": 14,
+"CellX": 5,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -2334,16 +3269,8 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"RoomRatio": {
-"Min": 90,
-"Max": 90
-},
-"BranchRatio": {
-"Min": 0,
-"Max": 25
-},
-"NoForcedBranches": false,
+"$type": "RogueElements.GridPathTwoSides`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"GapAxis": 0,
 "GenericRooms": {
 "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "$values": [
@@ -2351,20 +3278,20 @@
 "Spawn": {
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
-"Min": 4,
+"Min": 5,
 "Max": 11
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
-"Min": 4,
-"Max": 11
+"Min": 7,
+"Max": 14
 },
 "MinorWidth": {
-"Min": 2,
-"Max": 6
+"Min": 4,
+"Max": 8
 }
 },
 "Rate": 10
@@ -2377,8 +3304,22 @@
 "Max": 9
 },
 "Height": {
+"Min": 7,
+"Max": 14
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
 "Min": 5,
-"Max": 9
+"Max": 11
+},
+"Height": {
+"Min": 7,
+"Max": 14
 }
 },
 "Rate": 10
@@ -2397,7 +3338,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -2430,7 +3371,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"ConnectPercent": 50,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -2464,6 +3405,63 @@
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"RoomComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 1
+}
+],
+"MergeRate": {
+"Min": 1,
+"Max": 4
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 5,
+"Max": 9
+},
+"Height": {
+"Min": 20,
+"Max": 27
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -2580,6 +3578,60 @@
 {
 "Key": {
 "str": [
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.AddTunnelStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"TurnLength": {
+"Min": 3,
+"Max": 8
+},
+"MaxLength": {
+"Min": 25,
+"Max": 25
+},
+"AllowDeadEnd": false,
+"Halls": {
+"Min": 3,
+"Max": 7
+},
+"Brush": {
+"$type": "RogueElements.TerrainHallBrush, RogueElements",
+"Terrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "pit",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Danger": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"Dims": {
+"X": 1,
+"Y": 1
+}
+}
+}
+},
+{
+"Key": {
+"str": [
 4
 ]
 },
@@ -2647,6 +3699,76 @@
 }
 }
 }
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
 }
 },
 {
@@ -2773,10 +3895,10 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
-"CellY": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 6,
+"CellY": 5,
 "CellWall": 1,
 "Wrap": false
 }
@@ -2790,12 +3912,12 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 80,
+"Max": 80
 },
 "BranchRatio": {
 "Min": 0,
-"Max": 25
+"Max": 0
 },
 "NoForcedBranches": false,
 "GenericRooms": {
@@ -2806,19 +3928,19 @@
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorWidth": {
 "Min": 2,
-"Max": 6
+"Max": 5
 }
 },
 "Rate": 10
@@ -2828,11 +3950,11 @@
 "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 5,
-"Max": 9
+"Max": 10
 },
 "Height": {
 "Min": 5,
-"Max": 9
+"Max": 10
 }
 },
 "Rate": 10
@@ -2883,41 +4005,141 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"$type": "RogueElements.SetGridDefaultsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"DefaultRatio": {
+"Min": 25,
+"Max": 25
+},
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
 "Negate": true,
 "Components": [
 {
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ]
 }
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
+}
 ],
-"GenericHalls": {
-"$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"ToSpawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 0,
-"Max": 0
-},
-"Height": {
-"Min": 0,
-"Max": 0
-}
-}
-},
-"HallComponents": [
+"RoomComponents": [
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"MergeRate": {
+"Min": 3,
+"Max": 7
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 9,
+"Max": 9
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 9,
+"Max": 9
+},
+"Height": {
+"Min": 20,
+"Max": 27
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 9,
+"Max": 9
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 9,
+"Max": 9
+},
+"Height": {
+"Min": 20,
+"Max": 27
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -3229,6 +4451,76 @@
 ]
 },
 "Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
@@ -3345,10 +4637,10 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
-"CellY": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 6,
+"CellY": 5,
 "CellWall": 1,
 "Wrap": false
 }
@@ -3362,12 +4654,12 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 80,
+"Max": 80
 },
 "BranchRatio": {
 "Min": 0,
-"Max": 25
+"Max": 0
 },
 "NoForcedBranches": false,
 "GenericRooms": {
@@ -3378,19 +4670,19 @@
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorWidth": {
 "Min": 2,
-"Max": 6
+"Max": 5
 }
 },
 "Rate": 10
@@ -3400,11 +4692,11 @@
 "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 5,
-"Max": 9
+"Max": 10
 },
 "Height": {
 "Min": 5,
-"Max": 9
+"Max": 10
 }
 },
 "Rate": 10
@@ -3455,41 +4747,141 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"$type": "RogueElements.SetGridDefaultsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"DefaultRatio": {
+"Min": 25,
+"Max": 25
+},
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
 "Negate": true,
 "Components": [
 {
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ]
 }
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
+}
 ],
-"GenericHalls": {
-"$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"ToSpawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 0,
-"Max": 0
-},
-"Height": {
-"Min": 0,
-"Max": 0
-}
-}
-},
-"HallComponents": [
+"RoomComponents": [
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"MergeRate": {
+"Min": 3,
+"Max": 7
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 9,
+"Max": 9
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 20,
+"Max": 27
+},
+"Height": {
+"Min": 9,
+"Max": 9
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 9,
+"Max": 9
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 20,
+"Max": 27
+},
+"Height": {
+"Min": 9,
+"Max": 9
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -3801,6 +5193,76 @@
 ]
 },
 "Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
@@ -3917,10 +5379,10 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
-"CellY": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 6,
+"CellY": 5,
 "CellWall": 1,
 "Wrap": false
 }
@@ -3934,12 +5396,12 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 80,
+"Max": 80
 },
 "BranchRatio": {
 "Min": 0,
-"Max": 25
+"Max": 0
 },
 "NoForcedBranches": false,
 "GenericRooms": {
@@ -3950,19 +5412,19 @@
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorWidth": {
 "Min": 2,
-"Max": 6
+"Max": 5
 }
 },
 "Rate": 10
@@ -3972,11 +5434,11 @@
 "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 5,
-"Max": 9
+"Max": 10
 },
 "Height": {
 "Min": 5,
-"Max": 9
+"Max": 10
 }
 },
 "Rate": 10
@@ -4027,41 +5489,141 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"$type": "RogueElements.SetGridDefaultsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"DefaultRatio": {
+"Min": 25,
+"Max": 25
+},
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
 "Negate": true,
 "Components": [
 {
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ]
 }
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
+}
 ],
-"GenericHalls": {
-"$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"ToSpawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 0,
-"Max": 0
-},
-"Height": {
-"Min": 0,
-"Max": 0
-}
-}
-},
-"HallComponents": [
+"RoomComponents": [
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"MergeRate": {
+"Min": 3,
+"Max": 7
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 9,
+"Max": 9
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 9,
+"Max": 9
+},
+"Height": {
+"Min": 20,
+"Max": 27
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 9,
+"Max": 9
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 9,
+"Max": 9
+},
+"Height": {
+"Min": 20,
+"Max": 27
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -4373,6 +5935,76 @@
 ]
 },
 "Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
@@ -4489,10 +6121,10 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
-"CellY": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 6,
+"CellY": 5,
 "CellWall": 1,
 "Wrap": false
 }
@@ -4506,12 +6138,12 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 80,
+"Max": 80
 },
 "BranchRatio": {
 "Min": 0,
-"Max": 25
+"Max": 0
 },
 "NoForcedBranches": false,
 "GenericRooms": {
@@ -4522,19 +6154,19 @@
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorWidth": {
 "Min": 2,
-"Max": 6
+"Max": 5
 }
 },
 "Rate": 10
@@ -4544,11 +6176,11 @@
 "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 5,
-"Max": 9
+"Max": 10
 },
 "Height": {
 "Min": 5,
-"Max": 9
+"Max": 10
 }
 },
 "Rate": 10
@@ -4599,41 +6231,141 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"$type": "RogueElements.SetGridDefaultsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"DefaultRatio": {
+"Min": 25,
+"Max": 25
+},
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
 "Negate": true,
 "Components": [
 {
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ]
 }
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
+}
 ],
-"GenericHalls": {
-"$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"ToSpawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 0,
-"Max": 0
-},
-"Height": {
-"Min": 0,
-"Max": 0
-}
-}
-},
-"HallComponents": [
+"RoomComponents": [
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"MergeRate": {
+"Min": 3,
+"Max": 7
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 9,
+"Max": 9
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 20,
+"Max": 27
+},
+"Height": {
+"Min": 9,
+"Max": 9
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 9,
+"Max": 9
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 20,
+"Max": 27
+},
+"Height": {
+"Min": 9,
+"Max": 9
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -4945,6 +6677,76 @@
 ]
 },
 "Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
@@ -5061,10 +6863,10 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
-"CellY": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 6,
+"CellY": 5,
 "CellWall": 1,
 "Wrap": false
 }
@@ -5078,12 +6880,12 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 80,
+"Max": 80
 },
 "BranchRatio": {
 "Min": 0,
-"Max": 25
+"Max": 0
 },
 "NoForcedBranches": false,
 "GenericRooms": {
@@ -5094,19 +6896,19 @@
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorWidth": {
 "Min": 2,
-"Max": 6
+"Max": 5
 }
 },
 "Rate": 10
@@ -5116,11 +6918,11 @@
 "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 5,
-"Max": 9
+"Max": 10
 },
 "Height": {
 "Min": 5,
-"Max": 9
+"Max": 10
 }
 },
 "Rate": 10
@@ -5171,41 +6973,141 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"$type": "RogueElements.SetGridDefaultsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"DefaultRatio": {
+"Min": 25,
+"Max": 25
+},
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
 "Negate": true,
 "Components": [
 {
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ]
 }
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
+}
 ],
-"GenericHalls": {
-"$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"ToSpawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 0,
-"Max": 0
-},
-"Height": {
-"Min": 0,
-"Max": 0
-}
-}
-},
-"HallComponents": [
+"RoomComponents": [
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"MergeRate": {
+"Min": 3,
+"Max": 7
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 9,
+"Max": 9
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 9,
+"Max": 9
+},
+"Height": {
+"Min": 20,
+"Max": 27
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 9,
+"Max": 9
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 9,
+"Max": 9
+},
+"Height": {
+"Min": 20,
+"Max": 27
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -5517,6 +7419,76 @@
 ]
 },
 "Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
@@ -5633,10 +7605,10 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
-"CellY": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 6,
+"CellY": 5,
 "CellWall": 1,
 "Wrap": false
 }
@@ -5650,12 +7622,12 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 80,
+"Max": 80
 },
 "BranchRatio": {
 "Min": 0,
-"Max": 25
+"Max": 0
 },
 "NoForcedBranches": false,
 "GenericRooms": {
@@ -5666,19 +7638,19 @@
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorWidth": {
 "Min": 2,
-"Max": 6
+"Max": 5
 }
 },
 "Rate": 10
@@ -5688,11 +7660,11 @@
 "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 5,
-"Max": 9
+"Max": 10
 },
 "Height": {
 "Min": 5,
-"Max": 9
+"Max": 10
 }
 },
 "Rate": 10
@@ -5743,41 +7715,141 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"$type": "RogueElements.SetGridDefaultsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"DefaultRatio": {
+"Min": 25,
+"Max": 25
+},
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
 "Negate": true,
 "Components": [
 {
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ]
 }
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
+}
 ],
-"GenericHalls": {
-"$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"ToSpawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 0,
-"Max": 0
-},
-"Height": {
-"Min": 0,
-"Max": 0
-}
-}
-},
-"HallComponents": [
+"RoomComponents": [
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"MergeRate": {
+"Min": 3,
+"Max": 7
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 9,
+"Max": 9
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 20,
+"Max": 27
+},
+"Height": {
+"Min": 9,
+"Max": 9
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 9,
+"Max": 9
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 20,
+"Max": 27
+},
+"Height": {
+"Min": 9,
+"Max": 9
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -6089,6 +8161,76 @@
 ]
 },
 "Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
@@ -6205,9 +8347,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -6220,16 +8362,15 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"RoomRatio": {
-"Min": 90,
-"Max": 90
+"$type": "RogueElements.GridPathCircle`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"CircleRoomRatio": {
+"Min": 100,
+"Max": 100
 },
-"BranchRatio": {
-"Min": 0,
-"Max": 25
+"Paths": {
+"Min": 1,
+"Max": 1
 },
-"NoForcedBranches": false,
 "GenericRooms": {
 "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "$values": [
@@ -6238,26 +8379,26 @@
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorWidth": {
 "Min": 2,
-"Max": 6
+"Max": 5
 }
 },
 "Rate": 10
 },
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
 "Min": 5,
 "Max": 9
@@ -6265,6 +8406,20 @@
 "Height": {
 "Min": 5,
 "Max": 9
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 10
+},
+"Height": {
+"Min": 5,
+"Max": 10
 }
 },
 "Rate": 10
@@ -6283,7 +8438,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -6315,41 +8470,112 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
 "Negate": true,
 "Components": [
 {
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
 }
 ],
-"GenericHalls": {
-"$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"ToSpawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 0,
-"Max": 0
-},
-"Height": {
-"Min": 0,
-"Max": 0
-}
-}
-},
-"HallComponents": [
+"RoomComponents": [
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"MergeRate": {
+"Min": 6,
+"Max": 10
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 5,
+"Max": 9
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 5,
+"Max": 9
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 10
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 5,
+"Max": 10
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -6791,6 +9017,76 @@
 ]
 },
 "Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
@@ -6907,9 +9203,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -6922,16 +9218,15 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"RoomRatio": {
-"Min": 90,
-"Max": 90
+"$type": "RogueElements.GridPathCircle`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"CircleRoomRatio": {
+"Min": 100,
+"Max": 100
 },
-"BranchRatio": {
-"Min": 0,
-"Max": 25
+"Paths": {
+"Min": 1,
+"Max": 1
 },
-"NoForcedBranches": false,
 "GenericRooms": {
 "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "$values": [
@@ -6940,26 +9235,26 @@
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorWidth": {
 "Min": 2,
-"Max": 6
+"Max": 5
 }
 },
 "Rate": 10
 },
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
 "Min": 5,
 "Max": 9
@@ -6967,6 +9262,20 @@
 "Height": {
 "Min": 5,
 "Max": 9
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 10
+},
+"Height": {
+"Min": 5,
+"Max": 10
 }
 },
 "Rate": 10
@@ -6985,7 +9294,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -7017,41 +9326,112 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
 "Negate": true,
 "Components": [
 {
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
 }
 ],
-"GenericHalls": {
-"$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"ToSpawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 0,
-"Max": 0
-},
-"Height": {
-"Min": 0,
-"Max": 0
-}
-}
-},
-"HallComponents": [
+"RoomComponents": [
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"MergeRate": {
+"Min": 6,
+"Max": 10
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 5,
+"Max": 9
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 5,
+"Max": 9
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 10
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 5,
+"Max": 10
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -7493,6 +9873,76 @@
 ]
 },
 "Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
@@ -7609,9 +10059,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -7624,16 +10074,15 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"RoomRatio": {
-"Min": 90,
-"Max": 90
+"$type": "RogueElements.GridPathCircle`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"CircleRoomRatio": {
+"Min": 100,
+"Max": 100
 },
-"BranchRatio": {
-"Min": 0,
-"Max": 25
+"Paths": {
+"Min": 1,
+"Max": 1
 },
-"NoForcedBranches": false,
 "GenericRooms": {
 "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "$values": [
@@ -7642,26 +10091,26 @@
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorWidth": {
 "Min": 2,
-"Max": 6
+"Max": 5
 }
 },
 "Rate": 10
 },
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
 "Min": 5,
 "Max": 9
@@ -7669,6 +10118,20 @@
 "Height": {
 "Min": 5,
 "Max": 9
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 10
+},
+"Height": {
+"Min": 5,
+"Max": 10
 }
 },
 "Rate": 10
@@ -7687,7 +10150,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -7719,41 +10182,112 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
 "Negate": true,
 "Components": [
 {
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
 }
 ],
-"GenericHalls": {
-"$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"ToSpawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 0,
-"Max": 0
-},
-"Height": {
-"Min": 0,
-"Max": 0
-}
-}
-},
-"HallComponents": [
+"RoomComponents": [
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"MergeRate": {
+"Min": 6,
+"Max": 10
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 5,
+"Max": 9
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 5,
+"Max": 9
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 10
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 5,
+"Max": 10
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -8195,6 +10729,76 @@
 ]
 },
 "Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
@@ -8311,9 +10915,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -8326,16 +10930,15 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"RoomRatio": {
-"Min": 90,
-"Max": 90
+"$type": "RogueElements.GridPathCircle`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"CircleRoomRatio": {
+"Min": 100,
+"Max": 100
 },
-"BranchRatio": {
-"Min": 0,
-"Max": 25
+"Paths": {
+"Min": 1,
+"Max": 1
 },
-"NoForcedBranches": false,
 "GenericRooms": {
 "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "$values": [
@@ -8344,26 +10947,26 @@
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorWidth": {
 "Min": 2,
-"Max": 6
+"Max": 5
 }
 },
 "Rate": 10
 },
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
 "Min": 5,
 "Max": 9
@@ -8371,6 +10974,20 @@
 "Height": {
 "Min": 5,
 "Max": 9
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 10
+},
+"Height": {
+"Min": 5,
+"Max": 10
 }
 },
 "Rate": 10
@@ -8389,7 +11006,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -8421,41 +11038,112 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
 "Negate": true,
 "Components": [
 {
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
 }
 ],
-"GenericHalls": {
-"$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"ToSpawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 0,
-"Max": 0
-},
-"Height": {
-"Min": 0,
-"Max": 0
-}
-}
-},
-"HallComponents": [
+"RoomComponents": [
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"MergeRate": {
+"Min": 6,
+"Max": 10
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 5,
+"Max": 9
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 5,
+"Max": 9
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 10
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 5,
+"Max": 10
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -8897,6 +11585,76 @@
 ]
 },
 "Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
@@ -9013,9 +11771,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -9028,16 +11786,15 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"RoomRatio": {
-"Min": 90,
-"Max": 90
+"$type": "RogueElements.GridPathCircle`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"CircleRoomRatio": {
+"Min": 100,
+"Max": 100
 },
-"BranchRatio": {
-"Min": 0,
-"Max": 25
+"Paths": {
+"Min": 1,
+"Max": 1
 },
-"NoForcedBranches": false,
 "GenericRooms": {
 "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "$values": [
@@ -9046,26 +11803,26 @@
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorWidth": {
 "Min": 2,
-"Max": 6
+"Max": 5
 }
 },
 "Rate": 10
 },
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
 "Min": 5,
 "Max": 9
@@ -9073,6 +11830,20 @@
 "Height": {
 "Min": 5,
 "Max": 9
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 10
+},
+"Height": {
+"Min": 5,
+"Max": 10
 }
 },
 "Rate": 10
@@ -9091,7 +11862,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -9123,41 +11894,112 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
 "Negate": true,
 "Components": [
 {
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
 }
 ],
-"GenericHalls": {
-"$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"ToSpawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 0,
-"Max": 0
-},
-"Height": {
-"Min": 0,
-"Max": 0
-}
-}
-},
-"HallComponents": [
+"RoomComponents": [
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"MergeRate": {
+"Min": 6,
+"Max": 10
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 5,
+"Max": 9
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 5,
+"Max": 9
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 10
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 5,
+"Max": 10
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -9599,6 +12441,76 @@
 ]
 },
 "Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
@@ -9715,9 +12627,9 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
+"CellWidth": 9,
+"CellHeight": 9,
+"CellX": 5,
 "CellY": 4,
 "CellWall": 1,
 "Wrap": false
@@ -9730,16 +12642,15 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"RoomRatio": {
-"Min": 90,
-"Max": 90
+"$type": "RogueElements.GridPathCircle`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"CircleRoomRatio": {
+"Min": 100,
+"Max": 100
 },
-"BranchRatio": {
-"Min": 0,
-"Max": 25
+"Paths": {
+"Min": 1,
+"Max": 1
 },
-"NoForcedBranches": false,
 "GenericRooms": {
 "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
 "$values": [
@@ -9748,26 +12659,26 @@
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
 "Min": 4,
-"Max": 11
+"Max": 10
 },
 "MinorWidth": {
 "Min": 2,
-"Max": 6
+"Max": 5
 }
 },
 "Rate": 10
 },
 {
 "Spawn": {
-"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Width": {
 "Min": 5,
 "Max": 9
@@ -9775,6 +12686,20 @@
 "Height": {
 "Min": 5,
 "Max": 9
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 10
+},
+"Height": {
+"Min": 5,
+"Max": 10
 }
 },
 "Rate": 10
@@ -9793,7 +12718,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 0,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -9825,41 +12750,112 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
 "Negate": true,
 "Components": [
 {
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
 }
 ],
-"GenericHalls": {
-"$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"ToSpawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 0,
-"Max": 0
-},
-"Height": {
-"Min": 0,
-"Max": 0
-}
-}
-},
-"HallComponents": [
+"RoomComponents": [
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"MergeRate": {
+"Min": 6,
+"Max": 10
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 5,
+"Max": 9
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 5,
+"Max": 9
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 5,
+"Max": 10
+},
+"Height": {
+"Min": 10,
+"Max": 18
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 18
+},
+"Height": {
+"Min": 5,
+"Max": 10
+}
+}
+},
+"Rate": 10
 }
 ]
 }
@@ -10301,6 +13297,76 @@
 ]
 },
 "Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
@@ -10417,10 +13483,10 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
-"CellY": 4,
+"CellWidth": 5,
+"CellHeight": 5,
+"CellX": 11,
+"CellY": 8,
 "CellWall": 1,
 "Wrap": false
 }
@@ -10434,12 +13500,12 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 80,
+"Max": 80
 },
 "BranchRatio": {
 "Min": 0,
-"Max": 25
+"Max": 35
 },
 "NoForcedBranches": false,
 "GenericRooms": {
@@ -10449,20 +13515,20 @@
 "Spawn": {
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
-"Min": 4,
-"Max": 11
+"Min": 5,
+"Max": 5
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
-"Min": 4,
-"Max": 11
+"Min": 5,
+"Max": 5
 },
 "MinorWidth": {
 "Min": 2,
-"Max": 6
+"Max": 5
 }
 },
 "Rate": 10
@@ -10472,11 +13538,11 @@
 "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 5,
-"Max": 9
+"Max": 5
 },
 "Height": {
 "Min": 5,
-"Max": 9
+"Max": 5
 }
 },
 "Rate": 10
@@ -10495,7 +13561,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 100,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -10527,41 +13593,298 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
 "Negate": true,
 "Components": [
 {
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
 }
 ],
-"GenericHalls": {
-"$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"ToSpawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 0,
-"Max": 0
-},
-"Height": {
-"Min": 0,
-"Max": 0
-}
-}
-},
-"HallComponents": [
+"RoomComponents": [
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"MergeRate": {
+"Min": 1,
+"Max": 3
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 16
+},
+"Height": {
+"Min": 10,
+"Max": 16
+}
+}
+},
+"Rate": 10
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
+}
+],
+"RoomComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 1
+}
+],
+"MergeRate": {
+"Min": 8,
+"Max": 11
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 6,
+"Max": 10
+},
+"Height": {
+"Min": 9,
+"Max": 16
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 9,
+"Max": 16
+},
+"Height": {
+"Min": 6,
+"Max": 10
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 6,
+"Max": 10
+},
+"Height": {
+"Min": 9,
+"Max": 16
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 9,
+"Max": 16
+},
+"Height": {
+"Min": 6,
+"Max": 10
+}
+}
+},
+"Rate": 10
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
+}
+],
+"RoomComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 1
+}
+],
+"MergeRate": {
+"Min": 8,
+"Max": 11
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 10
+},
+"Height": {
+"Min": 10,
+"Max": 10
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 8,
+"Max": 8
+},
+"Height": {
+"Min": 8,
+"Max": 8
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 7,
+"Max": 11
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 11
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+}
+},
+"Rate": 5
 }
 ]
 }
@@ -11003,6 +14326,76 @@
 ]
 },
 "Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
@@ -11119,10 +14512,10 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
-"CellY": 4,
+"CellWidth": 5,
+"CellHeight": 5,
+"CellX": 11,
+"CellY": 8,
 "CellWall": 1,
 "Wrap": false
 }
@@ -11136,12 +14529,12 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 80,
+"Max": 80
 },
 "BranchRatio": {
 "Min": 0,
-"Max": 25
+"Max": 35
 },
 "NoForcedBranches": false,
 "GenericRooms": {
@@ -11151,20 +14544,20 @@
 "Spawn": {
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
-"Min": 4,
-"Max": 11
+"Min": 5,
+"Max": 5
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
-"Min": 4,
-"Max": 11
+"Min": 5,
+"Max": 5
 },
 "MinorWidth": {
 "Min": 2,
-"Max": 6
+"Max": 5
 }
 },
 "Rate": 10
@@ -11174,11 +14567,11 @@
 "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 5,
-"Max": 9
+"Max": 5
 },
 "Height": {
 "Min": 5,
-"Max": 9
+"Max": 5
 }
 },
 "Rate": 10
@@ -11197,7 +14590,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 100,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -11229,41 +14622,298 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
 "Negate": true,
 "Components": [
 {
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
 }
 ],
-"GenericHalls": {
-"$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"ToSpawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 0,
-"Max": 0
-},
-"Height": {
-"Min": 0,
-"Max": 0
-}
-}
-},
-"HallComponents": [
+"RoomComponents": [
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"MergeRate": {
+"Min": 1,
+"Max": 3
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 16
+},
+"Height": {
+"Min": 10,
+"Max": 16
+}
+}
+},
+"Rate": 10
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
+}
+],
+"RoomComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 1
+}
+],
+"MergeRate": {
+"Min": 8,
+"Max": 11
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 6,
+"Max": 10
+},
+"Height": {
+"Min": 9,
+"Max": 16
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 9,
+"Max": 16
+},
+"Height": {
+"Min": 6,
+"Max": 10
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 6,
+"Max": 10
+},
+"Height": {
+"Min": 9,
+"Max": 16
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 9,
+"Max": 16
+},
+"Height": {
+"Min": 6,
+"Max": 10
+}
+}
+},
+"Rate": 10
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
+}
+],
+"RoomComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 1
+}
+],
+"MergeRate": {
+"Min": 8,
+"Max": 11
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 10
+},
+"Height": {
+"Min": 10,
+"Max": 10
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 8,
+"Max": 8
+},
+"Height": {
+"Min": 8,
+"Max": 8
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 7,
+"Max": 11
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 11
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+}
+},
+"Rate": 5
 }
 ]
 }
@@ -11705,6 +15355,76 @@
 ]
 },
 "Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
@@ -11821,10 +15541,10 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
-"CellY": 4,
+"CellWidth": 5,
+"CellHeight": 5,
+"CellX": 11,
+"CellY": 8,
 "CellWall": 1,
 "Wrap": false
 }
@@ -11838,12 +15558,12 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 80,
+"Max": 80
 },
 "BranchRatio": {
 "Min": 0,
-"Max": 25
+"Max": 35
 },
 "NoForcedBranches": false,
 "GenericRooms": {
@@ -11853,20 +15573,20 @@
 "Spawn": {
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
-"Min": 4,
-"Max": 11
+"Min": 5,
+"Max": 5
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
-"Min": 4,
-"Max": 11
+"Min": 5,
+"Max": 5
 },
 "MinorWidth": {
 "Min": 2,
-"Max": 6
+"Max": 5
 }
 },
 "Rate": 10
@@ -11876,11 +15596,11 @@
 "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 5,
-"Max": 9
+"Max": 5
 },
 "Height": {
 "Min": 5,
-"Max": 9
+"Max": 5
 }
 },
 "Rate": 10
@@ -11899,7 +15619,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 100,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -11931,41 +15651,298 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
 "Negate": true,
 "Components": [
 {
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
 }
 ],
-"GenericHalls": {
-"$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"ToSpawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 0,
-"Max": 0
-},
-"Height": {
-"Min": 0,
-"Max": 0
-}
-}
-},
-"HallComponents": [
+"RoomComponents": [
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"MergeRate": {
+"Min": 1,
+"Max": 3
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 16
+},
+"Height": {
+"Min": 10,
+"Max": 16
+}
+}
+},
+"Rate": 10
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
+}
+],
+"RoomComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 1
+}
+],
+"MergeRate": {
+"Min": 8,
+"Max": 11
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 6,
+"Max": 10
+},
+"Height": {
+"Min": 9,
+"Max": 16
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 9,
+"Max": 16
+},
+"Height": {
+"Min": 6,
+"Max": 10
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 6,
+"Max": 10
+},
+"Height": {
+"Min": 9,
+"Max": 16
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 9,
+"Max": 16
+},
+"Height": {
+"Min": 6,
+"Max": 10
+}
+}
+},
+"Rate": 10
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
+}
+],
+"RoomComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 1
+}
+],
+"MergeRate": {
+"Min": 8,
+"Max": 11
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 10
+},
+"Height": {
+"Min": 10,
+"Max": 10
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 8,
+"Max": 8
+},
+"Height": {
+"Min": 8,
+"Max": 8
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 7,
+"Max": 11
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 11
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+}
+},
+"Rate": 5
 }
 ]
 }
@@ -12407,6 +16384,76 @@
 ]
 },
 "Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
@@ -12523,10 +16570,10 @@
 },
 "Value": {
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"CellWidth": 10,
-"CellHeight": 10,
-"CellX": 4,
-"CellY": 4,
+"CellWidth": 5,
+"CellHeight": 5,
+"CellX": 11,
+"CellY": 8,
 "CellWall": 1,
 "Wrap": false
 }
@@ -12540,12 +16587,12 @@
 "Value": {
 "$type": "RogueElements.GridPathBranch`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "RoomRatio": {
-"Min": 90,
-"Max": 90
+"Min": 80,
+"Max": 80
 },
 "BranchRatio": {
 "Min": 0,
-"Max": 25
+"Max": 35
 },
 "NoForcedBranches": false,
 "GenericRooms": {
@@ -12555,20 +16602,20 @@
 "Spawn": {
 "$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "MajorWidth": {
-"Min": 4,
-"Max": 11
+"Min": 5,
+"Max": 5
 },
 "MinorHeight": {
 "Min": 2,
-"Max": 6
+"Max": 5
 },
 "MajorHeight": {
-"Min": 4,
-"Max": 11
+"Min": 5,
+"Max": 5
 },
 "MinorWidth": {
 "Min": 2,
-"Max": 6
+"Max": 5
 }
 },
 "Rate": 10
@@ -12578,11 +16625,11 @@
 "$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "Width": {
 "Min": 5,
-"Max": 9
+"Max": 5
 },
 "Height": {
 "Min": 5,
-"Max": 9
+"Max": 5
 }
 },
 "Rate": 10
@@ -12601,7 +16648,7 @@
 {
 "Spawn": {
 "$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
+"HallTurnBias": 100,
 "Brush": {
 "$type": "RogueElements.DefaultHallBrush, RogueElements"
 },
@@ -12633,41 +16680,298 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 75,
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
 "Negate": true,
 "Components": [
 {
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
 }
 ],
-"GenericHalls": {
-"$type": "RogueElements.PresetPicker`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"ToSpawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 50,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 0,
-"Max": 0
-},
-"Height": {
-"Min": 0,
-"Max": 0
-}
-}
-},
-"HallComponents": [
+"RoomComponents": [
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"MergeRate": {
+"Min": 1,
+"Max": 3
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 16
+},
+"Height": {
+"Min": 10,
+"Max": 16
+}
+}
+},
+"Rate": 10
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
+}
+],
+"RoomComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 1
+}
+],
+"MergeRate": {
+"Min": 8,
+"Max": 11
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 6,
+"Max": 10
+},
+"Height": {
+"Min": 9,
+"Max": 16
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 9,
+"Max": 16
+},
+"Height": {
+"Min": 6,
+"Max": 10
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 3
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 6,
+"Max": 10
+},
+"Height": {
+"Min": 9,
+"Max": 16
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"Size": {
+"X": 3,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenCave`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 9,
+"Max": 16
+},
+"Height": {
+"Min": 6,
+"Max": 10
+}
+}
+},
+"Rate": 10
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+-4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.CombineGridRoomStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterDefaultGen, RogueElements",
+"Negate": true
+}
+],
+"RoomComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 1
+}
+],
+"MergeRate": {
+"Min": 8,
+"Max": 11
+},
+"Combos": [
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 10,
+"Max": 10
+},
+"Height": {
+"Min": 10,
+"Max": 10
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueElements.RoomGenRound`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Width": {
+"Min": 8,
+"Max": 8
+},
+"Height": {
+"Min": 8,
+"Max": 8
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 1,
+"Y": 2
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 5,
+"Max": 5
+},
+"Height": {
+"Min": 7,
+"Max": 11
+}
+}
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"Size": {
+"X": 2,
+"Y": 1
+},
+"GiantRoom": {
+"$type": "RogueEssence.LevelGen.RoomGenDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Width": {
+"Min": 7,
+"Max": 11
+},
+"Height": {
+"Min": 5,
+"Max": 5
+}
+}
+},
+"Rate": 5
 }
 ]
 }
@@ -13099,6 +17403,76 @@
 }
 }
 }
+}
+},
+{
+"Key": {
+"str": [
+4,
+2
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.PatternSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"AllowTerminal": false,
+"TerrainStencil": {
+"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"List": [
+{
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+{
+"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"TileStencil": {
+"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Room": true,
+"Wall": false,
+"Blocked": false,
+"Not": false
+},
+"Global": false,
+"Negate": false
+}
+],
+"RequireAny": false
+},
+"Amount": {
+"Min": 2,
+"Max": 4
+},
+"Maps": [
+{
+"Spawn": {
+"MapID": "pattern_dither_fourth",
+"Pattern": 3
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_squiggle",
+"Pattern": 2
+},
+"Rate": 5
+},
+{
+"Spawn": {
+"MapID": "pattern_x_repeat",
+"Pattern": 3
+},
+"Rate": 5
+}
+]
 }
 },
 {

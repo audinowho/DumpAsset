@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.7.0",
+"Version": "0.6.8.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -11,7 +11,7 @@
 "LocalTexts": {}
 },
 "Released": true,
-"Comment": "No Anim",
+"Comment": "",
 "IndexNum": 787,
 "BaseCharges": 10,
 "Strikes": 1,
@@ -32,7 +32,7 @@
 {
 "$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
 "Anim": {
-"AnimIndex": "Bubbles_Green",
+"AnimIndex": "Bubbles_Yellow",
 "FrameTime": 3,
 "StartFrame": -1,
 "EndFrame": -1,
@@ -65,14 +65,85 @@
 },
 "HitTiles": true,
 "Range": 3,
-"StopAtHit": false,
+"StopAtHit": true,
 "StopAtWall": true,
 "TargetAlignments": 6,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"PreActions": [],
+"PreActions": [
+{
+"Delay": 12,
+"Sound": "DUN_Food",
+"Emitter": {
+"$type": "RogueEssence.Content.StaticAreaEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Mud_Shot_Ball",
+"FrameTime": 4,
+"StartFrame": 3,
+"EndFrame": 4,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Bursts": 1,
+"ParticlesPerBurst": 1,
+"BurstTime": 0,
+"Range": 3,
+"Layer": 2
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+{
+"Delay": 0,
+"Sound": "DUN_Food",
+"Emitter": {
+"$type": "RogueEssence.Content.StaticAreaEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Mud_Shot_Ball",
+"FrameTime": 4,
+"StartFrame": 3,
+"EndFrame": 4,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Bursts": 1,
+"ParticlesPerBurst": 1,
+"BurstTime": 0,
+"Range": 3,
+"Layer": 2
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
 "ActionFX": {
 "Delay": 0,
 "Sound": "DUN_Bubble",

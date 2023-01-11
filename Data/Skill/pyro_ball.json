@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.7.0",
+"Version": "0.6.8.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -11,15 +11,15 @@
 "LocalTexts": {}
 },
 "Released": true,
-"Comment": "No Anim",
+"Comment": "",
 "IndexNum": 780,
 "BaseCharges": 5,
 "Strikes": 1,
 "HitboxAction": {
 "$type": "RogueEssence.Dungeon.ProjectileAction, RogueEssence",
 "Anim": {
-"AnimIndex": "",
-"FrameTime": 1,
+"AnimIndex": "Brave_Bird",
+"FrameTime": 3,
 "StartFrame": -1,
 "EndFrame": -1,
 "AnimDir": -1,
@@ -27,19 +27,46 @@
 "AnimFlip": 0
 },
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+"$type": "RogueEssence.Content.AttachReleaseEmitter, RogueEssence",
+"Anims": [
+{
+"$type": "RogueEssence.Content.EmittingAnim, RogueEssence",
+"ResultAnim": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"Layer": 0,
+"Anim": {
+"AnimIndex": "Weather_Ball_Fire_3",
+"FrameTime": 3,
+"StartFrame": 5,
+"EndFrame": 9,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Speed": 0,
+"ParticlesPerBurst": 1,
+"BurstTime": 3,
+"StartDistance": 15,
+"Layer": 2
 },
 "StreamEmitter": {
 "$type": "RogueEssence.Content.EmptyShootingEmitter, RogueEssence",
 "LocHeight": 0
 },
 "Rays": 0,
-"Speed": 10,
+"Speed": 20,
 "Boomerang": false,
 "ItemSprite": "",
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 7
+"ActionType": 8
 },
 "HitTiles": true,
 "Range": 6,
@@ -50,10 +77,330 @@
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"PreActions": [],
+"PreActions": [
+{
+"Delay": 15,
+"Sound": "DUN_Ember_2",
+"Emitter": {
+"$type": "RogueEssence.Content.MoveToEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Anim": {
+"AnimIndex": "Ember",
+"FrameTime": 3,
+"StartFrame": 1,
+"EndFrame": 5,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 1
+},
+"OffsetStart": {
+"X": -10,
+"Y": 0
+},
+"OffsetEnd": {
+"X": -10,
+"Y": 0
+},
+"HeightStart": 0,
+"HeightEnd": 0,
+"LingerStart": 0,
+"LingerEnd": 0,
+"MoveTime": 15,
+"ResultAnim": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ResultLayer": 4
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+{
+"Delay": 6,
+"Sound": "DUN_Blaze_Kick",
+"Emitter": {
+"$type": "RogueEssence.Content.MoveToEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Anim": {
+"AnimIndex": "Weather_Ball_Fire_3",
+"FrameTime": 3,
+"StartFrame": 1,
+"EndFrame": 3,
+"AnimDir": 2,
+"Alpha": 255,
+"AnimFlip": 1
+},
+"OffsetStart": {
+"X": -2,
+"Y": 0
+},
+"OffsetEnd": {
+"X": 0,
+"Y": 0
+},
+"HeightStart": 0,
+"HeightEnd": 25,
+"LingerStart": 0,
+"LingerEnd": 0,
+"MoveTime": 6,
+"ResultAnim": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ResultLayer": 4
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+{
+"Delay": 4,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.MoveToEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Anim": {
+"AnimIndex": "Weather_Ball_Fire_3",
+"FrameTime": 3,
+"StartFrame": 3,
+"EndFrame": 3,
+"AnimDir": 2,
+"Alpha": 255,
+"AnimFlip": 1
+},
+"OffsetStart": {
+"X": -3,
+"Y": 0
+},
+"OffsetEnd": {
+"X": 0,
+"Y": 0
+},
+"HeightStart": 25,
+"HeightEnd": 25,
+"LingerStart": 0,
+"LingerEnd": 0,
+"MoveTime": 4,
+"ResultAnim": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ResultLayer": 4
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+{
+"Delay": 9,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.MoveToEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Anim": {
+"AnimIndex": "Weather_Ball_Fire_3",
+"FrameTime": 3,
+"StartFrame": 4,
+"EndFrame": 6,
+"AnimDir": 2,
+"Alpha": 255,
+"AnimFlip": 1
+},
+"OffsetStart": {
+"X": 0,
+"Y": 0
+},
+"OffsetEnd": {
+"X": 15,
+"Y": 0
+},
+"HeightStart": 25,
+"HeightEnd": 0,
+"LingerStart": 0,
+"LingerEnd": 0,
+"MoveTime": 8,
+"ResultAnim": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ResultLayer": 4
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+{
+"Delay": 6,
+"Sound": "DUN_Blaze_Kick",
+"Emitter": {
+"$type": "RogueEssence.Content.MoveToEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Anim": {
+"AnimIndex": "Weather_Ball_Fire_3",
+"FrameTime": 3,
+"StartFrame": 1,
+"EndFrame": 3,
+"AnimDir": 6,
+"Alpha": 255,
+"AnimFlip": 1
+},
+"OffsetStart": {
+"X": 3,
+"Y": 0
+},
+"OffsetEnd": {
+"X": 0,
+"Y": 0
+},
+"HeightStart": 0,
+"HeightEnd": 25,
+"LingerStart": 0,
+"LingerEnd": 0,
+"MoveTime": 6,
+"ResultAnim": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ResultLayer": 4
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+{
+"Delay": 4,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.MoveToEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Anim": {
+"AnimIndex": "Weather_Ball_Fire_3",
+"FrameTime": 3,
+"StartFrame": 3,
+"EndFrame": 3,
+"AnimDir": 6,
+"Alpha": 255,
+"AnimFlip": 1
+},
+"OffsetStart": {
+"X": 0,
+"Y": 0
+},
+"OffsetEnd": {
+"X": -3,
+"Y": 0
+},
+"HeightStart": 25,
+"HeightEnd": 25,
+"LingerStart": 0,
+"LingerEnd": 0,
+"MoveTime": 4,
+"ResultAnim": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ResultLayer": 4
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+{
+"Delay": 9,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.MoveToEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Anim": {
+"AnimIndex": "Weather_Ball_Fire_3",
+"FrameTime": 3,
+"StartFrame": 4,
+"EndFrame": 6,
+"AnimDir": 6,
+"Alpha": 255,
+"AnimFlip": 1
+},
+"OffsetStart": {
+"X": 0,
+"Y": 0
+},
+"OffsetEnd": {
+"X": -20,
+"Y": 0
+},
+"HeightStart": 25,
+"HeightEnd": 0,
+"LingerStart": 0,
+"LingerEnd": 0,
+"MoveTime": 8,
+"ResultAnim": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ResultLayer": 4
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+{
+"Delay": 0,
+"Sound": "DUN_Flare_Blitz",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Blast_Seed",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 4,
+"UseDest": false
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Fire_Blast_2",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -127,10 +474,29 @@
 "IntroFX": [],
 "HitFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Overheat",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 15,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Flamethrower",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,

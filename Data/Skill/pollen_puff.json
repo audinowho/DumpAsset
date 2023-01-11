@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.7.0",
+"Version": "0.6.8.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -11,14 +11,14 @@
 "LocalTexts": {}
 },
 "Released": true,
-"Comment": "No Anim",
+"Comment": "",
 "IndexNum": 676,
 "BaseCharges": 13,
 "Strikes": 1,
 "HitboxAction": {
 "$type": "RogueEssence.Dungeon.ThrowAction, RogueEssence",
 "Anim": {
-"AnimIndex": "",
+"AnimIndex": "Energy_Ball",
 "FrameTime": 1,
 "StartFrame": -1,
 "EndFrame": -1,
@@ -27,7 +27,34 @@
 "AnimFlip": 0
 },
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+"$type": "RogueEssence.Content.AttachReleaseEmitter, RogueEssence",
+"Anims": [
+{
+"$type": "RogueEssence.Content.EmittingAnim, RogueEssence",
+"ResultAnim": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"Layer": 0,
+"Anim": {
+"AnimIndex": "Spores_RSE_Green",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Speed": 5,
+"ParticlesPerBurst": 3,
+"BurstTime": 3,
+"StartDistance": 20,
+"Layer": 2
 },
 "Range": 3,
 "Speed": 10,
@@ -45,7 +72,7 @@
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "DUN_Pound",
+"Sound": "DUN_Ingrain",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -178,10 +205,29 @@
 "IntroFX": [],
 "HitFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Transform",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Puff_Green",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,

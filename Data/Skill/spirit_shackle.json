@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.7.0",
+"Version": "0.6.8.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -11,14 +11,44 @@
 "LocalTexts": {}
 },
 "Released": true,
-"Comment": "No Anim",
+"Comment": "",
 "IndexNum": 662,
 "BaseCharges": 13,
 "Strikes": 1,
 "HitboxAction": {
 "$type": "RogueEssence.Dungeon.ProjectileAction, RogueEssence",
 "Anim": {
-"AnimIndex": "Wave_Circle_Blue",
+"AnimIndex": "Arrow_Shot",
+"FrameTime": 2,
+"StartFrame": 1,
+"EndFrame": 3,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"Emitter": {
+"$type": "RogueEssence.Content.AttachReleaseEmitter, RogueEssence",
+"Anims": [
+{
+"$type": "RogueEssence.Content.EmittingAnim, RogueEssence",
+"ResultAnim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Dark_Pulse_Particle",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 100,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 0,
+"Anim": {
+"AnimIndex": "Dragon_Pulse_Particle_Purple",
 "FrameTime": 3,
 "StartFrame": -1,
 "EndFrame": -1,
@@ -26,15 +56,50 @@
 "Alpha": 255,
 "AnimFlip": 0
 },
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Speed": 0,
+"ParticlesPerBurst": 1,
+"BurstTime": 5,
+"StartDistance": 10,
+"Layer": 2
 },
 "StreamEmitter": {
-"$type": "RogueEssence.Content.EmptyShootingEmitter, RogueEssence",
+"$type": "RogueEssence.Content.StreamEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.EmittingAnim, RogueEssence",
+"ResultAnim": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
+"Layer": 0,
+"Anim": {
+"AnimIndex": "Arrow_Shot",
+"FrameTime": 2,
+"StartFrame": 1,
+"EndFrame": 3,
+"AnimDir": -1,
+"Alpha": 149,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Shots": 2,
+"BurstTime": 3,
+"StartDistance": 0,
+"EndDiff": 0,
+"Layer": 2
+},
 "Rays": 0,
-"Speed": 10,
+"Speed": 20,
 "Boomerang": false,
 "ItemSprite": "",
 "CharAnimData": {
@@ -50,10 +115,75 @@
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"PreActions": [],
+"PreActions": [
+{
+"Delay": 0,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 3,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Psycho_Cut_Hole",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 150,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 1,
+"UseDest": false
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+{
+"Delay": 10,
+"Sound": "DUN_Dark_Pulse",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Dragon_Pulse_Ball",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 20,
+"Cycles": 0,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
 "ActionFX": {
 "Delay": 0,
-"Sound": "_UNK_DUN_Water_Echo_2",
+"Sound": "DUN_Pluck",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -101,7 +231,7 @@
 "SkillStates": [
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 40
+"Power": 50
 },
 {
 "$type": "PMDC.Dungeon.AdditionalEffectState, PMDC",
@@ -153,11 +283,60 @@
 "ElementEffects": [],
 "IntroFX": [],
 "HitFX": {
-"Delay": 0,
-"Sound": "",
+"Delay": 20,
+"Sound": "DUN_Night_Slash",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.StaticAreaEmitter, RogueEssence",
+"LocHeight": 10,
+"Anims": [
+{
+"$type": "RogueEssence.Content.EmittingAnim, RogueEssence",
+"ResultAnim": {
+"$type": "RogueEssence.Content.StaticAreaEmitter, RogueEssence",
+"LocHeight": -6,
+"Anims": [
+{
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Puff_Purple",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Bursts": 1,
+"ParticlesPerBurst": 1,
+"BurstTime": 0,
+"Range": 0,
+"Layer": 2
+},
+"Layer": 0,
+"Anim": {
+"AnimIndex": "Grudge_Lights",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 15,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Bursts": 3,
+"ParticlesPerBurst": 1,
+"BurstTime": 3,
+"Range": 15,
+"Layer": 2
 },
 "ScreenMovement": {
 "MinShake": 0,

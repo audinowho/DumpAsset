@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.7.0",
+"Version": "0.6.8.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -11,7 +11,7 @@
 "LocalTexts": {}
 },
 "Released": true,
-"Comment": "No Anim",
+"Comment": "",
 "IndexNum": 791,
 "BaseCharges": 10,
 "Strikes": 1,
@@ -24,10 +24,26 @@
 {
 "$type": "RogueEssence.Content.EmittingAnim, RogueEssence",
 "ResultAnim": {
+"$type": "RogueEssence.Content.EmittingAnim, RogueEssence",
+"ResultAnim": {
 "$type": "RogueEssence.Content.StaticAnim, RogueEssence",
 "Anim": {
+"AnimIndex": "Aqua_Tail_Wave",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 0,
+"Anim": {
 "AnimIndex": "Water_Sport",
-"FrameTime": 1,
+"FrameTime": 2,
 "StartFrame": 0,
 "EndFrame": 3,
 "AnimDir": -1,
@@ -58,14 +74,14 @@
 "BurstTime": 4,
 "StartDistance": 0,
 "RangeDiff": 16,
-"HeightRatio": 0.8,
+"HeightRatio": 0.5,
 "Layer": 2
 },
 "HitTiles": true,
 "BurstTiles": 0,
 "HitArea": 0,
 "Range": 4,
-"Speed": 3,
+"Speed": 7,
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
 "ActionType": 6
@@ -75,10 +91,37 @@
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"PreActions": [],
+"PreActions": [
+{
+"Delay": 10,
+"Sound": "DUN_Healing_Wish_2",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+{
+"Delay": 0,
+"Sound": "DUN_Natural_Gift",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Dragon_Dance",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0

@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.7.0",
+"Version": "0.6.8.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -11,7 +11,7 @@
 "LocalTexts": {}
 },
 "Released": true,
-"Comment": "No Anim",
+"Comment": "",
 "IndexNum": 716,
 "BaseCharges": 15,
 "Strikes": 1,
@@ -32,7 +32,7 @@
 },
 "WideAngle": 0,
 "SnapBack": false,
-"CharAnim": 0,
+"CharAnim": 8,
 "AppearanceMod": 0,
 "HitTiles": true,
 "Range": 2,
@@ -46,7 +46,7 @@
 "PreActions": [
 {
 "Delay": 0,
-"Sound": "DUN_Spark",
+"Sound": "DUN_Charge_Beam",
 "Emitter": {
 "$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
 "LocHeight": 0,
@@ -55,16 +55,16 @@
 "Anim": {
 "$type": "RogueEssence.Content.StaticAnim, RogueEssence",
 "Anim": {
-"AnimIndex": "Spark",
-"FrameTime": 3,
-"StartFrame": -1,
-"EndFrame": -1,
+"AnimIndex": "Charge_Beam_Glow",
+"FrameTime": 1,
+"StartFrame": 15,
+"EndFrame": 30,
 "AnimDir": -1,
 "Alpha": 255,
 "AnimFlip": 0
 },
-"TotalTime": 0,
-"Cycles": 1,
+"TotalTime": 15,
+"Cycles": 0,
 "FrameOffset": 0
 },
 "Layer": 2,
@@ -81,8 +81,30 @@
 "Delay": 0,
 "Sound": "",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.StaticAreaEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Charge_Beam_Particle",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 20,
+"Cycles": 0,
+"FrameOffset": 0
+}
+],
+"Bursts": 4,
+"ParticlesPerBurst": 1,
+"BurstTime": 2,
+"Range": 10,
+"Layer": 2
 },
 "ScreenMovement": {
 "MinShake": 0,

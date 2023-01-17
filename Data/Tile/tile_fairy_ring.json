@@ -1,0 +1,65 @@
+﻿{
+"Version": "0.6.8.0",
+"Object": {
+"$type": "RogueEssence.Data.TileData, RogueEssence",
+"Name": {
+"DefaultText": "Fairy Ring",
+"LocalTexts": {}
+},
+"Desc": {
+"DefaultText": "A mysterious energy permeates the area...",
+"LocalTexts": {}
+},
+"Released": true,
+"Comment": "",
+"Anim": {
+"AnimIndex": "Fairy_Ring",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"Layer": 0,
+"BlockItem": true,
+"StepType": 1,
+"MinimapIcon": {
+"X": 4,
+"Y": 1
+},
+"MinimapColor": "0, 255, 255, 255",
+"LandedOnTiles": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.TriggerUnderfootEvent, PMDC"
+}
+}
+],
+"InteractWithTiles": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.TransportOnElementEvent, PMDC",
+"TargetElement": "fairy",
+"Sound": "EVT_Fade_White",
+"FailMessage": {
+"Key": "MSG_PASSAGE_FAIRY"
+},
+"SuccessMessage": {
+"Key": "MSG_PASSAGE_FAIRY_OPEN"
+}
+}
+}
+]
+}
+}

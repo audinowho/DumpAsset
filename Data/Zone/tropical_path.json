@@ -2352,12 +2352,12 @@
 ]
 },
 "StartAmount": {
-"Min": 10,
-"Max": 15
+"Min": 40,
+"Max": 45
 },
 "AddAmount": {
-"Min": 10,
-"Max": 14
+"Min": 2,
+"Max": 6
 },
 "ModStates": [
 {
@@ -2862,19 +2862,6 @@
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
-"SpreadPlan": {
-"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
-"Quota": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
-"Replaceable": true,
-"FloorRange": {
-"Min": 0,
-"Max": 4
-}
-},
 "Spawns": {
 "$type": "RogueElements.RandBag`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
 "ToSpawn": [
@@ -3001,6 +2988,19 @@
 ],
 "RemoveOnRoll": true
 },
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
+},
+"Replaceable": true,
+"FloorRange": {
+"Min": 0,
+"Max": 4
+}
+},
 "ModStates": []
 },
 {
@@ -3030,7 +3030,7 @@
 },
 "Value": {
 "$type": "RogueEssence.LevelGen.MappedRoomStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
-"MapID": "zone_02_end"
+"MapID": "secret_tropical_path"
 }
 },
 {

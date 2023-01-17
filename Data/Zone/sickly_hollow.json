@@ -8596,7 +8596,7 @@
 },
 "Value": {
 "$type": "RogueEssence.LevelGen.MappedRoomStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
-"MapID": "zone_37_end"
+"MapID": "end_sickly_hollow"
 }
 },
 {
@@ -10124,7 +10124,7 @@
 "Item": 10,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 }
 ]
@@ -10531,7 +10531,7 @@
 "Item": 4,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 }
 ]
@@ -10907,17 +10907,6 @@
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
-"SpreadPlan": {
-"$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
-"FloorSpacing": {
-"Min": 2,
-"Max": 6
-},
-"FloorRange": {
-"Min": 8,
-"Max": 16
-}
-},
 "Spawns": {
 "$type": "RogueElements.SpawnList`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
 "$values": [
@@ -10961,21 +10950,21 @@
 }
 ]
 },
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
+"FloorSpacing": {
+"Min": 2,
+"Max": 6
+},
+"FloorRange": {
+"Min": 8,
+"Max": 16
+}
+},
 "ModStates": []
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
-"SpreadPlan": {
-"$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
-"FloorSpacing": {
-"Min": 3,
-"Max": 5
-},
-"FloorRange": {
-"Min": 0,
-"Max": 16
-}
-},
 "Spawns": {
 "$type": "RogueElements.SpawnList`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
 "$values": [
@@ -11019,23 +11008,21 @@
 }
 ]
 },
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
+"FloorSpacing": {
+"Min": 3,
+"Max": 5
+},
+"FloorRange": {
+"Min": 0,
+"Max": 16
+}
+},
 "ModStates": []
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
-"SpreadPlan": {
-"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
-"Quota": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 1,
-"Max": 1
-},
-"Replaceable": false,
-"FloorRange": {
-"Min": 0,
-"Max": 5
-}
-},
 "Spawns": {
 "$type": "RogueElements.SpawnList`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
 "$values": [
@@ -11078,6 +11065,19 @@
 "Rate": 10
 }
 ]
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 1
+},
+"Replaceable": false,
+"FloorRange": {
+"Min": 0,
+"Max": 5
+}
 },
 "ModStates": []
 },
@@ -12527,17 +12527,6 @@
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadRoomZoneStep, RogueEssence",
-"SpreadPlan": {
-"$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
-"FloorSpacing": {
-"Min": 2,
-"Max": 5
-},
-"FloorRange": {
-"Min": 1,
-"Max": 16
-}
-},
 "Spawns": [
 {
 "Spawn": {
@@ -12575,20 +12564,24 @@
 "PriorityList": {
 "str": [
 -2,
-1
+2
 ]
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
+"FloorSpacing": {
+"Min": 2,
+"Max": 5
+},
+"FloorRange": {
+"Min": 1,
+"Max": 16
 }
+},
+"ModStates": []
 },
 {
 "$type": "PMDC.LevelGen.SpreadHouseZoneStep, PMDC",
-"SpreadPlan": {
-"$type": "RogueEssence.LevelGen.SpreadPlanChance, RogueEssence",
-"Chance": 20,
-"FloorRange": {
-"Min": 1,
-"Max": 15
-}
-},
 "Priority": {
 "str": [
 6
@@ -13169,25 +13162,6 @@
 "Spawn": {
 "IsMoney": false,
 "Cursed": false,
-"Value": "loot_pearl",
-"HiddenValue": "",
-"Amount": 1,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 16
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
 "Value": "loot_heart_scale",
 "HiddenValue": "",
 "Amount": 2,
@@ -13299,7 +13273,7 @@
 },
 {
 "$type": "PMDC.LevelGen.ItemThemeNone, PMDC",
-"SpecialRatio": 0,
+"SpecialRatio": 30,
 "Amount": {
 "Min": 2,
 "Max": 4
@@ -13443,29 +13417,29 @@
 "Rate": 10
 }
 ],
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanChance, RogueEssence",
+"Chance": 20,
+"FloorRange": {
+"Min": 1,
+"Max": 15
+}
+},
 "ModStates": []
 },
 {
 "$type": "PMDC.LevelGen.SpreadVaultZoneStep, PMDC",
-"SpreadPlan": {
-"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
-"Quota": {
-"$type": "RogueElements.RandBinomial, RogueElements",
-"Offset": 1,
-"Trials": 4,
-"Percent": 50
-},
-"Replaceable": false,
-"FloorRange": {
-"Min": 1,
-"Max": 16
-}
-},
 "ItemPriority": {
 "str": [
 5,
 1,
 1
+]
+},
+"TilePriority": {
+"str": [
+4,
+2
 ]
 },
 "MobPriority": {
@@ -13485,6 +13459,64 @@
 ]
 },
 "Item": {
+"$type": "RogueElements.ResizeFloorStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"AddedSize": {
+"X": 16,
+"Y": 16
+},
+"ExpandDir": -1,
+"SpaceExpandDir": 7
+}
+},
+{
+"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements]], RogueEssence",
+"Priority": {
+"str": [
+-2,
+1
+]
+},
+"Item": {
+"$type": "RogueElements.ClampFloorStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"MinSize": {
+"X": 0,
+"Y": 0
+},
+"MaxSize": {
+"X": 78,
+"Y": 54
+}
+}
+},
+{
+"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements]], RogueEssence",
+"Priority": {
+"str": [
+-2,
+5
+]
+},
+"Item": {
+"$type": "RogueElements.ClampFloorStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"MinSize": {
+"X": 0,
+"Y": 0
+},
+"MaxSize": {
+"X": 0,
+"Y": 0
+}
+}
+},
+{
+"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements]], RogueEssence",
+"Priority": {
+"str": [
+-2,
+2
+]
+},
+"Item": {
 "$type": "RogueElements.AddConnectedRoomsStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "Amount": {
 "Min": 1,
@@ -13498,6 +13530,9 @@
 "Components": [
 {
 "$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.UnVaultableRoom, PMDC"
 }
 ]
 }
@@ -13602,234 +13637,6 @@
 "Spawn": {
 "IsMoney": false,
 "Cursed": false,
-"Value": "medicine_elixir",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 200,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_max_elixir",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 100,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_potion",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 200,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_max_potion",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 100,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_full_heal",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 300,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_x_attack",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 50,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_x_defense",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 50,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_x_sp_atk",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 50,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_x_sp_def",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 50,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_x_speed",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 50,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_x_accuracy",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 50,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_dire_hit",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 50,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
 "Value": "tm_earthquake",
 "HiddenValue": "",
 "Amount": 0,
@@ -13842,7 +13649,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -13861,7 +13668,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -13880,7 +13687,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -13899,7 +13706,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -13918,7 +13725,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -13937,7 +13744,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -13956,7 +13763,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -13975,7 +13782,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -13994,7 +13801,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14013,7 +13820,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14032,7 +13839,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14051,7 +13858,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14070,7 +13877,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14089,7 +13896,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14108,7 +13915,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14127,7 +13934,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14146,7 +13953,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14165,7 +13972,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14184,7 +13991,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14203,7 +14010,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14222,7 +14029,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14241,7 +14048,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14260,7 +14067,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14279,7 +14086,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14298,7 +14105,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14317,7 +14124,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14336,7 +14143,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14355,7 +14162,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14374,7 +14181,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14393,7 +14200,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14412,7 +14219,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14431,7 +14238,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14450,7 +14257,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14469,7 +14276,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14488,7 +14295,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14507,7 +14314,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14526,7 +14333,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14545,7 +14352,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14564,7 +14371,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14583,7 +14390,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14602,7 +14409,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14621,7 +14428,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14640,7 +14447,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14659,7 +14466,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14678,7 +14485,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14697,7 +14504,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14716,7 +14523,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14735,7 +14542,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14754,7 +14561,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14773,7 +14580,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14792,7 +14599,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14811,7 +14618,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14830,7 +14637,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14849,7 +14656,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14868,7 +14675,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14887,7 +14694,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14906,7 +14713,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14925,7 +14732,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14944,7 +14751,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14963,7 +14770,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -14982,7 +14789,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15001,7 +14808,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15020,7 +14827,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15039,7 +14846,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15058,7 +14865,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15077,7 +14884,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15096,7 +14903,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15115,7 +14922,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15134,7 +14941,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15153,7 +14960,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15172,7 +14979,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15191,7 +14998,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15210,7 +15017,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15229,7 +15036,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15248,7 +15055,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15267,7 +15074,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15286,7 +15093,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15305,7 +15112,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15324,7 +15131,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15343,7 +15150,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15362,7 +15169,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15381,7 +15188,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15400,7 +15207,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15419,7 +15226,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15438,7 +15245,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15457,7 +15264,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15476,7 +15283,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15495,7 +15302,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15514,7 +15321,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15533,7 +15340,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15552,7 +15359,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15571,7 +15378,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15590,7 +15397,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15609,7 +15416,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15628,7 +15435,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15647,7 +15454,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15666,7 +15473,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15685,7 +15492,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15704,7 +15511,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15723,7 +15530,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15742,7 +15549,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15761,7 +15568,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15780,7 +15587,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15799,7 +15606,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15818,7 +15625,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15837,7 +15644,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15856,7 +15663,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15875,7 +15682,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15894,7 +15701,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15913,7 +15720,7 @@
 "Rate": 5,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15932,7 +15739,7 @@
 "Rate": 200,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15951,7 +15758,7 @@
 "Rate": 100,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15970,7 +15777,7 @@
 "Rate": 200,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -15989,7 +15796,7 @@
 "Rate": 100,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 },
 {
@@ -16008,7 +15815,7 @@
 "Rate": 200,
 "Range": {
 "Min": 0,
-"Max": 30
+"Max": 16
 }
 }
 ],
@@ -16017,7 +15824,7 @@
 {
 "Item": {
 "Min": 1,
-"Max": 3
+"Max": 1
 },
 "Range": {
 "Min": 0,
@@ -16270,21 +16077,6 @@
 "Spawn": {
 "IsMoney": false,
 "Cursed": false,
-"Value": "medicine_potion",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 60
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
 "Value": "medicine_max_potion",
 "HiddenValue": "",
 "Amount": 0,
@@ -16310,21 +16102,6 @@
 }
 },
 "Rate": 100
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_elixir",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 60
 },
 {
 "Spawn": {
@@ -16689,7 +16466,7 @@
 "AmountSpawner": {
 "$type": "RogueElements.RandRange, RogueElements",
 "Min": 1,
-"Max": 1
+"Max": 3
 }
 }
 }
@@ -16724,30 +16501,37 @@
 }
 ]
 },
+"TileSpawners": {
+"nodes": []
+},
+"TilePlacements": {
+"nodes": []
+},
 "Mobs": [],
 "MobAmount": {
 "nodes": []
 },
 "MobPlacements": {
 "nodes": []
-}
 },
-{
-"$type": "RogueEssence.LevelGen.SpreadStepRangeZoneStep, RogueEssence",
 "SpreadPlan": {
 "$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
 "Quota": {
 "$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
-"Min": 0,
+"Min": 1,
 "Max": 4,
-"Rate": 35
+"Rate": 50
 },
 "Replaceable": false,
 "FloorRange": {
-"Min": 2,
+"Min": 1,
 "Max": 16
 }
 },
+"ModStates": []
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadStepRangeZoneStep, RogueEssence",
 "Spawns": [
 {
 "Spawn": {
@@ -17877,6 +17661,20 @@
 }
 }
 ],
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
+"Min": 0,
+"Max": 4,
+"Rate": 35
+},
+"Replaceable": false,
+"FloorRange": {
+"Min": 2,
+"Max": 16
+}
+},
 "ModStates": [
 {
 "assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",

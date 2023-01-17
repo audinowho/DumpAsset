@@ -50871,6 +50871,10 @@
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
+"Spawns": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
+"$values": []
+},
 "SpreadPlan": {
 "$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
 "Quota": {
@@ -50884,22 +50888,10 @@
 "Max": 15
 }
 },
-"Spawns": {
-"$type": "RogueElements.SpawnList`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
-"$values": []
-},
 "ModStates": []
 },
 {
 "$type": "PMDC.LevelGen.SpreadHouseZoneStep, PMDC",
-"SpreadPlan": {
-"$type": "RogueEssence.LevelGen.SpreadPlanChance, RogueEssence",
-"Chance": 10,
-"FloorRange": {
-"Min": 4,
-"Max": 20
-}
-},
 "Priority": {
 "str": [
 6
@@ -50935,23 +50927,18 @@
 "Rate": 10
 }
 ],
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanChance, RogueEssence",
+"Chance": 10,
+"FloorRange": {
+"Min": 4,
+"Max": 20
+}
+},
 "ModStates": []
 },
 {
 "$type": "PMDC.LevelGen.SpreadHouseZoneStep, PMDC",
-"SpreadPlan": {
-"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
-"Quota": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 5
-},
-"Replaceable": false,
-"FloorRange": {
-"Min": 6,
-"Max": 30
-}
-},
 "Priority": {
 "str": [
 6
@@ -50988,6 +50975,19 @@
 "Rate": 10
 }
 ],
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 5
+},
+"Replaceable": false,
+"FloorRange": {
+"Min": 6,
+"Max": 30
+}
+},
 "ModStates": [
 {
 "assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
@@ -50997,20 +50997,6 @@
 },
 {
 "$type": "PMDC.LevelGen.SpreadHouseZoneStep, PMDC",
-"SpreadPlan": {
-"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
-"Quota": {
-"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
-"Min": 1,
-"Max": 5,
-"Rate": 50
-},
-"Replaceable": false,
-"FloorRange": {
-"Min": 6,
-"Max": 30
-}
-},
 "Priority": {
 "str": [
 6
@@ -51047,6 +51033,20 @@
 "Rate": 10
 }
 ],
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
+"Min": 1,
+"Max": 5,
+"Rate": 50
+},
+"Replaceable": false,
+"FloorRange": {
+"Min": 6,
+"Max": 30
+}
+},
 "ModStates": []
 }
 ],

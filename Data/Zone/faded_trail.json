@@ -527,7 +527,7 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.MoneyDivSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "DivAmount": {
-"Min": 1,
+"Min": 2,
 "Max": 4
 }
 }
@@ -1091,7 +1091,7 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.MoneyDivSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "DivAmount": {
-"Min": 1,
+"Min": 2,
 "Max": 4
 }
 }
@@ -1655,7 +1655,7 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.MoneyDivSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "DivAmount": {
-"Min": 1,
+"Min": 2,
 "Max": 4
 }
 }
@@ -2219,7 +2219,7 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.MoneyDivSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "DivAmount": {
-"Min": 1,
+"Min": 2,
 "Max": 4
 }
 }
@@ -2425,7 +2425,7 @@
 "Key": {
 "str": [
 -2,
-1
+2
 ]
 },
 "Value": {
@@ -2442,6 +2442,9 @@
 "Components": [
 {
 "$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.UnVaultableRoom, PMDC"
 }
 ]
 }
@@ -2873,7 +2876,7 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.MoneyDivSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "DivAmount": {
-"Min": 1,
+"Min": 2,
 "Max": 4
 }
 }
@@ -3440,7 +3443,7 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.MoneyDivSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "DivAmount": {
-"Min": 1,
+"Min": 2,
 "Max": 4
 }
 }
@@ -3961,7 +3964,7 @@
 "Spawn": {
 "$type": "RogueEssence.LevelGen.MoneyDivSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "DivAmount": {
-"Min": 1,
+"Min": 2,
 "Max": 4
 }
 }
@@ -4052,12 +4055,12 @@
 ]
 },
 "StartAmount": {
-"Min": 15,
-"Max": 20
+"Min": 55,
+"Max": 60
 },
 "AddAmount": {
-"Min": 12,
-"Max": 16
+"Min": 4,
+"Max": 8
 },
 "ModStates": [
 {
@@ -4949,19 +4952,6 @@
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
-"SpreadPlan": {
-"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
-"Quota": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
-"Replaceable": true,
-"FloorRange": {
-"Min": 1,
-"Max": 5
-}
-},
 "Spawns": {
 "$type": "RogueElements.RandBag`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
 "ToSpawn": [
@@ -5147,6 +5137,19 @@
 }
 ],
 "RemoveOnRoll": true
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
+},
+"Replaceable": true,
+"FloorRange": {
+"Min": 1,
+"Max": 5
+}
 },
 "ModStates": []
 },
@@ -6889,12 +6892,12 @@
 ]
 },
 "StartAmount": {
-"Min": 135,
-"Max": 180
+"Min": 95,
+"Max": 140
 },
 "AddAmount": {
-"Min": 12,
-"Max": 16
+"Min": 4,
+"Max": 8
 },
 "ModStates": [
 {

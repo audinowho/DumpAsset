@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.7.0",
+"Version": "0.6.8.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -17,7 +17,7 @@
 }
 },
 "Desc": {
-"DefaultText": "It enables the user to permanently learn the move last used by the target. Once used, Sketch disappears.",
+"DefaultText": "It enables the user to permanently learn the target's moves. Once used, Sketch disappears.",
 "LocalTexts": {
 "fr": "Le lanceur apprend la dernière capacité utilisée par la  cible. Gribouille disparaît après utilisation.",
 "de": "Anwender lernt die letzte Attacke des Zieles dauerhaft. Nachahmer verschwindet nach Gebrauch.",
@@ -36,14 +36,23 @@
 "BaseCharges": 1,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Dungeon.ThrowAction, RogueEssence",
+"Anim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
 },
-"WideAngle": 0,
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+},
+"Range": 3,
+"Speed": 0,
+"Coverage": 2,
+"ItemSprite": "",
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
 "ActionType": 36
@@ -116,7 +125,7 @@
 },
 "Value": {
 "$type": "PMDC.Dungeon.SketchBattleEvent, PMDC",
-"LastMoveStatusID": "last_used_move"
+"LastMoveStatusID": ""
 }
 }
 ],
@@ -148,7 +157,7 @@
 "FrameOffset": 0
 },
 "Layer": 2,
-"UseDest": true
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,
@@ -181,7 +190,7 @@
 "FrameOffset": 0
 },
 "Layer": 2,
-"UseDest": false
+"UseDest": true
 },
 "ScreenMovement": {
 "MinShake": 0,

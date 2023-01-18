@@ -7,6 +7,18 @@ function SINGLE_CHAR_SCRIPT.Test(owner, ownerChar, character, args)
 end
 
 
+function SINGLE_CHAR_SCRIPT.GuildBlock(owner, ownerChar, character, args)
+  
+  if not SV.guildmaster_summit.BattleComplete then
+    UI:SetAutoFinish(true)
+    UI:WaitShowDialogue(RogueEssence.StringKey("DLG_LOCK_GUILD"):ToLocal())
+  else
+    UI:ResetSpeaker()
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_LOCK_GUILD_OPEN"):ToLocal(), character:GetDisplayName(true)))
+    TASK:WaitTask(owner:InteractWithTile(character))
+  end
+end
+
 ShopSecurityType = luanet.import_type('PMDC.Dungeon.ShopSecurityState')
 MapIndexType = luanet.import_type('RogueEssence.Dungeon.MapIndexState')
 

@@ -15293,21 +15293,31 @@
 ]
 },
 "Item": {
-"$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
-"Spawn": {
-"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
-"Picker": {
-"$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
-"ToSpawn": [
+"$type": "PMDC.LevelGen.TempTileStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"TileFilters": [
 {
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "PMDC.LevelGen.BossRoom, PMDC"
+}
+]
+}
+],
+"TempTile": {
 "$type": "RogueElements.PresetPicker`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "ToSpawn": {
 "TileLoc": {
 "X": 0,
 "Y": 0
 },
-"ID": "stairs_secret_down",
-"Revealed": false,
+"ID": "tile_mystery",
+"Revealed": true,
 "Danger": false,
 "Owner": 0,
 "TileStates": [
@@ -15321,10 +15331,8 @@
 }
 ]
 }
-}
-]
-}
-}
+},
+"TempStatus": "mysterious_distortion"
 }
 },
 "Rate": 10,

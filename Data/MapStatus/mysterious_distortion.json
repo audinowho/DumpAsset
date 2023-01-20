@@ -3,14 +3,14 @@
 "Object": {
 "$type": "RogueEssence.Data.MapStatusData, RogueEssence",
 "Name": {
-"DefaultText": "Harsh Sun",
+"DefaultText": "Mysterious Distortion",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "",
+"DefaultText": "The space-time is distorted on this floor...",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "CarryOver": false,
 "Emitter": {
@@ -20,16 +20,20 @@
 "DefaultHidden": false,
 "StatusStates": [
 {
-"$type": "RogueEssence.Dungeon.MapWeatherState, RogueEssence"
+"$type": "RogueEssence.Dungeon.MapCountDownState, RogueEssence",
+"Counter": 0
 },
 {
-"$type": "PMDC.Dungeon.MapTickState, PMDC",
-"Counter": 0
+"$type": "RogueEssence.Dungeon.MapLocState, RogueEssence",
+"Target": {
+"X": 0,
+"Y": 0
+}
 }
 ],
 "OnMapRefresh": [],
 "RepeatMethod": {
-"$type": "PMDC.Dungeon.MapStatusRefreshEvent, PMDC"
+"$type": "PMDC.Dungeon.MapStatusReplaceEvent, PMDC"
 },
 "ProximityEvent": {
 "Radius": -1,
@@ -68,38 +72,72 @@
 "BeforeStatusAdds": [],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
-"OnMapStatusAdds": [
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [
 {
 "Key": {
 "str": [
--5
+0
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.ReplaceStatusGroupEvent, PMDC",
-"States": [
+"$type": "PMDC.Dungeon.MapStatusBattleLogEvent, PMDC",
+"Message": {
+"Key": "MSG_INVERSE_END"
+},
+"Delay": true
+}
+}
+],
+"OnMapStarts": [
 {
-"assembly": "RogueEssence, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null",
-"type": "RogueEssence.Dungeon.MapWeatherState"
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.HintTempTileEvent, PMDC",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Stair_Sensor_Arrow",
+"FrameTime": 6,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 6,
+"FrameOffset": 0
+},
+"Layer": 4,
+"UseDest": false
+},
+"HintMsg": {
+"Key": "MSG_STAIR_SENSOR"
+}
+}
 }
 ],
-"Msg": false
-}
-}
-],
-"OnMapStatusRemoves": [],
-"OnMapStarts": [],
 "OnTurnStarts": [],
 "OnTurnEnds": [],
 "OnMapTurnEnds": [
 {
 "Key": {
 "str": [
-5
+7
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.MapTickEvent, PMDC"
+"$type": "PMDC.Dungeon.TempTileCollapseEvent, PMDC"
 }
 }
 ],

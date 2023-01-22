@@ -974,7 +974,8 @@ function COMMON.EndDungeonDay(result, zoneId, structureId, mapId, entryId)
   COMMON.EndDayCycle()
   GAME:EndDungeonRun(result, zoneId, structureId, mapId, entryId, true, true)
   if GAME:InRogueMode() then
-    GAME:RestartToTitle()
+    --This is handled in EndGame in GameProgress.cs
+    --GAME:RestartToTitle()
   else
 	GAME:EnterZone(zoneId, structureId, mapId, entryId)
   end

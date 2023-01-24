@@ -2,7 +2,7 @@ require 'common'
 
 SINGLE_CHAR_SCRIPT = {}
 
-function SINGLE_CHAR_SCRIPT.Test(owner, ownerChar, character, args)
+function SINGLE_CHAR_SCRIPT.Test(owner, ownerChar, context, args)
   PrintInfo("Test")
 end
 
@@ -11,7 +11,7 @@ ShopSecurityType = luanet.import_type('PMDC.Dungeon.ShopSecurityState')
 MapIndexType = luanet.import_type('RogueEssence.Dungeon.MapIndexState')
 
 
-function SINGLE_CHAR_SCRIPT.ThiefCheck(owner, ownerChar, character, args)
+function SINGLE_CHAR_SCRIPT.ThiefCheck(owner, ownerChar, context, args)
   local baseLoc = _DUNGEON.ActiveTeam.Leader.CharLoc
   local tile = _ZONE.CurrentMap.Tiles[baseLoc.X][baseLoc.Y]
   
@@ -26,7 +26,7 @@ function SINGLE_CHAR_SCRIPT.ThiefCheck(owner, ownerChar, character, args)
     --merchandise was returned.  doesn't matter who did it.
     security_price.Cart = price
   elseif price > security_price.Cart then
-    local char_index = _ZONE.CurrentMap:GetCharIndex(character)
+    local char_index = _ZONE.CurrentMap:GetCharIndex(context.User)
     if char_index.Faction ~= RogueEssence.Dungeon.Faction.Player then
       --non-player was responsible for taking/destroying merchandise, just readjust the security price and clear the current price
       security_price.Amount = security_price.Amount - price + security_price.Cart
@@ -68,7 +68,7 @@ function SINGLE_CHAR_SCRIPT.ThiefCheck(owner, ownerChar, character, args)
   end
 end
 
-function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, character, args)
+function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, context, args)
   local baseLoc = _DUNGEON.ActiveTeam.Leader.CharLoc
   local tile = _ZONE.CurrentMap.Tiles[baseLoc.X][baseLoc.Y]
 
@@ -153,8 +153,8 @@ function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, character, args)
   end
 end
 
-function SINGLE_CHAR_SCRIPT.DestinationFloor(owner, ownerChar, character, args)
-  if character ~= nil then
+function SINGLE_CHAR_SCRIPT.DestinationFloor(owner, ownerChar, context, args)
+  if context.User ~= nil then
     return
   end
   SOUND:PlayFanfare("Fanfare/Note")
@@ -163,8 +163,8 @@ function SINGLE_CHAR_SCRIPT.DestinationFloor(owner, ownerChar, character, args)
 end
 
 
-function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, character, args)
-  if character ~= nil then
+function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
+  if context.User ~= nil then
     return
   end
   SOUND:PlayBGM("C07. Outlaw.ogg", false)
@@ -178,7 +178,7 @@ function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, character, args)
   TASK:WaitTask(_DUNGEON:AddMapStatus(status))
 end
 
-function SINGLE_CHAR_SCRIPT.OutlawClearCheck(owner, ownerChar, character, args)
+function SINGLE_CHAR_SCRIPT.OutlawClearCheck(owner, ownerChar, context, args)
   -- check for no outlaw in the mission list
   remaining_outlaw = false
   for name, mission in pairs(SV.missions.Missions) do

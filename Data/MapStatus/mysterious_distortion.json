@@ -14,8 +14,25 @@
 "Comment": "",
 "CarryOver": false,
 "Emitter": {
-"$type": "RogueEssence.Content.EmptySwitchOffEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.OverlayEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"AnimIndex": "Inverse",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"Movement": {
+"X": 0,
+"Y": 0
+},
+"Layer": 4,
+"Color": "76, 76, 76, 76"
 },
 "DefaultHidden": false,
 "StatusStates": [
@@ -83,7 +100,7 @@
 "Value": {
 "$type": "PMDC.Dungeon.MapStatusBattleLogEvent, PMDC",
 "Message": {
-"Key": "MSG_INVERSE_END"
+"Key": "MSG_MYSTERIOSITY_END"
 },
 "Delay": true
 }
@@ -97,6 +114,43 @@
 ]
 },
 "Value": {
+"$type": "PMDC.Dungeon.NullCharEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.BattleLogEvent, PMDC",
+"Message": {
+"Key": "MSG_MYSTERIOSITY_START"
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.NullCharEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.AnimEvent, PMDC",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"Sound": "_UNK_EVT_004",
+"Delay": 90
+}
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.NullCharEvent, PMDC",
+"BaseEvent": {
 "$type": "PMDC.Dungeon.HintTempTileEvent, PMDC",
 "Emitter": {
 "$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
@@ -118,11 +172,12 @@
 "Cycles": 6,
 "FrameOffset": 0
 },
-"Layer": 4,
+"Layer": 2,
 "UseDest": false
 },
 "HintMsg": {
-"Key": "MSG_STAIR_SENSOR"
+"Key": "MSG_TREASURE_SENSOR"
+}
 }
 }
 }
@@ -137,7 +192,39 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.TempTileCollapseEvent, PMDC"
+"$type": "PMDC.Dungeon.TempTileCollapseEvent, PMDC",
+"Anims": [
+{
+"Emitter": {
+"$type": "RogueEssence.Content.FiniteOverlayEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"AnimIndex": "White",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"Movement": {
+"X": 0,
+"Y": 0
+},
+"RepeatX": false,
+"RepeatY": false,
+"FadeIn": 30,
+"FadeOut": 30,
+"TotalTime": 30,
+"Layer": 0,
+"Color": "255, 255, 255, 255"
+},
+"Sound": "",
+"Delay": 30
+}
+]
 }
 }
 ],

@@ -117,6 +117,8 @@ end
 function test_grounds.Sign1_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo('Sign1_Action')
+  
+  GROUND:MoveObjectToPosition(obj, 40, 40, 2)
   UI:ResetSpeaker()
   UI:SetCenter(true)
   UI:WaitShowDialogue(MapStrings['Sign1_Action_Line0'])
@@ -246,6 +248,7 @@ end
 
 function test_grounds.Assembly_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GROUND:ObjectWaitAnimFrame(obj, 3)
   UI:ResetSpeaker()
   SOUND:PlaySE("Menu/Skip")
   UI:AssemblyMenu()

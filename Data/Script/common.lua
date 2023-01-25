@@ -974,9 +974,23 @@ function COMMON.EndDungeonDay(result, zoneId, structureId, mapId, entryId)
   COMMON.EndDayCycle()
   GAME:EndDungeonRun(result, zoneId, structureId, mapId, entryId, true, true)
   if GAME:InRogueMode() then
-    GAME:RestartToTitle()
+    if result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
+      local msg = STRINGS:FormatKey("DLG_TRY_AGAIN_ASK");
+      UI:ChoiceMenuYesNo(msg, false)
+      UI:WaitForChoice()
+      result = UI:ChoiceResult()
+      GAME:WaitFrames(50);
+      if result then
+        local config = RogueEssence.Data.RogueConfig.RerollFromOther(_DATA.Save.Config)
+        GAME:RestartRogue(config)
+      else 
+        GAME:RestartToTitle()
+      end
+    else
+      GAME:RestartToTitle()
+    end
   else
-	GAME:EnterZone(zoneId, structureId, mapId, entryId)
+	  GAME:EnterZone(zoneId, structureId, mapId, entryId)
   end
 end
 

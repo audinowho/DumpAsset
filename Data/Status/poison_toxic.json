@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.8.0",
+"Version": "0.6.9.0",
 "Object": {
 "$type": "RogueEssence.Data.StatusData, RogueEssence",
 "Name": {
@@ -14,7 +14,9 @@
 },
 "Desc": {
 "DefaultText": "The Pokémon takes damage on every action, with the damage worsening if it attacks. Its ability to recover HP is also reduced. This status wears off after a few turns.",
-"LocalTexts": {}
+"LocalTexts": {
+"zh-hans": "这只宝可梦每次行动都会受到伤害，如果攻击，伤害会恶化。回复HP的能力也会降低。该状态在几回合后解除。"
+}
 },
 "Released": true,
 "Comment": "",
@@ -46,6 +48,10 @@
 {
 "$type": "PMDC.Dungeon.AttackedThisTurnState, PMDC",
 "Attacked": false
+},
+{
+"$type": "PMDC.Dungeon.WalkedThisTurnState, PMDC",
+"Walked": false
 }
 ],
 "OnSkillChanges": [],
@@ -248,13 +254,36 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.PoisonSingleEvent, PMDC",
-"Toxic": false
+"$type": "PMDC.Dungeon.PoisonEndEvent, PMDC",
+"Toxic": false,
+"ReducedDamage": true
 }
 }
 ],
 "OnMapTurnEnds": [],
-"OnWalks": [],
+"OnWalks": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.PoisonSingleEvent, PMDC",
+"Toxic": false
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.WalkedThisTurnEvent, PMDC"
+}
+}
+],
 "OnDeaths": [],
 "OnRefresh": [],
 "BeforeTryActions": [],

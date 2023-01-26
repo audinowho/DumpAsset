@@ -975,6 +975,7 @@ function COMMON.EndDungeonDay(result, zoneId, structureId, mapId, entryId)
   GAME:EndDungeonRun(result, zoneId, structureId, mapId, entryId, true, true)
   if GAME:InRogueMode() then
     if result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
+      UI:ResetSpeaker()
       local msg = STRINGS:FormatKey("DLG_TRY_AGAIN_ASK");
       UI:ChoiceMenuYesNo(msg, false)
       UI:WaitForChoice()

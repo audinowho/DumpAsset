@@ -114,8 +114,10 @@ Translation:
 [FR] Buxrart
 [FR] Alicia
 [FR] Blackun
+[FR] Youka#9465 Youka
 [KO] https://www.reddit.com/user/Bashful_Barry/ Barry
 [PT] https://twitter.com/SquishyTheMew Squishy
+[ZH] Chehra#5252 Chehra
 [ZH] https://twitter.com/Dewpoleon Dew
 [ZH] https://sites.google.com/view/daniel-lee-site/home PikaNiko
 [ZH] Rockdu

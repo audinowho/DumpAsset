@@ -60,6 +60,20 @@ function ITEM_SCRIPT.Test(owner, ownerChar, context, args)
   _DUNGEON.PendingLeaderAction = _MENU:ProcessMenuCoroutine(notice)
 end
 
+function ITEM_SCRIPT.ShimmerBayShift(owner, ownerChar, context, args)
+  if not SV.shimmer_bay.TookTreasure then
+    if context.Item.Value == "egg_mystery" or context.Item.Value == "box_deluxe" then
+	  SV.shimmer_bay.TookTreasure = true
+	  _ZONE.CurrentMap.Music = "B24. Shimmer Bay 2.ogg"
+	  SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
+	  _ZONE.CurrentMap.MapEffect.OnMapTurnEnds:Add(RogueElements.Priority(15), PMDC.Dungeon.RespawnFromEligibleEvent(14, 160))
+	  for ii = 1, 3, 1 do
+		PMDC.Dungeon.RespawnFromEligibleEvent.Respawn()
+	  end
+	end
+  end
+end
+
 REFRESH_SCRIPT = {}
 
 function REFRESH_SCRIPT.Test(owner, ownerChar, character, args)

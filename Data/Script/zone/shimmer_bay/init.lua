@@ -19,6 +19,7 @@ function shimmer_bay.EnterSegment(zone, rescuing, segmentID, mapID)
   if rescuing ~= true then
     COMMON.BeginDungeon(zone.ID, segmentID, mapID)
   end
+  SV.shimmer_bay.TookTreasure = false
 end
 
 function shimmer_bay.ExitSegment(zone, result, rescue, segmentID, mapID)
@@ -32,6 +33,16 @@ function shimmer_bay.ExitSegment(zone, result, rescue, segmentID, mapID)
   elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
+    --TODO: if they have the manaphy egg, REMOVE IT, and set the boolean to true
+	local item_slot = GAME:FindPlayerItem("egg_mystery", true, true)
+	if item_slot:IsValid() then
+		if item_slot.IsEquipped then
+			GAME:TakePlayerEquippedItem(item_slot.Slot)
+		else
+			GAME:TakePlayerBagItem(item_slot.Slot)
+		end
+		SV.manaphy_egg.Taken = true
+	end
     if segmentID == 0 then
       COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 3, 0)
     else

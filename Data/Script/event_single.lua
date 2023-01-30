@@ -7,6 +7,34 @@ function SINGLE_CHAR_SCRIPT.Test(owner, ownerChar, context, args)
 end
 
 
+function SINGLE_CHAR_SCRIPT.ShimmerBayAltMusic(owner, ownerChar, context, args)
+  if context.User ~= nil then
+    return
+  end
+  if not SV.shimmer_bay.TookTreasure then
+    --keep the map music as is
+  else
+	_ZONE.CurrentMap.Music = "B24. Shimmer Bay 2.ogg"
+  end
+  
+  SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
+end
+
+
+function SINGLE_CHAR_SCRIPT.ShimmerBayAltEnemies(owner, ownerChar, context, args)
+  if context.User ~= nil then
+    return
+  end
+  if not SV.shimmer_bay.TookTreasure then
+    return
+  end
+  
+  _ZONE.CurrentMap.MapEffect.OnMapTurnEnds:Add(RogueElements.Priority(15), PMDC.Dungeon.RespawnFromEligibleEvent(14, 160))
+  for ii = 1, 3, 1 do
+	PMDC.Dungeon.RespawnFromEligibleEvent.Respawn()
+  end
+end
+
 function SINGLE_CHAR_SCRIPT.GuildBlock(owner, ownerChar, character, args)
   
   if not SV.guildmaster_summit.BattleComplete then

@@ -257,4 +257,25 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
 end
 
 
+function FLOOR_GEN_SCRIPT.ShimmerBayRevisit(map, args)
+  if not SV.manaphy_egg.Taken then
+    return
+  end
+  
+  local item = nil
+  
+  for ii = 0, map.Items.Count - 1, 1 do
+	if map.Items[ii].Value == "egg_mystery" then
+	  item = map.Items[ii]
+	  break
+	end
+  end
+  
+  if item ~= nil then
+    item.Value = "box_deluxe"
+	item.HiddenValue = "xcl_element_water_dust"
+  end
+  
+end
+
 

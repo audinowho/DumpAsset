@@ -67,6 +67,18 @@ SV.missions =
   FinishedMissions = { },
 }
 
+SV.shimmer_bay = 
+{
+  TookTreasure  = false
+}
+
+SV.manaphy_egg = 
+{
+  Taken = false,
+  ExpositionComplete = false,
+  Hatched = false
+}
+
 SV.base_camp = 
 {
   IntroComplete    = false,

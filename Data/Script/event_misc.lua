@@ -56,9 +56,10 @@ end
 ITEM_SCRIPT = {}
 
 function ITEM_SCRIPT.Test(owner, ownerChar, context, args)
+  PrintInfo("Test")
   local text = "You got a " .. context.Item:GetDungeonName()
   local notice = _MENU:CreateNotice("Test", text)
-  _DUNGEON.PendingLeaderAction = _MENU:ProcessMenuCoroutine(notice)
+  TASK:WaitTask(_MENU:ProcessMenuCoroutine(notice))
 end
 
 function misc_helpers.ShimmerBayShift()

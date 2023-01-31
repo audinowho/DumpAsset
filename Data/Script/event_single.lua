@@ -35,6 +35,69 @@ function SINGLE_CHAR_SCRIPT.ShimmerBayAltEnemies(owner, ownerChar, context, args
   end
 end
 
+
+
+function SINGLE_CHAR_SCRIPT.SleepingCalderaAltData(owner, ownerChar, context, args)
+  if context.User ~= nil then
+    return
+  end
+  if not SV.sleeping_caldera.TookTreasure then
+    --keep the map music as is
+  else
+	_ZONE.CurrentMap.Name = RogueEssence.LocalText(RogueEssence.StringKey("TITLE_ENRAGED_CALDERA"):ToLocal())
+	_ZONE.CurrentMap.Music = "B11. Enraged Caldera.ogg"
+  end
+  
+  SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
+end
+
+function SINGLE_CHAR_SCRIPT.SleepingCalderaAltTiles(owner, ownerChar, context, args)
+  if context.User ~= nil then
+    return
+  end
+  if not SV.sleeping_caldera.TookTreasure then
+    return
+  end
+  
+  --TODO: set all water tiles to lava
+  --also set any stairs down to disabled
+  --remove any water mons traversing them
+  --set the tileset dictionary to lava
+  --call mapmodified for the entire map
+end
+
+function SINGLE_CHAR_SCRIPT.SleepingCalderaAltEnemies(owner, ownerChar, context, args)
+  if context.User ~= nil then
+    return
+  end
+  if not SV.sleeping_caldera.TookTreasure then
+    return
+  end
+  
+  _ZONE.CurrentMap.MapEffect.OnMapTurnEnds:Add(RogueElements.Priority(15), PMDC.Dungeon.RespawnFromEligibleEvent(15, 50))
+  for ii = 1, 3, 1 do
+	PMDC.Dungeon.RespawnFromEligibleEvent.Respawn()
+  end
+end
+
+function SINGLE_CHAR_SCRIPT.SleepingCalderaSummonHeatran(owner, ownerChar, context, args)
+  if context.User ~= nil then
+    return
+  end
+  if not SV.sleeping_caldera.TookTreasure then
+    return
+  end
+  
+  --TODO: check to see if heatran is in the party/assembly
+  --if so set gotHeatran to true
+  
+  
+  if SV.sleeping_caldera.GotHeatran then
+    return
+  end
+  --TODO: spawn heatran with fanfare
+end
+
 function SINGLE_CHAR_SCRIPT.GuildBlock(owner, ownerChar, character, args)
   
   if not SV.guildmaster_summit.BattleComplete then

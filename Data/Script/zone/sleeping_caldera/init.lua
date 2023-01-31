@@ -19,6 +19,7 @@ function sleeping_caldera.EnterSegment(zone, rescuing, segmentID, mapID)
   if rescuing ~= true then
     COMMON.BeginDungeon(zone.ID, segmentID, mapID)
   end
+  SV.sleeping_caldera.TookTreasure = false
 end
 
 function sleeping_caldera.ExitSegment(zone, result, rescue, segmentID, mapID)

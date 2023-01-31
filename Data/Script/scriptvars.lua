@@ -79,6 +79,22 @@ SV.manaphy_egg =
   Hatched = false
 }
 
+SV.roaming_legends =
+{
+  Raikou = false,
+  Entei = false,
+  Suicune = false,
+  Celebi = false,
+  Darkrai = false
+}
+
+
+SV.sleeping_caldera = 
+{
+  TookTreasure  = false,
+  GotHeatran = false
+}
+
 SV.base_camp = 
 {
   IntroComplete    = false,

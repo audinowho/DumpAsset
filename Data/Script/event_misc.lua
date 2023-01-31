@@ -1,5 +1,6 @@
 require 'common'
 
+misc_helpers = {}
 
 STATUS_SCRIPT = {}
 
@@ -60,16 +61,71 @@ function ITEM_SCRIPT.Test(owner, ownerChar, context, args)
   _DUNGEON.PendingLeaderAction = _MENU:ProcessMenuCoroutine(notice)
 end
 
+function misc_helpers.ShimmerBayShift()
+  GAME:WaitFrames(60)
+  _ZONE.CurrentMap.Music = "B24. Shimmer Bay 2.ogg"
+  SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
+  _ZONE.CurrentMap.MapEffect.OnMapTurnEnds:Add(RogueElements.Priority(15), PMDC.Dungeon.RespawnFromEligibleEvent(14, 160))
+  for ii = 1, 3, 1 do
+	PMDC.Dungeon.RespawnFromEligibleEvent.Respawn()
+  end
+end
+
 function ITEM_SCRIPT.ShimmerBayShift(owner, ownerChar, context, args)
   if not SV.shimmer_bay.TookTreasure then
     if context.Item.Value == "egg_mystery" or context.Item.Value == "box_deluxe" then
 	  SV.shimmer_bay.TookTreasure = true
-	  _ZONE.CurrentMap.Music = "B24. Shimmer Bay 2.ogg"
-	  SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
-	  _ZONE.CurrentMap.MapEffect.OnMapTurnEnds:Add(RogueElements.Priority(15), PMDC.Dungeon.RespawnFromEligibleEvent(14, 160))
-	  for ii = 1, 3, 1 do
-		PMDC.Dungeon.RespawnFromEligibleEvent.Respawn()
+	  
+	end
+  end
+end
+
+function misc_helpers.SleepingCalderaShift()
+  SOUND:PlayBGM("", false)
+  GAME:WaitFrames(60)
+  --TODO: rumble, make everyone shocked
+  GAME:FadeOut(true, 60)
+  --set name to enraged caldera
+  _ZONE.CurrentMap.Name = RogueEssence.LocalText(RogueEssence.StringKey("TITLE_ENRAGED_CALDERA"):ToLocal())
+  _ZONE.CurrentMap.Music = "B11. Enraged Caldera.ogg"
+  SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
+  
+  --set all water tiles to lava
+  for xx = 0, _ZONE.CurrentMap.Width - 1, 1 do
+	for yy = 0, _ZONE.CurrentMap.Height - 1, 1 do
+	  local loc = RogueElements.Loc(xx, yy)
+	  local tl = _ZONE.CurrentMap:GetTile()
+	  if tl.ID == "water" then
+		tl.ID = "lava"
+		--remove any mons traversing them
+		local chara = _ZONE.CurrentMap:GetCharAtLoc(loc)
+		if chara ~= nil then
+		  _DUNGEON:RemoveChar(chara)
+		end
 	  end
+	end
+  end
+  
+  --set the tileset dictionary to lava
+  _ZONE.CurrentMap.TextureMap["unbreakable"] = RogueEssence.Dungeon.AutoTile("dark_crater_wall")
+  _ZONE.CurrentMap.TextureMap["wall"] = RogueEssence.Dungeon.AutoTile("dark_crater_wall")
+  _ZONE.CurrentMap.TextureMap["floor"] = RogueEssence.Dungeon.AutoTile("dark_crater_floor")
+  --call mapmodified for the entire map
+  
+  _ZONE.CurrentMap.MapEffect.OnMapTurnEnds:Add(RogueElements.Priority(15), PMDC.Dungeon.RespawnFromEligibleEvent(15, 50))
+  for ii = 1, 3, 1 do
+	PMDC.Dungeon.RespawnFromEligibleEvent.Respawn()
+  end
+  
+  GAME:FadeIn(60)
+end
+
+function ITEM_SCRIPT.SleepingCalderaShift(owner, ownerChar, context, args)
+  if not SV.sleeping_caldera.TookTreasure then
+    if context.Item.Value == "box_deluxe" then
+	  SV.sleeping_caldera.TookTreasure = true
+	  
+
 	end
   end
 end

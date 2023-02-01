@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.8.0",
+"Version": "0.6.9.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -284,7 +284,6 @@
 },
 "ID": "stairs_go_up",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -341,7 +340,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -383,7 +381,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -418,7 +415,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -472,7 +468,6 @@
 },
 "ID": "tile_wonder",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -1040,7 +1035,6 @@
 },
 "ID": "stairs_go_up",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -1061,6 +1055,51 @@
 ]
 }
 ]
+}
+},
+{
+"Key": {
+"str": [
+2,
+2
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 4
+}
+],
+"Spawn": {
+"$type": "RogueEssence.LevelGen.BulkSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueEssence",
+"SpecificSpawns": [
+{
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "stairs_secret_up",
+"Revealed": true,
+"Owner": 0,
+"TileStates": [
+{
+"$type": "PMDC.Dungeon.DestState, PMDC",
+"Dest": {
+"Segment": 1,
+"ID": 0
+},
+"Relative": false,
+"PreserveMusic": false
+}
+]
+}
+],
+"RandomSpawns": [],
+"SpawnAmount": 0
+}
 }
 },
 {
@@ -1097,7 +1136,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -1139,7 +1177,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -1174,7 +1211,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -1228,7 +1264,6 @@
 },
 "ID": "tile_wonder",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -1312,52 +1347,6 @@
 "Min": 3,
 "Max": 6
 }
-}
-}
-},
-{
-"Key": {
-"str": [
-5,
-1,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
-"IncludeHalls": false,
-"Filters": [
-{
-"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
-"Connection": 4
-}
-],
-"Spawn": {
-"$type": "RogueEssence.LevelGen.BulkSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueEssence",
-"SpecificSpawns": [
-{
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "stairs_secret_up",
-"Revealed": true,
-"Danger": false,
-"Owner": 0,
-"TileStates": [
-{
-"$type": "PMDC.Dungeon.DestState, PMDC",
-"Dest": {
-"Segment": 1,
-"ID": 0
-},
-"Relative": false
-}
-]
-}
-],
-"RandomSpawns": [],
-"SpawnAmount": 0
 }
 }
 },
@@ -1650,7 +1639,6 @@
 },
 "ID": "stairs_go_up",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -1707,7 +1695,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -1749,7 +1736,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -1784,7 +1770,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -1838,7 +1823,6 @@
 },
 "ID": "tile_wonder",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -1965,7 +1949,12 @@
 }
 },
 {
-"$type": "RogueEssence.LevelGen.FloorNameIDZoneStep, RogueEssence",
+"$type": "PMDC.LevelGen.FloorNameDropZoneStep, PMDC",
+"DropPriority": {
+"str": [
+-15
+]
+},
 "Name": {
 "DefaultText": "Wisdom Road\n{0}F",
 "LocalTexts": {}
@@ -1993,7 +1982,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]

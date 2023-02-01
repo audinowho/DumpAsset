@@ -180,5 +180,49 @@ function BATTLE_SCRIPT.PairTalk(owner, ownerChar, context, args)
 end
 
 
+function BATTLE_SCRIPT.LegendRecruitCheck(owner, ownerChar, context, args)
+
+  --TODO: check to see if heatran is in the party/assembly
+  --if so set gotHeatran to true
+  if not SV.sleeping_caldera.GotHeatran then
+    --check for item throw, the only way to recruit
+	if context.ActionType == RogueEssence.Dungeon.BattleActionType.Throw then
+	  local found_legend = nil
+	  local player_count = _DUNGEON.ActiveTeam.Players.Count
+	  for player_idx = 0, player_count-1, 1 do
+	    player = _DUNGEON.ActiveTeam.Players[player_idx]
+	    --if so, iterate the team and the assembly for heatran
+	    --check for a lua table that marks it as THE guardian
+		local player_tbl = LTBL(player)
+	    if player.BaseForm.Species == "heatran" and player_tbl.IsLegend == true then
+		  found_legend = player
+		  break
+		end
+	  end
+	  
+	  if found_legend == nil then
+	    local assemblyCount = GAME:GetPlayerAssemblyCount()
+		
+		for assembly_idx = 0,total-1,1 do
+		  player = GAME:GetPlayerAssemblyMember(assembly_idx)
+		  local player_tbl = LTBL(player)
+		  if player.BaseForm.Species == "heatran" and player_tbl.IsLegend == true then
+			found_legend = player
+			break
+		  end
+		end
+	  end
+	  
+	  if found_legend ~= nil then
+	    --if so, set obtained to true
+	    SV.sleeping_caldera.GotHeatran = true
+	    --remove the lua table
+		local player_tbl = LTBL(found_legend)
+		player_tbl.FoundLegend = nil
+	  end
+	end
+  end
+end
+
 
 

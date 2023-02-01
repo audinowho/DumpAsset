@@ -44,7 +44,7 @@ function SINGLE_CHAR_SCRIPT.SleepingCalderaAltData(owner, ownerChar, context, ar
   if not SV.sleeping_caldera.TookTreasure then
     --keep the map music as is
   else
-	_ZONE.CurrentMap.Name = RogueEssence.LocalText(RogueEssence.StringKey("TITLE_ENRAGED_CALDERA"):ToLocal())
+	_ZONE.CurrentMap.Name = RogueEssence.LocalText(STRINGS:Format(RogueEssence.StringKey("TITLE_ENRAGED_CALDERA"):ToLocal(), _ZONE.CurrentMap.ID + 1))
 	_ZONE.CurrentMap.Music = "B11. Enraged Caldera.ogg"
   end
   
@@ -59,11 +59,42 @@ function SINGLE_CHAR_SCRIPT.SleepingCalderaAltTiles(owner, ownerChar, context, a
     return
   end
   
-  --TODO: set all water tiles to lava
-  --also set any stairs down to disabled
-  --remove any water mons traversing them
+  --set all water tiles to lava
+  for xx = 0, _ZONE.CurrentMap.Width - 1, 1 do
+	for yy = 0, _ZONE.CurrentMap.Height - 1, 1 do
+	  local loc = RogueElements.Loc(xx, yy)
+	  local tl = _ZONE.CurrentMap:GetTile(loc)
+	  if tl.ID == "water" then
+		tl.ID = "lava"
+		--remove any mons traversing them
+		local chara = _ZONE.CurrentMap:GetCharAtLoc(loc)
+		if chara ~= nil then
+		  if chara.MemberTeam ~= _DUNGEON.ActiveTeam then
+			_DUNGEON:RemoveChar(chara)
+		  end
+		end
+	  end
+	  --also remove any stairs down
+	  if tl.Effect.ID == "stairs_go_down" then
+		tl.Effect = RogueEssence.Dungeon.EffectTile(loc)
+	  end
+	end
+  end
   --set the tileset dictionary to lava
-  --call mapmodified for the entire map
+  if _ZONE.CurrentMap.ID < 6 then
+    _ZONE.CurrentMap.BlankBG = RogueEssence.Dungeon.AutoTile("dark_crater_wall")
+    _ZONE.CurrentMap.TextureMap["unbreakable"] = RogueEssence.Dungeon.AutoTile("dark_crater_wall")
+    _ZONE.CurrentMap.TextureMap["wall"] = RogueEssence.Dungeon.AutoTile("dark_crater_wall")
+    _ZONE.CurrentMap.TextureMap["floor"] = RogueEssence.Dungeon.AutoTile("dark_crater_floor")
+  else
+    _ZONE.CurrentMap.BlankBG = RogueEssence.Dungeon.AutoTile("deep_dark_crater_wall")
+    _ZONE.CurrentMap.TextureMap["unbreakable"] = RogueEssence.Dungeon.AutoTile("deep_dark_crater_wall")
+    _ZONE.CurrentMap.TextureMap["wall"] = RogueEssence.Dungeon.AutoTile("deep_dark_crater_wall")
+    _ZONE.CurrentMap.TextureMap["floor"] = RogueEssence.Dungeon.AutoTile("deep_dark_crater_floor")
+  end
+  --call recalculate all autotiles for the entire map
+  _ZONE.CurrentMap:CalculateAutotiles(RogueElements.Loc(0, 0), RogueElements.Loc(_ZONE.CurrentMap.Width, _ZONE.CurrentMap.Height))
+  _ZONE.CurrentMap:CalculateTerrainAutotiles(RogueElements.Loc(0, 0), RogueElements.Loc(_ZONE.CurrentMap.Width, _ZONE.CurrentMap.Height))
 end
 
 function SINGLE_CHAR_SCRIPT.SleepingCalderaAltEnemies(owner, ownerChar, context, args)
@@ -88,14 +119,59 @@ function SINGLE_CHAR_SCRIPT.SleepingCalderaSummonHeatran(owner, ownerChar, conte
     return
   end
   
-  --TODO: check to see if heatran is in the party/assembly
-  --if so set gotHeatran to true
-  
-  
   if SV.sleeping_caldera.GotHeatran then
     return
   end
-  --TODO: spawn heatran with fanfare
+  
+  -- spawn heatran- try 10 times; not guaranteed but not crucial
+  local origin = _DUNGEON.ActiveTeam.Leader.CharLoc
+  for ii = 1, 10, 1 do
+    local testLoc = RogueElements.Loc(_DATA.Save.Rand:Next(origin.X - 7, origin.X + 7 + 1), _DATA.Save.Rand:Next(origin.Y - 4, origin.Y + 4 + 1))
+	local tile_block = _ZONE.CurrentMap:TileBlocked(testLoc)
+	local char_at = _ZONE.CurrentMap:GetCharAtLoc(testLoc)
+	if tile_block == false and char_at == nil then
+	  --spawn it here
+	  DUNGEON:MoveScreen(RogueEssence.Content.ScreenMover(3, 6, 30))
+	  GAME:WaitFrames(10)
+	  
+	  local new_team = RogueEssence.Dungeon.MonsterTeam()
+	  local mob_data = RogueEssence.Dungeon.CharData()
+	  mob_data.BaseForm = RogueEssence.Dungeon.MonsterID("heatran", 0, "normal", Gender.Male)
+	  mob_data.Level = 40;
+	  mob_data.BaseSkills[0] = RogueEssence.Dungeon.SlotSkill("magma_storm")
+	  mob_data.BaseSkills[1] = RogueEssence.Dungeon.SlotSkill("iron_head")
+	  mob_data.BaseSkills[2] = RogueEssence.Dungeon.SlotSkill("scary_face")
+	  mob_data.BaseSkills[3] = RogueEssence.Dungeon.SlotSkill("crunch")
+	  mob_data.BaseIntrinsics[0] = "flash_fire"
+	  local new_mob = RogueEssence.Dungeon.Character(mob_data)
+	  local tactic = _DATA:GetAITactic("wander_smart")
+	  new_mob.Tactic = RogueEssence.Data.AITactic(tactic)
+	  new_mob.CharLoc = testLoc
+	  new_mob.CharDir = _ZONE.CurrentMap:ApproximateClosestDir8(new_mob.CharLoc, _DUNGEON.ActiveTeam.Leader.CharLoc)
+	  new_team.Players:Add(new_mob)
+	  player_tbl = LTBL(new_mob)
+	  player_tbl.IsLegend = true
+	  
+	  --with fanfare
+	  SOUND:PlayBattleSE("_UNK_EVT_003")
+	  local arriveAnim = RogueEssence.Content.StaticAnim(RogueEssence.Content.AnimData("Sacred_Fire_Ranger", 3), 1)
+	  arriveAnim:SetupEmitted(RogueElements.Loc(new_mob.CharLoc.X * 24, new_mob.CharLoc.Y * 24), 32, RogueElements.Dir8.Down)
+	  DUNGEON:PlayVFXAnim(arriveAnim, RogueEssence.Content.DrawLayer.Front)
+	  
+	  GAME:WaitFrames(3)
+	  
+	  _ZONE.CurrentMap.MapTeams:Add(new_team)
+	  new_mob:RefreshTraits()
+	  
+      TASK:WaitTask(_DUNGEON:SpecialIntro(new_mob))
+      TASK:WaitTask(new_mob:OnMapStart())
+	  
+	  _ZONE.CurrentMap:UpdateExploration(new_mob)
+	  
+	  break
+	end
+  end
+  
 end
 
 function SINGLE_CHAR_SCRIPT.GuildBlock(owner, ownerChar, character, args)

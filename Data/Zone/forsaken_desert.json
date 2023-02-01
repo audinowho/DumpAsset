@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.8.0",
+"Version": "0.6.9.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -151,7 +151,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -428,7 +427,6 @@
 },
 "ID": "stairs_go_up",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -502,7 +500,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -559,7 +556,6 @@
 },
 "ID": "tile_wonder",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -632,7 +628,6 @@
 },
 "ID": "tile_compass",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -674,7 +669,6 @@
 },
 "ID": "tile_compass",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -890,7 +884,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -1167,7 +1160,6 @@
 },
 "ID": "stairs_go_up",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -1241,7 +1233,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -1298,7 +1289,6 @@
 },
 "ID": "tile_wonder",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -1371,7 +1361,6 @@
 },
 "ID": "tile_compass",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -1413,7 +1402,6 @@
 },
 "ID": "tile_compass",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -2026,7 +2014,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.HeldState"
 },
 "UseMapItems": false,
@@ -2042,7 +2030,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.UtilityState"
 },
 "UseMapItems": false,
@@ -2058,7 +2046,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.DrinkState"
 },
 "UseMapItems": false,
@@ -2074,7 +2062,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": false,
@@ -2234,7 +2222,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -2383,6 +2370,107 @@
 {
 "Key": {
 "str": [
+-2,
+2
+]
+},
+"Value": {
+"$type": "RogueElements.AddConnectedRoomsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"Amount": {
+"Min": 1,
+"Max": 1
+},
+"HallPercent": 100,
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.UnVaultableRoom, PMDC"
+}
+]
+}
+],
+"GenericRooms": {
+"$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"MajorWidth": {
+"Min": 3,
+"Max": 3
+},
+"MinorHeight": {
+"Min": 2,
+"Max": 2
+},
+"MajorHeight": {
+"Min": 3,
+"Max": 3
+},
+"MinorWidth": {
+"Min": 2,
+"Max": 2
+}
+},
+"Rate": 10
+}
+]
+},
+"RoomComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 4
+},
+{
+"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.NoEventRoom, PMDC"
+}
+],
+"GenericHalls": {
+"$type": "RogueElements.SpawnList`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
+"HallTurnBias": 0,
+"Brush": {
+"$type": "RogueElements.DefaultHallBrush, RogueElements"
+},
+"Width": {
+"Min": 2,
+"Max": 4
+},
+"Height": {
+"Min": 2,
+"Max": 4
+}
+},
+"Rate": 10
+}
+]
+},
+"HallComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 4
+},
+{
+"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+}
+]
+}
+},
+{
+"Key": {
+"str": [
 -1
 ]
 },
@@ -2401,6 +2489,42 @@
 "Value": {
 "$type": "RogueEssence.LevelGen.UnbreakableBorderStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Thickness": 1
+}
+},
+{
+"Key": {
+"str": [
+0,
+2
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.SwitchSealStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"SwitchFilters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+},
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "PMDC.LevelGen.BossRoom, PMDC"
+}
+]
+}
+],
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 4
+}
+],
+"SealedTile": "sealed_block",
+"SwitchTile": "tile_switch",
+"Amount": 2,
+"TimeLimit": false
 }
 },
 {
@@ -2511,7 +2635,6 @@
 },
 "ID": "stairs_go_up",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -2532,6 +2655,51 @@
 ]
 }
 ]
+}
+},
+{
+"Key": {
+"str": [
+2,
+2
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 4
+}
+],
+"Spawn": {
+"$type": "RogueEssence.LevelGen.BulkSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueEssence",
+"SpecificSpawns": [
+{
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "stairs_secret_up",
+"Revealed": true,
+"Owner": 0,
+"TileStates": [
+{
+"$type": "PMDC.Dungeon.DestState, PMDC",
+"Dest": {
+"Segment": 1,
+"ID": 0
+},
+"Relative": false,
+"PreserveMusic": false
+}
+]
+}
+],
+"RandomSpawns": [],
+"SpawnAmount": 0
+}
 }
 },
 {
@@ -2585,7 +2753,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -2642,7 +2809,6 @@
 },
 "ID": "tile_wonder",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -2715,7 +2881,6 @@
 },
 "ID": "tile_compass",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -3335,7 +3500,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.HeldState"
 },
 "UseMapItems": false,
@@ -3351,7 +3516,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.UtilityState"
 },
 "UseMapItems": false,
@@ -3367,7 +3532,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.DrinkState"
 },
 "UseMapItems": false,
@@ -3383,7 +3548,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": false,
@@ -3940,7 +4105,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.HeldState"
 },
 "UseMapItems": false,
@@ -3956,7 +4121,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.UtilityState"
 },
 "UseMapItems": false,
@@ -3972,7 +4137,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.DrinkState"
 },
 "UseMapItems": false,
@@ -3988,7 +4153,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": false,
@@ -4148,7 +4313,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -4425,7 +4589,6 @@
 },
 "ID": "stairs_go_up",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -4499,7 +4662,6 @@
 },
 "ID": "",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 }
@@ -4556,7 +4718,6 @@
 },
 "ID": "tile_wonder",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -4629,7 +4790,6 @@
 },
 "ID": "tile_compass",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -5249,7 +5409,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.HeldState"
 },
 "UseMapItems": false,
@@ -5265,7 +5425,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.UtilityState"
 },
 "UseMapItems": false,
@@ -5281,7 +5441,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.DrinkState"
 },
 "UseMapItems": false,
@@ -5297,7 +5457,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": false,
@@ -5854,7 +6014,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.HeldState"
 },
 "UseMapItems": false,
@@ -5870,7 +6030,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.UtilityState"
 },
 "UseMapItems": false,
@@ -5886,7 +6046,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.DrinkState"
 },
 "UseMapItems": false,
@@ -5902,7 +6062,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": false,
@@ -6459,7 +6619,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.HeldState"
 },
 "UseMapItems": false,
@@ -6475,7 +6635,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.UtilityState"
 },
 "UseMapItems": false,
@@ -6491,7 +6651,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.DrinkState"
 },
 "UseMapItems": false,
@@ -6507,7 +6667,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": false,
@@ -7064,7 +7224,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.HeldState"
 },
 "UseMapItems": false,
@@ -7080,7 +7240,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.UtilityState"
 },
 "UseMapItems": false,
@@ -7096,7 +7256,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.DrinkState"
 },
 "UseMapItems": false,
@@ -7112,7 +7272,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": false,
@@ -7669,7 +7829,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.HeldState"
 },
 "UseMapItems": false,
@@ -7685,7 +7845,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.UtilityState"
 },
 "UseMapItems": false,
@@ -7701,7 +7861,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.DrinkState"
 },
 "UseMapItems": false,
@@ -7717,7 +7877,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": false,
@@ -8274,7 +8434,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.HeldState"
 },
 "UseMapItems": false,
@@ -8290,7 +8450,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.UtilityState"
 },
 "UseMapItems": false,
@@ -8306,7 +8466,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.DrinkState"
 },
 "UseMapItems": false,
@@ -8322,7 +8482,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": false,
@@ -8366,7 +8526,12 @@
 }
 },
 {
-"$type": "RogueEssence.LevelGen.FloorNameIDZoneStep, RogueEssence",
+"$type": "PMDC.LevelGen.FloorNameDropZoneStep, PMDC",
+"DropPriority": {
+"str": [
+-15
+]
+},
 "Name": {
 "DefaultText": "Forsaken Desert\n{0}F",
 "LocalTexts": {}
@@ -8394,7 +8559,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.6.8.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -9592,7 +9757,6 @@
 },
 "ID": "trap_trip",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -9610,7 +9774,6 @@
 },
 "ID": "trap_mud",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -9628,7 +9791,6 @@
 },
 "ID": "trap_seal",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -9646,7 +9808,6 @@
 },
 "ID": "trap_sticky",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -9664,7 +9825,6 @@
 },
 "ID": "trap_self_destruct",
 "Revealed": false,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -9682,7 +9842,6 @@
 },
 "ID": "trap_hunger",
 "Revealed": true,
-"Danger": false,
 "Owner": 0,
 "TileStates": []
 },
@@ -9696,6 +9855,539 @@
 }
 ],
 "IsRelevant": true
+},
+{
+"$type": "RogueEssence.LevelGen.LayeredSegment, RogueEssence",
+"Floors": [
+{
+"$type": "RogueEssence.LevelGen.LoadGen, RogueEssence",
+"GenSteps": [
+{
+"Key": {
+"str": [
+-6,
+-1
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.MappedRoomStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
+"MapID": "secret_forsaken_desert"
+}
+},
+{
+"Key": {
+"str": [
+5,
+1
+]
+},
+"Value": {
+"$type": "RogueElements.SpecificSpawnStep`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"SpawnLocs": [
+{
+"X": 6,
+"Y": 8
+},
+{
+"X": 2,
+"Y": 6
+},
+{
+"X": 10,
+"Y": 6
+},
+{
+"X": 2,
+"Y": 11
+},
+{
+"X": 10,
+"Y": 11
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueElements.RandBag`1[[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_eevee_02",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_eevee_05",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_eevee_08",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_eevee_11",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_eevee_14",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_eevee_17",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_eevee_20",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_eevee_23",
+"Amount": 0,
+"Price": 0
+}
+],
+"RemoveOnRoll": false
+},
+{
+"$type": "RogueElements.RandBag`1[[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_bulbasaur_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_charmander_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_squirtle_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_pikachu_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_chikorita_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_cyndaquil_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_totodile_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_treecko_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_torchic_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_mudkip_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_turtwig_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_chimchar_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_piplup_01",
+"Amount": 0,
+"Price": 0
+}
+],
+"RemoveOnRoll": false
+},
+{
+"$type": "RogueElements.RandBag`1[[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_bulbasaur_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_charmander_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_squirtle_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_pikachu_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_chikorita_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_cyndaquil_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_totodile_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_treecko_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_torchic_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_mudkip_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_turtwig_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_chimchar_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_piplup_01",
+"Amount": 0,
+"Price": 0
+}
+],
+"RemoveOnRoll": false
+},
+{
+"$type": "RogueElements.RandBag`1[[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_bulbasaur_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_charmander_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_squirtle_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_pikachu_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_chikorita_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_cyndaquil_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_totodile_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_treecko_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_torchic_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_mudkip_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_turtwig_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_chimchar_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_piplup_01",
+"Amount": 0,
+"Price": 0
+}
+],
+"RemoveOnRoll": false
+},
+{
+"$type": "RogueElements.RandBag`1[[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_bulbasaur_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_charmander_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_squirtle_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_pikachu_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_chikorita_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_cyndaquil_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_totodile_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_treecko_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_torchic_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_mudkip_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_turtwig_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_chimchar_01",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_deluxe",
+"Cursed": false,
+"HiddenValue": "xcl_family_piplup_01",
+"Amount": 0,
+"Price": 0
+}
+],
+"RemoveOnRoll": false
+}
+]
+}
+}
+}
+}
+]
+}
+],
+"ZoneSteps": [
+{
+"$type": "PMDC.LevelGen.FloorNameDropZoneStep, PMDC",
+"DropPriority": {
+"str": [
+-15
+]
+},
+"Name": {
+"DefaultText": "Secret Room",
+"LocalTexts": {}
+},
+"Priority": {
+"str": [
+-6
+]
+}
+}
+],
+"IsRelevant": false
 }
 ],
 "GroundMaps": []

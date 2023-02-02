@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.7.0",
+"Version": "0.6.9.0",
 "Object": {
 "$type": "RogueEssence.Data.StatusData, RogueEssence",
 "Name": {
@@ -40,6 +40,10 @@
 {
 "$type": "PMDC.Dungeon.AttackedThisTurnState, PMDC",
 "Attacked": false
+},
+{
+"$type": "PMDC.Dungeon.WalkedThisTurnState, PMDC",
+"Walked": false
 }
 ],
 "OnSkillChanges": [],
@@ -242,13 +246,36 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.PoisonSingleEvent, PMDC",
-"Toxic": false
+"$type": "PMDC.Dungeon.PoisonEndEvent, PMDC",
+"Toxic": false,
+"ReducedDamage": true
 }
 }
 ],
 "OnMapTurnEnds": [],
-"OnWalks": [],
+"OnWalks": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.PoisonSingleEvent, PMDC",
+"Toxic": false
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.WalkedThisTurnEvent, PMDC"
+}
+}
+],
 "OnDeaths": [],
 "OnRefresh": [],
 "BeforeTryActions": [],

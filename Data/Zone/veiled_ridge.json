@@ -12915,6 +12915,77 @@
 }
 }
 ]
+},
+{
+"$type": "RogueEssence.LevelGen.LoadGen, RogueEssence",
+"GenSteps": [
+{
+"Key": {
+"str": [
+-6,
+-1
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.MappedRoomStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
+"MapID": "end_veiled_ridge"
+}
+},
+{
+"Key": {
+"str": [
+4
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.MapTextureStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
+"GroundTileset": "rock_path_tds_floor",
+"BlockTileset": "rock_path_tds_wall",
+"WaterTileset": "rock_path_tds_secondary",
+"LayeredGround": false,
+"IndependentGround": false,
+"GroundElement": "dark"
+}
+},
+{
+"Key": {
+"str": [
+5,
+1
+]
+},
+"Value": {
+"$type": "RogueElements.SpecificSpawnStep`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"SpawnLocs": [
+{
+"X": 7,
+"Y": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueElements.RandBag`1[[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"ID": "box_glittery",
+"Cursed": false,
+"HiddenValue": "loot_nugget",
+"Amount": 0,
+"Price": 0
+}
+],
+"RemoveOnRoll": false
+}
+]
+}
+}
+}
+}
+]
 }
 ],
 "ZoneSteps": [

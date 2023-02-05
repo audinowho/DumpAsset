@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.7.0",
+"Version": "0.6.9.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -31,15 +31,23 @@
 }
 },
 "Released": true,
-"Comment": "No Anim\r\nneeds a better anim + a sound",
+"Comment": "",
 "IndexNum": 307,
 "BaseCharges": 5,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AreaAction, RogueEssence",
+"$type": "RogueEssence.Dungeon.ProjectileAction, RogueEssence",
+"Anim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
 "Emitter": {
-"$type": "RogueEssence.Content.CircleSquareAreaEmitter, RogueEssence",
-"LocHeight": 8,
+"$type": "RogueEssence.Content.AttachAreaEmitter, RogueEssence",
 "Anims": [
 {
 "$type": "RogueEssence.Content.StaticAnim, RogueEssence",
@@ -57,36 +65,80 @@
 "FrameOffset": 0
 }
 ],
-"ParticlesPerTile": 2.0,
-"RangeDiff": 0,
+"Range": 6,
+"ParticlesPerBurst": 2,
+"AddHeight": 4,
+"BurstTime": 10,
 "Layer": 2
 },
-"HitTiles": true,
-"BurstTiles": 0,
-"HitArea": 0,
-"Range": 2,
-"Speed": 6,
+"StreamEmitter": {
+"$type": "RogueEssence.Content.EmptyShootingEmitter, RogueEssence",
+"LocHeight": 0
+},
+"Rays": 4,
+"Speed": 3,
+"Boomerang": false,
+"ItemSprite": "",
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 36
+"ActionType": 7
 },
+"HitTiles": true,
+"Range": 2,
+"StopAtHit": true,
+"StopAtWall": true,
 "TargetAlignments": 4,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"PreActions": [],
-"ActionFX": {
-"Delay": 0,
-"Sound": "",
+"PreActions": [
+{
+"Delay": 10,
+"Sound": "_UNK_DUN_Energy",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.FiniteAreaEmitter, RogueEssence",
+"LocHeight": 32,
+"Anims": [
+{
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Sacred_Fire_Pillar",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Range": 16,
+"Speed": 48,
+"TotalParticles": 6,
+"Layer": 2
 },
 "ScreenMovement": {
 "MinShake": 0,
 "MaxShake": 0,
 "MaxShakeTime": 0
+}
+}
+],
+"ActionFX": {
+"Delay": 0,
+"Sound": "DUN_Blast_Burn",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 2,
+"MaxShake": 4,
+"MaxShakeTime": 10
 }
 },
 "LagBehindTime": 0

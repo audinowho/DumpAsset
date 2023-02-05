@@ -25522,7 +25522,7 @@
 "Spawns": [
 {
 "Spawn": {
-"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueEssence",
+"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence]], RogueElements]], RogueEssence",
 "Priority": {
 "str": [
 4,
@@ -25530,9 +25530,9 @@
 ]
 },
 "Item": {
-"$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Spawn": {
-"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Picker": {
 "$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "ToSpawn": [
@@ -25574,10 +25574,9 @@
 "SpreadPlan": {
 "$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
 "Quota": {
-"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
+"$type": "RogueElements.RandRange, RogueElements",
 "Min": 1,
-"Max": 8,
-"Rate": 70
+"Max": 1
 },
 "Replaceable": false,
 "FloorRange": {
@@ -25624,6 +25623,57 @@
 "Name": {
 "DefaultText": "Secret Room",
 "LocalTexts": {}
+}
+}
+},
+{
+"Key": {
+"str": [
+-6
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.MapEffectStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
+"Effect": {
+"UniversalStates": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeExplosions": [],
+"BeforeHits": [],
+"OnHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"ElementEffects": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [
+{
+"Key": {
+"str": [
+-15
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FadeTitleEvent, PMDC"
+}
+}
+],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"OnMapRefresh": [],
+"ModifyHPs": [],
+"RestoreHPs": [],
+"InitActionData": []
 }
 }
 },

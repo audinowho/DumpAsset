@@ -67,6 +67,12 @@ SV.missions =
   FinishedMissions = { },
 }
 
+SV.magnagate =
+{
+  cards = 0,
+  portal = false
+}
+
 SV.shimmer_bay = 
 {
   TookTreasure  = false

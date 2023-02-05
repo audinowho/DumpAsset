@@ -14,6 +14,13 @@ MapEffectStepType = luanet.import_type('RogueEssence.LevelGen.MapEffectStep`1')
 MapGenContextType = luanet.import_type('RogueEssence.LevelGen.ListMapGenContext')
 EntranceType = luanet.import_type('RogueEssence.LevelGen.MapGenEntrance')
 
+
+function ZONE_GEN_SCRIPT.Mysteriosity(zoneContext, context, queue, seed, args)
+  PrintInfo("Test")
+end
+
+
+
 function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed, args)
   -- choose a the floor to spawn it on
   local destinationFloor = false
@@ -97,6 +104,28 @@ end
 
 
 FLOOR_GEN_SCRIPT = {}
+
+
+PresetPickerType = luanet.import_type('RogueElements.PresetPicker`1')
+EffectTileType = luanet.import_type('RogueEssence.Dungeon.EffectTile')
+TempTileStepType = luanet.import_type('PMDC.LevelGen.TempTileStep`1')
+
+function FLOOR_GEN_SCRIPT.Mysteriosity(map, args)
+  local total_chance = 0
+  if SV.magnagate.cards > 0 then
+    total_chance = args.BaseChance + SV.magnagate.cards * 5
+  end
+  if map.Rand:Next(100) < total_chance then
+	local secretTile = RogueEssence.Dungeon.EffectTile("tile_mystery", true)
+	secretTile.TileStates:Set(PMDC.Dungeon.DestState(RogueEssence.Dungeon.SegLoc(args.SegDiff, 0), true))
+	local picker = LUA_ENGINE:MakeGenericType( PresetPickerType, { EffectTileType }, { secretTile })
+	local trapStep = LUA_ENGINE:MakeGenericType( TempTileStepType, { MapGenContextType }, { picker, "mysterious_distortion" })
+	trapStep.TileFilters:Add(PMDC.LevelGen.RoomFilterConnectivity(PMDC.LevelGen.ConnectivityRoom.Connectivity.Main))
+	trapStep.TileFilters:Add(RogueElements.RoomFilterComponent(true, PMDC.LevelGen.BossRoom()))
+	trapStep:Apply(map)
+  end
+  
+end
 
 RoomGenBlockedType = luanet.import_type('RogueElements.RoomGenBlocked`1')
 RoomGenEvoType = luanet.import_type('PMDC.LevelGen.RoomGenEvo`1')

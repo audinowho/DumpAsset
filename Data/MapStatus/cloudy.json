@@ -7,7 +7,7 @@
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "",
+"DefaultText": "Moves of all types are weakened, except the Normal-type.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -19,7 +19,7 @@
 "finished": false,
 "Offset": 0,
 "Anim": {
-"AnimIndex": "Clouds_Overhead",
+"AnimIndex": "Fog",
 "FrameTime": 1,
 "StartFrame": -1,
 "EndFrame": -1,
@@ -29,13 +29,21 @@
 },
 "Movement": {
 "X": -20,
-"Y": 20
+"Y": -20
 },
 "Layer": 4,
-"Color": "59, 59, 59, 59"
+"Color": "32, 32, 32, 100"
 },
 "DefaultHidden": false,
-"StatusStates": [],
+"StatusStates": [
+{
+"$type": "RogueEssence.Dungeon.MapWeatherState, RogueEssence"
+},
+{
+"$type": "RogueEssence.Dungeon.MapCountDownState, RogueEssence",
+"Counter": 50
+}
+],
 "OnMapRefresh": [],
 "RepeatMethod": {
 "$type": "PMDC.Dungeon.MapStatusRefreshEvent, PMDC"
@@ -77,18 +85,105 @@
 "BeforeStatusAdds": [],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
-"OnMapStatusAdds": [],
-"OnMapStatusRemoves": [],
+"OnMapStatusAdds": [
+{
+"Key": {
+"str": [
+-5
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.ReplaceStatusGroupEvent, PMDC",
+"States": [
+{
+"assembly": "RogueEssence, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null",
+"type": "RogueEssence.Dungeon.MapWeatherState"
+}
+],
+"Msg": false
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MapStatusSoundEvent, PMDC",
+"Sound": "DUN_Cloudy"
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MapStatusBattleLogEvent, PMDC",
+"Message": {
+"Key": "MSG_CLOUDY_START"
+},
+"Delay": true
+}
+}
+],
+"OnMapStatusRemoves": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MapStatusBattleLogEvent, PMDC",
+"Message": {
+"Key": "MSG_CLOUDY_END"
+},
+"Delay": true
+}
+}
+],
 "OnMapStarts": [],
 "OnTurnStarts": [],
 "OnTurnEnds": [],
-"OnMapTurnEnds": [],
+"OnMapTurnEnds": [
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MapStatusCountDownEvent, PMDC"
+}
+}
+],
 "OnWalks": [],
 "OnDeaths": [],
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [],
+"OnActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MultiplyNotElementEvent, PMDC",
+"NotMultElement": [
+"normal"
+],
+"Numerator": 3,
+"Denominator": 4,
+"Anims": [],
+"Msg": false
+}
+}
+],
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],

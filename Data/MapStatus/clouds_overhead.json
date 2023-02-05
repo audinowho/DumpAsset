@@ -3,14 +3,14 @@
 "Object": {
 "$type": "RogueEssence.Data.MapStatusData, RogueEssence",
 "Name": {
-"DefaultText": "Fog",
+"DefaultText": "Clouds Overhead",
 "LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "CarryOver": false,
 "Emitter": {
@@ -19,8 +19,8 @@
 "finished": false,
 "Offset": 0,
 "Anim": {
-"AnimIndex": "Fog",
-"FrameTime": 3,
+"AnimIndex": "Clouds_Overhead",
+"FrameTime": 1,
 "StartFrame": -1,
 "EndFrame": -1,
 "AnimDir": -1,
@@ -28,22 +28,14 @@
 "AnimFlip": 0
 },
 "Movement": {
-"X": 0,
-"Y": 0
+"X": -20,
+"Y": 20
 },
 "Layer": 4,
-"Color": "51, 51, 51, 102"
+"Color": "59, 59, 59, 59"
 },
 "DefaultHidden": false,
-"StatusStates": [
-{
-"$type": "RogueEssence.Dungeon.MapWeatherState, RogueEssence"
-},
-{
-"$type": "RogueEssence.Dungeon.MapCountDownState, RogueEssence",
-"Counter": 50
-}
-],
+"StatusStates": [],
 "OnMapRefresh": [],
 "RepeatMethod": {
 "$type": "PMDC.Dungeon.MapStatusRefreshEvent, PMDC"
@@ -85,70 +77,12 @@
 "BeforeStatusAdds": [],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
-"OnMapStatusAdds": [
-{
-"Key": {
-"str": [
--5
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.ReplaceStatusGroupEvent, PMDC",
-"States": [
-{
-"assembly": "RogueEssence, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null",
-"type": "RogueEssence.Dungeon.MapWeatherState"
-}
-],
-"Msg": false
-}
-},
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.MapStatusBattleLogEvent, PMDC",
-"Message": {
-"Key": "MSG_FOG_START"
-},
-"Delay": true
-}
-}
-],
-"OnMapStatusRemoves": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.MapStatusBattleLogEvent, PMDC",
-"Message": {
-"Key": "MSG_FOG_END"
-},
-"Delay": true
-}
-}
-],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
 "OnMapStarts": [],
 "OnTurnStarts": [],
 "OnTurnEnds": [],
-"OnMapTurnEnds": [
-{
-"Key": {
-"str": [
-5
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.MapStatusCountDownEvent, PMDC"
-}
-}
-],
+"OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
 "OnRefresh": [],

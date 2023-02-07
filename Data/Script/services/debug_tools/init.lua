@@ -162,6 +162,38 @@ function DebugTools:OnUpgrade()
   PrintInfo("=>> Loaded version")
 end
 
+--[[---------------------------------------------------------------
+    DebugTools:OnLossPenalty()
+      Called when the player fails a dungeon in main progress
+  ---------------------------------------------------------------]]
+function DebugTools:OnLossPenalty(save) 
+  assert(self, 'DebugTools:OnLossPenalty() : self is null!')
+ 
+  --remove money
+  save.ActiveTeam.Money = 0
+  local inv_count = save.ActiveTeam:GetInvCount() - 1
+
+  --remove bag items
+  for i = inv_count, 0, -1 do
+    local entry = _DATA:GetItem(save.ActiveTeam:GetInv(i).ID)
+    if not entry.CannotDrop then
+      save.ActiveTeam:RemoveFromInv(i);
+    end
+  end
+  
+  --remove equips
+  local player_count = GAME:GetPlayerPartyCount()
+  for i = 0, player_count - 1, 1 do 
+    local player = GAME:GetPlayerPartyMember(i)
+    if player.EquippedItem.ID ~= '' and player.EquippedItem.ID ~= nil then 
+      local entry = _DATA:GetItem(player.EquippedItem.ID);
+      if not entry.CannotDrop then
+         player:DequipItem();
+      end
+    end
+  end
+end
+
 ---Summary
 -- Subscribe to all channels this service wants callbacks from
 function DebugTools:Subscribe(med)
@@ -169,6 +201,7 @@ function DebugTools:Subscribe(med)
   med:Subscribe("DebugTools", EngineServiceEvents.Deinit,              function() self.OnDeinit(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.NewGame,        function() self.OnNewGame(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.UpgradeSave,        function() self.OnUpgrade(self) end )
+  med:Subscribe("DebugTools", EngineServiceEvents.LossPenalty,        function(_, args) self.OnLossPenalty(self, args[0]) end )
 --  med:Subscribe("DebugTools", EngineServiceEvents.GraphicsUnload,      function() self.OnGraphicsUnload(self) end )
 --  med:Subscribe("DebugTools", EngineServiceEvents.Restart,             function() self.OnRestart(self) end )
 end

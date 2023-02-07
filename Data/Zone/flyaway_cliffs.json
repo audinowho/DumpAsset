@@ -7556,6 +7556,20 @@
 "Min": 0,
 "Max": 10
 }
+},
+{
+"Spawn": {
+"ID": "key",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0
+},
+"Rate": 5,
+"Range": {
+"Min": 0,
+"Max": 10
+}
 }
 ],
 "SpawnRates": {
@@ -7997,46 +8011,6 @@
 "Spawn": {
 "Spawn": {
 "BaseForm": {
-"Species": "hoppip",
-"Form": 0,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 16,
-"Max": 16
-},
-"SpecifiedSkills": [
-"tail_whip",
-"splash",
-"synthesis"
-],
-"Intrinsic": "",
-"Tactic": "wander_dumb",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 3,
-"Remove": false
-}
-]
-},
-"Role": 1
-},
-"Rate": 10,
-"Range": {
-"Min": 2,
-"Max": 10
-}
-},
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
 "Species": "lickitung",
 "Form": 0,
 "Skin": "",
@@ -8197,12 +8171,13 @@
 "Gender": -1
 },
 "Level": {
-"Min": 20,
-"Max": 20
+"Min": 25,
+"Max": 25
 },
 "SpecifiedSkills": [
 "aerial_ace",
-"knock_off"
+"knock_off",
+"poison_jab"
 ],
 "Intrinsic": "defiant",
 "Tactic": "wander_dumb",
@@ -8213,8 +8188,25 @@
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 2,
+"StartAt": 3,
 "Remove": false
+},
+{
+"$type": "RogueEssence.LevelGen.MobSpawnStatus, RogueEssence",
+"Statuses": [
+{
+"Spawn": {
+"ID": "sleep",
+"StatusStates": [
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": -1
+}
+]
+},
+"Rate": 10
+}
+]
 }
 ]
 },
@@ -8353,7 +8345,80 @@
 }
 }
 ],
-"SpecificSpawns": []
+"SpecificSpawns": [
+{
+"Spawn": {
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "hoppip",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 16,
+"Max": 16
+},
+"SpecifiedSkills": [
+"tail_whip",
+"splash",
+"synthesis"
+],
+"Intrinsic": "",
+"Tactic": "wander_dumb",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 3,
+"Remove": false
+}
+]
+},
+{
+"BaseForm": {
+"Species": "hoppip",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 16,
+"Max": 16
+},
+"SpecifiedSkills": [
+"tail_whip",
+"splash",
+"synthesis"
+],
+"Intrinsic": "",
+"Tactic": "wander_dumb",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 3,
+"Remove": false
+}
+]
+}
+]
+},
+"Rate": 20,
+"Range": {
+"Min": 0,
+"Max": 6
+}
+}
+]
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",

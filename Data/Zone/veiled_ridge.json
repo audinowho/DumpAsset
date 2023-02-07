@@ -12934,6 +12934,17 @@
 {
 "Key": {
 "str": [
+-6
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.MapTimeLimitStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], PMDC",
+"TimeLimit": 600
+}
+},
+{
+"Key": {
+"str": [
 4
 ]
 },
@@ -14965,6 +14976,39 @@
 "$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
 "StartAt": 2,
 "Remove": false
+},
+{
+"$type": "RogueEssence.LevelGen.MobSpawnStatus, RogueEssence",
+"Statuses": [
+{
+"Spawn": {
+"ID": "sleep",
+"StatusStates": [
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": -1
+}
+]
+},
+"Rate": 10
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnItem, PMDC",
+"Items": [
+{
+"Spawn": {
+"ID": "loot_pearl",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0
+},
+"Rate": 10
+}
+],
+"MapStartOnly": true
 }
 ]
 },
@@ -22653,6 +22697,78 @@
 "Spawn": {
 "Spawn": {
 "BaseForm": {
+"Species": "absol",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 33,
+"Max": 33
+},
+"SpecifiedSkills": [
+"future_sight",
+"night_slash"
+],
+"Intrinsic": "",
+"Tactic": "wander_dumb",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+},
+{
+"$type": "RogueEssence.LevelGen.MobSpawnStatus, RogueEssence",
+"Statuses": [
+{
+"Spawn": {
+"ID": "sleep",
+"StatusStates": [
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": -1
+}
+]
+},
+"Rate": 10
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnItem, PMDC",
+"Items": [
+{
+"Spawn": {
+"ID": "gummi_black",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0
+},
+"Rate": 10
+}
+],
+"MapStartOnly": true
+}
+]
+},
+"Role": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 6
+}
+},
+{
+"Spawn": {
+"Spawn": {
+"BaseForm": {
 "Species": "mightyena",
 "Form": 0,
 "Skin": "",
@@ -22770,6 +22886,78 @@
 "Spawn": {
 "Spawn": {
 "BaseForm": {
+"Species": "masquerain",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 30,
+"Max": 30
+},
+"SpecifiedSkills": [
+"ominous_wind",
+"stun_spore"
+],
+"Intrinsic": "",
+"Tactic": "wander_dumb",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+},
+{
+"$type": "RogueEssence.LevelGen.MobSpawnStatus, RogueEssence",
+"Statuses": [
+{
+"Spawn": {
+"ID": "sleep",
+"StatusStates": [
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": -1
+}
+]
+},
+"Rate": 10
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnItem, PMDC",
+"Items": [
+{
+"Spawn": {
+"ID": "gummi_green",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0
+},
+"Rate": 10
+}
+],
+"MapStartOnly": true
+}
+]
+},
+"Role": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 6
+}
+},
+{
+"Spawn": {
+"Spawn": {
+"BaseForm": {
 "Species": "sneasel",
 "Form": 0,
 "Skin": "",
@@ -22833,6 +23021,39 @@
 "$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
 "StartAt": 2,
 "Remove": false
+},
+{
+"$type": "RogueEssence.LevelGen.MobSpawnStatus, RogueEssence",
+"Statuses": [
+{
+"Spawn": {
+"ID": "sleep",
+"StatusStates": [
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": -1
+}
+]
+},
+"Rate": 10
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnItem, PMDC",
+"Items": [
+{
+"Spawn": {
+"ID": "loot_pearl",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 5,
+"Price": 0
+},
+"Rate": 10
+}
+],
+"MapStartOnly": true
 }
 ]
 },
@@ -22873,6 +23094,62 @@
 "$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
 "StartAt": 3,
 "Remove": false
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnItem, PMDC",
+"Items": [
+{
+"Spawn": {
+"ID": "held_toxic_orb",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 100
+},
+{
+"Spawn": {
+"ID": "held_flame_orb",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 100
+},
+{
+"Spawn": {
+"ID": "held_iron_ball",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 100
+},
+{
+"Spawn": {
+"ID": "held_ring_target",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 100
+},
+{
+"Spawn": {
+"ID": "held_choice_scarf",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 100
+}
+],
+"MapStartOnly": true
 }
 ]
 },
@@ -22894,13 +23171,14 @@
 "Gender": -1
 },
 "Level": {
-"Min": 57,
-"Max": 57
+"Min": 55,
+"Max": 55
 },
 "SpecifiedSkills": [
 "night_daze",
 "u_turn",
-"agility"
+"agility",
+"night_slash"
 ],
 "Intrinsic": "",
 "Tactic": "wander_normal",
@@ -22911,14 +23189,31 @@
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 3,
+"StartAt": 4,
 "Remove": false
+},
+{
+"$type": "RogueEssence.LevelGen.MobSpawnStatus, RogueEssence",
+"Statuses": [
+{
+"Spawn": {
+"ID": "sleep",
+"StatusStates": [
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": -1
 }
 ]
 },
-"Role": 0
+"Rate": 10
+}
+]
+}
+]
 },
-"Rate": 10,
+"Role": 3
+},
+"Rate": 5,
 "Range": {
 "Min": 0,
 "Max": 6

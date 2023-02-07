@@ -9229,6 +9229,86 @@
 ]
 },
 "Value": {
+"$type": "RogueEssence.LevelGen.PlaceDisconnectedMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"AcceptedTiles": [
+{
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "water",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Owner": 0,
+"TileStates": []
+}
+}
+],
+"Spawn": {
+"$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Picker": {
+"$type": "RogueEssence.LevelGen.SpecificTeamSpawner, RogueEssence",
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "dratini",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 25,
+"Max": 25
+},
+"SpecifiedSkills": [
+"twister",
+"dragon_rage"
+],
+"Intrinsic": "",
+"Tactic": "wander_dumb",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 3
+}
+},
+"Ally": false
+}
+},
+{
+"Key": {
+"str": [
+5,
+2
+]
+},
+"Value": {
 "$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Filters": [
 {
@@ -10133,6 +10213,86 @@
 "Max": 6
 }
 }
+}
+},
+{
+"Key": {
+"str": [
+5,
+2
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.PlaceDisconnectedMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"AcceptedTiles": [
+{
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "water",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Owner": 0,
+"TileStates": []
+}
+}
+],
+"Spawn": {
+"$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Picker": {
+"$type": "RogueEssence.LevelGen.SpecificTeamSpawner, RogueEssence",
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "dratini",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 25,
+"Max": 25
+},
+"SpecifiedSkills": [
+"twister",
+"dragon_rage"
+],
+"Intrinsic": "",
+"Tactic": "wander_dumb",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 3
+}
+},
+"Ally": false
 }
 },
 {
@@ -11503,7 +11663,7 @@
 "Spawn": {
 "Spawn": {
 "BaseForm": {
-"Species": "wailmer",
+"Species": "corphish",
 "Form": 0,
 "Skin": "",
 "Gender": -1
@@ -11513,8 +11673,8 @@
 "Max": 25
 },
 "SpecifiedSkills": [
-"whirlpool",
-"astonish"
+"knock_off",
+"bubble"
 ],
 "Intrinsic": "",
 "Tactic": "wander_dumb",
@@ -11674,7 +11834,13 @@
 ],
 "Intrinsic": "",
 "Tactic": "wander_dumb",
-"SpawnConditions": [],
+"SpawnConditions": [
+{
+"$type": "PMDC.LevelGen.MobCheckSaveVar, PMDC",
+"SaveVar": "shimmer_bay.TookTreasure",
+"Status": true
+}
+],
 "SpawnFeatures": [
 {
 "$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
@@ -11688,7 +11854,7 @@
 },
 "Role": 0
 },
-"Rate": 10,
+"Rate": 100,
 "Range": {
 "Min": 0,
 "Max": 12
@@ -11714,7 +11880,13 @@
 ],
 "Intrinsic": "",
 "Tactic": "wander_dumb",
-"SpawnConditions": [],
+"SpawnConditions": [
+{
+"$type": "PMDC.LevelGen.MobCheckSaveVar, PMDC",
+"SaveVar": "shimmer_bay.TookTreasure",
+"Status": true
+}
+],
 "SpawnFeatures": [
 {
 "$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
@@ -11728,7 +11900,7 @@
 },
 "Role": 0
 },
-"Rate": 10,
+"Rate": 100,
 "Range": {
 "Min": 0,
 "Max": 12
@@ -11754,7 +11926,13 @@
 ],
 "Intrinsic": "",
 "Tactic": "wander_dumb",
-"SpawnConditions": [],
+"SpawnConditions": [
+{
+"$type": "PMDC.LevelGen.MobCheckSaveVar, PMDC",
+"SaveVar": "shimmer_bay.TookTreasure",
+"Status": true
+}
+],
 "SpawnFeatures": [
 {
 "$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
@@ -11768,86 +11946,7 @@
 },
 "Role": 0
 },
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 12
-}
-},
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
-"Species": "dratini",
-"Form": 0,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 25,
-"Max": 25
-},
-"SpecifiedSkills": [
-"twister",
-"dragon_rage"
-],
-"Intrinsic": "",
-"Tactic": "wander_dumb",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 2,
-"Remove": false
-}
-]
-},
-"Role": 0
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 12
-}
-},
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
-"Species": "vaporeon",
-"Form": 0,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 40,
-"Max": 40
-},
-"SpecifiedSkills": [
-"aqua_ring",
-"acid_armor",
-"muddy_water"
-],
-"Intrinsic": "",
-"Tactic": "wander_normal",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 3,
-"Remove": false
-}
-]
-},
-"Role": 0
-},
-"Rate": 10,
+"Rate": 100,
 "Range": {
 "Min": 0,
 "Max": 12
@@ -11877,7 +11976,7 @@
 {
 "$type": "PMDC.LevelGen.MobCheckSaveVar, PMDC",
 "SaveVar": "shimmer_bay.TookTreasure",
-"Negate": false
+"Status": true
 }
 ],
 "SpawnFeatures": [
@@ -11893,7 +11992,7 @@
 },
 "Role": 0
 },
-"Rate": 10,
+"Rate": 100,
 "Range": {
 "Min": 0,
 "Max": 12
@@ -12015,6 +12114,122 @@
 }
 }
 ]
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadStepRangeZoneStep, RogueEssence",
+"Spawns": [
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements]], RogueEssence",
+"Priority": {
+"str": [
+5,
+2
+]
+},
+"Item": {
+"$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Filters": [],
+"ClumpFactor": 0,
+"Spawn": {
+"$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Picker": {
+"$type": "RogueEssence.LevelGen.SpecificTeamSpawner, RogueEssence",
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "vaporeon",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 40,
+"Max": 40
+},
+"SpecifiedSkills": [
+"aqua_ring",
+"acid_armor",
+"muddy_water"
+],
+"Intrinsic": "",
+"Tactic": "wander_normal",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 3,
+"Remove": false
+},
+{
+"$type": "RogueEssence.LevelGen.MobSpawnStatus, RogueEssence",
+"Statuses": [
+{
+"Spawn": {
+"ID": "sleep",
+"StatusStates": [
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": -1
+}
+]
+},
+"Rate": 10
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnItem, PMDC",
+"Items": [
+{
+"Spawn": {
+"ID": "held_shell_bell",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10
+}
+],
+"MapStartOnly": true
+}
+]
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 1
+}
+},
+"Ally": false
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+}
+],
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
+"Min": 0,
+"Max": 1,
+"Rate": 50
+},
+"Replaceable": false,
+"FloorRange": {
+"Min": 0,
+"Max": 11
+}
+},
+"ModStates": []
 },
 {
 "$type": "PMDC.LevelGen.SpreadHouseZoneStep, PMDC",

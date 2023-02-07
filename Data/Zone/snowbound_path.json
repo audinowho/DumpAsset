@@ -20397,44 +20397,6 @@
 "Min": 0,
 "Max": 6
 }
-},
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
-"Species": "glaceon",
-"Form": 0,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 60,
-"Max": 60
-},
-"SpecifiedSkills": [
-"blizzard"
-],
-"Intrinsic": "",
-"Tactic": "wander_normal",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 1,
-"Remove": false
-}
-]
-},
-"Role": 3
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 6
-}
 }
 ],
 "TeamSizes": [
@@ -20586,6 +20548,120 @@
 }
 }
 ]
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadStepRangeZoneStep, RogueEssence",
+"Spawns": [
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements]], RogueEssence",
+"Priority": {
+"str": [
+5,
+2
+]
+},
+"Item": {
+"$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Filters": [],
+"ClumpFactor": 0,
+"Spawn": {
+"$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Picker": {
+"$type": "RogueEssence.LevelGen.SpecificTeamSpawner, RogueEssence",
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "glaceon",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 60,
+"Max": 60
+},
+"SpecifiedSkills": [
+"blizzard"
+],
+"Intrinsic": "",
+"Tactic": "wander_normal",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 1,
+"Remove": false
+},
+{
+"$type": "RogueEssence.LevelGen.MobSpawnStatus, RogueEssence",
+"Statuses": [
+{
+"Spawn": {
+"ID": "sleep",
+"StatusStates": [
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": -1
+}
+]
+},
+"Rate": 10
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnItem, PMDC",
+"Items": [
+{
+"Spawn": {
+"ID": "held_choice_specs",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10
+}
+],
+"MapStartOnly": true
+}
+]
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 1
+}
+},
+"Ally": false
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 6
+}
+}
+],
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
+"Min": 0,
+"Max": 1,
+"Rate": 50
+},
+"Replaceable": false,
+"FloorRange": {
+"Min": 0,
+"Max": 5
+}
+},
+"ModStates": []
 },
 {
 "$type": "PMDC.LevelGen.SpreadHouseZoneStep, PMDC",

@@ -9016,6 +9016,17 @@
 {
 "Key": {
 "str": [
+-6
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.MapTimeLimitStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], PMDC",
+"TimeLimit": 600
+}
+},
+{
+"Key": {
+"str": [
 4
 ]
 },
@@ -10587,8 +10598,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 20,
-"Max": 20
+"Min": 22,
+"Max": 22
 },
 "SpecifiedSkills": [
 "horn_attack",
@@ -10605,6 +10616,23 @@
 "$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
 "StartAt": 2,
 "Remove": false
+},
+{
+"$type": "RogueEssence.LevelGen.MobSpawnStatus, RogueEssence",
+"Statuses": [
+{
+"Spawn": {
+"ID": "sleep",
+"StatusStates": [
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": -1
+}
+]
+},
+"Rate": 10
+}
+]
 }
 ]
 },
@@ -15170,7 +15198,7 @@
 },
 {
 "Spawn": {
-"ID": "food_apple_big",
+"ID": "food_banana",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,
@@ -16345,46 +16373,6 @@
 "Spawn": {
 "Spawn": {
 "BaseForm": {
-"Species": "leafeon",
-"Form": 0,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 50,
-"Max": 50
-},
-"SpecifiedSkills": [
-"leaf_blade",
-"aerial_ace",
-"x_scissor"
-],
-"Intrinsic": "",
-"Tactic": "wander_normal",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 3,
-"Remove": false
-}
-]
-},
-"Role": 0
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 4
-}
-},
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
 "Species": "pineco",
 "Form": 0,
 "Skin": "",
@@ -16400,45 +16388,6 @@
 ],
 "Intrinsic": "",
 "Tactic": "turret",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 2,
-"Remove": false
-}
-]
-},
-"Role": 0
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 4
-}
-},
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
-"Species": "heracross",
-"Form": 0,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 20,
-"Max": 20
-},
-"SpecifiedSkills": [
-"horn_attack",
-"arm_thrust"
-],
-"Intrinsic": "",
-"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -16533,6 +16482,123 @@
 }
 }
 ]
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadStepRangeZoneStep, RogueEssence",
+"Spawns": [
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements]], RogueEssence",
+"Priority": {
+"str": [
+5,
+2
+]
+},
+"Item": {
+"$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Filters": [],
+"ClumpFactor": 0,
+"Spawn": {
+"$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Picker": {
+"$type": "RogueEssence.LevelGen.SpecificTeamSpawner, RogueEssence",
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "leafeon",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 40,
+"Max": 40
+},
+"SpecifiedSkills": [
+"leaf_blade",
+"aerial_ace",
+"x_scissor",
+"synthesis"
+],
+"Intrinsic": "",
+"Tactic": "wander_normal",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 4,
+"Remove": false
+},
+{
+"$type": "RogueEssence.LevelGen.MobSpawnStatus, RogueEssence",
+"Statuses": [
+{
+"Spawn": {
+"ID": "sleep",
+"StatusStates": [
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": -1
+}
+]
+},
+"Rate": 10
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnItem, PMDC",
+"Items": [
+{
+"Spawn": {
+"ID": "held_scope_lens",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10
+}
+],
+"MapStartOnly": true
+}
+]
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 1
+}
+},
+"Ally": false
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+}
+],
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
+"Min": 0,
+"Max": 1,
+"Rate": 50
+},
+"Replaceable": false,
+"FloorRange": {
+"Min": 0,
+"Max": 3
+}
+},
+"ModStates": []
 },
 {
 "$type": "PMDC.LevelGen.SpreadHouseZoneStep, PMDC",

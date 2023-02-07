@@ -6415,6 +6415,17 @@
 {
 "Key": {
 "str": [
+-6
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.MapTimeLimitStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], PMDC",
+"TimeLimit": 600
+}
+},
+{
+"Key": {
+"str": [
 4
 ]
 },
@@ -7658,45 +7669,6 @@
 "Spawn": {
 "Spawn": {
 "BaseForm": {
-"Species": "togedemaru",
-"Form": 0,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 24,
-"Max": 24
-},
-"SpecifiedSkills": [
-"rollout",
-"spark"
-],
-"Intrinsic": "",
-"Tactic": "wander_dumb",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 2,
-"Remove": false
-}
-]
-},
-"Role": 0
-},
-"Rate": 5,
-"Range": {
-"Min": 3,
-"Max": 7
-}
-},
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
 "Species": "grimer",
 "Form": 1,
 "Skin": "",
@@ -7890,17 +7862,17 @@
 "Spawn": {
 "Spawn": {
 "BaseForm": {
-"Species": "steelix",
+"Species": "lairon",
 "Form": 0,
 "Skin": "",
 "Gender": -1
 },
 "Level": {
-"Min": 28,
-"Max": 28
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
-"dragon_breath",
+"iron_head",
 "iron_tail"
 ],
 "Intrinsic": "",
@@ -7914,14 +7886,31 @@
 "$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
 "StartAt": 2,
 "Remove": false
+},
+{
+"$type": "RogueEssence.LevelGen.MobSpawnStatus, RogueEssence",
+"Statuses": [
+{
+"Spawn": {
+"ID": "sleep",
+"StatusStates": [
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": -1
+}
+]
+},
+"Rate": 10
+}
+]
 }
 ]
 },
 "Role": 0
 },
-"Rate": 5,
+"Rate": 10,
 "Range": {
-"Min": 7,
+"Min": 3,
 "Max": 11
 }
 }
@@ -15389,18 +15378,57 @@
 "Spawn": {
 "Spawn": {
 "BaseForm": {
-"Species": "steelix",
+"Species": "togedemaru",
 "Form": 0,
 "Skin": "",
 "Gender": -1
 },
 "Level": {
-"Min": 28,
-"Max": 28
+"Min": 24,
+"Max": 24
 },
 "SpecifiedSkills": [
-"dragon_breath",
-"iron_tail"
+"rollout",
+"spark"
+],
+"Intrinsic": "",
+"Tactic": "wander_dumb",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+},
+"Role": 0
+},
+"Rate": 5,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+},
+{
+"Spawn": {
+"Spawn": {
+"BaseForm": {
+"Species": "grimer",
+"Form": 1,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 26,
+"Max": 26
+},
+"SpecifiedSkills": [
+"bite",
+"poison_fang"
 ],
 "Intrinsic": "",
 "Tactic": "wander_dumb",
@@ -15467,18 +15495,18 @@
 "Spawn": {
 "Spawn": {
 "BaseForm": {
-"Species": "aron",
+"Species": "lairon",
 "Form": 0,
 "Skin": "",
 "Gender": -1
 },
 "Level": {
-"Min": 24,
-"Max": 24
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "iron_head",
-"harden"
+"iron_tail"
 ],
 "Intrinsic": "",
 "Tactic": "wander_dumb",
@@ -15491,6 +15519,23 @@
 "$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
 "StartAt": 2,
 "Remove": false
+},
+{
+"$type": "RogueEssence.LevelGen.MobSpawnStatus, RogueEssence",
+"Statuses": [
+{
+"Spawn": {
+"ID": "sleep",
+"StatusStates": [
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": -1
+}
+]
+},
+"Rate": 10
+}
+]
 }
 ]
 },
@@ -15521,7 +15566,78 @@
 }
 }
 ],
-"SpecificSpawns": []
+"SpecificSpawns": [
+{
+"Spawn": {
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "aron",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 24,
+"Max": 24
+},
+"SpecifiedSkills": [
+"iron_head",
+"harden"
+],
+"Intrinsic": "",
+"Tactic": "wander_dumb",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+},
+{
+"BaseForm": {
+"Species": "aron",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 24,
+"Max": 24
+},
+"SpecifiedSkills": [
+"iron_head",
+"harden"
+],
+"Intrinsic": "",
+"Tactic": "wander_dumb",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+}
+]
+},
+"Rate": 20,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+}
+]
 },
 {
 "$type": "RogueEssence.LevelGen.TileSpawnZoneStep, RogueEssence",

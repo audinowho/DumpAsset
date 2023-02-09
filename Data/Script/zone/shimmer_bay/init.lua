@@ -33,7 +33,7 @@ function shimmer_bay.ExitSegment(zone, result, rescue, segmentID, mapID)
   elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
-    --TODO: if they have the manaphy egg, REMOVE IT, and set the boolean to true
+    --if they have the manaphy egg, REMOVE IT, and set the boolean to true
 	local item_slot = GAME:FindPlayerItem("egg_mystery", true, true)
 	if item_slot:IsValid() then
 		if item_slot.IsEquipped then

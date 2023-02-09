@@ -37,7 +37,7 @@ function guild_hut.Card_Portal_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   --local dungeon_entrances = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40 }
-  local dungeon_entrances = { 'tropical_path', 'faded_trail', 'bramble_woods', 'faulted_cliffs', 'flyaway_cliffs', 'thunderstruck_pass', 'illusion_ridge', 'champions_road', 'sickly_hollow', 'guildmaster_trail', 'secret_garden' }
+  local dungeon_entrances = { 'tropical_path', 'faded_trail', 'bramble_woods', 'faultline_ridge' }
   local ground_entrances = { {Flag=true,Zone='guildmaster_island',ID=0,Entry=0} }
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end

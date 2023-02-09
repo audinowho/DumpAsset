@@ -46,6 +46,7 @@ function cliff_camp.BeginExposition()
   UI:WaitHideTitle(20);
   GAME:FadeIn(20)
   GAME:UnlockDungeon('flyaway_cliffs')
+  GAME:UnlockDungeon('fertile_valley')
 end
 --------------------------------------------------
 -- Objects Callbacks
@@ -55,12 +56,12 @@ function cliff_camp.East_Exit_Touch(obj, activator)
   UI:ResetSpeaker()
   UI:WaitShowDialogue(STRINGS:Format("You've reached the end of the demo![pause=0] A winner is you!"))
   
-  -- local dungeon_entrances = { 'flyaway_cliffs', 'igneous_tunnel', 'treacherous_mountain', 'snowbound_path' }
-  -- local ground_entrances = {{Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
-  -- {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
-  -- {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
-  -- {Flag=SV.guildmaster_summit.ExpositionComplete,Zone='guildmaster_island',ID=8,Entry=0}}
-  -- COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  local dungeon_entrances = { 'flyaway_cliffs', 'fertile_valley', 'wayward_wetlands', 'deserted_fortress', 'bravery_road', 'geode_underpass', 'the_sky' }
+  local ground_entrances = {{Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
+  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
+  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
+  {Flag=SV.guildmaster_summit.ExpositionComplete,Zone='guildmaster_island',ID=8,Entry=0}}
+  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
 function cliff_camp.West_Exit_Touch(obj, activator)
@@ -238,6 +239,55 @@ function cliff_camp.NPC_Sightseer_Action(chara, activator)
   GROUND:CharTurnToChar(chara, player)
   
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sightseer_Line_001']))
+end
+
+function cliff_camp.NPC_DexRater_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  UI:SetSpeaker(chara)
+  local player = CH('PLAYER')
+  GROUND:CharTurnToChar(chara, player)
+  
+  --Ring the bell, and your friends will gather, isn't that wonderful?
+  --How many kinds of Pokemon have you befriended?
+  --XX!  Wow!
+  --Let me show you a secret dungeon
+  --Let me give you this!
+  --If you get to XX, I'll give you something special~
+  
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Intro_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Check_001']))
+  
+  local dexCompletion = _DATA.Save:GetTotalMonsterUnlock(RogueEssence.Data.GameProgress.UnlockState.Completed)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Check_002'], dexCompletion))
+  
+  if SV.dex.CurrentRewardIdx < 1 then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Full_001']))
+  else 
+    while SV.dex.CurrentRewardIdx > 0 and dexCompletion >= SV.dex.RewardReqs[SV.dex.CurrentRewardIdx] do
+	  if SV.dex.CurrentRewardIdx == 1 then
+		UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Reward_001']))
+		COMMON.UnlockWithFanfare("lava_floe_island", false)
+	  elseif SV.dex.CurrentRewardIdx == 2 then
+		UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Reward_002']))
+		COMMON.UnlockWithFanfare("bravery_road", false)
+	  elseif SV.dex.CurrentRewardIdx == 3 then
+		UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Reward_003']))
+		COMMON.UnlockWithFanfare("labyrinth_of_the_lost", false)
+	  end
+      
+	  if SV.dex.CurrentRewardIdx < #SV.dex.RewardReqs then
+		SV.dex.CurrentRewardIdx = SV.dex.CurrentRewardIdx + 1
+	  else
+		SV.dex.CurrentRewardIdx = 0
+	  end
+	end
+	
+	if SV.dex.CurrentRewardIdx > 0 then
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Next_001'], SV.dex.RewardReqs[SV.dex.CurrentRewardIdx]))
+	end
+  end
+  
 end
 
 return cliff_camp

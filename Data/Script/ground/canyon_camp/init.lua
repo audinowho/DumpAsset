@@ -60,7 +60,9 @@ function canyon_camp.BeginExposition()
   UI:WaitHideTitle(20);
   GAME:FadeIn(20)
   
+  GAME:UnlockDungeon('copper_quarry')
   GAME:UnlockDungeon('forsaken_desert')
+  GAME:UnlockDungeon('sleeping_caldera')
 end
 
 --------------------------------------------------
@@ -69,7 +71,7 @@ end
 function canyon_camp.East_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local dungeon_entrances = { 'thunderstruck_pass', 'lunar_range', 'forsaken_desert', 'relic_tower' }
+  local dungeon_entrances = { 'copper_quarry', 'forsaken_desert', 'relic_tower', 'thunderstruck_pass', 'sleeping_caldera', 'royal_halls', 'starfall_heights', 'wisdom_road', 'sacred_tower'}
   local ground_entrances = {{Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
   {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
   {Flag=SV.guildmaster_summit.ExpositionComplete,Zone='guildmaster_island',ID=8,Entry=0}}

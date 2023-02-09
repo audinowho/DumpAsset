@@ -34,6 +34,8 @@ function copper_quarry.ExitSegment(zone, result, rescue, segmentID, mapID)
   else
     if segmentID == 0 then
       COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 5, 0)
+    elseif segmentID == 1 then
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 6, 3)
     else
       PrintInfo("No exit procedure found!")
 	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

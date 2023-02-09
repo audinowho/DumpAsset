@@ -35,7 +35,7 @@ function faded_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
     if segmentID == 0 then
       COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 4, 0)
     elseif segmentID == 1 then
-      COMMON.UnlockWithFanfare('faulted_cliffs', true)
+      COMMON.UnlockWithFanfare('faultline_ridge', true)
       COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 1, 3)
     else
       PrintInfo("No exit procedure found!")

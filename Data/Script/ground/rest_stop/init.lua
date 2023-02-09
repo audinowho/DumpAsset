@@ -44,6 +44,7 @@ function rest_stop.BeginExposition()
   GAME:FadeIn(20)
   
   GAME:UnlockDungeon('illusion_ridge')
+  GAME:UnlockDungeon('snowbound_path')
 end
 
 --------------------------------------------------
@@ -52,7 +53,7 @@ end
 function rest_stop.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local dungeon_entrances = { 'illusion_ridge' }
+  local dungeon_entrances = { 'veiled_ridge', 'snowbound_path', 'treacherous_mountain', 'hope_road', 'cave_of_whispers' }
   --also dungeon 21: royal halls, is accessible by ???
   --also dungeon 22: cave of solace, is accessible by having 8 key items
   local ground_entrances = {{Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},

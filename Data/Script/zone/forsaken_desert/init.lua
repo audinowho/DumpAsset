@@ -33,7 +33,10 @@ function forsaken_desert.ExitSegment(zone, result, rescue, segmentID, mapID)
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
     if segmentID == 0 then
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 11, 0)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 5, 2)
+    elseif segmentID == 1 then
+      COMMON.UnlockWithFanfare('relic_tower', true)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 5, 2)
     else
       PrintInfo("No exit procedure found!")
 	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

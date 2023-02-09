@@ -54,7 +54,7 @@ end
 function final_stop.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local dungeon_entrances = { 'champions_road' }
+  local dungeon_entrances = { 'champions_road', 'barren_tundra', 'cave_of_solace', 'labyrinth_of_the_lost' }
   --also dungeon 23: the sky is accessible by talking to a shaymin
   local ground_entrances = {{Flag=SV.guildmaster_summit.ExpositionComplete,Zone='guildmaster_island',ID=8,Entry=0}}
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)

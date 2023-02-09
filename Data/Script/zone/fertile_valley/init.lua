@@ -33,7 +33,11 @@ function fertile_valley.ExitSegment(zone, result, rescue, segmentID, mapID)
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
     if segmentID == 0 then
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 5, 0)
+      COMMON.UnlockWithFanfare('overgrown_wilds', true)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 4, 2)
+    elseif segmentID == 1 then
+      COMMON.UnlockWithFanfare('wayward_wetlands', true)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 4, 2)
     else
       PrintInfo("No exit procedure found!")
 	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

@@ -33,7 +33,10 @@ function trickster_woods.ExitSegment(zone, result, rescue, segmentID, mapID)
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
     if segmentID == 0 then
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 3, 0)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 3, 2)
+    elseif segmentID == 1 then
+      COMMON.UnlockWithFanfare('moonlit_courtyard', true)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 3, 2)
     else
       PrintInfo("No exit procedure found!")
 	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

@@ -121,7 +121,13 @@ SV.base_trades = {
 	{ Item="xcl_family_charmander_02", ReqItem={"",""}},
 	{ Item="xcl_family_squirtle_02", ReqItem={"",""}}
 }
+
 SV.unlocked_trades = {
+}
+
+SV.dex = {
+  CurrentRewardIdx = 1,
+  RewardReqs = { 25, 50, 100 }
 }
 
 SV.base_town = 
@@ -167,6 +173,11 @@ SV.guildmaster_summit =
 {
   ExpositionComplete  = false,
   BattleComplete = false
+}
+
+SV.moonlit_end = 
+{
+  ExpositionComplete  = false
 }
 
 SV.garden_end = 

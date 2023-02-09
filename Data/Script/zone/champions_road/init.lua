@@ -33,7 +33,20 @@ function champions_road.ExitSegment(zone, result, rescue, segmentID, mapID)
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
     if segmentID == 0 then
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 8, 0)
+	  if SV.guildmaster_summit.ExpositionComplete then
+        COMMON.EndDungeonDay(result, 'guildmaster_island', -1,8,0)
+	  else
+	    GAME:EnterZone('guildmaster_island',-1,8, 0)
+	  end
+    elseif segmentID == 1 then
+      COMMON.UnlockWithFanfare('the_sky', true)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 4, 2)
+    elseif segmentID == 2 then
+      --for the boss segment, set a save variable
+      --the MAP's script will play the final cutscene
+      --AND it will end the game
+      SV.guildmaster_summit.BattleComplete = true
+      GAME:EnterZone('guildmaster_island', -1, 8, 0)
     else
       PrintInfo("No exit procedure found!")
 	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

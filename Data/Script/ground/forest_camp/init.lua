@@ -64,7 +64,7 @@ end
 --------------------------------------------------
 function forest_camp.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  local dungeon_entrances = { 'faded_trail', 'bramble_woods', 'windy_valley', 'ambush_forest', 'overgrown_wilds', 'sickly_hollow', 'secret_garden'}
+  local dungeon_entrances = { 'faded_trail', 'bramble_woods', 'trickster_woods', 'overgrown_wilds', 'moonlit_courtyard', 'ambush_forest', 'energy_garden', 'sickly_hollow', 'secret_garden'}
   local ground_entrances = {{Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=0},
   {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
   {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},

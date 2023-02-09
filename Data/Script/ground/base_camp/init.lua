@@ -202,7 +202,7 @@ end
 
 function base_camp.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  local dungeon_entrances = { 'tropical_path', 'faulted_cliffs', 'cave_of_whispers', 'shimmer_bay', 'guildmaster_trail' }
+  local dungeon_entrances = { 'tropical_path', 'faultline_ridge', 'tiny_tunnel', 'guildmaster_trail' }
   local ground_entrances = {{Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=0},
   {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=0},
   {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
@@ -236,6 +236,15 @@ function base_camp.East_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   GAME:FadeOut(false, 20)
   GAME:EnterGroundMap("base_camp_2", "entrance_west")
+end
+
+function base_camp.Ferry_Action(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  local ferry = CH('Lapras')
+  UI:SetSpeaker(ferry)
+  local dungeon_entrances = { 'lava_floe_island', 'shimmer_bay', 'eon_island', 'lost_seas', 'inscribed_cave', 'prism_isles' }
+  local ground_entrances = {}
+  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
 function base_camp.Sign_Action(obj, activator)

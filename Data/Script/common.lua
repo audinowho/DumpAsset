@@ -158,7 +158,9 @@ function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
     if GAME:DungeonUnlocked(dungeon_entrances[ii]) then
 	  local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_entrances[ii])
 	  local zone_name = zone_summary:GetColoredName()
-      table.insert(open_dests, { Name=zone_name, Dest=RogueEssence.Dungeon.ZoneLoc(dungeon_entrances[ii], 0, 0, 0) })
+	  if zone.Released then
+        table.insert(open_dests, { Name=zone_name, Dest=RogueEssence.Dungeon.ZoneLoc(dungeon_entrances[ii], 0, 0, 0) })
+	  end
 	end
   end
   
@@ -311,6 +313,11 @@ end
 
 function COMMON.UnlockWithFanfare(dungeon_id, from_dungeon)
   if not GAME:DungeonUnlocked(dungeon_id) then
+    local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_id)
+	if zone.Released == false then
+      GAME:UnlockDungeon(dungeon_id)
+	  return
+	end
     if from_dungeon then
       UI:ResetSpeaker()
       UI:SetCenter(true)
@@ -319,7 +326,7 @@ function COMMON.UnlockWithFanfare(dungeon_id, from_dungeon)
     GAME:UnlockDungeon(dungeon_id)
     UI:ResetSpeaker(false)
 	UI:SetCenter(true)
-	local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_id)
+	
     SOUND:PlayFanfare("Fanfare/NewArea")
     UI:WaitShowDialogue(STRINGS:FormatKey("DLG_NEW_AREA", zone:GetColoredName()))
     UI:SetCenter(false)

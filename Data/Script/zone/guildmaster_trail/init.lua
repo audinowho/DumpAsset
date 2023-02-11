@@ -46,7 +46,7 @@ function guildmaster_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
 	    if SV.guildmaster_summit.ExpositionComplete then
           COMMON.EndDungeonDay(result, 'guildmaster_island', -1,8,0)
 	    else
-	      GAME:EnterZone('guildmaster_island',-1,8, 0)
+	      GAME:EnterZone('guildmaster_island',-1,8,0)
 	    end
       elseif segmentID == 1 then
     --for the boss segment, set a save variable

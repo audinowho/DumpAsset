@@ -111,7 +111,7 @@ function canyon_camp.NPC_Shiny_Action(chara, activator)
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
   GROUND:CharTurnToChar(chara, player)--make the chara turn to the player
   if not SV.canyon_camp.ShinyIntro then
-    if player.CurrentForm.Skin == 0 then
+    if player.CurrentForm.Skin == "normal" then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shiny_Line_001']))
     else
       SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
@@ -198,6 +198,14 @@ function canyon_camp.NPC_Shortcut_Action(chara, activator)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Line_002']))
 end
 
+
+function canyon_camp.NPC_Storehouse_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+    COMMON.UnlockWithFanfare("ambush_forest", false)
+end
 
 function canyon_camp.Assembly_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

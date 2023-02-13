@@ -34,10 +34,10 @@ function lava_floe_island.ExitSegment(zone, result, rescue, segmentID, mapID)
   else
     if segmentID == 0 then
       COMMON.UnlockWithFanfare('shimmer_bay', true)
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 1, 2)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 1, 0)
     elseif segmentID == 1 then
       COMMON.UnlockWithFanfare('inscribed_cave', true)
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 1, 2)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 1, 0)
     else
       PrintInfo("No exit procedure found!")
 	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

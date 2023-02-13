@@ -54,7 +54,6 @@ end
 function cliff_camp.East_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   UI:ResetSpeaker()
-  UI:WaitShowDialogue(STRINGS:Format("You've reached the end of the demo![pause=0] A winner is you!"))
   
   local dungeon_entrances = { 'flyaway_cliffs', 'fertile_valley', 'wayward_wetlands', 'deserted_fortress', 'bravery_road', 'geode_underpass', 'the_sky' }
   local ground_entrances = {{Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
@@ -244,6 +243,8 @@ end
 function cliff_camp.NPC_DexRater_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  local rewardReqs = { 10, 1008, 100 }
+  
   UI:SetSpeaker(chara)
   local player = CH('PLAYER')
   GROUND:CharTurnToChar(chara, player)
@@ -264,10 +265,11 @@ function cliff_camp.NPC_DexRater_Action(chara, activator)
   if SV.dex.CurrentRewardIdx < 1 then
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Full_001']))
   else 
-    while SV.dex.CurrentRewardIdx > 0 and dexCompletion >= SV.dex.RewardReqs[SV.dex.CurrentRewardIdx] do
+    while SV.dex.CurrentRewardIdx > 0 and dexCompletion >= rewardReqs[SV.dex.CurrentRewardIdx] do
 	  if SV.dex.CurrentRewardIdx == 1 then
 		UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Reward_001']))
 		COMMON.UnlockWithFanfare("lava_floe_island", false)
+		SV.base_camp.FerryUnlocked = true
 	  elseif SV.dex.CurrentRewardIdx == 2 then
 		UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Reward_002']))
 		COMMON.UnlockWithFanfare("bravery_road", false)
@@ -276,7 +278,7 @@ function cliff_camp.NPC_DexRater_Action(chara, activator)
 		COMMON.UnlockWithFanfare("labyrinth_of_the_lost", false)
 	  end
       
-	  if SV.dex.CurrentRewardIdx < #SV.dex.RewardReqs then
+	  if SV.dex.CurrentRewardIdx < #rewardReqs then
 		SV.dex.CurrentRewardIdx = SV.dex.CurrentRewardIdx + 1
 	  else
 		SV.dex.CurrentRewardIdx = 0
@@ -284,7 +286,7 @@ function cliff_camp.NPC_DexRater_Action(chara, activator)
 	end
 	
 	if SV.dex.CurrentRewardIdx > 0 then
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Next_001'], SV.dex.RewardReqs[SV.dex.CurrentRewardIdx]))
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Next_001'], rewardReqs[SV.dex.CurrentRewardIdx]))
 	end
   end
   

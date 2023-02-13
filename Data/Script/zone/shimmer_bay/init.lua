@@ -44,7 +44,7 @@ function shimmer_bay.ExitSegment(zone, result, rescue, segmentID, mapID)
 		SV.manaphy_egg.Taken = true
 	end
     if segmentID == 0 then
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 3, 0)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 1, 0)
     else
       PrintInfo("No exit procedure found!")
 	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

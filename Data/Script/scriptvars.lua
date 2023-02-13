@@ -106,7 +106,9 @@ SV.base_camp =
   IntroComplete    = false,
   ExpositionComplete  = false,
   FirstTalkComplete  = false,
-  FoodIntro  = false
+  FoodIntro  = false,
+  FerryUnlocked  = false,
+  FerryIntroduced  = false
 }
 
 SV.base_shop = {
@@ -126,8 +128,7 @@ SV.unlocked_trades = {
 }
 
 SV.dex = {
-  CurrentRewardIdx = 1,
-  RewardReqs = { 25, 50, 100 }
+  CurrentRewardIdx = 1
 }
 
 SV.base_town = 

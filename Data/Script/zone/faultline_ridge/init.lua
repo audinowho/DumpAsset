@@ -33,8 +33,8 @@ function faultline_ridge.ExitSegment(zone, result, rescue, segmentID, mapID)
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
     if segmentID == 0 then
-      COMMON.UnlockWithFanfare('deserted_fortress', true)
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 4, 0)
+      COMMON.UnlockWithFanfare('trickster_woods', true)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 3, 0)
     else
       PrintInfo("No exit procedure found!")
 	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

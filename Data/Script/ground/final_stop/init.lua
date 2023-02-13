@@ -71,6 +71,16 @@ function final_stop.South_Exit_Touch(obj, activator)
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
+
+
+function final_stop.NPC_Storehouse_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+  COMMON.UnlockWithFanfare("treacherous_mountain", false)
+end
+
 function final_stop.Assembly_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   UI:ResetSpeaker()

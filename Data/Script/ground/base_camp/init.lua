@@ -23,6 +23,9 @@ function base_camp.Enter(map)
     Map  = 1, Entry  = 0
   }
   
+  if not SV.base_camp.FerryUnlocked then
+    GROUND:Hide("Lapras")
+  end
   if not SV.base_camp.IntroComplete then
     base_camp.PrepareFirstTimeVisit()
 	GAME:FadeIn(20)
@@ -104,7 +107,6 @@ function base_camp.PrepareFirstTimeVisit()
   GROUND:Hide("NPC_Range")
   GROUND:Hide("NPC_Coast")
   GROUND:Hide("NPC_Bystander")
-  GROUND:Hide("Lapras")
   GROUND:Unhide("East_LogPile")
   GROUND:Unhide("West_LogPile")
   GROUND:Unhide("First_North_Exit")
@@ -242,9 +244,57 @@ function base_camp.Ferry_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   local ferry = CH('Lapras')
   UI:SetSpeaker(ferry)
+  if not SV.base_camp.FerryIntroduced then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ferry_Line_001']))
+	SV.base_camp.FerryIntroduced = true
+  end
   local dungeon_entrances = { 'lava_floe_island', 'shimmer_bay', 'eon_island', 'lost_seas', 'inscribed_cave', 'prism_isles' }
   local ground_entrances = {}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  base_camp.ShowFerryMenu(dungeon_entrances,ground_entrances)
+end
+
+function base_camp.ShowFerryMenu(dungeon_entrances, ground_entrances)
+  
+  --check for unlock of dungeons
+  local open_dests = {}
+  for ii = 1,#dungeon_entrances,1 do
+    if GAME:DungeonUnlocked(dungeon_entrances[ii]) then
+	  local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_entrances[ii])
+	  local zone_name = zone_summary:GetColoredName()
+	  if zone_summary.Released then
+        table.insert(open_dests, { Name=zone_name, Dest=RogueEssence.Dungeon.ZoneLoc(dungeon_entrances[ii], 0, 0, 0) })
+	  end
+	end
+  end
+  
+  --check for unlock of grounds
+  for ii = 1,#ground_entrances,1 do
+    if ground_entrances[ii].Flag then
+	  local ground_id = ground_entrances[ii].Zone
+	  local zone = _DATA:GetZone(ground_id)
+	  local ground = _DATA:GetGround(zone.GroundMaps[ground_entrances[ii].ID])
+	  local ground_name = ground:GetColoredName()
+      table.insert(open_dests, { Name=ground_name, Dest=RogueEssence.Dungeon.ZoneLoc(ground_id, -1, ground_entrances[ii].ID, ground_entrances[ii].Entry) })
+	end
+  end
+  
+  local dest = RogueEssence.Dungeon.ZoneLoc.Invalid
+  
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ferry_Line_002']))
+    UI:DestinationMenu(open_dests)
+	UI:WaitForChoice()
+	dest = UI:ChoiceResult()
+  
+  if dest:IsValid() then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ferry_Line_003']))
+    SOUND:PlayBGM("", true)
+    GAME:FadeOut(false, 20)
+	if dest.StructID.Segment > -1 then
+	  GAME:EnterDungeon(dest.ID, dest.StructID.Segment, dest.StructID.ID, dest.EntryPoint, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
+	else
+	  GAME:EnterZone(dest.ID, dest.StructID.Segment, dest.StructID.ID, dest.EntryPoint)
+	end
+  end
 end
 
 function base_camp.Sign_Action(obj, activator)

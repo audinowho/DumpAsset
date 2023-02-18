@@ -34,7 +34,7 @@ function fertile_valley.ExitSegment(zone, result, rescue, segmentID, mapID)
   else
     if segmentID == 0 then
       COMMON.UnlockWithFanfare('overgrown_wilds', true)
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 4, 2)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 3, 2)
     elseif segmentID == 1 then
       COMMON.UnlockWithFanfare('wayward_wetlands', true)
       COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 4, 2)

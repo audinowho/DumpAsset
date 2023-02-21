@@ -9,7 +9,7 @@
 "Released": true,
 "Comment": "",
 "NoEXP": false,
-"Level": 30,
+"Level": 35,
 "LevelCap": false,
 "TeamRestrict": false,
 "TeamSize": -1,
@@ -8499,12 +8499,12 @@
 ]
 },
 "StartAmount": {
-"Min": 235,
-"Max": 240
+"Min": 250,
+"Max": 255
 },
 "AddAmount": {
-"Min": 28,
-"Max": 32
+"Min": 30,
+"Max": 34
 },
 "ModStates": [
 {
@@ -12402,6 +12402,122 @@
 ]
 },
 {
+"$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
+"Spawns": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueEssence",
+"Priority": {
+"str": [
+6,
+1
+]
+},
+"Item": {
+"$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueElements.PresetPicker`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "food_grimy",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+}
+}
+]
+}
+}
+}
+},
+"Rate": 10
+}
+]
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
+"FloorSpacing": {
+"Min": 4,
+"Max": 20
+},
+"FloorRange": {
+"Min": 0,
+"Max": 13
+}
+},
+"ModStates": []
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
+"Spawns": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueEssence",
+"Priority": {
+"str": [
+6,
+1
+]
+},
+"Item": {
+"$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueElements.PresetPicker`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "berry_leppa",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+}
+}
+]
+}
+}
+}
+},
+"Rate": 10
+}
+]
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
+"FloorSpacing": {
+"Min": 4,
+"Max": 7
+},
+"FloorRange": {
+"Min": 0,
+"Max": 13
+}
+},
+"ModStates": []
+},
+{
 "$type": "RogueEssence.LevelGen.SpreadCombinedZoneStep, RogueEssence",
 "Steps": [
 {
@@ -13729,7 +13845,7 @@
 "Rate": 10,
 "Range": {
 "Min": 0,
-"Max": 13
+"Max": 12
 }
 }
 ],
@@ -14065,8 +14181,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "sweet_kiss",
@@ -14102,8 +14218,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "sweet_kiss",
@@ -14139,8 +14255,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "sweet_kiss",
@@ -14176,8 +14292,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "sweet_kiss",
@@ -14213,8 +14329,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "sweet_kiss",
@@ -14250,8 +14366,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "sweet_kiss",
@@ -14287,8 +14403,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "sweet_kiss",
@@ -14759,8 +14875,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -14793,8 +14909,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -14827,8 +14943,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -14861,8 +14977,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -14895,8 +15011,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -14956,8 +15072,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -14990,8 +15106,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15024,8 +15140,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15058,8 +15174,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15092,8 +15208,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15153,8 +15269,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15187,8 +15303,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15221,8 +15337,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15255,8 +15371,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15289,8 +15405,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15350,8 +15466,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15384,8 +15500,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15418,8 +15534,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15452,8 +15568,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15486,8 +15602,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15547,8 +15663,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15581,8 +15697,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15615,8 +15731,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15649,8 +15765,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15683,8 +15799,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15717,8 +15833,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -15794,8 +15910,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "tri_attack"
@@ -15889,8 +16005,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -15953,8 +16069,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -16017,8 +16133,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -16081,8 +16197,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -16145,8 +16261,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -16209,8 +16325,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -16273,8 +16389,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -16781,8 +16897,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "secret_power"
@@ -17259,8 +17375,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17293,8 +17409,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17327,8 +17443,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17361,8 +17477,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17395,8 +17511,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17456,8 +17572,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17490,8 +17606,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17524,8 +17640,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17558,8 +17674,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17592,8 +17708,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17653,8 +17769,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17687,8 +17803,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17721,8 +17837,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17755,8 +17871,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17789,8 +17905,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17850,8 +17966,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17884,8 +18000,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17918,8 +18034,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17952,8 +18068,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -17986,8 +18102,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -18047,8 +18163,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -18081,8 +18197,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -18115,8 +18231,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -18149,8 +18265,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -18183,8 +18299,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -18217,8 +18333,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -18294,8 +18410,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "tri_attack"
@@ -18389,8 +18505,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -18453,8 +18569,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -18517,8 +18633,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -18581,8 +18697,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -18645,8 +18761,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -18709,8 +18825,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -18773,8 +18889,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -19281,8 +19397,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "secret_power"
@@ -19759,8 +19875,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -19793,8 +19909,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -19827,8 +19943,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -19861,8 +19977,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -19895,8 +20011,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -19956,8 +20072,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -19990,8 +20106,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20024,8 +20140,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20058,8 +20174,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20092,8 +20208,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20153,8 +20269,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20187,8 +20303,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20221,8 +20337,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20255,8 +20371,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20289,8 +20405,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20350,8 +20466,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20384,8 +20500,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20418,8 +20534,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20452,8 +20568,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20486,8 +20602,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20547,8 +20663,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20581,8 +20697,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20615,8 +20731,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20649,8 +20765,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20683,8 +20799,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20717,8 +20833,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "hidden_power"
@@ -20794,8 +20910,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "tri_attack"
@@ -20889,8 +21005,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -20953,8 +21069,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -21017,8 +21133,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -21081,8 +21197,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -21145,8 +21261,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -21209,8 +21325,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -21273,8 +21389,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "ancient_power",
@@ -21781,8 +21897,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 30,
-"Max": 30
+"Min": 35,
+"Max": 35
 },
 "SpecifiedSkills": [
 "secret_power"

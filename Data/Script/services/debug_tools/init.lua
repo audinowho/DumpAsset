@@ -149,6 +149,7 @@ function DebugTools:OnUpgrade()
 	}
   end
   
+  
   -- end
   if SV.unlocked_trades ~= nil then
   else
@@ -162,6 +163,56 @@ function DebugTools:OnUpgrade()
   local oldVersion = _DATA.Save.GameVersion
   if oldVersion.Major <= 0 and oldVersion.Minor <= 6 and oldVersion.Build <= 7 then
     _DATA.Save:DeleteOutdatedAssets(RogueEssence.Data.DataManager.DataType.Item)
+  end
+  if oldVersion.Major <= 0 and oldVersion.Minor <= 7 then
+  
+  SV.base_camp.FerryUnlocked = true
+  SV.base_camp.FerryIntroduced = true
+  
+SV.magnagate =
+{
+  cards = 0,
+  portal = false
+}
+
+SV.shimmer_bay = 
+{
+  TookTreasure  = false
+}
+
+SV.manaphy_egg = 
+{
+  Taken = false,
+  ExpositionComplete = false,
+  Hatched = false
+}
+
+SV.roaming_legends =
+{
+  Raikou = false,
+  Entei = false,
+  Suicune = false,
+  Celebi = false,
+  Darkrai = false
+}
+
+
+SV.sleeping_caldera = 
+{
+  TookTreasure  = false,
+  GotHeatran = false
+}
+  
+SV.dex = {
+  CurrentRewardIdx = 1
+}
+	
+SV.moonlit_end = 
+{
+  ExpositionComplete  = false
+}
+
+	GAME:UnlockDungeon('fertile_valley')
   end
   
   PrintInfo("=>> Loaded version")

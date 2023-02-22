@@ -680,7 +680,7 @@ end
 function base_camp_2.Tutor_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local price = 500
+  local price = 250
   local state = 0
   local repeated = false
   local member = nil

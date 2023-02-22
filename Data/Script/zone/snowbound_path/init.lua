@@ -33,10 +33,10 @@ function snowbound_path.ExitSegment(zone, result, rescue, segmentID, mapID)
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
     if segmentID == 0 then
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 7, 2)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 7, 0)
     elseif segmentID == 1 then
       COMMON.UnlockWithFanfare('barren_tundra', true)
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 7, 2)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 7, 0)
     else
       PrintInfo("No exit procedure found!")
 	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

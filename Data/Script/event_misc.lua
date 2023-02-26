@@ -100,7 +100,7 @@ function ITEM_SCRIPT.SleepingCalderaShift(owner, ownerChar, context, args)
 	  DUNGEON:MoveScreen(RogueEssence.Content.ScreenMover(6, 9, 30))
 	  GAME:FadeOut(true, 30)
 	  --set name to enraged caldera
-	  _ZONE.CurrentMap.Name = RogueEssence.LocalText(RogueEssence.StringKey("TITLE_ENRAGED_CALDERA"):ToLocal())
+	  _ZONE.CurrentMap.Name = RogueEssence.LocalText(STRINGS:Format(RogueEssence.StringKey("TITLE_ENRAGED_CALDERA"):ToLocal(), _ZONE.CurrentMap.ID + 1))
 	  _ZONE.CurrentMap.Music = "B11. Enraged Caldera.ogg"
 	  
 	  --set all water tiles to lava

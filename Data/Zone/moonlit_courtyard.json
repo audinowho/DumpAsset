@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.9.0",
+"Version": "0.6.10.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -306,7 +306,7 @@
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 7,
-"RespawnTime": 70
+"RespawnTime": 90
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -879,7 +879,7 @@
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 7,
-"RespawnTime": 70
+"RespawnTime": 90
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -1152,6 +1152,80 @@
 "Amount": {
 "Min": 5,
 "Max": 7
+}
+},
+"Ally": false
+}
+},
+{
+"Key": {
+"str": [
+6,
+2
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [],
+"ClumpFactor": 0,
+"Spawn": {
+"$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Picker": {
+"$type": "RogueEssence.LevelGen.SpecificTeamSpawner, RogueEssence",
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "ralts",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"teleport",
+"growl"
+],
+"Intrinsic": "",
+"Tactic": "wander_normal",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnItem, PMDC",
+"Items": [
+{
+"Spawn": {
+"ID": "key",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0
+},
+"Rate": 10
+}
+],
+"MapStartOnly": true
+}
+]
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
+"Min": 0,
+"Max": 3,
+"Rate": 70
 }
 },
 "Ally": false
@@ -1452,7 +1526,7 @@
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 7,
-"RespawnTime": 70
+"RespawnTime": 90
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -1725,6 +1799,80 @@
 "Amount": {
 "Min": 5,
 "Max": 7
+}
+},
+"Ally": false
+}
+},
+{
+"Key": {
+"str": [
+6,
+2
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [],
+"ClumpFactor": 0,
+"Spawn": {
+"$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Picker": {
+"$type": "RogueEssence.LevelGen.SpecificTeamSpawner, RogueEssence",
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "ralts",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"teleport",
+"growl"
+],
+"Intrinsic": "",
+"Tactic": "wander_normal",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnItem, PMDC",
+"Items": [
+{
+"Spawn": {
+"ID": "key",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0
+},
+"Rate": 10
+}
+],
+"MapStartOnly": true
+}
+]
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
+"Min": 0,
+"Max": 3,
+"Rate": 70
 }
 },
 "Ally": false
@@ -2025,7 +2173,7 @@
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 7,
-"RespawnTime": 70
+"RespawnTime": 90
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -2298,6 +2446,80 @@
 "Amount": {
 "Min": 5,
 "Max": 7
+}
+},
+"Ally": false
+}
+},
+{
+"Key": {
+"str": [
+6,
+2
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [],
+"ClumpFactor": 0,
+"Spawn": {
+"$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Picker": {
+"$type": "RogueEssence.LevelGen.SpecificTeamSpawner, RogueEssence",
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "ralts",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"teleport",
+"growl"
+],
+"Intrinsic": "",
+"Tactic": "wander_normal",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnItem, PMDC",
+"Items": [
+{
+"Spawn": {
+"ID": "key",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0
+},
+"Rate": 10
+}
+],
+"MapStartOnly": true
+}
+]
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
+"Min": 0,
+"Max": 3,
+"Rate": 70
 }
 },
 "Ally": false
@@ -2598,7 +2820,7 @@
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 7,
-"RespawnTime": 70
+"RespawnTime": 90
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -2871,6 +3093,80 @@
 "Amount": {
 "Min": 5,
 "Max": 7
+}
+},
+"Ally": false
+}
+},
+{
+"Key": {
+"str": [
+6,
+2
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [],
+"ClumpFactor": 0,
+"Spawn": {
+"$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Picker": {
+"$type": "RogueEssence.LevelGen.SpecificTeamSpawner, RogueEssence",
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "ralts",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"teleport",
+"growl"
+],
+"Intrinsic": "",
+"Tactic": "wander_normal",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnItem, PMDC",
+"Items": [
+{
+"Spawn": {
+"ID": "key",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0
+},
+"Rate": 10
+}
+],
+"MapStartOnly": true
+}
+]
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
+"Min": 0,
+"Max": 3,
+"Rate": 70
 }
 },
 "Ally": false
@@ -3345,7 +3641,7 @@ false
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 7,
-"RespawnTime": 70
+"RespawnTime": 90
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -3626,6 +3922,80 @@ false
 {
 "Key": {
 "str": [
+6,
+2
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Filters": [],
+"ClumpFactor": 0,
+"Spawn": {
+"$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Picker": {
+"$type": "RogueEssence.LevelGen.SpecificTeamSpawner, RogueEssence",
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "ralts",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"teleport",
+"growl"
+],
+"Intrinsic": "",
+"Tactic": "wander_normal",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnItem, PMDC",
+"Items": [
+{
+"Spawn": {
+"ID": "key",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0
+},
+"Rate": 10
+}
+],
+"MapStartOnly": true
+}
+]
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
+"Min": 0,
+"Max": 3,
+"Rate": 70
+}
+},
+"Ally": false
+}
+},
+{
+"Key": {
+"str": [
 7
 ]
 },
@@ -4092,7 +4462,7 @@ false
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 7,
-"RespawnTime": 70
+"RespawnTime": 90
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -5014,6 +5384,7 @@ false
 "SealedTile": "sealed_block",
 "SwitchTile": "tile_switch",
 "Amount": 3,
+"Revealed": false,
 "TimeLimit": false
 }
 },
@@ -5034,7 +5405,7 @@ false
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 7,
-"RespawnTime": 70
+"RespawnTime": 90
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -5837,7 +6208,7 @@ false
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 7,
-"RespawnTime": 70
+"RespawnTime": 90
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -6584,7 +6955,7 @@ false
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 7,
-"RespawnTime": 70
+"RespawnTime": 90
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -7174,7 +7545,7 @@ false
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 7,
-"RespawnTime": 70
+"RespawnTime": 90
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -7764,7 +8135,7 @@ false
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 7,
-"RespawnTime": 70
+"RespawnTime": 90
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -8354,7 +8725,7 @@ false
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 7,
-"RespawnTime": 70
+"RespawnTime": 90
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -8944,7 +9315,7 @@ false
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromEligibleEvent, PMDC",
 "MaxFoes": 7,
-"RespawnTime": 70
+"RespawnTime": 90
 },
 "MaxFoes": 0,
 "RespawnTime": 0
@@ -9369,7 +9740,7 @@ false
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.10.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -10629,7 +11000,7 @@ false
 }
 ]
 },
-"Role": 0
+"Role": 1
 },
 "Rate": 10,
 "Range": {
@@ -10713,45 +11084,6 @@ false
 "Range": {
 "Min": 0,
 "Max": 5
-}
-},
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
-"Species": "ralts",
-"Form": 0,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 18,
-"Max": 18
-},
-"SpecifiedSkills": [
-"teleport",
-"growl"
-],
-"Intrinsic": "",
-"Tactic": "wander_dumb",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 2,
-"Remove": false
-}
-]
-},
-"Role": 0
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 10
 }
 },
 {
@@ -11138,201 +11470,6 @@ false
 "Spawn": {
 "Spawn": {
 "BaseForm": {
-"Species": "flabebe",
-"Form": 0,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 16,
-"Max": 16
-},
-"SpecifiedSkills": [
-"fairy_wind",
-"razor_leaf"
-],
-"Intrinsic": "",
-"Tactic": "turret",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 2,
-"Remove": false
-}
-]
-},
-"Role": 0
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 10
-}
-},
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
-"Species": "flabebe",
-"Form": 1,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 16,
-"Max": 16
-},
-"SpecifiedSkills": [
-"fairy_wind",
-"razor_leaf"
-],
-"Intrinsic": "",
-"Tactic": "turret",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 2,
-"Remove": false
-}
-]
-},
-"Role": 0
-},
-"Rate": 3,
-"Range": {
-"Min": 0,
-"Max": 10
-}
-},
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
-"Species": "flabebe",
-"Form": 2,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 16,
-"Max": 16
-},
-"SpecifiedSkills": [
-"fairy_wind",
-"razor_leaf"
-],
-"Intrinsic": "",
-"Tactic": "turret",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 2,
-"Remove": false
-}
-]
-},
-"Role": 0
-},
-"Rate": 3,
-"Range": {
-"Min": 0,
-"Max": 10
-}
-},
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
-"Species": "flabebe",
-"Form": 3,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 16,
-"Max": 16
-},
-"SpecifiedSkills": [
-"fairy_wind",
-"razor_leaf"
-],
-"Intrinsic": "",
-"Tactic": "turret",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 2,
-"Remove": false
-}
-]
-},
-"Role": 0
-},
-"Rate": 3,
-"Range": {
-"Min": 0,
-"Max": 10
-}
-},
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
-"Species": "flabebe",
-"Form": 4,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 16,
-"Max": 16
-},
-"SpecifiedSkills": [
-"fairy_wind",
-"razor_leaf"
-],
-"Intrinsic": "",
-"Tactic": "turret",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 2,
-"Remove": false
-}
-]
-},
-"Role": 0
-},
-"Rate": 3,
-"Range": {
-"Min": 0,
-"Max": 10
-}
-},
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
 "Species": "volbeat",
 "Form": 0,
 "Skin": "",
@@ -11438,7 +11575,503 @@ false
 }
 }
 ],
-"SpecificSpawns": []
+"SpecificSpawns": [
+{
+"Spawn": {
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "flabebe",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"fairy_wind",
+"razor_leaf"
+],
+"Intrinsic": "",
+"Tactic": "turret",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+},
+{
+"BaseForm": {
+"Species": "flabebe",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"fairy_wind",
+"razor_leaf"
+],
+"Intrinsic": "",
+"Tactic": "turret",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+},
+{
+"BaseForm": {
+"Species": "flabebe",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"fairy_wind",
+"razor_leaf"
+],
+"Intrinsic": "",
+"Tactic": "turret",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "flabebe",
+"Form": 1,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"fairy_wind",
+"razor_leaf"
+],
+"Intrinsic": "",
+"Tactic": "turret",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+},
+{
+"BaseForm": {
+"Species": "flabebe",
+"Form": 1,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"fairy_wind",
+"razor_leaf"
+],
+"Intrinsic": "",
+"Tactic": "turret",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+},
+{
+"BaseForm": {
+"Species": "flabebe",
+"Form": 1,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"fairy_wind",
+"razor_leaf"
+],
+"Intrinsic": "",
+"Tactic": "turret",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "flabebe",
+"Form": 2,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"fairy_wind",
+"razor_leaf"
+],
+"Intrinsic": "",
+"Tactic": "turret",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+},
+{
+"BaseForm": {
+"Species": "flabebe",
+"Form": 2,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"fairy_wind",
+"razor_leaf"
+],
+"Intrinsic": "",
+"Tactic": "turret",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+},
+{
+"BaseForm": {
+"Species": "flabebe",
+"Form": 2,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"fairy_wind",
+"razor_leaf"
+],
+"Intrinsic": "",
+"Tactic": "turret",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "flabebe",
+"Form": 3,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"fairy_wind",
+"razor_leaf"
+],
+"Intrinsic": "",
+"Tactic": "turret",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+},
+{
+"BaseForm": {
+"Species": "flabebe",
+"Form": 3,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"fairy_wind",
+"razor_leaf"
+],
+"Intrinsic": "",
+"Tactic": "turret",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+},
+{
+"BaseForm": {
+"Species": "flabebe",
+"Form": 3,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"fairy_wind",
+"razor_leaf"
+],
+"Intrinsic": "",
+"Tactic": "turret",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"Explorer": false,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "flabebe",
+"Form": 4,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"fairy_wind",
+"razor_leaf"
+],
+"Intrinsic": "",
+"Tactic": "turret",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+},
+{
+"BaseForm": {
+"Species": "flabebe",
+"Form": 4,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"fairy_wind",
+"razor_leaf"
+],
+"Intrinsic": "",
+"Tactic": "turret",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+},
+{
+"BaseForm": {
+"Species": "flabebe",
+"Form": 4,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 18,
+"Max": 18
+},
+"SpecifiedSkills": [
+"fairy_wind",
+"razor_leaf"
+],
+"Intrinsic": "",
+"Tactic": "turret",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+}
+]
 },
 {
 "$type": "RogueEssence.LevelGen.TileSpawnZoneStep, RogueEssence",
@@ -11587,6 +12220,198 @@ false
 "IsMoney": false,
 "Cursed": false,
 "Value": "berry_leppa",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+}
+}
+]
+}
+}
+}
+},
+"Rate": 10
+}
+]
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
+"FloorSpacing": {
+"Min": 4,
+"Max": 7
+},
+"FloorRange": {
+"Min": 0,
+"Max": 14
+}
+},
+"ModStates": []
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
+"Spawns": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueEssence",
+"Priority": {
+"str": [
+6,
+1
+]
+},
+"Item": {
+"$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueElements.PresetPicker`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "machine_assembly_box",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+}
+}
+]
+}
+}
+}
+},
+"Rate": 10
+}
+]
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
+"FloorSpacing": {
+"Min": 4,
+"Max": 7
+},
+"FloorRange": {
+"Min": 3,
+"Max": 14
+}
+},
+"ModStates": []
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
+"Spawns": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueEssence",
+"Priority": {
+"str": [
+6,
+1
+]
+},
+"Item": {
+"$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueElements.PresetPicker`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "apricorn_green",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+}
+}
+]
+}
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueEssence",
+"Priority": {
+"str": [
+6,
+1
+]
+},
+"Item": {
+"$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueElements.PresetPicker`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "apricorn_purple",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+}
+}
+]
+}
+}
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueEssence",
+"Priority": {
+"str": [
+6,
+1
+]
+},
+"Item": {
+"$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueElements.PresetPicker`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "apricorn_white",
 "HiddenValue": "",
 "Amount": 0,
 "Price": 0,
@@ -13183,7 +14008,7 @@ false
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.10.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ShopModGenState"
 }
 ]
@@ -18664,7 +19489,7 @@ false
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.6.9.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.6.10.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -20661,7 +21486,8 @@ false
 ],
 "SealedTile": "sealed_block",
 "SwitchTile": "tile_switch",
-"Amount": 1,
+"Amount": 2,
+"Revealed": true,
 "TimeLimit": false
 }
 }
@@ -20791,7 +21617,7 @@ false
 "$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
 "Quota": {
 "$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
-"Min": 1,
+"Min": 2,
 "Max": 8,
 "Rate": 50
 },

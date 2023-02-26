@@ -9,7 +9,7 @@
 "Released": true,
 "Comment": "",
 "NoEXP": false,
-"Level": 25,
+"Level": 30,
 "LevelCap": false,
 "TeamRestrict": false,
 "TeamSize": -1,
@@ -435,7 +435,7 @@
 },
 "Value": {
 "$type": "PMDC.Dungeon.DespawnRadiusEvent, PMDC",
-"Radius": 120,
+"Radius": 100,
 "DespawnTime": 160
 }
 }
@@ -466,7 +466,7 @@
 },
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromRandomEvent, PMDC",
-"Radius": 80,
+"Radius": 70,
 "MaxFoes": 100,
 "RespawnTime": 80
 },
@@ -864,7 +864,7 @@
 },
 "Value": {
 "$type": "RogueEssence.LevelGen.PlaceRadiusMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"Radius": 120,
+"Radius": 80,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
@@ -1126,7 +1126,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 80,
+"ConnectPercent": 150,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -1313,7 +1313,7 @@
 },
 "Value": {
 "$type": "PMDC.Dungeon.DespawnRadiusEvent, PMDC",
-"Radius": 120,
+"Radius": 100,
 "DespawnTime": 120
 }
 }
@@ -1344,7 +1344,7 @@
 },
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromRandomEvent, PMDC",
-"Radius": 80,
+"Radius": 70,
 "MaxFoes": 120,
 "RespawnTime": 60
 },
@@ -2243,8 +2243,8 @@
 },
 "AmountSpawner": {
 "$type": "RogueElements.RandRange, RogueElements",
-"Min": 60,
-"Max": 60
+"Min": 80,
+"Max": 80
 }
 }
 }
@@ -2348,7 +2348,7 @@
 },
 "Value": {
 "$type": "RogueEssence.LevelGen.PlaceRadiusMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"Radius": 120,
+"Radius": 80,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
@@ -2596,7 +2596,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 80,
+"ConnectPercent": 150,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -2924,7 +2924,7 @@
 },
 "Value": {
 "$type": "PMDC.Dungeon.DespawnRadiusEvent, PMDC",
-"Radius": 120,
+"Radius": 100,
 "DespawnTime": 120
 }
 }
@@ -2955,7 +2955,7 @@
 },
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromRandomEvent, PMDC",
-"Radius": 80,
+"Radius": 70,
 "MaxFoes": 120,
 "RespawnTime": 60
 },
@@ -4505,8 +4505,8 @@
 },
 "AmountSpawner": {
 "$type": "RogueElements.RandRange, RogueElements",
-"Min": 60,
-"Max": 60
+"Min": 80,
+"Max": 80
 }
 }
 }
@@ -4577,7 +4577,7 @@
 },
 "Value": {
 "$type": "RogueEssence.LevelGen.PlaceRadiusMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"Radius": 120,
+"Radius": 80,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
@@ -4839,7 +4839,7 @@
 },
 "Value": {
 "$type": "RogueElements.ConnectGridBranchStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"ConnectPercent": 80,
+"ConnectPercent": 150,
 "Filters": [
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -5026,7 +5026,7 @@
 },
 "Value": {
 "$type": "PMDC.Dungeon.DespawnRadiusEvent, PMDC",
-"Radius": 120,
+"Radius": 100,
 "DespawnTime": 120
 }
 }
@@ -5057,7 +5057,7 @@
 },
 "Respawn": {
 "$type": "PMDC.Dungeon.RespawnFromRandomEvent, PMDC",
-"Radius": 80,
+"Radius": 70,
 "MaxFoes": 120,
 "RespawnTime": 60
 },
@@ -7668,1218 +7668,6 @@
 {
 "Key": {
 "str": [
-4,
-1
-]
-},
-"Value": {
-"$type": "PMDC.LevelGen.ChestStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
-"Filters": [
-{
-"$type": "RogueElements.RoomFilterComponent, RogueElements",
-"Negate": true,
-"Components": [
-{
-"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
-},
-{
-"$type": "PMDC.LevelGen.NoEventRoom, PMDC"
-}
-]
-}
-],
-"Items": [
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "boost_nectar",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "boost_hp_up",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "boost_protein",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "boost_iron",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "boost_calcium",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "boost_zinc",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "boost_carbos",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_wonder",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_blue",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_black",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_clear",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_grass",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_green",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_brown",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_orange",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_gold",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_pink",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_purple",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_red",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_royal",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_silver",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_white",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_yellow",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_sky",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_gray",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_magenta",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "held_pierce_band",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "held_friend_bow",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "held_goggle_specs",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "evo_harmony_scarf",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_max_elixir",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 20
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_max_potion",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 20
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_full_heal",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 20
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_amber_tear",
-"HiddenValue": "",
-"Amount": 2,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 20
-}
-],
-"ItemThemes": [
-{
-"Spawn": {
-"$type": "PMDC.LevelGen.ItemStateType, PMDC",
-"UseType": {
-"assembly": "PMDC, Version=0.6.10.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.HeldState"
-},
-"UseMapItems": false,
-"UseSpecialItems": true,
-"Amount": {
-"Min": 1,
-"Max": 1
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "PMDC.LevelGen.ItemStateType, PMDC",
-"UseType": {
-"assembly": "PMDC, Version=0.6.10.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.UtilityState"
-},
-"UseMapItems": false,
-"UseSpecialItems": true,
-"Amount": {
-"Min": 2,
-"Max": 2
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "PMDC.LevelGen.ItemStateType, PMDC",
-"UseType": {
-"assembly": "PMDC, Version=0.6.10.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.DrinkState"
-},
-"UseMapItems": false,
-"UseSpecialItems": true,
-"Amount": {
-"Min": 3,
-"Max": 6
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "PMDC.LevelGen.ItemStateType, PMDC",
-"UseType": {
-"assembly": "PMDC, Version=0.6.10.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.GummiState"
-},
-"UseMapItems": false,
-"UseSpecialItems": true,
-"Amount": {
-"Min": 5,
-"Max": 10
-}
-},
-"Rate": 10
-}
-],
-"Mobs": [],
-"MobThemes": [],
-"Ambush": false
-}
-},
-{
-"Key": {
-"str": [
-4,
-1
-]
-},
-"Value": {
-"$type": "PMDC.LevelGen.ChestStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
-"Filters": [
-{
-"$type": "RogueElements.RoomFilterComponent, RogueElements",
-"Negate": true,
-"Components": [
-{
-"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
-},
-{
-"$type": "PMDC.LevelGen.NoEventRoom, PMDC"
-}
-]
-}
-],
-"Items": [
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "boost_nectar",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "boost_hp_up",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "boost_protein",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "boost_iron",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "boost_calcium",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "boost_zinc",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "boost_carbos",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_wonder",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_blue",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_black",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_clear",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_grass",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_green",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_brown",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_orange",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_gold",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_pink",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_purple",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_red",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_royal",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_silver",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_white",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_yellow",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_sky",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_gray",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "gummi_magenta",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "held_pierce_band",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "held_friend_bow",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "held_goggle_specs",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "evo_harmony_scarf",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_max_elixir",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 20
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_max_potion",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 20
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_full_heal",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 20
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_amber_tear",
-"HiddenValue": "",
-"Amount": 2,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 20
-}
-],
-"ItemThemes": [
-{
-"Spawn": {
-"$type": "PMDC.LevelGen.ItemStateType, PMDC",
-"UseType": {
-"assembly": "PMDC, Version=0.6.10.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.HeldState"
-},
-"UseMapItems": false,
-"UseSpecialItems": true,
-"Amount": {
-"Min": 1,
-"Max": 1
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "PMDC.LevelGen.ItemStateType, PMDC",
-"UseType": {
-"assembly": "PMDC, Version=0.6.10.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.UtilityState"
-},
-"UseMapItems": false,
-"UseSpecialItems": true,
-"Amount": {
-"Min": 2,
-"Max": 2
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "PMDC.LevelGen.ItemStateType, PMDC",
-"UseType": {
-"assembly": "PMDC, Version=0.6.10.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.DrinkState"
-},
-"UseMapItems": false,
-"UseSpecialItems": true,
-"Amount": {
-"Min": 3,
-"Max": 6
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"$type": "PMDC.LevelGen.ItemStateType, PMDC",
-"UseType": {
-"assembly": "PMDC, Version=0.6.10.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.GummiState"
-},
-"UseMapItems": false,
-"UseSpecialItems": true,
-"Amount": {
-"Min": 5,
-"Max": 10
-}
-},
-"Rate": 10
-}
-],
-"Mobs": [],
-"MobThemes": [],
-"Ambush": false
-}
-},
-{
-"Key": {
-"str": [
 5
 ]
 },
@@ -8986,8 +7774,8 @@
 },
 "AmountSpawner": {
 "$type": "RogueElements.RandRange, RogueElements",
-"Min": 60,
-"Max": 60
+"Min": 80,
+"Max": 80
 }
 }
 }
@@ -9058,7 +7846,7 @@
 },
 "Value": {
 "$type": "RogueEssence.LevelGen.PlaceRadiusMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"Radius": 120,
+"Radius": 80,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
@@ -9131,12 +7919,130 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.SpecificSpawnStep`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"$type": "RogueElements.SpecificSpawnStep`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
 "SpawnLocs": [
 {
 "X": 7,
 "Y": 6
+}
+],
+"Spawn": {
+"$type": "RogueEssence.LevelGen.BoxSpawner`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
+"BoxID": "box_heavy",
+"BaseSpawner": {
+"$type": "PMDC.LevelGen.SpeciesItemElementSpawner`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], PMDC",
+"Element": "ground",
+"ExceptFor": [
+"articuno",
+"zapdos",
+"moltres",
+"mewtwo",
+"mew",
+"lugia",
+"ho_oh",
+"celebi",
+"regirock",
+"regice",
+"registeel",
+"latias",
+"latios",
+"kyogre",
+"groudon",
+"rayquaza",
+"jirachi",
+"deoxys",
+"uxie",
+"mesprit",
+"azelf",
+"dialga",
+"palkia",
+"heatran",
+"regigigas",
+"giratina",
+"cresselia",
+"phione",
+"manaphy",
+"darkrai",
+"shaymin",
+"arceus",
+"victini",
+"cobalion",
+"terrakion",
+"virizion",
+"tornadus",
+"thundurus",
+"reshiram",
+"zekrom",
+"landorus",
+"kyurem",
+"keldeo",
+"meloetta",
+"genesect",
+"xerneas",
+"yveltal",
+"zygarde",
+"diancie",
+"hoopa",
+"volcanion",
+"tapu_koko",
+"tapu_lele",
+"tapu_bulu",
+"tapu_fini",
+"cosmog",
+"cosmoem",
+"solgaleo",
+"lunala",
+"nihilego",
+"buzzwole",
+"pheromosa",
+"xurkitree",
+"celesteela",
+"kartana",
+"guzzlord",
+"necrozma",
+"magearna",
+"marshadow",
+"poipole",
+"naganadel",
+"stakataka",
+"blacephalon",
+"zeraora",
+"meltan",
+"melmetal",
+"zacian",
+"zamazenta",
+"eternatus",
+"kubfu",
+"urshifu",
+"zarude",
+"regieleki",
+"regidrago",
+"glastrier",
+"spectrier",
+"calyrex"
+],
+"Rarity": {
+"Min": 2,
+"Max": 3
 },
+"Amount": {
+"Min": 1,
+"Max": 1
+}
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+6,
+1
+]
+},
+"Value": {
+"$type": "RogueElements.SpecificSpawnStep`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"SpawnLocs": [
 {
 "X": 7,
 "Y": 12
@@ -9147,19 +8053,6 @@
 "Picker": {
 "$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
 "ToSpawn": [
-{
-"$type": "RogueElements.RandBag`1[[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
-"ToSpawn": [
-{
-"ID": "box_glittery",
-"Cursed": false,
-"HiddenValue": "loot_nugget",
-"Amount": 0,
-"Price": 0
-}
-],
-"RemoveOnRoll": false
-},
 {
 "$type": "RogueElements.RandBag`1[[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
 "ToSpawn": [
@@ -9216,12 +8109,12 @@
 ]
 },
 "StartAmount": {
-"Min": 1775,
-"Max": 1820
+"Min": 8425,
+"Max": 8470
 },
 "AddAmount": {
-"Min": 100,
-"Max": 104
+"Min": 480,
+"Max": 484
 },
 "ModStates": [
 {
@@ -9239,6 +8132,35 @@
 ]
 },
 "Spawns": {
+"necessities": {
+"Spawns": [
+{
+"Spawn": {
+"ID": "food_grimy",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+}
+],
+"SpawnRates": {
+"nodes": [
+{
+"Item": 3,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+}
+]
+}
+},
 "snacks": {
 "Spawns": [
 {
@@ -9257,7 +8179,7 @@
 },
 {
 "Spawn": {
-"ID": "seed_decoy",
+"ID": "seed_blinker",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,
@@ -9278,6 +8200,48 @@
 "Price": 0
 },
 "Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+},
+{
+"Spawn": {
+"ID": "seed_blast",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+},
+{
+"Spawn": {
+"ID": "seed_last_chance",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+},
+{
+"Spawn": {
+"ID": "seed_decoy",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 5,
 "Range": {
 "Min": 0,
 "Max": 4
@@ -9339,6 +8303,34 @@
 "Min": 0,
 "Max": 4
 }
+},
+{
+"Spawn": {
+"ID": "machine_recall_box",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+},
+{
+"Spawn": {
+"ID": "key",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0
+},
+"Rate": 5,
+"Range": {
+"Min": 0,
+"Max": 4
+}
 }
 ],
 "SpawnRates": {
@@ -9385,13 +8377,13 @@
 },
 {
 "Spawn": {
-"ID": "wand_lure",
+"ID": "ammo_cacnea_spike",
 "Cursed": false,
 "HiddenValue": "",
-"Amount": 3,
+"Amount": 2,
 "Price": 0
 },
-"Rate": 10,
+"Rate": 3,
 "Range": {
 "Min": 0,
 "Max": 4
@@ -9399,13 +8391,13 @@
 },
 {
 "Spawn": {
-"ID": "wand_topsy_turvy",
+"ID": "ammo_iron_thorn",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 2,
 "Price": 0
 },
-"Rate": 10,
+"Rate": 3,
 "Range": {
 "Min": 0,
 "Max": 4
@@ -9419,7 +8411,49 @@
 "Amount": 3,
 "Price": 0
 },
-"Rate": 10,
+"Rate": 3,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+},
+{
+"Spawn": {
+"ID": "wand_lure",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 3,
+"Price": 0
+},
+"Rate": 3,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+},
+{
+"Spawn": {
+"ID": "wand_topsy_turvy",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0
+},
+"Rate": 3,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+},
+{
+"Spawn": {
+"ID": "wand_pounce",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 3,
+"Price": 0
+},
+"Rate": 3,
 "Range": {
 "Min": 0,
 "Max": 4
@@ -10322,10 +9356,10 @@
 },
 "SpecifiedSkills": [
 "snarl",
-"thief"
+"assurance"
 ],
 "Intrinsic": "",
-"Tactic": "thief",
+"Tactic": "wander_dumb_itemless",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {

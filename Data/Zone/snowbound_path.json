@@ -12910,7 +12910,7 @@
 "mud_bomb"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -12941,15 +12941,15 @@
 "Gender": -1
 },
 "Level": {
-"Min": 38,
-"Max": 38
+"Min": 37,
+"Max": 37
 },
 "SpecifiedSkills": [
 "ice_fang",
 "earthquake"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -12989,7 +12989,7 @@
 "ice_punch"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -13027,7 +13027,7 @@
 "frost_breath"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -13066,7 +13066,7 @@
 "icicle_spear"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -13106,7 +13106,7 @@
 "rest"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -13144,7 +13144,7 @@
 "dragon_breath"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -13183,7 +13183,7 @@
 "ingrain"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -13222,7 +13222,7 @@
 "aqua_ring"
 ],
 "Intrinsic": "thick_fat",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -13261,7 +13261,7 @@
 "chip_away"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -13300,7 +13300,7 @@
 "high_jump_kick"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -13339,7 +13339,7 @@
 "mirror_move"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -13378,7 +13378,7 @@
 "aqua_jet"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -13812,6 +13812,64 @@
 "FloorSpacing": {
 "Min": 4,
 "Max": 7
+},
+"FloorRange": {
+"Min": 0,
+"Max": 18
+}
+},
+"ModStates": []
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
+"Spawns": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueEssence",
+"Priority": {
+"str": [
+6,
+1
+]
+},
+"Item": {
+"$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueElements.PresetPicker`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "orb_cleanse",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+}
+}
+]
+}
+}
+}
+},
+"Rate": 10
+}
+]
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
+"FloorSpacing": {
+"Min": 9,
+"Max": 17
 },
 "FloorRange": {
 "Min": 0,
@@ -22010,7 +22068,7 @@
 "dazzling_gleam"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -22049,7 +22107,7 @@
 "ice_shard"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -22087,7 +22145,7 @@
 "dragon_breath"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -22126,7 +22184,7 @@
 "earthquake"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -22165,7 +22223,7 @@
 "amnesia"
 ],
 "Intrinsic": "",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -22204,7 +22262,7 @@
 "aqua_ring"
 ],
 "Intrinsic": "huge_power",
-"Tactic": "wander_normal",
+"Tactic": "wander_dumb",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -25879,7 +25937,7 @@
 ],
 "Spawn": {
 "$type": "RogueEssence.LevelGen.BoxSpawner`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
-"BoxID": "box_light",
+"BoxID": "box_heavy",
 "BaseSpawner": {
 "$type": "PMDC.LevelGen.SpeciesItemElementSpawner`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], PMDC",
 "Element": "ice",
@@ -25973,8 +26031,8 @@
 "calyrex"
 ],
 "Rarity": {
-"Min": 1,
-"Max": 2
+"Min": 2,
+"Max": 3
 },
 "Amount": {
 "Min": 1,

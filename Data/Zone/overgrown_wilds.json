@@ -9163,7 +9163,7 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.SpecificSpawnStep`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"$type": "RogueElements.SpecificSpawnStep`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
 "SpawnLocs": [
 {
 "X": 10,
@@ -9171,24 +9171,108 @@
 }
 ],
 "Spawn": {
-"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
-"Picker": {
-"$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
-"ToSpawn": [
-{
-"$type": "RogueElements.RandBag`1[[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
-"ToSpawn": [
-{
-"ID": "box_glittery",
-"Cursed": false,
-"HiddenValue": "loot_nugget",
-"Amount": 0,
-"Price": 0
-}
+"$type": "RogueEssence.LevelGen.BoxSpawner`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
+"BoxID": "box_heavy",
+"BaseSpawner": {
+"$type": "PMDC.LevelGen.SpeciesItemElementSpawner`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], PMDC",
+"Element": "grass",
+"ExceptFor": [
+"articuno",
+"zapdos",
+"moltres",
+"mewtwo",
+"mew",
+"lugia",
+"ho_oh",
+"celebi",
+"regirock",
+"regice",
+"registeel",
+"latias",
+"latios",
+"kyogre",
+"groudon",
+"rayquaza",
+"jirachi",
+"deoxys",
+"uxie",
+"mesprit",
+"azelf",
+"dialga",
+"palkia",
+"heatran",
+"regigigas",
+"giratina",
+"cresselia",
+"phione",
+"manaphy",
+"darkrai",
+"shaymin",
+"arceus",
+"victini",
+"cobalion",
+"terrakion",
+"virizion",
+"tornadus",
+"thundurus",
+"reshiram",
+"zekrom",
+"landorus",
+"kyurem",
+"keldeo",
+"meloetta",
+"genesect",
+"xerneas",
+"yveltal",
+"zygarde",
+"diancie",
+"hoopa",
+"volcanion",
+"tapu_koko",
+"tapu_lele",
+"tapu_bulu",
+"tapu_fini",
+"cosmog",
+"cosmoem",
+"solgaleo",
+"lunala",
+"nihilego",
+"buzzwole",
+"pheromosa",
+"xurkitree",
+"celesteela",
+"kartana",
+"guzzlord",
+"necrozma",
+"magearna",
+"marshadow",
+"poipole",
+"naganadel",
+"stakataka",
+"blacephalon",
+"zeraora",
+"meltan",
+"melmetal",
+"zacian",
+"zamazenta",
+"eternatus",
+"kubfu",
+"urshifu",
+"zarude",
+"regieleki",
+"regidrago",
+"glastrier",
+"spectrier",
+"calyrex"
 ],
-"RemoveOnRoll": false
+"Rarity": {
+"Min": 2,
+"Max": 3
+},
+"Amount": {
+"Min": 1,
+"Max": 1
 }
-]
 }
 }
 }
@@ -18238,7 +18322,7 @@
 ],
 "Spawn": {
 "$type": "RogueEssence.LevelGen.BoxSpawner`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
-"BoxID": "box_light",
+"BoxID": "box_heavy",
 "BaseSpawner": {
 "$type": "PMDC.LevelGen.SpeciesItemElementSpawner`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], PMDC",
 "Element": "grass",
@@ -18332,8 +18416,8 @@
 "calyrex"
 ],
 "Rarity": {
-"Min": 1,
-"Max": 2
+"Min": 2,
+"Max": 3
 },
 "Amount": {
 "Min": 1,

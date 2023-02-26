@@ -25925,6 +25925,64 @@
 "ModStates": []
 },
 {
+"$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
+"Spawns": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueEssence",
+"Priority": {
+"str": [
+6,
+1
+]
+},
+"Item": {
+"$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueElements.PresetPicker`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "orb_cleanse",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+}
+}
+]
+}
+}
+}
+},
+"Rate": 10
+}
+]
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
+"FloorSpacing": {
+"Min": 12,
+"Max": 24
+},
+"FloorRange": {
+"Min": 0,
+"Max": 25
+}
+},
+"ModStates": []
+},
+{
 "$type": "PMDC.LevelGen.SpreadHouseZoneStep, PMDC",
 "Priority": {
 "str": [
@@ -33893,7 +33951,7 @@
 ],
 "Spawn": {
 "$type": "RogueEssence.LevelGen.BoxSpawner`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
-"BoxID": "box_light",
+"BoxID": "box_heavy",
 "BaseSpawner": {
 "$type": "PMDC.LevelGen.SpeciesItemElementSpawner`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], PMDC",
 "Element": "bug",
@@ -33987,8 +34045,8 @@
 "calyrex"
 ],
 "Rarity": {
-"Min": 1,
-"Max": 2
+"Min": 2,
+"Max": 3
 },
 "Amount": {
 "Min": 1,

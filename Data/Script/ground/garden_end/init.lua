@@ -25,7 +25,7 @@ function garden_end.Init(map)
   --This will fill the localized strings table automatically based on the locale the game is 
   -- currently in. You can use the MapStrings table after this line!
   MapStrings = COMMON.AutoLoadLocalizedStrings()
-
+  GROUND:RefreshPlayer()
 end
 
 ---garden_end.Enter

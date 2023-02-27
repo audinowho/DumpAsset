@@ -188,7 +188,7 @@ function DebugTools:OnLossPenalty(save)
     if player.EquippedItem.ID ~= '' and player.EquippedItem.ID ~= nil then 
       local entry = _DATA:GetItem(player.EquippedItem.ID);
       if not entry.CannotDrop then
-         player:DequipItem();
+         player:SilentDequipItem();
       end
     end
   end

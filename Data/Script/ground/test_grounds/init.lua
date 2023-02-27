@@ -209,6 +209,18 @@ function test_grounds.Sign3_Action(obj, activator)
 end
 
 
+function test_grounds.Sign4_Action(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  PrintInfo('Text Tag Regression Test')
+  local chara = CH('PLAYER')
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue("Hello[pause=120]")
+  UI:WaitShowDialogue("Normal Normal Normal Normal Normal Normal Normal Normal [emote=happy]Happy Happy Happy Happy Happy Happy Happy [emote=sad]Sad Sad Sad Sad Sad Sad Sad Sad")
+  UI:WaitShowDialogue("Normal Normal Normal Normal Normal Normal Normal Normal [speed=3]Fast Fast Fast Fast Fast Fast Fast Fast Fast [speed=0.2]Slow Slow Slow Slow Slow Slow Slow")
+  UI:WaitShowDialogue("THE[pause=0] [color=#FF0000]QUICK[color] BROWN\n FOX [color=#FF0000]JUMPS[color] OVER[pause=0] THE[scroll] LAZY [color=#FF0000]DOG[color].\nTHE [color=#FF0000]QUICK[color] BROWN[pause=0] FOX [color=#FF0000]JUMPS[color].")
+end
+
+
 function test_grounds.Concurrent_Title()
 
   UI:WaitShowTitle("Like\nComment\nSubscribe", 60)

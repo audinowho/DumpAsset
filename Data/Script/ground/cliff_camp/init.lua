@@ -23,6 +23,7 @@ function cliff_camp.Enter(map)
     Map  = 4, Entry  = 1
   }
   
+  GROUND:Hide("NPC_DexRater")
   
   --when arriving the first time, play this cutscene
   if not SV.cliff_camp.ExpositionComplete then

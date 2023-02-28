@@ -29,7 +29,7 @@ function base_camp.Enter(map)
   if not SV.base_camp.IntroComplete then
     base_camp.PrepareFirstTimeVisit()
 	GAME:FadeIn(20)
-  elseif SV.test_grounds.DemoComplete then
+  elseif SV.guildmaster_summit.ExpositionComplete then
     local noctowl = CH('Noctowl')
     GROUND:TeleportTo(noctowl, 80, 288, Direction.Right)
 	GAME:FadeIn(20)

@@ -47,6 +47,10 @@ function guildmaster_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
           COMMON.EndDungeonDay(result, 'guildmaster_island', -1,8,0)
 	    else
 	      --GAME:EnterZone('guildmaster_island',-1,8,0)
+		  GAME:UnlockDungeon('tropical_path')
+		  SV.base_camp.ExpositionComplete = true
+          SV.base_camp.FirstTalkComplete = true
+		  SV.test_grounds.DemoComplete = true
 		  COMMON.EndDungeonDay(result, 'the_neverending_tale', -1,0,0)
 	    end
       elseif segmentID == 1 then

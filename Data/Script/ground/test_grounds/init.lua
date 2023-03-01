@@ -70,8 +70,6 @@ end
 function test_grounds.Enter(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo('Enter_test_grounds')
-  SV.base_camp.ExpositionComplete = true
-  SV.base_camp.FirstTalkComplete = true
   
   local caterQuest = SV.missions.FinishedMissions["CaterQuest"]
   if caterQuest == nil then
@@ -85,13 +83,6 @@ function test_grounds.Enter(map)
   GAME:FadeIn(60)
   UI:ResetSpeaker()
   
-  if not SV.test_grounds.DemoComplete then
-    GAME:SetTeamName(STRINGS:FormatKey("TEAM_NAME", "Guildmaster"))
-    UI:WaitShowDialogue(STRINGS:Format("Congratulations on completing the toughest dungeon in the demo![pause=0] Enjoy the debug room!"))
-	GAME:UnlockDungeon('debug_zone')
-	GAME:UnlockDungeon('tropical_path')
-  end
-  SV.test_grounds.DemoComplete = true
 end
 
 --Called constantly while the map is running

@@ -25,6 +25,7 @@ function base_camp.Enter(map)
   
   if not SV.base_camp.FerryUnlocked then
     GROUND:Hide("Lapras")
+    GROUND:Hide("Ferry")
   end
   if not SV.base_camp.IntroComplete then
     base_camp.PrepareFirstTimeVisit()

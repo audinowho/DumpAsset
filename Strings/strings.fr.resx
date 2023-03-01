@@ -253,7 +253,7 @@
     <value>Registre des messages</value>
     <comment></comment>  </data>
   <data name="_ENUM_InputType_Run" xml:space="preserve">
-    <value>Courrir</value>
+    <value>Courir</value>
     <comment></comment>  </data>
   <data name="_ENUM_InputType_SelectItems" xml:space="preserve">
     <value>Sélectionner les objets</value>
@@ -429,6 +429,12 @@
   <data name="DLG_DELETE_CONFIRM" xml:space="preserve">
     <value>En êtes-vous sûr ?</value>
     <comment></comment>  </data>
+  <data name="DLG_DELETE_REPLAY" xml:space="preserve">
+    <value>Les données du replay va être supprimé.[pause=0] Voulez-vous aussi supprimer les favoris ?</value>
+    <comment></comment>  </data>
+  <data name="DLG_DELETE_REPLAY_COMPLETE" xml:space="preserve">
+    <value>Vos replays ont été supprimés.</value>
+    <comment></comment>  </data>
   <data name="DLG_DELETE_SAVE" xml:space="preserve">
     <value>Votre aventure va être effacée.</value>
     <comment></comment>  </data>
@@ -437,6 +443,9 @@
     <comment></comment>  </data>
   <data name="DLG_ERR_READ_FILE_FALLBACK" xml:space="preserve">
     <value>Veuillez le supprimer, ou bien le déplacer de {0}.</value>
+    <comment></comment>  </data>
+  <data name="DLG_ERR_READ_QUICKSAVE" xml:space="preserve">
+    <value>La sauvegarde rapide n'a pas pu être chargé à cause de la différence de version.[pause=0] La sauvegarde principale sera chargé à la place.</value>
     <comment></comment>  </data>
   <data name="DLG_ERR_READ_SAVE" xml:space="preserve">
     <value>Le fichier de sauvegarde n'a pas pu être lu car son format est invalide ou a été corrompu.</value>
@@ -475,7 +484,13 @@
     <value>Abandonner l'aventure ? Cela sera considéré comme une défaite...</value>
     <comment></comment>  </data>
   <data name="DLG_REPLAY_DESYNC" xml:space="preserve">
-    <value>Le replay a été desynchronisé.[pause=0]Retourr au menu principal...</value>
+    <value>Le replay a été desynchronisé.[pause=0]Retour au menu principal...</value>
+    <comment></comment>  </data>
+  <data name="DLG_REPLAY_VERIFY_DESYNC" xml:space="preserve">
+    <value>Une désynchronisation s'est produite pendant la vérification du replay. [pause=0] Retour au menu ...</value>
+    <comment></comment>  </data>
+  <data name="DLG_REPLAY_VERIFY_OK" xml:space="preserve">
+    <value>Le replay a été vérifié.</value>
     <comment></comment>  </data>
   <data name="DLG_RESCUE_ADD_REWARD_ASK" xml:space="preserve">
     <value>Que voulez-vous offrir ?</value>
@@ -577,10 +592,10 @@
     <value>Envoyer {0} à la base?</value>
     <comment></comment>  </data>
   <data name="DLG_SKILL_DELETE" xml:space="preserve">
-    <value>Voulez-vous oublier une capacitié pour apprendre {0}?</value>
+    <value>Voulez-vous oublier une capacité pour apprendre {0}?</value>
     <comment></comment>  </data>
   <data name="DLG_SKILL_FULL" xml:space="preserve">
-    <value>{0} essaye d'apprendre {1}, mais {0} connait déjà 4 capacitiés.</value>
+    <value>{0} essaye d'apprendre {1}, mais {0} connait déjà 4 capacités.</value>
     <comment></comment>  </data>
   <data name="DLG_SKILL_LEARN" xml:space="preserve">
     <value>{0} a appris {1} !</value>
@@ -593,6 +608,9 @@
     <comment></comment>  </data>
   <data name="DLG_SKILL_STOP_LEARN" xml:space="preserve">
     <value>Arrêter d'apprendre {0} ?</value>
+    <comment></comment>  </data>
+  <data name="DLG_STORE_ALL_CONFIRM" xml:space="preserve">
+    <value>Entreposer tous les objets de votre inventaire ?</value>
     <comment></comment>  </data>
   <data name="DLG_SUSPEND_ASK" xml:space="preserve">
     <value>Voulez-vous sauvegarder la partie et retournez à l'écran de démarrage ?</value>
@@ -792,6 +810,9 @@
   <data name="MENU_DELETE" xml:space="preserve">
     <value>Supprimer</value>
     <comment></comment>  </data>
+  <data name="MENU_DELETE_REPLAY_TITLE" xml:space="preserve">
+    <value>Supprimer les données du replay</value>
+    <comment></comment>  </data>
   <data name="MENU_DELETE_SAVE_TITLE" xml:space="preserve">
     <value>Supprimer les fichiers de sauvegarde</value>
     <comment></comment>  </data>
@@ -859,7 +880,7 @@
     <value>Talent de {0}</value>
     <comment>Title of the Ability menu, to look at a team member's abilities</comment>  </data>
   <data name="MENU_ITEM_AMOUNT_TITLE" xml:space="preserve">
-    <value>Combien?</value>
+    <value>Combien ?</value>
     <comment></comment>  </data>
   <data name="MENU_ITEM_DRINK" xml:space="preserve">
     <value>Ingérer</value>
@@ -945,6 +966,9 @@
   <data name="MENU_MAIL_SOS_TITLE" xml:space="preserve">
     <value>Lettre SOS</value>
     <comment></comment>  </data>
+  <data name="MENU_MAIN_EDITOR_RETURN" xml:space="preserve">
+    <value>Retour à l'éditeur</value>
+    <comment></comment>  </data>
   <data name="MENU_MAIN_INVENTORY" xml:space="preserve">
     <value>Objets</value>
     <comment>Main menu option to look at inventory</comment>  </data>
@@ -952,7 +976,7 @@
     <value>Sauvegarder</value>
     <comment></comment>  </data>
   <data name="MENU_MAIN_SKILLS" xml:space="preserve">
-    <value>Capacitiés</value>
+    <value>Capacités</value>
     <comment>Main menu option to look at the team's moves</comment>  </data>
   <data name="MENU_MAKE_LEADER" xml:space="preserve">
     <value>Assigner Chef</value>
@@ -960,6 +984,18 @@
   <data name="MENU_MAP_CONDITION" xml:space="preserve">
     <value>Temps: {0}</value>
     <comment>For labeling the current map's weather or terrain.</comment>  </data>
+  <data name="MENU_MOD_LOG_DEPENDENCY" xml:space="preserve">
+    <value>{0} dépend du mode manquant {1}.</value>
+    <comment></comment>  </data>
+  <data name="MENU_MOD_LOG_INCOMPATIBLE" xml:space="preserve">
+    <value>{0} est incompatible avec {1}.</value>
+    <comment></comment>  </data>
+  <data name="MENU_MOD_LOG_ORDER" xml:space="preserve">
+    <value>Boucle du chargement des ordres trouvé: {0}.</value>
+    <comment></comment>  </data>
+  <data name="MENU_MOD_LOG_TITLE" xml:space="preserve">
+    <value>Erreur du chargement du mode</value>
+    <comment></comment>  </data>
   <data name="MENU_MSG_LOG_TITLE" xml:space="preserve">
     <value>Registre des messages</value>
     <comment>Title of the window for message log</comment>  </data>
@@ -1002,6 +1038,9 @@
   <data name="MENU_REPLAY_PAUSE" xml:space="preserve">
     <value>Pause</value>
     <comment>The "pause" action of a replay</comment>  </data>
+  <data name="MENU_REPLAY_QUICKSAVE" xml:space="preserve">
+    <value>Faire une sauvegarde rapide</value>
+    <comment></comment>  </data>
   <data name="MENU_REPLAY_REPLAY" xml:space="preserve">
     <value>Replay</value>
     <comment>Replay menu option for replaying a chosen recorded game</comment>  </data>
@@ -1017,6 +1056,9 @@
   <data name="MENU_REPLAY_TITLE" xml:space="preserve">
     <value>Replay</value>
     <comment>Title of the Replay menu, for options within a replay</comment>  </data>
+  <data name="MENU_REPLAY_VERIFY" xml:space="preserve">
+    <value>Verifier</value>
+    <comment></comment>  </data>
   <data name="MENU_REPLAYS_TITLE" xml:space="preserve">
     <value>Replays</value>
     <comment>Title for the Replays menu, where the player can view replays</comment>  </data>
@@ -1269,6 +1311,9 @@
   <data name="MENU_STORAGE_STORE" xml:space="preserve">
     <value>Entreposer des objets</value>
     <comment></comment>  </data>
+  <data name="MENU_STORAGE_STORE_ALL" xml:space="preserve">
+    <value>Tout entreposer</value>
+    <comment></comment>  </data>
   <data name="MENU_STORAGE_TAKE_BOX" xml:space="preserve">
     <value>Prendre les boîtes</value>
     <comment></comment>  </data>
@@ -1309,10 +1354,10 @@
     <value>Evanoui à: {0}</value>
     <comment>For labeling where the team member fainted at</comment>  </data>
   <data name="MENU_TEAM_HP" xml:space="preserve">
-    <value>PV: {0}/{1}</value>
+    <value>PV:</value>
     <comment>For labeling a team member's current and maximum HP</comment>  </data>
   <data name="MENU_TEAM_HUNGER" xml:space="preserve">
-    <value>Estomac: {0}/{1}</value>
+    <value>Estomac:</value>
     <comment>For labeling a team member's current and max belly</comment>  </data>
   <data name="MENU_TEAM_INFO" xml:space="preserve">
     <value>Information</value>
@@ -1324,7 +1369,7 @@
     <value>Niveau</value>
     <comment></comment>  </data>
   <data name="MENU_TEAM_LEVEL_SHORT" xml:space="preserve">
-    <value>Niv: {0}</value>
+    <value>Niv:</value>
     <comment>For labeling a team member's current level</comment>  </data>
   <data name="MENU_TEAM_MET_AT" xml:space="preserve">
     <value>Rencontré à: {0}</value>
@@ -1439,6 +1484,9 @@
     <comment></comment>  </data>
   <data name="MSG_CANT_SWAP_LEADER" xml:space="preserve">
     <value>{0} ne peut pas changer de meneur pour l'instant</value>
+    <comment></comment>  </data>
+  <data name="MSG_CANT_USE_ITEM_OTHER" xml:space="preserve">
+    <value>{0} ne peut pas utiliser cet objet sur les autres pour l'instant !</value>
     <comment></comment>  </data>
   <data name="MSG_CHARGES_LOST" xml:space="preserve">
     <value>Le {1} de {0} a perdu [color=#00FFFF]{2}[color] PP!</value>

@@ -384,3 +384,914 @@ function SINGLE_CHAR_SCRIPT.OutlawClearCheck(owner, ownerChar, context, args)
 end
 
 
+
+function SINGLE_CHAR_SCRIPT.ShowTileName(owner, ownerChar, context, args)
+
+    
+	if SV.test_grounds.Tileset == 0 then
+	  UI:TextPopUp("Tiny Woods", 150)
+	elseif SV.test_grounds.Tileset == 1 then
+	  UI:TextPopUp("Thunderwave Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 2 then
+	  UI:TextPopUp("Mt. Steel", 150)
+
+	elseif SV.test_grounds.Tileset == 3 then
+	  UI:TextPopUp("Mt. Steel 2", 150)
+
+	elseif SV.test_grounds.Tileset == 4 then
+	  UI:TextPopUp("Grass Maze", 150)
+
+	elseif SV.test_grounds.Tileset == 5 then
+	  UI:TextPopUp("Uproar Forest", 150)
+
+	elseif SV.test_grounds.Tileset == 6 then
+	  UI:TextPopUp("Electric Maze", 150)
+
+	elseif SV.test_grounds.Tileset == 7 then
+	  UI:TextPopUp("Water Maze", 150)
+
+	elseif SV.test_grounds.Tileset == 8 then
+	  UI:TextPopUp("Poison Maze", 150)
+
+	elseif SV.test_grounds.Tileset == 9 then
+	  UI:TextPopUp("Rock Maze", 150)
+
+	elseif SV.test_grounds.Tileset == 10 then
+	  UI:TextPopUp("Silent Chasm", 150)
+
+	elseif SV.test_grounds.Tileset == 11 then
+	  UI:TextPopUp("Mt. Thunder", 150)
+
+	elseif SV.test_grounds.Tileset == 12 then
+	  UI:TextPopUp("Mt. Thunder Peak", 150)
+
+	elseif SV.test_grounds.Tileset == 13 then
+	  UI:TextPopUp("Great Canyon", 150)
+
+	elseif SV.test_grounds.Tileset == 14 then
+	  UI:TextPopUp("Lapis Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 15 then
+	  UI:TextPopUp("Southern Cavern 2", 150)
+
+	elseif SV.test_grounds.Tileset == 16 then
+	  UI:TextPopUp("Wish Cave 2", 150)
+
+	elseif SV.test_grounds.Tileset == 17 then
+	  UI:TextPopUp("Rock Path", 150)
+
+	elseif SV.test_grounds.Tileset == 18 then
+	  UI:TextPopUp("Northern Range", 150)
+
+	elseif SV.test_grounds.Tileset == 19 then
+	  UI:TextPopUp("Mt. Blaze", 150)
+
+	elseif SV.test_grounds.Tileset == 20 then
+	  UI:TextPopUp("Snow Path", 150)
+
+	elseif SV.test_grounds.Tileset == 21 then
+	  UI:TextPopUp("Frosty Forest", 150)
+
+	elseif SV.test_grounds.Tileset == 22 then
+	  UI:TextPopUp("Mt. Freeze", 150)
+
+	elseif SV.test_grounds.Tileset == 23 then
+	  UI:TextPopUp("Ice Maze", 150)
+
+	elseif SV.test_grounds.Tileset == 24 then
+	  UI:TextPopUp("Magma Cavern 2", 150)
+
+	elseif SV.test_grounds.Tileset == 25 then
+	  UI:TextPopUp("Magma Cavern 3", 150)
+
+	elseif SV.test_grounds.Tileset == 26 then
+	  UI:TextPopUp("Howling Forest 2", 150)
+
+	elseif SV.test_grounds.Tileset == 27 then
+	  UI:TextPopUp("Sky Tower", 150)
+
+	elseif SV.test_grounds.Tileset == 28 then
+	  UI:TextPopUp("Darknight Relic", 150)
+
+	elseif SV.test_grounds.Tileset == 29 then
+	  UI:TextPopUp("Desert Region", 150)
+
+	elseif SV.test_grounds.Tileset == 30 then
+	  UI:TextPopUp("Howling Forest", 150)
+
+	elseif SV.test_grounds.Tileset == 31 then
+	  UI:TextPopUp("Southern Cavern", 150)
+
+	elseif SV.test_grounds.Tileset == 32 then
+	  UI:TextPopUp("Wyvern Hill", 150)
+
+	elseif SV.test_grounds.Tileset == 33 then
+	  UI:TextPopUp("Solar Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 34 then
+	  UI:TextPopUp("Waterfall Pond", 150)
+
+	elseif SV.test_grounds.Tileset == 35 then
+	  UI:TextPopUp("Stormy Sea", 150)
+
+	elseif SV.test_grounds.Tileset == 36 then
+	  UI:TextPopUp("Stormy Sea 2", 150)
+
+	elseif SV.test_grounds.Tileset == 37 then
+	  UI:TextPopUp("Silver Trench 3", 150)
+
+	elseif SV.test_grounds.Tileset == 38 then
+	  UI:TextPopUp("Buried Relic", 150)
+
+	elseif SV.test_grounds.Tileset == 39 then
+	  UI:TextPopUp("Buried Relic 2", 150)
+
+	elseif SV.test_grounds.Tileset == 40 then
+	  UI:TextPopUp("Buried Relic 3", 150)
+
+	elseif SV.test_grounds.Tileset == 41 then
+	  UI:TextPopUp("Lightning Field", 150)
+
+	elseif SV.test_grounds.Tileset == 42 then
+	  UI:TextPopUp("Northwind Field", 150)
+
+	elseif SV.test_grounds.Tileset == 43 then
+	  UI:TextPopUp("Mt. Faraway 2", 150)
+
+	elseif SV.test_grounds.Tileset == 44 then
+	  UI:TextPopUp("Mt. Faraway 4", 150)
+
+	elseif SV.test_grounds.Tileset == 45 then
+	  UI:TextPopUp("Northern Range 2", 150)
+
+	elseif SV.test_grounds.Tileset == 46 then
+	  UI:TextPopUp("Pitfall Valley", 150)
+
+	elseif SV.test_grounds.Tileset == 47 then
+	  UI:TextPopUp("Wish Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 48 then
+	  UI:TextPopUp("Joyous Tower", 150)
+
+	elseif SV.test_grounds.Tileset == 49 then
+	  UI:TextPopUp("Purity Forest 2", 150)
+
+	elseif SV.test_grounds.Tileset == 50 then
+	  UI:TextPopUp("Purity Forest 4", 150)
+
+	elseif SV.test_grounds.Tileset == 51 then
+	  UI:TextPopUp("Purity Forest 6", 150)
+
+	elseif SV.test_grounds.Tileset == 52 then
+	  UI:TextPopUp("Purity Forest 7", 150)
+
+	elseif SV.test_grounds.Tileset == 53 then
+	  UI:TextPopUp("Purity Forest 8", 150)
+
+	elseif SV.test_grounds.Tileset == 54 then
+	  UI:TextPopUp("Purity Forest 9", 150)
+
+	elseif SV.test_grounds.Tileset == 55 then
+	  UI:TextPopUp("Murky Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 56 then
+	  UI:TextPopUp("Western Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 57 then
+	  UI:TextPopUp("Western Cave 2", 150)
+
+	elseif SV.test_grounds.Tileset == 58 then
+	  UI:TextPopUp("Meteor Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 59 then
+	  UI:TextPopUp("Rescue Team Maze", 150)
+
+	elseif SV.test_grounds.Tileset == 60 then
+	  UI:TextPopUp("Beach Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 61 then
+	  UI:TextPopUp("Drenched Bluffs", 150)
+
+	elseif SV.test_grounds.Tileset == 62 then
+	  UI:TextPopUp("Mt. Bristle", 150)
+
+	elseif SV.test_grounds.Tileset == 63 then
+	  UI:TextPopUp("Waterfall Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 64 then
+	  UI:TextPopUp("Apple Woods", 150)
+
+	elseif SV.test_grounds.Tileset == 65 then
+	  UI:TextPopUp("Craggy Coast", 150)
+
+	elseif SV.test_grounds.Tileset == 66 then
+	  UI:TextPopUp("Side Path", 150)
+
+	elseif SV.test_grounds.Tileset == 67 then
+	  UI:TextPopUp("Mt. Horn", 150)
+
+	elseif SV.test_grounds.Tileset == 68 then
+	  UI:TextPopUp("Rock Path (PMD2)", 150)
+
+	elseif SV.test_grounds.Tileset == 69 then
+	  UI:TextPopUp("Foggy Forest", 150)
+
+	elseif SV.test_grounds.Tileset == 70 then
+	  UI:TextPopUp("Forest Path", 150)
+
+	elseif SV.test_grounds.Tileset == 71 then
+	  UI:TextPopUp("Steam Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 72 then
+	  UI:TextPopUp("Steam Cave Unused", 150)
+
+	elseif SV.test_grounds.Tileset == 73 then
+	  UI:TextPopUp("Amp Plains", 150)
+
+	elseif SV.test_grounds.Tileset == 74 then
+	  UI:TextPopUp("Far Amp Plains", 150)
+
+	elseif SV.test_grounds.Tileset == 75 then
+	  UI:TextPopUp("Northern Desert", 150)
+
+	elseif SV.test_grounds.Tileset == 76 then
+	  UI:TextPopUp("Northern Desert 2", 150)
+
+	elseif SV.test_grounds.Tileset == 77 then
+	  UI:TextPopUp("Quicksand Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 78 then
+	  UI:TextPopUp("Quicksand Pit", 150)
+
+	elseif SV.test_grounds.Tileset == 79 then
+	  UI:TextPopUp("Quicksand Pit Unused", 150)
+
+	elseif SV.test_grounds.Tileset == 80 then
+	  UI:TextPopUp("Crystal Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 81 then
+	  UI:TextPopUp("Crystal Cave 2", 150)
+
+	elseif SV.test_grounds.Tileset == 82 then
+	  UI:TextPopUp("Crystal Crossing", 150)
+
+	elseif SV.test_grounds.Tileset == 83 then
+	  UI:TextPopUp("Chasm Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 84 then
+	  UI:TextPopUp("Chasm Cave 2", 150)
+
+	elseif SV.test_grounds.Tileset == 85 then
+	  UI:TextPopUp("Dark Hill", 150)
+
+	elseif SV.test_grounds.Tileset == 86 then
+	  UI:TextPopUp("Dark Hill 2", 150)
+
+	elseif SV.test_grounds.Tileset == 87 then
+	  UI:TextPopUp("Sealed Ruin", 150)
+
+	elseif SV.test_grounds.Tileset == 88 then
+	  UI:TextPopUp("Deep Sealed Ruin", 150)
+
+	elseif SV.test_grounds.Tileset == 89 then
+	  UI:TextPopUp("Dusk Forest", 150)
+
+	elseif SV.test_grounds.Tileset == 90 then
+	  UI:TextPopUp("Dusk Forest 2", 150)
+
+	elseif SV.test_grounds.Tileset == 91 then
+	  UI:TextPopUp("Deep Dusk Forest", 150)
+
+	elseif SV.test_grounds.Tileset == 92 then
+	  UI:TextPopUp("Deep Dusk Forest 2", 150)
+
+	elseif SV.test_grounds.Tileset == 93 then
+	  UI:TextPopUp("Treeshroud Forest", 150)
+
+	elseif SV.test_grounds.Tileset == 94 then
+	  UI:TextPopUp("Treeshroud Forest 2", 150)
+
+	elseif SV.test_grounds.Tileset == 95 then
+	  UI:TextPopUp("Brine Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 96 then
+	  UI:TextPopUp("Lower Brine Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 97 then
+	  UI:TextPopUp("Brine Cave Unused", 150)
+
+	elseif SV.test_grounds.Tileset == 98 then
+	  UI:TextPopUp("Hidden Land", 150)
+
+	elseif SV.test_grounds.Tileset == 99 then
+	  UI:TextPopUp("Hidden Highland", 150)
+
+	elseif SV.test_grounds.Tileset == 100 then
+	  UI:TextPopUp("Temporal Tower", 150)
+
+	elseif SV.test_grounds.Tileset == 101 then
+	  UI:TextPopUp("Temporal Spire", 150)
+
+	elseif SV.test_grounds.Tileset == 102 then
+	  UI:TextPopUp("Temporal Tower Unused", 150)
+
+	elseif SV.test_grounds.Tileset == 103 then
+	  UI:TextPopUp("Mystifying Forest", 150)
+
+	elseif SV.test_grounds.Tileset == 104 then
+	  UI:TextPopUp("Southern Jungle", 150)
+
+	elseif SV.test_grounds.Tileset == 105 then
+	  UI:TextPopUp("Concealed Ruins", 150)
+
+	elseif SV.test_grounds.Tileset == 106 then
+	  UI:TextPopUp("Surrounded Sea", 150)
+
+	elseif SV.test_grounds.Tileset == 107 then
+	  UI:TextPopUp("Miracle Sea", 150)
+
+	elseif SV.test_grounds.Tileset == 108 then
+	  UI:TextPopUp("Mt. Travail", 150)
+
+	elseif SV.test_grounds.Tileset == 109 then
+	  UI:TextPopUp("The Nightmare", 150)
+
+	elseif SV.test_grounds.Tileset == 110 then
+	  UI:TextPopUp("Spacial Rift", 150)
+
+	elseif SV.test_grounds.Tileset == 111 then
+	  UI:TextPopUp("Spacial Rift 2", 150)
+
+	elseif SV.test_grounds.Tileset == 112 then
+	  UI:TextPopUp("Dark Crater", 150)
+
+	elseif SV.test_grounds.Tileset == 113 then
+	  UI:TextPopUp("Deep Dark Crater", 150)
+
+	elseif SV.test_grounds.Tileset == 114 then
+	  UI:TextPopUp("World Abyss 2", 150)
+
+	elseif SV.test_grounds.Tileset == 115 then
+	  UI:TextPopUp("Golden Chamber", 150)
+
+	elseif SV.test_grounds.Tileset == 116 then
+	  UI:TextPopUp("Mystery Jungle", 150)
+
+	elseif SV.test_grounds.Tileset == 117 then
+	  UI:TextPopUp("Mystery Jungle 2", 150)
+
+	elseif SV.test_grounds.Tileset == 118 then
+	  UI:TextPopUp("Zero Isle East 3", 150)
+
+	elseif SV.test_grounds.Tileset == 119 then
+	  UI:TextPopUp("Zero Isle East 4", 150)
+
+	elseif SV.test_grounds.Tileset == 120 then
+	  UI:TextPopUp("Zero Isle South", 150)
+
+	elseif SV.test_grounds.Tileset == 121 then
+	  UI:TextPopUp("Zero Isle South 2", 150)
+
+	elseif SV.test_grounds.Tileset == 122 then
+	  UI:TextPopUp("Tiny Meadow", 150)
+
+	elseif SV.test_grounds.Tileset == 123 then
+	  UI:TextPopUp("Final Maze 2", 150)
+
+	elseif SV.test_grounds.Tileset == 124 then
+	  UI:TextPopUp("Waterfall Pond Unused", 150)
+
+	elseif SV.test_grounds.Tileset == 125 then
+	  UI:TextPopUp("Lush Prairie", 150)
+
+	elseif SV.test_grounds.Tileset == 126 then
+	  UI:TextPopUp("Rock Aegis Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 127 then
+	  UI:TextPopUp("Ice Aegis Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 128 then
+	  UI:TextPopUp("Steel Aegis Cave", 150)
+
+	elseif SV.test_grounds.Tileset == 129 then
+	  UI:TextPopUp("Murky Forest", 150)
+
+	elseif SV.test_grounds.Tileset == 130 then
+	  UI:TextPopUp("Deep Boulder Quarry", 150)
+
+	elseif SV.test_grounds.Tileset == 131 then
+	  UI:TextPopUp("Limestone Cavern", 150)
+
+	elseif SV.test_grounds.Tileset == 132 then
+	  UI:TextPopUp("Deep Limestone Cavern", 150)
+
+	elseif SV.test_grounds.Tileset == 133 then
+	  UI:TextPopUp("Barren Valley", 150)
+
+	elseif SV.test_grounds.Tileset == 134 then
+	  UI:TextPopUp("Dark Wasteland", 150)
+
+	elseif SV.test_grounds.Tileset == 135 then
+	  UI:TextPopUp("Temporal Tower (Future of Darkness)", 150)
+
+	elseif SV.test_grounds.Tileset == 136 then
+	  UI:TextPopUp("Temporal Spire (Future of Darkness)", 150)
+
+	elseif SV.test_grounds.Tileset == 137 then
+	  UI:TextPopUp("Spacial Cliffs", 150)
+
+	elseif SV.test_grounds.Tileset == 138 then
+	  UI:TextPopUp("Dark Ice Mountain", 150)
+
+	elseif SV.test_grounds.Tileset == 139 then
+	  UI:TextPopUp("Dark Ice Mountain Peak", 150)
+
+	elseif SV.test_grounds.Tileset == 140 then
+	  UI:TextPopUp("Icicle Forest", 150)
+
+	elseif SV.test_grounds.Tileset == 141 then
+	  UI:TextPopUp("Vast Ice Mountain", 150)
+
+	elseif SV.test_grounds.Tileset == 142 then
+	  UI:TextPopUp("Vast Ice Mountain Peak", 150)
+
+	elseif SV.test_grounds.Tileset == 143 then
+	  UI:TextPopUp("Sky Peak 4th Pass", 150)
+
+	elseif SV.test_grounds.Tileset == 144 then
+	  UI:TextPopUp("Sky Peak 7th Pass", 150)
+
+	elseif SV.test_grounds.Tileset == 145 then
+	  UI:TextPopUp("Sky Peak Summit Pass", 150)
+
+	elseif SV.test_grounds.Tileset == 146 then
+	  UI:TextPopUp("Test Dungeon", 150)
+
+	end
+end
+
+function SINGLE_CHAR_SCRIPT.SetTileData(wall, ground, water)
+  
+    _ZONE.CurrentMap.TextureMap["wall"] = RogueEssence.Dungeon.AutoTile(wall)
+    _ZONE.CurrentMap.TextureMap["floor"] = RogueEssence.Dungeon.AutoTile(ground)
+    _ZONE.CurrentMap.TextureMap["water"] = RogueEssence.Dungeon.AutoTile(water)
+  
+  --call recalculate all autotiles for the entire map
+  _ZONE.CurrentMap:CalculateTerrainAutotiles(RogueElements.Loc(0, 0), RogueElements.Loc(_ZONE.CurrentMap.Width, _ZONE.CurrentMap.Height))
+end
+
+function SINGLE_CHAR_SCRIPT.TileTestChange(owner, ownerChar, context, args)
+
+  SV.test_grounds.Tileset = SV.test_grounds.Tileset + 1
+  
+	if SV.test_grounds.Tileset == 1 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("thunderwave_cave_wall", "thunderwave_cave_floor", "thunderwave_cave_secondary")
+	elseif SV.test_grounds.Tileset == 2 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("mt_steel_1_wall", "mt_steel_1_floor", "mt_steel_1_secondary")
+	elseif SV.test_grounds.Tileset == 3 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("mt_steel_2_wall", "mt_steel_2_floor", "mt_steel_2_secondary")
+	elseif SV.test_grounds.Tileset == 4 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("grass_maze_wall", "grass_maze_floor", "grass_maze_secondary")
+	elseif SV.test_grounds.Tileset == 5 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("uproar_forest_wall", "uproar_forest_floor", "uproar_forest_secondary")
+	elseif SV.test_grounds.Tileset == 6 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("electric_maze_wall", "electric_maze_floor", "electric_maze_secondary")
+	elseif SV.test_grounds.Tileset == 7 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("water_maze_wall", "water_maze_floor", "water_maze_secondary")
+	elseif SV.test_grounds.Tileset == 8 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("poison_maze_wall", "poison_maze_floor", "poison_maze_secondary")
+	elseif SV.test_grounds.Tileset == 9 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("rock_maze_wall", "rock_maze_floor", "rock_maze_secondary")
+	elseif SV.test_grounds.Tileset == 10 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("silent_chasm_wall", "silent_chasm_floor", "silent_chasm_secondary")
+	elseif SV.test_grounds.Tileset == 11 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("mt_thunder_wall", "mt_thunder_floor", "mt_thunder_secondary")
+	elseif SV.test_grounds.Tileset == 12 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("mt_thunder_peak_wall", "mt_thunder_peak_floor", "mt_thunder_peak_secondary")
+	elseif SV.test_grounds.Tileset == 13 then
+	  SOUND:PlayBGM("Great Canyon.ogg", true)
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("great_canyon_wall", "great_canyon_floor", "great_canyon_secondary")
+	elseif SV.test_grounds.Tileset == 14 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("lapis_cave_wall", "lapis_cave_floor", "lapis_cave_secondary")
+	elseif SV.test_grounds.Tileset == 15 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("southern_cavern_2_wall", "southern_cavern_2_floor", "southern_cavern_2_secondary")
+	elseif SV.test_grounds.Tileset == 16 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("wish_cave_2_wall", "wish_cave_2_floor", "wish_cave_2_secondary")
+	elseif SV.test_grounds.Tileset == 17 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("rock_path_rb_wall", "rock_path_rb_floor", "rock_path_rb_secondary")
+	elseif SV.test_grounds.Tileset == 18 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("northern_range_1_wall", "northern_range_1_floor", "northern_range_1_secondary")
+	elseif SV.test_grounds.Tileset == 19 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("mt_blaze_wall", "mt_blaze_floor", "mt_blaze_secondary")
+	elseif SV.test_grounds.Tileset == 20 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("snow_path_wall", "snow_path_floor", "snow_path_secondary")
+	elseif SV.test_grounds.Tileset == 21 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("frosty_forest_wall", "frosty_forest_floor", "frosty_forest_secondary")
+	elseif SV.test_grounds.Tileset == 22 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("mt_freeze_wall", "mt_freeze_floor", "mt_freeze_secondary")
+	elseif SV.test_grounds.Tileset == 23 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("ice_maze_wall", "ice_maze_floor", "ice_maze_secondary")
+	elseif SV.test_grounds.Tileset == 24 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("magma_cavern_2_wall", "magma_cavern_2_floor", "magma_cavern_2_secondary")
+	elseif SV.test_grounds.Tileset == 25 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("magma_cavern_3_wall", "magma_cavern_3_floor", "magma_cavern_3_secondary")
+	elseif SV.test_grounds.Tileset == 26 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("howling_forest_2_wall", "howling_forest_2_floor", "howling_forest_2_secondary")
+	elseif SV.test_grounds.Tileset == 27 then
+	  SOUND:PlayBGM("Sky Tower.ogg", true)
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("sky_tower_wall", "sky_tower_floor", "sky_tower_secondary")
+	elseif SV.test_grounds.Tileset == 28 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("darknight_relic_wall", "darknight_relic_floor", "darknight_relic_secondary")
+	elseif SV.test_grounds.Tileset == 29 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("desert_region_wall", "desert_region_floor", "desert_region_secondary")
+	elseif SV.test_grounds.Tileset == 30 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("howling_forest_1_wall", "howling_forest_1_floor", "howling_forest_1_secondary")
+	elseif SV.test_grounds.Tileset == 31 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("southern_cavern_1_wall", "southern_cavern_1_floor", "southern_cavern_1_secondary")
+	elseif SV.test_grounds.Tileset == 32 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("wyvern_hill_wall", "wyvern_hill_floor", "wyvern_hill_secondary")
+	elseif SV.test_grounds.Tileset == 33 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("solar_cave_1_wall", "solar_cave_1_floor", "solar_cave_1_secondary")
+	elseif SV.test_grounds.Tileset == 34 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("waterfall_pond_wall", "waterfall_pond_floor", "waterfall_pond_secondary")
+	elseif SV.test_grounds.Tileset == 35 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("stormy_sea_1_wall", "stormy_sea_1_floor", "stormy_sea_1_secondary")
+	elseif SV.test_grounds.Tileset == 36 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("stormy_sea_2_wall", "stormy_sea_2_floor", "stormy_sea_2_secondary")
+	elseif SV.test_grounds.Tileset == 37 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("silver_trench_3_wall", "silver_trench_3_floor", "silver_trench_3_secondary")
+	elseif SV.test_grounds.Tileset == 38 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("buried_relic_1_wall", "buried_relic_1_floor", "buried_relic_1_secondary")
+	elseif SV.test_grounds.Tileset == 39 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("buried_relic_2_wall", "buried_relic_2_floor", "buried_relic_2_secondary")
+	elseif SV.test_grounds.Tileset == 40 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("buried_relic_3_wall", "buried_relic_3_floor", "buried_relic_3_secondary")
+	elseif SV.test_grounds.Tileset == 41 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("lightning_field_wall", "lightning_field_floor", "lightning_field_secondary")
+	elseif SV.test_grounds.Tileset == 42 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("northwind_field_wall", "northwind_field_floor", "northwind_field_secondary")
+	elseif SV.test_grounds.Tileset == 43 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("mt_faraway_2_wall", "mt_faraway_2_floor", "mt_faraway_2_secondary")
+	elseif SV.test_grounds.Tileset == 44 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("mt_faraway_4_wall", "mt_faraway_4_floor", "mt_faraway_4_secondary")
+	elseif SV.test_grounds.Tileset == 45 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("northern_range_2_wall", "northern_range_2_floor", "northern_range_2_secondary")
+	elseif SV.test_grounds.Tileset == 46 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("pitfall_valley_1_wall", "pitfall_valley_1_floor", "pitfall_valley_1_secondary")
+	elseif SV.test_grounds.Tileset == 47 then
+	  SOUND:PlayBGM("Buried Relic.ogg", true)
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("wish_cave_1_wall", "wish_cave_1_floor", "wish_cave_1_secondary")
+	elseif SV.test_grounds.Tileset == 48 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("joyous_tower_wall", "joyous_tower_floor", "joyous_tower_secondary")
+	elseif SV.test_grounds.Tileset == 49 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("purity_forest_2_wall", "purity_forest_2_floor", "purity_forest_2_secondary")
+	elseif SV.test_grounds.Tileset == 50 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("purity_forest_4_wall", "purity_forest_4_floor", "purity_forest_4_secondary")
+	elseif SV.test_grounds.Tileset == 51 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("purity_forest_6_wall", "purity_forest_6_floor", "purity_forest_6_secondary")
+	elseif SV.test_grounds.Tileset == 52 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("purity_forest_7_wall", "purity_forest_7_floor", "purity_forest_7_secondary")
+	elseif SV.test_grounds.Tileset == 53 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("purity_forest_8_wall", "purity_forest_8_floor", "purity_forest_8_secondary")
+	elseif SV.test_grounds.Tileset == 54 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("purity_forest_9_wall", "purity_forest_9_floor", "purity_forest_9_secondary")
+	elseif SV.test_grounds.Tileset == 55 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("murky_cave_wall", "murky_cave_floor", "murky_cave_secondary")
+	elseif SV.test_grounds.Tileset == 56 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("western_cave_1_wall", "western_cave_1_floor", "western_cave_1_secondary")
+	elseif SV.test_grounds.Tileset == 57 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("western_cave_2_wall", "western_cave_2_floor", "western_cave_2_secondary")
+	elseif SV.test_grounds.Tileset == 58 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("meteor_cave_wall", "meteor_cave_floor", "meteor_cave_secondary")
+	elseif SV.test_grounds.Tileset == 59 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("rescue_team_maze_wall", "rescue_team_maze_floor", "rescue_team_maze_secondary")
+	elseif SV.test_grounds.Tileset == 60 then
+	  SOUND:PlayBGM("B04. Tropical Path.ogg", true)
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("beach_cave_wall", "beach_cave_floor", "beach_cave_secondary")
+	elseif SV.test_grounds.Tileset == 61 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("drenched_bluff_wall", "drenched_bluff_floor", "drenched_bluff_secondary")
+	elseif SV.test_grounds.Tileset == 62 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("mt_bristle_wall", "mt_bristle_floor", "mt_bristle_secondary")
+	elseif SV.test_grounds.Tileset == 63 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("waterfall_cave_wall", "waterfall_cave_floor", "waterfall_cave_secondary")
+	elseif SV.test_grounds.Tileset == 64 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("apple_woods_wall", "apple_woods_floor", "apple_woods_secondary")
+	elseif SV.test_grounds.Tileset == 65 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("craggy_coast_wall", "craggy_coast_floor", "craggy_coast_secondary")
+	elseif SV.test_grounds.Tileset == 66 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("side_path_wall", "side_path_floor", "side_path_secondary")
+	elseif SV.test_grounds.Tileset == 67 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("mt_horn_wall", "mt_horn_floor", "mt_horn_secondary")
+	elseif SV.test_grounds.Tileset == 68 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("rock_path_tds_wall", "rock_path_tds_floor", "rock_path_tds_secondary")
+	elseif SV.test_grounds.Tileset == 69 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("foggy_forest_wall", "foggy_forest_floor", "foggy_forest_secondary")
+	elseif SV.test_grounds.Tileset == 70 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("forest_path_wall", "forest_path_floor", "forest_path_secondary")
+	elseif SV.test_grounds.Tileset == 71 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("steam_cave_wall", "steam_cave_floor", "steam_cave_secondary")
+	elseif SV.test_grounds.Tileset == 72 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("unused_steam_cave_wall", "unused_steam_cave_floor", "unused_steam_cave_secondary")
+	elseif SV.test_grounds.Tileset == 73 then
+	  SOUND:PlayBGM("B10. Thunderstruck Pass.ogg", true)
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("amp_plains_wall", "amp_plains_floor", "amp_plains_secondary")
+	elseif SV.test_grounds.Tileset == 74 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("far_amp_plains_wall", "far_amp_plains_floor", "far_amp_plains_secondary")
+	elseif SV.test_grounds.Tileset == 75 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("northern_desert_1_wall", "northern_desert_1_floor", "northern_desert_1_secondary")
+	elseif SV.test_grounds.Tileset == 76 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("northern_desert_2_wall", "northern_desert_2_floor", "northern_desert_2_secondary")
+	elseif SV.test_grounds.Tileset == 77 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("quicksand_cave_wall", "quicksand_cave_floor", "quicksand_cave_secondary")
+	elseif SV.test_grounds.Tileset == 78 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("quicksand_pit_wall", "quicksand_pit_floor", "quicksand_pit_secondary")
+	elseif SV.test_grounds.Tileset == 79 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("quicksand_unused_wall", "quicksand_unused_floor", "quicksand_unused_secondary")
+	elseif SV.test_grounds.Tileset == 80 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("crystal_cave_1_wall", "crystal_cave_1_floor", "crystal_cave_1_secondary")
+	elseif SV.test_grounds.Tileset == 81 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("crystal_cave_2_wall", "crystal_cave_2_floor", "crystal_cave_2_secondary")
+	elseif SV.test_grounds.Tileset == 82 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("crystal_crossing_wall", "crystal_crossing_floor", "crystal_crossing_secondary")
+	elseif SV.test_grounds.Tileset == 83 then
+	  SOUND:PlayBGM("B29. Treacherous Mountain.ogg", true)
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("chasm_cave_1_wall", "chasm_cave_1_floor", "chasm_cave_1_floor")
+	elseif SV.test_grounds.Tileset == 84 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("chasm_cave_2_wall", "chasm_cave_2_floor", "chasm_cave_2_floor")
+	elseif SV.test_grounds.Tileset == 85 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("dark_hill_1_wall", "dark_hill_1_floor", "dark_hill_1_secondary")
+	elseif SV.test_grounds.Tileset == 86 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("dark_hill_2_wall", "dark_hill_2_floor", "dark_hill_2_secondary")
+	elseif SV.test_grounds.Tileset == 87 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("sealed_ruin_wall", "sealed_ruin_floor", "sealed_ruin_secondary")
+	elseif SV.test_grounds.Tileset == 88 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("deep_sealed_ruin_wall", "deep_sealed_ruin_floor", "deep_sealed_ruin_secondary")
+	elseif SV.test_grounds.Tileset == 89 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("dusk_forest_1_wall", "dusk_forest_1_floor", "dusk_forest_1_secondary")
+	elseif SV.test_grounds.Tileset == 90 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("dusk_forest_2_wall", "dusk_forest_2_floor", "dusk_forest_2_secondary")
+	elseif SV.test_grounds.Tileset == 91 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("deep_dusk_forest_1_wall", "deep_dusk_forest_1_floor", "deep_dusk_forest_1_secondary")
+	elseif SV.test_grounds.Tileset == 92 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("deep_dusk_forest_2_wall", "deep_dusk_forest_2_floor", "deep_dusk_forest_2_secondary")
+	elseif SV.test_grounds.Tileset == 93 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("treeshroud_forest_1_wall", "treeshroud_forest_1_floor", "treeshroud_forest_1_secondary")
+	elseif SV.test_grounds.Tileset == 94 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("treeshroud_forest_2_wall", "treeshroud_forest_2_floor", "treeshroud_forest_2_secondary")
+	elseif SV.test_grounds.Tileset == 95 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("brine_cave_wall", "brine_cave_floor", "brine_cave_secondary")
+	elseif SV.test_grounds.Tileset == 96 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("lower_brine_cave_wall", "lower_brine_cave_floor", "lower_brine_cave_secondary")
+	elseif SV.test_grounds.Tileset == 97 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("unused_brine_cave_wall", "unused_brine_cave_floor", "unused_brine_cave_secondary")
+	elseif SV.test_grounds.Tileset == 98 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("hidden_land_wall", "hidden_land_floor", "hidden_land_secondary")
+	elseif SV.test_grounds.Tileset == 99 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("hidden_highland_wall", "hidden_highland_floor", "hidden_highland_secondary")
+	elseif SV.test_grounds.Tileset == 100 then
+	  SOUND:PlayBGM("Temporal Tower.ogg", true)
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("temporal_tower_wall", "temporal_tower_floor", "temporal_tower_secondary")
+	elseif SV.test_grounds.Tileset == 101 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("temporal_spire_wall", "temporal_spire_floor", "temporal_spire_secondary")
+	elseif SV.test_grounds.Tileset == 102 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("temporal_unused_wall", "temporal_unused_floor", "temporal_unused_secondary")
+	elseif SV.test_grounds.Tileset == 103 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("mystifying_forest_wall", "mystifying_forest_floor", "mystifying_forest_secondary")
+	elseif SV.test_grounds.Tileset == 104 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("southern_jungle_wall", "southern_jungle_floor", "southern_jungle_secondary")
+	elseif SV.test_grounds.Tileset == 105 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("concealed_ruins_wall", "concealed_ruins_floor", "concealed_ruins_secondary")
+	elseif SV.test_grounds.Tileset == 106 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("surrounded_sea_wall", "surrounded_sea_floor", "surrounded_sea_secondary")
+	elseif SV.test_grounds.Tileset == 107 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("miracle_sea_wall", "miracle_sea_floor", "miracle_sea_secondary")
+	elseif SV.test_grounds.Tileset == 108 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("mt_travail_wall", "mt_travail_floor", "mt_travail_secondary")
+	elseif SV.test_grounds.Tileset == 109 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("the_nightmare_wall", "the_nightmare_floor", "the_nightmare_secondary")
+	elseif SV.test_grounds.Tileset == 110 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("spacial_rift_1_wall", "spacial_rift_1_floor", "spacial_rift_1_secondary")
+	elseif SV.test_grounds.Tileset == 111 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("spacial_rift_2_wall", "spacial_rift_2_floor", "spacial_rift_2_secondary")
+	elseif SV.test_grounds.Tileset == 112 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("dark_crater_wall", "dark_crater_floor", "dark_crater_secondary")
+	elseif SV.test_grounds.Tileset == 113 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("deep_dark_crater_wall", "deep_dark_crater_floor", "deep_dark_crater_secondary")
+	elseif SV.test_grounds.Tileset == 114 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("world_abyss_2_wall", "world_abyss_2_floor", "world_abyss_2_secondary")
+	elseif SV.test_grounds.Tileset == 115 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("golden_chamber_wall", "golden_chamber_floor", "golden_chamber_secondary")
+	elseif SV.test_grounds.Tileset == 116 then
+	  SOUND:PlayBGM("B22. Overgrown Wilds.ogg", true)
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("mystery_jungle_1_wall", "mystery_jungle_1_floor", "mystery_jungle_1_secondary")
+	elseif SV.test_grounds.Tileset == 117 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("mystery_jungle_2_wall", "mystery_jungle_2_floor", "mystery_jungle_2_secondary")
+	elseif SV.test_grounds.Tileset == 118 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("zero_isle_east_3_wall", "zero_isle_east_3_floor", "zero_isle_east_3_secondary")
+	elseif SV.test_grounds.Tileset == 119 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("zero_isle_east_4_wall", "zero_isle_east_4_floor", "zero_isle_east_4_secondary")
+	elseif SV.test_grounds.Tileset == 120 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("zero_isle_south_1_wall", "zero_isle_south_1_floor", "zero_isle_south_1_secondary")
+	elseif SV.test_grounds.Tileset == 121 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("zero_isle_south_2_wall", "zero_isle_south_2_floor", "zero_isle_south_2_secondary")
+	elseif SV.test_grounds.Tileset == 122 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("tiny_meadow_wall", "tiny_meadow_floor", "tiny_meadow_secondary")
+	elseif SV.test_grounds.Tileset == 123 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("final_maze_2_wall", "final_maze_2_floor", "final_maze_2_secondary")
+	elseif SV.test_grounds.Tileset == 124 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("unused_waterfall_pond_wall", "unused_waterfall_pond_floor", "unused_waterfall_pond_secondary")
+	elseif SV.test_grounds.Tileset == 125 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("lush_prairie_wall", "lush_prairie_floor", "lush_prairie_secondary")
+	elseif SV.test_grounds.Tileset == 126 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("rock_aegis_cave_wall", "rock_aegis_cave_floor", "rock_aegis_cave_secondary")
+	elseif SV.test_grounds.Tileset == 127 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("ice_aegis_cave_wall", "ice_aegis_cave_floor", "ice_aegis_cave_secondary")
+	elseif SV.test_grounds.Tileset == 128 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("steel_aegis_cave_wall", "steel_aegis_cave_floor", "steel_aegis_cave_secondary")
+	elseif SV.test_grounds.Tileset == 129 then
+	  SOUND:PlayBGM("B03. Demonstration 3.ogg", true)
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("murky_forest_wall", "murky_forest_floor", "murky_forest_secondary")
+	elseif SV.test_grounds.Tileset == 130 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("deep_boulder_quarry_wall", "deep_boulder_quarry_floor", "deep_boulder_quarry_secondary")
+	elseif SV.test_grounds.Tileset == 131 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("limestone_cavern_wall", "limestone_cavern_floor", "limestone_cavern_secondary")
+	elseif SV.test_grounds.Tileset == 132 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("deep_limestone_cavern_wall", "deep_limestone_cavern_floor", "deep_limestone_cavern_secondary")
+	elseif SV.test_grounds.Tileset == 133 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("barren_valley_wall", "barren_valley_floor", "barren_valley_secondary")
+	elseif SV.test_grounds.Tileset == 134 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("dark_wasteland_wall", "dark_wasteland_floor", "dark_wasteland_secondary")
+	elseif SV.test_grounds.Tileset == 135 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("future_temporal_tower_wall", "future_temporal_tower_floor", "future_temporal_tower_secondary")
+	elseif SV.test_grounds.Tileset == 136 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("future_temporal_spire_wall", "future_temporal_spire_floor", "future_temporal_spire_secondary")
+	elseif SV.test_grounds.Tileset == 137 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("spacial_cliffs_wall", "spacial_cliffs_floor", "spacial_cliffs_secondary")
+	elseif SV.test_grounds.Tileset == 138 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("dark_ice_mountain_wall", "dark_ice_mountain_floor", "dark_ice_mountain_secondary")
+	elseif SV.test_grounds.Tileset == 139 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("dark_ice_mountain_peak_wall", "dark_ice_mountain_peak_floor", "dark_ice_mountain_peak_secondary")
+	elseif SV.test_grounds.Tileset == 140 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("icicle_forest_wall", "icicle_forest_floor", "icicle_forest_secondary")
+	elseif SV.test_grounds.Tileset == 141 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("vast_ice_mountain_wall", "vast_ice_mountain_floor", "vast_ice_mountain_secondary")
+	elseif SV.test_grounds.Tileset == 142 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("vast_ice_mountain_peak_wall", "vast_ice_mountain_peak_floor", "vast_ice_mountain_peak_secondary")
+	elseif SV.test_grounds.Tileset == 143 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("sky_peak_4th_pass_wall", "sky_peak_4th_pass_floor", "sky_peak_4th_pass_secondary")
+	elseif SV.test_grounds.Tileset == 144 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("sky_peak_7th_pass_wall", "sky_peak_7th_pass_floor", "sky_peak_7th_pass_secondary")
+	elseif SV.test_grounds.Tileset == 145 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("sky_peak_summit_pass_wall", "sky_peak_summit_pass_floor", "sky_peak_summit_pass_secondary")
+	elseif SV.test_grounds.Tileset == 146 then
+
+	  SINGLE_CHAR_SCRIPT.SetTileData("test_dungeon_wall", "test_dungeon_floor", "test_dungeon_secondary")
+	end
+end
+

@@ -59,6 +59,7 @@ SV.test_grounds =
   Starter = { Species="pikachu", Form=0, Skin="normal", Gender=2 },
   Partner = { Species="eevee", Form=0, Skin="normal", Gender=1 },
   DemoComplete = false,
+  Tileset = 0,
 }
 
 SV.missions =

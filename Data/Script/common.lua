@@ -156,9 +156,14 @@ function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
   local open_dests = {}
   for ii = 1,#dungeon_entrances,1 do
     if GAME:DungeonUnlocked(dungeon_entrances[ii]) then
-	  local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_entrances[ii])
-	  local zone_name = zone_summary:GetColoredName()
+	local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_entrances[ii])
 	  if zone_summary.Released then
+	    local zone_name = ""
+	    if _DATA.Save:GetDungeonUnlock(dungeon_entrances[ii]) == RogueEssence.Data.GameProgress.UnlockState.Completed then
+		  zone_name = zone_summary:GetColoredName()
+		else
+		  zone_name = "[color=#00FFFF]"..zone_summary.Name:ToLocal().."[color]"
+		end
         table.insert(open_dests, { Name=zone_name, Dest=RogueEssence.Dungeon.ZoneLoc(dungeon_entrances[ii], 0, 0, 0) })
 	  end
 	end

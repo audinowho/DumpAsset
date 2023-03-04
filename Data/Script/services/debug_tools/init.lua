@@ -103,6 +103,11 @@ function DebugTools:OnNewGame()
     --  GAME:GivePlayerStorageItem(ii)
     --  SV.unlocked_trades[ii] = true
     --end
+	
+    --for ii = 1, 10000, 1 do
+    --  mon_id = RogueEssence.Dungeon.MonsterID("bulbasaur", 0, "normal", Gender.Male)
+    --  _DATA.Save.ActiveTeam.Assembly:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, "", 0))
+    --end
   
     SV.base_camp.ExpositionComplete = true
     SV.base_camp.IntroComplete = true

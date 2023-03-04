@@ -333,7 +333,7 @@ function base_camp_2.Appraisal_Action(obj, activator)
 			if result == 1 then
 				local bag_count = GAME:GetPlayerBagCount() + GAME:GetPlayerEquippedCount()
 				if bag_count > 0 then
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Choose'], "A"))
+					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Choose'], STRINGS:LocalKeyString(26)))
 					state = 1
 				else
 					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Bag_Empty']))

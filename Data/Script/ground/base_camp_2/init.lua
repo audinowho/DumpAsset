@@ -964,7 +964,6 @@ function base_camp_2.Catch_Action()
 end
 
 base_camp_2.difficulty_tbl = { }
-base_camp_2.difficulty_tbl[""] = -1
 base_camp_2.difficulty_tbl["debug_zone"] = 4
 base_camp_2.difficulty_tbl["guildmaster_island"] = -1
 base_camp_2.difficulty_tbl["tropical_path"] = 0
@@ -975,9 +974,12 @@ base_camp_2.difficulty_tbl["veiled_ridge"] = 3
 base_camp_2.difficulty_tbl["champions_road"] = 4
 base_camp_2.difficulty_tbl["cave_of_whispers"] = 4
 base_camp_2.difficulty_tbl["moonlit_courtyard"] = 3
-base_camp_2.difficulty_tbl["faultedline_ridge"] = 0
+base_camp_2.difficulty_tbl["faultline_ridge"] = 0
+base_camp_2.difficulty_tbl["trickster_woods"] = 1
+base_camp_2.difficulty_tbl["moonlit_courtyard"] = 3
 base_camp_2.difficulty_tbl["sleeping_caldera"] = 3
-base_camp_2.difficulty_tbl["shimmer_bay"] = 1
+base_camp_2.difficulty_tbl["lava_floe_island"] = 1
+base_camp_2.difficulty_tbl["shimmer_bay"] = 3
 base_camp_2.difficulty_tbl["fertile_valley"] = 1
 base_camp_2.difficulty_tbl["ambush_forest"] = 3
 base_camp_2.difficulty_tbl["treacherous_mountain"] = 3
@@ -1007,7 +1009,7 @@ function base_camp_2.NPC_Interactive_Action(chara, activator)
     talk_to = CH('Assembly3')
     --local tbl = LTBL(talk_to)
 	can_talk_to = true
-	if base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == -1 then
+	if base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == nil then
 	  can_talk_to = false
 	else
 	  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(talk_to.Data.MetLoc.ID)

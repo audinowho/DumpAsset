@@ -238,18 +238,18 @@ function DebugTools:OnLossPenalty(save)
   for i = inv_count, 0, -1 do
     local entry = _DATA:GetItem(save.ActiveTeam:GetInv(i).ID)
     if not entry.CannotDrop then
-      save.ActiveTeam:RemoveFromInv(i);
+      save.ActiveTeam:RemoveFromInv(i)
     end
   end
   
   --remove equips
-  local player_count = GAME:GetPlayerPartyCount()
+  local player_count = save.ActiveTeam.Players.Count
   for i = 0, player_count - 1, 1 do 
-    local player = GAME:GetPlayerPartyMember(i)
+    local player = save.ActiveTeam.Players[i]
     if player.EquippedItem.ID ~= '' and player.EquippedItem.ID ~= nil then 
-      local entry = _DATA:GetItem(player.EquippedItem.ID);
+      local entry = _DATA:GetItem(player.EquippedItem.ID)
       if not entry.CannotDrop then
-         player:SilentDequipItem();
+         player:SilentDequipItem()
       end
     end
   end

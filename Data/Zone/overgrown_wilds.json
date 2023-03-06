@@ -1,11 +1,12 @@
 ﻿{
-"Version": "0.7.0.0",
+"Version": "0.7.1.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Overgrown Wilds",
 "LocalTexts": {
-"de": "Überwachsene Wildnis"
+"de": "Überwachsene Wildnis",
+"zh-hans": "杂草原野"
 }
 },
 "Released": false,
@@ -9302,7 +9303,8 @@
 "Name": {
 "DefaultText": "Overgrown Wilds\\n{0}F",
 "LocalTexts": {
-"de": "Überwachsene Wildnis\\n{0}.OG"
+"de": "Überwachsene Wildnis\\n{0}.OG",
+"zh-hans": "杂草原野\\n{0}F"
 }
 },
 "Priority": {
@@ -9328,7 +9330,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -12592,7 +12594,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ShopModGenState"
 }
 ]
@@ -13018,7 +13020,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.StairsModGenState"
 }
 ]
@@ -13592,7 +13594,7 @@
 "BlankBG": "mystery_jungle_1_wall",
 "LayeredGround": true,
 "IndependentGround": false,
-"GroundElement": "grass"
+"GroundElement": "bug"
 }
 },
 {
@@ -14274,7 +14276,7 @@
 "BlankBG": "mystery_jungle_1_wall",
 "LayeredGround": true,
 "IndependentGround": false,
-"GroundElement": "grass"
+"GroundElement": "bug"
 }
 },
 {
@@ -14956,7 +14958,7 @@
 "BlankBG": "mystery_jungle_1_wall",
 "LayeredGround": true,
 "IndependentGround": false,
-"GroundElement": "grass"
+"GroundElement": "bug"
 }
 },
 {
@@ -15638,7 +15640,7 @@
 "BlankBG": "mystery_jungle_1_wall",
 "LayeredGround": true,
 "IndependentGround": false,
-"GroundElement": "grass"
+"GroundElement": "bug"
 }
 },
 {
@@ -15814,7 +15816,9 @@
 },
 "Name": {
 "DefaultText": "Exotic Wilds\\nB{0}F",
-"LocalTexts": {}
+"LocalTexts": {
+"zh-hans": "异草原野\\nB{0}F"
+}
 },
 "Priority": {
 "str": [
@@ -15839,7 +15843,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -17102,6 +17106,45 @@
 "Spawn": {
 "Spawn": {
 "BaseForm": {
+"Species": "seedot",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 17,
+"Max": 17
+},
+"SpecifiedSkills": [
+"harden",
+"nature_power"
+],
+"Intrinsic": "",
+"Tactic": "wander_dumb",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+},
+"Role": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+},
+{
+"Spawn": {
+"Spawn": {
+"BaseForm": {
 "Species": "pineco",
 "Form": 0,
 "Skin": "",
@@ -18026,7 +18069,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -18046,7 +18089,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.RecruitState"
 },
 "UseMapItems": true,

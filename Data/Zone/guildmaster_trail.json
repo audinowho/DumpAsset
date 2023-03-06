@@ -1,12 +1,13 @@
 ﻿{
-"Version": "0.7.0.0",
+"Version": "0.7.1.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Guildmaster Trail",
 "LocalTexts": {
 "de": "Gildenmeister-Pfad",
-"es": "Sendero del Maestro"
+"es": "Sendero del Maestro",
+"zh-hans": "公会会长之路"
 }
 },
 "Released": true,
@@ -47205,134 +47206,6 @@
 {
 "Key": {
 "str": [
-3
-]
-},
-"Value": {
-"$type": "RogueElements.BlobWaterStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Blobs": {
-"Min": 0,
-"Max": 0
-},
-"AreaScale": {
-"Min": 3,
-"Max": 9
-},
-"GenerateScale": {
-"Min": 6,
-"Max": 15
-},
-"BlobStencil": {
-"$type": "RogueElements.BlobTilePercentStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"TileStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Room": false,
-"Wall": false,
-"Blocked": true,
-"Not": true
-},
-"Percent": 50
-},
-"Terrain": {
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "grass",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Owner": 0,
-"TileStates": []
-}
-},
-"TerrainStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Room": true,
-"Wall": false,
-"Blocked": false,
-"Not": false
-}
-}
-},
-{
-"Key": {
-"str": [
-3
-]
-},
-"Value": {
-"$type": "RogueElements.PerlinWaterStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"OrderComplexity": 4,
-"OrderSoftness": 0,
-"WaterPercent": {
-"Min": 50,
-"Max": 50
-},
-"Bowl": false,
-"Terrain": {
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "grass",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Owner": 0,
-"TileStates": []
-}
-},
-"TerrainStencil": {
-"$type": "RogueElements.MultiTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"List": [
-{
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Room": true,
-"Wall": false,
-"Blocked": false,
-"Not": false
-},
-{
-"$type": "RogueElements.NoChokepointTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"TileStencil": {
-"$type": "RogueElements.MapTerrainStencil`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Room": true,
-"Wall": false,
-"Blocked": false,
-"Not": false
-},
-"Global": false,
-"Negate": true
-}
-],
-"RequireAny": false
-}
-}
-},
-{
-"Key": {
-"str": [
 3,
 1
 ]
@@ -64326,7 +64199,8 @@
 "DefaultText": "Guildmaster Trail\\n{0}F",
 "LocalTexts": {
 "de": "Gildenmeister-Pfad\\n{0}.OG",
-"es": "Sendero del Maestro\\nP{0}"
+"es": "Sendero del Maestro\\nP{0}",
+"zh-hans": "公会会长之路\\n{0}F"
 }
 },
 "Priority": {
@@ -64352,7 +64226,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -80568,7 +80442,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -80588,7 +80462,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.RecruitState"
 },
 "UseMapItems": true,
@@ -80623,7 +80497,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": true,
@@ -80664,7 +80538,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": true,
@@ -89754,7 +89628,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -89774,7 +89648,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.RecruitState"
 },
 "UseMapItems": true,
@@ -89809,7 +89683,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": true,
@@ -89850,7 +89724,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": true,
@@ -98843,7 +98717,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EquipState"
 },
 "UseMapItems": true,
@@ -98916,7 +98790,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -98936,7 +98810,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.RecruitState"
 },
 "UseMapItems": true,
@@ -98997,7 +98871,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ChestModGenState"
 }
 ]
@@ -102378,7 +102252,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EquipState"
 },
 "UseMapItems": true,
@@ -102514,7 +102388,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -102555,7 +102429,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.RecruitState"
 },
 "UseMapItems": true,
@@ -108567,7 +108441,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ChestModGenState"
 }
 ]
@@ -138695,7 +138569,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": false,
@@ -141834,7 +141708,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": false,
@@ -142125,7 +141999,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.1.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ShopModGenState"
 }
 ]

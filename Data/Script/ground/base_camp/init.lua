@@ -218,12 +218,15 @@ end
 function base_camp.First_North_Exit_Touch(obj, activator)  
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  UI:ResetSpeaker()
+  UI:ResetSpeaker(false)
+  SOUND:PlaySE("Menu/Skip")
   local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get('guildmaster_trail')
   UI:ChoiceMenuYesNo(STRINGS:FormatKey("DLG_ASK_ENTER_DUNGEON", zone:GetColoredName()), false)
   UI:WaitForChoice()
   ch = UI:ChoiceResult()
   if ch then
+    _DATA:PreLoadZone('guildmaster_trail')
+	SOUND:PlayBGM("", true)
     GAME:FadeOut(false, 20)
     GAME:EnterDungeon('guildmaster_trail', 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, true)
   end

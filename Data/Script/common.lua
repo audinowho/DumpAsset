@@ -184,8 +184,8 @@ function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
   if #open_dests == 1 then
     if open_dests[1].Dest.StructID.Segment < 0 then
 	  --single ground entry
-      UI:ResetSpeaker()
-      
+      UI:ResetSpeaker(false)
+      SOUND:PlaySE("Menu/Skip")
 	  UI:ChoiceMenuYesNo(STRINGS:FormatKey("DLG_ASK_ENTER_GROUND", open_dests[1].Name))
       UI:WaitForChoice()
       if UI:ChoiceResult() then
@@ -193,7 +193,7 @@ function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
 	  end
 	else
 	  --single dungeon entry
-      UI:ResetSpeaker()
+      UI:ResetSpeaker(false)
       SOUND:PlaySE("Menu/Skip")
 	  UI:DungeonChoice(open_dests[1].Name, open_dests[1].Dest)
       UI:WaitForChoice()
@@ -211,11 +211,15 @@ function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
   end
   
   if dest:IsValid() then
-    SOUND:PlayBGM("", true)
-    GAME:FadeOut(false, 20)
 	if dest.StructID.Segment > -1 then
+	  --pre-loads the zone on a separate thread while we fade out, just for a little optimization
+	  _DATA:PreLoadZone(dest.ID)
+	  SOUND:PlayBGM("", true)
+      GAME:FadeOut(false, 20)
 	  GAME:EnterDungeon(dest.ID, dest.StructID.Segment, dest.StructID.ID, dest.EntryPoint, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
 	else
+	  SOUND:PlayBGM("", true)
+      GAME:FadeOut(false, 20)
 	  GAME:EnterZone(dest.ID, dest.StructID.Segment, dest.StructID.ID, dest.EntryPoint)
 	end
   end

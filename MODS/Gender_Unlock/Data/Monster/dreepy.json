@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.6.1.0",
+"Version": "0.7.2.0",
 "Object": {
 "$type": "RogueEssence.Data.MonsterData, RogueEssence",
 "Name": {
@@ -16,7 +16,7 @@
 "zh-hans": "多龙梅西亚"
 }
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "Title": {
 "DefaultText": "Lingering Pokémon",
@@ -25,7 +25,7 @@
 "ko": "원망포켓몬",
 "zh-hant": "哀怨寶可夢",
 "fr": "Pokémon Âme Errante",
-"de": "Missgunst",
+"de": "Missgunst-Pokémon",
 "es": "Pokémon Resentido",
 "it": "Pokémon Risentimento",
 "ja-jp": "うらめしポケモン",
@@ -34,9 +34,9 @@
 },
 "IndexNum": 885,
 "EXPTable": "slow",
-"SkillGroup1": "undiscovered",
-"SkillGroup2": "undiscovered",
-"JoinRate": -10,
+"SkillGroup1": "amorphous",
+"SkillGroup2": "dragon",
+"JoinRate": -5,
 "PromoteFrom": "",
 "Promotions": [
 {
@@ -52,9 +52,8 @@
 "Forms": [
 {
 "$type": "PMDC.Data.MonsterFormData, PMDC",
-"Released": false,
+"Released": true,
 "Generation": 8,
-"Ratio": 0,
 "GenderlessWeight": 2,
 "MaleWeight": 4,
 "FemaleWeight": 4,
@@ -70,9 +69,75 @@
 "Personalities": [
 31
 ],
-"TeachSkills": [],
-"SharedSkills": [],
-"SecretSkills": [],
+"TeachSkills": [
+{
+"Skill": "thunder_wave"
+},
+{
+"Skill": "swift"
+},
+{
+"Skill": "rest"
+},
+{
+"Skill": "substitute"
+},
+{
+"Skill": "snore"
+},
+{
+"Skill": "protect"
+},
+{
+"Skill": "endure"
+},
+{
+"Skill": "attract"
+},
+{
+"Skill": "sleep_talk"
+},
+{
+"Skill": "baton_pass"
+},
+{
+"Skill": "facade"
+},
+{
+"Skill": "helping_hand"
+},
+{
+"Skill": "round"
+}
+],
+"SharedSkills": [
+{
+"Skill": "disable"
+},
+{
+"Skill": "double_team"
+},
+{
+"Skill": "confuse_ray"
+},
+{
+"Skill": "curse"
+},
+{
+"Skill": "grudge"
+},
+{
+"Skill": "sucker_punch"
+},
+{
+"Skill": "dragon_tail"
+}
+],
+"SecretSkills": [
+{
+"Skill": "draco_meteor"
+}
+],
 "FormName": {
 "DefaultText": "Dreepy",
 "LocalTexts": {
@@ -93,7 +158,24 @@
 "Intrinsic1": "clear_body",
 "Intrinsic2": "infiltrator",
 "Intrinsic3": "cursed_body",
-"LevelSkills": []
+"LevelSkills": [
+{
+"Level": 1,
+"Skill": "astonish"
+},
+{
+"Level": 1,
+"Skill": "infestation"
+},
+{
+"Level": 1,
+"Skill": "quick_attack"
+},
+{
+"Level": 1,
+"Skill": "bite"
+}
+]
 }
 ]
 }

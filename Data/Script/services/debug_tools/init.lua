@@ -174,50 +174,50 @@ function DebugTools:OnUpgrade()
   SV.base_camp.FerryUnlocked = true
   SV.base_camp.FerryIntroduced = true
   
-SV.magnagate =
-{
-  cards = 0,
-  portal = false
-}
+  SV.magnagate =
+  {
+    cards = 0,
+    portal = false
+  }
 
-SV.shimmer_bay = 
-{
-  TookTreasure  = false
-}
+  SV.shimmer_bay = 
+  {
+    TookTreasure  = false
+  }
 
-SV.manaphy_egg = 
-{
-  Taken = false,
-  ExpositionComplete = false,
-  Hatched = false
-}
+  SV.manaphy_egg = 
+  {
+    Taken = false,
+    ExpositionComplete = false,
+    Hatched = false
+  }
 
-SV.roaming_legends =
-{
-  Raikou = false,
-  Entei = false,
-  Suicune = false,
-  Celebi = false,
-  Darkrai = false
-}
+  SV.roaming_legends =
+  {
+    Raikou = false,
+    Entei = false,
+    Suicune = false,
+    Celebi = false,
+    Darkrai = false
+  }
 
 
-SV.sleeping_caldera = 
-{
-  TookTreasure  = false,
-  GotHeatran = false
-}
+  SV.sleeping_caldera = 
+  {
+    TookTreasure  = false,
+    GotHeatran = false
+  }
   
-SV.dex = {
-  CurrentRewardIdx = 1
-}
+  SV.dex = {
+    CurrentRewardIdx = 1
+  }
 	
-SV.moonlit_end = 
-{
-  ExpositionComplete  = false
-}
+  SV.moonlit_end = 
+  {
+    ExpositionComplete  = false
+  }
 
-	GAME:UnlockDungeon('fertile_valley')
+  GAME:UnlockDungeon('fertile_valley')
   end
   
   PrintInfo("=>> Loaded version")

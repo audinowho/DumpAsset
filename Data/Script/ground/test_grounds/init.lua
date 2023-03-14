@@ -204,11 +204,29 @@ function test_grounds.Sign4_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo('Text Tag Regression Test')
   local chara = CH('PLAYER')
+  
+  UI:SetBounds(16, 16, 128, 128)
   UI:SetSpeaker(chara)
+  UI:WaitShowDialogue("The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.")
+  UI:SetSpeakerLoc(144, 16)
+  UI:WaitShowDialogue("The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.")
+  
+  UI:ChoiceMenuYesNo("Was the dog lazy?")
+  UI:WaitForChoice()
+  UI:SetChoiceLoc(144, 72)
+  UI:ChoiceMenuYesNo("Was the fox jumpy?")
+  UI:WaitForChoice()
+  
+  UI:ResetSpeaker()
+  UI:ChoiceMenuYesNo("Was the fox brown?")
+  UI:WaitForChoice()
+  
   UI:WaitShowDialogue("Hello[pause=120]")
+  UI:SetSpeaker(chara)
   UI:WaitShowDialogue("ABCD[scroll]ABCD[scroll]ABCD[scroll]ABCD")
+  UI:SetSpeakerReverse(true)
   UI:WaitShowDialogue("Normal Normal Normal Normal Normal Normal Normal Normal [emote=happy]Happy Happy Happy Happy Happy Happy Happy [emote=sad]Sad Sad Sad Sad Sad Sad Sad Sad")
-  UI:WaitShowDialogue("Normal Normal Normal Normal Normal Normal Normal Normal [speed=3]Fast Fast Fast Fast Fast Fast Fast Fast Fast [speed=0.2]Slow Slow Slow Slow Slow Slow Slow")
+  UI:WaitShowDialogue("Normal Normal Normal Normal Normal Normal [speed=3]Fast Fast Fast Fast Fast Fast Fast Fast Fast [speed=0.2]Slow Slow Slow Slow")
   UI:WaitShowDialogue("THE[pause=0] [color=#FF0000]QUICK[color] BROWN\n FOX [color=#FF0000]JUMPS[color] OVER[pause=0] THE[scroll] LAZY [color=#FF0000]DOG[color].\nTHE [color=#FF0000]QUICK[color] BROWN[pause=0] FOX [color=#FF0000]JUMPS[color].")
 end
 

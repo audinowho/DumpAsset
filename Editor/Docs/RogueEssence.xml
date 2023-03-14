@@ -401,6 +401,16 @@
             Pixels per second
             </summary>
         </member>
+        <member name="F:RogueEssence.Content.FiniteOverlayEmitter.FadeIn">
+            <summary>
+            Time to fade in, in render frames.  Cuts into total time.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.FiniteOverlayEmitter.FadeOut">
+            <summary>
+            Time to fade out, in render frames.  Cuts into total time.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Content.FiniteOverlayEmitter.TotalTime">
             <summary>
             The total time the animation appears, in frames.
@@ -783,9 +793,14 @@
             Pixels Per Second Per Second 
             </summary>
         </member>
+        <member name="F:RogueEssence.Content.DrawLayer.Under">
+            <summary>
+            Draws on the floor, behind all entities and terrain.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Content.DrawLayer.Bottom">
             <summary>
-            Draws on the floor, behind all entities.
+            Draws on the floor, behind all entities but not terrain.
             </summary>
         </member>
         <member name="F:RogueEssence.Content.DrawLayer.Back">
@@ -955,6 +970,11 @@
             <param name="trueName">If set to true, uses Basename to bypass any alias or fake name.</param>
             <returns></returns>
         </member>
+        <member name="F:RogueEssence.Dungeon.Character.Absentee">
+            <summary>
+            If turned on, this entity is considered NOT a part of the adventure for the duration of that adventure.
+            </summary>
+        </member>
         <member name="P:RogueEssence.Dungeon.Character.CharLoc">
             <summary>
             Position on the map grid in tiles.
@@ -963,6 +983,11 @@
         <member name="P:RogueEssence.Dungeon.Character.CharDir">
             <summary>
             Character's direction.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.Character.MustHitNext">
+            <summary>
+            Guaranteed to hit next attack
             </summary>
         </member>
         <member name="F:RogueEssence.Dungeon.Character.TurnWait">
@@ -980,9 +1005,39 @@
             Whether the character has made an action during this map turn.  Only one action per map turn permitted.
             </summary>
         </member>
-        <member name="F:RogueEssence.Dungeon.Character.AttackOnly">
+        <member name="F:RogueEssence.Dungeon.Character.ItemDisabled">
             <summary>
-            Can only use basic attack as an action.
+            Will prevent the passive item effects.  Does not prevent active use.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.Character.IntrinsicDisabled">
+            <summary>
+            Prevents passive intrinsic effects
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.Character.MovesScrambled">
+            <summary>
+            Will move erratically
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.Character.WaitToAttack">
+            <summary>
+            The Wait command translates to attack.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.Character.CantInteract">
+            <summary>
+            Can't pick up/place/equip/take items, cant interact with ground/people.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.Character.EnemyOfFriend">
+            <summary>
+            Treated as a foe by friends in combat
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.Character.AttackFriend">
+            <summary>
+            Treats friends as foes in and out of combat
             </summary>
         </member>
         <member name="M:RogueEssence.Dungeon.Character.DieSilent">
@@ -993,7 +1048,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:RogueEssence.Dungeon.Character.EditSkill(System.Int32,System.Int32,System.Boolean)">
+        <member name="M:RogueEssence.Dungeon.Character.EditSkill(System.String,System.Int32,System.Boolean)">
             <summary>
             Editor-side skill changes.
             </summary>
@@ -1005,6 +1060,22 @@
             <summary>
             Removes a character's held item, effectively deleting it.
             </summary>
+        </member>
+        <member name="M:RogueEssence.Dungeon.Character.OnMapStart">
+            <summary>
+            Was once called independently as a part of DungeonScene.BeginFloor.
+            Was refactored out to allow modifiable order between the map/game-wide events and character events.
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Dungeon.Character.OnMapTurnEnd(RogueEssence.Dungeon.SingleCharContext)">
+            <summary>
+            Currently not used.  Was once called independently as a part of DungeonScene.ProcessMapTurnEnd
+            Was refactored out to allow modifiable order between the map/game-wide events and character events.
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
         </member>
         <member name="M:RogueEssence.Dungeon.Character.GetSeenCharacters(RogueEssence.Dungeon.Alignment)">
             <summary>
@@ -1335,6 +1406,30 @@
             Visual modifier for when the dash animation is executed.
             </summary>
         </member>
+        <member name="P:RogueEssence.Dungeon.CharAnimation.VisualLoc">
+            <summary>
+            The visual char loc.  Needed for wrapping
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Dungeon.CharAnimation.InPlace">
+            <summary>
+            Dashing animations will not sweep forward.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Dungeon.CharAnimation.GetLocsVisible">
+            <summary>
+            location that this character is in, for visibility purposes
+            if any of these locations are seen by the player, the character is considered seen by the player
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Dungeon.CharAnimation.GetVisionLocs">
+            <summary>
+            location that this character is in, for vision purposes
+            any locations seen by these locs are seen by the player
+            </summary>
+            <returns></returns>
+        </member>
         <member name="F:RogueEssence.Dungeon.CharData.IsFounder">
             <summary>
             Cannot be removed from assembly.
@@ -1437,6 +1532,56 @@
             In Tiles Per Second
             </summary>
         </member>
+        <member name="F:RogueEssence.Dungeon.DrawEffect.None">
+            <summary>
+            No draw effect
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.DrawEffect.Sleeping">
+            <summary>
+            The character uses its sleeping animation.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.DrawEffect.Stopped">
+            <summary>
+            The character uses only the first frame of its idle animation
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.DrawEffect.Shaking">
+            <summary>
+            Animates normally, but shaking
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.DrawEffect.Charging">
+            <summary>
+            In a charging pose.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.DrawEffect.Absent">
+            <summary>
+            Not drawn, but the shadow is still there.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.DrawEffect.Spinning">
+            <summary>
+            Constantly spinning
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.DrawEffect.Hurt">
+            <summary>
+            Constantly in pain
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.DrawEffect.Transparent">
+            <summary>
+            Semi-transparent
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.DrawEffect.Trembling">
+            <summary>
+            Animates normally, but with one-pixel shake
+            </summary>
+        </member>
         <member name="M:RogueEssence.Dungeon.DungeonScene.IterateEvents``1(RogueEssence.Dungeon.DungeonScene.EventEnqueueFunction{``0})">
             <summary>
             Iterates through all GameEvents gathered by the enqueue function, in order of priority.
@@ -1447,24 +1592,161 @@
             <param name="enqueueFunction"></param>
             <returns></returns>
         </member>
+        <member name="M:RogueEssence.Dungeon.DungeonScene.GetMatchup(RogueEssence.Dungeon.Character,RogueEssence.Dungeon.Character,System.Boolean)">
+            <summary>
+            Determines how the first character should treat the second character.
+            </summary>
+            <param name="attacker"></param>
+            <param name="target"></param>
+            <param name="action">Whether the alignment is for thinking (off) or for attacking (on)</param>
+            <returns></returns>
+        </member>
         <member name="F:RogueEssence.Dungeon.DungeonScene.sightRect">
             <summary>
             Rectangle of the tiles that are relevant to sight computation.
             </summary>
         </member>
-        <member name="M:RogueEssence.Dungeon.DungeonScene.AddSeenLocs(RogueEssence.Dungeon.VisionLoc,RogueEssence.Dungeon.Map.SightRange)">
+        <member name="M:RogueEssence.Dungeon.DungeonScene.AddBrightLocs(RogueEssence.Dungeon.VisionLoc,RogueEssence.Dungeon.Map.SightRange)">
             <summary>
-            Lights up tiles for graphical reasons
+            Lights up tiles for graphical reasons.
             </summary>
             <param name="loc"></param>
             <param name="sight"></param>
         </member>
-        <member name="T:RogueEssence.Dungeon.Map.ScrollEdge">
+        <member name="M:RogueEssence.Dungeon.DungeonScene.getBorderDarkness(RogueElements.Loc,RogueElements.Rect,RogueElements.Dir8)">
+            <summary>
+            Gets the texture and darkness intensity of a tile's border in a certain direction.
+            It is only used for tiles that are already bright.
+            </summary>
+            <param name="loc"></param>
+            <param name="sightRect"></param>
+            <param name="dir"></param>
+            <returns>A visionLoc of the texture to draw, and the intensity to draw it at (the amount of darkness to add).</returns>
+        </member>
+        <member name="M:RogueEssence.Dungeon.DungeonScene.getBrightnessValue(RogueElements.Loc,RogueElements.Loc)">
+            <summary>
+            Gets the brightness of a tile, for border computation.
+            </summary>
+            <param name="loc"></param>
+            <param name="rectStart"></param>
+            <returns></returns>
+        </member>
+        <member name="P:RogueEssence.Dungeon.BattleContext.StrikeStartTile">
+            <summary>
+            the tile of the user before it started a strike (used for tipper effects)
+            wrapped; it can't go out of bounds anyway
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Dungeon.BattleContext.StrikeEndTile">
+            <summary>
+            the tile of the user JUST AFTER it started a strike (used for updating position)
+            wrapped; it can't go out of bounds anyway
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Dungeon.BattleContext.StartDir">
+            <summary>
+            the direcion of the user before it started a strike (used for multistrike confusion)
+            unwrapped
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Dungeon.BattleContext.ExplosionTile">
+            <summary>
+            the origin tile for the explosion
+            unwrapped
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Dungeon.BattleContext.TargetTile">
+            <summary>
+             the location of the tile being targeted
+            unwrapped
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Dungeon.BattleContext.StrikeLandTiles">
+            <summary>
+            all tiles in which a strike's hitbox ended (used for item landing)
+            unwrapped
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.BaseMap.ScrollEdge.Blank">
+            <summary>
+            Displays the BlankBG texture, or a black void if there is none
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.BaseMap.ScrollEdge.Clamp">
+            <summary>
+            Does not scroll past the edge of the map.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.BaseMap.ScrollEdge.Wrap">
+            <summary>
+            The map is wrapped around.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.BaseMap.EdgeView">
             <summary>
             Describes how to handle the map scrolling past the edge of the map
             </summary>
         </member>
-        <member name="P:RogueEssence.Dungeon.Map.AssetName">
+        <member name="M:RogueEssence.Dungeon.BaseMap.FindItemlessTile(RogueElements.Loc,RogueElements.Loc,RogueElements.Loc,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="origin"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+            <param name="voluntary"></param>
+            <returns>Unwrapped destination value.</returns>
+        </member>
+        <member name="M:RogueEssence.Dungeon.BaseMap.GetClampedSight(RogueElements.Rect)">
+            <summary>
+            
+            </summary>
+            <param name="rect"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Dungeon.BaseMap.WrapLoc(RogueElements.Loc)">
+            <summary>
+            Converts out of bounds coords to wrapped-around coords.
+            Based on tiles.
+            </summary>
+            <param name="loc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Dungeon.BaseMap.WrapGroundLoc(RogueElements.Loc)">
+            <summary>
+            Converts out of bounds coords to wrapped-around coords.
+            Based on pixels.
+            </summary>
+            <param name="loc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Dungeon.BaseMap.GetLocInMapBounds(RogueElements.Loc@)">
+            <summary>
+            Checks to see if the loc is in map bounds.
+            If it's not wrapped, expect normal results.
+            If it's normally out of bounds but wrapped, the loc will be changed and the result will be true.
+            </summary>
+            <param name="loc">The location to test.  Will be wrapped if the map is wrapped.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Dungeon.BaseMap.GetClosestUnwrappedLoc(RogueElements.Loc,RogueElements.Loc)">
+            <summary>
+            
+            </summary>
+            <param name="loc1">Reference loc</param>
+            <param name="loc2">Loc to get the closest wrap of.  May be out of bounds.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Dungeon.BaseMap.IterateLocInBounds(RogueElements.Rect,RogueElements.Loc)">
+            <summary>
+            Gets all wrapped locations that fit in the specified bounds.
+            In tiles.
+            </summary>
+            <param name="rect"></param>
+            <param name="loc"></param>
+            <returns></returns>
+        </member>
+        <member name="F:RogueEssence.Dungeon.Map.AssetName">
             <summary>
             the internal name of the map, no spaces or special characters, never localized.
             Used to refer to map data and script data for this map!
@@ -1477,9 +1759,16 @@
             <param name="character"></param>
             <returns></returns>
         </member>
+        <member name="M:RogueEssence.Dungeon.Map.MapModified(RogueElements.Loc,RogueElements.Loc)">
+            <summary>
+            The region must be the region up for recalculation, NOT the changed tiles.
+            </summary>
+            <param name="startLoc">Unwrapped start of rectangle</param>
+            <param name="sizeLoc"></param>
+        </member>
         <member name="M:RogueEssence.Dungeon.Map.IterateProximityCharacters(RogueElements.Loc)">
             <summary>
-            Iterate through all characters with proximity passives that touch the specified location./
+            Iterate through all characters with proximity passives that touch the specified location.
             </summary>
             <param name="loc"></param>
             <returns></returns>
@@ -1490,7 +1779,7 @@
             </summary>
             <param name="character">The character being moved. Null if not a character currently on the map.</param>
             <param name="loc">The ideal warp destination.</param>
-            <returns></returns>
+            <returns>The best fit warp destination.  This value is wrapped.</returns>
         </member>
         <member name="M:RogueEssence.Dungeon.Map.OnInit">
             <summary>
@@ -1519,6 +1808,11 @@
         <member name="F:RogueEssence.Dungeon.Team.FoeConflict">
             <summary>
             If set to true, will attack/be attacked by Foe faction when in Ally faction.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Dungeon.Team.SortItems">
+            <summary>
+            Sorts items in the inventory STABLELY
             </summary>
         </member>
         <member name="F:RogueEssence.Dungeon.AutoTile.Layers">
@@ -1694,11 +1988,127 @@
             <param name="basePath"></param>
             <returns></returns>
         </member>
+        <member name="M:RogueEssence.Data.DataManager.BeginPlay(System.String,System.String,System.Boolean,System.Boolean,System.DateTime)">
+            <summary>
+            Starts recording the quicksave for a new adventure.
+            From here on, the replayWriter will remain open as a way to continue writing game states and player inputs.
+            </summary>
+            <param name="filePath"></param>
+            <param name="zoneId"></param>
+            <param name="rogue"></param>
+            <param name="seeded"></param>
+            <param name="sessionStart"></param>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.ResumePlay(RogueEssence.Data.ReplayData,System.DateTime)">
+            <summary>
+            Called when resuming an adventure from a quicksave.
+            The quicksave file is loaded and the stream position is set to the end, so that it can continue writing the replay.
+            </summary>
+            <param name="replay">The quicksave replay to resume from.</param>
+            <param name="sessionResumeTime"></param>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.LogState">
+            <summary>
+            Writes the game state to the current replay.  The player must be in dungeon mode.
+            This is used when the player begins a new dungeon in their adventure. (One adventure can contain a trek through multiple dungeons)
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.LogGroundSave">
+            <summary>
+            Writes the game state to the current replay.  The player must be in ground mode.
+            This is used when a player saves in the middle of an adventure in a ground mode rest area.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.LogQuicksave">
+            <summary>
+            Writes the entire game state for faster loading of quicksaves.
+            Currently not used due to quicksaves still loading from the start of the dungeon and replaying every step up to the current point.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.LogPlay(RogueEssence.Dungeon.GameAction)">
+            <summary>
+            Logs a player action to the current quicksave replay.
+            </summary>
+            <param name="play"></param>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.LogUIPlay(System.Int32[])">
+            <summary>
+            Logs a player UI action to the current quicksave replay.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.LogUIStringPlay(System.String)">
+            <summary>
+            Logs a string to the current quicksave replay.  Used for name inputs.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.QueueLogUI">
+            <summary>
+            Starts queueing UI commands to the current replay quicksave.
+            UI commands need to be queued sometimes, because they may happen mid-action for an action that may fail later.
+            If a player action fails, it is not logged.  Thus, if queues didn't exist, UI actions would be logged for actions that didn't actually happen.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.DequeueLogUI">
+            <summary>
+            Stops queueing UI commands to the current replay quicksave and writes the current queue to the replay.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.EndPlay(RogueEssence.Data.GameProgress,System.String)">
+            <summary>
+            Called when an adventure is ended.  Closes the replay writing stream and saves the quicksave into a replay.
+            </summary>
+            <param name="epitaph"></param>
+            <param name="outFile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.SaveSessionTime(System.TimeSpan)">
+            <summary>
+            Saves the current session time
+            </summary>
+            <param name="sessionTime"></param>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.SuspendPlay">
+            <summary>
+            Called when an adventure is suspended.  Closes the replay writing stream to allow for clean exit.
+            Note how nothing else is done aside form closing the stream.
+            Quicksaves already save every action from the player as it happens, so even if they closed the game there is no lost data.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:RogueEssence.Data.DataManager.LoadMainGameState(System.Boolean)">
             <summary>
             Returns game progress and current zone.
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.DeleteReplayData(System.Boolean)">
+            <summary>
+            Deletes replays from the replay folder corresponding to the current mod.
+            </summary>
+            <param name="includeFav">Favorites will be deleted too.</param>
+        </member>
+        <member name="M:RogueEssence.Data.EntryDataIndex.GetMappedKeys">
+            <summary>
+            Maps one index to one key.
+            </summary>
+            <returns>List may contain null.</returns>
+        </member>
+        <member name="M:RogueEssence.Data.EntryDataIndex.GetOrderedKeys(System.Boolean)">
+            <summary>
+            Keys ordered alphabetically or numerically
+            </summary>
+            <param name="numeric"></param>
+            <returns></returns>
+        </member>
+        <member name="F:RogueEssence.Data.GameProgress.SessionTime">
+            <summary>
+            The total play time from past sessions.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.GameProgress.SessionStartTime">
+            <summary>
+            The time when the current session was started.
+            </summary>
         </member>
         <member name="M:RogueEssence.Data.GameProgress.UpdateOptions">
             <summary>
@@ -1711,7 +2121,28 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:RogueEssence.Data.GameProgress.RestrictLevel(RogueEssence.Data.ZoneData,System.Boolean,System.Boolean,System.Boolean)">
+        <member name="M:RogueEssence.Data.GameProgress.BeginSession">
+            <summary>
+            Begin counting play time for session
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Data.GameProgress.EndSession">
+            <summary>
+            Stops counting play time for the end of an adventure or suspending via quicksave
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Data.GameProgress.ResumeSession(RogueEssence.Data.ReplayData)">
+            <summary>
+            Loads play time from replay data
+            resume counting play time by setting the sesion start
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Data.GameProgress.LoadedWithoutQuicksave">
+            <summary>
+            Executed when the save file is loaded without a quicksave.  Check and clear all quicksave-related variables.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Data.GameProgress.RestrictLevel(System.Int32,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             
             </summary>
@@ -1839,6 +2270,11 @@
         <member name="F:RogueEssence.Data.ItemData.ArcThrow">
             <summary>
             Defines whether this item flies in an arc or in a straight line.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ItemData.BreakOnThrow">
+            <summary>
+            Defines whether this item will disappear if thrown, even if it doesnt hit a target.
             </summary>
         </member>
         <member name="F:RogueEssence.Data.ItemData.ThrowAnim">
@@ -1996,6 +2432,7 @@
         <member name="F:RogueEssence.Data.ProximityData.Radius">
             <summary>
             The radius of the effect.
+            DO NOT SET THIS OVER 5.
             </summary>
         </member>
         <member name="F:RogueEssence.Data.ProximityData.TargetAlignments">
@@ -2101,6 +2538,16 @@
         <member name="F:RogueEssence.Data.StatusData.TargetPassive">
             <summary>
             Passive effects applied to the character that inflicted the status.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.TileData.Layer">
+            <summary>
+            The layer to draw the tile on.  Only supports Bottom, Back and Front for now.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.TileData.BlockItem">
+            <summary>
+            Prevents items from landing on it.
             </summary>
         </member>
         <member name="F:RogueEssence.Data.RogueStatus.None">
@@ -2257,12 +2704,20 @@
             <param name="sourceDir">Parent directory of the input files.</param>
             <param name="cachePattern">Pattern expression to save the output files as.</param>
         </member>
-        <member name="M:RogueEssence.Dev.ImportHelper.ImportAllAutoTiles(System.String,System.String)">
+        <member name="M:RogueEssence.Dev.ReflectionExt.GetSerializableMembers(System.Type)">
             <summary>
-            Reads all tileset folders from the input directory, and creates autotiles from them.
+            Gets all public fields, properties that have backing fields (auto-implemented properties), and private fields.
             </summary>
-            <param name="sourceDir"></param>
-            <param name="cacheDir"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Dev.ReflectionExt.GetEditableMembers(System.Type)">
+            <summary>
+            Gets all public fields, and properties that have backing fields (auto-implemented properties)
+            Does not get private fields.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
         </member>
         <member name="M:RogueEssence.Dev.ReflectionExt.GetBaseTypeArg(System.Type,System.Type,System.Int32)">
             <summary>
@@ -2797,6 +3252,11 @@
             Field for character entities that should not be serialized
             </summary>
         </member>
+        <member name="F:RogueEssence.Ground.EntityLayer.TemporaryObjects">
+            <summary>
+            Field for object entities that should not be serialized
+            </summary>
+        </member>
         <member name="F:RogueEssence.Ground.EntityLayer.Spawners">
             <summary>
             Contains a list of all the NPCs spawners on this map
@@ -2874,10 +3334,10 @@
         </member>
         <member name="M:RogueEssence.Ground.GroundEntity.HasScriptEvent(RogueEssence.Script.LuaEngine.EEntLuaEventTypes)">
             <summary>
-            Returns the event with the same name as the string eventname.
-            Or return null if the event can't be found.
+            Returns true if there exists and event with the same name as the string eventname.
+            The script event doesn't need to be loaded.
             </summary>
-            <param name="eventname"></param>
+            <param name="ev"></param>
             <returns></returns>
         </member>
         <member name="M:RogueEssence.Ground.GroundEntity.ReloadEvents">
@@ -2954,10 +3414,11 @@
             Size in tex units (8x8 tiles)
             </summary>
         </member>
-        <member name="P:RogueEssence.Ground.GroundMap.AssetName">
+        <member name="F:RogueEssence.Ground.GroundMap.AssetName">
             <summary>
             the internal name of the map, no spaces or special characters, never localized.
-            Used to refer to map data and script data for this map!
+            Used to refer to map data and script data for this map.  This value is always set when loaded,
+            But must remain serialized for state saving
             </summary>
         </member>
         <member name="M:RogueEssence.Ground.GroundMap.DoCleanup">
@@ -3032,6 +3493,14 @@
             <param name="instancename">Name of the object instance</param>
             <returns>Forund object, or null</returns>
         </member>
+        <member name="M:RogueEssence.Ground.GroundMap.GetTempObj(System.String)">
+            <summary>
+            Lookup a temporary object instance by name on the map.
+            Returns the object if found, or null.
+            </summary>
+            <param name="instancename">Name of the object instance</param>
+            <returns>Forund object, or null</returns>
+        </member>
         <member name="M:RogueEssence.Ground.GroundMap.AddMarker(System.String,RogueElements.Loc,RogueElements.Dir8)">
             <summary>
             Create a new marker with the specified parameters, and add it to the map.
@@ -3064,6 +3533,22 @@
             </summary>
             <param name="name">Name of the marker</param>
             <returns>The found marker, or null if not found.</returns>
+        </member>
+        <member name="M:RogueEssence.Ground.GroundMap.WrapLoc(RogueElements.Loc)">
+            <summary>
+            Converts out of bounds coords to wrapped-around coords.
+            Based on tiles.
+            </summary>
+            <param name="loc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Ground.GroundMap.WrapGroundLoc(RogueElements.Loc)">
+            <summary>
+            Converts out of bounds coords to wrapped-around coords.
+            Based on pixels.
+            </summary>
+            <param name="loc"></param>
+            <returns></returns>
         </member>
         <member name="M:RogueEssence.Ground.GroundMap.FindPossible(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
@@ -3125,6 +3610,14 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:RogueEssence.Ground.GroundMap.HasScriptEvent(RogueEssence.Script.LuaEngine.EMapCallbacks)">
+            <summary>
+            Returns true if there exists and event with the same name as the string eventname.
+            The script event doesn't need to be loaded.
+            </summary>
+            <param name="ev"></param>
+            <returns></returns>
+        </member>
         <member name="T:RogueEssence.Ground.GroundMarker">
             <summary>
             Entity representing a position on the map that can be used by the game logic for
@@ -3170,30 +3663,46 @@
             Components that the newly added room will be labeled with.
             </summary>
         </member>
-        <member name="T:RogueEssence.LevelGen.CombineGridRoomStep`1">
+        <member name="T:RogueEssence.LevelGen.CombineGridRoomBaseStep`1">
             <summary>
             Merges single-cell rooms together into larger rooms, specified in Combos
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="F:RogueEssence.LevelGen.CombineGridRoomStep`1.MergeRate">
+        <member name="F:RogueEssence.LevelGen.CombineGridRoomBaseStep`1.MergeRate">
             <summary>
             The number of merges to add to the grid plan.
             </summary>
         </member>
-        <member name="F:RogueEssence.LevelGen.CombineGridRoomStep`1.Combos">
+        <member name="F:RogueEssence.LevelGen.CombineGridRoomBaseStep`1.Combos">
             <summary>
             List of possible merges that can be done.
             </summary>
         </member>
-        <member name="P:RogueEssence.LevelGen.CombineGridRoomStep`1.Filters">
+        <member name="P:RogueEssence.LevelGen.CombineGridRoomBaseStep`1.Filters">
             <summary>
             Determines which rooms are eligible to be merged into a new room.
             </summary>
         </member>
-        <member name="P:RogueEssence.LevelGen.CombineGridRoomStep`1.RoomComponents">
+        <member name="P:RogueEssence.LevelGen.CombineGridRoomBaseStep`1.RoomComponents">
             <summary>
             Components that the newly added room will be labeled with.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.GridPathTiered`1">
+            <summary>
+            Populates the empty floor plan of a map by creating a path consisting of tiers of rooms, with a random value of hallways connecting each tier.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueEssence.LevelGen.GridPathTiered`1.TierAxis">
+            <summary>
+            Choose a horizontal or vertical orientation.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.GridPathTiered`1.TierConnections">
+            <summary>
+            The number of halls that connects each tier.  Minimum bound at 1.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.MarkAsHallStep`1">
@@ -3315,11 +3824,6 @@
             Maps the terrain type to the specified autotile.
             </summary>
         </member>
-        <member name="F:RogueEssence.LevelGen.MapDictTextureStep`1.GroundTexture">
-            <summary>
-            The texture considered to be the ground for this map.
-            </summary>
-        </member>
         <member name="F:RogueEssence.LevelGen.MapDictTextureStep`1.BlankBG">
             <summary>
             The repeated texture used for the border.
@@ -3341,22 +3845,6 @@
             The map's elemental aligment.
             </summary>
         </member>
-        <member name="T:RogueEssence.LevelGen.MobSpawnSettingsStep`1">
-            <summary>
-            Chooses the enemy limit and respawn time for the map.
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="F:RogueEssence.LevelGen.MobSpawnSettingsStep`1.MaxFoes">
-            <summary>
-            The limit to the number of enemies on the map.  If this number is reached or exceeded, no more respawns will occur.
-            </summary>
-        </member>
-        <member name="F:RogueEssence.LevelGen.MobSpawnSettingsStep`1.RespawnTime">
-            <summary>
-            The amount of time it takes for a new enemy team to respawn, in turns.
-            </summary>
-        </member>
         <member name="T:RogueEssence.LevelGen.MobSpawnStep`1">
             <summary>
             Generates the encounter table of enemies to spawn on a floor.
@@ -3369,6 +3857,11 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="T:RogueEssence.LevelGen.ColumnHallBrush">
+            <summary>
+            A rectangular brush for painting hallways.
+            </summary>
+        </member>
         <member name="T:RogueEssence.LevelGen.RoomGenCoated`1">
             <summary>
             Generates a room, and then coats it with additional tiles.
@@ -3376,20 +3869,63 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="T:RogueEssence.LevelGen.RoomGenEdgeIn`1">
+        <member name="T:RogueEssence.LevelGen.RoomGenDiamond`1">
+            <summary>
+            Generates a rounded room.  Square dimensions result in a circle, while rectangular dimensions result in capsules.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueEssence.LevelGen.RoomGenDiamond`1.Width">
+            <summary>
+            Width of the room.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.RoomGenDiamond`1.Height">
+            <summary>
+            Height of the room.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.RoomGenLoadMap`1">
+            <summary>
+            Generates a room by loading a map as the room.
+            Includes tiles, items, enemies, and mapstarts.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.RoomGenLoadMap`1.MapID">
+            <summary>
+            Map file to load.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.RoomGenLoadMap`1.RoomTerrain">
+            <summary>
+            The terrain that counts as room.  Halls will only attach to room tiles, or tiles specified with Borders.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.RoomGenLoadMap`1.PreventChanges">
+            <summary>
+            Determines if connecting hallways should continue digging inward after they hit the room bounds, until a walkable tile is found.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.RoomGenPlus`1">
             <summary>
             Generates a rectangular room with the specified width and height, and blocks off the tiles at the edges.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="F:RogueEssence.LevelGen.RoomGenEdgeIn`1.Width">
+        <member name="F:RogueEssence.LevelGen.RoomGenPlus`1.Width">
             <summary>
             Width of the room.
             </summary>
         </member>
-        <member name="F:RogueEssence.LevelGen.RoomGenEdgeIn`1.Height">
+        <member name="F:RogueEssence.LevelGen.RoomGenPlus`1.Height">
             <summary>
             Height of the room.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.RoomGenPlus`1.Corner">
+            <summary>
+            Amount of tiles to remove from corner.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.RoomGenPostProcSpecific`1">
@@ -3398,6 +3934,22 @@
             EDITOR UNFRIENDLY
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueEssence.LevelGen.RoomGenTriangle`1">
+            <summary>
+            Generates a rounded room.  Square dimensions result in a circle, while rectangular dimensions result in capsules.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueEssence.LevelGen.RoomGenTriangle`1.Width">
+            <summary>
+            Width of the room.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.RoomGenTriangle`1.Height">
+            <summary>
+            Height of the room.
+            </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.ScriptGenStep`1">
             <summary>
@@ -3421,13 +3973,22 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="T:RogueEssence.LevelGen.ReachableBlobWaterStep`1">
+        <member name="T:RogueEssence.LevelGen.LoadBlobStep`1">
             <summary>
-            Creates blobs of water using cellular automata, and places them around the map.
-            The water must be reachable from the stairs.
-            WIP DOES NOT WORK
+            Turns the tiles at the edge of the map into the Unbreakable terrain.
+            Thickness can be customized.
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.LoadBlobStep`1.Maps">
+            <summary>
+            Map filea to load.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.LoadBlobStep`1.TerrainStencil">
+            <summary>
+            Determines which tiles are eligible to be painted on.
+            </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.UnbreakableBorderStep`1">
             <summary>
@@ -3478,6 +4039,11 @@
             A floor generator that is suited for loading maps created by the editor.
             Using this generator allows for gen steps that load maps.
             It also allows basic tile and spawning gen steps.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.ChanceFloorGen">
+            <summary>
+            Chooses one floorgen out of several possibilities.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.RandDecay">
@@ -3679,6 +4245,12 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="T:RogueEssence.LevelGen.PlaceRadiusMobsStep`1">
+            <summary>
+            Picks tiles that can be reached by walking from the entrance and spawns the mobs there, within a radius.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
         <member name="T:RogueEssence.LevelGen.PlaceRandomMobsStep`1">
             <summary>
             Places mobs in random rooms.
@@ -3695,6 +4267,17 @@
         <member name="P:RogueEssence.LevelGen.PlaceRandomMobsStep`1.Filters">
             <summary>
             Used to filter out rooms unsuitable for spawning the mobs in.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.PlaceTerrainMobsStep`1">
+            <summary>
+            Picks tiles of a terrain spawns the mobs there.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.PlaceTerrainMobsStep`1.AcceptedTiles">
+            <summary>
+            The terrain types to spawn the mobs in.
             </summary>
         </member>
         <member name="F:RogueEssence.LevelGen.TeamMemberSpawn.MemberRole.Normal">
@@ -3753,6 +4336,59 @@
             The members of the team.
             </summary>
         </member>
+        <member name="T:RogueEssence.LevelGen.DetectItemStep`1">
+            <summary>
+            Orients all already-placed compass tiles to point to points of interest.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.DetectItemStep`1.FindItem">
+            <summary>
+            Tile used as compass.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.DetectTileStep`1">
+            <summary>
+            Orients all already-placed compass tiles to point to points of interest.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.DetectTileStep`1.FindTile">
+            <summary>
+            Tile used as compass.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.StairsStencil`1">
+            <summary>
+            A filter for determining the eligible tiles for an operation.
+            Tiles must or must not have a panel.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueEssence.LevelGen.StairsStencil`1.Not">
+            <summary>
+            If turned on, test will pass for empty tiles.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.TileEffectStencil`1">
+            <summary>
+            A filter for determining the eligible tiles for an operation.
+            Tiles must or must not have a panel.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueEssence.LevelGen.TileEffectStencil`1.Not">
+            <summary>
+            If turned on, test will pass for empty tiles.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.MatchTileEffectStencil`1">
+            <summary>
+            A filter for determining the eligible tiles for an operation.
+            Tiles must have a specific panel.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
         <member name="T:RogueEssence.LevelGen.LayeredSegment">
             <summary>
             A dungeon segment where each floor has its own map generator, with no gaps in between floors.
@@ -3778,6 +4414,16 @@
             A dungeon segment where each floor has its own map generator, with gaps between floors allowed.
             Players attempting to enter a floor in this segment will be served by the generator corresponding to the floor number they requested.
             An error will occur if the requested floor does not have a generator.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.ZoneSegmentBase.ZoneSteps">
+            <summary>
+            Map Generation steps that apply to multiple floors at a time.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.ZoneSegmentBase.IsRelevant">
+            <summary>
+            Determines if the segment counts to the dungeon's total floor count.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.FloorNameIDZoneStep">
@@ -3825,6 +4471,21 @@
             The spawn table, organized by category.
             </summary>
         </member>
+        <member name="T:RogueEssence.LevelGen.ItemSectionedZoneStep">
+            <summary>
+            Generates the table of items to spawn on all floors.  Breaks them into sections such that probability is easier.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.ItemSectionedZoneStep.Priority">
+            <summary>
+            At what point in the map gen process to run the item spawning in.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.ItemSectionedZoneStep.Spawns">
+            <summary>
+            The spawn table, organized by category.
+            </summary>
+        </member>
         <member name="T:RogueEssence.LevelGen.MoneySpawnZoneStep">
             <summary>
             Generates the table of items to spawn on all floors
@@ -3865,6 +4526,17 @@
         <member name="F:RogueEssence.LevelGen.ScriptZoneStep.ArgTable">
             <summary>
             Additional arguments that will be passed into the script.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.SpreadCombinedZoneStep">
+            <summary>
+            Combines zonesteps that spread across floors, ensuring none of them collide by deleting the drop point from the later collision.
+            First step takes priority over second step, etc.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadCombinedZoneStep.Steps">
+            <summary>
+            The steps to distribute.
             </summary>
         </member>
         <member name="F:RogueEssence.LevelGen.SpreadPlanBase.FloorRange">
@@ -3914,11 +4586,6 @@
             Generates specific rooms randomly across the whole dungeon segment.  This is done by replacing an existing room on the floor.
             </summary>
         </member>
-        <member name="F:RogueEssence.LevelGen.SpreadRoomZoneStep.SpreadPlan">
-            <summary>
-            Determines how many floors to distribute the step to, and how spread apart they are.
-            </summary>
-        </member>
         <member name="F:RogueEssence.LevelGen.SpreadRoomZoneStep.Spawns">
             <summary>
             The rooms to distribute.
@@ -3954,21 +4621,9 @@
             Spreads a map gen step randomly across the dungeon segment.
             </summary>
         </member>
-        <member name="F:RogueEssence.LevelGen.SpreadStepZoneStep.SpreadPlan">
-            <summary>
-            Determines how many floors to distribute the step to, and how spread apart they are.
-            </summary>
-        </member>
         <member name="F:RogueEssence.LevelGen.SpreadStepZoneStep.Spawns">
             <summary>
             The steps to distribute.
-            </summary>
-        </member>
-        <member name="F:RogueEssence.LevelGen.SpreadStepZoneStep.ModStates">
-            <summary>
-            Flags from the player's passives that will affect the appearance rate of the step.
-            If a player enters a floor and is carrying an item, intrinsic, etc. that has a ModGenState listed here,
-            The chance of the step appearing will be increased by the ModGenState's value.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.SpreadStepRangeZoneStep">
@@ -3976,17 +4631,22 @@
             Spreads a map gen step randomly across the dungeon segment, allowing precise control over the spawn rate across different floors.
             </summary>
         </member>
-        <member name="F:RogueEssence.LevelGen.SpreadStepRangeZoneStep.SpreadPlan">
-            <summary>
-            Determines how many floors to distribute the step to, and how spread apart they are.
-            </summary>
-        </member>
         <member name="F:RogueEssence.LevelGen.SpreadStepRangeZoneStep.Spawns">
             <summary>
             The steps to distribute.  Probabilities can be customized across floors.
             </summary>
         </member>
-        <member name="F:RogueEssence.LevelGen.SpreadStepRangeZoneStep.ModStates">
+        <member name="T:RogueEssence.LevelGen.SpreadZoneStep">
+            <summary>
+            Generates specific rooms randomly across the whole dungeon segment.  This is done by replacing an existing room on the floor.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadZoneStep.SpreadPlan">
+            <summary>
+            Determines how many floors to distribute the step to, and how spread apart they are.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadZoneStep.ModStates">
             <summary>
             Flags from the player's passives that will affect the appearance rate of the step.
             If a player enters a floor and is carrying an item, intrinsic, etc. that has a ModGenState listed here,
@@ -4041,12 +4701,38 @@
             <param name="seed"></param>
             <returns></returns>
         </member>
-        <member name="T:RogueEssence.IntrudingBlobWaterStep`1">
+        <member name="T:RogueEssence.TerrainBorderStencil`1">
             <summary>
-            Creates blobs of water using cellular automata, and places them around the map.
-            It will allow itself to be placed in locations that overlap walkable area, but never in a way that disconnects it.
+            A filter for determining the eligible tiles for an operation.
+            Tiles at the border of 2 terrain types are eligible
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueEssence.TerrainBorderStencil`1.MatchTiles">
+            <summary>
+            The allowed tile types that the blob can be placed on.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.TerrainBorderStencil`1.BorderTiles">
+            <summary>
+            The tile types that the blob must be touching to allow placement.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.TerrainBorderStencil`1.Intrude">
+            <summary>
+            If left off, the blob will only paint over the match tiles.
+            If turned on, the blob will be allowed to paint over border tiles.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.TerrainBorderStencil`1.AllowDiagonal">
+            <summary>
+            Counts diagonal adjacent tiles if they are a border tile.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.TerrainBorderStencil`1.FullSide">
+            <summary>
+            The adjacent side must fully touch border.
+            </summary>
         </member>
         <member name="T:RogueEssence.AddTunnelStep`1">
             <summary>
@@ -4168,6 +4854,12 @@
             The available callbacks a zone's lua script may receive from the engine.
             </summary>
         </member>
+        <member name="M:RogueEssence.Script.LuaEngine.EnumerateZoneCallbackTypes">
+            <summary>
+            Enumerate the values in the EDungeonFloorCallbacks enum
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:RogueEssence.Script.LuaEngine.MakeZoneScriptCallbackName(System.String,RogueEssence.Script.LuaEngine.EZoneCallbacks)">
             <summary>
             Create the name of a map's expected callback function in its script.
@@ -4196,6 +4888,7 @@
             </summary>
             <param name="callbackformat"></param>
             <param name="mapname"></param>
+            <param name="callback"></param>
             <returns></returns>
         </member>
         <member name="T:RogueEssence.Script.LuaEngine.EDungeonMapCallbacks">
@@ -4310,7 +5003,7 @@
             Use this to serialize the script variables and place the serialized data into the current GameProgress.
             </summary>
         </member>
-        <member name="M:RogueEssence.Script.LuaEngine.LuaTableToDict(NLua.LuaTable)">
+        <member name="M:RogueEssence.Script.LuaEngine.SaveLuaTable(NLua.LuaTable)">
             <summary>
             Creates a deep-copy conversion of the input lua table to a dictionary of objects.
             </summary>
@@ -4434,6 +5127,12 @@
             </summary>
             <param name="mapassetname"></param>
         </member>
+        <member name="M:RogueEssence.Script.LuaEngine.CreateZoneScriptDir(System.String)">
+            <summary>
+            Creates the bare minimum script and zone folder for a zone.
+            </summary>
+            <param name="zoneassetname"></param>
+        </member>
         <member name="M:RogueEssence.Script.LuaEngine.CreateCoroutineIterator(System.String,System.Object[])">
             <summary>
             Creates a wrapped coroutine that works like a lua iterator.
@@ -4490,6 +5189,16 @@
         <member name="M:RogueEssence.Script.LuaEngine.OnGraphicsUnload">
             <summary>
             Call this when GraphicsManager is being unloaded.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.LuaEngine.OnMusicChange(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Called when the music changes!
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.LuaEngine.OnLossPenalty(RogueEssence.Data.GameProgress)">
+            <summary>
+            Called after failing a dungeon in main progress!
             </summary>
         </member>
         <member name="M:RogueEssence.Script.LuaEngine.OnGroundModeBegin">
@@ -4609,7 +5318,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:RogueEssence.Script.ScriptDungeon.CharSetEmote(RogueEssence.Dungeon.Character,System.Int32,System.Int32)">
+        <member name="M:RogueEssence.Script.ScriptDungeon.CharSetEmote(RogueEssence.Dungeon.Character,System.String,System.Int32)">
             <summary>
             Set a character's emote
             </summary>
@@ -4684,7 +5393,13 @@
             Leave current map and load up the title screen
             </summary>
         </member>
-        <member name="M:RogueEssence.Script.ScriptGame.EnterZone(System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:RogueEssence.Script.ScriptGame.RestartRogue(RogueEssence.Data.RogueConfig)">
+            <summary>
+            Restarts a Roguelocke run based on the configuration
+            </summary>
+             <param name="config"></param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.EnterZone(System.String,System.Int32,System.Int32,System.Int32)">
              <summary>
             
              </summary>
@@ -4809,7 +5524,7 @@
             <param name="spawnChar"></param>
             <returns></returns>
         </member>
-        <member name="M:RogueEssence.Script.ScriptGround.CharSetEmote(RogueEssence.Ground.GroundChar,System.Int32,System.Int32)">
+        <member name="M:RogueEssence.Script.ScriptGround.CharSetEmote(RogueEssence.Ground.GroundChar,System.String,System.Int32)">
             <summary>
             Set a character's emote
             </summary>
@@ -4823,6 +5538,16 @@
             </summary>
             <param name="chara"></param>
             <param name="anim"></param>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGround.CharWaitAnim">
+            <summary>
+            Performs an animation and waits until it's over.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGround.ObjectWaitAnimFrame">
+            <summary>
+            Performs an animation and waits until it's over.
+            </summary>
         </member>
         <member name="M:RogueEssence.Script.ScriptGround.PlayVFX(RogueEssence.Content.FiniteEmitter,System.Int32,System.Int32,RogueElements.Dir8)">
             <summary>
@@ -5017,7 +5742,7 @@
             Clears the current speaker, so none is displayed the next time TextDialogue is called!
             </summary>
         </member>
-        <member name="M:RogueEssence.Script.ScriptUI.SetSpeaker(System.String,System.Boolean,System.Int32,System.Int32,System.Int32,RogueEssence.Data.Gender)">
+        <member name="M:RogueEssence.Script.ScriptUI.SetSpeaker(System.String,System.Boolean,System.String,System.Int32,System.String,RogueEssence.Data.Gender)">
             <summary>
             Sets the speaker to be displayed during the following calls to the TextDialogue functions.  It resets speaker emotion.
             </summary>
@@ -5104,6 +5829,9 @@
             Then to recover the integer value indicating the result of the menu, ChoiceResult() must be called.
             </summary>
             <param name="message">The question to ask the user.</param>
+            <param name="choicesPairs"></param>
+            <param name="defaultChoice"></param>
+            <param name="cancelChoice"></param>
         </member>
         <member name="M:RogueEssence.Script.ScriptUI.ChoiceResult">
             <summary>
@@ -5116,6 +5844,11 @@
             Let the scripts wait for the result of a choice
             </summary>
             <returns></returns>
+        </member>
+        <member name="F:RogueEssence.Menu.DialogueBox.SPEAK_FRAMES">
+            <summary>
+            frames between speech blip
+            </summary>
         </member>
         <member name="F:RogueEssence.Menu.DialogueText.textColor">
             <summary>
@@ -5155,10 +5888,25 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="F:RogueEssence.PathMod.Mods">
+        <member name="P:RogueEssence.PathMod.Mods">
             <summary>
             Filename of mod relative to executable
             </summary>
+        </member>
+        <member name="M:RogueEssence.PathMod.GetRelativePath(System.String)">
+            <summary>
+            Takes a full path and returns a new path that is relative to the executable folder.
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.PathMod.DiffModVersions(System.Collections.Generic.List{RogueEssence.ModVersion},System.Collections.Generic.List{RogueEssence.ModVersion})">
+            <summary>
+            Returns a diff list of mod versions preserving order as much as possible.
+            </summary>
+            <param name="oldVersion"></param>
+            <param name="newVersion"></param>
+            <returns></returns>
         </member>
         <member name="F:RogueEssence.ModHeader.Path">
             <summary>
@@ -5214,7 +5962,7 @@
             <param name="newSE"></param>
             <returns></returns>
         </member>
-        <member name="M:RogueEssence.GameManager.MoveToGround(System.Int32,System.String,System.String,System.Boolean)">
+        <member name="M:RogueEssence.GameManager.MoveToGround(System.String,System.String,System.String,System.Boolean)">
             <summary>
             Enter a ground map by name, and makes the player spawn at the specified named marker
             </summary>

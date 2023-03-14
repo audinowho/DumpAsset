@@ -87,6 +87,55 @@
             The strategy that the monster takes when it goes aggro
             </summary>
         </member>
+        <member name="F:PMDC.Dungeon.AIPlan.AttackChoice.StandardAttack">
+            <summary>
+            Only chooses standard attack.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIPlan.AttackChoice.DumbAttack">
+            <summary>
+            randomly chooses moves based on weight, sometimes walks within range due to missing moves having weight
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIPlan.AttackChoice.RandomAttack">
+            <summary>
+            randomly chooses moves based on weight, always attacks with damaging moves when within range, but sometimes moves forward if the only choice is a status move
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIPlan.AttackChoice.StatusAttack">
+            <summary>
+            randomly chooses a status move first and foremost
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIPlan.AttackChoice.SmartAttack">
+            <summary>
+            always chooses the best move, and always attacks when within range
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIPlan.PositionChoice.Approach">
+            <summary>
+            move in even if it's out of range of moves
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIPlan.PositionChoice.Close">
+            <summary>
+            move in as close as possible within range of moves
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIPlan.PositionChoice.Avoid">
+            <summary>
+            move as far as possible within range
+            </summary>
+        </member>
+        <member name="M:PMDC.Dungeon.AIPlan.canPassChar(RogueEssence.Dungeon.Character,RogueEssence.Dungeon.Character,System.Boolean)">
+            <summary>
+            Checks if the controlled character can push over the target character, based on ordering and matchup
+            </summary>
+            <param name="controlledChar"></param>
+            <param name="destChar"></param>
+            <param name="yieldToTeam">Considers other team members non-passable, even if they are lower rank.</param>
+            <returns></returns>
+        </member>
         <member name="M:PMDC.Dungeon.AIPlan.playerSensibleToAttack(RogueEssence.Dungeon.Character)">
             <summary>
             Is it sensible for a player character to attack this way?
@@ -132,7 +181,24 @@
             <param name="seenChars"></param>
             <returns></returns>
         </member>
-        <member name="M:PMDC.Dungeon.AIPlan.GetActionValues(RogueEssence.Dungeon.Character,System.Collections.Generic.List{RogueEssence.Dungeon.Character},RogueEssence.Dungeon.Character,System.Int32,PMDC.Dungeon.HitValue[],System.Boolean)">
+        <member name="M:PMDC.Dungeon.AIPlan.UpdateHighestIndices(System.Collections.Generic.List{PMDC.Dungeon.ActionDirValue},RogueEssence.Dungeon.GameAction,PMDC.Dungeon.HitValue[])">
+            <summary>
+            Updates the highest indices list with the GameAction with the highest score.
+            </summary>
+            <param name="highestIndices"></param>
+            <param name="baseAction">Non-directional action to use.  Direction will be selected when adding to list.</param>
+            <param name="attackDirs"></param>
+        </member>
+        <member name="M:PMDC.Dungeon.AIPlan.UpdateTotalIndices(RogueElements.IRandom,System.Collections.Generic.List{PMDC.Dungeon.ActionDirValue},RogueEssence.Dungeon.GameAction,PMDC.Dungeon.HitValue[])">
+            <summary>
+            Updates the highest indices list with the GameAction with all scores.
+            </summary>
+            <param name="rand"></param>
+            <param name="totalIndices"></param>
+            <param name="baseAction">Non-directional action to use.  Direction will be selected when adding to list.</param>
+            <param name="attackDirs"></param>
+        </member>
+        <member name="M:PMDC.Dungeon.AIPlan.GetActionValues(RogueEssence.Dungeon.Character,System.Collections.Generic.List{RogueEssence.Dungeon.Character},RogueEssence.Dungeon.Character,System.String,PMDC.Dungeon.HitValue[],System.Boolean)">
             <summary>
             
             </summary>
@@ -152,7 +218,7 @@
             <param name="endHash"></param>
             <param name="blindspotOnly">Will only treat blindspot attacks as attacks that need to path to tiles.</param>
         </member>
-        <member name="M:PMDC.Dungeon.AIPlan.GetTargetEffect(RogueEssence.Dungeon.Character,System.Int32,RogueEssence.Data.SkillData,System.Collections.Generic.List{RogueEssence.Dungeon.Character},RogueEssence.Dungeon.Character,System.Int32)">
+        <member name="M:PMDC.Dungeon.AIPlan.GetTargetEffect(RogueEssence.Dungeon.Character,System.String,RogueEssence.Data.SkillData,System.Collections.Generic.List{RogueEssence.Dungeon.Character},RogueEssence.Dungeon.Character,System.Int32,System.Int32)">
             <summary>
             
             </summary>
@@ -172,6 +238,19 @@
             <param name="curBest"></param>
             <returns></returns>
         </member>
+        <member name="M:PMDC.Dungeon.PrepareWithLeaderPlan.closestToHighestLeader(RogueEssence.Dungeon.Character)">
+            <summary>
+            Checks if the controlled character is close to the highest ranking member in sight.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.Dungeon.PrepareWithLeaderPlan.transitivelyTouchesLeader(RogueEssence.Dungeon.Character)">
+            <summary>
+            Checks if the controlled character is transitively close to THE leader. Unsure if should use this method.
+            </summary>
+            <param name="controlledChar"></param>
+            <returns></returns>
+        </member>
         <member name="T:PMDC.Dungeon.ThiefPlan">
             <summary>
             will attack players if its original item is their current item, or if its has no item
@@ -182,6 +261,36 @@
         </member>
         <!-- Badly formed XML comment ignored for member "T:PMDC.Dungeon.DmgMult" -->
         <!-- Badly formed XML comment ignored for member "T:PMDC.Dungeon.AccMult" -->
+        <member name="T:PMDC.Dungeon.AttackOnlyEvent">
+            <summary>
+            Prevents all interactions except for using moves and normal attack.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.RespawnFromRandomEvent.Radius">
+            <summary>
+            The radius from the player characters from which to spawn.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.RespawnBaseEvent.MaxFoes">
+            <summary>
+            The limit to the number of enemies on the map.  If this number is reached or exceeded, no more respawns will occur.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.RespawnBaseEvent.RespawnTime">
+            <summary>
+            The amount of time it takes for a new enemy team to respawn, in turns.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.DespawnRadiusEvent.Radius">
+            <summary>
+            The maximum radius from a player that enemies are allowed to remain.  Go farther than this when the check occurs, and the enemy despawns.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.DespawnRadiusEvent.DespawnTime">
+            <summary>
+            The amount of time it takes for a new enemy team to respawn, in turns.
+            </summary>
+        </member>
         <member name="T:PMDC.Dungeon.HandoutScaledExpEvent">
             <summary>
             EXP handed out for defeating an enemy is scaled based on the enemy's level.
@@ -197,6 +306,11 @@
             <summary>
             EXP handed out to each team member is scaled based on the team member's level relative to the defeated enemy's level.
             BaseEXP * Numerator * (2 * EnemyLv + LevelBuffer) ^ 3 / (EnemyLv + PlayerLv + LevelBuffer) ^ 3 / Denominator + 1
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.CompassEvent.EligibleTiles">
+            <summary>
+            Tiles eligible to be pointed to.
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.ChestStep`1">
@@ -350,6 +464,30 @@
             <param name="isHall"></param>
             <returns></returns>
         </member>
+        <member name="T:PMDC.LevelGen.FloorStairsDistanceStep`3">
+            <summary>
+            Adds the entrance and exit to the floor.  Is room-conscious.
+            The algorithm will try to place them within and outside of a certain specified range.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TEntrance"></typeparam>
+            <typeparam name="TExit"></typeparam>
+        </member>
+        <member name="P:PMDC.LevelGen.FloorStairsDistanceStep`3.Distance">
+            <summary>
+            Range of distance in tiles that entrances and exits mut be apart.  start-inclusive, end-exclusive
+            </summary>
+        </member>
+        <member name="M:PMDC.LevelGen.FloorStairsDistanceStep`3.GetOutlet``1(`0,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Attempt to choose an outlet in a room with no entrance/exit, and updates their availability.  If none exists, default to a chosen room.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="map"></param>
+            <param name="free_indices"></param>
+            <param name="used_indices"></param>
+            <returns></returns>
+        </member>
         <member name="T:PMDC.LevelGen.GridPathBeetle`1">
             <summary>
             Populates the empty floor plan of a map by creating a path consisting of one big room in the middle, with normal rooms connected to it.
@@ -386,6 +524,13 @@
             Components that the giant room will be labeled with.
             </summary>
         </member>
+        <member name="T:PMDC.LevelGen.SetGridInnerComponentStep`1">
+            <summary>
+            Takes all rooms in the INSIDE of a map's grid plan and gives them a specified component.
+            These components can be used to identify the room in some way for future filtering.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
         <member name="T:PMDC.LevelGen.MapDataStep`1">
             <summary>
             Sets various attributes about the map.
@@ -412,6 +557,22 @@
             The darkness level for character viewing.
             </summary>
         </member>
+        <member name="F:PMDC.LevelGen.MapDataStep`1.ClampCamera">
+            <summary>
+            Clamps the map edges so that the camera does not scroll past them.  Does not work on wrapped-around maps.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MapTimeLimitStep`1">
+            <summary>
+            Sets only time limit for the map.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.MapTimeLimitStep`1.TimeLimit">
+            <summary>
+            How many turns the player can spend on the map before an instant game over.
+            </summary>
+        </member>
         <member name="T:PMDC.LevelGen.DefaultMapStatusStep`1">
             <summary>
             Adds a map status that is considered the "default" for that map.
@@ -434,6 +595,38 @@
             Adds a map status to the map, with the specified MapStatusStates
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:PMDC.LevelGen.MapTileStep`1">
+            <summary>
+            Sets terrain in a room to a certain value.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:PMDC.LevelGen.MapTileStep`1.Tile">
+            <summary>
+            Tile representing the water terrain to paint with.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.MapTileStep`1.TerrainStencil">
+            <summary>
+            Determines which tiles are eligible to be painted on.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobSpawnSettingsStep`1">
+            <summary>
+            Chooses the enemy limit and respawn time for the map.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.MobSpawnSettingsStep`1.Respawn">
+            <summary>
+            The respawn step.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobSpawnSettingsStep`1.MaxFoes">
+            <summary>
+            OBSOLETE
+            </summary>
         </member>
         <member name="T:PMDC.LevelGen.MonsterHallStep`1">
             <summary>
@@ -495,12 +688,75 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="T:PMDC.LevelGen.PatternTrapsStep`1">
+        <member name="P:PMDC.LevelGen.PatternPlacerStep`1.AllowTerminal">
             <summary>
-            Litters traps on a room in specified patterns.
-            UNFINISHED DOES NOT WORK
+            Allows terminal rooms as spawn.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.PatternPlacerStep`1.TerrainStencil">
+            <summary>
+            Determines which tiles are eligible to be painted on.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.PatternPlan.MapID">
+            <summary>
+            Map file to load.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.PatternSpawnStep`2">
+            <summary>
+            Litters placeables on a room in specified patterns.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TSpawnable"></typeparam>
+        </member>
+        <member name="T:PMDC.LevelGen.PatternTerrainStep`1">
+            <summary>
+            Litters placeables on a room in specified patterns.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TSpawnable"></typeparam>
+        </member>
+        <member name="P:PMDC.LevelGen.PatternTerrainStep`1.Terrain">
+            <summary>
+            Tile representing the water terrain to paint with.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.RoomPostProcStep`1">
+            <summary>
+            Sets terrain in a room to a certain value.
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:PMDC.LevelGen.RoomPostProcStep`1.PostProc">
+            <summary>
+            Tile representing the water terrain to paint with.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.RoomPostProcStep`1.TerrainStencil">
+            <summary>
+            Determines which tiles are eligible to be painted on.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.RoomPostProcStep`1.IncludeHalls">
+            <summary>
+            Makes halls eligible for spawn.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.RoomPostProcStep`1.IncludeRooms">
+            <summary>
+            Makes halls eligible for spawn.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.NoConnectRoom">
+            <summary>
+            Rooms that are disconnected from the main path.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.NoEventRoom">
+            <summary>
+            Rooms that should not have any events taking place in them.
+            </summary>
         </member>
         <member name="T:PMDC.LevelGen.RoomGenEvo`1">
             <summary>
@@ -558,6 +814,37 @@
             The terrain used for the water ring.
             </summary>
         </member>
+        <member name="T:PMDC.LevelGen.UnVaultableRoom">
+            <summary>
+            Rooms that should not be considered for attaching vault entrances.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.RoomTerrainStep`1">
+            <summary>
+            Sets terrain in a room to a certain value.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:PMDC.LevelGen.RoomTerrainStep`1.Terrain">
+            <summary>
+            Tile representing the water terrain to paint with.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.RoomTerrainStep`1.TerrainStencil">
+            <summary>
+            Determines which tiles are eligible to be painted on.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.RoomTerrainStep`1.IncludeHalls">
+            <summary>
+            Makes halls eligible for spawn.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.RoomTerrainStep`1.IncludeRooms">
+            <summary>
+            Makes halls eligible for spawn.
+            </summary>
+        </member>
         <member name="P:PMDC.LevelGen.BaseSealStep`1.Filters">
             <summary>
             Determines the rooms that serve as a vault and are to be locked away.
@@ -595,6 +882,13 @@
             <summary>
             Singles out the boss room intended for this process.
             </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.GuardSealStep`1">
+            <summary>
+            One part of several steps used to create a sealed key room, or several thereof.
+            This step takes the target rooms and surrounds them with unbreakable walls, with one key block used to unlock them.
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="T:PMDC.LevelGen.KeySealStep`1">
             <summary>
@@ -638,6 +932,16 @@
             The switch tile that unlocked the vaults.
             </summary>
         </member>
+        <member name="F:PMDC.LevelGen.SwitchSealStep`1.Amount">
+            <summary>
+            Determines how many switches need to be placed.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SwitchSealStep`1.Revealed">
+            <summary>
+            Determines if the switch tile is revealed.
+            </summary>
+        </member>
         <member name="F:PMDC.LevelGen.SwitchSealStep`1.TimeLimit">
             <summary>
             Determines if a time limit is triggered when pressing the switch.
@@ -646,6 +950,23 @@
         <member name="P:PMDC.LevelGen.SwitchSealStep`1.SwitchFilters">
             <summary>
             Determines the rooms that the switch can be placed in.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.TerrainSealStep`1">
+            <summary>
+            One part of several steps used to create a room sealed by terrain, or several thereof.
+            This step takes the target rooms and surrounds them with the selected walls, with one key block used to unlock them.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.TerrainSealStep`1.SealTerrain">
+            <summary>
+            The tile that is used to block off the main entrance to the room.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.TerrainSealStep`1.BorderTerrain">
+            <summary>
+            The tile that is used to border the room.
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.ShopStep`1">
@@ -691,6 +1012,29 @@
             The personality of the shopkeeper.
             </summary>
         </member>
+        <member name="T:PMDC.LevelGen.TempTileStep`1">
+            <summary>
+            One part of several steps used to create a switch-opened sealed room, or several thereof.
+            This step takes the target rooms and surrounds them with unbreakable walls, with one key block used to unlock them.
+            The filter must be able to single out the key rooms intended for this process.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.TempTileStep`1.TempTile">
+            <summary>
+            The temp tile
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.TempTileStep`1.TempStatus">
+            <summary>
+            The status to keep track of the countdown
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.TempTileStep`1.TileFilters">
+            <summary>
+            Determines the rooms that the switch can be placed in.
+            </summary>
+        </member>
         <member name="T:PMDC.LevelGen.MobCheckVersionDiff">
             <summary>
             Spawns the mob if the player's random seed has a specific remainder when divided by a specific number.
@@ -704,6 +1048,16 @@
         <member name="F:PMDC.LevelGen.MobCheckVersionDiff.Remainder">
             <summary>
             The remainder to check for when dividing the player's seed.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobCheckSaveVar">
+            <summary>
+            Spawns the mob if the player's savevar is true.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobCheckSaveVar.SaveVar">
+            <summary>
+            The savevar to query
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.MobCheckTimeOfDay">
@@ -862,6 +1216,40 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="T:PMDC.LevelGen.SpacedRoomSpawnStep`2">
+            <summary>
+            Spawns objects in randomly chosen rooms.  Once a room is chosen, it and adjacent rooms cannot be chosen.
+            Large rooms have the same probability as small rooms.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TSpawnable"></typeparam>
+        </member>
+        <member name="P:PMDC.LevelGen.SpacedRoomSpawnStep`2.IncludeHalls">
+            <summary>
+            Makes halls eligible for spawn.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.SetCompassStep`1">
+            <summary>
+            Orients all already-placed compass tiles to point to points of interest.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.SetCompassStep`1.CompassTile">
+            <summary>
+            Tile used as compass.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.FloorNameDropZoneStep">
+            <summary>
+            Names all floors of the dungeon segment according to a naming convention.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.FloorNameDropZoneStep.DropPriority">
+            <summary>
+            At what point in the map start to drop the title.
+            </summary>
+        </member>
         <member name="T:PMDC.LevelGen.SaveVarsZoneStep">
             <summary>
             The zone step responsible for placing the rescue tile and monster house when a rescue is active.
@@ -878,11 +1266,6 @@
             Generates boss battles randomly across the whole dungeon segment.
             </summary>
         </member>
-        <member name="F:PMDC.LevelGen.SpreadBossZoneStep.SpreadPlan">
-            <summary>
-            Determines how many floors to distribute the step to, and how spread apart they are.
-            </summary>
-        </member>
         <member name="F:PMDC.LevelGen.SpreadBossZoneStep.ItemAmount">
             <summary>
             Amount for the items randomly chosen from spawnlist
@@ -893,21 +1276,9 @@
             Generates monster houses randomly across the whole dungeon segment.
             </summary>
         </member>
-        <member name="F:PMDC.LevelGen.SpreadHouseZoneStep.SpreadPlan">
-            <summary>
-            Determines how many floors to distribute the step to, and how spread apart they are.
-            </summary>
-        </member>
         <member name="F:PMDC.LevelGen.SpreadHouseZoneStep.Priority">
             <summary>
             At what point in the map gen process to run the step in.
-            </summary>
-        </member>
-        <member name="F:PMDC.LevelGen.SpreadHouseZoneStep.ModStates">
-            <summary>
-            Flags from the player's passives that will affect the appearance rate of the monster house.
-            If a player enters a floor and is carrying an item, intrinsic, etc. that has a ModGenState listed here,
-            The chance of the monster house appearing will be increased by the ModGenState's value.
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.SpreadVaultZoneStep">
@@ -915,14 +1286,14 @@
             Generates vaults randomly across the whole dungeon segment.
             </summary>
         </member>
-        <member name="F:PMDC.LevelGen.SpreadVaultZoneStep.SpreadPlan">
-            <summary>
-            Determines how many floors to distribute the step to, and how spread apart they are.
-            </summary>
-        </member>
         <member name="F:PMDC.LevelGen.SpreadVaultZoneStep.ItemPriority">
             <summary>
             At what point in the map gen process to run the item placement steps in.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SpreadVaultZoneStep.TilePriority">
+            <summary>
+            At what point in the map gen process to run the tile placement steps in.
             </summary>
         </member>
         <member name="F:PMDC.LevelGen.SpreadVaultZoneStep.MobPriority">
@@ -938,6 +1309,21 @@
         <member name="F:PMDC.LevelGen.SpreadVaultZoneStep.ItemAmount">
             <summary>
             Amount of the items randomly chosen from spawnlist
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SpreadVaultZoneStep.ItemSpawners">
+            <summary>
+            Spawners for specific items
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SpreadVaultZoneStep.ItemPlacements">
+            <summary>
+            Step used to place the items
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.SpreadVaultZoneStep.TileSpawners">
+            <summary>
+            Spawners for specific items
             </summary>
         </member>
         <member name="F:PMDC.LevelGen.SpreadVaultZoneStep.Mobs">

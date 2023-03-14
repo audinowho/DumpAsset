@@ -28,10 +28,10 @@
             Detects if an added blob of tiles disconnects the map's existing connectivity.
             </summary>
             <param name="mapBounds"></param>
-            <param name="isMapValid">Checks for a valid path tile.</param>
+            <param name="isMapValid">Checks for a valid path tile.  Returns true if the tile is unblocked.</param>
             <param name="blobDest">Position to draw the blob at.</param>
             <param name="blobSize"></param>
-            <param name="isBlobValid">Checks for a valid blob tile. Loc is with respect to the top right of the blob rect.</param>
+            <param name="isBlobValid">Checks for a valid blob tile. Loc is with respect to the top right of the blob rect.  Returns true if the tile will be made blocked.</param>
             <param name="countErasures">Whether a completely erased graph counts as disconnected or not.</param>
             <returns></returns>
         </member>
@@ -99,9 +99,22 @@
             <param name="nodeAct"></param>
             <param name="getAdjacents"></param>
         </member>
+        <member name="M:RogueElements.Grid.FindPath(RogueElements.Loc,RogueElements.Loc,RogueElements.Loc,RogueElements.Loc,RogueElements.Grid.LocTest,RogueElements.Grid.LocTest)">
+            <summary>
+            Searches for the fastest path to the end.  If multiple are tied it picks the first one.
+            </summary>
+            <param name="rectStart"></param>
+            <param name="rectSize"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+            <param name="checkBlock"></param>
+            <param name="checkDiagBlock"></param>
+            <returns></returns>
+        </member>
         <member name="M:RogueElements.Grid.FindAPath(RogueElements.Loc,RogueElements.Loc,RogueElements.Loc,RogueElements.Loc[],RogueElements.Grid.LocTest,RogueElements.Grid.LocTest)">
             <summary>
             Searches for the fastest path to any of the endpoints.  If multiple are tied it picks the first one.
+            If none are found, it returns the one that got the closest.
             </summary>
             <param name="rectStart"></param>
             <param name="rectSize"></param>
@@ -152,10 +165,10 @@
             <summary>
             Traverses a grid. Does not internally handle the state of traversed/untraversed nodes.
             </summary>
-            <param name="rect"></param>
-            <param name="checkBlock"></param>
-            <param name="checkDiagBlock"></param>
-            <param name="fillOp"></param>
+            <param name="rect">Bounds of the area to fill.</param>
+            <param name="checkBlock">The operation determining if a tile is nontraversible.</param>
+            <param name="checkDiagBlock">The operation determining if a tile is nontraversible, diagonally.</param>
+            <param name="fillOp">The fill operation.</param>
             <param name="loc"></param>
         </member>
         <member name="M:RogueElements.Grid.FindClosestConnectedTile(RogueElements.Loc,RogueElements.Loc,RogueElements.Grid.LocTest,RogueElements.Grid.LocTest,RogueElements.Grid.LocTest,RogueElements.Loc)">
@@ -170,6 +183,19 @@
             <param name="loc">Origin point to start search from.</param>
             <returns></returns>
         </member>
+        <member name="M:RogueElements.Grid.FindClosestConnectedTiles(RogueElements.Loc,RogueElements.Loc,RogueElements.Grid.LocTest,RogueElements.Grid.LocTest,RogueElements.Grid.LocTest,RogueElements.Loc,System.Int32)">
+            <summary>
+            Unwrapped but consistent.
+            </summary>
+            <param name="rectStart"></param>
+            <param name="rectSize"></param>
+            <param name="checkFree"></param>
+            <param name="checkBlock"></param>
+            <param name="checkDiagBlock"></param>
+            <param name="loc"></param>
+            <param name="amount"></param>
+            <returns></returns>
+        </member>
         <member name="M:RogueElements.Grid.IsChokePoint(RogueElements.Loc,RogueElements.Loc,RogueElements.Loc,RogueElements.Grid.LocTest,RogueElements.Grid.LocTest)">
             <summary>
             Determines if blocking off a specific tile would cause a path leading through it to become inaccessible.
@@ -182,6 +208,20 @@
             <param name="checkDiagBlock">Determines if a tile checked diagonally is blocked.</param>
             <returns></returns>
         </member>
+        <member name="M:RogueElements.Grid.FindMultiPaths(RogueElements.Loc,RogueElements.Loc,RogueElements.Loc,RogueElements.Loc[],RogueElements.Grid.LocTest,RogueElements.Grid.LocTest,RogueElements.Grid.EvalPaths,RogueElements.Grid.EvalFallback)">
+            <summary>
+            Unwrapped but consistent.
+            </summary>
+            <param name="rectStart"></param>
+            <param name="rectSize"></param>
+            <param name="start"></param>
+            <param name="ends"></param>
+            <param name="checkBlock"></param>
+            <param name="checkDiagBlock"></param>
+            <param name="eval">The method determining if the search is complete.  Ex, complete after finding one path, finding all paths, etc.</param>
+            <param name="fallback">What to do with the partial progress if the search could not complete.</param>
+            <returns>A list of Loc objects, with the start of the path at the last index and the end of the path at the 0th index.</returns>
+        </member>
         <member name="M:RogueElements.Grid.EvalPathOne(RogueElements.Loc[],System.Collections.Generic.List{RogueElements.Loc}[],RogueElements.Grid.PathTile[],RogueElements.Grid.PathTile)">
             <summary>
             Only needs one path completed to return.
@@ -191,6 +231,30 @@
             <param name="farthestTiles"></param>
             <param name="currentTile"></param>
             <returns></returns>
+        </member>
+        <member name="M:RogueElements.Grid.EvalPathAll(RogueElements.Loc[],System.Collections.Generic.List{RogueElements.Loc}[],RogueElements.Grid.PathTile[],RogueElements.Grid.PathTile)">
+            <summary>
+            Needs all paths completed to return.
+            </summary>
+            <param name="ends"></param>
+            <param name="resultPaths"></param>
+            <param name="farthestTiles"></param>
+            <param name="currentTile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueElements.Grid.EvalFallbackOne(System.Collections.Generic.List{RogueElements.Loc}[],RogueElements.Grid.PathTile[])">
+            <summary>
+            Fills in the path that got closest to an exit.
+            </summary>
+            <param name="resultPaths"></param>
+            <param name="farthestTiles"></param>
+        </member>
+        <member name="M:RogueElements.Grid.EvalFallbackAll(System.Collections.Generic.List{RogueElements.Loc}[],RogueElements.Grid.PathTile[])">
+            <summary>
+            Fills in the path that got closest to the exit, for every exit.
+            </summary>
+            <param name="resultPaths"></param>
+            <param name="farthestTiles"></param>
         </member>
         <member name="F:RogueElements.IntRange.Min">
             <summary>
@@ -226,10 +290,41 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:RogueElements.Loc.Transpose">
+            <summary>
+            Returns the transposed coordinates.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:RogueElements.AddConnectedRoomsRandStep`1">
+            <summary>
+            Takes the current floor plan and adds new rooms that are connected to existing rooms.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.AddConnectedRoomsStep`1">
+            <summary>
+            Takes the current floor plan and adds new rooms that are connected to existing rooms.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.AddDisconnectedRoomsRandStep`1">
+            <summary>
+            Takes the current floor plan and adds new rooms that are disconnected from existing rooms.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.AddDisconnectedRoomsStep`1">
+            <summary>
+            Takes the current floor plan and adds new rooms that are disconnected from existing rooms.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
         <member name="T:RogueElements.ClampFloorStep`1">
             <summary>
             Clamps the floor plan to at least a minimum size, at most a maximum size.
             If the bounds of the current roomplan maximum, the size will increase to include them.
+            Always shrinks in the BottomRight direction, which results in the TopLeft corner remaining constant.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
@@ -279,13 +374,52 @@
             Adds the specified number of tiles to the border of the map as wall terrain.
             </summary>
         </member>
+        <member name="P:RogueElements.FloorPlan.Start">
+            <summary>
+            Start loc of floor space.  Room coordinates are currently NOT relative to this value and their draw locs are universal.
+            </summary>
+        </member>
+        <member name="M:RogueElements.FloorPlan.GetBorderMatch(RogueElements.IRoomGen,RogueElements.IRoomGen,RogueElements.Loc,RogueElements.Dir4)">
+            <summary>
+            Gets the amount of tiles that overlap when adding a new room adjacent to an existing room.
+            </summary>
+            <param name="roomFrom">The room to have the new room added to.</param>
+            <param name="room">The new room to add. Its current position is not final.</param>
+            <param name="candLoc">The proposed location of the new room. Assumes this loc is indeed adjacent to the roomFrom, even in wrapped scenarios.</param>
+            <param name="expandTo">The direction to expand from the old room to new room.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueElements.FloorPlan.GetAdjacentRect(RogueElements.Rect,RogueElements.Rect,RogueElements.Dir4)">
+            <summary>
+            Given two rectangles that are meant to be adjacent to each other, with a valid direction of adjacency,
+            Gets the unwrapped version of the second rectangle that is adjacent to the first.
+            </summary>
+            <param name="rectFrom"></param>
+            <param name="rectTo"></param>
+            <param name="dir"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueElements.FloorPlan.GetDirAdjacent(RogueElements.IRoomGen,RogueElements.IRoomGen)">
+            <summary>
+            Gets the direction of adjacency.
+            </summary>
+            <param name="roomGenFrom"></param>
+            <param name="roomGenTo"></param>
+            <returns></returns>
+        </member>
         <member name="M:RogueElements.FloorPlan.Resize(RogueElements.Loc,RogueElements.Dir8,RogueElements.Dir8)">
             <summary>
             Changes size without changing the start.
             </summary>
             <param name="newSize"></param>
-            <param name="dir"></param>
+            <param name="dir">The direction to expand the floor space in.</param>
             <param name="anchorDir">The anchor point of the initial floor rect.</param>
+        </member>
+        <member name="M:RogueElements.FloorPlan.TransferBorderToAdjacents(RogueElements.RoomHallIndex)">
+            <summary>
+            A room's draw has been completed.  It must now signal to its adjacent rooms which of its borders are open.
+            </summary>
+            <param name="from"></param>
         </member>
         <member name="T:RogueElements.FloorRoomPlan">
             <summary>
@@ -316,57 +450,58 @@
             Used to filter out rooms that do not make suitable entrances/exits, such as boss rooms.
             </summary>
         </member>
-        <member name="M:RogueElements.FloorStairsStep`3.NextRoom(RogueElements.IRandom,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32})">
+        <member name="M:RogueElements.FloorStairsStep`3.GetOutlet``1(`0,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32})">
             <summary>
-            Attempt to choose a room with no entrance/exit, and updates their availability.  If none exists, default to a chosen room.
+            Attempt to choose an outlet in a room with no entrance/exit, and updates their availability.  If none exists, default to a chosen room.
             </summary>
-            <param name="rand">todo: describe rand parameter on NextRoom</param>
-            <param name="room_indices">todo: describe room_indices parameter on NextRoom</param>
-            <param name="used_indices">todo: describe used_indices parameter on NextRoom</param>
+            <typeparam name="T"></typeparam>
+            <param name="map"></param>
+            <param name="free_indices"></param>
+            <param name="used_indices"></param>
             <returns></returns>
         </member>
-        <member name="T:RogueElements.AddConnectedRoomsStep`1">
+        <member name="T:RogueElements.AddConnectedRoomsBaseStep`1">
             <summary>
             Takes the current floor plan and adds new rooms that are connected to existing rooms.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="P:RogueElements.AddConnectedRoomsStep`1.Amount">
+        <member name="P:RogueElements.AddConnectedRoomsBaseStep`1.Amount">
             <summary>
             The number of rooms to add.
             </summary>
         </member>
-        <member name="P:RogueElements.AddConnectedRoomsStep`1.HallPercent">
+        <member name="P:RogueElements.AddConnectedRoomsBaseStep`1.HallPercent">
             <summary>
             The chance that an added room is attached using an intermediate hallway.
             </summary>
         </member>
-        <member name="P:RogueElements.AddConnectedRoomsStep`1.Filters">
+        <member name="P:RogueElements.AddConnectedRoomsBaseStep`1.Filters">
             <summary>
             Determines which rooms are eligible to have the new rooms added on.
             </summary>
         </member>
-        <member name="P:RogueElements.AddConnectedRoomsStep`1.GenericRooms">
+        <member name="P:RogueElements.AddConnectedRoomsBaseStep`1.GenericRooms">
             <summary>
             The room types that can be used for the room being added.
             </summary>
         </member>
-        <member name="P:RogueElements.AddConnectedRoomsStep`1.RoomComponents">
+        <member name="P:RogueElements.AddConnectedRoomsBaseStep`1.RoomComponents">
             <summary>
             Components that the newly added rooms will be labeled with.
             </summary>
         </member>
-        <member name="P:RogueElements.AddConnectedRoomsStep`1.GenericHalls">
+        <member name="P:RogueElements.AddConnectedRoomsBaseStep`1.GenericHalls">
             <summary>
             The room types that can be used as the intermediate hall.
             </summary>
         </member>
-        <member name="P:RogueElements.AddConnectedRoomsStep`1.HallComponents">
+        <member name="P:RogueElements.AddConnectedRoomsBaseStep`1.HallComponents">
             <summary>
             Components that the newly added halls will be labeled with.
             </summary>
         </member>
-        <member name="M:RogueElements.AddConnectedRoomsStep`1.PrepareRoom(RogueElements.IRandom,RogueElements.FloorPlan,System.Boolean)">
+        <member name="M:RogueElements.AddConnectedRoomsBaseStep`1.PrepareRoom(RogueElements.IRandom,RogueElements.FloorPlan,System.Boolean)">
             <summary>
             Returns a random generic room or hall that can fit in the specified floor.
             </summary>
@@ -375,23 +510,23 @@
             <param name="isHall"></param>
             <returns></returns>
         </member>
-        <member name="T:RogueElements.AddDisconnectedRoomsStep`1">
+        <member name="T:RogueElements.AddDisconnectedRoomsBaseStep`1">
             <summary>
             Takes the current floor plan and adds new rooms that are disconnected from existing rooms.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="P:RogueElements.AddDisconnectedRoomsStep`1.Amount">
+        <member name="P:RogueElements.AddDisconnectedRoomsBaseStep`1.Amount">
             <summary>
             The number of rooms to add.
             </summary>
         </member>
-        <member name="P:RogueElements.AddDisconnectedRoomsStep`1.GenericRooms">
+        <member name="P:RogueElements.AddDisconnectedRoomsBaseStep`1.GenericRooms">
             <summary>
             The room types that can be used for the room being added.
             </summary>
         </member>
-        <member name="P:RogueElements.AddDisconnectedRoomsStep`1.Components">
+        <member name="P:RogueElements.AddDisconnectedRoomsBaseStep`1.Components">
             <summary>
             Components that the newly added rooms will be labeled with.
             </summary>
@@ -418,6 +553,11 @@
             Once finished, apply DrawFloorToTileStep to draw the actual tiles of the rooms.
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.InitFloorPlanStep`1.Wrap">
+            <summary>
+            Determines if the map is wrapped around.
+            </summary>
         </member>
         <member name="P:RogueElements.FloorPathStartStepGeneric`1.GenericRooms">
             <summary>
@@ -477,15 +617,16 @@
             <param name="branch">Chooses to branch from a path instead of extending it.</param>
             <returns>All possible RoomHallIndex that can receive an expansion.</returns>
         </member>
-        <member name="M:RogueElements.FloorPathBranch`1.ChooseRoomExpansion(RogueElements.FloorPathBranch{`0}.RoomPrep,System.Int32,RogueElements.IRandom,RogueElements.FloorPlan,System.Collections.Generic.List{RogueElements.RoomHallIndex})">
+        <member name="M:RogueElements.FloorPathBranch`1.ChooseRandRoomExpansion(RogueElements.IRoomGen,RogueElements.IRoomGen,RogueElements.IRandom,RogueElements.FloorPlan,System.Collections.Generic.List{RogueElements.RoomHallIndex})">
             <summary>
             Chooses a node to expand the path from based on the specified branch setting.
+            Attempts 30 times.
             </summary>
-            <param name="availableExpansions">todo: describe availableExpansions parameter on ChooseRoomExpansion</param>
-            <param name="prepareRoom">todo: describe prepareRoom parameter on ChooseRoomExpansion</param>
-            <param name="hallPercent">todo: describe hallPercent parameter on ChooseRoomExpansion</param>
+            <param name="room"></param>
+            <param name="hall"></param>
             <param name="rand"></param>
             <param name="floorPlan"></param>
+            <param name="availableExpansions"></param>
             <returns>A set of instructions on how to expand the path.</returns>
         </member>
         <member name="M:RogueElements.FloorPathBranch`1.PrepareRoom(RogueElements.IRandom,RogueElements.FloorPlan,System.Boolean)">
@@ -510,7 +651,12 @@
         </member>
         <member name="P:RogueElements.ResizeFloorStep`1.ExpandDir">
             <summary>
-            The direction in which to expand.
+            The direction in which to expand the floor space relative to existing rooms.
+            </summary>
+        </member>
+        <member name="P:RogueElements.ResizeFloorStep`1.SpaceExpandDir">
+            <summary>
+            The direction in which to expand the floor's draw rectangle.
             </summary>
         </member>
         <member name="T:RogueElements.SetFloorPlanComponentStep`1">
@@ -631,7 +777,7 @@
         </member>
         <member name="M:RogueElements.GridPlan.ChooseRoomBounds(RogueElements.IRandom,System.Int32)">
             <summary>
-            Decides on the room bounds for each room.
+            Decides on the room bounds for each room.  Results will be out of bounds and unwrapped in wrapped floor scenarios.
             </summary>
             <param name="rand"></param>
             <param name="roomIndex"></param>
@@ -645,12 +791,13 @@
             <param name="vertical"></param>
             <param name="rand">todo: describe rand parameter on ChooseHallBounds</param>
         </member>
-        <member name="M:RogueElements.GridPlan.GetHallTouchRange(RogueElements.IRoomGen,RogueElements.Dir4,System.Int32)">
+        <member name="M:RogueElements.GridPlan.GetHallTouchRange(RogueElements.Rect,System.Func{RogueElements.Dir4,System.Int32,System.Boolean},RogueElements.Dir4,System.Int32)">
             <summary>
             Gets the minimum range along the side of a room that includes all of its fulfillable borders.
             Special cases arise if the room is multi-cell.
             </summary>
-            <param name="room"></param>
+            <param name="rect">todo: describe rect parameter on GetHallTouchRange</param>
+            <param name="borderQuery">todo: describe borderQuery parameter on GetHallTouchRange</param>
             <param name="dir">Direction from room to hall.</param>
             <param name="tier"></param>
             <returns></returns>
@@ -692,6 +839,11 @@
         <member name="P:RogueElements.InitGridPlanStep`1.CellWall">
             <summary>
             The thickness of the dividers between cells in the grid, in tiles.
+            </summary>
+        </member>
+        <member name="P:RogueElements.InitGridPlanStep`1.Wrap">
+            <summary>
+            Determines if the map is wrapped around.
             </summary>
         </member>
         <member name="T:RogueElements.GridPathGrid`1">
@@ -819,7 +971,7 @@
         </member>
         <member name="T:RogueElements.SetGridDefaultsStep`1">
             <summary>
-            Takes an existing grid plan and changes one of the rooms into the default room type.
+            Takes an existing grid plan and changes some of the rooms into the default room type.
             The default room is a single tile in size and effectively acts as a hallway.
             </summary>
             <typeparam name="T"></typeparam>
@@ -862,6 +1014,12 @@
             Components that the newly added room will be labeled with.
             </summary>
         </member>
+        <member name="T:RogueElements.RandGenStep`1">
+            <summary>
+            Initializes a map of Width x Height tiles.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
         <member name="P:RogueElements.BaseHallBrush.Size">
             <summary>
             Communicates to the Room/HallGen the size of the brush, for alignment purposes.
@@ -899,7 +1057,7 @@
             The preferred height of the area covered by the hall.
             </summary>
         </member>
-        <member name="M:RogueElements.RoomGenAngledHall`1.DrawCombinedHall(RogueElements.ITiledGenContext,RogueElements.Dir4,System.Int32,System.Int32[])">
+        <member name="M:RogueElements.RoomGenAngledHall`1.DrawCombinedHall(RogueElements.ITiledGenContext,System.Collections.Generic.List{System.ValueTuple{RogueElements.LocRay4,System.Int32}},RogueElements.Dir4,System.Int32,System.Int32[])">
             <summary>
             Draws a bundle of halls from one direction, going up to the specified point, and connects them.
             </summary>
@@ -907,6 +1065,7 @@
             <param name="dir"></param>
             <param name="forwardEnd"></param>
             <param name="starts"></param>
+            <param name="drawnRays">todo: describe drawnRays parameter on DrawCombinedHall</param>
         </member>
         <member name="M:RogueElements.RoomGenAngledHall`1.GetIntersectedTiles(System.Collections.Generic.List{System.Collections.Generic.HashSet{System.Int32}},System.Collections.Generic.List{System.Collections.Generic.HashSet{System.Int32}})">
             <summary>
@@ -916,16 +1075,17 @@
             <param name="opening2"></param>
             <returns></returns>
         </member>
-        <member name="M:RogueElements.RoomGenAngledHall`1.DrawHall(RogueElements.ITiledGenContext,RogueElements.Loc,RogueElements.Loc,System.Boolean)">
+        <member name="M:RogueElements.RoomGenAngledHall`1.DrawHall(RogueElements.ITiledGenContext,System.Collections.Generic.List{System.ValueTuple{RogueElements.LocRay4,System.Int32}},RogueElements.Loc,RogueElements.Loc,RogueElements.Dir4)">
             <summary>
             Draws a hall in a straight cardinal direction, starting with one point and ending with another (inclusive).
             </summary>
             <param name="map"></param>
+            <param name="drawnRays"></param>
             <param name="point1"></param>
             <param name="point2"></param>
-            <param name="vertical"></param>
+            <param name="dir"></param>
         </member>
-        <member name="M:RogueElements.RoomGenAngledHall`1.DrawSecondaryHall(`0,System.Collections.Generic.HashSet{System.Int32},System.Collections.Generic.Dictionary{RogueElements.Dir4,System.Collections.Generic.List{System.Collections.Generic.HashSet{System.Int32}}},System.Boolean,System.Boolean)">
+        <member name="M:RogueElements.RoomGenAngledHall`1.DrawSecondaryHall(`0,System.Collections.Generic.List{System.ValueTuple{RogueElements.LocRay4,System.Int32}},System.Collections.Generic.HashSet{System.Int32},System.Collections.Generic.Dictionary{RogueElements.Dir4,System.Collections.Generic.List{System.Collections.Generic.HashSet{System.Int32}}},System.Boolean,System.Boolean)">
             <summary>
             In a 4- or 3-way hall situation, this method is called to add the remaining ways after the first two have been added.
             </summary>
@@ -934,8 +1094,9 @@
             <param name="possibleStarts"></param>
             <param name="vertical"></param>
             <param name="turn"></param>
+            <param name="drawnRays">todo: describe drawnRays parameter on DrawSecondaryHall</param>
         </member>
-        <member name="M:RogueElements.RoomGenAngledHall`1.DrawPrimaryHall(`0,System.Collections.Generic.HashSet{System.Int32},System.Collections.Generic.Dictionary{RogueElements.Dir4,System.Collections.Generic.List{System.Collections.Generic.HashSet{System.Int32}}},System.Boolean,System.Boolean)">
+        <member name="M:RogueElements.RoomGenAngledHall`1.DrawPrimaryHall(`0,System.Collections.Generic.List{System.ValueTuple{RogueElements.LocRay4,System.Int32}},System.Collections.Generic.HashSet{System.Int32},System.Collections.Generic.Dictionary{RogueElements.Dir4,System.Collections.Generic.List{System.Collections.Generic.HashSet{System.Int32}}},System.Boolean,System.Boolean)">
             <summary>
             Draws the hall connecting the first opposite pair of sides.
             </summary>
@@ -944,14 +1105,16 @@
             <param name="possibleStarts"></param>
             <param name="vertical"></param>
             <param name="turn"></param>
+            <param name="drawnRays">todo: describe drawnRays parameter on DrawPrimaryHall</param>
         </member>
-        <member name="M:RogueElements.RoomGenAngledHall`1.DrawStraightHall(`0,System.Collections.Generic.HashSet{System.Int32},System.Boolean)">
+        <member name="M:RogueElements.RoomGenAngledHall`1.DrawStraightHall(`0,System.Collections.Generic.List{System.ValueTuple{RogueElements.LocRay4,System.Int32}},System.Collections.Generic.HashSet{System.Int32},System.Boolean)">
             <summary>
             Draws a single straight hall in the specified direction, choosing ONE of the scalars provided in cross.
             </summary>
             <param name="map"></param>
             <param name="cross"></param>
             <param name="vertical"></param>
+            <param name="drawnRays">todo: describe drawnRays parameter on DrawStraightHall</param>
         </member>
         <member name="T:RogueElements.SquareHallBrush">
             <summary>
@@ -959,6 +1122,16 @@
             </summary>
         </member>
         <member name="P:RogueElements.SquareHallBrush.Dims">
+            <summary>
+            Dimensions of the brush, in Tiles
+            </summary>
+        </member>
+        <member name="T:RogueElements.TerrainHallBrush">
+            <summary>
+            A rectangular brush for painting hallways.
+            </summary>
+        </member>
+        <member name="P:RogueElements.TerrainHallBrush.Dims">
             <summary>
             Dimensions of the brush, in Tiles
             </summary>
@@ -989,11 +1162,22 @@
             The width of the vertical rectangle.
             </summary>
         </member>
+        <member name="T:RogueElements.RoomGenDefault`1">
+            <summary>
+            Generates a one-tile room.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
         <member name="T:RogueElements.PermissiveRoomGen`1">
             <summary>
             Subclass of RoomGen that can fulfill any combination of paths leading into it.
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.RoomFilterDefaultGen">
+            <summary>
+            Filters for rooms using the default generator.
+            </summary>
         </member>
         <member name="T:RogueElements.RoomGen`1">
             <summary>
@@ -1001,15 +1185,15 @@
             </summary>
             <remarks>
             RoomGens obey the following rules:
-            1. All RoomGens must generate a solvable room.  Aka, one where it is possible to get to any opening in its 4 sides, to any other opening in its 4 sides.
-            * This means, it is okay if some generated rooms can be “cheesed” out of any self-contained puzzle they’re trying to make.A cheesable room is better than a wholly unsolvable.
+            1. All RoomGens must generate a solvable room.  Aka, one where it is possible to get from any opening in its 4 sides, to any other opening in its 4 sides.
+            * This means, it is okay if some generated rooms can be “cheesed” out of any self-contained puzzle they’re trying to make. A cheesable room is better than a wholly unsolvable room.
             2. All RoomGens must be capable of taking any Size, and generate without throwing an exception.
             * So if you have a RoomGen that is meant to make a complicated self contained maze, and the calling code says "No, you only get 2x2 tiles of space to work with, deal with it", it will have to comply. (Usually by just making a blank square)
-            * But, you can ask a RoomGen what dimensions it would like to be, and then pass it those dimensions to play nice with it.This is the usual case.
+            * But, you can ask a RoomGen what dimensions it would like to be, and then pass it those dimensions to play nice with it. This is the usual case.
             3. A RoomGen must be able to produce at least one opening for each of the four cardinal directions, if asked.
-            * For example, a simple square room has openings on all four sides regardless of how it’s generated.Certain styles of rooms do not want to have any walkable tiles on the North border unless mandated.
+            * For example, a simple square room has openings on all four sides regardless of how it’s generated. Certain styles of rooms do not want to have any walkable tiles on the North border unless mandated.
             * Another example would be if the algorithm from above placed this RoomGen between two rooms: one above and one below.It wants to connect them from above and below.The RoomGen must provide an opening somewhere for its north and south borders.
-            * The keyword is somewhere.Somewhere that the RoomGen gets to pick and the calling code cannot.
+            * The keyword is somewhere. Somewhere that the RoomGen gets to pick and the calling code cannot.
             </remarks>
             <typeparam name="T">The MapGenContext to apply the room to.</typeparam>
         </member>
@@ -1017,6 +1201,48 @@
             <summary>
             The rectangle that the room is drawn in.
             </summary>
+        </member>
+        <member name="P:RogueElements.RoomGen`1.RoomSideReqs">
+            <summary>
+            Ranges that must have at least one of their permitted tiles touched.
+            There can potentially be multiple required ranges.
+            </summary>
+        </member>
+        <member name="P:RogueElements.RoomGen`1.BorderToFulfill">
+            <summary>
+            Tiles that, if touched during this room's gen, signify that the req has been filled
+            "the req" refers to the roomSideReqs for that side.
+            </summary>
+        </member>
+        <member name="P:RogueElements.RoomGen`1.FulfillableBorder">
+            <summary>
+            Tiles that this room can take as incoming paths.
+            These are the tiles that are allowed to be opened (turned on in openedBorder).
+            This is distinct from openedBorder in that fulfillableBorder has not been opened, but is able to open if asked.
+            </summary>
+        </member>
+        <member name="P:RogueElements.RoomGen`1.OpenedBorder">
+            <summary>
+            The tiles that this room has opened, which can be used to inform other rooms where to connect.
+            </summary>
+        </member>
+        <member name="M:RogueElements.RoomGen`1.GetFulfillableBorder(RogueElements.Dir4,System.Int32)">
+            <summary>
+            Gets the tiles that this room can take as incoming paths.
+            These are the tiles that are allowed to be opened (turned on in openedBorder).
+            Unlike openedBorder, fulfillableBorder has not been opened, but has signalled it is able to open if asked.
+            </summary>
+            <param name="dir"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueElements.RoomGen`1.GetOpenedBorder(RogueElements.Dir4,System.Int32)">
+            <summary>
+            Gets rhe tiles that this room has opened, which can be used to inform other rooms where to connect.
+            </summary>
+            <param name="dir"></param>
+            <param name="index"></param>
+            <returns></returns>
         </member>
         <member name="M:RogueElements.RoomGen`1.Copy">
             <summary>
@@ -1038,19 +1264,19 @@
             <param name="rand"></param>
             <param name="size"></param>
         </member>
-        <member name="M:RogueElements.RoomGen`1.ReceiveOpenedBorder(RogueElements.IRoomGen,RogueElements.Dir4)">
+        <member name="M:RogueElements.RoomGen`1.ChoosePossibleStartRanges(RogueElements.IRandom,System.Int32,System.Boolean[],System.Collections.Generic.List{RogueElements.IntRange},System.Int32,System.Int32)">
             <summary>
-            Transfers the opened tiles of one direction's OpenedBorder to the adjacent room's PermittedBorder
+            Returns a list of tile-collections, the whole of which would cover all sidereqs.
+            The sets are all mutually exclusive to each other, and the minimum amount is always chosen.
+            Unwrapped.
             </summary>
-            <param name="sourceRoom">The target room</param>
-            <param name="dir">The direction that the target room lies, relative to this room.</param>
-        </member>
-        <member name="M:RogueElements.RoomGen`1.ReceiveFulfillableBorder(RogueElements.IRoomGen,RogueElements.Dir4)">
-            <summary>
-            Transfers the opened tiles of one direction's FulfillableBorder to the adjacent room's PermittedBorder
-            </summary>
-            <param name="sourceRoom">The target room</param>
-            <param name="dir">The direction that the target room lies, relative to this room.</param>
+            <param name="rand">Random object</param>
+            <param name="scalarStart">The starting X/Y of the room side.</param>
+            <param name="permittedRange">The tiles that can be used to cover sidereqs, as a boolean array.</param>
+            <param name="origSideReqs">The required X/Y positions that must be touched.</param>
+            <param name="reqWidth">The width that each chosen tile would cover. Starts from the center.</param>
+            <param name="reqCenter">center of width.</param>
+            <returns></returns>
         </member>
         <member name="M:RogueElements.RoomGen`1.FulfillRoomBorders(`0,System.Boolean)">
             <summary>
@@ -1067,24 +1293,33 @@
             <param name="dir">The direction of the border, facing outwards.</param>
             <param name="scalar"></param>
         </member>
-        <member name="M:RogueElements.RoomGen`1.GetEdgeLoc(RogueElements.Dir4,System.Int32)">
+        <member name="M:RogueElements.RoomGen`1.AskBorderRange(RogueElements.IntRange,RogueElements.Dir4)">
             <summary>
-            Gets the loc just inside the room, from the specified direction, with the specified scalar.  The scalar determines X if it's a vertical, and Y if it's a horizontal side.
+            Requests that a given range of tiles be fulfilled by this room.
+            Will add a sidereq and consider all tiles in the range as eligible for fulfillment of that sidereq.
+            Assumes that the borders are touching.  Unwrapped.
             </summary>
-            <param name="dir">todo: describe dir parameter on GetEdgeLoc</param>
-            <param name="scalar">todo: describe scalar parameter on GetEdgeLoc</param>
-            <returns></returns>
+            <param name="range"></param>
+            <param name="dir"></param>
         </member>
-        <member name="M:RogueElements.RoomGen`1.ChoosePossibleStartRanges(RogueElements.IRandom,System.Int32,System.Boolean[],System.Collections.Generic.List{RogueElements.IntRange})">
+        <member name="M:RogueElements.RoomGen`1.AskBorderFromRoom(RogueElements.Rect,System.Func{RogueElements.Dir4,System.Int32,System.Boolean},RogueElements.Dir4)">
             <summary>
-            Returns a list of tile-collections, the whole of which would cover all sidereqs.
-            The sets are all mutually exclusive to each other, and the minimum amount is always chosen.
+            Requests that a given set of border tiles be fulfilled by this room.
+            The request is created using the edge loc of the room ordering this one.
+            Will add a sidereq and use fulfillable (or opened) tiles in the range as eligible for fulfillment of that sidereq.
+            Room must be touching.  Unwrapped.
             </summary>
-            <param name="rand">todo: describe rand parameter on ChoosePossibleStartRanges</param>
-            <param name="scalarStart">todo: describe scalarStart parameter on ChoosePossibleStartRanges</param>
-            <param name="permittedRange">todo: describe permittedRange parameter on ChoosePossibleStartRanges</param>
-            <param name="origSideReqs">todo: describe origSideReqs parameter on ChoosePossibleStartRanges</param>
-            <returns></returns>
+            <param name="sourceDraw"></param>
+            <param name="borderQuery"></param>
+            <param name="dir">Direction from this room to the source room.</param>
+        </member>
+        <member name="M:RogueElements.RoomGen`1.AskSideReq(RogueElements.IntRange,RogueElements.Dir4)">
+            <summary>
+            Adds a tile range to the room's sidereq in a specified direction.
+            The range will be checked to see if it's possible.
+            </summary>
+            <param name="range"></param>
+            <param name="dir"></param>
         </member>
         <member name="T:RogueElements.RoomGenBlocked`1">
             <summary>
@@ -1155,12 +1390,6 @@
             <summary>
             The max height of the room.  The actual cave will tend to be smaller.
             </summary>
-        </member>
-        <member name="T:RogueElements.RoomGenDefault`1">
-            <summary>
-            Generates a one-tile room.
-            </summary>
-            <typeparam name="T"></typeparam>
         </member>
         <member name="T:RogueElements.RoomGenRound`1">
             <summary>
@@ -1308,6 +1537,15 @@
             Determines the rooms eligible to spawn the objects in.
             </summary>
         </member>
+        <member name="M:RogueElements.RoomSpawnStep`2.SpawnRandInCandRooms(`0,RogueElements.SpawnList{RogueElements.RoomHallIndex},System.Collections.Generic.List{`1},System.Int32)">
+            <summary>
+            Spawns the chosen spawnables into the chosen collection of rooms
+            </summary>
+            <param name="map"></param>
+            <param name="spawningRooms"></param>
+            <param name="spawns"></param>
+            <param name="decayPercent">After spawning, the room is multiplied by this percentage to make it less likely to spawn.</param>
+        </member>
         <member name="T:RogueElements.SpecificSpawnStep`2">
             <summary>
             Spawns objects on specific locations.
@@ -1394,6 +1632,20 @@
             <typeparam name="TEntrance"></typeparam>
             <typeparam name="TExit"></typeparam>
         </member>
+        <member name="T:RogueElements.BlobTilePercentStencil`1">
+            <summary>
+            A filter for determining the eligible tiles for an operation.
+            Checking the bounds is checking each individual tile.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.BlobTileStencil`1">
+            <summary>
+            A filter for determining the eligible tiles for an operation.
+            Checking the bounds is checking each individual tile.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
         <member name="T:RogueElements.BlobWaterStep`1">
             <summary>
             Creates blobs of water using cellular automata, and places them around the map.
@@ -1405,15 +1657,39 @@
             The number of blobs to place.
             </summary>
         </member>
-        <member name="P:RogueElements.BlobWaterStep`1.MinScale">
+        <member name="P:RogueElements.BlobWaterStep`1.AreaScale">
             <summary>
-            The minimum size of the area creating the blob.  It is measured in percentage of the full map size.
+            The NxN size range of the acceptable area the blob takes.  It is measured in tiles.
             </summary>
         </member>
-        <member name="P:RogueElements.BlobWaterStep`1.StartScale">
+        <member name="P:RogueElements.BlobWaterStep`1.GenerateScale">
             <summary>
-            The maximum size of the area creating the blob.  It is measured in percentage of the full map size.
+            The NxN size range of the area creating the blob.  It is measured in tiles.
             </summary>
+        </member>
+        <member name="P:RogueElements.BlobWaterStep`1.BlobStencil">
+            <summary>
+            Blob-wide stencil.  All-or-nothing: If the blob position passes this stencil, it is drawn.  Otherwise it is not.
+            </summary>
+        </member>
+        <member name="T:RogueElements.BorderTerrainStencil`1">
+            <summary>
+            A filter for determining the eligible tiles for an operation.
+            Eligible if bordering a certain tile type.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.BorderTerrainStencil`1.MatchTiles">
+            <summary>
+            The allowed tile types.
+            </summary>
+        </member>
+        <member name="T:RogueElements.DefaultBlobStencil`1">
+            <summary>
+            A filter for determining the eligible tiles for an operation.
+            All tiles are eligible.
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="T:RogueElements.DefaultTerrainStencil`1">
             <summary>
@@ -1439,6 +1715,11 @@
             Allows tiles specified as the map's wall terrain.
             </summary>
         </member>
+        <member name="P:RogueElements.MapTerrainStencil`1.Blocked">
+            <summary>
+            Allows tiles specified as the blocked terrain.  This relies on the map's own definition of TileBlocked.
+            </summary>
+        </member>
         <member name="P:RogueElements.MapTerrainStencil`1.Not">
             <summary>
             Reverses the policy, allowing all tiles EXCEPT the ones selected above.
@@ -1454,6 +1735,54 @@
         <member name="P:RogueElements.MatchTerrainStencil`1.MatchTiles">
             <summary>
             The allowed tile types.
+            </summary>
+        </member>
+        <member name="T:RogueElements.MultiBlobStencil`1">
+            <summary>
+            A filter for determining the eligible tiles for an operation.
+            Only considers tiles eligible if they fit any/all conditions.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.MultiBlobStencil`1.List">
+            <summary>
+            Determines if the entire map should be checked for connectivity, or just the immediate surrounding tiles.
+            </summary>
+        </member>
+        <member name="T:RogueElements.MultiTerrainStencil`1">
+            <summary>
+            A filter for determining the eligible tiles for an operation.
+            Only considers tiles eligible if they fit any/all conditions.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.MultiTerrainStencil`1.List">
+            <summary>
+            Determines if the entire map should be checked for connectivity, or just the immediate surrounding tiles.
+            </summary>
+        </member>
+        <member name="T:RogueElements.NoChokepointStencil`1">
+            <summary>
+            A filter for determining the eligible tiles for an operation.
+            Locations that, if all made unwalkable, do not cause a chokepoint to be removed, are eligible.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.NoChokepointStencil`1.Global">
+            <summary>
+            Determines if the entire map should be checked for connectivity, or just the immediate surrounding tiles.
+            </summary>
+        </member>
+        <member name="T:RogueElements.NoChokepointTerrainStencil`1">
+            <summary>
+            A filter for determining the eligible tiles for an operation.
+            Locations that, if all made unwalkable, do not cause a chokepoint to be removed, are eligible.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.NoChokepointTerrainStencil`1.Global">
+            <summary>
+            Determines if the entire map should be checked for connectivity, or just the immediate surrounding tiles.
             </summary>
         </member>
         <member name="T:RogueElements.PerlinWaterStep`1">
@@ -1478,6 +1807,11 @@
             The percent chance of water occurring.
             </summary>
         </member>
+        <member name="P:RogueElements.PerlinWaterStep`1.Bowl">
+            <summary>
+            Distorts the water such that it becomes like a bowl-shape, preventing awkward cutoffs at the edge of the map.
+            </summary>
+        </member>
         <member name="P:RogueElements.WaterStep`1.Terrain">
             <summary>
             Tile representing the water terrain to paint with.
@@ -1497,9 +1831,26 @@
             <param name="rand"></param>
             <returns></returns>
         </member>
+        <member name="M:RogueElements.MathUtils.DivDown(System.Int32,System.Int32)">
+            <summary>
+            Division with round down.
+            </summary>
+            <param name="num"></param>
+            <param name="den"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueElements.MathUtils.DivUp(System.Int32,System.Int32)">
+            <summary>
+            Division with round up.
+            </summary>
+            <param name="num"></param>
+            <param name="den"></param>
+            <returns></returns>
+        </member>
         <member name="M:RogueElements.NoiseGen.PerlinNoise(RogueElements.IRandom,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Generates Nth degree perlin noise.
+            Wrapped by default.
             </summary>
             <param name="rand"></param>
             <param name="width"></param>
@@ -1821,6 +2172,14 @@
             <param name="point">The point contained by the rect</param>
             <returns></returns>
         </member>
+        <member name="M:RogueElements.Rect.FromPointRadius(RogueElements.Loc,System.Int32)">
+            <summary>
+            Creates a new <see cref="T:RogueElements.Rect"/> from a point and radius.  Will always be an odd number in width/height.
+            </summary>
+            <param name="point">The point to be used as the center of the rect</param>
+            <param name="radius">The radius of the rectangle</param>
+            <returns></returns>
+        </member>
         <member name="M:RogueElements.Rect.Contains(System.Int32,System.Int32)">
             <summary>
             Gets whether or not the provided coordinates lie within the bounds of this <see cref="T:RogueElements.Rect"/>.
@@ -1937,6 +2296,94 @@
             to push objects in order to resolve collisions.
             If the rectangles are not intersecting, Loc.Zero is returned.
             </returns>
+        </member>
+        <member name="M:RogueElements.RectExt.GetEdgeRectLoc(RogueElements.Rect,RogueElements.Dir4,RogueElements.Loc,System.Int32)">
+            <summary>
+            Gets the location to put an adjacent rectangle with specified parameters
+            </summary>
+            <param name="rect"></param>
+            <param name="dir"></param>
+            <param name="size"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueElements.RectExt.GetEdgeLoc(RogueElements.Rect,RogueElements.Dir4,System.Int32)">
+            <summary>
+            Gets the loc just inside the rect, from the specified direction, with the specified scalar.  The scalar determines X if it's a vertical, and Y if it's a horizontal side.
+            </summary>
+            <param name="rect"></param>
+            <param name="dir"></param>
+            <param name="scalar"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueElements.WrappedCollision.Collides(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Checks if two bounds collide, within a wrapped area.
+            </summary>
+            <param name="wrapSize">Size of wrapped area</param>
+            <param name="start1">Unwrapped start of bounds 1</param>
+            <param name="size1">Size of bounds 1</param>
+            <param name="start2">Unwrapped start of bounds 2</param>
+            <param name="size2">Size of bounds 2</param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueElements.WrappedCollision.InBounds(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Checks if a point is in bounds, within a wrapped area.
+            </summary>
+            <param name="wrapSize">Size of wrapped area</param>
+            <param name="start">Unwrapped start of bounds</param>
+            <param name="size">Size of bounds</param>
+            <param name="pt">Unwrapped position</param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueElements.WrappedCollision.GetClosestWrap(RogueElements.Loc,RogueElements.Loc,RogueElements.Loc)">
+            <summary>
+            Gets the unwrapped version of pt2 that is closest to pt1.
+            </summary>
+            <param name="wrapSize"></param>
+            <param name="pt1"></param>
+            <param name="pt2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueElements.WrappedCollision.GetClosestWrap(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets the unwrapped version of pt2 that is closest to pt1.
+            </summary>
+            <param name="wrapSize"></param>
+            <param name="pt1">The point to get close to.  Unwrapped.</param>
+            <param name="pt2">The point to get a close version of.  Unwrapped.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueElements.WrappedCollision.IteratePointsInBounds(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Returns all unwrapped versions of a point that exist within a region.
+            </summary>
+            <param name="wrapSize">Size of the wrapped area</param>
+            <param name="start">Unwrapped start of the region</param>
+            <param name="size">Size of the region</param>
+            <param name="pt">The point to find unwrapped versions.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueElements.WrappedCollision.IterateRegionsColliding(RogueElements.Loc,RogueElements.Rect,RogueElements.Rect)">
+            <summary>
+            Returns all unwrapped versions of a rect that collides with another rect.
+            </summary>
+            <param name="wrapSize"></param>
+            <param name="rect1">The unwrapped reference region</param>
+            <param name="rect2">The region to find unwrapped versions of</param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueElements.WrappedCollision.IterateRegionsColliding(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Returns all unwrapped versions of a region that collides with another region.
+            </summary>
+            <param name="wrapSize">Size of the wrapped area</param>
+            <param name="start1">The unwrapped start of the reference region</param>
+            <param name="size1">The size of the reference region</param>
+            <param name="start2">The start of the region to find the unwrapped versions of</param>
+            <param name="size2">The size of the region to find the unwrapped versions of</param>
+            <returns></returns>
         </member>
     </members>
 </doc>

@@ -1,14 +1,24 @@
 ﻿{
-"Version": "0.7.2.0",
+"Version": "0.7.3.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
 "DefaultText": "Path Wand",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Branche Piste",
+"de": "Pfadzweig",
+"ko": "길의지팡이",
+"zh-hans": "造路之杖"
+}
 },
 "Desc": {
 "DefaultText": "A wand to be waved at terrain features. It clears obstacles to form a path directly in front of the user.",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Une branche que l'on agite sur les éléments du terrain. Elle efface les obstacles pour former un chemin directement devant l'utilisateur.",
+"de": "Ein Zweig, der gegen Geländeeigenschaften geschwungen werden kann. Es entfernt Hindernisse, um dadurch einen Pfad direkt vor dem Nutzer zu formen.",
+"ko": "지형을 향해 휘두르면 장애물을 제거해 사용자 앞에 길을 만든다.",
+"zh-hans": "可以挥向地形特征处的魔杖。使用后清除正前方的所有地形障碍物，形成一条道路。"
+}
 },
 "Released": true,
 "Comment": "",
@@ -51,11 +61,11 @@
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
 "ActionType": 42
 },
-"HitTiles": false,
-"Range": 80,
-"StopAtHit": true,
-"StopAtWall": true,
-"TargetAlignments": 7,
+"HitTiles": true,
+"Range": 8,
+"StopAtHit": false,
+"StopAtWall": false,
+"TargetAlignments": 6,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -91,7 +101,7 @@
 "LagBehindTime": 0
 },
 "Explosion": {
-"TargetAlignments": 7,
+"TargetAlignments": 6,
 "HitTiles": false,
 "Range": 0,
 "Speed": 0,

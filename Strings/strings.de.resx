@@ -399,6 +399,9 @@
   <data name="DLG_ASK_GENDER" xml:space="preserve">
     <value>Bist du ein Junge oder ein Mädchen?</value>
     <comment></comment>  </data>
+  <data name="DLG_ASK_LOAD_UPGRADE" xml:space="preserve">
+    <value>Einige Modifikationen fehlen und können fehler beim laden verursachen.[pause=0] Bist du sicher, dass du den Spielstand laden möchtest?</value>
+    <comment></comment>  </data>
   <data name="DLG_ASSEMBLY_RELEASE" xml:space="preserve">
     <value>{0} wurde freigelassen.[pause=0]\nTschüß {0}...</value>
     <comment></comment>  </data>
@@ -435,6 +438,12 @@
   <data name="DLG_DELETE_CONFIRM" xml:space="preserve">
     <value>Ist das wirklich OK?</value>
     <comment></comment>  </data>
+  <data name="DLG_DELETE_REPLAY" xml:space="preserve">
+    <value>Wiederholungsdatei wird gelöscht.[pause=0] Willst du auch die Favoriten löschen?</value>
+    <comment></comment>  </data>
+  <data name="DLG_DELETE_REPLAY_COMPLETE" xml:space="preserve">
+    <value>Deine Wiederholungen wurden gelöscht.</value>
+    <comment></comment>  </data>
   <data name="DLG_DELETE_SAVE" xml:space="preserve">
     <value>Dein Abenteuer wird gelöscht. [pause=0] Dies beinhaltet nicht deine Kontakte, Wiederholungen oder Roguelockes.</value>
     <comment></comment>  </data>
@@ -444,11 +453,17 @@
   <data name="DLG_ERR_READ_FILE_FALLBACK" xml:space="preserve">
     <value>Bitte lösche sie oder verschiebe sie aus {0}.</value>
     <comment></comment>  </data>
+  <data name="DLG_ERR_READ_QUICKSAVE" xml:space="preserve">
+    <value>Die Schnellspeicherung konnte aufgrund verschiedener Spielversionen geladen werden.[pause=0] Die Hauptspeicherung wird stattdessen geladen.</value>
+    <comment></comment>  </data>
   <data name="DLG_ERR_READ_SAVE" xml:space="preserve">
     <value>Die Speicherdatei konnte nicht gelesen werden, da sie das falsche Format hat oder beschädigt wurde.</value>
     <comment></comment>  </data>
   <data name="DLG_ERR_READ_SAVE_FALLBACK" xml:space="preserve">
     <value>Die jetzigen Spieldaten werden von nun an als neue permanente Spieldaten verwendet.</value>
+    <comment></comment>  </data>
+  <data name="DLG_FILE_VERSION_DIFF" xml:space="preserve">
+    <value>Diese Speicherdatei hat eine andere Version.[pause=0] Das Laden kann scheitern.</value>
     <comment></comment>  </data>
   <data name="DLG_LANGUAGE_SET" xml:space="preserve">
     <value>Die Sprache wurde auf {0} geändert.</value>
@@ -479,6 +494,12 @@
     <comment></comment>  </data>
   <data name="DLG_REPLAY_DESYNC" xml:space="preserve">
     <value>Die Wiederholung ist unsynchron geworden. [pause=0] Kehre zum Menü zurück.</value>
+    <comment></comment>  </data>
+  <data name="DLG_REPLAY_VERIFY_DESYNC" xml:space="preserve">
+    <value>Während der Wiederholungsprüfung ist eine Desynchronisation aufgetreten.[pause=0] Rückkehr zum Menü ... </value>
+    <comment></comment>  </data>
+  <data name="DLG_REPLAY_VERIFY_OK" xml:space="preserve">
+    <value>Die Wiedergabe wurde verifiziert.</value>
     <comment></comment>  </data>
   <data name="DLG_RESCUE_ADD_REWARD_ASK" xml:space="preserve">
     <value>Was möchtest du anbieten?</value>
@@ -597,6 +618,9 @@
   <data name="DLG_SKILL_STOP_LEARN" xml:space="preserve">
     <value>Aufhören {0} zu erlernen?</value>
     <comment></comment>  </data>
+  <data name="DLG_STORE_ALL_CONFIRM" xml:space="preserve">
+    <value>Alle Items aus dein Inventar einlagern?</value>
+    <comment></comment>  </data>
   <data name="DLG_SUSPEND_ASK" xml:space="preserve">
     <value>Abenteuer speichern und zum Titelbildschirm zurückkehren?</value>
     <comment></comment>  </data>
@@ -638,6 +662,9 @@
     <comment></comment>  </data>
   <data name="DLG_TRANSFER_COMPLETE" xml:space="preserve">
     <value>Transfer abgeschlossen!</value>
+    <comment></comment>  </data>
+  <data name="DLG_TRY_AGAIN_ASK" xml:space="preserve">
+    <value>Möchtest du es nochmal versuchen? Deine aktuellen Einstellungen werden dabei verwendet.</value>
     <comment></comment>  </data>
   <data name="DLG_WHAT_DO" xml:space="preserve">
     <value>Was wirst du machen?</value>
@@ -942,8 +969,14 @@
   <data name="MENU_MAIL_ERROR" xml:space="preserve">
     <value>FEHLER BEIM LESEN DES BRIEFS</value>
     <comment></comment>  </data>
+  <data name="MENU_MAIL_INCOMPATIBLE" xml:space="preserve">
+    <value>INKOMPATIBLE VERSION</value>
+    <comment></comment>  </data>
   <data name="MENU_MAIL_SOS_TITLE" xml:space="preserve">
     <value>SOS Brief</value>
+    <comment></comment>  </data>
+  <data name="MENU_MAIN_EDITOR_RETURN" xml:space="preserve">
+    <value>Zurück zu Editor</value>
     <comment></comment>  </data>
   <data name="MENU_MAIN_INVENTORY" xml:space="preserve">
     <value>Items</value>
@@ -960,6 +993,18 @@
   <data name="MENU_MAP_CONDITION" xml:space="preserve">
     <value>Wetter: {0}</value>
     <comment>For labeling the current map's weather or terrain.</comment>  </data>
+  <data name="MENU_MOD_LOG_DEPENDENCY" xml:space="preserve">
+    <value>{0} hängt von der fehlenden Mod {1} ab.</value>
+    <comment></comment>  </data>
+  <data name="MENU_MOD_LOG_INCOMPATIBLE" xml:space="preserve">
+    <value>{0} ist nicht mit {1} kompatibel.</value>
+    <comment></comment>  </data>
+  <data name="MENU_MOD_LOG_ORDER" xml:space="preserve">
+    <value>Schleife der Lade-Reihenfolge gefunden: {0}.</value>
+    <comment></comment>  </data>
+  <data name="MENU_MOD_LOG_TITLE" xml:space="preserve">
+    <value>Mod-Ladefehler</value>
+    <comment></comment>  </data>
   <data name="MENU_MODS_TITLE" xml:space="preserve">
     <value>Modifikationen</value>
     <comment></comment>  </data>
@@ -1170,9 +1215,15 @@
   <data name="MENU_SETTINGS_LANGUAGE" xml:space="preserve">
     <value>Sprache</value>
     <comment></comment>  </data>
+  <data name="MENU_SETTINGS_MINIMAP_VISIBILITY" xml:space="preserve">
+    <value>Minimap</value>
+    <comment></comment>  </data>
   <data name="MENU_SETTINGS_MUSIC" xml:space="preserve">
     <value>Musik</value>
     <comment>Label for the music volume in the Settings menu</comment>  </data>
+  <data name="MENU_SETTINGS_SKILL_DEFAULT" xml:space="preserve">
+    <value>Standard-Angriffe</value>
+    <comment></comment>  </data>
   <data name="MENU_SETTINGS_SOUND" xml:space="preserve">
     <value>Sound</value>
     <comment>Label for the sound volume in the Settings menu</comment>  </data>
@@ -1196,6 +1247,9 @@
     <comment></comment>  </data>
   <data name="MENU_SHOP_TITLE" xml:space="preserve">
     <value>Güter</value>
+    <comment></comment>  </data>
+  <data name="MENU_SKILL_PREVIEW" xml:space="preserve">
+    <value>Vorschau</value>
     <comment></comment>  </data>
   <data name="MENU_SKILL_RECALL" xml:space="preserve">
     <value>Attacke erinnern</value>
@@ -1265,6 +1319,9 @@
     <comment></comment>  </data>
   <data name="MENU_STORAGE_STORE" xml:space="preserve">
     <value>Items lagern</value>
+    <comment></comment>  </data>
+  <data name="MENU_STORAGE_STORE_ALL" xml:space="preserve">
+    <value>Alles einlagern</value>
     <comment></comment>  </data>
   <data name="MENU_STORAGE_TAKE_BOX" xml:space="preserve">
     <value>Boxen nehmen</value>
@@ -1407,6 +1464,12 @@
   <data name="MENU_UPDATE_TEAM" xml:space="preserve">
     <value>Team aktualisieren</value>
     <comment></comment>  </data>
+  <data name="MENU_VERSION_INFO" xml:space="preserve">
+    <value>Versionsinfo</value>
+    <comment></comment>  </data>
+  <data name="MENU_VERSION_TITLE" xml:space="preserve">
+    <value>Versionierung ({0}/{1})</value>
+    <comment></comment>  </data>
   <data name="MET_AT_START" xml:space="preserve">
     <value>Von Anfang an</value>
     <comment>The "recruit location" of starters, who were recruited into the team from the beginning.</comment>  </data>
@@ -1433,6 +1496,9 @@
     <comment></comment>  </data>
   <data name="MSG_CANT_SWAP_LEADER" xml:space="preserve">
     <value>{0} kann momentan den Anführer nicht wechseln.</value>
+    <comment></comment>  </data>
+  <data name="MSG_CANT_USE_ITEM_OTHER" xml:space="preserve">
+    <value>{0} kann im Moment keine Items bei anderen verwenden!</value>
     <comment></comment>  </data>
   <data name="MSG_CHARGES_LOST" xml:space="preserve">
     <value>{0}s {1} verliert [color=#00FFFF]{2}[color] AP!</value>

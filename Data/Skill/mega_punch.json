@@ -4,38 +4,16 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Mega Punch",
-"LocalTexts": {
-"fr": "Ultimapoing",
-"de": "Megahieb",
-"es": "Megapuño",
-"pt": "Megassoco",
-"it": "Megapugno",
-"ko": "메가톤펀치",
-"ja": "メガトンパンチ",
-"ja-jp": "メガトンパンチ",
-"zh-hans": "百万吨重拳",
-"zh-hant": "百萬噸重拳"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "The target is slugged by a punch thrown with muscle-packed power.",
-"LocalTexts": {
-"fr": "L’ennemi reçoit un coup de poing d’une puissance incroyable.",
-"de": "Ein unglaublich kräftiger Hieb.",
-"es": "Un puñetazo de gran potencia.",
-"pt": "Acerta o alvo com um soco extremamente forte.",
-"it": "Colpisce il bersaglio con un pugno poderoso.",
-"ko": "힘을 담은 펀치로 상대를 공격한다.",
-"ja": "ちからを　こめた　パンチで あいてを　こうげきする。",
-"ja-jp": "力を　こめた　パンチで 相手を　攻撃する。",
-"zh-hans": "用充满力量的拳头攻击对手。",
-"zh-hant": "用帶有強大力量的拳頭 攻擊對手。"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
 "IndexNum": 5,
-"BaseCharges": 18,
+"BaseCharges": 16,
 "Strikes": 1,
 "HitboxAction": {
 "$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
@@ -121,7 +99,7 @@
 "Data": {
 "Element": "normal",
 "Category": 1,
-"HitRate": 80,
+"HitRate": 100,
 "SkillStates": [
 {
 "$type": "PMDC.Dungeon.ContactState, PMDC"
@@ -188,8 +166,9 @@
 }
 },
 "HitCharAction": {
-"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 0
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
 }
 }
 }

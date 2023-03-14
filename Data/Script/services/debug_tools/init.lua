@@ -169,10 +169,10 @@ function DebugTools:OnUpgrade()
   if oldVersion.Major <= 0 and oldVersion.Minor <= 6 and oldVersion.Build <= 7 then
     _DATA.Save:DeleteOutdatedAssets(RogueEssence.Data.DataManager.DataType.Item)
   end
-  if oldVersion.Major <= 0 and oldVersion.Minor <= 7 then
+  if oldVersion.Major <= 0 and oldVersion.Minor <= 7 and oldVersion.Build <= 2 then
   
-  SV.base_camp.FerryUnlocked = true
-  SV.base_camp.FerryIntroduced = true
+  SV.base_camp.FerryUnlocked = false
+  SV.base_camp.FerryIntroduced = false
   
   SV.magnagate =
   {

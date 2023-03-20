@@ -774,7 +774,7 @@ function COMMON.ShowTeamStorageMenu()
 	    UI:ChoiceMenuYesNo(STRINGS:FormatKey('DLG_STORE_ALL_CONFIRM'), false);
 	    UI:WaitForChoice()
 	    if UI:ChoiceResult() then
-	         UI:DepositAll()
+	      GAME:DepositAll()
 	    end
 	elseif result == 4 then
 	  UI:BankMenu()

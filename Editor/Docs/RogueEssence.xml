@@ -882,6 +882,13 @@
             <param name="ignoreOffsets">If turned on, frames with identical graphics and different offsets are treated as duplicates.</param>
             <param name="recenter">If turned on, frames will be recentered to center of actual sprite, and it will affect the animations.  Otherwise, leaves animations alone.</param>
         </member>
+        <member name="M:RogueEssence.Content.CharSheet.DefaultFrame(System.Collections.Generic.List{RogueEssence.Content.CharAnimFrame})">
+            <summary>
+            A current frame always of 0
+            </summary>
+            <param name="frames"></param>
+            <returns></returns>
+        </member>
         <member name="M:RogueEssence.Content.CharSheet.FractionFrame(System.Collections.Generic.List{RogueEssence.Content.CharAnimFrame},System.Int64,System.Int64,System.Boolean)">
             <summary>
             Computes the current frame based on fraction of a total time, using a specified total time.
@@ -5300,15 +5307,21 @@
             <param name="curch"></param>
             <param name="turnto"></param>
         </member>
+        <member name="M:RogueEssence.Script.ScriptDungeon.LastDungeonResult">
+            <summary>
+            Gets the result of the last dungeon adventure.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:RogueEssence.Script.ScriptDungeon.DungeonCurrentFloor">
             <summary>
-            Returns the floor number of the current dungeon
+            Returns the floor number of the current dungeon.
             </summary>
             <returns></returns>
         </member>
         <member name="M:RogueEssence.Script.ScriptDungeon.DungeonAssetName">
             <summary>
-            Returns the internal name for the current dungeon
+            Returns the internal name for the current dungeon.
             </summary>
             <returns></returns>
         </member>
@@ -5320,25 +5333,74 @@
         </member>
         <member name="M:RogueEssence.Script.ScriptDungeon.CharSetEmote(RogueEssence.Dungeon.Character,System.String,System.Int32)">
             <summary>
-            Set a character's emote
+            Set a character's emote in a dungeon map.
             </summary>
-            <param name="chara"></param>
-            <param name="emoteid"></param>
-            <param name="cycles"></param>
+            <param name="chara">Character to emote</param>
+            <param name="emoteid">ID of the emote</param>
+            <param name="cycles">The number of times to play the emote.</param>
         </member>
-        <member name="M:RogueEssence.Script.ScriptDungeon._CharStartAnim(RogueEssence.Dungeon.Character,System.String,System.Boolean)">
+        <member name="F:RogueEssence.Script.ScriptDungeon.CharStartAnim">
             <summary>
-            Set a character's animation
+            Set a character's animation.
             </summary>
-            <param name="chara"></param>
-            <param name="anim"></param>
+            <param name="chara">Character to animate</param>
+            <param name="anim">Name of the animation</param>
+            <param name="loop">Whether to loop the animation</param>
+            <example>
+            DUNGEON:CharStartAnim(player, anim, false)
+            </example>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptDungeon.CharEndAnim">
+            <summary>
+            Stops a character's current animation, reverting them to default idle.
+            </summary>
+            <param name="chara">Character to stop animating</param>
+            <example>
+            DUNGEON:CharEndAnim(player)
+            </example>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptDungeon.CharWaitAnim">
+            <summary>
+            Set a character's animation, and waits until it completed before continue.
+            </summary>
+            <param name="chara">Character to animate</param>
+            <param name="anim">Name of the animation</param>
+            <example>
+            DUNGEON:CharStartAnim(player, anim)
+            </example>
         </member>
         <member name="M:RogueEssence.Script.ScriptDungeon.PlayVFX(RogueEssence.Content.FiniteEmitter,System.Int32,System.Int32,RogueElements.Dir8)">
             <summary>
-            Plays a VFX
+            Plays a VFX in the dungeon map
             </summary>
-            <param name="chara"></param>
-            <param name="anim"></param>
+            <param name="emitter">The VFX emitter</param>
+            <param name="x">X position in pixels</param>
+            <param name="y">Y Position in pixels</param>
+            <param name="dir">Direction to orient the VFX, defaults to Down</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptDungeon.PlayVFX(RogueEssence.Content.FiniteEmitter,System.Int32,System.Int32,RogueElements.Dir8,System.Int32,System.Int32)">
+            <summary>
+            Plays a VFX that has a start position and an end position.  It uses a finite emitter that generates BaseAnims.
+            </summary>
+            <param name="emitter">The VFX emitter</param>
+            <param name="x">Start X position in pixels</param>
+            <param name="y">Start Y Position in pixels</param>
+            <param name="dir">Direction to orient the VFX, defaults to Down.</param>
+            <param name="xTo">End X position in pixels</param>
+            <param name="yTo">End Y position in pixels</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptDungeon.PlayVFXAnim(RogueEssence.Content.BaseAnim,RogueEssence.Content.DrawLayer)">
+            <summary>
+            Plays a VFX using just a BaseAnim
+            </summary>
+            <param name="anim">The animation to play</param>
+            <param name="layer">The layer to put it on</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptDungeon.MoveScreen(RogueEssence.Content.ScreenMover)">
+            <summary>
+            Plays a screen-moving effect.
+            </summary>
+            <param name="mover">The screen mover.</param>
         </member>
         <member name="T:RogueEssence.Script.ScriptEvent">
             <summary>
@@ -5381,48 +5443,200 @@
             As a result, it can take directly a lua function as construction parameter!
             </summary>
         </member>
+        <member name="P:RogueEssence.Script.ScriptGame.Rand">
+            <summary>
+            The game's random object.  Is not recorded in replays.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGame.GroundSave">
+            <summary>
+            Saves the game while in ground mode.
+            </summary>
+            <example>
+            GAME:GroundSave()
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetModDiff(System.String)">
+            <summary>
+            TODO
+            </summary>
+            <param name="uuidStr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetCurrentGround">
+            <summary>
+            Gets the current ground map.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetCurrentFloor">
+            <summary>
+            Gets the current dungeon map.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetCurrentDungeon">
+            <summary>
+            Gets the current zone, also known as dungeon.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:RogueEssence.Script.ScriptGame.EnterGroundMap(System.Int32,System.Int32,System.Boolean)">
             <summary>
-            Leave current map, and enter specified dungeon
+            Leave current map, and enter specified ground map within the current zone
             </summary>
-            <param name="mapname"></param>
-            <param name="entrypoint"></param>
+            <param name="id">The index of the ground map in the zone</param>
+            <param name="idxentrypoint">The index of the entry point in the ground map</param>
+            <param name="preserveMusic">If set to true, does not change the music when moving to the new ground map.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.EnterGroundMap(System.String,System.String,System.Boolean)">
+            <summary>
+            Leave current map, and enter specified ground map within the current zone
+            </summary>
+            <param name="name">The name of the ground map.  It must exist within in the zone.</param>
+            <param name="entrypoint">The name of the entry point in the ground map</param>
+            <param name="preserveMusic">If set to true, does not change the music when moving to the new ground map.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.EnterGroundMap(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Leave current map, and enter specified ground map within a new zone.
+            </summary>
+            <param name="zone">The name of the destination zone.</param>
+            <param name="name">The name of the ground map.  It must exist within in the zone.</param>
+            <param name="entrypoint">The name of the entry point in the ground map</param>
+            <param name="preserveMusic">If set to true, does not change the music when moving to the new ground map.</param>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGame.EnterDungeon">
+            <summary>
+            Enters a zone and begins a new adventure.
+            </summary>
+            <param name="dungeonid">The id of the dungeon to travel to.</param>
+            <param name="structureid">The segment within the dungeon to start in.  -1 represents ground maps.</param>
+            <param name="mapid">The id of the ground map or dungeon map within the dungeon segment.</param>
+            <param name="entry">The entry point on the resulting map</param>
+            <param name="stakes">Decides what happens when the adventure fails/succeeds.</param>
+            <param name="recorded">Record the adventure in a replay</param>
+            <param name="silentRestrict">Make the dungeon restrictions silently</param>
+            <example>
+            GAME:EnterDungeon(1, 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
+            </example>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGame.ContinueDungeon">
+            <summary>
+            Enters a zone and continues the current adventure.
+            </summary>
+            <param name="dungeonid">The id of the dungeon to travel to.</param>
+            <param name="structureid">The segment within the dungeon to start in.  -1 represents ground maps.</param>
+            <param name="mapid">The id of the ground map or dungeon map within the dungeon segment.</param>
+            <param name="entry">The entry point on the resulting map</param>
+            <example>
+            GAME:ContinueDungeon(1, 1, 0, 0)
+            </example>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGame.EndDungeonRun">
+            <summary>
+            Ends the current adventure, sending the player to a specified destination.
+            </summary>
+            <param name="result">The result of the adventure.</param>
+            <param name="destzoneid">The id of the dungeon to travel to.</param>
+            <param name="structureid">The segment within the dungeon to start in.  -1 represents ground maps.</param>
+            <param name="mapid">The id of the ground map or dungeon map within the dungeon segment.</param>
+            <param name="entryid">The entry point on the resulting map</param>
+            <param name="display">Display an epitaph marking the end of the adventure.</param>
+            <param name="fanfare">Play a fanfare.</param>
+            <example>
+            GAME:EndDungeonRun(GameProgress.ResultType.Cleared, 0, -1, 1, 0, true, true)
+            </example>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGame.EnterRescue">
+            <summary>
+            Enters a zone and begins a rescue adventure.
+            </summary>
+            <param name="sosPath">The path of the sos mail.</param>
+            <example>
+            GAME:EnterRescue("RESCUE/INBOX/SOS/example.sosmail")
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.AddAOKRemark(System.Int32)">
+            <summary>
+            TODO: WIP
+            </summary>
+            <param name="remarkIndex"></param>
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.RestartToTitle">
             <summary>
-            Leave current map and load up the title screen
+            Leave current map and load up the title screen.
             </summary>
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.RestartRogue(RogueEssence.Data.RogueConfig)">
             <summary>
             Restarts a Roguelocke run based on the configuration
             </summary>
-             <param name="config"></param>
+             <param name="config">The configuration of the roguelocke run</param>
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.EnterZone(System.String,System.Int32,System.Int32,System.Int32)">
-             <summary>
-            
-             </summary>
-             <param name="zone"></param>
-             <param name="structure"></param>
-             <param name="id"></param>
+            <summary>
+            Enters a zone and begins a new adventure.
+            </summary>
+            <param name="dungeonid">The id of the dungeon to travel to.</param>
+            <param name="structureid">The segment within the dungeon to start in.  -1 represents ground maps.</param>
+            <param name="mapid">The id of the ground map or dungeon map within the dungeon segment.</param>
+            <param name="entry">The entry point on the resulting map</param>
         </member>
         <member name="F:RogueEssence.Script.ScriptGame.FadeOut">
             <summary>
-            Fade the screen
+            Fade out the screen. Waits to complete before continuing.
             </summary>
-            <returns></returns>
+            <param name="white">Fade to white if set to true.  Fades to black otherwise.</param>
+            <param name="duration">The amount of time to fade in frames.</param>
+            <example>
+            GAME:FadeOut(false, 60)
+            </example>
         </member>
         <member name="F:RogueEssence.Script.ScriptGame.FadeIn">
             <summary>
-            Fade the screen
+            Fade into the screen. Waits to complete before continuing.
             </summary>
-            <returns></returns>
+            <param name="duration">The amount of time to fade in frames.</param>
+            <example>
+            GAME:FadeIn(false, 60)
+            </example>
         </member>
         <member name="F:RogueEssence.Script.ScriptGame.MoveCamera">
             <summary>
             Centers the camera on a position.
             </summary>
+            <param name="x">X coordinate of the camera center</param>
+            <param name="y">Y coordinate of the camera center</param>
+            <param name="duration">The amount of time it takes ot move to the destination</param>
+            <param name="toPlayer">Destination is in absolute coordinates if false, and relative to the player character if set to true.</param>
+            <example>
+            GAME:MoveCamera(200, 240, 60, false)
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetCameraCenter">
+            <summary>
+            Gets the current center of the camera.
+            </summary>
+            <returns>A Loc object representing the center of the camera.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.IsCameraOnChar">
+            <summary>
+            Determines whether the camera is centered relative to the player.
+            </summary>
+            <returns>Returns true if the camera is relative to the player, false otherwise.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.HasSOSMail">
+            <summary>
+            TODO
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.HasAOKMail">
+            <summary>
+            TODO
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.GetTeamLeaderIndex">
             <summary>
@@ -5430,74 +5644,479 @@
             </summary>
             <returns>Index of the currently player controlled entity in the party.</returns>
         </member>
+        <member name="M:RogueEssence.Script.ScriptGame.SetTeamLeaderIndex(System.Int32)">
+            <summary>
+            Sets the leader to the chosen index within the party.
+            </summary>
+            <param name="idx">The index of the team member within the team.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.SetCanSwitch(System.Boolean)">
+            <summary>
+            Prevents or allows the switching of leaders for the save file.
+            </summary>
+            <param name="canSwitch">Set to true to allow switching, set to false to prevent it.</param>
+        </member>
         <member name="M:RogueEssence.Script.ScriptGame.GetPlayerPartyCount">
             <summary>
-            Returns the player party count
+            Returns the player party count.  Does not include guests.
             </summary>
-            <returns></returns>
+            <returns>The count of players</returns>
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.GetPlayerPartyTable">
             <summary>
-            Return the party as a LuaTable
+            Return the party as a LuaTable.  Does not include guests.
             </summary>
-            <returns></returns>
+            <returns>A Lua Table of Characters</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetPlayerPartyMember(System.Int32)">
+            <summary>
+            Gets the character at the specified index within the player's team.
+            </summary>
+            <param name="index">The specified index</param>
+            <returns>The team member retrieved.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetPlayerGuestCount">
+            <summary>
+            Gets the number of guests currently in the player's party.
+            </summary>
+            <returns>The number of guests</returns>
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.GetPlayerGuestTable">
             <summary>
             Return the guests as a LuaTable
             </summary>
-            <returns></returns>
+            <returns>A Lua Table of Characters</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetPlayerGuestMember(System.Int32)">
+            <summary>
+            Gets the character at the specified index within the player's guests.
+            </summary>
+            <param name="index">The specified index</param>
+            <returns>The team member retrieved.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetPlayerAssemblyCount">
+            <summary>
+            Gets the number of characters currently in the player's assembly.
+            </summary>
+            <returns>The number of characters</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetPlayerAssemblyTable">
+            <summary>
+            Return the assembly as a LuaTable
+            </summary>
+            <returns>A Lua Table of Characters</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetPlayerAssemblyMember(System.Int32)">
+            <summary>
+            Gets the character at the specified index within the player's assembly.
+            </summary>
+            <param name="index">The specified index</param>
+            <returns>The assembly member retrieved.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.AddPlayerTeam(RogueEssence.Dungeon.Character)">
+            <summary>
+            Adds a character to the player's team.
+            </summary>
+            <param name="character">The character to add.</param>
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.RemovePlayerTeam(System.Int32)">
             <summary>
             Removes the character from the team, placing its item back in the inventory.
             </summary>
-            <param name="slot"></param>
+            <param name="slot">The slot of the player to remove.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.AddPlayerGuest(RogueEssence.Dungeon.Character)">
+            <summary>
+            Adds a character to the player's guests.
+            </summary>
+            <param name="character">The character to add.</param>
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.RemovePlayerGuest(System.Int32)">
             <summary>
-            Removes the character from the team, placing its item back in the inventory.
+            Removes the character from the team's guests, placing its item back in the inventory.
             </summary>
-            <param name="slot"></param>
+            <param name="slot">The slot of the player to remove.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.AddPlayerAssembly(RogueEssence.Dungeon.Character)">
+            <summary>
+            Adds a character to the player's assembly.
+            </summary>
+            <param name="character">The character to add.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.RemovePlayerAssembly(System.Int32)">
+            <summary>
+            Removes the character from the assembly, placing its item back in the inventory.
+            </summary>
+            <param name="slot">The slot of the player to remove.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.SetCharacterNickname(RogueEssence.Dungeon.Character,System.String)">
+            <summary>
+            Sets a character's nickname
+            </summary>
+            <param name="character">The character to rename</param>
+            <param name="nickname">The new name</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetCharacterNickname(RogueEssence.Dungeon.Character)">
+            <summary>
+            Gets the character nickname
+            </summary>
+            <param name="character">The character to get the nickname from</param>
+            <returns>The character's nickname</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.SetTeamName(System.String)">
+            <summary>
+            Sets the name of the player's team
+            </summary>
+            <param name="teamname">The new team name</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetTeamName">
+            <summary>
+            Gets the name of the player's team
+            </summary>
+            <returns>The team's name</returns>
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.CanRelearn(RogueEssence.Dungeon.Character)">
             <summary>
             Checks if the character can relearn any skills.
             </summary>
-            <param name="character"></param>
+            <param name="character">The character to check</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.CanForget(RogueEssence.Dungeon.Character)">
+            <summary>
+            Checks if the character can forget any skills.
+            </summary>
+            <param name="character">The character to check</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.CanLearn(RogueEssence.Dungeon.Character)">
+            <summary>
+            Checks if the character can learn any skills.
+            </summary>
+            <param name="character">The character to check</param>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGame.CheckLevelSkills">
+            <summary>
+            Checks the levels gained by a character and prompts to learn all skills along the levels.
+            Waits until all skills have been accepted or declined before continuing.
+            </summary>
+            <param name="chara">The character to prompt for learning.</param>
+            <param name="oldLevel">The level that the character leveled up from.</param>
+            <example>
+            GAME:CheckLevelSkills(player, 5)
+            </example>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGame.TryLearnSkill">
+            <summary>
+            Attempts to give a new skill to the specified character, prompting to replace an old one if they are full.
+            Waits until all the skill has been accepted or declined before continuing.
+            </summary>
+            <param name="chara">The character to learn the skill</param>
+            <param name="skill">The skill to learn</param>
+            <example>
+            GAME:TryLearnSkill(player, "thunder")
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.LearnSkill(RogueEssence.Dungeon.Character,System.String)">
+            <summary>
+            Gives a new skill to a specified character.
+            Fails if the character's skills are full.
+            </summary>
+            <param name="chara">The character to learn the skill</param>
+            <param name="skill">The skill to learn</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.ForgetSkill(RogueEssence.Dungeon.Character,System.Int32)">
+            <summary>
+            Removed a skill from the specified character.
+            </summary>
+            <param name="chara">The character to forget the skill</param>
+            <param name="slot">The slot of the skill to forget</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.SetCharacterSkill(RogueEssence.Dungeon.Character,System.String,System.Int32)">
+            <summary>
+            Gives a new skill to a specified character, replacing a specifically chosen slot.
+            </summary>
+            <param name="character">The character to learn the skill</param>
+            <param name="skillId">The skill to learn</param>
+            <param name="slot">The slot to replace</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetCharacterSkill(RogueEssence.Dungeon.Character,System.Int32)">
+            <summary>
+            Gets the skill from a specified character and specified slot.
+            </summary>
+            <param name="chara">The character to get the skill from.</param>
+            <param name="slot">The slot to get the skill from.</param>
+            <returns>The ID of the skill in the slot</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.CanPromote(RogueEssence.Dungeon.Character)">
+            <summary>
+            Checks if the character can be promoted to a new class.
+            </summary>
+            <param name="character">The character to check</param>
+            <returns>True if the character can be promoted, false otherwise.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetAvailablePromotions(RogueEssence.Dungeon.Character,System.String)">
+            <summary>
+            Gets a list of possible classes that the character can prmote to.
+            </summary>
+            <param name="character">The character to check</param>
+            <param name="bypassItem">An exception item that can bypass checks for promotion</param>
+            <returns>A lua table of PromoteBranch objects</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.PromoteCharacter(RogueEssence.Dungeon.Character,RogueEssence.Data.PromoteBranch,System.String)">
+            <summary>
+            Promotes a character ot a new class.
+            </summary>
+            <param name="character">The character to promote</param>
+            <param name="branch">The PromoteBranch to promote with</param>
+            <param name="bypassItem">An exception item that can bypass checks for promotion</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.FindPlayerItem(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Finds an item in the player's team and returns its slot within the inventory or among its team's equips.
+            </summary>
+            <param name="id">The item ID to search for.</param>
+            <param name="held">Check equipped items.</param>
+            <param name="inv">Check inventory items.</param>
+            <returns>The InvSlot of the item. Invalid if the item could not be found.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetPlayerEquippedCount">
+            <summary>
+            Get the number of items equipped by players.  Does not include guests.
+            </summary>
+            <returns>The number of items.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetPlayerBagCount">
+            <summary>
+            Get the number of items in the bag.
+            </summary>
+            <returns>The number of items.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetPlayerBagLimit">
+            <summary>
+            Gets the maximum amount of item the player's team can carry.
+            </summary>
+            <returns>The number of items.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetPlayerEquippedItem(System.Int32)">
+            <summary>
+            Gets the equipped item for the character in the specified slot.
+            </summary>
+            <param name="slot">The team slot of the character to check</param>
+            <returns>The character's equipped item</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetGuestEquippedItem(System.Int32)">
+            <summary>
+            Gets the equipped item for the character in the specified guest slot.
+            </summary>
+            <param name="slot">The guest slot of the character to check</param>
+            <returns>The character's equipped item</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GivePlayerItem(RogueEssence.Dungeon.InvItem)">
+            <summary>
+            Gives an item and adds it to the player team's bag.
+            </summary>
+            <param name="item">The item to give</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GivePlayerItem(System.String,System.Int32,System.Boolean,System.String)">
+            <summary>
+            Gives an item and adds it to the player team's bag.
+            </summary>
+            <param name="id">The ID of the item</param>
+            <param name="count">The amount to give. Default 1</param>
+            <param name="cursed">Whether the item is cursed. Default false.</param>
+            <param name="hiddenval">The hidden value of the item. Default empty string.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetPlayerBagItem(System.Int32)">
+            <summary>
+            Gets the item found at the specified slot of the player's bag.
+            </summary>
+            <param name="slot">The slot to check</param>
+            <returns>The item found in the slot</returns>
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.TakePlayerBagItem(System.Int32)">
             <summary>
             Remove an item from player inventory
             </summary>
+            <param name="slot">The slot from which to remove the item</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.TakePlayerEquippedItem(System.Int32)">
+            <summary>
+            Remove the equipped item from a chosen member of the team
+            </summary>
+            <param name="slot">The slot of the character on the team from which to remove the item</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.TakeGuestEquippedItem(System.Int32)">
+            <summary>
+            Remove the equipped item from a chosen guest of the team
+            </summary>
+            <param name="slot">The slot of the character on the team's guest list from which to remove the item</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetPlayerStorageCount">
+            <summary>
+            Get the amount of items in the player's storage
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetPlayerStorageItemCount(System.String)">
+            <summary>
+            Get the amount of a specific item in the player's storage
+            </summary>
+            <param name="id">ID of the item ot check</param>
+            <returns>The amount of copies currently in storage</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GivePlayerStorageItem(RogueEssence.Dungeon.InvItem)">
+            <summary>
+            Gives an item and adds it to the player team's storage.
+            </summary>
+            <param name="item">The item to give</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GivePlayerStorageItem(System.String,System.Int32,System.Boolean,System.String)">
+            <summary>
+            Gives an item and adds it to the player team's storage.
+            </summary>
+            <param name="id">The ID of the item</param>
+            <param name="count">The amount to give. Default 1</param>
+            <param name="cursed">Whether the item is cursed. Default false.</param>
+            <param name="hiddenval">The hidden value of the item. Default empty string.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.TakePlayerStorageItem(System.String)">
+            <summary>
+            Takes an item from the storage
+            </summary>
+            <param name="id">The ID of the item to take</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.DepositAll">
+            <summary>
+            Takes all items in the player team's bag and equipped items, and deposits them in storage.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetPlayerMoney">
+            <summary>
+            Gets the amount of money the player currently has on hand.
+            </summary>
+            <returns>The amount of money.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.AddToPlayerMoney(System.Int32)">
+            <summary>
+            Adds money to the player's wallet.
+            </summary>
+            <param name="toadd">The amount of money to add.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.RemoveFromPlayerMoney(System.Int32)">
+            <summary>
+            Removes money from the player's wallet.
+            </summary>
+            <param name="toremove">The amount of money to remove.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetPlayerMoneyBank">
+            <summary>
+            Gets the amount of money in the player's bank
+            </summary>
+            <returns>The amount of money.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.AddToPlayerMoneyBank(System.Int32)">
+            <summary>
+            Adds money to the player's bank.
+            </summary>
+            <param name="toadd">The amount of money to add.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.RemoveFromPlayerMoneyBank(System.Int32)">
+            <summary>
+            Removes money from the player's bank.
+            </summary>
+            <param name="toremove">The amount of money to remove.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.IsKeyDown(System.Int32)">
+            <summary>
+            Checks if a player is making a certain input.
+            </summary>
+            <param name="keyid">The ID of the input</param>
+            <returns>True if the button is currently pressed.  False otherwise.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.CutsceneMode(System.Boolean)">
+            <summary>
+            Sets the game in cutscene mode. This prevents characters from taking idle action and hides certain UI.
+            </summary>
+            <param name="bon">If set to true, turns cutscene mode on. If set to false, turns it off.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetDailySeed">
+            <summary>
+            Gets the random seed for the current adventure.
+            </summary>
+            <returns>The current adventure's seed.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.UnlockDungeon(System.String)">
+            <summary>
+            Unlocks a specified dungeon.
+            </summary>
+            <param name="dungeonid">ID of the dungeon to unlock.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.DungeonUnlocked(System.String)">
+            <summary>
+            Checks if a dungeon is unlocked.
+            </summary>
+            <param name="dungeonid">ID of the dungeon to check</param>
+            <returns>True if unlocked, false otherwise.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.InRogueMode">
+            <summary>
+            Checks if the current game is in rogue mode.
+            </summary>
+            <returns>True if in rogue mode, false otherwise.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.HasServerSet">
+            <summary>
+            TODO: WIP
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.GetRescueAllowed">
+            <summary>
+            Checks to see if rescue is allowed.
+            </summary>
+            <returns>True if rescues are allowed, false otherwise.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.SetRescueAllowed(System.Boolean)">
+            <summary>
+            Sets the value in the player's save file to determine if they can be rescued or not.
+            If rescue is possible on the Save File level, it can still be prevented by the map.
+            </summary>
+            <param name="allowed">Set to true to allow the player to be rescued.  False otherwise.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.QueueLeaderEvent(System.Object)">
+            <summary>
+            Prepares an event to execute on the next frame.
+            </summary>
+            <param name="obj"></param>
         </member>
         <member name="F:RogueEssence.Script.ScriptGame.WaitFrames">
-             <summary>
-            
-             </summary>
-             <param name="frames"></param>
-             <returns></returns>
+            <summary>
+            Waits for a specified number of frames before continuing.
+            </summary>
+            <param name="frames">The number of frames ot wait.  Each frame is 1/60th of a second.</param>
+            <example>
+            GAME:WaitFrames(60)
+            </example>
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.VectorToDirection(RogueElements.Loc)">
             <summary>
-            Turns a vector (preferably a unit vector) to a direction.
+            Turns a vector (preferably a unit vector) into a cardinal or diagonal direction.
             </summary>
-            <param name="v"></param>
-            <returns></returns>
+            <param name="v">The vector.</param>
+            <returns>The direction as one of 8 values.</returns>
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.VectorToDirection(System.Double,System.Double)">
             <summary>
             Convenience function to get a vector's components from lua numbers(doubles)
             </summary>
-            <param name="x"></param>
-            <param name="y"></param>
-            <returns></returns>
+            <param name="X">The X value of the vector</param>
+            <param name="Y">The Y value of the vector</param>
+            <returns>The direction the vector points to as one of 8 values.</returns>
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.RandomDirection">
             <summary>
             Generates a random direction.
             </summary>
-            <returns></returns>
+            <returns>An 8-directional direction.</returns>
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.SetupLuaFunctions(RogueEssence.Script.LuaEngine)">
             <summary>
@@ -5509,121 +6128,374 @@
             Helper interface to regroup everything tied to ground mode under a single object
             </summary>
         </member>
+        <member name="M:RogueEssence.Script.ScriptGround.Hide(System.String)">
+            <summary>
+            Hides an entity.
+            </summary>
+            <param name="entityname">The name of the entity to hide.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.Unhide(System.String)">
+            <summary>
+            Unhides an entity.
+            </summary>
+            <param name="entityname">The name of the entity to unhide.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.CreateObject(System.String,System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            TODO: WIP
+            </summary>
+            <param name="objtype"></param>
+            <param name="instancename"></param>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="w"></param>
+            <param name="h"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.CreateCharacter(System.String,System.String,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            TODO: WIP
+            </summary>
+            <param name="chartype"></param>
+            <param name="instancename"></param>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="actionfun"></param>
+            <param name="thinkfun"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.RemoveObject(System.String)">
+            <summary>
+            Deletes an object from the ground map, identified by its instance name.
+            </summary>
+            <param name="instancename">The instance name of the object.</param>
+            <returns>Returns true if succeeded, false otherwise.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.RemoveCharacter(System.String)">
+            <summary>
+            Deletes a character from the ground map, identified by its instance name.
+            </summary>
+            <param name="instancename">The instance name of the object.</param>
+            <returns>Returns true if succeeded, false otherwise.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.CreateCharacterFromCharData(System.String,RogueEssence.Dungeon.Character,System.Int32,System.Int32,RogueElements.Dir8)">
+            <summary>
+            Creates a ground character, given a dungeon character.
+            </summary>
+            <param name="instancename">The instance name to give the character</param>
+            <param name="data">Character data to create from</param>
+            <param name="x">X coordinate of the character</param>
+            <param name="y">Y coordinate of the character</param>
+            <param name="direction">Direction the character will face, defaults to Dir8.Down</param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.RefreshPlayer">
+            <summary>
+            Reloads the controllable player's character data to be the current team's leader.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.SetPlayer(RogueEssence.Dungeon.CharData)">
+            <summary>
+            Sets the controllable player to use new character data
+            </summary>
+            <param name="charData">The new character data</param>
+        </member>
         <member name="M:RogueEssence.Script.ScriptGround.SpawnerDoSpawn(System.String)">
             <summary>
             Make the specified spawner run its spawn method.
             </summary>
             <param name="spawnername"></param>
-            <returns></returns>
+            <returns>The ground character spawned.</returns>
         </member>
         <member name="M:RogueEssence.Script.ScriptGround.SpawnerSetSpawn(System.String,RogueEssence.Dungeon.CharData)">
             <summary>
             Sets the character to the specified spawner
             </summary>
-            <param name="spawnername"></param>
-            <param name="spawnChar"></param>
+            <param name="spawnername">The spawner to set the character to, by name</param>
+            <param name="spawnChar">The character to spawn.</param>
             <returns></returns>
-        </member>
-        <member name="M:RogueEssence.Script.ScriptGround.CharSetEmote(RogueEssence.Ground.GroundChar,System.String,System.Int32)">
-            <summary>
-            Set a character's emote
-            </summary>
-            <param name="chara"></param>
-            <param name="emoteid"></param>
-            <param name="cycles"></param>
-        </member>
-        <member name="M:RogueEssence.Script.ScriptGround.CharSetAnim(RogueEssence.Ground.GroundChar,System.String,System.Boolean)">
-            <summary>
-            Set a character's animation
-            </summary>
-            <param name="chara"></param>
-            <param name="anim"></param>
-        </member>
-        <member name="F:RogueEssence.Script.ScriptGround.CharWaitAnim">
-            <summary>
-            Performs an animation and waits until it's over.
-            </summary>
-        </member>
-        <member name="F:RogueEssence.Script.ScriptGround.ObjectWaitAnimFrame">
-            <summary>
-            Performs an animation and waits until it's over.
-            </summary>
-        </member>
-        <member name="M:RogueEssence.Script.ScriptGround.PlayVFX(RogueEssence.Content.FiniteEmitter,System.Int32,System.Int32,RogueElements.Dir8)">
-            <summary>
-            Plays a VFX
-            </summary>
-            <param name="chara"></param>
-            <param name="anim"></param>
         </member>
         <member name="M:RogueEssence.Script.ScriptGround.CharTurnToChar(RogueEssence.Ground.GroundChar,RogueEssence.Ground.GroundChar)">
             <summary>
-            Makes a character turn to face another
+            Makes a character turn to face another character instantly.
             </summary>
-            <param name="curch"></param>
-            <param name="turnto"></param>
+            <param name="turnchar">The character that is turning.</param>
+            <param name="turnto">The character to turn to.</param>
         </member>
         <member name="F:RogueEssence.Script.ScriptGround.CharTurnToCharAnimated">
-             <summary>
-            
-             </summary>
-             <param name="curch"></param>
-             <param name="turnto"></param>
-             <param name="framedur"></param>
-             <returns></returns>
+            <summary>
+            Makes a character do an animated turn to face another character over the specified time.
+            Clockwise or counter-clockwise are chosen based on the closest direction.
+            Waits until the operation is completed.
+            </summary>
+            <param name="curch">Character that is turning</param>
+            <param name="turnto">Character to turn to</param>
+            <param name="framedur">Time spent on each direction, in frames</param>
+            <example>
+            CharTurnToCharAnimated(charFrom, charTo, 3)
+            </example>
         </member>
         <member name="M:RogueEssence.Script.ScriptGround.EntTurn(RogueEssence.Ground.GroundEntity,RogueElements.Dir8)">
             <summary>
-            Make an entity immediately turn towards a direction
+            Makes a ground entity turn to face a direction.
             </summary>
-            <param name="curch"></param>
-            <param name="direction"></param>
+            <param name="ent">The ground entity.  Can be a character or object.</param>
+            <param name="direction">The direction to face.</param>
         </member>
         <member name="F:RogueEssence.Script.ScriptGround.CharAnimateTurn">
             <summary>
-            Do an animated turn
+            Makes a character do an animated turn to face a chosen direction over the specified time.
+            Must specify clockwise or counter-clockwise.
+            Waits until the operation is completed.
             </summary>
-            <param name="ch"></param>
-            <param name="direction"></param>
-            <param name="framedur"></param>
+            <param name="ch">The character to turn</param>
+            <param name="direction">The direction to turn to</param>
+            <param name="framedur">The time spent in each intermediate direction, in frames</param>
+            <param name="ccw">false if clockwise, true if counter-clockwise</param>
+            <example>
+            CharTurnToCharAnimated(charFrom, Dir8.Left, 3, true)
+            </example>
         </member>
-        <member name="M:RogueEssence.Script.ScriptGround._MoveInDirection(RogueEssence.Ground.GroundChar,RogueElements.Dir8,System.Int32,System.Boolean,System.Int32)">
+        <member name="F:RogueEssence.Script.ScriptGround.CharAnimateTurnTo">
             <summary>
-            Make an entity move in a direction
+            Makes a character do an animated turn to face a chosen direction over the specified time.
+            Waits until the operation is completed.
             </summary>
-            <returns></returns>
+            <param name="ch">The character to turn</param>
+            <param name="direction">The direction to turn to</param>
+            <param name="framedur">The time spent in each intermediate direction, in frames</param>
+            <example>
+            CharTurnToCharAnimated(charFrom, Dir8.Left, 3)
+            </example>
         </member>
-        <member name="M:RogueEssence.Script.ScriptGround._AnimateInDirection(RogueEssence.Ground.GroundChar,System.String,RogueElements.Dir8,RogueElements.Dir8,System.Int32,System.Single,System.Int32)">
+        <member name="M:RogueEssence.Script.ScriptGround.TeleportTo(RogueEssence.Ground.GroundEntity,System.Int32,System.Int32,RogueElements.Dir8)">
             <summary>
-            Make an entity move in a direction with custom animation
+            Repositions the ground entity in a specified location.
             </summary>
-            <returns></returns>
+            <param name="ent">The ground entity to reposition</param>
+            <param name="x">The X coordinate of the destination</param>
+            <param name="y">The Y coordinate of the destination</param>
+            <param name="direction">The direction to point the entity.  Defaults to Dir8.None, which leaves it untouched.</param>
         </member>
-        <member name="F:RogueEssence.Script.ScriptGround.AnimateToPosition">
+        <member name="F:RogueEssence.Script.ScriptGround.MoveInDirection">
             <summary>
-            Makes an entity move to the selected position over a certain time, with a certain animation.
+            Make ground character move in a direction.
             </summary>
-            <param name="ent"></param>
-            <param name="x"></param>
-            <param name="y"></param>
-            <returns></returns>
+            <param name="chara">Character to move</param>
+            <param name="direction">Direction to move in</param>
+            <param name="duration">Duration of movement, in frames</param>
+            <param name="run">True if using a running animation, false otherwise</param>
+            <param name="speed">Speed in pixels per frame</param>
+            <example>
+            GROUND:MoveInDirection(player, Dir8.Down, 24, false, 2)
+            </example>
         </member>
         <member name="F:RogueEssence.Script.ScriptGround.MoveToPosition">
             <summary>
-            Makes an entity move to the selected position over a certain time.
+            Make ground character move to a position.
             </summary>
-            <param name="ent"></param>
-            <param name="x"></param>
-            <param name="y"></param>
-            <returns></returns>
+            <param name="chara">Character to move</param>
+            <param name="x">X coordinate of destination</param>
+            <param name="y">Y  coordinate of destination</param>
+            <param name="run">True if using a running animation, false otherwise</param>
+            <param name="speed">Speed in pixels per frame</param>
+            <example>
+            GROUND:MoveInDirection(player, 200, 240, false, 2)
+            </example>
         </member>
         <member name="F:RogueEssence.Script.ScriptGround.MoveToMarker">
             <summary>
-            Makes an entity move to a marker.
+            Make ground character move to a ground marker.
             </summary>
-            <param name="ent"></param>
-            <param name="mark"></param>
-            <returns></returns>
+            <param name="chara">Character to move</param>
+            <param name="mark">GroundMarker object ot move to</param>
+            <param name="run">True if using a running animation, false otherwise</param>
+            <param name="speed">Speed in pixels per frame</param>
+            <example>
+            GROUND:MoveInDirection(player, marker, false, 2)
+            </example>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGround.MoveObjectToPosition">
+            <summary>
+            Make ground object move to a position.
+            </summary>
+            <param name="ent">Ground Entity to move</param>
+            <param name="x">X coordinate of destination</param>
+            <param name="y">Y  coordinate of destination</param>
+            <param name="speed">Speed in pixels per frame</param>
+            <example>
+            GROUND:MoveInDirection(player, 200, 240, 2)
+            </example>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGround.AnimateInDirection">
+            <summary>
+            Make a ground character move in a direction with custom animation
+            </summary>
+            <param name="chara">Character to move</param>
+            <param name="anim">Name of the animation</param>
+            <param name="animDir">Direction of animation</param>
+            <param name="direction">Direction to move in</param>
+            <param name="duration">Duration of movement, in frames</param>
+            <param name="animSpeed">Speed of animation, where 1.0 represents normal speed</param>
+            <param name="speed">Speed movement, in pixels per frame</param>
+            <example>
+            GROUND:AnimateInDirection(player, "Hurt", Dir8.Down, 24, 0.5, 2)
+            </example>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGround.AnimateToPosition">
+            <summary>
+            Make a ground entity move to a position with custom animation
+            </summary>
+            <param name="ent">Entity to move</param>
+            <param name="anim">Name of the animation</param>
+            <param name="animDir">Direction of animation</param>
+            <param name="x">X coordinate of the destination</param>
+            <param name="y">Y coordinate of the destination</param>
+            <param name="animSpeed">Speed of animation, where 1.0 represents normal speed</param>
+            <param name="speed">Speed movement, in pixels per frame</param>
+            <example>
+            GROUND:AnimateToPosition(player, "Hurt", Dir8.Down, 200, 240, 0.5, 2)
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.CharSetEmote(RogueEssence.Ground.GroundChar,System.String,System.Int32)">
+            <summary>
+            Make a character emote on the ground map.
+            </summary>
+            <param name="chara">Character to emote</param>
+            <param name="emoteid">ID of the emote</param>
+            <param name="cycles">The number of times to play the emote.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.CharSetDrawEffect(RogueEssence.Ground.GroundChar,RogueEssence.Dungeon.DrawEffect)">
+            <summary>
+            Sets the ground character's draw effect to become invisible, shaking, still, etc.
+            </summary>
+            <param name="chara">Target ground character.</param>
+            <param name="effect">The draw effect.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.CharEndDrawEffect(RogueEssence.Ground.GroundChar,RogueEssence.Dungeon.DrawEffect)">
+            <summary>
+            Sets the ground character's draw effect to become invisible, shaking, still, etc.
+            </summary>
+            <param name="chara">Target ground character.</param>
+            <param name="effect">The draw effect.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.CharSetAnim(RogueEssence.Ground.GroundChar,System.String,System.Boolean)">
+            <summary>
+            Set a character's animation.
+            </summary>
+            <param name="chara">Character to animate</param>
+            <param name="anim">Name of the animation</param>
+            <param name="loop">Whether to loop the animation</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.CharEndAnim(RogueEssence.Ground.GroundChar)">
+            <summary>
+            Stops a character's current animation, reverting them to default idle.
+            </summary>
+            <param name="chara">Character to stop animating</param>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGround.CharWaitAnim">
+            <summary>
+            Makes the character perform an animation and waits until it's over.
+            </summary>
+            <param name="ent">Character to animate</param>
+            <param name="anim">Animation to play</param>
+            <example>
+            GROUND:CharWaitAnim(player, "Hurt")
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.CharSetAction(RogueEssence.Ground.GroundChar,RogueEssence.Ground.GroundAction)">
+            <summary>
+            Set a character's action.
+            </summary>
+            <param name="chara">Character to perfomr the action</param>
+            <param name="action">The action to perform</param>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGround.CharWaitAction">
+            <summary>
+            Makes the character perform an action and waits until it's over.
+            </summary>
+            <param name="ent">Character to animate</param>
+            <param name="action">Action to perform</param>
+            <example>
+            GROUND:CharWaitAction(player, action)
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.ObjectSetAnim(RogueEssence.Ground.GroundObject,System.Int32,System.Int32,System.Int32,RogueElements.Dir8,System.Int32)">
+            <summary>
+            Sets a ground object's animation.  After it finishes, it will return to the default animation.
+            </summary>
+            <param name="obj">The object to animate</param>
+            <param name="frameTime">The duration of each frame of animation</param>
+            <param name="startFrame">The start frame of animation</param>
+            <param name="endFrame">The end frame of animation</param>
+            <param name="dir">The direction of the animation</param>
+            <param name="cycles">The number of times to repeat the animation</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.ObjectSetDefaultAnim(RogueEssence.Ground.GroundObject,System.String,System.Int32,System.Int32,System.Int32,RogueElements.Dir8)">
+            <summary>
+            Sets a ground object's default animation.
+            </summary>
+            <param name="obj">The object to animate</param>
+            <param name="animName">The name of the animation</param>
+            <param name="frameTime">The duration of each frame of animation</param>
+            <param name="startFrame">The start frame of animation</param>
+            <param name="endFrame">The end frame of animation</param>
+            <param name="dir">The direction of the animation</param>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGround.ObjectWaitAnimFrame">
+            <summary>
+            Waits for the object to reach a specific frame before continuing.
+            </summary>
+            <param name="obj">The object ot wait on</param>
+            <param name="frame">The frame of animation to wait on.</param>
+            <example>
+            GROUND:WaitObjectAnim(fountain, 3)
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.PlayVFX(RogueEssence.Content.FiniteEmitter,System.Int32,System.Int32,RogueElements.Dir8)">
+            <summary>
+            Plays a VFX using a finite emitter that generates BaseAnims.
+            </summary>
+            <param name="emitter">The VFX emitter</param>
+            <param name="x">X position</param>
+            <param name="y">Y Position</param>
+            <param name="dir">Direction to orient the VFX, defaults to Down</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.PlayVFX(RogueEssence.Content.FiniteEmitter,System.Int32,System.Int32,RogueElements.Dir8,System.Int32,System.Int32)">
+            <summary>
+            Plays a VFX that has a start position and an end position.  It uses a finite emitter that generates BaseAnims.
+            </summary>
+            <param name="emitter">The VFX emitter</param>
+            <param name="x">Start X position</param>
+            <param name="y">Start Y Position</param>
+            <param name="dir">Direction to orient the VFX, defaults to Down.</param>
+            <param name="xTo">End X position</param>
+            <param name="yTo">End Y position</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.PlayVFXAnim(RogueEssence.Content.BaseAnim,RogueEssence.Content.DrawLayer)">
+            <summary>
+            Plays a VFX using just a BaseAnim
+            </summary>
+            <param name="anim">The animation to play</param>
+            <param name="layer">The layer to put it on</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.MoveScreen(RogueEssence.Content.ScreenMover)">
+            <summary>
+            Plays a screen-moving effect.
+            </summary>
+            <param name="mover">The screen mover.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.AddMapStatus(System.String)">
+            <summary>
+            Adds a mapstatus to the ground map.  Map statuses only have an aesthetic effect in ground maps.
+            </summary>
+            <param name="statusIdx">The ID of the Map Status</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.RemoveMapStatus(System.String)">
+            <summary>
+            Removes a map status from the ground map.
+            </summary>
+            <param name="statusIdx">The ID of the Map Status to remove.</param>
         </member>
         <member name="T:RogueEssence.Script.ScriptServices">
             <summary>
@@ -5689,12 +6561,160 @@
             <summary>
             Plays a sound effect
             </summary>
-            <param name="name">Sound file name</param>
+            <param name="name">Sound file name, relative to the Content/SE folder</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptSound.PlayBattleSE(System.String)">
+            <summary>
+            Plays a sound effect specifically from the Battle/ subdirectory
+            </summary>
+            <param name="name">Sound file name, relative to the Content/SE/Battle folder</param>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptSound.WaitSE">
+            <summary>
+            Plays a sound effect, and waits for it to complete before continuing.
+            </summary>
+            <example>
+            SOUND:WaitSE("Battle/Hit")
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptSound.LoopSE(System.String)">
+            <summary>
+            Plays a continuous sound effect
+            </summary>
+            <param name="name">Sound file name, relative to the Content/SE folder</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptSound.LoopBattleSE(System.String)">
+            <summary>
+            Plays a continuous sound effect
+            </summary>
+            <param name="name">Sound file name, relative to the Content/SE/Battle folder</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptSound.StopSE(System.String)">
+            <summary>
+            Stops a continuous sound effect
+            </summary>
+            <param name="name">Sound file name, relative to the Content/SE folder</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptSound.StopBattleSE(System.String)">
+            <summary>
+            Stops a continuous sound effect
+            </summary>
+            <param name="name">Sound file name, relative to the Content/SE/Battle folder</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptSound.FadeInSE(System.String,System.Int32)">
+            <summary>
+            Plays a continuous sound effect, fading in over a specified amount of time
+            </summary>
+            <param name="name">Sound file name, relative to the Content/SE folder</param>
+            <param name="fadeTime">Time in frames for the sound to fade in</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptSound.FadeInBattleSE(System.String,System.Int32)">
+            <summary>
+            Plays a continuous sound effect, fading in over a specified amount of time
+            </summary>
+            <param name="name">Sound file name, relative to the Content/SE/Battle folder</param>
+            <param name="fadeTime">Time in frames for the sound to fade in</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptSound.FadeOutSE(System.String,System.Int32)">
+            <summary>
+            Stops a continuous sound effect, fading out over a specified amount of time
+            </summary>
+            <param name="name">Sound file name, relative to the Content/SE folder</param>
+            <param name="fadeTime">Time in frames for the sound to fade out</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptSound.FadeOutBattleSE(System.String,System.Int32)">
+            <summary>
+            Stops a continuous sound effect, fading out over a specified amount of time
+            </summary>
+            <param name="name">Sound file name, relative to the Content/SE/Battle folder</param>
+            <param name="fadeTime">Time in frames for the sound to fade out</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptSound.PlayFanfare(System.String)">
+            <summary>
+            Plays a sound effect that temporarily mutes the music for its duration
+            </summary>
+            <param name="name">Sound file name, relative to the Content/SE folder</param>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptSound.WaitFanfare">
+            <summary>
+            Plays a sound effect that temporarily mutes the music for its duration.
+            This function waits for the sound to complete before continuing.
+            </summary>
+            <example>
+            SOUND:WaitFanfare("Battle/LevelUp")
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptSound.PlayBGM(System.String,System.Boolean,System.Int32)">
+            <summary>
+            Plays a song, replacing the current one.
+            </summary>
+            <param name="name">The file name of the song, relative to the Content/Music folder.</param>
+            <param name="fade">Whether to fade the old song out, or start a new one.</param>
+            <param name="fadeTime">The amount of time, in frames, to fade out the old song.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptSound.StopBGM">
+            <summary>
+            Stops playing the current song.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptSound.FadeOutBGM(System.Int32)">
+            <summary>
+            Fades out the current song.
+            </summary>
+            <param name="fadeTime">The amount of time, in frames, to fade out the song.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptSound.SetBGMVolume(System.Single)">
+            <summary>
+            Sets the current volume of the song.
+            </summary>
+            <param name="val">A float value between 0 and 1</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptSound.GetCurrentSong">
+            <summary>
+            Gets the currently playing song.  If the current song is fading out, gets the next song to be played.
+            </summary>
+            <returns>The filename of the song, relative to the Content/Music folder</returns>
         </member>
         <member name="T:RogueEssence.Script.ScriptStrings">
             <summary>
             Class for handling loading localized string via xml, because lua xml libs sucks
             </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptStrings.LocaleCode">
+            <summary>
+            Gets the current language setting of the game.
+            </summary>
+            <returns>The current language, represented by a locale code.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptStrings.Format(System.String,System.Object[])">
+            <summary>
+            Formats a string.  Will unescape escaped characters.
+            </summary>
+            <param name="fmt">String to format.</param>
+            <param name="para">Arguments</param>
+            <returns>The formatted string.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptStrings.FormatKey(System.String,System.Object[])">
+            <summary>
+            Formats a string given a string key.  Will unescape escaped characters.
+            </summary>
+            <param name="fmt">The string key to format</param>
+            <param name="para">string arguments</param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptStrings.LocalKeyString(System.Int32)">
+            <summary>
+            Gets the string representing a button or key.
+            </summary>
+            <param name="index">The input type of the input.</param>
+            <returns>The string representing the button o key the input maps to.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptStrings.CreateList(NLua.LuaTable)">
+            <summary>
+            Builds a single string of comma separated elements.
+            </summary>
+            <param name="listStrings">LuaTable of strings containing the elements to build the list from.</param>
+            <returns>The combined string containing all elements.</returns>
         </member>
         <member name="T:RogueEssence.Script.ScriptTask">
             <summary>
@@ -5705,85 +6725,317 @@
             <summary>
             Helper function to make an entity run the specified task.
             Will not replace a running task!
-            Tasks are run interlocked with the script processing and game processing, and characters can run tasks at the same time.
+            Tasks are run interlocked with the script processing and game processing, and characters cannot run multiple tasks at the same time.
             </summary>
             <param name="ent">Entity which will run the task.</param>
             <param name="fn">Task coroutine.</param>
-            <returns>Returns whether the task could be set or not</returns>
-        </member>
-        <member name="M:RogueEssence.Script.ScriptTask._WaitStartEntityTask(RogueEssence.Ground.GroundEntity,NLua.LuaFunction)">
-            <summary>
-            Same as StartEntityTask, but this one blocks until the task is set
-            </summary>
-            <param name="ent"></param>
-            <param name="fn"></param>
         </member>
         <member name="M:RogueEssence.Script.ScriptTask.StopEntityTask(RogueEssence.Ground.GroundEntity)">
             <summary>
-            Helper function to force stop an entity's current task!
+            Helper function to force stop an entity's current task.
             </summary>
             <param name="ent">Entity running the task to stop.</param>
         </member>
-        <member name="M:RogueEssence.Script.ScriptTask._WaitEntityTask(RogueEssence.Ground.GroundEntity)">
+        <member name="F:RogueEssence.Script.ScriptTask.WaitStartEntityTask">
             <summary>
-            Helper function to invoke the Wait() function of the current task of the specified entity.
+            Makes an entity run a specified task, and waits for it to complete.
+            </summary>
+            <param name="ent">Entity which will run the task.</param>
+            <param name="fn">Task coroutine.</param>
+            <example>
+            TODO
+            </example>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptTask.WaitEntityTask">
+            <summary>
+            Waits for the specified entity to finish its task.
             </summary>
             <param name="ent">Entity which task we'll wait on.</param>
+            <example>
+            TASK:WaitEntityTask(player)
+            </example>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptTask.WaitTask">
+            <summary>
+            Runs a task and waits for it to complete.
+            Most methods that do not expose themselves to script need ot be wrapped with this.
+            </summary>
+            <param name="obj">The task to wait on.</param>
+            <example>
+            TASK:WaitTask(_DUNGEON:AddMapStatus("rain"))
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptTask.StartScriptLocalCoroutine(NLua.LuaFunction,System.Object[])">
+            <summary>
+            A wrapper around the StartCoroutine method of the GameManager, so lua coroutines can be executed locally to the script context.
+            AKA, it will block the script execution while its executed.
+            </summary>
+            <param name="fn"></param>
+            <param name="args"></param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:RogueEssence.Script.ScriptTask.StartScriptLocalCoroutine(NLua.LuaFunction,System.Object[])" -->
+        <member name="M:RogueEssence.Script.ScriptTask.BranchCoroutine(System.Object)">
+            <summary>
+            Starts a new coroutine to run parallel to the current execution.
+            Useful for performing multiple actions at once.
+            </summary>
+            <param name="obj">The task to run in parallel</param>
+            <example>
+            local coro1 = TASK:BranchCoroutine(GAME:_FadeIn(60))
+            </example>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptTask.JoinCoroutines">
+            <summary>
+            Waits for all specified coroutines to finish before continuing execution.
+            Often used for coroutines created using TASK:BranchCoroutine()
+            </summary>
+            <param name="coroTable">A table of coroutines to wait on.</param>
+            <example>
+            TASK:JoinCoroutines({coro1})
+            </example>
+        </member>
         <member name="T:RogueEssence.Script.ScriptUI.ChoicePair">
             <summary>
             Used to store a list of choice and their return value for most multi-choice menus.
             </summary>
         </member>
+        <member name="F:RogueEssence.Script.ScriptUI.WaitInput">
+            <summary>
+            Waits for the player to press a button before continuing.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptUI.WaitShowDialogue">
+            <summary>
+            Displays a dialogue box with text, waiting until the player completes it.
+            Takes a string as an argument.
+            </summary>
+            <param name="text">The text to display.</param>
+            <example>
+            UI:WaitShowDialogue("Hello World!")
+            </example>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptUI.WaitShowTimedDialogue">
+            <summary>
+            Displays a dialogue box with text, waiting until the specified time has expired.
+            </summary>
+            <param name="text">The text to display.</param>
+            <param name="waitTime">The time for the textbox to remain on screen. Pass -1 to wait for layer input.</param>
+            <example>
+            UI:WaitShowTimedDialogue("Hello World!", 120)
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.TextDialogue(System.String,System.Int32)">
+            <summary>
+            Sets the current dialogue text to be shown.  Requires WaitDialog to actually display.
+            </summary>
+            <param name="text">The text to display.</param>
+            <param name="waitTime">The time for the textbox to remain on screen. Pass -1 to wait for layer input.</param>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptUI.WaitShowVoiceOver">
+            <summary>
+            Displays a voice over, waiting until the player completes it.
+            </summary>
+            <param name="text">The text to display.</param>
+            <param name="expireTime">The time for the textbox to remain on screen. Pass -1 to wait for layer input.</param>
+            <example>
+            UI:WaitShowVoiceOver("Hello World!", 120)
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.TextVoiceOver(System.String,System.Int32)">
+            <summary>
+            Sets the current voice-over text to be shown.  Requires WaitDialog to actually display.
+            </summary>
+            <param name="text">The text to display.</param>
+            <param name="expireTime">The time for the textbox to remain on screen. Pass -1 to wait for layer input.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.PopUp(System.String,System.Int32)">
+            <summary>
+            Makes text pop up in the bottom-left corner. Displays concurrently with any other process.
+            </summary>
+            <param name="text">The text to display.</param>
+            <param name="expireTime">The time for the textbox to remain on screen.</param>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptUI.WaitShowTitle">
+            <summary>
+            Fades in a title text, waiting until the fade-in is complete.
+            </summary>
+            <param name="text">The text to display.</param>
+            <param name="time">The time for the text to fade in.</param>
+            <example>
+            UI:WaitShowTitle("Hello World!", 60)
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.TextShowTitle(System.String,System.Int32)">
+            <summary>
+            Shows text in the format of a title drop.  Requires WaitDialog to actually display.
+            </summary>
+            <param name="text">The text to display.</param>
+            <param name="time">The time for the text to fade in.</param>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptUI.WaitHideTitle">
+            <summary>
+            Fades out the currently displayed title, waiting until the fade-out is complete.
+            </summary>
+            <param name="time">The time for the text to fade in.</param>
+            <example>
+            UI:WaitHideTitle(60)
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.TextFadeTitle(System.Int32)">
+            <summary>
+            Fades out the text set in a title drop.  Requires WaitDialog to actually fade.
+            </summary>
+            <param name="time">The time for the text to fade in.</param>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptUI.WaitShowBG">
+            <summary>
+            Fades in a chosen background image, with a chosen framerate, at a certain fade time, waiting until the fade-in is complete.
+            </summary>
+            <param name="bg">The background to show, from the list of BG textures.</param>
+            <param name="frameTime">Framerate of the image animation.</param>
+            <param name="fadeInTime">Time taken to fade in the image.</param>
+            <example>
+            UI:WaitShowBG("TestBG", 3, 60)
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.ShowBG(System.String,System.Int32,System.Int32)">
+            <summary>
+            Sets an image to display.  Requires WaitDialog to actually display.
+            </summary>
+            <param name="bg">The background to show, from the list of BG textures.</param>
+            <param name="frameTime">Framerate of the image animation.</param>
+            <param name="fadeInTime">Time taken to fade in the image.</param>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptUI.WaitHideBG">
+            <summary>
+            Fades out the current background image, waiting until the fade-out is complete.
+            </summary>
+            <param name="time">Time taken to fade out the image.</param>
+            <example>
+            UI:WaitHideBG(60)
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.FadeBG(System.Int32)">
+            <summary>
+            Prepares a fade-out of the current image.  Requires WaitDialog to actually display.
+            </summary>
+            <param name="time">Time taken to fade out the image.</param>
+        </member>
         <member name="M:RogueEssence.Script.ScriptUI.ResetSpeaker(System.Boolean)">
             <summary>
-            Clears the current speaker, so none is displayed the next time TextDialogue is called!
+            Clears the current speaker, so none is displayed the next time TextDialogue is called.
+            This also resets any custom dialogue box positions, portrait positions, and choice positions.
             </summary>
+            <param name="keysound">If turned on, the text from the dialogue boxes make sounds.  Default is on.</param>
         </member>
         <member name="M:RogueEssence.Script.ScriptUI.SetSpeaker(System.String,System.Boolean,System.String,System.Int32,System.String,RogueEssence.Data.Gender)">
             <summary>
             Sets the speaker to be displayed during the following calls to the TextDialogue functions.  It resets speaker emotion.
             </summary>
-            <param name="name"></param>
-            <param name="keysound"></param>
-            <param name="specie"></param>
-            <param name="form"></param>
-            <param name="skin"></param>
-            <param name="gender"></param>
+            <param name="name">Speaker name.</param>
+            <param name="keysound">Plays sounds when text appears.</param>
+            <param name="specie">Species of the speaker</param>
+            <param name="form">Form of the speaker</param>
+            <param name="skin">Skin of the speaker</param>
+            <param name="gender">Gender of the speaker</param>
         </member>
         <member name="M:RogueEssence.Script.ScriptUI.SetSpeaker(RogueEssence.Ground.GroundChar,System.Boolean)">
-             <summary>
-            
-             </summary>
-             <param name="chara"></param>
-             <param name="keysound"></param>
+            <summary>
+            Sets the speaker to be displayed during the following calls to the TextDialogue functions.  It resets speaker emotion.
+            </summary>
+            <param name="chara">Character to set as speaker. This is a character in a ground map.</param>
+            <param name="keysound">Plays sounds when text appears.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.SetSpeaker(RogueEssence.Dungeon.Character,System.Boolean)">
+            <summary>
+            Sets the speaker to be displayed during the following calls to the TextDialogue functions.  It resets speaker emotion.
+            </summary>
+            <param name="chara">Character to set as speaker. This is a character in a dungeon map.</param>
+            <param name="keysound">Plays sounds when text appears.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.SetSpeakerReverse(System.Boolean)">
+            <summary>
+            Reverses the speaker orientation to face left instead of right.  This depends on the boolean passed in.
+            </summary>
+            <param name="reverse">Faces right if false, left if true.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.SetChoiceLoc(System.Int32,System.Int32)">
+            <summary>
+            Sets the position of the choices for a question dialog.
+            </summary>
+            <param name="x">The X position</param>
+            <param name="y">The Y position</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.ResetChoiceLoc">
+            <summary>
+            Sets the position of the choices for a question dialog back to default.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.SetBounds(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sets the position and size of the dialogue box.
+            </summary>
+            <param name="x">The X position of the box</param>
+            <param name="y">The Y position of the box</param>
+            <param name="width">Width of the box</param>
+            <param name="height">Height of the box</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.ResetBounds">
+            <summary>
+            Resets the position and size of the dialogue box.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.SetSpeakerLoc(System.Int32,System.Int32)">
+            <summary>
+            Sets the position of the speaker in a dialogue box.
+            </summary>
+            <param name="x">The X position</param>
+            <param name="y">The Y position</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.ResetSpeakerLoc">
+            <summary>
+            Resets the position of the speaker in a dialogue box.
+            </summary>
         </member>
         <member name="M:RogueEssence.Script.ScriptUI.SetSpeakerEmotion(System.String,System.Boolean)">
-             <summary>
-            
-             </summary>
-             <param name="emo"></param>
-             <param name="reverse"></param>
-        </member>
-        <member name="M:RogueEssence.Script.ScriptUI._WaitDialog">
             <summary>
-            Waits for the dialog window to be closed to return control to the script!
+            Sets the emotion of the speaker in the dialogue box.
             </summary>
+            <param name="emo">Emotion to display</param>
+            <param name="reverse">Faces right if false, left if true.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.SetCenter(System.Boolean,System.Boolean)">
+            <summary>
+            Sets the centering of the text in the textbox.
+            </summary>
+            <param name="centerH">Horizontal centering</param>
+            <param name="centerV">Vertical centering</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.SetAutoFinish(System.Boolean)">
+            <summary>
+            Makes the text automatically finish when it shows up.
+            </summary>
+            <param name="autoFinish">Auto-finishes text if true.</param>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptUI.WaitDialog">
+            <summary>
+            Displays the currently set dialogue box and waits for the player to complete it.
+            </summary>
+            <example>
+            UI:WaitDialog()
+            </example>
         </member>
         <member name="M:RogueEssence.Script.ScriptUI._DummyWait">
             <summary>
             Instantly break. Used as default/invalid value when returning a yieldable value.
             </summary>
-            <returns></returns>
         </member>
         <member name="M:RogueEssence.Script.ScriptUI.ChoiceMenuYesNo(System.String,System.Boolean)">
              <summary>
              Ask a question answered by yes or no via character dialogue to the player.
-             WaitForChoice() must be called afterwards for the menu to be actually displayed,
+             UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
              and for execution to suspend until the choice is returned.
-             Then to recover the integer value indicating the result of the menu, ChoiceResult() must be called.
+             Then to recover the integer value indicating the result of the menu, UI:ChoiceResult() must be called.
             
              The Yes/No menu returns 1 for yes, and 0 for no.
              </summary>
@@ -5794,57 +7046,283 @@
             <summary>
             Displays the name input box.
             
-            WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
             and for execution to suspend until the choice is returned.
-            Then to recover the string value indicating the result of the menu, StringResult() must be called.
+            Then to recover the string value indicating the result of the menu, UI:ChoiceResult() must be called.
             </summary>
-            <param name="title"></param>
-            <param name="desc"></param>
+            <param name="title">The text to show above the input line.</param>
+            <param name="desc">The text to show below the input line.</param>
+            <param name="maxLength">The length of the text in pixels.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.AssemblyMenu">
+            <summary>
+            Displays a menu for replacing party members with the assembly.
+            
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            and for execution to suspend until the choice is returned.
+            Then to recover the boolean value indicating whether the team composition was changed or not, UI:ChoiceResult() must be called.
+            </summary>
         </member>
         <member name="M:RogueEssence.Script.ScriptUI.ShopMenu(NLua.LuaTable)">
             <summary>
             Displays the Shop menu.
             
-            WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
             and for execution to suspend until the choice is returned.
-            Then to recover the string value indicating the result of the menu, StringResult() must be called.
+            Then to recover the table indicating the indices of items chosen, UI:ChoiceResult() must be called.
             </summary>
-            <param name="goods"></param>
+            <param name="goods">A table of items to be sold.  The format is { Item=InvItem, Price=int } for each item.</param>
         </member>
         <member name="M:RogueEssence.Script.ScriptUI.SellMenu">
             <summary>
             Displays the Sell menu.
             
-            WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
             and for execution to suspend until the choice is returned.
-            Then to recover the string value indicating the result of the menu, StringResult() must be called.
+            Then to recover the table indicating the indices of items to sell, UI:ChoiceResult() must be called.
             </summary>
-            <param name="goods"></param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.StorageMenu">
+            <summary>
+            Displays the Storage menu for which to exchange items in the inventory with.
+            
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            and for execution to suspend until the menu is exited.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.WithdrawMenu">
+            <summary>
+            Displays the Storage menu for which to withdraw from.
+            
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            and for execution to suspend until the menu is exited.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.BankMenu">
+            <summary>
+            Displays the Bank menu.
+            
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            and for execution to suspend until the menu is exited.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.SpoilsMenu(NLua.LuaTable)">
+            <summary>
+            Displays the Spoils menu.
+            
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            and for execution to suspend until the menu is exited.
+            </summary>
+            <param name="appraisalMap">A table of mappings from containers to items, in the format of { Box=InvItem , Item=InvItem }</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.AppraiseMenu">
+            <summary>
+            Displays the Appraisal menu.
+            
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            and for execution to suspend until the choice is returned.
+            Then to recover the table indicating the indices of items chosen, UI:ChoiceResult() must be called.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.TutorTeamMenu">
+            <summary>
+            Displays the Tutor Team menu.
+            
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            and for execution to suspend until the choice is returned.
+            Then to recover the integer representing the chosen team member, UI:ChoiceResult() must be called.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.RelearnMenu(RogueEssence.Dungeon.Character)">
+            <summary>
+            Displays the Relearn menu for a character.
+            
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            and for execution to suspend until the choice is returned.
+            Then to recover the integer representing the chosen skill, UI:ChoiceResult() must be called.
+            </summary>
+            <param name="chara">The character to relearn skills</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.LearnMenu(RogueEssence.Dungeon.Character,System.String)">
+            <summary>
+            Displays the Learn menu for a character to replace an existing skill with a new one.
+            
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            and for execution to suspend until the choice is returned.
+            Then to recover the integer representing the chosen skill, UI:ChoiceResult() must be called.
+            </summary>
+            <param name="chara">The character to relearn skills</param>
+            <param name="skillNum">The new skill</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.ForgetMenu(RogueEssence.Dungeon.Character)">
+            <summary>
+            Displays the Forget menu for a character to forget a skill.
+            
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            and for execution to suspend until the choice is returned.
+            Then to recover the integer representing the chosen skill, UI:ChoiceResult() must be called.
+            </summary>
+            <param name="chara">The character to relearn skills</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.ShowPromoteMenu">
+            <summary>
+            Displays the Promote menu to choose a team member to promote.
+            
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            and for execution to suspend until the choice is returned.
+            Then to recover the integer representing the chosen team slot, UI:ChoiceResult() must be called.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.CanSwapMenu(NLua.LuaTable)">
+            <summary>
+            TODO
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.SwapMenu(NLua.LuaTable,NLua.LuaTable)">
+            <summary>
+            TODO
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.TributeMenu(System.Int32)">
+            <summary>
+            TODO
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.ShowMusicMenu(NLua.LuaTable)">
+            <summary>
+            Displays the Music menu to browse music for the game.
+            
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            and for execution to suspend until the choice is returned.
+            Then to recover the string representing the chosen song, UI:ChoiceResult() must be called.
+            </summary>
+            <param name="spoilerUnlocks">A lua table of strings representing progression flags that have been completed.
+            Any ogg file that uses this tag as a spoiler tag will display in the menu only if the flag has been passed.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.DungeonChoice(System.String,RogueEssence.Dungeon.ZoneLoc)">
+             <summary>
+             Ask to enter a destintion via character dialogue to the player.
+             UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+             and for execution to suspend until the choice is returned.
+             Then to recover the integer value indicating the result of the menu, UI:ChoiceResult() must be called.
+            
+             The Yes/No menu returns 1 for yes, and 0 for no.
+             </summary>
+             <param name="name">Name of the destination</param>
+             <param name="dest">The ZoneLoc location of the destination.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.DestinationMenu(NLua.LuaTable)">
+            <summary>
+            Marks the start of a choice menu for choosing destinations, showing a preview of restrictions and requirements for dungeons.
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            and for execution to suspend until the choice is returned.
+            Then to recover the ZoneLoc indicating the chosen destination, UI:ChoiceResult() must be called.
+            </summary>
+            <param name="destinations">A lua table representing the list of destinations with each element in the format of { Name=string, Dest=ZoneLoc }</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.ServersMenu">
+            <summary>
+            TODO
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.ContactsMenu">
+            <summary>
+            TODO
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.SOSMenu">
+            <summary>
+            TODO
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.AOKMenu">
+            <summary>
+            TODO
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.PeersMenu">
+            <summary>
+            TODO
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.ShowConnectMenu">
+            <summary>
+            TODO
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.CurrentActivityMenu">
+            <summary>
+            TODO
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.ChooseMonsterMenu(System.String,NLua.LuaTable,System.Boolean,System.Boolean)">
+            <summary>
+            Marks the start of a choice menu for choosing monsters, showing a preview of their appearances via portrait.
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            and for execution to suspend until the choice is returned.
+            Then to recover the string indicating the chosen species, UI:ChoiceResult() must be called.
+            </summary>
+            <param name="title">The title of the menu</param>
+            <param name="choices">A lua table of choices with each element being a MonsterID.</param>
+            <param name="canMenu">If set to true, the Menu Button exits the menu if pressed.</param>
+            <param name="canCancel">If set to true, the Cancel Button exits the menu if pressed.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.SetCustomMenu(RogueEssence.Menu.InteractableMenu)">
+            <summary>
+            Displays a custom menu of the caller's choice.
+            
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            and for execution to suspend until the menu is exited.
+            </summary>
         </member>
         <member name="M:RogueEssence.Script.ScriptUI.BeginChoiceMenu(System.String,NLua.LuaTable,System.Object,System.Object)">
             <summary>
             Marks the start of a multi-choice menu.
-            Choices must be added after calling this method using the AddChoice() method.
-            WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
             and for execution to suspend until the choice is returned.
-            Then to recover the integer value indicating the result of the menu, ChoiceResult() must be called.
+            Then to recover the integer value indicating the result of the menu, UI:ChoiceResult() must be called.
             </summary>
             <param name="message">The question to ask the user.</param>
-            <param name="choicesPairs"></param>
-            <param name="defaultChoice"></param>
-            <param name="cancelChoice"></param>
+            <param name="choicesPairs">A table of choices.  Each choice can be either a string, or { string, bool } representing the text and enabled status.</param>
+            <param name="defaultChoice">The cursor starts on this choice.</param>
+            <param name="cancelChoice">This choice is chosen if the player presses the cancel button.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.BeginMultiPageMenu(System.Int32,System.Int32,System.Int32,System.String,NLua.LuaTable,System.Int32,System.Object,System.Object)">
+            <summary>
+            Marks the start of a multi-paged choice menu.
+            UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
+            and for execution to suspend until the choice is returned.
+            Then to recover the integer value indicating the result of the menu, UI:ChoiceResult() must be called.
+            </summary>
+            <param name="x">X position of the menu</param>
+            <param name="y">Y position of the menu</param>
+            <param name="width">Width of the menu</param>
+            <param name="title">Height of the menu</param>
+            <param name="choicesPairs">A table of choices.  Each choice can be either a string, or { string, bool } representing the text and enabled status.</param>
+            <param name="linesPerPage">Number of choices per page</param>
+            <param name="defaultChoice">The cursor starts on this choice.</param>
+            <param name="cancelChoice">This choice is chosen if the player presses the cancel button.</param>
         </member>
         <member name="M:RogueEssence.Script.ScriptUI.ChoiceResult">
             <summary>
             Get the result of the last choice menu
             </summary>
+            <returns>The result of the choice</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.GetChoiceAction(System.Object)">
+            <summary>
+            It's complicated.
+            </summary>
+            <param name="obj"></param>
             <returns></returns>
         </member>
-        <member name="M:RogueEssence.Script.ScriptUI._WaitForChoice">
+        <member name="F:RogueEssence.Script.ScriptUI.WaitForChoice">
             <summary>
-            Let the scripts wait for the result of a choice
+            Displays the currently set choice menu and waits for the player's selection to complete.
             </summary>
-            <returns></returns>
+            <example>
+            UI:WaitForChoice()
+            </example>
         </member>
         <member name="F:RogueEssence.Menu.DialogueBox.SPEAK_FRAMES">
             <summary>

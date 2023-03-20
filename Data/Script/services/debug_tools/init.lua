@@ -54,8 +54,8 @@ end
 function DebugTools:OnNewGame()
   assert(self, 'DebugTools:OnNewGame() : self is null!')
   
-  for ii = 1, _DATA.StartChars.Count, 1 do
-    _DATA.Save:RogueUnlockMonster(_DATA.StartChars[ii-1].Item1.Species)
+  for ii = 1, _DATA.Start.Chars.Count, 1 do
+    _DATA.Save:RogueUnlockMonster(_DATA.Start.Chars[ii-1].ID.Species)
   end
   
   if _DATA.Save.ActiveTeam.Players.Count > 0 then
@@ -124,7 +124,7 @@ function DebugTools:OnUpgrade()
   assert(self, 'DebugTools:OnUpgrade() : self is null!')
   
   PrintInfo("=>> Loading version")
-  _DATA.Save.NextDest = _DATA.StartMap
+  _DATA.Save.NextDest = _DATA.Start.Map
   
   SV.checkpoint = 
   {

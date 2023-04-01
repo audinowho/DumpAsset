@@ -23,8 +23,6 @@ function cliff_camp.Enter(map)
     Map  = 4, Entry  = 1
   }
   
-  GROUND:Hide("NPC_DexRater")
-  
   --when arriving the first time, play this cutscene
   if not SV.cliff_camp.ExpositionComplete then
     cliff_camp.BeginExposition()
@@ -244,7 +242,13 @@ end
 function cliff_camp.NPC_DexRater_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local rewardReqs = { 10, 1008, 100 }
+  --ability capsule
+  --magenta silk
+  --bravery road
+  --friend bow
+  
+  local rewardReqs = { 2, 3, 4 }
+  --local rewardReqs = { 15, 30, 60, 100, 151, 251, 386 }
   
   UI:SetSpeaker(chara)
   local player = CH('PLAYER')
@@ -258,35 +262,44 @@ function cliff_camp.NPC_DexRater_Action(chara, activator)
   --If you get to XX, I'll give you something special~
   
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Intro_001']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Check_001']))
   
   local dexCompletion = _DATA.Save:GetTotalMonsterUnlock(RogueEssence.Data.GameProgress.UnlockState.Completed)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Check_002'], dexCompletion))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Check_001'], GAME:GetTeamName(), dexCompletion))
   
-  if SV.dex.CurrentRewardIdx < 1 then
+  if SV.dex.CurrentRewardIdx > #rewardReqs then
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Full_001']))
   else 
-    while SV.dex.CurrentRewardIdx > 0 and dexCompletion >= rewardReqs[SV.dex.CurrentRewardIdx] do
+    suffix = ""
+    while SV.dex.CurrentRewardIdx <= #rewardReqs and dexCompletion >= rewardReqs[SV.dex.CurrentRewardIdx] do
 	  if SV.dex.CurrentRewardIdx == 1 then
-		UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Reward_001']))
+		UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Reward_Dungeon'..suffix]))
 		COMMON.UnlockWithFanfare("lava_floe_island", false)
 		SV.base_camp.FerryUnlocked = true
 	  elseif SV.dex.CurrentRewardIdx == 2 then
-		UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Reward_002']))
-		COMMON.UnlockWithFanfare("bravery_road", false)
+		UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Reward_Item'..suffix]))
+		local receive_item = RogueEssence.Dungeon.InvItem("machine_ability_capsule")
+		COMMON.GiftItem(player, receive_item)
 	  elseif SV.dex.CurrentRewardIdx == 3 then
-		UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Reward_003']))
+		UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Reward_Item'..suffix]))
+		local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_fairy_silk")
+		COMMON.GiftItem(player, receive_item)
+	  elseif SV.dex.CurrentRewardIdx == 4 then
+		UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Reward_Dungeon'..suffix]))
+		COMMON.UnlockWithFanfare("bravery_road", false)
+	  elseif SV.dex.CurrentRewardIdx == 5 then
+		UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Reward_Item'..suffix]))
+		local receive_item = RogueEssence.Dungeon.InvItem("held_friend_bow")
+		COMMON.GiftItem(player, receive_item)
+	  elseif SV.dex.CurrentRewardIdx == 6 then
+		UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Reward_Dungeon'..suffix]))
 		COMMON.UnlockWithFanfare("labyrinth_of_the_lost", false)
 	  end
       
-	  if SV.dex.CurrentRewardIdx < #rewardReqs then
-		SV.dex.CurrentRewardIdx = SV.dex.CurrentRewardIdx + 1
-	  else
-		SV.dex.CurrentRewardIdx = 0
-	  end
+	  SV.dex.CurrentRewardIdx = SV.dex.CurrentRewardIdx + 1
+	  suffix = "_Alt"
 	end
 	
-	if SV.dex.CurrentRewardIdx > 0 then
+	if SV.dex.CurrentRewardIdx <= #rewardReqs then
 	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Next_001'], rewardReqs[SV.dex.CurrentRewardIdx]))
 	end
   end

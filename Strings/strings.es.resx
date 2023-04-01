@@ -399,6 +399,9 @@
   <data name="DLG_ASK_GENDER" xml:space="preserve">
     <value>¿Eres un chico, o una chica?</value>
     <comment></comment>  </data>
+  <data name="DLG_ASK_LOAD_UPGRADE" xml:space="preserve">
+    <value>Faltan algunos mods lo cual puede causar errores en la carga.[pause=0]¿Estas seguro de cargar este archivo?</value>
+    <comment></comment>  </data>
   <data name="DLG_ASSEMBLY_RELEASE" xml:space="preserve">
     <value>{0} fue liberado.[pause=0]\nAdiós {0}...</value>
     <comment></comment>  </data>
@@ -435,6 +438,12 @@
   <data name="DLG_DELETE_CONFIRM" xml:space="preserve">
     <value>¿Estás absolutamente seguro?</value>
     <comment></comment>  </data>
+  <data name="DLG_DELETE_REPLAY" xml:space="preserve">
+    <value>Partida grabada será eliminada.[pause=0]¿Eliminarás tambíen favoritos?</value>
+    <comment></comment>  </data>
+  <data name="DLG_DELETE_REPLAY_COMPLETE" xml:space="preserve">
+    <value>Partidas grabadas han sido eliminadas.</value>
+    <comment></comment>  </data>
   <data name="DLG_DELETE_SAVE" xml:space="preserve">
     <value>Tu aventura será borrada.[pause=0] Esto no incluye Roguelocke, repeticiones o contactos.</value>
     <comment></comment>  </data>
@@ -444,11 +453,17 @@
   <data name="DLG_ERR_READ_FILE_FALLBACK" xml:space="preserve">
     <value>Por favor bórralo, o muévelo de {0}.</value>
     <comment></comment>  </data>
+  <data name="DLG_ERR_READ_QUICKSAVE" xml:space="preserve">
+    <value>El guardado rápido no puede ser cargado dado a diferencias en las versiones.[pause=0] La partida guardada principal se cargará en su lugar.</value>
+    <comment></comment>  </data>
   <data name="DLG_ERR_READ_SAVE" xml:space="preserve">
     <value>El archivo de guardado principal no se puede leer porque está en un formato erróneo o está corrupto.</value>
     <comment></comment>  </data>
   <data name="DLG_ERR_READ_SAVE_FALLBACK" xml:space="preserve">
     <value>Los datos actuales del juego se usarán como copia de respaldo, convirtiéndose los datos en permanentes.</value>
+    <comment></comment>  </data>
+  <data name="DLG_FILE_VERSION_DIFF" xml:space="preserve">
+    <value>El archivo tiene diferencias de versiones.[pause=0]La carga puede fallar.</value>
     <comment></comment>  </data>
   <data name="DLG_LANGUAGE_SET" xml:space="preserve">
     <value>El idioma ha sido cambiado a {0}.</value>
@@ -479,6 +494,12 @@
     <comment></comment>  </data>
   <data name="DLG_REPLAY_DESYNC" xml:space="preserve">
     <value>La repetición se ha desincronizado.[pause=0]Volviendo al menú...</value>
+    <comment></comment>  </data>
+  <data name="DLG_REPLAY_VERIFY_DESYNC" xml:space="preserve">
+    <value>Se ha encontrado desincronización durante la verificación de la partida grabada. [pause=0] Returnando al menú principal.</value>
+    <comment></comment>  </data>
+  <data name="DLG_REPLAY_VERIFY_OK" xml:space="preserve">
+    <value>La partida grabada ha sido verificada.</value>
     <comment></comment>  </data>
   <data name="DLG_RESCUE_ADD_REWARD_ASK" xml:space="preserve">
     <value>¿Qué vas a ofrecer?</value>
@@ -597,6 +618,9 @@
   <data name="DLG_SKILL_STOP_LEARN" xml:space="preserve">
     <value>¿Quieres olvidar {0}?</value>
     <comment></comment>  </data>
+  <data name="DLG_STORE_ALL_CONFIRM" xml:space="preserve">
+    <value>¿Guardar todos los items en tu inventorio?</value>
+    <comment></comment>  </data>
   <data name="DLG_SUSPEND_ASK" xml:space="preserve">
     <value>¿Quieres guardar la aventura y volver a la pantalla de inicio?</value>
     <comment></comment>  </data>
@@ -638,6 +662,9 @@
     <comment></comment>  </data>
   <data name="DLG_TRANSFER_COMPLETE" xml:space="preserve">
     <value>¡Transferencia completada!</value>
+    <comment></comment>  </data>
+  <data name="DLG_TRY_AGAIN_ASK" xml:space="preserve">
+    <value>¿Quieres intentar de nuevo? Esto usará tus ajustes actuales.</value>
     <comment></comment>  </data>
   <data name="DLG_WHAT_DO" xml:space="preserve">
     <value>¿Qué quieres hacer?</value>
@@ -795,6 +822,9 @@
   <data name="MENU_DELETE" xml:space="preserve">
     <value>Borrar</value>
     <comment></comment>  </data>
+  <data name="MENU_DELETE_REPLAY_TITLE" xml:space="preserve">
+    <value>Eliminar Partidas Grabadas</value>
+    <comment></comment>  </data>
   <data name="MENU_DELETE_SAVE_TITLE" xml:space="preserve">
     <value>Borrar Datos Guardados</value>
     <comment></comment>  </data>
@@ -942,8 +972,14 @@
   <data name="MENU_MAIL_ERROR" xml:space="preserve">
     <value>ERROR LEYENDO EL CORREO</value>
     <comment></comment>  </data>
+  <data name="MENU_MAIL_INCOMPATIBLE" xml:space="preserve">
+    <value>VERSIÓN INCOMPATIBLE</value>
+    <comment></comment>  </data>
   <data name="MENU_MAIL_SOS_TITLE" xml:space="preserve">
     <value>Correo SOS</value>
+    <comment></comment>  </data>
+  <data name="MENU_MAIN_EDITOR_RETURN" xml:space="preserve">
+    <value>Volver al Editor</value>
     <comment></comment>  </data>
   <data name="MENU_MAIN_INVENTORY" xml:space="preserve">
     <value>Objetos</value>
@@ -960,6 +996,21 @@
   <data name="MENU_MAP_CONDITION" xml:space="preserve">
     <value>Clima: {0}</value>
     <comment>For labeling the current map's weather or terrain.</comment>  </data>
+  <data name="MENU_MOD_LOG_DEPENDENCY" xml:space="preserve">
+    <value>{0} depende del mod faltante {1}</value>
+    <comment></comment>  </data>
+  <data name="MENU_MOD_LOG_INCOMPATIBLE" xml:space="preserve">
+    <value>{0} es incompatible con {1}</value>
+    <comment></comment>  </data>
+  <data name="MENU_MOD_LOG_ORDER" xml:space="preserve">
+    <value>Ciclo de carga encontrado: {0}</value>
+    <comment></comment>  </data>
+  <data name="MENU_MOD_LOG_TITLE" xml:space="preserve">
+    <value>Cargar errores de mods.</value>
+    <comment></comment>  </data>
+  <data name="MENU_MODS_AUTHOR" xml:space="preserve">
+    <value>Por: {0}</value>
+    <comment></comment>  </data>
   <data name="MENU_MODS_TITLE" xml:space="preserve">
     <value>Mods</value>
     <comment></comment>  </data>
@@ -982,7 +1033,7 @@
     <value>Otros</value>
     <comment>Title of the Others menu, for misc menu options</comment>  </data>
   <data name="MENU_QUESTS_EXIT" xml:space="preserve">
-    <value>Salir Capítulo</value>
+    <value>Salir del Capitulo</value>
     <comment></comment>  </data>
   <data name="MENU_QUESTS_TITLE" xml:space="preserve">
     <value>Capítulos Especiales</value>
@@ -1005,6 +1056,9 @@
   <data name="MENU_REPLAY_PAUSE" xml:space="preserve">
     <value>Pausa</value>
     <comment>The "pause" action of a replay</comment>  </data>
+  <data name="MENU_REPLAY_QUICKSAVE" xml:space="preserve">
+    <value>Hacer Guardado Rápido</value>
+    <comment></comment>  </data>
   <data name="MENU_REPLAY_REPLAY" xml:space="preserve">
     <value>Repetición</value>
     <comment>Replay menu option for replaying a chosen recorded game</comment>  </data>
@@ -1020,6 +1074,9 @@
   <data name="MENU_REPLAY_TITLE" xml:space="preserve">
     <value>Repetición</value>
     <comment>Title of the Replay menu, for options within a replay</comment>  </data>
+  <data name="MENU_REPLAY_VERIFY" xml:space="preserve">
+    <value>Verificar</value>
+    <comment></comment>  </data>
   <data name="MENU_REPLAYS_TITLE" xml:space="preserve">
     <value>Repeticiones</value>
     <comment>Title for the Replays menu, where the player can view replays</comment>  </data>
@@ -1170,12 +1227,21 @@
   <data name="MENU_SETTINGS_LANGUAGE" xml:space="preserve">
     <value>Idioma</value>
     <comment></comment>  </data>
+  <data name="MENU_SETTINGS_MINIMAP_VISIBILITY" xml:space="preserve">
+    <value>Minimapa</value>
+    <comment></comment>  </data>
   <data name="MENU_SETTINGS_MUSIC" xml:space="preserve">
     <value>Música</value>
     <comment>Label for the music volume in the Settings menu</comment>  </data>
+  <data name="MENU_SETTINGS_SKILL_DEFAULT" xml:space="preserve">
+    <value>Movimientos por defecto</value>
+    <comment></comment>  </data>
   <data name="MENU_SETTINGS_SOUND" xml:space="preserve">
     <value>Sonidos</value>
     <comment>Label for the sound volume in the Settings menu</comment>  </data>
+  <data name="MENU_SETTINGS_TEXT_SPEED" xml:space="preserve">
+    <value>Velocidad del Texto</value>
+    <comment></comment>  </data>
   <data name="MENU_SETTINGS_TITLE" xml:space="preserve">
     <value>Ajustes</value>
     <comment>Title of Settings menu</comment>  </data>
@@ -1196,6 +1262,9 @@
     <comment></comment>  </data>
   <data name="MENU_SHOP_TITLE" xml:space="preserve">
     <value>Mercancías</value>
+    <comment></comment>  </data>
+  <data name="MENU_SKILL_PREVIEW" xml:space="preserve">
+    <value>Vista Previa</value>
     <comment></comment>  </data>
   <data name="MENU_SKILL_RECALL" xml:space="preserve">
     <value>Recordar Movimientos</value>
@@ -1266,6 +1335,9 @@
   <data name="MENU_STORAGE_STORE" xml:space="preserve">
     <value>Guardar Objetos</value>
     <comment></comment>  </data>
+  <data name="MENU_STORAGE_STORE_ALL" xml:space="preserve">
+    <value>Guardar Todos</value>
+    <comment></comment>  </data>
   <data name="MENU_STORAGE_TAKE_BOX" xml:space="preserve">
     <value>Sacar cofres</value>
     <comment></comment>  </data>
@@ -1317,6 +1389,9 @@
   <data name="MENU_TEAM_INTRINSIC" xml:space="preserve">
     <value>Habilidad: {0}</value>
     <comment>For labeling a team member's ability</comment>  </data>
+  <data name="MENU_TEAM_LEARNSET" xml:space="preserve">
+    <value>Movimientos de nivel para {0}</value>
+    <comment></comment>  </data>
   <data name="MENU_TEAM_LEVEL" xml:space="preserve">
     <value>Nivel</value>
     <comment></comment>  </data>
@@ -1371,6 +1446,9 @@
   <data name="MENU_TIME_OF_DAY" xml:space="preserve">
     <value>Tiempo: {0}</value>
     <comment>Ex. "Time: Night"</comment>  </data>
+  <data name="MENU_TIMER" xml:space="preserve">
+    <value>Tiempo: {0}</value>
+    <comment></comment>  </data>
   <data name="MENU_TOP_CONTINUE" xml:space="preserve">
     <value>Continuar</value>
     <comment></comment>  </data>
@@ -1407,6 +1485,12 @@
   <data name="MENU_UPDATE_TEAM" xml:space="preserve">
     <value>Actualizar Equipo</value>
     <comment></comment>  </data>
+  <data name="MENU_VERSION_INFO" xml:space="preserve">
+    <value>Información de versión</value>
+    <comment></comment>  </data>
+  <data name="MENU_VERSION_TITLE" xml:space="preserve">
+    <value>Versionado ({0}/{1})</value>
+    <comment></comment>  </data>
   <data name="MET_AT_START" xml:space="preserve">
     <value>El Principio</value>
     <comment>The "recruit location" of starters, who were recruited into the team from the beginning.</comment>  </data>
@@ -1433,6 +1517,9 @@
     <comment></comment>  </data>
   <data name="MSG_CANT_SWAP_LEADER" xml:space="preserve">
     <value>{0} no puede cambiar líderes ahora mismo.</value>
+    <comment></comment>  </data>
+  <data name="MSG_CANT_USE_ITEM_OTHER" xml:space="preserve">
+    <value>¡{0} no puede usar objetos en otros ahora mismo!</value>
     <comment></comment>  </data>
   <data name="MSG_CHARGES_LOST" xml:space="preserve">
     <value>¡El {1} de {0} perdió [color=#00FFFF]{2}[color] PP!</value>

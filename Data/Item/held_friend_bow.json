@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.4.0",
+"Version": "0.7.5.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
@@ -12,10 +12,12 @@
 }
 },
 "Desc": {
-"DefaultText": "A held item that makes it easier for team members to recruit lower-leveled wild Pokémon.",
+"DefaultText": "A held item that makes it easier for team members to recruit wild Pokémon.",
 "LocalTexts": {
-"fr": "Objet à tenir qui permet aux membres de l'équipe de recruter plus facilement des Pokémon sauvages de niveau inférieur.",
-"zh-hans": "一种携带道具。携带后会使队伍更容易招募低等级的野生宝可梦。"
+"fr": "Tenu par le meneur de l'équipe, cet objet permet de recruter plus facilement les Pokémon vaincus dans l'équipe.",
+"de": "Erhöht die Chance wilde Pokémon zu rekrutieren, wenn das Item gehalten wird.",
+"ko": "지니게 하면 팀원이 야생 포켓몬을 동료로 영입하기 쉬워진다.",
+"zh-hans": "一种携带道具。携带后会使队伍更容易招募野生宝可梦。"
 }
 },
 "Released": true,
@@ -201,7 +203,8 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.LevelRecruitmentEvent, PMDC"
+"$type": "PMDC.Dungeon.FlatRecruitmentEvent, PMDC",
+"RecruitRate": 30
 }
 }
 ],

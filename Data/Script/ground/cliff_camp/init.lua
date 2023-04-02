@@ -247,7 +247,7 @@ function cliff_camp.NPC_DexRater_Action(chara, activator)
   --bravery road
   --friend bow
   
-  local rewardReqs = { 2, 3, 4 }
+  local rewardReqs = { 15, 30, 60 }
   --local rewardReqs = { 15, 30, 60, 100, 151, 251, 386 }
   
   UI:SetSpeaker(chara)

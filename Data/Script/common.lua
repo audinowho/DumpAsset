@@ -208,6 +208,8 @@ function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
     UI:DestinationMenu(open_dests)
 	UI:WaitForChoice()
 	dest = UI:ChoiceResult()
+  else
+    PrintInfo("No valid destinations found!")
   end
   
   if dest:IsValid() then
@@ -325,6 +327,7 @@ function COMMON.UnlockWithFanfare(dungeon_id, from_dungeon)
     local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_id)
 	if zone.Released == false then
       GAME:UnlockDungeon(dungeon_id)
+	  PrintInfo("Dungeon unlocked silently as it has not been released yet.")
 	  return
 	end
     if from_dungeon then

@@ -177,6 +177,7 @@ end
 function SINGLE_CHAR_SCRIPT.GuildBlock(owner, ownerChar, character, args)
   
   if not SV.guildmaster_summit.BattleComplete then
+    UI:ResetSpeaker()
     UI:SetAutoFinish(true)
     UI:WaitShowDialogue(RogueEssence.StringKey("DLG_LOCK_GUILD"):ToLocal())
   else

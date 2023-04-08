@@ -107,6 +107,7 @@ Translation:
 [DE] KomischerTypus#9155 KomischerTypus
 [ES] https://twitter.com/lagpu1 lagpu1
 [ES] https://www.reddit.com/u/thedask Dask
+[ES] https://discord.gg/PokemonRP Vioshim
 [FR] https://www.vg-resource.com/user-25643.html Van-Tazen
 [FR] https://www.twitter.com/Kuramarts Kurama
 [FR] https://www.twitter.com/Vladcik Aligatueur

@@ -174,7 +174,7 @@ function SINGLE_CHAR_SCRIPT.SleepingCalderaSummonHeatran(owner, ownerChar, conte
   
 end
 
-function SINGLE_CHAR_SCRIPT.GuildBlock(owner, ownerChar, character, args)
+function SINGLE_CHAR_SCRIPT.GuildBlock(owner, ownerChar, context, args)
   
   if not SV.guildmaster_summit.BattleComplete then
     UI:ResetSpeaker()
@@ -182,8 +182,8 @@ function SINGLE_CHAR_SCRIPT.GuildBlock(owner, ownerChar, character, args)
     UI:WaitShowDialogue(RogueEssence.StringKey("DLG_LOCK_GUILD"):ToLocal())
   else
     UI:ResetSpeaker()
-    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_LOCK_GUILD_OPEN"):ToLocal(), character:GetDisplayName(true)))
-    TASK:WaitTask(owner:InteractWithTile(character))
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_LOCK_GUILD_OPEN"):ToLocal(), context.User:GetDisplayName(true)))
+    TASK:WaitTask(owner:InteractWithTile(context.User))
   end
 end
 

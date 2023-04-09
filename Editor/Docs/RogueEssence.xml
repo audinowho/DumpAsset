@@ -2736,6 +2736,14 @@
             <param name="index"></param>
             <returns></returns>
         </member>
+        <member name="M:RogueEssence.Dev.ReflectionExt.GetTypesFromConstraints(System.Type[],System.Type[])">
+            <summary>
+            Works like GetAssignableTypes, but does not recurse into template types.
+            </summary>
+            <param name="parentTemplateTypes"></param>
+            <param name="types"></param>
+            <returns></returns>
+        </member>
         <member name="M:RogueEssence.Dev.ReflectionExt.getAssignableFromDerivedToConstraint(System.Collections.Generic.List{System.Type[]},System.Type,System.Type,System.Int32)">
             <summary>
             
@@ -2748,11 +2756,19 @@
             <summary>
             
             </summary>
-            <param name="genericType">A non-constructed generic type</param>
-            <param name="genericOther">Any generic type</param>
+            <param name="parent">Any generic type</param>
+            <param name="child">A non-constructed generic type</param>
             <returns></returns>
         </member>
-        <member name="M:RogueEssence.Dev.ReflectionExt.recurseTypeParamConstraints(System.Collections.Generic.List{System.Type},System.Int32,System.Reflection.Assembly[],System.Type,System.Type[],System.Type[],System.Int32)">
+        <member name="M:RogueEssence.Dev.ReflectionExt.IsGenericEqual(System.Type,System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="type1">A type that may be non-generic or a non-constructed generic.</param>
+            <param name="type2">A type that may be non-generic or a constructed generic.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Dev.ReflectionExt.recurseTypeParamConstraints(System.Collections.Generic.List{System.Type},System.Int32,System.Int32,System.Reflection.Assembly[],System.Type,System.Type[],System.Type[],System.Int32)">
             <summary>
             Takes a non-constructed generic type and gets all possible constructions via recursion.
             Constructed types are added to the children parameter.
@@ -2781,7 +2797,7 @@
             <param name="tConstraint"></param>
             <returns></returns>
         </member>
-        <member name="M:RogueEssence.Dev.ReflectionExt.recurseTypeParams(System.Collections.Generic.List{System.Type},System.Int32,System.Reflection.Assembly[],System.Type,System.Type[],System.Type[],System.Int32,System.Type[][],System.Int32)">
+        <member name="M:RogueEssence.Dev.ReflectionExt.recurseTypeParams(System.Collections.Generic.List{System.Type},System.Int32,System.Int32,System.Reflection.Assembly[],System.Type,System.Type[],System.Type[],System.Int32,System.Type[][],System.Int32)">
             <summary>
             Takes a jagged array of types that serve as candidates for the unconstructed generic type and adds all combinations to the children list.
             </summary>
@@ -3755,18 +3771,19 @@
         </member>
         <member name="T:RogueEssence.LevelGen.MapNameIDStep`1">
             <summary>
-            Sets the ID and title of the floor.
+            Sets the Title of the floor, taking in an offset for ID substitutions.
             </summary>
             <typeparam name="T"></typeparam>
-        </member>
-        <member name="F:RogueEssence.LevelGen.MapNameIDStep`1.ID">
-            <summary>
-            The floor ID.  This is typically the floor number and must be equal to the ID being requested.
-            </summary>
         </member>
         <member name="F:RogueEssence.LevelGen.MapNameIDStep`1.Name">
             <summary>
             The title of the map.
+            Can include one string format subtituion for floor number.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.MapNameIDStep`1.IDOffset">
+            <summary>
+            The amount to add to the map ID to get the floor number substituted into the title.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.MappedRoomStep`1">
@@ -4156,7 +4173,7 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="F:RogueEssence.LevelGen.MoneyDivSpawner`1.DivAmount">
+        <member name="P:RogueEssence.LevelGen.MoneyDivSpawner`1.DivAmount">
             <summary>
             The number of pickups to split the total sum of money into.
             </summary>
@@ -4235,12 +4252,12 @@
             <typeparam name="T"></typeparam>
             <typeparam name="TEntrance"></typeparam>
         </member>
-        <member name="F:RogueEssence.LevelGen.PlaceMobsStep`1.Spawn">
+        <member name="P:RogueEssence.LevelGen.PlaceMobsStep`1.Spawn">
             <summary>
             The generator responsible for creating the list of teams to spawn.
             </summary>
         </member>
-        <member name="F:RogueEssence.LevelGen.PlaceMobsStep`1.Ally">
+        <member name="P:RogueEssence.LevelGen.PlaceMobsStep`1.Ally">
             <summary>
             Determines if the mobs should be spawned as allies.
             </summary>
@@ -4520,6 +4537,21 @@
             The amount of money spawned will be increased by the ModGenState's value.
             </summary>
         </member>
+        <member name="T:RogueEssence.LevelGen.RangeStepZoneStep">
+            <summary>
+            Places steps on the floor based on a table.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.RangeStepZoneStep.StepPriority">
+            <summary>
+            The priority to insert the step at.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.RangeStepZoneStep.Spawns">
+            <summary>
+            The steps to distribute.
+            </summary>
+        </member>
         <member name="T:RogueEssence.LevelGen.ScriptZoneStep">
             <summary>
             Calls a lua script function that acts as the map gen step.
@@ -4628,6 +4660,11 @@
             Spreads a map gen step randomly across the dungeon segment.
             </summary>
         </member>
+        <member name="F:RogueEssence.LevelGen.SpreadStepZoneStep.StepPriority">
+            <summary>
+            The priority to insert the step at.
+            </summary>
+        </member>
         <member name="F:RogueEssence.LevelGen.SpreadStepZoneStep.Spawns">
             <summary>
             The steps to distribute.
@@ -4638,6 +4675,11 @@
             Spreads a map gen step randomly across the dungeon segment, allowing precise control over the spawn rate across different floors.
             </summary>
         </member>
+        <member name="F:RogueEssence.LevelGen.SpreadStepRangeZoneStep.StepPriority">
+            <summary>
+            The priority to insert the step at.
+            </summary>
+        </member>
         <member name="F:RogueEssence.LevelGen.SpreadStepRangeZoneStep.Spawns">
             <summary>
             The steps to distribute.  Probabilities can be customized across floors.
@@ -4645,7 +4687,7 @@
         </member>
         <member name="T:RogueEssence.LevelGen.SpreadZoneStep">
             <summary>
-            Generates specific rooms randomly across the whole dungeon segment.  This is done by replacing an existing room on the floor.
+            Generates specific occurrences randomly across the whole dungeon segment.
             </summary>
         </member>
         <member name="F:RogueEssence.LevelGen.SpreadZoneStep.SpreadPlan">
@@ -6848,7 +6890,7 @@
             <param name="text">The text to display.</param>
             <param name="expireTime">The time for the textbox to remain on screen. Pass -1 to wait for layer input.</param>
         </member>
-        <member name="M:RogueEssence.Script.ScriptUI.PopUp(System.String,System.Int32)">
+        <member name="M:RogueEssence.Script.ScriptUI.TextPopUp(System.String,System.Int32)">
             <summary>
             Makes text pop up in the bottom-left corner. Displays concurrently with any other process.
             </summary>
@@ -7367,6 +7409,32 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:RogueEssence.Menu.AssemblyMenu.Choose(System.Int32,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="index">Represents the true index, not the one on display</param>
+            <param name="assembly"></param>
+        </member>
+        <member name="M:RogueEssence.Menu.AssemblyMenu.CanChooseAssembly(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="choice">Choice must be premapped.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Menu.AssemblyMenu.ChooseAssembly(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="choice">Choice must be pre-mapped</param>
+        </member>
+        <member name="M:RogueEssence.Menu.AssemblyMenu.ReleaseAssembly(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="choice">Choice must be premapped</param>
+        </member>
         <member name="P:RogueEssence.PathMod.Mods">
             <summary>
             Filename of mod relative to executable
@@ -7445,8 +7513,11 @@
             <summary>
             Enter a ground map by name, and makes the player spawn at the specified named marker
             </summary>
+            <param name="zone"></param>
             <param name="mapname"></param>
             <param name="entrypoint"></param>
+            <param name="preserveMusic"></param>
+            <returns></returns>
         </member>
         <member name="T:RectPacker.Atlas">
             <summary>

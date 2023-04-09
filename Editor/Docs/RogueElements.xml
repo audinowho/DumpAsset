@@ -1430,19 +1430,6 @@
             Height of the room.
             </summary>
         </member>
-        <member name="T:RogueElements.BaseSpawnStep`2">
-            <summary>
-            Spawns objects of type E to IPlaceableGenContext T.
-            Child classes offer a different way to place the list of spawns provided by Spawn.
-            </summary>
-            <typeparam name="TGenContext"></typeparam>
-            <typeparam name="TSpawnable"></typeparam>
-        </member>
-        <member name="P:RogueElements.BaseSpawnStep`2.Spawn">
-            <summary>
-            The generator that creates a list of items for the step to spawn.
-            </summary>
-        </member>
         <member name="T:RogueElements.DueSpawnStep`3">
             <summary>
             Places items on the map based on how far they are from the entrance of the map.
@@ -1460,6 +1447,19 @@
         <member name="P:RogueElements.DueSpawnStep`3.IncludeHalls">
             <summary>
             Makes halls eligible for spawn.
+            </summary>
+        </member>
+        <member name="T:RogueElements.BaseSpawnStep`2">
+            <summary>
+            Spawns objects of type E to IPlaceableGenContext T.
+            Child classes offer a different way to place the list of spawns provided by Spawn.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TSpawnable"></typeparam>
+        </member>
+        <member name="P:RogueElements.BaseSpawnStep`2.Spawn">
+            <summary>
+            The generator that creates a list of items for the step to spawn.
             </summary>
         </member>
         <member name="P:RogueElements.IContextSpawner.Amount">
@@ -1905,6 +1905,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:RogueElements.LoopedRand`1">
+            <summary>
+            Generates a list of items by repeatedly calling an IRandPicker
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
         <member name="T:RogueElements.IMultiRandPicker`1">
             <summary>
             A random generator of a list of items.
@@ -1934,6 +1940,12 @@
             <summary>
             Determines if this instance is in a state where Roll() can be called without throwing an exception.
             </summary>
+        </member>
+        <member name="T:RogueElements.PresetMultiRand`1">
+            <summary>
+            Generates a list of items predefined by the user.
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="T:RogueElements.IRandPicker`1">
             <summary>
@@ -1965,12 +1977,6 @@
             Determines if this instance is in a state where Pick() can be called without throwing an exception.
             </summary>
         </member>
-        <member name="T:RogueElements.LoopedRand`1">
-            <summary>
-            Generates a list of items by repeatedly calling an IRandPicker
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
         <member name="T:RogueElements.ReNoise">
             <summary>
             A custom random class that holds on to its seed, for repeatability.
@@ -1983,12 +1989,6 @@
             <summary>
             The seed value that the class was initialized with.
             </summary>
-        </member>
-        <member name="T:RogueElements.PresetMultiRand`1">
-            <summary>
-            Generates a list of items predefined by the user.
-            </summary>
-            <typeparam name="T"></typeparam>
         </member>
         <member name="T:RogueElements.PresetPicker`1">
             <summary>

@@ -1,14 +1,10 @@
 ﻿{
-"Version": "0.7.6.0",
+"Version": "0.7.7.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Tropical Path",
-"LocalTexts": {
-"de": "Tropischer Pfad",
-"es": "Paso Tropical",
-"zh-hans": "热带小径"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -2355,12 +2351,8 @@
 ]
 },
 "Name": {
-"DefaultText": "Tropical Path\\n{0}F",
-"LocalTexts": {
-"de": "Tropischer Pfad\\n{0}.OG",
-"es": "Paso Tropical\\nP{0}",
-"zh-hans": "热带小径\\n{0}F"
-}
+"DefaultText": "Tropical Path\n{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -2385,7 +2377,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.6.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.7.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -2886,19 +2878,17 @@
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
-"Spawns": {
-"$type": "RogueElements.RandBag`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
-"ToSpawn": [
-{
-"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements]], RogueEssence",
-"Priority": {
+"StepPriority": {
 "str": [
 6,
 2,
 1
 ]
 },
-"Item": {
+"Spawns": {
+"$type": "RogueElements.RandBag`1[[RogueElements.IGenStep, RogueElements]], RogueElements",
+"ToSpawn": [
+{
 "$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
 "Filters": [],
 "Spawn": {
@@ -2947,18 +2937,8 @@
 },
 "Ally": true,
 "ClumpFactor": 0
-}
 },
 {
-"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements]], RogueEssence",
-"Priority": {
-"str": [
-6,
-2,
-1
-]
-},
-"Item": {
 "$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
 "Filters": [],
 "Spawn": {
@@ -3008,7 +2988,6 @@
 "Ally": true,
 "ClumpFactor": 0
 }
-}
 ],
 "RemoveOnRoll": true
 },
@@ -3039,20 +3018,17 @@
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepRangeZoneStep, RogueEssence",
-"Spawns": [
-{
-"Spawn": {
-"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements]], RogueEssence",
-"Priority": {
+"StepPriority": {
 "str": [
 5
 ]
 },
-"Item": {
+"Spawns": [
+{
+"Spawn": {
 "$type": "RogueEssence.LevelGen.ScriptGenStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
 "Script": "Mysteriosity",
 "ArgTable": "{BaseChance=5, SegDiff=2}"
-}
 },
 "Rate": 10,
 "Range": {
@@ -3191,9 +3167,7 @@
 },
 "Name": {
 "DefaultText": "Secret Room",
-"LocalTexts": {
-"zh-hans": "秘密之间"
-}
+"LocalTexts": {}
 },
 "Priority": {
 "str": [

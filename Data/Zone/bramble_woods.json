@@ -1,12 +1,10 @@
 ﻿{
-"Version": "0.7.6.0",
+"Version": "0.7.7.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Bramble Woods",
-"LocalTexts": {
-"zh-hans": "荆棘树林"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -4432,10 +4430,8 @@
 ]
 },
 "Name": {
-"DefaultText": "Bramble Woods\\nB{0}F",
-"LocalTexts": {
-"zh-hans": "荆棘树林\\nB{0}F"
-}
+"DefaultText": "Bramble Woods\nB{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -4460,7 +4456,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.6.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.7.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -5285,19 +5281,17 @@
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
-"Spawns": {
-"$type": "RogueElements.SpawnList`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
-"$values": [
-{
-"Spawn": {
-"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueEssence",
-"Priority": {
+"StepPriority": {
 "str": [
 6,
 1
 ]
 },
-"Item": {
+"Spawns": {
+"$type": "RogueElements.SpawnList`1[[RogueElements.IGenStep, RogueElements]], RogueElements",
+"$values": [
+{
+"Spawn": {
 "$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
 "Spawn": {
 "$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
@@ -5322,7 +5316,6 @@
 ]
 }
 }
-}
 },
 "Rate": 10
 }
@@ -5343,19 +5336,17 @@
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
-"Spawns": {
-"$type": "RogueElements.SpawnList`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
-"$values": [
-{
-"Spawn": {
-"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueEssence",
-"Priority": {
+"StepPriority": {
 "str": [
 6,
 1
 ]
 },
-"Item": {
+"Spawns": {
+"$type": "RogueElements.SpawnList`1[[RogueElements.IGenStep, RogueElements]], RogueElements",
+"$values": [
+{
+"Spawn": {
 "$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
 "Spawn": {
 "$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
@@ -5380,7 +5371,6 @@
 ]
 }
 }
-}
 },
 "Rate": 10
 }
@@ -5401,19 +5391,17 @@
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
-"Spawns": {
-"$type": "RogueElements.SpawnList`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
-"$values": [
-{
-"Spawn": {
-"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueEssence",
-"Priority": {
+"StepPriority": {
 "str": [
 6,
 1
 ]
 },
-"Item": {
+"Spawns": {
+"$type": "RogueElements.SpawnList`1[[RogueElements.IGenStep, RogueElements]], RogueElements",
+"$values": [
+{
+"Spawn": {
 "$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
 "Spawn": {
 "$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
@@ -5438,20 +5426,11 @@
 ]
 }
 }
-}
 },
 "Rate": 10
 },
 {
 "Spawn": {
-"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueEssence",
-"Priority": {
-"str": [
-6,
-1
-]
-},
-"Item": {
 "$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
 "Spawn": {
 "$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
@@ -5476,7 +5455,6 @@
 ]
 }
 }
-}
 },
 "Rate": 10
 }
@@ -5497,19 +5475,17 @@
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
-"Spawns": {
-"$type": "RogueElements.RandBag`1[[RogueEssence.LevelGen.IGenPriority, RogueEssence]], RogueElements",
-"ToSpawn": [
-{
-"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements]], RogueEssence",
-"Priority": {
+"StepPriority": {
 "str": [
 6,
 2,
 1
 ]
 },
-"Item": {
+"Spawns": {
+"$type": "RogueElements.RandBag`1[[RogueElements.IGenStep, RogueElements]], RogueElements",
+"ToSpawn": [
+{
 "$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
 "Filters": [],
 "Spawn": {
@@ -5559,7 +5535,6 @@
 "Ally": true,
 "ClumpFactor": 0
 }
-}
 ],
 "RemoveOnRoll": true
 },
@@ -5590,20 +5565,17 @@
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepRangeZoneStep, RogueEssence",
-"Spawns": [
-{
-"Spawn": {
-"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements]], RogueEssence",
-"Priority": {
+"StepPriority": {
 "str": [
 5
 ]
 },
-"Item": {
+"Spawns": [
+{
+"Spawn": {
 "$type": "RogueEssence.LevelGen.ScriptGenStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
 "Script": "Mysteriosity",
 "ArgTable": "{BaseChance=5, SegDiff=2}"
-}
 },
 "Rate": 10,
 "Range": {
@@ -7558,10 +7530,8 @@
 ]
 },
 "Name": {
-"DefaultText": "Bramble Thicket\\nB{0}F",
-"LocalTexts": {
-"zh-hans": "荆棘密林\\nB{0}F"
-}
+"DefaultText": "Bramble Thicket\nB{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -7586,7 +7556,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.6.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.7.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -8498,20 +8468,17 @@
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepRangeZoneStep, RogueEssence",
-"Spawns": [
-{
-"Spawn": {
-"$type": "RogueEssence.LevelGen.GenPriority`1[[RogueElements.GenStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements]], RogueEssence",
-"Priority": {
+"StepPriority": {
 "str": [
 5
 ]
 },
-"Item": {
+"Spawns": [
+{
+"Spawn": {
 "$type": "RogueEssence.LevelGen.ScriptGenStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
 "Script": "Mysteriosity",
 "ArgTable": "{BaseChance=5, SegDiff=3}"
-}
 },
 "Rate": 10,
 "Range": {

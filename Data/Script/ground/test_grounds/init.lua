@@ -230,6 +230,22 @@ function test_grounds.Sign4_Action(obj, activator)
   UI:WaitShowDialogue("THE[pause=0] [color=#FF0000]QUICK[color] BROWN\n FOX [color=#FF0000]JUMPS[color] OVER[pause=0] THE[scroll] LAZY [color=#FF0000]DOG[color].\nTHE [color=#FF0000]QUICK[color] BROWN[pause=0] FOX [color=#FF0000]JUMPS[color].")
 end
 
+function test_grounds.Sign5_Action(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  PrintInfo('Text Tag Regression Test')
+  local chara = CH('PLAYER')
+  
+  UI:ResetSpeaker()
+  UI:WaitShowVoiceOver("Our belief is often strongest when it should be weakest. That is the nature of hope.", 130, 150, 20, 100, -1)
+  UI:WaitShowVoiceOver("[speed=0.2]Alright... [speed=7.0]Zooming at the speed of light!\n[speed=0.2]Then... [speed=0.07]Slow as a Slowpoke.", 70)
+  
+  UI:TextPopUp("Everything", 30);
+  GAME:WaitFrames(70)
+  UI:TextPopUp("Everywhere, all at once, and everything that was here, and there, and everywhere", 50, 50, 50, 80, -1, false, false)
+  GAME:WaitFrames(70)
+  UI:TextPopUp("Oh, it can also stretch over here too!", 30, 150, 20, 90, -1, true, false)
+end
+
 
 function test_grounds.Concurrent_Title()
 

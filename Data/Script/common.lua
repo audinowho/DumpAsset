@@ -322,6 +322,28 @@ function COMMON.GiftItemFull(player, receive_item, fanfare, force_storage)
 end
 
 
+function COMMON.JoinTeamWithFanfare(recruit, from_dungeon)
+  if from_dungeon then
+    recruit.MetAt = _ZONE.CurrentMap:GetColoredName()
+  else
+    recruit.MetAt = _ZONE.CurrentGround:GetColoredName()
+  end
+  recruit.MetLoc = RogueEssence.Dungeon.ZoneLoc(_ZONE.CurrentZoneID, _ZONE.CurrentMapID)
+  
+  if _DATA.Save.ActiveTeam.Players.Count < _DATA.Save.ActiveTeam:GetMaxTeam(_ZONE.CurrentZone) then
+    _DATA.Save.ActiveTeam.Players:Add(recruit)
+  else
+    _DATA.Save.ActiveTeam.Assembly:Add(recruit)
+  end
+  SOUND:PlayFanfare("Fanfare/JoinTeam")
+  _DATA.Save:RegisterMonster(recruit.BaseForm.Species)
+  _DATA.Save:RogueUnlockMonster(recruit.BaseForm.Species)
+	
+  UI:ResetSpeaker()
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT"):ToLocal(), recruit:GetDisplayName(true), _DATA.Save.ActiveTeam.Name))
+end
+
+
 function COMMON.UnlockWithFanfare(dungeon_id, from_dungeon)
   if not GAME:DungeonUnlocked(dungeon_id) then
     local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_id)

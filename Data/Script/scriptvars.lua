@@ -49,19 +49,6 @@ SV.adventure =
   Thief    = false
 }
 
------------------------------------------------
--- Level Specific Defaults
------------------------------------------------
-SV.test_grounds =
-{
-  SpokeToPooch = false,
-  AcceptedPooch = false,
-  Starter = { Species="pikachu", Form=0, Skin="normal", Gender=2 },
-  Partner = { Species="eevee", Form=0, Skin="normal", Gender=1 },
-  DemoComplete = false,
-  Tileset = 0,
-}
-
 SV.missions =
 {
   Missions = { },
@@ -72,44 +59,6 @@ SV.magnagate =
 {
   cards = 0,
   portal = false
-}
-
-SV.shimmer_bay = 
-{
-  TookTreasure  = false
-}
-
-SV.manaphy_egg = 
-{
-  Taken = false,
-  ExpositionComplete = false,
-  Hatched = false
-}
-
-SV.roaming_legends =
-{
-  Raikou = false,
-  Entei = false,
-  Suicune = false,
-  Celebi = false,
-  Darkrai = false
-}
-
-
-SV.sleeping_caldera = 
-{
-  TookTreasure  = false,
-  GotHeatran = false
-}
-
-SV.base_camp = 
-{
-  IntroComplete    = false,
-  ExpositionComplete  = false,
-  FirstTalkComplete  = false,
-  FoodIntro  = false,
-  FerryUnlocked  = false,
-  FerryIntroduced  = false
 }
 
 SV.base_shop = {
@@ -128,8 +77,59 @@ SV.base_trades = {
 SV.unlocked_trades = {
 }
 
+-----------------------------------------------
+-- Level Specific Defaults
+-----------------------------------------------
+SV.test_grounds =
+{
+  SpokeToPooch = false,
+  AcceptedPooch = false,
+  Starter = { Species="pikachu", Form=0, Skin="normal", Gender=2 },
+  Partner = { Species="eevee", Form=0, Skin="normal", Gender=1 },
+  DemoComplete = false,
+  Tileset = 0,
+}
+
 SV.dex = {
   CurrentRewardIdx = 1
+}
+
+SV.roaming_legends =
+{
+  Raikou = false,
+  Entei = false,
+  Suicune = false,
+  Celebi = false,
+  Darkrai = false
+}
+
+
+SV.shimmer_bay = 
+{
+  TookTreasure  = false
+}
+
+SV.manaphy_egg = 
+{
+  Taken = false,
+  ExpositionComplete = false,
+  Hatched = false
+}
+
+SV.sleeping_caldera = 
+{
+  TookTreasure  = false,
+  GotHeatran = false
+}
+
+SV.base_camp = 
+{
+  IntroComplete    = false,
+  ExpositionComplete  = false,
+  FirstTalkComplete  = false,
+  FoodIntro  = false,
+  FerryUnlocked  = false,
+  FerryIntroduced  = false
 }
 
 SV.base_town = 

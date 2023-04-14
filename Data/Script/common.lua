@@ -340,7 +340,12 @@ function COMMON.JoinTeamWithFanfare(recruit, from_dungeon)
   _DATA.Save:RogueUnlockMonster(recruit.BaseForm.Species)
 	
   UI:ResetSpeaker()
-  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT"):ToLocal(), recruit:GetDisplayName(true), _DATA.Save.ActiveTeam.Name))
+  
+  if _DATA.Save.ActiveTeam.Name ~= "" then
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT"):ToLocal(), recruit:GetDisplayName(true), _DATA.Save.ActiveTeam.Name))
+  else
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT_ANY"):ToLocal(), recruit:GetDisplayName(true)))
+  end
 end
 
 

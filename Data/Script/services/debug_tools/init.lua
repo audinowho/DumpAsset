@@ -108,10 +108,14 @@ function DebugTools:OnNewGame()
     --  mon_id = RogueEssence.Dungeon.MonsterID("bulbasaur", 0, "normal", Gender.Male)
     --  _DATA.Save.ActiveTeam.Assembly:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, "", 0))
     --end
-  
-    SV.base_camp.ExpositionComplete = true
-    SV.base_camp.IntroComplete = true
-	SV.test_grounds.DemoComplete = true
+    
+	if SV.base_camp ~= nil then
+      SV.base_camp.ExpositionComplete = true
+      SV.base_camp.IntroComplete = true
+	end
+	if SV.test_grounds ~= nil then
+	  SV.test_grounds.DemoComplete = true
+	end
 	SV.General.Starter = _DATA.Save.ActiveTeam.Players[0].BaseForm
   end
 end

@@ -512,8 +512,8 @@ function COMMON.ThiefReturn()
   local check_status = _DUNGEON:GetMapStatus(thief_check_idx)
   
   local index_from = check_status.StatusStates:Get(luanet.ctype(MapIndexType))
-  UI:WaitShowDialogue(RogueEssence.StringKey(string.format("TALK_SHOP_SUSPECT_%04d", index_from.Index)):ToLocal())
-  _DUNGEON:LogMsg(RogueEssence.StringKey(string.format("TALK_SHOP_THIEF_RETURN_%04d", index_from.Index)):ToLocal())
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_SUSPECT_%04d", index_from.Index)):ToLocal()))
+  _DUNGEON:LogMsg(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_THIEF_RETURN_%04d", index_from.Index)):ToLocal()))
   
   local thief_status = RogueEssence.Dungeon.MapStatus(thief_idx)
   thief_status:LoadFromData()
@@ -665,7 +665,7 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
 	local oldDir = target.CharDir
     DUNGEON:CharTurnToChar(target, chara)
   
-    UI:WaitShowDialogue(chosen_quote)
+    UI:WaitShowDialogue(STRINGS:Format(chosen_quote))
   
     target.CharDir = oldDir
   else
@@ -852,7 +852,7 @@ function COMMON.GroundInteract(chara, target)
   -- PrintInfo("Selected "..chosen_quote)
   
   
-  UI:WaitShowDialogue(chosen_quote)
+  UI:WaitShowDialogue(STRINGS:Format(chosen_quote))
 end
 
 function COMMON.Rescued(zone, name, mail)

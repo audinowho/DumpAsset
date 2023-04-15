@@ -33,7 +33,7 @@ function BATTLE_SCRIPT.ShopkeeperInteract(owner, ownerChar, context, args)
 	    -- iterate player inventory prices and remove total price
         COMMON.PayDungeonSellPrice(sell_price)
 	    SOUND:PlayBattleSE("DUN_Money")
-	    UI:WaitShowDialogue(RogueEssence.StringKey(string.format("TALK_SHOP_SELL_DONE_%04d", context.Target.Discriminator)):ToLocal())
+	    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_SELL_DONE_%04d", context.Target.Discriminator)):ToLocal()))
 	  else
 	    -- nothing
 	  end
@@ -49,22 +49,22 @@ function BATTLE_SCRIPT.ShopkeeperInteract(owner, ownerChar, context, args)
 	    COMMON.ThiefReturn()
 	  elseif result then
 	    if price > GAME:GetPlayerMoney() then
-          UI:WaitShowDialogue(RogueEssence.StringKey(string.format("TALK_SHOP_PAY_SHORT_%04d", context.Target.Discriminator)):ToLocal())
+          UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_PAY_SHORT_%04d", context.Target.Discriminator)):ToLocal()))
 	    else
 	      -- iterate player inventory prices and remove total price
           COMMON.PayDungeonCartPrice(price)
 	      SOUND:PlayBattleSE("DUN_Money")
-	      UI:WaitShowDialogue(RogueEssence.StringKey(string.format("TALK_SHOP_PAY_DONE_%04d", context.Target.Discriminator)):ToLocal())
+	      UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_PAY_DONE_%04d", context.Target.Discriminator)):ToLocal()))
 	    end
 	  else
-	    UI:WaitShowDialogue(RogueEssence.StringKey(string.format("TALK_SHOP_PAY_REFUSE_%04d", context.Target.Discriminator)):ToLocal())
+	    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_PAY_REFUSE_%04d", context.Target.Discriminator)):ToLocal()))
 	  end
     end
 	
 	if price == 0 and sell_price == 0 then
       context.CancelState.Cancel = true
       UI:SetSpeaker(context.Target)
-      UI:WaitShowDialogue(RogueEssence.StringKey(string.format("TALK_SHOP_%04d", context.Target.Discriminator)):ToLocal())
+      UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_%04d", context.Target.Discriminator)):ToLocal()))
       context.Target.CharDir = oldDir
     end
   else

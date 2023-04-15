@@ -25,7 +25,7 @@ function MAP_STATUS_SCRIPT.ShopGreeting(owner, ownerChar, character, status, msg
   if found_shopkeep and COMMON.CanTalk(found_shopkeep) then
     DUNGEON:CharTurnToChar(found_shopkeep, _DUNGEON.ActiveTeam.Leader)
     UI:SetSpeaker(found_shopkeep)
-    UI:WaitShowDialogue(RogueEssence.StringKey(string.format("TALK_SHOP_START_%04d", found_shopkeep.Discriminator)):ToLocal())
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_START_%04d", found_shopkeep.Discriminator)):ToLocal()))
 	GAME:WaitFrames(10)
   end
 end

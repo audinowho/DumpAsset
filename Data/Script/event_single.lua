@@ -224,7 +224,7 @@ function SINGLE_CHAR_SCRIPT.ThiefCheck(owner, ownerChar, context, args)
 	  
 	  SV.adventure.Thief = true
 	  local index_from = owner.StatusStates:Get(luanet.ctype(MapIndexType))
-	  _DUNGEON:LogMsg(RogueEssence.StringKey(string.format("TALK_SHOP_THIEF_%04d", index_from.Index)):ToLocal())
+	  _DUNGEON:LogMsg(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_THIEF_%04d", index_from.Index)):ToLocal()))
 		
 	  -- create thief status
 	  local thief_status = RogueEssence.Dungeon.MapStatus(thief_idx)
@@ -301,7 +301,7 @@ function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, context, args)
 			  -- iterate player inventory prices and remove total price
 			  COMMON.PayDungeonSellPrice(sell_price)
 			  SOUND:PlayBattleSE("DUN_Money")
-			  UI:WaitShowDialogue(RogueEssence.StringKey(string.format("TALK_SHOP_SELL_DONE_%04d", found_shopkeep.Discriminator)):ToLocal())
+			  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_SELL_DONE_%04d", found_shopkeep.Discriminator)):ToLocal()))
 		    else
 			  -- nothing
 		    end
@@ -315,19 +315,19 @@ function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, context, args)
 			  COMMON.ThiefReturn()
 		    elseif result then
 	          if price > GAME:GetPlayerMoney() then
-                UI:WaitShowDialogue(RogueEssence.StringKey(string.format("TALK_SHOP_PAY_SHORT_%04d", found_shopkeep.Discriminator)):ToLocal())
+                UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_PAY_SHORT_%04d", found_shopkeep.Discriminator)):ToLocal()))
 	          else
 	            -- iterate player inventory prices and remove total price
                 COMMON.PayDungeonCartPrice(price)
 		        SOUND:PlayBattleSE("DUN_Money")
-	            UI:WaitShowDialogue(RogueEssence.StringKey(string.format("TALK_SHOP_PAY_DONE_%04d", found_shopkeep.Discriminator)):ToLocal())
+	            UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_PAY_DONE_%04d", found_shopkeep.Discriminator)):ToLocal()))
 	          end
 	        end
 		  end
 		end
       else
         UI:SetSpeaker(found_shopkeep)
-        UI:WaitShowDialogue(RogueEssence.StringKey(string.format("TALK_SHOP_END_%04d", found_shopkeep.Discriminator)):ToLocal())
+        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_END_%04d", found_shopkeep.Discriminator)):ToLocal()))
       end
 	end
   end

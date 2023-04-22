@@ -54,13 +54,13 @@ end
       This is called as a coroutine.
 ---------------------------------------------------------------]]
 function DebugTools:OnMenuButtonPressed()
-  --if MainMenu == nil then
-  --  MainMenu = RogueEssence.Menu.MainMenu()
-  --end
-  --MainMenu:SetupChoices()
-  --MainMenu:SetupTitleAndSummary()
-  --MainMenu:InitMenu()
-  --TASK:WaitTask(_MENU:ProcessMenuCoroutine(MainMenu))
+  if DebugTools.MainMenu == nil then
+    DebugTools.MainMenu = RogueEssence.Menu.MainMenu()
+  end
+  DebugTools.MainMenu:SetupChoices()
+  DebugTools.MainMenu:SetupTitleAndSummary()
+  DebugTools.MainMenu:InitMenu()
+  TASK:WaitTask(_MENU:ProcessMenuCoroutine(DebugTools.MainMenu))
 end
 
 --[[---------------------------------------------------------------

@@ -64,6 +64,20 @@ function DebugTools:OnMenuButtonPressed()
 end
 
 --[[---------------------------------------------------------------
+    DebugTools:OnOthersMenuButtonPressed()
+      When the others menu button is pressed from the main menu (or the others menu should be enabled) this is called!
+      This is called as a coroutine.
+---------------------------------------------------------------]]
+function DebugTools:OnOthersMenuButtonPressed()
+  if DebugTools.OthersMenu == nil then
+    DebugTools.OthersMenu = RogueEssence.Menu.OthersMenu()
+  end
+  DebugTools.OthersMenu:SetupChoices()
+  DebugTools.OthersMenu:InitMenu()
+  TASK:WaitTask(_MENU:ProcessMenuCoroutine(DebugTools.OthersMenu))
+end
+
+--[[---------------------------------------------------------------
     DebugTools:OnNewGame()
       When a new save file is loaded this is called!
 ---------------------------------------------------------------]]
@@ -281,6 +295,7 @@ function DebugTools:Subscribe(med)
   med:Subscribe("DebugTools", EngineServiceEvents.Init,                function() self.OnInit(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.Deinit,              function() self.OnDeinit(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.MenuButtonPressed,        function() self.OnMenuButtonPressed() end )
+  med:Subscribe("DebugTools", EngineServiceEvents.OthersMenuButtonPressed,        function() self.OnOthersMenuButtonPressed() end )
   med:Subscribe("DebugTools", EngineServiceEvents.NewGame,        function() self.OnNewGame(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.UpgradeSave,        function() self.OnUpgrade(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.LossPenalty,        function(_, args) self.OnLossPenalty(self, args[0]) end )

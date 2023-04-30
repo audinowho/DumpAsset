@@ -559,7 +559,7 @@ function base_camp_2.Swap_Action(obj, activator)
 			local free_slots = 0
 			tribute = {}
 			for ii = 1, #trade.ReqItem, 1 do
-				if trade.ReqItem[ii] == -1 then
+				if trade.ReqItem[ii] == "" then
 					free_slots = free_slots + 1
 				else
 					table.insert(tribute, trade.ReqItem[ii])

@@ -1,52 +1,41 @@
 ﻿{
-"Version": "0.7.9.0",
+"Version": "0.7.9.2",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Leafage",
-"LocalTexts": {
-"fr": "Feuillage",
-"de": "Blattwerk",
-"es": "Follaje",
-"it": "Fogliame",
-"ko": "나뭇잎",
-"ja": "このは",
-"ja-jp": "このは",
-"zh-hans": "树叶",
-"zh-hant": "樹葉"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "The user attacks by pelting the target with leaves.",
-"LocalTexts": {
-"fr": "Le lanceur attaque l'ennemi avec des feuilles.",
-"de": "Der Anwender greift das Ziel mit Blättern an.",
-"es": "Ataca al oponente lanzando hojas.",
-"it": "Attacca il bersaglio con delle foglie.",
-"ko": "잎을 상대에 맞춰 공격한다.",
-"ja": "はっぱを　あいてに　あてて こうげきする。",
-"ja-jp": "はっぱを　相手に　当てて 攻撃する。",
-"zh-hans": "将叶片打向对手，进行攻击。",
-"zh-hant": "將葉片打向對手， 進行攻擊。"
-}
+"LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 670,
-"BaseCharges": 40,
+"BaseCharges": 19,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Dungeon.ThrowAction, RogueEssence",
+"Anim": {
+"AnimIndex": "Leaf_Storm_Hit_Mark",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
 },
-"WideAngle": 0,
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+},
+"Range": 2,
+"Speed": 8,
+"Coverage": 2,
+"ItemSprite": "",
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
+"ActionType": 7
 },
 "TargetAlignments": 4,
 "TileEmitter": {
@@ -56,7 +45,7 @@
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "_UNK_DUN_Sneeze",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -130,10 +119,29 @@
 "IntroFX": [],
 "HitFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "_UNK_DUN_Rustle_2",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 20,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Razor_Leaf_Charge",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,

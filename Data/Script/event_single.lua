@@ -155,7 +155,7 @@ function SINGLE_CHAR_SCRIPT.SleepingCalderaSummonHeatran(owner, ownerChar, conte
 	  --with fanfare
 	  SOUND:PlayBattleSE("_UNK_EVT_003")
 	  local arriveAnim = RogueEssence.Content.StaticAnim(RogueEssence.Content.AnimData("Sacred_Fire_Ranger", 3), 1)
-	  arriveAnim:SetupEmitted(RogueElements.Loc(new_mob.CharLoc.X * 24, new_mob.CharLoc.Y * 24), 32, RogueElements.Dir8.Down)
+	  arriveAnim:SetupEmitted(RogueElements.Loc(new_mob.CharLoc.X * 24 + 12, new_mob.CharLoc.Y * 24 + 12), 32, RogueElements.Dir8.Down)
 	  DUNGEON:PlayVFXAnim(arriveAnim, RogueEssence.Content.DrawLayer.Front)
 	  
 	  GAME:WaitFrames(3)

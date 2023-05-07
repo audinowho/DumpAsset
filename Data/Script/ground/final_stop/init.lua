@@ -77,8 +77,8 @@ function final_stop.NPC_Storehouse_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
-  COMMON.UnlockWithFanfare("treacherous_mountain", false)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
+  --COMMON.UnlockWithFanfare("treacherous_mountain", false)
 end
 
 function final_stop.Assembly_Action(obj, activator)

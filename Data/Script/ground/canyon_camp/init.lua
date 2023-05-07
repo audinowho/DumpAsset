@@ -197,6 +197,22 @@ function canyon_camp.NPC_Shortcut_Action(chara, activator)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Line_001']))
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Line_002']))
 end
+  
+function canyon_camp.NPC_Wall_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Wall_Line_001']))
+end
+  
+function canyon_camp.NPC_Strategy_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Line_001']))
+end
 
 
 function canyon_camp.NPC_Storehouse_Action(chara, activator)

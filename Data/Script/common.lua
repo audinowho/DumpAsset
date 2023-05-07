@@ -216,11 +216,9 @@ function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
 	if dest.StructID.Segment > -1 then
 	  --pre-loads the zone on a separate thread while we fade out, just for a little optimization
 	  _DATA:PreLoadZone(dest.ID)
-	  SOUND:PlayBGM("", true)
       GAME:FadeOut(false, 20)
 	  GAME:EnterDungeon(dest.ID, dest.StructID.Segment, dest.StructID.ID, dest.EntryPoint, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
 	else
-	  SOUND:PlayBGM("", true)
       GAME:FadeOut(false, 20)
 	  GAME:EnterZone(dest.ID, dest.StructID.Segment, dest.StructID.ID, dest.EntryPoint)
 	end

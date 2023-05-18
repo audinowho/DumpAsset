@@ -2557,6 +2557,26 @@
             Prevents items from landing on it.
             </summary>
         </member>
+        <member name="F:RogueEssence.Data.TileData.Destructible">
+            <summary>
+                Allows the tile to be destroyed by certain attacks.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.TileData.EffectiveElements">
+            <summary>
+                Any supereffective move used against this tile will destroy it.  If this is none, any attack will destroy it.  Only used if Destructible is true.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.TileData.PowerNeededToDestroy">
+            <summary>
+                The minimum damage needed to destroy the tile.  Only used if Destructible is true.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.TileData.OnTileDestroyed">
+            <summary>
+                Triggers right before the tile is destroyed by certain attacks.  Only used if Destructible is true.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Data.RogueStatus.None">
             <summary>
             Disallowed for Rogue mode.

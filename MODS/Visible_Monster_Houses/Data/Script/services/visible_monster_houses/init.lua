@@ -28,6 +28,7 @@ end
 function VisibleMonsterHouses:OnInit()
   _GAME.ChestAmbushWarningTile = "chest_house_full"
   _GAME.MonsterHouseWarningTile = "tile_warning"
+  _GAME.NoMonsterHouseEntrances = true
   PrintInfo("\n<!> ExampleSvc: Init..")
 end
 

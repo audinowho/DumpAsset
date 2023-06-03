@@ -96,8 +96,7 @@ http://fable-amare.deviantart.com/ Fable, for custom portraits
 http://poyo-journal.tumblr.com/ Lurils, for custom map edits
 https://twitter.com/RaoKurai Rao Kurai, for custom sprites, music
 https://soundcloud.com/skelothan Skelothan, for custom music
-Shitpost Sunkern, for tileset edits
-Chi, Lovi, Moo, Reppamon, and 2 Anonymous, for custom sprites and portraits
+Chi, Lovi, Moo, Reppamon, and 3 Anonymous, for custom sprites and portraits
 
 
 Translation:

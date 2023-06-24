@@ -31,8 +31,14 @@ end
 ---moonlit_end.Enter
 --Engine callback function
 function moonlit_end.Enter(map)
-  if SV.moonlit_end.ExpositionComplete then
+  if SV.moonlit_end.ReturnVisit then
     moonlit_end.PrepareReturnVisit()
+  elseif SV.moonlit_end.BattleComplete then
+    
+	return
+  elseif SV.moonlit_end.BattleFailed then
+  
+    return
   end
   
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
@@ -64,8 +70,44 @@ function moonlit_end.Cutscene_Trigger_Touch(obj, activator)
   -- move camera up a little more: center at 196, 264
   GAME:MoveCamera(204, 192, 60, false)
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
+  UI:SetSpeaker(cresselia)
   
+  if not SV.moonlit_end.ExpositionComplete then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
+  end
+  
+  if SV.guildmaster_summit.ExpositionComplete then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002_Postgame']))
+  else
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002_Default']))
+  end
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_003']))
+  
+  UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Expo_Cutscene_Ask_Join']), false)
+  UI:WaitForChoice()
+  ch = UI:ChoiceResult()
+  
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_004']))
+  
+  SV.moonlit_end.ExpositionComplete = true
+  
+  if not ch then
+    
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_Reject']))
+	
+    SOUND:FadeOutBGM()
+    GAME:FadeOut(false, 30)
+    GAME:WaitFrames(120)
+    
+    COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 3, 2)
+	
+	return
+  end
+  
+  
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_Accept']))
+  
+
   local mon_id = RogueEssence.Dungeon.MonsterID("cresselia", 0, "normal", Gender.Genderless)
   local player = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 30, "", 0)
   player.MetAt = _ZONE.CurrentGround:GetColoredName()
@@ -78,14 +120,131 @@ function moonlit_end.Cutscene_Trigger_Touch(obj, activator)
   UI:ResetSpeaker()
   UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT"):ToLocal(), cresselia:GetDisplayName(), _DATA.Save.ActiveTeam.Name))
   
-  SV.moonlit_end.ExpositionComplete = true
+  SOUND:FadeOutBGM()
+  GAME:FadeOut(false, 30)
+  GAME:CutsceneMode(false)
+  GAME:WaitFrames(90)
+
+  SV.moonlit_end.ReturnVisit = true
+  
+  COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 3, 2)
+end
+  
+function moonlit_end.StartBattle()
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_005']))
+  
+  --flash
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_006']))
+  
+  --spawn attackers
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_007']))
+  
+  --begin the battle
+  
+  GAME:WaitFrames(30)
+  
+  COMMON.BossTransition()
+  
+  GAME:CutsceneMode(false)
+  
+  GAME:ContinueDungeon('moonlit_courtyard', 2, 0, 0)
+  
+--Turn 0:
+--Lunatone Lv28
+--Purugly Lv28
+--Clefable Lv28
+--Ribombee Lv28
+
+--Turn 3:
+--Florges Lv28
+--Roserade Lv28
+
+--Turn 6:
+--Gardevoir Lv28
+--Gallade Lv28
+
+--4 at a time
+--only aim for cresselia
+--boss battle ends if anyone is dead at the end of the turn
+--or if 10 turns pass.
+
+--No orbs or machines allowed
+
+--Cresselia Lv30:
+--Moonlight
+--Safeguard
+--Aurora Beam
+--Confusion
+  
+  
+end
+
+function moonlit_end.PostBattle_Fail()
+  
+  local cresselia = CH('Cresselia')
+  
+  GAME:CutsceneMode(true)
+  
+  GAME:MoveCamera(204, 192, 1, false)
+  
+  GAME:FadeIn(20)
+  
+  UI:SetSpeaker(cresselia)
+  
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Post_Cutscene_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Post_Cutscene_Line_Fail']))
+  
+  SOUND:FadeOutBGM()
+  GAME:FadeOut(false, 30)
+  GAME:CutsceneMode(false)
+  GAME:WaitFrames(90)
+  
+  
+  SV.moonlit_end.BattleFailed = false
+  SV.moonlit_end.ReturnVisit = true
+  
+  COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 3, 2)
+  
+end
+
+function moonlit_end.PostBattle_Success()
+
+  local cresselia = CH('Cresselia')
+  
+  GAME:CutsceneMode(true)
+  
+  GAME:MoveCamera(204, 192, 1, false)
+  
+  GAME:FadeIn(20)
+  
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Post_Cutscene_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Post_Cutscene_Line_Success']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_Accept']))
+  
+
+  local mon_id = RogueEssence.Dungeon.MonsterID("cresselia", 0, "normal", Gender.Genderless)
+  local player = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 30, "", 0)
+  player.MetAt = _ZONE.CurrentGround:GetColoredName()
+  player.MetLoc = RogueEssence.Dungeon.ZoneLoc(_ZONE.CurrentZoneID, _ZONE.CurrentMapID)
+  _DATA.Save.ActiveTeam.Assembly:Add(player)
+  SOUND:PlayFanfare("Fanfare/JoinTeam")
+  _DATA.Save:RegisterMonster(mon_id.Species)
+  _DATA.Save:RogueUnlockMonster(mon_id.Species)
+
+  UI:ResetSpeaker()
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT"):ToLocal(), cresselia:GetDisplayName(), _DATA.Save.ActiveTeam.Name))
   
   SOUND:FadeOutBGM()
   GAME:FadeOut(false, 30)
   GAME:CutsceneMode(false)
   GAME:WaitFrames(90)
 
+  SV.moonlit_end.BattleComplete = false
+  SV.moonlit_end.ReturnVisit = true
+  
   COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 3, 2)
+  
 end
 
 function moonlit_end.South_Exit_Touch(obj, activator)

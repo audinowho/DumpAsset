@@ -179,7 +179,10 @@ SV.guildmaster_summit =
 
 SV.moonlit_end = 
 {
-  ExpositionComplete  = false
+  ExpositionComplete  = false,
+  BattleComplete  = false,
+  BattleFailed  = false,
+  ReturnVisit  = false
 }
 
 SV.garden_end = 

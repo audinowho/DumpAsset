@@ -29,13 +29,20 @@ function moonlit_courtyard.ExitSegment(zone, result, rescue, segmentID, mapID)
   COMMON.ExitDungeonMissionCheck(zone.ID, segmentID)
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)
+  elseif segmentID == 2 then
+	if result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
+	  SV.moonlit_end.BattleComplete = true
+	else
+	  SV.moonlit_end.BattleFailed = true
+	end
+    GAME:EnterZone('moonlit_courtyard', -1, 0, 0)
   elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
     if segmentID == 0 then
       COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 3, 2)
     elseif segmentID == 1 then
-      GAME:EnterZone('moonlit_temple', -1, 0, 0)
+      GAME:EnterZone('moonlit_courtyard', -1, 0, 0)
     else
       PrintInfo("No exit procedure found!")
 	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

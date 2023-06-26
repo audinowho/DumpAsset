@@ -4,9 +4,7 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Moonlit Courtyard",
-"LocalTexts": {
-"zh-hans": "月光庭院"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -3207,23 +3205,6 @@
 {
 "Key": {
 "str": [
--6
-]
-},
-"Value": {
-"$type": "PMDC.LevelGen.DefaultMapStatusStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
-"SetterID": "default_weather",
-"DefaultMapStatus": [
-"misty_terrain",
-"clear",
-"clear",
-"clear"
-]
-}
-},
-{
-"Key": {
-"str": [
 -5
 ]
 },
@@ -4028,23 +4009,6 @@ false
 {
 "Key": {
 "str": [
--6
-]
-},
-"Value": {
-"$type": "PMDC.LevelGen.DefaultMapStatusStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
-"SetterID": "default_weather",
-"DefaultMapStatus": [
-"misty_terrain",
-"clear",
-"clear",
-"clear"
-]
-}
-},
-{
-"Key": {
-"str": [
 -5
 ]
 },
@@ -5421,6 +5385,47 @@ false
 {
 "Key": {
 "str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueElements.PresetPicker`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"ToSpawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "stairs_secret_up",
+"Revealed": false,
+"Owner": 0,
+"TileStates": [
+{
+"$type": "PMDC.Dungeon.DestState, PMDC",
+"Dest": {
+"Segment": 1,
+"ID": 0
+},
+"Relative": false,
+"PreserveMusic": false
+}
+]
+}
+}
+]
+}
+}
+}
+},
+{
+"Key": {
+"str": [
 6
 ]
 },
@@ -5497,6 +5502,17 @@ false
 },
 "Value": {
 "$type": "RogueElements.DetectIsolatedStairsStep`3[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.LevelGen.MapGenEntrance, RogueEssence],[RogueEssence.LevelGen.MapGenExit, RogueEssence]], RogueElements"
+}
+},
+{
+"Key": {
+"str": [
+7
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.DetectTileStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"FindTile": "stairs_secret_up"
 }
 }
 ]
@@ -9547,10 +9563,8 @@ false
 ]
 },
 "Name": {
-"DefaultText": "Moonlit Courtyard\\n{0}F",
-"LocalTexts": {
-"zh-hans": "月光庭院\\n{0}F"
-}
+"DefaultText": "Moonlit Courtyard\n{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -19259,10 +19273,8 @@ false
 ]
 },
 "Name": {
-"DefaultText": "Moonlit Temple\\nB{0}F",
-"LocalTexts": {
-"zh-hans": "月光神庙\\nB{0}F"
-}
+"DefaultText": "Moonlit Temple\nB{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -21487,9 +21499,7 @@ false
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Secret Room",
-"LocalTexts": {
-"zh-hans": "秘密之间"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -22041,9 +22051,7 @@ false
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -24491,9 +24499,7 @@ false
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -26957,9 +26963,7 @@ false
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -29434,9 +29438,7 @@ false
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -31884,9 +31886,7 @@ false
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -34350,9 +34350,7 @@ false
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }

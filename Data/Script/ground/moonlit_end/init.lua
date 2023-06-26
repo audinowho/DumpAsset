@@ -70,16 +70,17 @@ function moonlit_end.Cutscene_Trigger_Touch(obj, activator)
   -- move camera up a little more: center at 196, 264
   GAME:MoveCamera(204, 192, 60, false)
   
-  UI:SetSpeaker(cresselia)
+  UI:SetSpeaker(STRINGS:Format("\\uE040"))
   
   if not SV.moonlit_end.ExpositionComplete then
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
   end
   
+  UI:SetSpeaker(cresselia)
   if SV.guildmaster_summit.ExpositionComplete then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002_Postgame']))
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002_Postgame'], GAME:GetTeamName()))
   else
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002_Default']))
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002_Default'], GAME:GetTeamName()))
   end
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_003']))
   
@@ -97,6 +98,7 @@ function moonlit_end.Cutscene_Trigger_Touch(obj, activator)
 	
     SOUND:FadeOutBGM()
     GAME:FadeOut(false, 30)
+    GAME:CutsceneMode(false)
     GAME:WaitFrames(120)
     
     COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 3, 2)

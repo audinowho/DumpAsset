@@ -34,6 +34,8 @@ This most commonly occurs on newly installed computers.  You can find an install
 https://www.microsoft.com/en-us/download/details.aspx?id=5555
 https://www.microsoft.com/en-us/download/details.aspx?id=52685
 
+If you're on Windows, and the audio has a strange crunching sound, you will need the game to run with a different audio driver, most likely wasapi.  You can do this by running the game with "-audiodriver:wasapi" as a command line argument.
+
 If you're on Mac, and encounter an error where it is unable to load DLL "libgdiplus", then you may need to install GDI+ using brew:
 brew install mono-libgdiplus
 

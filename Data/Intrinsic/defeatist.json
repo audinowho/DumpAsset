@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.12.0",
+"Version": "0.7.13.0",
 "Object": {
 "$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
 "Name": {
@@ -30,7 +30,7 @@
 "zh-hant": "ＨＰ降到一半以下時， 會變得軟弱而使得 攻擊和特攻減半。"
 }
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 129,
 "ProximityEvent": {
@@ -81,7 +81,50 @@
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [],
+"OnActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.PinchNeededEvent, PMDC",
+"Denominator": 2,
+"AffectTarget": false,
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.MultiplyCategoryEvent, PMDC",
+"Category": 1,
+"Numerator": 1,
+"Denominator": 2,
+"Anims": []
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.PinchNeededEvent, PMDC",
+"Denominator": 2,
+"AffectTarget": false,
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.MultiplyCategoryEvent, PMDC",
+"Category": 2,
+"Numerator": 1,
+"Denominator": 2,
+"Anims": []
+}
+]
+}
+}
+],
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],

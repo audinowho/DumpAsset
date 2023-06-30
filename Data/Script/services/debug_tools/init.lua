@@ -191,53 +191,60 @@ function DebugTools:OnUpgrade()
   end
   if oldVersion.Major <= 0 and oldVersion.Minor <= 7 and oldVersion.Build <= 2 then
   
-  SV.base_camp.FerryUnlocked = false
-  SV.base_camp.FerryIntroduced = false
+    SV.base_camp.FerryUnlocked = false
+    SV.base_camp.FerryIntroduced = false
   
-  SV.magnagate =
-  {
-    cards = 0,
-    portal = false
-  }
+    SV.magnagate =
+    {
+      cards = 0,
+      portal = false
+    }
 
-  SV.shimmer_bay = 
-  {
-    TookTreasure  = false
-  }
+    SV.shimmer_bay = 
+    {
+      TookTreasure  = false
+    }
 
-  SV.manaphy_egg = 
-  {
-    Taken = false,
-    ExpositionComplete = false,
-    Hatched = false
-  }
+    SV.manaphy_egg = 
+    {
+      Taken = false,
+      ExpositionComplete = false,
+      Hatched = false
+    }
 
-  SV.roaming_legends =
-  {
-    Raikou = false,
-    Entei = false,
-    Suicune = false,
-    Celebi = false,
-    Darkrai = false
-  }
+    SV.roaming_legends =
+    {
+      Raikou = false,
+      Entei = false,
+      Suicune = false,
+      Celebi = false,
+      Darkrai = false
+    }
 
 
-  SV.sleeping_caldera = 
-  {
-    TookTreasure  = false,
-    GotHeatran = false
-  }
+    SV.sleeping_caldera = 
+    {
+      TookTreasure  = false,
+      GotHeatran = false
+    }
   
-  SV.dex = {
-    CurrentRewardIdx = 1
-  }
+    SV.dex = {
+      CurrentRewardIdx = 1
+    }
 	
-  SV.moonlit_end = 
-  {
-    ExpositionComplete  = false
-  }
+    SV.moonlit_end = 
+    {
+      ExpositionComplete  = false
+    }
 
-  GAME:UnlockDungeon('fertile_valley')
+    GAME:UnlockDungeon('fertile_valley')
+  end
+  
+  if oldVersion.Major <= 0 and oldVersion.Minor <= 7 and oldVersion.Build <= 14 then
+  
+	SV.base_camp.CenterStatueDate = ""
+	SV.base_camp.LeftStatueDate = ""
+	SV.base_camp.RightStatueDate = ""
   end
   
   PrintInfo("=>> Loaded version")

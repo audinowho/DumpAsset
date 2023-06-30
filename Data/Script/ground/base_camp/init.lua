@@ -23,10 +23,21 @@ function base_camp.Enter(map)
     Map  = 1, Entry  = 0
   }
   
+  if SV.base_camp.CenterStatueDate and SV.base_camp.CenterStatueDate ~= "" then
+    GROUND:Unhide("Statue_Center")
+  end
+  if SV.base_camp.LeftStatueDate and SV.base_camp.LeftStatueDate ~= "" then
+    GROUND:Unhide("Statue_Left")
+  end
+  if SV.base_camp.RightStatueDate and SV.base_camp.RightStatueDate ~= "" then
+    GROUND:Unhide("Statue_Right")
+  end
+  
   if not SV.base_camp.FerryUnlocked then
     GROUND:Hide("Lapras")
     GROUND:Hide("Ferry")
   end
+  
   if not SV.base_camp.IntroComplete then
     base_camp.PrepareFirstTimeVisit()
 	GAME:FadeIn(20)
@@ -47,6 +58,7 @@ function base_camp.Enter(map)
 		break
 	  end
 	end
+	
 	-- if no, search assembly and then add to party
 	if not in_party then
 	  local assemblyCount = GAME:GetPlayerAssemblyCount()
@@ -59,6 +71,7 @@ function base_camp.Enter(map)
 		end
       end
 	end
+	
 	-- move everyone else into assembly
 	local partyCount = GAME:GetPlayerPartyCount()
     for i = partyCount,1,-1 do
@@ -87,12 +100,15 @@ function base_camp.Enter(map)
   else
     GAME:FadeIn(20)
   end
+  
   --When the player gets back after fainting for the first time, play this cutscene
   if SV.base_camp.IntroComplete and not SV.base_camp.ExpositionComplete then
     base_camp.BeginExposition()
     SV.base_camp.ExpositionComplete = true
   end
+  
   SV.base_camp.IntroComplete = true
+  
 end
 
 --------------------------------------------------
@@ -107,7 +123,6 @@ function base_camp.PrepareFirstTimeVisit()
   GROUND:Hide("NPC_Entrance")
   GROUND:Hide("NPC_Range")
   GROUND:Hide("NPC_Coast")
-  GROUND:Hide("NPC_Bystander")
   GROUND:Unhide("East_LogPile")
   GROUND:Unhide("West_LogPile")
   GROUND:Unhide("First_North_Exit")
@@ -389,11 +404,31 @@ function base_camp.NPC_Range_Action(chara, activator)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Range_Line_002']))
 end
 
-function base_camp.NPC_Bystander_Action(chara, activator)
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
-  UI:SetSpeaker(chara)
+function base_camp.Statue_Center_Action(obj, activator)
+  
+  UI:ResetSpeaker()
+  UI:SetAutoFinish(true)
+  UI:SetCenter(true)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Statue_Center_Text'], SV.base_camp.CenterStatueDate, GAME:GetTeamName()))
+  UI:SetAutoFinish(false)
+end
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Bystander_Line_001']))
+function base_camp.Statue_Left_Action(obj, activator)
+  
+  UI:ResetSpeaker()
+  UI:SetAutoFinish(true)
+  UI:SetCenter(true)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Statue_Left_Text'], SV.base_camp.LeftStatueDate, GAME:GetTeamName()))
+  UI:SetAutoFinish(false)
+end
+
+function base_camp.Statue_Right_Action(obj, activator)
+  
+  UI:ResetSpeaker()
+  UI:SetAutoFinish(true)
+  UI:SetCenter(true)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Statue_Right_Text'], SV.base_camp.RightStatueDate, GAME:GetTeamName()))
+  UI:SetAutoFinish(false)
 end
 
 function base_camp.Teammate1_Action(chara, activator)

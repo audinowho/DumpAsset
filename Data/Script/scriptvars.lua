@@ -129,7 +129,10 @@ SV.base_camp =
   FirstTalkComplete  = false,
   FoodIntro  = false,
   FerryUnlocked  = false,
-  FerryIntroduced  = false
+  FerryIntroduced  = false,
+  CenterStatueDate  = "",
+  LeftStatueDate  = "",
+  RightStatueDate  = ""
 }
 
 SV.base_town = 

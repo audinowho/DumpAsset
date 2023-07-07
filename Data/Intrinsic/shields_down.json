@@ -4,33 +4,13 @@
 "$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
 "Name": {
 "DefaultText": "Shields Down",
-"LocalTexts": {
-"fr": "Bouclier-Carcan",
-"de": "Limitschild",
-"es": "Escudo Limitado",
-"it": "Scudosoglia",
-"ko": "리밋실드",
-"ja": "リミットシールド",
-"ja-jp": "リミットシールド",
-"zh-hans": "界限盾壳",
-"zh-hant": "界限盾殼"
-}
+"LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "When its HP becomes half or less, the Pokémon's shell breaks and it becomes aggressive.",
-"LocalTexts": {
-"fr": "Lorsque le Pokémon perd la moitié de ses PV, son enveloppe se brise, mais son Attaque et son Attaque Spéciale augmentent.",
-"de": "Fallen seine KP auf die Hälfte des Maximalwerts oder weniger, zerbricht die Panzerung des Pokémon und es wird aggressiver.",
-"es": "Rompe su coraza cuando sus PS se ven reducidos a la mitad y adopta una forma ofensiva.",
-"it": "Se i PS scendono a metà o meno, il guscio si rompe e il Pokémon si prepara all'offensiva.",
-"ko": "HP가 절반이 되면 껍질이 깨져 공격적으로 된다.",
-"ja": "ＨＰが　はんぶんに　なると からが　こわれて こうげきてきに　なる。",
-"ja-jp": "ＨＰが　半分に　なると 殻が　壊れて 攻撃的に　なる。",
-"zh-hans": "HP变为一半时，壳会坏掉，变得有攻击性。",
-"zh-hant": "ＨＰ變為一半時， 殼會壞掉，變得更有攻擊性。"
-}
+"DefaultText": "When it takes a hit that causes its HP to become half or less, the Pokémon's shell breaks and it becomes aggressive.",
+"LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 197,
 "ProximityEvent": {
@@ -67,12 +47,92 @@
 },
 "OnEquips": [],
 "OnPickups": [],
-"BeforeStatusAdds": [],
+"BeforeStatusAdds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FormeNeededStatusEvent, PMDC",
+"Forms": [
+0,
+1,
+2,
+3,
+4,
+5,
+6
+],
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StateStatusCheck, PMDC",
+"States": [
+{
+"assembly": "PMDC, Version=0.7.13.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.BadStatusState"
+}
+],
+"Message": {
+"Key": "MSG_PROTECT_STATUS"
+},
+"Anims": [
+{
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Small_Blue_In",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"Sound": "DUN_Screen_Hit",
+"Delay": 10,
+"NeedSelf": false
+}
+]
+}
+]
+}
+}
+],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
 "OnMapStatusRemoves": [],
-"OnMapStarts": [],
+"OnMapStarts": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MeteorFormeEvent, PMDC",
+"ReqSpecies": "minior",
+"ResultForme": 0,
+"FormeMult": 7,
+"PercentHP": 50,
+"Below": false
+}
+}
+],
 "OnTurnStarts": [],
 "OnTurnEnds": [],
 "OnMapTurnEnds": [],
@@ -85,7 +145,27 @@
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],
-"AfterBeingHits": [],
+"AfterBeingHits": [
+{
+"Key": {
+"str": [
+6
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.BattlelessEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.MeteorFormeEvent, PMDC",
+"ReqSpecies": "minior",
+"ResultForme": 1,
+"FormeMult": 7,
+"PercentHP": 50,
+"Below": true
+},
+"AffectTarget": true
+}
+}
+],
 "OnHitTiles": [],
 "AfterActions": [],
 "UserElementEffects": [],

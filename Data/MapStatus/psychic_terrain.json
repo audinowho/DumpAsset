@@ -7,7 +7,7 @@
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "Psychic-type attacks are boosted, and all moves have increased Attack Range.",
+"DefaultText": "Psychic-type attacks are boosted, and Pokémon can evade moves from close up.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -183,17 +183,6 @@
 {
 "Key": {
 "str": [
--1
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.AddRangeEvent, PMDC",
-"Range": 1
-}
-},
-{
-"Key": {
-"str": [
 0
 ]
 },
@@ -208,7 +197,19 @@
 }
 ],
 "BeforeHittings": [],
-"BeforeBeingHits": [],
+"BeforeBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.EvadeDistanceEvent, PMDC",
+"Inverted": true
+}
+}
+],
 "AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],

@@ -7,10 +7,10 @@
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "Gives priority to a healing move.",
+"DefaultText": "Boosts the Attack Range of healing moves.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 205,
 "ProximityEvent": {
@@ -61,7 +61,30 @@
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [],
+"OnActions": [
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MoveStateNeededEvent, PMDC",
+"States": [
+{
+"assembly": "PMDC, Version=0.7.13.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.HealState"
+}
+],
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.AddRangeEvent, PMDC",
+"Range": 1
+}
+]
+}
+}
+],
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],

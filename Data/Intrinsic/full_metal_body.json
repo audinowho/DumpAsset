@@ -10,7 +10,7 @@
 "DefaultText": "Prevents other Pokémon's moves or Abilities from lowering the Pokémon's stats.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 230,
 "ProximityEvent": {
@@ -47,7 +47,26 @@
 },
 "OnEquips": [],
 "OnPickups": [],
-"BeforeStatusAdds": [],
+"BeforeStatusAdds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatChangeCheck, PMDC",
+"Message": {
+"Key": "MSG_STAT_DROP_PROTECT"
+},
+"Stats": [],
+"Drop": true,
+"Boost": false,
+"IncludeSelf": false,
+"Anims": []
+}
+}
+],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],

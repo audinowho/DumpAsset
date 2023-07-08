@@ -3,24 +3,45 @@
 "Object": {
 "$type": "RogueEssence.Data.MapStatusData, RogueEssence",
 "Name": {
-"DefaultText": "Heavy Rain",
+"DefaultText": "Psychic Terrain",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "",
+"DefaultText": "Psychic-type attacks are boosted, and all moves have increased Attack Range.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "CarryOver": false,
 "Emitter": {
-"$type": "RogueEssence.Content.EmptySwitchOffEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.OverlayEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"AnimIndex": "White",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"Movement": {
+"X": 0,
+"Y": 0
+},
+"Layer": 4,
+"Color": "38, 0, 38, 76"
 },
 "DefaultHidden": false,
 "StatusStates": [
 {
 "$type": "RogueEssence.Dungeon.MapWeatherState, RogueEssence"
+},
+{
+"$type": "RogueEssence.Dungeon.MapCountDownState, RogueEssence",
+"Counter": 50
 },
 {
 "$type": "PMDC.Dungeon.MapTickState, PMDC",
@@ -85,9 +106,49 @@
 ],
 "Msg": false
 }
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MapStatusSoundEvent, PMDC",
+"Sound": "DUN_Gyro_Ball"
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MapStatusBattleLogEvent, PMDC",
+"Message": {
+"Key": "MSG_PSYCHIC_TERRAIN_START"
+},
+"Delay": true
+}
 }
 ],
-"OnMapStatusRemoves": [],
+"OnMapStatusRemoves": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MapStatusBattleLogEvent, PMDC",
+"Message": {
+"Key": "MSG_PSYCHIC_TERRAIN_END"
+},
+"Delay": true
+}
+}
+],
 "OnMapStarts": [],
 "OnTurnStarts": [],
 "OnTurnEnds": [],
@@ -101,6 +162,16 @@
 "Value": {
 "$type": "PMDC.Dungeon.MapTickEvent, PMDC"
 }
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MapStatusCountDownEvent, PMDC"
+}
 }
 ],
 "OnWalks": [],
@@ -108,7 +179,34 @@
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [],
+"OnActions": [
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AddRangeEvent, PMDC",
+"Range": 1
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MultiplyElementEvent, PMDC",
+"MultElement": "psychic",
+"Numerator": 3,
+"Denominator": 2,
+"Anims": [],
+"Msg": false
+}
+}
+],
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],

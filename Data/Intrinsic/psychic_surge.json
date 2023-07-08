@@ -7,10 +7,10 @@
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "Turns the ground into Psychic Terrain when the Pokémon enters a battle.",
+"DefaultText": "Turns the ground into Psychic Terrain when the Pokémon is battling.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 227,
 "ProximityEvent": {
@@ -67,7 +67,34 @@
 "AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],
-"AfterActions": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.OnMoveUseEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.GiveMapStatusEvent, PMDC",
+"StatusID": "psychic_terrain",
+"Counter": 10,
+"MsgOverride": {
+"Key": null
+},
+"States": [
+{
+"assembly": "PMDC, Version=0.7.13.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.ExtendWeatherState"
+}
+]
+}
+]
+}
+}
+],
 "UserElementEffects": [],
 "TargetElementEffects": [],
 "ModifyHPs": [],

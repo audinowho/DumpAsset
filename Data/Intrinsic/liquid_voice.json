@@ -10,7 +10,7 @@
 "DefaultText": "All sound-based moves become Water-type moves.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 204,
 "ProximityEvent": {
@@ -61,7 +61,31 @@
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [],
+"OnActions": [
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MoveStateNeededEvent, PMDC",
+"States": [
+{
+"assembly": "PMDC, Version=0.7.13.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.SoundState"
+}
+],
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.ChangeMoveElementEvent, PMDC",
+"ElementFrom": "none",
+"ElementTo": "water"
+}
+]
+}
+}
+],
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],

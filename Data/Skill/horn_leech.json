@@ -4,31 +4,11 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Horn Leech",
-"LocalTexts": {
-"fr": "Encornebois",
-"de": "Holzgeweih",
-"es": "Asta Drenaje",
-"it": "Legnicorno",
-"ko": "우드호른",
-"ja": "ウッドホーン",
-"ja-jp": "ウッドホーン",
-"zh-hans": "木角",
-"zh-hant": "木角"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "The user drains the target's energy with its horns. The user's HP is restored by half the damage taken by the target.",
-"LocalTexts": {
-"fr": "Un coup de corne qui draine l’énergie de l’ennemi. Convertit la moitié des dégâts infligés en PV pour le lanceur.",
-"de": "Greift Ziel mit Astgeweih an und zapft diesem Nährstoffe ab. Anwender wird um die Hälfte des zugefügten Schadens geheilt.",
-"es": "Un golpe que drena energía. El Pokémon recupera  la mitad de los PS arrebatados al objetivo.",
-"it": "Chi la usa infilza il bersaglio con le corna e assorbe una quantità di PS pari a metà del danno inferto.",
-"ko": "뿔을 꿰찔러서 상대의 양분을 흡수한다. 입힌 데미지의 절반에 해당하는 HP를 회복할 수 있다.",
-"ja": "つのを　つきさして　あいての　ようぶんを すいとる。あたえた　ダメージの はんぶんの　ＨＰを　かいふく　できる。",
-"ja-jp": "つのを　突き刺して　相手の　養分を 吸い取る。与えた　ダメージの 半分の　ＨＰを　回復できる。",
-"zh-hans": "将角刺入，吸取对手的养分。可以回复给予对手伤害的一半HP。",
-"zh-hant": "將角刺進對手，吸取養分。 可以回復給予對手 傷害的一半ＨＰ。"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "No Anim",
@@ -116,6 +96,9 @@
 "$type": "PMDC.Dungeon.ContactState, PMDC"
 },
 {
+"$type": "PMDC.Dungeon.HealState, PMDC"
+},
+{
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
 "Power": 60
 }
@@ -167,8 +150,9 @@
 }
 },
 "HitCharAction": {
-"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 0
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
 }
 }
 }

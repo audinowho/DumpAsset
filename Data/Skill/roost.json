@@ -4,31 +4,11 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Roost",
-"LocalTexts": {
-"fr": "Atterrissage",
-"de": "Ruheort",
-"es": "Respiro",
-"it": "Trespolo",
-"ko": "날개쉬기",
-"ja": "はねやすめ",
-"ja-jp": "はねやすめ",
-"zh-hans": "羽栖",
-"zh-hant": "羽棲"
-}
+"LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "The user lands and rests its body. It restores the user’s HP by up to half of its max HP.",
-"LocalTexts": {
-"fr": "Le lanceur atterrit et se repose. Restaure jusqu’à la moitié de ses PV max.",
-"de": "Anwender landet und ruht sich aus. KP des Anwenders werden um 50 % der maximalen KP aufgefüllt.",
-"es": "Aterriza sobre la superficie para descansar. Recupera hasta la mitad del total de sus PS.",
-"it": "Chi la usa sta fermo e riposa, recuperando metà dei propri PS massimi.",
-"ko": "땅에 내려와 몸을 쉬게 한다. 최대 HP의 절반만큼 HP를 회복한다.",
-"ja": "じめんに　おりて　からだを　やすめる。 さいだい　ＨＰの　はんぶんの ＨＰを　かいふく　する。",
-"ja-jp": "地面に　降りて　体を　やすめる。 最大ＨＰの　半分の ＨＰを　回復する。",
-"zh-hans": "降到地面，使身体休息。回复自己最大HP的一半。",
-"zh-hant": "降落到地面，讓身體休息。 回復自己最大ＨＰ的一半。"
-}
+"DefaultText": "The user lands and rests its body. It restores the user's HP by up to half of its max HP.",
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -94,7 +74,11 @@
 "Element": "flying",
 "Category": 3,
 "HitRate": -1,
-"SkillStates": [],
+"SkillStates": [
+{
+"$type": "PMDC.Dungeon.HealState, PMDC"
+}
+],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
@@ -185,8 +169,9 @@
 }
 },
 "HitCharAction": {
-"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 0
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
 }
 }
 }

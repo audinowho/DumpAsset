@@ -10,7 +10,7 @@
 "DefaultText": "Reduces the power of supereffective attacks taken.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 232,
 "ProximityEvent": {
@@ -63,7 +63,51 @@
 "BeforeActions": [],
 "OnActions": [],
 "BeforeHittings": [],
-"BeforeBeingHits": [],
+"BeforeBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MultiplyEffectiveEvent, PMDC",
+"Reverse": false,
+"Numerator": 2,
+"Denominator": 3,
+"Anims": [
+{
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Small_Blue_In",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"Sound": "DUN_Screen_Hit",
+"AffectTarget": true,
+"Delay": 10
+}
+]
+}
+}
+],
 "AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],

@@ -7,10 +7,10 @@
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "Bounces back only the stat-lowering effects that the Pokémon receives.",
+"DefaultText": "Bounces back stat-lowering effects from other Pokémon.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 240,
 "ProximityEvent": {
@@ -47,7 +47,55 @@
 },
 "OnEquips": [],
 "OnPickups": [],
-"BeforeStatusAdds": [],
+"BeforeStatusAdds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatChangeReflect, PMDC",
+"Message": {
+"Key": "MSG_STAT_DROP_REFLECT"
+},
+"Stats": [],
+"Drop": true,
+"Boost": false,
+"IncludeSelf": false,
+"Anims": [
+{
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Small_Blue_In",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"Sound": "DUN_Screen_Hit",
+"Delay": 10,
+"NeedSelf": false
+}
+]
+}
+}
+],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],

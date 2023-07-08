@@ -4,25 +4,11 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Milk Drink",
-"LocalTexts": {
-"fr": "Lait à Boire",
-"de": "Milchgetränk",
-"es": "Batido",
-"it": "Buonlatte",
-"ko": "우유마시기",
-"ja": "ミルクのみ",
-"ja-jp": "ミルクのみ",
-"zh-hans": "喝牛奶",
-"zh-hant": "喝牛奶"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "The user restores the party's HP by up to a half of its max HP",
-"LocalTexts": {
-"de": "KP des Anwenders werden um bis zur Hälfte der maximalen KP aufgefüllt.",
-"ko": "아군의 최대 HP 절반을 회복한다.",
-"zh-hans": "回复全队最大HP的一半。"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -97,7 +83,11 @@
 "Element": "normal",
 "Category": 3,
 "HitRate": -1,
-"SkillStates": [],
+"SkillStates": [
+{
+"$type": "PMDC.Dungeon.HealState, PMDC"
+}
+],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
@@ -155,8 +145,9 @@
 }
 },
 "HitCharAction": {
-"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 0
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
 }
 }
 }

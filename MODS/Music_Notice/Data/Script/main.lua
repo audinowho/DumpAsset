@@ -11,6 +11,7 @@
 --------------------------------------------------------------------------------------------------------------
 require 'services.chatter'
 require 'services.debug_tools'
+require 'services.upgrade_tools'
 require 'services.music_service'
 
 math.randomseed(os.time())

@@ -617,11 +617,8 @@ function base_camp_2.Swap_Action(obj, activator)
 				SOUND:PlayBattleSE("DUN_Money")
 				GAME:RemoveFromPlayerMoney(total)
 				
-				UI:SetSpeakerEmotion("Angry")
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Complete_001']))
-				UI:SetSpeakerEmotion("Stunned")
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Complete_002']))
 				UI:SetSpeakerEmotion("Normal")
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Complete']))
 				
 				UI:ResetSpeaker()
 				SOUND:PlayFanfare("Fanfare/Treasure")

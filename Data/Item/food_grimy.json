@@ -132,8 +132,12 @@
 "Anims": []
 },
 {
-"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
-"StatusID": "burn",
+"$type": "PMDC.Dungeon.MultiBattleEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
+"Stack": -3,
+"StatusID": "mod_defense",
 "AffectTarget": true,
 "SilentCheck": false,
 "Anonymous": false,
@@ -143,8 +147,22 @@
 "Anims": []
 },
 {
+"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
+"Stack": -3,
+"StatusID": "mod_special_defense",
+"AffectTarget": true,
+"SilentCheck": false,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+]
+},
+{
 "$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
-"StatusID": "paralyze",
+"StatusID": "burn",
 "AffectTarget": true,
 "SilentCheck": false,
 "Anonymous": false,

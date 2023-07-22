@@ -137,7 +137,9 @@ SV.base_camp =
 
 SV.base_town = 
 {
-  Song    = "A02. Base Town.ogg"
+  Song    = "A02. Base Town.ogg",
+  ValueTradeItem = "",
+  ValueTraded = false
 }
 
 SV.luminous_spring = 

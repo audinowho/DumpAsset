@@ -374,12 +374,18 @@ function base_camp_2.Appraisal_Action(obj, activator)
 						item = GAME:GetPlayerBagItem(cart[1].Slot)
 					end
 					msg = STRINGS:Format(MapStrings['Appraisal_Choose_One'], STRINGS:FormatKey("MONEY_AMOUNT", total), item:GetDisplayName())
-				else
+				elseif #cart < 3 then
 					msg = STRINGS:Format(MapStrings['Appraisal_Choose_Multi'], STRINGS:FormatKey("MONEY_AMOUNT", total))
+				else
+					UI:SetSpeakerEmotion("Surprised")
+					msg = STRINGS:Format(MapStrings['Appraisal_Choose_Max'], STRINGS:FormatKey("MONEY_AMOUNT", total))
+					
 				end
 				UI:ChoiceMenuYesNo(msg, false)
 				UI:WaitForChoice()
 				result = UI:ChoiceResult()
+				
+				UI:SetSpeakerEmotion("Normal")
 				
 				local treasure = {}
 				if result then
@@ -394,32 +400,110 @@ function base_camp_2.Appraisal_Action(obj, activator)
 							GAME:TakePlayerBagItem(cart[ii].Slot)
 						end
 						
-						local itemEntry = _DATA:GetItem(box.HiddenValue)
-						local treasure_choice = { Box = box, Item = RogueEssence.Dungeon.InvItem(box.HiddenValue,false,itemEntry.MaxStack)}
+						local treasure_item = "empty"-- box.HiddenValue
+						local itemEntry = _DATA:GetItem(treasure_item)
+						local treasure_choice = { Box = box, Item = RogueEssence.Dungeon.InvItem(treasure_item,false,itemEntry.MaxStack)}
 						table.insert(treasure, treasure_choice)
 						
 						-- note high rarity items
 						if itemEntry.Rarity > 0 then
-							SV.unlocked_trades[box.HiddenValue] = true
+							SV.unlocked_trades[treasure_item] = true
 						end
 					end
 					SOUND:PlayBattleSE("DUN_Money")
 					GAME:RemoveFromPlayerMoney(total)
 					cart = {}
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Start']))
 					
-					GROUND:MoveInDirection(chara, Direction.Up, 18, false, 2)
-					GROUND:Hide("Appraisal_Owner")
-					GAME:WaitFrames(10)
-					local shake = RogueEssence.Content.ScreenMover(0, 8, 30)
-					GROUND:MoveScreen(shake)
-					SOUND:PlayBattleSE("DUN_Explosion")
-					GAME:WaitFrames(60)
-					GROUND:Unhide("Appraisal_Owner")
-					GROUND:MoveInDirection(chara, Direction.Down, 18, false, 2)
+					if #treasure >= 3 then
+					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Start_Max']))
 					
-					SOUND:PlayFanfare("Fanfare/Treasure")
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_End']))
+					  GROUND:MoveInDirection(chara, Direction.Up, 18, false, 2)
+					  GROUND:Hide("Appraisal_Owner")
+					  GAME:WaitFrames(10)
+					  local shake = RogueEssence.Content.ScreenMover(0, 12, 20)
+					  GROUND:MoveScreen(shake)
+					  SOUND:PlayBattleSE("DUN_Explosion")
+					  GAME:WaitFrames(30)
+					  shake = RogueEssence.Content.ScreenMover(0, 12, 20)
+					  GROUND:MoveScreen(shake)
+					  SOUND:PlayBattleSE("DUN_Explosion")
+					  GAME:WaitFrames(30)
+					  shake = RogueEssence.Content.ScreenMover(0, 12, 20)
+					  GROUND:MoveScreen(shake)
+					  SOUND:PlayBattleSE("DUN_Explosion")
+					  GAME:WaitFrames(30)
+					  shake = RogueEssence.Content.ScreenMover(0, 12, 50)
+					  GROUND:MoveScreen(shake)
+					  SOUND:PlayBattleSE("DUN_Explosion")
+					  GAME:WaitFrames(10)
+					  SOUND:PlayBattleSE("DUN_Explosion")
+					  GAME:WaitFrames(10)
+					  SOUND:PlayBattleSE("DUN_Explosion")
+					  GAME:WaitFrames(10)
+					  shake = RogueEssence.Content.ScreenMover(0, 16, 30)
+					  GROUND:MoveScreen(shake)
+					  SOUND:PlayBattleSE("DUN_Explosion")
+					  GAME:WaitFrames(10)
+					  local coro1 = TASK:BranchCoroutine(GAME:_FadeOut(true, 30))
+					  SOUND:PlayBattleSE("DUN_Explosion")
+					  GAME:WaitFrames(10)
+					  shake = RogueEssence.Content.ScreenMover(0, 20, 30)
+					  GROUND:MoveScreen(shake)
+					  SOUND:PlayBattleSE("DUN_Explosion")
+					  GAME:WaitFrames(10)
+					  SOUND:PlayBattleSE("DUN_Explosion")
+					  TASK:JoinCoroutines({coro1})
+					  GAME:WaitFrames(30)
+					  
+					  emitter = RogueEssence.Content.StaticAreaEmitter(RogueEssence.Content.AnimData("Smoke_White", 3))
+					  emitter.Range = 72
+					  emitter.Bursts = 30
+					  emitter.BurstTime = 2
+					  emitter.ParticlesPerBurst = 1
+					  GROUND:PlayVFX(emitter, chara.MapLoc.X, chara.MapLoc.Y - 32)
+					  
+					  GAME:WaitFrames(30)
+					  GAME:FadeIn(60)
+					  GROUND:Unhide("Appraisal_Owner")
+					  GROUND:MoveInDirection(chara, Direction.Down, 36, false, 1)
+					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_End_Max_001']))
+					  SOUND:PlayFanfare("Fanfare/Treasure")
+					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_End_Max_002']))
+					
+					elseif #treasure >= 2 then
+					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Start_002']))
+					
+					  GROUND:MoveInDirection(chara, Direction.Up, 18, false, 2)
+					  GROUND:Hide("Appraisal_Owner")
+					  GAME:WaitFrames(20)
+					  local shake = RogueEssence.Content.ScreenMover(0, 12, 30)
+					  GROUND:MoveScreen(shake)
+					  SOUND:PlayBattleSE("DUN_Explosion")
+					  GAME:WaitFrames(10)
+					  SOUND:PlayBattleSE("DUN_Explosion")
+					  GAME:WaitFrames(10)
+					  SOUND:PlayBattleSE("DUN_Explosion")
+					  GAME:WaitFrames(60)
+					  GROUND:Unhide("Appraisal_Owner")
+					  GROUND:MoveInDirection(chara, Direction.Down, 18, false, 2)
+					  SOUND:PlayFanfare("Fanfare/Treasure")
+					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_End']))
+					else
+					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Start_001']))
+					
+					  GROUND:MoveInDirection(chara, Direction.Up, 18, false, 2)
+					  GROUND:Hide("Appraisal_Owner")
+					  GAME:WaitFrames(10)
+					  local shake = RogueEssence.Content.ScreenMover(0, 8, 30)
+					  GROUND:MoveScreen(shake)
+					  SOUND:PlayBattleSE("DUN_Explosion")
+					  GAME:WaitFrames(60)
+					  GROUND:Unhide("Appraisal_Owner")
+					  GROUND:MoveInDirection(chara, Direction.Down, 18, false, 2)
+					  SOUND:PlayFanfare("Fanfare/Treasure")
+					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_End']))
+					end
+
 					UI:SpoilsMenu(treasure)
 					UI:WaitForChoice()
 					
@@ -503,6 +587,11 @@ function base_camp_2.Swap_Action(obj, activator)
   local cart = -1 --catalog element chosen to trade for
   local tribute = {} --item IDs chosen to trade in
   
+  -- for special case when spoken to after forgetting to hold up their end of the trade, one off gag
+  if SV.base_town.ValueTradeItem ~= "" then
+    state = 4
+	repeated = true
+  end
 
   
   local Prices = { 1000, 5000, 20000, 50000, 100000 }
@@ -617,39 +706,74 @@ function base_camp_2.Swap_Action(obj, activator)
 				SOUND:PlayBattleSE("DUN_Money")
 				GAME:RemoveFromPlayerMoney(total)
 				
-				UI:SetSpeakerEmotion("Normal")
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Complete']))
-				
-				UI:ResetSpeaker()
-				SOUND:PlayFanfare("Fanfare/Treasure")
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Give'], player:GetDisplayName(), receive_item:GetDisplayName()))
-				
-				--local bag_count = GAME:GetPlayerBagCount() + GAME:GetPlayerEquippedCount()
-				--local bag_cap = GAME:GetPlayerBagLimit()
-				--if bag_count < bag_cap then
-				--	GAME:GivePlayerItem(trade.Item, 1, false, 0)
-				--else--TODO: load universal strings alongside local strings
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Item_Give_Storage'], receive_item:GetDisplayName()))
-				GAME:GivePlayerStorageItem(trade.Item, 1, false, "")
-				--end
-				
-				UI:SetSpeaker(chara)
 				
 				--remove the trade if it was a base trade
 				local base_trade_idx = cart - (#catalog - #SV.base_trades)
 				if base_trade_idx > 0 then
 					table.remove(SV.base_trades, base_trade_idx)
 				end
-				-- recompute the available trades
-				catalog = base_camp_2.Compute_Swap_Catalog()
 				
-				tribute = {}
-				cart = -1
+				SV.base_town.ValueTradeItem = trade.Item
+				if itemEntry.Rarity == 3 then
+				  UI:SetSpeakerEmotion("Inspired")
+				  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Complete_Max_001']))
+				  
+				  -- sableye gets so obsessed with his treasure he forgets about you, once
+				  if SV.base_town.ValueTraded == false then
+				    UI:SetSpeakerEmotion("Joyous")
+				    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Complete_Max_002']))
+				    return
+				  end
+				end
 				
-				state = 0
+				state = 4
 			else
 				state = 1
 			end
+				
+		elseif state == 4 then
+			
+			local itemEntry = _DATA:GetItem(SV.base_town.ValueTradeItem)
+			if itemEntry.Rarity == 3 then
+			  if SV.base_town.ValueTraded == false then
+			  
+			    SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
+			    GROUND:CharSetEmote(chara, "exclaim", 1)
+			    UI:SetSpeakerEmotion("Stunned")
+			  
+			    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Complete_Max_003']))
+			    UI:SetSpeakerEmotion("Normal")
+			  else
+				
+			    UI:SetSpeakerEmotion("Happy")
+			    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Complete_Max_004']))
+			    UI:SetSpeakerEmotion("Normal")
+			  end
+			  SV.base_town.ValueTraded = true
+			  
+			else
+			  UI:SetSpeakerEmotion("Normal")
+			  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Complete']))
+			end
+			
+			local receive_item = RogueEssence.Dungeon.InvItem(SV.base_town.ValueTradeItem)
+			UI:ResetSpeaker()
+			SOUND:PlayFanfare("Fanfare/Treasure")
+			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Give'], player:GetDisplayName(), receive_item:GetDisplayName()))
+			
+			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Item_Give_Storage'], receive_item:GetDisplayName()))
+			GAME:GivePlayerStorageItem(SV.base_town.ValueTradeItem, 1, false, "")
+			
+			UI:SetSpeaker(chara)
+			
+			-- recompute the available trades
+			catalog = base_camp_2.Compute_Swap_Catalog()
+			SV.base_town.ValueTradeItem = ""
+			
+			tribute = {}
+			cart = -1
+			
+			state = 0
 		end
 	end
 end

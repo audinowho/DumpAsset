@@ -69,7 +69,6 @@ function UpgradeTools:OnUpgrade()
   end
   
   
-  -- end
   if SV.unlocked_trades ~= nil then
   else
     SV.unlocked_trades = {}
@@ -88,6 +87,12 @@ function UpgradeTools:OnUpgrade()
     SV.base_camp.FerryUnlocked = false
     SV.base_camp.FerryIntroduced = false
   end
+  
+  if SV.base_town.ValueTradeState == nil then
+    SV.base_town.ValueTradeState = 0
+	ValueTradeItem = ""
+  end
+  
   
   if SV.magnagate == nil then
     SV.magnagate =
@@ -150,10 +155,14 @@ function UpgradeTools:OnUpgrade()
     GAME:UnlockDungeon('fertile_valley')
   end
   
-  if SV.CenterStatueDate == nil then
+  if SV.base_camp.CenterStatueDate == nil then
 	SV.base_camp.CenterStatueDate = ""
 	SV.base_camp.LeftStatueDate = ""
 	SV.base_camp.RightStatueDate = ""
+  end
+  
+  if SV.base_town.FinalTrade == nil then
+	SV.base_town.FinalTrade = false
   end
   
   

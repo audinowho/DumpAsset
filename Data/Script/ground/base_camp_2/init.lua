@@ -414,7 +414,7 @@ function base_camp_2.Appraisal_Action(obj, activator)
 					GAME:RemoveFromPlayerMoney(total)
 					cart = {}
 					
-					if #treasure >= 3 then
+					if #treasure >= 24 then
 					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Start_Max']))
 					
 					  GROUND:MoveInDirection(chara, Direction.Up, 18, false, 2)
@@ -470,7 +470,7 @@ function base_camp_2.Appraisal_Action(obj, activator)
 					  SOUND:PlayFanfare("Fanfare/Treasure")
 					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_End_Max_002']))
 					
-					elseif #treasure >= 2 then
+					elseif #treasure >= 8 then
 					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Start_002']))
 					
 					  GROUND:MoveInDirection(chara, Direction.Up, 18, false, 2)
@@ -714,7 +714,7 @@ function base_camp_2.Swap_Action(obj, activator)
 				end
 				
 				SV.base_town.ValueTradeItem = trade.Item
-				if itemEntry.Rarity == 3 then
+				if itemEntry.Rarity == 5 then
 				  UI:SetSpeakerEmotion("Inspired")
 				  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Complete_Max_001']))
 				  
@@ -734,7 +734,7 @@ function base_camp_2.Swap_Action(obj, activator)
 		elseif state == 4 then
 			
 			local itemEntry = _DATA:GetItem(SV.base_town.ValueTradeItem)
-			if itemEntry.Rarity == 3 then
+			if itemEntry.Rarity == 5 then
 			  if SV.base_town.ValueTraded == false then
 			  
 			    SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")

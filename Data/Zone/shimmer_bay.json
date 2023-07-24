@@ -6,7 +6,7 @@
 "DefaultText": "Shimmer Bay",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "NoEXP": false,
 "Level": 30,
@@ -14,7 +14,7 @@
 "TeamRestrict": false,
 "TeamSize": -1,
 "MoneyRestrict": false,
-"BagRestrict": 0,
+"BagRestrict": -1,
 "BagSize": -1,
 "Persistent": true,
 "Rescues": 2,
@@ -10064,17 +10064,6 @@
 "Value": {
 "$type": "RogueElements.DetectIsolatedStairsStep`3[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.LevelGen.MapGenEntrance, RogueEssence],[RogueEssence.LevelGen.MapGenExit, RogueEssence]], RogueElements"
 }
-},
-{
-"Key": {
-"str": [
-7
-]
-},
-"Value": {
-"$type": "RogueEssence.LevelGen.DetectItemStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"FindItem": "egg_mystery"
-}
 }
 ]
 }
@@ -11228,8 +11217,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 23,
-"Max": 23
+"Min": 27,
+"Max": 27
 },
 "SpecifiedSkills": [
 "clamp",
@@ -11518,8 +11507,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 25,
-"Max": 25
+"Min": 28,
+"Max": 28
 },
 "SpecifiedSkills": [
 "spike_cannon",
@@ -11596,8 +11585,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 28,
-"Max": 28
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "wide_guard",
@@ -11641,8 +11630,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 28,
-"Max": 28
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "ice_fang",
@@ -11687,8 +11676,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 28,
-"Max": 28
+"Min": 30,
+"Max": 30
 },
 "SpecifiedSkills": [
 "amnesia",
@@ -11733,8 +11722,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 36,
-"Max": 36
+"Min": 38,
+"Max": 38
 },
 "SpecifiedSkills": [
 "dive",
@@ -13435,6 +13424,61 @@
 "Replaceable": false,
 "FloorRange": {
 "Min": 0,
+"Max": 12
+}
+},
+"ModStates": []
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadRoomZoneStep, RogueEssence",
+"Spawns": [
+{
+"Spawn": {
+"GridOption": {
+"$type": "PMDC.LevelGen.RoomGenEvo`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC"
+},
+"ListOption": {
+"$type": "PMDC.LevelGen.RoomGenEvo`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], PMDC"
+},
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+]
+},
+"Rate": 10
+}
+],
+"PriorityGrid": {
+"str": [
+-4,
+1
+]
+},
+"PriorityList": {
+"str": [
+-2,
+2
+]
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
+"FloorSpacing": {
+"Min": 2,
+"Max": 5
+},
+"FloorRange": {
+"Min": 1,
 "Max": 12
 }
 },

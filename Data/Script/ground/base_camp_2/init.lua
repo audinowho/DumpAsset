@@ -400,7 +400,7 @@ function base_camp_2.Appraisal_Action(obj, activator)
 							GAME:TakePlayerBagItem(cart[ii].Slot)
 						end
 						
-						local treasure_item = "empty"-- box.HiddenValue
+						local treasure_item = box.HiddenValue
 						local itemEntry = _DATA:GetItem(treasure_item)
 						local treasure_choice = { Box = box, Item = RogueEssence.Dungeon.InvItem(treasure_item,false,itemEntry.MaxStack)}
 						table.insert(treasure, treasure_choice)

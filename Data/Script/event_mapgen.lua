@@ -302,7 +302,7 @@ function FLOOR_GEN_SCRIPT.ShimmerBayRevisit(map, args)
   
   if item ~= nil then
     item.Value = "box_deluxe"
-	item.HiddenValue = "xcl_element_water_dust"
+	item.HiddenValue = "empty"
   end
   
 end

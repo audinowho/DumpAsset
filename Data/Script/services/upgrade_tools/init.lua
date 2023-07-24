@@ -161,8 +161,9 @@ function UpgradeTools:OnUpgrade()
 	SV.base_camp.RightStatueDate = ""
   end
   
-  if SV.base_town.FinalTrade == nil then
-	SV.base_town.FinalTrade = false
+  if SV.base_town.ValueTraded == nil then
+	SV.base_town.ValueTradeItem = ""
+	SV.base_town.ValueTraded = false
   end
   
   

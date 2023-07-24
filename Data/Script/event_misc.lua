@@ -64,7 +64,7 @@ end
 
 function ITEM_SCRIPT.ShimmerBayShift(owner, ownerChar, context, args)
   if not SV.shimmer_bay.TookTreasure then
-    if context.Item.Value == "egg_mystery" or context.Item.Value == "box_deluxe" then
+    if (context.Item.Value == "egg_mystery" or context.Item.Value == "box_deluxe")  and context.Item.HiddenValue == "empty" then
 	  SV.shimmer_bay.TookTreasure = true
 	  GAME:WaitFrames(60)
 	  _ZONE.CurrentMap.Music = "B24. Shimmer Bay 2.ogg"

@@ -374,7 +374,7 @@ function base_camp_2.Appraisal_Action(obj, activator)
 						item = GAME:GetPlayerBagItem(cart[1].Slot)
 					end
 					msg = STRINGS:Format(MapStrings['Appraisal_Choose_One'], STRINGS:FormatKey("MONEY_AMOUNT", total), item:GetDisplayName())
-				elseif #cart < 3 then
+				elseif #cart < 24 then
 					msg = STRINGS:Format(MapStrings['Appraisal_Choose_Multi'], STRINGS:FormatKey("MONEY_AMOUNT", total))
 				else
 					UI:SetSpeakerEmotion("Surprised")

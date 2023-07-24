@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.13.0",
+"Version": "0.7.14.0",
 "Object": {
 "$type": "RogueEssence.Data.StatusData, RogueEssence",
 "Name": {
@@ -248,7 +248,9 @@
 "Value": {
 "$type": "PMDC.Dungeon.PoisonEndEvent, PMDC",
 "Toxic": false,
-"ReducedDamage": true
+"ReducedDamage": true,
+"HPFraction": 16,
+"HealHPFraction": 16
 }
 }
 ],
@@ -262,7 +264,10 @@
 },
 "Value": {
 "$type": "PMDC.Dungeon.PoisonSingleEvent, PMDC",
-"Toxic": false
+"Toxic": false,
+"AffectNonFocused": false,
+"HPFraction": 16,
+"RestoreHPFraction": 16
 }
 },
 {
@@ -272,7 +277,8 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.WalkedThisTurnEvent, PMDC"
+"$type": "PMDC.Dungeon.WalkedThisTurnEvent, PMDC",
+"AffectNonFocused": false
 }
 }
 ],

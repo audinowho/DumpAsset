@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.13.0",
+"Version": "0.7.14.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
@@ -143,11 +143,20 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.RemoveTerrainEvent, PMDC",
-"TileTypes": [
-"water",
-"lava",
-"pit"
+"$type": "PMDC.Dungeon.RemoveTerrainStateEvent, PMDC",
+"States": [
+{
+"assembly": "PMDC, Version=0.7.14.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.WaterTerrainState"
+},
+{
+"assembly": "PMDC, Version=0.7.14.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.LavaTerrainState"
+},
+{
+"assembly": "PMDC, Version=0.7.14.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.AbyssTerrainState"
+}
 ],
 "RemoveSound": "",
 "RemoveAnim": {

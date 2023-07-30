@@ -4,31 +4,11 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Purify",
-"LocalTexts": {
-"fr": "Purification",
-"de": "Läuterung",
-"es": "Purificación",
-"it": "Purificazione",
-"ko": "정화",
-"ja": "じょうか",
-"ja-jp": "じょうか",
-"zh-hans": "净化",
-"zh-hant": "淨化"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "The user heals the target's status condition. If the move succeeds, it also restores the user's own HP.",
-"LocalTexts": {
-"fr": "Le lanceur soigne les altérations de statut de la cible, ce qui lui permet de regagner des PV.",
-"de": "Der Anwender heilt das Statusproblem des Zieles und füllt dadurch seine eigenen KP auf.",
-"es": "Cura los problemas de estado del Pokémon rival y a cambio recupera PS propios.",
-"it": "Chi la usa cura i problemi di stato del bersaglio e in cambio recupera PS.",
-"ko": "상대의 상태 이상을 회복한다. 회복하면 자신은 HP를 회복할 수 있다.",
-"ja": "あいての　じょうたいいじょうを　なおす。 なおすと　じぶんは　ＨＰを かいふく　することが　できる。",
-"ja-jp": "相手の　状態異常を　治す。 治すと　自分は　ＨＰを 回復　することが　できる。",
-"zh-hans": "治愈对手的异常状态。治愈后可以回复自己的HP。",
-"zh-hant": "治癒對手的異常狀態。 治癒後可以回復自己的ＨＰ。"
-}
+"LocalTexts": {}
 },
 "Released": false,
 "Comment": "",
@@ -101,7 +81,11 @@
 "Element": "poison",
 "Category": 3,
 "HitRate": -1,
-"SkillStates": [],
+"SkillStates": [
+{
+"$type": "PMDC.Dungeon.HealState, PMDC"
+}
+],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],

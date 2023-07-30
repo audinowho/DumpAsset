@@ -4,31 +4,11 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Shore Up",
-"LocalTexts": {
-"fr": "Amass'Sable",
-"de": "Sandsammler",
-"es": "Recogearena",
-"it": "Sabbiaccumulo",
-"ko": "모래모으기",
-"ja": "すなあつめ",
-"ja-jp": "すなあつめ",
-"zh-hans": "集沙",
-"zh-hant": "集沙"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "The user regains up to half of its max HP. It restores more HP in a sandstorm.",
-"LocalTexts": {
-"fr": "Le lanceur récupère jusqu'à la moitié de ses PV max. Durant une tempête de sable, il en récupère encore plus.",
-"de": "KP des Anwenders werden um 50 % der maximalen KP aufgefüllt. Tobt ein Sandsturm, werden noch mehr KP aufgefüllt.",
-"es": "Restaura la mitad de los PS máximos del usuario. Durante las tormentas de arena, restaura aún más PS.",
-"it": "Chi la usa recupera metà dei propri PS massimi. Durante le tempeste di sabbia ne recupera di più.",
-"ko": "자신의 최대 HP 절반을 회복한다. 모래바람일 때는 많이 회복한다.",
-"ja": "さいだい　ＨＰの　はんぶん じぶんの　ＨＰを　かいふく　する。 すなあらしのときは　おおく　かいふく。",
-"ja-jp": "最大ＨＰの　半分 自分の　ＨＰを　回復する。 すなあらしの時は　多く　回復。",
-"zh-hans": "回复自己最大HP的一半。在沙暴中回复得更多。",
-"zh-hant": "回復自己最大ＨＰ的一半。 在沙暴中回復得更多。"
-}
+"LocalTexts": {}
 },
 "Released": false,
 "Comment": "",
@@ -101,7 +81,11 @@
 "Element": "ground",
 "Category": 3,
 "HitRate": -1,
-"SkillStates": [],
+"SkillStates": [
+{
+"$type": "PMDC.Dungeon.HealState, PMDC"
+}
+],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],

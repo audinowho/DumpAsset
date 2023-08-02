@@ -228,6 +228,10 @@ function test_grounds.Sign4_Action(obj, activator)
   UI:WaitShowDialogue("Normal Normal Normal Normal Normal Normal Normal Normal [emote=happy]Happy Happy Happy Happy Happy Happy Happy [emote=sad]Sad Sad Sad Sad Sad Sad Sad Sad")
   UI:WaitShowDialogue("Normal Normal Normal Normal Normal Normal [speed=3]Fast Fast Fast Fast Fast Fast Fast Fast Fast [speed=0.2]Slow Slow Slow Slow")
   UI:WaitShowDialogue("THE[pause=0] [color=#FF0000]QUICK[color] BROWN\n FOX [color=#FF0000]JUMPS[color] OVER[pause=0] THE[scroll] LAZY [color=#FF0000]DOG[color].\nTHE [color=#FF0000]QUICK[color] BROWN[pause=0] FOX [color=#FF0000]JUMPS[color].")
+  UI:WaitShowDialogue("Normal Sound Normal Sound Normal Sound Normal Sound Normal Sound Normal Sound Normal Sound")
+  UI:WaitShowDialogue("[sound=Menu/Speak,8]Normal Sound But Slower Normal Sound But Slower Normal Sound But Slower Normal Sound But Slower")
+  UI:WaitShowDialogue("[sound=Battle/_UNK_DUN_Water_Drop]Different Sound Different Sound Different Sound Different Sound Different Sound Different Sound")
+  UI:WaitShowDialogue("[sound=Battle/_UNK_DUN_Water_Drop,7]Different Sound But Slower Different Sound But Slower Different Sound But Slower")
 end
 
 function test_grounds.Sign5_Action(obj, activator)

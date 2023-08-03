@@ -64,12 +64,12 @@ end
 
 function ITEM_SCRIPT.ShimmerBayShift(owner, ownerChar, context, args)
   if not SV.shimmer_bay.TookTreasure then
-    if (context.Item.Value == "egg_mystery" or context.Item.Value == "box_deluxe")  and context.Item.HiddenValue == "empty" then
+    if (context.Item.Value == "egg_mystery" or context.Item.Value == "box_deluxe") and context.Item.HiddenValue == "empty" then
 	  SV.shimmer_bay.TookTreasure = true
 	  GAME:WaitFrames(60)
 	  _ZONE.CurrentMap.Music = "B24. Shimmer Bay 2.ogg"
 	  SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
-	  _ZONE.CurrentMap.MapEffect.OnMapTurnEnds:Add(RogueElements.Priority(15), PMDC.Dungeon.RespawnFromEligibleEvent(14, 160))
+	  _ZONE.CurrentMap.MapEffect.OnMapTurnEnds:Add(RogueElements.Priority(15), PMDC.Dungeon.RespawnFromEligibleEvent(9, 50))
 	  for ii = 1, 3, 1 do
 		PMDC.Dungeon.RespawnFromEligibleEvent.Respawn()
 	  end
@@ -130,7 +130,7 @@ function ITEM_SCRIPT.SleepingCalderaShift(owner, ownerChar, context, args)
 	  _ZONE.CurrentMap:CalculateAutotiles(RogueElements.Loc(0, 0), RogueElements.Loc(_ZONE.CurrentMap.Width, _ZONE.CurrentMap.Height))
 	  _ZONE.CurrentMap:CalculateTerrainAutotiles(RogueElements.Loc(0, 0), RogueElements.Loc(_ZONE.CurrentMap.Width, _ZONE.CurrentMap.Height))
 	  
-	  _ZONE.CurrentMap.MapEffect.OnMapTurnEnds:Add(RogueElements.Priority(15), PMDC.Dungeon.RespawnFromEligibleEvent(15, 50))
+	  _ZONE.CurrentMap.MapEffect.OnMapTurnEnds:Add(RogueElements.Priority(15), PMDC.Dungeon.RespawnFromEligibleEvent(15, 160))
 	  for ii = 1, 3, 1 do
 		PMDC.Dungeon.RespawnFromEligibleEvent.Respawn()
 	  end

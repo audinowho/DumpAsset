@@ -328,6 +328,7 @@ function test_grounds.Mew_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   local mew = CH('Mew')
   local player = CH('PLAYER')
+  local partner = CH('Partner')
   local state = {olddir = mew.CharDir}
 
   GROUND:CharTurnToChar(mew,player)
@@ -344,11 +345,19 @@ function test_grounds.Mew_Action(chara, activator)
 
   CH('Mew').CharDir = state.olddir
   
-  local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Swing")
-  GROUND:CharSetAction(CH('PLAYER'), RogueEssence.Ground.FrameGroundAction(CH('PLAYER').Position, CH('PLAYER').Direction, animId, 5))
-  
   GAME:WaitFrames(60)
-  GROUND:CharEndAnim(CH('PLAYER'))
+  
+  mew.CollisionDisabled = true
+  local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Hop")
+  local frameAction = RogueEssence.Ground.IdleAnimGroundAction(mew.Position, 0, Direction.Up, animId, false)
+  
+  local head_pos = GROUND:CharGetAnimPoint(partner, RogueEssence.Content.ActionPointType.Head)
+  local shadow_pos = GROUND:CharGetAnimPoint(partner, RogueEssence.Content.ActionPointType.Shadow)
+  GROUND:ActionToPosition(mew, frameAction, partner.MapLoc.X, partner.MapLoc.Y + 1, 1, 2, shadow_pos.Y - head_pos.Y)
+  
+  animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("None")
+  GROUND:CharSetAction(mew, RogueEssence.Ground.FrameGroundAction(mew.Position, mew.LocHeight, Direction.Up, animId, 0))
+  
 end
 
 function test_grounds.Walk_Sequence(chara)
@@ -356,6 +365,9 @@ function test_grounds.Walk_Sequence(chara)
   GROUND:MoveInDirection(chara, Direction.Up, 20, false, 2)
   GAME:WaitFrames(60)
   GROUND:AnimateInDirection(chara, "Hurt", Direction.Down, Direction.Up, 20, 1, 5)
+  PrintInfo(GROUND:CharGetAnimFallback(chara, "Hurt"))
+  PrintInfo(GROUND:CharGetAnimFallback(chara, "Kick"))
+  PrintInfo(GROUND:CharGetAnim(chara))
   GAME:WaitFrames(60)
   GROUND:MoveInDirection(chara, Direction.Down, 20, true, 7)
 end

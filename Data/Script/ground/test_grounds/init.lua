@@ -244,6 +244,39 @@ function test_grounds.Sign5_Action(obj, activator)
   UI:TextPopUp("Everywhere, all at once, and everything that was here, and there, and everywhere", 50, 50, 50, 80, -1, false, false)
   GAME:WaitFrames(70)
   UI:TextPopUp("Oh, it can also stretch over here too!", 30, 150, 20, 90, -1, true, false)
+  GAME:WaitFrames(50)
+  UI:WaitShowVoiceOver("Now watch this!", 120, 0, 0, -1, -1)
+  function test1()
+    PrintInfo("Skip Test 1")
+    UI:WaitShowDialogue("Skip me!")
+  end
+
+  function test2()
+    PrintInfo("Skip Test 2")
+    local tutor_choices = {RogueEssence.StringKey("MENU_RECALL_SKILL"):ToLocal(),
+                           RogueEssence.StringKey("MENU_FORGET_SKILL"):ToLocal(),
+                           STRINGS:FormatKey("MENU_INFO"),
+                           STRINGS:FormatKey("MENU_EXIT")}
+    UI:BeginMultiPageMenu(24, 24, 196, "Title Name", tutor_choices, 8, 1, 4)
+    UI:WaitForChoice()
+  end
+
+  function test3()
+    SOUND:PlayBattleSE("DUN_Explosion")
+    local emitter = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData("Flamethrower", 3))
+    emitter.LocHeight = 2
+    GROUND:PlayVFX(emitter, activator.MapLoc.X, activator.MapLoc.Y)
+    GAME:WaitFrames(60)
+    SOUND:PlayBattleSE("DUN_Explosion")
+    emitter = RogueEssence.Content.FiniteAreaEmitter(RogueEssence.Content.AnimData("Explosion", 3))
+    emitter.Range = 20
+    emitter.Speed = 72
+    emitter.TotalParticles = 2
+    GROUND:PlayVFX(emitter, activator.MapLoc.X, activator.MapLoc.Y)
+    GAME:WaitFrames(60)
+  end
+  local callbacks = { test1, test2, test3 }
+  UI:WaitShowDialogue("Aha![script=1][script=3] You've fallen in my trap![script=2][pause=60] Round 2? [pause=60]You can have it! [script=2]\n [pause=30] Round 3 when?", callbacks)
 end
 
 

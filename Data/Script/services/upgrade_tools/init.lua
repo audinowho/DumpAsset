@@ -102,8 +102,8 @@ function UpgradeTools:OnUpgrade()
     }
   end
   
-  if SV.shimmer_bay == nil then
-    SV.shimmer_bay = 
+  if SV.castaway_cave == nil then
+    SV.castaway_cave = 
     {
       TookTreasure  = false
     }

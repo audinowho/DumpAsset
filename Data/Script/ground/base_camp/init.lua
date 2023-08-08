@@ -267,7 +267,7 @@ function base_camp.Ferry_Action(obj, activator)
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ferry_Line_001']))
 	SV.base_camp.FerryIntroduced = true
   end
-  local dungeon_entrances = { 'lava_floe_island', 'shimmer_bay', 'eon_island', 'lost_seas', 'inscribed_cave', 'prism_isles' }
+  local dungeon_entrances = { 'lava_floe_island', 'castaway_cave', 'eon_island', 'lost_seas', 'inscribed_cave', 'prism_isles' }
   local ground_entrances = {}
   base_camp.ShowFerryMenu(dungeon_entrances,ground_entrances)
 end

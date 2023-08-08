@@ -286,7 +286,7 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
 end
 
 
-function FLOOR_GEN_SCRIPT.ShimmerBayRevisit(map, args)
+function FLOOR_GEN_SCRIPT.CastawayCaveRevisit(map, args)
   if not SV.manaphy_egg.Taken then
     return
   end

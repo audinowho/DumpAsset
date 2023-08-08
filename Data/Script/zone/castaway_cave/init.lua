@@ -1,30 +1,30 @@
 require 'common'
 
-local shimmer_bay = {}
+local castaway_cave = {}
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
-function shimmer_bay.Init(zone)
+function castaway_cave.Init(zone)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  PrintInfo("=>> Init_shimmer_bay")
+  PrintInfo("=>> Init_castaway_cave")
   
 
 end
 
-function shimmer_bay.Rescued(zone, name, mail)
+function castaway_cave.Rescued(zone, name, mail)
   COMMON.Rescued(zone, name, mail)
 end
 
-function shimmer_bay.EnterSegment(zone, rescuing, segmentID, mapID)
+function castaway_cave.EnterSegment(zone, rescuing, segmentID, mapID)
   if rescuing ~= true then
     COMMON.BeginDungeon(zone.ID, segmentID, mapID)
   end
-  SV.shimmer_bay.TookTreasure = false
+  SV.castaway_cave.TookTreasure = false
 end
 
-function shimmer_bay.ExitSegment(zone, result, rescue, segmentID, mapID)
+function castaway_cave.ExitSegment(zone, result, rescue, segmentID, mapID)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  PrintInfo("=>> ExitSegment_shimmer_bay result "..tostring(result).." segment "..tostring(segmentID))
+  PrintInfo("=>> ExitSegment_castaway_cave result "..tostring(result).." segment "..tostring(segmentID))
   
   --first check for rescue flag; if we're in rescue mode then take a different path
   COMMON.ExitDungeonMissionCheck(zone.ID, segmentID)
@@ -81,4 +81,4 @@ function shimmer_bay.ExitSegment(zone, result, rescue, segmentID, mapID)
   
 end
 
-return shimmer_bay
+return castaway_cave

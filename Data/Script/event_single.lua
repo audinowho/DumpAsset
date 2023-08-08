@@ -7,25 +7,25 @@ function SINGLE_CHAR_SCRIPT.Test(owner, ownerChar, context, args)
 end
 
 
-function SINGLE_CHAR_SCRIPT.ShimmerBayAltMusic(owner, ownerChar, context, args)
+function SINGLE_CHAR_SCRIPT.CastawayCaveAltMusic(owner, ownerChar, context, args)
   if context.User ~= nil then
     return
   end
-  if not SV.shimmer_bay.TookTreasure then
+  if not SV.castaway_cave.TookTreasure then
     --keep the map music as is
   else
-	_ZONE.CurrentMap.Music = "B24. Shimmer Bay 2.ogg"
+	_ZONE.CurrentMap.Music = "B24. Castaway Cave 2.ogg"
   end
   
   SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
 end
 
 
-function SINGLE_CHAR_SCRIPT.ShimmerBayAltEnemies(owner, ownerChar, context, args)
+function SINGLE_CHAR_SCRIPT.CastawayCaveAltEnemies(owner, ownerChar, context, args)
   if context.User ~= nil then
     return
   end
-  if not SV.shimmer_bay.TookTreasure then
+  if not SV.castaway_cave.TookTreasure then
     return
   end
   

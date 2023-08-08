@@ -62,12 +62,12 @@ function ITEM_SCRIPT.Test(owner, ownerChar, context, args)
   TASK:WaitTask(_MENU:ProcessMenuCoroutine(notice))
 end
 
-function ITEM_SCRIPT.ShimmerBayShift(owner, ownerChar, context, args)
-  if not SV.shimmer_bay.TookTreasure then
+function ITEM_SCRIPT.CastawayCaveShift(owner, ownerChar, context, args)
+  if not SV.castaway_cave.TookTreasure then
     if (context.Item.Value == "egg_mystery" or context.Item.Value == "box_deluxe") and context.Item.HiddenValue == "empty" then
-	  SV.shimmer_bay.TookTreasure = true
+	  SV.castaway_cave.TookTreasure = true
 	  GAME:WaitFrames(60)
-	  _ZONE.CurrentMap.Music = "B24. Shimmer Bay 2.ogg"
+	  _ZONE.CurrentMap.Music = "B24. Castaway Cave 2.ogg"
 	  SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
 	  _ZONE.CurrentMap.MapEffect.OnMapTurnEnds:Add(RogueElements.Priority(15), PMDC.Dungeon.RespawnFromEligibleEvent(9, 50))
 	  for ii = 1, 3, 1 do

@@ -104,7 +104,7 @@ SV.roaming_legends =
 }
 
 
-SV.shimmer_bay = 
+SV.castaway_cave = 
 {
   TookTreasure  = false
 }

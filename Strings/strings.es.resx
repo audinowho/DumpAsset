@@ -387,6 +387,9 @@
   <data name="ADD_END" xml:space="preserve">
     <value> y </value>
     <comment>Last conjunction word when creating lists of words.  Ex. "Attack, Defense, and Special Defense" There needs to be a space before the word for "and", otherwise the previous word will be followed directly by the "and". That's to make sure the oxford comma does NOT have a space before it. Silly English people with their oxford commas.</comment>  </data>
+  <data name="ADD_SEPARATOR" xml:space="preserve">
+    <value>,</value>
+    <comment></comment>  </data>
   <data name="DLG_ASK_ENTER_DUNGEON" xml:space="preserve">
     <value>¿Quieres entrar en {0}?</value>
     <comment></comment>  </data>
@@ -402,11 +405,14 @@
   <data name="DLG_ASK_LOAD_UPGRADE" xml:space="preserve">
     <value>Faltan algunos mods lo cual puede causar errores en la carga.[pause=0]¿Estas seguro de cargar este archivo?</value>
     <comment></comment>  </data>
+  <data name="DLG_ASK_VERSION_DIFF" xml:space="preserve">
+    <value>El archivo tiene diferencias de versiones. ¿Estás seguro de que deseas cargarlo?</value>
+    <comment></comment>  </data>
   <data name="DLG_ASSEMBLY_RELEASE" xml:space="preserve">
     <value>{0} fue liberado.[pause=0]\nAdiós {0}...</value>
     <comment></comment>  </data>
   <data name="DLG_ASSEMBLY_RELEASE_ASK" xml:space="preserve">
-    <value>Una vez liberados, {0} desaparecerá para siempre.[pause=0] ¿Estás seguro?</value>
+    <value>Una vez liberado, {0} desaparecerá para siempre.[pause=0] ¿Estás seguro?</value>
     <comment></comment>  </data>
   <data name="DLG_AWAIT_RESCUE_AOK_FAIL" xml:space="preserve">
     <value>Verificación fallida.[pause=0] El correo A-OK sido borrado.</value>
@@ -523,7 +529,7 @@
     <value>Para solicitar un rescate, selecciona Obtener Ayuda dentro de Esperando Rescate.</value>
     <comment></comment>  </data>
   <data name="DLG_RESCUE_QUIT_ASK" xml:space="preserve">
-    <value>¿Dejar de esperar el rescate y abandonar en la misión?</value>
+    <value>¿Dejar de esperar el rescate y abandonar la misión?</value>
     <comment></comment>  </data>
   <data name="DLG_RESCUE_RECEIVE_SOS" xml:space="preserve">
     <value>El correo SOS fue recibido de {0}.</value>
@@ -541,7 +547,7 @@
     <value>¿Enviar este correo A-OK a {0}? También recibirás la recompensa listada.</value>
     <comment></comment>  </data>
   <data name="DLG_RESCUE_SEND_AOK_REWARD" xml:space="preserve">
-    <value>¡También recibistes una recompensa como agradecimiento!</value>
+    <value>¡También recibiste una recompensa como agradecimiento!</value>
     <comment></comment>  </data>
   <data name="DLG_RESCUE_SEND_SOS" xml:space="preserve">
     <value>El correo SOS fue enviado a {0}.</value>
@@ -569,9 +575,6 @@
     <comment></comment>  </data>
   <data name="DLG_ROGUE_INFO_2" xml:space="preserve">
     <value>Puedes seleccionar con qué Pokémon empezar, y personalizar su habilidad, género o color.</value>
-    <comment></comment>  </data>
-  <data name="DLG_ROGUE_INFO_3" xml:space="preserve">
-    <value>Si tu equipo completa la mazmorra, todos los objetos y reclutas serán enviados al archivo de guardado principal.</value>
     <comment></comment>  </data>
   <data name="DLG_ROGUE_INFO_4" xml:space="preserve">
     <value>Sin embargo, si el equipo se debilita en su aventura, desaparecerán para siempre.</value>
@@ -663,6 +666,9 @@
   <data name="DLG_TRANSFER_COMPLETE" xml:space="preserve">
     <value>¡Transferencia completada!</value>
     <comment></comment>  </data>
+  <data name="DLG_TRANSFER_ITEM_ASK" xml:space="preserve">
+    <value>Se pueden enviar objetos a la partida principal. ¿Comenzar transferencia?</value>
+    <comment></comment>  </data>
   <data name="DLG_TRY_AGAIN_ASK" xml:space="preserve">
     <value>¿Quieres intentar de nuevo? Esto usará tus ajustes actuales.</value>
     <comment></comment>  </data>
@@ -673,7 +679,7 @@
     <value>El juego ha sido interrumpido\ndebido a que se generaron demasiados errores.\n\nPor favor, cierre el juego y reinícialo.</value>
     <comment></comment>  </data>
   <data name="GAME_SPLASH" xml:space="preserve">
-    <value>Este es un fangame gratis\n creado por los fans de\n Pokemon Mundo Misterioso.\n\n Por favor apoya a la serie\n comprando los juegos oficiales\n\n\nPokemon Mundo Misterioso pertenece a\n\nPokemon\nCreatures Inc\nGAME FREAK Inc\nSpike Chunsoft</value>
+    <value>Este es un fangame gratuito\n creado por los fans de\n Pokemon Mundo Misterioso.\n\n Por favor apoya a la serie\n comprando los juegos oficiales\n\n\nPokemon Mundo Misterioso pertenece a\n\nPokemon\nCreatures Inc\nGAME FREAK Inc\nSpike Chunsoft</value>
     <comment>CAREFUL.  A line can only contain up to 40 characters before it overflows the screen!  Due to font limitations, it also cannot contain anything other than plain ASCII. (Letters A-Z, numbers, punctuation.)</comment>  </data>
   <data name="GAME_TITLE" xml:space="preserve">
     <value>Pokémon Mundo Misterioso: Orígenes</value>
@@ -685,7 +691,7 @@
     <value>Introduzca el ID de tu contacto</value>
     <comment></comment>  </data>
   <data name="INPUT_IP_SUB" xml:space="preserve">
-    <value>Formato es "Hostname:Port". Usa CTRL+V para pegar.</value>
+    <value>El formato es "Hostname:Port". Usa CTRL+V para pegar.</value>
     <comment></comment>  </data>
   <data name="INPUT_IP_TITLE" xml:space="preserve">
     <value>Introduzca un servidor y opcionalmente un número de puerto.</value>
@@ -700,7 +706,7 @@
     <value>Introduce la semilla.</value>
     <comment></comment>  </data>
   <data name="INPUT_TEAM_DESC" xml:space="preserve">
-    <value>Presione [TAB] para sugerencias. \nDéjalo en blanco para un nombre aleatorio.</value>
+    <value>Presiona [TAB] para sugerencias. \nDéjalo en blanco para un nombre aleatorio.</value>
     <comment></comment>  </data>
   <data name="INPUT_TEAM_TITLE" xml:space="preserve">
     <value>Por favor introduzca un nombre de equipo.</value>
@@ -1006,10 +1012,13 @@
     <value>Ciclo de carga encontrado: {0}</value>
     <comment></comment>  </data>
   <data name="MENU_MOD_LOG_TITLE" xml:space="preserve">
-    <value>Cargar errores de mods.</value>
+    <value>Errores al cargar los mods</value>
     <comment></comment>  </data>
   <data name="MENU_MODS_AUTHOR" xml:space="preserve">
     <value>Por: {0}</value>
+    <comment></comment>  </data>
+  <data name="MENU_MODS_DIFF" xml:space="preserve">
+    <value>Diferencias entre versiones</value>
     <comment></comment>  </data>
   <data name="MENU_MODS_TITLE" xml:space="preserve">
     <value>Mods</value>
@@ -1528,7 +1537,7 @@
     <value>¡Los movimientos de {0} perdieron [color=#00FFFF]{1}[color] PP!</value>
     <comment></comment>  </data>
   <data name="MSG_CHARGES_LOST_ALL_NO_MORE" xml:space="preserve">
-    <value>¡Los movimientos de {0} ya no le quedan PP!</value>
+    <value>¡A los movimientos de {0} no les quedan PP!</value>
     <comment></comment>  </data>
   <data name="MSG_CHARGES_LOST_NO_MORE" xml:space="preserve">
     <value>¡El {1} de {0} ya está fuera de PP!</value>
@@ -1558,7 +1567,7 @@
     <value>¡{0} no recibió daño!</value>
     <comment></comment>  </data>
   <data name="MSG_DANGER_CONFIRM" xml:space="preserve">
-    <value>...¿estás seguro?</value>
+    <value>¿...estás seguro?</value>
     <comment></comment>  </data>
   <data name="MSG_DEFEAT" xml:space="preserve">
     <value>¡Oh no! ¡{0} se desmayó!</value>
@@ -1567,7 +1576,7 @@
     <value>¡{0} ha sido derrotado!</value>
     <comment></comment>  </data>
   <data name="MSG_DEQUIP_CURSED" xml:space="preserve">
-    <value>¡El {1} de {0} esta pegajoso y no puede ser quitado!</value>
+    <value>¡El {1} de {0} esta pegajoso y no puede ser desequipado!</value>
     <comment></comment>  </data>
   <data name="MSG_ELEMENT_CHANGE" xml:space="preserve">
     <value>¡{0} se convirtió a tipo {1}!</value>

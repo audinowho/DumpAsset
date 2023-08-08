@@ -3,18 +3,18 @@
 "Object": {
 "$type": "RogueEssence.Data.StatusData, RogueEssence",
 "Name": {
-"DefaultText": "Wish",
+"DefaultText": "King's Shield",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "The Pokémon will have its HP restored a few turns in the future. The amount of HP restored depends on the Maximum HP of the user.",
+"DefaultText": "The Pokémon is protected from all damaging moves. This status wears off after a few turns, or if the Pokémon attacks. ",
 "LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
 "MenuName": true,
 "CarryOver": false,
-"Emoticon": "Exclaim_Yellow",
+"Emoticon": "Shield_Yellow",
 "DropEmoticon": "",
 "FreeEmote": "",
 "DrawEffect": -1,
@@ -24,8 +24,7 @@
 "$type": "PMDC.Dungeon.TransferStatusState, PMDC"
 },
 {
-"$type": "PMDC.Dungeon.HPState, PMDC",
-"HP": 0
+"$type": "PMDC.Dungeon.RecentState, PMDC"
 },
 {
 "$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
@@ -106,7 +105,7 @@
 "Value": {
 "$type": "PMDC.Dungeon.SameStatusCheck, PMDC",
 "Message": {
-"Key": "MSG_WISH_ALREADY"
+"Key": "MSG_PROTECT_ALREADY"
 }
 }
 }
@@ -121,13 +120,28 @@
 "Value": {
 "$type": "PMDC.Dungeon.StatusBattleLogEvent, PMDC",
 "Message": {
-"Key": "MSG_WISH_START"
+"Key": "MSG_PROTECT"
 },
 "Delay": true
 }
 }
 ],
-"OnStatusRemoves": [],
+"OnStatusRemoves": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatusBattleLogEvent, PMDC",
+"Message": {
+"Key": "MSG_STATUS_END"
+},
+"Delay": false
+}
+}
+],
 "OnMapStatusAdds": [],
 "OnMapStatusRemoves": [],
 "OnMapStarts": [],
@@ -140,22 +154,8 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.CountDownEvent, PMDC",
-"Effects": [
-{
-"$type": "PMDC.Dungeon.RemoveEvent, PMDC",
+"$type": "PMDC.Dungeon.CountDownRemoveEvent, PMDC",
 "ShowMessage": true
-},
-{
-"$type": "PMDC.Dungeon.BattleLogEvent, PMDC",
-"Message": {
-"Key": "MSG_WISH_ATTACK"
-}
-},
-{
-"$type": "PMDC.Dungeon.HealEvent, PMDC"
-}
-]
 }
 }
 ],
@@ -164,14 +164,118 @@
 "OnDeaths": [],
 "OnRefresh": [],
 "BeforeTryActions": [],
-"BeforeActions": [],
+"BeforeActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveRecentEvent, PMDC"
+}
+}
+],
 "OnActions": [],
 "BeforeHittings": [],
-"BeforeBeingHits": [],
+"BeforeBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AttackingMoveNeededEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.ProtectEvent, PMDC",
+"Anims": null,
+"Effects": [
+{
+"$type": "PMDC.Dungeon.BattleAnimEvent, PMDC",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Protect_Yellow",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"Sound": "DUN_Screen_Hit",
+"AffectTarget": true,
+"Delay": 10
+}
+]
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+15
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AttackingMoveNeededEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
+"Stack": -1,
+"StatusID": "mod_attack",
+"AffectTarget": false,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+]
+}
+}
+],
 "AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],
-"AfterActions": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.ExceptionStatusEvent, PMDC",
+"States": [
+{
+"assembly": "PMDC, Version=0.7.14.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.RecentState"
+}
+],
+"BaseEvent": {
+"$type": "PMDC.Dungeon.RemoveOnActionEvent, PMDC",
+"ShowMessage": true
+}
+}
+}
+],
 "UserElementEffects": [],
 "TargetElementEffects": [],
 "ModifyHPs": [],

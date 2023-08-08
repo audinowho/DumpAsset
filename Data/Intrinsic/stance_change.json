@@ -10,7 +10,7 @@
 "DefaultText": "The Pokémon changes its form to Blade Forme when it uses an attack move, and changes to Shield Forme when it uses King's Shield.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 176,
 "ProximityEvent": {
@@ -67,7 +67,22 @@
 "AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],
-"AfterActions": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StanceChangeEvent, PMDC",
+"ReqSpecies": "aegislash",
+"DefenseSkill": "kings_shield",
+"DefenseForme": 0,
+"AttackForme": 1
+}
+}
+],
 "UserElementEffects": [],
 "TargetElementEffects": [],
 "ModifyHPs": [],

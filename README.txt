@@ -88,7 +88,7 @@ https://github.com/purpasmart96 Rev, for code contributions
 https://github.com/fa6ex Rings, for code contributions
 https://github.com/Buwwet Buwwet, for code contributions
 https://github.com/DoubleTrio Trio~, for code contributions
-Touhou Project　東方プロジェクト#6700 TouhouProject, for code contributions 
+Discord:touhou_project TouhouProject, for code contributions 
 Alexander Groeger, for code contributions 
 https://twitter.com/_palika_ Palika, for script contributions
 https://github.com/Parakoopa Parakoopa, for tiles dtef parsing
@@ -108,7 +108,8 @@ Translation:
 [DE] https://www.reddit.com/user/P1ka-/ P1ka
 [DE] https://athaleprime.wixsite.com/athaleprimegames AthalePrime
 [DE] https://twitter.com/NanashiRikai Mario Brand
-[DE] KomischerTypus#9155 KomischerTypus
+[DE] Discord:komischertypus KomischerTypus
+[ES] Discord:glaiver. Glaiver
 [ES] https://twitter.com/lagpu1 lagpu1
 [ES] https://www.reddit.com/u/thedask Dask
 [ES] https://discord.gg/PokemonRP Vioshim
@@ -119,10 +120,13 @@ Translation:
 [FR] Buxrart
 [FR] Alicia
 [FR] Blackun
-[FR] Youka#9465 Youka
+[FR] Discord:youka0 Youka
+[FR] Maru
+[IT] Discord:digital_hazard Digital Hazard
+[IT] Discord:saiphdeer Saiph
 [KO] https://www.reddit.com/user/Bashful_Barry/ Barry
 [PT] https://twitter.com/SquishyTheMew Squishy
-[ZH] Chehra#5252 Chehra
+[ZH] Discord:lazychehra Chehra
 [ZH] https://twitter.com/Dewpoleon Dew
 [ZH] https://sites.google.com/view/daniel-lee-site/home PikaNiko
 [ZH] Rockdu

@@ -254,13 +254,11 @@ function test_grounds.Sign5_Action(obj, activator)
   UI:TextPopUp("Oh, it can also stretch over here too!", 30, 150, 20, 90, -1, true, false)
   GAME:WaitFrames(50)
   UI:WaitShowVoiceOver("Now watch this!", 120, 0, 0, -1, -1)
-  function test1()
-    PrintInfo("Skip Test 1")
+  function test0()
     UI:WaitShowDialogue("Skip me!")
   end
 
-  function test2()
-    PrintInfo("Skip Test 2")
+  function test1()
     local tutor_choices = {RogueEssence.StringKey("MENU_RECALL_SKILL"):ToLocal(),
                            RogueEssence.StringKey("MENU_FORGET_SKILL"):ToLocal(),
                            STRINGS:FormatKey("MENU_INFO"),
@@ -269,7 +267,7 @@ function test_grounds.Sign5_Action(obj, activator)
     UI:WaitForChoice()
   end
 
-  function test3()
+  function test2()
     SOUND:PlayBattleSE("DUN_Explosion")
     local emitter = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData("Flamethrower", 3))
     emitter.LocHeight = 2
@@ -283,8 +281,8 @@ function test_grounds.Sign5_Action(obj, activator)
     GROUND:PlayVFX(emitter, activator.MapLoc.X, activator.MapLoc.Y)
     GAME:WaitFrames(60)
   end
-  local callbacks = { test1, test2, test3 }
-  UI:WaitShowDialogue("Aha![script=1][script=3] You've fallen in my trap![script=2][pause=60] Round 2? [pause=60]You can have it! [script=2]\n [pause=30] Round 3 when?", callbacks)
+  local callbacks = { test0, test1, test2 }
+  UI:WaitShowDialogue("Aha![script=2] You've fallen in my trap![pause=60] Now there is no escape.[script=0][script=1]", callbacks)
 end
 
 

@@ -907,6 +907,15 @@
             <param name="clamp">Whether to clamp the frame if the time exceeds the full anim time.</param>
             <returns></returns>
         </member>
+        <member name="M:RogueEssence.Content.CharSheet.SpecFrame(System.Collections.Generic.List{RogueEssence.Content.CharAnimFrame},System.Int32,System.Boolean)">
+            <summary>
+            Sets the animation to a specific frame always
+            </summary>
+            <param name="frames"></param>
+            <param name="frame"></param>
+            <param name="clamp"></param>
+            <returns></returns>
+        </member>
         <member name="F:RogueEssence.Content.GraphicsManager.TEX_SIZE">
             <summary>
             All textures are multiples of 8, right?
@@ -955,6 +964,7 @@
             </summary>
             <param name="conversionFlags">Chooses which asset type to bake</param>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:RogueEssence.Content.LoopedSong.GetSamplesPlayed" -->
         <member name="F:RogueEssence.Dungeon.MapBG.BGMovement">
             <summary>
             Pixels per Second
@@ -1694,6 +1704,16 @@
             Describes how to handle the map scrolling past the edge of the map
             </summary>
         </member>
+        <member name="P:RogueEssence.Dungeon.BaseMap.Width">
+            <summary>
+            Width in tiles
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Dungeon.BaseMap.Height">
+            <summary>
+            Height in tiles
+            </summary>
+        </member>
         <member name="M:RogueEssence.Dungeon.BaseMap.FindItemlessTile(RogueElements.Loc,RogueElements.Loc,RogueElements.Loc,System.Boolean)">
             <summary>
             
@@ -1742,6 +1762,15 @@
             </summary>
             <param name="loc1">Reference loc</param>
             <param name="loc2">Loc to get the closest wrap of.  May be out of bounds.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Dungeon.BaseMap.InRange(RogueElements.Loc,RogueElements.Loc,System.Int32)">
+            <summary>
+            Checks if two characters are close together, accounting for wrapping
+            </summary>
+            <param name="loc1"></param>
+            <param name="loc2"></param>
+            <param name="range"></param>
             <returns></returns>
         </member>
         <member name="M:RogueEssence.Dungeon.BaseMap.IterateLocInBounds(RogueElements.Rect,RogueElements.Loc)">
@@ -2252,6 +2281,11 @@
             They are potentially checked against in a select number of battle events.
             </summary>
         </member>
+        <member name="F:RogueEssence.Data.ItemData.GroundUseActions">
+            <summary>
+            List of ground actions that can be used with that item.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Data.ItemData.UseAction">
             <summary>
             The hitbox of the attack that comes out when the item is used.
@@ -2547,6 +2581,12 @@
             Passive effects applied to the character that inflicted the status.
             </summary>
         </member>
+        <member name="F:RogueEssence.Data.TerrainData.TerrainStates">
+            <summary>
+            Special variables that this terrain contains.
+            They are potentially checked against in a select number of battle events.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Data.TileData.Layer">
             <summary>
             The layer to draw the tile on.  Only supports Bottom, Back and Front for now.
@@ -2742,6 +2782,18 @@
             </summary>
             <param name="parentTemplateTypes"></param>
             <param name="types"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Dev.ReflectionExt.getAssignableTypes(System.Boolean,System.Int32,System.Int32,System.Reflection.Assembly[],System.Boolean,System.Type[])">
+            <summary>
+            
+            </summary>
+            <param name="allowAbstract"></param>
+            <param name="recursionDepth"></param>
+            <param name="limit"></param>
+            <param name="searchAssemblies"></param>
+            <param name="applyLimitToDirectReturn">Will short-circuit search when it reaches the limit of assignable types</param>
+            <param name="constraints"></param>
             <returns></returns>
         </member>
         <member name="M:RogueEssence.Dev.ReflectionExt.getAssignableFromDerivedToConstraint(System.Collections.Generic.List{System.Type[]},System.Type,System.Type,System.Int32)">
@@ -3014,6 +3066,16 @@
         <member name="T:RogueEssence.Ground.GroundDebug">
             <summary>
             Class with handy methods for drawing debug and editor stuff.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Ground.SelectionType.Self">
+            <summary>
+            apply to user
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Ground.SelectionType.Others">
+            <summary>
+            apply to other party members
             </summary>
         </member>
         <member name="M:RogueEssence.Ground.GroundScene.SilentSendHome(System.Int32)">
@@ -3686,13 +3748,37 @@
             Components that the newly added room will be labeled with.
             </summary>
         </member>
-        <member name="T:RogueEssence.LevelGen.CombineGridRoomBaseStep`1">
+        <member name="F:RogueEssence.LevelGen.GridCombo`1.Size">
             <summary>
-            Merges single-cell rooms together into larger rooms, specified in Combos
+            Size of the merge in cells
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.GridCombo`1.GiantRoom">
+            <summary>
+            The roomgen to use for the merged room.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.CombineGridRoomRandStep`1">
+            <summary>
+            Merges adjacent single-cell rooms together into larger rooms, specified in Combos.
+            This is done by choosing randomly from the entire grid and checking to see if it works as a merge point.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="F:RogueEssence.LevelGen.CombineGridRoomBaseStep`1.MergeRate">
+        <member name="T:RogueEssence.LevelGen.CombineGridRoomStep`1">
+            <summary>
+            Merges adjacent single-cell rooms together into larger rooms, specified in Combos.
+            This is done by getting all possible merge points and then choosing randomly from them.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueEssence.LevelGen.CombineGridRoomBaseStep`1">
+            <summary>
+            Merges adjacent single-cell rooms together into larger rooms, specified in Combos.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueEssence.LevelGen.CombineGridRoomBaseStep`1.MergeRate">
             <summary>
             The number of merges to add to the grid plan.
             </summary>
@@ -3700,6 +3786,8 @@
         <member name="F:RogueEssence.LevelGen.CombineGridRoomBaseStep`1.Combos">
             <summary>
             List of possible merges that can be done.
+            Maps a certain area of specifified size and merges it using a specified room gen.
+            Only merges of the specified sizes will be made.
             </summary>
         </member>
         <member name="P:RogueEssence.LevelGen.CombineGridRoomBaseStep`1.Filters">
@@ -5240,6 +5328,11 @@
             Call this when GraphicsManager is being unloaded.
             </summary>
         </member>
+        <member name="M:RogueEssence.Script.LuaEngine.OnMenuButtonPressed">
+            <summary>
+            Called when the menu button is pressed!
+            </summary>
+        </member>
         <member name="M:RogueEssence.Script.LuaEngine.OnMusicChange(System.String,System.String,System.String,System.String,System.String)">
             <summary>
             Called when the music changes!
@@ -5655,6 +5748,20 @@
             <example>
             GAME:MoveCamera(200, 240, 60, false)
             </example>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGame.MoveCameraToChara">
+             <summary>
+             Centers the camera on a character.
+            
+             As we are simply moving the camera to a character, this will simply set ViewCenter and not ViewOffset.
+             </summary>
+             <param name="x">X coordinate of the camera center, as an offset for the chara</param>
+             <param name="y">Y coordinate of the camera center, as an offset for the chara</param>
+             <param name="duration">The amount of time it takes ot move to the destination</param>
+             <param name="chara">The character to center on.</param>
+             <example>
+             GAME:MoveCameraToChara(200, 240, 60, false)
+             </example>
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.GetCameraCenter">
             <summary>
@@ -6310,7 +6417,7 @@
             CharTurnToCharAnimated(charFrom, Dir8.Left, 3)
             </example>
         </member>
-        <member name="M:RogueEssence.Script.ScriptGround.TeleportTo(RogueEssence.Ground.GroundEntity,System.Int32,System.Int32,RogueElements.Dir8)">
+        <member name="M:RogueEssence.Script.ScriptGround.TeleportTo(RogueEssence.Ground.GroundEntity,System.Int32,System.Int32,RogueElements.Dir8,System.Int32)">
             <summary>
             Repositions the ground entity in a specified location.
             </summary>
@@ -6395,6 +6502,7 @@
             <param name="y">Y coordinate of the destination</param>
             <param name="animSpeed">Speed of animation, where 1.0 represents normal speed</param>
             <param name="speed">Speed movement, in pixels per frame</param>
+            <param name="height">Height of the destination</param>
             <example>
             GROUND:AnimateToPosition(player, "Hurt", Dir8.Down, 200, 240, 0.5, 2)
             </example>
@@ -6420,6 +6528,28 @@
             </summary>
             <param name="chara">Target ground character.</param>
             <param name="effect">The draw effect.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.CharGetAnimFallback(RogueEssence.Ground.GroundChar,System.String)">
+            <summary>
+            Gets the fallback animation for the character.
+            </summary>
+            <param name="chara"></param>
+            <param name="anim">The anim to get the fallback anim of.</param>
+            <returns>The fallback animation, as a string.  Blank if there is none.  Will return anim if anim already exists.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.CharGetAnim(RogueEssence.Ground.GroundChar)">
+            <summary>
+            Gets a character's current animation as a string.
+            </summary>
+            <param name="chara"></param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGround.CharGetAnimPoint(RogueEssence.Ground.GroundChar,RogueEssence.Content.ActionPointType)">
+            <summary>
+            Gets the chosen action point of the character at this specific frame.
+            </summary>
+            <param name="chara"></param>
+            <param name="actionPoint">The ype of action point to retrieve the coordinates for.</param>
+            <returns>The location of the action point in absolute coordinates on the map.</returns>
         </member>
         <member name="M:RogueEssence.Script.ScriptGround.CharSetAnim(RogueEssence.Ground.GroundChar,System.String,System.Boolean)">
             <summary>
@@ -6526,6 +6656,14 @@
             Plays a screen-moving effect.
             </summary>
             <param name="mover">The screen mover.</param>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGround.LevelUpChar">
+            <summary>
+            Levels up a character a certain amount of times all at once.
+            Also handles learning new moves.
+            </summary>
+            <param name="character">The characters to level up.</param>
+            <param name="numLevelUps">The number of level ups.</param>
         </member>
         <member name="M:RogueEssence.Script.ScriptGround.AddMapStatus(System.String)">
             <summary>
@@ -6852,6 +6990,7 @@
             Takes a string as an argument.
             </summary>
             <param name="text">The text to display.</param>
+            <param name="callbacks">The Lua table of callbacks for the textbox to call.</param>
             <example>
             UI:WaitShowDialogue("Hello World!")
             </example>
@@ -6862,16 +7001,18 @@
             </summary>
             <param name="text">The text to display.</param>
             <param name="waitTime">The time for the textbox to remain on screen. Pass -1 to wait for layer input.</param>
+            <param name="callbacks">The Lua table of callbacks for the textbox to call.</param>
             <example>
             UI:WaitShowTimedDialogue("Hello World!", 120)
             </example>
         </member>
-        <member name="M:RogueEssence.Script.ScriptUI.TextDialogue(System.String,System.Int32)">
+        <member name="M:RogueEssence.Script.ScriptUI.TextDialogue(System.String,System.Int32,NLua.LuaTable)">
             <summary>
             Sets the current dialogue text to be shown.  Requires WaitDialog to actually display.
             </summary>
             <param name="text">The text to display.</param>
             <param name="waitTime">The time for the textbox to remain on screen. Pass -1 to wait for layer input.</param>
+            <param name="callbacks">The Lua table of callbacks for the textbox to call.</param>
         </member>
         <member name="F:RogueEssence.Script.ScriptUI.WaitShowVoiceOver">
             <summary>
@@ -6879,23 +7020,39 @@
             </summary>
             <param name="text">The text to display.</param>
             <param name="expireTime">The time for the textbox to remain on screen. Pass -1 to wait for layer input.</param>
+            <param name="x">The X position of the box</param>
+            <param name="y">The Y position of the box</param>
+            <param name="width">Width of the box</param>
+            <param name="height">Height of the box</param>
+            <param name="callbacks">The Lua table of callbacks for the textbox to call.</param>
             <example>
             UI:WaitShowVoiceOver("Hello World!", 120)
             </example>
         </member>
-        <member name="M:RogueEssence.Script.ScriptUI.TextVoiceOver(System.String,System.Int32)">
+        <member name="M:RogueEssence.Script.ScriptUI.TextVoiceOver(System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,NLua.LuaTable)">
             <summary>
             Sets the current voice-over text to be shown.  Requires WaitDialog to actually display.
             </summary>
             <param name="text">The text to display.</param>
             <param name="expireTime">The time for the textbox to remain on screen. Pass -1 to wait for layer input.</param>
+            <param name="x">The X position of the box</param>
+            <param name="y">The Y position of the box</param>
+            <param name="width">Width of the box</param>
+            <param name="height">Height of the box</param>
+            <param name="callbacks">The Lua table of callbacks for the textbox to call.</param>
         </member>
-        <member name="M:RogueEssence.Script.ScriptUI.TextPopUp(System.String,System.Int32)">
+        <member name="M:RogueEssence.Script.ScriptUI.TextPopUp(System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean)">
             <summary>
-            Makes text pop up in the bottom-left corner. Displays concurrently with any other process.
+            Makes text pop up in the bottom-left corner by default. Displays concurrently with any other process.
             </summary>
             <param name="text">The text to display.</param>
             <param name="expireTime">The time for the textbox to remain on screen.</param>
+            <param name="x">The X position of the box</param>
+            <param name="y">The Y position of the box</param>
+            <param name="width">Width of the box</param>
+            <param name="height">Height of the box</param>
+            <param name="centerH">Horizontal centering</param>
+            <param name="centerV">Vertical centering</param>
         </member>
         <member name="F:RogueEssence.Script.ScriptUI.WaitShowTitle">
             <summary>
@@ -7022,6 +7179,39 @@
             <param name="width">Width of the box</param>
             <param name="height">Height of the box</param>
         </member>
+        <member name="M:RogueEssence.Script.ScriptUI.SetSe(System.String,System.Int32)">
+            <summary>
+            Sets the speaker sound effect and speak frames played in the TextDialogue functions. 
+            </summary>
+            <param name="newSe">The sound effect of the box</param>
+            <param name="speakTime">The amount of frames to wait between each sound effect</param>
+            <example>
+            UI:SetSe("Battle/_UNK_DUN_Water_Drop", 3)
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.SetSe(System.String)">
+            <summary>
+            Sets the speaker sound effect played in the TextDialogue functions. 
+            </summary>
+            <param name="newSe">The sound effect of the box</param>
+            <example>
+            UI:SetSe("Menu/Unknown-3")
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.SetSpeakTime(System.Int32)">
+            <summary>
+            Sets the speak frames played in the TextDialogue functions. 
+            </summary>
+            <param name="speakTime">The amount of frames to wait between each sound effect</param>
+            <example>
+            UI:SetSpeakTime(10)
+            </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.ResetSe">
+            <summary>
+            Resets to the default speaker sound effect and speaker frames.
+            </summary>
+        </member>
         <member name="M:RogueEssence.Script.ScriptUI.ResetBounds">
             <summary>
             Resets the position and size of the dialogue box.
@@ -7072,7 +7262,7 @@
             Instantly break. Used as default/invalid value when returning a yieldable value.
             </summary>
         </member>
-        <member name="M:RogueEssence.Script.ScriptUI.ChoiceMenuYesNo(System.String,System.Boolean)">
+        <member name="M:RogueEssence.Script.ScriptUI.ChoiceMenuYesNo(System.String,System.Boolean,NLua.LuaTable)">
              <summary>
              Ask a question answered by yes or no via character dialogue to the player.
              UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
@@ -7083,6 +7273,7 @@
              </summary>
              <param name="message">Question to be asked to the user.</param>
              <param name="bdefaultstono">Whether the cursor starts on no by default</param>
+             <param name="callbacks">The Lua table of callbacks for the textbox to call.</param>
         </member>
         <member name="M:RogueEssence.Script.ScriptUI.NameMenu(System.String,System.String,System.Int32)">
             <summary>
@@ -7317,7 +7508,7 @@
             and for execution to suspend until the menu is exited.
             </summary>
         </member>
-        <member name="M:RogueEssence.Script.ScriptUI.BeginChoiceMenu(System.String,NLua.LuaTable,System.Object,System.Object)">
+        <member name="M:RogueEssence.Script.ScriptUI.BeginChoiceMenu(System.String,NLua.LuaTable,System.Object,System.Object,NLua.LuaTable)">
             <summary>
             Marks the start of a multi-choice menu.
             UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
@@ -7328,6 +7519,7 @@
             <param name="choicesPairs">A table of choices.  Each choice can be either a string, or { string, bool } representing the text and enabled status.</param>
             <param name="defaultChoice">The cursor starts on this choice.</param>
             <param name="cancelChoice">This choice is chosen if the player presses the cancel button.</param>
+            <param name="callbacks">The Lua table of callbacks for the textbox to call.</param>
         </member>
         <member name="M:RogueEssence.Script.ScriptUI.BeginMultiPageMenu(System.Int32,System.Int32,System.Int32,System.String,NLua.LuaTable,System.Int32,System.Object,System.Object)">
             <summary>
@@ -7365,6 +7557,12 @@
             <example>
             UI:WaitForChoice()
             </example>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.__WaitForChoice">
+            <summary>
+            Wait for choice and then CLEAN UP m_curchoice
+            </summary>
+            <returns></returns>
         </member>
         <member name="F:RogueEssence.Menu.DialogueBox.SPEAK_FRAMES">
             <summary>
@@ -7501,6 +7699,17 @@
             Checks to see if the calling coroutine can also continue to finish.
             </summary>
             <param name="cocontext"></param>
+        </member>
+        <member name="F:RogueEssence.GameManager.Song">
+            <summary>
+            Currently playing song
+            </summary>
+        </member>
+        <member name="F:RogueEssence.GameManager.SongFamily">
+            <summary>
+            Songs that are playing in parallel but muted in wait for crossfade.
+            Includes the currently playing song
+            </summary>
         </member>
         <member name="M:RogueEssence.GameManager.WaitSE(System.String)">
             <summary>

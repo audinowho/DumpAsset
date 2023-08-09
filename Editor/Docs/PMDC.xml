@@ -148,7 +148,7 @@
             Gets the path directly to a target
             </summary>
             <param name="controlledChar"></param>
-            <param name="end"></param>
+            <param name="ends"></param>
             <param name="freeGoal">Determines whether the goal should be reachable even if blocked.</param>
             <param name="respectPeers">Considers entities as blockers</param>
             <returns></returns>
@@ -259,6 +259,11 @@
             does not pick up items
             </summary>
         </member>
+        <member name="F:PMDC.Dungeon.ProtectEvent.Anims">
+            <summary>
+            OBSOLETE
+            </summary>
+        </member>
         <!-- Badly formed XML comment ignored for member "T:PMDC.Dungeon.DmgMult" -->
         <!-- Badly formed XML comment ignored for member "T:PMDC.Dungeon.AccMult" -->
         <member name="T:PMDC.Dungeon.AttackOnlyEvent">
@@ -311,6 +316,121 @@
         <member name="F:PMDC.Dungeon.CompassEvent.EligibleTiles">
             <summary>
             Tiles eligible to be pointed to.
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.BattlePositionEvent">
+            <summary>
+            Sets the position of team members for starting a battle.
+            The first loc in the list is where team member 1 should be
+            The second is where team member 2 should be
+            etc.
+            All positions are relative to the first entrance.
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.BeginBattleEvent">
+            <summary>
+            Sets Team Mode On for boss battles and adds a map condition for checking if all enemies have been defeated.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.ChestEvent.ChestAnimation">
+            <summary>
+            The animation to play when the chest opens.
+            Defaults to Chest_Open.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.ChestEvent.ChestEmptyTile">
+            <summary>
+            The empty chest tile to spawn after the chest is opened.
+            Defaults to chest_empty.
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.SpawnItemsEvent">
+            <summary>
+            This event spawns a number of items from the source tile/object onto the tiles around it, like the ChestEvent
+            item spawning.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.SpawnItemsEvent.MaxRangeWidth">
+            <summary>
+            Max range/distance to spawn from the origin.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.SpawnItemsEvent.MaxRangeHeight">
+            <summary>
+            Max range/distance to spawn from the origin.
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.SpawnEnemiesEvent">
+            <summary>
+            This event spawns a number of enemy mobs from the source tile/object onto the tiles around it, like the ChestEvent
+            item spawning.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.SpawnEnemiesEvent.MaxRangeWidth">
+            <summary>
+            Max range/distance to spawn from the origin.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.SpawnEnemiesEvent.MaxRangeHeight">
+            <summary>
+            Max range/distance to spawn from the origin.
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.SpawnRandomItemsEvent">
+            <summary>
+            This event spawns a number of items from the source tile/object onto the tiles around it, like the ChestEvent
+            item spawning.  It picks the data randomly from a spawn list.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.SpawnRandomItemsEvent.MaxRangeWidth">
+            <summary>
+            Max range/distance to spawn from the origin.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.SpawnRandomItemsEvent.MaxRangeHeight">
+            <summary>
+            Max range/distance to spawn from the origin.
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.SpawnRandomEnemiesEvent">
+            <summary>
+            This event spawns a number of enemy mobs from the source tile/object onto the tiles around it, like the ChestEvent
+            item spawning.  It picks the data randomly from a spawn list.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.SpawnRandomEnemiesEvent.MaxRangeWidth">
+            <summary>
+            Max range/distance to spawn from the origin.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.SpawnRandomEnemiesEvent.MaxRangeHeight">
+            <summary>
+            Max range/distance to spawn from the origin.
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.TransformTileEvent">
+            <summary>
+            This event transforms a specific tile into another tile.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.MonsterHouseTableState.MonsterHouseWarningTile">
+            <summary>
+            If this is set, this tile will be used to display a warning for monster houses.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.MonsterHouseTableState.ChestAmbushWarningTile">
+            <summary>
+            If this is set, this tile will be used to replace the chest in a chest ambush.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.MonsterHouseTableState.NoMonsterHallOnBlockLightTiles">
+            <summary>
+            If this is set to true, monster halls will never appear on tiles where you can't see the warning tile
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.MonsterHouseTableState.NoMonsterHouseEntrances">
+            <summary>
+            If this is set to true, you will not be able to spawn into a monster house upon entering a floor.
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.ChestStep`1">
@@ -1096,9 +1216,14 @@
             Spawns the mob with a custom shiny chance.
             </summary>
         </member>
+        <member name="F:PMDC.LevelGen.MobSpawnAltColor.Chance">
+            <summary>
+            Fractional chance of occurrence.
+            </summary>
+        </member>
         <member name="F:PMDC.LevelGen.MobSpawnAltColor.Odds">
             <summary>
-            One-in-this chance.
+            OBSOLETE
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.MobSpawnMovesOff">

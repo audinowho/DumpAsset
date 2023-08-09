@@ -121,7 +121,7 @@ Translation:
 [FR] Alicia
 [FR] Blackun
 [FR] Discord:youka0 Youka
-[FR] Maru
+[FR] Discord:veemaru Mathieu "Maru" V
 [IT] Discord:digital_hazard Digital Hazard
 [IT] Discord:saiphdeer Saiph
 [KO] https://www.reddit.com/user/Bashful_Barry/ Barry

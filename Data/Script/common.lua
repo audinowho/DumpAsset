@@ -984,7 +984,7 @@ function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
 end
 
 
-function COMMON.ExitDungeonMissionCheck(zoneId, segmentID)
+function COMMON.ExitDungeonMissionCheck(result, zoneId, segmentID)
   for name, mission in pairs(SV.missions.Missions) do
     PrintInfo("Checking Mission: "..tostring(name))
 	if mission.Complete == 0 and zoneId == mission.DestZone and segmentID == mission.DestSegment then

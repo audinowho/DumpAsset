@@ -29,7 +29,7 @@ function guildmaster_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
   --need to restart to title
   
   --first check for rescue flag; if we're in rescue mode then take a different path
-  COMMON.ExitDungeonMissionCheck(zone.ID, segmentID)
+  COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)
   else

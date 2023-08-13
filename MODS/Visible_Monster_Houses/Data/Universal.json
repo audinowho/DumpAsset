@@ -1,7 +1,14 @@
 ﻿{
-"Version": "0.7.10.0",
+"Version": "0.7.15.1",
 "Object": {
-"$type": "RogueEssence.Data.ActiveEffect, RogueEssence",
+"$type": "RogueEssence.Data.UniversalActiveEffect, RogueEssence",
+"ZoneSteps": [
+{
+"$type": "RogueEssence.LevelGen.ScriptZoneStep, RogueEssence",
+"Script": "SpawnMissionNpcFromSV",
+"ArgTable": "{}"
+}
+],
 "UniversalStates": [
 {
 "$type": "PMDC.Dungeon.HitRateLevelTableState, PMDC",
@@ -688,7 +695,8 @@
 },
 "Value": {
 "$type": "PMDC.Dungeon.ImpostorReviveEvent, PMDC",
-"AbilityID": "imposter"
+"AbilityID": "imposter",
+"StatusID": "transformed"
 }
 },
 {

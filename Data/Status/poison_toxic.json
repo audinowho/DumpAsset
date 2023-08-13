@@ -1,22 +1,14 @@
 ﻿{
-"Version": "0.7.15.0",
+"Version": "0.7.15.1",
 "Object": {
 "$type": "RogueEssence.Data.StatusData, RogueEssence",
 "Name": {
 "DefaultText": "Badly Poisoned",
-"LocalTexts": {
-"fr": "Gravement Empoisonné",
-"de": "Schwer vergiftet",
-"es": "Gravemente envenenado",
-"pt": "Gravemente Envenenado",
-"zh-hans": "剧毒"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "The Pokémon takes damage on every action, with the damage worsening if it attacks. Its ability to recover HP is also reduced. This status wears off after a few turns.",
-"LocalTexts": {
-"zh-hans": "这只宝可梦每次行动都会受到伤害，如果攻击，伤害会恶化。回复HP的能力也会降低。该状态在几回合后解除。"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -59,6 +51,7 @@
 "OnEquips": [],
 "OnPickups": [],
 "BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
@@ -91,6 +84,7 @@
 "OnEquips": [],
 "OnPickups": [],
 "BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
@@ -167,10 +161,19 @@
 ]
 },
 "Value": {
+"$type": "PMDC.Dungeon.ExceptionStatusContextEvent, PMDC",
+"States": [
+{
+"assembly": "PMDC, Version=0.7.15.1, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.Corrosion"
+}
+],
+"BaseEvent": {
 "$type": "PMDC.Dungeon.TypeCheck, PMDC",
 "Element": "poison",
 "Message": {
 "Key": "MSG_POISON_FAIL_ELEMENT"
+}
 }
 }
 },
@@ -181,6 +184,14 @@
 ]
 },
 "Value": {
+"$type": "PMDC.Dungeon.ExceptionStatusContextEvent, PMDC",
+"States": [
+{
+"assembly": "PMDC, Version=0.7.15.1, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.Corrosion"
+}
+],
+"BaseEvent": {
 "$type": "PMDC.Dungeon.TypeCheck, PMDC",
 "Element": "steel",
 "Message": {
@@ -188,7 +199,9 @@
 }
 }
 }
+}
 ],
+"BeforeStatusAddings": [],
 "OnStatusAdds": [
 {
 "Key": {

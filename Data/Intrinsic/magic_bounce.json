@@ -1,28 +1,14 @@
 ﻿{
-"Version": "0.7.15.0",
+"Version": "0.7.15.1",
 "Object": {
 "$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
 "Name": {
 "DefaultText": "Magic Bounce",
-"LocalTexts": {
-"fr": "Miroir Magik",
-"de": "Magiespiegel",
-"es": "Espejo Mágico",
-"it": "Magispecchio",
-"ko": "매직미러",
-"ja": "マジックミラー",
-"ja-jp": "マジックミラー",
-"zh-hans": "魔法镜",
-"zh-hant": "魔法鏡"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "Reflects moves that cause status conditions.",
-"LocalTexts": {
-"de": "Reflektiert Attacken, welche Statusprobleme verursachen.",
-"ko": "상태이상을 일으키는 기술을 반사한다.",
-"zh-hans": "可以反弹变化招式。"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -34,6 +20,7 @@
 "OnEquips": [],
 "OnPickups": [],
 "BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
@@ -62,6 +49,7 @@
 "OnEquips": [],
 "OnPickups": [],
 "BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
@@ -86,7 +74,7 @@
 },
 "Value": {
 "$type": "PMDC.Dungeon.ExceptInfiltratorEvent, PMDC",
-"ExceptionMsg": true,
+"ExceptionMsg": false,
 "BaseEvents": [
 {
 "$type": "PMDC.Dungeon.BounceStatusEvent, PMDC",

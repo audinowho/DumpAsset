@@ -1,24 +1,14 @@
 ﻿{
-"Version": "0.7.15.0",
+"Version": "0.7.15.1",
 "Object": {
 "$type": "RogueEssence.Data.StatusData, RogueEssence",
 "Name": {
 "DefaultText": "Paralyzed",
-"LocalTexts": {
-"fr": "Paralysé",
-"de": "Paralysiert",
-"es": "Paralizado",
-"pt": "Paralisado",
-"zh-hans": "麻痹"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "The Pokémon is paralyzed and cannot move in consecutive turns. This status wears off after a few turns.",
-"LocalTexts": {
-"de": "Das Pokémon ist paralysiert und kann nicht in aufeinanderfolgenden Zügen angreifen. Dieser Status lässt nach einigen Zügen nach.",
-"es": "El Pokémon está paralizado y no puede atacar en los siguientes turnos. Este estado desaparece tras unos turnos.",
-"zh-hans": "这只宝可梦处于麻痹状态，在接下来的几回合内不能攻击。该状态在几回合后解除。"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -53,6 +43,7 @@
 "OnEquips": [],
 "OnPickups": [],
 "BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
@@ -85,6 +76,7 @@
 "OnEquips": [],
 "OnPickups": [],
 "BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
@@ -154,6 +146,7 @@
 }
 }
 ],
+"BeforeStatusAddings": [],
 "OnStatusAdds": [
 {
 "Key": {
@@ -250,7 +243,7 @@
 "$type": "PMDC.Dungeon.PreventItemParalysisEvent, PMDC",
 "ExceptTypes": [
 {
-"assembly": "PMDC, Version=0.7.15.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.15.1, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CurerState"
 }
 ],

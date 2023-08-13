@@ -333,6 +333,30 @@ function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, context, args)
   end
 end
 
+function SINGLE_CHAR_SCRIPT.UpdateEscort(owner, ownerChar, context, args)
+  if context.User ~= nil then
+    return
+  end
+  PrintInfo("Update Escort")
+  local party = GAME:GetPlayerGuestTable()
+  for i, p in ipairs(party) do
+    if p.Dead == false then
+      local e_tbl = LTBL(p)
+	  if e_tbl ~= nil then
+	    local mission = SV.missions.Missions[e_tbl.Escort]
+	    if mission ~= nil then
+		  PrintInfo("Updating"..e_tbl.Escort)
+	      if mission.Type == COMMON.MISSION_TYPE_ESCORT_OUT then
+		    if _ZONE.CurrentMapID.Segment == 0 then
+		      mission.DestFloor = _ZONE.CurrentMapID.ID
+		    end
+	      end
+	    end
+	  end
+	end
+  end
+end
+
 function SINGLE_CHAR_SCRIPT.DestinationFloor(owner, ownerChar, context, args)
   if context.User ~= nil then
     return
@@ -362,7 +386,7 @@ function SINGLE_CHAR_SCRIPT.OutlawClearCheck(owner, ownerChar, context, args)
   -- check for no outlaw in the mission list
   remaining_outlaw = false
   for name, mission in pairs(SV.missions.Missions) do
-    PrintInfo("Checking Mission: "..tostring(name))
+    PrintInfo("Checking Mission for Outlaw Clear: "..tostring(name))
     if mission.Complete == COMMON.MISSION_INCOMPLETE and _ZONE.CurrentZoneID == mission.DestZone
 	  and _ZONE.CurrentMapID.Segment == mission.DestSegment and _ZONE.CurrentMapID.ID == mission.DestFloor then
 	  local found_outlaw = COMMON.FindNpcWithTable(true, "Mission", name)
@@ -370,7 +394,7 @@ function SINGLE_CHAR_SCRIPT.OutlawClearCheck(owner, ownerChar, context, args)
 	    remaining_outlaw = true
 	  else
 	    -- if no outlaws of the mission list, mark quest as complete
-		mission.Complete = 1
+		mission.Complete = COMMON.MISSION_COMPLETE
 		UI:ResetSpeaker()
         UI:WaitShowDialogue("Mission status set to complete. Return to quest giver for reward.")
 	  end

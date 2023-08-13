@@ -38,6 +38,8 @@ function forest_camp.Enter(map)
     GAME:FadeIn(20)
   end
   
+  forest_camp.CheckMissions()
+  
   -- TODO: move this back to BeginExposition
   GAME:UnlockDungeon('faded_trail')
   GAME:UnlockDungeon('bramble_woods')
@@ -57,6 +59,19 @@ function forest_camp.BeginExposition()
   GAME:FadeIn(20)
   
   
+end
+
+function forest_camp.CheckMissions()
+  local quest = SV.missions.Missions["EscortSister"]
+  if quest ~= nil then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
+	  UI:WaitShowDialogue("Escort mission state: Complete.")
+	  quest.Complete = COMMON.MISSION_ARCHIVED
+	  SV.missions.FinishedMissions["EscortSister"] = quest
+	  table.remove(SV.missions.Missions, "EscortSister")
+	end
+  end
+
 end
 
 --------------------------------------------------

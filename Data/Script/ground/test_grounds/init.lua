@@ -447,9 +447,9 @@ function test_grounds.Magnezone_Action(chara, activator)
       UI:WaitShowDialogue("You can find the perpetrator at Replay Test Zone 10F.  Good luck!")
     end
   else
-    if quest.Complete == 1 then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
 	  UI:WaitShowDialogue("Outlaw mission state: Complete.  Give a reward and mark mission as rewarded.")
-	  quest.Complete = 2
+	  quest.Complete = COMMON.MISSION_ARCHIVED
 	  SV.missions.FinishedMissions["OutlawQuest"] = quest
 	  table.remove(SV.missions.Missions, "OutlawQuest")
 	else
@@ -489,9 +489,9 @@ function test_grounds.Butterfree_Action(chara, activator)
       UI:WaitShowDialogue("You can find Caterpie at Replay Test Zone 5F.  Good luck!")
     end
   else
-    if quest.Complete == 1 then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
 	  UI:WaitShowDialogue("Caterpie mission state: Complete.  Give a reward and mark mission as rewarded.")
-	  quest.Complete = 2
+	  quest.Complete = COMMON.MISSION_ARCHIVED
 	  SV.missions.FinishedMissions["CaterQuest"] = quest
 	  table.remove(SV.missions.Missions, "CaterQuest")
 	else
@@ -542,9 +542,9 @@ function test_grounds.Volbeat_Action(chara, activator)
       UI:WaitShowDialogue("You can find Illumise at Replay Test Zone 4F.  I'll join you when you enter!")
     end
   else
-    if quest.Complete == 1 then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
 	  UI:WaitShowDialogue("Volmise mission state: Complete.  Give a reward and mark mission as rewarded.")
-	  quest.Complete = 2
+	  quest.Complete = COMMON.MISSION_ARCHIVED
 	  SV.missions.FinishedMissions["VolmiseQuest"] = quest
 	  table.remove(SV.missions.Missions, "VolmiseQuest")
 	else

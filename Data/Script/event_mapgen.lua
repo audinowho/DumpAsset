@@ -26,17 +26,18 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
   local destinationFloor = false
   local outlawFloor = false
   for name, mission in pairs(SV.missions.Missions) do
-    PrintInfo("Checking Mission: "..tostring(name))
+    PrintInfo("Checking Gen Mission: "..tostring(name))
     if mission.Complete == COMMON.MISSION_INCOMPLETE and zoneContext.CurrentZone == mission.DestZone
 	  and zoneContext.CurrentSegment == mission.DestSegment and zoneContext.CurrentID == mission.DestFloor then
       PrintInfo("Spawning Mission Goal")
+      local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
+	  specificTeam.Explorer = true
+      local post_mob = RogueEssence.LevelGen.MobSpawn()
+      post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(mission.TargetSpecies, 0, "normal", Gender.Unknown)
 	  if mission.Type == COMMON.MISSION_TYPE_OUTLAW then -- outlaw
-        local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
-        local post_mob = RogueEssence.LevelGen.MobSpawn()
-        post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(mission.TargetSpecies, 0, "normal", Gender.Unknown)
         post_mob.Tactic = "boss"
-        post_mob.Level = RogueElements.RandRange(50)
-		post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable('{ Mission = "'..name..'" }'))
+        post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level + 5)
+		post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
 	    specificTeam.Spawns:Add(post_mob)
         PrintInfo("Creating Spawn")
         local picker = LUA_ENGINE:MakeGenericType(PresetMultiTeamSpawnerType, { MapGenContextType }, { })
@@ -50,19 +51,23 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
         PrintInfo("Done")
 	    outlawFloor = true
 	  else
-        local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
-        local post_mob = RogueEssence.LevelGen.MobSpawn()
-        post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(mission.TargetSpecies, 0, "normal", Gender.Unknown)
         post_mob.Tactic = "slow_patrol"
-        post_mob.Level = RogueElements.RandRange(50)
 	    if mission.Type == COMMON.MISSION_TYPE_RESCUE then -- rescue
+          post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)
 	      local dialogue = RogueEssence.Dungeon.BattleScriptEvent("RescueReached")
           post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
-          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable('{ Mission = "'..name..'" }'))
+          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
         elseif mission.Type == COMMON.MISSION_TYPE_ESCORT then -- escort
+          post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)
 	      local dialogue = RogueEssence.Dungeon.BattleScriptEvent("EscortRescueReached")
           post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
-          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable('{ Mission = "'..name..'" }'))
+          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
+        elseif mission.Type == COMMON.MISSION_TYPE_ESCORT_OUT then -- escort
+          post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level // 2)
+	      local dialogue = RogueEssence.Dungeon.BattleScriptEvent("EscortOutReached", Serpent.line(mission.EscortTable))
+          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
+          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnMovesOff(0))
+          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Escort = name })))
 	    end
 	    specificTeam.Spawns:Add(post_mob)
         PrintInfo("Creating Spawn")
@@ -79,7 +84,6 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
 	    local priority = RogueElements.Priority(5, 2, 1)
 	    queue:Enqueue(priority, mobPlacement)
         PrintInfo("Done")
-	    destinationFloor = true
 	  end
     end
   end

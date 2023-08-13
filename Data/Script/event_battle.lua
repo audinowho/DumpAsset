@@ -82,7 +82,47 @@ function BATTLE_SCRIPT.EscortInteract(owner, ownerChar, context, args)
   local oldDir = context.Target.CharDir
   DUNGEON:CharTurnToChar(context.Target, context.User)
   UI:SetSpeaker(context.Target)
-  UI:WaitShowDialogue("I'm counting on you!")
+  UI:WaitShowDialogue(RogueEssence.StringKey(args.Messages[1]):ToLocal())
+  context.Target.CharDir = oldDir
+end
+
+function BATTLE_SCRIPT.EscortInteractSister(owner, ownerChar, context, args)
+  context.CancelState.Cancel = true
+  local tbl = LTBL(context.Target)
+  local oldDir = context.Target.CharDir
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  UI:SetSpeaker(context.Target)
+  
+  local oldDir = context.Target.CharDir
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  
+  UI:SetSpeaker(context.Target)
+  
+  local ratio = context.Target.HP * 100 // context.Target.MaxHP
+  
+if ratio <= 25 then
+  UI:SetSpeakerEmotion("Pain")
+  UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_HALF"):ToLocal())
+elseif ratio <= 50 then
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_HALF"):ToLocal())
+else 
+  UI:SetSpeakerEmotion("Worried")
+  if tbl.TalkAmount == nil then
+	UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_FULL_001"):ToLocal())
+	tbl.TalkAmount = 1
+  else
+    if tbl.TalkAmount == 1 then
+	  UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_FULL_002"):ToLocal())
+	elseif tbl.TalkAmount == 2 then
+	  UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_FULL_003"):ToLocal())
+	else
+	  UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_FULL_004"):ToLocal())
+	end
+	tbl.TalkAmount = tbl.TalkAmount + 1
+  end
+end
+
   context.Target.CharDir = oldDir
 end
 
@@ -90,7 +130,7 @@ function BATTLE_SCRIPT.RescueReached(owner, ownerChar, context, args)
 
   local tbl = LTBL(context.Target)
   local mission = SV.missions.Missions[tbl.Mission]
-  mission.Complete = 1
+  mission.Complete = COMMON.MISSION_COMPLETE
   
   local oldDir = context.Target.CharDir
   DUNGEON:CharTurnToChar(context.Target, context.User)
@@ -115,7 +155,7 @@ function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
   if escort then
     
     local mission = SV.missions.Missions[tbl.Mission]
-    mission.Complete = 1
+    mission.Complete = COMMON.MISSION_COMPLETE
   
     local oldDir = context.Target.CharDir
     DUNGEON:CharTurnToChar(context.Target, context.User)
@@ -133,6 +173,48 @@ function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
     UI:ResetSpeaker()
     UI:WaitShowDialogue("Mission status set to complete. Return to quest giver for reward.")
   end
+end
+
+function BATTLE_SCRIPT.EscortOutReached(owner, ownerChar, context, args)
+  
+  local tbl = LTBL(context.Target)
+  
+    local mission = SV.missions.Missions[tbl.Mission]
+  
+    local oldDir = context.Target.CharDir
+    DUNGEON:CharTurnToChar(context.Target, context.User)
+  
+    UI:SetSpeaker(context.Target)
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(args.EscortStartMsg):ToLocal()))
+    
+	-- ask to join
+    UI:ResetSpeaker()
+	UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("TALK_ESCORT_ASK"):ToLocal()), false)
+	UI:WaitForChoice()
+	result = UI:ChoiceResult()
+	if result then
+	  -- join the team
+
+	  _DUNGEON:RemoveChar(context.Target)
+	  local tactic = _DATA:GetAITactic(_DATA.DefaultAI)
+	  context.Target.Tactic =  RogueEssence.Data.AITactic(tactic)
+	  _DATA.Save.ActiveTeam.Guests:Add(context.Target)
+	  context.Target:RefreshTraits()
+	  context.Target.Tactic:Initialize(context.Target)
+
+	  context.Target:FullRestore()
+		
+	  context.Target.ActionEvents:Clear()
+	  local talk_evt = RogueEssence.Dungeon.BattleScriptEvent(args.EscortInteract)
+	  context.Target.ActionEvents:Add(talk_evt)
+	  
+	  SOUND:PlayFanfare("Fanfare/Note")
+      UI:ResetSpeaker()
+	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT_GUEST"):ToLocal(), context.Target:GetDisplayName(true)))
+      UI:SetSpeaker(context.Target)
+      UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(args.EscortAcceptMsg):ToLocal()))
+	end
+	
 end
 
 function BATTLE_SCRIPT.CountTalkTest(owner, ownerChar, context, args)

@@ -49,18 +49,6 @@ SV.adventure =
   Thief    = false
 }
 
-SV.missions =
-{
-  Missions = { },
-  FinishedMissions = { },
-}
-
-SV.magnagate =
-{
-  cards = 0,
-  portal = false
-}
-
 SV.base_shop = {
 	{ Index = "food_apple", Amount = 0, Price = 50},
 	{ Index = "food_apple_big", Amount = 0, Price = 150},
@@ -75,6 +63,18 @@ SV.base_trades = {
 }
 
 SV.unlocked_trades = {
+}
+
+SV.missions =
+{
+  Missions = { },
+  FinishedMissions = { },
+}
+
+SV.magnagate =
+{
+  cards = 0,
+  portal = false
 }
 
 -----------------------------------------------

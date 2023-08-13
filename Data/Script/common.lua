@@ -93,9 +93,11 @@ end
 COMMON.MISSION_TYPE_RESCUE = 0
 COMMON.MISSION_TYPE_ESCORT = 1
 COMMON.MISSION_TYPE_OUTLAW = 2
+COMMON.MISSION_TYPE_ESCORT_OUT = 3
 
 COMMON.MISSION_INCOMPLETE = 0
 COMMON.MISSION_COMPLETE = 1
+COMMON.MISSION_ARCHIVED = 2
 
 ----------------------------------------------------------
 -- Convenience Scription Functions
@@ -954,7 +956,7 @@ end
 function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
   for name, mission in pairs(SV.missions.Missions) do
     PrintInfo("Checking Mission: "..tostring(name))
-	if mission.Complete == 0 and zoneId == mission.DestZone and segmentID == mission.DestSegment then
+	if mission.Complete == COMMON.MISSION_INCOMPLETE and zoneId == mission.DestZone and segmentID == mission.DestSegment then
 	  if mission.Type == 1 then -- escort
 		
 		-- add escort to team
@@ -985,36 +987,35 @@ end
 
 
 function COMMON.ExitDungeonMissionCheck(result, zoneId, segmentID)
-  for name, mission in pairs(SV.missions.Missions) do
-    PrintInfo("Checking Mission: "..tostring(name))
-	if mission.Complete == 0 and zoneId == mission.DestZone and segmentID == mission.DestSegment then
-	  if mission.Type == 1 then -- escort
-	    -- remove the escort from the party
-		local escort = COMMON.FindMissionEscort(name)
-		if escort then
-		  _DUNGEON:RemoveChar(escort)
-		end
+  -- clear any escorts from party
+  PrintInfo("Checking Exit Escort")
+  local party = GAME:GetPlayerGuestTable()
+  for i, p in ipairs(party) do
+    local e_tbl = LTBL(p)
+	if e_tbl ~= nil then
+	  PrintInfo("Checking table "..e_tbl.Escort)
+	  local mission = SV.missions.Missions[e_tbl.Escort]
+	  if mission ~= nil then
+	    PrintInfo("Checking mission")
+	    if mission.Type == COMMON.MISSION_TYPE_ESCORT then
+	      _DUNGEON:RemoveChar(p)
+	    elseif mission.Type == COMMON.MISSION_TYPE_ESCORT_OUT then
+		  PrintInfo("Exiting with Escort")
+		  if p.Dead == false then
+		    if result == RogueEssence.Data.GameProgress.ResultType.Cleared then
+		      mission.Complete = COMMON.MISSION_COMPLETE
+		    else
+		      UI:ResetSpeaker()
+			  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_LOST_GUEST"):ToLocal(), p:GetDisplayName(true)))
+		    end
+		  end
+		  _DATA.Save.ActiveTeam.Guests:RemoveAt(i-1)
+	    end
 	  end
 	end
   end
 end
 
-
-
-function COMMON.FindMissionEscort(missionId)
-  local escort = nil
-  PrintInfo("Name: "..missionId)
-  local party = GAME:GetPlayerGuestTable()
-  for i, p in ipairs(party) do
-    local e_tbl = LTBL(p)
-	PrintInfo("Escort: "..e_tbl.Escort)
-	if e_tbl.Escort == missionId then
-	  escort = p
-	  break
-	end
-  end
-  return escort
-end
 
 function COMMON.EndDungeonDay(result, zoneId, structureId, mapId, entryId)
   COMMON.EndDayCycle()

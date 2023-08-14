@@ -110,6 +110,7 @@ function test_grounds.Sign1_Action(obj, activator)
   PrintInfo('Sign1_Action')
   
   GROUND:MoveObjectToPosition(obj, 40, 40, 2)
+  GROUND:TeleportTo(obj, 200, 200, Direction.Right)
   UI:ResetSpeaker()
   UI:SetCenter(true)
   UI:WaitShowDialogue(MapStrings['Sign1_Action_Line0'])
@@ -387,12 +388,14 @@ function test_grounds.Mew_Action(chara, activator)
   GAME:WaitFrames(60)
   
   mew.CollisionDisabled = true
+  _ZONE.CurrentGround:RemoveMapChar(mew)
+  _ZONE.CurrentGround:AddMapChar(mew)
   local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Hop")
   local frameAction = RogueEssence.Ground.IdleAnimGroundAction(mew.Position, 0, Direction.Up, animId, false)
   
-  local head_pos = GROUND:CharGetAnimPoint(partner, RogueEssence.Content.ActionPointType.Head)
-  local shadow_pos = GROUND:CharGetAnimPoint(partner, RogueEssence.Content.ActionPointType.Shadow)
-  GROUND:ActionToPosition(mew, frameAction, partner.MapLoc.X, partner.MapLoc.Y + 1, 1, 2, shadow_pos.Y - head_pos.Y)
+  local head_pos = GROUND:CharGetAnimPoint(player, RogueEssence.Content.ActionPointType.Head)
+  local shadow_pos = GROUND:CharGetAnimPoint(player, RogueEssence.Content.ActionPointType.Shadow)
+  GROUND:ActionToPosition(mew, frameAction, player.MapLoc.X, player.MapLoc.Y, 1, 2, shadow_pos.Y - head_pos.Y)
   
   animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("None")
   GROUND:CharSetAction(mew, RogueEssence.Ground.FrameGroundAction(mew.Position, mew.LocHeight, Direction.Up, animId, 0))

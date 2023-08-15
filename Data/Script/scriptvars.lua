@@ -150,6 +150,7 @@ SV.luminous_spring =
 SV.forest_camp = 
 {
   ExpositionComplete  = false,
+  -- TODO
   -- 0 = not started, 1 = started, 2 = failed, 3 = success, 4 = completed
   SnorlaxPhase = 0
 }
@@ -170,7 +171,9 @@ SV.canyon_camp =
 
 SV.rest_stop = 
 {
-  ExpositionComplete  = false
+  -- TODO
+  -- 0 = not started, 1 = started, 2 = failed, 3 = success, 4 = completed
+  Exposition = 0
 }
 
 SV.final_stop = 

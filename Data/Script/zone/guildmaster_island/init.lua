@@ -33,6 +33,10 @@ function guildmaster_island.ExitSegment(zone, result, rescue, segmentID, mapID)
 	    SV.forest_camp.SnorlaxPhase = 2
 	    COMMON.EndSession(result, 'guildmaster_island', -1,3,3)
 	    return
+	  elseif mapID == 6 then
+	    SV.rest_stop.Exposition = 2
+	    COMMON.EndSession(result, 'guildmaster_island', -1,5,2)
+	    return
 	  end
 	end
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
@@ -41,6 +45,9 @@ function guildmaster_island.ExitSegment(zone, result, rescue, segmentID, mapID)
 	  if mapID == 3 then
 		SV.forest_camp.SnorlaxPhase = 3
 	    COMMON.EndSession(result, 'guildmaster_island', -1,3,3)
+	  elseif mapID == 6 then
+		SV.rest_stop.Exposition = 3
+	    COMMON.EndSession(result, 'guildmaster_island', -1,6,1)
 	  else
 	    PrintInfo("No exit procedure found!")
 		COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

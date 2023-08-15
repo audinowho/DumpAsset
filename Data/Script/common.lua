@@ -99,6 +99,7 @@ COMMON.MISSION_INCOMPLETE = 0
 COMMON.MISSION_COMPLETE = 1
 COMMON.MISSION_ARCHIVED = 2
 
+
 ----------------------------------------------------------
 -- Convenience Scription Functions
 ----------------------------------------------------------

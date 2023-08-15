@@ -42,6 +42,9 @@ function canyon_camp.Enter(map)
   if not SV.canyon_camp.ExpositionComplete then
     canyon_camp.BeginExposition()
     SV.canyon_camp.ExpositionComplete = true
+  elseif SV.rest_stop.Exposition == 2 then
+    canyon_camp.Steelix_Fail()
+	SV.rest_stop.Exposition = 1
   else
     GAME:FadeIn(20)
   end
@@ -228,6 +231,13 @@ function canyon_camp.NPC_Storehouse_Action(chara, activator)
   UI:SetSpeaker(chara)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
     COMMON.UnlockWithFanfare("ambush_forest", false)
+end
+
+
+function canyon_camp.Steelix_Fail()
+  --everyone is dead
+  GAME:FadeIn(20)
+  --get back up
 end
 
 function canyon_camp.Assembly_Action(obj, activator)

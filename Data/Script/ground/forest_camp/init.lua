@@ -125,6 +125,10 @@ function forest_camp.Snorlax_Action(chara, activator)
   UI:ResetSpeaker()
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_001']))
   
+  if not RogueEssence.DiagManager.Instance.DevMode then
+    return
+  end
+  
   UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Sleeper_Line_Ask'], name), true)
   UI:WaitForChoice()
   ch = UI:ChoiceResult()

@@ -70,6 +70,7 @@ function cliff_camp.West_Exit_Touch(obj, activator)
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
+
 function cliff_camp.Assembly_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   UI:ResetSpeaker()

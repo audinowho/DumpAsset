@@ -22,9 +22,13 @@ function rest_stop.Enter(map)
   }
   
   --when arriving the first time, play this cutscene
-  if not SV.rest_stop.ExpositionComplete then
-    rest_stop.BeginExposition()
-    SV.rest_stop.ExpositionComplete = true
+  if SV.rest_stop.Exposition == 0 then
+    rest_stop.BeginExposition(false)
+  elseif SV.rest_stop.Exposition == 1 then
+    rest_stop.BeginExposition(true)
+  elseif SV.rest_stop.Exposition == 3 then
+    rest_stop.Steelix_Success()
+	SV.rest_stop.Exposition = 4
   else
     GAME:FadeIn(20)
   end
@@ -36,12 +40,58 @@ end
 --------------------------------------------------
 -- Map Begin Functions
 --------------------------------------------------
-function rest_stop.BeginExposition()
+function rest_stop.BeginExposition(shortened)
   
-  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20);
-  GAME:WaitFrames(30);
-  UI:WaitHideTitle(20);
+  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
+  GAME:WaitFrames(30)
+  UI:WaitHideTitle(20)
   GAME:FadeIn(20)
+  
+  
+  --camerawork
+  --walk in
+  
+  --bosses appear
+  GROUND:Unhide("Boss_1")
+  GROUND:Unhide("Boss_2")
+  GROUND:Unhide("Boss_3")
+  GROUND:Unhide("Boss_4")
+  GROUND:Unhide("Boss_5")
+  GROUND:Unhide("Boss_6")
+  
+  SOUND:PlayBGM("A13. Threat.ogg", false)
+  
+  --bosses talk
+  UI:ResetSpeaker()
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Boss_Line_001']))
+  
+  --battle!
+  SV.rest_stop.Exposition = 1
+  COMMON.BossTransition()
+  GAME:EnterDungeon('guildmaster_island', 0, 6, 0, RogueEssence.Data.GameProgress.DungeonStakes.Progress, true, true)
+end
+
+function rest_stop.Steelix_Success()
+  
+  
+  GROUND:Unhide("Boss_1")
+  GROUND:Unhide("Boss_2")
+  GROUND:Unhide("Boss_3")
+  GROUND:Unhide("Boss_4")
+  GROUND:Unhide("Boss_5")
+  GROUND:Unhide("Boss_6")
+  
+  GAME:FadeIn(20)
+  
+  UI:ResetSpeaker()
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Boss_Line_Success_001']))
+  
+  GROUND:Hide("Boss_1")
+  GROUND:Hide("Boss_2")
+  GROUND:Hide("Boss_3")
+  GROUND:Hide("Boss_4")
+  GROUND:Hide("Boss_5")
+  GROUND:Hide("Boss_6")
   
   GAME:UnlockDungeon('thunderstruck_pass')
   GAME:UnlockDungeon('veiled_ridge')

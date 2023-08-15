@@ -34,8 +34,20 @@ function forest_camp.Enter(map)
   if not SV.forest_camp.ExpositionComplete then
     forest_camp.BeginExposition()
     SV.forest_camp.ExpositionComplete = true
+  elseif SV.forest_camp.SnorlaxPhase == 2 then
+    forest_camp.Snorlax_Fail()
+	SV.forest_camp.SnorlaxPhase = 1
+  elseif SV.forest_camp.SnorlaxPhase == 3 then
+    forest_camp.Snorlax_Success()
+	SV.forest_camp.SnorlaxPhase = 4
   else
     GAME:FadeIn(20)
+  end
+  
+  if SV.forest_camp.SnorlaxPhase == 4 then
+    GROUND:Hide("Snorlax")
+    GROUND:Hide("NPC_Carry")
+    GROUND:Hide("NPC_Deliver")
   end
   
   forest_camp.CheckMissions()
@@ -113,10 +125,47 @@ function forest_camp.Snorlax_Action(chara, activator)
   UI:ResetSpeaker()
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_001']))
   
+  UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Sleeper_Line_Ask'], name), true)
+  UI:WaitForChoice()
+  ch = UI:ChoiceResult()
   
-  --SOUND:PlayBattleSE("EVT_Battle_Transition")
-  --GAME:FadeOut(true, 60)
-  --GAME:EnterDungeon('guildmaster_island', 0, 3, 0, RogueEssence.Data.GameProgress.DungeonStakes.Progress, true, true)
+  if ch then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_002']))
+	SV.forest_camp.SnorlaxPhase = 1
+    SOUND:PlayBattleSE("EVT_Battle_Transition")
+    GAME:FadeOut(true, 60)
+    GAME:EnterDungeon('guildmaster_island', 0, 3, 0, RogueEssence.Data.GameProgress.DungeonStakes.Progress, true, true)
+  end
+end
+
+function forest_camp.Snorlax_Fail()
+  --snorlax collapses back
+  --everyone is dead
+  GAME:FadeIn(20)
+  --ekans: he doesn't like to have his sleep disturbed
+  UI:SetSpeaker(CH("NPC_Deliver"))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_Fail_001']))
+  --move back to position
+end
+
+function forest_camp.Snorlax_Success()
+  local player = CH('PLAYER')
+  
+  GAME:FadeIn(20)
+  --snorlax runs off
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_Success_001']))
+  GROUND:Hide("Snorlax")
+  --the team thanks you, gives you a stock
+  UI:SetSpeaker(CH("NPC_Deliver"))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_Success_002']))
+  local receive_item = RogueEssence.Dungeon.InvItem("food_apple_huge")
+  COMMON.GiftItem(player, receive_item)
+  --they head off
+  UI:SetSpeaker(CH("NPC_Carry"))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_Success_003']))
+  GROUND:Hide("NPC_Carry")
+  GROUND:Hide("NPC_Deliver")
 end
 
 function forest_camp.NPC_Carry_Action(chara, activator)

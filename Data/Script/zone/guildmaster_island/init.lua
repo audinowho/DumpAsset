@@ -28,11 +28,19 @@ function guildmaster_island.ExitSegment(zone, result, rescue, segmentID, mapID)
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)
   elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
+    if segmentID == 0 then
+	  if mapID == 3 then
+	    SV.forest_camp.SnorlaxPhase = 2
+	    COMMON.EndSession(result, 'guildmaster_island', -1,3,3)
+	    return
+	  end
+	end
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
     if segmentID == 0 then
 	  if mapID == 3 then
-	    COMMON.EndSession(result, 'guildmaster_island', -1,3,0)
+		SV.forest_camp.SnorlaxPhase = 3
+	    COMMON.EndSession(result, 'guildmaster_island', -1,3,3)
 	  else
 	    PrintInfo("No exit procedure found!")
 		COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

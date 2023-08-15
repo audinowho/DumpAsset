@@ -149,7 +149,9 @@ SV.luminous_spring =
 
 SV.forest_camp = 
 {
-  ExpositionComplete  = false
+  ExpositionComplete  = false,
+  -- 0 = not started, 1 = started, 2 = failed, 3 = success, 4 = completed
+  SnorlaxPhase = 0
 }
 
 SV.cliff_camp = 

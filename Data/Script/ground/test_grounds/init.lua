@@ -388,13 +388,32 @@ function test_grounds.Mew_Action(chara, activator)
   GAME:WaitFrames(60)
   
   mew.CollisionDisabled = true
-  _ZONE.CurrentGround:RemoveMapChar(mew)
-  _ZONE.CurrentGround:AddMapChar(mew)
   local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Hop")
   local frameAction = RogueEssence.Ground.IdleAnimGroundAction(mew.Position, 0, Direction.Up, animId, false)
   
   local head_pos = GROUND:CharGetAnimPoint(player, RogueEssence.Content.ActionPointType.Head)
   local shadow_pos = GROUND:CharGetAnimPoint(player, RogueEssence.Content.ActionPointType.Shadow)
+  GROUND:ActionToPosition(mew, frameAction, player.MapLoc.X, player.MapLoc.Y, 1, 2, shadow_pos.Y - head_pos.Y + 100)
+  
+  GAME:WaitFrames(30)
+  
+  animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Rotate")
+  frameAction = RogueEssence.Ground.IdleAnimGroundAction(mew.Position, mew.LocHeight, Direction.Up, animId, true)
+  GROUND:ActionToPosition(mew, frameAction, player.MapLoc.X, player.MapLoc.Y, 1, 2, shadow_pos.Y - head_pos.Y)
+  
+  GAME:WaitFrames(30)
+  
+  animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Rotate")
+  frameAction = RogueEssence.Ground.IdleAnimGroundAction(mew.Position, mew.LocHeight, Direction.Up, animId, true)
+  GROUND:ActionToPosition(mew, frameAction, player.MapLoc.X, player.MapLoc.Y, 1, 2, shadow_pos.Y - head_pos.Y + 100)
+  
+  GAME:WaitFrames(30)
+  
+  _ZONE.CurrentGround:RemoveMapChar(mew)
+  _ZONE.CurrentGround:AddMapChar(mew)
+  
+  animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Rotate")
+  frameAction = RogueEssence.Ground.IdleAnimGroundAction(mew.Position, mew.LocHeight, Direction.Up, animId, true)
   GROUND:ActionToPosition(mew, frameAction, player.MapLoc.X, player.MapLoc.Y, 1, 2, shadow_pos.Y - head_pos.Y)
   
   animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("None")

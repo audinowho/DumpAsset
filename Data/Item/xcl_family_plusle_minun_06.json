@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.15.0",
+"Version": "0.7.16.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
@@ -21,8 +21,9 @@
 "de": "Ein exklusives Item für Plusle und Minun. Wenn es innerhalb des Beutels getragen wird, erholt sich das Pokémon von Statuseffekten nachdem ein Gegner besiegt wurde.",
 "es": "Un objeto exclusivo para Plusle y Minun. Al llevarlo en la bolsa, el Pokémon se recuperará de sus problemas de estado tras derrotar a un enemigo.",
 "pt": "Um item exclusivo para Plusle, and Minun. When kept in the bag, the Pokémon will recover from status effects after defeating an enemy.",
+"it": "Uno strumento esclusivo per Plusle, e Minun. Quando tenuto in borsa, il Pokémon guarirà da ogni problema di stato dopo aver sconfitto un nemico.",
 "ko": "플러시, 그리고마이농에게 한정된 아이템. When kept in the bag, the Pokémon will recover from status effects after defeating an enemy.",
-"zh-hans": "正电拍拍和負电拍拍的专属道具。When kept in the bag, the Pokémon will recover from status effects after defeating an enemy."
+"zh-hans": "正电拍拍和負电拍拍的专属道具。放在包里时，在击败对手后能够治愈异常状态。"
 }
 },
 "Released": true,
@@ -168,6 +169,7 @@
 "OnEquips": [],
 "OnPickups": [],
 "BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
@@ -196,6 +198,7 @@
 "OnEquips": [],
 "OnPickups": [],
 "BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
@@ -231,7 +234,7 @@
 "$type": "PMDC.Dungeon.RemoveStateStatusBattleEvent, PMDC",
 "States": [
 {
-"assembly": "PMDC, Version=0.7.15.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.16.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.BadStatusState"
 }
 ],

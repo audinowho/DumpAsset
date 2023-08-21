@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.15.0",
+"Version": "0.7.16.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
@@ -21,6 +21,7 @@
 "de": "Ein exklusives Item für Mew. Wenn es innerhalb des Beutels getragen wird, wird das Pokémon von Statusveränderungen geschützt, solange die Ebene den Klar Status hat.",
 "es": "Un objeto exclusivo para Mew. Al llevarlo en la bolsa, el Pokémon está protegido de problemas de estado cuando el piso tiene el estado Despejado.",
 "pt": "Um item exclusivo para Mew. When kept in the bag, the Pokémon is protected from status conditions when the floor has the Clear status.",
+"it": "Uno strumento esclusivo per Mew. When kept in the bag, the Pokémon is protected from status conditions when the floor has the Clear status.",
 "ko": "뮤에게 한정된 아이템. When kept in the bag, the Pokémon is protected from status conditions when the floor has the Clear status.",
 "zh-hans": "梦幻的专属道具。放在包里时，当楼层状态为晴朗时，不会变为异常状态"
 }
@@ -167,6 +168,7 @@
 "OnEquips": [],
 "OnPickups": [],
 "BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
@@ -211,7 +213,7 @@
 "$type": "PMDC.Dungeon.StateStatusCheck, PMDC",
 "States": [
 {
-"assembly": "PMDC, Version=0.7.15.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.16.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.BadStatusState"
 }
 ],
@@ -254,6 +256,7 @@
 }
 }
 ],
+"BeforeStatusAddings": [],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],

@@ -129,7 +129,7 @@ function base_camp.PrepareFirstTimeVisit()
   GAME:UnlockDungeon('guildmaster_trail')
   
   
-  if RogueEssence.DiagManager.Instance.DevMode then
+  if SV.Experimental ~= nil then
   SV.missions.Missions["EscortSister"] = 
 	{
 	DestZone = "faultline_ridge",

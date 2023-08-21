@@ -33,7 +33,7 @@ function flyaway_cliffs.ExitSegment(zone, result, rescue, segmentID, mapID)
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
     if segmentID == 0 then
-	  if RogueEssence.DiagManager.Instance.DevMode then
+	  if SV.Experimental ~= nil then
         COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 5, 0)
 	  else
 	    COMMON.EndDungeonDay(result, 'the_neverending_tale', -1,0,0)

@@ -125,7 +125,7 @@ function forest_camp.Snorlax_Action(chara, activator)
   UI:ResetSpeaker()
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_001']))
   
-  if not RogueEssence.DiagManager.Instance.DevMode then
+  if SV.Experimental == nil then
     return
   end
   

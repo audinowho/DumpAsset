@@ -606,10 +606,10 @@ function ExampleMenu:Update(input)
   if input:JustPressed(RogueEssence.FrameInput.InputType.Confirm) then
     _GAME:SE("Menu/Confirm")
 	if self.current_item > 2 then
-	  local choices = { {STRINGS:FormatKey("DLG_CHOICE_YES"), true, function()  end },
+	  local choices = { RogueEssence.Menu.MenuTextChoice(STRINGS:FormatKey("DLG_CHOICE_YES"), LUA_ENGINE:MakeLuaAction(function() _GAME:SE("Fanfare/RankUp")  end) ),
         { STRINGS:FormatKey("MENU_INFO"), false, function() end  },
         { STRINGS:FormatKey("DLG_CHOICE_NO"), true, function() _MENU:RemoveMenu() end }}
-	  submenu = RogueEssence.Menu.ScriptableSingleStripMenu(220, 24, 24, choices, 1)
+	  submenu = RogueEssence.Menu.ScriptableSingleStripMenu(220, 24, 24, choices, 1, function() _MENU:RemoveMenu() end)
 	  _MENU:AddMenu(submenu, true)
 	end
   elseif input:JustPressed(RogueEssence.FrameInput.InputType.Cancel) then

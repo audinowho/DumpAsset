@@ -82,7 +82,7 @@ function BATTLE_SCRIPT.EscortInteract(owner, ownerChar, context, args)
   local oldDir = context.Target.CharDir
   DUNGEON:CharTurnToChar(context.Target, context.User)
   UI:SetSpeaker(context.Target)
-  UI:WaitShowDialogue(RogueEssence.StringKey(args.Messages[1]):ToLocal())
+  UI:WaitShowDialogue(RogueEssence.StringKey("TALK_FULL_0820"):ToLocal())
   context.Target.CharDir = oldDir
 end
 

@@ -965,14 +965,6 @@ function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
         local new_mob = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, "", -1)
         _DATA.Save.ActiveTeam.Guests:Add(new_mob)
 		
-		-- place in a legal position on map
-		local dest = _ZONE.CurrentMap:GetClosestTileForChar(new_mob, _DATA.Save.ActiveTeam.Leader.CharLoc)
-        local endLoc = _DATA.Save.ActiveTeam.Leader.CharLoc
-		if dest ~= nil then
-		  endLoc = dest
-		end
-        new_mob.CharLoc = endLoc
-		
 		local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("EscortInteract")
         new_mob.ActionEvents:Add(talk_evt)
 		

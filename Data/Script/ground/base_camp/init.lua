@@ -128,19 +128,6 @@ function base_camp.PrepareFirstTimeVisit()
   GROUND:Unhide("First_North_Exit")
   GAME:UnlockDungeon('guildmaster_trail')
   
-  
-  if SV.Experimental ~= nil then
-  SV.missions.Missions["EscortSister"] = 
-	{
-	DestZone = "faultline_ridge",
-	DestSegment = 0,
-	DestFloor = 5,
-	TargetSpecies = "chikorita",
-	Complete = COMMON.MISSION_INCOMPLETE,
-	Type = COMMON.MISSION_TYPE_ESCORT_OUT,
-	EscortTable = { EscortStartMsg = "TALK_ESCORT_SISTER_START", EscortAcceptMsg = "TALK_ESCORT_SISTER_ACCEPT", EscortInteract = "EscortInteractSister" }
-	}
-  end
 end
 
 --------------------------------------------------
@@ -254,6 +241,20 @@ function base_camp.First_North_Exit_Touch(obj, activator)
   UI:WaitForChoice()
   ch = UI:ChoiceResult()
   if ch then
+  
+  if SV.Experimental ~= nil then
+  SV.missions.Missions["EscortSister"] = 
+	{
+	DestZone = "faultline_ridge",
+	DestSegment = 0,
+	DestFloor = 5,
+	TargetSpecies = "chikorita",
+	Complete = COMMON.MISSION_INCOMPLETE,
+	Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+	EscortTable = { EscortStartMsg = "TALK_ESCORT_SISTER_START", EscortAcceptMsg = "TALK_ESCORT_SISTER_ACCEPT", EscortInteract = "EscortInteractSister" }
+	}
+  end
+  
     _DATA:PreLoadZone('guildmaster_trail')
 	SOUND:PlayBGM("", true)
     GAME:FadeOut(false, 20)

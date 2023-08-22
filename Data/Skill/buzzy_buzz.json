@@ -30,23 +30,25 @@
 "zh-hant": "發出電擊攻擊對手。 讓對手陷入麻痺狀態。"
 }
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 734,
-"BaseCharges": 20,
+"BaseCharges": 15,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
+"$type": "RogueEssence.Dungeon.AreaAction, RogueEssence",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
 "LocHeight": 0
 },
-"WideAngle": 0,
+"HitTiles": true,
+"BurstTiles": 0,
+"HitArea": 0,
+"Range": 3,
+"Speed": 10,
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
+"ActionType": 34
 },
 "TargetAlignments": 4,
 "TileEmitter": {
@@ -56,7 +58,7 @@
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Discharge_2",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -104,7 +106,11 @@
 "SkillStates": [
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 60
+"Power": 75
+},
+{
+"$type": "PMDC.Dungeon.AdditionalEffectState, PMDC",
+"EffectChance": 100
 }
 ],
 "BeforeTryActions": [],
@@ -121,6 +127,29 @@
 },
 "Value": {
 "$type": "PMDC.Dungeon.DamageFormulaEvent, PMDC"
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AdditionalEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
+"StatusID": "paralyze",
+"AffectTarget": true,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+]
 }
 }
 ],

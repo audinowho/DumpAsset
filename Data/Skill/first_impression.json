@@ -30,33 +30,76 @@
 "zh-hant": "招式的威力雖高， 但只有在出場戰鬥時， 立刻使出才能成功。"
 }
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 660,
 "BaseCharges": 10,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
+"$type": "RogueEssence.Dungeon.DashAction, RogueEssence",
+"Anim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"AnimOffset": 0,
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
 },
-"WideAngle": 0,
-"CharAnimData": {
-"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
-},
-"TargetAlignments": 4,
+"WideAngle": 1,
+"SnapBack": false,
+"CharAnim": 5,
+"AppearanceMod": 0,
+"HitTiles": true,
+"Range": 6,
+"StopAtHit": true,
+"StopAtWall": true,
+"TargetAlignments": 6,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"PreActions": [],
+"PreActions": [
+{
+"Delay": 10,
+"Sound": "DUN_Leer",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 13,
+"finished": false,
+"Offset": 12,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Captivate_Sparkle",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Harden",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -67,7 +110,7 @@
 "MaxShakeTime": 0
 }
 },
-"LagBehindTime": 0
+"LagBehindTime": 5
 },
 "Explosion": {
 "TargetAlignments": 4,
@@ -103,15 +146,29 @@
 "HitRate": 100,
 "SkillStates": [
 {
+"$type": "PMDC.Dungeon.ContactState, PMDC"
+},
+{
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 90
+"Power": 80
 }
 ],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
 "BeforeExplosions": [],
-"BeforeHits": [],
+"BeforeHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.DistanceOnlyEvent, PMDC"
+}
+}
+],
 "OnHits": [
 {
 "Key": {

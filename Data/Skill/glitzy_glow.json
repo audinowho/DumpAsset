@@ -30,24 +30,63 @@
 "zh-hant": "用極大量的念力攻擊對手， 造出一道能夠減弱對手 特殊攻擊的神奇牆壁。"
 }
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 736,
 "BaseCharges": 15,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Dungeon.ProjectileAction, RogueEssence",
+"Anim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
 },
-"WideAngle": 0,
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+},
+"StreamEmitter": {
+"$type": "RogueEssence.Content.StreamEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Aura_Sphere",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Shots": 12,
+"BurstTime": 1,
+"StartDistance": 16,
+"EndDiff": 0,
+"Layer": 2
+},
+"Rays": 0,
+"Speed": 12,
+"Boomerang": false,
+"ItemSprite": "",
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
+"ActionType": 7
 },
+"HitTiles": true,
+"Range": 8,
+"StopAtHit": true,
+"StopAtWall": true,
 "TargetAlignments": 4,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
@@ -56,7 +95,7 @@
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Light_Screen_2",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -100,11 +139,11 @@
 "Data": {
 "Element": "psychic",
 "Category": 2,
-"HitRate": 95,
+"HitRate": 100,
 "SkillStates": [
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 80
+"Power": 90
 }
 ],
 "BeforeTryActions": [],
@@ -125,7 +164,36 @@
 }
 ],
 "OnHitTiles": [],
-"AfterActions": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
+"StatusID": "light_screen",
+"AffectTarget": false,
+"SilentCheck": false,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": [
+{
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"Sound": "DUN_Light_Screen",
+"AffectTarget": false,
+"Delay": 0
+}
+]
+}
+}
+],
 "ElementEffects": [],
 "IntroFX": [],
 "HitFX": {

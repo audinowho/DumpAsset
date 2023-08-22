@@ -30,7 +30,7 @@
 "zh-hant": "從對手背後爬近後進行攻擊。 會降低對手的特攻。"
 }
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 806,
 "BaseCharges": 10,
@@ -105,6 +105,10 @@
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
 "Power": 70
+},
+{
+"$type": "PMDC.Dungeon.AdditionalEffectState, PMDC",
+"EffectChance": 100
 }
 ],
 "BeforeTryActions": [],
@@ -121,6 +125,30 @@
 },
 "Value": {
 "$type": "PMDC.Dungeon.DamageFormulaEvent, PMDC"
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AdditionalEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
+"Stack": -1,
+"StatusID": "mod_special_attack",
+"AffectTarget": true,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+]
 }
 }
 ],

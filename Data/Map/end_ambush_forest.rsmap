@@ -10,7 +10,245 @@
 "Comment": "",
 "Begun": false,
 "ID": 0,
-"MapTeams": [],
+"MapTeams": [
+{
+"$type": "RogueEssence.Dungeon.MonsterTeam, RogueEssence",
+"Players": [
+{
+"Element1": "dark",
+"Element2": "flying",
+"movementSpeed": 0,
+"dead": false,
+"serializationLoc": {
+"X": 8,
+"Y": 6
+},
+"serializationDir": 0,
+"ProxyName": "",
+"ProxySprite": {
+"Species": "",
+"Form": -1,
+"Skin": "",
+"Gender": -1
+},
+"CurrentForm": {
+"Species": "honchkrow",
+"Form": 0,
+"Skin": "normal",
+"Gender": 0
+},
+"ProxyAtk": -1,
+"ProxyDef": -1,
+"ProxyMAtk": -1,
+"ProxyMDef": -1,
+"ProxySpeed": -1,
+"Skills": [
+{
+"Element": {
+"SkillNum": "night_slash",
+"Charges": 16,
+"Enabled": true,
+"Sealed": false
+},
+"BackRef": 0
+},
+{
+"Element": {
+"SkillNum": "roost",
+"Charges": 10,
+"Enabled": true,
+"Sealed": false
+},
+"BackRef": 1
+},
+{
+"Element": {
+"SkillNum": "snarl",
+"Charges": 14,
+"Enabled": true,
+"Sealed": false
+},
+"BackRef": 2
+},
+{
+"Element": {
+"SkillNum": "torment",
+"Charges": 18,
+"Enabled": true,
+"Sealed": false
+},
+"BackRef": 3
+}
+],
+"Intrinsics": [
+{
+"Element": {
+"ID": "super_luck"
+},
+"BackRef": 0
+}
+],
+"EquippedItem": {
+"ID": "",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Absentee": false,
+"ChargeBoost": 0,
+"HP": 169,
+"HPRemainder": 0,
+"Fullness": 100,
+"FullnessRemainder": 0,
+"MaxFullness": 100,
+"StatusEffects": {},
+"MustHitNext": false,
+"TurnWait": 0,
+"TiersUsed": 0,
+"TurnUsed": false,
+"EXPMarked": false,
+"Tactic": {
+"Name": {
+"DefaultText": "Boss",
+"LocalTexts": {}
+},
+"Released": false,
+"Comment": "",
+"ID": "boss",
+"Assignable": false,
+"Plans": [
+{
+"$type": "PMDC.Dungeon.AttackFoesPlan, PMDC",
+"AttackPattern": 4,
+"PositionPattern": 2,
+"IQ": 253,
+"AttackRange": 0,
+"StatusRange": 0,
+"SelfStatusRange": 4
+},
+{
+"$type": "PMDC.Dungeon.FollowLeaderPlan, PMDC",
+"IQ": 253,
+"AttackRange": 0,
+"StatusRange": 0,
+"SelfStatusRange": 0
+},
+{
+"$type": "PMDC.Dungeon.ExplorePlan, PMDC",
+"IQ": 253,
+"AttackRange": 0,
+"StatusRange": 0,
+"SelfStatusRange": 0
+},
+{
+"$type": "PMDC.Dungeon.WaitPlan, PMDC",
+"IQ": 253,
+"AttackRange": 0,
+"StatusRange": 0,
+"SelfStatusRange": 0
+}
+]
+},
+"Mobility": 0,
+"CantWalk": false,
+"ItemDisabled": false,
+"IntrinsicDisabled": false,
+"CanRemoveStuck": false,
+"StopItemAtHit": false,
+"MovesScrambled": false,
+"ChargeSaver": false,
+"WaitToAttack": false,
+"CantInteract": false,
+"EnemyOfFriend": false,
+"AttackFriend": false,
+"TileSight": -1,
+"CharSight": -1,
+"Unidentifiable": false,
+"Unlocatable": false,
+"SeeAllChars": false,
+"SeeItems": false,
+"SeeWallItems": false,
+"SeeTraps": false,
+"CharStates": [],
+"BackRef": {
+"Assembly": false,
+"Index": -1
+},
+"Nickname": "",
+"OriginalUUID": "",
+"OriginalTeam": "",
+"BaseForm": {
+"Species": "honchkrow",
+"Form": 0,
+"Skin": "normal",
+"Gender": 0
+},
+"Level": 35,
+"EXP": 0,
+"MaxHPBonus": 50,
+"AtkBonus": 0,
+"DefBonus": 50,
+"MAtkBonus": 0,
+"MDefBonus": 50,
+"SpeedBonus": 0,
+"BaseSkills": [
+{
+"SkillNum": "night_slash",
+"Charges": 16
+},
+{
+"SkillNum": "roost",
+"Charges": 10
+},
+{
+"SkillNum": "snarl",
+"Charges": 14
+},
+{
+"SkillNum": "torment",
+"Charges": 18
+}
+],
+"BaseIntrinsics": [
+"super_luck"
+],
+"Relearnables": {},
+"Discriminator": 0,
+"MetAt": "",
+"MetLoc": {
+"ID": "",
+"StructID": {
+"Segment": -1,
+"ID": -1
+},
+"EntryPoint": -1
+},
+"DefeatAt": "",
+"DefeatLoc": {
+"ID": "",
+"StructID": {
+"Segment": -1,
+"ID": -1
+},
+"EntryPoint": -1
+},
+"IsFounder": false,
+"IsPartner": false,
+"NameLocked": false,
+"IsFavorite": false,
+"Unrecruitable": false,
+"ActionEvents": [],
+"ScriptVars": null
+}
+],
+"Guests": [],
+"inventory": [],
+"Name": "",
+"LeaderIndex": 0,
+"FoeConflict": false
+}
+],
 "AllyTeams": [],
 "rand": {
 "$type": "RogueElements.ReRandom, RogueElements",
@@ -27,7 +265,17 @@
 "Music": "C02. Boss Battle 2.ogg",
 "TileSight": 0,
 "CharSight": 0,
-"Status": {},
+"Status": {
+"mysterious_force": {
+"ID": "mysterious_force",
+"StatusStates": [],
+"Emitter": {
+"$type": "RogueEssence.Content.EmptySwitchOffEmitter, RogueEssence",
+"LocHeight": 0
+},
+"Hidden": false
+}
+},
 "MapEffect": {
 "UniversalStates": [],
 "BeforeTryActions": [],
@@ -46,7 +294,47 @@
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
 "OnMapStatusRemoves": [],
-"OnMapStarts": [],
+"OnMapStarts": [
+{
+"Key": {
+"str": [
+-15
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.BattlePositionEvent, PMDC",
+"Positions": [
+{
+"X": 0,
+"Y": 0
+},
+{
+"X": 0,
+"Y": 1
+},
+{
+"X": -1,
+"Y": 1
+},
+{
+"X": -1,
+"Y": 1
+}
+]
+}
+},
+{
+"Key": {
+"str": [
+-5
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.BeginBattleEvent, PMDC",
+"CheckClearStatus": "map_clear_check"
+}
+}
+],
 "OnTurnStarts": [],
 "OnTurnEnds": [],
 "OnMapTurnEnds": [],
@@ -16999,7 +17287,15 @@
 ]
 ],
 "EdgeView": 1,
-"EntryPoints": [],
+"EntryPoints": [
+{
+"Loc": {
+"X": 8,
+"Y": 10
+},
+"Dir": 4
+}
+],
 "Items": []
 }
 }

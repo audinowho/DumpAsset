@@ -42,9 +42,9 @@ function canyon_camp.Enter(map)
   if not SV.canyon_camp.ExpositionComplete then
     canyon_camp.BeginExposition()
     SV.canyon_camp.ExpositionComplete = true
-  elseif SV.rest_stop.Exposition == 2 then
+  elseif SV.rest_stop.BossPhase == 2 then
     canyon_camp.Steelix_Fail()
-	SV.rest_stop.Exposition = 1
+	SV.rest_stop.BossPhase = 1
   else
     GAME:FadeIn(20)
   end

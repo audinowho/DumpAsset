@@ -265,9 +265,11 @@ function COMMON.MakeWhoosh(center, y, tier, reversed)
 	GROUND:PlayVFX(whoosh1, center.X, center.Y + y)
 end
 
-function COMMON.BossTransition()
+function COMMON.BossTransition(preserveMusic)
     local center = GAME:GetCameraCenter()
-    SOUND:FadeOutBGM(20)
+	if not preserveMusic then
+		SOUND:FadeOutBGM(20)
+	end
     local emitter = RogueEssence.Content.FlashEmitter()
     emitter.FadeInTime = 2
     emitter.HoldTime = 2
@@ -1126,4 +1128,20 @@ function COMMON.EndDayCycle()
 		table.insert(SV.base_trades, base_data)
 		table.remove(catalog, idx)
 	end
+	
+	
+  if SV.Experimental ~= nil then
+    if _DATA.Save:GetDungeonUnlock("faultline_ridge") == RogueEssence.Data.GameProgress.UnlockState.Discovered then
+	  SV.missions.Missions["EscortSister"] = 
+		{
+		DestZone = "faultline_ridge",
+		DestSegment = 0,
+		DestFloor = 5,
+		TargetSpecies = "chikorita",
+		Complete = COMMON.MISSION_INCOMPLETE,
+		Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+		EscortTable = { EscortStartMsg = "TALK_ESCORT_SISTER_START", EscortAcceptMsg = "TALK_ESCORT_SISTER_ACCEPT", EscortInteract = "EscortInteractSister" }
+		}
+	end
+  end
 end

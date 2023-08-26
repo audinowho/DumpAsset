@@ -78,7 +78,7 @@ function final_stop.NPC_Storehouse_Action(chara, activator)
   
   UI:SetSpeaker(chara)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
-  --COMMON.UnlockWithFanfare("treacherous_mountain", false)
+  COMMON.UnlockWithFanfare("treacherous_mountain", false)
 end
 
 function final_stop.Assembly_Action(obj, activator)

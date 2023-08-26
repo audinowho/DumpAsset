@@ -109,6 +109,18 @@ SV.castaway_cave =
   TookTreasure  = false
 }
 
+SV.ambush_forest = 
+{
+  -- 0 = not started, 1 = started, 2 = failed, 3 = success, 4 = completed
+  BossPhase  = 0
+}
+
+SV.treacherous_mountain = 
+{
+  -- 0 = not started, 1 = started, 2 = failed, 3 = success, 4 = completed
+  BossPhase  = 0
+}
+
 SV.manaphy_egg = 
 {
   Taken = false,
@@ -150,7 +162,6 @@ SV.luminous_spring =
 SV.forest_camp = 
 {
   ExpositionComplete  = false,
-  -- TODO
   -- 0 = not started, 1 = started, 2 = failed, 3 = success, 4 = completed
   SnorlaxPhase = 0
 }
@@ -171,9 +182,9 @@ SV.canyon_camp =
 
 SV.rest_stop = 
 {
-  -- TODO
   -- 0 = not started, 1 = started, 2 = failed, 3 = success, 4 = completed
-  Exposition = 0
+  BossPhase = 0,
+  ExpositionComplete  = false
 }
 
 SV.final_stop = 

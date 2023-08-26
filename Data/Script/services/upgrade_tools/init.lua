@@ -166,6 +166,28 @@ function UpgradeTools:OnUpgrade()
 	SV.base_town.ValueTraded = false
   end
   
+
+  if SV.ambush_forest == nil then
+    SV.ambush_forest = 
+    {
+      BossPhase  = 0
+    }
+  end
+  
+  if SV.treacherous_mountain == nil then
+    SV.treacherous_mountain = 
+    {
+      BossPhase  = 0
+    }
+  end
+  
+  if SV.rest_stop.BossPhase == nil then
+    SV.rest_stop.BossPhase = 0
+  end
+
+  if SV.forest_camp.SnorlaxPhase == nil then
+    SV.forest_camp.SnorlaxPhase = 0
+  end
   
   PrintInfo("=>> Loaded version")
 end

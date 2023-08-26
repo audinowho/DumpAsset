@@ -22,13 +22,14 @@ function rest_stop.Enter(map)
   }
   
   --when arriving the first time, play this cutscene
-  if SV.rest_stop.Exposition == 0 then
+  if SV.rest_stop.BossPhase == 0 then
     rest_stop.BeginExposition(false)
-  elseif SV.rest_stop.Exposition == 1 then
+  elseif SV.rest_stop.BossPhase == 1 then
     rest_stop.BeginExposition(true)
-  elseif SV.rest_stop.Exposition == 3 then
+  elseif SV.rest_stop.BossPhase == 3 then
     rest_stop.Steelix_Success()
-	SV.rest_stop.Exposition = 4
+	SV.rest_stop.BossPhase = 4
+    SV.rest_stop.ExpositionComplete = true
   else
     GAME:FadeIn(20)
   end
@@ -64,9 +65,12 @@ function rest_stop.BeginExposition(shortened)
   --bosses talk
   UI:ResetSpeaker()
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Boss_Line_001']))
+  if shortened then
+    UI:WaitShowDialogue("Return version")
+  end
   
   --battle!
-  SV.rest_stop.Exposition = 1
+  SV.rest_stop.BossPhase = 1
   COMMON.BossTransition()
   GAME:EnterDungeon('guildmaster_island', 0, 6, 0, RogueEssence.Data.GameProgress.DungeonStakes.Progress, true, true)
 end

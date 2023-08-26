@@ -241,20 +241,6 @@ function base_camp.First_North_Exit_Touch(obj, activator)
   UI:WaitForChoice()
   ch = UI:ChoiceResult()
   if ch then
-  
-  if SV.Experimental ~= nil then
-  SV.missions.Missions["EscortSister"] = 
-	{
-	DestZone = "faultline_ridge",
-	DestSegment = 0,
-	DestFloor = 5,
-	TargetSpecies = "chikorita",
-	Complete = COMMON.MISSION_INCOMPLETE,
-	Type = COMMON.MISSION_TYPE_ESCORT_OUT,
-	EscortTable = { EscortStartMsg = "TALK_ESCORT_SISTER_START", EscortAcceptMsg = "TALK_ESCORT_SISTER_ACCEPT", EscortInteract = "EscortInteractSister" }
-	}
-  end
-  
     _DATA:PreLoadZone('guildmaster_trail')
 	SOUND:PlayBGM("", true)
     GAME:FadeOut(false, 20)
@@ -336,12 +322,24 @@ function base_camp.ShowFerryMenu(dungeon_entrances, ground_entrances)
   end
 end
 
+base_camp.sign_count = 0
 function base_camp.Sign_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   UI:ResetSpeaker()
   UI:SetAutoFinish(true)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sign_Action_Text']))
   UI:SetAutoFinish(false)
+  
+  base_camp.sign_count = base_camp.sign_count + 1
+  if base_camp.sign_count > 5 and SV.Experimental == nil then
+    UI:ChoiceMenuYesNo("UNLOCK THE HALF FINISHED STORY? NO GOING BACK.", true)
+    UI:WaitForChoice()
+    ch = UI:ChoiceResult()
+	if ch then
+	  SV.Experimental = true
+	  UI:WaitShowDialogue("UNLOCKED")
+	end
+  end
 end
 
 function base_camp.Assembly_Action(obj, activator)

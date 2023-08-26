@@ -32,9 +32,131 @@ end
 --Engine callback function
 function end_ambush_forest.Enter(map)
 
-  GAME:FadeIn(20)
-
+  if SV.ambush_forest.BossPhase == 4 then
+    end_ambush_forest.EmptyReturn()
+  elseif SV.ambush_forest.BossPhase == 3 then
+    end_ambush_forest.PostBattle()
+  elseif SV.ambush_forest.BossPhase == 1 then
+    end_ambush_forest.PreBattle(true)
+  else
+    end_ambush_forest.PreBattle(false)
+  end
 end
+
+
+
+function end_ambush_forest.PreBattle(shortened)
+
+  local player = CH("PLAYER")
+  local enemy = CH("Honchkrow")
+  
+  GAME:CutsceneMode(true)
+  
+  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
+  GAME:WaitFrames(30)
+  UI:WaitHideTitle(20)
+  
+  GAME:MoveCamera(204, 192, 1, false)
+  
+  GAME:FadeIn(20)
+  
+  GROUND:MoveToPosition(player, 196, 240, false, 2)
+  
+  
+  UI:SetSpeaker(enemy)
+  UI:WaitShowDialogue("I introduce myself as Honchrow, and establish myself as an intimidating boss.")
+  
+  if shortened then
+    UI:WaitShowDialogue("Shortened")
+  end
+  
+  --GROUND:Unhide("Croco")
+  
+  --SOUND:FadeOutBGM(20)
+  SOUND:PlayBGM("A13. Threat.ogg", false)
+  
+  UI:WaitShowDialogue("I give some dialogue about the supply line and claim right to the island.")
+  
+  UI:WaitShowDialogue("All this, despite not having reached the summit.")
+  
+  
+  SOUND:PlayBGM("C02. Boss Battle 2.ogg", false)
+  
+  UI:WaitShowDialogue("Lead up to the boss battle with a very threatening aura.")
+  UI:WaitShowDialogue("I'll make you an offer you can't refuse.")
+  
+  GAME:WaitFrames(30)
+  
+  COMMON.BossTransition(true)
+  
+  GAME:CutsceneMode(false)
+  
+  GAME:ContinueDungeon('ambush_forest', 2, 0, 0)
+  
+end
+
+
+function end_ambush_forest.PostBattle()
+
+  local player = CH("PLAYER")
+  local enemy = CH("Honchkrow")
+  
+  GAME:CutsceneMode(true)
+  
+  --GROUND:Unhide("Croco")
+  
+  GAME:MoveCamera(204, 192, 1, false)
+  
+  GROUND:TeleportTo(player, 196, 240, Direction.Up)
+  
+  GAME:FadeIn(20)
+  
+  GAME:WaitFrames(60)
+  
+  UI:SetSpeaker(enemy)
+  UI:WaitShowDialogue("You win this round, but I'll be back.")
+  
+  GAME:FadeOut(false, 20)
+  
+  GAME:CutsceneMode(false)
+  
+  SV.ambush_forest.BossPhase = 4
+  COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 3, 0)
+  
+end
+
+function end_ambush_forest.EmptyReturn()
+
+  local player = CH("PLAYER")
+  local enemy = CH("Honchkrow")
+  
+  GAME:CutsceneMode(true)
+  
+  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
+  GAME:WaitFrames(30)
+  UI:WaitHideTitle(20)
+    
+  GAME:MoveCamera(204, 192, 1, false)
+  
+  GAME:FadeIn(20)
+  
+  GAME:WaitFrames(60)
+  
+  GROUND:MoveToPosition(player, 196, 240, false, 2)
+  
+  UI:ResetSpeaker(false)
+  UI:SetCenter(true)
+  UI:WaitShowDialogue("This is appears to be the end of the dungeon.")
+  UI:WaitShowDialogue("It's impossible to go any farther.[pause=0] It's time to go back.")
+  
+  GAME:FadeOut(false, 20)
+  
+  GAME:CutsceneMode(false)
+  
+  COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 3, 0)
+  
+end
+
 
 ---end_ambush_forest.Exit(map)
 --Engine callback function

@@ -32,9 +32,130 @@ end
 --Engine callback function
 function end_treacherous_mountain.Enter(map)
 
-  GAME:FadeIn(20)
-
+  if SV.treacherous_mountain.BossPhase == 4 then
+    end_treacherous_mountain.EmptyReturn()
+  elseif SV.treacherous_mountain.BossPhase == 3 then
+    end_treacherous_mountain.PostBattle()
+  elseif SV.treacherous_mountain.BossPhase == 1 then
+    end_treacherous_mountain.PreBattle(true)
+  else
+    end_treacherous_mountain.PreBattle(false)
+  end
 end
+
+
+function end_treacherous_mountain.PreBattle(shortened)
+
+  local player = CH("PLAYER")
+  local enemy = CH("Salamence")
+  
+  GAME:CutsceneMode(true)
+  
+  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
+  GAME:WaitFrames(30)
+  UI:WaitHideTitle(20)
+  
+  GAME:MoveCamera(252, 216, 1, false)
+  
+  GAME:FadeIn(20)
+  
+  GROUND:MoveToPosition(player, 244, 216, false, 2)
+  
+  
+  UI:SetSpeaker(enemy)
+  UI:WaitShowDialogue("I introduce myself as Salamence, and establish myself as LORD OF THE HOARD.")
+  
+  if shortened then
+    UI:WaitShowDialogue("Shortened")
+  end
+  
+  --GROUND:Unhide("Croco")
+  
+  --SOUND:FadeOutBGM(20)
+  SOUND:PlayBGM("A13. Threat.ogg", false)
+  
+  UI:WaitShowDialogue("I give some dialogue about the supply line and claim right to the island.")
+  
+  UI:WaitShowDialogue("All this, despite not having reached the summit.")
+  
+  
+  SOUND:PlayBGM("C02. Boss Battle 2.ogg", false)
+  
+  UI:WaitShowDialogue("Lead up to the boss battle with a very threatening aura.")
+  UI:WaitShowDialogue("Begin a relentless onslaught!")
+  
+  GAME:WaitFrames(30)
+  
+  COMMON.BossTransition(true)
+  
+  GAME:CutsceneMode(false)
+  
+  GAME:ContinueDungeon('treacherous_mountain', 2, 0, 0)
+  
+end
+
+
+function end_treacherous_mountain.PostBattle()
+
+  local player = CH("PLAYER")
+  local enemy = CH("Salamence")
+  
+  GAME:CutsceneMode(true)
+  
+  --GROUND:Unhide("Croco")
+  
+  GAME:MoveCamera(252, 216, 1, false)
+  
+  GROUND:TeleportTo(player, 244, 216, Direction.Up)
+  
+  GAME:FadeIn(20)
+  
+  GAME:WaitFrames(60)
+  
+  UI:SetSpeaker(enemy)
+  UI:WaitShowDialogue("You win this round, but I'll be back.")
+  
+  GAME:FadeOut(false, 20)
+  
+  GAME:CutsceneMode(false)
+  
+  SV.treacherous_mountain.BossPhase = 4
+  COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 6, 0)
+  
+end
+
+function end_treacherous_mountain.EmptyReturn()
+
+  local player = CH("PLAYER")
+  local enemy = CH("Salamence")
+  
+  GAME:CutsceneMode(true)
+  
+  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
+  GAME:WaitFrames(30)
+  UI:WaitHideTitle(20)
+    
+  GAME:MoveCamera(252, 216, 1, false)
+  
+  GAME:FadeIn(20)
+  
+  GAME:WaitFrames(60)
+  
+  GROUND:MoveToPosition(player, 244, 216, false, 2)
+  
+  UI:ResetSpeaker(false)
+  UI:SetCenter(true)
+  UI:WaitShowDialogue("This is appears to be the end of the dungeon.")
+  UI:WaitShowDialogue("It's impossible to go any farther.[pause=0] It's time to go back.")
+  
+  GAME:FadeOut(false, 20)
+  
+  GAME:CutsceneMode(false)
+  
+  COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 6, 0)
+  
+end
+
 
 ---end_treacherous_mountain.Exit(map)
 --Engine callback function

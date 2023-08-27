@@ -31,6 +31,7 @@ function rest_stop.Enter(map)
 	SV.rest_stop.BossPhase = 4
     SV.rest_stop.ExpositionComplete = true
   else
+    rest_stop.SetupNpcs()
     GAME:FadeIn(20)
   end
 end
@@ -41,6 +42,12 @@ end
 --------------------------------------------------
 -- Map Begin Functions
 --------------------------------------------------
+
+function rest_stop.SetupNpcs()
+  --GROUND:Unhide("NPC_1")
+  --GROUND:Unhide("NPC_2")
+end
+
 function rest_stop.BeginExposition(shortened)
   
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)

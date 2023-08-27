@@ -32,22 +32,20 @@ function forest_camp.Enter(map)
   
   --when arriving the first time, play this cutscene
   if not SV.forest_camp.ExpositionComplete then
+    forest_camp.SetupNpcs()
     forest_camp.BeginExposition()
     SV.forest_camp.ExpositionComplete = true
   elseif SV.forest_camp.SnorlaxPhase == 2 then
+    forest_camp.SetupNpcs()
     forest_camp.Snorlax_Fail()
 	SV.forest_camp.SnorlaxPhase = 1
   elseif SV.forest_camp.SnorlaxPhase == 3 then
+    forest_camp.SetupNpcs()
     forest_camp.Snorlax_Success()
 	SV.forest_camp.SnorlaxPhase = 4
   else
+    forest_camp.SetupNpcs()
     GAME:FadeIn(20)
-  end
-  
-  if SV.forest_camp.SnorlaxPhase == 4 then
-    GROUND:Hide("Snorlax")
-    GROUND:Hide("NPC_Carry")
-    GROUND:Hide("NPC_Deliver")
   end
   
   forest_camp.CheckMissions()
@@ -63,6 +61,19 @@ end
 --------------------------------------------------
 -- Map Begin Functions
 --------------------------------------------------
+function forest_camp.SetupNpcs()
+  GROUND:Unhide("NPC_Camps")
+  GROUND:Unhide("NPC_Parent")
+  GROUND:Unhide("NPC_Child")
+
+  if SV.forest_camp.SnorlaxPhase ~= 4 then
+    GROUND:Unhide("Snorlax")
+    GROUND:Unhide("NPC_Carry")
+    GROUND:Unhide("NPC_Deliver")
+  end
+end
+
+
 function forest_camp.BeginExposition()
   
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)

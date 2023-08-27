@@ -25,9 +25,11 @@ function cliff_camp.Enter(map)
   
   --when arriving the first time, play this cutscene
   if not SV.cliff_camp.ExpositionComplete then
+    cliff_camp.SetupNpcs()
     cliff_camp.BeginExposition()
     SV.cliff_camp.ExpositionComplete = true
   else
+    cliff_camp.SetupNpcs()
     GAME:FadeIn(20)
   end
 
@@ -39,6 +41,17 @@ end
 --------------------------------------------------
 -- Map Begin Functions
 --------------------------------------------------
+function cliff_camp.SetupNpcs()
+  GROUND:Unhide("Monk")
+  GROUND:Unhide("Rival_Early")
+  GROUND:Unhide("Undergrowth_1")
+  GROUND:Unhide("Undergrowth_2")
+  GROUND:Unhide("Speedster_1")
+  GROUND:Unhide("Speedster_2")
+  GROUND:Unhide("NPC_Storehouse")
+  GROUND:Unhide("NPC_Sightseer")
+end
+
 function cliff_camp.BeginExposition()
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20);
   GAME:WaitFrames(30);

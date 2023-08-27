@@ -25,9 +25,11 @@ function final_stop.Enter(map)
   
   --when arriving the first time, play this cutscene
   if not SV.final_stop.ExpositionComplete then
+    final_stop.SetupNpcs()
     final_stop.BeginExposition()
     SV.final_stop.ExpositionComplete = true
   else
+    final_stop.SetupNpcs()
     GAME:FadeIn(20)
   end
 end
@@ -38,6 +40,14 @@ end
 --------------------------------------------------
 -- Map Begin Functions
 --------------------------------------------------
+function final_stop.SetupNpcs()
+  GROUND:Unhide("NPC_Deliver")
+  GROUND:Unhide("NPC_Carry")
+  GROUND:Unhide("NPC_Storehouse")
+  GROUND:Unhide("Rival_Late")
+end
+
+
 function final_stop.BeginExposition()
   
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20);

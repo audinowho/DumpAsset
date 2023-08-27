@@ -78,10 +78,28 @@ function base_camp_2.Enter(map)
   GROUND:Hide("Mission_Board")
   GROUND:Hide("Locator")
   GROUND:Hide("Locator_Owner")
+  
+  base_camp_2.SetupNpcs()
+  
   GAME:FadeIn(20)
 end
 
 function base_camp_2.Update(map, time)
+end
+
+function base_camp_2.SetupNpcs()
+  GROUND:Unhide("NPC_Food")
+  GROUND:Unhide("NPC_Mother")
+  GROUND:Unhide("NPC_Father")
+  GROUND:Unhide("NPC_Catch_1")
+  GROUND:Unhide("NPC_Catch_2")
+  GROUND:Unhide("NPC_Elder")
+  GROUND:Unhide("NPC_History")
+  GROUND:Unhide("NPC_Settling")
+  GROUND:Unhide("NPC_Nonbeliever")
+  GROUND:Unhide("NPC_Hesitant")
+  GROUND:Unhide("NPC_Broke")
+
 end
 
 --------------------------------------------------

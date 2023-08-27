@@ -45,7 +45,53 @@ function base_camp.Enter(map)
     local noctowl = CH('Noctowl')
     GROUND:TeleportTo(noctowl, 80, 288, Direction.Right)
 	GAME:FadeIn(20)
-  elseif not SV.base_camp.ExpositionComplete then
+  elseif not SV.base_camp.ExpositionComplete then	
+    base_camp.SetupNpcs()
+    base_camp.BeginExposition()
+    SV.base_camp.ExpositionComplete = true
+  else
+    base_camp.SetupNpcs()
+    GAME:FadeIn(20)
+  end
+  
+  SV.base_camp.IntroComplete = true
+  
+end
+
+--------------------------------------------------
+-- Map Setup Functions
+--------------------------------------------------
+function base_camp.PrepareFirstTimeVisit()
+  --Hide assembly and storage
+  GROUND:Hide("Assembly")
+  GROUND:Hide("Storage")
+  GROUND:Hide("North_Exit")
+  GROUND:Hide("Noctowl")
+  GROUND:Hide("NPC_Entrance")
+  GROUND:Hide("NPC_Range")
+  GROUND:Hide("NPC_Coast")
+  GROUND:Unhide("East_LogPile")
+  GROUND:Unhide("West_LogPile")
+  GROUND:Unhide("First_North_Exit")
+  GAME:UnlockDungeon('guildmaster_trail')
+  
+end
+
+--------------------------------------------------
+-- Map Begin Functions
+--------------------------------------------------
+function base_camp.SetupNpcs()
+  GROUND:Unhide("NPC_Coast")
+  GROUND:Unhide("NPC_Range")
+  GROUND:Unhide("NPC_Entrance")
+
+end
+
+function base_camp.BeginExposition()  
+
+  local noctowl = CH('Noctowl')
+  local player = CH('PLAYER')
+  
 	-- move founder to team if not in party
 	-- get party
 	local party_table = GAME:GetPlayerPartyTable()
@@ -94,48 +140,10 @@ function base_camp.Enter(map)
     local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get('guildmaster_trail')
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001'], zone:GetColoredName()))
     --move the noctowl to a new position
-    local noctowl = CH('Noctowl')
     GROUND:TeleportTo(noctowl, 244, 286, Direction.Up)
     GAME:FadeIn(20)
-  else
-    GAME:FadeIn(20)
-  end
-  
-  --When the player gets back after fainting for the first time, play this cutscene
-  if SV.base_camp.IntroComplete and not SV.base_camp.ExpositionComplete then
-    base_camp.BeginExposition()
-    SV.base_camp.ExpositionComplete = true
-  end
-  
-  SV.base_camp.IntroComplete = true
-  
-end
 
---------------------------------------------------
--- Map Setup Functions
---------------------------------------------------
-function base_camp.PrepareFirstTimeVisit()
-  --Hide assembly and storage
-  GROUND:Hide("Assembly")
-  GROUND:Hide("Storage")
-  GROUND:Hide("North_Exit")
-  GROUND:Hide("Noctowl")
-  GROUND:Hide("NPC_Entrance")
-  GROUND:Hide("NPC_Range")
-  GROUND:Hide("NPC_Coast")
-  GROUND:Unhide("East_LogPile")
-  GROUND:Unhide("West_LogPile")
-  GROUND:Unhide("First_North_Exit")
-  GAME:UnlockDungeon('guildmaster_trail')
-  
-end
 
---------------------------------------------------
--- Map Begin Functions
---------------------------------------------------
-function base_camp.BeginExposition()  
-  local noctowl = CH('Noctowl')
-  local player = CH('PLAYER')
   UI:SetSpeaker(noctowl)
   
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002']))

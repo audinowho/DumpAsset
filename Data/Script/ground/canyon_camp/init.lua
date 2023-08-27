@@ -40,12 +40,15 @@ function canyon_camp.Enter(map)
   
   --when arriving the first time, play this cutscene
   if not SV.canyon_camp.ExpositionComplete then
+    canyon_camp.SetupNpcs()
     canyon_camp.BeginExposition()
     SV.canyon_camp.ExpositionComplete = true
   elseif SV.rest_stop.BossPhase == 2 then
+    canyon_camp.SetupNpcs()
     canyon_camp.Steelix_Fail()
 	SV.rest_stop.BossPhase = 1
   else
+    canyon_camp.SetupNpcs()
     GAME:FadeIn(20)
   end
 end
@@ -56,6 +59,20 @@ end
 --------------------------------------------------
 -- Map Begin Functions
 --------------------------------------------------
+function canyon_camp.SetupNpcs()
+  GROUND:Unhide("NPC_Seeker")
+  GROUND:Unhide("NPC_Hidden")
+  GROUND:Unhide("NPC_Dragon_1")
+  GROUND:Unhide("NPC_Dragon_2")
+  GROUND:Unhide("NPC_Dragon_3")
+  GROUND:Unhide("NPC_Storehouse")
+  GROUND:Unhide("NPC_Strategy")
+  GROUND:Unhide("NPC_Wall")
+  GROUND:Unhide("NPC_8")
+  GROUND:Unhide("NPC_Argue_1")
+  GROUND:Unhide("NPC_Argue_2")
+end
+
 function canyon_camp.BeginExposition()
 
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20);
@@ -217,7 +234,7 @@ function canyon_camp.NPC_Strategy_Action(chara, activator)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Line_001']))
 end
 
-function canyon_camp.NPC_Campfire_Top_Action(chara, activator)
+function canyon_camp.NPC_Fairy(chara, activator)
   
   UI:SetSpeaker(chara)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))

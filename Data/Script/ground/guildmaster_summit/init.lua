@@ -16,11 +16,11 @@ function guildmaster_summit.Enter(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
 
   if SV.guildmaster_summit.ExpositionComplete then
-    GROUND:Hide("Xatu")
-    GROUND:Hide("Lucario")
-    GROUND:Hide("Wigglytuff")
     GAME:FadeIn(20)
   else
+    GROUND:Unhide("Xatu")
+    GROUND:Unhide("Lucario")
+    GROUND:Unhide("Wigglytuff")
     if not SV.guildmaster_summit.BattleComplete then
       SV.base_camp.ExpositionComplete = true
       SV.base_camp.FirstTalkComplete = true

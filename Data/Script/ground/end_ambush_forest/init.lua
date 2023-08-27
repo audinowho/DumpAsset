@@ -58,6 +58,10 @@ function end_ambush_forest.PreBattle(shortened)
   
   GAME:MoveCamera(204, 192, 1, false)
   
+  GROUND:Unhide("Honchkrow")
+  GROUND:Unhide("Murkrow_1")
+  GROUND:Unhide("Murkrow_2")
+  
   GAME:FadeIn(20)
   
   GROUND:MoveToPosition(player, 196, 240, false, 2)
@@ -103,7 +107,9 @@ function end_ambush_forest.PostBattle()
   
   GAME:CutsceneMode(true)
   
-  --GROUND:Unhide("Croco")
+  GROUND:Unhide("Honchkrow")
+  GROUND:Unhide("Murkrow_1")
+  GROUND:Unhide("Murkrow_2")
   
   GAME:MoveCamera(204, 192, 1, false)
   

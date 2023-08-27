@@ -57,6 +57,8 @@ function end_treacherous_mountain.PreBattle(shortened)
   
   GAME:MoveCamera(252, 216, 1, false)
   
+  GROUND:Unhide("Salamence")
+  
   GAME:FadeIn(20)
   
   GROUND:MoveToPosition(player, 244, 216, false, 2)
@@ -102,7 +104,7 @@ function end_treacherous_mountain.PostBattle()
   
   GAME:CutsceneMode(true)
   
-  --GROUND:Unhide("Croco")
+  GROUND:Unhide("Salamence")
   
   GAME:MoveCamera(252, 216, 1, false)
   
@@ -127,7 +129,6 @@ end
 function end_treacherous_mountain.EmptyReturn()
 
   local player = CH("PLAYER")
-  local enemy = CH("Salamence")
   
   GAME:CutsceneMode(true)
   

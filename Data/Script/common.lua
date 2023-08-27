@@ -176,8 +176,8 @@ function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
   for ii = 1,#ground_entrances,1 do
     if ground_entrances[ii].Flag then
 	  local ground_id = ground_entrances[ii].Zone
-	  local zone = _DATA:GetZone(ground_id)
-	  local ground = _DATA:GetGround(zone.GroundMaps[ground_entrances[ii].ID])
+	  local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(ground_id)
+	  local ground = _DATA:GetGround(zone_summary.Grounds[ground_entrances[ii].ID])
 	  local ground_name = ground:GetColoredName()
       table.insert(open_dests, { Name=ground_name, Dest=RogueEssence.Dungeon.ZoneLoc(ground_id, -1, ground_entrances[ii].ID, ground_entrances[ii].Entry) })
 	end

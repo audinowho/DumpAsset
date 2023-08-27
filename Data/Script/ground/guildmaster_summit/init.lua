@@ -55,15 +55,15 @@ function guildmaster_summit.PreBattle(shortened)
   local team1 = CH('Teammate1')
   local team2 = CH('Teammate2')
   local team3 = CH('Teammate3')
-  GROUND:TeleportTo(player, 196, 196, Direction.Up)
+  GROUND:TeleportTo(player, 196, 244, Direction.Up)
   if team1 ~= nil then
-    GROUND:TeleportTo(team1, 168, 196, Direction.Up)
+    GROUND:TeleportTo(team1, 168, 244, Direction.Up)
   end
   if team2 ~= nil then
-    GROUND:TeleportTo(team2, 224, 196, Direction.Up)
+    GROUND:TeleportTo(team2, 224, 244, Direction.Up)
   end
   if team3 ~= nil then
-    GROUND:TeleportTo(team3, 196, 224, Direction.Up)
+    GROUND:TeleportTo(team3, 196, 272, Direction.Up)
   end
   
   
@@ -100,8 +100,8 @@ function guildmaster_summit.PreBattle(shortened)
   GAME:WaitFrames(10)
   UI:SetSpeaker(wigglytuff)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_007']))
-  SOUND:FadeOutBGM()
   GAME:WaitFrames(10)
+  SOUND:FadeOutBGM()
   
   if GAME:GetTeamName() == "" then
     
@@ -172,15 +172,15 @@ function guildmaster_summit.PostBattle()
   local team1 = CH('Teammate1')
   local team2 = CH('Teammate2')
   local team3 = CH('Teammate3')
-  GROUND:TeleportTo(player, 196, 196, Direction.Up)
+  GROUND:TeleportTo(player, 196, 244, Direction.Up)
   if team1 ~= nil then
-    GROUND:TeleportTo(team1, 168, 196, Direction.Up)
+    GROUND:TeleportTo(team1, 168, 244, Direction.Up)
   end
   if team2 ~= nil then
-    GROUND:TeleportTo(team2, 224, 196, Direction.Up)
+    GROUND:TeleportTo(team2, 224, 244, Direction.Up)
   end
   if team3 ~= nil then
-    GROUND:TeleportTo(team3, 196, 224, Direction.Up)
+    GROUND:TeleportTo(team3, 196, 272, Direction.Up)
   end
   
   local xatu = CH('Xatu')
@@ -220,10 +220,10 @@ function guildmaster_summit.PostBattle()
   GAME:WaitFrames(80)
 
   GAME:FadeOut(false, 40)
-  GAME:CutsceneMode(true)
 
   if GAME:InRogueMode() then
 
+      UI:SetAutoFinish(true)
 	  GAME:WaitFrames(60)
 	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Ending_Cutscene_Line_008'], GAME:GetTeamName()), -1)
 	  GAME:WaitFrames(20);
@@ -234,31 +234,12 @@ function guildmaster_summit.PostBattle()
 	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Ending_Cutscene_Line_011']), -1)
 	  GAME:WaitFrames(20);
 	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Ending_Cutscene_Line_012']), -1)
+      UI:SetAutoFinish(false)
 	  GAME:AddToPlayerMoneyBank(100000)
   else
-  
+      guildmaster_summit.can_skip = false
 	  GAME:WaitFrames(180)
-	  UI:WaitShowTitle(STRINGS:Format(MapStrings['Credits_Line_001']), 60)
-	  GAME:WaitFrames(180)
-	  UI:WaitHideTitle(60)
-	  GAME:WaitFrames(60)
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_002']), 210)
-	  GAME:WaitFrames(60)
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_003']), 210)
-	  GAME:WaitFrames(60)
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_004']), 210)
-	  GAME:WaitFrames(60)
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_005']), 210)
-	  GAME:WaitFrames(60)
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_006']), 210)
-	  GAME:WaitFrames(60)
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_007']), 210)
-	  GAME:WaitFrames(60)
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_008']), 210)
-	  GAME:WaitFrames(210)
-
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_009']), 240)
-	  
+      guildmaster_summit.RollCredits()
   end
   
   SOUND:FadeOutBGM()
@@ -268,11 +249,106 @@ function guildmaster_summit.PostBattle()
   SV.guildmaster_summit.GameComplete = true
   GAME:CutsceneMode(false)
   
+  local dungeon_to_clear = "champions_road"
   COMMON.EndDayCycle()
-  GAME:EndDungeonRun(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 1, 0, true, false)
+  GAME:EndDungeonRun(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 1, 0, true, false, dungeon_to_clear)
   GAME:RestartToTitle()
 end
 
+
+function guildmaster_summit.RollCredits()
+
+      UI:SetAutoFinish(true)
+	  UI:WaitShowTitle(STRINGS:Format(MapStrings['Credits_Line_001']), 60)
+	  GAME:WaitFrames(180)
+	  UI:WaitHideTitle(60)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  
+	  GAME:WaitFrames(60)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_002']), 210)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  
+	  GAME:WaitFrames(60)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_003']), 210)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  
+	  GAME:WaitFrames(60)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_004']), 210)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  
+	  GAME:WaitFrames(60)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_005']), 210)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  
+	  GAME:WaitFrames(60)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_006']), 210)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  
+	  GAME:WaitFrames(60)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_007']), 210)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  
+	  GAME:WaitFrames(60)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_008']), 210)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  
+	  GAME:WaitFrames(120)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_009']), 240)
+	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
+	    return
+	  end
+	  
+	  guildmaster_summit.credit_skip = true
+end
+
+function guildmaster_summit.WaitCredits()
+  while guildmaster_summit.credit_skip == false do
+    if GAME:IsInputDown(1) then -- Cancel
+	  guildmaster_summit.credit_skip = true
+	end
+	GAME:WaitFrames(1)
+  end
+end
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
@@ -290,11 +366,56 @@ function guildmaster_summit.South_Exit_Touch(obj, activator)
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
+guildmaster_summit.can_skip = false
+guildmaster_summit.credit_skip = false
 
 function guildmaster_summit.Summit_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local team1 = CH('Teammate1')
+  local team2 = CH('Teammate2')
+  local team3 = CH('Teammate3')
+  
+  if team1 ~= nil then
+  GROUND:CharAnimateTurnTo(team1, Direction.Up, 4)
+  end
+  if team2 ~= nil then
+  GROUND:CharAnimateTurnTo(team2, Direction.Up, 4)
+  end
+  if team3 ~= nil then
+  GROUND:CharAnimateTurnTo(team3, Direction.Up, 4)
+  end
+  
   UI:ResetSpeaker()
-  UI:WaitShowDialogue(STRINGS:Format("Witness it, the rising of the sun."))
+  
+  GAME:MoveCamera(0, -48, 48, true)
+  
+  --local coro1 = TASK:BranchCoroutine(GAME:_MoveCamera(0, -48, 60, true))
+  
+  local emitter = RogueEssence.Content.OverlayEmitter()
+  emitter.Anim = RogueEssence.Content.BGAnimData("White", 0)
+  emitter.Layer = DrawLayer.Top
+  emitter.Color = Color(0, 0, 0, 0.5)
+  emitter.FadeIn = 60
+  emitter.FadeOut = 60
+  _GROUND:CreateAnim(emitter, DrawLayer.NoDraw)
+  GAME:WaitFrames(90)
+  --TASK:JoinCoroutines({coro1})
+  
+  guildmaster_summit.can_skip = true
+  guildmaster_summit.credit_skip = false
+  local coro2 = TASK:BranchCoroutine(guildmaster_summit.RollCredits)
+  local coro3 = TASK:BranchCoroutine(guildmaster_summit.WaitCredits)
+  TASK:JoinCoroutines({coro2, coro3})
+  
+  
+  emitter:SwitchOff()
+  --coro1 = TASK:BranchCoroutine(GAME:_MoveCamera(0, 0, 60, true))
+  --TASK:JoinCoroutines({coro1})
+  
+  GAME:WaitFrames(60)
+  GAME:MoveCamera(0, 0, 48, true)
+  
 end
 
 

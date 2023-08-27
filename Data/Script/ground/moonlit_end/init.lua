@@ -77,7 +77,7 @@ function moonlit_end.Cutscene_Trigger_Touch(obj, activator)
   end
   
   UI:SetSpeaker(cresselia)
-  if SV.guildmaster_summit.ExpositionComplete then
+  if SV.guildmaster_summit.GameComplete then
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002_Postgame'], GAME:GetTeamName()))
   else
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002_Default'], GAME:GetTeamName()))

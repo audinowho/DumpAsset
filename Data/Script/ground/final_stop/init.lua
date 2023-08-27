@@ -28,6 +28,10 @@ function final_stop.Enter(map)
     final_stop.SetupNpcs()
     final_stop.BeginExposition()
     SV.final_stop.ExpositionComplete = true
+  elseif SV.guildmaster_summit.BossPhase == 2 then
+    final_stop.SetupNpcs()
+    final_stop.Summit_Fail()
+	SV.guildmaster_summit.BossPhase = 1
   else
     final_stop.SetupNpcs()
     GAME:FadeIn(20)
@@ -48,6 +52,17 @@ function final_stop.SetupNpcs()
 end
 
 
+function final_stop.Summit_Fail()
+  --everyone is dead
+  UI:ResetSpeaker()
+  UI:WaitShowDialogue("No... They weren't the ones.")
+  UI:WaitShowDialogue("We must continue to wait...")
+  
+  GAME:FadeIn(20)
+  --get back up
+end
+
+
 function final_stop.BeginExposition()
   
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20);
@@ -65,8 +80,7 @@ function final_stop.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   local dungeon_entrances = { 'champions_road', 'barren_tundra', 'cave_of_solace', 'labyrinth_of_the_lost' }
-  --also dungeon 23: the sky is accessible by talking to a shaymin
-  local ground_entrances = {{Flag=SV.guildmaster_summit.ExpositionComplete,Zone='guildmaster_island',ID=8,Entry=0}}
+  local ground_entrances = {{Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 

@@ -188,6 +188,11 @@ function UpgradeTools:OnUpgrade()
   if SV.forest_camp.SnorlaxPhase == nil then
     SV.forest_camp.SnorlaxPhase = 0
   end
+
+  if SV.guildmaster_summit.BossPhase == nil then
+    SV.guildmaster_summit.BossPhase = 0
+	SV.guildmaster_summit.GameComplete = false
+  end
   
   PrintInfo("=>> Loaded version")
 end

@@ -37,6 +37,10 @@ function guildmaster_island.ExitSegment(zone, result, rescue, segmentID, mapID)
 	    SV.rest_stop.BossPhase = 2
 	    COMMON.EndSession(result, 'guildmaster_island', -1,5,2)
 	    return
+	  elseif mapID == 8 then
+	    SV.guildmaster_summit.BossPhase = 2
+	    COMMON.EndDungeonDay(result, 'guildmaster_island', -1,7,2)
+	    return
 	  end
 	end
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
@@ -48,6 +52,12 @@ function guildmaster_island.ExitSegment(zone, result, rescue, segmentID, mapID)
 	  elseif mapID == 6 then
 		SV.rest_stop.BossPhase = 3
 	    COMMON.EndSession(result, 'guildmaster_island', -1,6,1)
+      elseif mapID == 8 then
+        --for the boss segment, set a save variable
+        --the MAP's script will play the final cutscene
+        --AND it will end the game
+        SV.guildmaster_summit.BossPhase = 3
+        GAME:EnterZone('guildmaster_island', -1, 8, 0)
 	  else
 	    PrintInfo("No exit procedure found!")
 		COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

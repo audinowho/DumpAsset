@@ -41,10 +41,6 @@ function base_camp.Enter(map)
   if not SV.base_camp.IntroComplete then
     base_camp.PrepareFirstTimeVisit()
 	GAME:FadeIn(20)
-  elseif SV.guildmaster_summit.ExpositionComplete then
-    local noctowl = CH('Noctowl')
-    GROUND:TeleportTo(noctowl, 80, 288, Direction.Right)
-	GAME:FadeIn(20)
   elseif not SV.base_camp.ExpositionComplete then	
     base_camp.SetupNpcs()
     base_camp.BeginExposition()
@@ -84,7 +80,11 @@ function base_camp.SetupNpcs()
   GROUND:Unhide("NPC_Coast")
   GROUND:Unhide("NPC_Range")
   GROUND:Unhide("NPC_Entrance")
-
+  
+  if SV.guildmaster_summit.GameComplete then
+    local noctowl = CH('Noctowl')
+    GROUND:TeleportTo(noctowl, 80, 288, Direction.Right)
+  end
 end
 
 function base_camp.BeginExposition()  
@@ -235,7 +235,7 @@ function base_camp.North_Exit_Touch(obj, activator)
   {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
   {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
   {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
-  {Flag=SV.guildmaster_summit.ExpositionComplete,Zone='guildmaster_island',ID=8,Entry=0}}
+  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 

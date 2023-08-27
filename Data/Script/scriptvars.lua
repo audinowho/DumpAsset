@@ -194,8 +194,9 @@ SV.final_stop =
 
 SV.guildmaster_summit = 
 {
-  ExpositionComplete  = false,
-  BattleComplete = false
+  -- 0 = not started, 1 = started, 2 = failed, 3 = success, 4 = completed
+  BossPhase = 0,
+  GameComplete  = false
 }
 
 SV.moonlit_end = 

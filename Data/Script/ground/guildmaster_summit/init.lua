@@ -15,19 +15,19 @@ end
 function guildmaster_summit.Enter(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
 
-  if SV.guildmaster_summit.ExpositionComplete then
+  if SV.guildmaster_summit.GameComplete then
+    guildmaster_summit.SetupNpcs()
     GAME:FadeIn(20)
   else
     GROUND:Unhide("Xatu")
     GROUND:Unhide("Lucario")
     GROUND:Unhide("Wigglytuff")
-    if not SV.guildmaster_summit.BattleComplete then
-      SV.base_camp.ExpositionComplete = true
-      SV.base_camp.FirstTalkComplete = true
-      guildmaster_summit.PreBattle()
-    else
+    if SV.guildmaster_summit.BossPhase == 0 then
+      guildmaster_summit.PreBattle(false)
+    elseif SV.guildmaster_summit.BossPhase == 1 then
+      guildmaster_summit.PreBattle(true)
+    elseif SV.guildmaster_summit.BossPhase == 3 then
       guildmaster_summit.PostBattle()
-      SV.guildmaster_summit.ExpositionComplete = true
     end
   end
   
@@ -40,7 +40,11 @@ end
 --------------------------------------------------
 -- Map Begin Functions
 --------------------------------------------------
-function guildmaster_summit.PreBattle()
+function guildmaster_summit.SetupNpcs()
+  
+end
+
+function guildmaster_summit.PreBattle(shortened)
   -- play cutscene
   GAME:CutsceneMode(true)
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
@@ -69,6 +73,9 @@ function guildmaster_summit.PreBattle()
   local wigglytuff = CH('Wigglytuff')
   -- trigger the battle and set a variable indicating its triggering
   UI:SetSpeaker("*", true, -1)
+  if shortened then
+    UI:WaitShowDialogue("Shortened")
+  end
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
   GAME:WaitFrames(10)
   GAME:MoveCamera(0, -72, 60, true)
@@ -150,7 +157,9 @@ function guildmaster_summit.PreBattle()
   GAME:FadeOut(true, 80)
   GAME:CutsceneMode(false)
   
-  GAME:ContinueDungeon('guildmaster_trail', 1,0, 0)
+  SV.guildmaster_summit.BossPhase = 1
+  
+  GAME:ContinueDungeon('guildmaster_island', 0,8, 0)
 end
 
 function guildmaster_summit.PostBattle()
@@ -254,7 +263,11 @@ function guildmaster_summit.PostBattle()
   
   SOUND:FadeOutBGM()
   GAME:WaitFrames(160);
-
+  
+  SV.guildmaster_summit.BossPhase = 4
+  SV.guildmaster_summit.GameComplete = true
+  GAME:CutsceneMode(false)
+  
   COMMON.EndDayCycle()
   GAME:EndDungeonRun(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 1, 0, true, false)
   GAME:RestartToTitle()

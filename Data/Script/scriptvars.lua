@@ -192,6 +192,13 @@ SV.final_stop =
   ExpositionComplete  = false
 }
 
+
+SV.guildmaster_trail = 
+{
+  FloorsCleared = 0,
+  Rewarded  = false
+}
+
 SV.guildmaster_summit = 
 {
   -- 0 = not started, 1 = started, 2 = failed, 3 = success, 4 = completed

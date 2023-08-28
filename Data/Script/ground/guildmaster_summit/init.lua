@@ -17,7 +17,12 @@ function guildmaster_summit.Enter(map)
 
   if SV.guildmaster_summit.GameComplete then
     guildmaster_summit.SetupNpcs()
-    GAME:FadeIn(20)
+    if SV.guildmaster_trail.FloorsCleared >= 30 and SV.guildmaster_trail.Rewarded == false then
+	  guildmaster_summit.NoctowlDialogue()
+	  SV.guildmaster_trail.Rewarded = true
+	else
+      GAME:FadeIn(20)
+	end
   else
     GROUND:Unhide("Xatu")
     GROUND:Unhide("Lucario")
@@ -41,6 +46,78 @@ end
 -- Map Begin Functions
 --------------------------------------------------
 function guildmaster_summit.SetupNpcs()
+  
+end
+function guildmaster_summit.NoctowlDialogue()
+  
+  GAME:CutsceneMode(true)
+  local player = CH('PLAYER')
+  local noctowl = CH('Noctowl')
+  
+  GROUND:Unhide("Noctowl")
+  
+  local team1 = CH('Teammate1')
+  local team2 = CH('Teammate2')
+  local team3 = CH('Teammate3')
+  GROUND:TeleportTo(player, 196, 280, Direction.Up)
+  if team1 ~= nil then
+    GROUND:TeleportTo(team1, 168, 280, Direction.Up)
+  end
+  if team2 ~= nil then
+    GROUND:TeleportTo(team2, 224, 280, Direction.Up)
+  end
+  if team3 ~= nil then
+    GROUND:TeleportTo(team3, 196, 304, Direction.Up)
+  end
+  
+  GAME:FadeIn(20)
+	
+  UI:SetSpeaker(noctowl)
+  UI:WaitShowDialogue("So, they're really gone...")
+  --UI:WaitShowDialogue("Where did you come from...?")
+  --UI:WaitShowDialogue("Could it be...?")
+  
+  GROUND:CharAnimateTurnTo(noctowl, Direction.Down, 4)
+  
+  
+  --UI:WaitShowDialogue("When the guildmasters first put up the challenge, I was there.")
+  --UI:WaitShowDialogue("I witnessed them set off for the summit, never to return.")
+  --UI:WaitShowDialogue("Countless others followed, but never succeeded.")
+  UI:WaitShowDialogue("Never did I think someone would conquer all of the Guildmaster Trail.")
+  UI:WaitShowDialogue("But you've proved me wrong.")
+  
+  GROUND:MoveInDirection(noctowl, Direction.Down, 24, false, 2)
+  
+  UI:WaitShowDialogue("A token of my appreciation.  You've earned it.")
+  
+  local receive_item = RogueEssence.Dungeon.InvItem("apricorn_perfect")
+  COMMON.GiftItem(player, receive_item)
+  
+  
+  --Who are the ones that stand before us?
+  --What do you call your team?
+  --To follow in our steps is no easy endeavor...
+  
+  GAME:FadeOut(false, 20)
+  
+  
+  if team1 ~= nil then
+    GROUND:TeleportTo(team1, 160, 176, Direction.Up)
+  end
+  if team2 ~= nil then
+    GROUND:TeleportTo(team2, 232, 176, Direction.Up)
+  end
+  if team3 ~= nil then
+    GROUND:TeleportTo(team3, 196, 200, Direction.Up)
+  end
+  
+  GAME:WaitFrames(60)
+  
+  GAME:CutsceneMode(false)
+  
+  GROUND:Hide("Noctowl")
+  
+  GAME:FadeIn(20)
   
 end
 

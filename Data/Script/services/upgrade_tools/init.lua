@@ -193,6 +193,14 @@ function UpgradeTools:OnUpgrade()
     SV.guildmaster_summit.BossPhase = 0
 	SV.guildmaster_summit.GameComplete = false
   end
+
+  if SV.guildmaster_trail == nil then
+	SV.guildmaster_trail = 
+	{
+	  FloorsCleared = 0,
+	  Rewarded  = false
+	}
+  end
   
   PrintInfo("=>> Loaded version")
 end

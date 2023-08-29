@@ -73,8 +73,7 @@ SV.missions =
 
 SV.magnagate =
 {
-  cards = 0,
-  portal = false
+  Cards = 0
 }
 
 -----------------------------------------------
@@ -205,6 +204,14 @@ SV.guildmaster_summit =
   BossPhase = 0,
   GameComplete  = false,
   ClearedFromTrail  = false
+}
+
+SV.guild_hut = 
+{
+  ExpositionComplete = false,
+  TookCard  = false,
+  Portal  = false,
+  BookPhase = 0
 }
 
 SV.moonlit_end = 

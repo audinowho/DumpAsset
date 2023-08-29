@@ -116,8 +116,8 @@ TempTileStepType = luanet.import_type('PMDC.LevelGen.TempTileStep`1')
 
 function FLOOR_GEN_SCRIPT.Mysteriosity(map, args)
   local total_chance = 0
-  if SV.magnagate.cards > 0 then
-    total_chance = args.BaseChance + SV.magnagate.cards * 5
+  if SV.magnagate.Cards > 0 then
+    total_chance = args.BaseChance + SV.magnagate.Cards * 5
   end
   if map.Rand:Next(100) < total_chance then
 	local secretTile = RogueEssence.Dungeon.EffectTile("tile_mystery", true)

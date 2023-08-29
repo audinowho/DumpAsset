@@ -16,7 +16,6 @@ end
 function base_camp.Enter(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  
   SV.checkpoint = 
   {
     Zone    = 'guildmaster_island', Segment  = -1,

@@ -94,11 +94,10 @@ function UpgradeTools:OnUpgrade()
   end
   
   
-  if SV.magnagate == nil then
+  if SV.magnagate == nil or SV.magnagate.Cards == nil then
     SV.magnagate =
     {
-      cards = 0,
-      portal = false
+      Cards = 0
     }
   end
   
@@ -200,6 +199,16 @@ function UpgradeTools:OnUpgrade()
 	{
 	  FloorsCleared = 0,
 	  Rewarded  = false
+	}
+  end
+
+  if SV.guild_hut == nil then
+	SV.guild_hut = 
+	{
+	  ExpositionComplete = false,
+	  TookCard  = false,
+	  Portal  = false,
+      BookPhase = 0
 	}
   end
   

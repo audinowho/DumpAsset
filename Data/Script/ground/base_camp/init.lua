@@ -41,6 +41,10 @@ function base_camp.Enter(map)
   if not SV.base_camp.IntroComplete then
     base_camp.PrepareFirstTimeVisit()
 	GAME:FadeIn(20)
+  elseif SV.guildmaster_trail.FloorsCleared >= 30 and SV.guildmaster_trail.Rewarded == false then
+    base_camp.RewardDialogue()
+	SV.guildmaster_trail.Rewarded = true
+    SV.base_camp.ExpositionComplete = true
   elseif not SV.base_camp.ExpositionComplete then	
     base_camp.SetupNpcs()
     base_camp.BeginExposition()
@@ -223,6 +227,49 @@ function base_camp.BeginExposition()
   
 end
 
+
+function base_camp.RewardDialogue()
+  
+  GAME:CutsceneMode(true)
+  local player = CH('PLAYER')
+  local noctowl = CH('Noctowl')
+    
+  GROUND:TeleportTo(noctowl, 244, 286, Direction.Up)
+	
+  GAME:FadeIn(20)
+	
+  UI:SetSpeaker(noctowl)
+  
+  UI:WaitShowDialogue("Your badge... that insignia!")
+  --UI:WaitShowDialogue("Where did you come from...?")
+  --UI:WaitShowDialogue("Could it be...?")
+  
+  --UI:WaitShowDialogue("When the guildmasters first put up the challenge, I was there.")
+  --UI:WaitShowDialogue("I witnessed them set off for the summit, never to return.")
+  --UI:WaitShowDialogue("Countless others followed, but never succeeded.")
+  UI:WaitShowDialogue("Never did I think someone would conquer all of the Guildmaster Trail.")
+  UI:WaitShowDialogue("But you've proved me wrong.")
+  
+  UI:WaitShowDialogue("A token of my appreciation.  You've earned it.")
+  
+  local receive_item = RogueEssence.Dungeon.InvItem("apricorn_perfect")
+  COMMON.GiftItem(player, receive_item)
+  
+  UI:WaitShowDialogue("I look forward to your future endeavors.")
+  
+  GROUND:MoveToPosition(noctowl, 82, 286, false, 2)
+  
+  GROUND:MoveToPosition(noctowl, 80, 288, false, 2)
+  
+  GROUND:CharAnimateTurnTo(noctowl, Direction.Right, 4)
+  
+  GAME:UnlockDungeon('tropical_path')
+  
+  
+  GAME:CutsceneMode(false)
+  
+end
+
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
@@ -366,8 +413,8 @@ function base_camp.Noctowl_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
   
-  if not SV.base_camp.FirstTalkComplete then
-    -- UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Action_Line_003']))
+  if not SV.base_camp.FirstTalkComplete and _DATA.Save:GetDungeonUnlock("champions_road") ~= RogueEssence.Data.GameProgress.UnlockState.Completed and SV.guildmaster_summit.GameComplete then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Action_Line_001']))
     SV.base_camp.FirstTalkComplete = true
   end
   

@@ -39,7 +39,12 @@ function guildmaster_island.ExitSegment(zone, result, rescue, segmentID, mapID)
 	    return
 	  elseif mapID == 8 then
 	    SV.guildmaster_summit.BossPhase = 2
-	    COMMON.EndDungeonDay(result, 'guildmaster_island', -1,7,2)
+		if SV.guildmaster_summit.ClearedFromTrail then
+	      SV.guildmaster_summit.BossPhase = 1
+	      COMMON.EndDungeonDay(result, 'guildmaster_island', -1,1,0)
+		else
+		  COMMON.EndDungeonDay(result, 'guildmaster_island', -1,7,2)
+		end
 	    return
 	  end
 	end

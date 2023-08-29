@@ -36,6 +36,7 @@ function champions_road.ExitSegment(zone, result, rescue, segmentID, mapID)
 	  if SV.guildmaster_summit.GameComplete then
         COMMON.EndDungeonDay(result, 'guildmaster_island', -1,8,0)
 	  else
+	    SV.guildmaster_summit.ClearedFromTrail = false
 	    GAME:EnterZone('guildmaster_island',-1,8, 0)
 	  end
     elseif segmentID == 1 then

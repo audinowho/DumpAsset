@@ -203,7 +203,8 @@ SV.guildmaster_summit =
 {
   -- 0 = not started, 1 = started, 2 = failed, 3 = success, 4 = completed
   BossPhase = 0,
-  GameComplete  = false
+  GameComplete  = false,
+  ClearedFromTrail  = false
 }
 
 SV.moonlit_end = 

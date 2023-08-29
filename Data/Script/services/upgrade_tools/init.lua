@@ -192,6 +192,7 @@ function UpgradeTools:OnUpgrade()
   if SV.guildmaster_summit.BossPhase == nil then
     SV.guildmaster_summit.BossPhase = 0
 	SV.guildmaster_summit.GameComplete = false
+	SV.guildmaster_summit.ClearedFromTrail = false
   end
 
   if SV.guildmaster_trail == nil then

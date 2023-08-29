@@ -18,7 +18,7 @@ function guildmaster_summit.Enter(map)
   if SV.guildmaster_summit.GameComplete then
     guildmaster_summit.SetupNpcs()
     if SV.guildmaster_trail.FloorsCleared >= 30 and SV.guildmaster_trail.Rewarded == false then
-	  guildmaster_summit.NoctowlDialogue()
+	  guildmaster_summit.RewardDialogue()
 	  SV.guildmaster_trail.Rewarded = true
 	else
       GAME:FadeIn(20)
@@ -48,7 +48,8 @@ end
 function guildmaster_summit.SetupNpcs()
   
 end
-function guildmaster_summit.NoctowlDialogue()
+
+function guildmaster_summit.RewardDialogue()
   
   GAME:CutsceneMode(true)
   local player = CH('PLAYER')
@@ -93,10 +94,6 @@ function guildmaster_summit.NoctowlDialogue()
   local receive_item = RogueEssence.Dungeon.InvItem("apricorn_perfect")
   COMMON.GiftItem(player, receive_item)
   
-  
-  --Who are the ones that stand before us?
-  --What do you call your team?
-  --To follow in our steps is no easy endeavor...
   
   GAME:FadeOut(false, 20)
   
@@ -164,11 +161,34 @@ function guildmaster_summit.PreBattle(shortened)
   UI:SetSpeaker(xatu)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002']))
   
-  if GAME:GetTeamName() == "" then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_004']))
-  else
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_003'], GAME:GetTeamName()))
+  
+  if _DATA.Save.ActiveTeam.Name == "" then
+    
+  --Who are the ones that stand before us?
+  --What do you call your team?
+  --To follow in our steps is no easy endeavor...
+  
+	UI:SetSpeaker(xatu)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_Ask_001']))
+	
+    local ch = false
+    local name = ""
+    while not ch do
+      UI:NameMenu(STRINGS:FormatKey("INPUT_TEAM_TITLE"), STRINGS:Format(""))
+      UI:WaitForChoice()
+      name = UI:ChoiceResult()
+    
+	  UI:ResetSpeaker()
+      UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Ending_Cutscene_Line_Ask_002'], name), true)
+      UI:WaitForChoice()
+      ch = UI:ChoiceResult()
+    end
+    GAME:SetTeamName(name)
+    
   end
+  
+  UI:SetSpeaker(xatu)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_003'], GAME:GetTeamName()))
   GAME:WaitFrames(10)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_005']))
   GAME:WaitFrames(10)
@@ -178,44 +198,15 @@ function guildmaster_summit.PreBattle(shortened)
   UI:SetSpeaker(wigglytuff)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_007']))
   GAME:WaitFrames(10)
+    
   SOUND:FadeOutBGM()
   
-  if GAME:GetTeamName() == "" then
-    
-    UI:SetSpeaker(lucario)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_008'], GAME:GetTeamName()))
-    UI:SetSpeaker(wigglytuff)
-    UI:SetSpeakerEmotion("Stunned")
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_009']))
-    GAME:WaitFrames(10)
-    GROUND:CharAnimateTurnTo(xatu, Direction.Right, 4)
-    GAME:WaitFrames(50)
-    GROUND:CharAnimateTurnTo(xatu, Direction.Down, 4)
-	UI:SetSpeaker(xatu)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_010']))
-	
-    local ch = false
-    local name = ""
-    while not ch do
-      UI:NameMenu(STRINGS:FormatKey("INPUT_TEAM_TITLE"), STRINGS:Format(""))
-      UI:WaitForChoice()
-      name = UI:ChoiceResult()
-    
-      UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Expo_Cutscene_Line_011'], name), true)
-      UI:WaitForChoice()
-      ch = UI:ChoiceResult()
-    end
-    GAME:SetTeamName(name)
-    
-  end
-  
-  
   UI:SetSpeaker(xatu)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_012']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_013']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_008']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_009']))
   
   SOUND:PlayBGM("C06. Final Battle.ogg", false)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_014'], GAME:GetTeamName()))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_010'], GAME:GetTeamName()))
   GAME:WaitFrames(10)
   SOUND:PlayBattleSE("DUN_Bird_Caw")
   
@@ -283,11 +274,12 @@ function guildmaster_summit.PostBattle()
   GAME:WaitFrames(10)
   UI:SetSpeaker(wigglytuff)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_004']))
-
+  
   UI:SetSpeaker(lucario)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_005']))
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_006']))
   GAME:WaitFrames(10)
+  
   UI:SetSpeaker(xatu)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_007'], GAME:GetTeamName()))
 
@@ -327,6 +319,10 @@ function guildmaster_summit.PostBattle()
   GAME:CutsceneMode(false)
   
   local dungeon_to_clear = "champions_road"
+  if SV.guildmaster_summit.ClearedFromTrail then
+    dungeon_to_clear = "guildmaster_trail"
+	SV.guildmaster_trail.FloorsCleared = 30
+  end
   COMMON.EndDayCycle()
   GAME:EndDungeonRun(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 1, 0, true, false, dungeon_to_clear)
   GAME:RestartToTitle()

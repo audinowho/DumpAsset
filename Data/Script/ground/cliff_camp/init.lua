@@ -48,8 +48,19 @@ function cliff_camp.SetupNpcs()
   GROUND:Unhide("Undergrowth_2")
   GROUND:Unhide("Speedster_1")
   GROUND:Unhide("Speedster_2")
-  GROUND:Unhide("NPC_Storehouse")
   GROUND:Unhide("NPC_Sightseer")
+  
+  if SV.supply_corps.Status <= 1 then
+    GROUND:Unhide("NPC_Storehouse")
+  elseif SV.supply_corps.Status <= 3 then
+    GROUND:Unhide("NPC_Storehouse")
+    GROUND:Unhide("NPC_Carry")
+    GROUND:Unhide("NPC_Deliver")
+  elseif SV.supply_corps.Status <= 5 then
+    GROUND:Unhide("NPC_Carry")
+  elseif SV.supply_corps.Status >= 18 then
+    --cycle appearances
+  end
 end
 
 function cliff_camp.BeginExposition()
@@ -239,8 +250,36 @@ end
 function cliff_camp.NPC_Storehouse_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  local player = CH('PLAYER')
   UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+  
+  if SV.supply_corps.Status <= 0 then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+  elseif SV.supply_corps.Status == 1 then
+    UI:WaitShowDialogue("I'll wait one more day.")
+  elseif SV.supply_corps.Status == 2 then
+    local questname = "OutlawForest1"
+    local quest = SV.missions.Missions[questname]
+    if quest == nil then
+      UI:WaitShowDialogue("Deliver NPC had his package stolen! Please help!")
+	  --add the quest
+	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW, DestZone = "faded_trail", DestSegment = 0, DestFloor = 5, TargetSpecies = "murkrow" }
+	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+	  UI:WaitShowDialogue("Deliver NPC had his package stolen! (You already have the quest)")
+	else
+	  UI:WaitShowDialogue("Thanks for getting back the supplies!  Have a reward!")
+	  --give reward
+      local receive_item = RogueEssence.Dungeon.InvItem("food_apple_huge")
+      COMMON.GiftItem(player, receive_item)
+	  --complete mission and move to done
+	  quest.Complete = COMMON.MISSION_ARCHIVED
+	  SV.missions.FinishedMissions[questname] = quest
+	  SV.missions.Missions[questname] = nil
+	  SV.supply_corps.Status = 3
+	end
+  elseif SV.supply_corps.Status == 3 then
+    UI:WaitShowDialogue("Thanks for helping our delivery.  Now we can go to canyon camp.")
+  end
 end
 
 function cliff_camp.NPC_Sightseer_Action(chara, activator)

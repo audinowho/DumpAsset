@@ -211,6 +211,16 @@ function UpgradeTools:OnUpgrade()
       BookPhase = 0
 	}
   end
+
+  if SV.supply_corps == nil then
+	SV.supply_corps =
+	{
+	  Status = 0,
+	  CarryCycle = 0,
+	  DeliverCycle = 0,
+	  ManagerCycle = 0
+	}
+  end
   
   PrintInfo("=>> Loaded version")
 end

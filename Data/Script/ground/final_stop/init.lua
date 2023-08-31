@@ -45,10 +45,27 @@ end
 -- Map Begin Functions
 --------------------------------------------------
 function final_stop.SetupNpcs()
-  GROUND:Unhide("NPC_Deliver")
-  GROUND:Unhide("NPC_Carry")
-  GROUND:Unhide("NPC_Storehouse")
   GROUND:Unhide("Rival_Late")
+  
+  if SV.supply_corps.Status < 16 then
+    --pass
+  elseif SV.supply_corps.Status <= 16 then
+    GROUND:Unhide("NPC_Carry")
+    GROUND:Unhide("NPC_Deliver")
+	
+	--also add storehouse once he's saved
+    local questname = "OutlawMountain2"
+    local quest = SV.missions.Missions[questname]
+    if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+	  GROUND:Unhide("NPC_Storehouse")
+	end
+  elseif SV.supply_corps.Status <= 19 then
+    GROUND:Unhide("NPC_Storehouse")
+    GROUND:Unhide("NPC_Carry")
+    GROUND:Unhide("NPC_Deliver")
+  elseif SV.supply_corps.Status >= 20 then
+    --cycle appearances
+  end
 end
 
 
@@ -76,6 +93,78 @@ end
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
+
+function final_stop.NPC_Storehouse_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+  UI:SetSpeaker(chara)
+  
+  if SV.supply_corps.Status <= 16 then
+    local questname = "OutlawMountain2"
+    local quest = SV.missions.Missions[questname]
+    if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+	  UI:WaitShowDialogue("Thanks for apprehending the criminal, take this reward.")
+	  --give reward
+      local receive_item = RogueEssence.Dungeon.InvItem("tm_focus_blast")
+      COMMON.GiftItem(player, receive_item)
+	  --complete mission and move to done
+	  quest.Complete = COMMON.MISSION_ARCHIVED
+	  SV.missions.FinishedMissions[questname] = quest
+	  SV.missions.Missions[questname] = nil
+	  SV.supply_corps.Status = 17
+	  UI:WaitShowDialogue("We've got to do something about these thieves.")
+	end
+	
+  elseif SV.supply_corps.Status == 17 then
+	UI:WaitShowDialogue("We've got to do something about these thieves.")
+  elseif SV.supply_corps.Status == 18 then
+    local unlock = _DATA.Save:GetDungeonUnlock("treacherous_mountain") -- make this the dungeon unlock state
+	if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+      COMMON.UnlockWithFanfare("treacherous_mountain", false)
+	elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
+	  UI:WaitShowDialogue("Please help us take down this criminal!")
+	else
+	  UI:WaitShowDialogue("Thanks for bringing down the criminal!  We reward you with biggest storage bag!")
+	  --increase rank for bag space
+	  _DATA.Save.ActiveTeam:SetRank("silver")
+	  SOUND:PlayFanfare("Fanfare/RankUp")
+	  UI:ResetSpeaker(false)
+      UI:SetCenter(true)
+      UI:WaitShowDialogue(STRINGS:Format("You can now carry {0} items in your Treasure Bag!", 40))
+	  UI:SetSpeaker(chara)
+	  UI:SetCenter(false)
+	  UI:WaitShowDialogue("This bad boy can hold even more food than me! dohohoho!")
+	  SV.supply_corps.Status = 19
+	end
+  elseif SV.supply_corps.Status == 19 then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
+  end
+  
+end
+
+
+function final_stop.NPC_Carry_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+  UI:SetSpeaker(chara)
+  
+  if SV.supply_corps.Status <= 16 then
+    local questname = "OutlawMountain2"
+    local quest = SV.missions.Missions[questname]
+    if quest == nil then
+      UI:WaitShowDialogue("Our manager disappeared!  He should be in snowbound path!")
+	  --add the quest
+	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_DISGUISE, DestZone = "snowbound_path", DestSegment = 0, DestFloor = 12, TargetSpecies = "zoroark" }
+	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue("Our manager disappeared! (You already have the quest)")
+	end
+  end
+  
+end
+
 function final_stop.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
@@ -95,15 +184,6 @@ function final_stop.South_Exit_Touch(obj, activator)
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
-
-
-function final_stop.NPC_Storehouse_Action(chara, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
-  COMMON.UnlockWithFanfare("treacherous_mountain", false)
-end
 
 function final_stop.Assembly_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

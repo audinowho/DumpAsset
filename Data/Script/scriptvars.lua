@@ -173,6 +173,71 @@ SV.cliff_camp =
   RivalEarlyIntro = false
 }
 
+--TODO
+SV.supply_corps =
+{
+  --0 = Stopped at Snorlax, 
+  --1 = Cleared Snorlax and headed to cliff camp,
+  --2 = deliver had package stolen
+  --2 (completed) = deliver had package returned,
+  --3 = deliver thanks given for return,
+  --4 = manager moved to canyon camp with deliver,
+  --5 = spoke at canyon camp,
+  --6 = carry had package stolen,
+  --6 (completed) = carry had package returned,
+  --7 = carry thanks given for return,
+  --8 = they found the boss,
+  --8 (with unlock) = gave dungeon of the boss,
+  --8 (with flag) = completed the boss,
+  --9 = thanks for completing the boss,
+  --10 = found the new cave, set up the post
+  --11 = spoke at cave
+  --12 = deliver and carry beaten up,
+  --12 (completed) = deliver rescued from monster house,
+  --13 = deliver thanks given for return,
+  --14 = found snow camp, claims they will set up post
+  --15 = spoke about snow camp
+  --16 = manager disappeared,
+  --16 (completed) = manager rescued from monster house,
+  --17 = manager thanks given for return,
+  --18 = they found the boss,
+  --18 (with unlock) = gave dungeon of the boss,
+  --18 (with flag) = completed the boss,
+  --19 = thanks for completing the boss,
+  --20 = questline and mountain complete, go into cycle routine
+  Status = 0,
+  
+  --cyclical up and down from 1 to 5 inclusive
+  --0 = base camp
+  --1 = forest camp
+  --2 = cliff camp
+  --3 = canyon camp
+  --4 = cave camp
+  --5 = snow camp
+  --6 = summit
+  CarryCycle = 0,
+  
+  --random from 1 to 5 inclusive
+  --0 = base camp
+  --1 = forest camp
+  --2 = cliff camp
+  --3 = canyon camp
+  --4 = cave camp
+  --5 = snow camp
+  --6 = summit
+  DeliverCycle = 0,
+  
+  --cyclical.  overrides the other two if in base camp or summit
+  --0 = base camp
+  --1 = forest camp
+  --2 = cliff camp
+  --3 = canyon camp
+  --4 = cave camp
+  --5 = snow camp
+  --6 = summit
+  ManagerCycle = 0
+}
+
 SV.canyon_camp = 
 {
   ExpositionComplete  = false,

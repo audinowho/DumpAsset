@@ -65,12 +65,24 @@ function canyon_camp.SetupNpcs()
   GROUND:Unhide("NPC_Dragon_1")
   GROUND:Unhide("NPC_Dragon_2")
   GROUND:Unhide("NPC_Dragon_3")
-  GROUND:Unhide("NPC_Storehouse")
   GROUND:Unhide("NPC_Strategy")
   GROUND:Unhide("NPC_Wall")
   GROUND:Unhide("NPC_8")
   GROUND:Unhide("NPC_Argue_1")
   GROUND:Unhide("NPC_Argue_2")
+  
+  if SV.supply_corps.Status < 4 then
+    --pass
+  elseif SV.supply_corps.Status <= 5 then
+    GROUND:Unhide("NPC_Storehouse")
+    GROUND:Unhide("NPC_Deliver")
+  elseif SV.supply_corps.Status <= 9 then
+    GROUND:Unhide("NPC_Storehouse")
+    GROUND:Unhide("NPC_Carry")
+    GROUND:Unhide("NPC_Deliver")
+  elseif SV.supply_corps.Status >= 18 then
+    --cycle appearances
+  end
 end
 
 function canyon_camp.BeginExposition()
@@ -245,9 +257,58 @@ end
 function canyon_camp.NPC_Storehouse_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  local player = CH('PLAYER')
   UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
-    COMMON.UnlockWithFanfare("ambush_forest", false)
+	
+  if SV.supply_corps.Status <= 4 then
+    UI:WaitShowDialogue("I went ahead and set up tent here! I'm waiting for my subordinates to make another trip!")
+	SV.supply_corps.Status = 5
+  elseif SV.supply_corps.Status == 6 then
+    local questname = "OutlawForest2"
+    local quest = SV.missions.Missions[questname]
+    if quest == nil then
+      UI:WaitShowDialogue("Carry NPC had his package stolen! Please Help!")
+	  --add the quest
+	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_HOUSE, DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6, TargetSpecies = "decidueye" }
+	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue("Carry NPC had his package stolen! (You already have the quest)")
+	else
+	  UI:WaitShowDialogue("Thanks for getting back the supplies!  Have a reward!")
+	  --give reward
+      local receive_item = RogueEssence.Dungeon.InvItem("food_banana_big")
+      COMMON.GiftItem(player, receive_item)
+	  --complete mission and move to done
+	  quest.Complete = COMMON.MISSION_ARCHIVED
+	  SV.missions.FinishedMissions[questname] = quest
+	  SV.missions.Missions[questname] = nil
+	  SV.supply_corps.Status = 7
+	  UI:WaitShowDialogue("We've got to do something about these thieves.")
+	end
+  elseif SV.supply_corps.Status == 7 then
+	UI:WaitShowDialogue("We've got to do something about these thieves.")
+  elseif SV.supply_corps.Status == 8 then
+    local unlock = _DATA.Save:GetDungeonUnlock("ambush_forest") -- make this the dungeon unlock state
+	if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+      COMMON.UnlockWithFanfare("ambush_forest", false)
+	elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
+	  UI:WaitShowDialogue("Please help us take down this criminal!")
+	else
+	  UI:WaitShowDialogue("Thanks for bringing down the criminal!  We reward you with a storage bag!")
+	  --increase rank for bag space
+	  _DATA.Save.ActiveTeam:SetRank("bronze")
+	  SOUND:PlayFanfare("Fanfare/RankUp")
+	  UI:ResetSpeaker(false)
+      UI:SetCenter(true)
+      UI:WaitShowDialogue(STRINGS:Format("You can now carry {0} items in your Treasure Bag!", 32))
+	  UI:SetSpeaker(chara)
+	  UI:SetCenter(false)
+	  UI:WaitShowDialogue("We use this bag for our runs!")
+	  SV.supply_corps.Status = 9
+	end
+  elseif SV.supply_corps.Status == 9 then
+    UI:WaitShowDialogue("Thanks for bringing honchkrow down.")
+  end
 end
 
 

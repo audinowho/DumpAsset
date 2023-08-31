@@ -92,8 +92,10 @@ end
 
 COMMON.MISSION_TYPE_RESCUE = 0
 COMMON.MISSION_TYPE_ESCORT = 1
-COMMON.MISSION_TYPE_OUTLAW = 2
-COMMON.MISSION_TYPE_ESCORT_OUT = 3
+COMMON.MISSION_TYPE_ESCORT_OUT = 2
+COMMON.MISSION_TYPE_OUTLAW = 3
+COMMON.MISSION_TYPE_OUTLAW_HOUSE = 4
+COMMON.MISSION_TYPE_OUTLAW_DISGUISE = 5
 
 COMMON.MISSION_INCOMPLETE = 0
 COMMON.MISSION_COMPLETE = 1
@@ -1130,8 +1132,9 @@ function COMMON.EndDayCycle()
 	end
 	
 	
+	
   if SV.Experimental ~= nil then
-    if _DATA.Save:GetDungeonUnlock("faultline_ridge") == RogueEssence.Data.GameProgress.UnlockState.Discovered then
+    if _DATA.Save:GetDungeonUnlock("faultline_ridge") ~= RogueEssence.Data.GameProgress.UnlockState.None then
 	  SV.missions.Missions["EscortSister"] = 
 		{
 		DestZone = "faultline_ridge",
@@ -1163,5 +1166,29 @@ function COMMON.EndDayCycle()
     if all_done == true then
       SV.base_camp.RightStatueDate = os.date("%B %m, %Y")
 	end
+  end
+  
+  if SV.supply_corps.Status == 1 then
+    SV.supply_corps.Status = 2
+  elseif SV.supply_corps.Status == 3 then
+    SV.supply_corps.Status = 4
+  elseif SV.supply_corps.Status == 5 then
+    SV.supply_corps.Status = 6
+  elseif SV.supply_corps.Status == 7 then
+    SV.supply_corps.Status = 8
+  elseif SV.supply_corps.Status == 9 and SV.rest_stop.ExpositionComplete then
+    SV.supply_corps.Status = 10
+  elseif SV.supply_corps.Status == 11 then
+    SV.supply_corps.Status = 12
+  elseif SV.supply_corps.Status == 13 and SV.final_stop.ExpositionComplete then
+    SV.supply_corps.Status = 14
+  elseif SV.supply_corps.Status == 15 then
+    SV.supply_corps.Status = 16
+  elseif SV.supply_corps.Status == 17 then
+    SV.supply_corps.Status = 18
+  elseif SV.supply_corps.Status == 19 and SV.guildmaster_summit.GameComplete then
+    SV.supply_corps.Status = 20
+  elseif SV.supply_corps.Status == 20 then
+    --cycle
   end
 end

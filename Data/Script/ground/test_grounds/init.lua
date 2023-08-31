@@ -473,7 +473,7 @@ function test_grounds.Magnezone_Action(chara, activator)
 	  UI:WaitShowDialogue("Outlaw mission state: Complete.  Give a reward and mark mission as rewarded.")
 	  quest.Complete = COMMON.MISSION_ARCHIVED
 	  SV.missions.FinishedMissions["OutlawQuest"] = quest
-	  table.remove(SV.missions.Missions, "OutlawQuest")
+	  SV.missions.Missions["OutlawQuest"] = nil
 	else
 	  -- there is an outlaw quest, but it hasn't been completed?  ask to abandon
       UI:ChoiceMenuYesNo("Outlaw mission state: Incomplete.  Do you want to abandon the mission?")
@@ -515,7 +515,7 @@ function test_grounds.Butterfree_Action(chara, activator)
 	  UI:WaitShowDialogue("Caterpie mission state: Complete.  Give a reward and mark mission as rewarded.")
 	  quest.Complete = COMMON.MISSION_ARCHIVED
 	  SV.missions.FinishedMissions["CaterQuest"] = quest
-	  table.remove(SV.missions.Missions, "CaterQuest")
+	  SV.missions.Missions["CaterQuest"] = nil
 	else
 	  -- there is a caterpie quest, but it hasn't been completed?  ask to abandon
       UI:ChoiceMenuYesNo("Caterpie mission state: Incomplete.  Do you want to abandon the mission?")
@@ -568,7 +568,7 @@ function test_grounds.Volbeat_Action(chara, activator)
 	  UI:WaitShowDialogue("Volmise mission state: Complete.  Give a reward and mark mission as rewarded.")
 	  quest.Complete = COMMON.MISSION_ARCHIVED
 	  SV.missions.FinishedMissions["VolmiseQuest"] = quest
-	  table.remove(SV.missions.Missions, "VolmiseQuest")
+	  SV.missions.Missions["VolmiseQuest"] = nil
 	else
 	  -- there is a caterpie quest, but it hasn't been completed?  ask to abandon
       UI:ChoiceMenuYesNo("Volmise mission state: Incomplete.  Do you want to abandon the mission?")

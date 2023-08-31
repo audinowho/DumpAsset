@@ -43,6 +43,7 @@ function forest_camp.Enter(map)
     forest_camp.SetupNpcs()
     forest_camp.Snorlax_Success()
 	SV.forest_camp.SnorlaxPhase = 4
+	SV.supply_corps.Status = 1
   else
     forest_camp.SetupNpcs()
     GAME:FadeIn(20)
@@ -66,10 +67,12 @@ function forest_camp.SetupNpcs()
   GROUND:Unhide("NPC_Parent")
   GROUND:Unhide("NPC_Child")
 
-  if SV.forest_camp.SnorlaxPhase ~= 4 then
+  if SV.supply_corps.Status == 0 then
     GROUND:Unhide("Snorlax")
     GROUND:Unhide("NPC_Carry")
     GROUND:Unhide("NPC_Deliver")
+  elseif SV.supply_corps.Status >= 18 then
+    --cycle appearances
   end
 end
 
@@ -174,7 +177,7 @@ function forest_camp.Snorlax_Success()
   --the team thanks you, gives you a stock
   UI:SetSpeaker(CH("NPC_Deliver"))
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_Success_002']))
-  local receive_item = RogueEssence.Dungeon.InvItem("food_apple_huge")
+  local receive_item = RogueEssence.Dungeon.InvItem("apricorn_big")
   COMMON.GiftItem(player, receive_item)
   --they head off
   UI:SetSpeaker(CH("NPC_Carry"))

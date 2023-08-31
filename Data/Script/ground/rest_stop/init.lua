@@ -46,6 +46,18 @@ end
 function rest_stop.SetupNpcs()
   --GROUND:Unhide("NPC_1")
   --GROUND:Unhide("NPC_2")
+  
+  if SV.supply_corps.Status < 10 then
+    --pass
+  elseif SV.supply_corps.Status <= 11 then
+    GROUND:Unhide("NPC_Storehouse")
+  elseif SV.supply_corps.Status <= 15 then
+    GROUND:Unhide("NPC_Storehouse")
+    GROUND:Unhide("NPC_Carry")
+    GROUND:Unhide("NPC_Deliver")
+  elseif SV.supply_corps.Status >= 19 then
+    --cycle appearances
+  end
 end
 
 function rest_stop.BeginExposition(shortened)
@@ -111,6 +123,46 @@ end
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
+
+function rest_stop.NPC_Storehouse_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+  UI:SetSpeaker(chara)
+  
+  if SV.supply_corps.Status <= 10 then
+    UI:WaitShowDialogue("Thanks for discovering this cave.  We're putting supplies here.")
+	SV.supply_corps.Status = 11
+  elseif SV.supply_corps.Status == 12 then
+    local questname = "OutlawMountain1"
+    local quest = SV.missions.Missions[questname]
+    if quest == nil then
+      UI:WaitShowDialogue("Some thugs beat our guys up!  Teach them a lesson!")
+	  --add the quest
+	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW, DestZone = "copper_quarry", DestSegment = 0, DestFloor = 4, TargetSpecies = "weavile" }
+	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue("Some thugs beat our guys up!  Teach them a lesson! (You already have the quest)")
+	else
+	  UI:WaitShowDialogue("Thanks for getting back the supplies!  Have a reward!")
+	  --give reward
+      local receive_item = RogueEssence.Dungeon.InvItem("tm_sludge_bomb")
+      COMMON.GiftItem(player, receive_item)
+	  --complete mission and move to done
+	  quest.Complete = COMMON.MISSION_ARCHIVED
+	  SV.missions.FinishedMissions[questname] = quest
+	  SV.missions.Missions[questname] = nil
+	  SV.supply_corps.Status = 13
+	end
+  elseif SV.supply_corps.Status == 13 then
+    UI:WaitShowDialogue("Thanks for protecting us!")
+  elseif SV.supply_corps.Status == 14 then
+    UI:WaitShowDialogue("We're getting ready to go to snow camp.")
+	SV.supply_corps.Status = 15
+  elseif SV.supply_corps.Status == 15 then
+    UI:WaitShowDialogue("We'll get to snow camp in a day probably.")
+  end
+end
+
 function rest_stop.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   

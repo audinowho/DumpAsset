@@ -47,10 +47,10 @@ function guild_hut.BeginExposition()
   local team3 = CH('Teammate3')
   GROUND:TeleportTo(player, 184, 256, Direction.Up)
   if team1 ~= nil then
-    GROUND:TeleportTo(team1, 176, 256, Direction.Up)
+    GROUND:TeleportTo(team1, 160, 256, Direction.Up)
   end
   if team2 ~= nil then
-    GROUND:TeleportTo(team2, 212, 256, Direction.Up)
+    GROUND:TeleportTo(team2, 208, 256, Direction.Up)
   end
   if team3 ~= nil then
     GROUND:TeleportTo(team3, 184, 240, Direction.Up)
@@ -102,6 +102,12 @@ end
 function guild_hut.Journal_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   UI:ResetSpeaker()
+  
+  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Purple_Opening', 0, 0, 0, Direction.Right)	  
+  GROUND:ObjectSetAnim(obj, 6, 0, 3, Direction.Right, 1)
+  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Purple_Opening', 0, 3, 3, Direction.Right)
+  
+  
   --talk about the guild and how the guildmaster left?
   UI:WaitShowDialogue("talk about the guild and how the guildmaster left")
   --they took all the magnagates and closed the portal
@@ -118,10 +124,20 @@ function guild_hut.Journal_Action(obj, activator)
 	
 	UI:WaitShowDialogue("You got the sun card")
   end
+  
+  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Purple_Closing', 0, 0, 0, Direction.Right)
+  GROUND:ObjectSetAnim(obj, 6, 0, 3, Direction.Right, 1)
+  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Purple_Closing', 0, 3, 3, Direction.Right)
 end
 
 function guild_hut.Novel_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  
+  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Green_Opening', 0, 0, 0, Direction.Left)	  
+  GROUND:ObjectSetAnim(obj, 6, 0, 3, Direction.Left, 1)
+  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Green_Opening', 0, 3, 3, Direction.Left)
+  
   
   UI:ResetSpeaker()
   if SV.guild_hut.BookPhase == 0 then
@@ -139,6 +155,7 @@ function guild_hut.Novel_Action(obj, activator)
 	}
 	
 	GAME:EnterDungeon('the_neverending_tale', 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.None, true, true)
+	return
   else    
     local book_choices = {"Read",
       "Notes",
@@ -166,13 +183,19 @@ function guild_hut.Novel_Action(obj, activator)
         guild_hut.DisplayNotes()
       end
     end
-	
   end
+  
+  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Green_Closing', 0, 0, 0, Direction.Left)
+  GROUND:ObjectSetAnim(obj, 6, 0, 3, Direction.Left, 1)
+  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Green_Closing', 0, 3, 3, Direction.Left)
 end
 
 
 function guild_hut.AfterFirstNovel()
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local obj = OBJ("Novel")
+  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Green_Opening', 0, 3, 3, Direction.Left)
   
   GAME:FadeIn(20)
   UI:WaitShowDialogue("...?")
@@ -181,6 +204,9 @@ function guild_hut.AfterFirstNovel()
   
   guild_hut.DisplayNotes()
   
+  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Green_Closing', 0, 0, 0, Direction.Left)
+  GROUND:ObjectSetAnim(obj, 6, 0, 3, Direction.Left, 1)
+  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Green_Closing', 0, 3, 3, Direction.Left)
 end
 
 function guild_hut.DisplayNotes()

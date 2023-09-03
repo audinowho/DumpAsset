@@ -262,6 +262,42 @@ function BATTLE_SCRIPT.PairTalk(owner, ownerChar, context, args)
 end
 
 
+function BATTLE_SCRIPT.DisguiseTalk(owner, ownerChar, context, args)
+  context.TurnCancel.Cancel = true
+  
+  local oldDir = context.Target.CharDir
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  
+  local appearance = context.Target.Appearance
+  local name = _DATA:GetMonster(appearance.Species).Name:ToLocal()
+  UI:SetSpeaker("[color=#00FF00]"..name.."[color]", true, appearance.Species, appearance.Form, appearance.Skin, appearance.Gender)
+  
+  local tbl = LTBL(context.Target)
+
+  if tbl.TalkAmount == nil then
+    UI:WaitShowDialogue("Hey it's me, manager.")
+	tbl.TalkAmount = 1
+  else
+    if tbl.TalkAmount == 1 then
+	  UI:WaitShowDialogue("...What?")
+	elseif tbl.TalkAmount == 2 then
+	  UI:WaitShowDialogue("I'm not suspicious")
+	else
+	  SOUND:PlayBGM("", false)
+	  UI:WaitShowDialogue("...So you saw through my disguise after all.")
+	
+	  UI:WaitShowDialogue("Fine, we'll do this the hard way!")
+	  
+	  TASK:WaitTask(context.Target:RemoveStatusEffect("illusion", true))
+	  
+	  COMMON.TriggerAdHocMonsterHouse(owner, ownerChar, context.Target)
+	end
+	tbl.TalkAmount = tbl.TalkAmount + 1
+  end
+  
+end
+
+
 function BATTLE_SCRIPT.LegendRecruitCheck(owner, ownerChar, context, args)
 
   --TODO: check to see if heatran is in the party/assembly

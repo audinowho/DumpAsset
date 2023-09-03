@@ -564,6 +564,22 @@ function COMMON.FindNpcWithTable(foes, key, value)
   return nil
 end
 
+function COMMON.TriggerAdHocMonsterHouse(owner, ownerChar, target)
+	  --trigger a monster house
+	  local monster_event = PMDC.Dungeon.MonsterHouseMapEvent()
+	  monster_event.Bounds = RogueElements.Rect(target.CharLoc - RogueElements.Loc(4), RogueElements.Loc(9))
+	  local map = _ZONE.CurrentMap
+	  local mon_count = map.Rand:Next(5, 8)
+	  for ii = 1, mon_count, 1 do
+		local ex_list = map.TeamSpawns:Pick(map.Rand):ChooseSpawns(map.Rand)
+		local mob_copy = ex_list[0]:Copy()
+		monster_event.Mobs:Add(mob_copy)
+	  end
+	  local new_context = RogueEssence.Dungeon.SingleCharContext(target)
+	  TASK:WaitTask(monster_event:Apply(owner, ownerChar, new_context))
+  
+end
+
 function COMMON.CanTalk(chara)
   if chara:GetStatusEffect("sleep") ~= nil then
     return false

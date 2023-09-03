@@ -34,22 +34,47 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
 	  specificTeam.Explorer = true
       local post_mob = RogueEssence.LevelGen.MobSpawn()
       post_mob.BaseForm = mission.TargetSpecies
-	  if mission.Type == COMMON.MISSION_TYPE_OUTLAW or mission.Type == COMMON.MISSION_TYPE_OUTLAW_HOUSE then -- outlaw
-        post_mob.Tactic = "boss"
+	  if mission.Type == COMMON.MISSION_TYPE_OUTLAW or mission.Type == COMMON.MISSION_TYPE_OUTLAW_HOUSE or mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then -- outlaw
+        if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
+		  post_mob.Tactic = "slow_patrol"
+		else
+          post_mob.Tactic = "boss"
+		end
         post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level + 5)
 		post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
+		local boost = PMDC.LevelGen.MobSpawnBoost()
+		boost.MaxHPBonus = _ZONE.CurrentZone.Level + 20
+		boost.DefBonus = _ZONE.CurrentZone.Level // 2
+		boost.SpDefBonus = _ZONE.CurrentZone.Level // 2
+		boost.SpeedBonus = _ZONE.CurrentZone.Level // 2
+		post_mob.SpawnFeatures:Add(boost)
+		if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
+		  local spawn_status = RogueEssence.LevelGen.MobSpawnStatus()
+		  local status_effect = RogueEssence.Dungeon.StatusEffect("illusion")
+		  status_effect.StatusStates:Set(PMDC.Dungeon.MonsterIDState(mission.DisguiseSpecies))
+		  spawn_status.Statuses:Add(status_effect, 10)
+		  post_mob.SpawnFeatures:Add(spawn_status)
+		  post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(RogueEssence.Dungeon.BattleScriptEvent(mission.DisguiseTalk)))
+		end
 	    specificTeam.Spawns:Add(post_mob)
         PrintInfo("Creating Spawn")
         local picker = LUA_ENGINE:MakeGenericType(PresetMultiTeamSpawnerType, { MapGenContextType }, { })
 	    picker.Spawns:Add(specificTeam)
         PrintInfo("Creating Step")
         local mobPlacement = LUA_ENGINE:MakeGenericType(PlaceEntranceMobsStepType, { MapGenContextType, EntranceType }, { picker })
+		
+		if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
+		  mobPlacement.Ally = true
+		end
         PrintInfo("Enqueueing")
 	    -- Priority 5.2.1 is for NPC spawning in PMDO, but any dev can choose to roll with their own standard of priority.
 	    local priority = RogueElements.Priority(5, 2, 1)
 	    queue:Enqueue(priority, mobPlacement)
         PrintInfo("Done")
-	    outlawFloor = true
+		
+		if mission.Type ~= COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
+	      outlawFloor = true
+		end
 		
 		if mission.Type == COMMON.MISSION_TYPE_OUTLAW_HOUSE then
 		  --add house trigger

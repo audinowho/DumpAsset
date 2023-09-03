@@ -393,16 +393,7 @@ function SINGLE_CHAR_SCRIPT.OutlawHouse(owner, ownerChar, context, args)
   UI:SetSpeaker(found_outlaw)
   UI:WaitShowDialogue("You have fallen into my trap!")
 	
-  local monster_event = PMDC.Dungeon.MonsterHouseMapEvent()
-  monster_event.Bounds = RogueElements.Rect(found_outlaw.CharLoc - RogueElements.Loc(4), RogueElements.Loc(9))
-  local map = _ZONE.CurrentMap
-  local mon_count = map.Rand:Next(5, 8)
-  for ii = 1, mon_count, 1 do
-	local ex_list = map.TeamSpawns:Pick(map.Rand):ChooseSpawns(map.Rand)
-	local mob_copy = ex_list[0]:Copy()
-	monster_event.Mobs:Add(mob_copy)
-  end
-  TASK:WaitTask(monster_event:Apply(owner, ownerChar, context))
+  COMMON.TriggerAdHocMonsterHouse(owner, ownerChar, found_outlaw)
 end
 
 function SINGLE_CHAR_SCRIPT.OutlawClearCheck(owner, ownerChar, context, args)

@@ -207,6 +207,8 @@ SV.supply_corps =
   --20 = questline and mountain complete, go into cycle routine
   Status = 0,
   
+  DaysSinceCheckpoint = 0,
+  
   --cyclical up and down from 1 to 5 inclusive
   --0 = base camp
   --1 = forest camp

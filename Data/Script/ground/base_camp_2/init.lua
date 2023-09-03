@@ -100,54 +100,296 @@ function base_camp_2.SetupNpcs()
   GROUND:Unhide("NPC_Hesitant")
   GROUND:Unhide("NPC_Broke")
 
+  if SV.supply_corps.Status >= 20 then
+	if SV.supply_corps.ManagerCycle == 0 then
+	  GROUND:Unhide("NPC_Carry")
+	  GROUND:Unhide("NPC_Deliver")
+	  GROUND:Unhide("NPC_Storehouse")
+	end
+  end
 end
 
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
-function base_camp_2.West_Exit_Touch(obj, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  GAME:FadeOut(false, 20)
-  GAME:EnterGroundMap("base_camp", "entrance_east")
-end
 
-function base_camp_2.North_Exit_Touch(obj, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  GAME:FadeOut(false, 20)
-  GAME:EnterGroundMap("luminous_spring", "entrance_south")
-end
-
-function base_camp_2.Post_Office_Entrance_Touch(obj, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  GAME:FadeOut(false, 20)
-  GAME:EnterGroundMap("post_office", "entrance_south", true)
-end
-
-function base_camp_2.Mission_Board_Action(obj, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  UI:ResetSpeaker()
-  UI:SetCenter(true, true)
-  UI:WaitShowDialogue("Try to show a custom menu.[scroll]Are you ready?")
-  
-  local choices = LUA_ENGINE:MakeGenericType(ListType, { MenuTextChoiceType }, { })
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice 0", UI:GetChoiceAction(0)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice one", UI:GetChoiceAction(1)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice two", UI:GetChoiceAction(2)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice tres", UI:GetChoiceAction(3)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice quatro", UI:GetChoiceAction(4)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice V", UI:GetChoiceAction(5)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice VI", UI:GetChoiceAction(6)))
-  local custom_menu = RogueEssence.Menu.CustomMultiPageMenu(RogueElements.Loc(8, 16), 144, "Custom Menu Test", choices:ToArray(), 5, 4, UI:GetChoiceAction(-1), nil)
-  UI:ChooseCustomMenu(custom_menu)
-  UI:WaitForChoice()
-  local chres = UI:ChoiceResult()
-  if chres > -1 then
-    UI:WaitShowDialogue("You chose option " .. tostring(chres))
-  else
-    UI:WaitShowDialogue("You cancelled.")
+function base_camp_2.NPC_Food_Action(chara, activator)
+  local player = CH('PLAYER')
+  GROUND:CharTurnToChar(chara,player)
+  UI:SetSpeaker(chara)
+  if not SV.base_camp.FoodIntro then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Food_Line_001']))
+	local receive_item = RogueEssence.Dungeon.InvItem("food_apple_big")
+	COMMON.GiftItem(player, receive_item)
+	SV.base_camp.FoodIntro = true
+	UI:SetSpeaker(chara)
   end
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Food_Line_002']))
 end
+
+
+function base_camp_2.NPC_Treasure_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_002']))
+  UI:SetSpeakerEmotion("Happy")
+  GROUND:CharSetEmote(chara, "glowing", 4)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_003']))
+end
+
+
+function base_camp_2.NPC_Nonbeliever_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Nonbeliever_Line_001']))
+  UI:SetSpeakerEmotion("Sigh")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Nonbeliever_Line_002']))
+  GROUND:EntTurn(chara, Direction.Right)
+end
+
+
+function base_camp_2.NPC_Storehouse_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+  UI:SetSpeaker(chara)
+  
+  UI:WaitShowDialogue("We're loading up for our next delivery!")
+end
+
+function base_camp_2.NPC_Settling_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Settling_Line_001']))
+end
+
+
+function base_camp_2.NPC_Broke_Action(chara, activator)
+  UI:SetSpeaker(chara)
+
+  UI:SetSpeakerEmotion("Sad")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_001']))
+  GROUND:CharSetEmote(partner, "sweating", 1)
+  SOUND:PlayBattleSE("EVT_Emote_Sweating")
+  UI:SetSpeakerEmotion("Crying")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_002']))
+end
+
+
+function base_camp_2.NPC_Hesitant_Action(chara, activator)
+  UI:SetSpeaker(chara)
+
+  UI:SetSpeakerEmotion("Sigh")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hesitant_Line_001']))
+end
+
+
+function base_camp_2.NPC_Elder_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Line_001']))
+end
+
+
+function base_camp_2.NPC_History_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['History_Line_001']))
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['History_Line_002']))
+end
+
+
+function base_camp_2.NPC_Father_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Father_Line_001']))
+  GROUND:EntTurn(chara, Direction.DownLeft)
+end
+
+
+function base_camp_2.NPC_Mother_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mother_Line_001']))
+  GROUND:EntTurn(chara, Direction.UpRight)
+end
+
+function base_camp_2.NPC_Catch_1_Action(chara, activator)
+  DEBUG.EnableDbgCoro()
+  
+  base_camp_2.Catch_Action()
+end
+
+function base_camp_2.NPC_Catch_2_Action(chara, activator)
+  DEBUG.EnableDbgCoro()
+  base_camp_2.Catch_Action()
+  
+end
+
+function base_camp_2.Catch_Action()
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local catch1 = CH('NPC_Catch_1')
+  local catch2 = CH('NPC_Catch_2')
+  local player = CH('PLAYER')
+  local itemAnim = nil
+  
+  GROUND:CharTurnToChar(player, catch1)
+  UI:SetSpeaker(catch1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_001']))
+  SOUND:PlayBattleSE("DUN_Throw_Start")
+  GROUND:CharSetAnim(catch1, "Rotate", false)
+  GAME:WaitFrames(18)
+  SOUND:PlayBattleSE("DUN_Throw_Arc")
+  itemAnim = RogueEssence.Content.ItemAnim(catch1.Bounds.Center, catch2.Bounds.Center, "Rock_Gray", 48, 1)
+  GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
+  
+  GROUND:CharTurnToChar(player, catch2)
+  GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
+	
+  SOUND:PlayBattleSE("DUN_Equip")
+  UI:SetSpeaker(catch2)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_002']))
+  SOUND:PlayBattleSE("DUN_Throw_Start")
+  GROUND:CharSetAnim(catch2, "Rotate", false)
+  GAME:WaitFrames(18)
+  SOUND:PlayBattleSE("DUN_Throw_Arc")
+  itemAnim = RogueEssence.Content.ItemAnim(catch2.Bounds.Center, catch1.Bounds.Center, "Rock_Gray", 48, 1)
+  GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
+  
+  GROUND:CharTurnToChar(player, catch1)
+  GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
+  
+  SOUND:PlayBattleSE("DUN_Equip")
+  UI:SetSpeaker(catch1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_003']))
+  SOUND:PlayBattleSE("DUN_Throw_Start")
+  GROUND:CharSetAnim(catch1, "Rotate", false)
+  GAME:WaitFrames(18)
+  SOUND:PlayBattleSE("DUN_Throw_Arc")
+  itemAnim = RogueEssence.Content.ItemAnim(catch1.Bounds.Center, catch2.Bounds.Center, "Rock_Gray", 48, 1)
+  GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
+  
+  GROUND:CharTurnToChar(player, catch2)
+  GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
+  
+  SOUND:PlayBattleSE("DUN_Equip")
+  UI:SetSpeaker(catch2)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_004']))
+  SOUND:PlayBattleSE("DUN_Throw_Start")
+  GROUND:CharSetAnim(catch2, "Rotate", false)
+  GAME:WaitFrames(18)
+  SOUND:PlayBattleSE("DUN_Throw_Arc")
+  itemAnim = RogueEssence.Content.ItemAnim(catch2.Bounds.Center, catch1.Bounds.Center, "Rock_Gray", 48, 1)
+  GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
+  
+  GROUND:CharTurnToChar(player, catch1)
+  GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
+  
+  SOUND:PlayBattleSE("DUN_Equip")
+  UI:SetSpeaker(catch1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_005']))
+end
+
+base_camp_2.difficulty_tbl = { }
+base_camp_2.difficulty_tbl["debug_zone"] = 4
+base_camp_2.difficulty_tbl["guildmaster_island"] = -1
+base_camp_2.difficulty_tbl["tropical_path"] = 0
+base_camp_2.difficulty_tbl["faded_trail"] = 1
+base_camp_2.difficulty_tbl["flyaway_cliffs"] = 2
+base_camp_2.difficulty_tbl["thunderstruck_pass"] = 3
+base_camp_2.difficulty_tbl["veiled_ridge"] = 3
+base_camp_2.difficulty_tbl["champions_road"] = 4
+base_camp_2.difficulty_tbl["cave_of_whispers"] = 4
+base_camp_2.difficulty_tbl["moonlit_courtyard"] = 3
+base_camp_2.difficulty_tbl["faultline_ridge"] = 0
+base_camp_2.difficulty_tbl["trickster_woods"] = 1
+base_camp_2.difficulty_tbl["moonlit_courtyard"] = 3
+base_camp_2.difficulty_tbl["sleeping_caldera"] = 3
+base_camp_2.difficulty_tbl["lava_floe_island"] = 1
+base_camp_2.difficulty_tbl["castaway_cave"] = 3
+base_camp_2.difficulty_tbl["fertile_valley"] = 1
+base_camp_2.difficulty_tbl["ambush_forest"] = 3
+base_camp_2.difficulty_tbl["treacherous_mountain"] = 3
+base_camp_2.difficulty_tbl["forsaken_desert"] = 3
+base_camp_2.difficulty_tbl["snowbound_path"] = 3
+base_camp_2.difficulty_tbl["relic_tower"] = 3
+base_camp_2.difficulty_tbl["guildmaster_trail"] = 0
+base_camp_2.difficulty_tbl["overgrown_wilds"] = 1
+base_camp_2.difficulty_tbl["wayward_wetlands"] = 3
+base_camp_2.difficulty_tbl["secret_garden"] = 4
+base_camp_2.difficulty_tbl["cave_of_solace"] = 4
+base_camp_2.difficulty_tbl["royal_halls"] = 4
+base_camp_2.difficulty_tbl["the_sky"] = 4
+base_camp_2.difficulty_tbl["the_abyss"] = 4
+base_camp_2.difficulty_tbl["training_maze"] = 0
+base_camp_2.difficulty_tbl["bramble_woods"] = 1
+base_camp_2.difficulty_tbl["sickly_hollow"] = 1
+
+function base_camp_2.NPC_Interactive_Action(chara, activator)
+  
+  local assemblyCount = GAME:GetPlayerAssemblyCount()
+  UI:SetSpeaker(chara)
+  
+  
+  local can_talk_to = false
+  if assemblyCount >= 3 then
+    talk_to = CH('Assembly3')
+    --local tbl = LTBL(talk_to)
+	can_talk_to = true
+	if base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == nil then
+	  can_talk_to = false
+	else
+	  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(talk_to.Data.MetLoc.ID)
+	  local zone_name = zone:GetColoredName()
+	  local cur_team = _DATA.Save.ActiveTeam.Name
+	  if talk_to.Data.OriginalUUID ~= _DATA.Save.UUID then
+	    local old_team = talk_to.Data.OriginalTeam
+		UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Trade_Line_001'], cur_team, old_team))
+	  elseif base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == 0 then
+	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_001_Line_001'], zone_name, cur_team))
+	  elseif base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == 1 then
+	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_002_Line_001'], zone_name, cur_team))
+	    UI:SetSpeakerEmotion("Happy")
+	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_002_Line_002']))
+	  elseif base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == 2 then
+	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_003_Line_001'], zone_name))
+	    UI:SetSpeakerEmotion("Sigh")
+	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_003_Line_002']))
+	  elseif base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == 3 then
+	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_004_Line_001'], zone_name))
+	    UI:SetSpeakerEmotion("Happy")
+	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_004_Line_002'], cur_team))
+	  else
+        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_005_Line_001'], zone_name))
+		
+        GAME:WaitFrames(30)
+        GROUND:CharSetEmote(chara, "shock", 1)
+        SOUND:PlayBattleSE("EVT_Emote_Shock_Bad")
+        GAME:WaitFrames(30)
+  
+        UI:SetSpeakerEmotion("Surprised")
+        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_005_Line_002'], cur_team))
+	  end
+	end
+  end
+  
+  if not can_talk_to then
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Line_001']))
+  end
+  
+end
+
 
 function base_camp_2.Shop_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
@@ -987,273 +1229,48 @@ function base_camp_2.Juice_Action(obj, activator)
   UI:WaitShowDialogue(STRINGS:Format("We're not open right now...[pause=0] Come back later."))
 end
 
-
-function base_camp_2.NPC_Food_Action(chara, activator)
-  local player = CH('PLAYER')
-  GROUND:CharTurnToChar(chara,player)
-  UI:SetSpeaker(chara)
-  if not SV.base_camp.FoodIntro then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Food_Line_001']))
-	local receive_item = RogueEssence.Dungeon.InvItem("food_apple_big")
-	COMMON.GiftItem(player, receive_item)
-	SV.base_camp.FoodIntro = true
-	UI:SetSpeaker(chara)
-  end
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Food_Line_002']))
+function base_camp_2.West_Exit_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GAME:FadeOut(false, 20)
+  GAME:EnterGroundMap("base_camp", "entrance_east")
 end
 
-
-function base_camp_2.NPC_Treasure_Action(chara, activator)
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
-  UI:SetSpeaker(chara)
-
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_001']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_002']))
-  UI:SetSpeakerEmotion("Happy")
-  GROUND:CharSetEmote(chara, "glowing", 4)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_003']))
+function base_camp_2.North_Exit_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GAME:FadeOut(false, 20)
+  GAME:EnterGroundMap("luminous_spring", "entrance_south")
 end
 
-
-function base_camp_2.NPC_Nonbeliever_Action(chara, activator)
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
-  UI:SetSpeaker(chara)
-
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Nonbeliever_Line_001']))
-  UI:SetSpeakerEmotion("Sigh")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Nonbeliever_Line_002']))
-  GROUND:EntTurn(chara, Direction.Right)
+function base_camp_2.Post_Office_Entrance_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GAME:FadeOut(false, 20)
+  GAME:EnterGroundMap("post_office", "entrance_south", true)
 end
 
-function base_camp_2.NPC_Catch_1_Action(chara, activator)
-  DEBUG.EnableDbgCoro()
-  
-  base_camp_2.Catch_Action()
-end
-
-function base_camp_2.NPC_Catch_2_Action(chara, activator)
-  DEBUG.EnableDbgCoro()
-  base_camp_2.Catch_Action()
-  
-end
-
-function base_camp_2.Catch_Action()
+function base_camp_2.Mission_Board_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local catch1 = CH('NPC_Catch_1')
-  local catch2 = CH('NPC_Catch_2')
-  local player = CH('PLAYER')
-  local itemAnim = nil
+  UI:ResetSpeaker()
+  UI:SetCenter(true, true)
+  UI:WaitShowDialogue("Try to show a custom menu.[scroll]Are you ready?")
   
-  GROUND:CharTurnToChar(player, catch1)
-  UI:SetSpeaker(catch1)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_001']))
-  SOUND:PlayBattleSE("DUN_Throw_Start")
-  GROUND:CharSetAnim(catch1, "Rotate", false)
-  GAME:WaitFrames(18)
-  SOUND:PlayBattleSE("DUN_Throw_Arc")
-  itemAnim = RogueEssence.Content.ItemAnim(catch1.Bounds.Center, catch2.Bounds.Center, "Rock_Gray", 48, 1)
-  GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
-  
-  GROUND:CharTurnToChar(player, catch2)
-  GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
-	
-  SOUND:PlayBattleSE("DUN_Equip")
-  UI:SetSpeaker(catch2)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_002']))
-  SOUND:PlayBattleSE("DUN_Throw_Start")
-  GROUND:CharSetAnim(catch2, "Rotate", false)
-  GAME:WaitFrames(18)
-  SOUND:PlayBattleSE("DUN_Throw_Arc")
-  itemAnim = RogueEssence.Content.ItemAnim(catch2.Bounds.Center, catch1.Bounds.Center, "Rock_Gray", 48, 1)
-  GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
-  
-  GROUND:CharTurnToChar(player, catch1)
-  GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
-  
-  SOUND:PlayBattleSE("DUN_Equip")
-  UI:SetSpeaker(catch1)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_003']))
-  SOUND:PlayBattleSE("DUN_Throw_Start")
-  GROUND:CharSetAnim(catch1, "Rotate", false)
-  GAME:WaitFrames(18)
-  SOUND:PlayBattleSE("DUN_Throw_Arc")
-  itemAnim = RogueEssence.Content.ItemAnim(catch1.Bounds.Center, catch2.Bounds.Center, "Rock_Gray", 48, 1)
-  GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
-  
-  GROUND:CharTurnToChar(player, catch2)
-  GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
-  
-  SOUND:PlayBattleSE("DUN_Equip")
-  UI:SetSpeaker(catch2)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_004']))
-  SOUND:PlayBattleSE("DUN_Throw_Start")
-  GROUND:CharSetAnim(catch2, "Rotate", false)
-  GAME:WaitFrames(18)
-  SOUND:PlayBattleSE("DUN_Throw_Arc")
-  itemAnim = RogueEssence.Content.ItemAnim(catch2.Bounds.Center, catch1.Bounds.Center, "Rock_Gray", 48, 1)
-  GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
-  
-  GROUND:CharTurnToChar(player, catch1)
-  GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
-  
-  SOUND:PlayBattleSE("DUN_Equip")
-  UI:SetSpeaker(catch1)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_005']))
-end
-
-base_camp_2.difficulty_tbl = { }
-base_camp_2.difficulty_tbl["debug_zone"] = 4
-base_camp_2.difficulty_tbl["guildmaster_island"] = -1
-base_camp_2.difficulty_tbl["tropical_path"] = 0
-base_camp_2.difficulty_tbl["faded_trail"] = 1
-base_camp_2.difficulty_tbl["flyaway_cliffs"] = 2
-base_camp_2.difficulty_tbl["thunderstruck_pass"] = 3
-base_camp_2.difficulty_tbl["veiled_ridge"] = 3
-base_camp_2.difficulty_tbl["champions_road"] = 4
-base_camp_2.difficulty_tbl["cave_of_whispers"] = 4
-base_camp_2.difficulty_tbl["moonlit_courtyard"] = 3
-base_camp_2.difficulty_tbl["faultline_ridge"] = 0
-base_camp_2.difficulty_tbl["trickster_woods"] = 1
-base_camp_2.difficulty_tbl["moonlit_courtyard"] = 3
-base_camp_2.difficulty_tbl["sleeping_caldera"] = 3
-base_camp_2.difficulty_tbl["lava_floe_island"] = 1
-base_camp_2.difficulty_tbl["castaway_cave"] = 3
-base_camp_2.difficulty_tbl["fertile_valley"] = 1
-base_camp_2.difficulty_tbl["ambush_forest"] = 3
-base_camp_2.difficulty_tbl["treacherous_mountain"] = 3
-base_camp_2.difficulty_tbl["forsaken_desert"] = 3
-base_camp_2.difficulty_tbl["snowbound_path"] = 3
-base_camp_2.difficulty_tbl["relic_tower"] = 3
-base_camp_2.difficulty_tbl["guildmaster_trail"] = 0
-base_camp_2.difficulty_tbl["overgrown_wilds"] = 1
-base_camp_2.difficulty_tbl["wayward_wetlands"] = 3
-base_camp_2.difficulty_tbl["secret_garden"] = 4
-base_camp_2.difficulty_tbl["cave_of_solace"] = 4
-base_camp_2.difficulty_tbl["royal_halls"] = 4
-base_camp_2.difficulty_tbl["the_sky"] = 4
-base_camp_2.difficulty_tbl["the_abyss"] = 4
-base_camp_2.difficulty_tbl["training_maze"] = 0
-base_camp_2.difficulty_tbl["bramble_woods"] = 1
-base_camp_2.difficulty_tbl["sickly_hollow"] = 1
-
-function base_camp_2.NPC_Interactive_Action(chara, activator)
-  
-  local assemblyCount = GAME:GetPlayerAssemblyCount()
-  UI:SetSpeaker(chara)
-  
-  
-  local can_talk_to = false
-  if assemblyCount >= 3 then
-    talk_to = CH('Assembly3')
-    --local tbl = LTBL(talk_to)
-	can_talk_to = true
-	if base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == nil then
-	  can_talk_to = false
-	else
-	  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(talk_to.Data.MetLoc.ID)
-	  local zone_name = zone:GetColoredName()
-	  local cur_team = _DATA.Save.ActiveTeam.Name
-	  if talk_to.Data.OriginalUUID ~= _DATA.Save.UUID then
-	    local old_team = talk_to.Data.OriginalTeam
-		UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Trade_Line_001'], cur_team, old_team))
-	  elseif base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == 0 then
-	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_001_Line_001'], zone_name, cur_team))
-	  elseif base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == 1 then
-	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_002_Line_001'], zone_name, cur_team))
-	    UI:SetSpeakerEmotion("Happy")
-	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_002_Line_002']))
-	  elseif base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == 2 then
-	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_003_Line_001'], zone_name))
-	    UI:SetSpeakerEmotion("Sigh")
-	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_003_Line_002']))
-	  elseif base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == 3 then
-	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_004_Line_001'], zone_name))
-	    UI:SetSpeakerEmotion("Happy")
-	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_004_Line_002'], cur_team))
-	  else
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_005_Line_001'], zone_name))
-		
-        GAME:WaitFrames(30)
-        GROUND:CharSetEmote(chara, "shock", 1)
-        SOUND:PlayBattleSE("EVT_Emote_Shock_Bad")
-        GAME:WaitFrames(30)
-  
-        UI:SetSpeakerEmotion("Surprised")
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_005_Line_002'], cur_team))
-	  end
-	end
+  local choices = LUA_ENGINE:MakeGenericType(ListType, { MenuTextChoiceType }, { })
+  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice 0", UI:GetChoiceAction(0)))
+  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice one", UI:GetChoiceAction(1)))
+  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice two", UI:GetChoiceAction(2)))
+  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice tres", UI:GetChoiceAction(3)))
+  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice quatro", UI:GetChoiceAction(4)))
+  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice V", UI:GetChoiceAction(5)))
+  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice VI", UI:GetChoiceAction(6)))
+  local custom_menu = RogueEssence.Menu.CustomMultiPageMenu(RogueElements.Loc(8, 16), 144, "Custom Menu Test", choices:ToArray(), 5, 4, UI:GetChoiceAction(-1), nil)
+  UI:ChooseCustomMenu(custom_menu)
+  UI:WaitForChoice()
+  local chres = UI:ChoiceResult()
+  if chres > -1 then
+    UI:WaitShowDialogue("You chose option " .. tostring(chres))
+  else
+    UI:WaitShowDialogue("You cancelled.")
   end
-  
-  if not can_talk_to then
-    GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Line_001']))
-  end
-  
-end
-
-
-function base_camp_2.NPC_Settling_Action(chara, activator)
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
-  UI:SetSpeaker(chara)
-
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Settling_Line_001']))
-end
-
-
-function base_camp_2.NPC_Broke_Action(chara, activator)
-  UI:SetSpeaker(chara)
-
-  UI:SetSpeakerEmotion("Sad")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_001']))
-  GROUND:CharSetEmote(partner, "sweating", 1)
-  SOUND:PlayBattleSE("EVT_Emote_Sweating")
-  UI:SetSpeakerEmotion("Crying")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_002']))
-end
-
-
-function base_camp_2.NPC_Hesitant_Action(chara, activator)
-  UI:SetSpeaker(chara)
-
-  UI:SetSpeakerEmotion("Sigh")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hesitant_Line_001']))
-end
-
-
-function base_camp_2.NPC_Elder_Action(chara, activator)
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
-  UI:SetSpeaker(chara)
-
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Line_001']))
-end
-
-
-function base_camp_2.NPC_History_Action(chara, activator)
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
-  UI:SetSpeaker(chara)
-
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['History_Line_001']))
-  UI:SetSpeakerEmotion("Worried")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['History_Line_002']))
-end
-
-
-function base_camp_2.NPC_Father_Action(chara, activator)
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
-  UI:SetSpeaker(chara)
-
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Father_Line_001']))
-  GROUND:EntTurn(chara, Direction.DownLeft)
-end
-
-
-function base_camp_2.NPC_Mother_Action(chara, activator)
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
-  UI:SetSpeaker(chara)
-
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mother_Line_001']))
-  GROUND:EntTurn(chara, Direction.UpRight)
 end
 
 

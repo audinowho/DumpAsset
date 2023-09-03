@@ -1190,5 +1190,13 @@ function COMMON.EndDayCycle()
     SV.supply_corps.Status = 20
   elseif SV.supply_corps.Status == 20 then
     --cycle
+	SV.supply_corps.DaysSinceCheckpoint = SV.supply_corps.DaysSinceCheckpoint + 1
+	SV.supply_corps.CarryCycle = SV.supply_corps.DaysSinceCheckpoint % 5 + 1
+	SV.supply_corps.DeliverCycle = math.random(1, 5)
+	SV.supply_corps.ManagerCycle = SV.supply_corps.DaysSinceCheckpoint % 12
+	if SV.supply_corps.ManagerCycle > 6 then
+	  SV.supply_corps.ManagerCycle = 6 - (SV.supply_corps.ManagerCycle - 6)
+	end
   end
+  
 end

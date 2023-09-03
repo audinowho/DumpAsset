@@ -55,8 +55,21 @@ function rest_stop.SetupNpcs()
     GROUND:Unhide("NPC_Storehouse")
     GROUND:Unhide("NPC_Carry")
     GROUND:Unhide("NPC_Deliver")
-  elseif SV.supply_corps.Status >= 19 then
+  elseif SV.supply_corps.Status >= 20 then
     --cycle appearances
+	if SV.supply_corps.ManagerCycle == 0 or SV.supply_corps.ManagerCycle == 6 then
+	
+	else
+	  if SV.supply_corps.CarryCycle == 4 then
+	    GROUND:Unhide("NPC_Carry")
+	  end
+	  if SV.supply_corps.DeliverCycle == 4 then
+	    GROUND:Unhide("NPC_Deliver")
+	  end
+	  if SV.supply_corps.ManagerCycle == 4 then
+	    GROUND:Unhide("NPC_Storehouse")
+	  end
+	end
   end
 end
 
@@ -160,6 +173,65 @@ function rest_stop.NPC_Storehouse_Action(chara, activator)
 	SV.supply_corps.Status = 15
   elseif SV.supply_corps.Status == 15 then
     UI:WaitShowDialogue("We'll get to snow camp in a day probably.")
+  elseif SV.supply_corps.Status == 20 then
+    UI:WaitShowDialogue("I'm on my routine route in cave camp!")
+  end
+end
+
+function rest_stop.NPC_Carry_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  
+  if SV.supply_corps.Status == 12 then
+    local questname = "OutlawMountain1"
+    local quest = SV.missions.Missions[questname]
+    if quest == nil then
+      UI:WaitShowDialogue("(Carry) Some thugs beat our guys up!  Teach them a lesson!")
+	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue("Some thugs beat our guys up!  Teach them a lesson! (You already have the quest)")
+	else
+	  UI:WaitShowDialogue("(Carry) Thanks for getting back the supplies!  Have a reward!")
+	end
+  elseif SV.supply_corps.Status == 13 then
+    UI:WaitShowDialogue("(Carry) Thanks for protecting us!")
+  elseif SV.supply_corps.Status == 14 then
+    UI:WaitShowDialogue("(Carry) We're getting ready to go to snow camp.")
+	SV.supply_corps.Status = 15
+  elseif SV.supply_corps.Status == 15 then
+    UI:WaitShowDialogue("(Carry) We'll get to snow camp in a day probably.")
+  elseif SV.supply_corps.Status == 20 then
+    UI:WaitShowDialogue("(Carry) I'm on my routine route in cave camp!")
+  end
+  
+end
+
+function rest_stop.NPC_Deliver_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  
+  if SV.supply_corps.Status == 12 then
+    local questname = "OutlawMountain1"
+    local quest = SV.missions.Missions[questname]
+    if quest == nil then
+      UI:WaitShowDialogue("(Deliver) Some thugs beat our guys up!  Teach them a lesson!")
+	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue("Some thugs beat our guys up!  Teach them a lesson! (You already have the quest)")
+	else
+	  UI:WaitShowDialogue("(Deliver) Thanks for getting back the supplies!  Have a reward!")
+	end
+  elseif SV.supply_corps.Status == 13 then
+    UI:WaitShowDialogue("(Deliver) Thanks for protecting us!")
+  elseif SV.supply_corps.Status == 14 then
+    UI:WaitShowDialogue("(Deliver) We're getting ready to go to snow camp.")
+	SV.supply_corps.Status = 15
+  elseif SV.supply_corps.Status == 15 then
+    UI:WaitShowDialogue("(Deliver) We'll get to snow camp in a day probably.")
+  elseif SV.supply_corps.Status == 20 then
+    UI:WaitShowDialogue("(Deliver) I'm on my routine route in cave camp!")
   end
 end
 

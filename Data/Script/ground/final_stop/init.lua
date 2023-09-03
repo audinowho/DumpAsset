@@ -65,6 +65,19 @@ function final_stop.SetupNpcs()
     GROUND:Unhide("NPC_Deliver")
   elseif SV.supply_corps.Status >= 20 then
     --cycle appearances
+	if SV.supply_corps.ManagerCycle == 0 or SV.supply_corps.ManagerCycle == 6 then
+	
+	else
+	  if SV.supply_corps.CarryCycle == 5 then
+	    GROUND:Unhide("NPC_Carry")
+	  end
+	  if SV.supply_corps.DeliverCycle == 5 then
+	    GROUND:Unhide("NPC_Deliver")
+	  end
+	  if SV.supply_corps.ManagerCycle == 5 then
+	    GROUND:Unhide("NPC_Storehouse")
+	  end
+	end
   end
 end
 
@@ -140,6 +153,8 @@ function final_stop.NPC_Storehouse_Action(chara, activator)
 	end
   elseif SV.supply_corps.Status == 19 then
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
+  elseif SV.supply_corps.Status == 20 then
+    UI:WaitShowDialogue("I'm on my routine route in blizzard camp!")
   end
   
 end
@@ -160,9 +175,58 @@ function final_stop.NPC_Carry_Action(chara, activator)
 	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_DISGUISE, DestZone = "snowbound_path", DestSegment = 0, DestFloor = 12, TargetSpecies = "zoroark" }
 	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
       UI:WaitShowDialogue("Our manager disappeared! (You already have the quest)")
+	else
+	  UI:WaitShowDialogue("Our manager's back!  Yay!")
 	end
+  elseif SV.supply_corps.Status == 17 then
+	UI:WaitShowDialogue("(Carry) We've got to do something about these thieves.")
+  elseif SV.supply_corps.Status == 18 then
+	if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
+	  UI:WaitShowDialogue("(Carry) I feel unsafe until you take care of the criminal.")
+	elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
+	  UI:WaitShowDialogue("(Carry) I still feel unsafe until you take care of the criminal.")
+	else
+	  UI:WaitShowDialogue("(Carry) You defeated the criminal?")
+	end
+  elseif SV.supply_corps.Status == 19 then
+    UI:WaitShowDialogue("(Carry) Thank you and good luck with the summit!")
+  elseif SV.supply_corps.Status == 20 then
+    UI:WaitShowDialogue("(Carry) I'm on my routine route in blizzard camp!")
   end
+end
+
+
+function final_stop.NPC_Deliver_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  local player = CH('PLAYER')
+  UI:SetSpeaker(chara)
+  
+  if SV.supply_corps.Status <= 16 then
+    local questname = "OutlawMountain2"
+    local quest = SV.missions.Missions[questname]
+    if quest == nil then
+      UI:WaitShowDialogue("(Deliver) Our manager disappeared!  He should be in snowbound path!")
+	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue("(Deliver) Our manager disappeared! (You already have the quest)")
+	else
+	  UI:WaitShowDialogue("(Deliver) Our manager's back!  Yay!")
+	end
+  elseif SV.supply_corps.Status == 17 then
+	UI:WaitShowDialogue("(Deliver) We've got to do something about these thieves.")
+  elseif SV.supply_corps.Status == 18 then
+	if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
+	  UI:WaitShowDialogue("(Deliver) I feel unsafe until you take care of the criminal.")
+	elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
+	  UI:WaitShowDialogue("(Deliver) I still feel unsafe until you take care of the criminal.")
+	else
+	  UI:WaitShowDialogue("(Deliver) You defeated the criminal?")
+	end
+  elseif SV.supply_corps.Status == 19 then
+    UI:WaitShowDialogue("(Deliver) Thank you and good luck with the summit!")
+  elseif SV.supply_corps.Status == 20 then
+    UI:WaitShowDialogue("(Deliver) I'm on my routine route in blizzard camp!")
+  end
 end
 
 function final_stop.North_Exit_Touch(obj, activator)

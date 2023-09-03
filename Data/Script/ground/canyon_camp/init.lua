@@ -80,8 +80,21 @@ function canyon_camp.SetupNpcs()
     GROUND:Unhide("NPC_Storehouse")
     GROUND:Unhide("NPC_Carry")
     GROUND:Unhide("NPC_Deliver")
-  elseif SV.supply_corps.Status >= 18 then
+  elseif SV.supply_corps.Status >= 20 then
     --cycle appearances
+	if SV.supply_corps.ManagerCycle == 0 or SV.supply_corps.ManagerCycle == 6 then
+	
+	else
+	  if SV.supply_corps.CarryCycle == 3 then
+	    GROUND:Unhide("NPC_Carry")
+	  end
+	  if SV.supply_corps.DeliverCycle == 3 then
+	    GROUND:Unhide("NPC_Deliver")
+	  end
+	  if SV.supply_corps.ManagerCycle == 3 then
+	    GROUND:Unhide("NPC_Storehouse")
+	  end
+	end
   end
 end
 
@@ -308,6 +321,77 @@ function canyon_camp.NPC_Storehouse_Action(chara, activator)
 	end
   elseif SV.supply_corps.Status == 9 then
     UI:WaitShowDialogue("Thanks for bringing honchkrow down.")
+  elseif SV.supply_corps.Status == 20 then
+    UI:WaitShowDialogue("I'm on my routine route in canyon camp!")
+  end
+end
+
+function canyon_camp.NPC_Carry_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  
+  if SV.supply_corps.Status == 6 then
+    local questname = "OutlawForest2"
+    local quest = SV.missions.Missions[questname]
+    if quest == nil then
+      UI:WaitShowDialogue("(Carry) Carry NPC had his package stolen! Please Help!")
+	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue("(Carry) Carry NPC had his package stolen! (You already have the quest)")
+	else
+	  UI:WaitShowDialogue("(Carry) Did you back the supplies?")
+	end
+  elseif SV.supply_corps.Status == 7 then
+	UI:WaitShowDialogue("(Carry) We've got to do something about these thieves.")
+  elseif SV.supply_corps.Status == 8 then
+    local unlock = _DATA.Save:GetDungeonUnlock("ambush_forest") -- make this the dungeon unlock state
+	if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
+      UI:WaitShowDialogue("(Carry) I feel unsafe until you take care of the criminal.")
+	elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
+	  UI:WaitShowDialogue("(Carry) Please help us take down this criminal!")
+	else
+	  UI:WaitShowDialogue("(Carry) You brought down the criminal!")
+	end
+  elseif SV.supply_corps.Status == 9 then
+    UI:WaitShowDialogue("(Carry) Thanks for bringing honchkrow down.")
+  elseif SV.supply_corps.Status == 20 then
+    UI:WaitShowDialogue("(Carry) I'm on my routine route in canyon camp!")
+  end
+  
+end
+
+function canyon_camp.NPC_Deliver_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  
+  if SV.supply_corps.Status == 6 then
+    local questname = "OutlawForest2"
+    local quest = SV.missions.Missions[questname]
+    if quest == nil then
+      UI:WaitShowDialogue("(Deliver) Carry NPC had his package stolen! Please Help!")
+	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue("(Deliver) Carry NPC had his package stolen! (You already have the quest)")
+	else
+	  UI:WaitShowDialogue("(Deliver) Did you back the supplies?")
+	end
+  elseif SV.supply_corps.Status == 7 then
+	UI:WaitShowDialogue("(Deliver) We've got to do something about these thieves.")
+  elseif SV.supply_corps.Status == 8 then
+    local unlock = _DATA.Save:GetDungeonUnlock("ambush_forest") -- make this the dungeon unlock state
+	if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
+      UI:WaitShowDialogue("(Deliver) I feel unsafe until you take care of the criminal.")
+	elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
+	  UI:WaitShowDialogue("(Deliver) Please help us take down this criminal!")
+	else
+	  UI:WaitShowDialogue("(Deliver) You brought down the criminal!")
+	end
+  elseif SV.supply_corps.Status == 9 then
+    UI:WaitShowDialogue("(Deliver) Thanks for bringing honchkrow down.")
+  elseif SV.supply_corps.Status == 20 then
+    UI:WaitShowDialogue("(Deliver) I'm on my routine route in canyon camp!")
   end
 end
 

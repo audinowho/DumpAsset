@@ -47,6 +47,13 @@ end
 --------------------------------------------------
 function guildmaster_summit.SetupNpcs()
   
+  if SV.supply_corps.Status >= 20 then
+	if SV.supply_corps.ManagerCycle == 6 then
+	  GROUND:Unhide("NPC_Carry")
+	  GROUND:Unhide("NPC_Deliver")
+	  GROUND:Unhide("NPC_Storehouse")
+	end
+  end
 end
 
 function guildmaster_summit.RewardDialogue()
@@ -425,6 +432,40 @@ end
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
+
+function guildmaster_summit.NPC_Storehouse_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  guildmaster_summit.NPC_All_Action()
+end
+
+
+function guildmaster_summit.NPC_Carry_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  guildmaster_summit.NPC_All_Action()
+end
+
+
+function guildmaster_summit.NPC_Deliver_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  guildmaster_summit.NPC_All_Action()
+end
+
+function guildmaster_summit.NPC_All_Action()
+  local carry = CH('NPC_Carry')
+  local deliver = CH('NPC_Deliver')
+  local storehouse = CH('NPC_Storehouse')
+  
+  UI:SetSpeaker(storehouse)
+  UI:WaitShowDialogue("Beautiful sight isn't it?")
+  UI:SetSpeaker(carry)
+  UI:WaitShowDialogue("yea")
+  UI:SetSpeaker(deliver)
+  UI:WaitShowDialogue("yea")
+end
+
 
 function guildmaster_summit.South_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

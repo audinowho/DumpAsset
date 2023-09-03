@@ -71,8 +71,21 @@ function forest_camp.SetupNpcs()
     GROUND:Unhide("Snorlax")
     GROUND:Unhide("NPC_Carry")
     GROUND:Unhide("NPC_Deliver")
-  elseif SV.supply_corps.Status >= 18 then
+  elseif SV.supply_corps.Status >= 20 then
     --cycle appearances
+	if SV.supply_corps.ManagerCycle == 0 or SV.supply_corps.ManagerCycle == 6 then
+	
+	else
+	  if SV.supply_corps.CarryCycle == 1 then
+	    GROUND:Unhide("NPC_Carry")
+	  end
+	  if SV.supply_corps.DeliverCycle == 1 then
+	    GROUND:Unhide("NPC_Deliver")
+	  end
+	  if SV.supply_corps.ManagerCycle == 1 then
+	    GROUND:Unhide("NPC_Storehouse")
+	  end
+	end
   end
 end
 
@@ -186,16 +199,33 @@ function forest_camp.Snorlax_Success()
   GROUND:Hide("NPC_Deliver")
 end
 
+function forest_camp.NPC_Storehouse_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  
+  UI:WaitShowDialogue("I'm on my routine route in forest camp!")
+
+end
+
 function forest_camp.NPC_Carry_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
-  UI:SetSpeakerEmotion("Angry")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_001']))
-  UI:SetSpeakerEmotion("Stunned")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_002']))
-  GROUND:EntTurn(chara, Direction.Left)
+  
+  if SV.supply_corps.Status == 0 then
+    UI:SetSpeakerEmotion("Angry")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_001']))
+    UI:SetSpeakerEmotion("Stunned")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_002']))
+    GROUND:EntTurn(chara, Direction.Left)
+  elseif SV.supply_corps.Status >= 20 then
+    UI:WaitShowDialogue("(Carry) I'm on my routine route in forest camp!")
+  end
+  
+
 end
 
 function forest_camp.NPC_Deliver_Action(chara, activator)
@@ -203,13 +233,19 @@ function forest_camp.NPC_Deliver_Action(chara, activator)
   
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
-  UI:SetSpeakerEmotion("Pain")
   
-  SOUND:PlayBattleSE("EVT_Emote_Sweating")
-  GROUND:CharSetEmote(chara, "sweating", 1)
-  GAME:WaitFrames(30)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_001']))
-  GROUND:EntTurn(chara, Direction.Right)
+  if SV.supply_corps.Status == 0 then
+    UI:SetSpeakerEmotion("Pain")
+    SOUND:PlayBattleSE("EVT_Emote_Sweating")
+    GROUND:CharSetEmote(chara, "sweating", 1)
+    GAME:WaitFrames(30)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_001']))
+    GROUND:EntTurn(chara, Direction.Right)
+  elseif SV.supply_corps.Status >= 20 then
+    UI:WaitShowDialogue("(Deliver) I'm on my routine route in forest camp!")
+  end
+  
+
 end
 
 function forest_camp.NPC_Camps_Action(chara, activator)

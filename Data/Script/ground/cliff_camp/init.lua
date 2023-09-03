@@ -58,8 +58,21 @@ function cliff_camp.SetupNpcs()
     GROUND:Unhide("NPC_Deliver")
   elseif SV.supply_corps.Status <= 5 then
     GROUND:Unhide("NPC_Carry")
-  elseif SV.supply_corps.Status >= 18 then
+  elseif SV.supply_corps.Status >= 20 then
     --cycle appearances
+	if SV.supply_corps.ManagerCycle == 0 or SV.supply_corps.ManagerCycle == 6 then
+	
+	else
+	  if SV.supply_corps.CarryCycle == 2 then
+	    GROUND:Unhide("NPC_Carry")
+	  end
+	  if SV.supply_corps.DeliverCycle == 2 then
+	    GROUND:Unhide("NPC_Deliver")
+	  end
+	  if SV.supply_corps.ManagerCycle == 2 then
+	    GROUND:Unhide("NPC_Storehouse")
+	  end
+	end
   end
 end
 
@@ -279,8 +292,60 @@ function cliff_camp.NPC_Storehouse_Action(chara, activator)
 	end
   elseif SV.supply_corps.Status == 3 then
     UI:WaitShowDialogue("Thanks for helping our delivery.  Now we can go to canyon camp.")
+  elseif SV.supply_corps.Status == 20 then
+    UI:WaitShowDialogue("I'm on my routine route in cliff camp!")
   end
 end
+
+
+function cliff_camp.NPC_Carry_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  
+  
+  if SV.supply_corps.Status == 2 then
+    local questname = "OutlawForest1"
+    local quest = SV.missions.Missions[questname]
+    if quest == nil then
+      UI:WaitShowDialogue("(Carry) Deliver NPC had his package stolen! Please help!")
+	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+	  UI:WaitShowDialogue("(Carry) Deliver NPC had his package stolen! (You already have the quest)")
+	else
+	  UI:WaitShowDialogue("(Carry) Did you get back the supplies?")
+	end
+  elseif SV.supply_corps.Status == 3 then
+    UI:WaitShowDialogue("(Carry) Thanks for helping our delivery.  Now we can go to canyon camp.")
+  elseif SV.supply_corps.Status == 20 then
+    UI:WaitShowDialogue("(Carry) I'm on my routine route in cliff camp!")
+  end
+  
+end
+
+function cliff_camp.NPC_Deliver_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  
+  if SV.supply_corps.Status == 2 then
+    local questname = "OutlawForest1"
+    local quest = SV.missions.Missions[questname]
+    if quest == nil then
+      UI:WaitShowDialogue("(Deliver) Deliver NPC had his package stolen! Please help!")
+	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+	  UI:WaitShowDialogue("(Deliver) Deliver NPC had his package stolen! (You already have the quest)")
+	else
+	  UI:WaitShowDialogue("(Deliver) Did you get back the supplies?")
+	end
+  elseif SV.supply_corps.Status == 3 then
+    UI:WaitShowDialogue("(Deliver) Thanks for helping our delivery.  Now we can go to canyon camp.")
+  elseif SV.supply_corps.Status == 20 then
+    UI:WaitShowDialogue("(Deliver) I'm on my routine route in cliff camp!")
+  end
+end
+
 
 function cliff_camp.NPC_Sightseer_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

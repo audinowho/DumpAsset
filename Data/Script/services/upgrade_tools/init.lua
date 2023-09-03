@@ -216,6 +216,7 @@ function UpgradeTools:OnUpgrade()
 	SV.supply_corps =
 	{
 	  Status = 0,
+	  DaysSinceCheckpoint = 0,
 	  CarryCycle = 0,
 	  DeliverCycle = 0,
 	  ManagerCycle = 0

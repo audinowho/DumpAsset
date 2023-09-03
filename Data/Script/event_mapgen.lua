@@ -33,7 +33,7 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
       local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
 	  specificTeam.Explorer = true
       local post_mob = RogueEssence.LevelGen.MobSpawn()
-      post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(mission.TargetSpecies, 0, "normal", Gender.Unknown)
+      post_mob.BaseForm = mission.TargetSpecies
 	  if mission.Type == COMMON.MISSION_TYPE_OUTLAW then -- outlaw
         post_mob.Tactic = "boss"
         post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level + 5)

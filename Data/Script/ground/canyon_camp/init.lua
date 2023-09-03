@@ -282,7 +282,7 @@ function canyon_camp.NPC_Storehouse_Action(chara, activator)
     if quest == nil then
       UI:WaitShowDialogue("Carry NPC had his package stolen! Please Help!")
 	  --add the quest
-	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_HOUSE, DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6, TargetSpecies = "decidueye" }
+	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_HOUSE, DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6, TargetSpecies = RogueEssence.Dungeon.MonsterID("decidueye", 0, "normal", Gender.Male) }
 	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
       UI:WaitShowDialogue("Carry NPC had his package stolen! (You already have the quest)")
 	else

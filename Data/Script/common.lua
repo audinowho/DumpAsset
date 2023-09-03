@@ -965,7 +965,7 @@ function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
 	  if mission.Type == 1 then -- escort
 		
 		-- add escort to team
-		local mon_id = RogueEssence.Dungeon.MonsterID(mission.EscortSpecies, 0, "normal", Gender.Male)
+		local mon_id = mission.EscortSpecies
         local new_mob = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, "", -1)
         _DATA.Save.ActiveTeam.Guests:Add(new_mob)
 		
@@ -1013,6 +1013,20 @@ function COMMON.ExitDungeonMissionCheck(result, zoneId, segmentID)
   end
 end
 
+function COMMON.FindMissionEscort(missionId)
+  local escort = nil
+  PrintInfo("Name: "..missionId)
+  local party = GAME:GetPlayerGuestTable()
+  for i, p in ipairs(party) do
+    local e_tbl = LTBL(p)
+	PrintInfo("Escort: "..e_tbl.Escort)
+	if e_tbl.Escort == missionId then
+	  escort = p
+	  break
+	end
+  end
+  return escort
+end
 
 function COMMON.EndDungeonDay(result, zoneId, structureId, mapId, entryId)
   COMMON.EndDayCycle()
@@ -1140,7 +1154,7 @@ function COMMON.EndDayCycle()
 		DestZone = "faultline_ridge",
 		DestSegment = 0,
 		DestFloor = 5,
-		TargetSpecies = "chikorita",
+		TargetSpecies = RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female),
 		Complete = COMMON.MISSION_INCOMPLETE,
 		Type = COMMON.MISSION_TYPE_ESCORT_OUT,
 		EscortTable = { EscortStartMsg = "TALK_ESCORT_SISTER_START", EscortAcceptMsg = "TALK_ESCORT_SISTER_ACCEPT", EscortInteract = "EscortInteractSister" }

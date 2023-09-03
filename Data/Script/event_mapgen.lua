@@ -34,7 +34,7 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
 	  specificTeam.Explorer = true
       local post_mob = RogueEssence.LevelGen.MobSpawn()
       post_mob.BaseForm = mission.TargetSpecies
-	  if mission.Type == COMMON.MISSION_TYPE_OUTLAW then -- outlaw
+	  if mission.Type == COMMON.MISSION_TYPE_OUTLAW or mission.Type == COMMON.MISSION_TYPE_OUTLAW_HOUSE then -- outlaw
         post_mob.Tactic = "boss"
         post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level + 5)
 		post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
@@ -50,6 +50,15 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
 	    queue:Enqueue(priority, mobPlacement)
         PrintInfo("Done")
 	    outlawFloor = true
+		
+		if mission.Type == COMMON.MISSION_TYPE_OUTLAW_HOUSE then
+		  --add house trigger
+          local activeEffect = RogueEssence.Data.ActiveEffect()
+          activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("OutlawHouse", Serpent.line({ Mission = name})))
+	      local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
+	      local priority = RogueElements.Priority(-6, 1)
+	      queue:Enqueue(priority, destNote)
+		end
 	  else
         post_mob.Tactic = "slow_patrol"
 	    if mission.Type == COMMON.MISSION_TYPE_RESCUE then -- rescue

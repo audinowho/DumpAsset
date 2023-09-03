@@ -371,6 +371,7 @@ function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
   if context.User ~= nil then
     return
   end
+
   SOUND:PlayBGM("C07. Outlaw.ogg", false)
   UI:ResetSpeaker()
   UI:WaitShowDialogue("Wanted outlaw spotted!")
@@ -380,6 +381,28 @@ function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
   local status = RogueEssence.Dungeon.MapStatus(checkClearStatus)
   status:LoadFromData()
   TASK:WaitTask(_DUNGEON:AddMapStatus(status))
+end
+
+function SINGLE_CHAR_SCRIPT.OutlawHouse(owner, ownerChar, context, args)
+  if context.User ~= nil then
+    return
+  end
+  
+  local found_outlaw = COMMON.FindNpcWithTable(true, "Mission", args.Mission)
+  found_outlaw.CharDir = _ZONE.CurrentMap:ApproximateClosestDir8(found_outlaw.CharLoc, _DUNGEON.ActiveTeam.Leader.CharLoc)
+  UI:SetSpeaker(found_outlaw)
+  UI:WaitShowDialogue("You have fallen into my trap!")
+	
+  local monster_event = PMDC.Dungeon.MonsterHouseMapEvent()
+  monster_event.Bounds = RogueElements.Rect(found_outlaw.CharLoc - RogueElements.Loc(4), RogueElements.Loc(9))
+  local map = _ZONE.CurrentMap
+  local mon_count = map.Rand:Next(5, 8)
+  for ii = 1, mon_count, 1 do
+	local ex_list = map.TeamSpawns:Pick(map.Rand):ChooseSpawns(map.Rand)
+	local mob_copy = ex_list[0]:Copy()
+	monster_event.Mobs:Add(mob_copy)
+  end
+  TASK:WaitTask(monster_event:Apply(owner, ownerChar, context))
 end
 
 function SINGLE_CHAR_SCRIPT.OutlawClearCheck(owner, ownerChar, context, args)

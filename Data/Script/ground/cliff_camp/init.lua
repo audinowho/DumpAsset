@@ -58,6 +58,7 @@ function cliff_camp.SetupNpcs()
     GROUND:Unhide("NPC_Deliver")
   elseif SV.supply_corps.Status <= 5 then
     GROUND:Unhide("NPC_Carry")
+    GROUND:Unhide("NPC_Deliver")
   elseif SV.supply_corps.Status >= 20 then
     --cycle appearances
 	if SV.supply_corps.ManagerCycle == 0 or SV.supply_corps.ManagerCycle == 6 then
@@ -274,11 +275,11 @@ function cliff_camp.NPC_Storehouse_Action(chara, activator)
     local questname = "OutlawForest1"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue("Deliver NPC had his package stolen! Please help!")
+      UI:WaitShowDialogue("Deliver NPC had his package stolen in Faded Trail! Please help!")
 	  --add the quest
 	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW, DestZone = "faded_trail", DestSegment = 0, DestFloor = 5, TargetSpecies = RogueEssence.Dungeon.MonsterID("murkrow", 0, "normal", Gender.Male) }
 	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-	  UI:WaitShowDialogue("Deliver NPC had his package stolen! (You already have the quest)")
+	  UI:WaitShowDialogue("Deliver NPC had his package stolen in Faded Trail! (You already have the quest)")
 	else
 	  UI:WaitShowDialogue("Thanks for getting back the supplies!  Have a reward!")
 	  --give reward
@@ -309,14 +310,19 @@ function cliff_camp.NPC_Carry_Action(chara, activator)
     local questname = "OutlawForest1"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue("(Carry) Deliver NPC had his package stolen! Please help!")
+      UI:WaitShowDialogue("(Carry) Deliver NPC had his package stolen in Faded Trail! Please help!")
 	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-	  UI:WaitShowDialogue("(Carry) Deliver NPC had his package stolen! (You already have the quest)")
+	  UI:WaitShowDialogue("(Carry) Deliver NPC had his package stolen in Faded Trail! (You already have the quest)")
 	else
 	  UI:WaitShowDialogue("(Carry) Did you get back the supplies?")
 	end
   elseif SV.supply_corps.Status == 3 then
     UI:WaitShowDialogue("(Carry) Thanks for helping our delivery.  Now we can go to canyon camp.")
+  elseif SV.supply_corps.Status == 4 then
+    UI:WaitShowDialogue("(Carry) Our boss went ahead in ravine camp.  We'll head there tomorrow too!")
+	SV.supply_corps.Status = 5
+  elseif SV.supply_corps.Status == 5 then
+    UI:WaitShowDialogue("(Carry) Our boss went ahead in ravine camp.  We'll head there tomorrow too!")
   elseif SV.supply_corps.Status == 20 then
     UI:WaitShowDialogue("(Carry) I'm on my routine route in cliff camp!")
   end
@@ -333,14 +339,19 @@ function cliff_camp.NPC_Deliver_Action(chara, activator)
     local questname = "OutlawForest1"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue("(Deliver) Deliver NPC had his package stolen! Please help!")
+      UI:WaitShowDialogue("(Deliver) Deliver NPC had his package stolen in Faded Trail! Please help!")
 	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-	  UI:WaitShowDialogue("(Deliver) Deliver NPC had his package stolen! (You already have the quest)")
+	  UI:WaitShowDialogue("(Deliver) Deliver NPC had his package stolen in Faded Trail! (You already have the quest)")
 	else
 	  UI:WaitShowDialogue("(Deliver) Did you get back the supplies?")
 	end
   elseif SV.supply_corps.Status == 3 then
     UI:WaitShowDialogue("(Deliver) Thanks for helping our delivery.  Now we can go to canyon camp.")
+  elseif SV.supply_corps.Status == 4 then
+    UI:WaitShowDialogue("(Deliver) Our boss went ahead in ravine camp.  We'll head there tomorrow too!")
+	SV.supply_corps.Status = 5
+  elseif SV.supply_corps.Status == 5 then
+    UI:WaitShowDialogue("(Deliver) Our boss went ahead in ravine camp.  We'll head there tomorrow too!")
   elseif SV.supply_corps.Status == 20 then
     UI:WaitShowDialogue("(Deliver) I'm on my routine route in cliff camp!")
   end

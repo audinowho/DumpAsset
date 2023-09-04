@@ -146,15 +146,17 @@ function rest_stop.NPC_Storehouse_Action(chara, activator)
   if SV.supply_corps.Status <= 10 then
     UI:WaitShowDialogue("Thanks for discovering this cave.  We're putting supplies here.")
 	SV.supply_corps.Status = 11
+  elseif SV.supply_corps.Status == 11 then
+    UI:WaitShowDialogue("Thanks for discovering this cave.  We're putting supplies here.")
   elseif SV.supply_corps.Status == 12 then
     local questname = "OutlawMountain1"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue("Some thugs beat our guys up!  Teach them a lesson!")
+      UI:WaitShowDialogue("Some thugs beat our guys up in Copper Quarry!  Teach them a lesson!")
 	  --add the quest
 	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW, DestZone = "copper_quarry", DestSegment = 0, DestFloor = 4, TargetSpecies = RogueEssence.Dungeon.MonsterID("weavile", 0, "normal", Gender.Male) }
 	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue("Some thugs beat our guys up!  Teach them a lesson! (You already have the quest)")
+      UI:WaitShowDialogue("Some thugs beat our guys up in Copper Quarry!  Teach them a lesson! (You already have the quest)")
 	else
 	  UI:WaitShowDialogue("Thanks for getting back the supplies!  Have a reward!")
 	  --give reward
@@ -188,11 +190,11 @@ function rest_stop.NPC_Carry_Action(chara, activator)
     local questname = "OutlawMountain1"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue("(Carry) Some thugs beat our guys up!  Teach them a lesson!")
+      UI:WaitShowDialogue("(Carry) Some thugs beat our guys up in Copper Quarry!  Teach them a lesson!")
 	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue("Some thugs beat our guys up!  Teach them a lesson! (You already have the quest)")
+      UI:WaitShowDialogue("Some thugs beat our guys up in Copper Quarry!  Teach them a lesson! (You already have the quest)")
 	else
-	  UI:WaitShowDialogue("(Carry) Thanks for getting back the supplies!  Have a reward!")
+	  UI:WaitShowDialogue("(Carry) Thanks for getting back the supplies!")
 	end
   elseif SV.supply_corps.Status == 13 then
     UI:WaitShowDialogue("(Carry) Thanks for protecting us!")
@@ -217,11 +219,11 @@ function rest_stop.NPC_Deliver_Action(chara, activator)
     local questname = "OutlawMountain1"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue("(Deliver) Some thugs beat our guys up!  Teach them a lesson!")
+      UI:WaitShowDialogue("(Deliver) Some thugs beat our guys up in Copper Quarry!  Teach them a lesson!")
 	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue("Some thugs beat our guys up!  Teach them a lesson! (You already have the quest)")
+      UI:WaitShowDialogue("Some thugs beat our guys up in Copper Quarry!  Teach them a lesson! (You already have the quest)")
 	else
-	  UI:WaitShowDialogue("(Deliver) Thanks for getting back the supplies!  Have a reward!")
+	  UI:WaitShowDialogue("(Deliver) Thanks for getting back the supplies!")
 	end
   elseif SV.supply_corps.Status == 13 then
     UI:WaitShowDialogue("(Deliver) Thanks for protecting us!")

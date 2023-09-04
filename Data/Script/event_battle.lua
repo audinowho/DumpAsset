@@ -288,13 +288,49 @@ function BATTLE_SCRIPT.DisguiseTalk(owner, ownerChar, context, args)
 	
 	  UI:WaitShowDialogue("Fine, we'll do this the hard way!")
 	  
+      local teamIndex = _ZONE.CurrentMap.AllyTeams:IndexOf(context.Target.MemberTeam)
+	  _DUNGEON:RemoveTeam(RogueEssence.Dungeon.Faction.Friend, teamIndex)
+	  _DUNGEON:AddTeam(RogueEssence.Dungeon.Faction.Foe, context.Target.MemberTeam)
+	  local tactic = _DATA:GetAITactic("boss") -- shopkeeper attack tactic
+	  context.Target.Tactic = RogueEssence.Data.AITactic(tactic)
+	  context.Target.Tactic:Initialize(context.Target)
+	  TASK:WaitTask(context.Target:RemoveStatusEffect("attack_response", false))
+	
 	  TASK:WaitTask(context.Target:RemoveStatusEffect("illusion", true))
 	  
 	  COMMON.TriggerAdHocMonsterHouse(owner, ownerChar, context.Target)
 	end
 	tbl.TalkAmount = tbl.TalkAmount + 1
   end
+end
+
+
+function BATTLE_SCRIPT.DisguiseHit(owner, ownerChar, context, args)
   
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  
+  local appearance = context.Target.Appearance
+  local name = _DATA:GetMonster(appearance.Species).Name:ToLocal()
+  UI:SetSpeaker("[color=#00FF00]"..name.."[color]", true, appearance.Species, appearance.Form, appearance.Skin, appearance.Gender)
+
+
+  SOUND:PlayBGM("", false)
+  UI:WaitShowDialogue("Argh, how did you know?")
+	
+  UI:WaitShowDialogue("Fine, we'll do this the hard way!")
+	  
+      local teamIndex = _ZONE.CurrentMap.AllyTeams:IndexOf(context.Target.MemberTeam)
+	  _DUNGEON:RemoveTeam(RogueEssence.Dungeon.Faction.Friend, teamIndex)
+	  _DUNGEON:AddTeam(RogueEssence.Dungeon.Faction.Foe, context.Target.MemberTeam)
+	  local tactic = _DATA:GetAITactic("boss") -- shopkeeper attack tactic
+	  context.Target.Tactic = RogueEssence.Data.AITactic(tactic)
+	  context.Target.Tactic:Initialize(context.Target)
+	
+	
+	  TASK:WaitTask(context.Target:RemoveStatusEffect("attack_response", false))
+  TASK:WaitTask(context.Target:RemoveStatusEffect("illusion", true))
+	  
+  COMMON.TriggerAdHocMonsterHouse(owner, ownerChar, context.Target)
 end
 
 

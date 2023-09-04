@@ -152,11 +152,14 @@ function final_stop.NPC_Storehouse_Action(chara, activator)
 	  SV.supply_corps.Status = 19
 	end
   elseif SV.supply_corps.Status == 19 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
+    if SV.guildmaster_summit.GameComplete then
+	  UI:WaitShowDialogue("Maybe we should aim for the summit ourselves.")
+	else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
+	end
   elseif SV.supply_corps.Status == 20 then
     UI:WaitShowDialogue("I'm on my routine route in blizzard camp!")
   end
-  
 end
 
 
@@ -172,7 +175,7 @@ function final_stop.NPC_Carry_Action(chara, activator)
     if quest == nil then
       UI:WaitShowDialogue("Our manager disappeared!  He should be in snowbound path!")
 	  --add the quest
-	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_DISGUISE, DestZone = "snowbound_path", DestSegment = 0, DestFloor = 12, TargetSpecies = RogueEssence.Dungeon.MonsterID("zoroark", 1, "normal", Gender.Male), DisguiseSpecies = RogueEssence.Dungeon.MonsterID("swalot", 0, "normal", Gender.Male), DisguiseTalk = "DisguiseTalk" }
+	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_DISGUISE, DestZone = "snowbound_path", DestSegment = 0, DestFloor = 12, TargetSpecies = RogueEssence.Dungeon.MonsterID("zoroark", 1, "normal", Gender.Male), DisguiseSpecies = RogueEssence.Dungeon.MonsterID("swalot", 0, "normal", Gender.Male), DisguiseTalk = "DisguiseTalk", DisguiseHit = "DisguiseHit" }
 	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
       UI:WaitShowDialogue("Our manager disappeared! (You already have the quest)")
 	else
@@ -181,6 +184,7 @@ function final_stop.NPC_Carry_Action(chara, activator)
   elseif SV.supply_corps.Status == 17 then
 	UI:WaitShowDialogue("(Carry) We've got to do something about these thieves.")
   elseif SV.supply_corps.Status == 18 then
+    local unlock = _DATA.Save:GetDungeonUnlock("treacherous_mountain") -- make this the dungeon unlock state
 	if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
 	  UI:WaitShowDialogue("(Carry) I feel unsafe until you take care of the criminal.")
 	elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
@@ -189,7 +193,11 @@ function final_stop.NPC_Carry_Action(chara, activator)
 	  UI:WaitShowDialogue("(Carry) You defeated the criminal?")
 	end
   elseif SV.supply_corps.Status == 19 then
-    UI:WaitShowDialogue("(Carry) Thank you and good luck with the summit!")
+    if SV.guildmaster_summit.GameComplete then
+	  UI:WaitShowDialogue("(Carry) Maybe we should aim for the summit ourselves.")
+	else
+      UI:WaitShowDialogue("(Carry) Thank you and good luck with the summit!")
+	end
   elseif SV.supply_corps.Status == 20 then
     UI:WaitShowDialogue("(Carry) I'm on my routine route in blizzard camp!")
   end
@@ -215,6 +223,7 @@ function final_stop.NPC_Deliver_Action(chara, activator)
   elseif SV.supply_corps.Status == 17 then
 	UI:WaitShowDialogue("(Deliver) We've got to do something about these thieves.")
   elseif SV.supply_corps.Status == 18 then
+    local unlock = _DATA.Save:GetDungeonUnlock("treacherous_mountain") -- make this the dungeon unlock state
 	if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
 	  UI:WaitShowDialogue("(Deliver) I feel unsafe until you take care of the criminal.")
 	elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
@@ -223,7 +232,11 @@ function final_stop.NPC_Deliver_Action(chara, activator)
 	  UI:WaitShowDialogue("(Deliver) You defeated the criminal?")
 	end
   elseif SV.supply_corps.Status == 19 then
-    UI:WaitShowDialogue("(Deliver) Thank you and good luck with the summit!")
+    if SV.guildmaster_summit.GameComplete then
+	  UI:WaitShowDialogue("(Deliver) Maybe we should aim for the summit ourselves.")
+	else
+      UI:WaitShowDialogue("(Deliver) Thank you and good luck with the summit!")
+	end
   elseif SV.supply_corps.Status == 20 then
     UI:WaitShowDialogue("(Deliver) I'm on my routine route in blizzard camp!")
   end

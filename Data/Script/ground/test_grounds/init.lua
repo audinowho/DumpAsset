@@ -465,7 +465,7 @@ function test_grounds.Magnezone_Action(chara, activator)
     local chres = UI:ChoiceResult() 
     if chres then
 	  -- Type 0 = Rescue
-	  SV.missions.Missions["OutlawQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_DISGUISE, DestZone = "debug_zone", DestSegment = 4, DestFloor = 9, TargetSpecies = RogueEssence.Dungeon.MonsterID("riolu", 0, "normal", Gender.Male), DisguiseSpecies = RogueEssence.Dungeon.MonsterID("swalot", 0, "normal", Gender.Male), DisguiseTalk = "DisguiseTalk" }
+	  SV.missions.Missions["OutlawQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_DISGUISE, DestZone = "debug_zone", DestSegment = 4, DestFloor = 9, TargetSpecies = RogueEssence.Dungeon.MonsterID("riolu", 0, "normal", Gender.Male), DisguiseSpecies = RogueEssence.Dungeon.MonsterID("swalot", 0, "normal", Gender.Male), DisguiseTalk = "DisguiseTalk", DisguiseHit = "DisguiseHit" }
       UI:WaitShowDialogue("You can find the perpetrator at Replay Test Zone 10F.  Good luck!")
     end
   else

@@ -3,29 +3,27 @@
 "Object": {
 "$type": "RogueEssence.Data.StatusData, RogueEssence",
 "Name": {
-"DefaultText": "Endure",
+"DefaultText": "Attack Response",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "The Pokémon is bracing itself, preventing it from fainting from a direct attack. This status wears off after a few turns, or if the Pokémon moves.",
+"DefaultText": "",
 "LocalTexts": {}
 },
 "Released": true,
-"Comment": "",
-"MenuName": true,
+"Comment": "Used to trigger scripts when an enemy or neutral is attacked.",
+"MenuName": false,
 "CarryOver": false,
-"Emoticon": "Exclaim_Red",
+"Emoticon": "",
 "DropEmoticon": "",
 "FreeEmote": "",
-"DrawEffect": 3,
+"DrawEffect": -1,
 "Targeted": false,
 "StatusStates": [
 {
-"$type": "PMDC.Dungeon.TransferStatusState, PMDC"
-},
-{
-"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
-"Counter": 4
+"$type": "RogueEssence.Dungeon.ScriptCallState, RogueEssence",
+"Script": "",
+"ArgTable": "{}"
 }
 ],
 "OnSkillChanges": [],
@@ -94,92 +92,26 @@
 },
 "OnEquips": [],
 "OnPickups": [],
-"BeforeStatusAdds": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.SameStatusCheck, PMDC",
-"Message": {
-"Key": "MSG_NOTHING_HAPPENED"
-}
-}
-}
-],
+"BeforeStatusAdds": [],
 "BeforeStatusAddings": [],
-"OnStatusAdds": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.StatusBattleLogEvent, PMDC",
-"Message": {
-"Key": "MSG_ENDURE_START"
-},
-"Delay": true
-}
-}
-],
-"OnStatusRemoves": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.StatusBattleLogEvent, PMDC",
-"Message": {
-"Key": "MSG_ENDURE_END"
-},
-"Delay": false
-}
-}
-],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
 "OnMapStatusAdds": [],
 "OnMapStatusRemoves": [],
 "OnMapStarts": [],
 "OnTurnStarts": [],
-"OnTurnEnds": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.CountDownRemoveEvent, PMDC",
-"ShowMessage": true
-}
-}
-],
+"OnTurnEnds": [],
 "OnMapTurnEnds": [],
-"OnWalks": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.RemoveEvent, PMDC",
-"ShowMessage": true
-}
-}
-],
+"OnWalks": [],
 "OnDeaths": [],
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
 "BeforeHittings": [],
-"BeforeBeingHits": [
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [
 {
 "Key": {
 "str": [
@@ -187,16 +119,18 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.AddContextStateEvent, PMDC",
-"AddedState": {
-"$type": "PMDC.Dungeon.AttackEndure, PMDC"
-},
-"Global": false
+"$type": "PMDC.Dungeon.OnHitEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "RogueEssence.Dungeon.BattleScriptStateEvent, RogueEssence"
+}
+],
+"RequireDamage": true,
+"RequireContact": false,
+"Chance": 100
 }
 }
 ],
-"AfterHittings": [],
-"AfterBeingHits": [],
 "OnHitTiles": [],
 "AfterActions": [],
 "UserElementEffects": [],

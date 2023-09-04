@@ -371,10 +371,12 @@ function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
   if context.User ~= nil then
     return
   end
-
-  SOUND:PlayBGM("C07. Outlaw.ogg", false)
-  UI:ResetSpeaker()
-  UI:WaitShowDialogue("Wanted outlaw spotted!")
+  
+  if not args.Silent then
+    SOUND:PlayBGM("C07. Outlaw.ogg", false)
+    UI:ResetSpeaker()
+    UI:WaitShowDialogue("Wanted outlaw spotted!")
+  end
   
   -- add a map status for outlaw clear check
   local checkClearStatus = "outlaw_clear_check" -- outlaw clear check
@@ -404,6 +406,10 @@ function SINGLE_CHAR_SCRIPT.OutlawClearCheck(owner, ownerChar, context, args)
     if mission.Complete == COMMON.MISSION_INCOMPLETE and _ZONE.CurrentZoneID == mission.DestZone
 	  and _ZONE.CurrentMapID.Segment == mission.DestSegment and _ZONE.CurrentMapID.ID == mission.DestFloor then
 	  local found_outlaw = COMMON.FindNpcWithTable(true, "Mission", name)
+	  -- check for disguised outlaws
+	  if not found_outlaw then
+	    found_outlaw = COMMON.FindNpcWithTable(false, "Mission", name)
+	  end
       if found_outlaw then
 	    remaining_outlaw = true
 	  else

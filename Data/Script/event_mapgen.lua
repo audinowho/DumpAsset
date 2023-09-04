@@ -25,6 +25,7 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
   -- choose a the floor to spawn it on
   local destinationFloor = false
   local outlawFloor = false
+  local outlawSilent = false
   for name, mission in pairs(SV.missions.Missions) do
     PrintInfo("Checking Gen Mission: "..tostring(name))
     if mission.Complete == COMMON.MISSION_INCOMPLETE and zoneContext.CurrentZone == mission.DestZone
@@ -54,6 +55,13 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
 		  status_effect.StatusStates:Set(PMDC.Dungeon.MonsterIDState(mission.DisguiseSpecies))
 		  spawn_status.Statuses:Add(status_effect, 10)
 		  post_mob.SpawnFeatures:Add(spawn_status)
+		  
+		  local spawn_interact = RogueEssence.LevelGen.MobSpawnStatus()
+		  local status_interact = RogueEssence.Dungeon.StatusEffect("attack_response")
+		  status_interact.StatusStates:Set(RogueEssence.Dungeon.ScriptCallState(mission.DisguiseHit, "{}"))
+		  spawn_interact.Statuses:Add(status_interact, 10)
+		  post_mob.SpawnFeatures:Add(spawn_interact)
+		  
 		  post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(RogueEssence.Dungeon.BattleScriptEvent(mission.DisguiseTalk)))
 		end
 	    specificTeam.Spawns:Add(post_mob)
@@ -72,8 +80,9 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
 	    queue:Enqueue(priority, mobPlacement)
         PrintInfo("Done")
 		
-		if mission.Type ~= COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
-	      outlawFloor = true
+		outlawFloor = true
+		if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
+	      outlawSilent = true
 		end
 		
 		if mission.Type == COMMON.MISSION_TYPE_OUTLAW_HOUSE then
@@ -133,7 +142,7 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
   if outlawFloor then
     -- add destination floor notification
     local activeEffect = RogueEssence.Data.ActiveEffect()
-    activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("OutlawFloor"))
+    activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("OutlawFloor", Serpent.line({ Silent = outlawSilent })))
 	local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
 	local priority = RogueElements.Priority(-6)
 	queue:Enqueue(priority, destNote)

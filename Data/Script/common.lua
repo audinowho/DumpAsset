@@ -11,7 +11,7 @@ DEBUG =
 {
   EnableDbgCoro = function() end, --Call this function inside coroutines you want to allow debugging of, at the start. Default is empty
   --FIXME: fix mobdebug and sockets
-  IsDevMode = function() return false end, --RogueEssence.DiagManager.Instance.DevMode end,
+  IsDevMode = function() return RogueEssence.DiagManager.Instance.DevMode end,
   GroundAIShowDebugInfo = false,
 }
 

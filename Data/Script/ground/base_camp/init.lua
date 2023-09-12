@@ -112,7 +112,7 @@ function base_camp.BeginExposition()
 	if not in_party then
 	  local assemblyCount = GAME:GetPlayerAssemblyCount()
   
-      for i = 1,assemblyCount,1 do
+      for i = assemblyCount,1,-1 do
         p = GAME:GetPlayerAssemblyMember(i-1)
 		if p.IsFounder then
 		  GAME:RemovePlayerAssembly(i-1)

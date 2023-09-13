@@ -398,7 +398,7 @@ function test_grounds.Mew_Action(chara, activator)
   GAME:WaitFrames(30)
   
   animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Rotate")
-  frameAction = RogueEssence.Ground.IdleAnimGroundAction(mew.Position, mew.LocHeight, Direction.Up, animId, true)
+  frameAction = RogueEssence.Ground.ReverseGroundAction(mew.Position, mew.LocHeight, Direction.Up, animId)
   GROUND:ActionToPosition(mew, frameAction, player.MapLoc.X, player.MapLoc.Y, 1, 2, shadow_pos.Y - head_pos.Y)
   
   GAME:WaitFrames(30)
@@ -413,7 +413,7 @@ function test_grounds.Mew_Action(chara, activator)
   _ZONE.CurrentGround:AddMapChar(mew)
   
   animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Rotate")
-  frameAction = RogueEssence.Ground.IdleAnimGroundAction(mew.Position, mew.LocHeight, Direction.Up, animId, true)
+  frameAction = RogueEssence.Ground.ReverseGroundAction(mew.Position, mew.LocHeight, Direction.Up, animId)
   GROUND:ActionToPosition(mew, frameAction, player.MapLoc.X, player.MapLoc.Y, 1, 2, shadow_pos.Y - head_pos.Y)
   
   animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("None")

@@ -4,19 +4,11 @@
 "$type": "RogueEssence.Data.TileData, RogueEssence",
 "Name": {
 "DefaultText": "Sigil Site",
-"LocalTexts": {
-"fr": "Zone de Signal",
-"es": "Área Señal",
-"zh-hans": "信号区域"
-}
+"LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A mysterious signal that calls Pokémon to the area.",
-"LocalTexts": {
-"fr": "Un signal mystérieux qui appelle les Pokémon dans la zone.",
-"es": "Una misteriosa señal que llama Pokémon al área.",
-"zh-hans": "一种可以召集宝可梦来到这里的神秘信号。"
-}
+"DefaultText": "A mysterious sigil that calls Pokémon to the area.",
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -61,8 +53,11 @@
 ]
 },
 "Value": {
+"$type": "PMDC.Dungeon.LeaderCharEvent, PMDC",
+"BaseEvent": {
 "$type": "PMDC.Dungeon.LockdownTileEvent, PMDC",
 "CheckClearStatus": "map_clear_check"
+}
 }
 },
 {
@@ -72,7 +67,10 @@
 ]
 },
 "Value": {
+"$type": "PMDC.Dungeon.LeaderCharEvent, PMDC",
+"BaseEvent": {
 "$type": "PMDC.Dungeon.BossSpawnEvent, PMDC"
+}
 }
 }
 ]

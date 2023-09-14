@@ -426,6 +426,16 @@
             Pixels per second
             </summary>
         </member>
+        <member name="F:RogueEssence.Content.OverlayEmitter.FadeIn">
+            <summary>
+            Time to fade in, in render frames.  Cuts into total time.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Content.OverlayEmitter.FadeOut">
+            <summary>
+            Time to fade out, in render frames.  Cuts into total time.
+            </summary>
+        </member>
         <member name="T:RogueEssence.Content.FiniteReleaseRangeEmitter">
             <summary>
             Emits particles within a specified start range, which all move outwards to the maximum radius.
@@ -1648,6 +1658,11 @@
             <param name="rectStart"></param>
             <returns></returns>
         </member>
+        <member name="T:RogueEssence.Dungeon.BattleContext">
+            <summary>
+            Represents a single turn-taking battle action, used for attacks, items, throws, trap triggers.
+            </summary>
+        </member>
         <member name="P:RogueEssence.Dungeon.BattleContext.StrikeStartTile">
             <summary>
             the tile of the user before it started a strike (used for tipper effects)
@@ -1682,6 +1697,62 @@
             <summary>
             all tiles in which a strike's hitbox ended (used for item landing)
             unwrapped
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.BattleContext.UsageSlot">
+            <summary>
+            For skills, the skill slot
+            For items, the item slot
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.BattleContext.StrikesMade">
+            <summary>
+            Strikes that have currently been made in the BattleContext.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.BattleContext.Strikes">
+            <summary>
+            The total strikes that should be made in the BattleContext.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Dungeon.BattleContext.HitboxAction">
+            <summary>
+            Determines the range and type of hitbox.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Dungeon.BattleContext.Explosion">
+            <summary>
+            Determiens the size of splash effect.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Dungeon.BattleContext.Data">
+            <summary>
+            The effect of the skill, item, trap, etc. on the target.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.BattleContext.Item">
+            <summary>
+            The item that is used, and most likely dropped
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.BattleContext.SkillUsedUp">
+            <summary>
+            The skill whose last charge was used up
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.BattleContext.TurnCancel">
+            <summary>
+            Determines if this action should trigger end-of-turn.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.BattleContext.Hit">
+            <summary>
+            Denotes whether the action hit its target.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.BattleContext.RangeMod">
+            <summary>
+            A number of be added to the Range argument for the hitbox, when it comes out.
             </summary>
         </member>
         <member name="F:RogueEssence.Dungeon.BaseMap.ScrollEdge.Blank">
@@ -2178,7 +2249,7 @@
             Executed when the save file is loaded without a quicksave.  Check and clear all quicksave-related variables.
             </summary>
         </member>
-        <member name="M:RogueEssence.Data.GameProgress.RestrictLevel(System.Int32,System.Boolean,System.Boolean,System.Boolean)">
+        <member name="M:RogueEssence.Data.GameProgress.RestrictLevel(System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             
             </summary>
@@ -2188,7 +2259,7 @@
             <param name="silent"></param>
             <returns></returns>
         </member>
-        <member name="M:RogueEssence.Data.GameProgress.RestrictCharLevel(RogueEssence.Dungeon.Character,System.Int32,System.Boolean)">
+        <member name="M:RogueEssence.Data.GameProgress.RestrictCharLevel(RogueEssence.Dungeon.Character,System.Int32,System.Boolean,System.Boolean)">
             <summary>
             
             </summary>
@@ -2342,6 +2413,12 @@
         <member name="F:RogueEssence.Data.PassiveData.BeforeStatusAdds">
             <summary>
             Occurs before a status condition is added to the player.
+            Can be used to cancel the operation.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.PassiveData.BeforeStatusAddings">
+            <summary>
+            Occurs before a status condition is being added to another player.
             Can be used to cancel the operation.
             </summary>
         </member>
@@ -2530,6 +2607,31 @@
             Before it's used, when it hits, after it's used, etc.
             </summary>
         </member>
+        <member name="F:RogueEssence.Data.SkinData.Symbol">
+            <summary>
+            The symbol displayed next the characters species name.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.SkinData.MinimapColor">
+            <summary>
+            The color displayed on the minimap.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.SkinData.LeaderFX">
+            <summary>
+            The VFX effect played when becoming the team leader.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.SkinData.Display">
+            <summary>
+            Whether to show the skin type in the member info menu.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.SkinData.Challenge">
+            <summary>
+            Whether the character with this skin can be sent home during Roguelocke.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Data.StatusData.MenuName">
             <summary>
             Determines if it shows up in the status menu.
@@ -2589,7 +2691,7 @@
         </member>
         <member name="F:RogueEssence.Data.TileData.Layer">
             <summary>
-            The layer to draw the tile on.  Only supports Bottom, Back and Front for now.
+            The layer to draw the tile on. Only supports Bottom, Back, and Front for now.
             </summary>
         </member>
         <member name="F:RogueEssence.Data.TileData.BlockItem">
@@ -2630,6 +2732,11 @@
         <member name="P:RogueEssence.Data.ZoneData.LevelCap">
             <summary>
             Turn on to cap the team at the recommended level.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.ZoneData.KeepSkills">
+            <summary>
+            Turn on to keep the teams moveset during level restrictions.
             </summary>
         </member>
         <member name="P:RogueEssence.Data.ZoneData.TeamRestrict">
@@ -2908,6 +3015,11 @@
             </summary>
             <param name="gameTime">Provides a snapshot of timing values.</param>
         </member>
+        <member name="F:RogueEssence.Ground.BaseGroundScene.groundObjectDraw">
+            <summary>
+            Ground char and ground object draw, utilizing their specific entity order variable.
+            </summary>
+        </member>
         <member name="T:RogueEssence.Ground.BaseTaskUser">
             <summary>
             class to implement to add basic task handling to an entity
@@ -3160,62 +3272,6 @@
             <param name="args"></param>
             <returns></returns>
         </member>
-        <member name="T:RogueEssence.Ground.GroundSpawner">
-            <summary>
-            Class representing an NPC spawner on a ground map. Its meant to randomly create an NPC at runtime, and is controlled via script.
-            </summary>
-        </member>
-        <member name="P:RogueEssence.Ground.GroundSpawner.NPCName">
-            <summary>
-            Name of the NPC that will be spawned by this spawner
-            </summary>
-        </member>
-        <member name="P:RogueEssence.Ground.GroundSpawner.NPCChar">
-            <summary>
-            The "Character" entity from which the NPC will be generated.
-            </summary>
-        </member>
-        <member name="F:RogueEssence.Ground.GroundSpawner.curNpc">
-            <summary>
-            The NPC that was spawned by this spawner
-            </summary>
-        </member>
-        <member name="F:RogueEssence.Ground.GroundSpawner.EntityCallbacks">
-            <summary>
-            The Callbacks that will be enabled on the spawned entity
-            </summary>
-        </member>
-        <member name="M:RogueEssence.Ground.GroundSpawner.#ctor(System.String,System.String,RogueEssence.Dungeon.CharData)">
-            <summary>
-            Creates a NPC Spawner entity with the given name, NPC name and character entity.
-            </summary>
-            <param name="spawnername">name given to the spawner entity</param>
-            <param name="npcname">name given to the spawned entity</param>
-            <param name="npcchar">character entity from which the NPC will be generated from</param>
-        </member>
-        <member name="M:RogueEssence.Ground.GroundSpawner.Spawn(RogueEssence.Ground.GroundMap)">
-            <summary>
-            Generates the NPC and place it at the location the spawner is on the map.
-            </summary>
-        </member>
-        <member name="M:RogueEssence.Ground.GroundSpawner.AddSpawnedEntScriptEvent(RogueEssence.Script.LuaEngine.EEntLuaEventTypes)">
-            <summary>
-            Add a script event to be assigned to the spawned entity.
-            </summary>
-            <param name="ev"></param>
-        </member>
-        <member name="M:RogueEssence.Ground.GroundSpawner.RemoveSpawnedEntScriptEvent(RogueEssence.Script.LuaEngine.EEntLuaEventTypes)">
-            <summary>
-            Removes a script event from the list of events to be assigned to the spawned entity
-            </summary>
-            <param name="ev"></param>
-        </member>
-        <member name="M:RogueEssence.Ground.GroundSpawner.IterateSpawnedEntScriptEvents">
-            <summary>
-            Iterates the list of entity callbacks enabled
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:RogueEssence.Ground.GroundTask">
             <summary>
             Represents a task that a ground entity should execute.
@@ -3387,6 +3443,11 @@
             So it essentially becomes invisible and inactive on the map.
             Its mainly meant to be used with the mape editor so entities
             can be placed and activated only when needed by the map scenario.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Ground.GroundEntity.EntOrder">
+            <summary>
+            The draw/interaction order of the entity.  Lower values are handled before higher ones.
             </summary>
         </member>
         <member name="M:RogueEssence.Ground.GroundEntity.GetEntityType">
@@ -3708,6 +3769,62 @@
             Entity representing a position on the map that can be used by the game logic for
             making entities and etc move to the marker's position.
             </summary>
+        </member>
+        <member name="T:RogueEssence.Ground.GroundSpawner">
+            <summary>
+            Class representing an NPC spawner on a ground map. Its meant to randomly create an NPC at runtime, and is controlled via script.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Ground.GroundSpawner.NPCName">
+            <summary>
+            Name of the NPC that will be spawned by this spawner
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Ground.GroundSpawner.NPCChar">
+            <summary>
+            The "Character" entity from which the NPC will be generated.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Ground.GroundSpawner.curNpc">
+            <summary>
+            The NPC that was spawned by this spawner
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Ground.GroundSpawner.EntityCallbacks">
+            <summary>
+            The Callbacks that will be enabled on the spawned entity
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Ground.GroundSpawner.#ctor(System.String,System.String,RogueEssence.Dungeon.CharData)">
+            <summary>
+            Creates a NPC Spawner entity with the given name, NPC name and character entity.
+            </summary>
+            <param name="spawnername">name given to the spawner entity</param>
+            <param name="npcname">name given to the spawned entity</param>
+            <param name="npcchar">character entity from which the NPC will be generated from</param>
+        </member>
+        <member name="M:RogueEssence.Ground.GroundSpawner.Spawn(RogueEssence.Ground.GroundMap)">
+            <summary>
+            Generates the NPC and place it at the location the spawner is on the map.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Ground.GroundSpawner.AddSpawnedEntScriptEvent(RogueEssence.Script.LuaEngine.EEntLuaEventTypes)">
+            <summary>
+            Add a script event to be assigned to the spawned entity.
+            </summary>
+            <param name="ev"></param>
+        </member>
+        <member name="M:RogueEssence.Ground.GroundSpawner.RemoveSpawnedEntScriptEvent(RogueEssence.Script.LuaEngine.EEntLuaEventTypes)">
+            <summary>
+            Removes a script event from the list of events to be assigned to the spawned entity
+            </summary>
+            <param name="ev"></param>
+        </member>
+        <member name="M:RogueEssence.Ground.GroundSpawner.IterateSpawnedEntScriptEvents">
+            <summary>
+            Iterates the list of entity callbacks enabled
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:RogueEssence.Ground.GroundWall">
             <summary>
@@ -5404,7 +5521,12 @@
             <param name="gametime">Time elapsed since launch in game time.</param>
             <param name="frametime">Value between 0 and 1 indicating the current time fraction of a frame the call is taking place at.</param>
         </member>
-        <!-- Badly formed XML comment ignored for member "F:RogueEssence.Script.LuaTableContainer.Table" -->
+        <member name="F:RogueEssence.Script.LuaTableContainer.Table">
+            <summary>
+            We're using a List of object arrays instead of a dictionary because some quirk in json serialization causes integer keys to be written as strings.
+            this data type is the next best thing in terms of internal storage
+            </summary>
+        </member>
         <member name="T:RogueEssence.Script.ScriptAI">
             <summary>
             Handles script interactions with character AI
@@ -5679,6 +5801,7 @@
             <param name="entryid">The entry point on the resulting map</param>
             <param name="display">Display an epitaph marking the end of the adventure.</param>
             <param name="fanfare">Play a fanfare.</param>
+            <param name="completedZone">Zone to mark as completed. Defaults to current zone.</param>
             <example>
             GAME:EndDungeonRun(GameProgress.ResultType.Cleared, 0, -1, 1, 0, true, true)
             </example>
@@ -6176,10 +6299,17 @@
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.IsKeyDown(System.Int32)">
             <summary>
-            Checks if a player is making a certain input.
+            Checks if a player is making a certain physical keyboard input.
             </summary>
             <param name="keyid">The ID of the input</param>
             <returns>True if the button is currently pressed.  False otherwise.</returns>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptGame.IsInputDown(System.Int32)">
+            <summary>
+            Checks if a player is making a certain game input.
+            </summary>
+            <param name="inputid"></param>
+            <returns>True if the input is currently pressed.  False otherwise.</returns>
         </member>
         <member name="M:RogueEssence.Script.ScriptGame.CutsceneMode(System.Boolean)">
             <summary>
@@ -6425,6 +6555,7 @@
             <param name="x">The X coordinate of the destination</param>
             <param name="y">The Y coordinate of the destination</param>
             <param name="direction">The direction to point the entity.  Defaults to Dir8.None, which leaves it untouched.</param>
+            <param name="height"></param>
         </member>
         <member name="F:RogueEssence.Script.ScriptGround.MoveInDirection">
             <summary>
@@ -6868,7 +6999,7 @@
         </member>
         <member name="M:RogueEssence.Script.ScriptStrings.Format(System.String,System.Object[])">
             <summary>
-            Formats a string.  Will unescape escaped characters.
+            Formats a string.  Will unescape escaped characters and process grammar tags.
             </summary>
             <param name="fmt">String to format.</param>
             <param name="para">Arguments</param>
@@ -7488,7 +7619,7 @@
             TODO
             </summary>
         </member>
-        <member name="M:RogueEssence.Script.ScriptUI.ChooseMonsterMenu(System.String,NLua.LuaTable,System.Boolean,System.Boolean)">
+        <member name="M:RogueEssence.Script.ScriptUI.ChooseMonsterMenu(System.String,NLua.LuaTable,System.Boolean,System.Boolean,System.Int32)">
             <summary>
             Marks the start of a choice menu for choosing monsters, showing a preview of their appearances via portrait.
             UI:WaitForChoice() must be called afterwards for the menu to be actually displayed,
@@ -7499,6 +7630,7 @@
             <param name="choices">A lua table of choices with each element being a MonsterID.</param>
             <param name="canMenu">If set to true, the Menu Button exits the menu if pressed.</param>
             <param name="canCancel">If set to true, the Cancel Button exits the menu if pressed.</param>
+            <param name="slotsPerPage">Slots to display per page</param>
         </member>
         <member name="M:RogueEssence.Script.ScriptUI.SetCustomMenu(RogueEssence.Menu.InteractableMenu)">
             <summary>

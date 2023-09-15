@@ -46,10 +46,11 @@ function forest_camp.Enter(map)
 	SV.supply_corps.Status = 1
   else
     forest_camp.SetupNpcs()
+	
+	forest_camp.CheckMissions()
+	
     GAME:FadeIn(20)
   end
-  
-  forest_camp.CheckMissions()
   
   -- TODO: move this back to BeginExposition
   GAME:UnlockDungeon('faded_trail')
@@ -101,14 +102,27 @@ function forest_camp.BeginExposition()
 end
 
 function forest_camp.CheckMissions()
+  local player = CH('PLAYER')
+  
   local quest = SV.missions.Missions["EscortSister"]
   if quest ~= nil then
     if quest.Complete == COMMON.MISSION_COMPLETE then
-	  UI:WaitShowDialogue("Escort mission state: Complete.")
-	  quest.Complete = COMMON.MISSION_ARCHIVED
-	  SV.missions.FinishedMissions["EscortSister"] = quest
-	  table.remove(SV.missions.Missions, "EscortSister")
-	end
+	
+      --spawn her	  
+      
+      GAME:FadeIn(20)
+      UI:WaitShowDialogue("Escort mission state: Complete.")
+      
+      --she walks off to sunflora
+      UI:WaitShowDialogue("The sister drops something as she runs off.")
+      
+      SV.magnagate.Cards = SV.magnagate.Cards + 1
+      COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_SUN"):ToLocal())
+      quest.Complete = COMMON.MISSION_ARCHIVED
+      SV.missions.FinishedMissions["EscortSister"] = quest
+      SV.missions.Missions["EscortSister"] = nil
+	  
+    end
   end
 
 end

@@ -114,15 +114,15 @@ function guild_hut.Journal_Action(obj, activator)
   UI:WaitShowDialogue("they took all the magnagates and closed the portal, leaving only one.")
   
   if SV.guild_hut.TookCard == false then
+    local player = CH('PLAYER')
     UI:WaitShowDialogue("...there's a card between the pages.")
   
     --set the savevar
-	SV.guild_hut.TookCard = true
+    SV.guild_hut.TookCard = true
     --add the card
-	SV.magnagate.Cards = SV.magnagate.Cards + 1
+    SV.magnagate.Cards = SV.magnagate.Cards + 1
     --message you got the card
-	
-	UI:WaitShowDialogue("You got the sun card")
+    COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_WORLD"):ToLocal())
   end
   
   GROUND:ObjectSetDefaultAnim(obj, 'Diary_Purple_Closing', 0, 0, 0, Direction.Right)

@@ -305,6 +305,17 @@ function COMMON.GiftItemFull(player, receive_item, fanfare, force_storage)
   UI:ResetSpeaker()
 end
 
+function COMMON.GiftKeyItem(player, item_name)
+  SOUND:PlayFanfare("Fanfare/Treasure")
+  UI:ResetSpeaker(false)
+  UI:SetCenter(true)
+  
+  -- item names are expected to be passed in without formatting
+  -- the standard color for event items is always green
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_RECEIVE_ITEM"):ToLocal(), player:GetDisplayName(), string.format("[color=#00FF00]%s[color]", item_name)))
+  UI:SetCenter(false)
+  UI:ResetSpeaker()
+end
 
 function COMMON.JoinTeamWithFanfare(recruit, from_dungeon)
   if from_dungeon then
@@ -978,19 +989,15 @@ end
 
 function COMMON.ExitDungeonMissionCheck(result, zoneId, segmentID)
   -- clear any escorts from party
-  PrintInfo("Checking Exit Escort")
   local party = GAME:GetPlayerGuestTable()
   for i, p in ipairs(party) do
     local e_tbl = LTBL(p)
 	if e_tbl ~= nil then
-	  PrintInfo("Checking table "..e_tbl.Escort)
 	  local mission = SV.missions.Missions[e_tbl.Escort]
 	  if mission ~= nil then
-	    PrintInfo("Checking mission")
 	    if mission.Type == COMMON.MISSION_TYPE_ESCORT then
 	      _DUNGEON:RemoveChar(p)
 	    elseif mission.Type == COMMON.MISSION_TYPE_ESCORT_OUT then
-		  PrintInfo("Exiting with Escort")
 		  if p.Dead == false then
 		    if result == RogueEssence.Data.GameProgress.ResultType.Cleared then
 		      mission.Complete = COMMON.MISSION_COMPLETE

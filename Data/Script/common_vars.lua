@@ -7,17 +7,19 @@ function COMMON.UpdateDayEndVars()
 
   if SV.Experimental ~= nil then
     if _DATA.Save:GetDungeonUnlock("faultline_ridge") ~= RogueEssence.Data.GameProgress.UnlockState.None then
-	  SV.missions.Missions["EscortSister"] = 
-		{
-		DestZone = "faultline_ridge",
-		DestSegment = 0,
-		DestFloor = 5,
-		TargetSpecies = RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female),
-		Complete = COMMON.MISSION_INCOMPLETE,
-		Type = COMMON.MISSION_TYPE_ESCORT_OUT,
-		EscortTable = { EscortStartMsg = "TALK_ESCORT_SISTER_START", EscortAcceptMsg = "TALK_ESCORT_SISTER_ACCEPT", EscortInteract = "EscortInteractSister" }
-		}
-	end
+      if SV.missions.Missions["EscortSister"] == nil and SV.missions.FinishedMissions["EscortSister"] == nil then
+        SV.missions.Missions["EscortSister"] = 
+        {
+          DestZone = "faultline_ridge",
+          DestSegment = 0,
+          DestFloor = 5,
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female),
+          Complete = COMMON.MISSION_INCOMPLETE,
+          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          EscortTable = { EscortStartMsg = "TALK_ESCORT_SISTER_START", EscortAcceptMsg = "TALK_ESCORT_SISTER_ACCEPT", EscortInteract = "EscortInteractSister" }
+        }
+      end
+    end
   end
   
   if SV.base_camp.CenterStatueDate == nil or SV.base_camp.CenterStatueDate == "" then

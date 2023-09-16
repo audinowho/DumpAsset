@@ -154,7 +154,11 @@ function rest_stop.NPC_Storehouse_Action(chara, activator)
     if quest == nil then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
 	  --add the quest
-	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW, DestZone = "copper_quarry", DestSegment = 0, DestFloor = 4, ClientSpecies = chara.CurrentForm, TargetSpecies = RogueEssence.Dungeon.MonsterID("weavile", 0, "normal", Gender.Male) }
+	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW,
+      DestZone = "copper_quarry", DestSegment = 0, DestFloor = 4,
+      FloorUnknown = true,
+      ClientSpecies = chara.CurrentForm,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("weavile", 0, "normal", Gender.Male) }
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_003']))
     else

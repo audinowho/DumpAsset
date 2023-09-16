@@ -30,94 +30,98 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
     if mission.Complete == COMMON.MISSION_INCOMPLETE and zoneContext.CurrentZone == mission.DestZone
 	  and zoneContext.CurrentSegment == mission.DestSegment and zoneContext.CurrentID == mission.DestFloor then
       local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
-	  specificTeam.Explorer = true
+      specificTeam.Explorer = true
       local post_mob = RogueEssence.LevelGen.MobSpawn()
       post_mob.BaseForm = mission.TargetSpecies
-	  if mission.Type == COMMON.MISSION_TYPE_OUTLAW or mission.Type == COMMON.MISSION_TYPE_OUTLAW_HOUSE or mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then -- outlaw
+      if mission.Type == COMMON.MISSION_TYPE_OUTLAW or mission.Type == COMMON.MISSION_TYPE_OUTLAW_HOUSE or mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then -- outlaw
         if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
-		  post_mob.Tactic = "slow_patrol"
-		else
+          post_mob.Tactic = "slow_patrol"
+        else
           post_mob.Tactic = "boss"
-		end
+        end
         post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level + 5)
-		post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
-		local boost = PMDC.LevelGen.MobSpawnBoost()
-		boost.MaxHPBonus = _ZONE.CurrentZone.Level + 20
-		boost.DefBonus = _ZONE.CurrentZone.Level // 2
-		boost.SpDefBonus = _ZONE.CurrentZone.Level // 2
-		boost.SpeedBonus = _ZONE.CurrentZone.Level // 2
-		post_mob.SpawnFeatures:Add(boost)
-		if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
-		  local spawn_status = RogueEssence.LevelGen.MobSpawnStatus()
-		  local status_effect = RogueEssence.Dungeon.StatusEffect("illusion")
-		  status_effect.StatusStates:Set(PMDC.Dungeon.MonsterIDState(mission.DisguiseSpecies))
-		  spawn_status.Statuses:Add(status_effect, 10)
-		  post_mob.SpawnFeatures:Add(spawn_status)
-		  
-		  local spawn_interact = RogueEssence.LevelGen.MobSpawnStatus()
-		  local status_interact = RogueEssence.Dungeon.StatusEffect("attack_response")
-		  status_interact.StatusStates:Set(RogueEssence.Dungeon.ScriptCallState(mission.DisguiseHit, "{}"))
-		  spawn_interact.Statuses:Add(status_interact, 10)
-		  post_mob.SpawnFeatures:Add(spawn_interact)
-		  
-		  post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(RogueEssence.Dungeon.BattleScriptEvent(mission.DisguiseTalk)))
-		end
-	    specificTeam.Spawns:Add(post_mob)
+        post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
+        local boost = PMDC.LevelGen.MobSpawnBoost()
+        boost.MaxHPBonus = _ZONE.CurrentZone.Level + 20
+        boost.DefBonus = _ZONE.CurrentZone.Level // 2
+        boost.SpDefBonus = _ZONE.CurrentZone.Level // 2
+        boost.SpeedBonus = _ZONE.CurrentZone.Level // 2
+        post_mob.SpawnFeatures:Add(boost)
+        if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
+          local spawn_status = RogueEssence.LevelGen.MobSpawnStatus()
+          local status_effect = RogueEssence.Dungeon.StatusEffect("illusion")
+          status_effect.StatusStates:Set(PMDC.Dungeon.MonsterIDState(mission.DisguiseSpecies))
+          spawn_status.Statuses:Add(status_effect, 10)
+          post_mob.SpawnFeatures:Add(spawn_status)
+          
+          local spawn_interact = RogueEssence.LevelGen.MobSpawnStatus()
+          local status_interact = RogueEssence.Dungeon.StatusEffect("attack_response")
+          status_interact.StatusStates:Set(RogueEssence.Dungeon.ScriptCallState(mission.DisguiseHit, "{}"))
+          spawn_interact.Statuses:Add(status_interact, 10)
+          post_mob.SpawnFeatures:Add(spawn_interact)
+          
+          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(RogueEssence.Dungeon.BattleScriptEvent(mission.DisguiseTalk)))
+        end
+        specificTeam.Spawns:Add(post_mob)
         local picker = LUA_ENGINE:MakeGenericType(PresetMultiTeamSpawnerType, { MapGenContextType }, { })
-	    picker.Spawns:Add(specificTeam)
+        picker.Spawns:Add(specificTeam)
         local mobPlacement = LUA_ENGINE:MakeGenericType(PlaceEntranceMobsStepType, { MapGenContextType, EntranceType }, { picker })
 		
-		if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
-		  mobPlacement.Ally = true
-		end
-	    -- Priority 5.2.1 is for NPC spawning in PMDO, but any dev can choose to roll with their own standard of priority.
-	    local priority = RogueElements.Priority(5, 2, 1)
-	    queue:Enqueue(priority, mobPlacement)
-        PrintInfo("Done")
+        if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
+          mobPlacement.Ally = true
+        end
+        -- Priority 5.2.1 is for NPC spawning in PMDO, but any dev can choose to roll with their own standard of priority.
+        local priority = RogueElements.Priority(5, 2, 1)
+        queue:Enqueue(priority, mobPlacement)
+          PrintInfo("Done")
 		
-		outlawFloor = true
-		if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
-	      outlawSilent = true
-		end
+        outlawFloor = true
+        if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
+            outlawSilent = true
+        end
 		
-		if mission.Type == COMMON.MISSION_TYPE_OUTLAW_HOUSE then
-		  --add house trigger
-          local activeEffect = RogueEssence.Data.ActiveEffect()
-          activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("OutlawHouse", Serpent.line({ Mission = name})))
-	      local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
-	      local priority = RogueElements.Priority(-6, 1)
-	      queue:Enqueue(priority, destNote)
-		end
-	  else
+        if mission.Type == COMMON.MISSION_TYPE_OUTLAW_HOUSE then
+          --add house trigger
+              local activeEffect = RogueEssence.Data.ActiveEffect()
+              activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("OutlawHouse", Serpent.line({ Mission = name})))
+            local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
+            local priority = RogueElements.Priority(-6, 1)
+            queue:Enqueue(priority, destNote)
+        end
+      else
         post_mob.Tactic = "slow_patrol"
-	    if mission.Type == COMMON.MISSION_TYPE_RESCUE then -- rescue
-          post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)
-	      local dialogue = RogueEssence.Dungeon.BattleScriptEvent("RescueReached")
-          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
-          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
-        elseif mission.Type == COMMON.MISSION_TYPE_ESCORT then -- escort
-          post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)
-	      local dialogue = RogueEssence.Dungeon.BattleScriptEvent("EscortRescueReached")
-          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
-          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
-        elseif mission.Type == COMMON.MISSION_TYPE_ESCORT_OUT then -- escort
-          post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level // 2)
-	      local dialogue = RogueEssence.Dungeon.BattleScriptEvent("EscortOutReached", Serpent.line(mission.EscortTable))
-          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
-          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnMovesOff(0))
-          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Escort = name })))
-	    end
-	    specificTeam.Spawns:Add(post_mob)
+        if mission.Type == COMMON.MISSION_TYPE_RESCUE then -- rescue
+            post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)
+          local dialogue = RogueEssence.Dungeon.BattleScriptEvent("RescueReached")
+            post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
+            post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
+          elseif mission.Type == COMMON.MISSION_TYPE_ESCORT then -- escort
+            post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)
+          local dialogue = RogueEssence.Dungeon.BattleScriptEvent("EscortRescueReached")
+            post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
+            post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
+          elseif mission.Type == COMMON.MISSION_TYPE_ESCORT_OUT then -- escort
+            post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level // 2)
+          local dialogue = RogueEssence.Dungeon.BattleScriptEvent("EscortOutReached", Serpent.line(mission.EscortTable))
+            post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
+            post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnMovesOff(0))
+            post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Escort = name })))
+        end
+        specificTeam.Spawns:Add(post_mob)
         local picker = LUA_ENGINE:MakeGenericType(PresetMultiTeamSpawnerType, { MapGenContextType }, { })
-	    picker.Spawns:Add(specificTeam)
+        picker.Spawns:Add(specificTeam)
         local mobPlacement = LUA_ENGINE:MakeGenericType(PlaceRandomMobsStepType, { MapGenContextType }, { picker })
         mobPlacement.Ally = true
         mobPlacement.Filters:Add(PMDC.LevelGen.RoomFilterConnectivity(PMDC.LevelGen.ConnectivityRoom.Connectivity.Main))
         mobPlacement.ClumpFactor = 20
-	    -- Priority 5.2.1 is for NPC spawning in PMDO, but any dev can choose to roll with their own standard of priority.
-	    local priority = RogueElements.Priority(5, 2, 1)
-	    queue:Enqueue(priority, mobPlacement)
-	  end
+        -- Priority 5.2.1 is for NPC spawning in PMDO, but any dev can choose to roll with their own standard of priority.
+        local priority = RogueElements.Priority(5, 2, 1)
+        queue:Enqueue(priority, mobPlacement)
+        
+        if not mission.FloorUnknown then
+          destinationFloor = true
+        end
+      end
     end
   end
   
@@ -125,9 +129,9 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
     -- add destination floor notification
     local activeEffect = RogueEssence.Data.ActiveEffect()
     activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("DestinationFloor"))
-	local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
-	local priority = RogueElements.Priority(-6)
-	queue:Enqueue(priority, destNote)
+    local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
+    local priority = RogueElements.Priority(-6)
+    queue:Enqueue(priority, destNote)
   end
   if outlawFloor then
     -- add destination floor notification

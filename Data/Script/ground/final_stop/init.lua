@@ -174,7 +174,12 @@ function final_stop.NPC_Carry_Action(chara, activator)
     if quest == nil then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_001']))
       --add the quest
-      SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_DISGUISE, DestZone = "snowbound_path", DestSegment = 0, DestFloor = 12, ClientSpecies = chara.CurrentForm, TargetSpecies = RogueEssence.Dungeon.MonsterID("zoroark", 1, "normal", Gender.Male), DisguiseSpecies = RogueEssence.Dungeon.MonsterID("swalot", 0, "normal", Gender.Male), DisguiseTalk = "DisguiseTalk", DisguiseHit = "DisguiseHit" }
+      SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_DISGUISE,
+        DestZone = "snowbound_path", DestSegment = 0, DestFloor = 12,
+        FloorUnknown = true,
+        ClientSpecies = chara.CurrentForm,
+        TargetSpecies = RogueEssence.Dungeon.MonsterID("zoroark", 1, "normal", Gender.Male),
+        DisguiseSpecies = RogueEssence.Dungeon.MonsterID("swalot", 0, "normal", Gender.Male), DisguiseTalk = "DisguiseTalk", DisguiseHit = "DisguiseHit" }
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_002']))
     else

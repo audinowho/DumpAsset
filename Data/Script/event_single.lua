@@ -361,7 +361,7 @@ function SINGLE_CHAR_SCRIPT.DestinationFloor(owner, ownerChar, context, args)
   end
   SOUND:PlayFanfare("Fanfare/Note")
   UI:ResetSpeaker()
-  STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_DESTINATION"):ToLocal())
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_DESTINATION"):ToLocal()))
 end
 
 
@@ -373,7 +373,7 @@ function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
   if not args.Silent then
     SOUND:PlayBGM("C07. Outlaw.ogg", false)
     UI:ResetSpeaker()
-    STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW"):ToLocal())
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW"):ToLocal()))
   end
   
   -- add a map status for outlaw clear check
@@ -391,7 +391,7 @@ function SINGLE_CHAR_SCRIPT.OutlawHouse(owner, ownerChar, context, args)
   local found_outlaw = COMMON.FindNpcWithTable(true, "Mission", args.Mission)
   found_outlaw.CharDir = _ZONE.CurrentMap:ApproximateClosestDir8(found_outlaw.CharLoc, _DUNGEON.ActiveTeam.Leader.CharLoc)
   UI:SetSpeaker(found_outlaw)
-  STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW_TRAP"):ToLocal())
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW_TRAP"):ToLocal()))
 	
   COMMON.TriggerAdHocMonsterHouse(owner, ownerChar, found_outlaw)
 end
@@ -419,8 +419,8 @@ function SINGLE_CHAR_SCRIPT.OutlawClearCheck(owner, ownerChar, context, args)
         -- retrieve the species of the quest giver
         local client_name = _DATA:GetMonster(mission.ClientSpecies.Species).Name
         
-        STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW_DONE"):ToLocal(), target_name:ToLocal())
-        STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_REMINDER"):ToLocal(), client_name:ToLocal())
+        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW_DONE"):ToLocal(), target_name:ToLocal()))
+        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_REMINDER"):ToLocal(), client_name:ToLocal()))
       end
     end
   end

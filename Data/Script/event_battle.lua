@@ -178,7 +178,7 @@ function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
     --UI:SetSpeaker(context.Target)
     UI:ResetSpeaker()
     local client_name = _DATA:GetMonster(mission.ClientSpecies.Species).Name
-    STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_ESCORT_DONE"):ToLocal(), client_name:ToLocal())
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_ESCORT_DONE"):ToLocal(), client_name:ToLocal()))
   
     -- warp out
     TASK:WaitTask(_DUNGEON:ProcessBattleFX(escort, escort, _DATA.SendHomeFX))
@@ -188,7 +188,7 @@ function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
     _DUNGEON:RemoveChar(context.Target)
   
     UI:ResetSpeaker()
-    STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_REMINDER"):ToLocal(), client_name:ToLocal())
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_REMINDER"):ToLocal(), client_name:ToLocal()))
   end
 end
 

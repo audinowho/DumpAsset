@@ -466,9 +466,11 @@ function test_grounds.Magnezone_Action(chara, activator)
     local chres = UI:ChoiceResult() 
     if chres then
 	  -- Type 0 = Rescue
-	  SV.missions.Missions["OutlawQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_DISGUISE, DestZone = "debug_zone", DestSegment = 4, DestFloor = 9, TargetSpecies = RogueEssence.Dungeon.MonsterID("riolu", 0, "normal", Gender.Male),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("magnezone", 0, "normal", Gender.Genderless),
-      DisguiseSpecies = RogueEssence.Dungeon.MonsterID("swalot", 0, "normal", Gender.Male), DisguiseTalk = "DisguiseTalk", DisguiseHit = "DisguiseHit" }
+	  SV.missions.Missions["OutlawQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW,
+      DestZone = "debug_zone", DestSegment = 4, DestFloor = 9,
+      FloorUnknown = true,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("riolu", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("magnezone", 0, "normal", Gender.Genderless) }
       UI:WaitShowDialogue("You can find the perpetrator at Replay Test Zone 10F.  Good luck!")
     end
   else
@@ -510,7 +512,10 @@ function test_grounds.Butterfree_Action(chara, activator)
     local chres = UI:ChoiceResult() 
     if chres then
 	  -- Type 0 = Rescue
-	  SV.missions.Missions["CaterQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE, DestZone = "debug_zone", DestSegment = 4, DestFloor = 4, TargetSpecies = RogueEssence.Dungeon.MonsterID("caterpie", 0, "normal", Gender.Male),
+	  SV.missions.Missions["CaterQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "debug_zone", DestSegment = 4, DestFloor = 4,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("caterpie", 0, "normal", Gender.Male),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("butterfree", 0, "normal", Gender.Male) }
       UI:WaitShowDialogue("You can find Caterpie at Replay Test Zone 5F.  Good luck!")
     end
@@ -564,9 +569,13 @@ function test_grounds.Volbeat_Action(chara, activator)
     local chres = UI:ChoiceResult() 
     if chres then
 	  -- Type 1 = Escort
-	  SV.missions.Missions["VolmiseQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_ESCORT, DestZone = "debug_zone", DestSegment = 4, DestFloor = 3, TargetSpecies = RogueEssence.Dungeon.MonsterID("illumise", 0, "normal", Gender.Female), EscortSpecies = RogueEssence.Dungeon.MonsterID("volbeat", 0, "normal", Gender.Male),
+	  SV.missions.Missions["VolmiseQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_ESCORT,
+      DestZone = "debug_zone", DestSegment = 4, DestFloor = 3,
+      FloorUnknown = true,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("illumise", 0, "normal", Gender.Female),
+      EscortSpecies = RogueEssence.Dungeon.MonsterID("volbeat", 0, "normal", Gender.Male),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("volbeat", 0, "normal", Gender.Male) }
-      UI:WaitShowDialogue("You can find Illumise at Replay Test Zone 4F.  I'll join you when you enter!")
+      UI:WaitShowDialogue("You can find Illumise at Replay Test Zone ?F.  I'll join you when you enter!")
     end
   else
     if quest.Complete == COMMON.MISSION_COMPLETE then

@@ -13,6 +13,7 @@ function COMMON.UpdateDayEndVars()
           DestZone = "faultline_ridge",
           DestSegment = 0,
           DestFloor = 5,
+          FloorUnknown = true,
           TargetSpecies = RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female),
           Complete = COMMON.MISSION_INCOMPLETE,

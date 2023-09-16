@@ -277,7 +277,10 @@ function cliff_camp.NPC_Storehouse_Action(chara, activator)
     if quest == nil then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_003']))
 	  --add the quest
-	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW, DestZone = "faded_trail", DestSegment = 0, DestFloor = 5, ClientSpecies = chara.CurrentForm, TargetSpecies = RogueEssence.Dungeon.MonsterID("murkrow", 0, "normal", Gender.Male) }
+	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW,
+      DestZone = "faded_trail", DestSegment = 0, DestFloor = 5, FloorUnknown = true,
+      ClientSpecies = chara.CurrentForm,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("murkrow", 0, "normal", Gender.Male) }
 	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_004']))
 	else

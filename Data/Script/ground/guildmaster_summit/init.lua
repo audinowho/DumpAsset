@@ -18,11 +18,11 @@ function guildmaster_summit.Enter(map)
   if SV.guildmaster_summit.GameComplete then
     guildmaster_summit.SetupNpcs()
     if SV.guildmaster_trail.FloorsCleared >= 30 and SV.guildmaster_trail.Rewarded == false then
-	  guildmaster_summit.RewardDialogue()
-	  SV.guildmaster_trail.Rewarded = true
-	else
-      GAME:FadeIn(20)
-	end
+      guildmaster_summit.RewardDialogue()
+      SV.guildmaster_trail.Rewarded = true
+    else
+        GAME:FadeIn(20)
+    end
   else
     GROUND:Unhide("Xatu")
     GROUND:Unhide("Lucario")
@@ -81,7 +81,7 @@ function guildmaster_summit.RewardDialogue()
   GAME:FadeIn(20)
 	
   UI:SetSpeaker(noctowl)
-  UI:WaitShowDialogue("So, they're really gone...")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Reward_Line_001']))
   --UI:WaitShowDialogue("Where did you come from...?")
   --UI:WaitShowDialogue("Could it be...?")
   
@@ -91,12 +91,11 @@ function guildmaster_summit.RewardDialogue()
   --UI:WaitShowDialogue("When the guildmasters first put up the challenge, I was there.")
   --UI:WaitShowDialogue("I witnessed them set off for the summit, never to return.")
   --UI:WaitShowDialogue("Countless others followed, but never succeeded.")
-  UI:WaitShowDialogue("Never did I think someone would conquer all of the Guildmaster Trail.")
-  UI:WaitShowDialogue("But you've proved me wrong.")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Reward_Line_002']))
   
   GROUND:MoveInDirection(noctowl, Direction.Down, 24, false, 2)
   
-  UI:WaitShowDialogue("A token of my appreciation.  You've earned it.")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Reward_Line_003']))
   
   local receive_item = RogueEssence.Dungeon.InvItem("apricorn_perfect")
   COMMON.GiftItem(player, receive_item)
@@ -459,11 +458,11 @@ function guildmaster_summit.NPC_All_Action()
   local storehouse = CH('NPC_Storehouse')
   
   UI:SetSpeaker(storehouse)
-  UI:WaitShowDialogue("Beautiful sight isn't it?")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Supply_Line_001']))
   UI:SetSpeaker(carry)
-  UI:WaitShowDialogue("yea")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Supply_Line_002']))
   UI:SetSpeaker(deliver)
-  UI:WaitShowDialogue("yea")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Supply_Line_003']))
 end
 
 

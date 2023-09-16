@@ -144,39 +144,38 @@ function rest_stop.NPC_Storehouse_Action(chara, activator)
   UI:SetSpeaker(chara)
   
   if SV.supply_corps.Status <= 10 then
-    UI:WaitShowDialogue("Thanks for discovering this cave.  We're putting supplies here.")
-	SV.supply_corps.Status = 11
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+    SV.supply_corps.Status = 11
   elseif SV.supply_corps.Status == 11 then
-    UI:WaitShowDialogue("Thanks for discovering this cave.  We're putting supplies here.")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
   elseif SV.supply_corps.Status == 12 then
     local questname = "OutlawMountain1"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue("Some thugs beat our guys up in Copper Quarry!  Teach them a lesson!")
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
 	  --add the quest
-	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW, DestZone = "copper_quarry", DestSegment = 0, DestFloor = 4, TargetSpecies = RogueEssence.Dungeon.MonsterID("weavile", 0, "normal", Gender.Male) }
-	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue("Some thugs beat our guys up in Copper Quarry!  Teach them a lesson! (You already have the quest)")
-	else
-	  UI:WaitShowDialogue("Thanks for getting back the supplies!  Have a reward!")
-	  --give reward
+	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW, DestZone = "copper_quarry", DestSegment = 0, DestFloor = 4, ClientSpecies = chara.CurrentForm, TargetSpecies = RogueEssence.Dungeon.MonsterID("weavile", 0, "normal", Gender.Male) }
+    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_003']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_004']))
+      --give reward
       local receive_item = RogueEssence.Dungeon.InvItem("tm_sludge_bomb")
       COMMON.GiftItem(player, receive_item)
-	  --complete mission and move to done
-	  quest.Complete = COMMON.MISSION_ARCHIVED
-	  SV.missions.FinishedMissions[questname] = quest
-	  SV.missions.Missions[questname] = nil
-	  SV.supply_corps.Status = 13
-	end
+      --complete mission and move to done
+      quest.Complete = COMMON.MISSION_ARCHIVED
+      SV.missions.FinishedMissions[questname] = quest
+      SV.missions.Missions[questname] = nil
+      SV.supply_corps.Status = 13
+    end
   elseif SV.supply_corps.Status == 13 then
-    UI:WaitShowDialogue("Thanks for protecting us!")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_005']))
   elseif SV.supply_corps.Status == 14 then
-    UI:WaitShowDialogue("We're getting ready to go to snow camp.")
-	SV.supply_corps.Status = 15
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_006']))
   elseif SV.supply_corps.Status == 15 then
-    UI:WaitShowDialogue("We'll get to snow camp in a day probably.")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_007']))
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue("I'm on my routine route in cave camp!")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_Route']))
   end
 end
 
@@ -190,21 +189,21 @@ function rest_stop.NPC_Carry_Action(chara, activator)
     local questname = "OutlawMountain1"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue("(Carry) Some thugs beat our guys up in Copper Quarry!  Teach them a lesson!")
-	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue("Some thugs beat our guys up in Copper Quarry!  Teach them a lesson! (You already have the quest)")
-	else
-	  UI:WaitShowDialogue("(Carry) Thanks for getting back the supplies!")
-	end
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_001']))
+    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_002']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_003']))
+    end
   elseif SV.supply_corps.Status == 13 then
-    UI:WaitShowDialogue("(Carry) Thanks for protecting us!")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_004']))
   elseif SV.supply_corps.Status == 14 then
-    UI:WaitShowDialogue("(Carry) We're getting ready to go to snow camp.")
-	SV.supply_corps.Status = 15
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_005']))
+    SV.supply_corps.Status = 15
   elseif SV.supply_corps.Status == 15 then
-    UI:WaitShowDialogue("(Carry) We'll get to snow camp in a day probably.")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_006']))
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue("(Carry) I'm on my routine route in cave camp!")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_Route']))
   end
   
 end
@@ -219,21 +218,21 @@ function rest_stop.NPC_Deliver_Action(chara, activator)
     local questname = "OutlawMountain1"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue("(Deliver) Some thugs beat our guys up in Copper Quarry!  Teach them a lesson!")
-	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue("Some thugs beat our guys up in Copper Quarry!  Teach them a lesson! (You already have the quest)")
-	else
-	  UI:WaitShowDialogue("(Deliver) Thanks for getting back the supplies!")
-	end
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_001']))
+    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_002']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_003']))
+    end
   elseif SV.supply_corps.Status == 13 then
-    UI:WaitShowDialogue("(Deliver) Thanks for protecting us!")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_004']))
   elseif SV.supply_corps.Status == 14 then
-    UI:WaitShowDialogue("(Deliver) We're getting ready to go to snow camp.")
-	SV.supply_corps.Status = 15
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_005']))
+    SV.supply_corps.Status = 15
   elseif SV.supply_corps.Status == 15 then
-    UI:WaitShowDialogue("(Deliver) We'll get to snow camp in a day probably.")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_006']))
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue("(Deliver) I'm on my routine route in cave camp!")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_Route']))
   end
 end
 

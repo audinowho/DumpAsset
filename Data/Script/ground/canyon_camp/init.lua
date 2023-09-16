@@ -123,57 +123,57 @@ function canyon_camp.NPC_Storehouse_Action(chara, activator)
   UI:SetSpeaker(chara)
 	
   if SV.supply_corps.Status <= 4 then
-    UI:WaitShowDialogue("I went ahead and set up tent here! I'm waiting for my subordinates to make another trip!")
-	SV.supply_corps.Status = 5
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+    SV.supply_corps.Status = 5
   elseif SV.supply_corps.Status == 5 then
-    UI:WaitShowDialogue("I went ahead and set up tent here! I'm waiting for my subordinates to make another trip!")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
   elseif SV.supply_corps.Status == 6 then
     local questname = "OutlawForest2"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue("Carry NPC had his package stolen in Flyaway Cliffs! Please Help!")
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
 	  --add the quest
-	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_HOUSE, DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6, TargetSpecies = RogueEssence.Dungeon.MonsterID("toxicroak", 0, "normal", Gender.Male) }
-	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue("Carry NPC had his package stolen in Flyaway Cliffs! (You already have the quest)")
-	else
-	  UI:WaitShowDialogue("Thanks for getting back the supplies!  Have a reward!")
-	  --give reward
-      local receive_item = RogueEssence.Dungeon.InvItem("food_banana_big")
-      COMMON.GiftItem(player, receive_item)
-	  --complete mission and move to done
-	  quest.Complete = COMMON.MISSION_ARCHIVED
-	  SV.missions.FinishedMissions[questname] = quest
-	  SV.missions.Missions[questname] = nil
-	  SV.supply_corps.Status = 7
-	  UI:WaitShowDialogue("We've got to do something about these thieves.")
-	end
+	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_HOUSE, DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6, ClientSpecies = chara.CurrentForm, TargetSpecies = RogueEssence.Dungeon.MonsterID("toxicroak", 0, "normal", Gender.Male) }
+    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_003']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_004']))
+      --give reward
+        local receive_item = RogueEssence.Dungeon.InvItem("food_banana_big")
+        COMMON.GiftItem(player, receive_item)
+      --complete mission and move to done
+      quest.Complete = COMMON.MISSION_ARCHIVED
+      SV.missions.FinishedMissions[questname] = quest
+      SV.missions.Missions[questname] = nil
+      SV.supply_corps.Status = 7
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_005']))
+    end
   elseif SV.supply_corps.Status == 7 then
-	UI:WaitShowDialogue("We've got to do something about these thieves.")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_006']))
   elseif SV.supply_corps.Status == 8 then
     local unlock = _DATA.Save:GetDungeonUnlock("ambush_forest") -- make this the dungeon unlock state
-	if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+    if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_007']))
       COMMON.UnlockWithFanfare("ambush_forest", false)
-	elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-	  UI:WaitShowDialogue("Please help us take down this criminal!")
-	else
-	  UI:WaitShowDialogue("Thanks for bringing down the criminal!  We reward you with a storage bag!")
-	  --increase rank for bag space
-	  _DATA.Save.ActiveTeam:SetRank("bronze")
-	  SOUND:PlayFanfare("Fanfare/RankUp")
-	  UI:ResetSpeaker(false)
+    elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_008']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_009']))
+      --increase rank for bag space
+      _DATA.Save.ActiveTeam:SetRank("bronze")
+      SOUND:PlayFanfare("Fanfare/RankUp")
+      UI:ResetSpeaker(false)
       UI:SetCenter(true)
-      UI:WaitShowDialogue(STRINGS:Format("You can now carry {0} items in your Treasure Bag!", 32))
-	  UI:SetSpeaker(chara)
-	  UI:SetCenter(false)
-	  UI:WaitShowDialogue("We use this bag for our runs!")
-	  SV.supply_corps.Status = 9
-	end
+      UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_BAG_SIZE"):ToLocal(), 32))
+      UI:SetSpeaker(chara)
+      UI:SetCenter(false)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_010']))
+      SV.supply_corps.Status = 9
+    end
   elseif SV.supply_corps.Status == 9 then
-    UI:WaitShowDialogue("Thanks for bringing honchkrow down.")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_011']))
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue("I'm on my routine route in canyon camp!")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_Route']))
   end
 end
 
@@ -187,32 +187,32 @@ function canyon_camp.NPC_Carry_Action(chara, activator)
     local questname = "OutlawForest2"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue("(Carry) Carry NPC had his package stolen in Flyaway Cliffs! Please Help!")
-	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue("(Carry) Carry NPC had his package stolen in Flyaway Cliffs! (You already have the quest)")
-	else
-	  UI:WaitShowDialogue("(Carry) Did you back the supplies?")
-	end
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_001']))
+    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_002']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_003']))
+    end
   elseif SV.supply_corps.Status == 7 then
-	UI:WaitShowDialogue("(Carry) We've got to do something about these thieves.")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_004']))
   elseif SV.supply_corps.Status == 8 then
     local unlock = _DATA.Save:GetDungeonUnlock("ambush_forest") -- make this the dungeon unlock state
-	if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-      UI:WaitShowDialogue("(Carry) I feel unsafe until you take care of the criminal.")
-	elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-	  UI:WaitShowDialogue("(Carry) Please help us take down this criminal!")
-	else
-	  UI:WaitShowDialogue("(Carry) You brought down the criminal!")
-	end
+    if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_005']))
+    elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_006']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_007']))
+    end
   elseif SV.supply_corps.Status == 9 then
-    UI:WaitShowDialogue("(Carry) Thanks for bringing honchkrow down.")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_008']))
   elseif SV.supply_corps.Status == 10 then
-    UI:WaitShowDialogue("(Carry) Thanks for discovering this cave.  We're putting supplies here.")
-	SV.supply_corps.Status = 11
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_009']))
+    SV.supply_corps.Status = 11
   elseif SV.supply_corps.Status == 11 then
-    UI:WaitShowDialogue("(Carry) Thanks for discovering this cave.  We're putting supplies here.")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_009']))
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue("(Carry) I'm on my routine route in canyon camp!")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_Route']))
   end
   
 end
@@ -227,32 +227,32 @@ function canyon_camp.NPC_Deliver_Action(chara, activator)
     local questname = "OutlawForest2"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue("(Deliver) Carry NPC had his package stolen in Flyaway Cliffs! Please Help!")
-	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue("(Deliver) Carry NPC had his package stolen in Flyaway Cliffs! (You already have the quest)")
-	else
-	  UI:WaitShowDialogue("(Deliver) Did you back the supplies?")
-	end
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_001']))
+    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_002']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_003']))
+    end
   elseif SV.supply_corps.Status == 7 then
-	UI:WaitShowDialogue("(Deliver) We've got to do something about these thieves.")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_004']))
   elseif SV.supply_corps.Status == 8 then
     local unlock = _DATA.Save:GetDungeonUnlock("ambush_forest") -- make this the dungeon unlock state
-	if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-      UI:WaitShowDialogue("(Deliver) I feel unsafe until you take care of the criminal.")
-	elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-	  UI:WaitShowDialogue("(Deliver) Please help us take down this criminal!")
-	else
-	  UI:WaitShowDialogue("(Deliver) You brought down the criminal!")
-	end
+    if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_005']))
+    elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_006']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_007']))
+    end
   elseif SV.supply_corps.Status == 9 then
-    UI:WaitShowDialogue("(Deliver) Thanks for bringing honchkrow down.")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_008']))
   elseif SV.supply_corps.Status == 10 then
-    UI:WaitShowDialogue("(Deliver) Thanks for discovering this cave.  We're putting supplies here.")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_009']))
 	SV.supply_corps.Status = 11
   elseif SV.supply_corps.Status == 11 then
-    UI:WaitShowDialogue("(Deliver) Thanks for discovering this cave.  We're putting supplies here.")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_009']))
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue("(Deliver) I'm on my routine route in canyon camp!")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_Route']))
   end
 end
 

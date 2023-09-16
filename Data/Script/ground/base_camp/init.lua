@@ -240,21 +240,21 @@ function base_camp.RewardDialogue()
   UI:SetSpeaker(noctowl)
   
   UI:WaitShowDialogue("Your badge... that insignia!")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Reward_Line_001']))
   --UI:WaitShowDialogue("Where did you come from...?")
   --UI:WaitShowDialogue("Could it be...?")
   
   --UI:WaitShowDialogue("When the guildmasters first put up the challenge, I was there.")
   --UI:WaitShowDialogue("I witnessed them set off for the summit, never to return.")
   --UI:WaitShowDialogue("Countless others followed, but never succeeded.")
-  UI:WaitShowDialogue("Never did I think someone would conquer all of the Guildmaster Trail.")
-  UI:WaitShowDialogue("But you've proved me wrong.")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Reward_Line_002']))
   
-  UI:WaitShowDialogue("A token of my appreciation.  You've earned it.")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Reward_Line_003']))
   
   local receive_item = RogueEssence.Dungeon.InvItem("apricorn_perfect")
   COMMON.GiftItem(player, receive_item)
   
-  UI:WaitShowDialogue("I look forward to your future endeavors.")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Reward_Line_004']))
   
   GROUND:MoveToPosition(noctowl, 82, 286, false, 2)
   

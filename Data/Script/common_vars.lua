@@ -14,6 +14,7 @@ function COMMON.UpdateDayEndVars()
           DestSegment = 0,
           DestFloor = 5,
           TargetSpecies = RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female),
           Complete = COMMON.MISSION_INCOMPLETE,
           Type = COMMON.MISSION_TYPE_ESCORT_OUT,
           EscortTable = { EscortStartMsg = "TALK_ESCORT_SISTER_START", EscortAcceptMsg = "TALK_ESCORT_SISTER_ACCEPT", EscortInteract = "EscortInteractSister" }

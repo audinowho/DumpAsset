@@ -85,8 +85,8 @@ end
 function final_stop.Summit_Fail()
   --everyone is dead
   UI:ResetSpeaker()
-  UI:WaitShowDialogue("No... They weren't the ones.")
-  UI:WaitShowDialogue("We must continue to wait...")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Summit_Fail_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Summit_Fail_Line_002']))
   
   GAME:FadeIn(20)
   --get back up
@@ -117,48 +117,47 @@ function final_stop.NPC_Storehouse_Action(chara, activator)
     local questname = "OutlawMountain2"
     local quest = SV.missions.Missions[questname]
     if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
-	  UI:WaitShowDialogue("Thanks for apprehending the criminal, take this reward.")
-	  --give reward
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+      --give reward
       local receive_item = RogueEssence.Dungeon.InvItem("tm_focus_blast")
       COMMON.GiftItem(player, receive_item)
-	  --complete mission and move to done
-	  quest.Complete = COMMON.MISSION_ARCHIVED
-	  SV.missions.FinishedMissions[questname] = quest
-	  SV.missions.Missions[questname] = nil
-	  SV.supply_corps.Status = 17
-	  UI:WaitShowDialogue("We've got to do something about these thieves.")
-	end
-	
+      --complete mission and move to done
+      quest.Complete = COMMON.MISSION_ARCHIVED
+      SV.missions.FinishedMissions[questname] = quest
+      SV.missions.Missions[questname] = nil
+      SV.supply_corps.Status = 17
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
+    end
   elseif SV.supply_corps.Status == 17 then
-	UI:WaitShowDialogue("We've got to do something about these thieves.")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_003']))
   elseif SV.supply_corps.Status == 18 then
     local unlock = _DATA.Save:GetDungeonUnlock("treacherous_mountain") -- make this the dungeon unlock state
-	if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+    if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_004']))
       COMMON.UnlockWithFanfare("treacherous_mountain", false)
-	elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-	  UI:WaitShowDialogue("Please help us take down this criminal!")
-	else
-	  UI:WaitShowDialogue("Thanks for bringing down the criminal!  We reward you with biggest storage bag!")
-	  --increase rank for bag space
-	  _DATA.Save.ActiveTeam:SetRank("silver")
-	  SOUND:PlayFanfare("Fanfare/RankUp")
-	  UI:ResetSpeaker(false)
+    elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_005']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_006']))
+      --increase rank for bag space
+      _DATA.Save.ActiveTeam:SetRank("silver")
+      SOUND:PlayFanfare("Fanfare/RankUp")
+      UI:ResetSpeaker(false)
       UI:SetCenter(true)
-      UI:WaitShowDialogue(STRINGS:Format("You can now carry {0} items in your Treasure Bag!", 40))
-	  UI:SetSpeaker(chara)
-	  UI:SetCenter(false)
-	  UI:WaitShowDialogue("This bad boy can hold even more food than me! dohohoho!")
-	  SV.supply_corps.Status = 19
-	end
+      UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_BAG_SIZE"):ToLocal(), 40))
+      UI:SetSpeaker(chara)
+      UI:SetCenter(false)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_007']))
+      SV.supply_corps.Status = 19
+    end
   elseif SV.supply_corps.Status == 19 then
-    if SV.guildmaster_summit.GameComplete then
-	  UI:WaitShowDialogue("Maybe we should aim for the summit ourselves.")
-	else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
-	end
+    if not SV.guildmaster_summit.GameComplete then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_008']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_009']))
+    end
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue("I'm on my routine route in blizzard camp!")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_Route']))
   end
 end
 
@@ -173,33 +172,33 @@ function final_stop.NPC_Carry_Action(chara, activator)
     local questname = "OutlawMountain2"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue("Our manager disappeared!  He should be in snowbound path!")
-	  --add the quest
-	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_DISGUISE, DestZone = "snowbound_path", DestSegment = 0, DestFloor = 12, TargetSpecies = RogueEssence.Dungeon.MonsterID("zoroark", 1, "normal", Gender.Male), DisguiseSpecies = RogueEssence.Dungeon.MonsterID("swalot", 0, "normal", Gender.Male), DisguiseTalk = "DisguiseTalk", DisguiseHit = "DisguiseHit" }
-	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue("Our manager disappeared! (You already have the quest)")
-	else
-	  UI:WaitShowDialogue("Our manager's back!  Yay!")
-	end
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_001']))
+      --add the quest
+      SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_DISGUISE, DestZone = "snowbound_path", DestSegment = 0, DestFloor = 12, ClientSpecies = chara.CurrentForm, TargetSpecies = RogueEssence.Dungeon.MonsterID("zoroark", 1, "normal", Gender.Male), DisguiseSpecies = RogueEssence.Dungeon.MonsterID("swalot", 0, "normal", Gender.Male), DisguiseTalk = "DisguiseTalk", DisguiseHit = "DisguiseHit" }
+    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_002']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_003']))
+    end
   elseif SV.supply_corps.Status == 17 then
-	UI:WaitShowDialogue("(Carry) We've got to do something about these thieves.")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_004']))
   elseif SV.supply_corps.Status == 18 then
     local unlock = _DATA.Save:GetDungeonUnlock("treacherous_mountain") -- make this the dungeon unlock state
-	if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-	  UI:WaitShowDialogue("(Carry) I feel unsafe until you take care of the criminal.")
-	elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-	  UI:WaitShowDialogue("(Carry) I still feel unsafe until you take care of the criminal.")
-	else
-	  UI:WaitShowDialogue("(Carry) You defeated the criminal?")
-	end
+    if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_005']))
+    elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_006']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_007']))
+    end
   elseif SV.supply_corps.Status == 19 then
-    if SV.guildmaster_summit.GameComplete then
-	  UI:WaitShowDialogue("(Carry) Maybe we should aim for the summit ourselves.")
-	else
-      UI:WaitShowDialogue("(Carry) Thank you and good luck with the summit!")
-	end
+    if not SV.guildmaster_summit.GameComplete then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_008']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_009']))
+    end
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue("(Carry) I'm on my routine route in blizzard camp!")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_Route']))
   end
 end
 
@@ -214,31 +213,31 @@ function final_stop.NPC_Deliver_Action(chara, activator)
     local questname = "OutlawMountain2"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue("(Deliver) Our manager disappeared!  He should be in snowbound path!")
-	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue("(Deliver) Our manager disappeared! (You already have the quest)")
-	else
-	  UI:WaitShowDialogue("(Deliver) Our manager's back!  Yay!")
-	end
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_001']))
+    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_002']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_003']))
+    end
   elseif SV.supply_corps.Status == 17 then
-	UI:WaitShowDialogue("(Deliver) We've got to do something about these thieves.")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_004']))
   elseif SV.supply_corps.Status == 18 then
     local unlock = _DATA.Save:GetDungeonUnlock("treacherous_mountain") -- make this the dungeon unlock state
-	if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-	  UI:WaitShowDialogue("(Deliver) I feel unsafe until you take care of the criminal.")
-	elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-	  UI:WaitShowDialogue("(Deliver) I still feel unsafe until you take care of the criminal.")
-	else
-	  UI:WaitShowDialogue("(Deliver) You defeated the criminal?")
-	end
+    if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_005']))
+    elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_006']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_007']))
+    end
   elseif SV.supply_corps.Status == 19 then
-    if SV.guildmaster_summit.GameComplete then
-	  UI:WaitShowDialogue("(Deliver) Maybe we should aim for the summit ourselves.")
-	else
-      UI:WaitShowDialogue("(Deliver) Thank you and good luck with the summit!")
-	end
+    if not SV.guildmaster_summit.GameComplete then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_008']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_009']))
+    end
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue("(Deliver) I'm on my routine route in blizzard camp!")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_Route']))
   end
 end
 

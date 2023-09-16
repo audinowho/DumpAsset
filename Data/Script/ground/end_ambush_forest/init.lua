@@ -52,42 +52,43 @@ function end_ambush_forest.PreBattle(shortened)
   
   GAME:CutsceneMode(true)
   
-  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
-  GAME:WaitFrames(30)
-  UI:WaitHideTitle(20)
-  
   GAME:MoveCamera(204, 192, 1, false)
   
   GROUND:Unhide("Honchkrow")
   GROUND:Unhide("Murkrow_1")
   GROUND:Unhide("Murkrow_2")
   
-  GAME:FadeIn(20)
   
+  
+  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
+  GAME:WaitFrames(30)
+  UI:WaitHideTitle(20)
+  
+  GAME:FadeIn(20)
   GROUND:MoveToPosition(player, 196, 240, false, 2)
   
+  if shortened == false then
   
-  UI:SetSpeaker(enemy)
-  UI:WaitShowDialogue("I introduce myself as Honchrow, and establish myself as an intimidating boss.")
+    UI:SetSpeaker(enemy)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
+    
+    SOUND:PlayBGM("A13. Threat.ogg", false)
+    
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_003']))
+    
+    --also, if the player has already reached the summit, give a reaction
   
-  if shortened then
-    UI:WaitShowDialogue("Shortened")
+  else
+    SOUND:PlayBGM("A13. Threat.ogg", false)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Short']))
   end
   
-  --GROUND:Unhide("Croco")
-  
-  --SOUND:FadeOutBGM(20)
-  SOUND:PlayBGM("A13. Threat.ogg", false)
-  
-  UI:WaitShowDialogue("I give some dialogue about the supply line and claim right to the island.")
-  
-  UI:WaitShowDialogue("All this, despite not having reached the summit.")
   
   
   SOUND:PlayBGM("C02. Boss Battle 2.ogg", false)
   
-  UI:WaitShowDialogue("Lead up to the boss battle with a very threatening aura.")
-  UI:WaitShowDialogue("I'll make you an offer you can't refuse.")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_004']))
   
   GAME:WaitFrames(30)
   
@@ -120,7 +121,7 @@ function end_ambush_forest.PostBattle()
   GAME:WaitFrames(60)
   
   UI:SetSpeaker(enemy)
-  UI:WaitShowDialogue("You win this round, but I'll be back.")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_001']))
   
   GAME:FadeOut(false, 20)
   
@@ -152,8 +153,8 @@ function end_ambush_forest.EmptyReturn()
   
   UI:ResetSpeaker(false)
   UI:SetCenter(true)
-  UI:WaitShowDialogue("This is appears to be the end of the dungeon.")
-  UI:WaitShowDialogue("It's impossible to go any farther.[pause=0] It's time to go back.")
+  
+  STRINGS:Format(RogueEssence.StringKey("DLG_DUNGEON_DEAD_END"):ToLocal())
   
   GAME:FadeOut(false, 20)
   

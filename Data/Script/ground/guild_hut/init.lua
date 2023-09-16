@@ -61,8 +61,8 @@ function guild_hut.BeginExposition()
   GROUND:Unhide("Noctowl")
   
   UI:SetSpeaker(noctowl)
-  UI:WaitShowDialogue("This was the base of operations for the original guildmaster.")
-  UI:WaitShowDialogue("It's yours now.")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002']))
   
   GROUND:CharAnimateTurnTo(noctowl, Direction.Down, 4)
   
@@ -109,13 +109,14 @@ function guild_hut.Journal_Action(obj, activator)
   
   
   --talk about the guild and how the guildmaster left?
-  UI:WaitShowDialogue("talk about the guild and how the guildmaster left")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Journal_Line_001']))
   --they took all the magnagates and closed the portal
-  UI:WaitShowDialogue("they took all the magnagates and closed the portal, leaving only one.")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Journal_Line_002']))
   
   if SV.guild_hut.TookCard == false then
     local player = CH('PLAYER')
-    UI:WaitShowDialogue("...there's a card between the pages.")
+    
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Journal_Line_Card']))
   
     --set the savevar
     SV.guild_hut.TookCard = true
@@ -138,34 +139,32 @@ function guild_hut.Novel_Action(obj, activator)
   GROUND:ObjectSetAnim(obj, 6, 0, 3, Direction.Left, 1)
   GROUND:ObjectSetDefaultAnim(obj, 'Diary_Green_Opening', 0, 3, 3, Direction.Left)
   
+  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get('the_neverending_tale')
   
   UI:ResetSpeaker()
   if SV.guild_hut.BookPhase == 0 then
-    UI:WaitShowDialogue("It's a book called the neverending tale")
-    UI:WaitShowDialogue("A story of a band of fearless explorers traveling the lands on an endless journey...")
-    UI:WaitShowDialogue("...")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Novel_Intro_001'], zone:GetColoredName()))
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Novel_Intro_002']))
     GAME:FadeOut(false, 20)
-	SV.guild_hut.BookPhase = 1
-	--enter the dungeon with 0 stakes
+	  SV.guild_hut.BookPhase = 1
+	  --enter the dungeon with 0 stakes
 	
-	SV.checkpoint = 
-	{
-	  Zone    = 'guildmaster_island', Segment  = -1,
-	  Map  = 10, Entry  = 2
-	}
+    SV.checkpoint = 
+    {
+      Zone    = 'guildmaster_island', Segment  = -1,
+      Map  = 10, Entry  = 2
+    }
 	
-	GAME:EnterDungeon('the_neverending_tale', 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.None, true, true)
-	return
+    GAME:EnterDungeon('the_neverending_tale', 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.None, true, true)
+    return
   else    
-    local book_choices = {"Read",
-      "Notes",
+    local book_choices = {STRINGS:Format(MapStrings['Menu_Novel_Read']),
+      STRINGS:Format(MapStrings['Menu_Novel_Notes']),
       STRINGS:FormatKey("MENU_CANCEL")}
-  
-    local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get('the_neverending_tale')
   
     local result = 2
     while result == 2 do
-      UI:BeginChoiceMenu(STRINGS:Format("The book reads, {0}", zone:GetColoredName()), book_choices, 1, 3)
+      UI:BeginChoiceMenu(STRINGS:Format(MapStrings['Novel_Ask'], zone:GetColoredName()), book_choices, 1, 3)
       UI:WaitForChoice()
       result = UI:ChoiceResult()
       if result == 1 then
@@ -198,9 +197,8 @@ function guild_hut.AfterFirstNovel()
   GROUND:ObjectSetDefaultAnim(obj, 'Diary_Green_Opening', 0, 3, 3, Direction.Left)
   
   GAME:FadeIn(20)
-  UI:WaitShowDialogue("...?")
-  UI:WaitShowDialogue("Must've dozed off...")
-  UI:WaitShowDialogue("There's notes on the back of the book.")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Novel_After_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Novel_After_002']))
   
   guild_hut.DisplayNotes()
   
@@ -225,11 +223,15 @@ end
 function guild_hut.Card_Portal_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local dungeon_entrances = { 'tropical_path', 'faded_trail', 'bramble_woods', 'faultline_ridge' }
+  local dungeon_entrances = { 'tropical_path', 'faded_trail', 'bramble_woods', 'faultline_ridge', 'trickster_woods',
+    'moonlit_courtyard', 'flyaway_cliffs', 'fertile_valley', 'overgrown_wilds', 'lava_floe_island', 'castaway_cave',
+    'copper_quarry', 'forsaken_desert', 'relic_tower', 'sleeping_caldera', 'thunderstruck_pass', 'veiled_ridge',
+    'snowbound_path', 'champions_road',
+    'ambush_forest', 'treacherous_mountain', 'barren_tundra', 'energy_garden', 'wayward_wetlands', 'sickly_hollow',
+    'cave_of_solace', 'royal_halls', 'the_sky', 'guildmaster_trail', 'secret_garden', 'the_abyss'}
   local ground_entrances = { }
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
-
 
 -- equivalent to defining a class
 guild_hut.NoteMenu = Class('NoteMenu')

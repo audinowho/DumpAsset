@@ -337,7 +337,6 @@ function SINGLE_CHAR_SCRIPT.UpdateEscort(owner, ownerChar, context, args)
   if context.User ~= nil then
     return
   end
-  PrintInfo("Update Escort")
   local party = GAME:GetPlayerGuestTable()
   for i, p in ipairs(party) do
     if p.Dead == false then
@@ -345,7 +344,6 @@ function SINGLE_CHAR_SCRIPT.UpdateEscort(owner, ownerChar, context, args)
 	  if e_tbl ~= nil then
 	    local mission = SV.missions.Missions[e_tbl.Escort]
 	    if mission ~= nil then
-		  PrintInfo("Updating"..e_tbl.Escort)
 	      if mission.Type == COMMON.MISSION_TYPE_ESCORT_OUT then
 		    if _ZONE.CurrentMapID.Segment == 0 then
 		      mission.DestFloor = _ZONE.CurrentMapID.ID
@@ -363,7 +361,7 @@ function SINGLE_CHAR_SCRIPT.DestinationFloor(owner, ownerChar, context, args)
   end
   SOUND:PlayFanfare("Fanfare/Note")
   UI:ResetSpeaker()
-  UI:WaitShowDialogue("You've reached a destination floor!")
+  STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_DESTINATION"):ToLocal())
 end
 
 
@@ -375,7 +373,7 @@ function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
   if not args.Silent then
     SOUND:PlayBGM("C07. Outlaw.ogg", false)
     UI:ResetSpeaker()
-    UI:WaitShowDialogue("Wanted outlaw spotted!")
+    STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW"):ToLocal())
   end
   
   -- add a map status for outlaw clear check
@@ -393,7 +391,7 @@ function SINGLE_CHAR_SCRIPT.OutlawHouse(owner, ownerChar, context, args)
   local found_outlaw = COMMON.FindNpcWithTable(true, "Mission", args.Mission)
   found_outlaw.CharDir = _ZONE.CurrentMap:ApproximateClosestDir8(found_outlaw.CharLoc, _DUNGEON.ActiveTeam.Leader.CharLoc)
   UI:SetSpeaker(found_outlaw)
-  UI:WaitShowDialogue("You have fallen into my trap!")
+  STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW_TRAP"):ToLocal())
 	
   COMMON.TriggerAdHocMonsterHouse(owner, ownerChar, found_outlaw)
 end
@@ -402,7 +400,6 @@ function SINGLE_CHAR_SCRIPT.OutlawClearCheck(owner, ownerChar, context, args)
   -- check for no outlaw in the mission list
   remaining_outlaw = false
   for name, mission in pairs(SV.missions.Missions) do
-    PrintInfo("Checking Mission for Outlaw Clear: "..tostring(name))
     if mission.Complete == COMMON.MISSION_INCOMPLETE and _ZONE.CurrentZoneID == mission.DestZone
 	  and _ZONE.CurrentMapID.Segment == mission.DestSegment and _ZONE.CurrentMapID.ID == mission.DestFloor then
 	  local found_outlaw = COMMON.FindNpcWithTable(true, "Mission", name)
@@ -411,13 +408,20 @@ function SINGLE_CHAR_SCRIPT.OutlawClearCheck(owner, ownerChar, context, args)
 	    found_outlaw = COMMON.FindNpcWithTable(false, "Mission", name)
 	  end
       if found_outlaw then
-	    remaining_outlaw = true
-	  else
-	    -- if no outlaws of the mission list, mark quest as complete
-		mission.Complete = COMMON.MISSION_COMPLETE
-		UI:ResetSpeaker()
-        UI:WaitShowDialogue("Mission status set to complete. Return to quest giver for reward.")
-	  end
+        remaining_outlaw = true
+      else
+        -- if no outlaws of the mission list, mark quest as complete
+        mission.Complete = COMMON.MISSION_COMPLETE
+        UI:ResetSpeaker()
+        
+        -- retrieve the species of the target
+        local target_name = _DATA:GetMonster(mission.TargetSpecies.Species).Name
+        -- retrieve the species of the quest giver
+        local client_name = _DATA:GetMonster(mission.ClientSpecies.Species).Name
+        
+        STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW_DONE"):ToLocal(), target_name:ToLocal())
+        STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_REMINDER"):ToLocal(), client_name:ToLocal())
+      end
     end
   end
   if not remaining_outlaw then

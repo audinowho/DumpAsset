@@ -51,40 +51,42 @@ function end_treacherous_mountain.PreBattle(shortened)
   
   GAME:CutsceneMode(true)
   
-  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
-  GAME:WaitFrames(30)
-  UI:WaitHideTitle(20)
-  
   GAME:MoveCamera(252, 216, 1, false)
   
   GROUND:Unhide("Salamence")
   
-  GAME:FadeIn(20)
+  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
+  GAME:WaitFrames(30)
+  UI:WaitHideTitle(20)
   
+  
+  
+  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
+  GAME:WaitFrames(30)
+  UI:WaitHideTitle(20)
+  
+  GAME:FadeIn(20)
   GROUND:MoveToPosition(player, 244, 216, false, 2)
   
+  if shortened == false then
   
-  UI:SetSpeaker(enemy)
-  UI:WaitShowDialogue("I introduce myself as Salamence, and establish myself as LORD OF THE HOARD.")
+    UI:SetSpeaker(enemy)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
+    
+    SOUND:PlayBGM("A13. Threat.ogg", false)
+    
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_003']))
   
-  if shortened then
-    UI:WaitShowDialogue("Shortened")
+  else
+    SOUND:PlayBGM("A13. Threat.ogg", false)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Short']))
   end
-  
-  --GROUND:Unhide("Croco")
-  
-  --SOUND:FadeOutBGM(20)
-  SOUND:PlayBGM("A13. Threat.ogg", false)
-  
-  UI:WaitShowDialogue("I give some dialogue about the supply line and claim right to the island.")
-  
-  UI:WaitShowDialogue("All this, despite not having reached the summit.")
   
   
   SOUND:PlayBGM("C02. Boss Battle 2.ogg", false)
   
-  UI:WaitShowDialogue("Lead up to the boss battle with a very threatening aura.")
-  UI:WaitShowDialogue("Begin a relentless onslaught!")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_004']))
   
   GAME:WaitFrames(30)
   
@@ -115,7 +117,8 @@ function end_treacherous_mountain.PostBattle()
   GAME:WaitFrames(60)
   
   UI:SetSpeaker(enemy)
-  UI:WaitShowDialogue("You win this round, but I'll be back.")
+  
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_001']))
   
   GAME:FadeOut(false, 20)
   
@@ -146,8 +149,8 @@ function end_treacherous_mountain.EmptyReturn()
   
   UI:ResetSpeaker(false)
   UI:SetCenter(true)
-  UI:WaitShowDialogue("This is appears to be the end of the dungeon.")
-  UI:WaitShowDialogue("It's impossible to go any farther.[pause=0] It's time to go back.")
+  
+  STRINGS:Format(RogueEssence.StringKey("DLG_DUNGEON_DEAD_END"):ToLocal())
   
   GAME:FadeOut(false, 20)
   

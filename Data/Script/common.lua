@@ -666,12 +666,10 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
       end
   	
   	  if not valid_quote then
-        -- PrintInfo("Rejected "..chosen_quote)
   	    table.remove(running_pool, chosen_idx)
   	    chosen_quote = ""
   	  end
     end
-    -- PrintInfo("Selected "..chosen_quote)
 	
 	local oldDir = target.CharDir
     DUNGEON:CharTurnToChar(target, chara)
@@ -855,12 +853,10 @@ function COMMON.GroundInteract(chara, target)
     chosen_quote = string.gsub(chosen_quote, "%[hero%]", chara:GetDisplayName())
     
 	if not valid_quote then
-      -- PrintInfo("Rejected "..chosen_quote)
 	  table.remove(running_pool, chosen_idx)
 	  chosen_quote = ""
 	end
   end
-  -- PrintInfo("Selected "..chosen_quote)
   
   
   UI:WaitShowDialogue(STRINGS:Format(chosen_quote))
@@ -964,7 +960,6 @@ end
 
 function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
   for name, mission in pairs(SV.missions.Missions) do
-    PrintInfo("Checking Mission: "..tostring(name))
 	if mission.Complete == COMMON.MISSION_INCOMPLETE and zoneId == mission.DestZone and segmentID == mission.DestSegment then
 	  if mission.Type == 1 then -- escort
 		
@@ -1015,11 +1010,9 @@ end
 
 function COMMON.FindMissionEscort(missionId)
   local escort = nil
-  PrintInfo("Name: "..missionId)
   local party = GAME:GetPlayerGuestTable()
   for i, p in ipairs(party) do
     local e_tbl = LTBL(p)
-	PrintInfo("Escort: "..e_tbl.Escort)
 	if e_tbl.Escort == missionId then
 	  escort = p
 	  break

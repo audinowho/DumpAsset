@@ -27,10 +27,8 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
   local outlawFloor = false
   local outlawSilent = false
   for name, mission in pairs(SV.missions.Missions) do
-    PrintInfo("Checking Gen Mission: "..tostring(name))
     if mission.Complete == COMMON.MISSION_INCOMPLETE and zoneContext.CurrentZone == mission.DestZone
 	  and zoneContext.CurrentSegment == mission.DestSegment and zoneContext.CurrentID == mission.DestFloor then
-      PrintInfo("Spawning Mission Goal")
       local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
 	  specificTeam.Explorer = true
       local post_mob = RogueEssence.LevelGen.MobSpawn()
@@ -65,16 +63,13 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
 		  post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(RogueEssence.Dungeon.BattleScriptEvent(mission.DisguiseTalk)))
 		end
 	    specificTeam.Spawns:Add(post_mob)
-        PrintInfo("Creating Spawn")
         local picker = LUA_ENGINE:MakeGenericType(PresetMultiTeamSpawnerType, { MapGenContextType }, { })
 	    picker.Spawns:Add(specificTeam)
-        PrintInfo("Creating Step")
         local mobPlacement = LUA_ENGINE:MakeGenericType(PlaceEntranceMobsStepType, { MapGenContextType, EntranceType }, { picker })
 		
 		if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
 		  mobPlacement.Ally = true
 		end
-        PrintInfo("Enqueueing")
 	    -- Priority 5.2.1 is for NPC spawning in PMDO, but any dev can choose to roll with their own standard of priority.
 	    local priority = RogueElements.Priority(5, 2, 1)
 	    queue:Enqueue(priority, mobPlacement)
@@ -113,20 +108,15 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
           post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Escort = name })))
 	    end
 	    specificTeam.Spawns:Add(post_mob)
-        PrintInfo("Creating Spawn")
         local picker = LUA_ENGINE:MakeGenericType(PresetMultiTeamSpawnerType, { MapGenContextType }, { })
 	    picker.Spawns:Add(specificTeam)
-        PrintInfo("Creating Step")
         local mobPlacement = LUA_ENGINE:MakeGenericType(PlaceRandomMobsStepType, { MapGenContextType }, { picker })
-        PrintInfo("Setting everything else")
         mobPlacement.Ally = true
         mobPlacement.Filters:Add(PMDC.LevelGen.RoomFilterConnectivity(PMDC.LevelGen.ConnectivityRoom.Connectivity.Main))
         mobPlacement.ClumpFactor = 20
-        PrintInfo("Enqueueing")
 	    -- Priority 5.2.1 is for NPC spawning in PMDO, but any dev can choose to roll with their own standard of priority.
 	    local priority = RogueElements.Priority(5, 2, 1)
 	    queue:Enqueue(priority, mobPlacement)
-        PrintInfo("Done")
 	  end
     end
   end

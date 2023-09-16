@@ -219,7 +219,7 @@ function forest_camp.NPC_Storehouse_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
   
-  UI:WaitShowDialogue("I'm on my routine route in forest camp!")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_Route']))
 
 end
 
@@ -236,7 +236,7 @@ function forest_camp.NPC_Carry_Action(chara, activator)
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_002']))
     GROUND:EntTurn(chara, Direction.Left)
   elseif SV.supply_corps.Status >= 20 then
-    UI:WaitShowDialogue("(Carry) I'm on my routine route in forest camp!")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_Route']))
   end
   
 
@@ -256,7 +256,7 @@ function forest_camp.NPC_Deliver_Action(chara, activator)
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_001']))
     GROUND:EntTurn(chara, Direction.Right)
   elseif SV.supply_corps.Status >= 20 then
-    UI:WaitShowDialogue("(Deliver) I'm on my routine route in forest camp!")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_Route']))
   end
   
 

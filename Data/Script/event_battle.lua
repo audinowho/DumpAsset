@@ -128,26 +128,41 @@ end
 
 function BATTLE_SCRIPT.RescueReached(owner, ownerChar, context, args)
 
+  context.CancelState.Cancel = true
+  
   local tbl = LTBL(context.Target)
   local mission = SV.missions.Missions[tbl.Mission]
-  mission.Complete = COMMON.MISSION_COMPLETE
   
-  local oldDir = context.Target.CharDir
   DUNGEON:CharTurnToChar(context.Target, context.User)
   
-  UI:SetSpeaker(context.Target)
-  UI:WaitShowDialogue("Yay, you found me!")
-  
-  -- warp out
-  TASK:WaitTask(_DUNGEON:ProcessBattleFX(context.Target, context.Target, _DATA.SendHomeFX))
-  _DUNGEON:RemoveChar(context.Target)
-  
   UI:ResetSpeaker()
-  UI:WaitShowDialogue("Mission status set to complete. Return to quest giver for reward.")
+  local target_name = _DATA:GetMonster(mission.TargetSpecies.Species).Name
+	UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_RESCUE_ASK"):ToLocal(), target_name:ToLocal()), false)
+	UI:WaitForChoice()
+	result = UI:ChoiceResult()
+	if result then
+  
+    mission.Complete = COMMON.MISSION_COMPLETE
+    
+    local poseAction = RogueEssence.Dungeon.CharAnimPose(context.User.CharLoc, context.User.CharDir, 50, 0)
+    DUNGEON:CharSetAction(context.User, poseAction)
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_RESCUE_DONE"):ToLocal(), target_name:ToLocal()))
+        
+    UI:SetSpeaker(context.Target)
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_RESCUE_THANKS"):ToLocal()))
+    
+    -- warp out
+    TASK:WaitTask(_DUNGEON:ProcessBattleFX(context.Target, context.Target, _DATA.SendHomeFX))
+    _DUNGEON:RemoveChar(context.Target)
+    
+    DUNGEON:CharEndAnim(context.User)
+  end
 end
 
 
 function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
+  
+  context.CancelState.Cancel = true
   
   local tbl = LTBL(context.Target)
   local escort = COMMON.FindMissionEscort(tbl.Mission)
@@ -160,8 +175,10 @@ function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
     local oldDir = context.Target.CharDir
     DUNGEON:CharTurnToChar(context.Target, context.User)
   
-    UI:SetSpeaker(context.Target)
-    UI:WaitShowDialogue("Yay, you brought the escort to me!")
+    --UI:SetSpeaker(context.Target)
+    UI:ResetSpeaker()
+    local client_name = _DATA:GetMonster(mission.ClientSpecies.Species).Name
+    STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_ESCORT_DONE"):ToLocal(), client_name:ToLocal())
   
     -- warp out
     TASK:WaitTask(_DUNGEON:ProcessBattleFX(escort, escort, _DATA.SendHomeFX))
@@ -171,11 +188,13 @@ function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
     _DUNGEON:RemoveChar(context.Target)
   
     UI:ResetSpeaker()
-    UI:WaitShowDialogue("Mission status set to complete. Return to quest giver for reward.")
+    STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_REMINDER"):ToLocal(), client_name:ToLocal())
   end
 end
 
 function BATTLE_SCRIPT.EscortOutReached(owner, ownerChar, context, args)
+  
+  context.CancelState.Cancel = true
   
   local tbl = LTBL(context.Target)
   
@@ -275,31 +294,30 @@ function BATTLE_SCRIPT.DisguiseTalk(owner, ownerChar, context, args)
   local tbl = LTBL(context.Target)
 
   if tbl.TalkAmount == nil then
-    UI:WaitShowDialogue("Hey it's me, manager.")
-	tbl.TalkAmount = 1
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_OUTLAW_DISGUISE_001"):ToLocal()))
+    tbl.TalkAmount = 1
   else
     if tbl.TalkAmount == 1 then
-	  UI:WaitShowDialogue("...What?")
-	elseif tbl.TalkAmount == 2 then
-	  UI:WaitShowDialogue("I'm not suspicious")
-	else
-	  SOUND:PlayBGM("", false)
-	  UI:WaitShowDialogue("...So you saw through my disguise after all.")
-	
-	  UI:WaitShowDialogue("Fine, we'll do this the hard way!")
-	  
-      local teamIndex = _ZONE.CurrentMap.AllyTeams:IndexOf(context.Target.MemberTeam)
-	  _DUNGEON:RemoveTeam(RogueEssence.Dungeon.Faction.Friend, teamIndex)
-	  _DUNGEON:AddTeam(RogueEssence.Dungeon.Faction.Foe, context.Target.MemberTeam)
-	  local tactic = _DATA:GetAITactic("boss") -- shopkeeper attack tactic
-	  context.Target.Tactic = RogueEssence.Data.AITactic(tactic)
-	  context.Target.Tactic:Initialize(context.Target)
-	  TASK:WaitTask(context.Target:RemoveStatusEffect("attack_response", false))
-	
-	  TASK:WaitTask(context.Target:RemoveStatusEffect("illusion", true))
-	  
-	  COMMON.TriggerAdHocMonsterHouse(owner, ownerChar, context.Target)
-	end
+      UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_OUTLAW_DISGUISE_002"):ToLocal()))
+    elseif tbl.TalkAmount == 2 then
+      UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_OUTLAW_DISGUISE_003"):ToLocal()))
+    else
+      SOUND:PlayBGM("", false)
+      UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_OUTLAW_DISGUISE_004"):ToLocal()))
+      UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_OUTLAW_DISGUISE_005"):ToLocal()))
+      
+        local teamIndex = _ZONE.CurrentMap.AllyTeams:IndexOf(context.Target.MemberTeam)
+      _DUNGEON:RemoveTeam(RogueEssence.Dungeon.Faction.Friend, teamIndex)
+      _DUNGEON:AddTeam(RogueEssence.Dungeon.Faction.Foe, context.Target.MemberTeam)
+      local tactic = _DATA:GetAITactic("boss") -- shopkeeper attack tactic
+      context.Target.Tactic = RogueEssence.Data.AITactic(tactic)
+      context.Target.Tactic:Initialize(context.Target)
+      TASK:WaitTask(context.Target:RemoveStatusEffect("attack_response", false))
+    
+      TASK:WaitTask(context.Target:RemoveStatusEffect("illusion", true))
+      
+      COMMON.TriggerAdHocMonsterHouse(owner, ownerChar, context.Target)
+    end
 	tbl.TalkAmount = tbl.TalkAmount + 1
   end
 end
@@ -315,9 +333,9 @@ function BATTLE_SCRIPT.DisguiseHit(owner, ownerChar, context, args)
 
 
   SOUND:PlayBGM("", false)
-  UI:WaitShowDialogue("Argh, how did you know?")
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_OUTLAW_DISGUISE_ATTACKED"):ToLocal()))
 	
-  UI:WaitShowDialogue("Fine, we'll do this the hard way!")
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_OUTLAW_DISGUISE_005"):ToLocal()))
 	  
       local teamIndex = _ZONE.CurrentMap.AllyTeams:IndexOf(context.Target.MemberTeam)
 	  _DUNGEON:RemoveTeam(RogueEssence.Dungeon.Faction.Friend, teamIndex)

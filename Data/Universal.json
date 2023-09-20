@@ -700,12 +700,23 @@
 ]
 },
 "Value": {
+"$type": "PMDC.Dungeon.HandoutPiecewiseExpEvent, PMDC",
+"ScaleMin": 5,
+"ScaleAdd": 0,
+"UnderleveledHandout": {
 "$type": "PMDC.Dungeon.HandoutRelativeExpEvent, PMDC",
 "Numerator": 1,
 "Denominator": 7,
-"LevelBuffer": 10,
-"ScaleMin": 5,
+"LevelBuffer": 5,
 "PowerCurve": 2
+},
+"OverleveledHandout": {
+"$type": "PMDC.Dungeon.HandoutRelativeExpEvent, PMDC",
+"Numerator": 1,
+"Denominator": 7,
+"LevelBuffer": 5,
+"PowerCurve": 2
+}
 }
 }
 ],

@@ -96,7 +96,7 @@ function end_ambush_forest.PreBattle(shortened)
   
   GAME:CutsceneMode(false)
   
-  GAME:ContinueDungeon('ambush_forest', 2, 0, 0)
+  GAME:ContinueDungeon('ambush_forest', 3, 0, 0)
   
 end
 

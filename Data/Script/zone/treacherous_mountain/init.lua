@@ -37,7 +37,7 @@ function treacherous_mountain.ExitSegment(zone, result, rescue, segmentID, mapID
   else
     if segmentID == 0 then
       GAME:EnterZone('treacherous_mountain', -1, 0, 0)
-	elseif segmentID == 2 then
+	elseif segmentID == 3 then
 	  SV.treacherous_mountain.BossPhase = 3
 	  GAME:EnterZone('treacherous_mountain', -1, 0, 0)
     else

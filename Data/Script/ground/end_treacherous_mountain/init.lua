@@ -94,7 +94,7 @@ function end_treacherous_mountain.PreBattle(shortened)
   
   GAME:CutsceneMode(false)
   
-  GAME:ContinueDungeon('treacherous_mountain', 2, 0, 0)
+  GAME:ContinueDungeon('treacherous_mountain', 3, 0, 0)
   
 end
 

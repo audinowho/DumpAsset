@@ -37,7 +37,7 @@ function ambush_forest.ExitSegment(zone, result, rescue, segmentID, mapID)
   else
     if segmentID == 0 then
       GAME:EnterZone('ambush_forest', -1, 0, 0)
-	elseif segmentID == 2 then
+	elseif segmentID == 3 then
 	  SV.ambush_forest.BossPhase = 3
 	  GAME:EnterZone('ambush_forest', -1, 0, 0)
     else

@@ -31,7 +31,7 @@
 }
 },
 "Released": true,
-"Comment": "No Anim, priority\r\nuse a recolor of wrap",
+"Comment": "",
 "IndexNum": 489,
 "BaseCharges": 16,
 "Strikes": 1,
@@ -51,8 +51,42 @@
 "Delay": 0,
 "Sound": "DUN_Conversion2",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.BetweenEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"AnimBack": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Wrap_White_Back",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"AnimFront": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Wrap_White_Front",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"HeightBack": 16,
+"HeightFront": 16,
+"Offset": 0
 },
 "ScreenMovement": {
 "MinShake": 0,
@@ -74,7 +108,7 @@
 "MaxShakeTime": 0
 }
 },
-"LagBehindTime": 0
+"LagBehindTime": 25
 },
 "Explosion": {
 "TargetAlignments": 1,

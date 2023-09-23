@@ -25,15 +25,55 @@
 }
 },
 "Released": true,
-"Comment": "No Anim, priority",
+"Comment": "",
 "IndexNum": 191,
 "BaseCharges": 20,
 "Strikes": 1,
 "HitboxAction": {
 "$type": "RogueEssence.Dungeon.AreaAction, RogueEssence",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.CircleSquareFountainEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.EmittingAnim, RogueEssence",
+"ResultAnim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Spikes_RSE",
+"FrameTime": 30,
+"StartFrame": 0,
+"EndFrame": 0,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"Anim": {
+"AnimIndex": "Spikes_RSE",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Bursts": 8,
+"ParticlesPerBurst": 5,
+"BurstTime": 4,
+"StartDistance": 0,
+"RangeDiff": 0,
+"HeightRatio": 0.2,
+"Layer": 2
 },
 "HitTiles": true,
 "BurstTiles": 0,
@@ -52,7 +92,7 @@
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Chestnut_Trap",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -63,7 +103,7 @@
 "MaxShakeTime": 0
 }
 },
-"LagBehindTime": 0
+"LagBehindTime": 30
 },
 "Explosion": {
 "TargetAlignments": 4,

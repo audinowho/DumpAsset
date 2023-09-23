@@ -4,31 +4,11 @@
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
 "DefaultText": "Binding Band",
-"LocalTexts": {
-"fr": "Bande Étreinte",
-"de": "Klammerband",
-"es": "Banda Atadura",
-"it": "Legafascia",
-"ko": "조임밴드",
-"ja": "しめつけバンド",
-"ja-jp": "しめつけバンド",
-"zh-hans": "紧绑束带",
-"zh-hant": "緊綁束帶"
-}
+"LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A band that increases the power of binding moves used by the holder.",
-"LocalTexts": {
-"fr": "Objet à tenir. Augmente la puissance des attaques immobilisantes telles que Ligotage ou Étreinte.",
-"de": "Ein Band, das die Stärke aller Klammerattacken des Trägers erhöht.",
-"es": "Joya de un solo uso que potencia los movimientos de tipo Acero. Debe llevarla un Pokémon.",
-"it": "Uno strumento da dare a un Pokémon. Aumenta la potenza delle mosse che immobilizzano.",
-"ko": "지니게 하면 조이기 기술의 위력이 강해진다.",
-"ja": "しめつけるわざを　ほじょする　バンド。 もたせると　しめつけるわざの いりょくが　つよく　なる。",
-"ja-jp": "締めつける技を　補助する　バンド。 持たせると　締めつける技の 威力が　強くなる。",
-"zh-hans": "能增强绑紧招式的束带。携带后，绑紧招式的威力会变强。",
-"zh-hant": "輔助綁緊類招式的束帶。 攜帶後，綁緊類招式的 威力會變強。"
-}
+"DefaultText": "An item to be held by a Pokémon. When the holder successfully inflicts damage, the target may also be immobilized.",
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -205,7 +185,13 @@
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
-"OnRefresh": [
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [
 {
 "Key": {
 "str": [
@@ -213,19 +199,37 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.MiscEvent, PMDC",
-"Effect": {
-"$type": "PMDC.Dungeon.BindState, PMDC"
+"$type": "PMDC.Dungeon.OnMoveUseEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.OnHitEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusStateBattleEvent, PMDC",
+"States": [
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": 3
 }
+],
+"StatusID": "immobilized",
+"AffectTarget": true,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+],
+"RequireDamage": true,
+"RequireContact": false,
+"Chance": 25
+}
+]
 }
 }
 ],
-"BeforeTryActions": [],
-"BeforeActions": [],
-"OnActions": [],
-"BeforeHittings": [],
-"BeforeBeingHits": [],
-"AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],
 "AfterActions": [],

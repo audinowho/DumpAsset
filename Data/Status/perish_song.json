@@ -3,29 +3,18 @@
 "Object": {
 "$type": "RogueEssence.Data.StatusData, RogueEssence",
 "Name": {
-"DefaultText": "Perish Song",
-"LocalTexts": {
-"fr": "Requiem",
-"de": "Abgesang",
-"es": "Canto Mortal",
-"it": "Ultimocanto",
-"zh-hans": "灭亡之歌"
-}
+"DefaultText": "Perish Count",
+"LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "The Pokémon has heard Perish Song, and will faint when its countdown reaches zero.",
-"LocalTexts": {
-"fr": "Le Pokémon à entendu Requiem et tombera K.O quand le compte à rebours atteindra zéro.",
-"de": "Das Pokémon hat den Abgesang gehört und wird besiegt, sobald der Countdown null erreicht.",
-"es": "El Pokémon ha oído Canto mortal, y se debilitará cuando el contador llegue a cero.",
-"zh-hans": "这只宝可梦听了灭亡之歌，将在三回合倒计时结束后倒下。"
-}
+"DefaultText": "The Pokémon has a Perish Count that drops each time it hears Perish Song. It will faint when it drops to 0.",
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
 "MenuName": true,
 "CarryOver": false,
-"Emoticon": "",
+"Emoticon": "Exclaim_White",
 "DropEmoticon": "",
 "FreeEmote": "",
 "DrawEffect": -1,
@@ -39,7 +28,7 @@
 },
 {
 "$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
-"Counter": 61
+"Counter": 3
 }
 ],
 "OnSkillChanges": [],
@@ -108,7 +97,18 @@
 },
 "OnEquips": [],
 "OnPickups": [],
-"BeforeStatusAdds": [],
+"BeforeStatusAdds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatusCountdownCheck, PMDC"
+}
+}
+],
 "BeforeStatusAddings": [],
 "OnStatusAdds": [
 {
@@ -118,11 +118,53 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.StatusBattleLogEvent, PMDC",
+"$type": "PMDC.Dungeon.PerishStatusEvent, PMDC",
 "Message": {
-"Key": "MSG_PERISH_START"
+"Key": "MSG_PERISH_COUNT"
 },
-"Delay": true
+"Delay": true,
+"Anims": [
+{
+"Emitter": {
+"$type": "RogueEssence.Content.FiniteOverlayEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"AnimIndex": "White",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"Movement": {
+"X": 0,
+"Y": 0
+},
+"RepeatX": false,
+"RepeatY": false,
+"FadeIn": 0,
+"FadeOut": 0,
+"TotalTime": 80,
+"Layer": 0,
+"Color": "0, 0, 0, 255"
+},
+"Sound": "_UNK_DUN_Suspense",
+"Delay": 60,
+"NeedSelf": false
+},
+{
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"Sound": "DUN_Hit_Super_Effective",
+"Delay": 0,
+"NeedSelf": false
+}
+]
 }
 }
 ],
@@ -147,19 +189,7 @@
 "OnMapStarts": [],
 "OnTurnStarts": [],
 "OnTurnEnds": [],
-"OnMapTurnEnds": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.PerishEvent, PMDC",
-"Mult": 20
-}
-}
-],
+"OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
 "OnRefresh": [],

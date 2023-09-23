@@ -4,20 +4,11 @@
 "$type": "RogueEssence.Data.StatusData, RogueEssence",
 "Name": {
 "DefaultText": "Poisoned",
-"LocalTexts": {
-"fr": "Empoisonné",
-"de": "Vergiftet",
-"es": "Envenenado",
-"pt": "Envenenado",
-"it": "Avvelenamento",
-"zh-hans": "中毒"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "The Pokémon takes damage on every action, and its ability to recover HP is reduced. This status wears off after a few turns.",
-"LocalTexts": {
-"zh-hans": "这只宝可梦每次行动都会受到伤害，且回复HP的能力也会降低。该状态在几回合后解除。"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -280,7 +271,7 @@
 "Toxic": false,
 "ReducedDamage": true,
 "HPFraction": 16,
-"HealHPFraction": 16
+"HealHPFraction": 12
 }
 }
 ],
@@ -297,7 +288,7 @@
 "Toxic": false,
 "AffectNonFocused": false,
 "HPFraction": 16,
-"RestoreHPFraction": 16
+"RestoreHPFraction": 12
 }
 },
 {
@@ -334,7 +325,9 @@
 "BaseEvents": [
 {
 "$type": "PMDC.Dungeon.PoisonEvent, PMDC",
-"Toxic": false
+"Toxic": false,
+"HPFraction": 16,
+"RestoreHPFraction": 12
 }
 ]
 }

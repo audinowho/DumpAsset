@@ -37158,7 +37158,7 @@
 "BoxID": "box_deluxe",
 "BaseSpawner": {
 "$type": "PMDC.LevelGen.SpeciesItemElementSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
-"Element": "",
+"Element": "none",
 "ExceptFor": [
 "articuno",
 "zapdos",
@@ -37299,74 +37299,6 @@
 },
 "Ally": false,
 "ClumpFactor": 20
-}
-},
-{
-"Key": {
-"str": [
-6,
-2
-]
-},
-"Value": {
-"$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"Filters": [],
-"Spawn": {
-"$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"Picker": {
-"$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
-"Explorer": false,
-"Spawns": [
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
-"Species": "audino",
-"Form": 0,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 50,
-"Max": 50
-},
-"SpecifiedSkills": [
-"secret_power"
-],
-"Intrinsic": "",
-"Tactic": "wander_smart",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 1,
-"Remove": false
-}
-]
-},
-"Role": 0
-},
-"Rate": 10
-}
-],
-"TeamSizes": [
-{
-"Spawn": 1,
-"Rate": 12
-}
-]
-},
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 3,
-"Max": 6
-}
-},
-"Ally": false,
-"ClumpFactor": 25
 }
 }
 ]

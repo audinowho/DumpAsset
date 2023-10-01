@@ -55,11 +55,6 @@ function end_treacherous_mountain.PreBattle(shortened)
   
   GROUND:Unhide("Salamence")
   
-  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
-  GAME:WaitFrames(30)
-  UI:WaitHideTitle(20)
-  
-  
   
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
   GAME:WaitFrames(30)

@@ -127,13 +127,26 @@
 "UseEvent": {
 "Element": "none",
 "Category": 0,
-"HitRate": -1,
+"HitRate": 100,
 "SkillStates": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
 "BeforeExplosions": [],
-"BeforeHits": [],
+"BeforeHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.CustomHitRateEvent, PMDC",
+"Numerator": 1,
+"Denominator": 2
+}
+}
+],
 "OnHits": [
 {
 "Key": {
@@ -232,20 +245,7 @@
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
-"BeforeHittings": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.ChanceEvadeEvent, PMDC",
-"Numerator": 2,
-"Denominator": 3
-}
-}
-],
+"BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],
 "AfterBeingHits": [],

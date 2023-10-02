@@ -27,47 +27,25 @@
 "Released": true,
 "Comment": "",
 "IndexNum": 200,
-"BaseCharges": 14,
+"BaseCharges": 10,
 "Strikes": 1,
 "HitboxAction": {
 "$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
 "HitTiles": true,
-"BurstTiles": 0,
+"BurstTiles": 2,
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"WideAngle": 2,
+"WideAngle": 0,
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 40
+"ActionType": 24
 },
 "TargetAlignments": 4,
 "TileEmitter": {
-"$type": "RogueEssence.Content.StaticAreaEmitter, RogueEssence",
-"LocHeight": 8,
-"Anims": [
-{
-"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
-"Anim": {
-"AnimIndex": "Blast_Burn",
-"FrameTime": 3,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": -1,
-"Alpha": 255,
-"AnimFlip": 0
-},
-"TotalTime": 0,
-"Cycles": 1,
-"FrameOffset": 0
-}
-],
-"Bursts": 3,
-"ParticlesPerBurst": 1,
-"BurstTime": 6,
-"Range": 12,
-"Layer": 2
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
 },
 "PreActions": [
 {
@@ -119,22 +97,42 @@
 "LagBehindTime": 0
 },
 "Explosion": {
-"TargetAlignments": 4,
-"HitTiles": false,
-"Range": 0,
-"Speed": 0,
+"TargetAlignments": 6,
+"HitTiles": true,
+"Range": 1,
+"Speed": 8,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.CircleSquareAreaEmitter, RogueEssence",
+"LocHeight": 8,
+"Anims": [
+{
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Blast_Burn",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"ParticlesPerTile": 3.0,
+"RangeDiff": 0,
+"Layer": 2
 },
 "IntroFX": [],
 "ExplodeFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Shadow_Force",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -156,7 +154,7 @@
 },
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 90
+"Power": 85
 }
 ],
 "BeforeTryActions": [],

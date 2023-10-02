@@ -29,7 +29,7 @@
 "Released": true,
 "Comment": "",
 "IndexNum": 80,
-"BaseCharges": 12,
+"BaseCharges": 10,
 "Strikes": 1,
 "HitboxAction": {
 "$type": "RogueEssence.Dungeon.DashAction, RogueEssence",
@@ -51,19 +51,11 @@
 "CharAnim": 17,
 "AppearanceMod": 0,
 "HitTiles": true,
-"Range": 1,
+"Range": 2,
 "StopAtHit": true,
 "StopAtWall": true,
 "TargetAlignments": 4,
 "TileEmitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
-},
-"PreActions": [
-{
-"Delay": 0,
-"Sound": "DUN_Petal_Dance",
-"Emitter": {
 "$type": "RogueEssence.Content.BetweenEmitter, RogueEssence",
 "LocHeight": 0,
 "finished": false,
@@ -100,6 +92,14 @@
 "HeightBack": 32,
 "HeightFront": 32,
 "Offset": 0
+},
+"PreActions": [
+{
+"Delay": 0,
+"Sound": "DUN_Petal_Dance",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
 },
 "ScreenMovement": {
 "MinShake": 0,
@@ -161,7 +161,7 @@
 },
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 80
+"Power": 90
 }
 ],
 "BeforeTryActions": [],

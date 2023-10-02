@@ -31,7 +31,7 @@
 }
 },
 "Released": true,
-"Comment": "No Anim",
+"Comment": "",
 "IndexNum": 595,
 "BaseCharges": 15,
 "Strikes": 1,
@@ -70,10 +70,43 @@
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"PreActions": [],
+"PreActions": [
+{
+"Delay": 0,
+"Sound": "DUN_Wonder_Tile",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Small_White_In",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Sacred_Fire",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -218,8 +251,27 @@
 "Delay": 0,
 "Sound": "",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 10,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Burned",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,

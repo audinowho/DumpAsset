@@ -126,10 +126,13 @@ end
 
 function guildmaster_summit.PreBattle(shortened)
   -- play cutscene
+  
+  GAME:WaitFrames(60)
   GAME:CutsceneMode(true)
-  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
+  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 40)
+  GAME:WaitFrames(60)
+  UI:WaitHideTitle(40)
   GAME:WaitFrames(30)
-  UI:WaitHideTitle(20)
   -- move characters to beside the player
   local player = CH('PLAYER')
   local team1 = CH('Teammate1')
@@ -147,7 +150,7 @@ function guildmaster_summit.PreBattle(shortened)
   end
   
   
-  GAME:FadeIn(20)
+  GAME:FadeIn(40)
   local xatu = CH('Xatu')
   local lucario = CH('Lucario')
   local wigglytuff = CH('Wigglytuff')

@@ -3,11 +3,11 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Zapdos Crown",
+"DefaultText": "Mystery Wing",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "An exclusive item for Zapdos. When kept in the bag, the Pokémon will regain HP after defeating an enemy.",
+"DefaultText": "An exclusive item for Articuno, Zapdos, and Moltres. When kept in the bag, the effects of wands will fly in an arc when waved by the Pokémon.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -15,20 +15,22 @@
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 3200,
-"Rarity": 4,
+"Price": 800,
+"Rarity": 1,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 54
+"ItemType": 0
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
-"zapdos"
+"articuno",
+"zapdos",
+"moltres"
 ]
 },
 {
@@ -195,35 +197,91 @@
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [],
-"BeforeHittings": [],
-"BeforeBeingHits": [],
-"AfterHittings": [],
-"AfterBeingHits": [],
-"OnHitTiles": [],
-"AfterActions": [
+"OnActions": [
 {
 "Key": {
 "str": [
-1
+-3
 ]
 },
 "Value": {
 "$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.KnockOutNeededEvent, PMDC",
-"BaseEvents": [
+"$type": "PMDC.Dungeon.WandAttackNeededEvent, PMDC",
+"ExceptItems": [
+"wand_path",
+"wand_pounce"
+],
+"BaseEvent": {
+"$type": "PMDC.Dungeon.ChangeActionEvent, PMDC",
+"NewAction": {
+"$type": "RogueEssence.Dungeon.ThrowAction, RogueEssence",
+"Anim": {
+"AnimIndex": "Confuse_Ray",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+},
+"Range": 10,
+"Speed": 12,
+"Coverage": 2,
+"ItemSprite": "",
+"CharAnimData": {
+"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
+"ActionType": 42
+},
+"TargetAlignments": 4,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"PreActions": [
 {
-"$type": "PMDC.Dungeon.RestoreHPEvent, PMDC",
-"Numerator": 1,
-"Denominator": 8,
-"AffectTarget": false
+"Delay": 0,
+"Sound": "DUN_Throw_Start",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
 }
-]
+}
+],
+"ActionFX": {
+"Delay": 0,
+"Sound": "DUN_Blowback_Orb",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+"LagBehindTime": 0
+}
+}
 }
 }
 }
 ],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
 "UserElementEffects": [],
 "TargetElementEffects": [],
 "ModifyHPs": [],

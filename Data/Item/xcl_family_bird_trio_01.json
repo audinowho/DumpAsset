@@ -3,11 +3,11 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Moltres Cape",
+"DefaultText": "Articuno Scarf",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "An exclusive item for Moltres. When kept in the bag, the Pokémon will damage nearby enemies after defeating an enemy.",
+"DefaultText": "An exclusive item for Articuno. When kept in the bag, the Pokémon will be able to move again after defeating an enemy.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -23,12 +23,12 @@
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 60
+"ItemType": 49
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
-"moltres"
+"articuno"
 ]
 },
 {
@@ -198,75 +198,38 @@
 "OnActions": [],
 "BeforeHittings": [],
 "BeforeBeingHits": [],
-"AfterHittings": [
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [
 {
 "Key": {
 "str": [
-0
+1
 ]
 },
 "Value": {
 "$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.TargetDeadNeededEvent, PMDC",
+"$type": "PMDC.Dungeon.KnockOutNeededEvent, PMDC",
 "BaseEvents": [
 {
-"$type": "PMDC.Dungeon.InvokeCustomBattleEvent, PMDC",
-"HitboxAction": {
-"$type": "RogueEssence.Dungeon.AreaAction, RogueEssence",
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "PMDC.Dungeon.PreserveTurnEvent, PMDC",
+"Msg": {
+"Key": "MSG_EXTRA_TURN"
 },
-"HitTiles": true,
-"BurstTiles": 2,
-"HitArea": 0,
-"Range": 0,
-"Speed": 0,
-"CharAnimData": {
-"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
-"Process": 0,
-"AnimOverride": 0
-},
-"TargetAlignments": 7,
-"TileEmitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
-},
-"PreActions": [],
-"ActionFX": {
-"Delay": 0,
-"Sound": "",
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
-},
-"ScreenMovement": {
-"MinShake": 0,
-"MaxShake": 0,
-"MaxShakeTime": 0
-}
-},
-"LagBehindTime": 0
-},
-"Explosion": {
-"TargetAlignments": 2,
-"HitTiles": false,
-"Range": 1,
-"Speed": 10,
-"TileEmitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
-},
-"Emitter": {
-"$type": "RogueEssence.Content.CircleSquareAreaEmitter, RogueEssence",
-"LocHeight": 0,
 "Anims": [
 {
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
 "$type": "RogueEssence.Content.StaticAnim, RogueEssence",
 "Anim": {
-"AnimIndex": "Blast_Seed",
-"FrameTime": 3,
+"AnimIndex": "Circle_White_In",
+"FrameTime": 1,
 "StartFrame": -1,
 "EndFrame": -1,
 "AnimDir": -1,
@@ -276,86 +239,21 @@
 "TotalTime": 0,
 "Cycles": 1,
 "FrameOffset": 0
-}
-],
-"ParticlesPerTile": 0.8,
-"RangeDiff": 0,
-"Layer": 2
 },
-"IntroFX": [],
-"ExplodeFX": {
-"Delay": 0,
-"Sound": "DUN_Blast_Seed",
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"Layer": 2,
+"UseDest": false
 },
-"ScreenMovement": {
-"MinShake": 0,
-"MaxShake": 0,
-"MaxShakeTime": 0
+"Sound": "DUN_Attack_Speed_Up",
+"AffectTarget": false,
+"Delay": 20
 }
-}
-},
-"NewData": {
-"Element": "none",
-"Category": 0,
-"HitRate": -1,
-"SkillStates": [],
-"BeforeTryActions": [],
-"BeforeActions": [],
-"OnActions": [],
-"BeforeExplosions": [],
-"BeforeHits": [],
-"OnHits": [
-{
-"Key": {
-"str": [
--1
 ]
-},
-"Value": {
-"$type": "PMDC.Dungeon.MaxHPDamageEvent, PMDC",
-"HPFraction": 6
-}
-}
-],
-"OnHitTiles": [],
-"AfterActions": [],
-"ElementEffects": [],
-"IntroFX": [],
-"HitFX": {
-"Delay": 0,
-"Sound": "",
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
-},
-"ScreenMovement": {
-"MinShake": 0,
-"MaxShake": 0,
-"MaxShakeTime": 0
-}
-},
-"HitCharAction": {
-"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
-"Process": 0,
-"AnimOverride": 0
-}
-},
-"Msg": {
-"Key": "MSG_EXCESSIVE_FORCE"
-},
-"AffectTarget": true
 }
 ]
 }
 }
 }
 ],
-"AfterBeingHits": [],
-"OnHitTiles": [],
-"AfterActions": [],
 "UserElementEffects": [],
 "TargetElementEffects": [],
 "ModifyHPs": [],

@@ -3,11 +3,11 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Zapdos Crown",
+"DefaultText": "Fire Veil",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "An exclusive item for Zapdos. When kept in the bag, the Pokémon will regain HP after defeating an enemy.",
+"DefaultText": "An exclusive item for Moltres. When kept in the bag, the Pokémon's Flying-type moves have a chance to inflict the Burned status.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -15,20 +15,20 @@
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 3200,
-"Rarity": 4,
+"Price": 4000,
+"Rarity": 5,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 54
+"ItemType": 0
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
-"zapdos"
+"moltres"
 ]
 },
 {
@@ -198,32 +198,46 @@
 "OnActions": [],
 "BeforeHittings": [],
 "BeforeBeingHits": [],
-"AfterHittings": [],
-"AfterBeingHits": [],
-"OnHitTiles": [],
-"AfterActions": [
+"AfterHittings": [
 {
 "Key": {
 "str": [
-1
+0
 ]
 },
 "Value": {
 "$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.KnockOutNeededEvent, PMDC",
+"$type": "PMDC.Dungeon.ElementNeededEvent, PMDC",
 "BaseEvents": [
 {
-"$type": "PMDC.Dungeon.RestoreHPEvent, PMDC",
-"Numerator": 1,
-"Denominator": 8,
-"AffectTarget": false
+"$type": "PMDC.Dungeon.OnHitEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
+"StatusID": "burn",
+"AffectTarget": true,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": "MSG_EXCL_ITEM_TYPE"
+},
+"Anims": []
 }
-]
+],
+"RequireDamage": false,
+"RequireContact": false,
+"Chance": 35
+}
+],
+"NeededElement": "flying"
 }
 }
 }
 ],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
 "UserElementEffects": [],
 "TargetElementEffects": [],
 "ModifyHPs": [],

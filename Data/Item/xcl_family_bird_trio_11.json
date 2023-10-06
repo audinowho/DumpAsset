@@ -3,11 +3,11 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Zapdos Crown",
+"DefaultText": "Mystery Seal",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "An exclusive item for Zapdos. When kept in the bag, the Pokémon will regain HP after defeating an enemy.",
+"DefaultText": "An exclusive item for Articuno, Zapdos, and Moltres. When kept in the bag, the Pokémon will counter damage from regular attacks and thrown items.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -15,20 +15,22 @@
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 3200,
-"Rarity": 4,
+"Price": 2400,
+"Rarity": 3,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 54
+"ItemType": 0
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
-"zapdos"
+"articuno",
+"zapdos",
+"moltres"
 ]
 },
 {
@@ -199,31 +201,82 @@
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],
-"AfterBeingHits": [],
-"OnHitTiles": [],
-"AfterActions": [
+"AfterBeingHits": [
 {
 "Key": {
 "str": [
-1
+0
 ]
 },
 "Value": {
 "$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.KnockOutNeededEvent, PMDC",
-"BaseEvents": [
-{
-"$type": "PMDC.Dungeon.RestoreHPEvent, PMDC",
+"$type": "PMDC.Dungeon.CounterNonSkillEvent, PMDC",
 "Numerator": 1,
-"Denominator": 8,
-"AffectTarget": false
+"Denominator": 2,
+"Anims": [
+{
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.ColumnAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Column_Blue",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 192,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1
+},
+"Layer": 2,
+"UseDest": false
+},
+"Sound": "DUN_Light_Screen",
+"AffectTarget": true,
+"Delay": 10
+},
+{
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Hit_Neutral",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"Sound": "DUN_Hit_Neutral",
+"AffectTarget": false,
+"Delay": 0
 }
 ]
 }
 }
 }
 ],
+"OnHitTiles": [],
+"AfterActions": [],
 "UserElementEffects": [],
 "TargetElementEffects": [],
 "ModifyHPs": [],

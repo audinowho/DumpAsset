@@ -3,11 +3,11 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Mystery Wing",
+"DefaultText": "Thunder Veil",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "An exclusive item for Articuno, Zapdos, and Moltres. When kept in the bag, the effects of wands will fly in an arc when waved by the Pokémon.",
+"DefaultText": "An exclusive item for Zapdos. When kept in the bag, the Pokémon's Flying-type moves have a chance to inflict the Paralyzed status.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -15,8 +15,8 @@
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 800,
-"Rarity": 1,
+"Price": 4000,
+"Rarity": 5,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
@@ -28,9 +28,7 @@
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
-"articuno",
-"zapdos",
-"moltres"
+"zapdos"
 ]
 },
 {
@@ -197,88 +195,46 @@
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [
 {
 "Key": {
 "str": [
--3
+0
 ]
 },
 "Value": {
 "$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.WandAttackNeededEvent, PMDC",
-"ExceptItems": [
-"wand_path",
-"wand_pounce"
-],
-"BaseEvent": {
-"$type": "PMDC.Dungeon.ChangeActionEvent, PMDC",
-"NewAction": {
-"$type": "RogueEssence.Dungeon.ThrowAction, RogueEssence",
-"Anim": {
-"AnimIndex": "Confuse_Ray",
-"FrameTime": 2,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": -1,
-"Alpha": 255,
-"AnimFlip": 0
-},
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
-},
-"Range": 10,
-"Speed": 12,
-"Coverage": 2,
-"ItemSprite": "",
-"CharAnimData": {
-"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 42
-},
-"TargetAlignments": 4,
-"TileEmitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
-},
-"PreActions": [
+"$type": "PMDC.Dungeon.ElementNeededEvent, PMDC",
+"BaseEvents": [
 {
-"Delay": 0,
-"Sound": "DUN_Throw_Start",
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "PMDC.Dungeon.OnHitEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
+"StatusID": "paralyze",
+"AffectTarget": true,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": "MSG_EXCL_ITEM_TYPE"
 },
-"ScreenMovement": {
-"MinShake": 0,
-"MaxShake": 0,
-"MaxShakeTime": 0
-}
+"Anims": []
 }
 ],
-"ActionFX": {
-"Delay": 0,
-"Sound": "DUN_Blowback_Orb",
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
-},
-"ScreenMovement": {
-"MinShake": 0,
-"MaxShake": 0,
-"MaxShakeTime": 0
+"RequireDamage": false,
+"RequireContact": false,
+"Chance": 35
 }
-},
-"LagBehindTime": 0
-}
-}
+],
+"NeededElement": "flying"
 }
 }
 }
 ],
-"BeforeHittings": [],
-"BeforeBeingHits": [],
-"AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],
 "AfterActions": [],

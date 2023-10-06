@@ -3,11 +3,11 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Zapdos Crown",
+"DefaultText": "Mystery Card",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "An exclusive item for Zapdos. When kept in the bag, the Pokémon will regain HP after defeating an enemy.",
+"DefaultText": "An exclusive item for Articuno, Zapdos, and Moltres. When kept in the bag, the Pokémon's attacks never miss, and always land a critical hit if the move is on its last PP.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -15,20 +15,22 @@
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 3200,
-"Rarity": 4,
+"Price": 1600,
+"Rarity": 2,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 54
+"ItemType": 0
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
-"zapdos"
+"articuno",
+"zapdos",
+"moltres"
 ]
 },
 {
@@ -196,34 +198,26 @@
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
-"BeforeHittings": [],
-"BeforeBeingHits": [],
-"AfterHittings": [],
-"AfterBeingHits": [],
-"OnHitTiles": [],
-"AfterActions": [
+"BeforeHittings": [
 {
 "Key": {
 "str": [
-1
+0
 ]
 },
 "Value": {
 "$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.KnockOutNeededEvent, PMDC",
-"BaseEvents": [
-{
-"$type": "PMDC.Dungeon.RestoreHPEvent, PMDC",
-"Numerator": 1,
-"Denominator": 8,
-"AffectTarget": false
-}
-]
+"$type": "PMDC.Dungeon.BetterOddsEvent, PMDC"
 }
 }
 }
 ],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
 "UserElementEffects": [],
 "TargetElementEffects": [],
 "ModifyHPs": [],

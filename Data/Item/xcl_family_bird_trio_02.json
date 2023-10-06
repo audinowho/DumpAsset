@@ -3,11 +3,11 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Moltres Crest",
+"DefaultText": "Articuno Crest",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "An exclusive item for Moltres. When kept in the bag, it raises the critical-hit ratio of super-effective hits.",
+"DefaultText": "An exclusive item for Articuno. When kept in the bag, stat changes inflicted on the Pokémon are passed to the Pokémon that caused it.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -28,7 +28,7 @@
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
-"moltres"
+"articuno"
 ]
 },
 {
@@ -182,7 +182,54 @@
 "OnPickups": [],
 "BeforeStatusAdds": [],
 "BeforeStatusAddings": [],
-"OnStatusAdds": [],
+"OnStatusAdds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyStatusEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.StatDropSyncEvent, PMDC",
+"Message": {
+"Key": "MSG_STAT_DROP_TRIGGER"
+},
+"Anims": [
+{
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Small_Blue_Out",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"Sound": "DUN_Switcher",
+"Delay": 30,
+"NeedSelf": false
+}
+]
+}
+}
+}
+],
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
 "OnMapStatusRemoves": [],
@@ -196,23 +243,7 @@
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
-"BeforeHittings": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.CritEffectiveEvent, PMDC",
-"Reverse": false,
-"AddCrit": 1
-}
-}
-}
-],
+"BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],
 "AfterBeingHits": [],

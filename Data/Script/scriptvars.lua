@@ -168,9 +168,12 @@ SV.forest_camp =
 SV.cliff_camp = 
 {
   ExpositionComplete  = false,
-  TeamRetreatIntro = false,
-  TeamUndergrowthIntro = false,
-  RivalEarlyIntro = false
+  TeamUndergrowthIntro = false
+}
+
+SV.team_retreat =
+{
+  Intro = false
 }
 
 --TODO

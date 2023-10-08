@@ -46,8 +46,6 @@ function cliff_camp.SetupNpcs()
   GROUND:Unhide("Rival_Early")
   GROUND:Unhide("Undergrowth_1")
   GROUND:Unhide("Undergrowth_2")
-  GROUND:Unhide("Speedster_1")
-  GROUND:Unhide("Speedster_2")
   GROUND:Unhide("NPC_Sightseer")
   
   if SV.supply_corps.Status <= 1 then
@@ -137,53 +135,6 @@ function cliff_camp.Teammate3_Action(chara, activator)
   COMMON.GroundInteract(activator, chara, true)
 end
 
-function cliff_camp.Speedster_1_Action(chara, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
-  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-	if not SV.cliff_camp.TeamRetreatIntro then
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Intro_001']))
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Intro_002']))
-	  GROUND:EntTurn(chara, Direction.DownLeft)
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Intro_003']))
-	  GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Intro_004']))
-	  GROUND:EntTurn(chara, Direction.DownLeft)
-	  SV.cliff_camp.TeamRetreatIntro = true
-	else
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_001']))
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_002']))
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_003']))
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_004']))
-	  GROUND:CharSetEmote(chara, "sweating", 1)
-	  SOUND:PlayBattleSE("EVT_Emote_Sweating")
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_005']))
-	  GROUND:EntTurn(chara, Direction.DownLeft)
-	end
-end
-  
-function cliff_camp.Speedster_2_Action(chara, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
-  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-	if not SV.cliff_camp.TeamRetreatIntro then
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Intro_001']))
-	  GROUND:EntTurn(chara, Direction.UpRight)
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Intro_002']))
-	  GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Intro_003']))
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Intro_004']))
-	  SV.cliff_camp.TeamRetreatIntro = true
-	  GROUND:EntTurn(chara, Direction.UpRight)
-	else
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Line_001']))
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Line_002']))
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Line_003']))
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Line_004']))
-	  GROUND:EntTurn(chara, Direction.UpRight)
-	end
-end
-
 function cliff_camp.Undergrowth_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
@@ -215,20 +166,8 @@ end
 function cliff_camp.Rival_Early_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local player = CH('PLAYER')
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  if not SV.cliff_camp.RivalEarlyIntro then
-    GROUND:CharTurnToChar(chara, player)--make the chara turn to the player
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_Line_001']))
-	local receive_item = RogueEssence.Dungeon.InvItem("orb_escape")
-	COMMON.GiftItem(player, receive_item)
-	UI:SetSpeaker(chara)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_Line_002']))
-    SV.cliff_camp.RivalEarlyIntro = true
-	GROUND:EntTurn(chara, Direction.Right)
-  else
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_Line_003']))
-  end
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_Line_003']))
 end
   
 function cliff_camp.Monk_Action(chara, activator)

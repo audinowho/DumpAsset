@@ -67,6 +67,8 @@ function forest_camp.SetupNpcs()
   GROUND:Unhide("NPC_Camps")
   GROUND:Unhide("NPC_Parent")
   GROUND:Unhide("NPC_Child")
+  GROUND:Unhide("Speedster_1")
+  GROUND:Unhide("Speedster_2")
 
   if SV.supply_corps.Status == 0 then
     GROUND:Unhide("Snorlax")
@@ -261,6 +263,40 @@ function forest_camp.NPC_Deliver_Action(chara, activator)
   
 
 end
+
+
+function forest_camp.Speedster_1_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  local player = CH('PLAYER')
+  GROUND:CharTurnToChar(chara,player)
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_001']))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_002']))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_003']))
+	GROUND:EntTurn(chara, Direction.UpLeft)
+end
+  
+function forest_camp.Speedster_2_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  local player = CH('PLAYER')
+  GROUND:CharTurnToChar(chara,player)
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  
+  local receive_item = RogueEssence.Dungeon.InvItem("orb_escape")
+  if not SV.team_retreat.Intro then
+    GROUND:CharTurnToChar(chara, player)--make the chara turn to the player
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Line_001']))
+	COMMON.GiftItem(player, receive_item)
+    SV.team_retreat.Intro = true
+  end
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Line_002'], receive_item:GetDisplayName()))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Line_003']))
+  
+  GROUND:EntTurn(chara, Direction.DownRight)
+end
+
 
 function forest_camp.NPC_Camps_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

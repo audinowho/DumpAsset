@@ -518,4 +518,11 @@ function base_camp.Teammate3_Action(chara, activator)
   COMMON.GroundInteract(activator, chara, true)
 end
 
+function base_camp.SisterReminderActive()
+  if SV.family.Sister == 0 and SV.family.SisterActiveDays > 2 then
+    return true
+  end
+  return false
+end
+
 return base_camp

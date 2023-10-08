@@ -233,6 +233,32 @@ function UpgradeTools:OnUpgrade()
       Intro = false
 	}
   end
+
+  if SV.team_retreat == nil then
+	SV.team_retreat =
+	{
+      Intro = false
+	}
+  end
+
+  
+  if SV.family == nil then
+	SV.family =
+	{
+	  SisterActiveDays = 0,
+	  Sister = 0,
+	  MotherActiveDays = 0,
+	  Mother = 0,
+	  FatherActiveDays = 0,
+	  Father = 0,
+	  SonActiveDays = 0,
+	  Son = 0,
+	  GrandmaActiveDays = 0,
+	  Grandma = 0,
+	  PetActiveDays = 0,
+	  Pet = 0
+	}
+  end
   
   PrintInfo("=>> Loaded version")
 end

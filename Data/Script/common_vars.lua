@@ -75,5 +75,9 @@ function COMMON.UpdateDayEndVars()
 	end
   end
   
+  if SV.family.Sister == 0 then
+    SV.family.SisterActiveDays = SV.family.SisterActiveDays + 1
+  end
+  
 end
 

@@ -119,6 +119,7 @@ function forest_camp.CheckMissions()
       UI:WaitShowDialogue("The sister drops something as she runs off.")
       
       SV.magnagate.Cards = SV.magnagate.Cards + 1
+	  SV.family.Sister = 1
       COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_SUN"):ToLocal())
       quest.Complete = COMMON.MISSION_ARCHIVED
       SV.missions.FinishedMissions["EscortSister"] = quest
@@ -261,7 +262,6 @@ function forest_camp.NPC_Deliver_Action(chara, activator)
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_Route']))
   end
   
-
 end
 
 

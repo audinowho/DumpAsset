@@ -12,11 +12,15 @@
 "ID": 0,
 "MapTeams": [
 {
-"$type": "RogueEssence.Dungeon.MonsterTeam, RogueEssence",
+"$type": "RogueEssence.Dungeon.ExplorerTeam, RogueEssence",
+"Rank": "bronze",
 "Players": [
 {
 "Element1": "dragon",
 "Element2": "flying",
+"TurnWait": 0,
+"TiersUsed": 0,
+"TurnUsed": false,
 "movementSpeed": 0,
 "dead": false,
 "serializationLoc": {
@@ -89,7 +93,7 @@
 }
 ],
 "EquippedItem": {
-"ID": "",
+"ID": "medicine_max_potion",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,
@@ -104,9 +108,6 @@
 "MaxFullness": 100,
 "StatusEffects": {},
 "MustHitNext": false,
-"TurnWait": 0,
-"TiersUsed": 0,
-"TurnUsed": false,
 "EXPMarked": false,
 "Tactic": {
 "Name": {
@@ -240,25 +241,18 @@
 "Unrecruitable": true,
 "ActionEvents": [],
 "ScriptVars": null
-}
-],
-"Guests": [],
-"inventory": [],
-"Name": "",
-"LeaderIndex": 0,
-"FoeConflict": false
 },
-{
-"$type": "RogueEssence.Dungeon.MonsterTeam, RogueEssence",
-"Players": [
 {
 "Element1": "normal",
 "Element2": "none",
+"TurnWait": 0,
+"TiersUsed": 0,
+"TurnUsed": false,
 "movementSpeed": 0,
 "dead": false,
 "serializationLoc": {
-"X": 8,
-"Y": 7
+"X": 7,
+"Y": 6
 },
 "serializationDir": 7,
 "ProxyName": "",
@@ -326,10 +320,10 @@
 }
 ],
 "EquippedItem": {
-"ID": "",
+"ID": "ammo_rare_fossil",
 "Cursed": false,
 "HiddenValue": "",
-"Amount": 0,
+"Amount": 3,
 "Price": 0
 },
 "Absentee": false,
@@ -341,46 +335,50 @@
 "MaxFullness": 100,
 "StatusEffects": {},
 "MustHitNext": false,
-"TurnWait": 0,
-"TiersUsed": 0,
-"TurnUsed": false,
 "EXPMarked": false,
 "Tactic": {
 "Name": {
-"DefaultText": "Normal Wander",
+"DefaultText": "Item Finder",
 "LocalTexts": {}
 },
 "Released": false,
 "Comment": "",
-"ID": "wander_normal",
+"ID": "item_finder",
 "Assignable": false,
 "Plans": [
 {
 "$type": "PMDC.Dungeon.AttackFoesPlan, PMDC",
 "AttackPattern": 2,
 "PositionPattern": 1,
-"IQ": 100,
+"IQ": 44,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 4
 },
 {
+"$type": "PMDC.Dungeon.FindItemPlan, PMDC",
+"IQ": 172,
+"AttackRange": 0,
+"StatusRange": 0,
+"SelfStatusRange": 0
+},
+{
 "$type": "PMDC.Dungeon.FollowLeaderPlan, PMDC",
-"IQ": 228,
+"IQ": 172,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 0
 },
 {
 "$type": "PMDC.Dungeon.ExplorePlan, PMDC",
-"IQ": 228,
+"IQ": 172,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 0
 },
 {
 "$type": "PMDC.Dungeon.WaitPlan, PMDC",
-"IQ": 228,
+"IQ": 172,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 0
@@ -477,25 +475,18 @@
 "Unrecruitable": true,
 "ActionEvents": [],
 "ScriptVars": null
-}
-],
-"Guests": [],
-"inventory": [],
-"Name": "",
-"LeaderIndex": 0,
-"FoeConflict": false
 },
-{
-"$type": "RogueEssence.Dungeon.MonsterTeam, RogueEssence",
-"Players": [
 {
 "Element1": "normal",
 "Element2": "none",
+"TurnWait": 0,
+"TiersUsed": 0,
+"TurnUsed": false,
 "movementSpeed": 0,
 "dead": false,
 "serializationLoc": {
-"X": 12,
-"Y": 7
+"X": 13,
+"Y": 6
 },
 "serializationDir": 1,
 "ProxyName": "",
@@ -563,10 +554,10 @@
 }
 ],
 "EquippedItem": {
-"ID": "",
+"ID": "ammo_golden_thorn",
 "Cursed": false,
 "HiddenValue": "",
-"Amount": 0,
+"Amount": 3,
 "Price": 0
 },
 "Absentee": false,
@@ -578,46 +569,50 @@
 "MaxFullness": 100,
 "StatusEffects": {},
 "MustHitNext": false,
-"TurnWait": 0,
-"TiersUsed": 0,
-"TurnUsed": false,
 "EXPMarked": false,
 "Tactic": {
 "Name": {
-"DefaultText": "Normal Wander",
+"DefaultText": "Item Finder",
 "LocalTexts": {}
 },
 "Released": false,
 "Comment": "",
-"ID": "wander_normal",
+"ID": "item_finder",
 "Assignable": false,
 "Plans": [
 {
 "$type": "PMDC.Dungeon.AttackFoesPlan, PMDC",
 "AttackPattern": 2,
 "PositionPattern": 1,
-"IQ": 100,
+"IQ": 44,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 4
 },
 {
+"$type": "PMDC.Dungeon.FindItemPlan, PMDC",
+"IQ": 172,
+"AttackRange": 0,
+"StatusRange": 0,
+"SelfStatusRange": 0
+},
+{
 "$type": "PMDC.Dungeon.FollowLeaderPlan, PMDC",
-"IQ": 228,
+"IQ": 172,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 0
 },
 {
 "$type": "PMDC.Dungeon.ExplorePlan, PMDC",
-"IQ": 228,
+"IQ": 172,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 0
 },
 {
 "$type": "PMDC.Dungeon.WaitPlan, PMDC",
-"IQ": 228,
+"IQ": 172,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 0
@@ -714,27 +709,20 @@
 "Unrecruitable": true,
 "ActionEvents": [],
 "ScriptVars": null
-}
-],
-"Guests": [],
-"inventory": [],
-"Name": "",
-"LeaderIndex": 0,
-"FoeConflict": false
 },
-{
-"$type": "RogueEssence.Dungeon.MonsterTeam, RogueEssence",
-"Players": [
 {
 "Element1": "steel",
 "Element2": "flying",
+"TurnWait": 0,
+"TiersUsed": 0,
+"TurnUsed": false,
 "movementSpeed": 0,
 "dead": false,
 "serializationLoc": {
-"X": 10,
-"Y": 12
+"X": 13,
+"Y": 10
 },
-"serializationDir": 4,
+"serializationDir": 3,
 "ProxyName": "",
 "ProxySprite": {
 "Species": "",
@@ -800,10 +788,10 @@
 }
 ],
 "EquippedItem": {
-"ID": "",
+"ID": "ammo_silver_spike",
 "Cursed": false,
 "HiddenValue": "",
-"Amount": 0,
+"Amount": 3,
 "Price": 0
 },
 "Absentee": false,
@@ -815,46 +803,50 @@
 "MaxFullness": 100,
 "StatusEffects": {},
 "MustHitNext": false,
-"TurnWait": 0,
-"TiersUsed": 0,
-"TurnUsed": false,
 "EXPMarked": false,
 "Tactic": {
 "Name": {
-"DefaultText": "Normal Wander",
+"DefaultText": "Item Finder",
 "LocalTexts": {}
 },
 "Released": false,
 "Comment": "",
-"ID": "wander_normal",
+"ID": "item_finder",
 "Assignable": false,
 "Plans": [
 {
 "$type": "PMDC.Dungeon.AttackFoesPlan, PMDC",
 "AttackPattern": 2,
 "PositionPattern": 1,
-"IQ": 100,
+"IQ": 44,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 4
 },
 {
+"$type": "PMDC.Dungeon.FindItemPlan, PMDC",
+"IQ": 172,
+"AttackRange": 0,
+"StatusRange": 0,
+"SelfStatusRange": 0
+},
+{
 "$type": "PMDC.Dungeon.FollowLeaderPlan, PMDC",
-"IQ": 228,
+"IQ": 172,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 0
 },
 {
 "$type": "PMDC.Dungeon.ExplorePlan, PMDC",
-"IQ": 228,
+"IQ": 172,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 0
 },
 {
 "$type": "PMDC.Dungeon.WaitPlan, PMDC",
-"IQ": 228,
+"IQ": 172,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 0
@@ -951,264 +943,20 @@
 "Unrecruitable": true,
 "ActionEvents": [],
 "ScriptVars": null
-}
-],
-"Guests": [],
-"inventory": [],
-"Name": "",
-"LeaderIndex": 0,
-"FoeConflict": false
 },
-{
-"$type": "RogueEssence.Dungeon.MonsterTeam, RogueEssence",
-"Players": [
-{
-"Element1": "ghost",
-"Element2": "none",
-"movementSpeed": 0,
-"dead": false,
-"serializationLoc": {
-"X": 13,
-"Y": 9
-},
-"serializationDir": 2,
-"ProxyName": "",
-"ProxySprite": {
-"Species": "",
-"Form": -1,
-"Skin": "",
-"Gender": -1
-},
-"CurrentForm": {
-"Species": "dusclops",
-"Form": 0,
-"Skin": "normal",
-"Gender": 1
-},
-"ProxyAtk": -1,
-"ProxyDef": -1,
-"ProxyMAtk": -1,
-"ProxyMDef": -1,
-"ProxySpeed": -1,
-"Skills": [
-{
-"Element": {
-"SkillNum": "will_o_wisp",
-"Charges": 18,
-"Enabled": true,
-"Sealed": false
-},
-"BackRef": 0
-},
-{
-"Element": {
-"SkillNum": "shadow_sneak",
-"Charges": 16,
-"Enabled": true,
-"Sealed": false
-},
-"BackRef": 1
-},
-{
-"Element": {
-"SkillNum": "pain_split",
-"Charges": 20,
-"Enabled": true,
-"Sealed": false
-},
-"BackRef": 2
-},
-{
-"Element": {
-"SkillNum": "disable",
-"Charges": 16,
-"Enabled": true,
-"Sealed": false
-},
-"BackRef": 3
-}
-],
-"Intrinsics": [
-{
-"Element": {
-"ID": "pressure"
-},
-"BackRef": 0
-}
-],
-"EquippedItem": {
-"ID": "",
-"Cursed": false,
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0
-},
-"Absentee": false,
-"ChargeBoost": 0,
-"HP": 106,
-"HPRemainder": 0,
-"Fullness": 100,
-"FullnessRemainder": 0,
-"MaxFullness": 100,
-"StatusEffects": {},
-"MustHitNext": false,
-"TurnWait": 0,
-"TiersUsed": 0,
-"TurnUsed": false,
-"EXPMarked": false,
-"Tactic": {
-"Name": {
-"DefaultText": "Normal Wander",
-"LocalTexts": {}
-},
-"Released": false,
-"Comment": "",
-"ID": "wander_normal",
-"Assignable": false,
-"Plans": [
-{
-"$type": "PMDC.Dungeon.AttackFoesPlan, PMDC",
-"AttackPattern": 2,
-"PositionPattern": 1,
-"IQ": 100,
-"AttackRange": 0,
-"StatusRange": 0,
-"SelfStatusRange": 4
-},
-{
-"$type": "PMDC.Dungeon.FollowLeaderPlan, PMDC",
-"IQ": 228,
-"AttackRange": 0,
-"StatusRange": 0,
-"SelfStatusRange": 0
-},
-{
-"$type": "PMDC.Dungeon.ExplorePlan, PMDC",
-"IQ": 228,
-"AttackRange": 0,
-"StatusRange": 0,
-"SelfStatusRange": 0
-},
-{
-"$type": "PMDC.Dungeon.WaitPlan, PMDC",
-"IQ": 228,
-"AttackRange": 0,
-"StatusRange": 0,
-"SelfStatusRange": 0
-}
-]
-},
-"Mobility": 8,
-"CantWalk": false,
-"ItemDisabled": false,
-"IntrinsicDisabled": false,
-"CanRemoveStuck": false,
-"StopItemAtHit": false,
-"MovesScrambled": false,
-"ChargeSaver": false,
-"WaitToAttack": false,
-"CantInteract": false,
-"EnemyOfFriend": false,
-"AttackFriend": false,
-"TileSight": -1,
-"CharSight": -1,
-"Unidentifiable": false,
-"Unlocatable": false,
-"SeeAllChars": false,
-"SeeItems": false,
-"SeeWallItems": false,
-"SeeTraps": false,
-"CharStates": [],
-"BackRef": {
-"Assembly": false,
-"Index": -1
-},
-"Nickname": "",
-"OriginalUUID": "",
-"OriginalTeam": "",
-"BaseForm": {
-"Species": "dusclops",
-"Form": 0,
-"Skin": "normal",
-"Gender": 1
-},
-"Level": 35,
-"EXP": 0,
-"MaxHPBonus": 50,
-"AtkBonus": 0,
-"DefBonus": 0,
-"MAtkBonus": 0,
-"MDefBonus": 0,
-"SpeedBonus": 0,
-"BaseSkills": [
-{
-"SkillNum": "will_o_wisp",
-"Charges": 18
-},
-{
-"SkillNum": "shadow_sneak",
-"Charges": 16
-},
-{
-"SkillNum": "pain_split",
-"Charges": 20
-},
-{
-"SkillNum": "disable",
-"Charges": 16
-}
-],
-"BaseIntrinsics": [
-"pressure"
-],
-"Relearnables": {},
-"Discriminator": 0,
-"MetAt": "",
-"MetLoc": {
-"ID": "",
-"StructID": {
-"Segment": -1,
-"ID": -1
-},
-"EntryPoint": -1
-},
-"DefeatAt": "",
-"DefeatLoc": {
-"ID": "",
-"StructID": {
-"Segment": -1,
-"ID": -1
-},
-"EntryPoint": -1
-},
-"IsFounder": false,
-"IsPartner": false,
-"NameLocked": false,
-"IsFavorite": false,
-"Unrecruitable": true,
-"ActionEvents": [],
-"ScriptVars": null
-}
-],
-"Guests": [],
-"inventory": [],
-"Name": "",
-"LeaderIndex": 0,
-"FoeConflict": false
-},
-{
-"$type": "RogueEssence.Dungeon.MonsterTeam, RogueEssence",
-"Players": [
 {
 "Element1": "dark",
 "Element2": "ice",
+"TurnWait": 0,
+"TiersUsed": 0,
+"TurnUsed": false,
 "movementSpeed": 0,
 "dead": false,
 "serializationLoc": {
 "X": 7,
-"Y": 9
+"Y": 10
 },
-"serializationDir": 6,
+"serializationDir": 5,
 "ProxyName": "",
 "ProxySprite": {
 "Species": "",
@@ -1274,10 +1022,10 @@
 }
 ],
 "EquippedItem": {
-"ID": "",
+"ID": "wand_warp",
 "Cursed": false,
 "HiddenValue": "",
-"Amount": 0,
+"Amount": 3,
 "Price": 0
 },
 "Absentee": false,
@@ -1289,46 +1037,50 @@
 "MaxFullness": 100,
 "StatusEffects": {},
 "MustHitNext": false,
-"TurnWait": 0,
-"TiersUsed": 0,
-"TurnUsed": false,
 "EXPMarked": false,
 "Tactic": {
 "Name": {
-"DefaultText": "Normal Wander",
+"DefaultText": "Item Finder",
 "LocalTexts": {}
 },
 "Released": false,
 "Comment": "",
-"ID": "wander_normal",
+"ID": "item_finder",
 "Assignable": false,
 "Plans": [
 {
 "$type": "PMDC.Dungeon.AttackFoesPlan, PMDC",
 "AttackPattern": 2,
 "PositionPattern": 1,
-"IQ": 100,
+"IQ": 44,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 4
 },
 {
+"$type": "PMDC.Dungeon.FindItemPlan, PMDC",
+"IQ": 172,
+"AttackRange": 0,
+"StatusRange": 0,
+"SelfStatusRange": 0
+},
+{
 "$type": "PMDC.Dungeon.FollowLeaderPlan, PMDC",
-"IQ": 228,
+"IQ": 172,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 0
 },
 {
 "$type": "PMDC.Dungeon.ExplorePlan, PMDC",
-"IQ": 228,
+"IQ": 172,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 0
 },
 {
 "$type": "PMDC.Dungeon.WaitPlan, PMDC",
-"IQ": 228,
+"IQ": 172,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 0
@@ -1429,6 +1181,14 @@
 ],
 "Guests": [],
 "inventory": [],
+"MaxInv": 24,
+"Assembly": [],
+"Storage": {},
+"BoxStorage": [],
+"Bank": 0,
+"Money": 0,
+"Fame": 0,
+"RankExtra": 0,
 "Name": "",
 "LeaderIndex": 0,
 "FoeConflict": false
@@ -1599,8 +1359,7 @@
 "CurrentOrder": {
 "TurnTier": 0,
 "Faction": 0,
-"TurnIndex": 0,
-"SkipAll": false
+"TurnIndex": 0
 },
 "TurnToChar": []
 },

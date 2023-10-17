@@ -167,7 +167,7 @@ function cliff_camp.Rival_Early_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_Line_001']))
 end
   
 function cliff_camp.Monk_Action(chara, activator)

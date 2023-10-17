@@ -386,7 +386,7 @@ function canyon_camp.NPC_Strategy_Action(chara, activator)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Line_001']))
 end
 
-function canyon_camp.NPC_Fairy(chara, activator)
+function canyon_camp.NPC_Fairy_Action(chara, activator)
   
   UI:SetSpeaker(chara)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))

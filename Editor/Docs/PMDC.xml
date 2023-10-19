@@ -9,6 +9,161 @@
             Maps monster, form to summary
             </summary>
         </member>
+        <member name="F:PMDC.Data.MonsterFormData.Generation">
+            <summary>
+            What generation it was introduced in
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.MonsterFormData.GenderlessWeight">
+            <summary>
+            How often it appears as genderless (weight)
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.MonsterFormData.MaleWeight">
+            <summary>
+            How often it appears as male (weight)
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.MonsterFormData.FemaleWeight">
+            <summary>
+            How often it appears as female (weight)
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.MonsterFormData.BaseHP">
+            <summary>
+            Base HP stat
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.MonsterFormData.BaseAtk">
+            <summary>
+            Base attack stat
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.MonsterFormData.BaseDef">
+            <summary>
+            Base defense stat
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.MonsterFormData.BaseMAtk">
+            <summary>
+            Base special attack stat
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.MonsterFormData.BaseMDef">
+            <summary>
+            Base special defense stat
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.MonsterFormData.BaseSpeed">
+            <summary>
+            Base speed stat
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.MonsterFormData.ExpYield">
+            <summary>
+            Base EXP yield
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.MonsterFormData.Height">
+            <summary>
+            species/form height
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.MonsterFormData.Weight">
+            <summary>
+            species/form weight
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.MonsterFormData.Personalities">
+            <summary>
+            Possible personalities (advanced)
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.MonsterFormData.TeachSkills">
+            <summary>
+            Moves learned by TM
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.MonsterFormData.SharedSkills">
+            <summary>
+            Egg moves
+            </summary>
+        </member>
+        <member name="F:PMDC.Data.MonsterFormData.SecretSkills">
+            <summary>
+            Tutor moves
+            </summary>
+        </member>
+        <member name="M:PMDC.Data.MonsterFormData.GetStat(System.Int32,RogueEssence.Data.Stat,System.Int32)">
+            <summary>
+            Calculates stat based on level, stat type, and bonus
+            </summary>
+            <param name="level"></param>
+            <param name="stat"></param>
+            <param name="bonus"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.Data.MonsterFormData.RollSkin(RogueElements.IRandom)">
+            <summary>
+            Rolls a random skin (shinyness) this monster can spawn with
+            </summary>
+            <param name="rand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.Data.MonsterFormData.GetPersonalityType(System.Int32)">
+            <summary>
+            Gets a personality type given an integer (advanced)
+            </summary>
+            <param name="discriminator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.Data.MonsterFormData.RollGender(RogueElements.IRandom)">
+            <summary>
+            Rolls a possible gender this monster can spawn as
+            </summary>
+            <param name="rand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.Data.MonsterFormData.RollIntrinsic(RogueElements.IRandom,System.Int32)">
+            <summary>
+            Rolls a random ability this monster can spawn as.  No hidden abilities.
+            </summary>
+            <param name="rand"></param>
+            <param name="bounds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.Data.MonsterFormData.GetPossibleGenders">
+            <summary>
+            Gets the possible genders that can be rolled
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.Data.MonsterFormData.GetPossibleSkins">
+            <summary>
+            Gets the possible skins that can be rolled
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.Data.MonsterFormData.GetPossibleIntrinsicSlots">
+            <summary>
+            Gets the possible intrinsic slots that can be rolled
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.Data.MonsterFormData.GetMaxStat(RogueEssence.Data.Stat)">
+            <summary>
+            Gets its max stat for a given stat type
+            </summary>
+            <param name="stat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PMDC.Data.MonsterFormData.CanLearnSkill(System.String)">
+            <summary>
+            Checks if it can learn the skill
+            </summary>
+            <param name="skill"></param>
+            <returns></returns>
+        </member>
         <member name="F:PMDC.Data.RarityData.RarityMap">
             <summary>
             Maps monster, rarity to list of applicable items 
@@ -317,10 +472,90 @@
             EXP handed out for defeating an enemy is equal to its base EXP yield without any changes.
             </summary>
         </member>
+        <member name="T:PMDC.Dungeon.HandoutPiecewiseExpEvent">
+            <summary>
+            Uses one formula when the recipient's level is at or lower than the defeated level
+            And another when it's higher
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.HandoutPiecewiseExpEvent.ScaleMin">
+            <summary>
+            Minimum level for target's level to be counted at
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.HandoutPiecewiseExpEvent.ScaleAdd">
+            <summary>
+            Added level for the target to be counted at
+            </summary>
+        </member>
         <member name="T:PMDC.Dungeon.HandoutRelativeExpEvent">
             <summary>
             EXP handed out to each team member is scaled based on the team member's level relative to the defeated enemy's level.
-            BaseEXP * Numerator * (2 * EnemyLv + LevelBuffer) ^ 3 / (EnemyLv + PlayerLv + LevelBuffer) ^ 3 / Denominator + 1
+            BaseEXP * Numerator * (2 * EnemyLv + LevelBuffer) ^ PowerCurve / (EnemyLv + PlayerLv + LevelBuffer) ^ PowerCurve / Denominator + 1
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.HandoutRelativeExpEvent.Numerator">
+            <summary>
+            Numerator of ratio
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.HandoutRelativeExpEvent.Denominator">
+            <summary>
+            Denominator for ratio
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.HandoutRelativeExpEvent.LevelBuffer">
+            <summary>
+            Number to add to numerator and denominator to buffer the ratio
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.HandoutRelativeExpEvent.PowerCurve">
+            <summary>
+            Exponent when underleveled
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.HandoutHarmonicExpEvent">
+            <summary>
+            EXP handed out to each team member is scaled based on the team member's level relative to the defeated enemy's level.
+            BaseEXP * Numerator * LevelBuffer / (PlayerLv - EnemyLv + LevelBuffer) / Denominator + 1
+            This means it cannot be applied to situations where PlayerLv is LevelBuffer levels lower than EnemyLv due to div by 0
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.HandoutHarmonicExpEvent.Numerator">
+            <summary>
+            Numerator of ratio
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.HandoutHarmonicExpEvent.Denominator">
+            <summary>
+            Denominator for ratio
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.HandoutHarmonicExpEvent.LevelBuffer">
+            <summary>
+            Number to add to numerator and denominator to buffer the ratio
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.HandoutStackExpEvent">
+            <summary>
+            EXP handed out to each team member is scaled based on the team member's level relative to the defeated enemy's level.
+            BaseEXP * Numerator * (EnemyLv - PlayerLv + LevelBuffer) / (LevelBuffer) / Denominator + 1
+            Will drop to 0 if PlayerLv is LevelBuffer levels higher than EnemyLv
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.HandoutStackExpEvent.Numerator">
+            <summary>
+            Numerator of ratio
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.HandoutStackExpEvent.Denominator">
+            <summary>
+            Denominator for ratio
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.HandoutStackExpEvent.LevelBuffer">
+            <summary>
+            Number to add to numerator and denominator to buffer the ratio
             </summary>
         </member>
         <member name="F:PMDC.Dungeon.CompassEvent.EligibleTiles">
@@ -1272,6 +1507,22 @@
             </summary>
         </member>
         <member name="F:PMDC.LevelGen.MobSpawnItem.MapStartOnly">
+            <summary>
+            Only give it the item on map generation.
+            Respawns that occur after the map is generated do not get the item.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.MobSpawnExclBase">
+            <summary>
+            Spawn the mob with a box containing an exclusive item.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobSpawnExclBase.Box">
+            <summary>
+            Type of box
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobSpawnExclBase.MapStartOnly">
             <summary>
             Only give it the item on map generation.
             Respawns that occur after the map is generated do not get the item.

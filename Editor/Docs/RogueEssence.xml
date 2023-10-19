@@ -1017,17 +1017,17 @@
             Guaranteed to hit next attack
             </summary>
         </member>
-        <member name="F:RogueEssence.Dungeon.Character.TurnWait">
+        <member name="P:RogueEssence.Dungeon.Character.TurnWait">
             <summary>
             The number of turns this character must wait before being able to move again.
             </summary>
         </member>
-        <member name="F:RogueEssence.Dungeon.Character.TiersUsed">
+        <member name="P:RogueEssence.Dungeon.Character.TiersUsed">
             <summary>
             The number of turn tiers that this character has moved OR acted on.
             </summary>
         </member>
-        <member name="F:RogueEssence.Dungeon.Character.TurnUsed">
+        <member name="P:RogueEssence.Dungeon.Character.TurnUsed">
             <summary>
             Whether the character has made an action during this map turn.  Only one action per map turn permitted.
             </summary>
@@ -1214,6 +1214,11 @@
         <member name="F:RogueEssence.Dungeon.OffsetAction.OffsetArea.Sides">
             <summary>
             Hits the targeted tile, and the tiles to the left and right of it.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.OffsetAction.OffsetArea.Cross">
+            <summary>
+            Hits the targeted tile, and all cardinally adjacent tiles.
             </summary>
         </member>
         <member name="F:RogueEssence.Dungeon.OffsetAction.OffsetArea.Area">
@@ -1519,6 +1524,11 @@
             Hits the front and sides in a cone shape.
             </summary>
         </member>
+        <member name="F:RogueEssence.Dungeon.Hitbox.AreaLimit.Cross">
+            <summary>
+            Hits the tiles up, down, left and right of the center.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Dungeon.Hitbox.AreaLimit.Sides">
             <summary>
             Hits the tiles left and right of the center.
@@ -1699,6 +1709,11 @@
             unwrapped
             </summary>
         </member>
+        <member name="P:RogueEssence.Dungeon.BattleContext.ActionType">
+            <summary>
+            The ActionType: Skill, Item, Throw or Trap
+            </summary>
+        </member>
         <member name="F:RogueEssence.Dungeon.BattleContext.UsageSlot">
             <summary>
             For skills, the skill slot
@@ -1753,6 +1768,32 @@
         <member name="F:RogueEssence.Dungeon.BattleContext.RangeMod">
             <summary>
             A number of be added to the Range argument for the hitbox, when it comes out.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.BattleContext.GlobalContextStates">
+            <summary>
+            Context states that remain on the main battlecontext even after iterating over different targets.
+            Ordinarily, context states are left behind when switching to a new target (in multi-target contexts)
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Dungeon.UserTargetGameContext.Target">
+            <summary>
+            The character that the action is targeted at
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.GameContext.ContextStates">
+            <summary>
+            Contains contextual info to be passed along the GameContext, used by GameEvents
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Dungeon.GameContext.User">
+            <summary>
+            The character that is performing the action
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.GameContext.CancelState">
+            <summary>
+            Whether the action should be canceled or not.
             </summary>
         </member>
         <member name="F:RogueEssence.Dungeon.BaseMap.ScrollEdge.Blank">
@@ -1967,6 +2008,13 @@
             The list of characters (represented by index) scheduled to take a turn within the current faction.
             </summary>
         </member>
+        <member name="M:RogueEssence.Dungeon.TurnState.SetTeamRound(RogueEssence.Dungeon.Team,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="team"></param>
+            <param name="reset">True = Reset everyone's turns.  False = Skip everyone's turns</param>
+        </member>
         <member name="F:RogueEssence.Dungeon.Zone.scriptEvents">
             <summary>
             For containing entire dungeon-related events. (Since we can't handle some of those things inside the dungeon floors themselves)
@@ -2003,6 +2051,16 @@
         <member name="F:RogueEssence.Data.AITactic.Assignable">
             <summary>
             Can be assigned via tactics menu
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BattleData.Element">
+            <summary>
+            Elemental typing of attack
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BattleData.Category">
+            <summary>
+            Category of attack
             </summary>
         </member>
         <member name="F:RogueEssence.Data.BattleData.HitRate">
@@ -2088,11 +2146,220 @@
             Only plays if the target is actually hit.
             </summary>
         </member>
+        <member name="F:RogueEssence.Data.DataManager.Start">
+            <summary>
+            The parameters governing the start of the game.
+            Such as starting character, map, level, etc.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.DataManager.DefaultMonster">
+            <summary>
+            The monster ID consiered default for purposes of initialization
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.DataManager.DefaultSkill">
+            <summary>
+            The skill ID considered default for purposes of initialization and comparing to "nothing"
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.DataManager.DefaultIntrinsic">
+            <summary>
+            The skill ID considered default for purposes of initialization and comparing to "nothing"
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.DataManager.DefaultMapStatus">
+            <summary>
+            The skill ID considered default for purposes of initialization and comparing to "nothing"
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.DataManager.DefaultElement">
+            <summary>
+            The skill ID considered default for purposes of initialization and comparing to "nothing"
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.DataManager.DefaultTile">
+            <summary>
+            The skill ID considered default for purposes of initialization and comparing to "nothing"
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.DataManager.DefaultZone">
+            <summary>
+            The skill ID considered default for purposes of initialization.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.DataManager.DefaultRank">
+            <summary>
+            The skill ID considered default for purposes of initialization.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.DataManager.DefaultAI">
+            <summary>
+            The skill ID considered default for purposes of initialization.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.DataManager.DefaultSkin">
+            <summary>
+            The skill ID considered default for purposes of initialization.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.DataManager.GenFloor">
+            <summary>
+            The terrain ID considered to be universally "floor" in random dungeon generation
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.DataManager.GenWall">
+            <summary>
+            The terrain ID considered to be universally "wall" in random dungeon generation
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.DataManager.GenUnbreakable">
+            <summary>
+            The terrain ID considered to be universally "unbreakable" in random dungeon generation
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.DataManager.Save">
+            <summary>
+            The current save file, loaded into memory
+            </summary>
+        </member>
         <member name="M:RogueEssence.Data.DataManager.GetIndex(RogueEssence.Data.DataManager.DataType)">
             <summary>
             Index paths are modified like mods.  However, if multiple mods have conflicting indices, a combined index must be generated.
             </summary>
             <param name="basePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetZone(System.String)">
+            <summary>
+            Gets a zone based on its ID
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetMap(System.String)">
+            <summary>
+            Gets a map based on its ID
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetGround(System.String)">
+            <summary>
+            Gets a ground map based on its ID
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetSkill(System.String)">
+            <summary>
+            Gets the data for a skill based on its ID
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetItem(System.String)">
+            <summary>
+            Gets the data for an item based on its ID
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetAutoTile(System.String)">
+            <summary>
+            Gets the data for an autotile based on its ID
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetMonster(System.String)">
+            <summary>
+            Gets the data for a monster based on its ID
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetStatus(System.String)">
+            <summary>
+            Gets the data for a status effect based on its ID
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetIntrinsic(System.String)">
+            <summary>
+            Gets the data for an intrinsic (passive ability) based on its ID
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetMapStatus(System.String)">
+            <summary>
+            Gets the data for a map-wide status effect based on its ID
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetTile(System.String)">
+            <summary>
+            Gets the data for a tile, such as stairs or traps, based on its ID
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetTerrain(System.String)">
+            <summary>
+            Gets the data for a terrain type based on its ID
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetEmote(System.String)">
+            <summary>
+            Gets the data for an emote based on its ID
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetElement(System.String)">
+            <summary>
+            Gets the data for an elemental type based on its ID
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetGrowth(System.String)">
+            <summary>
+            Gets the data for a growth group based on its ID
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetSkillGroup(System.String)">
+            <summary>
+            Gets the data for a skill-sharing group based on its ID
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetAITactic(System.String)">
+            <summary>
+            Gets the data for an ai tactic based on its ID
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetRank(System.String)">
+            <summary>
+            Gets the data for a team rank based on its ID
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetSkin(System.String)">
+            <summary>
+            Gets the data for a skin based on its ID
+            </summary>
+            <param name="index"></param>
             <returns></returns>
         </member>
         <member name="M:RogueEssence.Data.DataManager.BeginPlay(System.String,System.String,System.Boolean,System.Boolean,System.DateTime)">
@@ -2184,7 +2451,7 @@
         </member>
         <member name="M:RogueEssence.Data.DataManager.LoadMainGameState(System.Boolean)">
             <summary>
-            Returns game progress and current zone.
+            Returns game progress loaded from the save folder and current zone.
             </summary>
             <returns></returns>
         </member>
@@ -2310,6 +2577,42 @@
             Developer-only comments for this asset.
             </summary>
         </member>
+        <member name="P:RogueEssence.Data.IntrinsicData.Name">
+            <summary>
+            The name of the data
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.IntrinsicData.Desc">
+            <summary>
+            The description of the data
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.IntrinsicData.Released">
+            <summary>
+            Is it released and allowed to show up in the game?
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.IntrinsicData.Comment">
+            <summary>
+            Comments visible to only developers
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.IntrinsicData.IndexNum">
+            <summary>
+            Index number of the intrinsic for sorting.  Must be unique
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Data.IntrinsicData.GetColoredName">
+            <summary>
+            Gets the colored text string of the intrinsic
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:RogueEssence.Data.ItemData.Name">
+            <summary>
+            The name of the data
+            </summary>
+        </member>
         <member name="F:RogueEssence.Data.ItemData.Sprite">
             <summary>
             How the item looks in the game.
@@ -2318,6 +2621,26 @@
         <member name="F:RogueEssence.Data.ItemData.Icon">
             <summary>
             The icon displayed next to the item's name.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.ItemData.Desc">
+            <summary>
+            The description of the item
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.ItemData.Released">
+            <summary>
+            Is it released and allowed to show up in the game?
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.ItemData.Comment">
+            <summary>
+            Comments visible to only developers
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.ItemData.SortCategory">
+            <summary>
+            The number order of the item for sorting
             </summary>
         </member>
         <member name="F:RogueEssence.Data.ItemData.Price">
@@ -2395,9 +2718,188 @@
             Set to an empty anim to use the item's own sprite.
             </summary>
         </member>
+        <member name="M:RogueEssence.Data.ItemData.GetColoredName">
+            <summary>
+            Gets the colored text string of the item
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.ItemData.GetIconName">
+            <summary>
+            Gets the colored text string of the item, with icon included
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:RogueEssence.Data.MapStatusData.Name">
+            <summary>
+            The name of the data
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.MapStatusData.Desc">
+            <summary>
+            The description of the data
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.MapStatusData.Released">
+            <summary>
+            Is it released and allowed to show up in the game?
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.MapStatusData.Comment">
+            <summary>
+            Comments visible to only developers
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.MapStatusData.CarryOver">
+            <summary>
+            Does it carry over between floors?
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.MapStatusData.Emitter">
+            <summary>
+            The VFX to play while the map status is in effect.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.MapStatusData.DefaultHidden">
+            <summary>
+            Should this map status start off hidden from the menu?
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.MapStatusData.StatusStates">
+            <summary>
+            States of the map status
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.MapStatusData.OnMapRefresh">
+            <summary>
+            Triggers when a characer needs to refresh traits
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.MapStatusData.RepeatMethod">
+            <summary>
+            Triggers when something attempts to add a map status when it already exists
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Data.MapStatusData.GetColoredName">
+            <summary>
+            Gets the colored string for the map status
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:RogueEssence.Data.MonsterData.Name">
+            <summary>
+            Monster's name
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.MonsterData.Title">
+            <summary>
+            Monster's species title
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.MonsterData.Released">
+            <summary>
+            Is it released and allowed to show up in the game?
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.MonsterData.Comment">
+            <summary>
+            Comments visible to only developers
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.MonsterData.IndexNum">
+            <summary>
+            Index number of the monster for sorting.  Must be unique
+            </summary>
+        </member>
         <member name="F:RogueEssence.Data.MonsterData.EXPTable">
             <summary>
             How fast this unit levels up.  Uses the Growth Group EXP tables.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.MonsterData.SkillGroup1">
+            <summary>
+            Skill group for shared skills
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.MonsterData.SkillGroup2">
+            <summary>
+            Skill group 2 for shared skills
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.MonsterData.JoinRate">
+            <summary>
+            Chance to be recruited
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.MonsterData.PromoteFrom">
+            <summary>
+            Monster SPECIES this was promoted from
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.MonsterData.Promotions">
+            <summary>
+            Possible promotions
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.MonsterData.Forms">
+            <summary>
+            Forms of the monster
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Data.MonsterData.GetColoredName">
+            <summary>
+            Gets the colored text string of the monster
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:RogueEssence.Data.BaseMonsterForm.FormName">
+            <summary>
+            Monster's form title
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.BaseMonsterForm.Released">
+            <summary>
+            Is it released and allowed to show up in the game?
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BaseMonsterForm.Temporary">
+            <summary>
+            Is it a temporary form?  Cannot be picked in rogue mode if so.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BaseMonsterForm.PromoteForm">
+            <summary>
+            Monster FORM this was promoted from
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BaseMonsterForm.Element1">
+            <summary>
+            elemental typing 1
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BaseMonsterForm.Element2">
+            <summary>
+            elemental typing 2
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BaseMonsterForm.Intrinsic1">
+            <summary>
+            possible intrinsic 1
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BaseMonsterForm.Intrinsic2">
+            <summary>
+            possible intrinsic 2
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BaseMonsterForm.Intrinsic3">
+            <summary>
+            possible intrinsic 3
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.BaseMonsterForm.LevelSkills">
+            <summary>
+            skills learned on level up
             </summary>
         </member>
         <member name="F:RogueEssence.Data.PassiveData.OnEquips">
@@ -2581,6 +3083,31 @@
             A bit hacky, but is currently the only way for converters to recognize version.
             </summary>
         </member>
+        <member name="P:RogueEssence.Data.SkillData.Name">
+            <summary>
+            The name of the data
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.SkillData.Desc">
+            <summary>
+            The description of the data
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.SkillData.Released">
+            <summary>
+            Is it released and allowed to show up in the game?
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.SkillData.Comment">
+            <summary>
+            Comments visible to only developers
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.SkillData.IndexNum">
+            <summary>
+            Index number of the skill for sorting.  Must be unique
+            </summary>
+        </member>
         <member name="F:RogueEssence.Data.SkillData.BaseCharges">
             <summary>
             The number of times the skill can be used.
@@ -2607,6 +3134,18 @@
             Before it's used, when it hits, after it's used, etc.
             </summary>
         </member>
+        <member name="M:RogueEssence.Data.SkillData.GetColoredName">
+            <summary>
+            Gets the colored text string of the skill
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.SkillData.GetIconName">
+            <summary>
+            Gets the colored text string of the skill, with icon included
+            </summary>
+            <returns></returns>
+        </member>
         <member name="F:RogueEssence.Data.SkinData.Symbol">
             <summary>
             The symbol displayed next the characters species name.
@@ -2630,6 +3169,26 @@
         <member name="F:RogueEssence.Data.SkinData.Challenge">
             <summary>
             Whether the character with this skin can be sent home during Roguelocke.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.StatusData.Name">
+            <summary>
+            The name of the data
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.StatusData.Desc">
+            <summary>
+            The description of the data
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.StatusData.Released">
+            <summary>
+            Is it released and allowed to show up in the game?
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.StatusData.Comment">
+            <summary>
+            Comments visible to only developers
             </summary>
         </member>
         <member name="F:RogueEssence.Data.StatusData.MenuName">
@@ -2683,10 +3242,46 @@
             Passive effects applied to the character that inflicted the status.
             </summary>
         </member>
+        <member name="M:RogueEssence.Data.StatusData.GetColoredName">
+            <summary>
+            Gets the colored text string of the status effect
+            </summary>
+            <returns></returns>
+        </member>
         <member name="F:RogueEssence.Data.TerrainData.TerrainStates">
             <summary>
             Special variables that this terrain contains.
             They are potentially checked against in a select number of battle events.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.TileData.Name">
+            <summary>
+            The name of the data
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.TileData.Desc">
+            <summary>
+            The description of the data
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.TileData.Released">
+            <summary>
+            Is it released and allowed to show up in the game?
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Data.TileData.Comment">
+            <summary>
+            Comments visible to only developers
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.TileData.Anim">
+            <summary>
+            The object animation used for this tile
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.TileData.Offset">
+            <summary>
+            The offset for which to draw the object animation
             </summary>
         </member>
         <member name="F:RogueEssence.Data.TileData.Layer">
@@ -2698,6 +3293,38 @@
             <summary>
             Prevents items from landing on it.
             </summary>
+        </member>
+        <member name="F:RogueEssence.Data.TileData.StepType">
+            <summary>
+            Determines how the tile can be interacted with
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.TileData.MinimapIcon">
+            <summary>
+            Texture for the minimap icon
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.TileData.MinimapColor">
+            <summary>
+            Color for the minimap icon
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.TileData.LandedOnTiles">
+            <summary>
+            What happens when a character walks on the tile.
+            Also triggers if forced on or winds up on it in any other way.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Data.TileData.InteractWithTiles">
+            <summary>
+            What happens when the character voluntarily triggers the tile.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Data.TileData.GetColoredName">
+            <summary>
+            Gets the colored name for the tile
+            </summary>
+            <returns></returns>
         </member>
         <member name="F:RogueEssence.Data.RogueStatus.None">
             <summary>
@@ -6710,7 +7337,7 @@
             <summary>
             Set a character's action.
             </summary>
-            <param name="chara">Character to perfomr the action</param>
+            <param name="chara">Character to perfom the action</param>
             <param name="action">The action to perform</param>
         </member>
         <member name="F:RogueEssence.Script.ScriptGround.CharWaitAction">

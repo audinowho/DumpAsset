@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.15.1",
+"Version": "0.7.18.0",
 "Object": {
 "$type": "RogueEssence.Data.UniversalActiveEffect, RogueEssence",
 "ZoneSteps": [
@@ -480,7 +480,7 @@
 2,
 4,
 6,
-8
+9
 ],
 "TypeMap": {
 "none": 0,
@@ -528,7 +528,10 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.PreActionEvent, PMDC"
+"$type": "PMDC.Dungeon.PreActionEvent, PMDC",
+"LastSlotStatusID": "last_used_move_slot",
+"LastMoveStatusID": "last_used_move",
+"RepeatStatusID": "times_move_used"
 }
 }
 ],
@@ -592,8 +595,6 @@
 },
 "Value": {
 "$type": "PMDC.Dungeon.UsePostEvent, PMDC",
-"LastSlotStatusID": "last_used_move_slot",
-"LastMoveStatusID": "last_used_move",
 "RepeatStatusID": "times_move_used",
 "AllyStatusID": "last_ally_move",
 "MissedAllID": "missed_all_last_turn"
@@ -706,12 +707,21 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.HandoutRelativeExpEvent, PMDC",
+"$type": "PMDC.Dungeon.HandoutPiecewiseExpEvent, PMDC",
+"ScaleMin": 5,
+"ScaleAdd": 0,
+"UnderleveledHandout": {
+"$type": "PMDC.Dungeon.HandoutStackExpEvent, PMDC",
 "Numerator": 1,
 "Denominator": 7,
-"LevelBuffer": 10,
-"ScaleMin": 5,
-"PowerCurve": 2
+"LevelBuffer": 7
+},
+"OverleveledHandout": {
+"$type": "PMDC.Dungeon.HandoutHarmonicExpEvent, PMDC",
+"Numerator": 1,
+"Denominator": 7,
+"LevelBuffer": 7
+}
 }
 }
 ],

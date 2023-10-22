@@ -9,13 +9,14 @@ DEBUG =
 {
   EnableDbgCoro = function() end, --Call this function inside coroutines you want to allow debugging of, at the start. Default is empty
   IsDevMode = function() return RogueEssence.DiagManager.Instance.DevMode end,
+  IsDevLua = function() return RogueEssence.DiagManager.Instance.DebugLua end,
   GroundAIShowDebugInfo = false,
 }
 
 DEBUG.GroundAIShowDebugInfo = false--DEBUG.IsDevMode()
 
 --Disable debugging for non devs
-if DEBUG.IsDevMode() then
+if DEBUG.IsDevLua() then
   ___mobdebug = require('mobdebug')
   ___mobdebug.coro() --Enable coroutine debugging
   ___mobdebug.checkcount = 1 --Increase debugger update frequency

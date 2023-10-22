@@ -1,33 +1,19 @@
 ﻿{
-"Version": "0.7.18.0",
+"Version": "0.7.18.2",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Rototiller",
-"LocalTexts": {
-"fr": "Fertilisation",
-"de": "Pflüger",
-"es": "Fertilizante",
-"it": "Aracampo",
-"ko": "일구기",
-"ja": "たがやす",
-"ja-jp": "たがやす",
-"zh-hans": "耕地",
-"zh-hant": "耕地"
-}
+"LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "The user overturns the soil, destroying traps and making it easier for plants to grow. This raises the Attack and Sp. Atk stats of Grass-type Pokémon.",
-"LocalTexts": {
-"de": "Der Anwender pflügt den Boden und macht die Erde fruchtbarer, dabei werden Fallen zerstört. Erhöht den Angriff und den Spezial-Angriff von Pflanzen-Pokémon.",
-"ko": "땅을 일구어 함정을 파괴하고 초목이 자라기 쉽게 한다. 풀타입의 공격과 특수공격이 오른다.",
-"zh-hans": "翻耕土地，破坏陷阱，使草木更容易成长。会提高草属性宝可梦的攻击和特攻。"
-}
+"DefaultText": "The user overturns the soil, destroying obstacles along the way.",
+"LocalTexts": {}
 },
 "Released": true,
-"Comment": "No Anim",
+"Comment": "",
 "IndexNum": 563,
-"BaseCharges": 20,
+"BaseCharges": 17,
 "Strikes": 1,
 "HitboxAction": {
 "$type": "RogueEssence.Dungeon.DashAction, RogueEssence",
@@ -42,7 +28,29 @@
 },
 "AnimOffset": 0,
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+"$type": "RogueEssence.Content.AttachAreaEmitter, RogueEssence",
+"Anims": [
+{
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Hammer_Arm_Smoke",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Range": 8,
+"ParticlesPerBurst": 1,
+"AddHeight": 0,
+"BurstTime": 2,
+"Layer": 0
 },
 "WideAngle": 2,
 "SnapBack": false,
@@ -51,7 +59,7 @@
 "HitTiles": true,
 "Range": 4,
 "StopAtHit": false,
-"StopAtWall": true,
+"StopAtWall": false,
 "TargetAlignments": 0,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
@@ -60,7 +68,7 @@
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "_UNK_DUN_Heave_Up",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -74,7 +82,7 @@
 "LagBehindTime": 0
 },
 "Explosion": {
-"TargetAlignments": 7,
+"TargetAlignments": 0,
 "HitTiles": false,
 "Range": 0,
 "Speed": 0,
@@ -111,45 +119,7 @@
 "OnActions": [],
 "BeforeExplosions": [],
 "BeforeHits": [],
-"OnHits": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.CharElementNeededEvent, PMDC",
-"BaseEvents": [
-{
-"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
-"Stack": 1,
-"StatusID": "mod_attack",
-"AffectTarget": true,
-"SilentCheck": false,
-"Anonymous": false,
-"TriggerMsg": {
-"Key": null
-},
-"Anims": []
-},
-{
-"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
-"Stack": 1,
-"StatusID": "mod_special_attack",
-"AffectTarget": true,
-"SilentCheck": false,
-"Anonymous": false,
-"TriggerMsg": {
-"Key": null
-},
-"Anims": []
-}
-],
-"NeededElement": "grass"
-}
-}
-],
+"OnHits": [],
 "OnHitTiles": [
 {
 "Key": {
@@ -159,6 +129,58 @@
 },
 "Value": {
 "$type": "PMDC.Dungeon.RemoveTrapEvent, PMDC"
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveTerrainStateEvent, PMDC",
+"States": [
+{
+"assembly": "PMDC, Version=0.7.18.2, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.WallTerrainState"
+},
+{
+"assembly": "PMDC, Version=0.7.18.2, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.WaterTerrainState"
+},
+{
+"assembly": "PMDC, Version=0.7.18.2, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.LavaTerrainState"
+},
+{
+"assembly": "PMDC, Version=0.7.18.2, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.AbyssTerrainState"
+}
+],
+"RemoveSound": "",
+"RemoveAnim": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Wall_Break",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+}
 }
 }
 ],
@@ -179,8 +201,9 @@
 }
 },
 "HitCharAction": {
-"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 0
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
 }
 }
 }

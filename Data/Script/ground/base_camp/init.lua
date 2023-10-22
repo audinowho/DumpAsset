@@ -311,7 +311,7 @@ end
 function base_camp.East_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   GAME:FadeOut(false, 20)
-  GAME:EnterGroundMap("base_camp_2", "entrance_west")
+  GAME:EnterGroundMap("base_camp_2", "entrance_west", true)
 end
 
 function base_camp.Ferry_Action(obj, activator)

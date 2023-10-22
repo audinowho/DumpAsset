@@ -122,7 +122,6 @@ function base_camp_2.NPC_Food_Action(chara, activator)
 	local receive_item = RogueEssence.Dungeon.InvItem("food_apple_big")
 	COMMON.GiftItem(player, receive_item)
 	SV.base_camp.FoodIntro = true
-	UI:SetSpeaker(chara)
   end
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Food_Line_002']))
 end

@@ -204,10 +204,12 @@ function cliff_camp.NPC_Storehouse_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   local player = CH('PLAYER')
+  local carry = CH('NPC_Carry')
+  local deliver = CH('NPC_Deliver')
   UI:SetSpeaker(chara)
   
   if SV.supply_corps.Status <= 0 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001'], carry:GetDisplayName(), deliver:GetDisplayName()))
   elseif SV.supply_corps.Status == 1 then
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
   elseif SV.supply_corps.Status == 2 then
@@ -365,7 +367,6 @@ function cliff_camp.NPC_DexRater_Action(chara, activator)
 		UI:WaitShowDialogue(STRINGS:Format(MapStrings['DexRater_Reward_Dungeon'..suffix]))
 		COMMON.UnlockWithFanfare("labyrinth_of_the_lost", false)
 	  end
-      
 	  SV.dex.CurrentRewardIdx = SV.dex.CurrentRewardIdx + 1
 	  suffix = "_Alt"
 	end

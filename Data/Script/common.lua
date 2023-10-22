@@ -287,6 +287,7 @@ function COMMON.GiftItem(player, receive_item)
 end
 
 function COMMON.GiftItemFull(player, receive_item, fanfare, force_storage)
+  local orig_settings = UI:ExportSpeakerSettings()
   if fanfare then
     SOUND:PlayFanfare("Fanfare/Item")
   end
@@ -301,11 +302,11 @@ function COMMON.GiftItemFull(player, receive_item, fanfare, force_storage)
 	UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_RECEIVE_ITEM_STORAGE"):ToLocal(), player:GetDisplayName(), receive_item:GetDisplayName()))
 	GAME:GivePlayerStorageItem(receive_item)
   end
-  UI:SetCenter(false)
-  UI:ResetSpeaker()
+  UI:ImportSpeakerSettings(orig_settings)
 end
 
 function COMMON.GiftKeyItem(player, item_name)
+  local orig_settings = UI:ExportSpeakerSettings()
   SOUND:PlayFanfare("Fanfare/Treasure")
   UI:ResetSpeaker(false)
   UI:SetCenter(true)
@@ -313,11 +314,12 @@ function COMMON.GiftKeyItem(player, item_name)
   -- item names are expected to be passed in without formatting
   -- the standard color for event items is always green
   UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_RECEIVE_ITEM"):ToLocal(), player:GetDisplayName(), string.format("[color=#00FF00]%s[color]", item_name)))
-  UI:SetCenter(false)
-  UI:ResetSpeaker()
+  UI:ImportSpeakerSettings(orig_settings)
 end
 
 function COMMON.JoinTeamWithFanfare(recruit, from_dungeon)
+  local orig_settings = UI:ExportSpeakerSettings()
+  
   if from_dungeon then
     recruit.MetAt = _ZONE.CurrentMap:GetColoredName()
   else
@@ -334,18 +336,23 @@ function COMMON.JoinTeamWithFanfare(recruit, from_dungeon)
   _DATA.Save:RegisterMonster(recruit.BaseForm.Species)
   _DATA.Save:RogueUnlockMonster(recruit.BaseForm.Species)
 	
-  UI:ResetSpeaker()
+  UI:ResetSpeaker(false)
+  UI:SetCenter(true)
   
   if _DATA.Save.ActiveTeam.Name ~= "" then
     UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT"):ToLocal(), recruit:GetDisplayName(true), _DATA.Save.ActiveTeam.Name))
   else
     UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT_ANY"):ToLocal(), recruit:GetDisplayName(true)))
   end
+  
+  UI:ImportSpeakerSettings(orig_settings)
 end
 
 
 function COMMON.UnlockWithFanfare(dungeon_id, from_dungeon)
   if not GAME:DungeonUnlocked(dungeon_id) then
+	local orig_settings = UI:ExportSpeakerSettings()
+	
     local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_id)
 	if zone.Released == false then
       GAME:UnlockDungeon(dungeon_id)
@@ -363,8 +370,8 @@ function COMMON.UnlockWithFanfare(dungeon_id, from_dungeon)
 	
     SOUND:PlayFanfare("Fanfare/NewArea")
     UI:WaitShowDialogue(STRINGS:FormatKey("DLG_NEW_AREA", zone:GetColoredName()))
-    UI:SetCenter(false)
-    UI:ResetSpeaker()
+	
+    UI:ImportSpeakerSettings(orig_settings)
   end
 
 end

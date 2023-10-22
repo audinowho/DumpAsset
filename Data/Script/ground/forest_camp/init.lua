@@ -290,7 +290,6 @@ function forest_camp.Speedster_2_Action(chara, activator)
 	COMMON.GiftItem(player, receive_item)
     SV.team_retreat.Intro = true
   end
-  UI:SetSpeaker(chara)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Line_002'], receive_item:GetDisplayName()))
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Line_003']))
   
@@ -301,9 +300,12 @@ end
 function forest_camp.NPC_Camps_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("faded_trail")
+  local ground = _DATA:GetGround("cliff_camp")
+  
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Camps_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Camps_Line_001'], zone_summary:GetColoredName(), ground:GetColoredName()))
 end
 
 function forest_camp.NPC_Parent_Action(chara, activator)

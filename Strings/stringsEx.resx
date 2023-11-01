@@ -129,6 +129,9 @@
   <data name="DLG_ASK_STORAGE" xml:space="preserve">
     <value>What will you take out?</value>
     <comment></comment>  </data>
+  <data name="DLG_BAG_SIZE" xml:space="preserve">
+    <value>You can now carry {0} items in your Treasure Bag!</value>
+    <comment></comment>  </data>
   <data name="DLG_CANT_FORGET_SKILL" xml:space="preserve">
     <value>{0} can't forget any more moves.</value>
     <comment></comment>  </data>
@@ -137,6 +140,9 @@
     <comment></comment>  </data>
   <data name="DLG_CANT_RECALL_SKILL" xml:space="preserve">
     <value>{0} has no moves to relearn.</value>
+    <comment></comment>  </data>
+  <data name="DLG_DUNGEON_DEAD_END" xml:space="preserve">
+    <value>This is appears to be the end of the dungeon.[br]It's impossible to go any farther.[pause=0] It's time to go back.</value>
     <comment></comment>  </data>
   <data name="DLG_DUNGEON_UNLOCK" xml:space="preserve">
     <value>A new dungeon has been discovered!</value>
@@ -171,21 +177,6 @@
   <data name="DLG_EVO_NONE_NOW" xml:space="preserve">
     <value>...[pause=0]{0} cannot evolve right now.</value>
     <comment></comment>  </data>
-  <data name="MSG_PASSAGE_FAIRY" xml:space="preserve">
-    <value>...[pause=0]A mysterious energy permeates the area.</value>
-    <comment></comment>  </data>
-  <data name="MSG_PASSAGE_FAIRY_OPEN" xml:space="preserve">
-    <value>It swirls and gathers around {0}!</value>
-    <comment></comment>  </data>
-  <data name="TITLE_ENRAGED_CALDERA" xml:space="preserve">
-    <value>Enraged Caldera\nB{0}F</value>
-    <comment></comment>  </data>
-  <data name="MSG_PASSAGE_FLYING" xml:space="preserve">
-    <value>...[pause=0]A mysterious wind current is blowing upwards.</value>
-    <comment></comment>  </data>
-  <data name="MSG_PASSAGE_FLYING_OPEN" xml:space="preserve">
-    <value>{0} is carried by the updraft!</value>
-    <comment></comment>  </data>
   <data name="DLG_FORGET_INTRINSIC" xml:space="preserve">
     <value>{0} lost the ability {1}.</value>
     <comment></comment>  </data>
@@ -198,14 +189,41 @@
   <data name="DLG_LOCK" xml:space="preserve">
     <value>It needs a {0} to unlock...</value>
     <comment></comment>  </data>
-  <data name="DLG_LOCK_KEY" xml:space="preserve">
-    <value>Will you unlock it with the {0}?</value>
-    <comment></comment>  </data>
   <data name="DLG_LOCK_GUILD" xml:space="preserve">
     <value>It's sealed with the Guildmaster's emblem...</value>
     <comment></comment>  </data>
   <data name="DLG_LOCK_GUILD_OPEN" xml:space="preserve">
     <value>The seal is reacting to {0}'s badge!</value>
+    <comment></comment>  </data>
+  <data name="DLG_LOCK_KEY" xml:space="preserve">
+    <value>Will you unlock it with the {0}?</value>
+    <comment></comment>  </data>
+  <data name="DLG_MISSION_DESTINATION" xml:space="preserve">
+    <value>You've reached a destination floor!</value>
+    <comment></comment>  </data>
+  <data name="DLG_MISSION_ESCORT_DONE" xml:space="preserve">
+    <value>Yes! You completed {0}'s escort mission. {0} is delighted!</value>
+    <comment></comment>  </data>
+  <data name="DLG_MISSION_OUTLAW" xml:space="preserve">
+    <value>Wanted outlaw spotted!</value>
+    <comment></comment>  </data>
+  <data name="DLG_MISSION_OUTLAW_DONE" xml:space="preserve">
+    <value>Yes!\nKnocked out the outlaw {0}!</value>
+    <comment></comment>  </data>
+  <data name="DLG_MISSION_OUTLAW_TRAP" xml:space="preserve">
+    <value>You've fallen into my trap!</value>
+    <comment></comment>  </data>
+  <data name="DLG_MISSION_REMINDER" xml:space="preserve">
+    <value>Report back to {0} after leaving the dungeon.</value>
+    <comment></comment>  </data>
+  <data name="DLG_MISSION_RESCUE_ASK" xml:space="preserve">
+    <value>Yes! You've found {0}![scroll]Do you want to use your badge to rescue {0}?</value>
+    <comment></comment>  </data>
+  <data name="DLG_MISSION_RESCUE_DONE" xml:space="preserve">
+    <value>Your badge shines on {0}, and {0} is transported away magically!</value>
+    <comment></comment>  </data>
+  <data name="DLG_MISSION_RESCUE_THANKS" xml:space="preserve">
+    <value>Thank you! I'll see you outside with a reward when you return!</value>
     <comment></comment>  </data>
   <data name="DLG_RECEIVE_ITEM" xml:space="preserve">
     <value>{0} received the {1}!</value>
@@ -241,10 +259,10 @@
     <value>land {0} critical hits in battle</value>
     <comment></comment>  </data>
   <data name="EVO_REQ_HUNGER_HIGH" xml:space="preserve">
-    <value>be full</value>
+    <value>with overfilled belly</value>
     <comment></comment>  </data>
   <data name="EVO_REQ_HUNGER_LOW" xml:space="preserve">
-    <value>be hungry</value>
+    <value>with empty belly</value>
     <comment></comment>  </data>
   <data name="EVO_REQ_ITEM" xml:space="preserve">
     <value>hold {0}</value>
@@ -261,6 +279,9 @@
   <data name="EVO_REQ_SKILL_ELEMENT" xml:space="preserve">
     <value>learn a {0}-type move</value>
     <comment>Evolution requirement: must learn a move of a certain type</comment>  </data>
+  <data name="EVO_REQ_SKILL_USE" xml:space="preserve">
+    <value>used {0} {1} times in a row</value>
+    <comment></comment>  </data>
   <data name="EVO_REQ_STAT_BOOST" xml:space="preserve">
     <value>raise {0} in battle</value>
     <comment></comment>  </data>
@@ -273,11 +294,47 @@
   <data name="EVO_REQ_TRADE" xml:space="preserve">
     <value>must be from another team</value>
     <comment>Evolution requirement: must be from another team</comment>  </data>
+  <data name="ITEM_KEY_CARD_GRASS" xml:space="preserve">
+    <value>Grass Card</value>
+    <comment></comment>  </data>
+  <data name="ITEM_KEY_CARD_MIST" xml:space="preserve">
+    <value>Mist Card</value>
+    <comment></comment>  </data>
+  <data name="ITEM_KEY_CARD_MOON" xml:space="preserve">
+    <value>Moon Card</value>
+    <comment></comment>  </data>
+  <data name="ITEM_KEY_CARD_SAND" xml:space="preserve">
+    <value>Sand Card</value>
+    <comment></comment>  </data>
+  <data name="ITEM_KEY_CARD_STAR" xml:space="preserve">
+    <value>Star Card</value>
+    <comment></comment>  </data>
+  <data name="ITEM_KEY_CARD_SUN" xml:space="preserve">
+    <value>Sun Card</value>
+    <comment></comment>  </data>
+  <data name="ITEM_KEY_CARD_WATER" xml:space="preserve">
+    <value>Water Card</value>
+    <comment></comment>  </data>
+  <data name="ITEM_KEY_CARD_WIND" xml:space="preserve">
+    <value>Wind Card</value>
+    <comment></comment>  </data>
+  <data name="ITEM_KEY_CARD_WORLD" xml:space="preserve">
+    <value>World Card</value>
+    <comment></comment>  </data>
   <data name="MENU_FORGET_SKILL" xml:space="preserve">
     <value>Forget Move</value>
     <comment></comment>  </data>
   <data name="MENU_RECALL_SKILL" xml:space="preserve">
     <value>Recall Move</value>
+    <comment></comment>  </data>
+  <data name="MENU_RECRUITMENT_TITLE" xml:space="preserve">
+    <value>Potential Recruits</value>
+    <comment></comment>  </data>
+  <data name="MENU_RECRUITMENT" xml:space="preserve">
+    <value>Recruitment Search</value>
+    <comment></comment>  </data>
+  <data name="MENU_RECRUITMENT_NONE" xml:space="preserve">
+    <value>No recruits available</value>
     <comment></comment>  </data>
   <data name="MSG_ABSORB" xml:space="preserve">
     <value>{0} absorbed the attack with {1}!</value>
@@ -513,6 +570,12 @@
   <data name="MSG_CLOUD_NINE" xml:space="preserve">
     <value>{0}'s Cloud Nine made the weather disappear!</value>
     <comment></comment>  </data>
+  <data name="MSG_CLOUDY_END" xml:space="preserve">
+    <value>The clouds disappeared.</value>
+    <comment></comment>  </data>
+  <data name="MSG_CLOUDY_START" xml:space="preserve">
+    <value>The sky is cloudy...</value>
+    <comment></comment>  </data>
   <data name="MSG_CONFUSE_ALREADY" xml:space="preserve">
     <value>{0} is already confused!</value>
     <comment></comment>  </data>
@@ -592,7 +655,7 @@
     <value>{0} became a decoy to attract attacks!</value>
     <comment></comment>  </data>
   <data name="MSG_DESTINY_BOND" xml:space="preserve">
-    <value></value>
+    <value>{0} is trying to take {1} with it!</value>
     <comment></comment>  </data>
   <data name="MSG_DESTINY_BOND_END" xml:space="preserve">
     <value>{0} gave up the Destiny Bond!</value>
@@ -631,6 +694,9 @@
     <value>{0} resurfaced!</value>
     <comment></comment>  </data>
   <data name="MSG_DMG_BOOST_ANY_STATUS" xml:space="preserve">
+    <value>The power was boosted due to the its major status!</value>
+    <comment></comment>  </data>
+  <data name="MSG_DMG_BOOST_ANY_STATUS_OTHER" xml:space="preserve">
     <value>The power was boosted due to the target's major status!</value>
     <comment></comment>  </data>
   <data name="MSG_DMG_BOOST_LOW_HP" xml:space="preserve">
@@ -744,6 +810,9 @@
   <data name="MSG_EXTRA_TURN" xml:space="preserve">
     <value>{0}'s {1} let it move again!</value>
     <comment></comment>  </data>
+  <data name="MSG_FAKE_ITEM" xml:space="preserve">
+    <value>The {0} was actually [a/an] {1}!</value>
+    <comment></comment>  </data>
   <data name="MSG_FIRE_SPIN_START" xml:space="preserve">
     <value>{0} was trapped in a vortex of fire!</value>
     <comment></comment>  </data>
@@ -777,9 +846,6 @@
   <data name="MSG_FLY_END" xml:space="preserve">
     <value>{0} dropped back down!</value>
     <comment></comment>  </data>
-  <data name="MSG_SKY_DROP_CHARGE" xml:space="preserve">
-    <value>{0} took {1} into the sky!</value>
-    <comment></comment>  </data>
   <data name="MSG_FOCUS_ENERGY_START" xml:space="preserve">
     <value>{0} is getting pumped!</value>
     <comment></comment>  </data>
@@ -794,12 +860,6 @@
     <comment></comment>  </data>
   <data name="MSG_FOG_START" xml:space="preserve">
     <value>The fog is deep...</value>
-    <comment></comment>  </data>
-  <data name="MSG_CLOUDY_END" xml:space="preserve">
-    <value>The clouds disappeared.</value>
-    <comment></comment>  </data>
-  <data name="MSG_CLOUDY_START" xml:space="preserve">
-    <value>The sky is cloudy...</value>
     <comment></comment>  </data>
   <data name="MSG_FOLLOW_ME_ALREADY" xml:space="preserve">
     <value>{0} is already the center of attention!</value>
@@ -845,9 +905,6 @@
     <comment></comment>  </data>
   <data name="MSG_GIVE_ITEM_AWAY" xml:space="preserve">
     <value>{0} gave away the {1}!</value>
-    <comment></comment>  </data>
-  <data name="MSG_FAKE_ITEM" xml:space="preserve">
-    <value>The {0} was actually a {1}!</value>
     <comment></comment>  </data>
   <data name="MSG_GRASSY_TERRAIN_END" xml:space="preserve">
     <value>The grass disappeared from the battlefield.</value>
@@ -1062,20 +1119,14 @@
   <data name="MSG_LOCK_OPEN_FLOOR" xml:space="preserve">
     <value>Doors were opened throughout the floor!</value>
     <comment>English translation is intentionally using phrases that are unofficial, so feel free to use your own spin on things for translation.</comment>  </data>
-  <data name="MSG_SWITCH_NEEDED_ONE" xml:space="preserve">
-    <value>{0} more switch remains.</value>
-    <comment></comment>  </data>
-  <data name="MSG_SWITCH_NEEDED_MULTI" xml:space="preserve">
-    <value>{0} more switches remain.</value>
-    <comment></comment>  </data>
-  <data name="MSG_SWITCH_NEEDED_SYNC" xml:space="preserve">
-    <value>Team members must be on all {0} switches.</value>
-    <comment></comment>  </data>
   <data name="MSG_LOSE_HELD_ITEM" xml:space="preserve">
     <value>{0}'s {1} was lost!</value>
     <comment></comment>  </data>
   <data name="MSG_LOSE_ITEM" xml:space="preserve">
     <value>The {1} in {0}'s bag was lost!</value>
+    <comment></comment>  </data>
+  <data name="MSG_LOST_GUEST" xml:space="preserve">
+    <value>{0} was left behind...</value>
     <comment></comment>  </data>
   <data name="MSG_LOVE" xml:space="preserve">
     <value>{0} is attracted and can't target {1}!</value>
@@ -1227,6 +1278,12 @@
   <data name="MSG_MUG" xml:space="preserve">
     <value>All held items were drawn to {0}!</value>
     <comment></comment>  </data>
+  <data name="MSG_MYSTERIOSITY_END" xml:space="preserve">
+    <value>The distortion disappeared!</value>
+    <comment></comment>  </data>
+  <data name="MSG_MYSTERIOSITY_START" xml:space="preserve">
+    <value>A mysterious distortion appears in the dungeon!</value>
+    <comment></comment>  </data>
   <data name="MSG_NIGHTMARE" xml:space="preserve">
     <value>{0} is having nightmares!</value>
     <comment></comment>  </data>
@@ -1286,6 +1343,21 @@
     <comment></comment>  </data>
   <data name="MSG_PASS_ATTACK" xml:space="preserve">
     <value>{0} passed the attack to {1}!</value>
+    <comment></comment>  </data>
+  <data name="MSG_PASSAGE_FAIRY" xml:space="preserve">
+    <value>...[pause=0]A mysterious energy permeates the area.</value>
+    <comment></comment>  </data>
+  <data name="MSG_PASSAGE_FAIRY_OPEN" xml:space="preserve">
+    <value>It swirls and gathers around {0}!</value>
+    <comment></comment>  </data>
+  <data name="MSG_PASSAGE_FLYING" xml:space="preserve">
+    <value>...[pause=0]A mysterious wind current is blowing upwards.</value>
+    <comment></comment>  </data>
+  <data name="MSG_PASSAGE_FLYING_OPEN" xml:space="preserve">
+    <value>{0} is carried by the updraft!</value>
+    <comment></comment>  </data>
+  <data name="MSG_PASTEL_VEIL" xml:space="preserve">
+    <value>{0} can't be poisoned due to Pastel Veil!</value>
     <comment></comment>  </data>
   <data name="MSG_PAUSE" xml:space="preserve">
     <value>{0} is paused and can't move!</value>
@@ -1380,6 +1452,12 @@
   <data name="MSG_PROTECT_WITH" xml:space="preserve">
     <value>{0} is protected by {1}!</value>
     <comment></comment>  </data>
+  <data name="MSG_PSYCHIC_TERRAIN_END" xml:space="preserve">
+    <value>The weirdness disappeared from the battlefield.</value>
+    <comment></comment>  </data>
+  <data name="MSG_PSYCHIC_TERRAIN_START" xml:space="preserve">
+    <value>The battlefield got weird!</value>
+    <comment></comment>  </data>
   <data name="MSG_QUICK_GUARD_START" xml:space="preserve">
     <value>{0} is protected from long-range attacks!</value>
     <comment></comment>  </data>
@@ -1423,13 +1501,16 @@
     <value>{0} joined the party to go on adventures!</value>
     <comment>The version for when the player doesn't have a team name.</comment>  </data>
   <data name="MSG_RECRUIT_BOOST_START" xml:space="preserve">
-    <value>{0}'s chances of recruitment was boosted!</value>
+    <value>{0}'s chance of recruitment was boosted!</value>
     <comment></comment>  </data>
   <data name="MSG_RECRUIT_FAIL" xml:space="preserve">
     <value>{0} seems hesitant to join the team...</value>
     <comment></comment>  </data>
+  <data name="MSG_RECRUIT_GUEST" xml:space="preserve">
+    <value>{0} was brought along for the adventure.</value>
+    <comment></comment>  </data>
   <data name="MSG_RECYCLE" xml:space="preserve">
-    <value>{0}'s {1} was recycled and became a {2}</value>
+    <value>{0}'s {1} was recycled and became a {2}.</value>
     <comment></comment>  </data>
   <data name="MSG_REDIRECT_ATTACK" xml:space="preserve">
     <value>{0} redirected the attack!</value>
@@ -1551,6 +1632,9 @@
   <data name="MSG_SKY_ATTACK_CHARGE" xml:space="preserve">
     <value>{0} became cloaked in a harsh light!</value>
     <comment></comment>  </data>
+  <data name="MSG_SKY_DROP_CHARGE" xml:space="preserve">
+    <value>{0} took {1} into the sky!</value>
+    <comment></comment>  </data>
   <data name="MSG_SLEEP_ALREADY" xml:space="preserve">
     <value>{0} is already asleep!</value>
     <comment></comment>  </data>
@@ -1650,6 +1734,9 @@
   <data name="MSG_STAT_DROP_PROTECT" xml:space="preserve">
     <value>{0}'s {1} prevented its {2} from dropping!</value>
     <comment></comment>  </data>
+  <data name="MSG_STAT_DROP_REFLECT" xml:space="preserve">
+    <value>{0}'s {1} reflected the stat change!</value>
+    <comment></comment>  </data>
   <data name="MSG_STAT_DROP_TRIGGER" xml:space="preserve">
     <value>The stat drop triggered {0}'s {1}!</value>
     <comment></comment>  </data>
@@ -1661,6 +1748,9 @@
     <comment></comment>  </data>
   <data name="MSG_STAT_SWAP" xml:space="preserve">
     <value>{0} swapped its {1} with its {2}!</value>
+    <comment></comment>  </data>
+  <data name="MSG_STAT_SWAP_OTHER" xml:space="preserve">
+    <value>{0} swapped its {1} with {2}!</value>
     <comment></comment>  </data>
   <data name="MSG_STATIC" xml:space="preserve">
     <value>{0}'s Static paralyzes on contact!</value>
@@ -1752,6 +1842,15 @@
   <data name="MSG_SWEET_VEIL_DROWSY" xml:space="preserve">
     <value>{0} can't become drowsy due to Sweet Veil!</value>
     <comment></comment>  </data>
+  <data name="MSG_SWITCH_NEEDED_MULTI" xml:space="preserve">
+    <value>{0} more switches remain.</value>
+    <comment></comment>  </data>
+  <data name="MSG_SWITCH_NEEDED_ONE" xml:space="preserve">
+    <value>{0} more switch remains.</value>
+    <comment></comment>  </data>
+  <data name="MSG_SWITCH_NEEDED_SYNC" xml:space="preserve">
+    <value>Team members must be on all {0} switches.</value>
+    <comment></comment>  </data>
   <data name="MSG_SYNCHRO_FAIL" xml:space="preserve">
     <value>{0} isn't the same type as {1}!</value>
     <comment></comment>  </data>
@@ -1778,12 +1877,6 @@
     <comment></comment>  </data>
   <data name="MSG_TIME_UP" xml:space="preserve">
     <value>It's right nearby! It's gusting hard!</value>
-    <comment></comment>  </data>
-  <data name="MSG_MYSTERIOSITY_START" xml:space="preserve">
-    <value>A mysterious distortion appears in the dungeon!</value>
-    <comment></comment>  </data>
-  <data name="MSG_MYSTERIOSITY_END" xml:space="preserve">
-    <value>The distortion disappeared!</value>
     <comment></comment>  </data>
   <data name="MSG_TIME_WARNING_1" xml:space="preserve">
     <value>Something's stirring...</value>
@@ -2043,6 +2136,9 @@
   <data name="TALK_ADVICE_NEUTRAL" xml:space="preserve">
     <value>Be careful around wild Pokémon when you're in these Mystery Dungeons.[br]But me?[pause=0] I'm harmless.[br]You can tell from the color of my map icon,[pause=0] and the yellow outline around my shadow!</value>
     <comment></comment>  </data>
+  <data name="TALK_ADVICE_POISON" xml:space="preserve">
+    <value>If you get poisoned, don't panic![scroll]If you wait it out without moving or attacking, and you'll take less damage.</value>
+    <comment></comment>  </data>
   <data name="TALK_ADVICE_RANGE" xml:space="preserve">
     <value>I'd be careful around those Ledyba...[br]Their Supersonic hits at a long range,[pause=0] and can travel through multiple team members!</value>
     <comment></comment>  </data>
@@ -2053,7 +2149,7 @@
     <value>Whew, that did the trick![pause=0] Why don't you take this?</value>
     <comment></comment>  </data>
   <data name="TALK_ADVICE_STAT_DROP" xml:space="preserve">
-    <value>Aurgh, that Aipom threw some sand in my eyes and now my attacks are harder to hit![br]I need to get to a Wonder Tile...</value>
+    <value>Aurgh, that Aipom threw some sand in my eyes and now I can barely hit anything![br]I need to get to a Wonder Tile...</value>
     <comment></comment>  </data>
   <data name="TALK_ADVICE_SWITCH_GAMEPAD" xml:space="preserve">
     <value>If you want another Pokémon to take the lead, use {0} or {1} to switch leaders!</value>
@@ -2066,6 +2162,33 @@
     <comment></comment>  </data>
   <data name="TALK_CANT" xml:space="preserve">
     <value>[myname] can't talk just now.</value>
+    <comment></comment>  </data>
+  <data name="TALK_ESCORT_ASK" xml:space="preserve">
+    <value>Take the lost Pokémon along?</value>
+    <comment></comment>  </data>
+  <data name="TALK_ESCORT_SISTER_ACCEPT" xml:space="preserve">
+    <value>Can... can you get me out of here?</value>
+    <comment></comment>  </data>
+  <data name="TALK_ESCORT_SISTER_FULL_001" xml:space="preserve">
+    <value>[tmp]This can't be real...</value>
+    <comment></comment>  </data>
+  <data name="TALK_ESCORT_SISTER_FULL_002" xml:space="preserve">
+    <value>[tmp]This feels so strange...</value>
+    <comment></comment>  </data>
+  <data name="TALK_ESCORT_SISTER_FULL_003" xml:space="preserve">
+    <value>[tmp]H-Hey... what are you?</value>
+    <comment></comment>  </data>
+  <data name="TALK_ESCORT_SISTER_FULL_004" xml:space="preserve">
+    <value>[tmp]... ...</value>
+    <comment></comment>  </data>
+  <data name="TALK_ESCORT_SISTER_HALF" xml:space="preserve">
+    <value>[tmp]Owie! Why is everyone so mean!?</value>
+    <comment></comment>  </data>
+  <data name="TALK_ESCORT_SISTER_PINCH" xml:space="preserve">
+    <value>[tmp]I can't go on...</value>
+    <comment></comment>  </data>
+  <data name="TALK_ESCORT_SISTER_START" xml:space="preserve">
+    <value>[tmp]Where am I?  Am I dreaming?  I feel a slight breeze...</value>
     <comment></comment>  </data>
   <data name="TALK_FULL_0000" xml:space="preserve">
     <value>Let's do our best!</value>
@@ -2943,6 +3066,24 @@
   <data name="TALK_HALF_0200" xml:space="preserve">
     <value>It's gotten even tougher now.</value>
     <comment></comment>  </data>
+  <data name="TALK_OUTLAW_DISGUISE_001" xml:space="preserve">
+    <value>[tmp]Hey it's me, manager. I'm okay after all!</value>
+    <comment></comment>  </data>
+  <data name="TALK_OUTLAW_DISGUISE_002" xml:space="preserve">
+    <value>[tmp]Don't worry, I'll be right back on the mountain, kekeke...</value>
+    <comment></comment>  </data>
+  <data name="TALK_OUTLAW_DISGUISE_003" xml:space="preserve">
+    <value>[tmp]I said you should go now.  There's nothing here for you.</value>
+    <comment></comment>  </data>
+  <data name="TALK_OUTLAW_DISGUISE_004" xml:space="preserve">
+    <value>[tmp]fufufu... so you're not fooled after all.</value>
+    <comment></comment>  </data>
+  <data name="TALK_OUTLAW_DISGUISE_005" xml:space="preserve">
+    <value>[tmp]Fine, we'll do this the hard way!</value>
+    <comment></comment>  </data>
+  <data name="TALK_OUTLAW_DISGUISE_ATTACKED" xml:space="preserve">
+    <value>[tmp]What? How!?</value>
+    <comment></comment>  </data>
   <data name="TALK_PINCH_0000" xml:space="preserve">
     <value>I'm going down for the count...</value>
     <comment></comment>  </data>
@@ -3620,5 +3761,8 @@
     <comment></comment>  </data>
   <data name="TALK_WAIT_0190" xml:space="preserve">
     <value>Good to see you!</value>
+    <comment></comment>  </data>
+  <data name="TITLE_ENRAGED_CALDERA" xml:space="preserve">
+    <value>Enraged Caldera\nB{0}F</value>
     <comment></comment>  </data>
 </root>

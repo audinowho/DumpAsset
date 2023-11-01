@@ -7,9 +7,11 @@
 ]]--
 require 'common'
 require 'services.baseservice'
+require 'recruit_list'
 
 --Declare class DebugTools
 local DebugTools = Class('DebugTools', BaseService)
+
 
 --[[---------------------------------------------------------------
     DebugTools:initialize()
@@ -48,14 +50,46 @@ function DebugTools:OnDeinit()
 end
 
 --[[---------------------------------------------------------------
+    DebugTools:OnMenuButtonPressed()
+      When the main menu button is pressed or the main menu should be enabled this is called!
+      This is called as a coroutine.
+---------------------------------------------------------------]]
+function DebugTools:OnMenuButtonPressed()
+  -- TODO: Remove this when the memory leak is fixed or confirmed not a leak
+  if DebugTools.MainMenu == nil then
+    DebugTools.MainMenu = RogueEssence.Menu.MainMenu()
+  end
+  DebugTools.MainMenu:SetupChoices()
+  if RogueEssence.GameManager.Instance.CurrentScene == RogueEssence.Dungeon.DungeonScene.Instance then
+    DebugTools.MainMenu.Choices[5] = RogueEssence.Menu.MenuTextChoice(STRINGS:FormatKey("MENU_OTHERS_TITLE"), function () _MENU:AddMenu(DebugTools:OthersMenuWithRecruitScan(), false) end)
+  end
+  DebugTools.MainMenu:SetupTitleAndSummary()
+  DebugTools.MainMenu:InitMenu()
+  TASK:WaitTask(_MENU:ProcessMenuCoroutine(DebugTools.MainMenu))
+end
+
+function DebugTools:OthersMenuWithRecruitScan()
+  -- TODO: Remove this when the memory leak is fixed or confirmed not a leak
+  if DebugTools.OthersMenu == nil then
+    DebugTools.OthersMenu = RogueEssence.Menu.OthersMenu()
+  end
+  DebugTools.OthersMenu:SetupChoices();
+  if RogueEssence.GameManager.Instance.CurrentScene == RogueEssence.Dungeon.DungeonScene.Instance then
+    DebugTools.OthersMenu.Choices:Insert(1, RogueEssence.Menu.MenuTextChoice(RogueEssence.StringKey("MENU_RECRUITMENT"):ToLocal(), function () _MENU:AddMenu(RecruitmentListMenu:new().menu, false) end))
+  end
+  DebugTools.OthersMenu:InitMenu();
+  return DebugTools.OthersMenu
+end
+
+--[[---------------------------------------------------------------
     DebugTools:OnNewGame()
       When a new save file is loaded this is called!
 ---------------------------------------------------------------]]
 function DebugTools:OnNewGame()
   assert(self, 'DebugTools:OnNewGame() : self is null!')
   
-  for ii = 1, _DATA.StartChars.Count, 1 do
-    _DATA.Save:RogueUnlockMonster(_DATA.StartChars[ii-1].Item1.Species)
+  for ii = 1, _DATA.Start.Chars.Count, 1 do
+    _DATA.Save:RogueUnlockMonster(_DATA.Start.Chars[ii-1].ID.Species)
   end
   
   if _DATA.Save.ActiveTeam.Players.Count > 0 then
@@ -103,120 +137,23 @@ function DebugTools:OnNewGame()
     --  GAME:GivePlayerStorageItem(ii)
     --  SV.unlocked_trades[ii] = true
     --end
-  
-    SV.base_camp.ExpositionComplete = true
-    SV.base_camp.IntroComplete = true
-	SV.test_grounds.DemoComplete = true
+	
+    --for ii = 1, 10000, 1 do
+    --  mon_id = RogueEssence.Dungeon.MonsterID("bulbasaur", 0, "normal", Gender.Male)
+    --  _DATA.Save.ActiveTeam.Assembly:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, "", 0))
+    --end
+    
+	if SV.base_camp ~= nil then
+      SV.base_camp.ExpositionComplete = true
+      SV.base_camp.IntroComplete = true
+	end
+	if SV.test_grounds ~= nil then
+	  SV.test_grounds.DemoComplete = true
+	end
 	SV.General.Starter = _DATA.Save.ActiveTeam.Players[0].BaseForm
   end
 end
 
---[[---------------------------------------------------------------
-    DebugTools:OnUpgrade()
-      When a save file in an old version is loaded this is called!
----------------------------------------------------------------]]
-function DebugTools:OnUpgrade()
-  assert(self, 'DebugTools:OnUpgrade() : self is null!')
-  
-  PrintInfo("=>> Loading version")
-  _DATA.Save.NextDest = _DATA.StartMap
-  
-  SV.checkpoint = 
-  {
-    Zone    = 'guildmaster_island', Segment  = -1,
-    Map  = 1, Entry  = 0
-  }
-  
-  if SV.test_grounds.DemoComplete == nil then
-    SV.test_grounds =
-    {
-      SpokeToPooch = false,
-      AcceptedPooch = false,
-      Starter = { Species="pikachu", Form=0, Skin="normal", Gender=2 },
-      Partner = { Species="eevee", Form=0, Skin="normal", Gender=1 },
-      DemoComplete = false,
-    }
-  end
-  
-  SV.test_grounds.Starter = { Species="pikachu", Form=0, Skin="normal", Gender=2 }
-  SV.test_grounds.Partner = { Species="eevee", Form=0, Skin="normal", Gender=1 }
-  
-  if SV.missions == nil then
-    SV.missions =
-	{
-	  Missions = { },
-	  FinishedMissions = { },
-	}
-  end
-  
-  
-  -- end
-  if SV.unlocked_trades ~= nil then
-  else
-    SV.unlocked_trades = {}
-  end
-  
-  if SV.General.Starter == nil then
-    SV.General.Starter = MonsterID("bulbasaur", 0, "normal", Gender.Male)
-  end
-  
-  local oldVersion = _DATA.Save.GameVersion
-  if oldVersion.Major <= 0 and oldVersion.Minor <= 6 and oldVersion.Build <= 7 then
-    _DATA.Save:DeleteOutdatedAssets(RogueEssence.Data.DataManager.DataType.Item)
-  end
-  if oldVersion.Major <= 0 and oldVersion.Minor <= 7 then
-  
-  SV.base_camp.FerryUnlocked = true
-  SV.base_camp.FerryIntroduced = true
-  
-SV.magnagate =
-{
-  cards = 0,
-  portal = false
-}
-
-SV.shimmer_bay = 
-{
-  TookTreasure  = false
-}
-
-SV.manaphy_egg = 
-{
-  Taken = false,
-  ExpositionComplete = false,
-  Hatched = false
-}
-
-SV.roaming_legends =
-{
-  Raikou = false,
-  Entei = false,
-  Suicune = false,
-  Celebi = false,
-  Darkrai = false
-}
-
-
-SV.sleeping_caldera = 
-{
-  TookTreasure  = false,
-  GotHeatran = false
-}
-  
-SV.dex = {
-  CurrentRewardIdx = 1
-}
-	
-SV.moonlit_end = 
-{
-  ExpositionComplete  = false
-}
-
-	GAME:UnlockDungeon('fertile_valley')
-  end
-  
-  PrintInfo("=>> Loaded version")
-end
 
 --[[---------------------------------------------------------------
     DebugTools:OnLossPenalty()
@@ -233,18 +170,18 @@ function DebugTools:OnLossPenalty(save)
   for i = inv_count, 0, -1 do
     local entry = _DATA:GetItem(save.ActiveTeam:GetInv(i).ID)
     if not entry.CannotDrop then
-      save.ActiveTeam:RemoveFromInv(i);
+      save.ActiveTeam:RemoveFromInv(i)
     end
   end
   
   --remove equips
-  local player_count = GAME:GetPlayerPartyCount()
+  local player_count = save.ActiveTeam.Players.Count
   for i = 0, player_count - 1, 1 do 
-    local player = GAME:GetPlayerPartyMember(i)
+    local player = save.ActiveTeam.Players[i]
     if player.EquippedItem.ID ~= '' and player.EquippedItem.ID ~= nil then 
-      local entry = _DATA:GetItem(player.EquippedItem.ID);
+      local entry = _DATA:GetItem(player.EquippedItem.ID)
       if not entry.CannotDrop then
-         player:SilentDequipItem();
+         player:SilentDequipItem()
       end
     end
   end
@@ -255,8 +192,8 @@ end
 function DebugTools:Subscribe(med)
   med:Subscribe("DebugTools", EngineServiceEvents.Init,                function() self.OnInit(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.Deinit,              function() self.OnDeinit(self) end )
+  med:Subscribe("DebugTools", EngineServiceEvents.MenuButtonPressed,        function() self.OnMenuButtonPressed() end )
   med:Subscribe("DebugTools", EngineServiceEvents.NewGame,        function() self.OnNewGame(self) end )
-  med:Subscribe("DebugTools", EngineServiceEvents.UpgradeSave,        function() self.OnUpgrade(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.LossPenalty,        function(_, args) self.OnLossPenalty(self, args[0]) end )
 --  med:Subscribe("DebugTools", EngineServiceEvents.GraphicsUnload,      function() self.OnGraphicsUnload(self) end )
 --  med:Subscribe("DebugTools", EngineServiceEvents.Restart,             function() self.OnRestart(self) end )

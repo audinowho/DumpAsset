@@ -183,7 +183,7 @@ function SINGLE_CHAR_SCRIPT.GuildBlock(owner, ownerChar, context, args)
   else
     UI:ResetSpeaker()
     UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_LOCK_GUILD_OPEN"):ToLocal(), context.User:GetDisplayName(true)))
-    TASK:WaitTask(owner:InteractWithTile(context.User))
+    TASK:WaitTask(owner:InteractWithTile(context))
   end
 end
 

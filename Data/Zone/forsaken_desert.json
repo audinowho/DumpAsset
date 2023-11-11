@@ -684,8 +684,8 @@
 },
 "AmountSpawner": {
 "$type": "RogueElements.RandRange, RogueElements",
-"Min": 80,
-"Max": 100
+"Min": 100,
+"Max": 120
 }
 }
 }
@@ -844,6 +844,31 @@
 "Key": {
 "str": [
 6,
+1
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"Spawn": {
+"$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"Amount": {
+"Min": 100,
+"Max": 120
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+6,
 2
 ]
 },
@@ -914,8 +939,8 @@
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "CellWidth": 8,
 "CellHeight": 8,
-"CellX": 50,
-"CellY": 50,
+"CellX": 40,
+"CellY": 40,
 "CellWall": 1,
 "Wrap": false
 }
@@ -1256,8 +1281,8 @@
 "Value": {
 "$type": "RogueEssence.LevelGen.CombineGridRoomRandStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "MergeRate": {
-"Min": 800,
-"Max": 800
+"Min": 450,
+"Max": 450
 },
 "Filters": [
 {
@@ -8175,9 +8200,9 @@
 },
 "Value": {
 "$type": "RogueEssence.LevelGen.MapTextureStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"GroundTileset": "northern_desert_1_floor",
-"BlockTileset": "northern_desert_1_wall",
-"WaterTileset": "northern_desert_1_secondary",
+"GroundTileset": "desert_region_floor",
+"BlockTileset": "desert_region_wall",
+"WaterTileset": "desert_region_secondary",
 "LayeredGround": false,
 "IndependentGround": false,
 "GroundElement": "ground"
@@ -8222,8 +8247,8 @@
 },
 "AmountSpawner": {
 "$type": "RogueElements.RandRange, RogueElements",
-"Min": 80,
-"Max": 100
+"Min": 130,
+"Max": 150
 }
 }
 }
@@ -8375,6 +8400,31 @@
 "PlacementValue": {
 "Min": 20,
 "Max": 120
+}
+}
+},
+{
+"Key": {
+"str": [
+6,
+1
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"Spawn": {
+"$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"Amount": {
+"Min": 150,
+"Max": 170
+}
 }
 }
 },
@@ -9042,7 +9092,7 @@
 ]
 },
 "Value": {
-"$type": "RogueEssence.LevelGen.GridPathBranchSpread`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"$type": "PMDC.LevelGen.GridPathPyramid`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
 "RoomRatio": {
 "Min": 90,
 "Max": 90
@@ -9051,6 +9101,29 @@
 "Min": 0,
 "Max": 35
 },
+"LargeRoomComponents": [
+{
+"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
+"Connection": 4
+},
+{
+"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.NoEventRoom, PMDC"
+}
+],
+"CornerRoomComponents": [
+{
+"$type": "PMDC.LevelGen.CornerRoom, PMDC"
+},
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+},
+{
+"$type": "PMDC.LevelGen.NoEventRoom, PMDC"
+}
+],
 "NoForcedBranches": false,
 "GenericRooms": {
 "$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
@@ -9189,6 +9262,746 @@
 {
 "$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
 "Connection": 1
+}
+],
+"GiantHallSize": {
+"X": 20,
+"Y": 20
+},
+"GiantHallGen": [
+{
+"Spawn": {
+"$type": "RogueEssence.LevelGen.RoomGenLoadMapBordered`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Borders": {
+"Down": [
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"Up": [
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"Left": [
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+],
+"Right": [
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+true,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false,
+false
+]
+},
+"PreventChanges": 3,
+"MapID": "room_pyramid"
+},
+"Rate": 10
 }
 ]
 }
@@ -9371,8 +10184,8 @@
 "Value": {
 "$type": "RogueEssence.LevelGen.CombineGridRoomRandStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "MergeRate": {
-"Min": 800,
-"Max": 800
+"Min": 600,
+"Max": 600
 },
 "Filters": [
 {
@@ -36666,110 +37479,6 @@
 {
 "Key": {
 "str": [
--2,
-2
-]
-},
-"Value": {
-"$type": "RogueElements.AddConnectedRoomsStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"Amount": {
-"Min": 1,
-"Max": 1
-},
-"HallPercent": 100,
-"Filters": [
-{
-"$type": "RogueElements.RoomFilterComponent, RogueElements",
-"Negate": true,
-"Components": [
-{
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.UnVaultableRoom, PMDC"
-}
-]
-}
-],
-"GenericRooms": {
-"$type": "RogueElements.SpawnList`1[[RogueElements.RoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"$values": [
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenCross`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"MajorWidth": {
-"Min": 3,
-"Max": 3
-},
-"MinorHeight": {
-"Min": 2,
-"Max": 2
-},
-"MajorHeight": {
-"Min": 3,
-"Max": 3
-},
-"MinorWidth": {
-"Min": 2,
-"Max": 2
-}
-},
-"Rate": 10
-}
-]
-},
-"RoomComponents": [
-{
-"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
-"Connection": 4
-},
-{
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.NoEventRoom, PMDC"
-}
-],
-"GenericHalls": {
-"$type": "RogueElements.SpawnList`1[[RogueElements.PermissiveRoomGen`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements]], RogueElements",
-"$values": [
-{
-"Spawn": {
-"$type": "RogueElements.RoomGenAngledHall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
-"HallTurnBias": 0,
-"Brush": {
-"$type": "RogueElements.DefaultHallBrush, RogueElements"
-},
-"Width": {
-"Min": 2,
-"Max": 4
-},
-"Height": {
-"Min": 2,
-"Max": 4
-}
-},
-"Rate": 10
-}
-]
-},
-"HallComponents": [
-{
-"$type": "PMDC.LevelGen.ConnectivityRoom, PMDC",
-"Connection": 4
-},
-{
-"$type": "PMDC.LevelGen.NoConnectRoom, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.NoEventRoom, PMDC"
-}
-]
-}
-},
-{
-"Key": {
-"str": [
 -1
 ]
 },
@@ -36798,99 +37507,16 @@
 ]
 },
 "Value": {
-"$type": "PMDC.LevelGen.BossSealStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
-"BossFilters": [
-{
-"$type": "RogueElements.RoomFilterComponent, RogueElements",
-"Negate": false,
-"Components": [
-{
-"$type": "PMDC.LevelGen.BossRoom, PMDC"
-}
-]
-},
-{
-"$type": "RogueEssence.LevelGen.RoomFilterIndex, RogueEssence",
-"Negate": false,
-"Indices": [
-0
-]
-}
-],
-"Filters": [
-{
-"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
-"Connection": 16
-},
-{
-"$type": "RogueEssence.LevelGen.RoomFilterIndex, RogueEssence",
-"Negate": false,
-"Indices": [
-0
-]
-}
-],
-"SealedTile": "sealed_block",
-"BossTile": "tile_boss"
-}
-},
-{
-"Key": {
-"str": [
-0,
-2
-]
-},
-"Value": {
-"$type": "PMDC.LevelGen.BossSealStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
-"BossFilters": [
-{
-"$type": "RogueElements.RoomFilterComponent, RogueElements",
-"Negate": false,
-"Components": [
-{
-"$type": "PMDC.LevelGen.BossRoom, PMDC"
-}
-]
-},
-{
-"$type": "RogueEssence.LevelGen.RoomFilterIndex, RogueEssence",
-"Negate": false,
-"Indices": [
-1
-]
-}
-],
-"Filters": [
-{
-"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
-"Connection": 16
-},
-{
-"$type": "RogueEssence.LevelGen.RoomFilterIndex, RogueEssence",
-"Negate": false,
-"Indices": [
-1
-]
-}
-],
-"SealedTile": "sealed_block",
-"BossTile": "tile_boss"
-}
-},
-{
-"Key": {
-"str": [
-0,
-2
-]
-},
-"Value": {
 "$type": "PMDC.LevelGen.SwitchSealStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
 "SwitchFilters": [
 {
-"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
-"Connection": 1
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": false,
+"Components": [
+{
+"$type": "PMDC.LevelGen.CornerRoom, PMDC"
+}
+]
 },
 {
 "$type": "RogueElements.RoomFilterComponent, RogueElements",
@@ -36910,9 +37536,97 @@
 ],
 "SealedTile": "sealed_block",
 "SwitchTile": "tile_switch",
-"Amount": 2,
+"Amount": 4,
 "Revealed": true,
 "TimeLimit": false
+}
+},
+{
+"Key": {
+"str": [
+0,
+2
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.BossSealStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"BossFilters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": false,
+"Components": [
+{
+"$type": "PMDC.LevelGen.BossRoom, PMDC"
+}
+]
+},
+{
+"$type": "RogueEssence.LevelGen.RoomFilterIndex, RogueEssence",
+"Negate": false,
+"Indices": [
+0
+]
+}
+],
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 16
+},
+{
+"$type": "RogueEssence.LevelGen.RoomFilterIndex, RogueEssence",
+"Negate": false,
+"Indices": [
+0
+]
+}
+],
+"SealedTile": "sealed_block",
+"BossTile": "tile_boss"
+}
+},
+{
+"Key": {
+"str": [
+0,
+2
+]
+},
+"Value": {
+"$type": "PMDC.LevelGen.BossSealStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"BossFilters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": false,
+"Components": [
+{
+"$type": "PMDC.LevelGen.BossRoom, PMDC"
+}
+]
+},
+{
+"$type": "RogueEssence.LevelGen.RoomFilterIndex, RogueEssence",
+"Negate": false,
+"Indices": [
+1
+]
+}
+],
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 16
+},
+{
+"$type": "RogueEssence.LevelGen.RoomFilterIndex, RogueEssence",
+"Negate": false,
+"Indices": [
+1
+]
+}
+],
+"SealedTile": "sealed_block",
+"BossTile": "tile_boss"
 }
 },
 {
@@ -37052,59 +37766,14 @@
 {
 "Key": {
 "str": [
-2,
-2
-]
-},
-"Value": {
-"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
-"IncludeHalls": false,
-"Filters": [
-{
-"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
-"Connection": 4
-}
-],
-"Spawn": {
-"$type": "RogueEssence.LevelGen.BulkSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueEssence",
-"SpecificSpawns": [
-{
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "stairs_secret_up",
-"Revealed": true,
-"Owner": 0,
-"TileStates": [
-{
-"$type": "PMDC.Dungeon.DestState, PMDC",
-"Dest": {
-"Segment": 1,
-"ID": 0
-},
-"Relative": false,
-"PreserveMusic": false
-}
-]
-}
-],
-"RandomSpawns": [],
-"SpawnAmount": 0
-}
-}
-},
-{
-"Key": {
-"str": [
 4
 ]
 },
 "Value": {
 "$type": "RogueEssence.LevelGen.MapTextureStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"GroundTileset": "northern_desert_2_floor",
-"BlockTileset": "northern_desert_2_wall",
-"WaterTileset": "northern_desert_2_secondary",
+"GroundTileset": "northern_desert_1_floor",
+"BlockTileset": "northern_desert_1_wall",
+"WaterTileset": "northern_desert_1_secondary",
 "LayeredGround": false,
 "IndependentGround": false,
 "GroundElement": "ground"
@@ -37149,8 +37818,8 @@
 },
 "AmountSpawner": {
 "$type": "RogueElements.RandRange, RogueElements",
-"Min": 80,
-"Max": 100
+"Min": 160,
+"Max": 180
 }
 }
 }
@@ -37257,8 +37926,8 @@
 "Max": 2
 },
 "Amount": {
-"Min": 6,
-"Max": 6
+"Min": 5,
+"Max": 5
 }
 }
 },
@@ -37269,6 +37938,31 @@
 "PlacementValue": {
 "Min": 20,
 "Max": 120
+}
+}
+},
+{
+"Key": {
+"str": [
+6,
+1
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"Spawn": {
+"$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"Amount": {
+"Min": 200,
+"Max": 220
+}
 }
 }
 },
@@ -38870,8 +39564,8 @@
 "Value": {
 "$type": "RogueEssence.LevelGen.CombineGridRoomRandStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "MergeRate": {
-"Min": 800,
-"Max": 800
+"Min": 750,
+"Max": 750
 },
 "Filters": [
 {
@@ -64728,8 +65422,8 @@
 },
 "AmountSpawner": {
 "$type": "RogueElements.RandRange, RogueElements",
-"Min": 80,
-"Max": 100
+"Min": 190,
+"Max": 210
 }
 }
 }
@@ -64848,6 +65542,31 @@
 "PlacementValue": {
 "Min": 20,
 "Max": 120
+}
+}
+},
+{
+"Key": {
+"str": [
+6,
+1
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"Spawn": {
+"$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"Amount": {
+"Min": 250,
+"Max": 270
+}
 }
 }
 },
@@ -67005,6 +67724,20 @@
 },
 {
 "Spawn": {
+"ID": "seed_plain",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+},
+{
+"Spawn": {
 "ID": "seed_vile",
 "Cursed": false,
 "HiddenValue": "",
@@ -67820,7 +68553,7 @@
 "growl"
 ],
 "Intrinsic": "",
-"Tactic": "wander_dumb_itemless",
+"Tactic": "wait_and_see",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -67858,7 +68591,7 @@
 "bonemerang"
 ],
 "Intrinsic": "",
-"Tactic": "wander_dumb_itemless",
+"Tactic": "wait_and_see",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -67897,7 +68630,7 @@
 "dig"
 ],
 "Intrinsic": "",
-"Tactic": "wander_dumb_itemless",
+"Tactic": "wait_and_see",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -67914,8 +68647,8 @@
 },
 "Rate": 10,
 "Range": {
-"Min": 1,
-"Max": 4
+"Min": 0,
+"Max": 2
 }
 },
 {
@@ -67936,7 +68669,7 @@
 "pluck"
 ],
 "Intrinsic": "",
-"Tactic": "wander_dumb_itemless",
+"Tactic": "wait_and_see",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -67975,7 +68708,7 @@
 "sand_attack"
 ],
 "Intrinsic": "",
-"Tactic": "wander_dumb_itemless",
+"Tactic": "wait_and_see",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -68014,7 +68747,7 @@
 "needle_arm"
 ],
 "Intrinsic": "",
-"Tactic": "wander_dumb_itemless",
+"Tactic": "wait_and_see",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -68053,7 +68786,7 @@
 "bug_bite"
 ],
 "Intrinsic": "",
-"Tactic": "wander_dumb_itemless",
+"Tactic": "wait_and_see",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -68091,8 +68824,8 @@
 "smokescreen",
 "lava_plume"
 ],
-"Intrinsic": "",
-"Tactic": "wander_dumb_itemless",
+"Intrinsic": "drought",
+"Tactic": "wait_and_see",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -68132,7 +68865,7 @@
 "crunch"
 ],
 "Intrinsic": "",
-"Tactic": "wander_dumb_itemless",
+"Tactic": "wait_and_see",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -68171,7 +68904,7 @@
 "assurance"
 ],
 "Intrinsic": "",
-"Tactic": "wander_dumb_itemless",
+"Tactic": "wait_and_see",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -68210,7 +68943,7 @@
 "bide"
 ],
 "Intrinsic": "",
-"Tactic": "wander_dumb_itemless",
+"Tactic": "wait_and_see",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -68249,7 +68982,7 @@
 "low_kick"
 ],
 "Intrinsic": "",
-"Tactic": "wander_dumb_itemless",
+"Tactic": "wait_and_see",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -68268,6 +69001,45 @@
 "Range": {
 "Min": 0,
 "Max": 2
+}
+},
+{
+"Spawn": {
+"Spawn": {
+"BaseForm": {
+"Species": "gible",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 25,
+"Max": 25
+},
+"SpecifiedSkills": [
+"sandstorm",
+"dragon_rage"
+],
+"Intrinsic": "",
+"Tactic": "wait_and_see",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+}
+]
+},
+"Role": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 2,
+"Max": 4
 }
 }
 ],

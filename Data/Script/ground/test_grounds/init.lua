@@ -109,6 +109,13 @@ function test_grounds.Sign1_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo('Sign1_Action')
   
+  local zone = _DATA:GetZone("faded_trail")
+  local cur_floor = zone.Segments[0].Floors[0]
+  local priorities = LUA_ENGINE:MakeList(cur_floor.GenSteps)
+  for priority in luanet.each(priorities) do
+    PrintInfo(priority:ToString())
+  end
+  
   GROUND:MoveObjectToPosition(obj, 40, 40, 2)
   GROUND:TeleportTo(obj, 200, 200, Direction.Right)
   UI:ResetSpeaker()
@@ -139,6 +146,14 @@ function test_grounds.Sign1_Action(obj, activator)
   emitter.LocHeight = 14
   GROUND:PlayVFX(emitter, activator.MapLoc.X, activator.MapLoc.Y)
   
+  
+  local switchEmitter = RogueEssence.Content.SingleSwitchEmitter()
+  switchEmitter.Anim = RogueEssence.Content.StaticAnim(RogueEssence.Content.AnimData("Flamethrower", 3), 0, -1)
+  switchEmitter.LocHeight = 14
+  switchEmitter:SetupEmit(RogueElements.Loc(activator.MapLoc.X + 64, activator.MapLoc.Y), RogueElements.Loc(activator.MapLoc.X + 64, activator.MapLoc.Y), Dir8.Down)
+  _GROUND:CreateAnim(switchEmitter, DrawLayer.NoDraw)
+  --use _DUNGEON for dungeon.
+  
   GAME:WaitFrames(60)
   UI:WaitShowDialogue("BOOM.")
   
@@ -151,6 +166,8 @@ function test_grounds.Sign1_Action(obj, activator)
   
   GAME:WaitFrames(60)
   UI:WaitShowDialogue("BOOM BOOM BOOM.")
+  
+  switchEmitter:SwitchOff()
 end
 
 

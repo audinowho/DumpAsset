@@ -180,7 +180,7 @@ function RecruitmentListMenu:initialize()
     self.list = {}
     self.list = RECRUIT_LIST.compileCurrentList()
     self.page = 0
-    self.PAGE_MAX = (#self.list-1)//self.ENTRY_LIMIT+1
+    self.PAGE_MAX = math.max((#self.list-1)//self.ENTRY_LIMIT+1, 0)
 
     self:DrawMenu()
 end

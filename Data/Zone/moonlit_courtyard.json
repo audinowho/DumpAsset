@@ -15133,6 +15133,88 @@ false
 ]
 },
 {
+"$type": "RogueEssence.LevelGen.SpreadRoomZoneStep, RogueEssence",
+"Spawns": [
+{
+"Spawn": {
+"GridOption": {
+"$type": "RogueEssence.LevelGen.RoomGenLoadMap`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"RoomTerrain": {
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Owner": 0,
+"TileStates": []
+}
+},
+"PreventChanges": 3,
+"MapID": "room_moon_dance"
+},
+"ListOption": {
+"$type": "RogueElements.RoomGenDefault`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements"
+},
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+]
+},
+"Rate": 10
+}
+],
+"PriorityGrid": {
+"str": [
+-4,
+1
+]
+},
+"PriorityList": {
+"str": [
+-2,
+2
+]
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 0,
+"Max": 2
+},
+"Replaceable": false,
+"FloorRange": {
+"Min": 10,
+"Max": 14
+}
+},
+"ModStates": []
+},
+{
 "$type": "RogueEssence.LevelGen.SpreadStepRangeZoneStep, RogueEssence",
 "StepPriority": {
 "str": [

@@ -483,6 +483,7 @@ function base_camp.Statue_Center_Action(obj, activator)
   UI:SetCenter(true)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Statue_Center_Text'], SV.base_camp.CenterStatueDate, GAME:GetTeamName()))
   UI:SetAutoFinish(false)
+  UI:ResetSpeaker()
 end
 
 function base_camp.Statue_Left_Action(obj, activator)
@@ -492,6 +493,7 @@ function base_camp.Statue_Left_Action(obj, activator)
   UI:SetCenter(true)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Statue_Left_Text'], SV.base_camp.LeftStatueDate, GAME:GetTeamName()))
   UI:SetAutoFinish(false)
+  UI:ResetSpeaker()
 end
 
 function base_camp.Statue_Right_Action(obj, activator)
@@ -501,6 +503,7 @@ function base_camp.Statue_Right_Action(obj, activator)
   UI:SetCenter(true)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Statue_Right_Text'], SV.base_camp.RightStatueDate, GAME:GetTeamName()))
   UI:SetAutoFinish(false)
+  UI:ResetSpeaker()
 end
 
 function base_camp.Teammate1_Action(chara, activator)

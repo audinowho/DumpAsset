@@ -4,40 +4,20 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Shadow Bone",
-"LocalTexts": {
-"fr": "Os Ombre",
-"de": "Schattenknochen",
-"es": "Hueso Sombrío",
-"it": "Ossotetro",
-"ko": "섀도본",
-"ja": "シャドーボーン",
-"ja-jp": "シャドーボーン",
-"zh-hans": "暗影之骨",
-"zh-hant": "暗影之骨"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "The user attacks by beating the target with a bone that contains a spirit. This may also lower the target's Defense stat.",
-"LocalTexts": {
-"fr": "Le lanceur frappe avec un os possédé par l'âme d'un défunt. Peut aussi baisser la Défense de la cible.",
-"de": "Der Anwender greift das Ziel mit einem Knochen an, in dem eine Seele haust. Senkt eventuell die Verteidigung des Zieles.",
-"es": "Ataca al oponente golpeándole con un hueso poseído por un espíritu. Puede reducir la Defensa del objetivo.",
-"it": "Chi la usa colpisce il bersaglio con un osso in cui alberga uno spirito. Può anche ridurne la Difesa.",
-"ko": "영혼이 머물고 있는 뼈로 상대를 세게 때려서 공격한다. 상대의 방어를 떨어뜨릴 때가 있다.",
-"ja": "たましいの　やどった　ホネで あいてを　なぐりつけて　こうげきする。 あいての　ぼうぎょを　さげる　ことがある。",
-"ja-jp": "魂の　宿った　ホネで 相手を　なぐりつけて　攻撃する。 相手の　防御を　さげる　ことがある。",
-"zh-hans": "用附有灵魂的骨头殴打对手进行攻击。有时会降低对手的防御。",
-"zh-hant": "用寄宿了靈魂的骨頭 毆打對手進行攻擊。 有時會降低對手的防禦。"
-}
+"LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 708,
-"BaseCharges": 10,
+"BaseCharges": 15,
 "Strikes": 1,
 "HitboxAction": {
 "$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
+"HitTiles": true,
 "BurstTiles": 0,
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
@@ -46,14 +26,28 @@
 "WideAngle": 0,
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
+"ActionType": 8
 },
 "TargetAlignments": 4,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"PreActions": [],
+"PreActions": [
+{
+"Delay": 0,
+"Sound": "DUN_Attack",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
 "ActionFX": {
 "Delay": 0,
 "Sound": "",
@@ -105,6 +99,10 @@
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
 "Power": 85
+},
+{
+"$type": "PMDC.Dungeon.AdditionalEffectState, PMDC",
+"EffectChance": 25
 }
 ],
 "BeforeTryActions": [],
@@ -122,6 +120,30 @@
 "Value": {
 "$type": "PMDC.Dungeon.DamageFormulaEvent, PMDC"
 }
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AdditionalEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
+"Stack": -1,
+"StatusID": "mod_defense",
+"AffectTarget": true,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+]
+}
 }
 ],
 "OnHitTiles": [],
@@ -130,10 +152,29 @@
 "IntroFX": [],
 "HitFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Punch",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Thief_Hit_Dark",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,

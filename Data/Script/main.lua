@@ -11,7 +11,7 @@
 --------------------------------------------------------------------------------------------------------------
 -- Service Packages
 --------------------------------------------------------------------------------------------------------------
-require 'services.chatter'
+--require 'services.chatter'
 require 'services.debug_tools'
 require 'services.upgrade_tools'
 

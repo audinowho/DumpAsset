@@ -25,10 +25,11 @@ end
     UpgradeTools:__gc()
       UpgradeTools class gc method
       Essentially called when the garbage collector collects the service.
+	  TODO: Currently causes issues.  debug later.
   ---------------------------------------------------------------]]
-function UpgradeTools:__gc()
-  PrintInfo('*****************UpgradeTools:__gc()')
-end
+--function UpgradeTools:__gc()
+--  PrintInfo('*****************UpgradeTools:__gc()')
+--end
 
 --[[---------------------------------------------------------------
     UpgradeTools:OnUpgrade()

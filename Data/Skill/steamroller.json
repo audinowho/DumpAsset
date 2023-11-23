@@ -56,17 +56,54 @@
 "AppearanceMod": 0,
 "HitTiles": true,
 "Range": 3,
-"StopAtHit": false,
+"StopAtHit": true,
 "StopAtWall": true,
 "TargetAlignments": 4,
 "TileEmitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.StaticAreaEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Attack_Order_Dust",
+"FrameTime": 2,
+"StartFrame": 2,
+"EndFrame": 5,
+"AnimDir": 4,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+{
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Attack_Order_Dust",
+"FrameTime": 2,
+"StartFrame": 2,
+"EndFrame": 5,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Bursts": 1,
+"ParticlesPerBurst": 1,
+"BurstTime": 3,
+"Range": 4,
+"Layer": 2
 },
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "DUN_Gravity",
+"Sound": "DUN_Wood_Hammer",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0

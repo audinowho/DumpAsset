@@ -9,7 +9,7 @@ end
 
 PresetMultiTeamSpawnerType = luanet.import_type('RogueEssence.LevelGen.PresetMultiTeamSpawner`1')
 PlaceRandomMobsStepType = luanet.import_type('RogueEssence.LevelGen.PlaceRandomMobsStep`1')
-PlaceEntranceMobsStepType = luanet.import_type('RogueEssence.LevelGen.PlaceEntranceMobsStep`2')
+PlaceEntranceMobsStepType = luanet.import_type('RogueEssence.LevelGen.PlaceNearSpawnableMobsStep`2')
 MapEffectStepType = luanet.import_type('RogueEssence.LevelGen.MapEffectStep`1')
 MapGenContextType = luanet.import_type('RogueEssence.LevelGen.ListMapGenContext')
 EntranceType = luanet.import_type('RogueEssence.LevelGen.MapGenEntrance')

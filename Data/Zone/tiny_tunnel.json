@@ -4,12 +4,7 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Tiny Tunnel",
-"LocalTexts": {
-"de": "Winziger Tunnel",
-"es": "Túnel Pequeño",
-"it": "Piccola Galleria",
-"zh-hans": "小小地道"
-}
+"LocalTexts": {}
 },
 "Released": false,
 "Comment": "",
@@ -458,6 +453,7 @@
 "Connection": 1
 }
 ],
+"IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
@@ -910,6 +906,7 @@
 "Connection": 1
 }
 ],
+"IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
@@ -1362,6 +1359,7 @@
 "Connection": 1
 }
 ],
+"IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
@@ -1814,6 +1812,7 @@
 "Connection": 1
 }
 ],
+"IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
@@ -2266,6 +2265,7 @@
 "Connection": 1
 }
 ],
+"IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
@@ -2718,6 +2718,7 @@
 "Connection": 1
 }
 ],
+"IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
@@ -3170,6 +3171,7 @@
 "Connection": 1
 }
 ],
+"IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
@@ -3622,6 +3624,7 @@
 "Connection": 1
 }
 ],
+"IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.TeamContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Amount": {
@@ -3664,13 +3667,8 @@
 ]
 },
 "Name": {
-"DefaultText": "Tiny Tunnel\\nB{0}F",
-"LocalTexts": {
-"de": "Winziger Tunnel\\nU{0}",
-"es": "Túnel Pequeño\\nP-{0}",
-"it": "Piccola Galleria\\nP-{0}",
-"zh-hans": "小小地道\\nB{0}F"
-}
+"DefaultText": "Tiny Tunnel\nB{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -3740,6 +3738,61 @@
 ]
 },
 "Spawns": []
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadRoomZoneStep, RogueEssence",
+"Spawns": [
+{
+"Spawn": {
+"GridOption": {
+"$type": "PMDC.LevelGen.RoomGenEvoSmall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC"
+},
+"ListOption": {
+"$type": "PMDC.LevelGen.RoomGenEvoSmall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], PMDC"
+},
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+]
+},
+"Rate": 10
+}
+],
+"PriorityGrid": {
+"str": [
+-4,
+1
+]
+},
+"PriorityList": {
+"str": [
+-2,
+2
+]
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanSpaced, RogueEssence",
+"FloorSpacing": {
+"Min": 2,
+"Max": 5
+},
+"FloorRange": {
+"Min": 1,
+"Max": 8
+}
+},
+"ModStates": []
 }
 ],
 "IsRelevant": true

@@ -1038,7 +1038,7 @@ function base_camp_2.Swap_Action(obj, activator)
 	end
 end
 
-function base_camp_2.Tutor_Sequence(member, moveEntry)
+function base_camp_2.Tutor_Sequence()
 
 	local chara = CH('Tutor_Owner')
 	GAME:WaitFrames(10)
@@ -1058,63 +1058,33 @@ function base_camp_2.Tutor_Sequence(member, moveEntry)
 	GAME:WaitFrames(30)
 end
 
-function base_camp_2.Tutor_Action(obj, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  local price = 250
-  local state = 0
-  local repeated = false
+function base_camp_2.Tutor_Remember_Flow(price)
+    
+	local state = 0
   local member = nil
   local move = ""
-  local chara = CH('Tutor_Owner')
-  UI:SetSpeaker(chara)
-  
+	
+	if price > GAME:GetPlayerMoney() then
+		UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_No_Money']))
+		return
+	end
+    
 	while state > -1 do
 		if state == 0 then
-			local msg = STRINGS:Format(MapStrings['Tutor_Intro'], STRINGS:FormatKey("MONEY_AMOUNT", price))
-			if repeated == true then
-				msg = STRINGS:Format(MapStrings['Tutor_Intro_Return'])
-			end
-			
-			local tutor_choices = {RogueEssence.StringKey("MENU_RECALL_SKILL"):ToLocal(),
-			RogueEssence.StringKey("MENU_FORGET_SKILL"):ToLocal(),
-			STRINGS:FormatKey("MENU_INFO"),
-			STRINGS:FormatKey("MENU_EXIT")}
-			UI:BeginChoiceMenu(msg, tutor_choices, 1, 4)
-			UI:WaitForChoice()
-			local result = UI:ChoiceResult()
-			repeated = true
-			if result == 1 then
-				if price > GAME:GetPlayerMoney() then
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_No_Money']))
-				else
-					state = 1
-				end
-			elseif result == 2 then
-				state = 4
-			elseif result == 3 then
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Info_001']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Info_002']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Info_003']))
-			else
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Goodbye']))
-				state = -1
-			end
-		elseif state == 1 then
 			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Who']))
 			UI:TutorTeamMenu()
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
 			if result > -1 then
-				state = 2
+				state = 1
 				member = GAME:GetPlayerPartyMember(result)
 			else
-				state = 0
+				state = -1
 			end
-		elseif state == 2 then
+		elseif state == 1 then
 			if not GAME:CanRelearn(member) then
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Cant_Remember']))
-				state = 1
+				state = 0
 			else
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_What'], member:GetDisplayName(true)))
 				UI:RelearnMenu(member)
@@ -1122,71 +1092,208 @@ function base_camp_2.Tutor_Action(obj, activator)
 				local result = UI:ChoiceResult()
 				if result ~= "" then
 					move = result
-					state = 3
+					state = 2
 				else
-					state = 1
+					state = 0
 				end
 			end
-		elseif state == 3 then
-			local moveEntry = _DATA:GetSkill(move)
-			if GAME:CanLearn(member) then
-				SOUND:PlayBattleSE("DUN_Money")
-				GAME:RemoveFromPlayerMoney(price)
-				GAME:LearnSkill(member, move)
+		elseif state == 2 then
+        local moveEntry = _DATA:GetSkill(move)
+		    local learnedMove = COMMON.LearnMoveFlow(member, move, STRINGS:Format(MapStrings['Tutor_Remember_Replace']))
+			
+			if learnedMove then
+				if price > 0 then
+				  SOUND:PlayBattleSE("DUN_Money")
+				  GAME:RemoveFromPlayerMoney(price)
+				end
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Begin']))
 				base_camp_2.Tutor_Sequence()
 				SOUND:PlayFanfare("Fanfare/LearnSkill")
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
-				state = 0
+				state = -1
 			else
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Replace']))
-				local result = UI:LearnMenu(member, move)
-				UI:WaitForChoice()
-				local result = UI:ChoiceResult()
-				if result > -1 and result < 4 then
-					SOUND:PlayBattleSE("DUN_Money")
-					GAME:RemoveFromPlayerMoney(price)
-					GAME:SetCharacterSkill(member, move, result)
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Begin']))
-					base_camp_2.Tutor_Sequence()	
-				    SOUND:PlayFanfare("Fanfare/LearnSkill")
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
-					state = 0
-				else
-					state = 2
-				end
+				state = 1
 			end
-		elseif state == 4 then
-			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_Who']))
+		end
+	end
+end
+
+
+function base_camp_2.Tutor_Forget_Flow()
+  local state = 0
+  local member = nil
+  local move = ""
+  
+  while state > -1 do
+  
+	if state == 0 then
+		UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_Who']))
+		UI:TutorTeamMenu()
+		UI:WaitForChoice()
+		local result = UI:ChoiceResult()
+		if result > -1 then
+			member = GAME:GetPlayerPartyMember(result)
+			if GAME:CanForget(member) then
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_What'], member:GetDisplayName(true)))
+				state = 1
+			end
+		else
+			state = -1
+		end
+	elseif state == 1 then
+		local result = UI:ForgetMenu(member)
+		UI:WaitForChoice()
+		local result = UI:ChoiceResult()
+		if result > -1 then
+			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_Begin']))
+			move = GAME:GetCharacterSkill(member, result)
+			local moveEntry = _DATA:GetSkill(move)
+			GAME:ForgetSkill(member, result)
+			base_camp_2.Tutor_Sequence()
+			SOUND:PlayFanfare("Fanfare/LearnSkill")
+			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
+			state = -1
+		else
+			state = 0
+		end
+	end
+  
+  end
+  
+end
+
+
+function base_camp_2.Tutor_Teach_Flow(tutor_moves)
+    
+	local state = 0
+    local member = nil
+    local move = ""
+	
+	while state > -1 do
+		if state == 0 then
+			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Teach_Who']))
 			UI:TutorTeamMenu()
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
 			if result > -1 then
+				state = 1
 				member = GAME:GetPlayerPartyMember(result)
-				if not GAME:CanForget(member) then
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Cant_Forget']))
-				else
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_What'], member:GetDisplayName(true)))
-					state = 5
-				end
 			else
-				state = 0
+				state = -1
 			end
-		elseif state == 5 then
-			local result = UI:ForgetMenu(member)
+		elseif state == 1 then
+			if not GAME:CanRelearn(member) then
+				state = -1
+			else
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Teach_What'], member:GetDisplayName(true)))
+				UI:RelearnMenu(member)
+				UI:WaitForChoice()
+				local result = UI:ChoiceResult()
+				if result ~= "" then
+					move = result
+					state = 2
+				else
+					state = 0
+				end
+			end
+		elseif state == 2 then
+      local moveEntry = _DATA:GetSkill(move)
+			local learnedMove = COMMON.LearnMoveFlow(member, move, STRINGS:Format(MapStrings['Tutor_Remember_Replace']))
+			
+			if learnedMove then
+				SOUND:PlayBattleSE("DUN_Money")
+				--GAME:RemoveFromPlayerMoney(price)
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Begin']))
+				base_camp_2.Tutor_Sequence()
+				SOUND:PlayFanfare("Fanfare/LearnSkill")
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Teach_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
+				state = -1
+			else
+				state = 1
+			end
+		end
+	end
+end
+
+function base_camp_2.Tutor_Action(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local price = 250
+  local tutor_moves = {}
+  for move_key in pairs(SV.base_town.TutorMoves) do
+	if COMMON.TUTOR[move_key] ~= nil then
+	  table.insert(tutor_moves, { move_key, COMMON.TUTOR[move_key] } )
+	end
+  end
+  
+  
+  local state = 0
+  local repeated = false
+  local chara = CH('Tutor_Owner')
+  UI:SetSpeaker(chara)
+  
+  if SV.guildmaster_summit.GameComplete and SV.base_town.FreeRelearn == false then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Now_Free']))
+	SV.base_town.FreeRelearn = true
+  end
+  
+  if #tutor_moves > 0 and SV.base_town.TutorOpen == false then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Now_Teaches']))
+	SV.base_town.TutorOpen = true
+  end
+  
+  if SV.base_town.FreeRelearn then
+    price = 0
+  end
+  
+  
+	while state > -1 do
+		if state == 0 then
+			local msg = STRINGS:Format(MapStrings['Tutor_Intro'], STRINGS:FormatKey("MONEY_AMOUNT", price))
+			if price == 0 then
+			  msg = STRINGS:Format(MapStrings['Tutor_Intro_Free'])
+			end
+			
+			if repeated == true then
+				msg = STRINGS:Format(MapStrings['Tutor_Intro_Return'])
+			end
+			
+			local tutor_choices = {}
+			tutor_choices[1] = RogueEssence.StringKey("MENU_RECALL_SKILL"):ToLocal()
+			tutor_choices[2] = RogueEssence.StringKey("MENU_FORGET_SKILL"):ToLocal()
+			
+			if #tutor_moves > 0 then
+				tutor_choices[3] = STRINGS:Format(MapStrings['Tutor_Option_Tutor'])
+			end
+			
+			tutor_choices[4] = STRINGS:FormatKey("MENU_INFO")
+			tutor_choices[5] = STRINGS:FormatKey("MENU_EXIT")
+			
+			UI:BeginChoiceMenu(msg, tutor_choices, 1, 5)
+			
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
-			if result > -1 then
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_Begin']))
-				base_camp_2.Tutor_Sequence()
-				move = GAME:GetCharacterSkill(member, result)
-				local moveEntry = _DATA:GetSkill(move)
-				GAME:ForgetSkill(member, result)
-				SOUND:PlayFanfare("Fanfare/LearnSkill")
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
-				state = 0
+			
+			repeated = true
+			if result == 1 then
+			    base_camp_2.Tutor_Remember_Flow(price)
+			elseif result == 2 then
+				base_camp_2.Tutor_Forget_Flow()
+			elseif result == 3 then
+			    base_camp_2.Tutor_Teach_Flow(tutor_moves)
+			elseif result == 4 then
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Info_001']))
+				if SV.base_town.FreeRelearn then
+				    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Info_003']))
+				else
+				    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Info_002']))
+				end
+				if SV.base_town.TutorOpen then
+				    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Info_004']))
+				end
 			else
-				state = 4
+				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Goodbye']))
+				state = -1
 			end
 		end
 	end

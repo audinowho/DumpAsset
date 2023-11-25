@@ -261,6 +261,28 @@ function UpgradeTools:OnUpgrade()
 	}
   end
   
+  if SV.base_town.FreeRelearn == nil then
+    SV.base_town.FreeRelearn = false
+  end
+  
+  if SV.base_town.TutorOpen == nil then
+    SV.base_town.TutorOpen = false
+  end
+  
+  if SV.base_town.TutorMoves == nil then
+    SV.base_town.TutorMoves = {}
+  end
+  
+  if SV.StarterTutor == nil then
+	SV.StarterTutor =
+	{
+		Complete = false,
+		Evolved = false,
+		--go on a cycle after tutoring?
+		--may appear in cave camp, where he alludes to the elemental hyper beam tutors' locations
+	}
+  end
+  
   PrintInfo("=>> Loaded version")
 end
 

@@ -56,6 +56,7 @@ COMMON = {}
 require 'common_talk'
 require 'common_shop'
 require 'common_vars'
+require 'common_tutor'
 
 --Automatically load the appropriate localization for the specified package, or defaults to english!
 function COMMON.AutoLoadLocalizedStrings()
@@ -374,6 +375,24 @@ function COMMON.UnlockWithFanfare(dungeon_id, from_dungeon)
     UI:ImportSpeakerSettings(orig_settings)
   end
 
+end
+
+function COMMON.LearnMoveFlow(member, move, replace_msg)
+	local moveEntry = _DATA:GetSkill(move)
+	if GAME:CanLearn(member) then
+		GAME:LearnSkill(member, move)
+		return true
+	else
+		UI:WaitShowDialogue(replace_msg)
+		local result = UI:LearnMenu(member, move)
+		UI:WaitForChoice()
+		local result = UI:ChoiceResult()
+		if result > -1 and result < 4 then
+			GAME:SetCharacterSkill(member, move, result)
+			return true
+		end
+	end
+	return false
 end
 
 function COMMON.ClearPlayerPrices()

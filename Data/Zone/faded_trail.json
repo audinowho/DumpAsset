@@ -5480,15 +5480,26 @@
 "$type": "PMDC.LevelGen.MobSpawnInteractable, PMDC",
 "CheckEvents": [
 {
-"$type": "PMDC.Dungeon.NpcDialogueBattleEvent, PMDC",
-"Message": {
-"Key": "TALK_ADVICE_STAT_DROP"
-},
-"HideSpeaker": false,
-"Emote": {
-"Emote": 0,
-"Reverse": false
+"$type": "RogueEssence.Dungeon.BattleScriptEvent, RogueEssence",
+"Script": "AccuracyTalk",
+"ArgTable": "{}"
 }
+]
+},
+{
+"$type": "RogueEssence.LevelGen.MobSpawnStatus, RogueEssence",
+"Statuses": [
+{
+"Spawn": {
+"ID": "mod_accuracy",
+"StatusStates": [
+{
+"$type": "RogueEssence.Dungeon.StackState, RogueEssence",
+"Stack": -1
+}
+]
+},
+"Rate": 10
 }
 ]
 }

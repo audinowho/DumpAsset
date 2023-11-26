@@ -281,6 +281,35 @@ function BATTLE_SCRIPT.PairTalk(owner, ownerChar, context, args)
 end
 
 
+StackType = luanet.import_type('RogueEssence.Dungeon.StackState')
+
+function BATTLE_SCRIPT.AccuracyTalk(owner, ownerChar, context, args)
+  context.CancelState.Cancel = true
+  
+  local oldDir = context.Target.CharDir
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  
+  UI:SetSpeaker(context.Target)
+  
+  local sanded = false
+  local acc_mod = context.Target:GetStatusEffect("mod_accuracy")
+  if acc_mod ~= nil then
+    local stack = acc_mod.StatusStates:Get(luanet.ctype(StackType))
+	if stack.Stack < 0 then
+	  sanded = true
+	end
+  end
+  
+  if sanded then
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_ADVICE_STAT_DROP"):ToLocal()))
+  else
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_ADVICE_STAT_DROP_CLEAR"):ToLocal()))
+  end
+  
+  context.Target.CharDir = oldDir
+end
+
+
 function BATTLE_SCRIPT.DisguiseTalk(owner, ownerChar, context, args)
   context.TurnCancel.Cancel = true
   

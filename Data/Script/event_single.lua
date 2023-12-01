@@ -297,6 +297,7 @@ function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, context, args)
 		  
 		    if SV.adventure.Thief then
 			  COMMON.ThiefReturn()
+			  price = 0
 		    elseif result then
 			  -- iterate player inventory prices and remove total price
 			  COMMON.PayDungeonSellPrice(sell_price)

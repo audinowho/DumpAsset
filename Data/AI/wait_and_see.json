@@ -1,0 +1,47 @@
+﻿{
+"Version": "0.7.20.0",
+"Object": {
+"$type": "RogueEssence.Data.AITactic, RogueEssence",
+"Name": {
+"DefaultText": "Wait and See",
+"LocalTexts": {}
+},
+"Released": true,
+"Comment": "",
+"ID": "wait_and_see",
+"Assignable": false,
+"Plans": [
+{
+"$type": "PMDC.Dungeon.AttackFoesPlan, PMDC",
+"AttackPattern": 1,
+"PositionPattern": 0,
+"IQ": 32,
+"AttackRange": 4,
+"StatusRange": 4,
+"SelfStatusRange": 3
+},
+{
+"$type": "PMDC.Dungeon.FollowLeaderPlan, PMDC",
+"IQ": 160,
+"AttackRange": 0,
+"StatusRange": 0,
+"SelfStatusRange": 0
+},
+{
+"$type": "PMDC.Dungeon.ExploreIfSeenPlan, PMDC",
+"Negate": false,
+"IQ": 160,
+"AttackRange": 0,
+"StatusRange": 0,
+"SelfStatusRange": 0
+},
+{
+"$type": "PMDC.Dungeon.WaitPlan, PMDC",
+"IQ": 160,
+"AttackRange": 0,
+"StatusRange": 0,
+"SelfStatusRange": 0
+}
+]
+}
+}

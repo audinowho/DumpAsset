@@ -150,7 +150,10 @@ SV.base_town =
 {
   Song    = "A02. Base Town.ogg",
   ValueTradeItem = "",
-  ValueTraded = false
+  ValueTraded = false,
+  FreeRelearn = false,
+  TutorOpen = false,
+  TutorMoves = {}
 }
 
 SV.luminous_spring = 
@@ -264,6 +267,12 @@ SV.family =
   PetActiveDays = 0,
   -- 0 = Not rescued, 1 = Rescued, 2 = In Town
   Pet = 0
+}
+
+SV.StarterTutor =
+{
+	Complete = false,
+	Evolved = false
 }
 
 SV.canyon_camp = 

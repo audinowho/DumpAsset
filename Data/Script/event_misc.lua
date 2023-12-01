@@ -47,10 +47,10 @@ function MAP_STATUS_SCRIPT.SetShopkeeperHostile(owner, ownerChar, character, sta
 	
 	local berserk_idx = "shopkeeper"
 	local berserk = RogueEssence.Dungeon.StatusEffect(berserk_idx)
-	TASK:WaitTask(found_shopkeep:AddStatusEffect(nil, berserk, nil))
+	TASK:WaitTask(found_shopkeep:AddStatusEffect(nil, berserk, false))
   end
   -- force everyone to skip their turn for this entire session
-  _ZONE.CurrentMap.CurrentTurnMap:SkipRemainingTurns()
+  _DUNGEON:SkipRemainingTurns()
 end
 
 ITEM_SCRIPT = {}

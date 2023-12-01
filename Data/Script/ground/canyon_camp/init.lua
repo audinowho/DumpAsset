@@ -17,12 +17,24 @@ function canyon_camp.Init(map)
   local charData = RogueEssence.Dungeon.CharData()
   local tutor_species = "missingno"
   if SV.General.Starter.Species == "bulbasaur" then
-    tutor_species = "meganium"
+    if SV.StarterTutor.Evolved then
+      tutor_species = "meganium"
+	else
+	  tutor_species = "bayleef"
+	end
   elseif SV.General.Starter.Species == "charmander" then
-    tutor_species = "typhlosion"
+    if SV.StarterTutor.Evolved then
+      tutor_species = "typhlosion"
+	else
+	  tutor_species = "quilava"
+	end
   elseif SV.General.Starter.Species == "squirtle" then
-    tutor_species = "feraligatr"
-  elseif SV.General.Starter.Species == "pikachu" then
+    if SV.StarterTutor.Evolved then
+      tutor_species = "feraligatr"
+	else
+	  tutor_species = "croconaw"
+	end
+  else --if SV.General.Starter.Species == "pikachu" then
     tutor_species = "raichu"
   end
   charData.BaseForm = RogueEssence.Dungeon.MonsterID(tutor_species, 0, "normal", Gender.Female)
@@ -67,9 +79,9 @@ function canyon_camp.SetupNpcs()
   GROUND:Unhide("NPC_Dragon_3")
   GROUND:Unhide("NPC_Strategy")
   GROUND:Unhide("NPC_Wall")
-  GROUND:Unhide("NPC_8")
-  GROUND:Unhide("NPC_Argue_1")
-  GROUND:Unhide("NPC_Argue_2")
+  GROUND:Unhide("NPC_NextCamp")
+  --GROUND:Unhide("NPC_Argue_1")
+  --GROUND:Unhide("NPC_Argue_2")
   
   if SV.supply_corps.Status < 4 then
     --pass
@@ -300,19 +312,81 @@ end
 function canyon_camp.NPC_Tutor_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local tutor_skill = 0
+  local tutor_skill = "struggle"
   if SV.General.Starter.Species == "bulbasaur" then
     tutor_skill = "grass_pledge"
   elseif SV.General.Starter.Species == "charmander" then
     tutor_skill = "fire_pledge"
   elseif SV.General.Starter.Species == "squirtle" then
     tutor_skill = "water_pledge"
-  elseif SV.General.Starter.Species == "pikachu" then
+  else --if SV.General.Starter.Species == "pikachu" then
     tutor_skill = "volt_tackle"
   end
   
-  
-  --after teaching, unlock the tutor back at the hub for ALL moves
+  local player = CH('PLAYER')
+  UI:SetSpeaker(chara)
+  if SV.StarterTutor.Complete == false then
+    
+	local skillData = _DATA:GetSkill(tutor_skill)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Intro'], skillData:GetIconName()))
+	
+	local playerMonId = player.Data.BaseForm
+	local monData = _DATA:GetMonster(playerMonId.Species)
+	local formData = monData.Forms[playerMonId.Form]
+	if formData:CanLearnSkill(tutor_skill) then
+	  
+	  UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Tutor_Ask'], monData:GetColoredName(), skillData:GetIconName()), false)
+	  UI:WaitForChoice()
+	  result = UI:ChoiceResult()
+	  
+	  if result then
+		--one more check against full list flow
+		result = COMMON.LearnMoveFlow(player.Data, tutor_skill, STRINGS:Format(MapStrings['Tutor_Replace'], skillData:GetIconName()))
+	  end
+	  
+	  if result then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Accept']))
+      
+      --fade out, pause
+      local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")
+      GROUND:CharSetAction(chara, RogueEssence.Ground.PoseGroundAction(chara.Position, chara.Direction, animId))
+      GROUND:CharSetAction(player, RogueEssence.Ground.PoseGroundAction(player.Position, player.Direction, animId))
+		
+      GAME:FadeOut(false, 30)
+      GAME:WaitFrames(30)
+		
+      SOUND:PlayFanfare("Fanfare/LearnSkill")
+      local orig_settings = UI:ExportSpeakerSettings()
+      UI:ResetSpeaker(false)
+      UI:WaitShowDialogue(STRINGS:FormatKey("DLG_SKILL_LEARN", player.Data:GetDisplayName(true), skillData:GetIconName()))
+      UI:ImportSpeakerSettings(orig_settings)
+		
+      --fade in
+      GROUND:CharEndAnim(chara)
+      GROUND:CharEndAnim(player)
+      GAME:FadeIn(30)
+		
+	    --I learned this move from a traveling move tutor.  He said he'd pass by base town after I spoke to him.
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Taught']))
+		
+      --after teaching, unlock the tutor back at the hub
+      --the other moves can be found in dungeons by wandering tutors
+      SV.StarterTutor.Complete = true
+      SV.base_town.TutorMoves[tutor_skill] = true
+	  else
+	    --come back if you change your mind.
+	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Decline']))
+	  end
+	else
+	  --But the other townsfolk weren't interested in hearing about it.
+	  --If only there was someone I could share this knowledge with.
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Incompatible']))
+	end
+  else
+	--There are other tutors wandering around in the dungeons. They've spent too much time training in dungeons without outside contact, but I'm sure they'd appreciate company.
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Done']))
+  end
+	
   
 end
   
@@ -370,12 +444,12 @@ function canyon_camp.NPC_Shortcut_Action(chara, activator)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Line_002']))
 end
   
-function canyon_camp.NPC_Wall_Action(chara, activator)
+function canyon_camp.NPC_NextCamp_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   local player = CH('PLAYER')
   UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Wall_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['NextCamp_Line_001']))
 end
   
 function canyon_camp.NPC_Strategy_Action(chara, activator)

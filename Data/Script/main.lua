@@ -11,9 +11,8 @@
 --------------------------------------------------------------------------------------------------------------
 -- Service Packages
 --------------------------------------------------------------------------------------------------------------
-require 'services.chatter'
+--require 'services.chatter'
 require 'services.debug_tools'
 require 'services.upgrade_tools'
---require 'services.example_service' --Uncommment to try out the ExampleService
 
 math.randomseed(os.time())

@@ -273,6 +273,9 @@
   <data name="_ENUM_InputType_SkillMenu" xml:space="preserve">
     <value>Attacken Menü</value>
     <comment></comment>  </data>
+  <data name="_ENUM_InputType_SkillPreview" xml:space="preserve">
+    <value>Attacken Vorschau</value>
+    <comment></comment>  </data>
   <data name="_ENUM_InputType_Skills" xml:space="preserve">
     <value>Attacken</value>
     <comment></comment>  </data>
@@ -320,6 +323,15 @@
     <comment></comment>  </data>
   <data name="_ENUM_SkillCategory_Status" xml:space="preserve">
     <value>Status</value>
+    <comment></comment>  </data>
+  <data name="_ENUM_SkillDefault_All" xml:space="preserve">
+    <value>Alle</value>
+    <comment></comment>  </data>
+  <data name="_ENUM_SkillDefault_Attacks" xml:space="preserve">
+    <value>Angriffe</value>
+    <comment></comment>  </data>
+  <data name="_ENUM_SkillDefault_None" xml:space="preserve">
+    <value>Keine</value>
     <comment></comment>  </data>
   <data name="_ENUM_Stat_Attack" xml:space="preserve">
     <value>Angriff</value>
@@ -387,6 +399,9 @@
   <data name="ADD_END" xml:space="preserve">
     <value> und </value>
     <comment>Last conjunction word when creating lists of words.  Ex. "Attack, Defense, and Special Defense" There needs to be a space before the word for "and", otherwise the previous word will be followed directly by the "and". That's to make sure the oxford comma does NOT have a space before it. Silly English people with their oxford commas.</comment>  </data>
+  <data name="ADD_SEPARATOR" xml:space="preserve">
+    <value>, </value>
+    <comment></comment>  </data>
   <data name="DLG_ASK_ENTER_DUNGEON" xml:space="preserve">
     <value>Möchtest du {0} betreten?</value>
     <comment></comment>  </data>
@@ -401,6 +416,9 @@
     <comment></comment>  </data>
   <data name="DLG_ASK_LOAD_UPGRADE" xml:space="preserve">
     <value>Einige Modifikationen fehlen und können fehler beim laden verursachen.[pause=0] Bist du sicher, dass du den Spielstand laden möchtest?</value>
+    <comment></comment>  </data>
+  <data name="DLG_ASK_VERSION_DIFF" xml:space="preserve">
+    <value>Die Spielversion der Datei stimmt nicht überein. Bist du dir sicher, dass du sie laden möchtest?</value>
     <comment></comment>  </data>
   <data name="DLG_ASSEMBLY_RELEASE" xml:space="preserve">
     <value>{0} wurde freigelassen.[pause=0]\nTschüß {0}...</value>
@@ -570,6 +588,9 @@
   <data name="DLG_ROGUE_INFO_2" xml:space="preserve">
     <value>Du kannst auswählen mit welchem Pokémon du beginnst und kannst seine Fähigkeit, Geschlecht oder auch Farbe ändern.</value>
     <comment></comment>  </data>
+  <data name="DLG_ROGUE_INFO_3" xml:space="preserve">
+    <value>Items und rekrutierte Pokémon können, abhängig vom Dungeon, auf den Hauptspielstand übertragen werden.</value>
+    <comment></comment>  </data>
   <data name="DLG_ROGUE_INFO_4" xml:space="preserve">
     <value>Wenn die gesamte Gruppe KO geht, sind alle Gruppenmitglieder für immer verloren.</value>
     <comment></comment>  </data>
@@ -660,18 +681,24 @@
   <data name="DLG_TRANSFER_COMPLETE" xml:space="preserve">
     <value>Transfer abgeschlossen!</value>
     <comment></comment>  </data>
+  <data name="DLG_TRANSFER_ITEM_ASK" xml:space="preserve">
+    <value>Items können zum Hauptspielstand übertragen werden. Möchtest du diesen Transfer ausführen?</value>
+    <comment></comment>  </data>
   <data name="DLG_TRY_AGAIN_ASK" xml:space="preserve">
     <value>Möchtest du es nochmal versuchen? Deine aktuellen Einstellungen werden dabei verwendet.</value>
     <comment></comment>  </data>
   <data name="DLG_WHAT_DO" xml:space="preserve">
-    <value>Was wirst du machen?</value>
+    <value>Was willst du machen?</value>
     <comment></comment>  </data>
   <data name="GAME_ERROR_SPLASH" xml:space="preserve">
     <value>Das Spiel wurde abgebrochen,\nweil zu viele Fehler verursacht wurden.\n\nBitte beende das Spiel und starte es neu.</value>
+    <comment>For chinese, japanese and Korean, try to use as few characters as possible.</comment>  </data>
+  <data name="GAME_LOAD_READY" xml:space="preserve">
+    <value>Drücke eine Taste um fortzufahren</value>
     <comment></comment>  </data>
   <data name="GAME_SPLASH" xml:space="preserve">
-    <value>Dies ist ein kostenloses Fan-Spiel\ndas von Pokemon Mystery Dungeon Fans\n entwickelt wurde.\n\nBitte kaufe ein offizielles Spiel,\num die Serie zu unterstuetzen.\n\n\nPokemon Mystery Dungeon ist eine Marke von:\nNintendo\nPokemon\nCreatures Inc\nGAME FREAK Inc\nSpike Chunsoft</value>
-    <comment>CAREFUL.  A line can only contain up to 40 characters before it overflows the screen!  Due to font limitations, it also cannot contain anything other than plain ASCII. (Letters A-Z, numbers, punctuation.)</comment>  </data>
+    <value>Dies ist ein kostenloses Fan-Spiel\ndas von Pokémon Mystery Dungeon Fans\n entwickelt wurde.\n\nBitte kaufe ein offizielles Spiel,\num die Serie zu unterstützen.\n\n\nPokémon Mystery Dungeon ist\neine Marke von:\nNintendo\nPokémon\nCreatures Inc\nGAME FREAK Inc\nSpike Chunsoft</value>
+    <comment>CAREFUL.  A line can only contain up to 40 characters before it overflows the screen!  there are NO ASCII limitations now!</comment>  </data>
   <data name="GAME_TITLE" xml:space="preserve">
     <value>Pokémon Mystery Dungeon: Ursprünge</value>
     <comment>The title of the game.  Based off of "Pokemon Origins" (the anime)</comment>  </data>
@@ -818,6 +845,9 @@
     <comment></comment>  </data>
   <data name="MENU_DELETE" xml:space="preserve">
     <value>Löschen</value>
+    <comment></comment>  </data>
+  <data name="MENU_DELETE_REPLAY_TITLE" xml:space="preserve">
+    <value>Lösche Wiederholungsdaten</value>
     <comment></comment>  </data>
   <data name="MENU_DELETE_SAVE_TITLE" xml:space="preserve">
     <value>Spielstand löschen</value>
@@ -1002,6 +1032,15 @@
   <data name="MENU_MOD_LOG_TITLE" xml:space="preserve">
     <value>Mod-Ladefehler</value>
     <comment></comment>  </data>
+  <data name="MENU_MODS_AUTHOR" xml:space="preserve">
+    <value>Von: {0}</value>
+    <comment></comment>  </data>
+  <data name="MENU_MODS_DIFF" xml:space="preserve">
+    <value>Versionsunterschiede</value>
+    <comment></comment>  </data>
+  <data name="MENU_MODS_MISSING" xml:space="preserve">
+    <value>Fehlende Modifikationen</value>
+    <comment></comment>  </data>
   <data name="MENU_MODS_TITLE" xml:space="preserve">
     <value>Modifikationen</value>
     <comment></comment>  </data>
@@ -1047,6 +1086,9 @@
   <data name="MENU_REPLAY_PAUSE" xml:space="preserve">
     <value>Pause</value>
     <comment>The "pause" action of a replay</comment>  </data>
+  <data name="MENU_REPLAY_QUICKSAVE" xml:space="preserve">
+    <value>Schnellspeicherung erstellen</value>
+    <comment></comment>  </data>
   <data name="MENU_REPLAY_REPLAY" xml:space="preserve">
     <value>Wiederholung</value>
     <comment>Replay menu option for replaying a chosen recorded game</comment>  </data>
@@ -1062,6 +1104,9 @@
   <data name="MENU_REPLAY_TITLE" xml:space="preserve">
     <value>Wiederholung</value>
     <comment>Title of the Replay menu, for options within a replay</comment>  </data>
+  <data name="MENU_REPLAY_VERIFY" xml:space="preserve">
+    <value>Verifizieren</value>
+    <comment></comment>  </data>
   <data name="MENU_REPLAYS_TITLE" xml:space="preserve">
     <value>Wiederholungen</value>
     <comment>Title for the Replays menu, where the player can view replays</comment>  </data>
@@ -1224,6 +1269,9 @@
   <data name="MENU_SETTINGS_SOUND" xml:space="preserve">
     <value>Sound</value>
     <comment>Label for the sound volume in the Settings menu</comment>  </data>
+  <data name="MENU_SETTINGS_TEXT_SPEED" xml:space="preserve">
+    <value>Textgeschwindigkeit</value>
+    <comment></comment>  </data>
   <data name="MENU_SETTINGS_TITLE" xml:space="preserve">
     <value>Einstellungen</value>
     <comment>Title of Settings menu</comment>  </data>
@@ -1371,6 +1419,9 @@
   <data name="MENU_TEAM_INTRINSIC" xml:space="preserve">
     <value>Fähigkeit: {0}</value>
     <comment>For labeling a team member's ability</comment>  </data>
+  <data name="MENU_TEAM_LEARNSET" xml:space="preserve">
+    <value>Durch Levelaufstieg erlernte Attacken von {0}</value>
+    <comment></comment>  </data>
   <data name="MENU_TEAM_LEVEL" xml:space="preserve">
     <value>Level</value>
     <comment></comment>  </data>
@@ -1423,8 +1474,11 @@
     <value>Getauscht von: {0}</value>
     <comment></comment>  </data>
   <data name="MENU_TIME_OF_DAY" xml:space="preserve">
-    <value>Zeit: {0}</value>
+    <value>Tageszeit: {0}</value>
     <comment>Ex. "Time: Night"</comment>  </data>
+  <data name="MENU_TIMER" xml:space="preserve">
+    <value>Zeit: {0}</value>
+    <comment></comment>  </data>
   <data name="MENU_TOP_CONTINUE" xml:space="preserve">
     <value>Fortfahren</value>
     <comment></comment>  </data>
@@ -1454,6 +1508,9 @@
     <comment></comment>  </data>
   <data name="MENU_TRADE_TEAM" xml:space="preserve">
     <value>Teamaustausch</value>
+    <comment></comment>  </data>
+  <data name="MENU_TRAIL_TITLE" xml:space="preserve">
+    <value>Abenteuer-Pfad ({0}/{1})</value>
     <comment></comment>  </data>
   <data name="MENU_TREASURE_TITLE" xml:space="preserve">
     <value>Schatz </value>
@@ -1701,6 +1758,9 @@
   <data name="RANGE_AREA_CONE" xml:space="preserve">
     <value>{1} in einem {0}-Felder Kegel</value>
     <comment></comment>  </data>
+  <data name="RANGE_AREA_CROSS" xml:space="preserve">
+    <value>{1} in einem {0}-Felder Kreuz</value>
+    <comment></comment>  </data>
   <data name="RANGE_AREA_FULL" xml:space="preserve">
     <value>{1} in einem {0}-Felder Bereich</value>
     <comment>Ex. "Foe in 4-Tile Area"</comment>  </data>
@@ -1742,6 +1802,9 @@
     <comment>Adds the "Wide" descriptor to a move target description Ex. "Beam", "Wide-Beam", "Piercing Beam"</comment>  </data>
   <data name="RANGE_OFFSET_AREA" xml:space="preserve">
     <value>{1} im Bereich, {0} Felder entfernt</value>
+    <comment></comment>  </data>
+  <data name="RANGE_OFFSET_CROSS" xml:space="preserve">
+    <value>{1} im Kreuz, {0} Felder entfernt</value>
     <comment></comment>  </data>
   <data name="RANGE_OFFSET_SIDES" xml:space="preserve">
     <value>{1} in einer Reihe, {0} Felder entfernt</value>
@@ -1794,8 +1857,17 @@
   <data name="TEAM_NAME" xml:space="preserve">
     <value>Team {0}</value>
     <comment>For putting together the team name.</comment>  </data>
+  <data name="TRANSFER_ALL" xml:space="preserve">
+    <value>Alles</value>
+    <comment></comment>  </data>
+  <data name="TRANSFER_ITEMS" xml:space="preserve">
+    <value>Nur Items</value>
+    <comment></comment>  </data>
   <data name="ZONE_EXPECT_LEVEL" xml:space="preserve">
     <value>Erwartetes Level: {0}</value>
+    <comment></comment>  </data>
+  <data name="ZONE_RESET_MOVESET" xml:space="preserve">
+    <value>Zurückgesetzte Attacken</value>
     <comment></comment>  </data>
   <data name="ZONE_RESTRICT_ALONE" xml:space="preserve">
     <value>Alleine betreten</value>
@@ -1820,5 +1892,8 @@
     <comment></comment>  </data>
   <data name="ZONE_RESTRICT_TEAM" xml:space="preserve">
     <value>Teamgröße ist auf {0} gesetzt</value>
+    <comment></comment>  </data>
+  <data name="ZONE_TRANSFER" xml:space="preserve">
+    <value>Transfer: {0}</value>
     <comment></comment>  </data>
 </root>

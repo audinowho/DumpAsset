@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.18.0",
+"Version": "0.7.20.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -31,21 +31,217 @@
 }
 },
 "Released": true,
-"Comment": "No Anim",
+"Comment": "",
 "IndexNum": 552,
-"BaseCharges": 12,
+"BaseCharges": 10,
 "Strikes": 1,
 "HitboxAction": {
 "$type": "RogueEssence.Dungeon.AreaAction, RogueEssence",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.MultiCircleSquareEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Emitters": [
+{
+"$type": "RogueEssence.Content.CircleSquareReleaseEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Lava_Plume_Fire",
+"FrameTime": 1,
+"StartFrame": 0,
+"EndFrame": 0,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Lava_Plume_Fire",
+"FrameTime": 1,
+"StartFrame": 1,
+"EndFrame": 1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Lava_Plume_Fire",
+"FrameTime": 1,
+"StartFrame": 2,
+"EndFrame": 2,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Lava_Plume_Fire",
+"FrameTime": 1,
+"StartFrame": 3,
+"EndFrame": 3,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Lava_Plume_Fire",
+"FrameTime": 1,
+"StartFrame": 4,
+"EndFrame": 4,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Lava_Plume_Fire",
+"FrameTime": 1,
+"StartFrame": 5,
+"EndFrame": 5,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Lava_Plume_Fire",
+"FrameTime": 1,
+"StartFrame": 6,
+"EndFrame": 6,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Lava_Plume_Fire",
+"FrameTime": 1,
+"StartFrame": 7,
+"EndFrame": 7,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Lava_Plume_Fire",
+"FrameTime": 1,
+"StartFrame": 8,
+"EndFrame": 8,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Bursts": 6,
+"ParticlesPerBurst": 3,
+"BurstTime": 3,
+"StartDistance": 4,
+"Layer": 2
+},
+{
+"$type": "RogueEssence.Content.CircleSquareAreaEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.BetweenEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"AnimBack": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Fire_Spin_Back",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"AnimFront": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Fire_Spin_Front",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"HeightBack": 32,
+"HeightFront": 32,
+"Offset": 0
+}
+],
+"ParticlesPerTile": 0.7,
+"RangeDiff": 0,
+"Layer": 2
+}
+]
 },
 "HitTiles": true,
 "BurstTiles": 0,
 "HitArea": 0,
-"Range": 1,
-"Speed": 10,
+"Range": 2,
+"Speed": 8,
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
 "ActionType": 26
@@ -58,7 +254,7 @@
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "DUN_Flame_Wheel",
+"Sound": "DUN_Fire_Spin",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -106,7 +302,7 @@
 "SkillStates": [
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 80
+"Power": 60
 },
 {
 "$type": "PMDC.Dungeon.AdditionalEffectState, PMDC",

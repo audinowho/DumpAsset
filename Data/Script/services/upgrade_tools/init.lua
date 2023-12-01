@@ -25,10 +25,11 @@ end
     UpgradeTools:__gc()
       UpgradeTools class gc method
       Essentially called when the garbage collector collects the service.
+	  TODO: Currently causes issues.  debug later.
   ---------------------------------------------------------------]]
-function UpgradeTools:__gc()
-  PrintInfo('*****************UpgradeTools:__gc()')
-end
+--function UpgradeTools:__gc()
+--  PrintInfo('*****************UpgradeTools:__gc()')
+--end
 
 --[[---------------------------------------------------------------
     UpgradeTools:OnUpgrade()
@@ -257,6 +258,28 @@ function UpgradeTools:OnUpgrade()
 	  Grandma = 0,
 	  PetActiveDays = 0,
 	  Pet = 0
+	}
+  end
+  
+  if SV.base_town.FreeRelearn == nil then
+    SV.base_town.FreeRelearn = false
+  end
+  
+  if SV.base_town.TutorOpen == nil then
+    SV.base_town.TutorOpen = false
+  end
+  
+  if SV.base_town.TutorMoves == nil then
+    SV.base_town.TutorMoves = {}
+  end
+  
+  if SV.StarterTutor == nil then
+	SV.StarterTutor =
+	{
+		Complete = false,
+		Evolved = false,
+		--go on a cycle after tutoring?
+		--may appear in cave camp, where he alludes to the elemental hyper beam tutors' locations
 	}
   end
   

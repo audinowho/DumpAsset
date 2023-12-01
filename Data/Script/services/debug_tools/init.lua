@@ -7,6 +7,7 @@
 ]]--
 require 'common'
 require 'services.baseservice'
+require 'recruit_list'
 
 --Declare class DebugTools
 local DebugTools = Class('DebugTools', BaseService)
@@ -25,10 +26,11 @@ end
     DebugTools:__gc()
       DebugTools class gc method
       Essentially called when the garbage collector collects the service.
+	  TODO: Currently causes issues.  debug later.
   ---------------------------------------------------------------]]
-function DebugTools:__gc()
-  PrintInfo('*****************DebugTools:__gc()')
-end
+--function DebugTools:__gc()
+--  PrintInfo('*****************DebugTools:__gc()')
+--end
 
 --[[---------------------------------------------------------------
     DebugTools:OnInit()
@@ -54,13 +56,30 @@ end
       This is called as a coroutine.
 ---------------------------------------------------------------]]
 function DebugTools:OnMenuButtonPressed()
+  -- TODO: Remove this when the memory leak is fixed or confirmed not a leak
   if DebugTools.MainMenu == nil then
     DebugTools.MainMenu = RogueEssence.Menu.MainMenu()
   end
   DebugTools.MainMenu:SetupChoices()
+  if RogueEssence.GameManager.Instance.CurrentScene == RogueEssence.Dungeon.DungeonScene.Instance then
+    DebugTools.MainMenu.Choices[5] = RogueEssence.Menu.MenuTextChoice(STRINGS:FormatKey("MENU_OTHERS_TITLE"), function () _MENU:AddMenu(DebugTools:OthersMenuWithRecruitScan(), false) end)
+  end
   DebugTools.MainMenu:SetupTitleAndSummary()
   DebugTools.MainMenu:InitMenu()
   TASK:WaitTask(_MENU:ProcessMenuCoroutine(DebugTools.MainMenu))
+end
+
+function DebugTools:OthersMenuWithRecruitScan()
+  -- TODO: Remove this when the memory leak is fixed or confirmed not a leak
+  if DebugTools.OthersMenu == nil then
+    DebugTools.OthersMenu = RogueEssence.Menu.OthersMenu()
+  end
+  DebugTools.OthersMenu:SetupChoices();
+  if RogueEssence.GameManager.Instance.CurrentScene == RogueEssence.Dungeon.DungeonScene.Instance then
+    DebugTools.OthersMenu.Choices:Insert(1, RogueEssence.Menu.MenuTextChoice(RogueEssence.StringKey("MENU_RECRUITMENT"):ToLocal(), function () _MENU:AddMenu(RecruitmentListMenu:new().menu, false) end))
+  end
+  DebugTools.OthersMenu:InitMenu();
+  return DebugTools.OthersMenu
 end
 
 --[[---------------------------------------------------------------

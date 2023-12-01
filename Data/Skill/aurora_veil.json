@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.18.0",
+"Version": "0.7.20.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -30,33 +30,183 @@
 "zh-hant": "在５回合內減弱 物理和特殊的傷害。 在下冰雹時才有效果。"
 }
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 694,
-"BaseCharges": 20,
+"BaseCharges": 13,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
+"$type": "RogueEssence.Dungeon.AreaAction, RogueEssence",
+"Emitter": {
+"$type": "RogueEssence.Content.CircleSquareAreaEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.ColumnAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Column_Blue",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 192,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1
+},
+"Layer": 2,
+"UseDest": false
+},
+{
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.ColumnAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Column_Green",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 192,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1
+},
+"Layer": 2,
+"UseDest": false
+},
+{
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.ColumnAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Column_Purple",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 192,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1
+},
+"Layer": 2,
+"UseDest": false
+},
+{
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.ColumnAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Column_Red",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 192,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1
+},
+"Layer": 2,
+"UseDest": false
+},
+{
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.ColumnAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Column_Yellow",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 192,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1
+},
+"Layer": 2,
+"UseDest": false
+}
+],
+"ParticlesPerTile": 0.7,
+"RangeDiff": -4,
+"Layer": 2
+},
 "HitTiles": false,
 "BurstTiles": 0,
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
-},
-"WideAngle": 0,
+"HitArea": 0,
+"Range": 2,
+"Speed": 10,
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
+"ActionType": 38
 },
-"TargetAlignments": 4,
+"TargetAlignments": 3,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"PreActions": [],
+"PreActions": [
+{
+"Delay": 0,
+"Sound": "DUN_Wonder_Tile",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Small_Blue_In",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Natural_Gift",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -70,7 +220,7 @@
 "LagBehindTime": 0
 },
 "Explosion": {
-"TargetAlignments": 4,
+"TargetAlignments": 3,
 "HitTiles": false,
 "Range": 0,
 "Speed": 0,
@@ -104,10 +254,62 @@
 "SkillStates": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [],
+"OnActions": [
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.WeatherRequiredEvent, PMDC",
+"WeatherID": "hail",
+"Message": {
+"Key": "MSG_NOT_HAILING"
+}
+}
+}
+],
 "BeforeExplosions": [],
 "BeforeHits": [],
-"OnHits": [],
+"OnHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
+"StatusID": "light_screen",
+"AffectTarget": true,
+"SilentCheck": false,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
+"StatusID": "reflect",
+"AffectTarget": true,
+"SilentCheck": false,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+}
+],
 "OnHitTiles": [],
 "AfterActions": [],
 "ElementEffects": [],

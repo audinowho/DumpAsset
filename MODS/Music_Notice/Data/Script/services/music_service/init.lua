@@ -22,15 +22,6 @@ function MusicService:initialize()
 end
 
 --[[---------------------------------------------------------------
-    MusicService:__gc()
-      MusicService class gc method
-      Essentially called when the garbage collector collects the service.
-  ---------------------------------------------------------------]]
-function MusicService:__gc()
-  PrintInfo('*****************MusicService:__gc()')
-end
-
---[[---------------------------------------------------------------
     MusicService:OnInit()
       Called on initialization of the script engine by the game!
 ---------------------------------------------------------------]]

@@ -103,8 +103,8 @@ function luminous_spring.Spring_Touch(obj, activator)
 					local evo_item = ""
 					for detail_idx = 0, branch.Details.Count  - 1 do
 						local detail = branch.Details[detail_idx]
-						if detail.GiveItem ~= "" then
-							evo_item = detail.GiveItem
+						evo_item = detail:GetReqItem(member)
+						if evo_item ~= "" then
 							break
 						end
 					end

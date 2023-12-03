@@ -180,7 +180,7 @@ function RecruitmentListMenu:initialize()
     self.list = {}
     self.list = RECRUIT_LIST.compileCurrentList()
     self.page = 0
-    self.PAGE_MAX = math.max((#self.list-1)//self.ENTRY_LIMIT, 0)
+    self.PAGE_MAX = math.max((#self.list-1)//self.ENTRY_LIMIT+1, 0)
 
     self:DrawMenu()
 end
@@ -199,8 +199,8 @@ function RecruitmentListMenu:DrawMenu()
     end
 
     --Add page number if it has more than one
-    if self.PAGE_MAX>0 then
-        local pagenum = "("..tostring(self.page+1).."/"..tostring(self.PAGE_MAX+1)..")"
+    if self.PAGE_MAX>1 then
+        local pagenum = "("..tostring(self.page+1).."/"..tostring(self.PAGE_MAX)..")"
         self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(pagenum, RogueElements.Loc(self.menu.Bounds.Width - 8, 8),RogueElements.DirH.Right))
     end
 
@@ -241,11 +241,10 @@ function RecruitmentListMenu:Update(input)
         _MENU:RemoveMenu()
     elseif input.Direction == RogueElements.Dir8.Right then
         if not self.dirPressed then
-            if self.page >= self.PAGE_MAX then
+            if self.page + 1 >= self.PAGE_MAX then
                 _GAME:SE("Menu/Cancel")
-                self.page = self.PAGE_MAX
             else
-                self.page = self.page +1
+                self.page = self.page + 1
                 _GAME:SE("Menu/Skip")
                 self:DrawMenu()
             end
@@ -255,9 +254,8 @@ function RecruitmentListMenu:Update(input)
         if not self.dirPressed then
             if self.page <= 0 then
                 _GAME:SE("Menu/Cancel")
-                self.page = 0
             else
-                self.page = self.page -1
+                self.page = self.page - 1
                 _GAME:SE("Menu/Skip")
                 self:DrawMenu()
             end

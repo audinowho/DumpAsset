@@ -404,7 +404,7 @@ function BATTLE_SCRIPT.LegendRecruitCheck(owner, ownerChar, context, args)
 	  if found_legend == nil then
 	    local assemblyCount = GAME:GetPlayerAssemblyCount()
 		
-		for assembly_idx = 0,total-1,1 do
+		for assembly_idx = 0,assemblyCount-1,1 do
 		  player = GAME:GetPlayerAssemblyMember(assembly_idx)
 		  local player_tbl = LTBL(player)
 		  if player.BaseForm.Species == "heatran" and player_tbl.IsLegend == true then

@@ -739,6 +739,34 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="T:RogueElements.GridPathCross`1">
+            <summary>
+                Creates a grid plan made up of a center room and halls and rooms extending off in the four cardinal directions.
+                For best results, it is recommended to make the grid height and width both odd numbers.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.GridPathEdge`1">
+            <summary>
+                Populates the empty grid plan of a map by creating a minimum spanning tree of connected rooms and halls.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.GridPathEdge.Edge`1">
+            <summary>
+                The edge of the map where the rooms will spawn in.
+            </summary>
+        </member>
+        <member name="T:RogueElements.GridPathEdge.RoomRatio`1">
+            <summary>
+                The percentage of total rooms in the edge that the step aims to fill.
+            </summary>
+        </member>
+        <member name="T:RogueElements.GridPathEdge.HallRatio`1">
+            <summary>
+                The percentage of total halls in grid tiles not on the chosen edge that the step aims to fill.
+            </summary>
+        </member>
         <member name="T:RogueElements.GridHallGroup">
             <summary>
             Contains data about which cells a room occupies in a GridFloorPlan.
@@ -892,6 +920,43 @@
             <summary>
             Components that the newly added halls will be labeled with.
             </summary>
+        </member>
+        <member name="T:RogueElements.GridPathTreads`1">
+            <summary>
+                Creates a grid plan with two large "tread" rooms along the sides and a set of rooms in the middle.
+                Inverse of GridPathBeetle.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.GridPathTreads`1.ConnectPercent">
+            <summary>
+                The number of connections between adjacent small rooms, as a percent of the connections possible.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.GridPathTreads`1.GiantHallGen">
+            <summary>
+                The room types that can be used for the giant rooms in the layout.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.GridPathTreads`1.LargeRoomComponents">
+            <summary>
+                Components that the giant rooms will be labeled with.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.GridPathTreads`1.RoomPercent">
+            <summary>
+                The number of small rooms attached to the main large rooms, as a percent of the rooms possible.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.GridPathTreads`1.Vertical">
+            <summary>
+                Choose a horizontal or vertical orientation.
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="T:RogueElements.GridPathTwoSides`1">
             <summary>

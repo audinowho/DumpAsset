@@ -395,6 +395,46 @@ function COMMON.LearnMoveFlow(member, move, replace_msg)
 	return false
 end
 
+function COMMON.GetTutorableMoves(member, tutor_moves)
+	
+	local valid_moves = {}
+	local playerMonId = member.BaseForm
+	
+	while playerMonId ~= nil do
+		local mon = _DATA:GetMonster(playerMonId.Species)
+		local form = mon.Forms[playerMonId.Form]
+	  
+		--for each shared skill
+		for move_idx = 0, form.SharedSkills.Count - 1, 1 do
+			local move = form.SharedSkills[move_idx].Skill
+			if tutor_moves[move] ~= nil then
+				--check if the move tutor list contains it as nonspecial
+				if not tutor_moves[move].Special then
+					valid_moves[move] = tutor_moves[move]
+				end
+			end
+		end
+		--for each secret skill
+		for move_idx = 0, form.SecretSkills.Count - 1, 1 do
+			local move = form.SecretSkills[move_idx].Skill
+			if tutor_moves[move] ~= nil then
+				--check if the move tutor list contains it as special
+				if tutor_moves[move].Special then
+					valid_moves[move] = tutor_moves[move]
+				end
+			end
+		end
+		
+		if mon.PromoteFrom ~= "" then
+		  playerMonId = RogueEssence.Dungeon.MonsterID(mon.PromoteFrom, form.PromoteForm, "normal", Gender.Genderless)
+		else
+		  playerMonId = nil
+		end
+	end
+  
+  return valid_moves
+end
+
 function COMMON.ClearPlayerPrices()
   local item_count = GAME:GetPlayerBagCount()
   for item_idx = 0, item_count-1, 1 do

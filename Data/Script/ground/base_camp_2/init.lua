@@ -1,4 +1,5 @@
 require 'common'
+require 'menu.SkillSelectMenu'
 
 local base_camp_2 = {}
 local MapStrings = {}
@@ -1068,17 +1069,11 @@ function base_camp_2.Tutor_Can_Forget(member)
 end
 
 function base_camp_2.Tutor_Can_Tutor(member, tutor_moves)
-
-	local playerMonId = member.BaseForm
-	local monData = _DATA:GetMonster(playerMonId.Species)
-	local formData = monData.Forms[playerMonId.Form]
   
-  for move_idx = 1, #tutor_moves, 1 do
-    local move = tutor_moves[move_idx].Skill
-    if formData:CanLearnSkill(move) then
-      return true
-    end
-  end
+  local valid_moves = COMMON.GetTutorableMoves(member, tutor_moves)
+	for move_idx, skill in pairs(valid_moves) do
+		return true
+	end
   
   return false
 end
@@ -1109,9 +1104,7 @@ function base_camp_2.Tutor_Remember_Flow(price)
 			end
 		elseif state == 1 then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_What'], member:GetDisplayName(true)))
-      UI:RelearnMenu(member)
-      UI:WaitForChoice()
-      local result = UI:ChoiceResult()
+      local result = SkillSelectMenu.runRelearnMenu(member)
       if result ~= "" then
         move = result
         state = 2
@@ -1202,9 +1195,7 @@ function base_camp_2.Tutor_Teach_Flow(tutor_moves)
 			end
 		elseif state == 1 then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Teach_What'], member:GetDisplayName(true)))
-      UI:RelearnMenu(member)
-      UI:WaitForChoice()
-      local result = UI:ChoiceResult()
+      local result = SkillSelectMenu.runTutorMenu(member, tutor_moves)
       if result ~= "" then
         move = result
         state = 2
@@ -1235,9 +1226,11 @@ function base_camp_2.Tutor_Action(obj, activator)
   
   local price = 250
   local tutor_moves = {}
+  local can_tutor = false
   for move_key in pairs(SV.base_town.TutorMoves) do
     if COMMON.TUTOR[move_key] ~= nil then
-      --table.insert(tutor_moves, { Skill = move_key, Price = COMMON.TUTOR[move_key] } )
+      tutor_moves[move_key] = COMMON.TUTOR[move_key]
+	  can_tutor = true
     end
   end
   
@@ -1252,7 +1245,7 @@ function base_camp_2.Tutor_Action(obj, activator)
     SV.base_town.FreeRelearn = true
   end
   
-  if #tutor_moves > 0 and SV.base_town.TutorOpen == false then
+  if can_tutor and SV.base_town.TutorOpen == false then
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Now_Teaches']))
 	SV.base_town.TutorOpen = true
   end
@@ -1277,7 +1270,7 @@ function base_camp_2.Tutor_Action(obj, activator)
 			tutor_choices[1] = RogueEssence.StringKey("MENU_RECALL_SKILL"):ToLocal()
 			tutor_choices[2] = RogueEssence.StringKey("MENU_FORGET_SKILL"):ToLocal()
 			
-			if #tutor_moves > 0 then
+			if can_tutor then
 				tutor_choices[3] = STRINGS:Format(MapStrings['Tutor_Option_Tutor'])
 			end
 			

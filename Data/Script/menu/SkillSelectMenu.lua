@@ -137,26 +137,23 @@ end
 --- @param chara userdata the RogueEssence.Dungeon.Character object the chosen skill is to be applied to
 --- @return string the id of the selected skill if one was chosen in the menu; "" otherwise or if 'chara' was invalid
 function SkillSelectMenu.runRelearnMenu(chara)
-    -- do not open in replays. Don't think it's gonna be used there but just in case
-    if _DATA.CurrentReplay ~= null then return end
-
-    -- trying to find a RogueEssence.Dungeon.Character
-    local Character = luanet.import_type('RogueEssence.Dungeon.Character')
-    -- if chara exists and is not a RogueEssence.Dungeon.Character
-    local err = false
-    if not chara then err=true -- error if nil
-    elseif LUA_ENGINE:TypeOf(chara) ~= luanet.ctype(Character) then
-        -- assume the object is actually a GroundChar or similar and try to fetch chara.Data
-        if chara.Data~= nil and LUA_ENGINE:TypeOf(chara.Data) == luanet.ctype(Character) then
-            chara = chara.Data -- save object if class is right
-        else
-            err = true -- error if wrong
-        end
-    end
-    -- throw error if RogueEssence.Dungeon.Character was not found
-    if err then error("parameter 'chara' neither was nor contained a RogueEssence.Dungeon.Character object") end
 
     local forgottenSkills = chara:GetRelearnableSkills(true)
 
     return SkillSelectMenu.run(STRINGS:FormatKey("MENU_SKILL_RECALL"), chara, forgottenSkills)
+end
+
+
+function SkillSelectMenu.runTutorMenu(chara, tutor_moves)
+	
+	local valid_moves = COMMON.GetTutorableMoves(chara, tutor_moves)
+	
+	--TODO: Allow the list to show the cost in heart scales
+
+    local tutor_skills = {}
+	for move_idx, skill in pairs(valid_moves) do
+		table.insert(tutor_skills, move_idx)
+	end
+
+    return SkillSelectMenu.run(RogueEssence.StringKey("MENU_SKILL_TUTOR"):ToLocal(), chara, tutor_skills)
 end

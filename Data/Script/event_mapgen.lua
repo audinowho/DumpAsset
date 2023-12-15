@@ -14,6 +14,16 @@ MapEffectStepType = luanet.import_type('RogueEssence.LevelGen.MapEffectStep`1')
 MapGenContextType = luanet.import_type('RogueEssence.LevelGen.ListMapGenContext')
 EntranceType = luanet.import_type('RogueEssence.LevelGen.MapGenEntrance')
 
+MapEffectStepType = luanet.import_type('RogueEssence.LevelGen.MapEffectStep`1')
+MapGenContextType = luanet.import_type('RogueEssence.LevelGen.ListMapGenContext')
+EntranceType = luanet.import_type('RogueEssence.LevelGen.MapGenEntrance')
+
+RandomRoomSpawnStepType = luanet.import_type('RogueElements.RandomRoomSpawnStep`2')
+PickerSpawnType = luanet.import_type('RogueElements.PickerSpawner`2')
+PresetMultiRandType = luanet.import_type('RogueElements.PresetMultiRand`1')
+PresetPickerType = luanet.import_type('RogueElements.PresetPicker`1')
+MapItemType = luanet.import_type('RogueEssence.Dungeon.MapItem')
+
 
 function ZONE_GEN_SCRIPT.Mysteriosity(zoneContext, context, queue, seed, args)
   PrintInfo("Test")
@@ -92,8 +102,8 @@ function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed
             queue:Enqueue(priority, mobPlacement)
 
           elseif mission.Type == COMMON.MISSION_TYPE_LOST_ITEM then
-            PrintInfo("Spawning Lost Item")
             local lost_item = RogueEssence.Dungeon.MapItem(mission.Item)
+            PrintInfo("Spawning Lost Item "..lost_item.Value)
             local preset_picker = LUA_ENGINE:MakeGenericType(PresetPickerType, { MapItemType }, { lost_item })
             local multi_preset_picker = LUA_ENGINE:MakeGenericType(PresetMultiRandType, { MapItemType }, { preset_picker })
             local picker_spawner = LUA_ENGINE:MakeGenericType(PickerSpawnType, {  MapGenContextType, MapItemType }, { multi_preset_picker })

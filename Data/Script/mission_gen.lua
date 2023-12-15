@@ -1532,7 +1532,7 @@ function MISSION_GEN.GenerateBoard(board_type)
 	local dungeon_difficulties = MISSION_GEN.ShallowCopy(MISSION_GEN.DIFFICULTY)
 	for i = #dungeon_candidates, 1, -1 do
 		local dungeon_id = dungeon_candidates[i]
-		if _DATA.Save:GetDungeonUnlock(dungeon_id) ~= RogueEssence.Data.GameProgress.UnlockState.Completed then
+		if _DATA.Save:GetDungeonUnlock(dungeon_id) ~= RogueEssence.Data.GameProgress.UnlockState.Completed and dungeon_id ~= _ZONE.CurrentZoneID then
 			table.remove(dungeon_candidates, i)
 		else
 			local dungeon_instance = _DATA:GetZone(dungeon_id)
@@ -1619,8 +1619,9 @@ function MISSION_GEN.GenerateBoard(board_type)
 
 
 		--generate the objective.
-		local objective 
-		if mission_type == COMMON.MISSION_BOARD_OUTLAW then 
+		local objective
+		local missionOutlawRoll = math.random(2)
+		if missionOutlawRoll == 0 then 
 			local roll = math.random(1, 10)
 			if roll <= 5 then
 				objective = COMMON.MISSION_TYPE_OUTLAW

@@ -1,4 +1,5 @@
 ﻿require 'common'
+require 'mission_gen'
 
 local base_camp_2 = {}
 local MapStrings = {}

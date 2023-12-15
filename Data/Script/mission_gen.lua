@@ -41,17 +41,17 @@ MISSION_GEN.DUNGEON_LIST = {'tropical_path', 'faultline_ridge', 'tiny_tunnel', '
 MISSION_GEN.DIFFICULTY = {}
 MISSION_GEN.DIFFICULTY[""] = 0
 MISSION_GEN.DIFFICULTY["F"] = 0
-MISSION_GEN.DIFFICULTY["E"] = 10
-MISSION_GEN.DIFFICULTY["D"] = 15
+MISSION_GEN.DIFFICULTY["E"] = 5
+MISSION_GEN.DIFFICULTY["D"] = 10
 MISSION_GEN.DIFFICULTY["C"] = 20
 MISSION_GEN.DIFFICULTY["B"] = 30
-MISSION_GEN.DIFFICULTY["A"] = 50
-MISSION_GEN.DIFFICULTY["S"] = 70
-MISSION_GEN.DIFFICULTY["STAR_1"] = 100
+MISSION_GEN.DIFFICULTY["A"] = 40
+MISSION_GEN.DIFFICULTY["S"] = 50
+MISSION_GEN.DIFFICULTY["STAR_1"] = 70
 
 --dungeon's assigned difficulty
-MISSION_GEN.DUNGEON_DIFFICULTY = {}
-MISSION_GEN.DUNGEON_DIFFICULTY[""] = "F"
+SV.DungeonDifficulty = {}
+SV.DungeonDifficulty[""] = "F"
 
 --order of difficulties. 
 MISSION_GEN.DIFF_TO_ORDER = {}
@@ -97,7 +97,7 @@ MISSION_GEN.DIFF_TO_COLOR["STAR_1"] = "[color=#F8F800]"
 MISSION_GEN.COMPLETE = 1
 MISSION_GEN.INCOMPLETE = 0
 
-MISSION_GEN.EXPECTED_LEVEL = {}
+SV.ExpectedLevel = {}
 
 
 MISSION_GEN.TITLES =  {
@@ -503,6 +503,11 @@ MISSION_GEN.POKEMON = {
 
 --weighting of possible client/target pokemon based on difficulty of mission
 MISSION_GEN.DIFF_POKEMON = {
+	F = {
+		{"TIER_LOW", 10},
+		{"TIER_MID", 0},
+		{"TIER_HIGH", 0}
+	},
 	E = {
 		{"TIER_LOW", 10},
 		{"TIER_MID", 0},
@@ -543,6 +548,20 @@ MISSION_GEN.DIFF_POKEMON = {
 --weighting of each loot table based on difficulty of mission
 
 MISSION_GEN.DIFF_REWARDS = {
+	F = {
+		{"AMMO_LOW", 5},
+		{"AMMO_HIGH", 0},
+		{"FOOD_LOW", 5},
+		{"FOOD_HIGH", 0},
+		{"SEED_LOW", 5},
+		{"SEED_HIGH", 0},
+		{"HELD_LOW", 0},
+		{"HELD_HIGH", 0},
+		{"TM_LOW", 0},
+		{"TM_MID", 0},
+		{"TM_HIGH", 0},
+		{"SPECIAL", 0}
+	},
 	E = {
 		{"AMMO_LOW", 5},
 		{"AMMO_HIGH", 0},
@@ -1091,14 +1110,14 @@ MISSION_GEN.DELIVERABLE_ITEMS = {
 }
 
 --"order" of dungeons
-MISSION_GEN.DUNGEON_ORDER = {}
-MISSION_GEN.DUNGEON_ORDER[""] = 99999--empty missions should get shoved towards the end 
+SV.DungeonOrder = {}
+SV.DungeonOrder[""] = 99999--empty missions should get shoved towards the end 
 
 
 
 --Do the stairs go up or down? Blank string if up, B if down
-MISSION_GEN.STAIR_TYPE = {}
-MISSION_GEN.STAIR_TYPE[""] = ""
+SV.StairType = {}
+SV.StairType[""] = ""
 
 
 
@@ -1134,6 +1153,11 @@ end
 
 
 function MISSION_GEN.ResetBoards()
+SV.DungeonDifficulty = {}
+SV.ExpectedLevel = {}
+SV.DungeonOrder = {}
+SV.StairType = {}
+	
 --jobs on the mission board.
 SV.MissionBoard =
 {
@@ -1476,7 +1500,7 @@ function MISSION_GEN.GenerateBoard(board_type)
 	if board_type == COMMON.MISSION_BOARD_OUTLAW then mission_type = COMMON.MISSION_BOARD_OUTLAW end
 	
 	--get list of potential dungeons for missions, remove any that haven't been completed yet.
-	--if it does exist, add the dungeon to MISSION_GEN.DUNGEON_DIFFICULTY based on its level
+	--if it does exist, add the dungeon to SV.DungeonDifficulty based on its level
 	local dungeon_candidates = MISSION_GEN.ShallowCopy(MISSION_GEN.DUNGEON_LIST)
 	local dungeon_difficulties = MISSION_GEN.ShallowCopy(MISSION_GEN.DIFFICULTY)
 	for i = #dungeon_candidates, 1, -1 do
@@ -1485,10 +1509,10 @@ function MISSION_GEN.GenerateBoard(board_type)
 			table.remove(dungeon_candidates, i)
 		else
 			local dungeon_instance = _DATA:GetZone(dungeon_id)
-			if dungeon_instance.Level == nil then
+			if dungeon_instance.Level == nil or dungeon_instance.Level < 0 then
 				PrintInfo("Adding dungeon instance "..dungeon_id.." with score ".."F")
-				MISSION_GEN.DUNGEON_DIFFICULTY[dungeon_id] = "F"
-				MISSION_GEN.EXPECTED_LEVEL[dungeon_id] = 5
+				SV.DungeonDifficulty[dungeon_id] = "F"
+				SV.ExpectedLevel[dungeon_id] = 5
 			else
 				local dungeon_difficulty_score = dungeon_instance.Level
 				if dungeon_instance.LevelCap then
@@ -1504,7 +1528,7 @@ function MISSION_GEN.GenerateBoard(board_type)
 				
 				local max_team_size = RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS
 				
-				if dungeon_instance.TeamSize < max_team_size then
+				if dungeon_instance.TeamSize > -1 and dungeon_instance.TeamSize < max_team_size then
 					local team_members_down = max_team_size - dungeon_instance.TeamSize
 					dungeon_difficulty_score = dungeon_difficulty_score * team_members_down
 				end
@@ -1522,7 +1546,7 @@ function MISSION_GEN.GenerateBoard(board_type)
 					dungeon_difficulty_score = dungeon_difficulty_score + (bag_restrict_amount * 2)
 				end
 
-				if dungeon_instance.BagSize and dungeon_instance.BagSize <= 24 then
+				if dungeon_instance.BagSize > -1 and dungeon_instance.BagSize <= 24 then
 					local bag_size_amount = 24 - dungeon_instance.BagSize
 					dungeon_difficulty_score = dungeon_difficulty_score + (bag_size_amount * 1)
 				end
@@ -1531,26 +1555,28 @@ function MISSION_GEN.GenerateBoard(board_type)
 				local difficulty_found = false
 				
 				for key, value in pairs(dungeon_difficulties) do
-					if value > dungeon_difficulty_score then
-						difficulty_found = true
-					end
+					if value ~= "" then
+						if value > dungeon_difficulty_score then
+							difficulty_found = true
+						end
 
-					if difficulty_found == false then
-						cur_difficulty_score = key
+						if difficulty_found == false then
+							cur_difficulty_score = key
+						end
 					end
 				end
 				
 				PrintInfo("Adding dungeon instance "..dungeon_id.." with score "..cur_difficulty_score)
 
-				MISSION_GEN.DUNGEON_DIFFICULTY[dungeon_id] = cur_difficulty_score
+				SV.DungeonDifficulty[dungeon_id] = cur_difficulty_score
 				
 				--Add the expected level
-				MISSION_GEN.EXPECTED_LEVEL[dungeon_id] = dungeon_instance.Level
+				SV.ExpectedLevel[dungeon_id] = dungeon_instance.Level
 			end
 		end
 
-		MISSION_GEN.DUNGEON_ORDER[dungeon_id] = i
-		MISSION_GEN.STAIR_TYPE[dungeon_id] = ""
+		SV.DungeonOrder[dungeon_id] = i
+		SV.StairType[dungeon_id] = ""
 	end
 	
 	--failsafe. Just quit if no dungeons are eligible.
@@ -1622,7 +1648,7 @@ function MISSION_GEN.GenerateBoard(board_type)
 		end
 
 
-		local difficulty = MISSION_GEN.DUNGEON_DIFFICULTY[dungeon]
+		local difficulty = SV.DungeonDifficulty[dungeon]
 		local offset = 0
 		--up the difficulty by 1 if its an outlaw or escort mission.
 		local difficult_objectives = { COMMON.MISSION_TYPE_ESCORT, COMMON.MISSION_TYPE_EXPLORATION, COMMON.MISSION_TYPE_OUTLAW, COMMON.MISSION_TYPE_OUTLAW_FLEE, COMMON.MISSION_TYPE_OUTLAW_ITEM }
@@ -1652,9 +1678,9 @@ function MISSION_GEN.GenerateBoard(board_type)
 			--print(target_candidates[1]) --to give an idea of what tier we rolled
 		end
 		
-		--if its a generic outlaw mission, or a monster house / fleeing outlaw, Zhayn is the client. Normal mons only ask you to go after their stolen items.
+		--if its a generic outlaw mission, or a monster house / fleeing outlaw, Magna is the client. Normal mons only ask you to go after their stolen items.
 		if objective == COMMON.MISSION_TYPE_OUTLAW or objective == COMMON.MISSION_TYPE_OUTLAW_FLEE or objective == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then
-			client = "zhayn"
+			client = "magna"
 		end
 		
 		--if it's a delivery, exploration, or lost item, target and client should match.
@@ -1678,14 +1704,14 @@ function MISSION_GEN.GenerateBoard(board_type)
 		--because Scriptvars doesnt like saving genders instead of regular structures, use 1/2/0 for m/f/genderless respectively, and convert when needed
 		local client_gender
 		
-		if client == "zhayn" then--Zhayn is a special exception
+		if client == "magna" then --Magna is a special exception
 			client_gender = 0
 		else
-			client_gender = _DATA:GetMonster(client).Forms[0]:RollGender(_ZONE.CurrentGround.Rand)
+			client_gender = _DATA:GetMonster(client).Forms[0]:RollGender(_ZONE.CurrentZone.Rand)
 			client_gender = COMMON.GenderToNum(client_gender)
 		end 
 		
-		local target_gender = _DATA:GetMonster(target).Forms[0]:RollGender(_ZONE.CurrentGround.Rand)
+		local target_gender = _DATA:GetMonster(target).Forms[0]:RollGender(_ZONE.CurrentZone.Rand)
 	
 		target_gender = COMMON.GenderToNum(target_gender)
 
@@ -1921,10 +1947,10 @@ end
 
 function MISSION_GEN.JobSortFunction(j1, j2)
 	--if they're the same dungeon, then check floors. Otherwise, dungeon order takes presidence. 
-	if MISSION_GEN.DUNGEON_ORDER[j1.Zone] == MISSION_GEN.DUNGEON_ORDER[j2.Zone] then
+	if SV.DungeonOrder[j1.Zone] == SV.DungeonOrder[j2.Zone] then
 		return j1.Floor < j2.Floor 
 	else 
-		return MISSION_GEN.DUNGEON_ORDER[j1.Zone] < MISSION_GEN.DUNGEON_ORDER[j2.Zone]
+		return SV.DungeonOrder[j1.Zone] < SV.DungeonOrder[j2.Zone]
 	end
 end
 
@@ -2011,11 +2037,11 @@ function JobMenu:initialize(job_type, job_number, parent_board_menu)
   self.taken = job.Taken
   
   self.flavor = job.Flavor
-  --Zhayn is the only non-species name that'll show up here. So he is hardcoded in as an exception here.
+  --Magna is the only non-species name that'll show up here. So he is hardcoded in as an exception here.
   --TODO: Unhardcode this by adding in a check if string is not empty and if its not a species name, then add the color coding around it for  proper names.
   self.client = ""
-  if job.Client == 'zhayn' then 
-	self.client = '[color=#00FFFF]Zhayn[color]' 
+  if job.Client == 'magna' then 
+	self.client = '[color=#00FFFF]Magna[color]' 
   elseif job.Client ~= "" then 
 	self.client = _DATA:GetMonster(job.Client):GetColoredName() 
   end
@@ -2051,7 +2077,7 @@ function JobMenu:initialize(job_type, job_number, parent_board_menu)
   if job.Zone ~= "" then self.zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(job.Zone):GetColoredName() end
   
   self.floor = ""
-  if job.Floor ~= -1 then self.floor = MISSION_GEN.STAIR_TYPE[job.Zone] .. '[color=#00FFFF]' .. tostring(job.Floor) .. "[color]F" end
+  if job.Floor ~= -1 then self.floor = SV.StairType[job.Zone] .. '[color=#00FFFF]' .. tostring(job.Floor) .. "[color]F" end
   
   self.difficulty = ""
   if job.Difficulty ~= "" then self.difficulty = MISSION_GEN.DIFF_TO_COLOR[job.Difficulty] .. job.Difficulty .. "[color]   (" .. tostring(MISSION_GEN.DIFFICULTY[job.Difficulty]) .. ")" end 
@@ -2101,9 +2127,9 @@ function JobMenu:DrawJob()
   self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Reward:", RogueElements.Loc(16, 110))) 
 
   local client = self.client 
-  --Don't show "Zhayn" if the nickname mod is enabled. Need to still save it internally as Zhayn though for other processes.
+  --Don't show "Magna" if the nickname mod is enabled. Need to still save it internally as Magna though for other processes.
   if not CONFIG.UseNicknames then
-	client = string.gsub(client, "Zhayn", "Bisharp")
+	client = string.gsub(client, "Magna", "Magnezone")
   end
   
   self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(client, RogueElements.Loc(68, 54)))
@@ -2398,7 +2424,7 @@ function BoardMenu:DrawBoard()
 	
 	local title = self.jobs[i].Title
 	local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(self.jobs[i].Zone):GetColoredName()
-    local floor =  MISSION_GEN.STAIR_TYPE[self.jobs[i].Zone] ..'[color=#00FFFF]' .. tostring(self.jobs[i].Floor) .. "[color]F"
+    local floor =  SV.StairType[self.jobs[i].Zone] ..'[color=#00FFFF]' .. tostring(self.jobs[i].Floor) .. "[color]F"
     local difficulty = MISSION_GEN.DIFF_TO_COLOR[self.jobs[i].Difficulty] .. self.jobs[i].Difficulty .. "[color]" 
 	
 	local icon = ""
@@ -2684,7 +2710,7 @@ function DungeonJobList:DrawMenu()
 	
 	--only look at jobs in the current dungeon that aren't suspended
 	if self.jobs[i].Zone == self.dungeon and self.jobs[i].Taken then 	
-		local floor =  MISSION_GEN.STAIR_TYPE[self.jobs[i].Zone] ..'[color=#00FFFF]' .. tostring(self.jobs[i].Floor) .. "[color]F"
+		local floor =  SV.StairType[self.jobs[i].Zone] ..'[color=#00FFFF]' .. tostring(self.jobs[i].Floor) .. "[color]F"
 		local objective = ""
 		local icon = ""
 		local goal = self.jobs[i].Type
@@ -2692,8 +2718,8 @@ function DungeonJobList:DrawMenu()
 		local target = _DATA:GetMonster(self.jobs[i].Target):GetColoredName()
 	
 		local client = ""
-		if self.jobs[i].Client == "zhayn" then 
-			client = "[color=#00FFFF]Zhayn[color]"
+		if self.jobs[i].Client == "magna" then 
+			client = "[color=#00FFFF]Magna[color]"
 		else 
 			client = _DATA:GetMonster(self.jobs[i].Client):GetColoredName()
 		end

@@ -238,6 +238,12 @@ SV.TakenBoard =
 
 }
 
+--Needed to save data about dungeons
+SV.DungeonDifficulty = {}
+SV.ExpectedLevel = {}
+SV.DungeonOrder = {}
+SV.StairType = {}
+
 --jobs on the mission board.
 SV.MissionBoard =
 {

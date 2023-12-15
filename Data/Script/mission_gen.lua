@@ -2034,6 +2034,27 @@ function MISSION_GEN.SortOutlaw()
 	end
 end
 
+function MISSION_GEN.IsBoardFull(board)
+	for i=#board, 1, -1 do
+		if board[i].Client == "" then
+			return false
+		end
+	end
+	
+	return true
+end
+
+--Finds the next free index in the board, returns -1 if it can't be found
+function MISSION_GEN.FindFreeSpaceInBoard(board)
+	for i=#board, 1, -1 do
+		if board[i].Client == "" then
+			return i
+		end
+	end
+
+	return -1
+end
+
 --Used to copy job from one board to another (mainly for taking jobs)
 function MISSION_GEN.ShallowCopy(orig)
     local orig_type = type(orig)
@@ -2071,7 +2092,7 @@ function JobMenu:initialize(job_type, job_number, parent_board_menu)
   --get relevant board
   local job
   if job_type == COMMON.MISSION_BOARD_TAKEN then
-		job = SV.TakenBoard[job_number]
+	job = SV.TakenBoard[job_number]
   elseif job_type == COMMON.MISSION_BOARD_OUTLAW then
   	job = SV.OutlawBoard[job_number]
   else --default to mission board
@@ -2269,15 +2290,16 @@ end
 --for use with submenu
 --adds the current job to the taken board, then sorts it. Then close the menu
 function JobMenu:AddJobToTaken()
-	--this should already be true if we get to this point, but just in case, check if the last job slot is empty
-	if SV.TakenBoard[8].Client == "" then
+	--find an empty job slot
+	local freeIndex = MISSION_GEN.FindFreeSpaceInBoard(board)
+	if freeIndex > -1 then
 		if self.job_type == COMMON.MISSION_BOARD_OUTLAW then
 			--Need to copy the table rather than just pass the pointer, or you can dupe missions which is not good
-			SV.TakenBoard[8] = MISSION_GEN.ShallowCopy(SV.OutlawBoard[self.job_number])
+			SV.TakenBoard[freeIndex] = MISSION_GEN.ShallowCopy(SV.OutlawBoard[self.job_number])
 		elseif self.job_type == COMMON.MISSION_BOARD_MISSION then
-			SV.TakenBoard[8] = MISSION_GEN.ShallowCopy(SV.MissionBoard[self.job_number])
+			SV.TakenBoard[freeIndex] = MISSION_GEN.ShallowCopy(SV.MissionBoard[self.job_number])
 		end 
-		SV.TakenBoard[8].BackReference = self.job_number
+		SV.TakenBoard[freeIndex].BackReference = self.job_number
 		MISSION_GEN.SortTaken()
 	end
 	
@@ -2317,7 +2339,7 @@ function JobMenu:OpenSubMenu()
 		else --outlaw/mission boards
 			--we already made a check above to see if this is a job board and not taken 
 			--only selectable if there's room on the taken board for the job and we haven't already taken this mission
-			choices = {{"Take Job", SV.TakenBoard[8].Client == "" and not self.taken, function() self:FlipTakenStatus() 
+			choices = {{"Take Job", MISSION_GEN.IsBoardFull(SV.TakenBoard) and not self.taken, function() self:FlipTakenStatus() 
 																								 self:AddJobToTaken() _MENU:RemoveMenu() end },
 					   {"Cancel", true, function() _MENU:RemoveMenu() _MENU:RemoveMenu() end} }
 		end 
@@ -2377,12 +2399,14 @@ function BoardMenu:initialize(board_type, parent_selection_menu, parent_main_men
 	
 	self.total_items = 0
 	self.jobs = {}
+	self.original_menu_index = {}
 	
 	--get total job count and add jobs to self.jobs
 	for i = #source_board, 1, -1 do
 		if source_board[i].Client ~= "" then
 			self.total_items = self.total_items + 1
 			self.jobs[self.total_items] = source_board[i]
+			self.original_menu_index[self.total_items] = i
 		end
 	end
   
@@ -2411,12 +2435,14 @@ function BoardMenu:RefreshSelf()
   
   self.total_items = 0
   self.jobs = {}
+  self.original_menu_index = {}
 	
   --get total job count and add jobs to self.jobs
   for i = #source_board, 1, -1 do 
 	if source_board[i].Client ~= "" then
 		self.total_items = self.total_items + 1
 		self.jobs[self.total_items] = source_board[i]
+		self.original_menu_index[self.total_items] = i
 	end
   end
  
@@ -2469,7 +2495,7 @@ function BoardMenu:DrawBoard()
   
   --populate 4 self.jobs on a page
   for i = (4 * self.page) - 3, 4 * self.page, 1 do 
-	if i >= #self.jobs then break end
+	if i > #self.jobs then break end
 	  
     if self.jobs[i].Client ~= "" then
 		local title = self.jobs[i].Title
@@ -2525,7 +2551,7 @@ function BoardMenu:Update(input)
   if input:JustPressed(RogueEssence.FrameInput.InputType.Confirm) then
 	--open the selected job menu
 	_GAME:SE("Menu/Confirm")
-	local job_menu = JobMenu:new(self.board_type, self:GetSelectedJobIndex(), self)
+	local job_menu = JobMenu:new(self.board_type, self:GetOriginalSelectedJobIndex(), self)
 	_MENU:AddMenu(job_menu.menu, false)
 	job_menu:OpenSubMenu()
   elseif input:JustPressed(RogueEssence.FrameInput.InputType.Cancel) or input:JustPressed(RogueEssence.FrameInput.InputType.Menu) then
@@ -2591,9 +2617,12 @@ end
 --gets current job index based on the current item and the page. if self.page is 2, and current item is 0, returned answer should be 5.
 function BoardMenu:GetSelectedJobIndex()
 	return self.current_item + (4 * (self.page - 1) + 1)
-	
 end
 
+--gets current job index based on the current item and the page, then translates it to the correct index in its original menu
+function BoardMenu:GetOriginalSelectedJobIndex()
+	return self.original_menu_index[self:GetSelectedJobIndex()]
+end
 
 
 

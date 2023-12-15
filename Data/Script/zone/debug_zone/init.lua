@@ -26,7 +26,7 @@ end
 function debug_zone.ExitSegment(zone, result, rescue, segmentID, mapID)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  MISSION_GEN.EndOfDay()
+  MISSION_GEN.EndOfDay(result)
 COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)

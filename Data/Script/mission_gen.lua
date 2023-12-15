@@ -750,12 +750,6 @@ MISSION_GEN.REWARDS = {
 		{'berry_oran', 5},
 		{'berry_leppa', 5},
 		{'berry_sitrus', 5},
-		{'berry_pecha', 5},
-		{'berry_cheri', 5},
-		{'berry_rawst', 5},
-		{'berry_aspear', 5},
-		{'berry_chesto', 5},
-		{'berry_persim', 5},
 		{'berry_lum', 5}
 	},
 	
@@ -773,13 +767,6 @@ MISSION_GEN.REWARDS = {
 		{'held_special_band', 5},
 		{'held_defense_scarf', 5},
 		{'held_zinc_band', 5},
-		
-		{'held_pecha_scarf', 5},
-		{'held_cheri_scarf', 5},
-		{'held_rawst_scarf', 5},
-		{'held_aspear_scarf', 5},
-		{'held_insomniascope', 5},
-		{'held_persim_band', 5},
 		
 		{'held_warp_scarf', 5}
 	},
@@ -1105,8 +1092,8 @@ MISSION_GEN.DELIVERABLE_ITEMS = {
 	"berry_oran",
 	"berry_leppa",
 	"food_apple",
-	"berry_pecha",
-	"berry_cheri"
+	"berry_lum",
+	"apricorn_plain"
 }
 
 --"order" of dungeons
@@ -1504,7 +1491,7 @@ end
 
 --Generate a board. Board_type should be given as "Mission" or "Outlaw".
 --Job/Outlaw Boards should be cleared before being regenerated.
-function MISSION_GEN.GenerateBoard(board_type)
+function MISSION_GEN.GenerateBoard(result, board_type)
 	local jobs_to_make = math.random(5, 7)--Todo: jobs generated is based on your rank or how many dungeons you've done.
 	local assigned_combos = {}--floor/dungeon combinations that already have had missions genned for it. Need to consider already genned missions and missions on taken board.
 	
@@ -1532,7 +1519,7 @@ function MISSION_GEN.GenerateBoard(board_type)
 	local dungeon_difficulties = MISSION_GEN.ShallowCopy(MISSION_GEN.DIFFICULTY)
 	for i = #dungeon_candidates, 1, -1 do
 		local dungeon_id = dungeon_candidates[i]
-		if _DATA.Save:GetDungeonUnlock(dungeon_id) ~= RogueEssence.Data.GameProgress.UnlockState.Completed and dungeon_id ~= _ZONE.CurrentZoneID then
+		if _DATA.Save:GetDungeonUnlock(dungeon_id) ~= RogueEssence.Data.GameProgress.UnlockState.Completed and (dungeon_id ~= _ZONE.CurrentZoneID or result ~= RogueEssence.Data.GameProgress.ResultType.Cleared) then
 			table.remove(dungeon_candidates, i)
 		else
 			local dungeon_instance = _DATA:GetZone(dungeon_id)
@@ -2897,11 +2884,11 @@ function MISSION_GEN.RemoveMissionBackReference()
 	end
 end
 
-function MISSION_GEN.EndOfDay()
+function MISSION_GEN.EndOfDay(result)
 	--Regenerate jobs
 	MISSION_GEN.ResetBoards()
 	MISSION_GEN.RemoveMissionBackReference()
-	MISSION_GEN.GenerateBoard(COMMON.MISSION_BOARD_MISSION)
+	MISSION_GEN.GenerateBoard(result, COMMON.MISSION_BOARD_MISSION)
 	--MISSION_GEN.GenerateBoard(COMMON.MISSION_BOARD_OUTLAW)
 	MISSION_GEN.SortMission()
 	MISSION_GEN.SortOutlaw()

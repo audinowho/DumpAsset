@@ -27,7 +27,7 @@ function faultline_ridge.ExitSegment(zone, result, rescue, segmentID, mapID)
   PrintInfo("=>> ExitSegment_faultline_ridge result "..tostring(result).." segment "..tostring(segmentID))
   
   --first check for rescue flag; if we're in rescue mode then take a different path
-  MISSION_GEN.EndOfDay()
+  MISSION_GEN.EndOfDay(result)
 COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)

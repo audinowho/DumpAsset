@@ -1541,7 +1541,7 @@ function MISSION_GEN.GenerateBoard(board_type)
 					dungeon_difficulty_score = dungeon_difficulty_score + 5
 				end
 
-				if dungeon_instance.BagRestrict and dungeon_instance.BagRestrict <= 24 then
+				if dungeon_instance.BagRestrict > -1 and dungeon_instance.BagRestrict <= 24 then
 					local bag_restrict_amount = 24 - dungeon_instance.BagRestrict
 					dungeon_difficulty_score = dungeon_difficulty_score + (bag_restrict_amount * 2)
 				end
@@ -1551,24 +1551,22 @@ function MISSION_GEN.GenerateBoard(board_type)
 					dungeon_difficulty_score = dungeon_difficulty_score + (bag_size_amount * 1)
 				end
 
-				local cur_difficulty_score = "F"
+				local cur_difficulty = "F"
+				local cur_difficulty_score = 0
 				local difficulty_found = false
 				
 				for key, value in pairs(dungeon_difficulties) do
 					if value ~= "" then
-						if value > dungeon_difficulty_score then
-							difficulty_found = true
-						end
-
-						if difficulty_found == false then
-							cur_difficulty_score = key
+						if value <= dungeon_difficulty_score and value > cur_difficulty_score then
+							cur_difficulty_score = value
+							cur_difficulty = key
 						end
 					end
 				end
 				
-				PrintInfo("Adding dungeon instance "..dungeon_id.." with score "..cur_difficulty_score)
+				PrintInfo("Adding dungeon "..dungeon_id.." with difficulty score "..dungeon_difficulty_score.." and difficulty "..cur_difficulty)
 
-				SV.DungeonDifficulty[dungeon_id] = cur_difficulty_score
+				SV.DungeonDifficulty[dungeon_id] = cur_difficulty
 				
 				--Add the expected level
 				SV.ExpectedLevel[dungeon_id] = dungeon_instance.Level
@@ -1658,9 +1656,17 @@ function MISSION_GEN.GenerateBoard(board_type)
 		elseif objective == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then
 			offset = 2
 		end
-		difficulty = MISSION_GEN.ORDER_TO_DIFF[MISSION_GEN.DIFF_TO_ORDER[difficulty]+offset]
 		
+		local final_order = MISSION_GEN.DIFF_TO_ORDER[difficulty]+offset
+
+		if final_order >= #MISSION_GEN.ORDER_TO_DIFF then
+			final_order = #MISSION_GEN.ORDER_TO_DIFF - 1
+		end
 		
+		difficulty = MISSION_GEN.ORDER_TO_DIFF[final_order]
+
+
+		PrintInfo("Creating job with difficulty "..difficulty.." and offset "..offset)
 		
 		--Generate a tier, then the client
 		local tier = MISSION_GEN.WeightedRandom(MISSION_GEN.DIFF_POKEMON[difficulty])
@@ -1946,6 +1952,13 @@ function MISSION_GEN.GenerateBoard(board_type)
 end
 
 function MISSION_GEN.JobSortFunction(j1, j2)
+	if (j2 == nil or j2.Zone == nil or j2.Zone == "") then
+		return false
+	end
+	if (j1 == nil or j1.Zone == nil or j1.Zone == "") then
+		return true
+	end
+	
 	--if they're the same dungeon, then check floors. Otherwise, dungeon order takes presidence. 
 	if SV.DungeonOrder[j1.Zone] == SV.DungeonOrder[j2.Zone] then
 		return j1.Floor < j2.Floor 
@@ -1979,15 +1992,21 @@ function MISSION_GEN.Generate_List_Range(low, up)
 end
 
 function MISSION_GEN.SortTaken()
-	table.sort(SV.TakenBoard, MISSION_GEN.JobSortFunction)
+	if #SV.TakenBoard > 1 then
+		table.sort(SV.TakenBoard, MISSION_GEN.JobSortFunction)
+	end
 end
 
 function MISSION_GEN.SortMission()
-	table.sort(SV.MissionBoard, MISSION_GEN.JobSortFunction)
+	if #SV.MissionBoard > 1 then
+		table.sort(SV.MissionBoard, MISSION_GEN.JobSortFunction)
+	end
 end
 
 function MISSION_GEN.SortOutlaw()
-	table.sort(SV.OutlawBoard, MISSION_GEN.JobSortFunction)
+	if #SV.OutlawBoard > 1 then
+		table.sort(SV.OutlawBoard, MISSION_GEN.JobSortFunction)
+	end
 end
 
 --Used to copy job from one board to another (mainly for taking jobs)

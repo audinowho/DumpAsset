@@ -38,6 +38,8 @@ COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
 	  SV.moonlit_end.BattleFailed = true
 	end
     GAME:EnterZone('moonlit_courtyard', -1, 0, 0)
+  elseif SV.TemporaryFlags.MissionCompleted then
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 2, 0)
   elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else

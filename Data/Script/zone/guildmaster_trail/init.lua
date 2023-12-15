@@ -38,7 +38,9 @@ COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
 	if not SV.base_camp.ExpositionComplete then
 	  GAME:SetRescueAllowed(true)
 	end
-    if result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
+	if SV.TemporaryFlags.MissionCompleted then
+	  COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 2, 0)
+    elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
     --if result is defeat, unknown, timed out, or escaped, end the game with the destination as the last checkpoint
     --defeat is the same for all segments
 	  if mapID > SV.guildmaster_trail.FloorsCleared then

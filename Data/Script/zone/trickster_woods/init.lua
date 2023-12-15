@@ -31,6 +31,8 @@ function trickster_woods.ExitSegment(zone, result, rescue, segmentID, mapID)
 COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)
+  elseif SV.TemporaryFlags.MissionCompleted then
+    COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 2, 0)
   elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else

@@ -31,6 +31,8 @@ function treacherous_mountain.ExitSegment(zone, result, rescue, segmentID, mapID
 COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)
+  elseif SV.TemporaryFlags.MissionCompleted then
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 2, 0)
   elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
     if segmentID == 2 then
 	  SV.treacherous_mountain.BossPhase = 1

@@ -1136,7 +1136,7 @@ function MISSION_GEN.TakenBoardIsEmpty()
 	return true
 end
 
-function MISSION_GEN.WeightedRandom (weights)
+function MISSION_GEN.WeightedRandom(weights)
     local summ = 0
     for i, value in pairs (weights) do
         summ = summ + value[2]
@@ -1495,7 +1495,6 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 	local jobs_to_make = math.random(5, 7)--Todo: jobs generated is based on your rank or how many dungeons you've done.
 	local assigned_combos = {}--floor/dungeon combinations that already have had missions genned for it. Need to consider already genned missions and missions on taken board.
 	
-
 	-- All seen Pokemon in the pokedex
 	--local seen_pokemon = {}
 
@@ -1507,8 +1506,6 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 
 	--print( seen_pokemon[ math.random( #seen_pokemon ) ] )
 	
-
-
 	--default to mission.
 	local mission_type = COMMON.MISSION_BOARD_MISSION
 	if board_type == COMMON.MISSION_BOARD_OUTLAW then mission_type = COMMON.MISSION_BOARD_OUTLAW end
@@ -1608,7 +1605,8 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		--generate the objective.
 		local objective
 		local missionOutlawRoll = math.random(2)
-		if missionOutlawRoll == 0 then 
+		if missionOutlawRoll == 1 then 
+			PrintInfo("Generating new outlaw mission")
 			local roll = math.random(1, 10)
 			if roll <= 5 then
 				objective = COMMON.MISSION_TYPE_OUTLAW
@@ -1620,6 +1618,7 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 				objective = COMMON.MISSION_TYPE_OUTLAW_FLEE
 			end
 		else
+			PrintInfo("Generating new normal mission")
 			local roll = math.random(1, 10)
 			if roll <= 2 then 
 				--if there's already an escort or exploration mission generated for this dungeon, don't gen another one and just make it a rescue.
@@ -2763,7 +2762,7 @@ function DungeonJobList:initialize()
 end
 
 --refreshes information and draws to the menu. This is important in case there's a change to the taken board
-function DungeonJobList:DrawMenu()
+function DungeonJobList:DrawMenu() 
     --Standard menu divider. Reuse this whenever you need a menu divider at the top for a title.
   self.menu.MenuElements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(8, 8 + 12), self.menu.Bounds.Width - 8 * 2))
 
@@ -2776,79 +2775,73 @@ function DungeonJobList:DrawMenu()
   --populate jobs that are in this dungeon
   for i = 1, 8, 1 do 
 	--stop populating if we hit a job that's empty
-    if self.jobs[i].Client == "" then break end 
-	
-	--only look at jobs in the current dungeon that aren't suspended
-	if self.jobs[i].Zone == self.dungeon and self.jobs[i].Taken then 	
-		local floor = MISSION_GEN.GetStairsType(self.jobs[i].Zone) ..'[color=#00FFFF]' .. tostring(self.jobs[i].Floor) .. "[color]F"
-		local objective = ""
-		local icon = ""
-		local goal = self.jobs[i].Type
-		
-		local target = _DATA:GetMonster(self.jobs[i].Target):GetColoredName()
-	
-		local client = ""
-		if self.jobs[i].Client == "magna" then 
-			client = "[color=#00FFFF]Magna[color]"
-		else 
-			client = _DATA:GetMonster(self.jobs[i].Client):GetColoredName()
-		end
-		
-		local item = "" 
-		if self.jobs[i].Item ~= "" then
-			item = _DATA:GetItem(self.jobs[i].Item):GetColoredName()
-		end
-		
-		if goal == COMMON.MISSION_TYPE_RESCUE then
-			objective = "Rescue " .. target .. "."
-		elseif goal == COMMON.MISSION_TYPE_ESCORT then 
-			objective = "Escort " .. client .. " to " .. target .. "."
-		elseif goal == COMMON.MISSION_TYPE_OUTLAW then
-			objective = "Arrest " .. target .. "."
-		elseif goal == COMMON.MISSION_TYPE_EXPLORATION then
-			objective = "Explore with " .. client .. "."
-		elseif goal == COMMON.MISSION_TYPE_LOST_ITEM then 
-			objective = "Find " .. item .. " for " .. client .. "."
-		elseif goal == COMMON.MISSION_TYPE_OUTLAW_ITEM then
-			objective = "Reclaim " .. item .. " from " .. target .. "."
-		elseif goal == COMMON.MISSION_TYPE_OUTLAW_FLEE then
-			objective = "Arrest cowardly " .. target .. "."
-		elseif goal == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then
-			objective = "Arrest big boss " .. target .. "."
-		elseif goal == COMMON.MISSION_TYPE_DELIVERY then
-			objective = "Deliver " .. item .. " to " .. client .. "."
-		end
-		
-		
-		
-		if self.jobs[i].Completion == COMMON.MISSION_INCOMPLETE then 
-			icon = STRINGS:Format("\\uE10F")--open letter
-		else
-			icon = STRINGS:Format("\\uE10A")--check mark
+    if self.jobs[i].Client ~= "" then
+		--only look at jobs in the current dungeon that aren't suspended
+		if self.jobs[i].Zone == self.dungeon and self.jobs[i].Taken then
+			local floor = MISSION_GEN.GetStairsType(self.jobs[i].Zone) ..'[color=#00FFFF]' .. tostring(self.jobs[i].Floor) .. "[color]F"
+			local objective = ""
+			local icon = ""
+			local goal = self.jobs[i].Type
+
+			local target = _DATA:GetMonster(self.jobs[i].Target):GetColoredName()
+
+			local client = ""
+			if self.jobs[i].Client == "magna" then
+				client = "[color=#00FFFF]Magna[color]"
+			else
+				client = _DATA:GetMonster(self.jobs[i].Client):GetColoredName()
+			end
+
+			local item = ""
+			if self.jobs[i].Item ~= "" then
+				item = _DATA:GetItem(self.jobs[i].Item):GetColoredName()
+			end
+
+			if goal == COMMON.MISSION_TYPE_RESCUE then
+				objective = Text.FormatKey("MISSION_OBJECTIVES_RESCUE", target)
+			elseif goal == COMMON.MISSION_TYPE_ESCORT then
+				objective = Text.FormatKey("MISSION_OBJECTIVES_ESCORT", client, target)
+			elseif goal == COMMON.MISSION_TYPE_OUTLAW then
+				objective = Text.FormatKey("MISSION_OBJECTIVES_OUTLAW", target)
+			elseif goal == COMMON.MISSION_TYPE_EXPLORATION then
+				objective = Text.FormatKey("MISSION_OBJECTIVES_EXPLORATION", client)
+			elseif goal == COMMON.MISSION_TYPE_LOST_ITEM then
+				objective = Text.FormatKey("MISSION_OBJECTIVES_LOST_ITEM", item, client)
+			elseif goal == COMMON.MISSION_TYPE_OUTLAW_ITEM then
+				objective = Text.FormatKey("MISSION_OBJECTIVES_OUTLAW_ITEM", item, target)
+			elseif goal == COMMON.MISSION_TYPE_OUTLAW_FLEE then
+				objective = Text.FormatKey("MISSION_OBJECTIVES_OUTLAW_FLEE", target)
+			elseif goal == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then
+				objective = Text.FormatKey("MISSION_OBJECTIVES_OUTLAW_MONSTER_HOUSE", target)
+			elseif goal == COMMON.MISSION_TYPE_DELIVERY then
+				objective = Text.FormatKey("MISSION_OBJECTIVES_DELIVERY", item, client)
+			end
+
+			if self.jobs[i].Completion == COMMON.MISSION_INCOMPLETE then
+				icon = STRINGS:Format("\\uE10F")--open letter
+			else
+				icon = STRINGS:Format("\\uE10A")--check mark
+			end
+
+			self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(icon, RogueElements.Loc(16, 24 + 14 * count)))
+			self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(floor, RogueElements.Loc(28, 24 + 14 * count)))
+			self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(objective, RogueElements.Loc(60, 24 + 14 * count)))
+
+			count = count + 1
 		end
 
-		
-
-		
-		self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(icon, RogueElements.Loc(16, 24 + 14 * count)))
-		self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(floor, RogueElements.Loc(28, 24 + 14 * count)))
-		self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(objective, RogueElements.Loc(60, 24 + 14 * count)))
-		
-		count = count + 1
 	end
 
+
   end
-  
+
+
   --put a special message if no jobs dependent on story progression.
   local message = ""
-  if count == 0 then 
-	message = "Go as far as you can."
-	self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(message, RogueElements.Loc(16, 12 + 14)))
-  end 
-
-  
-  
-  
+  if count == 0 then
+	  message = Text.FormatKey("MISSION_OBJECTIVES_DEFAULT")
+	  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(message, RogueElements.Loc(16, 12 + 14)))
+  end
 end 
 
 

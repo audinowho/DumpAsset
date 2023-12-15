@@ -1034,7 +1034,7 @@ function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
 
                 local mon_id = RogueEssence.Dungeon.MonsterID(mission.Client, 0, "normal", COMMON.NumToGender(mission.ClientGender))
                 -- set the escort level 20% less than the expected level
-                local level = math.floor(MISSION_GEN.EXPECTED_LEVEL[mission.Zone] * 0.80)
+                local level = math.floor(SV.ExpectedLevel[mission.Zone] * 0.80)
                 local new_mob = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, level, "", -1)
                 local tactic = _DATA:GetAITactic("stick_together")
                 new_mob.Tactic = RogueEssence.Data.AITactic(tactic);
@@ -1365,4 +1365,119 @@ function COMMON.RemoveCharEffects(char)
     char.ProxyMAtk = -1;
     char.ProxyMDef = -1;
     char.ProxySpeed = -1;
+end
+
+function COMMON.MakeCharactersFromList(list, retTable)
+    retTable = retTable or false--return a table of chars rather than multiple chars if this is true
+    local charTable = {}
+    local chara = 0
+    local length = 0
+    for i = 1, #list, 1 do
+        local name = list[i][1]
+        length = #list[i]
+        if length == 1 then--this case is so we can reference characters that aren't on the map. Put them at 0, 0 and hide them
+            local monster = RogueEssence.Dungeon.MonsterID(characters[name].species,
+                    characters[name].form,
+                    characters[name].skin,
+                    characters[name].gender)
+            chara = RogueEssence.Ground.GroundChar(monster, RogueElements.Loc(0, 0), Direction.Down, name, characters[name].instance)
+            chara:ReloadEvents()
+            GAME:GetCurrentGround():AddTempChar(chara)
+            GROUND:Hide(chara.EntName)
+
+        elseif length == 2 then --may be inefficient to do a length lookup so often...
+            local marker = MRKR(list[i][2])
+            local monster = RogueEssence.Dungeon.MonsterID(characters[name].species,
+                    characters[name].form,
+                    characters[name].skin,
+                    characters[name].gender)
+            chara = RogueEssence.Ground.GroundChar(monster, RogueElements.Loc(marker.Position.X, marker.Position.Y), marker.Direction, name, characters[name].instance)
+            chara:ReloadEvents()
+            GAME:GetCurrentGround():AddTempChar(chara)
+        else
+            local x = list[i][2]
+            local y = list[i][3]
+            local direction = list[i][4]
+            local monster = RogueEssence.Dungeon.MonsterID(characters[name].species,
+                    characters[name].form,
+                    characters[name].skin,
+                    characters[name].gender)
+            chara = RogueEssence.Ground.GroundChar(monster, RogueElements.Loc(x, y), direction, name, characters[name].instance)
+            chara:ReloadEvents()
+            GAME:GetCurrentGround():AddTempChar(chara)
+
+        end
+        chara:OnMapInit()
+        local result = RogueEssence.Script.TriggerResult()
+        TASK:WaitTask(chara:RunEvent(RogueEssence.Script.LuaEngine.EEntLuaEventTypes.EntSpawned, result, chara))
+        charTable[i] = chara
+    end
+    if retTable then
+        return charTable
+    else
+        return table.unpack(charTable)
+    end
+end
+
+function COMMON.TeamTurnTo(char)
+    local player_count = GAME:GetPlayerPartyCount()
+    local guest_count = GAME:GetPlayerGuestCount()
+    for i = 0, player_count - 1, 1 do
+        local player = GAME:GetPlayerPartyMember(i)
+        if not player.Dead then
+            DUNGEON:CharTurnToChar(player, char)
+        end
+    end
+
+    for i = 0, guest_count - 1, 1 do
+        local guest = GAME:GetPlayerGuestMember(i)
+        if not guest.Dead then
+            DUNGEON:CharTurnToChar(guest, char)
+        end
+    end
+end
+
+--used to reward items to the player, sends the item to storage if inv is full
+function COMMON.RewardItem(itemID, money, amount)
+    --if money is true, the itemID is instead the amount of money to award
+    if money == nil then money = false end
+
+    UI:ResetSpeaker(false)--disable text noise
+    UI:SetCenter(true)
+
+
+    SOUND:PlayFanfare("Fanfare/Item")
+
+    if money then
+        UI:WaitShowDialogue("Team " .. GAME:GetTeamName() .. " received " .. "[color=#00FFFF]" .. itemID .. "[color]" .. STRINGS:Format("\\uE024") .. ".[pause=40]")
+        GAME:AddToPlayerMoney(itemID)
+    else
+        local itemEntry = RogueEssence.Data.DataManager.Instance:GetItem(itemID)
+
+        --give at least 1 item
+        if amount == nil then amount = math.max(1, itemEntry.MaxStack) end
+
+        local item = RogueEssence.Dungeon.InvItem(itemID, false, amount)
+
+        local article = "a"
+
+        local first_letter = string.upper(string.sub(_DATA:GetItem(item.ID).Name:ToLocal(), 1, 1))
+
+        if first_letter == "A" or first_letter == 'E' or first_letter == 'I' or first_letter == 'O' or first_letter == 'U' then article = 'an' end
+
+        UI:WaitShowDialogue("Team " .. GAME:GetTeamName() .. " received " .. article .. " " .. item:GetDisplayName() ..".[pause=40]")
+
+        --bag is full - equipped count is separate from bag and must be included in the calc
+        if GAME:GetPlayerBagCount() + GAME:GetPlayerEquippedCount() >= GAME:GetPlayerBagLimit() then
+            UI:WaitShowDialogue("The " .. item:GetDisplayName() .. " was sent to storage.")
+            GAME:GivePlayerStorageItem(item.ID, amount)
+        else
+            GAME:GivePlayerItem(item.ID, amount)
+        end
+
+    end
+    UI:SetCenter(false)
+    UI:ResetSpeaker()
+
+
 end

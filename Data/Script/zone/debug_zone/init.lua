@@ -1,4 +1,5 @@
 require 'common'
+require 'mission_gen'
 
 local debug_zone = {}
 --------------------------------------------------
@@ -25,7 +26,8 @@ end
 function debug_zone.ExitSegment(zone, result, rescue, segmentID, mapID)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
+  MISSION_GEN.EndOfDay()
+COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)
   else

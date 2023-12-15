@@ -1,4 +1,5 @@
 require 'common'
+require 'mission_gen'
 
 local fertile_valley = {}
 --------------------------------------------------
@@ -26,7 +27,7 @@ function fertile_valley.ExitSegment(zone, result, rescue, segmentID, mapID)
   PrintInfo("=>> ExitSegment_fertile_valley result "..tostring(result).." segment "..tostring(segmentID))
   
   --first check for rescue flag; if we're in rescue mode then take a different path
-  COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
+  SV.StairType
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)
   elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then

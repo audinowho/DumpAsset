@@ -1,4 +1,5 @@
 require 'common'
+require 'mission_gen'
 
 local training_maze = {}
 --------------------------------------------------

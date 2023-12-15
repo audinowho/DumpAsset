@@ -1,4 +1,5 @@
 require 'common'
+require 'mission_gen'
 
 local snowbound_path = {}
 --------------------------------------------------
@@ -26,7 +27,8 @@ function snowbound_path.ExitSegment(zone, result, rescue, segmentID, mapID)
   PrintInfo("=>> ExitSegment_snowbound_path result "..tostring(result).." segment "..tostring(segmentID))
   
   --first check for rescue flag; if we're in rescue mode then take a different path
-  COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
+  MISSION_GEN.EndOfDay()
+COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)
   elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then

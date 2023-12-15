@@ -1,4 +1,5 @@
 require 'common'
+require 'mission_gen'
 
 local relic_tower = {}
 --------------------------------------------------
@@ -26,7 +27,8 @@ function relic_tower.ExitSegment(zone, result, rescue, segmentID, mapID)
   PrintInfo("=>> ExitSegment_relic_tower result "..tostring(result).." segment "..tostring(segmentID))
   
   --first check for rescue flag; if we're in rescue mode then take a different path
-  COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
+  MISSION_GEN.EndOfDay()
+COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)
   elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then

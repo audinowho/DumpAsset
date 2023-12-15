@@ -1599,8 +1599,8 @@ end
 
 --Allows mission gen to work here
 function base_camp_2.MissionBoard_Action(obj, activator)
-    local hero = CH('PLAYER')
     DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+    local hero = CH('PLAYER')
     GROUND:CharSetAnim(hero, 'None', true)
 
     local menu = BoardSelectionMenu:new(COMMON.MISSION_BOARD_MISSION)

@@ -98,9 +98,6 @@ MISSION_GEN.COMPLETE = 1
 MISSION_GEN.INCOMPLETE = 0
 
 MISSION_GEN.EXPECTED_LEVEL = {}
-MISSION_GEN.EXPECTED_LEVEL["illuminant_riverbed"] = 8
-MISSION_GEN.EXPECTED_LEVEL["crooked_cavern"] = 10
-MISSION_GEN.EXPECTED_LEVEL["apricorn_grove"] = 13
 
 
 MISSION_GEN.TITLES =  {
@@ -1096,20 +1093,12 @@ MISSION_GEN.DELIVERABLE_ITEMS = {
 --"order" of dungeons
 MISSION_GEN.DUNGEON_ORDER = {}
 MISSION_GEN.DUNGEON_ORDER[""] = 99999--empty missions should get shoved towards the end 
-MISSION_GEN.DUNGEON_ORDER["relic_forest"] = 1
-MISSION_GEN.DUNGEON_ORDER["illuminant_riverbed"] = 2
-MISSION_GEN.DUNGEON_ORDER["crooked_cavern"] = 3
-MISSION_GEN.DUNGEON_ORDER["apricorn_grove"] = 4
 
 
 
 --Do the stairs go up or down? Blank string if up, B if down
 MISSION_GEN.STAIR_TYPE = {}
 MISSION_GEN.STAIR_TYPE[""] = ""
-MISSION_GEN.STAIR_TYPE["relic_forest"] = ""
-MISSION_GEN.STAIR_TYPE["illuminant_riverbed"] = ""
-MISSION_GEN.STAIR_TYPE["crooked_cavern"] = "B"
-MISSION_GEN.STAIR_TYPE["apricorn_grove"] = ""
 
 
 
@@ -1497,7 +1486,9 @@ function MISSION_GEN.GenerateBoard(board_type)
 		else
 			local dungeon_instance = _DATA:GetZone(dungeon_id)
 			if dungeon_instance.Level == nil then
-				table.insert(dungeon_instance, "F")
+				PrintInfo("Adding dungeon instance "..dungeon_id.." with score ".."F")
+				MISSION_GEN.DUNGEON_DIFFICULTY[dungeon_id] = "F"
+				MISSION_GEN.EXPECTED_LEVEL[dungeon_id] = 5
 			else
 				local dungeon_difficulty_score = dungeon_instance.Level
 				if dungeon_instance.LevelCap then
@@ -1539,19 +1530,27 @@ function MISSION_GEN.GenerateBoard(board_type)
 				local cur_difficulty_score = "F"
 				local difficulty_found = false
 				
-				for j = #dungeon_difficulties, 1, -1 do
-					if dungeon_difficulties[j] > dungeon_difficulty_score then
+				for key, value in pairs(dungeon_difficulties) do
+					if value > dungeon_difficulty_score then
 						difficulty_found = true
 					end
 
 					if difficulty_found == false then
-						cur_difficulty_score = j
+						cur_difficulty_score = key
 					end
 				end
+				
+				PrintInfo("Adding dungeon instance "..dungeon_id.." with score "..cur_difficulty_score)
 
-				table.insert(dungeon_instance, cur_difficulty_score)
+				MISSION_GEN.DUNGEON_DIFFICULTY[dungeon_id] = cur_difficulty_score
+				
+				--Add the expected level
+				MISSION_GEN.EXPECTED_LEVEL[dungeon_id] = dungeon_instance.Level
 			end
 		end
+
+		MISSION_GEN.DUNGEON_ORDER[dungeon_id] = i
+		MISSION_GEN.STAIR_TYPE[dungeon_id] = ""
 	end
 	
 	--failsafe. Just quit if no dungeons are eligible.
@@ -2788,6 +2787,16 @@ function MISSION_GEN.RemoveMissionBackReference()
 	for mission_num, _ in pairs(SV.TakenBoard) do
 		SV.TakenBoard[mission_num].BackReference = -1
 	end
+end
+
+function MISSION_GEN.EndOfDay()
+	--Regenerate jobs
+	MISSION_GEN.ResetBoards()
+	MISSION_GEN.RemoveMissionBackReference()
+	MISSION_GEN.GenerateBoard(COMMON.MISSION_BOARD_MISSION)
+	MISSION_GEN.GenerateBoard(COMMON.MISSION_BOARD_OUTLAW)
+	MISSION_GEN.SortMission()
+	MISSION_GEN.SortOutlaw()
 end
 
 function MISSION_GEN.GetDebugMissionInfo(board, slot)

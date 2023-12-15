@@ -1237,13 +1237,12 @@ function COMMON.EndDayCycle()
     type_count = 7
   end
   
-	for ii = 1, type_count, 1 do
-		local idx = math.random(1, #catalog)
-		local base_data = catalog[idx]
-		table.insert(SV.base_trades, base_data)
-		table.remove(catalog, idx)
-	end
-	
-	
-  COMMON.UpdateDayEndVars()
+    for ii = 1, type_count, 1 do
+        local idx = math.random(1, #catalog)
+        local base_data = catalog[idx]
+        table.insert(SV.base_trades, base_data)
+        table.remove(catalog, idx)
+    end
+    
+    COMMON.UpdateDayEndVars()
 end

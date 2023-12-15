@@ -553,6 +553,12 @@ SV.OutlawBoard =
   }
 }
 
+SV.missions =
+{
+  Missions = { },
+  FinishedMissions = { },
+}
+
 SV.magnagate =
 {
   Cards = 0

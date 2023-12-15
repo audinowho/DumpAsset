@@ -184,7 +184,7 @@ function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed
 
     activeEffect.OnMapStarts:Add(-11, RogueEssence.Dungeon.SingleCharScriptEvent("SpawnOutlaw", '{ Mission = '..missionNum..' }'))
     activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("OutlawFloor", '{ Mission = '..missionNum..' }'))
-    tbl.MissionType = COMMON.MISSION_BOARD_OUTLAW
+    tbl.MissionType = COMMON.MISSION_BOARD_MISSION --So both outlaw spawns and regular missions spawn from the same pool
   end
 
   local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })

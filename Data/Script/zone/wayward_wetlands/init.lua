@@ -1,0 +1,45 @@
+require 'common'
+
+local wayward_wetlands = {}
+--------------------------------------------------
+-- Map Callbacks
+--------------------------------------------------
+function wayward_wetlands.Init(zone)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  PrintInfo("=>> Init_wayward_wetlands")
+  
+
+end
+
+function wayward_wetlands.Rescued(zone, name, mail)
+  COMMON.Rescued(zone, name, mail)
+end
+
+function wayward_wetlands.EnterSegment(zone, rescuing, segmentID, mapID)
+  if rescuing ~= true then
+    COMMON.BeginDungeon(zone.ID, segmentID, mapID)
+  end
+end
+
+function wayward_wetlands.ExitSegment(zone, result, rescue, segmentID, mapID)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  PrintInfo("=>> ExitSegment_wayward_wetlands result "..tostring(result).." segment "..tostring(segmentID))
+  
+  --first check for rescue flag; if we're in rescue mode then take a different path
+  COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
+  if rescue == true then
+    COMMON.EndRescue(zone, result, segmentID)
+  elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
+    COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
+  else
+    if segmentID == 0 then
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 1, 0)
+    else
+      PrintInfo("No exit procedure found!")
+	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
+    end
+  end
+  
+end
+
+return wayward_wetlands

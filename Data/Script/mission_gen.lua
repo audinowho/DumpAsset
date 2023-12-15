@@ -2291,7 +2291,7 @@ end
 --adds the current job to the taken board, then sorts it. Then close the menu
 function JobMenu:AddJobToTaken()
 	--find an empty job slot
-	local freeIndex = MISSION_GEN.FindFreeSpaceInBoard(board)
+	local freeIndex = MISSION_GEN.FindFreeSpaceInBoard(SV.TakenBoard)
 	if freeIndex > -1 then
 		if self.job_type == COMMON.MISSION_BOARD_OUTLAW then
 			--Need to copy the table rather than just pass the pointer, or you can dupe missions which is not good
@@ -2339,7 +2339,7 @@ function JobMenu:OpenSubMenu()
 		else --outlaw/mission boards
 			--we already made a check above to see if this is a job board and not taken 
 			--only selectable if there's room on the taken board for the job and we haven't already taken this mission
-			choices = {{"Take Job", MISSION_GEN.IsBoardFull(SV.TakenBoard) and not self.taken, function() self:FlipTakenStatus() 
+			choices = {{"Take Job", MISSION_GEN.IsBoardFull(SV.TakenBoard) == false and not self.taken, function() self:FlipTakenStatus() 
 																								 self:AddJobToTaken() _MENU:RemoveMenu() end },
 					   {"Cancel", true, function() _MENU:RemoveMenu() _MENU:RemoveMenu() end} }
 		end 
@@ -2882,12 +2882,11 @@ end
 function MISSION_GEN.GetTakenCount()
 	local count = 0
 	for i = 1, 8, 1 do
-		if SV.TakenBoard[i].Client == "" then 
-			break 
-		else
+		if SV.TakenBoard[i].Client ~= "" then 
 			count = count + 1 
 		end 
 	end 
+	
 	return count
 end
 

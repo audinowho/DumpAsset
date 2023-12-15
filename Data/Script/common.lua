@@ -1032,7 +1032,7 @@ function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
                 --Set max team size to 3 as the guest is "taking" up a party slot
                 RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS = 3
 
-                local mon_id = RogueEssence.Dungeon.MonsterID(mission.Client, 0, "normal", GeneralFunctions.NumToGender(mission.ClientGender))
+                local mon_id = RogueEssence.Dungeon.MonsterID(mission.Client, 0, "normal", COMMON.NumToGender(mission.ClientGender))
                 -- set the escort level 20% less than the expected level
                 local level = math.floor(MISSION_GEN.EXPECTED_LEVEL[mission.Zone] * 0.80)
                 local new_mob = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, level, "", -1)
@@ -1049,6 +1049,18 @@ function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
             end
         end
     end
+end
+
+function COMMON.NumToGender(num)
+    local res = Gender.Unknown
+    if num == 0 then
+        res = Gender.Genderless
+    elseif num == 1 then
+        res = Gender.Male
+    elseif num == 2 then
+        res = Gender.Female
+    end
+    return res
 end
 
 
@@ -1158,6 +1170,105 @@ function COMMON.TableContains(table, val)
 end
 
 
+--called whenever to warp the party out, including guests
+function COMMON.WarpOut()
+    local player_count = GAME:GetPlayerPartyCount()
+    local guest_count = GAME:GetPlayerGuestCount()
+    for i = 0, player_count - 1, 1 do
+        local player = GAME:GetPlayerPartyMember(i)
+        if not player.Dead then
+            GAME:WaitFrames(60)
+            local anim = RogueEssence.Dungeon.CharAbsentAnim(player.CharLoc, player.CharDir)
+            COMMON.RemoveCharEffects(player)
+            TASK:WaitTask(_DUNGEON:ProcessBattleFX(player, player, _DATA.SendHomeFX))
+            TASK:WaitTask(player:StartAnim(anim))
+        end
+    end
+
+    for i = 0, guest_count - 1, 1 do
+        local guest = GAME:GetPlayerGuestMember(i)
+        if not guest.Dead then
+            GAME:WaitFrames(60)
+            local anim = RogueEssence.Dungeon.CharAbsentAnim(guest.CharLoc, guest.CharDir)
+            COMMON.RemoveCharEffects(guest)
+            TASK:WaitTask(_DUNGEON:ProcessBattleFX(guest, guest, _DATA.SendHomeFX))
+            TASK:WaitTask(guest:StartAnim(anim))
+        end
+    end
+end
+
+--called whenever a mission is completed
+function COMMON.AskMissionWarpOut()
+    local function MissionWarpOut()
+        COMMON.WarpOut()
+        GAME:WaitFrames(80)
+        --Set minimap state back to old setting
+        _DUNGEON.ShowMap = SV.TemporaryFlags.PriorMapSetting
+        SV.TemporaryFlags.PriorMapSetting = nil
+        TASK:WaitTask(_GAME:EndSegment(RogueEssence.Data.GameProgress.ResultType.Escaped))
+    end
+
+    local function SetMinimap()
+        --to prevent accidentally doing something by pressing the button to select yes
+        GAME:WaitFrames(10)
+        --Set minimap state back to old setting
+        _DUNGEON.ShowMap = SV.TemporaryFlags.PriorMapSetting
+        SV.TemporaryFlags.PriorMapSetting = nil
+    end
+
+    local has_ongoing_mission = false
+    local curr_floor = GAME:GetCurrentFloor().ID + 1
+    local curr_zone = _ZONE.CurrentZoneID
+    local curr_segment = _ZONE.CurrentMapID.Segment
+
+    for _, mission in ipairs(SV.TakenBoard) do
+        if mission.Floor > curr_floor and mission.Taken and mission.Completion == COMMON.MISSION_INCOMPLETE and curr_zone == mission.Zone and curr_segment == mission.Segment then
+            has_ongoing_mission = true
+            break
+        end
+    end
+
+
+    UI:ResetSpeaker()
+    local state = 0
+    while state > -1 do
+        if state == 0 then
+            if has_ongoing_mission then
+                UI:ChoiceMenuYesNo("You have more ongoing missions, but would you like to leave the dungeon now?", true)
+                UI:WaitForChoice()
+                local leave_dungeon = UI:ChoiceResult()
+                if leave_dungeon then
+                    UI:ChoiceMenuYesNo("Do you really want to leave?", true)
+                    UI:WaitForChoice()
+                    local leave_confirm = UI:ChoiceResult()
+                    if leave_confirm then
+                        state = -1
+                        MissionWarpOut()
+                    else
+                        --pause between textboxes if player de-confirms
+                        GAME:WaitFrames(20)
+                    end
+                else
+                    state = -1
+                    SetMinimap()
+                end
+            else
+                UI:ChoiceMenuYesNo("You have no more ongoing missions beyond this point.\nWould you like to leave the dungeon now?", false)
+                UI:WaitForChoice()
+                local leave_dungeon = UI:ChoiceResult()
+                if leave_dungeon then
+                    state = -1
+                    MissionWarpOut()
+                else
+                    state = -1
+                    SetMinimap()
+                end
+            end
+        end
+    end
+end
+
+
 function COMMON.EndDayCycle()
   --reshuffle items
 
@@ -1245,4 +1356,13 @@ function COMMON.EndDayCycle()
     end
     
     COMMON.UpdateDayEndVars()
+end
+
+function COMMON.RemoveCharEffects(char)
+    char.StatusEffects:Clear();
+    char.ProxyAtk = -1;
+    char.ProxyDef = -1;
+    char.ProxyMAtk = -1;
+    char.ProxyMDef = -1;
+    char.ProxySpeed = -1;
 end

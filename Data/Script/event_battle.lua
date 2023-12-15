@@ -92,7 +92,7 @@ function RescueCheck(context, targetName, mission)
 		TASK:WaitTask(_DUNGEON:ProcessBattleFX(context.Target, context.Target, _DATA.SendHomeFX))
 		_DUNGEON:RemoveChar(context.Target)
 		GAME:WaitFrames(50)
-		GeneralFunctions.AskMissionWarpOut()
+		COMMON.AskMissionWarpOut()
 	else 
 		--quickly hide the minimap for the 20 frame pause
 		local map_setting = _DUNGEON.ShowMap
@@ -153,7 +153,7 @@ function DeliveryCheck(context, targetName, mission)
 			TASK:WaitTask(_DUNGEON:ProcessBattleFX(context.Target, context.Target, _DATA.SendHomeFX))
 			_DUNGEON:RemoveChar(context.Target)
 			GAME:WaitFrames(50)
-			GeneralFunctions.AskMissionWarpOut()
+			COMMON.AskMissionWarpOut()
 		else --they are sad if you dont give them the item
 			--quickly hide the minimap for the 20 frame pause
 			local map_setting = _DUNGEON.ShowMap
@@ -222,7 +222,7 @@ function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
 				_DUNGEON:RemoveChar(context.Target)
 				
 				GAME:WaitFrames(50)
-				GeneralFunctions.AskMissionWarpOut()
+				COMMON.AskMissionWarpOut()
 			else
 				UI:WaitShowDialogue(escortName .. " doesn't seem to be around...")
 			end

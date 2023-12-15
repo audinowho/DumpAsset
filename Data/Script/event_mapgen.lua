@@ -57,7 +57,7 @@ function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed
           COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE
         }
 
-        if GeneralFunctions.TableContains(outlaw_arr, mission.Type) then -- outlaw
+        if COMMON.TableContains(outlaw_arr, mission.Type) then -- outlaw
           -- local boost_feature = PMDC.LevelGen.MobSpawnBoost()
           -- local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
           -- local post_mob = RogueEssence.LevelGen.MobSpawn()
@@ -103,7 +103,7 @@ function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed
           if mission.Type == COMMON.MISSION_TYPE_RESCUE or mission.Type == COMMON.MISSION_TYPE_DELIVERY or mission.Type == COMMON.MISSION_TYPE_ESCORT then
             local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
             local post_mob = RogueEssence.LevelGen.MobSpawn()
-            post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(mission.Target, 0, "normal", GeneralFunctions.NumToGender(mission.TargetGender))
+            post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(mission.Target, 0, "normal", COMMON.NumToGender(mission.TargetGender))
             post_mob.Tactic = "slow_wander"
             post_mob.Level = RogueElements.RandRange(50)
             if mission.Type == COMMON.MISSION_TYPE_RESCUE or mission.Type == COMMON.MISSION_TYPE_DELIVERY then -- rescue
@@ -163,7 +163,7 @@ function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed
     end
 
     local npcMissions = { COMMON.MISSION_TYPE_DELIVERY, COMMON.MISSION_TYPE_ESCORT, COMMON.MISSION_TYPE_RESCUE }
-    if GeneralFunctions.TableContains(npcMissions, missionType) then
+    if COMMON.TableContains(npcMissions, missionType) then
       activeEffect.OnMapTurnEnds:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("MobilityEndTurn", '{ Mission = '..missionNum..' }'))
     end
     tbl.MissionType = COMMON.MISSION_BOARD_MISSION

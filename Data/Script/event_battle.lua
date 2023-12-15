@@ -1,7 +1,5 @@
 require 'common'
 
-require "CharacterEssentials"
-
 BATTLE_SCRIPT = {}
 
 RedirectionType = luanet.import_type('PMDC.Dungeon.Redirected')

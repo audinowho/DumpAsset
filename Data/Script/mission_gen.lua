@@ -1,6 +1,4 @@
 require 'common'
-require 'GeneralFunctions'
-require 'CharacterEssentials'
 
 --Halcyon Custom work ported to PMDO Vanilla:
 --Code in this folder is used to generate, display, and handle randomized missions
@@ -1629,7 +1627,7 @@ function MISSION_GEN.GenerateBoard(board_type)
 		local offset = 0
 		--up the difficulty by 1 if its an outlaw or escort mission.
 		local difficult_objectives = { COMMON.MISSION_TYPE_ESCORT, COMMON.MISSION_TYPE_EXPLORATION, COMMON.MISSION_TYPE_OUTLAW, COMMON.MISSION_TYPE_OUTLAW_FLEE, COMMON.MISSION_TYPE_OUTLAW_ITEM }
-		if GeneralFunctions.TableContains(difficult_objectives, objective) then
+		if COMMON.TableContains(difficult_objectives, objective) then
 			offset = 1
 		--up the difficulty by 2 if its an outlaw monster house
 		elseif objective == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then
@@ -1685,12 +1683,12 @@ function MISSION_GEN.GenerateBoard(board_type)
 			client_gender = 0
 		else
 			client_gender = _DATA:GetMonster(client).Forms[0]:RollGender(_ZONE.CurrentGround.Rand)
-			client_gender = GeneralFunctions.GenderToNum(client_gender)
+			client_gender = COMMON.GenderToNum(client_gender)
 		end 
 		
 		local target_gender = _DATA:GetMonster(target).Forms[0]:RollGender(_ZONE.CurrentGround.Rand)
 	
-		target_gender = GeneralFunctions.GenderToNum(target_gender)
+		target_gender = COMMON.GenderToNum(target_gender)
 
 		--Special cases
 		--Roll for the main 3 rescue special cases 
@@ -2130,7 +2128,7 @@ function JobMenu:DeleteJob()
 			COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE
 		}
 
-		if GeneralFunctions.TableContains(outlaw_arr, mission.Type) then 
+		if COMMON.TableContains(outlaw_arr, mission.Type) then 
 			SV.OutlawBoard[back_ref].Taken = false
 		else
 			SV.MissionBoard[back_ref].Taken = false
@@ -2749,31 +2747,7 @@ function DungeonJobList:DrawMenu()
   --put a special message if no jobs dependent on story progression.
   local message = ""
   if count == 0 then 
-	--partner only relic forest
-    if SV.ChapterProgression.Chapter == 1 and self.dungeon == 'relic_forest' and not SV.Chapter1.PartnerCompletedForest then
-		message = "Explore the forest."
-	--partner+hero relic forest
-	elseif SV.ChapterProgression.Chapter == 1 and self.dungeon == 'relic_forest' and SV.Chapter1.PartnerCompletedForest then
-		message = "Get back to Metano Town."
-	--Illuminant Riverbed
-	elseif SV.ChapterProgression.Chapter == 2 and self.dungeon == 'illuminant_riverbed' and not SV.Chapter2.FinishedRiver then
-		message = 'Rescue ' .. CharacterEssentials.GetCharacterName('Numel') .. "."
-	--Crooked Cavern, before seeing the boss
-	elseif SV.ChapterProgression.Chapter == 3 and self.dungeon == 'crooked_cavern' and not SV.Chapter3.EncounteredBoss then 
-		message = 'Apprehend ' .. CharacterEssentials.GetCharacterName('Sandile') .. "."
-	--Crooked cavern, at the boss
-	elseif SV.ChapterProgression.Chapter == 3 and self.dungeon == 'crooked_cavern' and SV.Chapter3.EncounteredBoss and not SV.Chapter3.DefeatedBoss and _ZONE.CurrentMapID.Segment == 1 then 
-		message = 'Defeat Team [color=#FFA5FF]Style[color]!'
-	--crooked cavern, lost to boss, on the way back.
-	elseif SV.ChapterProgression.Chapter == 3 and self.dungeon == 'crooked_cavern' and SV.Chapter3.EncounteredBoss and not SV.Chapter3.DefeatedBoss and _ZONE.CurrentMapID.Segment == 0 then 
-		message = 'Get back to the end of the cavern.'
-	elseif SV.ChapterProgression.Chapter == 4 and self.dungeon == 'apricorn_grove' and not SV.Chapter4.ReachedGlade and not SV.Chapter4.FinishedGrove then
-		message = 'Try to find something of interest.'
-	elseif SV.ChapterProgression.Chapter == 4 and self.dungeon == 'apricorn_grove' and SV.Chapter4.ReachedGlade and not SV.Chapter4.FinishedGrove then
-		message = 'Return to the large Apricorn tree with enough\nPokémon to reach a big Apricorn.'
-	else
-		message = "Go as far as you can."
-	end 
+	message = "Go as far as you can."
 	self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(message, RogueElements.Loc(16, 12 + 14)))
   end 
 

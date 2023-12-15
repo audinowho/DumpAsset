@@ -1136,6 +1136,27 @@ function COMMON.EndSession(result, zoneId, structureId, mapId, entryId)
   GAME:EnterZone(zoneId, structureId, mapId, entryId)
 end
 
+function COMMON.GenderToNum(gender)
+    local res = -1
+    if gender == Gender.Genderless then
+        res = 0
+    elseif gender == Gender.Male then
+        res = 1
+    elseif gender == Gender.Female then
+        res = 2
+    end
+    return res
+end
+
+function COMMON.TableContains(table, val)
+    for i=1,#table do
+        if table[i] == val then
+            return true
+        end
+    end
+    return false
+end
+
 
 function COMMON.EndDayCycle()
   --reshuffle items

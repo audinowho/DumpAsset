@@ -716,15 +716,6 @@ function DebugTools:OnUpgrade()
   PrintInfo("=>> Loaded version")
 end
 
---[[---------------------------------------------------------------
-    DebugTools:OnLossPenalty()
-      Called when the player fails a dungeon in main progress
-  ---------------------------------------------------------------]]
-function DebugTools:OnLossPenalty(save) 
-  assert(self, 'DebugTools:OnLossPenalty() : self is null!')
-	
-end
-
 ---Summary
 -- Subscribe to all channels this service wants callbacks from
 function DebugTools:Subscribe(med)

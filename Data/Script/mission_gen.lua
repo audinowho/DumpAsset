@@ -1914,14 +1914,22 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 				table.insert(used_floors, 1, SV.TakenBoard[j].Floor)
 			end
 		end
-				
-		local floor_candidates = MISSION_GEN.Generate_List_Range(math.floor(zoneEntry.CountedFloors * .55), zoneEntry.CountedFloors)
+		
+		local current_segment = zone.Segments[segment]
+		local floor_count = current_segment.FloorCount
+
+		local floor_candidates = {}
+		if segment == 0 then
+			--The first segment should be the default one the player enters
+			floor_candidates = MISSION_GEN.Generate_List_Range(math.floor(floor_count * .55), floor_count)
+		else
+			floor_candidates = MISSION_GEN.Generate_List_Range(1, floor_count)
+		end
 		MISSION_GEN.array_sub(used_floors, floor_candidates)
 
 		--TODO: Prune floor_candidates of floors with LoadGen
 		local floor_candidates_length = #floor_candidates
 		local current_index = 0
-		local current_segment = zone.Segments[segment]
 		 
 		for i = 1, floor_candidates_length, 1 do
 			
@@ -2211,6 +2219,7 @@ end
 function JobMenu:DeleteJob()
 	local mission = SV.TakenBoard[self.job_number]
 	local back_ref = mission.BackReference
+	PrintInfo("Restoring taken from backref "..back_ref)
 	if back_ref > 0 and back_ref ~= nil then
 		local outlaw_arr = {
 			COMMON.MISSION_TYPE_OUTLAW,
@@ -2219,11 +2228,8 @@ function JobMenu:DeleteJob()
 			COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE
 		}
 
-		if COMMON.TableContains(outlaw_arr, mission.Type) then 
-			SV.OutlawBoard[back_ref].Taken = false
-		else
-			SV.MissionBoard[back_ref].Taken = false
-		end
+		--Outlaw missions are now part of the normal board
+		SV.MissionBoard[back_ref].Taken = false
 	end 
 	
 	SV.TakenBoard[self.job_number] = {
@@ -2248,7 +2254,7 @@ function JobMenu:DeleteJob()
 									}
 	
 	MISSION_GEN.SortTaken()
-	if self.parent_board_menu ~= nil then 
+	if self.parent_board_menu ~= nil then 		
 		--redraw board with potentially changed information from job board
 		self.parent_board_menu.menu.MenuElements:Clear()
 		self.parent_board_menu:RefreshSelf()
@@ -2429,13 +2435,12 @@ end
 function BoardMenu:RefreshSelf()
   local source_board = SV.MissionBoard
 	
-  print("Debug: Refreshing self!")
   if self.board_type == COMMON.MISSION_BOARD_TAKEN then 
 	  source_board = SV.TakenBoard
   elseif self.board_type == COMMON.MISSION_BOARD_OUTLAW then
 	  source_board = SV.OutlawBoard
   end
-  print("Boardtype: " .. self.board_type)
+  PrintInfo("Boardtype: " .. self.board_type)
   
   self.total_items = 0
   self.jobs = {}
@@ -2447,6 +2452,13 @@ function BoardMenu:RefreshSelf()
 		self.total_items = self.total_items + 1
 		self.jobs[self.total_items] = source_board[i]
 		self.original_menu_index[self.total_items] = i
+
+		local taken_string = 'false'
+
+		if source_board[i].Taken then
+			taken_string = 'true'
+		end
+		PrintInfo("Debug: Refreshing from source board index "..i)
 	end
   end
  
@@ -2503,8 +2515,14 @@ function BoardMenu:DrawBoard()
 	  
     if self.jobs[i].Client ~= "" then
 		local title = self.jobs[i].Title
+		
+		local taken_string = 'false'
 
-		PrintInfo("Creating board job for title "..title.." and zone "..self.jobs[i].Zone.." and segment "..self.jobs[i].Segment)
+		if self.jobs[i].Taken then
+			taken_string = 'true'
+		end
+
+		PrintInfo("Creating board job for title "..title.." and zone "..self.jobs[i].Zone.." and segment "..self.jobs[i].Segment.." and taken "..taken_string)
 
 		local zone = _DATA:GetZone(self.jobs[i].Zone).Segments[self.jobs[i].Segment]:ToString()
 		zone = COMMON.CreateColoredSegmentString(zone)

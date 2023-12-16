@@ -1537,23 +1537,24 @@ end
 function COMMON.CreateColoredSegmentString(segment_name)
     local split_name = {}
     
-    local index = 0
+    local index = 1
 
     for str in string.gmatch(segment_name, "([^%s]+)") do
-        table.insert(split_name, str, index)
+        table.insert(split_name, index, str)
         index = index + 1
     end
     
     local final_name = ''
 
-    for k, v in split_name do
-
-        if v == 0 then
-            final_name = k
-        elseif v ~= index then
-            final_name = final_name .. ' ' .. k
+    for i = 1, #split_name, 1 do
+        local cur_word = split_name[i]
+        
+        if i == 1 then
+            final_name = cur_word
+        elseif i ~= #split_name then
+            final_name = final_name .. ' ' .. cur_word
         end
     end
     
-    return '[color=#FFFF00]'..final_name..'[color]'
+    return '[color=#FFC663]'..final_name..'[color]'
 end

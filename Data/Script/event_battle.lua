@@ -18,7 +18,7 @@ function BATTLE_SCRIPT.EscortInteract(owner, ownerChar, context, args)
   local job = SV.TakenBoard[mission_slot]
   
   if job.Type == COMMON.MISSION_TYPE_EXPLORATION then
-		local floor = MISSION_GEN.STAIR_TYPE[job.Zone] .. '[color=#00FFFF]' .. tostring(job.Floor) .. '[color]' .. "F"
+		local floor = SV.StairType[job.Zone] .. '[color=#00FFFF]' .. tostring(job.Floor) .. '[color]' .. "F"
 		UI:WaitShowDialogue("Please, take me to " .. floor .. "!")
   elseif job.Type == COMMON.MISSION_TYPE_ESCORT then
     if job.Special == MISSION_GEN.SPECIAL_CLIENT_LOVER then
@@ -197,17 +197,17 @@ function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
 				--Mark mission completion flags
 				SV.TemporaryFlags.MissionCompleted = true
 				mission.Completion = 1
-				UI:WaitShowDialogue("Yes! You completed " .. escortName .. "'s escort mission.\n" .. escortName .. " is delighted!")
+				UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_REACHED"):ToLocal(), escortName))
 				--Clear but remember minimap state
 				SV.TemporaryFlags.PriorMapSetting = _DUNGEON.ShowMap
 				_DUNGEON.ShowMap = _DUNGEON.MinimapState.None
 				GAME:WaitFrames(20)
 				
 				UI:SetSpeaker(escort)
-				UI:WaitShowDialogue("Thank you for escorting me to " .. _DATA:GetMonster(context.Target.CurrentForm.Species):GetColoredName() .. "!")
+				UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_THANKS"):ToLocal(), _DATA:GetMonster(context.Target.CurrentForm.Species):GetColoredName()))
 				GAME:WaitFrames(20)
 				UI:ResetSpeaker()
-				UI:WaitShowDialogue(escortName .. "'s twosome left the dungeon!")
+				UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_DEPART"):ToLocal(), escortName))
 				GAME:WaitFrames(20)
 
 				--Set max team size to 4 as the guest is no longer "taking" up a party slot
@@ -224,7 +224,7 @@ function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
 				GAME:WaitFrames(50)
 				COMMON.AskMissionWarpOut()
 			else
-				UI:WaitShowDialogue(escortName .. " doesn't seem to be around...")
+				UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_UNAVAILABLE"):ToLocal(), escortName))
 			end
 		end
   end

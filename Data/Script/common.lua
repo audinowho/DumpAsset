@@ -86,6 +86,36 @@ COMMON.MISSION_BOARD_MISSION = 0
 COMMON.MISSION_BOARD_OUTLAW = 1
 COMMON.MISSION_BOARD_TAKEN = 2
 
+local characters = {
+    --Head of Police
+    Magnezone = {
+        species = "magnezone",
+        nickname = 'Magnezone',
+        instance = 'Magnezone',
+        gender = Gender.Male,
+        form = 0,
+        skin = "normal"
+    },
+
+    Magnemite_Left = {
+        species = "magnemite",
+        nickname = 'Magnemite',
+        instance = 'Magnemite_Left',
+        gender = Gender.Male,
+        form = 0,
+        skin = "normal"
+    },
+
+    Magnemite_Right = {
+        species = "magnemite",
+        nickname = 'Magnemite',
+        instance = 'Magnemite_Right',
+        gender = Gender.Female,
+        form = 0,
+        skin = "normal"
+    },
+}
+
 ----------------------------------------------------------
 -- Convenience Scription Functions
 ----------------------------------------------------------
@@ -1192,6 +1222,26 @@ function COMMON.WarpOut()
             local anim = RogueEssence.Dungeon.CharAbsentAnim(guest.CharLoc, guest.CharDir)
             COMMON.RemoveCharEffects(guest)
             TASK:WaitTask(_DUNGEON:ProcessBattleFX(guest, guest, _DATA.SendHomeFX))
+            TASK:WaitTask(guest:StartAnim(anim))
+        end
+    end
+end
+
+function COMMON.ResetPose()
+    local player_count = GAME:GetPlayerPartyCount()
+    local guest_count = GAME:GetPlayerGuestCount()
+    for i = 0, player_count - 1, 1 do
+        local player = GAME:GetPlayerPartyMember(i)
+        if not player.Dead then
+            local anim = RogueEssence.Dungeon.CharAnimIdle(player.CharLoc, player.CharDir)
+            TASK:WaitTask(player:StartAnim(anim))
+        end
+    end
+
+    for i = 0, guest_count - 1, 1 do
+        local guest = GAME:GetPlayerGuestMember(i)
+        if not guest.Dead then
+            local anim = RogueEssence.Dungeon.CharAnimIdle(guest.CharLoc, guest.CharDir)
             TASK:WaitTask(guest:StartAnim(anim))
         end
     end

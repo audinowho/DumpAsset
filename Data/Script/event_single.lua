@@ -827,7 +827,7 @@ function SINGLE_CHAR_SCRIPT.MissionGuestCheck(owner, ownerChar, context, args)
 	if tbl ~= nil and tbl.Escort ~= nil then
 		local targetName = _DATA:GetMonster(context.User.BaseForm.Species):GetColoredName()
 		UI:ResetSpeaker()
-		UI:WaitShowDialogue("Oh no! " ..  targetName .. " fainted!")
+		UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_FAINTED"):ToLocal(), targetName))
 		GAME:WaitFrames(40)
 		--Set max team size to 4 as the guest is no longer "taking" up a party slot
 		RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS = 4

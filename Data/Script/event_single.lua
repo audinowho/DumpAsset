@@ -662,11 +662,11 @@ function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
 			for x = math.max(topLeft.X, 0), math.min(bottomRight.X, _ZONE.CurrentMap.Width - 1), 1 do
 				for y = math.max(topLeft.Y, 0), math.min(bottomRight.Y, _ZONE.CurrentMap.Height - 1), 1 do
 					local testLoc = RogueElements.Loc(x,y)
-					local is_choke_point = RogueElements.Grid.IsChokePoint(testLoc - rect_area, rect_area2, testLoc, checkBlock, checkDiagBlock)
+					--local is_choke_point = RogueElements.Grid.IsChokePoint(testLoc - rect_area, rect_area2, testLoc, checkBlock, checkDiagBlock)
 					local tile_block = _ZONE.CurrentMap:TileBlocked(testLoc)
 					local char_at = _ZONE.CurrentMap:GetCharAtLoc(testLoc)
 
-					if tile_block == false and char_at == nil and not is_choke_point then
+					if tile_block == false and char_at == nil then
 						valid_tile_total = valid_tile_total + 1
 						leftmost_x = math.min(testLoc.X, leftmost_x)
 						rightmost_x = math.max(testLoc.X, rightmost_x)

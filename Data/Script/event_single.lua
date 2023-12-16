@@ -482,7 +482,7 @@ function SpawnOutlaw(origin, radius, mission_num)
 	for x = top_left.X, bottom_right.X, 1 do
 		for y = top_left.Y, bottom_right.Y, 1 do
 			local testLoc = RogueElements.Loc(x, y)
-			local is_choke_point = RogueElements.Grid.IsChokePoint(testLoc - rect_area, rect_area2, testLoc, checkBlock, checkDiagBlock)
+			--local is_choke_point = RogueElements.Grid.IsChokePoint(testLoc - rect_area, rect_area2, testLoc, checkBlock, checkDiagBlock)
 			local tile_block = _ZONE.CurrentMap:TileBlocked(testLoc)
 			local char_at = _ZONE.CurrentMap:GetCharAtLoc(testLoc)
 
@@ -505,10 +505,15 @@ function SpawnOutlaw(origin, radius, mission_num)
 				end
 			end
 
-			if tile_block == false and char_at == nil and not is_choke_point and not next_to_player_units then
+			if tile_block == false and char_at == nil and not next_to_player_units then
 				table.insert(spawn_candidates, testLoc)
 			end
 		end
+	end
+
+	if #spawn_candidates < 1 then
+		PrintInfo("Error: Outlaw couldn't spawn for current floor, not enough spawn candidates.")
+		return
 	end
 
 	local spawn_loc = spawn_candidates[_DATA.Save.Rand:Next(1, #spawn_candidates)]

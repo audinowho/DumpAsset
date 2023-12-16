@@ -2813,64 +2813,72 @@ function DungeonJobList:DrawMenu()
   
   --how many jobs have we populated so far
   local count = 0
+  local side_dungeon_mission = false
+  local zone_string = ''
   
   --populate jobs that are in this dungeon
-  for i = 1, 8, 1 do 
-	--stop populating if we hit a job that's empty
+  for i = 8, 1, -1 do 
+	--skip all empty jobs
     if self.jobs[i].Client ~= "" then
 		--only look at jobs in the current dungeon that aren't suspended
-		if self.jobs[i].Zone == self.dungeon and self.jobs[i].Segment == self.section and self.jobs[i].Taken then
+		if self.jobs[i].Zone == self.dungeon and self.jobs[i].Taken then
+			if self.jobs[i].Segment == self.section then
+				local floor = MISSION_GEN.GetStairsType(self.jobs[i].Zone) ..'[color=#00FFFF]' .. tostring(self.jobs[i].Floor) .. "[color]F"
+				local objective = ""
+				local icon = ""
+				local goal = self.jobs[i].Type
+
+				local target = _DATA:GetMonster(self.jobs[i].Target):GetColoredName()
+
+				local client = ""
+				if self.jobs[i].Client == "magna" then
+					client = "[color=#00FFFF]Magna[color]"
+				else
+					client = _DATA:GetMonster(self.jobs[i].Client):GetColoredName()
+				end
+
+				local item = ""
+				if self.jobs[i].Item ~= "" then
+					item = _DATA:GetItem(self.jobs[i].Item):GetColoredName()
+				end
+
+				if goal == COMMON.MISSION_TYPE_RESCUE then
+					objective = Text.FormatKey("MISSION_OBJECTIVES_RESCUE", target)
+				elseif goal == COMMON.MISSION_TYPE_ESCORT then
+					objective = Text.FormatKey("MISSION_OBJECTIVES_ESCORT", client, target)
+				elseif goal == COMMON.MISSION_TYPE_OUTLAW then
+					objective = Text.FormatKey("MISSION_OBJECTIVES_OUTLAW", target)
+				elseif goal == COMMON.MISSION_TYPE_EXPLORATION then
+					objective = Text.FormatKey("MISSION_OBJECTIVES_EXPLORATION", client)
+				elseif goal == COMMON.MISSION_TYPE_LOST_ITEM then
+					objective = Text.FormatKey("MISSION_OBJECTIVES_LOST_ITEM", item, client)
+				elseif goal == COMMON.MISSION_TYPE_OUTLAW_ITEM then
+					objective = Text.FormatKey("MISSION_OBJECTIVES_OUTLAW_ITEM", item, target)
+				elseif goal == COMMON.MISSION_TYPE_OUTLAW_FLEE then
+					objective = Text.FormatKey("MISSION_OBJECTIVES_OUTLAW_FLEE", target)
+				elseif goal == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then
+					objective = Text.FormatKey("MISSION_OBJECTIVES_OUTLAW_MONSTER_HOUSE", target)
+				elseif goal == COMMON.MISSION_TYPE_DELIVERY then
+					objective = Text.FormatKey("MISSION_OBJECTIVES_DELIVERY", item, client)
+				end
+
+				if self.jobs[i].Completion == COMMON.MISSION_INCOMPLETE then
+					icon = STRINGS:Format("\\uE10F")--open letter
+				else
+					icon = STRINGS:Format("\\uE10A")--check mark
+				end
+
+				self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(icon, RogueElements.Loc(16, 24 + 14 * count)))
+				self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(floor, RogueElements.Loc(28, 24 + 14 * count)))
+				self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(objective, RogueElements.Loc(60, 24 + 14 * count)))
+
+				count = count + 1
+			else
+				side_dungeon_mission = true
+				zone_string = _DATA:GetZone(self.jobs[i].Zone).Segments[self.jobs[i].Segment]:ToString()
+				zone_string = COMMON.CreateColoredSegmentString(zone_string)
+			end
 			
-			local floor = MISSION_GEN.GetStairsType(self.jobs[i].Zone) ..'[color=#00FFFF]' .. tostring(self.jobs[i].Floor) .. "[color]F"
-			local objective = ""
-			local icon = ""
-			local goal = self.jobs[i].Type
-
-			local target = _DATA:GetMonster(self.jobs[i].Target):GetColoredName()
-
-			local client = ""
-			if self.jobs[i].Client == "magna" then
-				client = "[color=#00FFFF]Magna[color]"
-			else
-				client = _DATA:GetMonster(self.jobs[i].Client):GetColoredName()
-			end
-
-			local item = ""
-			if self.jobs[i].Item ~= "" then
-				item = _DATA:GetItem(self.jobs[i].Item):GetColoredName()
-			end
-
-			if goal == COMMON.MISSION_TYPE_RESCUE then
-				objective = Text.FormatKey("MISSION_OBJECTIVES_RESCUE", target)
-			elseif goal == COMMON.MISSION_TYPE_ESCORT then
-				objective = Text.FormatKey("MISSION_OBJECTIVES_ESCORT", client, target)
-			elseif goal == COMMON.MISSION_TYPE_OUTLAW then
-				objective = Text.FormatKey("MISSION_OBJECTIVES_OUTLAW", target)
-			elseif goal == COMMON.MISSION_TYPE_EXPLORATION then
-				objective = Text.FormatKey("MISSION_OBJECTIVES_EXPLORATION", client)
-			elseif goal == COMMON.MISSION_TYPE_LOST_ITEM then
-				objective = Text.FormatKey("MISSION_OBJECTIVES_LOST_ITEM", item, client)
-			elseif goal == COMMON.MISSION_TYPE_OUTLAW_ITEM then
-				objective = Text.FormatKey("MISSION_OBJECTIVES_OUTLAW_ITEM", item, target)
-			elseif goal == COMMON.MISSION_TYPE_OUTLAW_FLEE then
-				objective = Text.FormatKey("MISSION_OBJECTIVES_OUTLAW_FLEE", target)
-			elseif goal == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then
-				objective = Text.FormatKey("MISSION_OBJECTIVES_OUTLAW_MONSTER_HOUSE", target)
-			elseif goal == COMMON.MISSION_TYPE_DELIVERY then
-				objective = Text.FormatKey("MISSION_OBJECTIVES_DELIVERY", item, client)
-			end
-
-			if self.jobs[i].Completion == COMMON.MISSION_INCOMPLETE then
-				icon = STRINGS:Format("\\uE10F")--open letter
-			else
-				icon = STRINGS:Format("\\uE10A")--check mark
-			end
-
-			self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(icon, RogueElements.Loc(16, 24 + 14 * count)))
-			self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(floor, RogueElements.Loc(28, 24 + 14 * count)))
-			self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(objective, RogueElements.Loc(60, 24 + 14 * count)))
-
-			count = count + 1
 		end
 
 	end
@@ -2881,7 +2889,14 @@ function DungeonJobList:DrawMenu()
 
   --put a special message if no jobs dependent on story progression.
   local message = ""
-  if count == 0 then
+  if side_dungeon_mission == true then
+	  message = Text.FormatKey("MISSION_OBJECTIVES_SIDE", zone_string)
+	  local yloc = 12 + 14
+	  if count > 0 then
+		  yloc = 24 + 14 * count
+	  end
+	  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(message, RogueElements.Loc(16, yloc)))
+  elseif count == 0 then
 	  message = Text.FormatKey("MISSION_OBJECTIVES_DEFAULT")
 	  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(message, RogueElements.Loc(16, 12 + 14)))
   end

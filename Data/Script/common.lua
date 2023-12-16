@@ -3,6 +3,7 @@
     A collection of frequently used functions and values!
 ]]--
 require 'common_gen'
+require 'menu/member_return'
 
 ----------------------------------------
 -- Lib Definitions
@@ -1264,7 +1265,7 @@ function COMMON.ResetPose()
     local guest_count = GAME:GetPlayerGuestCount()
     for i = 0, player_count - 1, 1 do
         local player = GAME:GetPlayerPartyMember(i)
-        if not player.Dead then
+        if not player.Dead and player.CharLoc ~= nil and player.CharDir ~= nil then
             local anim = RogueEissionssence.Dungeon.CharAnimIdle(player.CharLoc, player.CharDir)
             TASK:WaitTask(player:StartAnim(anim))
         end
@@ -1272,7 +1273,7 @@ function COMMON.ResetPose()
 
     for i = 0, guest_count - 1, 1 do
         local guest = GAME:GetPlayerGuestMember(i)
-        if not guest.Dead then
+        if not guest.Dead and guest.CharLoc ~= nil and guest.CharDir ~= nil then
             local anim = RogueEssence.Dungeon.CharAnimIdle(guest.CharLoc, guest.CharDir)
             TASK:WaitTask(guest:StartAnim(anim))
         end

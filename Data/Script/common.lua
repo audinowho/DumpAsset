@@ -1023,9 +1023,10 @@ end
 function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
     for name, mission in pairs(SV.TakenBoard) do
         PrintInfo("Checking Mission: "..tostring(name))
-        if mission.Taken and mission.Completion == COMMON.MISSION_INCOMPLETE and zoneId == mission.Zone and segmentID == mission.Segment and mission.Client ~= "" then
+        if mission.Taken and mission.Completion == COMMON.MISSION_INCOMPLETE and zoneId == mission.Zone and mission.Client ~= "" then
             if mission.Type == COMMON.MISSION_TYPE_ESCORT or mission.Type == COMMON.MISSION_TYPE_EXPLORATION then -- escort
                 -- add escort to team
+                PrintInfo("Adding escort to team for Mission: "..tostring(name)) 
                 local player_count = GAME:GetPlayerPartyCount()
                 local guest_count = GAME:GetPlayerGuestCount()
 
@@ -1040,13 +1041,13 @@ function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
                     local state = 0
                     while state > -1 do
                         UI:ResetSpeaker()
-                        UI:WaitShowDialogue("Have one of your team members return to the guild to make room for your client, " .. _DATA:GetMonster(mission.Client):GetColoredName() .. ".")
+                        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_REPLACE"):ToLocal(), _DATA:GetMonster(mission.Client):GetColoredName()))
                         local MemberReturnMenu = CreateMemberReturnMenu()
                         local menu = MemberReturnMenu:new()
                         UI:SetCustomMenu(menu.menu)
                         UI:WaitForChoice()
                         local member = menu.members[menu.current_item]
-                        UI:ChoiceMenuYesNo("Send " .. member:GetDisplayName(true) .. " back to the guild?", false)
+                        UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_REPLACE_ASK"):ToLocal(), member:GetDisplayName(true)), false)
                         UI:WaitForChoice()
 
                         local send_home = UI:ChoiceResult()
@@ -1074,8 +1075,10 @@ function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
 
                 local tbl = LTBL(new_mob)
                 tbl.Escort = name
+                
+                PrintInfo("Adding to exploration: "..STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_ADD"):ToLocal(), new_mob.Name))
                 UI:ResetSpeaker()
-                UI:WaitShowDialogue("Added [color=#00FF00]".. new_mob.Name .."[color] to the party as a guest.")
+                UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_ADD"):ToLocal(), new_mob.Name))
             end
         end
     end

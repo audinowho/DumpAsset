@@ -84,6 +84,8 @@ function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed
               local dialogue = RogueEssence.Dungeon.BattleScriptEvent("EscortRescueReached")
               post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
               post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable('{ Mission = '..name..' }'))
+            elseif mission.Type == COMMON.MISSION_TYPE_EXPLORATION then --Exploration
+              ZONE_GEN_SCRIPT.ExplorationReached(zoneContext, context, queue, seed, args)
             end
             specificTeam.Spawns:Add(post_mob)
             PrintInfo("Creating Spawn")
@@ -160,6 +162,41 @@ function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed
   local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
   local priority = RogueElements.Priority(-6)
   queue:Enqueue(priority, destNote)
+end
+
+function ZONE_GEN_SCRIPT.ExplorationReached(zoneContext, context, queue, seed, args)
+  context.CancelState.Cancel = false
+  context.TurnCancel.Cancel = true
+  
+  local mission = SV.TakenBoard[tbl.Mission]
+  local escort = COMMON.FindMissionEscort(tbl.Mission)
+  local escortName = _DATA:GetMonster(mission.Client):GetColoredName()
+  if escort then
+    UI:ResetSpeaker()
+    SV.TemporaryFlags.MissionCompleted = true
+    mission.Completion = 1
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_EXPLORATION_REACHED"):ToLocal(), escortName))
+    SV.TemporaryFlags.PriorMapSetting = _DUNGEON.ShowMap
+    _DUNGEON.ShowMap = _DUNGEON.MinimapState.None
+    GAME:WaitFrames(20)
+    UI:SetSpeaker(escort)
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_EXPLORATION_THANKS"):ToLocal(), _DATA:GetMonster(context.Target.CurrentForm.Species):GetColoredName()))
+    GAME:WaitFrames(20)
+    UI:ResetSpeaker()
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_EXPLORATION_DEPART"):ToLocal(), escortName))
+    GAME:WaitFrames(20)
+
+    --Set max team size to 4 as the guest is no longer "taking" up a party slot
+    RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS = 4
+
+    -- warp out
+    TASK:WaitTask(_DUNGEON:ProcessBattleFX(escort, escort, _DATA.SendHomeFX))
+    _DUNGEON:RemoveChar(escort)
+    _ZONE.CurrentMap.DisplacedChars:Remove(escort)
+
+    GAME:WaitFrames(50)
+    COMMON.AskMissionWarpOut()
+  end
 end
 
 function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed, args)

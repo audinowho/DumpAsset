@@ -18,13 +18,15 @@ function BATTLE_SCRIPT.EscortInteract(owner, ownerChar, context, args)
   local job = SV.TakenBoard[mission_slot]
   
   if job.Type == COMMON.MISSION_TYPE_EXPLORATION then
-		local floor = SV.StairType[job.Zone] .. '[color=#00FFFF]' .. tostring(job.Floor) .. '[color]' .. "F"
-		UI:WaitShowDialogue("Please, take me to " .. floor .. "!")
+	  local zone_string = _DATA:GetZone(job.Zone).Segments[job.Segment]:ToString()
+	  zone_string = COMMON.CreateColoredSegmentString(zone_string)
+	  local floor = SV.StairType[job.Zone] .. '[color=#00FFFF]' .. tostring(job.Floor) .. '[color]' .. "F"
+	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_EXPLORATION_INTERACT"):ToLocal(), zone_string , floor))
   elseif job.Type == COMMON.MISSION_TYPE_ESCORT then
     if job.Special == MISSION_GEN.SPECIAL_CLIENT_LOVER then
-	  UI:WaitShowDialogue("Please, bring me to my love! I'm counting on you!")
+	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_LOVER_INTERACT"):ToLocal()))
 	else
-	  UI:WaitShowDialogue("I'm counting on you to bring me to " .. _DATA:GetMonster(job.Target):GetColoredName() .. "!") 
+	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_INTERACT"):ToLocal(), _DATA:GetMonster(job.Target):GetColoredName())) 
 	end
    end
   context.Target.CharDir = oldDir

@@ -1604,12 +1604,20 @@ end
 --Allows mission gen to work here
 function base_camp_2.Mission_Board_Action(obj, activator)
     DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+    local dungeons_needed = 1 --Number of dungeons needed to unlock this
+    
     local hero = CH('PLAYER')
     GROUND:CharSetAnim(hero, 'None', true)
 
-    local menu = BoardSelectionMenu:new(COMMON.MISSION_BOARD_MISSION)
-    UI:SetCustomMenu(menu.menu)
-    UI:WaitForChoice()
+    if SV.MissionPrereq.NumDungeonsCompleted >= dungeons_needed then
+        local menu = BoardSelectionMenu:new(COMMON.MISSION_BOARD_MISSION)
+        UI:SetCustomMenu(menu.menu)
+        UI:WaitForChoice()
+    else
+        UI:ResetSpeaker()
+        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Board_Locked']))
+        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Board_Locked_2'], dungeons_needed - SV.MissionPrereq.NumDungeonsCompleted))
+    end
 
     GROUND:CharEndAnim(hero)
 end
@@ -1654,6 +1662,7 @@ function base_camp_2.Hand_In_Missions()
     
     GAME:MoveCamera(0, 0, 1, true)
     SOUND:PlayBGM(SV.base_town.Song, true)
+    MISSION_GEN.RegenerateJobs(result)
     
     --sort taken jobs now that we're removed completed ones
     MISSION_GEN.SortTaken()    

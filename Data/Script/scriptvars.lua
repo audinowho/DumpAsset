@@ -43,6 +43,11 @@ SV.checkpoint =
   Map  = 1, Entry  = 0
 }
 
+SV.MissionPrereq =
+{
+  DungeonsCompleted = {},
+  NumDungeonsCompleted = 0
+}
 
 SV.adventure = 
 {

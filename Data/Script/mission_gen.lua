@@ -1516,7 +1516,7 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 	local dungeon_difficulties = MISSION_GEN.ShallowCopy(MISSION_GEN.DIFFICULTY)
 	for i = #dungeon_candidates, 1, -1 do
 		local dungeon_id = dungeon_candidates[i]
-		if _DATA.Save:GetDungeonUnlock(dungeon_id) ~= RogueEssence.Data.GameProgress.UnlockState.Completed and (dungeon_id ~= _ZONE.CurrentZoneID or result ~= RogueEssence.Data.GameProgress.ResultType.Cleared) then
+		if _DATA.Save:GetDungeonUnlock(dungeon_id) ~= RogueEssence.Data.GameProgress.UnlockState.Completed and (_ZONE.CurrentZoneID == nil or result == nil or dungeon_id ~= _ZONE.CurrentZoneID or result ~= RogueEssence.Data.GameProgress.ResultType.Cleared) then
 			table.remove(dungeon_candidates, i)
 		else
 			local dungeon_instance = _DATA:GetZone(dungeon_id)
@@ -2878,6 +2878,19 @@ function MISSION_GEN.RemoveMissionBackReference()
 end
 
 function MISSION_GEN.EndOfDay(result)
+	--Mark the current dungeon as visited
+	
+	local cur_zone_name = _ZONE.CurrentMap.Name
+
+	if SV.MissionPrereq.DungeonsCompleted[cur_zone_name] == nil and result == RogueEssence.Data.GameProgress.ResultType.Cleared then
+		SV.MissionPrereq.DungeonsCompleted[cur_zone_name] = 1
+		SV.MissionPrereq.NumDungeonsCompleted = SV.MissionPrereq.NumDungeonsCompleted + 1
+	end
+	
+	MISSION_GEN.RegenerateJobs(result)
+end
+
+function MISSION_GEN.RegenerateJobs(result)
 	--Regenerate jobs
 	MISSION_GEN.ResetBoards()
 	MISSION_GEN.RemoveMissionBackReference()

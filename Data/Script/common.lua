@@ -1233,7 +1233,7 @@ function COMMON.ResetPose()
     for i = 0, player_count - 1, 1 do
         local player = GAME:GetPlayerPartyMember(i)
         if not player.Dead then
-            local anim = RogueEssence.Dungeon.CharAnimIdle(player.CharLoc, player.CharDir)
+            local anim = RogueEissionssence.Dungeon.CharAnimIdle(player.CharLoc, player.CharDir)
             TASK:WaitTask(player:StartAnim(anim))
         end
     end

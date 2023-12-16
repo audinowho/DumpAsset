@@ -25,7 +25,7 @@ end
 function guildmaster_island.ExitSegment(zone, result, rescue, segmentID, mapID)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
 
-  MISSION_GEN.EndOfDay(result)
+  MISSION_GEN.EndOfDay(result, segmentID)
 COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)

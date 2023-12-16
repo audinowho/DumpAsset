@@ -45,7 +45,7 @@ SV.checkpoint =
 
 SV.MissionPrereq =
 {
-  DungeonsCompleted = {},
+  DungeonsCompleted = {}, --Uses a bitmap to determine which sections are complete (
   NumDungeonsCompleted = 0
 }
 

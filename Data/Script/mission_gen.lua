@@ -1516,7 +1516,7 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 	local dungeon_difficulties = MISSION_GEN.ShallowCopy(MISSION_GEN.DIFFICULTY)
 	for i = #dungeon_candidates, 1, -1 do
 		local dungeon_id = dungeon_candidates[i]
-		if _DATA.Save:GetDungeonUnlock(dungeon_id) ~= RogueEssence.Data.GameProgress.UnlockState.Completed and (_ZONE.CurrentZoneID == nil or result == nil or dungeon_id ~= _ZONE.CurrentZoneID or result ~= RogueEssence.Data.GameProgress.ResultType.Cleared) then
+		if SV.MissionPrereq.DungeonsCompleted[_ZONE.CurrentZoneID] == nil or SV.MissionPrereq.DungeonsCompleted[_ZONE.CurrentZoneID][_ZONE.CurrentMapID.Segment] == nil then
 			table.remove(dungeon_candidates, i)
 		else
 			local dungeon_instance = _DATA:GetZone(dungeon_id)
@@ -2889,7 +2889,7 @@ function DungeonJobList:DrawMenu()
 
   --put a special message if no jobs dependent on story progression.
   local message = ""
-  if side_dungeon_mission == true then
+  if side_dungeon_mission == true and self.section == 0 then
 	  message = Text.FormatKey("MISSION_OBJECTIVES_SIDE", zone_string)
 	  local yloc = 12 + 14
 	  if count > 0 then
@@ -2935,14 +2935,19 @@ function MISSION_GEN.RemoveMissionBackReference()
 	end
 end
 
-function MISSION_GEN.EndOfDay(result)
+function MISSION_GEN.EndOfDay(result, segmentID)
 	--Mark the current dungeon as visited
 	
 	local cur_zone_name = _ZONE.CurrentMap.Name
 
-	if SV.MissionPrereq.DungeonsCompleted[cur_zone_name] == nil and result == RogueEssence.Data.GameProgress.ResultType.Cleared then
-		SV.MissionPrereq.DungeonsCompleted[cur_zone_name] = 1
-		SV.MissionPrereq.NumDungeonsCompleted = SV.MissionPrereq.NumDungeonsCompleted + 1
+	if result == RogueEssence.Data.GameProgress.ResultType.Cleared then
+		if SV.MissionPrereq.DungeonsCompleted[cur_zone_name] == nil then
+			SV.MissionPrereq.DungeonsCompleted[cur_zone_name] = { }
+			SV.MissionPrereq.DungeonsCompleted[cur_zone_name][segmentID] = 1
+			SV.MissionPrereq.NumDungeonsCompleted = SV.MissionPrereq.NumDungeonsCompleted + 1
+		elseif SV.MissionPrereq.DungeonsCompleted[cur_zone_name][segmentID] == nil then
+			SV.MissionPrereq.DungeonsCompleted[cur_zone_name][segmentID] = 1
+		end
 	end
 	
 	MISSION_GEN.RegenerateJobs(result)

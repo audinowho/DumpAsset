@@ -1998,9 +1998,9 @@ function MISSION_GEN.JobSortFunction(j1, j2)
 	
 	--if they're the same dungeon, then check floors. Otherwise, dungeon order takes presidence. 
 	if SV.DungeonOrder[j1.Zone] == SV.DungeonOrder[j2.Zone] then
-		return j1.Floor < j2.Floor 
+		return j1.Floor > j2.Floor 
 	else 
-		return SV.DungeonOrder[j1.Zone] < SV.DungeonOrder[j2.Zone]
+		return SV.DungeonOrder[j1.Zone] > SV.DungeonOrder[j2.Zone]
 	end
 end
 

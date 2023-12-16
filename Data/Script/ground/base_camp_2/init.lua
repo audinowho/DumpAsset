@@ -1705,10 +1705,10 @@ function base_camp_2.Outlaw_Job_Clear(job)
         SOUND:PlayBGM("Job Clear!.ogg", true)
         UI:SetSpeaker(magna)
 
-        UI:WaitShowDialogue("You bagged the outlaw " .. _DATA:GetMonster(outlaw.CurrentForm.Species):GetColoredName() .. "!")
+        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Outlaw_Capture_Cutscene_001'], _DATA:GetMonster(outlaw.CurrentForm.Species):GetColoredName()))
 
         GAME:WaitFrames(20)
-        UI:WaitShowDialogue("Please take this here bounty as a reward.")
+        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Outlaw_Capture_Cutscene_002']))
         GAME:WaitFrames(20)
 
         --reward the item 
@@ -1722,7 +1722,7 @@ function base_camp_2.Outlaw_Job_Clear(job)
         if job.BonusReward ~= '' then
             UI:SetSpeaker(magna)
             GAME:WaitFrames(20)
-            UI:WaitShowDialogue("Please take this here item as well.")
+            UI:WaitShowDialogue(STRINGS:Format(MapStrings['Outlaw_Capture_Cutscene_003']))
             GAME:WaitFrames(20)
             COMMON.RewardItem(job.BonusReward)
         end
@@ -1733,7 +1733,7 @@ function base_camp_2.Outlaw_Job_Clear(job)
         GAME:WaitFrames(20)
 
         UI:SetSpeaker(magna)
-        UI:WaitShowDialogue("Thank ya as always for lendin' a hand.")
+        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Outlaw_Capture_Cutscene_004']))
 
         GROUND:CharSetEmote(magnemite_left, "happy", 0)
         GROUND:CharSetEmote(magnemite_right, "happy", 0)
@@ -1778,9 +1778,9 @@ function base_camp_2.Outlaw_Job_Clear(job)
 
 
         local item = RogueEssence.Dungeon.InvItem(job.Item)
-        UI:WaitShowDialogue("Thank you for getting my " .. item:GetDisplayName() .. " back!")
+        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Outlaw_Retrieve_Cutscene'], item:GetDisplayName()))
         GAME:WaitFrames(20)
-        UI:WaitShowDialogue("Please take this as my thanks!")
+        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Generic_Reward']))
         GAME:WaitFrames(20)
 
         --reward the item 
@@ -1793,7 +1793,7 @@ function base_camp_2.Outlaw_Job_Clear(job)
         if job.BonusReward ~= '' then
             UI:SetSpeaker(client)
             GAME:WaitFrames(20)
-            UI:WaitShowDialogue("Please take this as well!")
+            UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Generic_Reward_2']))
             GAME:WaitFrames(20)
             COMMON.RewardItem(job.BonusReward)
         end
@@ -1840,20 +1840,20 @@ function base_camp_2.Mission_Job_Clear(job)
 
         --different thank you message depending on the job type
         if job.Type == COMMON.MISSION_TYPE_RESCUE then
-            UI:WaitShowDialogue("Thank you for rescuing me!")
+            UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Response_Rescue']))
         elseif job.Type == COMMON.MISSION_TYPE_EXPLORATION then
             local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(job.Zone)
-            UI:WaitShowDialogue("Thank you for taking me on an adventure in " .. zone:GetColoredName() .. "!")
+            UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Response_Exploration'], zone:GetColoredName()))
         elseif job.Type == COMMON.MISSION_TYPE_LOST_ITEM then
             local item = RogueEssence.Dungeon.InvItem(job.Item)
-            UI:WaitShowDialogue("Thank you for finding my " .. item:GetDisplayName() .. "!")
+            UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Response_Lost_Item'], item:GetDisplayName()))
         else--delivery 
             local item = RogueEssence.Dungeon.InvItem(job.Item)
-            UI:WaitShowDialogue("Thank you for delivering the " .. item:GetDisplayName() .. " to me!")
+            UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Response_Delivery_Item'], item:GetDisplayName()))
         end
 
         GAME:WaitFrames(20)
-        UI:WaitShowDialogue("Please take this as my thanks!")
+        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Generic_Reward']))
         GAME:WaitFrames(20)
 
         --reward the item 
@@ -1866,7 +1866,7 @@ function base_camp_2.Mission_Job_Clear(job)
         if job.BonusReward ~= '' then
             UI:SetSpeaker(client)
             GAME:WaitFrames(20)
-            UI:WaitShowDialogue("Please take this as well!")
+            UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Generic_Reward_2']))
             GAME:WaitFrames(20)
             COMMON.RewardItem(job.BonusReward)
         end
@@ -1909,20 +1909,20 @@ function base_camp_2.Mission_Job_Clear(job)
         UI:SetSpeaker(client)
 
         if job.Type == COMMON.MISSION_TYPE_ESCORT then
-            UI:WaitShowDialogue("Thank you for escorting me to my friend!")
+            UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Response_Escort']))
         else
             if job.Special == MISSION_GEN.SPECIAL_CLIENT_LOVER then
-                UI:WaitShowDialogue("Thank you for rescuing my love!")
+                UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Response_Lover']))
             elseif job.Special == MISSION_GEN.SPECIAL_CLIENT_RIVAL then
-                UI:WaitShowDialogue("Thank you for rescuing my rival!")
+                UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Response_Rival']))
             elseif job.Special == MISSION_GEN.SPECIAL_CLIENT_CHILD then
-                UI:WaitShowDialogue("Thank you for rescuing my child!")
+                UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Response_Child']))
             else
-                UI:WaitShowDialogue("Thank you for rescuing my friend!")
+                UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Response_Rescue']))
             end
         end
         GAME:WaitFrames(20)
-        UI:WaitShowDialogue("Please take this as my thanks!")
+        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Generic_Reward']))
         GAME:WaitFrames(20)
 
         --reward the item 
@@ -1935,7 +1935,7 @@ function base_camp_2.Mission_Job_Clear(job)
         if job.BonusReward ~= '' then
             UI:SetSpeaker(client)
             GAME:WaitFrames(20)
-            UI:WaitShowDialogue("Please take this as well!")
+            UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Generic_Reward_2']))
             GAME:WaitFrames(20)
             COMMON.RewardItem(job.BonusReward)
         end

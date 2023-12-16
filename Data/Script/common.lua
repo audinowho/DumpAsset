@@ -1151,8 +1151,37 @@ function COMMON.FindMissionEscort(missionId)
   return escort
 end
 
+function COMMON.ResetAnims()
+    local player_count = GAME:GetPlayerPartyCount()
+    local guest_count = GAME:GetPlayerGuestCount()
+    for i = 0, player_count - 1, 1 do
+        local player = GAME:GetPlayerPartyMember(i)
+        if not player.Dead then
+            local anim = RogueEssence.Dungeon.CharAnimAction()
+            anim.BaseFrameType = 0 --none
+            anim.AnimLoc = player.CharLoc
+            anim.CharDir = player.CharDir
+            TASK:WaitTask(player:StartAnim(anim))
+        end
+    end
+
+    for i = 0, guest_count - 1, 1 do
+        local guest = GAME:GetPlayerGuestMember(i)
+        if not guest.Dead then
+            local anim = RogueEssence.Dungeon.CharAnimAction()
+            anim.BaseFrameType = 0 --none
+            anim.AnimLoc = guest.CharLoc
+            anim.CharDir = guest.CharDir
+            TASK:WaitTask(guest:StartAnim(anim))
+        end
+    end
+end
+
 function COMMON.EndDungeonDay(result, zoneId, structureId, mapId, entryId)
   COMMON.EndDayCycle()
+    
+  COMMON.ResetAnims()
+    
   GAME:EndDungeonRun(result, zoneId, structureId, mapId, entryId, true, true)
   if GAME:InRogueMode() then
     if result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then

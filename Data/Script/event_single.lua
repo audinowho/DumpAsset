@@ -260,6 +260,39 @@ function SINGLE_CHAR_SCRIPT.ThiefCheck(owner, ownerChar, context, args)
   end
 end
 
+function SINGLE_CHAR_SCRIPT.ExplorationReached(owner, ownerChar, context, args)
+	local index = args.Mission
+	local mission = SV.TakenBoard[index]
+	local escort = COMMON.FindMissionEscort(index)
+	local escortName = _DATA:GetMonster(mission.Client):GetColoredName()
+	PrintInfo("Exploration reached at index "..index.." !")
+	if escort ~= nil and escortName ~= nil then
+		UI:ResetSpeaker()
+		SV.TemporaryFlags.MissionCompleted = true
+		UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_EXPLORATION_REACHED"):ToLocal(), escortName))
+		SV.TemporaryFlags.PriorMapSetting = _DUNGEON.ShowMap
+		_DUNGEON.ShowMap = _DUNGEON.MinimapState.None
+		GAME:WaitFrames(20)
+		UI:SetSpeaker(escort)
+		UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_EXPLORATION_THANKS"):ToLocal()))
+		GAME:WaitFrames(20)
+		UI:ResetSpeaker()
+		UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_EXPLORATION_DEPART"):ToLocal(), escortName))
+		GAME:WaitFrames(20)
+
+		--Set max team size to 4 as the guest is no longer "taking" up a party slot
+		RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS = 4
+
+		-- warp out
+		TASK:WaitTask(_DUNGEON:ProcessBattleFX(escort, escort, _DATA.SendHomeFX))
+		_DUNGEON:RemoveChar(escort)
+		_ZONE.CurrentMap.DisplacedChars:Remove(escort)
+
+		GAME:WaitFrames(50)
+		COMMON.AskMissionWarpOut()
+	end
+end
+
 function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, context, args)
   local baseLoc = _DUNGEON.ActiveTeam.Leader.CharLoc
   local tile = _ZONE.CurrentMap.Tiles[baseLoc.X][baseLoc.Y]

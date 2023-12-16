@@ -1531,3 +1531,29 @@ function COMMON.RewardItem(itemID, money, amount)
 
 
 end
+
+--Given a segment name string obtained by segment.ToString(), return a colored segment.
+--This is obtained by removing the last part of the segment name as it is the floor indicator and wrapping yellow around it
+function COMMON.CreateColoredSegmentString(segment_name)
+    local split_name = {}
+    
+    local index = 0
+
+    for str in string.gmatch(segment_name, "([^%s]+)") do
+        table.insert(split_name, str, index)
+        index = index + 1
+    end
+    
+    local final_name = ''
+
+    for k, v in split_name do
+
+        if v == 0 then
+            final_name = k
+        elseif v ~= index then
+            final_name = final_name .. ' ' .. k
+        end
+    end
+    
+    return '[color=#FFFF00]'..final_name..'[color]'
+end

@@ -1781,13 +1781,23 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 			bonus_reward = MISSION_GEN.WeightedRandom(MISSION_GEN.REWARDS[MISSION_GEN.WeightedRandom(MISSION_GEN.DIFF_REWARDS[difficulty])])
 		end 
 		
-		--get the zone, and max floors (counted floors of relevant segments)
-		local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon)
+		--get the zone, and max floors (counted floors of relevant segments, excluding the first LoadGen floor)
+		local zoneEntry = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon)
+		local zone = _DATA:GetZone(dungeon)
+
+		--Parse through segments for the dungeon
+		local zone_segments = zone.Segments
+		local num_segments = zone_segments.Count
+		local possible_segments = {}
 		
+		for i = 0, num_segments - 1, 1 do
+			if zone_segments[i].FloorCount > 0 then
+				table.insert(possible_segments, 1, i)
+			end
+		end
 		
-		--segment is typically 0. If needed, add more advanced logic here in the future to pick relevant segments for a given zone.
 		local segment = 0
-		
+		segment = possible_segments[math.random(1, #possible_segments)]
 
 
 		--Choose a random title that's appropriate.
@@ -1905,10 +1915,17 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 			end
 		end
 				
-		local floor_candidates = MISSION_GEN.Generate_List_Range(math.floor(zone.CountedFloors * .55), zone.CountedFloors)
-		MISSION_GEN.array_sub(used_floors, floor_candidates)	
+		local floor_candidates = MISSION_GEN.Generate_List_Range(math.floor(zoneEntry.CountedFloors * .55), zoneEntry.CountedFloors)
+		MISSION_GEN.array_sub(used_floors, floor_candidates)
+
+		--TODO: Prune floor_candidates of floors with LoadGen
+		local floor_candidates_length = #floor_candidates
+		local current_index = 0
+		local current_segment = zone.Segments[segment]
 		 
-		
+		for i = 1, floor_candidates_length, 1 do
+			
+		end
 
 		local mission_floor = -1
 		if #floor_candidates > 0 then
@@ -2042,7 +2059,7 @@ function MISSION_GEN.FindFreeSpaceInBoard(board)
 	return -1
 end
 
---Used to copy job from one board to another (mainly for taking jobs)
+--Used to create a shallow copy of a provided table (mainly for taking jobs)
 function MISSION_GEN.ShallowCopy(orig)
     local orig_type = type(orig)
     local copy
@@ -2486,10 +2503,11 @@ function BoardMenu:DrawBoard()
 	  
     if self.jobs[i].Client ~= "" then
 		local title = self.jobs[i].Title
-		local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(self.jobs[i].Zone):GetColoredName()
 
-		PrintInfo("Creating board job for title "..title.." and zone "..self.jobs[i].Zone)
+		PrintInfo("Creating board job for title "..title.." and zone "..self.jobs[i].Zone.." and segment "..self.jobs[i].Segment)
 
+		local zone = _DATA:GetZone(self.jobs[i].Zone).Segments[self.jobs[i].Segment]:ToString()
+		zone = COMMON.CreateColoredSegmentString(zone)
 		local floor =  MISSION_GEN.GetStairsType(self.jobs[i].Zone) ..'[color=#00FFFF]' .. tostring(self.jobs[i].Floor) .. "[color]F"
 		local difficulty = MISSION_GEN.DIFF_TO_COLOR[self.jobs[i].Difficulty] .. self.jobs[i].Difficulty .. "[color]"
 

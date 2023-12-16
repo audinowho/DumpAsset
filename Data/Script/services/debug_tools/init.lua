@@ -104,10 +104,6 @@ function DebugTools:CustomDungeonOthersMenu()
     menu:SetupChoices();
 	if RogueEssence.GameManager.Instance.CurrentScene == RogueEssence.Dungeon.DungeonScene.Instance then
 		menu.Choices:Add(RogueEssence.Menu.MenuTextChoice("Mission Objectives", function () _MENU:AddMenu(DungeonJobList:new().menu, false) end))
-		-- add recruitment search menu only if assembly is unlocked
-		if SV.Chapter4 and SV.Chapter4.FinishedAssemblyIntro then
-			menu.Choices:Add(RogueEssence.Menu.MenuTextChoice(RogueEssence.StringKey("MENU_RECRUITMENT"):ToLocal(), function () _MENU:AddMenu(RecruitmentListMenu:new().menu, false) end))
-		end
 	end
 	menu:InitMenu();
     return menu

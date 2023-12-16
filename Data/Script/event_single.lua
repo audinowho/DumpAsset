@@ -1,5 +1,8 @@
 require 'common'
 
+ListType = luanet.import_type('System.Collections.Generic.List`1')
+MobSpawnType = luanet.import_type('RogueEssence.LevelGen.MobSpawn')
+
 SINGLE_CHAR_SCRIPT = {}
 
 local function in_array(value, array)
@@ -600,8 +603,7 @@ function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
 			function checkDiagBlock(loc)
 				return true
 			end
-
-
+			
 			local goon_spawn_radius = 5
 
 			local origin = _DUNGEON.ActiveTeam.Leader.CharLoc
@@ -616,6 +618,8 @@ function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
 			local topLeft = RogueElements.Loc(origin.X - goon_spawn_radius, origin.Y - goon_spawn_radius)
 			local bottomRight =  RogueElements.Loc(origin.X + goon_spawn_radius, origin.Y + goon_spawn_radius)
 
+			PrintInfo("Spawning monster house with top left "..topLeft.X..", "..topLeft.Y.." and bottom right "..bottomRight.X..", "..bottomRight.Y)
+			
 			local valid_tile_total = 0
 			for x = math.max(topLeft.X, 0), math.min(bottomRight.X, _ZONE.CurrentMap.Width - 1), 1 do
 				for y = math.max(topLeft.Y, 0), math.min(bottomRight.Y, _ZONE.CurrentMap.Height - 1), 1 do
@@ -635,7 +639,7 @@ function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
 			end
 
 			local house_event = PMDC.Dungeon.MonsterHouseMapEvent();
-
+			
 			local tl = RogueElements.Loc(leftmost_x - 1, upmost_y - 1)
 			local br =  RogueElements.Loc(rightmost_x + 1, downmost_y + 1)
 

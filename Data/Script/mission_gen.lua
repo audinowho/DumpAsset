@@ -1791,7 +1791,7 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		local possible_segments = {}
 		
 		for i = 0, num_segments - 1, 1 do
-			if zone_segments[i].FloorCount > 0 then
+			if zone_segments[i].FloorCount > 1 then
 				table.insert(possible_segments, 1, i)
 			end
 		end
@@ -2151,7 +2151,11 @@ function JobMenu:initialize(job_type, job_number, parent_board_menu)
   
   
   self.zone = ""
-  if job.Zone ~= "" then self.zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(job.Zone):GetColoredName() end
+  if job.Zone ~= "" then
+	  local zone_string = _DATA:GetZone(job.Zone).Segments[job.Segment]:ToString()
+	  zone_string = COMMON.CreateColoredSegmentString(zone_string)
+	  self.zone = zone_string
+  end
   
   self.floor = ""
   if job.Floor ~= -1 then self.floor = MISSION_GEN.GetStairsType(job.Zone) .. '[color=#00FFFF]' .. tostring(job.Floor) .. "[color]F" end
@@ -2777,10 +2781,12 @@ function DungeonJobList:initialize()
   
   self.menu = RogueEssence.Menu.ScriptableMenu(32, 32, 256, 176, function(input) self:Update(input) end)
   self.dungeon = ""
+  self.section = -1
   
   --This menu should only be accessible from dungeons, but add this as a check just in case we somehow access this menu from outside a dungeon.
   if RogueEssence.GameManager.Instance.CurrentScene == RogueEssence.Dungeon.DungeonScene.Instance then
 	self.dungeon = _ZONE.CurrentZoneID
+	self.section = _ZONE.CurrentMapID.Segment
   end
   
   self.jobs = SV.TakenBoard
@@ -2813,7 +2819,8 @@ function DungeonJobList:DrawMenu()
 	--stop populating if we hit a job that's empty
     if self.jobs[i].Client ~= "" then
 		--only look at jobs in the current dungeon that aren't suspended
-		if self.jobs[i].Zone == self.dungeon and self.jobs[i].Taken then
+		if self.jobs[i].Zone == self.dungeon and self.jobs[i].Segment == self.section and self.jobs[i].Taken then
+			
 			local floor = MISSION_GEN.GetStairsType(self.jobs[i].Zone) ..'[color=#00FFFF]' .. tostring(self.jobs[i].Floor) .. "[color]F"
 			local objective = ""
 			local icon = ""

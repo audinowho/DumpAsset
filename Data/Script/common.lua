@@ -1098,22 +1098,10 @@ function COMMON.NumToGender(num)
 end
 
 
-function COMMON.ExitDungeonMissionCheck(result, zoneId, segmentID)
-  -- clear any escorts from party
-    for name, mission in ipairs(SV.TakenBoard) do
-        PrintInfo("Checking Mission: "..tostring(name))
-        if mission.Taken and mission.Completion == COMMON.MISSION_INCOMPLETE and zoneId == mission.Zone and segmentID == mission.Segment then
-            if mission.Type == COMMON.MISSION_TYPE_ESCORT or mission.Type == COMMON.MISSION_TYPE_EXPLORATION then -- escort
-                -- remove the escort from the party
-                local escort = COMMON.FindMissionEscort(name)
-                if escort then
-                    --Set max team size to 4 as the guest is no longer "taking" up a party slot
-                    RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS = 4
-                    _DUNGEON:RemoveChar(escort)
-                end
-            end
-        end
-    end
+function COMMON.ExitDungeonMissionCheck(result, zoneId, segmentID)    
+    --remove all guests from the dungeon
+    RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS = 4
+    _DATA.Save.ActiveTeam.Guests:Clear()
 
     --Remove any lost/stolen items. If the item's ID starts with "mission" then delete it on exiting the dungeon.
     local itemCount = GAME:GetPlayerBagCount()

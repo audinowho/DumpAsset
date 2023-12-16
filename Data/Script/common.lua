@@ -657,7 +657,6 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
     UI:SetSpeaker(target)
   
     local personality = form:GetPersonalityType(target.Discriminator)
-    PrintInfo("Talking with "..target.BaseName.." with personality type "..personality)
     
     local personality_group = COMMON.PERSONALITY[personality]
     local pool = {}

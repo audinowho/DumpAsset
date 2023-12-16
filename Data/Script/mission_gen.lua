@@ -1492,7 +1492,7 @@ end
 --Generate a board. Board_type should be given as "Mission" or "Outlaw".
 --Job/Outlaw Boards should be cleared before being regenerated.
 function MISSION_GEN.GenerateBoard(result, board_type)
-	local jobs_to_make = math.random(5, 7)--Todo: jobs generated is based on your rank or how many dungeons you've done.
+	local jobs_to_make = 8
 	local assigned_combos = {}--floor/dungeon combinations that already have had missions genned for it. Need to consider already genned missions and missions on taken board.
 	
 	-- All seen Pokemon in the pokedex
@@ -1516,10 +1516,10 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 	local dungeon_difficulties = MISSION_GEN.ShallowCopy(MISSION_GEN.DIFFICULTY)
 	for i = #dungeon_candidates, 1, -1 do
 		local dungeon_id = dungeon_candidates[i]
-		if SV.MissionPrereq.DungeonsCompleted[_ZONE.CurrentZoneID] == nil or SV.MissionPrereq.DungeonsCompleted[_ZONE.CurrentZoneID][_ZONE.CurrentMapID.Segment] == nil then
+		local dungeon_instance = _DATA:GetZone(dungeon_id)
+		if SV.MissionPrereq.DungeonsCompleted[dungeon_id] == nil then
 			table.remove(dungeon_candidates, i)
 		else
-			local dungeon_instance = _DATA:GetZone(dungeon_id)
 			if dungeon_instance.Level == nil or dungeon_instance.Level < 0 then
 				PrintInfo("Adding dungeon instance "..dungeon_id.." with score ".."F")
 				SV.DungeonDifficulty[dungeon_id] = "F"
@@ -1791,13 +1791,16 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		local possible_segments = {}
 		
 		for i = 0, num_segments - 1, 1 do
-			if zone_segments[i].FloorCount > 1 then
+			if zone_segments[i].FloorCount > 1 and SV.MissionPrereq.DungeonsCompleted[dungeon][i] ~= nil then
 				table.insert(possible_segments, 1, i)
 			end
 		end
 		
-		local segment = 0
-		segment = possible_segments[math.random(1, #possible_segments)]
+		local segment = 0 --Default to 0 segment if no other valid one has been unlocked
+
+		if #possible_segments > 0 then
+			segment = possible_segments[math.random(1, #possible_segments)]
+		end
 
 
 		--Choose a random title that's appropriate.
@@ -2938,9 +2941,10 @@ end
 function MISSION_GEN.EndOfDay(result, segmentID)
 	--Mark the current dungeon as visited
 	
-	local cur_zone_name = _ZONE.CurrentMap.Name
+	local cur_zone_name = _ZONE.CurrentZoneID
 
 	if result == RogueEssence.Data.GameProgress.ResultType.Cleared then
+		PrintInfo("Completed zone "..cur_zone_name.." with segment "..segmentID)
 		if SV.MissionPrereq.DungeonsCompleted[cur_zone_name] == nil then
 			SV.MissionPrereq.DungeonsCompleted[cur_zone_name] = { }
 			SV.MissionPrereq.DungeonsCompleted[cur_zone_name][segmentID] = 1

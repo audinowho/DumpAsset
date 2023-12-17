@@ -1604,7 +1604,7 @@ end
 --Allows mission gen to work here
 function base_camp_2.Mission_Board_Action(obj, activator)
     DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-    local dungeons_needed = 2 --Number of dungeons needed to unlock the Mission Board
+    local dungeons_needed = 3 --Number of dungeons needed to unlock the Mission Board
     
     local hero = CH('PLAYER')
     GROUND:CharSetAnim(hero, 'None', true)

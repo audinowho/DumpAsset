@@ -619,7 +619,7 @@ MISSION_GEN.DIFF_POKEMON = {
 
 MISSION_GEN.DIFF_REWARDS = {
 	F = {
-		{"NECESSITIES", 6}, --Basic stuff (i.e. reviver seeds, escape orbs, leppa berries) *
+		{"NECESSITIES", 10}, --Basic stuff (i.e. reviver seeds, escape orbs, leppa berries) *
 		{"AMMO_LOW", 0},
 		{"AMMO_MID", 0},
 		{"AMMO_HIGH", 0},
@@ -653,18 +653,18 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"SPECIAL", 0}
 	},
 	E = {
-		{"NECESSITIES", 6},  --Basic stuff (i.e. reviver seeds, escape orbs, leppa berries) *
+		{"NECESSITIES", 10},  --Basic stuff (i.e. reviver seeds, escape orbs, leppa berries) *
 		{"AMMO_LOW", 0},
 		{"AMMO_MID", 0},
 		{"AMMO_HIGH", 0},
-		{"APRICORN_GENERIC", 6}, --Generic (non-typed) apricorns with a max catch bonus below 35 *
+		{"APRICORN_GENERIC", 10}, --Generic (non-typed) apricorns with a max catch bonus below 35 *
 		{"APRICORN_TYPED", 0},
-		{"FOOD_LOW", 6}, --Basic food, small chance of gummis *
+		{"FOOD_LOW", 10}, --Basic food, small chance of gummis *
 		{"FOOD_MID", 0},
 		{"FOOD_HIGH", 0},
 		{"MEDICINE_LOW", 0},
 		{"MEDICINE_HIGH", 0},
-		{"SEED_LOW", 6}, --Basic seeds, berries, white herbs *
+		{"SEED_LOW", 10}, --Basic seeds, berries, white herbs *
 		{"SEED_MID", 0},
 		{"SEED_HIGH", 0},
 		{"HELD_LOW", 3}, --Basic stat boosting held items and ones with a net drawback (Iron Ball, Flame Orb, etc.)
@@ -678,7 +678,7 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"ORBS_LOW", 0},
 		{"ORBS_MID", 0},
 		{"ORBS_HIGH", 0},
-		{"WANDS_LOW", 6}, --Weak wands *
+		{"WANDS_LOW", 10}, --Weak wands *
 		{"WANDS_MID", 0},
 		{"WANDS_HIGH", 0},
 		{"TM_LOW", 0},
@@ -691,7 +691,7 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"AMMO_LOW", 6}, --Mostly iron thorns, with some weaker ammo *
 		{"AMMO_MID", 0},
 		{"AMMO_HIGH", 0},
-		{"APRICORN_GENERIC", 6}, --Generic (non-typed) apricorns with a max catch bonus below 35 *
+		{"APRICORN_GENERIC", 10}, --Generic (non-typed) apricorns with a max catch bonus below 35 *
 		{"APRICORN_TYPED", 2}, --Type and glitter apricorns
 		{"FOOD_LOW", 4}, --Basic food, small chance of gummis
 		{"FOOD_MID", 0},
@@ -699,21 +699,21 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"MEDICINE_LOW", 0},
 		{"MEDICINE_HIGH", 0},
 		{"SEED_LOW", 4}, --Basic seeds, berries, white herbs
-		{"SEED_MID", 6}, --Advanced seeds and type berries *
+		{"SEED_MID", 10}, --Advanced seeds and type berries *
 		{"SEED_HIGH", 0},
-		{"HELD_LOW", 6}, --Basic stat boosting held items and ones with a net drawback (Iron Ball, Flame Orb, etc.) *
+		{"HELD_LOW", 10}, --Basic stat boosting held items and ones with a net drawback (Iron Ball, Flame Orb, etc.) *
 		{"HELD_MID", 0},
 		{"HELD_HIGH", 0},
 		{"HELD_TYPE", 3}, --Held items that boost a specific type
 		{"HELD_PLATES", 0},
-		{"LOOT_LOW", 6}, --Keys, pearls, assembly boxes *
+		{"LOOT_LOW", 10}, --Keys, pearls, assembly boxes *
 		{"LOOT_HIGH", 0},
 		{"EVO_ITEMS", 0},
 		{"ORBS_LOW", 2}, --Weak wonder orbs
 		{"ORBS_MID", 0},
 		{"ORBS_HIGH", 0},
 		{"WANDS_LOW", 4}, --Weak wands
-		{"WANDS_MID", 6}, --Medium wands *
+		{"WANDS_MID", 10}, --Medium wands *
 		{"WANDS_HIGH", 0},
 		{"TM_LOW", 0},
 		{"TM_MID", 0},
@@ -726,9 +726,9 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"AMMO_MID", 2}, --Stronger generic ammo that you find in most dungeons
 		{"AMMO_HIGH", 0},
 		{"APRICORN_GENERIC", 4}, --Generic (non-typed) apricorns with a max catch bonus below 35 
-		{"APRICORN_TYPED", 6}, --Type and glitter apricorns *
+		{"APRICORN_TYPED", 10}, --Type and glitter apricorns *
 		{"FOOD_LOW", 4}, --Basic food, small chance of gummis
-		{"FOOD_MID", 6}, --Big food, medium chance of gummis *
+		{"FOOD_MID", 10}, --Big food, medium chance of gummis *
 		{"FOOD_HIGH", 0},
 		{"MEDICINE_LOW", 0},
 		{"MEDICINE_HIGH", 0},
@@ -739,17 +739,17 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"HELD_MID", 0},
 		{"HELD_HIGH", 0},
 		{"HELD_TYPE", 3}, --Held items that boost a specific type
-		{"HELD_PLATES", 6}, --Held items that reduce damage from a specific type *
+		{"HELD_PLATES", 10}, --Held items that reduce damage from a specific type *
 		{"LOOT_LOW", 4}, --Keys, pearls, assembly boxes 
 		{"LOOT_HIGH", 0},
 		{"EVO_ITEMS", 2}, --Evolution items, high chance of link cables
-		{"ORBS_LOW", 6}, --Weak wonder orbs *
+		{"ORBS_LOW", 10}, --Weak wonder orbs *
 		{"ORBS_MID", 2}, --Medium wonder orbs, many can shut down a monster house
 		{"ORBS_HIGH", 0},
 		{"WANDS_LOW", 4}, --Weak wands
 		{"WANDS_MID", 4}, --Medium wands 
 		{"WANDS_HIGH", 0},
-		{"TM_LOW", 6}, --TMs for weak moves *
+		{"TM_LOW", 10}, --TMs for weak moves *
 		{"TM_MID", 0},
 		{"TM_HIGH", 0},
 		{"SPECIAL", 0}
@@ -757,10 +757,10 @@ MISSION_GEN.DIFF_REWARDS = {
 	B = {
 		{"NECESSITIES", 3},  --Basic stuff (i.e. reviver seeds, escape orbs, leppa berries)
 		{"AMMO_LOW", 0},
-		{"AMMO_MID", 6}, --Stronger generic ammo that you find in most dungeons *
+		{"AMMO_MID", 10}, --Stronger generic ammo that you find in most dungeons *
 		{"AMMO_HIGH", 2}, --Rare ammo that are hard to find in dungeons
 		{"APRICORN_GENERIC", 0},
-		{"APRICORN_TYPED", 6}, --Type and glitter apricorns *
+		{"APRICORN_TYPED", 10}, --Type and glitter apricorns *
 		{"FOOD_LOW", 3}, --Basic food, small chance of gummis
 		{"FOOD_MID", 5}, --Big food, medium chance of gummis
 		{"FOOD_HIGH", 0},
@@ -770,7 +770,7 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"SEED_MID", 4}, --Advanced seeds and type berries 
 		{"SEED_HIGH", 3}, --Includes rare seeds and berries, skews to Pure Seeds
 		{"HELD_LOW", 3}, --Basic stat boosting held items and ones with a net drawback (Iron Ball, Flame Orb, etc.) 
-		{"HELD_MID", 6}, --Held items very useful for a specific strategy *
+		{"HELD_MID", 10}, --Held items very useful for a specific strategy *
 		{"HELD_HIGH", 0},
 		{"HELD_TYPE", 3}, --Held items that boost a specific type
 		{"HELD_PLATES", 3}, --Held items that reduce damage from a specific type
@@ -778,11 +778,11 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"LOOT_HIGH", 0},
 		{"EVO_ITEMS", 5}, --Evolution items, high chance of link cables
 		{"ORBS_LOW", 4}, --Weak wonder orbs 
-		{"ORBS_MID", 6}, --Medium wonder orbs, many can shut down a monster house *
+		{"ORBS_MID", 10}, --Medium wonder orbs, many can shut down a monster house *
 		{"ORBS_HIGH", 0},
 		{"WANDS_LOW", 0},
 		{"WANDS_MID", 3}, --Medium wands 
-		{"WANDS_HIGH", 6}, --Rare, specialty wands *
+		{"WANDS_HIGH", 10}, --Rare, specialty wands *
 		{"TM_LOW", 4}, --TMs for weak moves
 		{"TM_MID", 2}, --TMs for moderate moves
 		{"TM_HIGH", 0},
@@ -792,25 +792,25 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"NECESSITIES", 2},  --Basic stuff (i.e. reviver seeds, escape orbs, leppa berries)
 		{"AMMO_LOW", 0},
 		{"AMMO_MID", 3}, --Stronger generic ammo that you find in most dungeons
-		{"AMMO_HIGH", 6}, --Rare ammo that are hard to find in dungeons *
+		{"AMMO_HIGH", 10}, --Rare ammo that are hard to find in dungeons *
 		{"APRICORN_GENERIC", 0},
-		{"APRICORN_TYPED", 6}, --Type and glitter apricorns *
+		{"APRICORN_TYPED", 10}, --Type and glitter apricorns *
 		{"FOOD_LOW", 0},
 		{"FOOD_MID", 4}, --Big food, medium chance of gummis
 		{"FOOD_HIGH", 2}, --Huge food with a high chance of wonder gummis and a chance for vitamins
-		{"MEDICINE_LOW", 6}, --Weaker medicine that can't heal all PP or HP at once *
+		{"MEDICINE_LOW", 10}, --Weaker medicine that can't heal all PP or HP at once *
 		{"MEDICINE_HIGH", 0},
 		{"SEED_LOW", 0},
 		{"SEED_MID", 3}, --Advanced seeds and type berries 
-		{"SEED_HIGH", 6}, --Includes rare seeds and berries, skews to Pure Seeds *
+		{"SEED_HIGH", 10}, --Includes rare seeds and berries, skews to Pure Seeds *
 		{"HELD_LOW", 0},
 		{"HELD_MID", 5}, --Held items very useful for a specific strategy 
 		{"HELD_HIGH", 2}, --Held items useful for anyone
 		{"HELD_TYPE", 3}, --Held items that boost a specific type
 		{"HELD_PLATES", 3}, --Held items that reduce damage from a specific type
 		{"LOOT_LOW", 3}, --Keys, pearls, assembly boxes 
-		{"LOOT_HIGH", 6}, --Rare loot, skews towards heart scales *
-		{"EVO_ITEMS", 6}, --Evolution items, high chance of link cables *
+		{"LOOT_HIGH", 10}, --Rare loot, skews towards heart scales *
+		{"EVO_ITEMS", 10}, --Evolution items, high chance of link cables *
 		{"ORBS_LOW", 0},
 		{"ORBS_MID", 4}, --Medium wonder orbs, many can shut down a monster house
 		{"ORBS_HIGH", 4}, --Rare, powerful wonder orbs often with map wide effects
@@ -818,7 +818,7 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"WANDS_MID", 2}, --Medium wands 
 		{"WANDS_HIGH", 5}, --Rare, specialty wands
 		{"TM_LOW", 2}, --TMs for weak moves
-		{"TM_MID", 6}, --TMs for moderate moves *
+		{"TM_MID", 10}, --TMs for moderate moves *
 		{"TM_HIGH", 0},
 		{"SPECIAL", 0}
 	},
@@ -831,9 +831,9 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"APRICORN_TYPED", 5}, --Type and glitter apricorns
 		{"FOOD_LOW", 0},
 		{"FOOD_MID", 2}, --Big food, medium chance of gummis
-		{"FOOD_HIGH", 6}, --Huge food with a high chance of wonder gummis and a chance for vitamins *
+		{"FOOD_HIGH", 10}, --Huge food with a high chance of wonder gummis and a chance for vitamins *
 		{"MEDICINE_LOW", 4}, --Weaker medicine that can't heal all PP or HP at once
-		{"MEDICINE_HIGH", 6}, --Powerful medicine that can heal everything *
+		{"MEDICINE_HIGH", 10}, --Powerful medicine that can heal everything *
 		{"SEED_LOW", 0},
 		{"SEED_MID", 0},
 		{"SEED_HIGH", 5}, --Includes rare seeds and berries, skews to Pure Seeds
@@ -843,8 +843,8 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"HELD_TYPE", 3}, --Held items that boost a specific type
 		{"HELD_PLATES", 3}, --Held items that reduce damage from a specific type
 		{"LOOT_LOW", 2}, --Keys, pearls, assembly boxes 
-		{"LOOT_HIGH", 6}, --Rare loot, skews towards heart scales *
-		{"EVO_ITEMS", 6}, --Evolution items, high chance of link cables *
+		{"LOOT_HIGH", 10}, --Rare loot, skews towards heart scales *
+		{"EVO_ITEMS", 10}, --Evolution items, high chance of link cables *
 		{"ORBS_LOW", 0},
 		{"ORBS_MID", 2}, --Medium wonder orbs, many can shut down a monster house
 		{"ORBS_HIGH", 5}, --Rare, powerful wonder orbs often with map wide effects
@@ -853,7 +853,7 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"WANDS_HIGH", 4}, --Rare, specialty wands
 		{"TM_LOW", 0},
 		{"TM_MID", 4}, --TMs for moderate moves
-		{"TM_HIGH", 6}, --TMs for very powerful moves *
+		{"TM_HIGH", 10}, --TMs for very powerful moves *
 		{"SPECIAL", 0}
 	},
 	STAR_1 = {

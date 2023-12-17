@@ -171,7 +171,16 @@ function COMMON.ShowTeamAssemblyMenu(obj, init_fun)
 end
 
 function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
-  
+  --get dungeons with a taken mission
+  local mission_dests = {}
+
+    for i = 1, 8, 1 do
+        local zone = SV.TakenBoard[i].Zone
+        if zone ~= nil and zone ~= '' then
+            mission_dests[zone] = 1
+        end
+    end
+    
   --check for unlock of dungeons
   local open_dests = {}
   for ii = 1,#dungeon_entrances,1 do
@@ -184,6 +193,9 @@ function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
 		else
 		  zone_name = "[color=#00FFFF]"..zone_summary.Name:ToLocal().."[color]"
 		end
+        if mission_dests[dungeon_entrances[ii]] ~= nil then
+          zone_name = STRINGS:Format("\\uE10F ") .. zone_name --open letter
+        end
         table.insert(open_dests, { Name=zone_name, Dest=RogueEssence.Dungeon.ZoneLoc(dungeon_entrances[ii], 0, 0, 0) })
 	  end
 	end

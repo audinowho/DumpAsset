@@ -619,242 +619,573 @@ MISSION_GEN.DIFF_POKEMON = {
 
 MISSION_GEN.DIFF_REWARDS = {
 	F = {
+		{"NECESSITIES", 6}, --Basic stuff (i.e. reviver seeds, escape orbs, leppa berries) *
 		{"AMMO_LOW", 0},
+		{"AMMO_MID", 0},
 		{"AMMO_HIGH", 0},
-		{"FOOD_LOW", 5},
+		{"APRICORN_GENERIC", 0},
+		{"APRICORN_TYPED", 0},
+		{"FOOD_LOW", 0},
+		{"FOOD_MID", 0},
 		{"FOOD_HIGH", 0},
-		{"SEED_LOW", 5},
+		{"MEDICINE_LOW", 0},
+		{"MEDICINE_HIGH", 0},
+		{"SEED_LOW", 0},
+		{"SEED_MID", 0},
 		{"SEED_HIGH", 0},
 		{"HELD_LOW", 0},
+		{"HELD_MID", 0},
 		{"HELD_HIGH", 0},
+		{"HELD_TYPE", 0},
+		{"HELD_PLATES", 0},
+		{"LOOT_LOW", 0},
+		{"LOOT_HIGH", 0},
+		{"EVO_ITEMS", 0},
+		{"ORBS_LOW", 0},
+		{"ORBS_MID", 0},
+		{"ORBS_HIGH", 0},
+		{"WANDS_LOW", 0},
+		{"WANDS_MID", 0},
+		{"WANDS_HIGH", 0},
 		{"TM_LOW", 0},
 		{"TM_MID", 0},
 		{"TM_HIGH", 0},
 		{"SPECIAL", 0}
 	},
 	E = {
-		{"AMMO_LOW", 5},
+		{"NECESSITIES", 6},  --Basic stuff (i.e. reviver seeds, escape orbs, leppa berries) *
+		{"AMMO_LOW", 0},
+		{"AMMO_MID", 0},
 		{"AMMO_HIGH", 0},
-		{"FOOD_LOW", 5},
+		{"APRICORN_GENERIC", 6}, --Generic (non-typed) apricorns with a max catch bonus below 35 *
+		{"APRICORN_TYPED", 0},
+		{"FOOD_LOW", 6}, --Basic food, small chance of gummis *
+		{"FOOD_MID", 0},
 		{"FOOD_HIGH", 0},
-		{"SEED_LOW", 5},
+		{"MEDICINE_LOW", 0},
+		{"MEDICINE_HIGH", 0},
+		{"SEED_LOW", 6}, --Basic seeds, berries, white herbs *
+		{"SEED_MID", 0},
 		{"SEED_HIGH", 0},
-		{"HELD_LOW", 1},
+		{"HELD_LOW", 3}, --Basic stat boosting held items and ones with a net drawback (Iron Ball, Flame Orb, etc.)
+		{"HELD_MID", 0},
 		{"HELD_HIGH", 0},
+		{"HELD_TYPE", 0},
+		{"HELD_PLATES", 0},
+		{"LOOT_LOW", 3}, --Keys, pearls, assembly boxes
+		{"LOOT_HIGH", 0},
+		{"EVO_ITEMS", 0},
+		{"ORBS_LOW", 0},
+		{"ORBS_MID", 0},
+		{"ORBS_HIGH", 0},
+		{"WANDS_LOW", 6}, --Weak wands *
+		{"WANDS_MID", 0},
+		{"WANDS_HIGH", 0},
 		{"TM_LOW", 0},
 		{"TM_MID", 0},
 		{"TM_HIGH", 0},
 		{"SPECIAL", 0}
-		},
+	},
 	D = {
-		{"AMMO_LOW", 5},
+		{"NECESSITIES", 5},  --Basic stuff (i.e. reviver seeds, escape orbs, leppa berries)
+		{"AMMO_LOW", 6}, --Mostly iron thorns, with some weaker ammo *
+		{"AMMO_MID", 0},
 		{"AMMO_HIGH", 0},
-		{"FOOD_LOW", 5},
+		{"APRICORN_GENERIC", 6}, --Generic (non-typed) apricorns with a max catch bonus below 35 *
+		{"APRICORN_TYPED", 2}, --Type and glitter apricorns
+		{"FOOD_LOW", 4}, --Basic food, small chance of gummis
+		{"FOOD_MID", 0},
 		{"FOOD_HIGH", 0},
-		{"SEED_LOW", 5},
+		{"MEDICINE_LOW", 0},
+		{"MEDICINE_HIGH", 0},
+		{"SEED_LOW", 4}, --Basic seeds, berries, white herbs
+		{"SEED_MID", 6}, --Advanced seeds and type berries *
 		{"SEED_HIGH", 0},
-		{"HELD_LOW", 3},
+		{"HELD_LOW", 6}, --Basic stat boosting held items and ones with a net drawback (Iron Ball, Flame Orb, etc.) *
+		{"HELD_MID", 0},
 		{"HELD_HIGH", 0},
-		{"TM_LOW", 1},
+		{"HELD_TYPE", 3}, --Held items that boost a specific type
+		{"HELD_PLATES", 0},
+		{"LOOT_LOW", 6}, --Keys, pearls, assembly boxes *
+		{"LOOT_HIGH", 0},
+		{"EVO_ITEMS", 0},
+		{"ORBS_LOW", 2}, --Weak wonder orbs
+		{"ORBS_MID", 0},
+		{"ORBS_HIGH", 0},
+		{"WANDS_LOW", 4}, --Weak wands
+		{"WANDS_MID", 6}, --Medium wands *
+		{"WANDS_HIGH", 0},
+		{"TM_LOW", 0},
 		{"TM_MID", 0},
 		{"TM_HIGH", 0},
 		{"SPECIAL", 0}
-		},
+	},
 	C = {
-		{"AMMO_LOW", 5},
+		{"NECESSITIES", 4},  --Basic stuff (i.e. reviver seeds, escape orbs, leppa berries)
+		{"AMMO_LOW", 4}, --Mostly iron thorns, with some weaker ammo 
+		{"AMMO_MID", 2}, --Stronger generic ammo that you find in most dungeons
 		{"AMMO_HIGH", 0},
-		{"FOOD_LOW", 5},
-		{"FOOD_HIGH", 1},
-		{"SEED_LOW", 5},
-		{"SEED_HIGH", 1},
-		{"HELD_LOW", 4},
+		{"APRICORN_GENERIC", 4}, --Generic (non-typed) apricorns with a max catch bonus below 35 
+		{"APRICORN_TYPED", 6}, --Type and glitter apricorns *
+		{"FOOD_LOW", 4}, --Basic food, small chance of gummis
+		{"FOOD_MID", 6}, --Big food, medium chance of gummis *
+		{"FOOD_HIGH", 0},
+		{"MEDICINE_LOW", 0},
+		{"MEDICINE_HIGH", 0},
+		{"SEED_LOW", 4}, --Basic seeds, berries, white herbs
+		{"SEED_MID", 4}, --Advanced seeds and type berries 
+		{"SEED_HIGH", 0},
+		{"HELD_LOW", 4}, --Basic stat boosting held items and ones with a net drawback (Iron Ball, Flame Orb, etc.) 
+		{"HELD_MID", 0},
 		{"HELD_HIGH", 0},
-		{"TM_LOW", 3},
+		{"HELD_TYPE", 3}, --Held items that boost a specific type
+		{"HELD_PLATES", 6}, --Held items that reduce damage from a specific type *
+		{"LOOT_LOW", 4}, --Keys, pearls, assembly boxes 
+		{"LOOT_HIGH", 0},
+		{"EVO_ITEMS", 2}, --Evolution items, high chance of link cables
+		{"ORBS_LOW", 6}, --Weak wonder orbs *
+		{"ORBS_MID", 2}, --Medium wonder orbs, many can shut down a monster house
+		{"ORBS_HIGH", 0},
+		{"WANDS_LOW", 4}, --Weak wands
+		{"WANDS_MID", 4}, --Medium wands 
+		{"WANDS_HIGH", 0},
+		{"TM_LOW", 6}, --TMs for weak moves *
 		{"TM_MID", 0},
 		{"TM_HIGH", 0},
 		{"SPECIAL", 0}
-		},
+	},
 	B = {
-		{"AMMO_LOW", 5},
-		{"AMMO_HIGH", 1},
-		{"FOOD_LOW", 5},
-		{"FOOD_HIGH", 1},
-		{"SEED_LOW", 5},
-		{"SEED_HIGH", 1},
-		{"HELD_LOW", 4},
+		{"NECESSITIES", 3},  --Basic stuff (i.e. reviver seeds, escape orbs, leppa berries)
+		{"AMMO_LOW", 0},
+		{"AMMO_MID", 6}, --Stronger generic ammo that you find in most dungeons *
+		{"AMMO_HIGH", 2}, --Rare ammo that are hard to find in dungeons
+		{"APRICORN_GENERIC", 0},
+		{"APRICORN_TYPED", 6}, --Type and glitter apricorns *
+		{"FOOD_LOW", 3}, --Basic food, small chance of gummis
+		{"FOOD_MID", 5}, --Big food, medium chance of gummis
+		{"FOOD_HIGH", 0},
+		{"MEDICINE_LOW", 2}, --Weaker medicine that can't heal all PP or HP at once
+		{"MEDICINE_HIGH", 0},
+		{"SEED_LOW", 0},
+		{"SEED_MID", 4}, --Advanced seeds and type berries 
+		{"SEED_HIGH", 3}, --Includes rare seeds and berries, skews to Pure Seeds
+		{"HELD_LOW", 3}, --Basic stat boosting held items and ones with a net drawback (Iron Ball, Flame Orb, etc.) 
+		{"HELD_MID", 6}, --Held items very useful for a specific strategy *
 		{"HELD_HIGH", 0},
-		{"TM_LOW", 3},
-		{"TM_MID", 1},
+		{"HELD_TYPE", 3}, --Held items that boost a specific type
+		{"HELD_PLATES", 3}, --Held items that reduce damage from a specific type
+		{"LOOT_LOW", 4}, --Keys, pearls, assembly boxes 
+		{"LOOT_HIGH", 0},
+		{"EVO_ITEMS", 5}, --Evolution items, high chance of link cables
+		{"ORBS_LOW", 4}, --Weak wonder orbs 
+		{"ORBS_MID", 6}, --Medium wonder orbs, many can shut down a monster house *
+		{"ORBS_HIGH", 0},
+		{"WANDS_LOW", 0},
+		{"WANDS_MID", 3}, --Medium wands 
+		{"WANDS_HIGH", 6}, --Rare, specialty wands *
+		{"TM_LOW", 4}, --TMs for weak moves
+		{"TM_MID", 2}, --TMs for moderate moves
 		{"TM_HIGH", 0},
 		{"SPECIAL", 0}
-		},
+	},
 	A = {
-		{"AMMO_LOW", 5},
-		{"AMMO_HIGH", 1},
-		{"FOOD_LOW", 5},
-		{"FOOD_HIGH", 2},
-		{"SEED_LOW", 5},
-		{"SEED_HIGH", 2},
-		{"HELD_LOW", 5},
-		{"HELD_HIGH", 1},
-		{"TM_LOW", 3},
-		{"TM_MID", 1},
+		{"NECESSITIES", 2},  --Basic stuff (i.e. reviver seeds, escape orbs, leppa berries)
+		{"AMMO_LOW", 0},
+		{"AMMO_MID", 3}, --Stronger generic ammo that you find in most dungeons
+		{"AMMO_HIGH", 6}, --Rare ammo that are hard to find in dungeons *
+		{"APRICORN_GENERIC", 0},
+		{"APRICORN_TYPED", 6}, --Type and glitter apricorns *
+		{"FOOD_LOW", 0},
+		{"FOOD_MID", 4}, --Big food, medium chance of gummis
+		{"FOOD_HIGH", 2}, --Huge food with a high chance of wonder gummis and a chance for vitamins
+		{"MEDICINE_LOW", 6}, --Weaker medicine that can't heal all PP or HP at once *
+		{"MEDICINE_HIGH", 0},
+		{"SEED_LOW", 0},
+		{"SEED_MID", 3}, --Advanced seeds and type berries 
+		{"SEED_HIGH", 6}, --Includes rare seeds and berries, skews to Pure Seeds *
+		{"HELD_LOW", 0},
+		{"HELD_MID", 5}, --Held items very useful for a specific strategy 
+		{"HELD_HIGH", 2}, --Held items useful for anyone
+		{"HELD_TYPE", 3}, --Held items that boost a specific type
+		{"HELD_PLATES", 3}, --Held items that reduce damage from a specific type
+		{"LOOT_LOW", 3}, --Keys, pearls, assembly boxes 
+		{"LOOT_HIGH", 6}, --Rare loot, skews towards heart scales *
+		{"EVO_ITEMS", 6}, --Evolution items, high chance of link cables *
+		{"ORBS_LOW", 0},
+		{"ORBS_MID", 4}, --Medium wonder orbs, many can shut down a monster house
+		{"ORBS_HIGH", 4}, --Rare, powerful wonder orbs often with map wide effects
+		{"WANDS_LOW", 0},
+		{"WANDS_MID", 2}, --Medium wands 
+		{"WANDS_HIGH", 5}, --Rare, specialty wands
+		{"TM_LOW", 2}, --TMs for weak moves
+		{"TM_MID", 6}, --TMs for moderate moves *
 		{"TM_HIGH", 0},
 		{"SPECIAL", 0}
-		},
+	},
 	S = {
-		{"AMMO_LOW", 4},
-		{"AMMO_HIGH", 1},
-		{"FOOD_LOW", 3},
-		{"FOOD_HIGH", 2},
-		{"SEED_LOW", 4},
-		{"SEED_HIGH", 2},
-		{"HELD_LOW", 4},
-		{"HELD_HIGH", 1},
-		{"TM_LOW", 2},
-		{"TM_MID", 3},
-		{"TM_HIGH", 1},
-		{"SPECIAL", 1}
-		},
+		{"NECESSITIES", 2},  --Basic stuff (i.e. reviver seeds, escape orbs, leppa berries)
+		{"AMMO_LOW", 0},
+		{"AMMO_MID", 2}, --Stronger generic ammo that you find in most dungeons
+		{"AMMO_HIGH", 5}, --Rare ammo that are hard to find in dungeons
+		{"APRICORN_GENERIC", 0},
+		{"APRICORN_TYPED", 5}, --Type and glitter apricorns
+		{"FOOD_LOW", 0},
+		{"FOOD_MID", 2}, --Big food, medium chance of gummis
+		{"FOOD_HIGH", 6}, --Huge food with a high chance of wonder gummis and a chance for vitamins *
+		{"MEDICINE_LOW", 4}, --Weaker medicine that can't heal all PP or HP at once
+		{"MEDICINE_HIGH", 6}, --Powerful medicine that can heal everything *
+		{"SEED_LOW", 0},
+		{"SEED_MID", 0},
+		{"SEED_HIGH", 5}, --Includes rare seeds and berries, skews to Pure Seeds
+		{"HELD_LOW", 0},
+		{"HELD_MID", 3}, --Held items very useful for a specific strategy 
+		{"HELD_HIGH", 6}, --Held items useful for anyone *
+		{"HELD_TYPE", 3}, --Held items that boost a specific type
+		{"HELD_PLATES", 3}, --Held items that reduce damage from a specific type
+		{"LOOT_LOW", 2}, --Keys, pearls, assembly boxes 
+		{"LOOT_HIGH", 6}, --Rare loot, skews towards heart scales *
+		{"EVO_ITEMS", 6}, --Evolution items, high chance of link cables *
+		{"ORBS_LOW", 0},
+		{"ORBS_MID", 2}, --Medium wonder orbs, many can shut down a monster house
+		{"ORBS_HIGH", 5}, --Rare, powerful wonder orbs often with map wide effects
+		{"WANDS_LOW", 0},
+		{"WANDS_MID", 2}, --Medium wands 
+		{"WANDS_HIGH", 4}, --Rare, specialty wands
+		{"TM_LOW", 0},
+		{"TM_MID", 4}, --TMs for moderate moves
+		{"TM_HIGH", 6}, --TMs for very powerful moves *
+		{"SPECIAL", 0}
+	},
 	STAR_1 = {
-		{"AMMO_LOW", 3},
-		{"AMMO_HIGH", 2},
-		{"FOOD_LOW", 2},
-		{"FOOD_HIGH", 2},
-		{"SEED_LOW", 2},
-		{"SEED_HIGH", 2},
-		{"HELD_LOW", 3},
-		{"HELD_HIGH", 2},
+		{"NECESSITIES", 0},
+		{"AMMO_LOW", 0},
+		{"AMMO_MID", 2}, --Stronger generic ammo that you find in most dungeons
+		{"AMMO_HIGH", 5}, --Rare ammo that are hard to find in dungeons
+		{"APRICORN_GENERIC", 0},
+		{"APRICORN_TYPED", 5}, --Type and glitter apricorns
+		{"FOOD_LOW", 0},
+		{"FOOD_MID", 0},
+		{"FOOD_HIGH", 5}, --Huge food with a high chance of wonder gummis and a chance for vitamins
+		{"MEDICINE_LOW", 2}, --Weaker medicine that can't heal all PP or HP at once
+		{"MEDICINE_HIGH", 5}, --Powerful medicine that can heal everything
+		{"SEED_LOW", 0},
+		{"SEED_MID", 0},
+		{"SEED_HIGH", 2}, --Includes rare seeds and berries, skews to Pure Seeds
+		{"HELD_LOW", 0},
+		{"HELD_MID", 2}, --Held items very useful for a specific strategy 
+		{"HELD_HIGH", 5}, --Held items useful for anyone
+		{"HELD_TYPE", 0}, 
+		{"HELD_PLATES", 0}, 
+		{"LOOT_LOW", 2}, --Keys, pearls, assembly boxes 
+		{"LOOT_HIGH", 5}, --Rare loot, skews towards heart scales
+		{"EVO_ITEMS", 5}, --Evolution items, high chance of link cables
+		{"ORBS_LOW", 0},
+		{"ORBS_MID", 2}, --Medium wonder orbs, many can shut down a monster house
+		{"ORBS_HIGH", 5}, --Rare, powerful wonder orbs often with map wide effects
+		{"WANDS_LOW", 0},
+		{"WANDS_MID", 0},
+		{"WANDS_HIGH", 3}, --Rare, specialty wands
 		{"TM_LOW", 0},
-		{"TM_MID", 3},
-		{"TM_HIGH", 1},
-		{"SPECIAL", 2}
-		},
+		{"TM_MID", 4}, --TMs for moderate moves
+		{"TM_HIGH", 5}, --TMs for very powerful moves
+		{"SPECIAL", 1} --Very rare, powerful treasures (Amber Tears, Ability Capsules, Golden Apples, etc.)
+	},
 	STAR_2 = {
-		{"AMMO_LOW", 2},
-		{"AMMO_HIGH", 3},
-		{"FOOD_LOW", 1},
-		{"FOOD_HIGH", 3},
-		{"SEED_LOW", 1},
-		{"SEED_HIGH", 3},
-		{"HELD_LOW", 2},
-		{"HELD_HIGH", 3},
+		{"NECESSITIES", 0},
+		{"AMMO_LOW", 0},
+		{"AMMO_MID", 0}, 
+		{"AMMO_HIGH", 5}, --Rare ammo that are hard to find in dungeons
+		{"APRICORN_GENERIC", 0},
+		{"APRICORN_TYPED", 0},
+		{"FOOD_LOW", 0},
+		{"FOOD_MID", 0},
+		{"FOOD_HIGH", 5}, --Huge food with a high chance of wonder gummis and a chance for vitamins
+		{"MEDICINE_LOW", 0}, 
+		{"MEDICINE_HIGH", 5}, --Powerful medicine that can heal everything
+		{"SEED_LOW", 0},
+		{"SEED_MID", 0},
+		{"SEED_HIGH", 0}, 
+		{"HELD_LOW", 0},
+		{"HELD_MID", 0}, 
+		{"HELD_HIGH", 5}, --Held items useful for anyone
+		{"HELD_TYPE", 0}, 
+		{"HELD_PLATES", 0}, 
+		{"LOOT_LOW", 0}, 
+		{"LOOT_HIGH", 5}, --Rare loot, skews towards heart scales
+		{"EVO_ITEMS", 5}, --Evolution items, high chance of link cables
+		{"ORBS_LOW", 0},
+		{"ORBS_MID", 0}, 
+		{"ORBS_HIGH", 5}, --Rare, powerful wonder orbs often with map wide effects
+		{"WANDS_LOW", 0},
+		{"WANDS_MID", 0},
+		{"WANDS_HIGH", 0}, 
 		{"TM_LOW", 0},
-		{"TM_MID", 2},
-		{"TM_HIGH", 2},
-		{"SPECIAL", 2}
+		{"TM_MID", 2}, --TMs for moderate moves
+		{"TM_HIGH", 5}, --TMs for very powerful moves
+		{"SPECIAL", 2} --Very rare, powerful treasures (Amber Tears, Ability Capsules, Golden Apples, etc.)
 	},
 	STAR_3 = {
-		{"AMMO_LOW", 1},
-		{"AMMO_HIGH", 4},
-		{"FOOD_LOW", 1},
-		{"FOOD_HIGH", 4},
-		{"SEED_LOW", 1},
-		{"SEED_HIGH", 4},
-		{"HELD_LOW", 1},
-		{"HELD_HIGH", 4},
+		{"NECESSITIES", 0},
+		{"AMMO_LOW", 0},
+		{"AMMO_MID", 0},
+		{"AMMO_HIGH", 5}, --Rare ammo that are hard to find in dungeons
+		{"APRICORN_GENERIC", 0},
+		{"APRICORN_TYPED", 0},
+		{"FOOD_LOW", 0},
+		{"FOOD_MID", 0},
+		{"FOOD_HIGH", 5}, --Huge food with a high chance of wonder gummis and a chance for vitamins
+		{"MEDICINE_LOW", 0},
+		{"MEDICINE_HIGH", 5}, --Powerful medicine that can heal everything
+		{"SEED_LOW", 0},
+		{"SEED_MID", 0},
+		{"SEED_HIGH", 0},
+		{"HELD_LOW", 0},
+		{"HELD_MID", 0},
+		{"HELD_HIGH", 5}, --Held items useful for anyone
+		{"HELD_TYPE", 0},
+		{"HELD_PLATES", 0},
+		{"LOOT_LOW", 0},
+		{"LOOT_HIGH", 5}, --Rare loot, skews towards heart scales
+		{"EVO_ITEMS", 5}, --Evolution items, high chance of link cables
+		{"ORBS_LOW", 0},
+		{"ORBS_MID", 0},
+		{"ORBS_HIGH", 0}, 
+		{"WANDS_LOW", 0},
+		{"WANDS_MID", 0},
+		{"WANDS_HIGH", 0},
 		{"TM_LOW", 0},
-		{"TM_MID", 1},
-		{"TM_HIGH", 3},
-		{"SPECIAL", 2}
+		{"TM_MID", 0}, 
+		{"TM_HIGH", 5}, --TMs for very powerful moves
+		{"SPECIAL", 3} --Very rare, powerful treasures (Amber Tears, Ability Capsules, Golden Apples, etc.)
 	},
 	STAR_4 = {
+		{"NECESSITIES", 0},
 		{"AMMO_LOW", 0},
-		{"AMMO_HIGH", 5},
+		{"AMMO_MID", 0},
+		{"AMMO_HIGH", 0},
+		{"APRICORN_GENERIC", 0},
+		{"APRICORN_TYPED", 0},
 		{"FOOD_LOW", 0},
-		{"FOOD_HIGH", 5},
+		{"FOOD_MID", 0},
+		{"FOOD_HIGH", 5}, --Huge food with a high chance of wonder gummis and a chance for vitamins
+		{"MEDICINE_LOW", 0},
+		{"MEDICINE_HIGH", 0}, 
 		{"SEED_LOW", 0},
-		{"SEED_HIGH", 5},
+		{"SEED_MID", 0},
+		{"SEED_HIGH", 0},
 		{"HELD_LOW", 0},
-		{"HELD_HIGH", 5},
+		{"HELD_MID", 0},
+		{"HELD_HIGH", 5}, --Held items useful for anyone
+		{"HELD_TYPE", 0},
+		{"HELD_PLATES", 0},
+		{"LOOT_LOW", 0},
+		{"LOOT_HIGH", 5}, --Rare loot, skews towards heart scales
+		{"EVO_ITEMS", 5}, --Evolution items, high chance of link cables
+		{"ORBS_LOW", 0},
+		{"ORBS_MID", 0},
+		{"ORBS_HIGH", 0},
+		{"WANDS_LOW", 0},
+		{"WANDS_MID", 0},
+		{"WANDS_HIGH", 0},
 		{"TM_LOW", 0},
 		{"TM_MID", 0},
-		{"TM_HIGH", 3},
-		{"SPECIAL", 2}
+		{"TM_HIGH", 5}, --TMs for very powerful moves
+		{"SPECIAL", 4} --Very rare, powerful treasures (Amber Tears, Ability Capsules, Golden Apples, etc.)
 	},
 	STAR_5 = {
+		{"NECESSITIES", 0},
 		{"AMMO_LOW", 0},
-		{"AMMO_HIGH", 5},
+		{"AMMO_MID", 0},
+		{"AMMO_HIGH", 0},
+		{"APRICORN_GENERIC", 0},
+		{"APRICORN_TYPED", 0},
 		{"FOOD_LOW", 0},
-		{"FOOD_HIGH", 5},
+		{"FOOD_MID", 0},
+		{"FOOD_HIGH", 5}, --Huge food with a high chance of wonder gummis and a chance for vitamins
+		{"MEDICINE_LOW", 0},
+		{"MEDICINE_HIGH", 0},
 		{"SEED_LOW", 0},
-		{"SEED_HIGH", 5},
+		{"SEED_MID", 0},
+		{"SEED_HIGH", 0},
 		{"HELD_LOW", 0},
-		{"HELD_HIGH", 5},
+		{"HELD_MID", 0},
+		{"HELD_HIGH", 0},
+		{"HELD_TYPE", 0},
+		{"HELD_PLATES", 0},
+		{"LOOT_LOW", 0},
+		{"LOOT_HIGH", 0},
+		{"EVO_ITEMS", 0},
+		{"ORBS_LOW", 0},
+		{"ORBS_MID", 0},
+		{"ORBS_HIGH", 0},
+		{"WANDS_LOW", 0},
+		{"WANDS_MID", 0},
+		{"WANDS_HIGH", 0},
 		{"TM_LOW", 0},
 		{"TM_MID", 0},
-		{"TM_HIGH", 3},
-		{"SPECIAL", 3}
+		{"TM_HIGH", 5}, --TMs for very powerful moves
+		{"SPECIAL", 5} --Very rare, powerful treasures (Amber Tears, Ability Capsules, Golden Apples, etc.)
 	},
 	STAR_6 = {
+		{"NECESSITIES", 0},
 		{"AMMO_LOW", 0},
-		{"AMMO_HIGH", 5},
+		{"AMMO_MID", 0},
+		{"AMMO_HIGH", 0},
+		{"APRICORN_GENERIC", 0},
+		{"APRICORN_TYPED", 0},
 		{"FOOD_LOW", 0},
-		{"FOOD_HIGH", 5},
+		{"FOOD_MID", 0},
+		{"FOOD_HIGH", 4}, --Huge food with a high chance of wonder gummis and a chance for vitamins
+		{"MEDICINE_LOW", 0},
+		{"MEDICINE_HIGH", 0},
 		{"SEED_LOW", 0},
-		{"SEED_HIGH", 5},
+		{"SEED_MID", 0},
+		{"SEED_HIGH", 0},
 		{"HELD_LOW", 0},
-		{"HELD_HIGH", 5},
+		{"HELD_MID", 0},
+		{"HELD_HIGH", 0},
+		{"HELD_TYPE", 0},
+		{"HELD_PLATES", 0},
+		{"LOOT_LOW", 0},
+		{"LOOT_HIGH", 0},
+		{"EVO_ITEMS", 0},
+		{"ORBS_LOW", 0},
+		{"ORBS_MID", 0},
+		{"ORBS_HIGH", 0},
+		{"WANDS_LOW", 0},
+		{"WANDS_MID", 0},
+		{"WANDS_HIGH", 0},
 		{"TM_LOW", 0},
 		{"TM_MID", 0},
-		{"TM_HIGH", 3},
-		{"SPECIAL", 3}
+		{"TM_HIGH", 4}, --TMs for very powerful moves
+		{"SPECIAL", 6} --Very rare, powerful treasures (Amber Tears, Ability Capsules, Golden Apples, etc.)
 	},
 	STAR_7 = {
+		{"NECESSITIES", 0},
 		{"AMMO_LOW", 0},
-		{"AMMO_HIGH", 5},
+		{"AMMO_MID", 0},
+		{"AMMO_HIGH", 0},
+		{"APRICORN_GENERIC", 0},
+		{"APRICORN_TYPED", 0},
 		{"FOOD_LOW", 0},
-		{"FOOD_HIGH", 5},
+		{"FOOD_MID", 0},
+		{"FOOD_HIGH", 3}, --Huge food with a high chance of wonder gummis and a chance for vitamins
+		{"MEDICINE_LOW", 0},
+		{"MEDICINE_HIGH", 0},
 		{"SEED_LOW", 0},
-		{"SEED_HIGH", 5},
+		{"SEED_MID", 0},
+		{"SEED_HIGH", 0},
 		{"HELD_LOW", 0},
-		{"HELD_HIGH", 5},
+		{"HELD_MID", 0},
+		{"HELD_HIGH", 0},
+		{"HELD_TYPE", 0},
+		{"HELD_PLATES", 0},
+		{"LOOT_LOW", 0},
+		{"LOOT_HIGH", 0},
+		{"EVO_ITEMS", 0},
+		{"ORBS_LOW", 0},
+		{"ORBS_MID", 0},
+		{"ORBS_HIGH", 0},
+		{"WANDS_LOW", 0},
+		{"WANDS_MID", 0},
+		{"WANDS_HIGH", 0},
 		{"TM_LOW", 0},
 		{"TM_MID", 0},
-		{"TM_HIGH", 3},
-		{"SPECIAL", 3}
+		{"TM_HIGH", 3}, --TMs for very powerful moves
+		{"SPECIAL", 7} --Very rare, powerful treasures (Amber Tears, Ability Capsules, Golden Apples, etc.)
 	},
 	STAR_8 = {
+		{"NECESSITIES", 0},
 		{"AMMO_LOW", 0},
-		{"AMMO_HIGH", 5},
+		{"AMMO_MID", 0},
+		{"AMMO_HIGH", 0},
+		{"APRICORN_GENERIC", 0},
+		{"APRICORN_TYPED", 0},
 		{"FOOD_LOW", 0},
-		{"FOOD_HIGH", 5},
+		{"FOOD_MID", 0},
+		{"FOOD_HIGH", 0},
+		{"MEDICINE_LOW", 0},
+		{"MEDICINE_HIGH", 0},
 		{"SEED_LOW", 0},
-		{"SEED_HIGH", 5},
+		{"SEED_MID", 0},
+		{"SEED_HIGH", 0},
 		{"HELD_LOW", 0},
-		{"HELD_HIGH", 5},
+		{"HELD_MID", 0},
+		{"HELD_HIGH", 0},
+		{"HELD_TYPE", 0},
+		{"HELD_PLATES", 0},
+		{"LOOT_LOW", 0},
+		{"LOOT_HIGH", 0},
+		{"EVO_ITEMS", 0},
+		{"ORBS_LOW", 0},
+		{"ORBS_MID", 0},
+		{"ORBS_HIGH", 0},
+		{"WANDS_LOW", 0},
+		{"WANDS_MID", 0},
+		{"WANDS_HIGH", 0},
 		{"TM_LOW", 0},
 		{"TM_MID", 0},
-		{"TM_HIGH", 3},
-		{"SPECIAL", 3}
+		{"TM_HIGH", 3}, --TMs for very powerful moves
+		{"SPECIAL", 8} --Very rare, powerful treasures (Amber Tears, Ability Capsules, Golden Apples, etc.)
 	},
 	STAR_9 = {
+		{"NECESSITIES", 0},
 		{"AMMO_LOW", 0},
-		{"AMMO_HIGH", 5},
+		{"AMMO_MID", 0},
+		{"AMMO_HIGH", 0},
+		{"APRICORN_GENERIC", 0},
+		{"APRICORN_TYPED", 0},
 		{"FOOD_LOW", 0},
-		{"FOOD_HIGH", 5},
+		{"FOOD_MID", 0},
+		{"FOOD_HIGH", 0},
+		{"MEDICINE_LOW", 0},
+		{"MEDICINE_HIGH", 0},
 		{"SEED_LOW", 0},
-		{"SEED_HIGH", 5},
+		{"SEED_MID", 0},
+		{"SEED_HIGH", 0},
 		{"HELD_LOW", 0},
-		{"HELD_HIGH", 5},
+		{"HELD_MID", 0},
+		{"HELD_HIGH", 0},
+		{"HELD_TYPE", 0},
+		{"HELD_PLATES", 0},
+		{"LOOT_LOW", 0},
+		{"LOOT_HIGH", 0},
+		{"EVO_ITEMS", 0},
+		{"ORBS_LOW", 0},
+		{"ORBS_MID", 0},
+		{"ORBS_HIGH", 0},
+		{"WANDS_LOW", 0},
+		{"WANDS_MID", 0},
+		{"WANDS_HIGH", 0},
 		{"TM_LOW", 0},
 		{"TM_MID", 0},
-		{"TM_HIGH", 3},
-		{"SPECIAL", 3}
+		{"TM_HIGH", 0}, 
+		{"SPECIAL", 9} --Very rare, powerful treasures (Amber Tears, Ability Capsules, Golden Apples, etc.)
 	},
 }
 
 
 
 --Weighted list of rewards to choose from for missions
---todo: balance the weightings
 MISSION_GEN.REWARDS = {
 	--Reward tables of high and low tier loot separated by category (TM, ammo, held items, etc)
 	--different mission difficulties have different chances to roll each table
+
+	NECESSITIES = {
+		{"seed_reviver", 10},
+		{"berry_leppa", 5},
+		{"berry_oran", 5},
+		{"berry_lum", 5},
+		{"food_apple", 5},
+		{"orb_escape", 5},
+		{"apricorn_plain", 5},
+		{"key", 2}
+	},
+	
 	AMMO_LOW = {
 		{"ammo_iron_thorn", 5},
-		{"ammo_geo_pebble", 2},
-		{"ammo_stick", 2},
+		{"ammo_geo_pebble", 1},
+		{"ammo_stick", 1},
 	},
 	
 	AMMO_MID = {
@@ -969,7 +1300,7 @@ MISSION_GEN.REWARDS = {
 		{"medicine_full_heal", 10}
 	},
 	
-	--includes seeds and berries, as well as type berries and weak herbs
+	--includes seeds and berries, as well as white herbs
 	SEED_LOW = {
 		{'seed_blast', 5},
 		{'seed_sleep', 5},
@@ -980,7 +1311,7 @@ MISSION_GEN.REWARDS = {
 		{'berry_lum', 5},
 		{"herb_white", 10}
 	},
-	--Includes advanced seeds and type berries
+	--Includes advanced seeds, herbs, and type berries
 	SEED_MID = {
 		{'seed_reviver', 25},
 		{'seed_decoy', 5},
@@ -2237,14 +2568,16 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		--1/4 chance you get money instead of an item
 		
 		if math.random(1, 4) > 1 then 
-			reward = MISSION_GEN.WeightedRandom(MISSION_GEN.REWARDS[MISSION_GEN.WeightedRandom(MISSION_GEN.DIFF_REWARDS[difficulty])])
+			local reward_pool = MISSION_GEN.REWARDS[MISSION_GEN.WeightedRandom(MISSION_GEN.DIFF_REWARDS[difficulty])]
+			reward = MISSION_GEN.WeightedRandom(reward_pool)
 		end
 		
 		--1/3 chance you get a bonus reward. Bonus reward is always an item, never money 
 		local bonus_reward = ""
 		
-		if math.random(1,3) == 1 then 
-			bonus_reward = MISSION_GEN.WeightedRandom(MISSION_GEN.REWARDS[MISSION_GEN.WeightedRandom(MISSION_GEN.DIFF_REWARDS[difficulty])])
+		if math.random(1,3) == 1 then
+			local reward_pool = MISSION_GEN.REWARDS[MISSION_GEN.WeightedRandom(MISSION_GEN.DIFF_REWARDS[difficulty])]
+			bonus_reward = MISSION_GEN.WeightedRandom(reward_pool)
 		end 
 
 		--Choose a random title that's appropriate.

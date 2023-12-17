@@ -27,31 +27,39 @@ require 'common'
 --Difficulty's point ranks
 MISSION_GEN = {}
 
---UPDATE HERE when a new dungeon gets added
+--MISSION_GEN.DUNGEON_LIST = {'tropical_path', 'faultline_ridge', 'tiny_tunnel', 'guildmaster_trail',
+--							'lava_floe_island', 'castaway_cave', 'eon_island', 'lost_seas', 'inscribed_cave', 'prism_isles',
+--							'faded_trail', 'bramble_woods', 'trickster_woods', 'overgrown_wilds', 'moonlit_courtyard', 'ambush_forest', 'energy_garden', 'sickly_hollow', 'secret_garden',
+--							'flyaway_cliffs', 'fertile_valley', 'wayward_wetlands', 'deserted_fortress', 'bravery_road', 'geode_underpass', 'the_sky',
+--							'copper_quarry', 'forsaken_desert', 'relic_tower', 'sleeping_caldera', 'royal_halls', 'starfall_heights', 'wisdom_road', 'sacred_tower',
+--							'thunderstruck_pass', 'veiled_ridge', 'snowbound_path', 'treacherous_mountain', 'hope_road', 'cave_of_whispers',
+--							'champions_road', 'barren_tundra', 'cave_of_solace', 'labyrinth_of_the_lost'}
+
+--UPDATE HERE when a new dungeon gets added- note, you MUST have a [0] for the default difficulty as well as the first segment
 --REMOVE FROM HERE if you do not want a dungeon to appear in mission gen anymore
-MISSION_GEN.DUNGEON_LIST = {'tropical_path', 'faultline_ridge', 'tiny_tunnel', 'guildmaster_trail',
-							'lava_floe_island', 'castaway_cave', 'eon_island', 'lost_seas', 'inscribed_cave', 'prism_isles',
-							'faded_trail', 'bramble_woods', 'trickster_woods', 'overgrown_wilds', 'moonlit_courtyard', 'ambush_forest', 'energy_garden', 'sickly_hollow', 'secret_garden',
-							'flyaway_cliffs', 'fertile_valley', 'wayward_wetlands', 'deserted_fortress', 'bravery_road', 'geode_underpass', 'the_sky',
-							'copper_quarry', 'forsaken_desert', 'relic_tower', 'sleeping_caldera', 'royal_halls', 'starfall_heights', 'wisdom_road', 'sacred_tower',
-							'thunderstruck_pass', 'veiled_ridge', 'snowbound_path', 'treacherous_mountain', 'hope_road', 'cave_of_whispers',
-							'champions_road', 'barren_tundra', 'cave_of_solace', 'labyrinth_of_the_lost'}
+MISSION_GEN.DUNGEON_LIST = {}
+MISSION_GEN.DUNGEON_LIST["tropical_path"] = { [0] = "F" } --Tropical Path
+MISSION_GEN.DUNGEON_LIST["faultline_ridge"] = { [0] = "STAR_7" } --Faultline Ridge
 
 
 MISSION_GEN.DIFFICULTY = {}
 MISSION_GEN.DIFFICULTY[""] = 0
-MISSION_GEN.DIFFICULTY["F"] = 0
-MISSION_GEN.DIFFICULTY["E"] = 5
-MISSION_GEN.DIFFICULTY["D"] = 10
-MISSION_GEN.DIFFICULTY["C"] = 20
-MISSION_GEN.DIFFICULTY["B"] = 30
-MISSION_GEN.DIFFICULTY["A"] = 40
-MISSION_GEN.DIFFICULTY["S"] = 50
-MISSION_GEN.DIFFICULTY["STAR_1"] = 70
-
---dungeon's assigned difficulty
-SV.DungeonDifficulty = {}
-SV.DungeonDifficulty[""] = "F"
+MISSION_GEN.DIFFICULTY["F"] = 5 --below lv 10 dungeons generally
+MISSION_GEN.DIFFICULTY["E"] = 10 --lv 10-14 dungeons
+MISSION_GEN.DIFFICULTY["D"] = 20 --lv 15-19 dungeons
+MISSION_GEN.DIFFICULTY["C"] = 40 --lv 20-29 dungeons
+MISSION_GEN.DIFFICULTY["B"] = 80 --lv 30-39 dungeons
+MISSION_GEN.DIFFICULTY["A"] = 125 --lv 40-49 dungeons
+MISSION_GEN.DIFFICULTY["S"] = 250 --lv 50-59 dungeons
+MISSION_GEN.DIFFICULTY["STAR_1"] = 500 --lv 60+ dungeons
+MISSION_GEN.DIFFICULTY["STAR_2"] = 1000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_3"] = 2000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_4"] = 3000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_5"] = 4000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_6"] = 5000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_7"] = 6000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_8"] = 7000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_9"] = 8000 --reserved for challenge dungeons
 
 --order of difficulties. 
 MISSION_GEN.DIFF_TO_ORDER = {}
@@ -64,26 +72,42 @@ MISSION_GEN.DIFF_TO_ORDER["B"] = 6
 MISSION_GEN.DIFF_TO_ORDER["A"] = 7
 MISSION_GEN.DIFF_TO_ORDER["S"] = 8
 MISSION_GEN.DIFF_TO_ORDER["STAR_1"] = 9
+MISSION_GEN.DIFF_TO_ORDER["STAR_2"] = 10
+MISSION_GEN.DIFF_TO_ORDER["STAR_3"] = 11
+MISSION_GEN.DIFF_TO_ORDER["STAR_4"] = 12
+MISSION_GEN.DIFF_TO_ORDER["STAR_5"] = 13
+MISSION_GEN.DIFF_TO_ORDER["STAR_6"] = 14
+MISSION_GEN.DIFF_TO_ORDER["STAR_7"] = 15
+MISSION_GEN.DIFF_TO_ORDER["STAR_8"] = 16
+MISSION_GEN.DIFF_TO_ORDER["STAR_9"] = 17
 
 --use this to get back from above.
-MISSION_GEN.ORDER_TO_DIFF = {"", "F", "E", "D", "C", "B", "A", "S", "STAR_1"}
+MISSION_GEN.ORDER_TO_DIFF = {"", "F", "E", "D", "C", "B", "A", "S", "STAR_1","STAR_2","STAR_3","STAR_4","STAR_5","STAR_6","STAR_7","STAR_8","STAR_9"}
 
 --mapping of difficulty to reward amounts for money
 MISSION_GEN.DIFF_TO_MONEY = {}
 MISSION_GEN.DIFF_TO_MONEY[""] = 0
-MISSION_GEN.DIFF_TO_MONEY["F"] = 0
-MISSION_GEN.DIFF_TO_MONEY["E"] = 100
-MISSION_GEN.DIFF_TO_MONEY["D"] = 200
-MISSION_GEN.DIFF_TO_MONEY["C"] = 400
+MISSION_GEN.DIFF_TO_MONEY["F"] = 100
+MISSION_GEN.DIFF_TO_MONEY["E"] = 200
+MISSION_GEN.DIFF_TO_MONEY["D"] = 400
+MISSION_GEN.DIFF_TO_MONEY["C"] = 600
 MISSION_GEN.DIFF_TO_MONEY["B"] = 800
 MISSION_GEN.DIFF_TO_MONEY["A"] = 1500
-MISSION_GEN.DIFF_TO_MONEY["S"] = 4000
-MISSION_GEN.DIFF_TO_MONEY["STAR_1"] = 10000
+MISSION_GEN.DIFF_TO_MONEY["S"] = 3000
+MISSION_GEN.DIFF_TO_MONEY["STAR_1"] = 6000
+MISSION_GEN.DIFF_TO_MONEY["STAR_2"] = 10000
+MISSION_GEN.DIFF_TO_MONEY["STAR_3"] = 15000
+MISSION_GEN.DIFF_TO_MONEY["STAR_4"] = 20000
+MISSION_GEN.DIFF_TO_MONEY["STAR_5"] = 25000
+MISSION_GEN.DIFF_TO_MONEY["STAR_6"] = 30000
+MISSION_GEN.DIFF_TO_MONEY["STAR_7"] = 35000
+MISSION_GEN.DIFF_TO_MONEY["STAR_8"] = 40000
+MISSION_GEN.DIFF_TO_MONEY["STAR_9"] = 45000
 
 --color coding for mission difficulty letters
 MISSION_GEN.DIFF_TO_COLOR = {}
 MISSION_GEN.DIFF_TO_COLOR[""] = "[color=#000000]"
-MISSION_GEN.DIFF_TO_COLOR["F"] = "[color=#000000]"
+MISSION_GEN.DIFF_TO_COLOR["F"] = "[color=#FFFFFF]"
 MISSION_GEN.DIFF_TO_COLOR["E"] = "[color=#F8F8F8]"
 MISSION_GEN.DIFF_TO_COLOR["D"] = "[color=#F8C8C8]"
 MISSION_GEN.DIFF_TO_COLOR["C"] = "[color=#40F840]"
@@ -91,6 +115,14 @@ MISSION_GEN.DIFF_TO_COLOR["B"] = "[color=#F8C060]"
 MISSION_GEN.DIFF_TO_COLOR["A"] = "[color=#00F8F8]"
 MISSION_GEN.DIFF_TO_COLOR["S"] = "[color=#F80000]"
 MISSION_GEN.DIFF_TO_COLOR["STAR_1"] = "[color=#F8F800]"
+MISSION_GEN.DIFF_TO_COLOR["STAR_2"] = "[color=#F8F800]"
+MISSION_GEN.DIFF_TO_COLOR["STAR_3"] = "[color=#F8F800]"
+MISSION_GEN.DIFF_TO_COLOR["STAR_4"] = "[color=#F8F800]"
+MISSION_GEN.DIFF_TO_COLOR["STAR_5"] = "[color=#F8F800]"
+MISSION_GEN.DIFF_TO_COLOR["STAR_6"] = "[color=#F8F800]"
+MISSION_GEN.DIFF_TO_COLOR["STAR_7"] = "[color=#F8F800]"
+MISSION_GEN.DIFF_TO_COLOR["STAR_8"] = "[color=#F8F800]"
+MISSION_GEN.DIFF_TO_COLOR["STAR_9"] = "[color=#F8F800]"
 
 
 
@@ -479,47 +511,92 @@ MISSION_GEN.DIFF_POKEMON = {
 		{"TIER_HIGH", 0}
 	},
 	E = {
-		{"TIER_LOW", 10},
-		{"TIER_MID", 0},
-		{"TIER_HIGH", 0}
-		},
-	D = {
 		{"TIER_LOW", 9},
 		{"TIER_MID", 1},
 		{"TIER_HIGH", 0}
 		},
-	C = {
+	D = {
 		{"TIER_LOW", 7},
 		{"TIER_MID", 3},
 		{"TIER_HIGH", 0}
 		},
-	B = {
-		{"TIER_LOW", 5},
+	C = {
+		{"TIER_LOW", 6},
 		{"TIER_MID", 4},
-		{"TIER_HIGH", 1}
+		{"TIER_HIGH", 0}
 		},
-	A = {
+	B = {
 		{"TIER_LOW", 2},
 		{"TIER_MID", 6},
 		{"TIER_HIGH", 2}
 		},
+	A = {
+		{"TIER_LOW", 1},
+		{"TIER_MID", 5},
+		{"TIER_HIGH", 4}
+		},
 	S = {
 		{"TIER_LOW", 0},
-		{"TIER_MID", 6},
-		{"TIER_HIGH", 4}
+		{"TIER_MID", 5},
+		{"TIER_HIGH", 5}
 		},
 	STAR_1 = {
 		{"TIER_LOW", 0},
-		{"TIER_MID", 4},
-		{"TIER_HIGH", 6}
-		}
+		{"TIER_MID", 3},
+		{"TIER_HIGH", 7}
+		},
+	STAR_2 = {
+		{"TIER_LOW", 0},
+		{"TIER_MID", 1},
+		{"TIER_HIGH", 9}
+		},
+	STAR_3 = {
+		{"TIER_LOW", 0},
+		{"TIER_MID", 0},
+		{"TIER_HIGH", 10}
+		},
+	STAR_3 = {
+		{"TIER_LOW", 0},
+		{"TIER_MID", 0},
+		{"TIER_HIGH", 10}
+	},
+	STAR_4 = {
+		{"TIER_LOW", 0},
+		{"TIER_MID", 0},
+		{"TIER_HIGH", 10}
+	},
+	STAR_5 = {
+		{"TIER_LOW", 0},
+		{"TIER_MID", 0},
+		{"TIER_HIGH", 10}
+	},
+	STAR_6 = {
+		{"TIER_LOW", 0},
+		{"TIER_MID", 0},
+		{"TIER_HIGH", 10}
+	},
+	STAR_7 = {
+		{"TIER_LOW", 0},
+		{"TIER_MID", 0},
+		{"TIER_HIGH", 10}
+	},
+	STAR_8 = {
+		{"TIER_LOW", 0},
+		{"TIER_MID", 0},
+		{"TIER_HIGH", 10}
+	},
+	STAR_9 = {
+		{"TIER_LOW", 0},
+		{"TIER_MID", 0},
+		{"TIER_HIGH", 10}
+	}
 }
 
 --weighting of each loot table based on difficulty of mission
 
 MISSION_GEN.DIFF_REWARDS = {
 	F = {
-		{"AMMO_LOW", 5},
+		{"AMMO_LOW", 0},
 		{"AMMO_HIGH", 0},
 		{"FOOD_LOW", 5},
 		{"FOOD_HIGH", 0},
@@ -539,7 +616,7 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"FOOD_HIGH", 0},
 		{"SEED_LOW", 5},
 		{"SEED_HIGH", 0},
-		{"HELD_LOW", 0},
+		{"HELD_LOW", 1},
 		{"HELD_HIGH", 0},
 		{"TM_LOW", 0},
 		{"TM_MID", 0},
@@ -553,9 +630,9 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"FOOD_HIGH", 0},
 		{"SEED_LOW", 5},
 		{"SEED_HIGH", 0},
-		{"HELD_LOW", 2},
+		{"HELD_LOW", 3},
 		{"HELD_HIGH", 0},
-		{"TM_LOW", 0},
+		{"TM_LOW", 1},
 		{"TM_MID", 0},
 		{"TM_HIGH", 0},
 		{"SPECIAL", 0}
@@ -564,23 +641,9 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"AMMO_LOW", 5},
 		{"AMMO_HIGH", 0},
 		{"FOOD_LOW", 5},
-		{"FOOD_HIGH", 0},
+		{"FOOD_HIGH", 1},
 		{"SEED_LOW", 5},
-		{"SEED_HIGH", 0},
-		{"HELD_LOW", 3},
-		{"HELD_HIGH", 0},
-		{"TM_LOW", 2},
-		{"TM_MID", 0},
-		{"TM_HIGH", 0},
-		{"SPECIAL", 0}
-		},
-	B = {
-		{"AMMO_LOW", 5},
-		{"AMMO_HIGH", 0},
-		{"FOOD_LOW", 5},
-		{"FOOD_HIGH", 0},
-		{"SEED_LOW", 5},
-		{"SEED_HIGH", 0},
+		{"SEED_HIGH", 1},
 		{"HELD_LOW", 4},
 		{"HELD_HIGH", 0},
 		{"TM_LOW", 3},
@@ -588,15 +651,29 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"TM_HIGH", 0},
 		{"SPECIAL", 0}
 		},
-	A = {
+	B = {
 		{"AMMO_LOW", 5},
 		{"AMMO_HIGH", 1},
 		{"FOOD_LOW", 5},
 		{"FOOD_HIGH", 1},
 		{"SEED_LOW", 5},
 		{"SEED_HIGH", 1},
-		{"HELD_LOW", 5},
+		{"HELD_LOW", 4},
 		{"HELD_HIGH", 0},
+		{"TM_LOW", 3},
+		{"TM_MID", 1},
+		{"TM_HIGH", 0},
+		{"SPECIAL", 0}
+		},
+	A = {
+		{"AMMO_LOW", 5},
+		{"AMMO_HIGH", 1},
+		{"FOOD_LOW", 5},
+		{"FOOD_HIGH", 2},
+		{"SEED_LOW", 5},
+		{"SEED_HIGH", 2},
+		{"HELD_LOW", 5},
+		{"HELD_HIGH", 1},
 		{"TM_LOW", 3},
 		{"TM_MID", 1},
 		{"TM_HIGH", 0},
@@ -606,14 +683,14 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"AMMO_LOW", 4},
 		{"AMMO_HIGH", 1},
 		{"FOOD_LOW", 3},
-		{"FOOD_HIGH", 1},
+		{"FOOD_HIGH", 2},
 		{"SEED_LOW", 4},
-		{"SEED_HIGH", 1},
+		{"SEED_HIGH", 2},
 		{"HELD_LOW", 4},
 		{"HELD_HIGH", 1},
 		{"TM_LOW", 2},
 		{"TM_MID", 3},
-		{"TM_HIGH", 0},
+		{"TM_HIGH", 1},
 		{"SPECIAL", 1}
 		},
 	STAR_1 = {
@@ -629,7 +706,119 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"TM_MID", 3},
 		{"TM_HIGH", 1},
 		{"SPECIAL", 2}
-		}
+		},
+	STAR_2 = {
+		{"AMMO_LOW", 2},
+		{"AMMO_HIGH", 3},
+		{"FOOD_LOW", 1},
+		{"FOOD_HIGH", 3},
+		{"SEED_LOW", 1},
+		{"SEED_HIGH", 3},
+		{"HELD_LOW", 2},
+		{"HELD_HIGH", 3},
+		{"TM_LOW", 0},
+		{"TM_MID", 2},
+		{"TM_HIGH", 2},
+		{"SPECIAL", 2}
+	},
+	STAR_3 = {
+		{"AMMO_LOW", 1},
+		{"AMMO_HIGH", 4},
+		{"FOOD_LOW", 1},
+		{"FOOD_HIGH", 4},
+		{"SEED_LOW", 1},
+		{"SEED_HIGH", 4},
+		{"HELD_LOW", 1},
+		{"HELD_HIGH", 4},
+		{"TM_LOW", 0},
+		{"TM_MID", 1},
+		{"TM_HIGH", 3},
+		{"SPECIAL", 2}
+	},
+	STAR_4 = {
+		{"AMMO_LOW", 0},
+		{"AMMO_HIGH", 5},
+		{"FOOD_LOW", 0},
+		{"FOOD_HIGH", 5},
+		{"SEED_LOW", 0},
+		{"SEED_HIGH", 5},
+		{"HELD_LOW", 0},
+		{"HELD_HIGH", 5},
+		{"TM_LOW", 0},
+		{"TM_MID", 0},
+		{"TM_HIGH", 3},
+		{"SPECIAL", 2}
+	},
+	STAR_5 = {
+		{"AMMO_LOW", 0},
+		{"AMMO_HIGH", 5},
+		{"FOOD_LOW", 0},
+		{"FOOD_HIGH", 5},
+		{"SEED_LOW", 0},
+		{"SEED_HIGH", 5},
+		{"HELD_LOW", 0},
+		{"HELD_HIGH", 5},
+		{"TM_LOW", 0},
+		{"TM_MID", 0},
+		{"TM_HIGH", 3},
+		{"SPECIAL", 3}
+	},
+	STAR_6 = {
+		{"AMMO_LOW", 0},
+		{"AMMO_HIGH", 5},
+		{"FOOD_LOW", 0},
+		{"FOOD_HIGH", 5},
+		{"SEED_LOW", 0},
+		{"SEED_HIGH", 5},
+		{"HELD_LOW", 0},
+		{"HELD_HIGH", 5},
+		{"TM_LOW", 0},
+		{"TM_MID", 0},
+		{"TM_HIGH", 3},
+		{"SPECIAL", 3}
+	},
+	STAR_7 = {
+		{"AMMO_LOW", 0},
+		{"AMMO_HIGH", 5},
+		{"FOOD_LOW", 0},
+		{"FOOD_HIGH", 5},
+		{"SEED_LOW", 0},
+		{"SEED_HIGH", 5},
+		{"HELD_LOW", 0},
+		{"HELD_HIGH", 5},
+		{"TM_LOW", 0},
+		{"TM_MID", 0},
+		{"TM_HIGH", 3},
+		{"SPECIAL", 3}
+	},
+	STAR_8 = {
+		{"AMMO_LOW", 0},
+		{"AMMO_HIGH", 5},
+		{"FOOD_LOW", 0},
+		{"FOOD_HIGH", 5},
+		{"SEED_LOW", 0},
+		{"SEED_HIGH", 5},
+		{"HELD_LOW", 0},
+		{"HELD_HIGH", 5},
+		{"TM_LOW", 0},
+		{"TM_MID", 0},
+		{"TM_HIGH", 3},
+		{"SPECIAL", 3}
+	},
+	STAR_9 = {
+		{"AMMO_LOW", 0},
+		{"AMMO_HIGH", 5},
+		{"FOOD_LOW", 0},
+		{"FOOD_HIGH", 5},
+		{"SEED_LOW", 0},
+		{"SEED_HIGH", 5},
+		{"HELD_LOW", 0},
+		{"HELD_HIGH", 5},
+		{"TM_LOW", 0},
+		{"TM_MID", 0},
+		{"TM_HIGH", 3},
+		{"SPECIAL", 3}
+	},
 }
 
 
@@ -1143,7 +1332,6 @@ end
 
 
 function MISSION_GEN.ResetBoards()
-SV.DungeonDifficulty = {}
 SV.ExpectedLevel = {}
 SV.DungeonOrder = {}
 SV.StairType = {}
@@ -1465,6 +1653,24 @@ SV.OutlawBoard =
 
 end
 
+function MISSION_GEN.GetDifficultyString(difficulty_val)
+	local star_icon = STRINGS:Format("\\uE10C") --star icon
+	local difficulty_string = ""
+	local difficulty_text_strings = {}
+	for str in string.gmatch(difficulty_val, "([^_]+)") do
+		table.insert(difficulty_text_strings, str)
+	end
+
+	if #difficulty_text_strings == 1 then
+		difficulty_string = difficulty_text_strings[1]
+	elseif #difficulty_text_strings == 2 then
+		--STAR
+		difficulty_string = difficulty_text_strings[2] .. star_icon
+	end
+	
+	return difficulty_string
+end
+
 --Generate a board. Board_type should be given as "Mission" or "Outlaw".
 --Job/Outlaw Boards should be cleared before being regenerated.
 function MISSION_GEN.GenerateBoard(result, board_type)
@@ -1487,79 +1693,54 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 	if board_type == COMMON.MISSION_BOARD_OUTLAW then mission_type = COMMON.MISSION_BOARD_OUTLAW end
 	
 	--get list of potential dungeons for missions, remove any that haven't been completed yet.
-	--if it does exist, add the dungeon to SV.DungeonDifficulty based on its level
-	local dungeon_candidates = MISSION_GEN.ShallowCopy(MISSION_GEN.DUNGEON_LIST)
+	local dungeon_candidates = {}
+	local dungeon_segments = {}
+	local dungeon_candidate_index_cur = 1
 	local dungeon_difficulties = MISSION_GEN.ShallowCopy(MISSION_GEN.DIFFICULTY)
-	for i = #dungeon_candidates, 1, -1 do
-		local dungeon_id = dungeon_candidates[i]
-		local dungeon_instance = _DATA:GetZone(dungeon_id)
-		if SV.MissionPrereq.DungeonsCompleted[dungeon_id] == nil then
-			table.remove(dungeon_candidates, i)
-		else
-			if dungeon_instance.Level == nil or dungeon_instance.Level < 0 then
-				PrintInfo("Adding dungeon instance "..dungeon_id.." with score ".."F")
-				SV.DungeonDifficulty[dungeon_id] = "F"
-				SV.ExpectedLevel[dungeon_id] = 5
-			else
-				local dungeon_difficulty_score = dungeon_instance.Level
-				if dungeon_instance.LevelCap then
-					dungeon_difficulty_score = dungeon_difficulty_score * 2
-					if dungeon_instance.KeepSkills == false then
-						dungeon_difficulty_score = dungeon_difficulty_score + 10
+	for dungeon_id, cur_dungeon_segments in pairs(SV.MissionPrereq.DungeonsCompleted) do
+		local dungeon_instance = _DATA:GetZone(dungeon_id)		
+		local dungeon_segment_index_cur = 1
+		PrintInfo("Checking to see if "..dungeon_id.." is a possible mission destination.")
+		if MISSION_GEN.DUNGEON_LIST[dungeon_id] ~= nil then
+			--Add the expected level
+			SV.ExpectedLevel[dungeon_id] = dungeon_instance.Level
+			dungeon_candidates[dungeon_candidate_index_cur] = dungeon_id
+			PrintInfo("Adding dungeon "..dungeon_id.." as a possible mission destination.")
+			local default_dungeon_candidate_needed = true
+			for dungeon_segment, value in pairs(cur_dungeon_segments) do
+				if MISSION_GEN.DUNGEON_LIST[dungeon_id][dungeon_segment] ~= nil then
+					local cur_difficulty = MISSION_GEN.DUNGEON_LIST[dungeon_id][dungeon_segment]
+
+					PrintInfo("Adding dungeon "..dungeon_id.." with segment "..dungeon_segment.." and difficulty "..cur_difficulty)
+
+					if dungeon_segments[dungeon_candidate_index_cur] == nil then
+						dungeon_segments[dungeon_candidate_index_cur] = {}
 					end
-				end
 
-				if dungeon_instance.TeamRestrict then
-					dungeon_difficulty_score = dungeon_difficulty_score * 2
-				end
-				
-				local max_team_size = RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS
-				
-				if dungeon_instance.TeamSize > -1 and dungeon_instance.TeamSize < max_team_size then
-					local team_members_down = max_team_size - dungeon_instance.TeamSize
-					dungeon_difficulty_score = dungeon_difficulty_score * team_members_down
-				end
-
-				if dungeon_instance.NoEXP then
-					dungeon_difficulty_score = dungeon_difficulty_score + 10
-				end
-
-				if dungeon_instance.MoneyRestrict then
-					dungeon_difficulty_score = dungeon_difficulty_score + 5
-				end
-
-				if dungeon_instance.BagRestrict > -1 and dungeon_instance.BagRestrict <= 24 then
-					local bag_restrict_amount = 24 - dungeon_instance.BagRestrict
-					dungeon_difficulty_score = dungeon_difficulty_score + (bag_restrict_amount * 2)
-				end
-
-				if dungeon_instance.BagSize > -1 and dungeon_instance.BagSize <= 24 then
-					local bag_size_amount = 24 - dungeon_instance.BagSize
-					dungeon_difficulty_score = dungeon_difficulty_score + (bag_size_amount * 1)
-				end
-
-				local cur_difficulty = "F"
-				local cur_difficulty_score = 0
-				local difficulty_found = false
-				
-				for key, value in pairs(dungeon_difficulties) do
-					if value ~= "" then
-						if value <= dungeon_difficulty_score and value > cur_difficulty_score then
-							cur_difficulty_score = value
-							cur_difficulty = key
-						end
+					if dungeon_instance.Segments[dungeon_segment].FloorCount > 1 then
+						dungeon_segments[dungeon_candidate_index_cur][dungeon_segment_index_cur] = dungeon_segment
 					end
+					default_dungeon_candidate_needed = false
 				end
-				
-				PrintInfo("Adding dungeon "..dungeon_id.." with difficulty score "..dungeon_difficulty_score.." and difficulty "..cur_difficulty)
-
-				SV.DungeonDifficulty[dungeon_id] = cur_difficulty
-				
-				--Add the expected level
-				SV.ExpectedLevel[dungeon_id] = dungeon_instance.Level
 			end
-		end
 
+			if default_dungeon_candidate_needed == true then
+				if MISSION_GEN.DUNGEON_LIST[dungeon_id][0] ~= nil then
+					local cur_difficulty = MISSION_GEN.DUNGEON_LIST[dungeon_id][0]
+
+					PrintInfo("Adding dungeon "..dungeon_id.." with default segment 0 and difficulty "..cur_difficulty)
+
+					if dungeon_segments[dungeon_candidate_index_cur] == nil then
+						dungeon_segments[dungeon_candidate_index_cur] = {}
+					end
+
+					if dungeon_instance.Segments[0].FloorCount > 1 then
+						dungeon_segments[dungeon_candidate_index_cur][dungeon_segment_index_cur] = 0
+					end
+				end
+			end
+			dungeon_candidate_index_cur = dungeon_candidate_index_cur + 1
+		end
 		SV.DungeonOrder[dungeon_id] = i
 		SV.StairType[dungeon_id] = ""
 	end
@@ -1570,12 +1751,23 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 	--generate jobs
 	for i = 1, jobs_to_make, 1 do 
 		--choose a dungeon, client, target, item, etc
-		local dungeon = dungeon_candidates[math.random(1, #dungeon_candidates)]
+		local dungeon_candidate_index = math.random(1, #dungeon_candidates)
+		local dungeon = dungeon_candidates[dungeon_candidate_index]
 		local client = ""
 		local item = ""
 		local special = ""
 		local title = "Default title."
-		local flavor = "Default flavor text.\nHow did you see this? Tell Palika, please!"
+		local flavor = "Default flavor text."
+
+
+		--Parse through segments for the dungeon
+		local possible_segments = dungeon_segments[dungeon_candidate_index]
+
+		local segment = 0 --Default to 0 segment if no other valid one has been unlocked
+
+		if #possible_segments > 0 then
+			segment = possible_segments[math.random(1, #possible_segments)]
+		end
 
 
 		--generate the objective.
@@ -1641,25 +1833,8 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		local zoneEntry = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon)
 		local zone = _DATA:GetZone(dungeon)
 
-		--Parse through segments for the dungeon
-		local zone_segments = zone.Segments
-		local num_segments = zone_segments.Count
-		local possible_segments = {}
 
-		for i = 0, num_segments - 1, 1 do
-			if zone_segments[i].FloorCount > 1 and SV.MissionPrereq.DungeonsCompleted[dungeon][i] ~= nil then
-				table.insert(possible_segments, 1, i)
-			end
-		end
-
-		local segment = 0 --Default to 0 segment if no other valid one has been unlocked
-
-		if #possible_segments > 0 then
-			segment = possible_segments[math.random(1, #possible_segments)]
-		end
-
-
-		local difficulty = SV.DungeonDifficulty[dungeon]
+		local difficulty = MISSION_GEN.DUNGEON_LIST[dungeon][segment]
 		local offset = 0
 		--up the difficulty by 1 if its an outlaw or escort mission.
 		local difficult_objectives = { COMMON.MISSION_TYPE_ESCORT, COMMON.MISSION_TYPE_EXPLORATION, COMMON.MISSION_TYPE_OUTLAW, COMMON.MISSION_TYPE_OUTLAW_FLEE, COMMON.MISSION_TYPE_OUTLAW_ITEM }
@@ -2146,7 +2321,7 @@ function JobMenu:initialize(job_type, job_number, parent_board_menu)
   if job.Floor ~= -1 then self.floor = MISSION_GEN.GetStairsType(job.Zone) .. '[color=#00FFFF]' .. tostring(job.Floor) .. "[color]F" end
   
   self.difficulty = ""
-  if job.Difficulty ~= "" then self.difficulty = MISSION_GEN.DIFF_TO_COLOR[job.Difficulty] .. job.Difficulty .. "[color]   (" .. tostring(MISSION_GEN.DIFFICULTY[job.Difficulty]) .. ")" end 
+  if job.Difficulty ~= "" then self.difficulty = MISSION_GEN.DIFF_TO_COLOR[job.Difficulty] .. MISSION_GEN.GetDifficultyString(job.Difficulty) .. "[color]   (" .. tostring(MISSION_GEN.DIFFICULTY[job.Difficulty]) .. ")" end 
   
   
   
@@ -2516,8 +2691,13 @@ function BoardMenu:DrawBoard()
 		local zone = _DATA:GetZone(self.jobs[i].Zone).Segments[self.jobs[i].Segment]:ToString()
 		zone = COMMON.CreateColoredSegmentString(zone)
 		local floor =  MISSION_GEN.GetStairsType(self.jobs[i].Zone) ..'[color=#00FFFF]' .. tostring(self.jobs[i].Floor) .. "[color]F"
-		local difficulty = MISSION_GEN.DIFF_TO_COLOR[self.jobs[i].Difficulty] .. self.jobs[i].Difficulty .. "[color]"
+		local difficulty = ""
+		
+		--create difficulty string
+		local difficult_string = MISSION_GEN.GetDifficultyString(self.jobs[i].Difficulty)
 
+		difficulty = MISSION_GEN.DIFF_TO_COLOR[self.jobs[i].Difficulty] .. difficult_string .. "[color]"
+		
 		local icon = ""
 		if self.board_type == COMMON.MISSION_BOARD_TAKEN then
 			if self.jobs[i].Taken then

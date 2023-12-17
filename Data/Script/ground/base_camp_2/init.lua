@@ -1941,7 +1941,13 @@ function base_camp_2.Mission_Job_Clear(job)
         end
 
         GAME:WaitFrames(20)
-        --GeneralFunctions.RewardPoints(MISSION_GEN.DIFFICULTY[job.Difficulty])
+        --Reward EXP for your party
+        local exp_reward = MISSION_GEN.DIFFICULTY[job.Difficulty]
+        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Handout_EXP']), "[color=#00FFFF]"..exp_reward.."[color]")
+        local player_count = _DUNGEON.ActiveTeam.Players.Count
+        for player_idx = 0, player_count-1, 1 do
+            Task:WaitTask(GROUND:_HandoutEXP(_DUNGEON.ActiveTeam.Players[player_idx], exp_reward))
+        end
         GAME:WaitFrames(20)
 
 

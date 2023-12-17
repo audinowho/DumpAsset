@@ -1636,6 +1636,29 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		end
 
 
+
+		--get the zone, and max floors (counted floors of relevant segments, excluding the first LoadGen floor)
+		local zoneEntry = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon)
+		local zone = _DATA:GetZone(dungeon)
+
+		--Parse through segments for the dungeon
+		local zone_segments = zone.Segments
+		local num_segments = zone_segments.Count
+		local possible_segments = {}
+
+		for i = 0, num_segments - 1, 1 do
+			if zone_segments[i].FloorCount > 1 and SV.MissionPrereq.DungeonsCompleted[dungeon][i] ~= nil then
+				table.insert(possible_segments, 1, i)
+			end
+		end
+
+		local segment = 0 --Default to 0 segment if no other valid one has been unlocked
+
+		if #possible_segments > 0 then
+			segment = possible_segments[math.random(1, #possible_segments)]
+		end
+
+
 		local difficulty = SV.DungeonDifficulty[dungeon]
 		local offset = 0
 		--up the difficulty by 1 if its an outlaw or escort mission.
@@ -1645,6 +1668,11 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		--up the difficulty by 2 if its an outlaw monster house
 		elseif objective == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then
 			offset = 2
+		end
+
+		--up the difficulty in a subsegment of the dungeon
+		if segment > 0 then
+			offset = offset + 1
 		end
 		
 		local final_order = MISSION_GEN.DIFF_TO_ORDER[difficulty]+offset
@@ -1756,28 +1784,6 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		if math.random(1,3) == 1 then 
 			bonus_reward = MISSION_GEN.WeightedRandom(MISSION_GEN.REWARDS[MISSION_GEN.WeightedRandom(MISSION_GEN.DIFF_REWARDS[difficulty])])
 		end 
-		
-		--get the zone, and max floors (counted floors of relevant segments, excluding the first LoadGen floor)
-		local zoneEntry = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon)
-		local zone = _DATA:GetZone(dungeon)
-
-		--Parse through segments for the dungeon
-		local zone_segments = zone.Segments
-		local num_segments = zone_segments.Count
-		local possible_segments = {}
-		
-		for i = 0, num_segments - 1, 1 do
-			if zone_segments[i].FloorCount > 1 and SV.MissionPrereq.DungeonsCompleted[dungeon][i] ~= nil then
-				table.insert(possible_segments, 1, i)
-			end
-		end
-		
-		local segment = 0 --Default to 0 segment if no other valid one has been unlocked
-
-		if #possible_segments > 0 then
-			segment = possible_segments[math.random(1, #possible_segments)]
-		end
-
 
 		--Choose a random title that's appropriate.
 		local title_candidates = {}

@@ -852,9 +852,14 @@ MISSION_GEN.REWARDS = {
 	--Reward tables of high and low tier loot separated by category (TM, ammo, held items, etc)
 	--different mission difficulties have different chances to roll each table
 	AMMO_LOW = {
+		{"ammo_iron_thorn", 5},
+		{"ammo_geo_pebble", 2},
+		{"ammo_stick", 2},
+	},
+	
+	AMMO_MID = {
 		{"ammo_geo_pebble", 5},
 		{"ammo_gravelerock", 5},
-		{"ammo_iron_thorn", 5},
 		{"ammo_stick", 5},
 		{"ammo_silver_spike", 5}
 	},
@@ -862,8 +867,24 @@ MISSION_GEN.REWARDS = {
 	AMMO_HIGH = {
 		{"ammo_rare_fossil", 5},
 		{"ammo_corsola_twig", 5},
-		{"ammo_cacnea_spike", 5},
-		{"ammo_golden_thorn", 5}
+		{"ammo_cacnea_spike", 5}
+	},
+	
+	APRICORN_GENERIC = {
+		{"apricorn_plain", 12},
+		{"apricorn_big", 4}
+	},
+	
+	APRICORN_TYPED = {
+		{"apricorn_blue", 5},
+		{"apricorn_green", 5},
+		{"apricorn_brown", 5},
+		{"apricorn_purple", 5},
+		{"apricorn_red", 5},
+		{"apricorn_white", 5},
+		{"apricorn_yellow", 5},
+		{"apricorn_black", 5},
+		{"apricorn_glittery", 5}
 	},
 	--Rare chance for gummis
 	FOOD_LOW = {
@@ -957,7 +978,7 @@ MISSION_GEN.REWARDS = {
 		{'berry_leppa', 5},
 		{'berry_sitrus', 5},
 		{'berry_lum', 5},
-		{"herb_white", 5}
+		{"herb_white", 10}
 	},
 	--Includes advanced seeds and type berries
 	SEED_MID = {
@@ -987,14 +1008,14 @@ MISSION_GEN.REWARDS = {
 		{'berry_babiri', 2},
 		{'berry_passho', 2},
 		{'berry_roseli', 2},
-		{"herb_power", 5},
-		{"herb_mental", 5}
+		{"herb_power", 10},
+		{"herb_mental", 10}
 	},
 	
 	--includes rare seeds and berries
 	SEED_HIGH = {
-		{'seed_pure', 5},
-		{'seed_joy', 2},
+		{'seed_pure', 15},
+		{'seed_joy', 1},
 		{'berry_rowap', 5},
 		{'berry_jaboca', 5},
 		{'berry_liechi', 5},
@@ -1092,16 +1113,19 @@ MISSION_GEN.REWARDS = {
 		{'held_iron_plate', 5},
 		{'held_splash_plate', 5}
 	},
-
+	
 	--Spawns boxes, keys, and loot
-	LOOT = {
-		{'loot_heart_scale', 30},
-		{'key', 10},
-		{'loot_pearl', 5},
-		{'loot_nugget', 2},
+	LOOT_LOW = {
+		{'loot_pearl', 10},
+		{'machine_assembly_box', 10},
+		{'key', 10}
+	},
+
+	LOOT_HIGH = {
+		{'loot_heart_scale', 10},
+		{'loot_nugget', 5},
 		{'machine_recall_box', 5},
-		{'machine_assembly_box', 5},
-		{'machine_storage_box', 2},
+		{'machine_storage_box', 5}
 	},
 	
 	EVO_ITEMS = {
@@ -1132,6 +1156,75 @@ MISSION_GEN.REWARDS = {
 		{'evo_sun_ribbon', 5},
 		{'evo_lunar_ribbon', 5},
 		{'evo_ice_stone', 5}
+	},
+
+	ORBS_LOW = {
+		{"orb_escape", 5},
+		{"orb_weather", 5},
+		{"orb_cleanse", 5},
+		{"orb_endure", 5},
+		{"orb_trapbust", 5},
+		{"orb_petrify", 5},
+		{"orb_foe_hold", 5},
+		{"orb_nullify", 5},
+		{"orb_all_dodge", 5},
+		{"orb_rebound", 5},
+		{"orb_mirror", 5},
+		{"orb_foe_seal", 5},
+		{"orb_rollcall", 5},
+		{"orb_mug", 5},
+	},
+
+	ORBS_MID = {
+		{"orb_escape", 5},
+		{"orb_mobile", 5},
+		{"orb_invisify", 5},
+		{"orb_all_aim", 5},
+		{"orb_trawl", 5},
+		{"orb_one_shot", 5},
+		{"orb_pierce", 5},
+		{"orb_all_protect", 5},
+		{"orb_trap_see", 5},
+		{"orb_slumber", 5},
+		{"orb_totter", 5},
+		{"orb_freeze", 5},
+		{"orb_spurn", 5},
+		{"orb_itemizer", 5},
+		{"orb_halving", 5},
+	},
+
+	ORBS_HIGH = {
+		{"orb_escape", 5},
+		{"orb_luminous", 5},
+		{"orb_invert", 5},
+		{"orb_devolve", 5},
+		{"orb_revival", 5},
+		{"orb_scanner", 5},
+		{"orb_stayaway", 5},
+		{"orb_one_room", 5},
+	},
+	
+	WANDS_LOW = {
+		{"wand_pounce", 5},
+		{"wand_slow", 5},
+		{"wand_topsy_turvy", 5},
+		{"wand_purge", 5}
+	},
+
+	WANDS_MID = {
+		{"wand_path", 5},
+		{"wand_whirlwind", 5},
+		{"wand_switcher", 5},
+		{"wand_fear", 5},
+		{"wand_warp", 5},
+		{"wand_lob", 5}
+	},
+
+	WANDS_HIGH = {
+		{"wand_lure", 5},
+		{"wand_stayaway", 5},
+		{"wand_transfer", 5},
+		{"wand_vanish", 5}
 	},
 	
 	TM_LOW = {
@@ -1187,7 +1280,6 @@ MISSION_GEN.REWARDS = {
 		{'tm_quash', 5}},
 		
 	TM_MID = {
-
 		{'tm_explosion', 5},
 		{'tm_will_o_wisp', 5},
 		{'tm_facade', 5},
@@ -1229,7 +1321,9 @@ MISSION_GEN.REWARDS = {
 		{'tm_dragon_tail', 5},
 		{'tm_silver_wind', 5},
 		{'tm_frost_breath', 5},
-		{'tm_sky_drop', 5}},
+		{'tm_sky_drop', 5}
+	},
+	
 	TM_HIGH = {
 		{'tm_earthquake', 5},
 		{'tm_hyper_beam', 5},
@@ -1283,6 +1377,7 @@ MISSION_GEN.REWARDS = {
 		{'food_apple_golden', 1},
 		{'seed_golden', 1},
 		{'evo_harmony_scarf', 1},
+		{'apricorn_perfect', 1}
 	}
 }
 

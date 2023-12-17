@@ -383,6 +383,7 @@ MISSION_GEN.FLAVOR_BOTTOM =  {
 }
 --master pokemon list
 --This is a list of all Released Pokemon, minus legendaries, and a few other "special" mons (unown for example)
+--This has no purpose besides documenting which Pokemon are available
 MISSION_GEN.MASTER_POKEMON_LIST = 
 {"abra","absol","aerodactyl","aggron","aipom","alakazam","alcremie","altaria","amaura","ambipom","ampharos","anorith","appletun","applin","arbok","arcanine","archen","ariados","armaldo","aron","arrokuda","audino","aurorus","axew","azumarill","azurill",
 "bagon","baltoy","banette","barboach","bastiodon","bayleef","beautifly","beedrill","beldum","bellossom","bellsprout","bibarel","bisharp","bidoof","blastoise","blaziken","blissey","bonsly","bounsweet","braixen","breloom","brionne","bronzong","bronzor","budew","buizel","bulbasaur","buneary","burmy","butterfree",

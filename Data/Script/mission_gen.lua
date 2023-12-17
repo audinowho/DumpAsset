@@ -73,12 +73,12 @@ MISSION_GEN.DIFF_TO_MONEY = {}
 MISSION_GEN.DIFF_TO_MONEY[""] = 0
 MISSION_GEN.DIFF_TO_MONEY["F"] = 0
 MISSION_GEN.DIFF_TO_MONEY["E"] = 100
-MISSION_GEN.DIFF_TO_MONEY["D"] = 150
-MISSION_GEN.DIFF_TO_MONEY["C"] = 200
-MISSION_GEN.DIFF_TO_MONEY["B"] = 250
-MISSION_GEN.DIFF_TO_MONEY["A"] = 300
-MISSION_GEN.DIFF_TO_MONEY["S"] = 350
-MISSION_GEN.DIFF_TO_MONEY["STAR_1"] = 400
+MISSION_GEN.DIFF_TO_MONEY["D"] = 200
+MISSION_GEN.DIFF_TO_MONEY["C"] = 400
+MISSION_GEN.DIFF_TO_MONEY["B"] = 800
+MISSION_GEN.DIFF_TO_MONEY["A"] = 1500
+MISSION_GEN.DIFF_TO_MONEY["S"] = 4000
+MISSION_GEN.DIFF_TO_MONEY["STAR_1"] = 10000
 
 --color coding for mission difficulty letters
 MISSION_GEN.DIFF_TO_COLOR = {}
@@ -489,29 +489,29 @@ MISSION_GEN.DIFF_POKEMON = {
 		{"TIER_HIGH", 0}
 		},
 	C = {
-		{"TIER_LOW", 8},
-		{"TIER_MID", 2},
-		{"TIER_HIGH", 0}
-		},
-	B = {
 		{"TIER_LOW", 7},
 		{"TIER_MID", 3},
 		{"TIER_HIGH", 0}
 		},
-	A = {
+	B = {
 		{"TIER_LOW", 5},
-		{"TIER_MID", 5},
-		{"TIER_HIGH", 0}
+		{"TIER_MID", 4},
+		{"TIER_HIGH", 1}
+		},
+	A = {
+		{"TIER_LOW", 2},
+		{"TIER_MID", 6},
+		{"TIER_HIGH", 2}
 		},
 	S = {
-		{"TIER_LOW", 2},
-		{"TIER_MID", 7},
-		{"TIER_HIGH", 1}
+		{"TIER_LOW", 0},
+		{"TIER_MID", 6},
+		{"TIER_HIGH", 4}
 		},
 	STAR_1 = {
 		{"TIER_LOW", 0},
-		{"TIER_MID", 7},
-		{"TIER_HIGH", 3}
+		{"TIER_MID", 4},
+		{"TIER_HIGH", 6}
 		}
 }
 
@@ -605,7 +605,7 @@ MISSION_GEN.DIFF_REWARDS = {
 	S = {
 		{"AMMO_LOW", 4},
 		{"AMMO_HIGH", 1},
-		{"FOOD_LOW", 4},
+		{"FOOD_LOW", 3},
 		{"FOOD_HIGH", 1},
 		{"SEED_LOW", 4},
 		{"SEED_HIGH", 1},
@@ -614,21 +614,21 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"TM_LOW", 2},
 		{"TM_MID", 3},
 		{"TM_HIGH", 0},
-		{"SPECIAL", 0}
+		{"SPECIAL", 1}
 		},
 	STAR_1 = {
 		{"AMMO_LOW", 3},
 		{"AMMO_HIGH", 2},
-		{"FOOD_LOW", 3},
+		{"FOOD_LOW", 2},
 		{"FOOD_HIGH", 2},
-		{"SEED_LOW", 3},
+		{"SEED_LOW", 2},
 		{"SEED_HIGH", 2},
 		{"HELD_LOW", 3},
 		{"HELD_HIGH", 2},
 		{"TM_LOW", 0},
-		{"TM_MID", 4},
+		{"TM_MID", 3},
 		{"TM_HIGH", 1},
-		{"SPECIAL", 0}
+		{"SPECIAL", 2}
 		}
 }
 
@@ -895,8 +895,14 @@ MISSION_GEN.REWARDS = {
 		{'tm_dragon_pulse', 5},
 		{'tm_sludge_wave', 5},
 		{'tm_drain_punch', 5}},
-	--additional, special, unique rewards. todo
-	SPECIAL = {}
+	
+	--special and unique rewards, very rare
+	SPECIAL = {
+		{'medicine_amber_tear', 1},
+		{'loot_nugget', 1},
+		{'ammo_golden_thorn', 1},
+		{'food_apple_golden', 1},
+	}
 }
 
 MISSION_GEN.SPECIAL_CLIENT_RIVAL = "RIVAL"

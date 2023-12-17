@@ -688,7 +688,7 @@ MISSION_GEN.DIFF_REWARDS = {
 	},
 	D = {
 		{"NECESSITIES", 5},  --Basic stuff (i.e. reviver seeds, escape orbs, leppa berries)
-		{"AMMO_LOW", 6}, --Mostly iron thorns, with some weaker ammo *
+		{"AMMO_LOW", 10}, --Mostly iron thorns, with some weaker ammo *
 		{"AMMO_MID", 0},
 		{"AMMO_HIGH", 0},
 		{"APRICORN_GENERIC", 10}, --Generic (non-typed) apricorns with a max catch bonus below 35 *
@@ -839,7 +839,7 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"SEED_HIGH", 5}, --Includes rare seeds and berries, skews to Pure Seeds
 		{"HELD_LOW", 0},
 		{"HELD_MID", 3}, --Held items very useful for a specific strategy 
-		{"HELD_HIGH", 6}, --Held items useful for anyone *
+		{"HELD_HIGH", 10}, --Held items useful for anyone *
 		{"HELD_TYPE", 3}, --Held items that boost a specific type
 		{"HELD_PLATES", 3}, --Held items that reduce damage from a specific type
 		{"LOOT_LOW", 2}, --Keys, pearls, assembly boxes 

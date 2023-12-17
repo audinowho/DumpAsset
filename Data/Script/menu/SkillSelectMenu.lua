@@ -5,38 +5,32 @@
     Opens a menu with multiple pages that allows the player to select a skill.
     It contains a run method for quick instantiation, as well as a way to open
     an (almost) exact equivalent of UI:RelearnMenu.
-    This equivalent is NOT SAFE FOR REPLAYS. Do not use in dungeons until further notice.
+    This equivalent is NOT SAFE FOR REPLAYS. Do NOT use in dungeons until further notice.
 ]]
 require 'common'
 
 --- Menu for selecting a skill from a specific list of skills.
 SkillSelectMenu = Class("SkillSelectMenu")
 
---- Creates a new SkillSelectMenu instance using the provided list and callbacks.
---- This function throws an error if the parameter 'skill_list' contains less than 1 entries.
---- @param title string the title this window will have
---- @param character userdata the RogueEssence.Dungeon.Character object the chosen skill is to be applied to. Used only for charge display reasons. Can be nil
---- @param skill_list table an array, list or lua array table containing skill indices
---- @param confirm_action function the function called when a slot is chosen. It will have a skill id string passed to it as a parameter
---- @param refuse_action function the function called when the player presses the cancel or menu button
---- @param menu_width number the width of this window. Default is 152
+--- Creates a new ``SkillSelectMenu`` instance using the provided list and callbacks.
+--- This function throws an error if the parameter ``skill_list`` contains less than 1 entries.
+--- @param title string the title this window will have.
+--- @param character userdata the ``RogueEssence.Dungeon.Character`` object the chosen skill is to be applied to. Used only for charge display reasons. Can be nil.
+--- @param skill_list table an array, list or lua array table containing skill indices.
+--- @param confirm_action function the function called when a slot is chosen. It will have a skill id string passed to it as a parameter.
+--- @param refuse_action function the function called when the player presses the cancel or menu button.
+--- @param menu_width number the width of this window. Default is 152.
 function SkillSelectMenu:initialize(title, character, skill_list, confirm_action, refuse_action, menu_width)
+    -- param validity check
+    if #skill_list <1 then
+        --abort if skill list is empty
+        error("parameter 'skill_list' cannot be an empty collection")
+    end
+
     -- constants
     self.MAX_ELEMENTS = 5
 
-    -- try to find a RogueEssence.Dungeon.Character
-    local Character = luanet.import_type('RogueEssence.Dungeon.Character')
-    -- if character exists and is not a RogueEssence.Dungeon.Character
-    if character and LUA_ENGINE:TypeOf(character) ~= luanet.ctype(Character) then
-        -- assume the object is actually a GroundChar or similar and try to fetch character.Data
-        if character.Data and LUA_ENGINE:TypeOf(character.Data) == luanet.ctype(Character) then
-            character = character.Data -- save object if class is right
-        else
-            character = nil -- give up if wrong
-        end
-    end
-
-    -- loading parameters
+    -- parsing data
     self.character = character
     self.confirmAction = confirm_action
     self.refuseAction = refuse_action
@@ -44,11 +38,6 @@ function SkillSelectMenu:initialize(title, character, skill_list, confirm_action
     self.skillList, self.optionsList = self:load_skills(skill_list)
 
     self.choice = nil -- result
-
-    if #self.skillList <1 then
-        --abort if skill list is empty
-        error("parameter 'skill_list' cannot be an empty collection")
-    end
 
     -- creating the menu
     local origin = RogueElements.Loc(16,16)
@@ -67,38 +56,33 @@ end
 
 --- Loads the skills that will be part of the menu.
 --- @param skills table an array, list or lua array table containing skill indices
---- @return table,table a standardized version of the indices list, the list of MenuElementChoice elements corresponding to the skill indices
+--- @return table a standardized version of the indices list, the list of MenuElementChoice elements corresponding to the skill indices
 function SkillSelectMenu:load_skills(skills)
     local skill_list = {}
-    local options_list = {}
 
     if type(skills) == 'table' then
-        for _, skill_id in pairs(skills) do
-            table.insert(options_list, self:process_entry(skill_id, #skill_list+1))
-            table.insert(skill_list, skill_id)
-        end
+        for _, skill_id in pairs(skills) do table.insert(skill_list, skill_id) end
     else
-        for skill_id in luanet.each(LUA_ENGINE:MakeList(skills)) do
-            table.insert(options_list, self:process_entry(skill_id, #skill_list+1))
-            table.insert(skill_list, skill_id)
-        end
+        for skill_id in luanet.each(LUA_ENGINE:MakeList(skills)) do table.insert(skill_list, skill_id) end
     end
-    return skill_list, options_list
+    return skill_list
 end
 
---- Processes one specific skill id and turns it into a MenuElementChoice
---- @param skill_id string the id of the skill to process
---- @param index number the index of the skill in the list it will be inserted in
---- @return userdata the RogueEssence.Menu.MenuElementChoice associated to the skill id and index
-function SkillSelectMenu:process_entry(skill_id, index)
-    local skill = _DATA:GetSkill(skill_id)
-    local skill_name = skill:GetColoredName()
-    local max_charges = skill.BaseCharges
-    if self.character then max_charges = max_charges + self.character.ChargeBoost end
-    local skill_charges = max_charges.."/"..max_charges
-    local text_skill = RogueEssence.Menu.MenuText(skill_name, RogueElements.Loc(2, 1))
-    local text_charges = RogueEssence.Menu.MenuText(skill_charges, RogueElements.Loc(self.menuWidth - 8 * 4, 1), RogueElements.DirH.Right)
-    return RogueEssence.Menu.MenuElementChoice(function() self:choose(index) end, true, text_skill, text_charges)
+--- Processes the menu's properties and generates the ``RogueEssence.Menu.MenuElementChoice`` list that will be displayed.
+--- @return table a list of ``RogueEssence.Menu.MenuElementChoice`` objects.
+function SkillSelectMenu:generate_options()
+    local options = {}
+    for i=1, #self.skillList, 1 do
+        local skill = _DATA:GetSkill(self.skillList[i])
+        local max_charges = skill.BaseCharges
+        if self.character then max_charges = max_charges + self.character.ChargeBoost end
+        local skill_charges = max_charges.."/"..max_charges
+        local text_skill = RogueEssence.Menu.MenuText(skill:GetColoredName(), RogueElements.Loc(2, 1)) --TODO check if colored or icon
+        local text_charges = RogueEssence.Menu.MenuText(skill_charges, RogueElements.Loc(self.menuWidth - 8 * 4, 1), RogueElements.DirH.Right)
+        local option = RogueEssence.Menu.MenuElementChoice(function() self:choose(i) end, true, text_skill, text_charges)
+        table.insert(options, option)
+    end
+    return options
 end
 
 --- Closes the menu and calls the menu's confirmation callback.

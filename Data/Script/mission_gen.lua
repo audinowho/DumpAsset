@@ -2148,6 +2148,10 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 	
 end
 
+function MISSION_GEN.GetJobExpReward(difficulty)
+	return MISSION_GEN.DIFFICULTY[difficulty]
+end
+
 function MISSION_GEN.JobSortFunction(j1, j2)
 	if (j2 == nil or j2.Zone == nil or j2.Zone == "") then
 		return false

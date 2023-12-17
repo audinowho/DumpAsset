@@ -1728,7 +1728,7 @@ function base_camp_2.Outlaw_Job_Clear(job)
         end
 
         GAME:WaitFrames(20)
-        --GeneralFunctions.RewardPoints(MISSION_GEN.DIFFICULTY[job.Difficulty])
+        base_camp_2.RewardEXP(job)
 
         GAME:WaitFrames(20)
 
@@ -1799,7 +1799,7 @@ function base_camp_2.Outlaw_Job_Clear(job)
         end
 
         GAME:WaitFrames(20)
-        --GeneralFunctions.RewardPoints(MISSION_GEN.DIFFICULTY[job.Difficulty])
+        base_camp_2.RewardEXP(job)
         GAME:WaitFrames(20)
 
         --fade out and clean up any temporary characters
@@ -1872,7 +1872,7 @@ function base_camp_2.Mission_Job_Clear(job)
         end
 
         GAME:WaitFrames(20)
-        --GeneralFunctions.RewardPoints(MISSION_GEN.DIFFICULTY[job.Difficulty])
+        base_camp_2.RewardEXP(job)
         GAME:WaitFrames(20)
 
 
@@ -1941,13 +1941,7 @@ function base_camp_2.Mission_Job_Clear(job)
         end
 
         GAME:WaitFrames(20)
-        --Reward EXP for your party
-        local exp_reward = MISSION_GEN.DIFFICULTY[job.Difficulty]
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Handout_EXP']), "[color=#00FFFF]"..exp_reward.."[color]")
-        local player_count = _DUNGEON.ActiveTeam.Players.Count
-        for player_idx = 0, player_count-1, 1 do
-            Task:WaitTask(GROUND:_HandoutEXP(_DUNGEON.ActiveTeam.Players[player_idx], exp_reward))
-        end
+        base_camp_2.RewardEXP(job)
         GAME:WaitFrames(20)
 
 
@@ -1958,6 +1952,19 @@ function base_camp_2.Mission_Job_Clear(job)
         GAME:GetCurrentGround():RemoveTempChar(target)
     end
     GAME:CutsceneMode(false)
+end
+
+function base_camp_2.RewardEXP(job)
+    --Reward EXP for your party
+    local exp_reward = MISSION_GEN.GetJobExpReward(job.Difficulty)
+    local exp_reward_string = "[color=#00FFFF]"..exp_reward.."[color]"
+    UI:ResetSpeaker()
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Handout_EXP'], exp_reward_string))
+    PrintInfo("Rewarding EXP for job with difficulty "..job.Difficulty.." and reward "..exp_reward_string)
+    local player_count = _DATA.Save.ActiveTeam.Players.Count
+    for player_idx = 0, player_count-1, 1 do
+        TASK:WaitTask(GROUND:_HandoutEXP(_DATA.Save.ActiveTeam.Players[player_idx], exp_reward))
+    end
 end
 
 return base_camp_2

@@ -382,35 +382,34 @@ MISSION_GEN.FLAVOR_BOTTOM =  {
 	}
 }
 --master pokemon list
---This is a list of all Released Pokemon, minus ones who are in the same evolutionary family as a named character in the game,
---starters, legendaries, and a few other "special" mons (unown for example)
+--This is a list of all Released Pokemon, minus legendaries, and a few other "special" mons (unown for example)
 MISSION_GEN.MASTER_POKEMON_LIST = 
-{"abra","absol","aerodactyl","aipom","alakazam","alcremie","altaria","amaura","anorith","appletun","applin","arbok","archen","ariados","armaldo","aron","arrokuda","aurorus","axew",
-"baltoy","banette","barboach","bastiodon","beedrill","beldum","bellsprout","bibarel","bidoof","blissey","bonsly","bounsweet","bronzong","bronzor","buneary","burmy",
-"carnivine","carvanha","cascoon","castform","chandelure","chansey","chatot","cherrim","cherubi","chimecho","chinchou","chingling","clamperl","claydol","clobbopus","cloyster","combee","corphish","corsola","corviknight","cradily","cramorant","crawdaunt","croagunk","crobat","cubchoo","cursola","cutiefly",
-"deerling","deino","delibird","dewgong","diglett","ditto","donphan","dragonair","dragonite","drampa","drapion","dratini","drifblim","drifloon","drowzee","dugtrio","dunsparce","duosion","dusclops","dusknoir","duskull","dustox",
-"ekans","electabuzz","electivire","electrode","elekid","emolga","espurr","exeggcute","exeggutor","exploud",
-"fearow","feebas","finneon","flabebe","floette","florges","flygon","fomantis","forretress","froslass",
-"gallade","galvantula","gardevoir","gastly","gastrodon","gengar","geodude","glalie","gligar","gliscor","golbat","goldeen","golduck","golem","golisopod","golurk","goodra","goomy","gorebyss","gothita","gothitelle","gothorita","gourgeist","graveler","grimer","grumpig","gyarados",
-"happiny","hariyama","hatenna","hatterene","hattrem","haunter","helioptile","heracross","hippopotas","hippowdon","hitmonchan","hitmonlee","hitmontop","honedge","hoppip","horsea","houndoom","houndour","huntail","hypno",
-"illumise","indeedee",
-"jangmo_o","joltik","jumpluff","jynx",
-"kabuto","kabutops","kadabra","kakuna","kingdra","kingler","kirlia","koffing","krabby","kricketot","kricketune",
-"lampent","lanturn","lapras","larvitar","leavanny","lileep","lillipup","litwick","lopunny","loudred","lumineon","lunatone","luvdisc",
-"magby","magcargo","magikarp","magmar","magmortar","magnemite","magneton","magnezone","makuhita","mamoswine","mandibuzz","mankey","mantine","mantyke","maractus","mareanie","masquerain","meowstic","metagross","metang","mienfoo","mightyena","milotic","miltank","mime_jr","minccino","minior","minun","misdreavus","mismagius","morgrem","mothim","mr_mime","muk",
-"natu","nincada","ninjask","noibat","noivern","nosepass","nuzleaf",
-"octillery","omanyte","omastar","onix",
-"pachirisu","paras","parasect","phantump","pidgeot","pidgeotto","pidgey","pidove","piloswine","pineco","pinsir","plusle","politoed","poliwag","poliwhirl","poliwrath","ponyta","poochyena","porygon","porygon_z","porygon2","primeape","probopass","psyduck","pumpkaboo","pupitar","purrloin","purugly",
-"qwilfish",
-"ralts","rapidash","raticate","rattata","remoraid","rhydon","rhyhorn","rhyperior","ribombee","roggenrola",
-"sableye","salandit","salazzle","sandshrew","sandslash","sandygast","sawsbuck","scizor","scrafty","scyther","seadra","seaking","seedot","seel","sewaddle","sharpedo","shedinja","shellder","shellos","shieldon","shiftry","shuppet","sinistea","skarmory","skiploom","skorupi","skuntank","slaking","slakoth","sliggoo","slugma","smeargle","smoochum","snorunt","snover","solrock","spearow","spinarak","spiritomb","spoink","stantler","staraptor","staravia","starly","starmie","staryu","steelix","steenee","stoutland","sudowoodo","surskit","swablu","swellow","swinub","swirlix","swoobat",
-"taillow","tangela","tangrowth","tauros","teddiursa","tentacool","tentacruel","thievul","togedemaru","togekiss","togepi","togetic","torkoal","toxicroak","trapinch","trubbish","tsareena","tympole","tyranitar","tyrogue",
+{"abra","absol","aerodactyl","aggron","aipom","alakazam","alcremie","altaria","amaura","ambipom","ampharos","anorith","appletun","applin","arbok","arcanine","archen","ariados","armaldo","aron","arrokuda","audino","aurorus","axew","azumarill","azurill",
+"bagon","baltoy","banette","barboach","bastiodon","beautifly","beedrill","beldum","bellossom","bellsprout","bibarel","bisharp","bidoof","blissey","bonsly","bounsweet","breloom","bronzong","bronzor","budew","buizel","buneary","burmy","butterfree",
+"cacnea","cacturne","camerupt","carnivine","carvanha","cascoon","castform","caterpie","chandelure","chansey","chatot","cherrim","cherubi","chimecho","chinchou","chingling","clamperl","claydol","clefable","clefairy","cleffa","clobbopus","cloyster","combee","corphish","corsola","corviknight","cradily","cramorant","cranidos","crawdaunt","croagunk","crobat","cubchoo","cursola","cutiefly",
+"deerling","deino","delibird","dewgong","diglett","ditto","dodrio","doduo","donphan","dragonair","dragonite","drampa","drapion","dratini","drifblim","drifloon","drowzee","dugtrio","dunsparce","duosion","dusclops","dusknoir","duskull","dustox",
+"ekans","electabuzz","electivire","electrike","electrode","elekid","emolga","espurr","exeggcute","exeggutor","exploud",
+"farfetchd","fearow","feebas","finneon","flabebe","flaaffy","floatzel","floette","florges","flygon","fomantis","forretress","froslass","furret",
+"gabite","gallade","galvantula","garchomp","gardevoir","gastly","gastrodon","gengar","geodude","gible","girafarig","glalie","glameow","gligar","gliscor","gloom","golbat","goldeen","golduck","golem","golisopod","golurk","goodra","goomy","gorebyss","gothita","gothitelle","gothorita","gourgeist","granbull","graveler","grimer","growlithe","grumpig","gulpin","gyarados",
+"happiny","hariyama","hatenna","hatterene","hattrem","haunter","helioptile","heracross","hippopotas","hippowdon","hitmonchan","hitmonlee","hitmontop","honchkrow","honedge","hoothoot","hoppip","horsea","houndoom","houndour","huntail","hypno",
+"igglybuff","illumise","indeedee",
+"jangmo_o","jigglypuff","joltik","jumpluff","jynx",
+"kabuto","kabutops","kadabra","kakuna","kangaskhan","kingdra","kingler","kirlia","koffing","krabby","kricketot","kricketune",
+"lairon","lampent","lanturn","lapras","larvitar","leavanny","ledian","ledyba","lileep","lillipup","linoone","litwick","lombre","lopunny","lotad","loudred","ludicolo","lumineon","lunatone","luvdisc","luxio","luxray",
+"magby","machamp","machoke","machop","magcargo","magikarp","magmar","magmortar","magnemite","magneton","magnezone","makuhita","mamoswine","mandibuzz","manectric","mankey","mantine","mantyke","maractus","mareanie","mareep","marill","masquerain","mawile","medicham","meditite","meowstic","metagross","metang","metapod","mienfoo","mightyena","milotic","miltank","mime_jr","minccino","minior","minun","misdreavus","mismagius","morgrem","mothim","mr_mime","muk","munchlax","murkrow",
+"natu","nidoking","nidoqueen","nidoran_m","nidoran_f","nidorina","nidorino","nincada","ninjask","noibat","noivern","nosepass","numel","nuzleaf",
+"octillery","oddish","omanyte","omastar","onix",
+"pachirisu","paras","parasect","pawniard","phantump","pidgeot","pidgeotto","pidgey","pidove","piloswine","pineco","pinsir","plusle","politoed","poliwag","poliwhirl","poliwrath","ponyta","poochyena","porygon","porygon_z","porygon2","primeape","probopass","psyduck","pumpkaboo","pupitar","purrloin","purugly",
+"quagsire","qwilfish",
+"ralts","rampardos","rapidash","raticate","rattata","relicanth","remoraid","rhydon","rhyhorn","rhyperior","ribombee","roggenrola","roselia","roserade",
+"sableye","salamence","salandit","salazzle","sandile","sandshrew","sandslash","sandygast","sawsbuck","scizor","scrafty","scyther","seadra","seaking","sealeo","seedot","seel","sentret","seviper","sewaddle","sharpedo","shedinja","shellder","shellos","shelgon","shieldon","shiftry","shinx","shroomish","shuckle","shuppet","silcoon","sinistea","skarmory","skiploom","skorupi","skuntank","slaking","slakoth","sliggoo","slowbro","slowking","slowpoke","slugma","smeargle","smoochum","sneasel","snorlax","snorunt","snover","snubbull","solrock","spearow","spheal","spinarak","spinda","spiritomb","spoink","stantler","staraptor","staravia","starly","starmie","staryu","steelix","steenee","stoutland","stunky","sudowoodo","sunflora","sunkern","surskit","swablu","swalot","swellow","swinub","swirlix","swoobat",
+"taillow","tangela","tangrowth","tauros","teddiursa","tentacool","tentacruel","thievul","togedemaru","togekiss","togepi","togetic","torkoal","toxicroak","trapinch","tropius","trubbish","tsareena","tympole","tyranitar","tyrogue",
 "ursaring",
-"vanillish","vanillite","venomoth","venonat","vespiquen","vibrava","victreebel","vigoroth","volbeat","voltorb",
-"wailmer","wailord","weedle","weepinbell","weezing","whimsicott","whiscash","whismur","wobbuffet","woobat","wooloo","wormadam","wynaut",
+"vanillish","vanillite","venomoth","venonat","vespiquen","vibrava","victreebel","vigoroth","vileplume","volbeat","voltorb",
+"wailmer","wailord","walrein","weavile","weedle","weepinbell","weezing","whimsicott","whiscash","whismur","wigglytuff","wobbuffet","woobat","wooloo","wooper","wormadam","wurmple","wynaut",
 "xatu",
 "yanma","yanmega",
-"zubat"}
+"zangoose", "zigzagoon", "zubat"}
 
 MISSION_GEN.POKEMON = {
 	--weak mons for easy missions

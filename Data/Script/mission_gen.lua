@@ -35,31 +35,54 @@ MISSION_GEN = {}
 --							'thunderstruck_pass', 'veiled_ridge', 'snowbound_path', 'treacherous_mountain', 'hope_road', 'cave_of_whispers',
 --							'champions_road', 'barren_tundra', 'cave_of_solace', 'labyrinth_of_the_lost'}
 
---UPDATE HERE when a new dungeon gets added- note, you MUST have a [0] for the default difficulty as well as the first segment
+--UPDATE HERE when a new dungeon gets added- note, you MUST always have a [0] for the default difficulty
 --REMOVE FROM HERE if you do not want a dungeon to appear in mission gen anymore
 MISSION_GEN.DUNGEON_LIST = {}
 MISSION_GEN.DUNGEON_LIST["tropical_path"] = { [0] = "F" } --Tropical Path
-MISSION_GEN.DUNGEON_LIST["faultline_ridge"] = { [0] = "STAR_7" } --Faultline Ridge
+MISSION_GEN.DUNGEON_LIST["faultline_ridge"] = { [0] = "D" } --Faultline Ridge
+MISSION_GEN.DUNGEON_LIST["guildmaster_trail"] = { [0] = "STAR_2" } --Guildmaster Trail
+MISSION_GEN.DUNGEON_LIST["lava_floe_island"] = { [0] = "C", [1] = "STAR_1" } --Lava Floe Island, Abyssal Island
+MISSION_GEN.DUNGEON_LIST["castaway_cave"] = { [0] = "B" } --Castaway Cave
+MISSION_GEN.DUNGEON_LIST["faded_trail"] = { [0] = "E", [1] = "D" } --Faded Trail, Hidden Trail
+MISSION_GEN.DUNGEON_LIST["bramble_woods"] = { [0] = "E", [1] = "D" } --Bramble Woods, Bramble Thicket
+MISSION_GEN.DUNGEON_LIST["trickster_woods"] = { [0] = "C", [1] = "B" } --Trickster Woods, Trickster Maze
+MISSION_GEN.DUNGEON_LIST["overgrown_wilds"] = { [0] = "C", [1] = "B" } --Overgrown Wilds, Exotic Wilds
+MISSION_GEN.DUNGEON_LIST["moonlit_courtyard"] = { [0] = "C", [1] = "A" } --Moonlit Courtyard, Moonlit Temple
+MISSION_GEN.DUNGEON_LIST["ambush_forest"] = { [0] = "B" } --Ambush Forest
+MISSION_GEN.DUNGEON_LIST["sickly_hollow"] = { [0] = "S" } --Sickly Hollow
+MISSION_GEN.DUNGEON_LIST["secret_garden"] = { [0] = "STAR_3" } --Secret Garden
+MISSION_GEN.DUNGEON_LIST["flyaway_cliffs"] = { [0] = "C" } --Flyaway Cliffs
+MISSION_GEN.DUNGEON_LIST["fertile_valley"] = { [0] = "D", [1] = "C" } --Fertile Valley, Muddy Valley
+MISSION_GEN.DUNGEON_LIST["copper_quarry"] = { [0] = "C", [1] = "B" } --Copper Quarry, Lodestone Quarry
+MISSION_GEN.DUNGEON_LIST["forsaken_desert"] = { [0] = "A" } --Forsaken Desert
+MISSION_GEN.DUNGEON_LIST["relic_tower"] = { [0] = "S" } --Relic Tower
+MISSION_GEN.DUNGEON_LIST["sleeping_caldera"] = { [0] = "B" } --Sleeping Caldera
+MISSION_GEN.DUNGEON_LIST["thunderstruck_pass"] = { [0] = "B" } --Thunderstruck Pass
+MISSION_GEN.DUNGEON_LIST["veiled_ridge"] = { [0] = "B", [1] = "A" } --Veiled Ridge, Illusion Ridge
+MISSION_GEN.DUNGEON_LIST["snowbound_path"] = { [0] = "A", [1] = "S" } --Snowbound Path, Glacial Path
+MISSION_GEN.DUNGEON_LIST["treacherous_mountain"] = { [0] = "A" } --Treacherous Mountain
+MISSION_GEN.DUNGEON_LIST["champions_road"] = { [0] = "S" } --Champion's Road (Clouded Road is not eligible for missions)
 
 
+--This is mainly used for EXP rewards in base PMDO
 MISSION_GEN.DIFFICULTY = {}
 MISSION_GEN.DIFFICULTY[""] = 0
-MISSION_GEN.DIFFICULTY["F"] = 5 --below lv 10 dungeons generally
-MISSION_GEN.DIFFICULTY["E"] = 10 --lv 10-14 dungeons
-MISSION_GEN.DIFFICULTY["D"] = 20 --lv 15-19 dungeons
-MISSION_GEN.DIFFICULTY["C"] = 40 --lv 20-29 dungeons
-MISSION_GEN.DIFFICULTY["B"] = 80 --lv 30-39 dungeons
-MISSION_GEN.DIFFICULTY["A"] = 125 --lv 40-49 dungeons
-MISSION_GEN.DIFFICULTY["S"] = 250 --lv 50-59 dungeons
-MISSION_GEN.DIFFICULTY["STAR_1"] = 500 --lv 60+ dungeons
-MISSION_GEN.DIFFICULTY["STAR_2"] = 1000 --reserved for challenge dungeons
-MISSION_GEN.DIFFICULTY["STAR_3"] = 2000 --reserved for challenge dungeons
-MISSION_GEN.DIFFICULTY["STAR_4"] = 3000 --reserved for challenge dungeons
-MISSION_GEN.DIFFICULTY["STAR_5"] = 4000 --reserved for challenge dungeons
-MISSION_GEN.DIFFICULTY["STAR_6"] = 5000 --reserved for challenge dungeons
-MISSION_GEN.DIFFICULTY["STAR_7"] = 6000 --reserved for challenge dungeons
-MISSION_GEN.DIFFICULTY["STAR_8"] = 7000 --reserved for challenge dungeons
-MISSION_GEN.DIFFICULTY["STAR_9"] = 8000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["F"] = 200 --below lv 10 dungeons generally
+MISSION_GEN.DIFFICULTY["E"] = 400 --lv 10-14 dungeons
+MISSION_GEN.DIFFICULTY["D"] = 800 --lv 15-20 dungeons
+MISSION_GEN.DIFFICULTY["C"] = 1250 --lv 21-29 dungeons
+MISSION_GEN.DIFFICULTY["B"] = 2500 --lv 30-39 dungeons
+MISSION_GEN.DIFFICULTY["A"] = 5000 --lv 40-49 dungeons
+MISSION_GEN.DIFFICULTY["S"] = 10000 --lv 50-59 dungeons
+MISSION_GEN.DIFFICULTY["STAR_1"] = 20000 --lv 60+ dungeons
+MISSION_GEN.DIFFICULTY["STAR_2"] = 30000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_3"] = 40000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_4"] = 50000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_5"] = 60000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_6"] = 70000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_7"] = 80000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_8"] = 90000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_9"] = 100000 --reserved for challenge dungeons
 
 --order of difficulties. 
 MISSION_GEN.DIFF_TO_ORDER = {}
@@ -845,9 +868,7 @@ MISSION_GEN.REWARDS = {
 	--Rare chance for gummis
 	FOOD_LOW = {
 		{"food_apple", 30},
-		{"food_apple_big", 18},
 		{"food_banana", 18},
-		{"food_chestnut", 12},
 		{"gummi_blue", 1},
 		{"gummi_black", 1},
 		{"gummi_clear", 1}, 
@@ -867,58 +888,123 @@ MISSION_GEN.REWARDS = {
 		{"gummi_gray", 1},
 		{"gummi_magenta", 1}
 	},
-	--Better chance for gummis over low tier, small chance for vitamins
-	FOOD_HIGH = {
+	--Moderate chance of gummis, rare chance of wonder gummis
+	FOOD_MID = {
 		{"food_apple_big", 30},
-		{"food_apple_huge", 18},
-		{"food_apple_perfect", 12},
 		{"food_banana_big", 18},
-		{"gummi_blue", 1},
-		{"gummi_black", 1},
-		{"gummi_clear", 1}, 
-		{"gummi_grass", 1},
-		{"gummi_green", 1},
-		{"gummi_brown", 1},
-		{"gummi_orange", 1},
-		{"gummi_gold", 1},
-		{"gummi_pink", 1},
-		{"gummi_purple", 1},
-		{"gummi_red", 1},
-		{"gummi_royal", 1},
-		{"gummi_silver", 1},
-		{"gummi_white", 1},
-		{"gummi_yellow", 1},
-		{"gummi_sky", 1},
-		{"gummi_gray", 1},
-		{"gummi_magenta", 1},
-		{"boost_calcium", 1},
-		{"boost_protein", 1},
-		{"boost_hp_up", 1},
-		{"boost_zinc", 1},
-		{"boost_carbos", 1},
-		{"boost_iron", 1},
-		{"boost_nectar", 1}
-		
+		{"gummi_blue", 2},
+		{"gummi_black", 2},
+		{"gummi_clear", 2},
+		{"gummi_grass", 2},
+		{"gummi_green", 2},
+		{"gummi_brown", 2},
+		{"gummi_orange", 2},
+		{"gummi_gold", 2},
+		{"gummi_pink", 2},
+		{"gummi_purple", 2},
+		{"gummi_red", 2},
+		{"gummi_royal", 2},
+		{"gummi_silver", 2},
+		{"gummi_white", 2},
+		{"gummi_yellow", 2},
+		{"gummi_sky", 2},
+		{"gummi_gray", 2},
+		{"gummi_magenta", 2},
+		{"gummi_wonder", 1}
 	},
-	--includes seeds and berries
+	--Small chance for vitamins
+	FOOD_HIGH = {
+		{"food_apple_huge", 30},
+		{"food_apple_perfect", 18},
+		{"food_banana_big", 18},
+		{"gummi_wonder", 30},
+		{"boost_calcium", 3},
+		{"boost_protein", 3},
+		{"boost_hp_up", 3},
+		{"boost_zinc", 3},
+		{"boost_carbos", 3},
+		{"boost_iron", 3},
+		{"boost_nectar", 5}
+	},
+	
+	--Basic manufactured medicine
+	MEDICINE_LOW = {
+		{"medicine_potion", 20},
+		{"medicine_elixir", 20},
+		{"medicine_full_heal", 10},
+		{"medicine_x_attack", 10},
+		{"medicine_x_defense", 10},
+		{"medicine_x_sp_atk", 10},
+		{"medicine_x_sp_def", 10},
+		{"medicine_x_speed", 10},
+		{"medicine_x_accuracy", 10},
+		{"medicine_dire_hit", 10}
+	},
+	
+	--Advanced manufactued medicine
+	MEDICINE_HIGH = {
+		{"medicine_max_potion", 20},
+		{"medicine_max_elixir", 20},
+		{"medicine_full_heal", 10}
+	},
+	
+	--includes seeds and berries, as well as type berries and weak herbs
 	SEED_LOW = {
 		{'seed_blast', 5},
-		{'seed_reviver', 5},
 		{'seed_sleep', 5},
 		{'seed_warp', 5},
 		{'berry_oran', 5},
 		{'berry_leppa', 5},
 		{'berry_sitrus', 5},
-		{'berry_lum', 5}
+		{'berry_lum', 5},
+		{"herb_white", 5}
+	},
+	--Includes advanced seeds and type berries
+	SEED_MID = {
+		{'seed_reviver', 25},
+		{'seed_decoy', 5},
+		{'seed_blinker', 5},
+		{'seed_last_chance', 5},
+		{'seed_doom', 5},
+		{'seed_ban', 5},
+		{'seed_ice', 5},
+		{'seed_vile', 5},
+		{'berry_tanga', 2},
+		{'berry_colbur', 2},
+		{'berry_wacan', 2},
+		{'berry_haban', 2},
+		{'berry_chople', 2},
+		{'berry_occa', 2},
+		{'berry_coba', 2},
+		{'berry_kasib', 2},
+		{'berry_rindo', 2},
+		{'berry_shuca', 2},
+		{'berry_yache', 2},
+		{'berry_chilan', 2},
+		{'berry_kebia', 2},
+		{'berry_payapa', 2},
+		{'berry_charti', 2},
+		{'berry_babiri', 2},
+		{'berry_passho', 2},
+		{'berry_roseli', 2},
+		{"herb_power", 5},
+		{"herb_mental", 5}
 	},
 	
-	--includes seeds and berries
+	--includes rare seeds and berries
 	SEED_HIGH = {
-		{'seed_reviver', 5},
 		{'seed_pure', 5},
 		{'seed_joy', 2},
-		{'berry_sitrus', 5},
-		{'berry_lum', 5}
+		{'berry_rowap', 5},
+		{'berry_jaboca', 5},
+		{'berry_liechi', 5},
+		{'berry_ganlon', 5},
+		{'berry_salac', 5},
+		{'berry_petaya', 5},
+		{'berry_apicot', 5},
+		{'berry_micle', 5},
+		{'berry_enigma', 5},
+		{'berry_starf', 5}
 	}, 
 	
 	HELD_LOW = {
@@ -926,22 +1012,126 @@ MISSION_GEN.REWARDS = {
 		{'held_special_band', 5},
 		{'held_defense_scarf', 5},
 		{'held_zinc_band', 5},
-		
-		{'held_warp_scarf', 5}
+		{'held_toxic_orb', 5},
+		{'held_flame_orb', 5},
+		{'held_iron_ball', 5},
+		{'held_ring_target', 5}
+	},
+
+	HELD_MID = {
+		{'held_pierce_band', 5},
+		{'held_warp_scarf', 5},
+		{'held_scope_lens', 5},
+		{'held_reunion_cape', 5},
+		{'held_heal_ribbon', 5},
+		{'held_twist_band', 5},
+		{'held_grip_claw', 5},
+		{'held_binding_band', 5},
+		{'held_metronome', 5},
+		{'held_shed_shell', 5},
+		{'held_wide_lens', 5},
+		{'held_sticky_barb', 5},
+		{'held_choice_band', 5},
+		{'held_choice_scarf', 5},
+		{'held_choice_specs', 5}
 	},
 	
 	HELD_HIGH = {
+		{'held_golden_mask', 5},
 		{'held_friend_bow', 2},
-		{'held_mobile_scarf', 2},
+		{'held_shell_bell', 5},
+		{'held_mobile_scarf', 5},
 		{'held_cover_band', 5},
-		{'held_scope_lens', 5},
+		{'held_pass_scarf', 5},
 		{'held_trap_scarf', 5},
-		{'held_reunion_cape', 5},
 		{'held_pierce_band', 5},
-		{'held_heal_ribbon', 5},
 		{'held_goggle_specs', 5},
 		{'held_x_ray_specs', 5},
-		{'held_twist_band', 5}
+		{'held_assault_vest', 5},
+		{'held_life_orb', 5}
+	},
+	
+	HELD_TYPE = {
+		{'held_silver_powder', 5},
+		{'held_black_glasses', 5},
+		{'held_dragon_scale', 5},
+		{'held_magnet', 5},
+		{'held_pink_bow', 5},
+		{'held_black_belt', 5},
+		{'held_charcoal', 5},
+		{'held_sharp_beak', 5},
+		{'held_spell_tag', 5},
+		{'held_miracle_seed', 5},
+		{'held_soft_sand', 5},
+		{'held_never_melt_ice', 5},
+		{'held_silk_scarf', 5},
+		{'held_poison_barb', 5},
+		{'held_twisted_spoon', 5},
+		{'held_hard_stone', 5},
+		{'held_metal_coat', 5},
+		{'held_mystic_water', 5}
+	},
+	
+	HELD_PLATES = {
+		{'held_insect_plate', 5},
+		{'held_dread_plate', 5},
+		{'held_draco_plate', 5},
+		{'held_zap_plate', 5},
+		{'held_pixie_plate', 5},
+		{'held_fist_plate', 5},
+		{'held_flame_plate', 5},
+		{'held_sky_plate', 5},
+		{'held_spooky_plate', 5},
+		{'held_meadow_plate', 5},
+		{'held_earth_plate', 5},
+		{'held_icicle_plate', 5},
+		{'held_blank_plate', 5},
+		{'held_toxic_plate', 5},
+		{'held_mind_plate', 5},
+		{'held_stone_plate', 5},
+		{'held_iron_plate', 5},
+		{'held_splash_plate', 5}
+	},
+
+	--Spawns boxes, keys, and loot
+	LOOT = {
+		{'loot_heart_scale', 30},
+		{'key', 10},
+		{'loot_pearl', 5},
+		{'loot_nugget', 2},
+		{'machine_recall_box', 5},
+		{'machine_assembly_box', 5},
+		{'machine_storage_box', 2},
+	},
+	
+	EVO_ITEMS = {
+		{'evo_link_cable', 30},
+		{'evo_fire_stone', 5},
+		{'evo_thunder_stone', 5},
+		{'evo_water_stone', 5},
+		{'evo_leaf_stone', 5},
+		{'evo_moon_stone', 5},
+		{'evo_sun_stone', 5},
+		{'evo_magmarizer', 5},
+		{'evo_electirizer', 5},
+		{'evo_reaper_cloth', 5},
+		{'evo_cracked_pot', 5},
+		{'evo_chipped_pot', 5},
+		{'evo_shiny_stone', 5},
+		{'evo_dusk_stone', 5},
+		{'evo_dawn_stone', 5},
+		{'evo_up_grade', 5},
+		{'evo_dubious_disc', 5},
+		{'evo_razor_fang', 5},
+		{'evo_razor_claw', 5},
+		{'evo_protector', 5},
+		{'evo_prism_scale', 5},
+		{'evo_kings_rock', 5},
+		{'evo_deep_sea_tooth', 5},
+		{'evo_deep_sea_scale', 5},
+		{'evo_sun_ribbon', 5},
+		{'evo_lunar_ribbon', 5},
+		{'evo_ice_stone', 5}
 	},
 	
 	TM_LOW = {
@@ -1088,9 +1278,11 @@ MISSION_GEN.REWARDS = {
 	--special and unique rewards, very rare
 	SPECIAL = {
 		{'medicine_amber_tear', 1},
-		{'loot_nugget', 1},
+		{'machine_ability_capsule', 1},
 		{'ammo_golden_thorn', 1},
 		{'food_apple_golden', 1},
+		{'seed_golden', 1},
+		{'evo_harmony_scarf', 1},
 	}
 }
 
@@ -2154,12 +2346,14 @@ end
 
 function MISSION_GEN.JobSortFunction(j1, j2)
 	if (j2 == nil or j2.Zone == nil or j2.Zone == "") then
+		PrintInfo("Sorting by jobs in dungeons "..j1.Zone.." and nil")
 		return false
 	end
 	if (j1 == nil or j1.Zone == nil or j1.Zone == "") then
+		PrintInfo("Sorting by jobs in dungeons nil and "..j2.Zone)
 		return true
 	end
-	
+	PrintInfo("Sorting by jobs in dungeons "..j1.Zone.." and "..j2.Zone)
 	--if they're the same dungeon, then check floors. Otherwise, dungeon order takes presidence. 
 	if SV.DungeonOrder[j1.Zone] == SV.DungeonOrder[j2.Zone] then
 		return j1.Floor > j2.Floor 
@@ -2199,6 +2393,8 @@ function MISSION_GEN.SortTaken()
 end
 
 function MISSION_GEN.SortMission()
+	PrintInfo("Sorting mission board with size "..#SV.MissionBoard)
+	
 	if #SV.MissionBoard > 1 then
 		table.sort(SV.MissionBoard, MISSION_GEN.JobSortFunction)
 	end

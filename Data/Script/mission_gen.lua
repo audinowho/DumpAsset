@@ -130,7 +130,7 @@ MISSION_GEN.DIFF_TO_MONEY["STAR_9"] = 45000
 --color coding for mission difficulty letters
 MISSION_GEN.DIFF_TO_COLOR = {}
 MISSION_GEN.DIFF_TO_COLOR[""] = "[color=#000000]"
-MISSION_GEN.DIFF_TO_COLOR["F"] = "[color=#FFFFFF]"
+MISSION_GEN.DIFF_TO_COLOR["F"] = "[color=#A1A1A1]"
 MISSION_GEN.DIFF_TO_COLOR["E"] = "[color=#F8F8F8]"
 MISSION_GEN.DIFF_TO_COLOR["D"] = "[color=#F8C8C8]"
 MISSION_GEN.DIFF_TO_COLOR["C"] = "[color=#40F840]"

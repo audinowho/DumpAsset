@@ -2359,7 +2359,7 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 			end
 			dungeon_candidate_index_cur = dungeon_candidate_index_cur + 1
 		end
-		SV.DungeonOrder[dungeon_id] = i
+		SV.DungeonOrder[dungeon_id] = dungeon_candidate_index_cur
 		SV.StairType[dungeon_id] = ""
 	end
 	

@@ -22,7 +22,9 @@ SkillSelectMenu = Class("SkillSelectMenu")
 --- @param menu_width number the width of this window. Default is 152.
 function SkillSelectMenu:initialize(title, character, skill_list, confirm_action, refuse_action, menu_width)
     -- param validity check
-    if #skill_list <1 then
+    local len = 0
+    if type(skill_list) == 'table' then len = #skill_list else len = skill_list.Count end
+    if len <1 then
         --abort if skill list is empty
         error("parameter 'skill_list' cannot be an empty collection")
     end
@@ -35,7 +37,8 @@ function SkillSelectMenu:initialize(title, character, skill_list, confirm_action
     self.confirmAction = confirm_action
     self.refuseAction = refuse_action
     self.menuWidth = menu_width or 152
-    self.skillList, self.optionsList = self:load_skills(skill_list)
+    self.skillList = self:load_skills(skill_list)
+    self.optionsList = self:generate_options()
 
     self.choice = nil -- result
 
@@ -55,17 +58,17 @@ function SkillSelectMenu:initialize(title, character, skill_list, confirm_action
 end
 
 --- Loads the skills that will be part of the menu.
---- @param skills table an array, list or lua array table containing skill indices
---- @return table a standardized version of the indices list, the list of MenuElementChoice elements corresponding to the skill indices
-function SkillSelectMenu:load_skills(skills)
-    local skill_list = {}
+--- @param skill_list table an array, list or lua array table containing skill indices
+--- @return table a standardized version of the skill list
+function SkillSelectMenu:load_skills(skill_list)
+    local list = {}
 
-    if type(skills) == 'table' then
-        for _, skill_id in pairs(skills) do table.insert(skill_list, skill_id) end
+    if type(skill_list) == 'table' then
+        for _, skill_id in pairs(skill_list) do table.insert(list, skill_id) end
     else
-        for skill_id in luanet.each(LUA_ENGINE:MakeList(skills)) do table.insert(skill_list, skill_id) end
+        for skill_id in luanet.each(LUA_ENGINE:MakeList(skill_list)) do table.insert(list, skill_id) end
     end
-    return skill_list
+    return list
 end
 
 --- Processes the menu's properties and generates the ``RogueEssence.Menu.MenuElementChoice`` list that will be displayed.
@@ -77,7 +80,7 @@ function SkillSelectMenu:generate_options()
         local max_charges = skill.BaseCharges
         if self.character then max_charges = max_charges + self.character.ChargeBoost end
         local skill_charges = max_charges.."/"..max_charges
-        local text_skill = RogueEssence.Menu.MenuText(skill:GetColoredName(), RogueElements.Loc(2, 1)) --TODO check if colored or icon
+        local text_skill = RogueEssence.Menu.MenuText(skill:GetColoredName(), RogueElements.Loc(2, 1))
         local text_charges = RogueEssence.Menu.MenuText(skill_charges, RogueElements.Loc(self.menuWidth - 8 * 4, 1), RogueElements.DirH.Right)
         local option = RogueEssence.Menu.MenuElementChoice(function() self:choose(i) end, true, text_skill, text_charges)
         table.insert(options, option)
@@ -88,24 +91,26 @@ end
 --- Closes the menu and calls the menu's confirmation callback.
 --- The result must be retrieved by accessing the choice variable of this object, which will hold
 --- the string id of the chosen skill.
---- @param index number the index of the chosen skill
+--- @param index number the index of the chosen skill.
 function SkillSelectMenu:choose(index)
     self.choice = self.skillList[index]
     _MENU:RemoveMenu()
     self.confirmAction(self.choice)
 end
 
---- Updates the summary menu.
+--- Updates the summary window.
 function SkillSelectMenu:updateSummary()
     self.summary:SetSkill(self.skillList[self.menu.CurrentChoiceTotal+1])
 end
 
 
---- Creates a basic SkillSelectMenu instance using the provided list and callbacks, then runs it and returns its output.
+
+
+--- Creates a basic ``SkillSelectMenu`` instance using the provided list and callbacks, then runs it and returns its output.
 --- @param title string the title this window will have
---- @param character userdata the RogueEssence.Dungeon.Character object the chosen skill is to be applied to. Used only for charge display reasons. Can be nil
---- @param skill_list table an array, list or lua array table containing skill indices
---- @return string the id of the selected skill if one was chosen in the menu; "" otherwise
+--- @param character userdata the ``RogueEssence.Dungeon.Character`` object the chosen skill is to be applied to. Used only for charge display reasons. Can be ``nil``.
+--- @param skill_list table an array, list or lua array table containing skill indices.
+--- @return string the id of the selected skill if one was chosen in the menu; ``""`` otherwise.
 function SkillSelectMenu.run(title, character, skill_list)
     local ret = ""
     local choose = function(move) ret = move end
@@ -116,28 +121,13 @@ function SkillSelectMenu.run(title, character, skill_list)
     return ret
 end
 
---- Creates a SkillSelectMenu instance that allows a choice between the character's relearnable moves, then runs it and returns its output.
---- This function throws an error if the parameter 'chara' is not valid.
+--- Creates a ``SkillSelectMenu`` instance that allows a choice between the character's relearnable moves, then runs it and returns its output.
+--- This function throws an error if the parameter ``chara`` is not valid.
 --- @param chara userdata the RogueEssence.Dungeon.Character object the chosen skill is to be applied to
---- @return string the id of the selected skill if one was chosen in the menu; "" otherwise or if 'chara' was invalid
+--- @return string the id of the selected skill if one was chosen in the menu; ``""`` otherwise
 function SkillSelectMenu.runRelearnMenu(chara)
 
     local forgottenSkills = chara:GetRelearnableSkills(true)
 
     return SkillSelectMenu.run(STRINGS:FormatKey("MENU_SKILL_RECALL"), chara, forgottenSkills)
-end
-
-
-function SkillSelectMenu.runTutorMenu(chara, tutor_moves)
-	
-	local valid_moves = COMMON.GetTutorableMoves(chara, tutor_moves)
-	
-	--TODO: Allow the list to show the cost in heart scales
-
-    local tutor_skills = {}
-	for move_idx, skill in pairs(valid_moves) do
-		table.insert(tutor_skills, move_idx)
-	end
-
-    return SkillSelectMenu.run(RogueEssence.StringKey("MENU_SKILL_TUTOR"):ToLocal(), chara, tutor_skills)
 end

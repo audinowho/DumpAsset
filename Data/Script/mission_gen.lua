@@ -674,7 +674,7 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"HELD_PLATES", 0},
 		{"LOOT_LOW", 3}, --Keys, pearls, assembly boxes
 		{"LOOT_HIGH", 0},
-		{"EVO_ITEMS", 0},
+		{"EVO_ITEMS", 1}, --Evolution items, high chance of link cables
 		{"ORBS_LOW", 0},
 		{"ORBS_MID", 0},
 		{"ORBS_HIGH", 0},
@@ -708,7 +708,7 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"HELD_PLATES", 0},
 		{"LOOT_LOW", 10}, --Keys, pearls, assembly boxes *
 		{"LOOT_HIGH", 0},
-		{"EVO_ITEMS", 0},
+		{"EVO_ITEMS", 2}, --Evolution items, high chance of link cables
 		{"ORBS_LOW", 2}, --Weak wonder orbs
 		{"ORBS_MID", 0},
 		{"ORBS_HIGH", 0},
@@ -742,7 +742,7 @@ MISSION_GEN.DIFF_REWARDS = {
 		{"HELD_PLATES", 10}, --Held items that reduce damage from a specific type *
 		{"LOOT_LOW", 4}, --Keys, pearls, assembly boxes 
 		{"LOOT_HIGH", 0},
-		{"EVO_ITEMS", 2}, --Evolution items, high chance of link cables
+		{"EVO_ITEMS", 4}, --Evolution items, high chance of link cables
 		{"ORBS_LOW", 10}, --Weak wonder orbs *
 		{"ORBS_MID", 2}, --Medium wonder orbs, many can shut down a monster house
 		{"ORBS_HIGH", 0},

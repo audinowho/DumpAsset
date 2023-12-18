@@ -191,7 +191,7 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
         else
           post_mob.Tactic = "boss"
         end
-        post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level + 10)
+        post_mob.Level = _ZONE.CurrentZone.Level + 8
         post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
         local boost = PMDC.LevelGen.MobSpawnBoost()
         boost.MaxHPBonus = _ZONE.CurrentZone.Level + 20

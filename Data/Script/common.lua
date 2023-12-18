@@ -1544,7 +1544,7 @@ function COMMON.RewardItem(itemID, money, amount)
         
         --give at least 1 item
         if amount == nil then amount = 1 end
-        if itemEntry.MaxStack > 1 then
+        if itemEntry.MaxStack >= 3 then
             --for stackable items, always give 3 of them as a reward
             amount = 3
         end

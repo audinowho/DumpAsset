@@ -2966,7 +2966,7 @@ function JobMenu:initialize(job_type, job_number, parent_board_menu)
 	else
 		local reward_amount = 1
 		--Reward amount should be 3 for multi-stack items
-		if RogueEssence.Data.DataManager.Instance:GetItem(job.Reward).MaxStack > 1 then
+		if RogueEssence.Data.DataManager.Instance:GetItem(job.Reward).MaxStack >= 3 then
 			reward_amount = 3
 		end
 		self.reward = RogueEssence.Dungeon.InvItem(job.Reward, false, reward_amount):GetDisplayName()

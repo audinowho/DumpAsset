@@ -179,7 +179,7 @@ function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
 
     for i = 1, 8, 1 do
         local zone = SV.TakenBoard[i].Zone
-        if zone ~= nil and zone ~= '' then
+        if zone ~= nil and zone ~= '' and SV.TakenBoard[i].Taken then
             mission_dests[zone] = 1
         end
     end

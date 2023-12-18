@@ -2959,8 +2959,13 @@ function JobMenu:initialize(job_type, job_number, parent_board_menu)
 	--special case for money
 	if job.Reward == "money" then
 		self.reward = '[color=#00FFFF]' .. MISSION_GEN.DIFF_TO_MONEY[job.Difficulty] .. '[color]' .. STRINGS:Format("\\uE024")
-	else 
-		self.reward = RogueEssence.Dungeon.InvItem(job.Reward, false, RogueEssence.Data.DataManager.Instance:GetItem(job.Reward).MaxStack):GetDisplayName()
+	else
+		local reward_amount = 1
+		--Reward amount should be 3 for multi-stack items
+		if RogueEssence.Data.DataManager.Instance:GetItem(job.Reward).MaxStack > 1 then
+			reward_amount = 3
+		end
+		self.reward = RogueEssence.Dungeon.InvItem(job.Reward, false, reward_amount):GetDisplayName()
     end
   end
   

@@ -2953,7 +2953,7 @@ function JobMenu:initialize(job_type, job_number, parent_board_menu)
   if job.Floor ~= -1 then self.floor = MISSION_GEN.GetStairsType(job.Zone) .. '[color=#00FFFF]' .. tostring(job.Floor) .. "[color]F" end
   
   self.difficulty = ""
-  if job.Difficulty ~= "" then self.difficulty = MISSION_GEN.DIFF_TO_COLOR[job.Difficulty] .. MISSION_GEN.GetDifficultyString(job.Difficulty) .. "[color]   - " .. tostring(MISSION_GEN.DIFFICULTY[job.Difficulty]) .. " EXP" end 
+  if job.Difficulty ~= "" then self.difficulty = MISSION_GEN.DIFF_TO_COLOR[job.Difficulty] .. MISSION_GEN.GetDifficultyString(job.Difficulty) .. "[color]   - " ..  Text.FormatKey("MISSION_EXP_DESCRIPTION", tostring(MISSION_GEN.DIFFICULTY[job.Difficulty])) end 
   
   
   

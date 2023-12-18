@@ -172,7 +172,7 @@ function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed
   queue:Enqueue(priority, destNote)
 end
 
-
+--This method is for spawning main game sidequests
 function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed, args)
   -- choose a the floor to spawn it on
   local destinationFloor = false
@@ -290,7 +290,7 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
   if outlawFloor then
     -- add destination floor notification
     local activeEffect = RogueEssence.Data.ActiveEffect()
-    activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("OutlawFloor", Serpent.line({ Silent = outlawSilent })))
+    activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("OutlawSidequestFloor", Serpent.line({ Silent = outlawSilent })))
 	local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
 	local priority = RogueElements.Priority(-6)
 	queue:Enqueue(priority, destNote)

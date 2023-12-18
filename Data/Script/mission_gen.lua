@@ -2712,10 +2712,23 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		local noMissionFloors = current_segment:GetNoMissionFloors()
 		local valid_floor_candidates = {}
 		 
+		--Make sure that the dungeon floor added is valid
 		for i = 1, floor_candidates_length, 1 do
 			local cur_candidate = floor_candidates[i]
 			if noMissionFloors:Contains(cur_candidate) == false then
-				table.insert(valid_floor_candidates, cur_candidate)
+				local has_sidequest_on_floor = false
+				
+				--Make sure none of the sidequests (EscortSister, OutlawForest) take place in the same floor
+				for name, mission in pairs(SV.missions.Missions) do
+					if mission.DestZone == dungeon and mission.DestSegment == current_segment and mission.DestFloor == cur_candidate - 1 then
+						has_sidequest_on_floor = true
+						break
+					end
+				end
+
+				if has_sidequest_on_floor == false then
+					table.insert(valid_floor_candidates, cur_candidate)
+				end
 			end
 		end
 

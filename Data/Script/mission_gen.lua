@@ -2367,7 +2367,7 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 	if #dungeon_candidates == 0 then return end
 	
 	--generate jobs
-	for i = 1, jobs_to_make, 1 do 
+	for i = 1, jobs_to_make, 1 do
 		--choose a dungeon, client, target, item, etc
 		local dungeon_candidate_index = math.random(1, #dungeon_candidates)
 		local dungeon = dungeon_candidates[dungeon_candidate_index]
@@ -2391,14 +2391,14 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		--generate the objective.
 		local objective
 		local missionOutlawRoll = math.random(2)
-		if missionOutlawRoll == 1 then 
+		if missionOutlawRoll == 1 then
 			PrintInfo("Generating new outlaw mission")
 			local roll = math.random(1, 10)
 			if roll <= 5 then
 				objective = COMMON.MISSION_TYPE_OUTLAW
-			elseif roll <= 8 then 
+			elseif roll <= 8 then
 				objective = COMMON.MISSION_TYPE_OUTLAW_ITEM
-			elseif roll <= 9 then 
+			elseif roll <= 9 then
 				objective = COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE
 			else
 				objective = COMMON.MISSION_TYPE_OUTLAW_FLEE
@@ -2406,22 +2406,22 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		else
 			PrintInfo("Generating new normal mission")
 			local roll = math.random(1, 10)
-			if roll <= 2 then 
+			if roll <= 2 then
 				--if there's already an escort or exploration mission generated for this dungeon, don't gen another one and just make it a rescue.
 				if roll == 1 then
-					objective = COMMON.MISSION_TYPE_EXPLORATION 
+					objective = COMMON.MISSION_TYPE_EXPLORATION
 				else
 					objective = COMMON.MISSION_TYPE_ESCORT
 				end
 
 				--only check from 1 to i-1 to save time.
-				for j = 1, i-1, 1 do 
+				for j = 1, i-1, 1 do
 					if SV.MissionBoard[j].Zone == dungeon and (SV.MissionBoard[j].Type == COMMON.MISSION_TYPE_ESCORT or SV.MissionBoard[j].Type == COMMON.MISSION_TYPE_EXPLORATION) then
 						objective = COMMON.MISSION_TYPE_RESCUE
 						break
-					end 
-				end 
-				
+					end
+				end
+
 				for j = 1, 8, 1 do
 					if SV.TakenBoard[j].Zone == dungeon and (SV.TakenBoard[j].Type == COMMON.MISSION_TYPE_ESCORT or SV.TakenBoard[j].Type == COMMON.MISSION_TYPE_EXPLORATION) then
 						objective = COMMON.MISSION_TYPE_RESCUE
@@ -2458,7 +2458,7 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		local difficult_objectives = { COMMON.MISSION_TYPE_ESCORT, COMMON.MISSION_TYPE_EXPLORATION, COMMON.MISSION_TYPE_OUTLAW, COMMON.MISSION_TYPE_OUTLAW_FLEE, COMMON.MISSION_TYPE_OUTLAW_ITEM }
 		if COMMON.TableContains(difficult_objectives, objective) then
 			offset = 1
-		--up the difficulty by 2 if its an outlaw monster house
+			--up the difficulty by 2 if its an outlaw monster house
 		elseif objective == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then
 			offset = 2
 		end
@@ -2467,66 +2467,66 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		if segment > 0 then
 			offset = offset + 1
 		end
-		
+
 		local final_order = MISSION_GEN.DIFF_TO_ORDER[difficulty]+offset
 
 		if final_order >= #MISSION_GEN.ORDER_TO_DIFF then
 			final_order = #MISSION_GEN.ORDER_TO_DIFF - 1
 		end
-		
+
 		difficulty = MISSION_GEN.ORDER_TO_DIFF[final_order]
-		
+
 		--Generate a tier, then the client
 		local tier = MISSION_GEN.WeightedRandom(MISSION_GEN.DIFF_POKEMON[difficulty])
 		local client_candidates = MISSION_GEN.POKEMON[tier]
 		client = client_candidates[math.random(1, #client_candidates)]
-		
+
 		--50% chance that the client and target are the same. Target is the escort if its an escort mission.
 		--It is possible for this to roll the same target as the client again, which is fine.
 		--Always give a target if objective is escort or a outlaw stole an item.
 		--Target should always be client for 
 		local target = client
 		local target_candidates = MISSION_GEN.POKEMON[tier]
-		if math.random(1, 2) == 1 or objective == COMMON.MISSION_TYPE_ESCORT or objective == COMMON.MISSION_TYPE_OUTLAW_ITEM then 
-			target = target_candidates[math.random(1, #target_candidates)]	
+		if math.random(1, 2) == 1 or objective == COMMON.MISSION_TYPE_ESCORT or objective == COMMON.MISSION_TYPE_OUTLAW_ITEM then
+			target = target_candidates[math.random(1, #target_candidates)]
 			--print(target_candidates[1]) --to give an idea of what tier we rolled
 		end
-		
+
 		--if its a generic outlaw mission, or a monster house / fleeing outlaw, Magna is the client. Normal mons only ask you to go after their stolen items.
 		if objective == COMMON.MISSION_TYPE_OUTLAW or objective == COMMON.MISSION_TYPE_OUTLAW_FLEE or objective == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then
 			client = "magna"
 		end
-		
+
 		--if it's a delivery, exploration, or lost item, target and client should match.
 		if objective == COMMON.MISSION_TYPE_EXPLORATION or objective == COMMON.MISSION_TYPE_DELIVERY or objective == COMMON.MISSION_TYPE_LOST_ITEM then
 			target = client
 		end
-		
-		
+
+
 		--Reroll target if target is ghost and target is a fleeing outlaw, that shit would be too obnoxious to deal with
 		local target_type_1 = _DATA:GetMonster(target).Forms[0].Element1
 		local target_type_2 = _DATA:GetMonster(target).Forms[0].Element2
 		while objective == COMMON.MISSION_TYPE_OUTLAW_FLEE and (target_type_1 == "ghost" or target_type_2 == "ghost") do
 			print(target .. ": Rerolling cowardly ghost outlaw!!!")
-			target = target_candidates[math.random(1, #target_candidates)]	
+			target = target_candidates[math.random(1, #target_candidates)]
 			target_type_1 = _DATA:GetMonster(target).Forms[0].Element1
 			target_type_2 = _DATA:GetMonster(target).Forms[0].Element2
 			print("new target is " .. target)
 		end
-		
+
 		--Roll for genders. Use base form because it PROBABLY won't ever matter.
 		--because Scriptvars doesnt like saving genders instead of regular structures, use 1/2/0 for m/f/genderless respectively, and convert when needed
 		local client_gender
-		
+
 		if client == "magna" then --Magna is a special exception
 			client_gender = 0
 		else
 			client_gender = _DATA:GetMonster(client).Forms[0]:RollGender(_ZONE.CurrentZone.Rand)
 			client_gender = COMMON.GenderToNum(client_gender)
-		end 
-		
+		end
+
 		local target_gender = _DATA:GetMonster(target).Forms[0]:RollGender(_ZONE.CurrentZone.Rand)
-	
+
 		target_gender = COMMON.GenderToNum(target_gender)
 
 		--Special cases
@@ -2543,46 +2543,46 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 			elseif special == MISSION_GEN.SPECIAL_CLIENT_FRIEND then
 				special_candidates = MISSION_GEN.SPECIAL_FRIEND_PAIRS[tier]
 			end
-				
-		
+
+
 			--Set variables with special client/target info
 			local special_choice = special_candidates[math.random(1, #special_candidates)]
 			client = special_choice[1]
 			client_gender = special_choice[2]
 			target = special_choice[3]
 			target_gender = special_choice[4]
-			
+
 			local special_title_candidates = MISSION_GEN.TITLES[special]
 			title = RogueEssence.StringKey(special_title_candidates[math.random(1, #special_title_candidates)]):ToLocal()
 
 			flavor = RogueEssence.StringKey(special_choice[5]):ToLocal()
-			
-	
+
+
 		end
 
 
-		
-		
+
+
 		--generate reward with hardcoded list of weighted rewards
 		local reward = "money"
 		--1/4 chance you get money instead of an item
-		
-		if math.random(1, 4) > 1 then 
+
+		if math.random(1, 4) > 1 then
 			local reward_pool = MISSION_GEN.REWARDS[MISSION_GEN.WeightedRandom(MISSION_GEN.DIFF_REWARDS[difficulty])]
 			reward = MISSION_GEN.WeightedRandom(reward_pool)
 		end
-		
+
 		--1/3 chance you get a bonus reward. Bonus reward is always an item, never money 
 		local bonus_reward = ""
-		
+
 		if math.random(1,3) == 1 then
 			local reward_pool = MISSION_GEN.REWARDS[MISSION_GEN.WeightedRandom(MISSION_GEN.DIFF_REWARDS[difficulty])]
 			bonus_reward = MISSION_GEN.WeightedRandom(reward_pool)
-		end 
+		end
 
 		--Choose a random title that's appropriate.
 		local title_candidates = {}
-		
+
 		if special == "" then -- get title if special didn't already generate it
 			if objective == COMMON.MISSION_TYPE_RESCUE and client ~= target then
 				title_candidates = MISSION_GEN.TITLES["RESCUE_FRIEND"]
@@ -2603,30 +2603,30 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 			elseif objective == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then
 				title_candidates = MISSION_GEN.TITLES["OUTLAW_MONSTER_HOUSE"]
 			elseif objective == COMMON.MISSION_TYPE_OUTLAW_FLEE then
-				title_candidates = MISSION_GEN.TITLES["OUTLAW_FLEE"]			
+				title_candidates = MISSION_GEN.TITLES["OUTLAW_FLEE"]
 			end
 			title = RogueEssence.StringKey(title_candidates[math.random(1, #title_candidates)]):ToLocal()
-			
+
 			--string substitutions, if needed.
 			if string.find(title, "%[target%]") then
 				title = string.gsub(title, "%[target%]", _DATA:GetMonster(target):GetColoredName())
-			end 
-			
+			end
+
 			if string.find(title, "%[dungeon%]") then
 				title = string.gsub(title, "%[dungeon%]", _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon):GetColoredName())
-			end 
-			
+			end
+
 			if string.find(title, "%[item%]") then
 				title = string.gsub(title, "%[item%]",  _DATA:GetItem(item):GetColoredName())
 			end
-		end 
-		
-		
-		
+		end
+
+
+
 		--Flavor text generation
 		local flavor_top_candidates = {}
 		local flavor_bottom_candidates = {}
-		
+
 		if special == "" then -- get flavor if special didn't already generate it 
 			if objective == COMMON.MISSION_TYPE_RESCUE and client ~= target then
 				flavor_top_candidates = MISSION_GEN.FLAVOR_TOP["RESCUE_FRIEND"]
@@ -2660,30 +2660,30 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 				flavor_bottom_candidates = MISSION_GEN.FLAVOR_BOTTOM["OUTLAW_FLEE"]
 			end
 			flavor = RogueEssence.StringKey(flavor_top_candidates[math.random(1, #flavor_top_candidates)]):ToLocal() .. '\n' .. RogueEssence.StringKey(flavor_bottom_candidates[math.random(1, #flavor_bottom_candidates)]):ToLocal()
-		
+
 			--string substitutions, if needed.
 			if string.find(flavor, "%[target%]") then
 				flavor = string.gsub(flavor, "%[target%]", _DATA:GetMonster(target):GetColoredName())
 			end
-			
+
 			if string.find(flavor, "%[dungeon%]") then
 				flavor = string.gsub(flavor, "%[dungeon%]", _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon):GetColoredName())
 			end
-						
+
 			if string.find(flavor, "%[item%]") then
 				flavor = string.gsub(flavor, "%[item%]",  _DATA:GetItem(item):GetColoredName())
 			end
-			
-		end 
+
+		end
 
 
 
-		
+
 		--mission floor should be in last 45% of the dungeon
 		--don't pick a floor that's already been chosen for another mission in a dungeon
 		--It's smart; it'll only randomly choose floors that haven't been used up yet. If all floors are used up that are possible, only then is the job thrown out.
 		local used_floors = {}
-		for j = 1, 8, 1 do 
+		for j = 1, 8, 1 do
 			if SV.OutlawBoard[j].Zone == dungeon then
 				table.insert(used_floors, 1, SV.OutlawBoard[j].Floor)
 			end
@@ -2694,7 +2694,7 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 				table.insert(used_floors, 1, SV.TakenBoard[j].Floor)
 			end
 		end
-		
+
 		local current_segment = zone.Segments[segment]
 		local floor_count = current_segment.FloorCount
 
@@ -2707,17 +2707,21 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		end
 		MISSION_GEN.array_sub(used_floors, floor_candidates)
 
-		--TODO: Prune floor_candidates of floors with LoadGen
 		local floor_candidates_length = #floor_candidates
 		local current_index = 0
+		local noMissionFloors = current_segment:GetNoMissionFloors()
+		local valid_floor_candidates = {}
 		 
 		for i = 1, floor_candidates_length, 1 do
-			
+			local cur_candidate = floor_candidates[i]
+			if noMissionFloors:Contains(cur_candidate) == false then
+				table.insert(valid_floor_candidates, cur_candidate)
+			end
 		end
 
 		local mission_floor = -1
-		if #floor_candidates > 0 then
-			mission_floor = floor_candidates[math.random(1, #floor_candidates)]
+		if #valid_floor_candidates > 0 then
+			mission_floor = valid_floor_candidates[math.random(1, #valid_floor_candidates)]
 		end
 		
 		if mission_floor == -1 then PrintInfo("Can't generate job for index "..i.." and difficulty "..difficulty..", no more floors available!") end
@@ -2949,7 +2953,7 @@ function JobMenu:initialize(job_type, job_number, parent_board_menu)
   if job.Floor ~= -1 then self.floor = MISSION_GEN.GetStairsType(job.Zone) .. '[color=#00FFFF]' .. tostring(job.Floor) .. "[color]F" end
   
   self.difficulty = ""
-  if job.Difficulty ~= "" then self.difficulty = MISSION_GEN.DIFF_TO_COLOR[job.Difficulty] .. MISSION_GEN.GetDifficultyString(job.Difficulty) .. "[color]   (" .. tostring(MISSION_GEN.DIFFICULTY[job.Difficulty]) .. ")" end 
+  if job.Difficulty ~= "" then self.difficulty = MISSION_GEN.DIFF_TO_COLOR[job.Difficulty] .. MISSION_GEN.GetDifficultyString(job.Difficulty) .. "[color]   - " .. tostring(MISSION_GEN.DIFFICULTY[job.Difficulty]) .. " EXP" end 
   
   
   

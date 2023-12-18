@@ -306,6 +306,45 @@ function COMMON.GiftItemFull(player, receive_item, fanfare, force_storage)
   UI:ImportSpeakerSettings(orig_settings)
 end
 
+-- useful for counting the number of multiple items carried by the player at the same time
+function COMMON.GetPlayerItemsCount(item_id_list, check_storage)
+    local item_count_list = {}
+    for _, item_id in item_id_list do item_count_list[item_id] = 0 end
+
+    for i=0, GAME:GetPlayerBagCount()-1, 1 do
+        local item = GAME:GetPlayerBagItem(i)
+        if item_count_list[item.ID] then
+            local amount = 1
+            if _DATA:GetItem(item.ID).MaxStack >0 then amount = item.Amount end
+            item_count_list[item.ID] = item_count_list[item.ID] + amount
+        end
+    end
+    if not check_storage then return item_count_list end
+
+    for key in pairs(item_count_list) do
+        item_count_list[key] = item_count_list[key] + GAME:GetPlayerStorageItemCount(key)
+    end
+    return item_count_list
+end
+
+-- counts the number of a specific item carried by the player
+function COMMON.GetPlayerItemCount(item_id, check_storage)
+    local item_count = 0
+
+    for i=0, GAME:GetPlayerBagCount()-1, 1 do
+        local item = GAME:GetPlayerBagItem(i)
+        if item.ID == item_id then
+            local amount = 1
+            if _DATA:GetItem(item.ID).MaxStack >0 then amount = item.Amount end
+            item_count = item_count + amount
+        end
+    end
+    if not check_storage then return item_count end
+
+    item_count = item_count + GAME:GetPlayerStorageItemCount(item_id)
+    return item_count
+end
+
 function COMMON.GiftKeyItem(player, item_name)
   local orig_settings = UI:ExportSpeakerSettings()
   SOUND:PlayFanfare("Fanfare/Treasure")

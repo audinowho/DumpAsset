@@ -1445,18 +1445,19 @@ MISSION_GEN.REWARDS = {
 		{'held_splash_plate', 5}
 	},
 	
-	--Spawns boxes, keys, and loot
+	--Spawns boxes, keys, heart scales, and loot
 	LOOT_LOW = {
+		{'loot_heart_scale', 5},
 		{'loot_pearl', 10},
 		{'machine_assembly_box', 10},
 		{'key', 10}
 	},
 
 	LOOT_HIGH = {
-		{'loot_heart_scale', 10},
+		{'loot_heart_scale', 20},
 		{'loot_nugget', 5},
-		{'machine_recall_box', 5},
-		{'machine_storage_box', 5}
+		{'machine_recall_box', 10},
+		{'machine_storage_box', 10}
 	},
 	
 	EVO_ITEMS = {
@@ -2390,27 +2391,35 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 
 		--generate the objective.
 		local objective
-		local missionOutlawRoll = math.random(2)
+		local missionOutlawRoll = math.random(3)
 		if missionOutlawRoll == 1 then
+			--1 in 3 chance of outlaw
 			PrintInfo("Generating new outlaw mission")
 			local roll = math.random(1, 10)
 			if roll <= 5 then
+				--5/10 chance of regular outlaw
 				objective = COMMON.MISSION_TYPE_OUTLAW
 			elseif roll <= 8 then
+				--3/10 chance of outlaw with an item
 				objective = COMMON.MISSION_TYPE_OUTLAW_ITEM
 			elseif roll <= 9 then
+				--1/10 chance of outlaw monster house
 				objective = COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE
 			else
+				--1/10 chance of outlaw fleeing
 				objective = COMMON.MISSION_TYPE_OUTLAW_FLEE
 			end
 		else
+			--2 in 3 chance of normal
 			PrintInfo("Generating new normal mission")
 			local roll = math.random(1, 10)
 			if roll <= 2 then
 				--if there's already an escort or exploration mission generated for this dungeon, don't gen another one and just make it a rescue.
 				if roll == 1 then
+					--1/10 chance of exploration (becomes regular rescue mission)
 					objective = COMMON.MISSION_TYPE_EXPLORATION
 				else
+					--1/10 chance of escort (becomes regular rescue mission)
 					objective = COMMON.MISSION_TYPE_ESCORT
 				end
 
@@ -2428,11 +2437,14 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 						break
 					end
 				end
-			elseif roll <= 4 then
+			elseif roll <= 3 then
+				--1/10 chance of delivery
 				objective = COMMON.MISSION_TYPE_DELIVERY
-			elseif roll <= 6 then
+			elseif roll <= 5 then
+				--2/10 chance of lost item
 				objective = COMMON.MISSION_TYPE_LOST_ITEM
 			else
+				--5/10 chance of a normal rescue mission
 				objective = COMMON.MISSION_TYPE_RESCUE
 			end
 		end

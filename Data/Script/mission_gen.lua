@@ -67,22 +67,22 @@ MISSION_GEN.DUNGEON_LIST["champions_road"] = { [0] = "S" } --Champion's Road (Cl
 --This is mainly used for EXP rewards in base PMDO
 MISSION_GEN.DIFFICULTY = {}
 MISSION_GEN.DIFFICULTY[""] = 0
-MISSION_GEN.DIFFICULTY["F"] = 200 --below lv 10 dungeons generally
-MISSION_GEN.DIFFICULTY["E"] = 400 --lv 10-14 dungeons
-MISSION_GEN.DIFFICULTY["D"] = 800 --lv 15-20 dungeons
-MISSION_GEN.DIFFICULTY["C"] = 1250 --lv 21-29 dungeons
-MISSION_GEN.DIFFICULTY["B"] = 2500 --lv 30-39 dungeons
-MISSION_GEN.DIFFICULTY["A"] = 5000 --lv 40-49 dungeons
-MISSION_GEN.DIFFICULTY["S"] = 10000 --lv 50-59 dungeons
-MISSION_GEN.DIFFICULTY["STAR_1"] = 20000 --lv 60+ dungeons
-MISSION_GEN.DIFFICULTY["STAR_2"] = 30000 --reserved for challenge dungeons
-MISSION_GEN.DIFFICULTY["STAR_3"] = 40000 --reserved for challenge dungeons
-MISSION_GEN.DIFFICULTY["STAR_4"] = 50000 --reserved for challenge dungeons
-MISSION_GEN.DIFFICULTY["STAR_5"] = 60000 --reserved for challenge dungeons
-MISSION_GEN.DIFFICULTY["STAR_6"] = 70000 --reserved for challenge dungeons
-MISSION_GEN.DIFFICULTY["STAR_7"] = 80000 --reserved for challenge dungeons
-MISSION_GEN.DIFFICULTY["STAR_8"] = 90000 --reserved for challenge dungeons
-MISSION_GEN.DIFFICULTY["STAR_9"] = 100000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["F"] = 100 --below lv 10 dungeons generally
+MISSION_GEN.DIFFICULTY["E"] = 200 --lv 10-14 dungeons
+MISSION_GEN.DIFFICULTY["D"] = 400 --lv 15-20 dungeons
+MISSION_GEN.DIFFICULTY["C"] = 800 --lv 21-29 dungeons
+MISSION_GEN.DIFFICULTY["B"] = 1250 --lv 30-39 dungeons
+MISSION_GEN.DIFFICULTY["A"] = 2500 --lv 40-49 dungeons
+MISSION_GEN.DIFFICULTY["S"] = 5000 --lv 50-59 dungeons
+MISSION_GEN.DIFFICULTY["STAR_1"] = 10000 --lv 60+ dungeons
+MISSION_GEN.DIFFICULTY["STAR_2"] = 20000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_3"] = 30000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_4"] = 40000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_5"] = 50000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_6"] = 60000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_7"] = 70000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_8"] = 80000 --reserved for challenge dungeons
+MISSION_GEN.DIFFICULTY["STAR_9"] = 90000 --reserved for challenge dungeons
 
 --order of difficulties. 
 MISSION_GEN.DIFF_TO_ORDER = {}

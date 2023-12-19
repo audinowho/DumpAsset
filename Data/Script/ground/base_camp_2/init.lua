@@ -1623,7 +1623,7 @@ function base_camp_2.Mission_Board_Action(obj, activator)
 end
 
 function base_camp_2.Hand_In_Missions()
-    for i = 1, 8, 1 do
+    for i = 8, 1, -1 do
         if SV.TakenBoard[i].Client ~= "" and SV.TakenBoard[i].Completion == MISSION_GEN.COMPLETE then
             if SV.TakenBoard[i].Type == COMMON.MISSION_TYPE_OUTLAW or SV.TakenBoard[i].Type == COMMON.MISSION_TYPE_OUTLAW_ITEM
                     or SV.TakenBoard[i].Type == COMMON.MISSION_TYPE_OUTLAW_FLEE or SV.TakenBoard[i].Type == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then

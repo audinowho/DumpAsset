@@ -341,7 +341,8 @@ function canyon_camp.NPC_Tutor_Action(chara, activator)
 	  
 	  if result then
 		--one more check against full list flow
-		result = COMMON.LearnMoveFlow(player.Data, tutor_skill, STRINGS:Format(MapStrings['Tutor_Replace'], skillData:GetIconName()))
+		local replace_msg = STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_REPLACE"):ToLocal(), skillData:GetIconName())
+		result = COMMON.LearnMoveFlow(player.Data, tutor_skill, replace_msg)
 	  end
 	  
 	  if result then

@@ -100,31 +100,33 @@ function BATTLE_SCRIPT.EscortInteractSister(owner, ownerChar, context, args)
   
   local ratio = context.Target.HP * 100 // context.Target.MaxHP
   
-if ratio <= 25 then
-  UI:SetSpeakerEmotion("Pain")
-  UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_HALF"):ToLocal())
-elseif ratio <= 50 then
-  UI:SetSpeakerEmotion("Worried")
-  UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_HALF"):ToLocal())
-else 
-  UI:SetSpeakerEmotion("Worried")
-  if tbl.TalkAmount == nil then
-	UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_FULL_001"):ToLocal())
-	tbl.TalkAmount = 1
-  else
-    if tbl.TalkAmount == 1 then
-	  UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_FULL_002"):ToLocal())
-	elseif tbl.TalkAmount == 2 then
-	  UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_FULL_003"):ToLocal())
-	else
-	  UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_FULL_004"):ToLocal())
-	end
-	tbl.TalkAmount = tbl.TalkAmount + 1
+  if ratio <= 25 then
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_PINCH"):ToLocal())
+  elseif ratio <= 50 then
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_HALF"):ToLocal())
+  else 
+    UI:SetSpeakerEmotion("Worried")
+    if tbl.TalkAmount == nil then
+	  UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_FULL_001"):ToLocal())
+	  tbl.TalkAmount = 1
+    else
+      if tbl.TalkAmount == 1 then
+	    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_FULL_002"):ToLocal())
+	  elseif tbl.TalkAmount == 2 then
+	    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_FULL_003"):ToLocal())
+	  else
+	    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_SISTER_FULL_004"):ToLocal())
+	  end
+	  tbl.TalkAmount = tbl.TalkAmount + 1
+    end
   end
-end
 
   context.Target.CharDir = oldDir
 end
+
+
 
 function BATTLE_SCRIPT.RescueReached(owner, ownerChar, context, args)
 
@@ -194,8 +196,6 @@ end
 
 function BATTLE_SCRIPT.EscortOutReached(owner, ownerChar, context, args)
   
-  context.CancelState.Cancel = true
-  
   local tbl = LTBL(context.Target)
   
     local mission = SV.missions.Missions[tbl.Mission]
@@ -232,6 +232,11 @@ function BATTLE_SCRIPT.EscortOutReached(owner, ownerChar, context, args)
 	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT_GUEST"):ToLocal(), context.Target:GetDisplayName(true)))
       UI:SetSpeaker(context.Target)
       UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(args.EscortAcceptMsg):ToLocal()))
+	  
+	  context.TurnCancel.Cancel = true
+	else
+	  context.Target.CharDir = oldDir
+	  context.CancelState.Cancel = true
 	end
 	
 end
@@ -307,6 +312,127 @@ function BATTLE_SCRIPT.AccuracyTalk(owner, ownerChar, context, args)
   end
   
   context.Target.CharDir = oldDir
+end
+
+
+function BATTLE_SCRIPT.Tutor_Sequence(chara)
+
+	GAME:WaitFrames(10)
+	DUNGEON:CharStartAnim(chara, "Strike", false)
+	GAME:WaitFrames(15)
+	local emitter = RogueEssence.Content.FlashEmitter()
+	emitter.FadeInTime = 2
+	emitter.HoldTime = 4
+	emitter.FadeOutTime = 2
+	emitter.StartColor = Color(0, 0, 0, 0)
+	emitter.Layer = DrawLayer.Top
+	emitter.Anim = RogueEssence.Content.BGAnimData("White", 0)
+	DUNGEON:PlayVFX(emitter, chara.MapLoc.X, chara.MapLoc.Y)
+	SOUND:PlayBattleSE("EVT_Battle_Flash")
+	GAME:WaitFrames(30)
+end
+
+function BATTLE_SCRIPT.TutorTalk(owner, ownerChar, context, args)
+
+    local oldDir = context.Target.CharDir
+    DUNGEON:CharTurnToChar(context.Target, context.User)
+  
+    UI:SetSpeaker(context.Target)
+	
+	local tbl = LTBL(context.Target)
+	
+	if tbl.TaughtMove ~= nil then
+	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_DONE"):ToLocal()))
+	  
+	  context.Target.CharDir = oldDir
+	  context.CancelState.Cancel = true
+	  return
+	end
+	
+	local move_idx = context.Target.BaseSkills[0].SkillNum
+	local skill_data = _DATA:GetSkill(move_idx)
+	
+	local already_learned = context.User:HasBaseSkill(move_idx)
+	if already_learned then
+	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_ALREADY"):ToLocal(), skill_data:GetIconName()))
+
+	  SV.base_town.TutorMoves[move_idx] = true
+		context.TurnCancel.Cancel = true
+	  return
+	end
+	
+	
+	  local team_id = context.User.BaseForm
+	  local mon = _DATA:GetMonster(team_id.Species)
+	  local form = mon.Forms[team_id.Form]
+	
+	local can_learn = false
+	local skill = COMMON.TUTOR[move_idx]
+	  if not skill.Special then
+		--iterate the shared skills
+		for learnable in luanet.each(form.SharedSkills) do
+		  if learnable.Skill == move_idx then
+			can_learn = true
+			break
+		  end
+		end
+	  else
+		--iterate the secret skills
+		for learnable in luanet.each(form.SecretSkills) do
+		  if learnable.Skill == move_idx then
+			can_learn = true
+			break
+		  end
+		end
+	  end
+	
+	if can_learn then
+		UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_ASK"):ToLocal(), skill_data:GetIconName()), false)
+		UI:WaitForChoice()
+		result = UI:ChoiceResult()
+		
+		if result then
+		  local replace_msg = STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_REPLACE"):ToLocal(), skill_data:GetIconName())
+		  result = COMMON.LearnMoveFlow(context.User, move_idx, replace_msg)
+		end
+		
+		if result then
+		  -- attempt to learn move
+		  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_ACCEPT"):ToLocal(), skill_data:GetIconName()))
+		  
+		  --attack in a 90-degree turn from the talk
+		  context.Target.CharDir = Direction.Down
+		  context.User.CharDir = Direction.Down
+		  
+		  BATTLE_SCRIPT.Tutor_Sequence(context.Target)
+		  
+		  --player does the same animation offset by a little time
+		  BATTLE_SCRIPT.Tutor_Sequence(context.User)
+		  
+		  SOUND:PlayFanfare("Fanfare/LearnSkill")
+		  local orig_settings = UI:ExportSpeakerSettings()
+		  UI:ResetSpeaker(false)
+		  UI:WaitShowDialogue(STRINGS:FormatKey("DLG_SKILL_LEARN", context.User:GetDisplayName(true), skill_data:GetIconName()))
+		  UI:ImportSpeakerSettings(orig_settings)
+		  
+		  DUNGEON:CharTurnToChar(context.Target, context.User)
+		  DUNGEON:CharTurnToChar(context.User, context.Target)
+		  
+		  tbl.TaughtMove = true
+		  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_VISIT"):ToLocal()))
+		else
+		  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_DECLINE"):ToLocal(), skill_data:GetIconName()))
+		end
+		
+		SV.base_town.TutorMoves[move_idx] = true
+		
+		context.TurnCancel.Cancel = true
+	else
+	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR"):ToLocal(), skill_data:GetIconName()))
+
+	  context.Target.CharDir = oldDir
+	  context.CancelState.Cancel = true
+	end
 end
 
 

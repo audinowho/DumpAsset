@@ -166,6 +166,10 @@ end
 
 function FLOOR_GEN_SCRIPT.SpawnRandomTutor(map, args)
   
+  if SV.Experimental ~= true then
+    return
+  end
+  
   local valid_moves = {}
   --iterate through all tutor moves
   for move_idx, skill in pairs(COMMON.TUTOR) do

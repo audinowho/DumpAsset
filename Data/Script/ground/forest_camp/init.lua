@@ -92,17 +92,6 @@ function forest_camp.SetupNpcs()
   end
 end
 
-
-function forest_camp.BeginExposition()
-  
-  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
-  GAME:WaitFrames(30)
-  UI:WaitHideTitle(20)
-  GAME:FadeIn(20)
-  
-  
-end
-
 function forest_camp.CheckMissions()
   local player = CH('PLAYER')
   
@@ -128,6 +117,18 @@ function forest_camp.CheckMissions()
     end
   end
 
+end
+
+
+
+function forest_camp.BeginExposition()
+  
+  UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
+  GAME:WaitFrames(30)
+  UI:WaitHideTitle(20)
+  GAME:FadeIn(20)
+  
+  
 end
 
 --------------------------------------------------

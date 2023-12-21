@@ -128,6 +128,152 @@ end
 
 
 
+function BATTLE_SCRIPT.EscortInteractMother(owner, ownerChar, context, args)
+  context.CancelState.Cancel = true
+  local tbl = LTBL(context.Target)
+  local oldDir = context.Target.CharDir
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  UI:SetSpeaker(context.Target)
+  
+  local oldDir = context.Target.CharDir
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  
+  UI:SetSpeaker(context.Target)
+  
+  local ratio = context.Target.HP * 100 // context.Target.MaxHP
+  
+  if ratio <= 25 then
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_MOTHER_PINCH"):ToLocal())
+  elseif ratio <= 50 then
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_MOTHER_HALF"):ToLocal())
+  else 
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_MOTHER_FULL_001"):ToLocal())
+  end
+
+  context.Target.CharDir = oldDir
+end
+
+
+
+function BATTLE_SCRIPT.EscortInteractFather(owner, ownerChar, context, args)
+  context.CancelState.Cancel = true
+  local tbl = LTBL(context.Target)
+  local oldDir = context.Target.CharDir
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  UI:SetSpeaker(context.Target)
+  
+  local oldDir = context.Target.CharDir
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  
+  UI:SetSpeaker(context.Target)
+  
+  local ratio = context.Target.HP * 100 // context.Target.MaxHP
+  
+  if ratio <= 25 then
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_FATHER_PINCH"):ToLocal())
+  elseif ratio <= 50 then
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_FATHER_HALF"):ToLocal())
+  else 
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_FATHER_FULL_001"):ToLocal())
+  end
+
+  context.Target.CharDir = oldDir
+end
+
+
+function BATTLE_SCRIPT.EscortInteractBrother(owner, ownerChar, context, args)
+  context.CancelState.Cancel = true
+  local tbl = LTBL(context.Target)
+  local oldDir = context.Target.CharDir
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  UI:SetSpeaker(context.Target)
+  
+  local oldDir = context.Target.CharDir
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  
+  UI:SetSpeaker(context.Target)
+  
+  local ratio = context.Target.HP * 100 // context.Target.MaxHP
+  
+  if ratio <= 25 then
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_BROTHER_PINCH"):ToLocal())
+  elseif ratio <= 50 then
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_BROTHER_HALF"):ToLocal())
+  else 
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_BROTHER_FULL_001"):ToLocal())
+  end
+
+  context.Target.CharDir = oldDir
+end
+
+
+function BATTLE_SCRIPT.EscortInteractGrandma(owner, ownerChar, context, args)
+  context.CancelState.Cancel = true
+  local tbl = LTBL(context.Target)
+  local oldDir = context.Target.CharDir
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  UI:SetSpeaker(context.Target)
+  
+  local oldDir = context.Target.CharDir
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  
+  UI:SetSpeaker(context.Target)
+  
+  local ratio = context.Target.HP * 100 // context.Target.MaxHP
+  
+  if ratio <= 25 then
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_GRANDMA_PINCH"):ToLocal())
+  elseif ratio <= 50 then
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_GRANDMA_HALF"):ToLocal())
+  else 
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_GRANDMA_FULL_001"):ToLocal())
+  end
+
+  context.Target.CharDir = oldDir
+end
+
+
+function BATTLE_SCRIPT.EscortInteractPet(owner, ownerChar, context, args)
+  context.CancelState.Cancel = true
+  local tbl = LTBL(context.Target)
+  local oldDir = context.Target.CharDir
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  UI:SetSpeaker(context.Target)
+  
+  local oldDir = context.Target.CharDir
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  
+  UI:SetSpeaker(context.Target)
+  
+  local ratio = context.Target.HP * 100 // context.Target.MaxHP
+  
+  if ratio <= 25 then
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_PET_PINCH"):ToLocal())
+  elseif ratio <= 50 then
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_PET_HALF"):ToLocal())
+  else 
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue(RogueEssence.StringKey("TALK_ESCORT_PET_FULL_001"):ToLocal())
+  end
+
+  context.Target.CharDir = oldDir
+end
+
+
 function BATTLE_SCRIPT.RescueReached(owner, ownerChar, context, args)
 
   context.CancelState.Cancel = true

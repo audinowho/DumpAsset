@@ -50,6 +50,9 @@ function base_camp.Enter(map)
     SV.base_camp.ExpositionComplete = true
   else
     base_camp.SetupNpcs()
+	
+	base_camp.CheckMissions()
+	
     GAME:FadeIn(20)
   end
   
@@ -87,6 +90,34 @@ function base_camp.SetupNpcs()
   if SV.guildmaster_summit.GameComplete then
     local noctowl = CH('Noctowl')
     GROUND:TeleportTo(noctowl, 80, 288, Direction.Right)
+  end
+end
+
+
+
+function base_camp.CheckMissions()
+  local player = CH('PLAYER')
+  
+  local quest = SV.missions.Missions["EscortMother"]
+  if quest ~= nil then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
+	
+      --spawn her	  
+      
+      GAME:FadeIn(20)
+      UI:WaitShowDialogue("Escort mission state: Complete.")
+      
+      --she walks off to sunflora
+      UI:WaitShowDialogue("The mother drops something as she runs off.")
+      
+      SV.magnagate.Cards = SV.magnagate.Cards + 1
+	  SV.family.Mother = 1
+      COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_WATER"):ToLocal())
+      quest.Complete = COMMON.MISSION_ARCHIVED
+      SV.missions.FinishedMissions["EscortMother"] = quest
+      SV.missions.Missions["EscortMother"] = nil
+	  
+    end
   end
 end
 
@@ -523,6 +554,13 @@ end
 
 function base_camp.SisterReminderActive()
   if SV.family.Sister == 0 and SV.family.SisterActiveDays > 2 then
+    return true
+  end
+  return false
+end
+
+function base_camp.MotherReminderActive()
+  if SV.family.Mother == 0 and SV.family.MotherActiveDays > 2 then
     return true
   end
   return false

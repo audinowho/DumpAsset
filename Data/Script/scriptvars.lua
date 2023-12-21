@@ -258,9 +258,9 @@ SV.family =
   FatherActiveDays = 0,
   -- 0 = Not rescued, 1 = Rescued, 2 = In Town
   Father = 0,
-  SonActiveDays = 0,
+  BrotherActiveDays = 0,
   -- 0 = Not rescued, 1 = Rescued, 2 = In Town
-  Son = 0,
+  Brother = 0,
   GrandmaActiveDays = 0,
   -- 0 = Not rescued, 1 = Rescued, 2 = In Town
   Grandma = 0,

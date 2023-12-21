@@ -61,6 +61,9 @@ function canyon_camp.Enter(map)
 	SV.rest_stop.BossPhase = 1
   else
     canyon_camp.SetupNpcs()
+	
+	canyon_camp.CheckMissions()
+	
     GAME:FadeIn(20)
   end
 end
@@ -109,6 +112,32 @@ function canyon_camp.SetupNpcs()
 	    GROUND:Unhide("NPC_Storehouse")
 	  end
 	end
+  end
+end
+
+function canyon_camp.CheckMissions()
+  local player = CH('PLAYER')
+  
+  local quest = SV.missions.Missions["EscortFather"]
+  if quest ~= nil then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
+	
+      --spawn her	  
+      
+      GAME:FadeIn(20)
+      UI:WaitShowDialogue("Escort mission state: Complete.")
+      
+      --she walks off to sunflora
+      UI:WaitShowDialogue("The father drops something as she runs off.")
+      
+      SV.magnagate.Cards = SV.magnagate.Cards + 1
+	  SV.family.Father = 1
+      COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_SAND"):ToLocal())
+      quest.Complete = COMMON.MISSION_ARCHIVED
+      SV.missions.FinishedMissions["EscortFather"] = quest
+      SV.missions.Missions["EscortFather"] = nil
+	  
+    end
   end
 end
 
@@ -333,7 +362,11 @@ function canyon_camp.NPC_Tutor_Action(chara, activator)
 	local playerMonId = player.Data.BaseForm
 	local monData = _DATA:GetMonster(playerMonId.Species)
 	local formData = monData.Forms[playerMonId.Form]
-	if formData:CanLearnSkill(tutor_skill) then
+	
+	local already_learned = player:HasBaseSkill(tutor_skill)
+	if already_learned then
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Already'], skillData:GetIconName()))
+	elseif formData:CanLearnSkill(tutor_skill) then
 	  
 	  UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Tutor_Ask'], monData:GetColoredName(), skillData:GetIconName()), false)
 	  UI:WaitForChoice()

@@ -22,6 +22,95 @@ function COMMON.UpdateDayEndVars()
         }
       end
     end
+	
+
+    if _DATA.Save:GetDungeonUnlock("castaway_cave") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+      if SV.missions.Missions["EscortMother"] == nil and SV.missions.FinishedMissions["EscortMother"] == nil then
+        SV.missions.Missions["EscortMother"] = 
+        {
+          DestZone = "castaway_cave",
+          DestSegment = 0,
+          DestFloor = 7,
+          FloorUnknown = true,
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("swellow", 0, "normal", Gender.Female),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("swellow", 0, "normal", Gender.Female),
+          Complete = COMMON.MISSION_INCOMPLETE,
+          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          EscortTable = { EscortStartMsg = "TALK_ESCORT_MOTHER_START", EscortAcceptMsg = "TALK_ESCORT_MOTHER_ACCEPT", EscortInteract = "EscortInteractMother" }
+        }
+      end
+    end
+	
+
+    if _DATA.Save:GetDungeonUnlock("deserted_fortress") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+      if SV.missions.Missions["EscortFather"] == nil and SV.missions.FinishedMissions["EscortFather"] == nil then
+        SV.missions.Missions["EscortFather"] = 
+        {
+          DestZone = "deserted_fortress",
+          DestSegment = 0,
+          DestFloor = 6,
+          FloorUnknown = true,
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male),
+          Complete = COMMON.MISSION_INCOMPLETE,
+          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          EscortTable = { EscortStartMsg = "TALK_ESCORT_FATHER_START", EscortAcceptMsg = "TALK_ESCORT_FATHER_ACCEPT", EscortInteract = "EscortInteractFather" }
+        }
+      end
+    end
+
+    if _DATA.Save:GetDungeonUnlock("barren_tundra") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+      if SV.missions.Missions["EscortBrother"] == nil and SV.missions.FinishedMissions["EscortBrother"] == nil then
+        SV.missions.Missions["EscortBrother"] = 
+        {
+          DestZone = "barren_tundra",
+          DestSegment = 0,
+          DestFloor = 10,
+          FloorUnknown = true,
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("wooper", 0, "normal", Gender.Male),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("wooper", 0, "normal", Gender.Male),
+          Complete = COMMON.MISSION_INCOMPLETE,
+          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          EscortTable = { EscortStartMsg = "TALK_ESCORT_BROTHER_START", EscortAcceptMsg = "TALK_ESCORT_BROTHER_ACCEPT", EscortInteract = "EscortInteractBrother" }
+        }
+      end
+    end
+	
+
+    if _DATA.Save:GetDungeonUnlock("wayward_wetlands") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+      if SV.missions.Missions["EscortPet"] == nil and SV.missions.FinishedMissions["EscortPet"] == nil then
+        SV.missions.Missions["EscortPet"] = 
+        {
+          DestZone = "wayward_wetlands",
+          DestSegment = 0,
+          DestFloor = 10,
+          FloorUnknown = true,
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male),
+          Complete = COMMON.MISSION_INCOMPLETE,
+          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          EscortTable = { EscortStartMsg = "TALK_ESCORT_PET_START", EscortAcceptMsg = "TALK_ESCORT_Pet_ACCEPT", EscortInteract = "EscortInteractPet" }
+        }
+      end
+    end
+
+    if _DATA.Save:GetDungeonUnlock("the_sky") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+      if SV.missions.Missions["EscortGrandma"] == nil and SV.missions.FinishedMissions["EscortGrandma"] == nil then
+        SV.missions.Missions["EscortGrandma"] = 
+        {
+          DestZone = "the_sky",
+          DestSegment = 0,
+          DestFloor = 15,
+          FloorUnknown = true,
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male),
+          Complete = COMMON.MISSION_INCOMPLETE,
+          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          EscortTable = { EscortStartMsg = "TALK_ESCORT_GRANDMA_START", EscortAcceptMsg = "TALK_ESCORT_GRANDMA_ACCEPT", EscortInteract = "EscortInteractGrandma" }
+        }
+      end
+    end
+	
   end
   
   if SV.base_camp.CenterStatueDate == nil or SV.base_camp.CenterStatueDate == "" then

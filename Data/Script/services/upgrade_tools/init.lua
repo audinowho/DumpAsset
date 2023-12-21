@@ -252,13 +252,18 @@ function UpgradeTools:OnUpgrade()
 	  Mother = 0,
 	  FatherActiveDays = 0,
 	  Father = 0,
-	  SonActiveDays = 0,
-	  Son = 0,
+	  BrotherActiveDays = 0,
+	  Brother = 0,
 	  GrandmaActiveDays = 0,
 	  Grandma = 0,
 	  PetActiveDays = 0,
 	  Pet = 0
 	}
+  end
+  
+  if SV.family.BrotherActiveDays == nil then
+    SV.family.BrotherActiveDays = 0
+	SV.family.Brother = 0
   end
   
   if SV.base_town.FreeRelearn == nil then

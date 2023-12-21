@@ -34,6 +34,9 @@ function final_stop.Enter(map)
 	SV.guildmaster_summit.BossPhase = 1
   else
     final_stop.SetupNpcs()
+	
+	final_stop.CheckMissions()
+	
     GAME:FadeIn(20)
   end
 end
@@ -81,6 +84,32 @@ function final_stop.SetupNpcs()
   end
 end
 
+
+function final_stop.CheckMissions()
+  local player = CH('PLAYER')
+  
+  local quest = SV.missions.Missions["EscortBrother"]
+  if quest ~= nil then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
+	
+      --spawn her	  
+      
+      GAME:FadeIn(20)
+      UI:WaitShowDialogue("Escort mission state: Complete.")
+      
+      --she walks off to sunflora
+      UI:WaitShowDialogue("The brother drops something as he runs off.")
+      
+      SV.magnagate.Cards = SV.magnagate.Cards + 1
+	  SV.family.Brother = 1
+      COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_MIST"):ToLocal())
+      quest.Complete = COMMON.MISSION_ARCHIVED
+      SV.missions.FinishedMissions["EscortBrother"] = quest
+      SV.missions.Missions["EscortBrother"] = nil
+	  
+    end
+  end
+end
 
 function final_stop.Summit_Fail()
   --everyone is dead
@@ -293,6 +322,14 @@ end
 function final_stop.Teammate3_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   COMMON.GroundInteract(activator, chara, true)
+end
+
+
+function final_stop.BrotherReminderActive()
+  if SV.family.Brother == 0 and SV.family.BrotherActiveDays > 2 then
+    return true
+  end
+  return false
 end
 
 return final_stop

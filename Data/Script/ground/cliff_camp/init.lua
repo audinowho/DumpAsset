@@ -30,6 +30,9 @@ function cliff_camp.Enter(map)
     SV.cliff_camp.ExpositionComplete = true
   else
     cliff_camp.SetupNpcs()
+	
+	cliff_camp.CheckMissions()
+	
     GAME:FadeIn(20)
   end
 
@@ -74,6 +77,56 @@ function cliff_camp.SetupNpcs()
 	end
   end
 end
+
+
+function cliff_camp.CheckMissions()
+  local player = CH('PLAYER')
+  
+  local quest = SV.missions.Missions["EscortPet"]
+  if quest ~= nil then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
+	
+      --spawn her	  
+      
+      GAME:FadeIn(20)
+      UI:WaitShowDialogue("Escort mission state: Complete.")
+      
+      --she walks off to sunflora
+      UI:WaitShowDialogue("The pet drops something as it runs off.")
+      
+      SV.magnagate.Cards = SV.magnagate.Cards + 1
+	  SV.family.Pet = 1
+      COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_GRASS"):ToLocal())
+      quest.Complete = COMMON.MISSION_ARCHIVED
+      SV.missions.FinishedMissions["EscortPet"] = quest
+      SV.missions.Missions["EscortPet"] = nil
+	  
+    end
+  end
+  
+  quest = SV.missions.Missions["EscortGrandma"]
+  if quest ~= nil then
+    if quest.Complete == COMMON.MISSION_COMPLETE then
+	
+      --spawn her	  
+      
+      GAME:FadeIn(20)
+      UI:WaitShowDialogue("Escort mission state: Complete.")
+      
+      --she walks off to sunflora
+      UI:WaitShowDialogue("The grandma drops something as she runs off.")
+      
+      SV.magnagate.Cards = SV.magnagate.Cards + 1
+	  SV.family.Grandma = 1
+      COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_WIND"):ToLocal())
+      quest.Complete = COMMON.MISSION_ARCHIVED
+      SV.missions.FinishedMissions["EscortGrandma"] = quest
+      SV.missions.Missions["EscortGrandma"] = nil
+	  
+    end
+  end
+end
+
 
 function cliff_camp.BeginExposition()
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20);
@@ -376,6 +429,29 @@ function cliff_camp.NPC_DexRater_Action(chara, activator)
 	end
   end
   
+end
+
+
+function cliff_camp.FatherReminderActive()
+  if SV.family.Father == 0 and SV.family.FatherActiveDays > 2 then
+    return true
+  end
+  return false
+end
+
+
+function cliff_camp.GrandmaReminderActive()
+  if SV.family.Grandma == 0 and SV.family.GrandmaActiveDays > 2 then
+    return true
+  end
+  return false
+end
+
+function cliff_camp.PetReminderActive()
+  if SV.family.Pet == 0 and SV.family.PetActiveDays > 2 then
+    return true
+  end
+  return false
 end
 
 return cliff_camp

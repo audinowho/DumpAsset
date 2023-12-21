@@ -133,9 +133,9 @@ function SkillTutorMenu:updateSummary()
         self.currency_title:SetText(STRINGS.FormatKey("MENU_STORAGE_MONEY")..":")
         self.currency_text:SetText(STRINGS.FormatKey("MONEY_AMOUNT" , amount))
     else
-        local item_name = _DATA:GetItem(currency):GetIconName()
-        self.currency_title:SetText("Item:")
-        self.currency_text:SetText(item_name.." [color=#FFCEFF]("..tostring(amount)..")[color]")
+		local ex_item = RogueEssence.Dungeon.InvItem(currency, false, amount)
+        self.currency_title:SetText(RogueEssence.StringKey("MENU_CURRENCY_AVAILABLE"):ToLocal()..":")
+        self.currency_text:SetText(ex_item:GetDisplayName())
     end
 end
 

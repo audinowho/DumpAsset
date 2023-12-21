@@ -446,7 +446,8 @@ function COMMON.GetTutorableMoves(member, tutor_moves)
 		--for each shared skill
 		for move_idx = 0, form.SharedSkills.Count - 1, 1 do
 			local move = form.SharedSkills[move_idx].Skill
-			if tutor_moves[move] ~= nil then
+			local already_learned = member:HasBaseSkill(move)
+			if not already_learned and tutor_moves[move] ~= nil then
 				--check if the move tutor list contains it as nonspecial
 				if not tutor_moves[move].Special then
 					valid_moves[move] = tutor_moves[move]
@@ -456,7 +457,8 @@ function COMMON.GetTutorableMoves(member, tutor_moves)
 		--for each secret skill
 		for move_idx = 0, form.SecretSkills.Count - 1, 1 do
 			local move = form.SecretSkills[move_idx].Skill
-			if tutor_moves[move] ~= nil then
+			local already_learned = member:HasBaseSkill(move)
+			if not already_learned and tutor_moves[move] ~= nil then
 				--check if the move tutor list contains it as special
 				if tutor_moves[move].Special then
 					valid_moves[move] = tutor_moves[move]

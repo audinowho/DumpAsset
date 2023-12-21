@@ -1209,8 +1209,19 @@ function base_camp_2.Tutor_Teach_Flow(tutor_moves)
 			local learnedMove = COMMON.LearnMoveFlow(member, move, STRINGS:Format(MapStrings['Tutor_Remember_Replace']))
 			
 			if learnedMove then
+				local price = COMMON.TUTOR[move].Cost
 				SOUND:PlayBattleSE("DUN_Money")
-				--GAME:RemoveFromPlayerMoney(price)
+				for ii = 1, price, 1 do
+					local item_slot = GAME:FindPlayerItem("loot_heart_scale", true, true)
+					if not item_slot:IsValid() then
+						--it is a certainty that there is an item in storage, due to previous checks
+						GAME:TakePlayerStorageItem("loot_heart_scale")
+					elseif item_slot.IsEquipped then
+						GAME:TakePlayerEquippedItem(item_slot.Slot)
+					else
+						GAME:TakePlayerBagItem(item_slot.Slot)
+					end
+				end
 				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Begin']))
 				base_camp_2.Tutor_Sequence()
 				SOUND:PlayFanfare("Fanfare/LearnSkill")

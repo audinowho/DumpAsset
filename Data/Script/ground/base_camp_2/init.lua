@@ -1,5 +1,6 @@
 require 'common'
 require 'menu.SkillSelectMenu'
+require 'menu.SkillTutorMenu'
 
 local base_camp_2 = {}
 local MapStrings = {}
@@ -1195,7 +1196,8 @@ function base_camp_2.Tutor_Teach_Flow(tutor_moves)
 			end
 		elseif state == 1 then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Teach_What'], member:GetDisplayName(true)))
-      local result = SkillSelectMenu.runTutorMenu(member, tutor_moves)
+	  local valid_moves = COMMON.GetTutorableMoves(member, tutor_moves) --moved out here
+	  local result = SkillTutorMenu.runTutorMenu(valid_moves, "loot_heart_scale")
       if result ~= "" then
         move = result
         state = 2

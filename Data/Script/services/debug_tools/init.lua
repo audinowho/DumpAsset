@@ -103,6 +103,7 @@ function DebugTools:CustomDungeonOthersMenu()
     local menu = RogueEssence.Menu.OthersMenu()
     menu:SetupChoices();
 	if RogueEssence.GameManager.Instance.CurrentScene == RogueEssence.Dungeon.DungeonScene.Instance then
+		menu.Choices:Insert(1, RogueEssence.Menu.MenuTextChoice(RogueEssence.StringKey("MENU_RECRUITMENT"):ToLocal(), function () _MENU:AddMenu(RecruitmentListMenu:new().menu, false) end))
 		menu.Choices:Add(RogueEssence.Menu.MenuTextChoice("Mission Objectives", function () _MENU:AddMenu(DungeonJobList:new().menu, false) end))
 	end
 	menu:InitMenu();

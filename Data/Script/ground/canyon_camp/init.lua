@@ -363,7 +363,7 @@ function canyon_camp.NPC_Tutor_Action(chara, activator)
 	local monData = _DATA:GetMonster(playerMonId.Species)
 	local formData = monData.Forms[playerMonId.Form]
 	
-	local already_learned = player:HasBaseSkill(tutor_skill)
+	local already_learned = player.Data:HasBaseSkill(tutor_skill)
 	if already_learned then
 	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Already'], skillData:GetIconName()))
 	elseif formData:CanLearnSkill(tutor_skill) then

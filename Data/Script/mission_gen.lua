@@ -2533,11 +2533,11 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		if client == "magna" then --Magna is a special exception
 			client_gender = 0
 		else
-			client_gender = _DATA:GetMonster(client).Forms[0]:RollGender(_ZONE.CurrentZone.Rand)
+			client_gender = _DATA:GetMonster(client).Forms[0]:RollGender(_ZONE.CurrentMap.Rand)
 			client_gender = COMMON.GenderToNum(client_gender)
 		end
 
-		local target_gender = _DATA:GetMonster(target).Forms[0]:RollGender(_ZONE.CurrentZone.Rand)
+		local target_gender = _DATA:GetMonster(target).Forms[0]:RollGender(_ZONE.CurrentMap.Rand)
 
 		target_gender = COMMON.GenderToNum(target_gender)
 

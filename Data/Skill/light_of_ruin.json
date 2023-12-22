@@ -4,73 +4,95 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Light of Ruin",
-"LocalTexts": {
-"fr": "Lumière du Néant",
-"de": "Lux Calamitatis",
-"es": "Luz Aniquiladora",
-"it": "Luce Nefasta",
-"ko": "파멸의빛",
-"ja": "はめつのひかり",
-"ja-jp": "はめつのひかり",
-"zh-hans": "破灭之光",
-"zh-hant": "破滅之光"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "Drawing power from the Eternal Flower, the user fires a powerful beam of light. This also damages the user quite a lot.",
-"LocalTexts": {
-"fr": "Utilise la puissance de la Fleur Éternelle pour lancer un formidable rayon d’énergie. Blesse aussi gravement le lanceur.",
-"de": "Die Attacke basiert auf der Kraft des Ewigblütlers, die als mächtiger Lichtstrahl abgefeuert wird. Der Anwender nimmt dabei selbst großen Schaden.",
-"es": "El usuario emplea el poder de la Flor Eterna para lanzar un potente rayo de luz, pero sufre bastante daño al hacerlo.",
-"it": "Concentra il potere del Fiore Eterno in un raggio di luce potentissimo con cui attacca il bersaglio. Causa danni ingenti anche a chi la usa.",
-"ko": "영원의 꽃의 파워를 빌려서 강력한 광선을 쏜다. 자신도 상당한 데미지를 입는다.",
-"ja": "えいえんのはな　の　パワーを　かりて きょうりょくな　こうせんを　うちだす。 じぶんも　かなりの　ダメージを　うける。",
-"ja-jp": "永遠の花　の　パワーを　かりて 強力な　光線を　撃ちだす。 自分も　かなりの　ダメージを　受ける。",
-"zh-hans": "借用永恒之花的力量，发射出强力光线。自己也会受到不小的伤害。",
-"zh-hant": "借用永恆之花的力量， 發射出強力光線。 自己也會受到不小的傷害。"
-}
+"LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 617,
 "BaseCharges": 5,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Dungeon.WaveMotionAction, RogueEssence",
+"Anim": {
+"AnimIndex": "Beam_Pink",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
 },
-"WideAngle": 0,
+"Wide": true,
+"Speed": 10,
+"Linger": 6,
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
+"ActionType": 7
 },
-"TargetAlignments": 4,
+"HitTiles": true,
+"Range": 8,
+"StopAtHit": false,
+"StopAtWall": false,
+"TargetAlignments": 6,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"PreActions": [],
-"ActionFX": {
+"PreActions": [
+{
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Lunar_Dance",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Copycat_Back",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": 12,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,
 "MaxShake": 0,
 "MaxShakeTime": 0
 }
+}
+],
+"ActionFX": {
+"Delay": 0,
+"Sound": "DUN_Lunar_Dance_2",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 8,
+"MaxShakeTime": 30
+}
 },
 "LagBehindTime": 0
 },
 "Explosion": {
-"TargetAlignments": 4,
+"TargetAlignments": 6,
 "HitTiles": false,
 "Range": 0,
 "Speed": 0,
@@ -100,11 +122,11 @@
 "Data": {
 "Element": "fairy",
 "Category": 2,
-"HitRate": 90,
+"HitRate": 85,
 "SkillStates": [
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 140
+"Power": 100
 }
 ],
 "BeforeTryActions": [],
@@ -124,8 +146,62 @@
 }
 }
 ],
-"OnHitTiles": [],
-"AfterActions": [],
+"OnHitTiles": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveTerrainStateEvent, PMDC",
+"States": [
+{
+"assembly": "PMDC, Version=0.7.21.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.WallTerrainState"
+}
+],
+"RemoveSound": "DUN_Rollout",
+"RemoveAnim": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Wall_Break",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+}
+}
+}
+],
+"AfterActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.HPRecoilEvent, PMDC",
+"Fraction": 3,
+"MaxHP": false
+}
+}
+],
 "ElementEffects": [],
 "IntroFX": [],
 "HitFX": {

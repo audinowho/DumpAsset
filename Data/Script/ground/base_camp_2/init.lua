@@ -552,9 +552,9 @@ function base_camp_2.Shop_Action(obj, activator)
 			if result then
 				for ii = #cart, 1, -1 do
 					if cart[ii].IsEquipped then
-						GAME:TakePlayerEquippedItem(cart[ii].Slot)
+						GAME:TakePlayerEquippedItem(cart[ii].Slot, true)
 					else
-						GAME:TakePlayerBagItem(cart[ii].Slot)
+						GAME:TakePlayerBagItem(cart[ii].Slot, true)
 					end
 				end
 				SOUND:PlayBattleSE("DUN_Money")
@@ -656,10 +656,10 @@ function base_camp_2.Appraisal_Action(obj, activator)
 						local stack = 0
 						if cart[ii].IsEquipped then
 							box = GAME:GetPlayerEquippedItem(cart[ii].Slot)
-							GAME:TakePlayerEquippedItem(cart[ii].Slot)
+							GAME:TakePlayerEquippedItem(cart[ii].Slot, true)
 						else
 							box = GAME:GetPlayerBagItem(cart[ii].Slot)
-							GAME:TakePlayerBagItem(cart[ii].Slot)
+							GAME:TakePlayerBagItem(cart[ii].Slot, true)
 						end
 						
 						local treasure_item = box.HiddenValue

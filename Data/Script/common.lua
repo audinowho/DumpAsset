@@ -15,6 +15,9 @@ Mediator = require 'lib.mediator'
 --Reserve the "Serpent" symbol for the serializer
 Serpent = require 'lib.serpent'
 
+LoadGenType = luanet.import_type('RogueEssence.LevelGen.LoadGen')
+ChanceFloorGenType = luanet.import_type('RogueEssence.LevelGen.ChanceFloorGen')
+
 ----------------------------------------------------------
 -- Console Writing
 ----------------------------------------------------------
@@ -1608,8 +1611,9 @@ function COMMON.GetNoMissionFloors(current_segment)
     for i=0, floor_count - 1, 1 do
         local map_gen = current_segment:GetMapGen(i)
         local type = LUA_ENGINE:TypeOf(map_gen)
-        if type:IsAssignableTo(LoadGenType) or type:IsAssignableTo(ChanceFloorGenType) then
-            no_mission_floors[i] = 1
+        if type:IsAssignableTo(luanet.ctype(LoadGenType)) or type:IsAssignableTo(luanet.ctype(ChanceFloorGenType)) then
+            PrintInfo("Type is of "..type.FullName..", "..i.." is a no mission floor!")
+            no_mission_floors[i+1] = 1
         end
     end
     return no_mission_floors

@@ -2723,11 +2723,13 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		local current_index = 0
 		local noMissionFloors = COMMON.GetNoMissionFloors(current_segment)
 		local valid_floor_candidates = {}
+		
+		PrintInfo(#noMissionFloors.." no mission floors found for dungeon "..dungeon)
 		 
 		--Make sure that the dungeon floor added is valid
 		for i = 1, floor_candidates_length, 1 do
 			local cur_candidate = floor_candidates[i]
-			if noMissionFloors[cur_candidate] ~= nil then
+			if noMissionFloors[cur_candidate] == nil then
 				local has_sidequest_on_floor = false
 				
 				--Make sure none of the sidequests (EscortSister, OutlawForest) take place in the same floor
@@ -2803,14 +2805,11 @@ end
 
 function MISSION_GEN.JobSortFunction(j1, j2)
 	if (j2 == nil or j2.Zone == nil or j2.Zone == "") then
-		PrintInfo("Sorting by jobs in dungeons "..j1.Zone.." and nil")
 		return false
 	end
 	if (j1 == nil or j1.Zone == nil or j1.Zone == "") then
-		PrintInfo("Sorting by jobs in dungeons nil and "..j2.Zone)
 		return true
 	end
-	PrintInfo("Sorting by jobs in dungeons "..j1.Zone.." and "..j2.Zone)
 	--if they're the same dungeon, then check floors. Otherwise, dungeon order takes presidence. 
 	if SV.DungeonOrder[j1.Zone] == SV.DungeonOrder[j2.Zone] then
 		return j1.Floor > j2.Floor 

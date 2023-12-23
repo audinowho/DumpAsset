@@ -44,7 +44,6 @@ function base_camp_2.Init(map)
   COMMON.CreateWalkArea("Assembly" .. tostring(14), 72, 264, 64, 64)
   COMMON.CreateWalkArea("Assembly" .. tostring(19), 400, 592, 56, 48)
   COMMON.CreateWalkArea("Assembly" .. tostring(22), 728, 352, 64, 48)
-  COMMON.CreateWalkArea("Assembly" .. tostring(23), 584, 608, 72, 56)
   
   COMMON.CreateWalkArea("NPC_Food", 144, 592, 32, 32)
   COMMON.CreateWalkArea("NPC_Settling", 344, 288, 48, 48)
@@ -91,8 +90,8 @@ end
 
 function base_camp_2.SetupNpcs()
   GROUND:Unhide("NPC_Food")
-  GROUND:Unhide("NPC_Mother")
-  GROUND:Unhide("NPC_Father")
+  GROUND:Unhide("NPC_Queen")
+  GROUND:Unhide("NPC_King")
   GROUND:Unhide("NPC_Catch_1")
   GROUND:Unhide("NPC_Catch_2")
   GROUND:Unhide("NPC_Elder")
@@ -109,11 +108,144 @@ function base_camp_2.SetupNpcs()
 	  GROUND:Unhide("NPC_Storehouse")
 	end
   end
+  
+  -- family appears if Returned = false
+  if SV.family.Returned == false then
+    -- and if they've been saved individually
+    if SV.family.Sister then
+	  GROUND:Unhide("Family_Sister")
+	end
+    if SV.family.Mother then
+	  GROUND:Unhide("Family_Mother")
+	end
+    if SV.family.Father then
+	  GROUND:Unhide("Family_Father")
+	end
+    if SV.family.Brother then
+	  GROUND:Unhide("Family_Brother")
+	end
+    if SV.family.Pet then
+	  GROUND:Unhide("Family_Pet")
+	end
+    if SV.family.Grandma then
+	  GROUND:Unhide("Family_Grandma")
+	end
+  end
 end
 
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
+
+
+function base_camp_2.Family_Sister_Action(obj, activator)
+  
+  local group_check = base_camp_2.Isekai_Event()
+  if group_check then
+    return
+  end
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sister_Line_001']))
+  GROUND:EntTurn(chara, Direction.DownLeft)
+end
+
+function base_camp_2.Family_Mother_Action(obj, activator)
+
+  local group_check = base_camp_2.Isekai_Event()
+  if group_check then
+    return
+  end
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mother_Line_001']))
+  GROUND:EntTurn(chara, Direction.DownLeft)
+end
+
+function base_camp_2.Family_Father_Action(obj, activator)
+
+  local group_check = base_camp_2.Isekai_Event()
+  if group_check then
+    return
+  end
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Father_Line_001']))
+  GROUND:EntTurn(chara, Direction.DownLeft)
+end
+
+function base_camp_2.Family_Brother_Action(obj, activator)
+
+  local group_check = base_camp_2.Isekai_Event()
+  if group_check then
+    return
+  end
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Brother_Line_001']))
+  GROUND:EntTurn(chara, Direction.DownLeft)
+end
+
+function base_camp_2.Family_Pet_Action(obj, activator)
+
+  local group_check = base_camp_2.Isekai_Event()
+  if group_check then
+    return
+  end
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pet_Line_001']))
+  GROUND:EntTurn(chara, Direction.DownLeft)
+end
+
+function base_camp_2.Family_Grandma_Action(obj, activator)
+
+  local group_check = base_camp_2.Isekai_Event()
+  if group_check then
+    return
+  end
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Grandma_Line_001']))
+  GROUND:EntTurn(chara, Direction.DownLeft)
+end
+
+function base_camp_2.Isekai_Event()
+  
+  if SV.family.TalkedReturn == false then
+    if SV.guild_hut.TookCard then
+		UI:ResetSpeaker()
+		SV.family.TalkedReturn = true
+		UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_001']))
+		GAME:FadeOut(false, 20)
+		GAME:FadeIn(20)
+		return true
+	end
+  else
+    if SV.family.Sister and SV.family.Mother and SV.family.Father and SV.family.Brother and SV.family.Pet and SV.family.Grandma then
+		UI:ResetSpeaker()
+		SV.family.Returned = true
+		UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_002']))
+		GAME:FadeOut(false, 20)
+		GAME:EnterGroundMap("guild_hut", "entrance_portal", false)
+	  return true
+	end
+  end
+  
+  return false
+end
 
 function base_camp_2.NPC_Food_Action(chara, activator)
   local player = CH('PLAYER')
@@ -207,20 +339,20 @@ function base_camp_2.NPC_History_Action(chara, activator)
 end
 
 
-function base_camp_2.NPC_Father_Action(chara, activator)
+function base_camp_2.NPC_King_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Father_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['King_Line_001']))
   GROUND:EntTurn(chara, Direction.DownLeft)
 end
 
 
-function base_camp_2.NPC_Mother_Action(chara, activator)
+function base_camp_2.NPC_Queen_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mother_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Queen_Line_001']))
   GROUND:EntTurn(chara, Direction.UpRight)
 end
 

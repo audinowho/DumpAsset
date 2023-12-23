@@ -16,12 +16,19 @@ end
 function guild_hut.Enter(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  if SV.guild_hut.Portal then
+    GROUND:Unhide("Card_Portal")
+  end
+  
   if not SV.guild_hut.ExpositionComplete then
     guild_hut.BeginExposition()
 	SV.guild_hut.ExpositionComplete = true
   elseif SV.guild_hut.BookPhase == 1 then
     guild_hut.AfterFirstNovel()
     SV.guild_hut.BookPhase = 2
+  elseif SV.family.Returned and not SV.guild_hut.Portal then
+    guild_hut.FamilyReturn()
+	SV.guild_hut.Portal = true
   else
     GAME:FadeIn(20)
   end
@@ -79,6 +86,72 @@ function guild_hut.BeginExposition()
   if team3 ~= nil then
     GROUND:TeleportTo(team3, 120, 164, Direction.Down)
   end
+  
+  GAME:WaitFrames(60)
+  
+  GAME:CutsceneMode(false)
+  
+  GROUND:Hide("Noctowl")
+  
+  GAME:FadeIn(20)
+  
+end
+
+
+function guild_hut.FamilyReturn()
+  GAME:CutsceneMode(true)
+  
+  GROUND:Unhide("Noctowl")
+  GROUND:Unhide("Family_Sister")
+  GROUND:Unhide("Family_Mother")
+  GROUND:Unhide("Family_Father")
+  GROUND:Unhide("Family_Brother")
+  GROUND:Unhide("Family_Pet")
+  GROUND:Unhide("Family_Grandma")
+  
+  local player = CH('PLAYER')
+  local noctowl = CH('Noctowl')
+  local sister = CH('Family_Sister')
+  local mother = CH('Family_Mother')
+  local brother = CH('Family_Brother')
+  local grandma = CH('Family_Grandma')
+  
+  GAME:FadeIn(20)
+  
+  UI:ResetSpeaker()
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_001']))
+  
+  SOUND:PlayBattleSE("EVT_Evolution_Start")
+  GAME:FadeOut(true, 20)
+  GROUND:Unhide("Card_Portal")
+  GAME:FadeIn(20)
+  
+  UI:SetSpeaker(brother)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_002']))
+  
+  UI:SetSpeaker(mother)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_003']))
+  
+  UI:SetSpeaker(grandma)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_004']))
+  
+  UI:SetSpeaker(noctowl)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_005']))
+  UI:ResetSpeaker()
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_006']))
+  
+  GROUND:Hide("Family_Sister")
+  GROUND:Hide("Family_Mother")
+  GROUND:Hide("Family_Father")
+  GROUND:Hide("Family_Brother")
+  GROUND:Hide("Family_Pet")
+  GROUND:Hide("Family_Grandma")
+  
+  
+  UI:SetSpeaker(noctowl)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_007']))
+  
+  GAME:FadeOut(false, 20)
   
   GAME:WaitFrames(60)
   

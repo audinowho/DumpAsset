@@ -128,10 +128,10 @@ function canyon_camp.CheckMissions()
       UI:WaitShowDialogue("Escort mission state: Complete.")
       
       --she walks off to sunflora
-      UI:WaitShowDialogue("The father drops something as she runs off.")
+      UI:WaitShowDialogue("The father drops something as he runs off.")
       
       SV.magnagate.Cards = SV.magnagate.Cards + 1
-	  SV.family.Father = 1
+	  SV.family.Father = true
       COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_SAND"):ToLocal())
       quest.Complete = COMMON.MISSION_ARCHIVED
       SV.missions.FinishedMissions["EscortFather"] = quest

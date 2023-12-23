@@ -21,6 +21,10 @@ function COMMON.UpdateDayEndVars()
           EscortTable = { EscortStartMsg = "TALK_ESCORT_SISTER_START", EscortAcceptMsg = "TALK_ESCORT_SISTER_ACCEPT", EscortInteract = "EscortInteractSister" }
         }
       end
+	  
+	  if SV.family.Sister == false then
+		SV.family.SisterActiveDays = SV.family.SisterActiveDays + 1
+	  end
     end
 	
 
@@ -39,6 +43,10 @@ function COMMON.UpdateDayEndVars()
           EscortTable = { EscortStartMsg = "TALK_ESCORT_MOTHER_START", EscortAcceptMsg = "TALK_ESCORT_MOTHER_ACCEPT", EscortInteract = "EscortInteractMother" }
         }
       end
+	  
+	  if SV.family.Mother == false then
+		SV.family.MotherActiveDays = SV.family.MotherActiveDays + 1
+	  end
     end
 	
 
@@ -57,6 +65,10 @@ function COMMON.UpdateDayEndVars()
           EscortTable = { EscortStartMsg = "TALK_ESCORT_FATHER_START", EscortAcceptMsg = "TALK_ESCORT_FATHER_ACCEPT", EscortInteract = "EscortInteractFather" }
         }
       end
+	  
+	  if SV.family.Father == false then
+		SV.family.FatherActiveDays = SV.family.FatherActiveDays + 1
+	  end
     end
 
     if _DATA.Save:GetDungeonUnlock("barren_tundra") ~= RogueEssence.Data.GameProgress.UnlockState.None then
@@ -74,6 +86,10 @@ function COMMON.UpdateDayEndVars()
           EscortTable = { EscortStartMsg = "TALK_ESCORT_BROTHER_START", EscortAcceptMsg = "TALK_ESCORT_BROTHER_ACCEPT", EscortInteract = "EscortInteractBrother" }
         }
       end
+	  
+	  if SV.family.Brother == false then
+		SV.family.BrotherActiveDays = SV.family.BrotherActiveDays + 1
+	  end
     end
 	
 
@@ -89,9 +105,13 @@ function COMMON.UpdateDayEndVars()
           ClientSpecies = RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male),
           Complete = COMMON.MISSION_INCOMPLETE,
           Type = COMMON.MISSION_TYPE_ESCORT_OUT,
-          EscortTable = { EscortStartMsg = "TALK_ESCORT_PET_START", EscortAcceptMsg = "TALK_ESCORT_Pet_ACCEPT", EscortInteract = "EscortInteractPet" }
+          EscortTable = { EscortStartMsg = "TALK_ESCORT_PET_START", EscortAcceptMsg = "TALK_ESCORT_PET_ACCEPT", EscortInteract = "EscortInteractPet" }
         }
       end
+	  
+	  if SV.family.Pet == false then
+		SV.family.PetActiveDays = SV.family.PetActiveDays + 1
+	  end
     end
 
     if _DATA.Save:GetDungeonUnlock("the_sky") ~= RogueEssence.Data.GameProgress.UnlockState.None then
@@ -109,6 +129,10 @@ function COMMON.UpdateDayEndVars()
           EscortTable = { EscortStartMsg = "TALK_ESCORT_GRANDMA_START", EscortAcceptMsg = "TALK_ESCORT_GRANDMA_ACCEPT", EscortInteract = "EscortInteractGrandma" }
         }
       end
+	  
+	  if SV.family.Grandma == false then
+		SV.family.GrandmaActiveDays = SV.family.GrandmaActiveDays + 1
+	  end
     end
 	
   end
@@ -163,10 +187,7 @@ function COMMON.UpdateDayEndVars()
 	  SV.supply_corps.ManagerCycle = 6 - (SV.supply_corps.ManagerCycle - 6)
 	end
   end
-  
-  if SV.family.Sister == 0 then
-    SV.family.SisterActiveDays = SV.family.SisterActiveDays + 1
-  end
+
   
 end
 

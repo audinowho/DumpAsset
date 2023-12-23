@@ -135,8 +135,19 @@ end
 
 function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
   
-  --check for unlock of dungeons
   local open_dests = {}
+  --check for unlock of grounds
+  for ii = 1,#ground_entrances,1 do
+    if ground_entrances[ii].Flag then
+	  local ground_id = ground_entrances[ii].Zone
+	  local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(ground_id)
+	  local ground = _DATA:GetGround(zone_summary.Grounds[ground_entrances[ii].ID])
+	  local ground_name = ground:GetColoredName()
+      table.insert(open_dests, { Name=ground_name, Dest=RogueEssence.Dungeon.ZoneLoc(ground_id, -1, ground_entrances[ii].ID, ground_entrances[ii].Entry) })
+	end
+  end
+  
+  --check for unlock of dungeons
   for ii = 1,#dungeon_entrances,1 do
     if GAME:DungeonUnlocked(dungeon_entrances[ii]) then
 	local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_entrances[ii])
@@ -149,17 +160,6 @@ function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
 		end
         table.insert(open_dests, { Name=zone_name, Dest=RogueEssence.Dungeon.ZoneLoc(dungeon_entrances[ii], 0, 0, 0) })
 	  end
-	end
-  end
-  
-  --check for unlock of grounds
-  for ii = 1,#ground_entrances,1 do
-    if ground_entrances[ii].Flag then
-	  local ground_id = ground_entrances[ii].Zone
-	  local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(ground_id)
-	  local ground = _DATA:GetGround(zone_summary.Grounds[ground_entrances[ii].ID])
-	  local ground_name = ground:GetColoredName()
-      table.insert(open_dests, { Name=ground_name, Dest=RogueEssence.Dungeon.ZoneLoc(ground_id, -1, ground_entrances[ii].ID, ground_entrances[ii].Entry) })
 	end
   end
   

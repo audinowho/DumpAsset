@@ -111,7 +111,7 @@ function base_camp.CheckMissions()
       UI:WaitShowDialogue("The mother drops something as she runs off.")
       
       SV.magnagate.Cards = SV.magnagate.Cards + 1
-	  SV.family.Mother = 1
+	  SV.family.Mother = true
       COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_WATER"):ToLocal())
       quest.Complete = COMMON.MISSION_ARCHIVED
       SV.missions.FinishedMissions["EscortMother"] = quest
@@ -553,14 +553,14 @@ function base_camp.Teammate3_Action(chara, activator)
 end
 
 function base_camp.SisterReminderActive()
-  if SV.family.Sister == 0 and SV.family.SisterActiveDays > 2 then
+  if SV.family.Sister == false and SV.family.SisterActiveDays > 2 then
     return true
   end
   return false
 end
 
 function base_camp.MotherReminderActive()
-  if SV.family.Mother == 0 and SV.family.MotherActiveDays > 2 then
+  if SV.family.Mother == false and SV.family.MotherActiveDays > 2 then
     return true
   end
   return false

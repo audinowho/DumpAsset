@@ -101,7 +101,7 @@ function final_stop.CheckMissions()
       UI:WaitShowDialogue("The brother drops something as he runs off.")
       
       SV.magnagate.Cards = SV.magnagate.Cards + 1
-	  SV.family.Brother = 1
+	  SV.family.Brother = true
       COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_MIST"):ToLocal())
       quest.Complete = COMMON.MISSION_ARCHIVED
       SV.missions.FinishedMissions["EscortBrother"] = quest
@@ -326,7 +326,7 @@ end
 
 
 function final_stop.BrotherReminderActive()
-  if SV.family.Brother == 0 and SV.family.BrotherActiveDays > 2 then
+  if SV.family.Brother == false and SV.family.BrotherActiveDays > 2 then
     return true
   end
   return false

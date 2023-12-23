@@ -1,29 +1,29 @@
 require 'common'
 
-local trickster_woods = {}
+local deserted_fortress = {}
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
-function trickster_woods.Init(zone)
+function deserted_fortress.Init(zone)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  PrintInfo("=>> Init_trickster_woods")
+  PrintInfo("=>> Init_deserted_fortress")
   
 
 end
 
-function trickster_woods.Rescued(zone, name, mail)
+function deserted_fortress.Rescued(zone, name, mail)
   COMMON.Rescued(zone, name, mail)
 end
 
-function trickster_woods.EnterSegment(zone, rescuing, segmentID, mapID)
+function deserted_fortress.EnterSegment(zone, rescuing, segmentID, mapID)
   if rescuing ~= true then
     COMMON.BeginDungeon(zone.ID, segmentID, mapID)
   end
 end
 
-function trickster_woods.ExitSegment(zone, result, rescue, segmentID, mapID)
+function deserted_fortress.ExitSegment(zone, result, rescue, segmentID, mapID)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  PrintInfo("=>> ExitSegment_trickster_woods result "..tostring(result).." segment "..tostring(segmentID))
+  PrintInfo("=>> ExitSegment_deserted_fortress result "..tostring(result).." segment "..tostring(segmentID))
   
   --first check for rescue flag; if we're in rescue mode then take a different path
   COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
@@ -33,11 +33,7 @@ function trickster_woods.ExitSegment(zone, result, rescue, segmentID, mapID)
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
     if segmentID == 0 then
-      COMMON.UnlockWithFanfare('deserted_fortress', true)
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 4, 0)
-    elseif segmentID == 1 then
-      COMMON.UnlockWithFanfare('moonlit_courtyard', true)
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 3, 2)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 5, 2)
     else
       PrintInfo("No exit procedure found!")
 	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
@@ -46,4 +42,4 @@ function trickster_woods.ExitSegment(zone, result, rescue, segmentID, mapID)
   
 end
 
-return trickster_woods
+return deserted_fortress

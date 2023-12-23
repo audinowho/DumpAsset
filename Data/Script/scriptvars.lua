@@ -250,23 +250,19 @@ SV.supply_corps =
 SV.family = 
 {
   SisterActiveDays = 0,
-  -- 0 = Not rescued, 1 = Rescued, 2 = In Town
-  Sister = 0,
+  Sister = false,
   MotherActiveDays = 0,
-  -- 0 = Not rescued, 1 = Rescued, 2 = In Town
-  Mother = 0,
+  Mother = false,
   FatherActiveDays = 0,
-  -- 0 = Not rescued, 1 = Rescued, 2 = In Town
-  Father = 0,
+  Father = false,
   BrotherActiveDays = 0,
-  -- 0 = Not rescued, 1 = Rescued, 2 = In Town
-  Brother = 0,
+  Brother = false,
   GrandmaActiveDays = 0,
-  -- 0 = Not rescued, 1 = Rescued, 2 = In Town
-  Grandma = 0,
+  Grandma = false,
   PetActiveDays = 0,
-  -- 0 = Not rescued, 1 = Rescued, 2 = In Town
-  Pet = 0
+  Pet = false,
+  TalkedReturn = false,
+  Returned = false
 }
 
 SV.StarterTutor =

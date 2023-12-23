@@ -247,23 +247,52 @@ function UpgradeTools:OnUpgrade()
 	SV.family =
 	{
 	  SisterActiveDays = 0,
-	  Sister = 0,
+	  Sister = false,
 	  MotherActiveDays = 0,
-	  Mother = 0,
+	  Mother = false,
 	  FatherActiveDays = 0,
-	  Father = 0,
+	  Father = false,
 	  BrotherActiveDays = 0,
-	  Brother = 0,
+	  Brother = false,
 	  GrandmaActiveDays = 0,
-	  Grandma = 0,
+	  Grandma = false,
 	  PetActiveDays = 0,
-	  Pet = 0
+	  Pet = false
 	}
+  end
+  
+  if SV.missions.FinishedMissions["EscortSister"] ~= nil and SV.family.Sister ~= true then
+    SV.family.Sister = true
+  end
+  
+  if SV.missions.FinishedMissions["EscortMother"] ~= nil and SV.family.Mother ~= true then
+    SV.family.Mother = true
+  end
+  
+  if SV.missions.FinishedMissions["EscortFather"] ~= nil and SV.family.Father ~= true then
+    SV.family.Father = true
+  end
+  
+  if SV.missions.FinishedMissions["EscortBrother"] ~= nil and SV.family.Brother ~= true then
+    SV.family.Brother = true
+  end
+  
+  if SV.missions.FinishedMissions["EscortPet"] ~= nil and SV.family.Pet ~= true then
+    SV.family.Pet = true
+  end
+  
+  if SV.missions.FinishedMissions["EscortGrandma"] ~= nil and SV.family.Grandma ~= true then
+    SV.family.Grandma = true
   end
   
   if SV.family.BrotherActiveDays == nil then
     SV.family.BrotherActiveDays = 0
-	SV.family.Brother = 0
+	SV.family.Brother = false
+  end
+  
+  if SV.family.TalkedReturn == nil then
+    SV.family.TalkedReturn = false
+	SV.family.Returned = false
   end
   
   if SV.base_town.FreeRelearn == nil then

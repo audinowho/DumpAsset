@@ -1600,3 +1600,19 @@ function COMMON.CreateColoredSegmentString(segment_name)
     
     return '[color=#FFC663]'..final_name..'[color]'
 end
+
+
+function COMMON.GetNoMissionFloors(current_segment)
+    local floor_ids = current_segment:GetFloorIDs()
+    local index = 0
+    local no_mission_floors = {}
+    local floor_count = current_segment.FloorCount
+    for i=0, floor_count - 1, 1 do
+        local map_gen = current_segment:GetMapGen(i)
+        if map_gen:IsAssignableTo(LoadGenType) or map_gen:IsAssignableTo(ChanceFloorGenType) then
+            no_mission_floors[index] = i
+            index = index + 1
+        end
+    end
+    return no_mission_floors
+end

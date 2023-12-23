@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.20.0",
+"Version": "0.7.21.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -14740,6 +14740,42 @@
 "FloorRange": {
 "Min": 1,
 "Max": 11
+}
+},
+"ModStates": []
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
+"StepPriority": {
+"str": [
+6,
+2,
+1
+]
+},
+"Spawns": {
+"$type": "RogueElements.RandBag`1[[RogueElements.IGenStep, RogueElements]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueEssence.LevelGen.ScriptGenStep`1[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence]], RogueEssence",
+"Script": "SpawnRandomTutor",
+"ArgTable": "{ MinCost = 5, MaxCost = 13, Elements = {\"electric\", \"grass\", \"dark\"}}"
+}
+],
+"removeOnRoll": false
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
+"Min": 1,
+"Max": 3,
+"Rate": 50
+},
+"Replaceable": true,
+"FloorRange": {
+"Min": 0,
+"Max": 12
 }
 },
 "ModStates": []

@@ -322,6 +322,119 @@ function FLOOR_GEN_SCRIPT.Mysteriosity(map, args)
   
 end
 
+function FLOOR_GEN_SCRIPT.SpawnRandomTutor(map, args)
+
+  if SV.Experimental ~= true then
+    return
+  end
+
+  local valid_moves = {}
+  --iterate through all tutor moves
+  for move_idx, skill in pairs(COMMON.TUTOR) do
+    --do they not fall in range of cost?  skip
+    if skill.Cost < args.MinCost or skill.Cost >= args.MaxCost then
+      goto continue
+    end
+    --is the tutor species valid?  no?  skip
+    if skill.TutorSpecies == "" then
+      goto continue
+    end
+    --can anyone on the current team learn the move? no? skip
+    --iterate the team
+    local can_learn = false
+    for member in luanet.each(_DATA.Save.ActiveTeam.Players) do
+      local team_id = member.BaseForm
+      local mon = _DATA:GetMonster(team_id.Species)
+      local form = mon.Forms[team_id.Form]
+      if not skill.Special then
+        --iterate the shared skills
+        for learnable in luanet.each(form.SharedSkills) do
+          if learnable.Skill == move_idx then
+            can_learn = true
+            break
+          end
+        end
+      else
+        --iterate the secret skills
+        for learnable in luanet.each(form.SecretSkills) do
+          if learnable.Skill == move_idx then
+            can_learn = true
+            break
+          end
+        end
+      end
+
+      if can_learn then
+        break
+      end
+    end
+    if not can_learn then
+      goto continue
+    end
+
+    --do they not match the types provided?  skip
+    local has_element = false
+    local skill_data = _DATA:GetSkill(move_idx)
+    for _, element_id in pairs(args.Elements) do
+      --check to see if the skill is of the correct element
+      if skill_data.Data.Element == element_id then
+        has_element = true
+        break
+      end
+    end
+    if not has_element then
+      goto continue
+    end
+
+    table.insert(valid_moves, move_idx)
+
+    --lua doesnt support continue keyword so we have to make do with goto
+    ::continue::
+  end
+
+
+
+
+
+  if #valid_moves > 0 then
+    --choose a random move out of the valid ones
+    local rand_idx = map.Rand:Next(#valid_moves) + 1
+    --set the tutor id
+    local tutor_move = valid_moves[rand_idx]
+
+    local tutor_species = COMMON.TUTOR[tutor_move].TutorSpecies
+    local tutor_form = COMMON.TUTOR[tutor_move].TutorForm
+
+    local mon = _DATA:GetMonster(tutor_species)
+    local form = mon.Forms[tutor_form]
+    --set the correct possible gender
+    local tutor_gender = form:RollGender(map.Rand)
+    local tutor_id = RogueEssence.Dungeon.MonsterID(tutor_species, tutor_form, "normal", tutor_gender)
+
+
+    local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
+    specificTeam.Explorer = true
+    local post_mob = RogueEssence.LevelGen.MobSpawn()
+    post_mob.BaseForm = tutor_id
+    post_mob.SpecifiedSkills:Add(tutor_move)
+
+    post_mob.Tactic = "slow_patrol"
+    post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level + 5)
+    local dialogue = RogueEssence.Dungeon.BattleScriptEvent("TutorTalk")
+    post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
+
+    specificTeam.Spawns:Add(post_mob)
+    local picker = LUA_ENGINE:MakeGenericType(PresetMultiTeamSpawnerType, { MapGenContextType }, { })
+    picker.Spawns:Add(specificTeam)
+    local mobPlacement = LUA_ENGINE:MakeGenericType(PlaceRandomMobsStepType, { MapGenContextType }, { picker })
+    mobPlacement.Ally = true
+    mobPlacement.Filters:Add(PMDC.LevelGen.RoomFilterConnectivity(PMDC.LevelGen.ConnectivityRoom.Connectivity.Main))
+    mobPlacement.ClumpFactor = 20
+    mobPlacement:Apply(map)
+  end
+end
+
+
 RoomGenBlockedType = luanet.import_type('RogueElements.RoomGenBlocked`1')
 RoomGenEvoType = luanet.import_type('PMDC.LevelGen.RoomGenEvo`1')
 

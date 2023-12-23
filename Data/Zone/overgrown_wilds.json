@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.20.0",
+"Version": "0.7.21.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -301,7 +301,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -1099,7 +1099,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -1897,7 +1897,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -2695,7 +2695,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -3493,7 +3493,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -4291,7 +4291,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -5089,7 +5089,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -6046,7 +6046,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -6855,7 +6855,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -7538,7 +7538,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -8221,7 +8221,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -8904,7 +8904,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -13230,6 +13230,42 @@
 }
 },
 "ModStates": []
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
+"StepPriority": {
+"str": [
+6,
+2,
+1
+]
+},
+"Spawns": {
+"$type": "RogueElements.RandBag`1[[RogueElements.IGenStep, RogueElements]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueEssence.LevelGen.ScriptGenStep`1[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence]], RogueEssence",
+"Script": "SpawnRandomTutor",
+"ArgTable": "{ MinCost = 0, MaxCost = 5, Elements = {\"fire\", \"poison\", \"bug\"}}"
+}
+],
+"removeOnRoll": false
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
+"Min": 1,
+"Max": 3,
+"Rate": 60
+},
+"Replaceable": true,
+"FloorRange": {
+"Min": 0,
+"Max": 12
+}
+},
+"ModStates": []
 }
 ],
 "IsRelevant": true,
@@ -13416,7 +13452,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -14115,7 +14151,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -14814,7 +14850,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -15513,7 +15549,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -18402,6 +18438,42 @@
 "$type": "RogueEssence.LevelGen.ScriptZoneStep, RogueEssence",
 "Script": "GenerateMissionFromSV",
 "ArgTable": "{}"
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
+"StepPriority": {
+"str": [
+6,
+2,
+1
+]
+},
+"Spawns": {
+"$type": "RogueElements.RandBag`1[[RogueElements.IGenStep, RogueElements]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueEssence.LevelGen.ScriptGenStep`1[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence]], RogueEssence",
+"Script": "SpawnRandomTutor",
+"ArgTable": "{ MinCost = 0, MaxCost = 5, Elements = {\"fire\", \"poison\", \"bug\"}}"
+}
+],
+"removeOnRoll": false
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
+"Min": 0,
+"Max": 1,
+"Rate": 30
+},
+"Replaceable": true,
+"FloorRange": {
+"Min": 0,
+"Max": 4
+}
+},
+"ModStates": []
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepRangeZoneStep, RogueEssence",

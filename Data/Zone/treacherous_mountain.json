@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.20.0",
+"Version": "0.7.21.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -9032,7 +9032,7 @@
 "Max": 9
 },
 "AllowDeadEnd": true,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 8,
 "Max": 15
@@ -9831,7 +9831,7 @@
 "Max": 9
 },
 "AllowDeadEnd": true,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 8,
 "Max": 15
@@ -10648,7 +10648,7 @@
 "Max": 9
 },
 "AllowDeadEnd": true,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 8,
 "Max": 15
@@ -11447,7 +11447,7 @@
 "Max": 9
 },
 "AllowDeadEnd": true,
-"AllowPenetratePassableTiles": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 8,
 "Max": 15
@@ -23312,6 +23312,42 @@
 "FloorRange": {
 "Min": 0,
 "Max": 19
+}
+},
+"ModStates": []
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
+"StepPriority": {
+"str": [
+6,
+2,
+1
+]
+},
+"Spawns": {
+"$type": "RogueElements.RandBag`1[[RogueElements.IGenStep, RogueElements]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueEssence.LevelGen.ScriptGenStep`1[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence]], RogueEssence",
+"Script": "SpawnRandomTutor",
+"ArgTable": "{ MinCost = 5, MaxCost = 13, Elements = {\"dragon\", \"ice\", \"fairy\"}}"
+}
+],
+"removeOnRoll": false
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
+"Min": 2,
+"Max": 3,
+"Rate": 30
+},
+"Replaceable": true,
+"FloorRange": {
+"Min": 0,
+"Max": 20
 }
 },
 "ModStates": []

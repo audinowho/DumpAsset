@@ -1,24 +1,16 @@
 ﻿{
-"Version": "0.7.21.0",
+"Version": "0.7.22.0",
 "Object": {
 "$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
 "Name": {
 "DefaultText": "Supreme Overlord",
-"LocalTexts": {
-"fr": "Général Suprême",
-"de": "Feldherr",
-"es": "General Supremo",
-"it": "Generale Supremo",
-"ja": "そうだいしょう",
-"ja-jp": "そうだいしょう",
-"zh-hans": "大将"
-}
-},
-"Desc": {
-"DefaultText": "",
 "LocalTexts": {}
 },
-"Released": false,
+"Desc": {
+"DefaultText": "The Pokémon's Attack and Sp. Atk stats are boosted for every fainted teammate.",
+"LocalTexts": {}
+},
+"Released": true,
 "Comment": "",
 "IndexNum": 293,
 "ProximityEvent": {
@@ -71,7 +63,19 @@
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [],
+"OnActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MultiplyFromFallenEvent, PMDC",
+"Denominator": 10
+}
+}
+],
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],

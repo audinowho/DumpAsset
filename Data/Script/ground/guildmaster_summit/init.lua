@@ -24,9 +24,6 @@ function guildmaster_summit.Enter(map)
         GAME:FadeIn(20)
     end
   else
-    GROUND:Unhide("Xatu")
-    GROUND:Unhide("Lucario")
-    GROUND:Unhide("Wigglytuff")
     if SV.guildmaster_summit.BossPhase == 0 then
       guildmaster_summit.PreBattle(false)
     elseif SV.guildmaster_summit.BossPhase == 1 then
@@ -129,6 +126,11 @@ function guildmaster_summit.PreBattle(shortened)
   
   GAME:WaitFrames(60)
   GAME:CutsceneMode(true)
+  
+  GROUND:Unhide("Xatu")
+  GROUND:Unhide("Lucario")
+  GROUND:Unhide("Wigglytuff")
+
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 40)
   GAME:WaitFrames(60)
   UI:WaitHideTitle(40)
@@ -244,6 +246,10 @@ function guildmaster_summit.PostBattle()
   
   GAME:CutsceneMode(true)
   
+  GROUND:Unhide("Xatu")
+  GROUND:Unhide("Lucario")
+  GROUND:Unhide("Wigglytuff")
+
   
   local player = CH('PLAYER')
   local team1 = CH('Teammate1')

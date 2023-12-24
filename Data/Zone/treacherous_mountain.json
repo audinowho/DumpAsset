@@ -1,19 +1,15 @@
 ﻿{
-"Version": "0.7.21.0",
+"Version": "0.7.22.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Treacherous Mountain",
-"LocalTexts": {
-"de": "Tückisches Gebirge",
-"es": "Montaña Traicionera",
-"it": "Montagna Infida",
-"zh-hans": "奸诈山峰"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
 "NoEXP": false,
+"ExpPercent": 100,
 "Level": 40,
 "LevelCap": false,
 "KeepSkills": false,
@@ -9037,6 +9033,7 @@
 "Max": 9
 },
 "AllowDeadEnd": true,
+"TraverseFloor": false,
 "Halls": {
 "Min": 8,
 "Max": 15
@@ -9835,6 +9832,7 @@
 "Max": 9
 },
 "AllowDeadEnd": true,
+"TraverseFloor": false,
 "Halls": {
 "Min": 8,
 "Max": 15
@@ -10651,6 +10649,7 @@
 "Max": 9
 },
 "AllowDeadEnd": true,
+"TraverseFloor": false,
 "Halls": {
 "Min": 8,
 "Max": 15
@@ -11449,6 +11448,7 @@
 "Max": 9
 },
 "AllowDeadEnd": true,
+"TraverseFloor": false,
 "Halls": {
 "Min": 8,
 "Max": 15
@@ -14807,13 +14807,8 @@
 ]
 },
 "Name": {
-"DefaultText": "Treacherous Mountain\\n{0}F",
-"LocalTexts": {
-"de": "Tückisches Gebirge\\nE{0}",
-"es": "Montaña Traicionera\\nP{0}",
-"it": "Montagna Infida\\nP{0}",
-"zh-hans": "奸诈山峰\\n{0}F"
-}
+"DefaultText": "Treacherous Mountain\n{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -14838,7 +14833,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.21.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.22.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -17754,7 +17749,7 @@
 "ArgTable": "{ MinCost = 5, MaxCost = 13, Elements = {\"dragon\", \"ice\", \"fairy\"}}"
 }
 ],
-"RemoveOnRoll": false
+"removeOnRoll": false
 },
 "SpreadPlan": {
 "$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
@@ -20549,7 +20544,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.21.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.22.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -21129,7 +21124,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.21.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.22.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ChestModGenState"
 }
 ]
@@ -23314,7 +23309,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.21.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.22.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.StairsModGenState"
 }
 ]
@@ -23383,13 +23378,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Secret Room",
-"LocalTexts": {
-"de": "Geheimer Raum",
-"es": "Piso Secreto",
-"pt": "Sala Secreta",
-"it": "Stanza Segreta",
-"zh-hans": "秘密之间"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -23683,13 +23672,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }

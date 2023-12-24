@@ -1,18 +1,15 @@
 ﻿{
-"Version": "0.7.21.0",
+"Version": "0.7.22.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Overgrown Wilds",
-"LocalTexts": {
-"de": "Überwachsene Wildnis",
-"it": "Bosco Selvaggio",
-"zh-hans": "杂草原野"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
 "NoEXP": false,
+"ExpPercent": 100,
 "Level": 20,
 "LevelCap": false,
 "KeepSkills": false,
@@ -305,6 +302,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -1102,6 +1100,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -1899,6 +1898,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -2696,6 +2696,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -3493,6 +3494,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -4290,6 +4292,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -5087,6 +5090,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -6043,6 +6047,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -6851,6 +6856,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -7533,6 +7539,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -8215,6 +8222,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -8897,6 +8905,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -9495,12 +9504,8 @@
 ]
 },
 "Name": {
-"DefaultText": "Overgrown Wilds\\n{0}F",
-"LocalTexts": {
-"de": "Überwachsene Wildnis\\nE{0}",
-"it": "Bosco Selvaggio\\nP{0}",
-"zh-hans": "杂草原野\\n{0}F"
-}
+"DefaultText": "Overgrown Wilds\n{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -9525,7 +9530,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.21.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.22.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -11267,7 +11272,7 @@
 "ArgTable": "{ MinCost = 0, MaxCost = 5, Elements = {\"fire\", \"poison\", \"bug\"}}"
 }
 ],
-"RemoveOnRoll": false
+"removeOnRoll": false
 },
 "SpreadPlan": {
 "$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
@@ -12796,7 +12801,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.21.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.22.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ShopModGenState"
 }
 ]
@@ -13219,7 +13224,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.21.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.22.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.StairsModGenState"
 }
 ]
@@ -13443,6 +13448,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -14141,6 +14147,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -14839,6 +14846,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -15537,6 +15545,7 @@
 "Max": 25
 },
 "AllowDeadEnd": false,
+"TraverseFloor": false,
 "Halls": {
 "Min": 14,
 "Max": 20
@@ -16076,12 +16085,8 @@
 ]
 },
 "Name": {
-"DefaultText": "Exotic Wilds\\nB{0}F",
-"LocalTexts": {
-"de": "Exotische Wildnis\\nU{0}",
-"it": "Boscaglia Esotica\\nP-{0}",
-"zh-hans": "异草原野\\nB{0}F"
-}
+"DefaultText": "Exotic Wilds\nB{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -16106,7 +16111,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.21.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.22.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -17474,7 +17479,7 @@
 "ArgTable": "{ MinCost = 0, MaxCost = 5, Elements = {\"fire\", \"poison\", \"bug\"}}"
 }
 ],
-"RemoveOnRoll": false
+"removeOnRoll": false
 },
 "SpreadPlan": {
 "$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
@@ -18370,7 +18375,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.21.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.22.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -18390,7 +18395,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.21.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.22.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.RecruitState"
 },
 "UseMapItems": true,
@@ -18525,13 +18530,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Secret Room",
-"LocalTexts": {
-"de": "Geheimer Raum",
-"es": "Piso Secreto",
-"pt": "Sala Secreta",
-"it": "Stanza Segreta",
-"zh-hans": "秘密之间"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -18825,13 +18824,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -21159,13 +21152,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -23509,13 +23496,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -25871,13 +25852,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -28205,13 +28180,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -30555,13 +30524,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }

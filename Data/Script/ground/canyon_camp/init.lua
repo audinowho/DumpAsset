@@ -57,7 +57,7 @@ function canyon_camp.Enter(map)
     SV.canyon_camp.ExpositionComplete = true
   elseif SV.rest_stop.BossPhase == 2 then
     canyon_camp.SetupNpcs()
-    canyon_camp.Steelix_Fail()
+    canyon_camp.Aggron_Fail()
 	SV.rest_stop.BossPhase = 1
   else
     canyon_camp.SetupNpcs()
@@ -83,8 +83,11 @@ function canyon_camp.SetupNpcs()
   GROUND:Unhide("NPC_Strategy")
   GROUND:Unhide("NPC_Wall")
   GROUND:Unhide("NPC_NextCamp")
-  --GROUND:Unhide("NPC_Argue_1")
-  --GROUND:Unhide("NPC_Argue_2")
+  
+  if SV.team_steel.Argued == false then
+    GROUND:Unhide("NPC_Argue_1")
+    GROUND:Unhide("NPC_Argue_2")
+  end
   
   if SV.supply_corps.Status < 4 then
     --pass
@@ -427,13 +430,46 @@ end
 function canyon_camp.NPC_Argue_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  canyon_camp.Argument()
 end
   
 function canyon_camp.NPC_Argue_2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+  canyon_camp.Argument()
 end
+
+function canyon_camp.Argument()
   
+  arg1 = CH('NPC_Argue_1')
+  arg2 = CH('NPC_Argue_2')
+  
+  local itemEntry = _DATA:GetItem("held_metal_coat")
+  
+  local argue_choices = {arg1:GetDisplayName(),
+    arg2:GetDisplayName()}
+  
+  local item_slot = GAME:FindPlayerItem("held_metal_coat", true, true)
+	if item_slot:IsValid() then
+		argue_choices[3] = STRINGS:Format(MapStrings['Argue_Option'], itemEntry:GetIconName())
+	end
+			
+  UI:SetSpeaker(arg1)
+  UI:BeginChoiceMenu(STRINGS:Format(MapStrings['Argue_Line_001']), argue_choices, 1, -1)
+  UI:WaitForChoice()
+  result = UI:ChoiceResult()
+  
+  if result < 3 then
+    UI:SetSpeaker(arg2)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Argue_Line_002']))
+  else
+    SOUND:PlayBattleSE("EVT_CH02_Box_Open")
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Argue_Solved_Line_001']))
+	GROUND:Hide("NPC_Argue_1")
+	GROUND:Hide("NPC_Argue_2")
+	SV.team_steel.Argued = true
+  end
+end
+
 function canyon_camp.NPC_Seeker_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
@@ -503,7 +539,7 @@ end
 
 
 
-function canyon_camp.Steelix_Fail()
+function canyon_camp.Aggron_Fail()
   --everyone is dead
   GAME:FadeIn(20)
   --get back up

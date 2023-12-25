@@ -180,6 +180,13 @@ SV.team_retreat =
 }
 
 
+SV.team_steel =
+{
+  Argued = false,
+  DaysSinceArgue = 0,
+  Rescued = false
+}
+
 --TODO
 SV.supply_corps =
 {
@@ -273,7 +280,7 @@ SV.StarterTutor =
 
 SV.canyon_camp = 
 {
-  ExpositionComplete  = false,
+  ExpositionComplete = false,
   ShinyIntro = false
 }
 
@@ -281,7 +288,9 @@ SV.rest_stop =
 {
   -- 0 = not started, 1 = started, 2 = failed, 3 = success, 4 = completed
   BossPhase = 0,
-  ExpositionComplete  = false
+  ExpositionComplete = false,
+  DaysSinceBoss = 0,
+  BossSolved = false
 }
 
 SV.final_stop = 

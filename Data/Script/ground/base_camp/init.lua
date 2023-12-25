@@ -32,9 +32,9 @@ function base_camp.Enter(map)
     GROUND:Unhide("Statue_Right")
   end
   
-  if not SV.base_camp.FerryUnlocked then
-    GROUND:Hide("Lapras")
-    GROUND:Hide("Ferry")
+  if SV.base_camp.FerryUnlocked then
+    GROUND:Unhide("Lapras")
+    GROUND:Unhide("Ferry")
   end
   
   if not SV.base_camp.IntroComplete then
@@ -68,10 +68,6 @@ function base_camp.PrepareFirstTimeVisit()
   GROUND:Hide("Assembly")
   GROUND:Hide("Storage")
   GROUND:Hide("North_Exit")
-  GROUND:Hide("Noctowl")
-  GROUND:Hide("NPC_Entrance")
-  GROUND:Hide("NPC_Range")
-  GROUND:Hide("NPC_Coast")
   GROUND:Unhide("East_LogPile")
   GROUND:Unhide("West_LogPile")
   GROUND:Unhide("First_North_Exit")
@@ -83,16 +79,27 @@ end
 -- Map Begin Functions
 --------------------------------------------------
 function base_camp.SetupNpcs()
+  GROUND:Unhide("Noctowl")
   GROUND:Unhide("NPC_Coast")
   GROUND:Unhide("NPC_Range")
   GROUND:Unhide("NPC_Entrance")
+  
+  
   
   if SV.guildmaster_summit.GameComplete then
     local noctowl = CH('Noctowl')
     GROUND:TeleportTo(noctowl, 80, 288, Direction.Right)
   end
+  
+  if SV.team_steel.DaysSinceArgue >= 2 and not SV.team_steel.Rescued then
+    GROUND:Unhide("NPC_Steel_1")
+	local questname = "QuestSteel"
+    local quest = SV.missions.Missions[questname]
+	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+	  GROUND:Unhide("NPC_Steel_2")
+	end
+  end
 end
-
 
 
 function base_camp.CheckMissions()
@@ -261,6 +268,9 @@ end
 function base_camp.RewardDialogue()
   
   GAME:CutsceneMode(true)
+  
+  GROUND:Unhide("Noctowl")
+  
   local player = CH('PLAYER')
   local noctowl = CH('Noctowl')
     
@@ -473,6 +483,69 @@ function base_camp.Noctowl_Action(chara, activator)
     end
   end
   
+end
+
+
+function base_camp.NPC_Steel_1_Action(chara, activator)
+
+  local questname = "QuestSteel"
+  local quest = SV.missions.Missions[questname]
+	
+  
+  if quest == nil then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Steel_Line_001']))
+	
+	SV.missions.Missions["QuestSteel"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "guildmaster_trail", DestSegment = 0, DestFloor = 14,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("scizor", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("steelix", 0, "normal", Gender.Male) }
+	
+  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Steel_Line_002']))
+  else
+    base_camp.Steel_Complete()
+  end
+  
+  
+end
+
+function base_camp.NPC_Steel_2_Action(chara, activator)
+  if not SV.team_steel.Rescued then
+    base_camp.Steel_Complete()
+  end
+end
+
+function base_camp.Steel_Complete()
+  local steel1 = CH('NPC_Steel_1')
+  local steel2 = CH('NPC_Steel_2')
+  local player = CH('PLAYER')
+  
+  GROUND:CharTurnToChar(steel1,player)
+  GROUND:CharTurnToChar(steel2,player)
+  
+  UI:SetSpeaker(steel1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Steel_Complete_Line_001']))
+  
+  local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_steel_silk")
+  COMMON.GiftItem(player, receive_item)
+  
+  UI:SetSpeaker(steel2)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Steel_Complete_Line_002']))
+  GROUND:Hide("NPC_Steel_1")
+  GROUND:Hide("NPC_Steel_2")
+  
+  local questname = "QuestSteel"
+  local quest = SV.missions.Missions[questname]
+  quest.Complete = COMMON.MISSION_ARCHIVED
+  SV.missions.FinishedMissions["QuestSteel"] = quest
+  SV.missions.Missions["QuestSteel"] = nil
+  
+  SV.team_steel.Rescued = true
 end
 
 

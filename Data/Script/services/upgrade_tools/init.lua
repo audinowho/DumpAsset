@@ -184,6 +184,11 @@ function UpgradeTools:OnUpgrade()
   if SV.rest_stop.BossPhase == nil then
     SV.rest_stop.BossPhase = 0
   end
+  
+  if SV.rest_stop.DaysSinceBoss == nil then
+    SV.rest_stop.DaysSinceBoss = 0
+	SV.rest_stop.BossSolved = false
+  end
 
   if SV.forest_camp.SnorlaxPhase == nil then
     SV.forest_camp.SnorlaxPhase = 0
@@ -239,6 +244,15 @@ function UpgradeTools:OnUpgrade()
 	SV.team_retreat =
 	{
       Intro = false
+	}
+  end
+
+  if SV.team_steel == nil then
+	SV.team_steel =
+	{
+	  Argued = false,
+	  DaysSinceArgue = 0,
+	  Rescued = false
 	}
   end
 

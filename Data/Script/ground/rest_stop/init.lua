@@ -71,6 +71,17 @@ function rest_stop.SetupNpcs()
 	  end
 	end
   end
+  
+  if SV.rest_stop.DaysSinceBoss >= 3 and not SV.rest_stop.BossSolved then
+
+    GROUND:Unhide("Boss_1")
+    GROUND:Unhide("Boss_2")
+    GROUND:Unhide("Boss_3")
+    GROUND:Unhide("Boss_4")
+    GROUND:Unhide("Boss_5")
+    GROUND:Unhide("Boss_6")
+  end
+  
 end
 
 function rest_stop.BeginExposition(shortened)
@@ -238,6 +249,140 @@ function rest_stop.NPC_Deliver_Action(chara, activator)
   elseif SV.supply_corps.Status == 20 then
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_Route']))
   end
+end
+
+
+function rest_stop.Boss_1_Action(chara, activator)
+  rest_stop.Rock_Boss(chara, activator)
+end
+
+function rest_stop.Boss_2_Action(chara, activator)
+  rest_stop.Rock_Boss(chara, activator)
+end
+
+function rest_stop.Rock_Boss(chara, activator)
+  
+  local questname = "QuestRock"
+  local quest = SV.missions.Missions[questname]
+	
+  
+  if quest == nil then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rock_Boss_Line_001']))
+	
+	SV.missions.Missions["QuestRock"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "veiled_ridge", DestSegment = 0, DestFloor = 10,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("exploud", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("aggron", 0, "normal", Gender.Male) }
+	
+  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rock_Boss_Line_002']))
+  else
+    rest_stop.Rock_Complete()
+  end
+end
+
+function rest_stop.Boss_3_Action(chara, activator)
+  rest_stop.Screech_Rabble(chara, activator)
+end
+
+function rest_stop.Boss_4_Action(chara, activator)
+  rest_stop.Screech_Rabble(chara, activator)
+end
+
+function rest_stop.Screech_Rabble(chara, activator)
+
+  local questname = "QuestRock"
+  local quest = SV.missions.Missions[questname]
+  
+  if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+    rest_stop.Rock_Complete()
+  else
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Screech_Rabble_Line_001']))
+  end
+end
+
+
+
+function rest_stop.Boss_5_Action(chara, activator)
+  rest_stop.Loud_Rabble(chara, activator)
+end
+
+function rest_stop.Boss_6_Action(chara, activator)
+  rest_stop.Loud_Rabble(chara, activator)
+end
+
+function rest_stop.Loud_Rabble(chara, activator)
+
+  local questname = "QuestRock"
+  local quest = SV.missions.Missions[questname]
+  
+  if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+    rest_stop.Rock_Complete()
+  else
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Loud_Rabble_Line_001']))
+  end
+end
+
+
+function rest_stop.Rock_Complete()
+  local player = CH('PLAYER')
+  local rock1 = CH('Boss_1')
+  local loud1 = CH('Boss_5')
+  local loud2 = CH('Boss_6')
+  local loud_boss = CH('Boss_Loud')
+  
+  UI:SetSpeaker(loud1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Loud_Boss_Line_001']))
+  
+  GROUND:Unhide("Boss_Loud")
+  
+  GAME:WaitFrames(60)
+  
+  UI:SetSpeaker(loud_boss)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Loud_Boss_Line_002']))
+  
+  UI:SetSpeaker(loud1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Loud_Boss_Line_003']))
+  
+  GROUND:Hide("Boss_5")
+  GROUND:Hide("Boss_6")
+  GROUND:Hide("Boss_Loud")
+  
+  GAME:WaitFrames(60)
+  
+  UI:SetSpeaker(rock1)
+  UI:SetSpeakerEmotion("Stunned")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Loud_Boss_Line_004']))
+  
+  UI:SetSpeakerEmotion("Normal")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rock_Boss_Reward']))
+  
+  
+  local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_rock_silk")
+  COMMON.GiftItem(player, receive_item)
+  
+  
+  GROUND:Hide("Boss_1")
+  GROUND:Hide("Boss_2")
+  
+  GROUND:Hide("Boss_3")
+  GROUND:Hide("Boss_4")
+  
+  
+  local questname = "QuestRock"
+  local quest = SV.missions.Missions[questname]
+  quest.Complete = COMMON.MISSION_ARCHIVED
+  SV.missions.FinishedMissions["QuestRock"] = quest
+  SV.missions.Missions["QuestRock"] = nil
+  
+  SV.rest_stop.BossSolved = true
 end
 
 function rest_stop.North_Exit_Touch(obj, activator)

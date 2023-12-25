@@ -188,6 +188,18 @@ function COMMON.UpdateDayEndVars()
 	end
   end
 
+
+  if SV.team_steel.Argued then
+    if not SV.team_steel.Rescued then
+      SV.team_steel.DaysSinceArgue = SV.team_steel.DaysSinceArgue + 1
+	end
+  end
+  
+  if SV.rest_stop.ExpositionComplete then
+    if not SV.rest_stop.BossSolved then
+      SV.rest_stop.DaysSinceBoss = SV.rest_stop.DaysSinceBoss + 1
+	end
+  end
   
 end
 

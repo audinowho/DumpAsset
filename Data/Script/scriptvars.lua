@@ -187,6 +187,18 @@ SV.team_steel =
   Rescued = false
 }
 
+SV.team_firecracker =
+{
+  DaysInCliff = 0,
+  InRavine = false,
+  DaysInRavine = 0,
+  InCave = false,
+  DaysInCave = 0,
+  InSnow = false,
+  Rescued = false
+  Wandering = false
+}
+
 --TODO
 SV.supply_corps =
 {

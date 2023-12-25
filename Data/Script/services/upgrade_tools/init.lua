@@ -240,10 +240,17 @@ function UpgradeTools:OnUpgrade()
 	}
   end
 
-  if SV.team_retreat == nil then
-	SV.team_retreat =
+  if SV.team_firecracker == nil then
+	SV.team_firecracker =
 	{
-      Intro = false
+	  DaysInCliff = 0,
+	  InRavine = false,
+	  DaysInRavine = 0,
+	  InCave = false,
+	  DaysInCave = 0,
+	  InSnow = false,
+	  Rescued = false
+	  Wandering = false
 	}
   end
 

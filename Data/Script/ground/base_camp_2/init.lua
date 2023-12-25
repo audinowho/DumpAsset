@@ -1918,7 +1918,7 @@ function base_camp_2.Mission_Job_Clear(job)
             elseif job.Special == MISSION_GEN.SPECIAL_CLIENT_CHILD then
                 UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Response_Child']))
             else
-                UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Response_Rescue']))
+                UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Response_Rescue_Friend']))
             end
         end
         GAME:WaitFrames(20)

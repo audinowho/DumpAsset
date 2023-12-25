@@ -1115,10 +1115,37 @@ function COMMON.NumToGender(num)
     return res
 end
 
+function COMMON.SidequestExitDungeonMissionCheck(result, zoneId, segmentID)
+    -- clear any escorts from party
+    local party = GAME:GetPlayerGuestTable()
+    for i, p in ipairs(party) do
+        local e_tbl = LTBL(p)
+        if e_tbl ~= nil then
+            local mission = SV.missions.Missions[e_tbl.Escort]
+            if mission ~= nil then
+                if mission.Type == COMMON.MISSION_TYPE_ESCORT then
+                    _DUNGEON:RemoveChar(p)
+                elseif mission.Type == COMMON.MISSION_TYPE_ESCORT_OUT then
+                    if p.Dead == false then
+                        if result == RogueEssence.Data.GameProgress.ResultType.Cleared then
+                            mission.Complete = COMMON.MISSION_COMPLETE
+                        else
+                            UI:ResetSpeaker()
+                            UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_LOST_GUEST"):ToLocal(), p:GetDisplayName(true)))
+                        end
+                    end
+                    _DATA.Save.ActiveTeam.Guests:RemoveAt(i-1)
+                end
+            end
+        end
+    end
+end
+
 
 function COMMON.ExitDungeonMissionCheck(result, zoneId, segmentID)    
     --remove all guests from the dungeon
     RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS = 4
+    
     _DATA.Save.ActiveTeam.Guests:Clear()
 
     --Remove any lost/stolen items. If the item's ID starts with "mission" then delete it on exiting the dungeon.

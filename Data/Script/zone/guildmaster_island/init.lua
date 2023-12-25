@@ -27,7 +27,8 @@ function guildmaster_island.ExitSegment(zone, result, rescue, segmentID, mapID)
 
 	--Do not trigger end of day for guildmaster island maps
   --MISSION_GEN.EndOfDay(result, segmentID)
-  COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
+  COMMON.SidequestExitDungeonMissionCheck(result, zone.ID, segmentID)
+COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)
   elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then

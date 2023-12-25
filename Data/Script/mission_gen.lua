@@ -2529,15 +2529,23 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		--Roll for genders. Use base form because it PROBABLY won't ever matter.
 		--because Scriptvars doesnt like saving genders instead of regular structures, use 1/2/0 for m/f/genderless respectively, and convert when needed
 		local client_gender
+		
+		local rand = nil
+
+		if _ZONE.CurrentMap ~= nil and _ZONE.CurrentMap.Rand ~= nil then
+			rand = _ZONE.CurrentMap.Rand
+		else
+			rand = GAME.Rand
+		end
 
 		if client == "magna" then --Magna is a special exception
 			client_gender = 0
 		else
-			client_gender = _DATA:GetMonster(client).Forms[0]:RollGender(_ZONE.CurrentMap.Rand)
+			client_gender = _DATA:GetMonster(client).Forms[0]:RollGender(rand)
 			client_gender = COMMON.GenderToNum(client_gender)
 		end
 
-		local target_gender = _DATA:GetMonster(target).Forms[0]:RollGender(_ZONE.CurrentMap.Rand)
+		local target_gender = _DATA:GetMonster(target).Forms[0]:RollGender(rand)
 
 		target_gender = COMMON.GenderToNum(target_gender)
 

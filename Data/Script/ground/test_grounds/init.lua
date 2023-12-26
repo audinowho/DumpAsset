@@ -626,6 +626,13 @@ function ExampleMenu:initialize()
   self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Apple", RogueElements.Loc(88, 8 + 12 * 0)))
   self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Test String 2", RogueElements.Loc(16, 8 + 12 * 1)))
   self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Orange", RogueElements.Loc(88, 8 + 12 * 1)))
+  
+  local portrait = RogueEssence.Menu.MenuPortrait(RogueElements.Loc(16, 32), RogueEssence.Dungeon.MonsterID("jigglypuff", 0, "normal", Gender.Male), RogueEssence.Content.EmoteStyle(1, true))
+  self.menu.MenuElements:Add(portrait)
+  local dirtex = RogueEssence.Menu.MenuDirTex(RogueElements.Loc(64, 32), RogueEssence.Menu.MenuDirTex.TexType.Item, RogueEssence.Content.AnimData("Money_Gray", 1))
+  self.menu.MenuElements:Add(dirtex)
+  local dirtex2 = RogueEssence.Menu.MenuDirTex(RogueElements.Loc(64, 48), RogueEssence.Menu.MenuDirTex.TexType.Icon, RogueEssence.Content.AnimData("Shield_Green", 3))
+  self.menu.MenuElements:Add(dirtex2)
   self.total_items = 4
   self.current_item = 0
   self.cursor.Loc = RogueElements.Loc(8 + 12 * (self.current_item % 2), 8 + 80 * (self.current_item // 2))

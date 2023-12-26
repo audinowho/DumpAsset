@@ -249,7 +249,7 @@ function UpgradeTools:OnUpgrade()
 	  InCave = false,
 	  DaysInCave = 0,
 	  InSnow = false,
-	  Rescued = false
+	  Rescued = false,
 	  Wandering = false
 	}
   end

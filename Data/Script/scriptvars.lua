@@ -195,7 +195,7 @@ SV.team_firecracker =
   InCave = false,
   DaysInCave = 0,
   InSnow = false,
-  Rescued = false
+  Rescued = false,
   Wandering = false
 }
 

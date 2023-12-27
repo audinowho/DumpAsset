@@ -243,14 +243,10 @@ function UpgradeTools:OnUpgrade()
   if SV.team_firecracker == nil then
 	SV.team_firecracker =
 	{
-	  DaysInCliff = 0,
-	  InRavine = false,
-	  DaysInRavine = 0,
-	  InCave = false,
-	  DaysInCave = 0,
-	  InSnow = false,
-	  Rescued = false,
-	  Wandering = false
+		Status = 0,
+		SpokenTo = false,
+		DaysSinceCheckpoint = 0,
+		Cycle = 0
 	}
   end
 

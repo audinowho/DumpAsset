@@ -12,6 +12,8 @@ function cliff_camp.Init(map)
   COMMON.RespawnAllies()
   
   COMMON.CreateWalkArea("NPC_Sightseer", 144, 328, 48, 48)
+  
+  
 end
 
 function cliff_camp.Enter(map)
@@ -50,6 +52,24 @@ function cliff_camp.SetupNpcs()
   GROUND:Unhide("Undergrowth_1")
   GROUND:Unhide("Undergrowth_2")
   GROUND:Unhide("NPC_Sightseer")
+  
+  if SV.Experimental and SV.team_firecracker.Status == 0 then
+    GROUND:Unhide("NPC_Seer")
+	GROUND:Unhide("NPC_Conjurer")
+  elseif SV.team_firecracker.Status == 5 and SV.team_firecracker.Cycle == 2 then
+    GROUND:Unhide("NPC_Seer")
+	GROUND:Unhide("NPC_Conjurer")
+	
+	local seer = CH('NPC_Seer')
+	local seerData = RogueEssence.Dungeon.CharData()
+	seerData.BaseForm = RogueEssence.Dungeon.MonsterID("delphox", 0, "normal", Gender.Male)
+	seer.Data = seerData
+
+	local conjurer = CH('NPC_Conjurer')
+	local conjurerData = RogueEssence.Dungeon.CharData()
+	conjurerData.BaseForm = RogueEssence.Dungeon.MonsterID("typhlosion", 1, "normal", Gender.Male)
+	conjurer.Data = conjurerData
+  end
   
   if SV.supply_corps.Status <= 1 then
     GROUND:Unhide("NPC_Storehouse")
@@ -251,6 +271,34 @@ function cliff_camp.Monk_Action(chara, activator)
   
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Monk_Line_002']))
   GROUND:EntTurn(chara, Direction.Up)
+end
+
+
+
+function cliff_camp.NPC_Seer_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  
+  if SV.team_firecracker.Status ~= 5 then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Line_001']))
+	SV.team_firecracker.SpokenTo = true
+  else
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Line_002']))
+  end
+end
+
+function cliff_camp.NPC_Conjurer_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  
+  if SV.team_firecracker.Status ~= 5 then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Conjurer_Line_001']))
+	SV.team_firecracker.SpokenTo = true
+  else
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Conjurer_Line_002']))
+  end
 end
 
 function cliff_camp.NPC_Storehouse_Action(chara, activator)

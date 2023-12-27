@@ -189,14 +189,24 @@ SV.team_steel =
 
 SV.team_firecracker =
 {
-  DaysInCliff = 0,
-  InRavine = false,
-  DaysInRavine = 0,
-  InCave = false,
-  DaysInCave = 0,
-  InSnow = false,
-  Rescued = false,
-  Wandering = false
+  --0 = At Cliff Camp
+  --1 = At Ravine Camp
+  --2 = At Cave Camp
+  --3 = At Blizzard Camp, need rescue
+  --4 = Rescued, talking about it
+  --5 = In cycle
+  Status = 0,
+  SpokenTo = false,
+  DaysSinceCheckpoint = 0,
+  
+  --0 = base camp
+  --1 = forest camp
+  --2 = cliff camp
+  --3 = canyon camp
+  --4 = cave camp
+  --5 = snow camp
+  --6 = summit
+  Cycle = 0
 }
 
 --TODO

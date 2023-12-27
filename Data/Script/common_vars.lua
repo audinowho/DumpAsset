@@ -157,6 +157,39 @@ function COMMON.UpdateDayEndVars()
 	end
   end
   
+  if SV.team_firecracker.Status == 0 and SV.team_firecracker.SpokenTo and SV.canyon_camp.ExpositionComplete then
+    SV.team_firecracker.DaysSinceCheckpoint = SV.team_firecracker.DaysSinceCheckpoint + 1
+	if SV.team_firecracker.DaysSinceCheckpoint >= 2 then
+      SV.team_firecracker.Status = 1
+	  SV.team_firecracker.DaysSinceCheckpoint = 0
+	  SV.team_firecracker.SpokenTo = false
+	end
+  elseif SV.team_firecracker.Status == 1 and SV.team_firecracker.SpokenTo and SV.rest_stop.ExpositionComplete then
+    SV.team_firecracker.DaysSinceCheckpoint = SV.team_firecracker.DaysSinceCheckpoint + 1
+	if SV.team_firecracker.DaysSinceCheckpoint >= 3 then
+      SV.team_firecracker.Status = 2
+	  SV.team_firecracker.DaysSinceCheckpoint = 0
+	  SV.team_firecracker.SpokenTo = false
+	end
+  elseif SV.team_firecracker.Status == 2 and SV.team_firecracker.SpokenTo and SV.final_stop.ExpositionComplete then
+    SV.team_firecracker.DaysSinceCheckpoint = SV.team_firecracker.DaysSinceCheckpoint + 1
+	if SV.team_firecracker.DaysSinceCheckpoint >= 3 then
+      SV.team_firecracker.Status = 3
+	  SV.team_firecracker.DaysSinceCheckpoint = 0
+	  SV.team_firecracker.SpokenTo = false
+	end
+  elseif SV.team_firecracker.Status == 4 then
+    SV.team_firecracker.Status = 5
+	SV.team_firecracker.DaysSinceCheckpoint = 0
+	SV.team_firecracker.Cycle = 2
+  elseif SV.team_firecracker.Status == 5 then
+    local max_cycle = 5
+	if SV.guildmaster_summit.GameComplete then
+	  max_cycle = 6
+	end
+	SV.team_firecracker.Cycle = math.random(2, max_cycle)
+  end
+  
   if SV.supply_corps.Status == 1 then
     SV.supply_corps.Status = 2
   elseif SV.supply_corps.Status == 3 then

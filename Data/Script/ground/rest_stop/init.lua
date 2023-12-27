@@ -47,6 +47,21 @@ function rest_stop.SetupNpcs()
   --GROUND:Unhide("NPC_1")
   --GROUND:Unhide("NPC_2")
   
+
+  
+  if SV.team_firecracker.Status == 2 then
+    GROUND:Unhide("NPC_Seer")
+	GROUND:Unhide("NPC_Conjurer")
+  elseif SV.team_firecracker.Status == 5 and SV.team_firecracker.Cycle == 4 then
+    GROUND:Unhide("NPC_Seer")
+	GROUND:Unhide("NPC_Conjurer")
+	
+	local conjurer = CH('NPC_Conjurer')
+	local conjurerData = RogueEssence.Dungeon.CharData()
+	conjurerData.BaseForm = RogueEssence.Dungeon.MonsterID("typhlosion", 1, "normal", Gender.Male)
+	conjurer.Data = conjurerData
+  end
+  
   if SV.supply_corps.Status < 10 then
     --pass
   elseif SV.supply_corps.Status <= 11 then
@@ -147,6 +162,32 @@ end
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
+
+function rest_stop.NPC_Seer_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  
+  if SV.team_firecracker.Status ~= 5 then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Line_001']))
+	SV.team_firecracker.SpokenTo = true
+  else
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Line_002']))
+  end
+end
+
+function rest_stop.NPC_Conjurer_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  
+  if SV.team_firecracker.Status ~= 5 then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Conjurer_Line_001']))
+	SV.team_firecracker.SpokenTo = true
+  else
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Conjurer_Line_002']))
+  end
+end
 
 function rest_stop.NPC_Storehouse_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

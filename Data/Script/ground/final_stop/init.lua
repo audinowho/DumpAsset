@@ -50,6 +50,17 @@ end
 function final_stop.SetupNpcs()
   GROUND:Unhide("Rival_Late")
   
+  
+  if SV.team_firecracker.Status == 3 then
+    GROUND:Unhide("NPC_Seer")
+  elseif SV.team_firecracker.Status == 4 then
+    GROUND:Unhide("NPC_Seer")
+	GROUND:Unhide("NPC_Conjurer")
+  elseif SV.team_firecracker.Status == 5 and SV.team_firecracker.Cycle == 5 then
+    GROUND:Unhide("NPC_Seer")
+	GROUND:Unhide("NPC_Conjurer")
+  end
+  
   if SV.supply_corps.Status < 16 then
     --pass
   elseif SV.supply_corps.Status <= 16 then
@@ -135,6 +146,105 @@ end
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
+
+function final_stop.NPC_Seer_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+
+  
+  if SV.team_firecracker.Status == 3 then
+    local questname = "QuestFire"
+    local quest = SV.missions.Missions[questname]
+	
+    if quest == nil then
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Help_Line_001']))
+	
+	  SV.missions.Missions["QuestFire"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+        DestZone = "snowbound_path", DestSegment = 0, DestFloor = 10,
+        FloorUnknown = false,
+        TargetSpecies = RogueEssence.Dungeon.MonsterID("typhlosion", 1, "normal", Gender.Male),
+        ClientSpecies = RogueEssence.Dungeon.MonsterID("delphox", 0, "normal", Gender.Male) }
+	
+    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+	  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+      UI:SetSpeaker(chara)
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Help_Line_002']))
+    else
+      final_stop.Fire_Complete()
+    end
+
+  elseif SV.team_firecracker.Status < 5 then
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:SetSpeaker(chara)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Line_001']))
+  else
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Line_002']))
+  end
+end
+
+function final_stop.NPC_Conjurer_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  
+  if SV.team_firecracker.Status ~= 5 then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Conjurer_Line_001']))
+  else
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Conjurer_Line_002']))
+  end
+end
+
+
+function final_stop.Fire_Complete()
+  local seer = CH('NPC_Seer')
+  local conjurer = CH('NPC_Conjurer')
+  local player = CH('PLAYER')
+  
+  GROUND:CharTurnToChar(seer,player)
+  
+  UI:SetSpeaker(seer)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Complete_Line_001']))
+  
+  GROUND:TeleportTo(conjurer, 360, 416, Direction.Up)
+  GROUND:Unhide("NPC_Conjurer")
+  
+  UI:SetSpeaker(conjurer)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Complete_Line_002']))
+  
+  UI:SetSpeaker(seer)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Complete_Line_003']))
+  
+  UI:SetSpeaker(conjurer)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Complete_Line_004']))
+  
+  UI:SetSpeaker(seer)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Complete_Line_005']))
+  
+  UI:SetSpeaker(conjurer)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Complete_Line_006']))
+  
+  GROUND:TeleportTo(conjurer, 392, 368, Direction.Up)
+  GROUND:CharTurnToChar(conjurer,seer)
+  
+  UI:SetSpeaker(seer)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Complete_Line_007']))
+  
+  local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_fire_silk")
+  COMMON.GiftItem(player, receive_item)
+  
+  
+  local questname = "QuestFire"
+  local quest = SV.missions.Missions[questname]
+  quest.Complete = COMMON.MISSION_ARCHIVED
+  SV.missions.FinishedMissions["QuestFire"] = quest
+  SV.missions.Missions["QuestFire"] = nil
+  
+  SV.team_firecracker.Status = 4
+end
+
 
 function final_stop.NPC_Storehouse_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

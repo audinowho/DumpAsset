@@ -89,6 +89,24 @@ function canyon_camp.SetupNpcs()
     GROUND:Unhide("NPC_Argue_2")
   end
   
+  if SV.team_firecracker.Status == 1 then
+    GROUND:Unhide("NPC_Seer")
+	GROUND:Unhide("NPC_Conjurer")
+  elseif SV.team_firecracker.Status == 5 and SV.team_firecracker.Cycle == 3 then
+    GROUND:Unhide("NPC_Seer")
+	GROUND:Unhide("NPC_Conjurer")
+	
+	local seer = CH('NPC_Seer')
+	local seerData = RogueEssence.Dungeon.CharData()
+	seerData.BaseForm = RogueEssence.Dungeon.MonsterID("delphox", 0, "normal", Gender.Male)
+	seer.Data = seerData
+
+	local conjurer = CH('NPC_Conjurer')
+	local conjurerData = RogueEssence.Dungeon.CharData()
+	conjurerData.BaseForm = RogueEssence.Dungeon.MonsterID("typhlosion", 1, "normal", Gender.Male)
+	conjurer.Data = conjurerData
+  end
+  
   if SV.supply_corps.Status < 4 then
     --pass
   elseif SV.supply_corps.Status <= 5 then
@@ -159,6 +177,32 @@ end
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
+
+function canyon_camp.NPC_Seer_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  
+  if SV.team_firecracker.Status ~= 5 then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Line_001']))
+	SV.team_firecracker.SpokenTo = true
+  else
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Line_002']))
+  end
+end
+
+function canyon_camp.NPC_Conjurer_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  
+  if SV.team_firecracker.Status ~= 5 then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Conjurer_Line_001']))
+	SV.team_firecracker.SpokenTo = true
+  else
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Conjurer_Line_002']))
+  end
+end
 
 function canyon_camp.NPC_Storehouse_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

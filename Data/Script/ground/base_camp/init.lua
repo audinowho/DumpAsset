@@ -130,9 +130,6 @@ end
 
 function base_camp.BeginExposition()  
 
-  local noctowl = CH('Noctowl')
-  local player = CH('PLAYER')
-  
 	-- move founder to team if not in party
 	-- get party
 	local party_table = GAME:GetPlayerPartyTable()
@@ -174,6 +171,10 @@ function base_camp.BeginExposition()
 	-- update team
     COMMON.RespawnAllies()
 	
+	
+  local noctowl = CH('Noctowl')
+  local player = CH('PLAYER')
+  
 	
     GAME:CutsceneMode(true)
     UI:SetSpeaker(STRINGS:Format("\\uE040"), true, "", -1, "", RogueEssence.Data.Gender.Unknown)

@@ -446,7 +446,7 @@ MISSION_GEN.POKEMON = {
 	"darumaka","deerling","deino","diglett","doduo","dratini","drifloon","dreepy","drowzee","duskull",
 	"ekans","electrike","elekid","elgyem","espurr","exeggcute",
 	"feebas","fennekin","ferroseed","fidough","finneon","flabebe","fletchling","fomantis","foongus","froakie","fuecoco",
-	"gastly","geodude","gible","gimmighoul","glameow","goldeen","goomy","gothita","grimer","growlithe","gulpin",
+	"gastly","geodude","gible","glameow","goldeen","goomy","gothita","grimer","growlithe","gulpin",
 	"happiny","hatenna","helioptile","hippopotas","honedge","hoothoot","hoppip","horsea","houndour",
 	"igglybuff",
 	"jangmo_o","joltik",

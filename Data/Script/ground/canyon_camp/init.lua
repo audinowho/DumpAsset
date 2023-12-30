@@ -616,6 +616,14 @@ function canyon_camp.Argument()
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Argue_Solved_Line_001']))
 	GROUND:Hide("NPC_Argue_1")
 	GROUND:Hide("NPC_Argue_2")
+	
+	
+	if item_slot.IsEquipped then
+		GAME:TakePlayerEquippedItem(item_slot.Slot)
+	else
+		GAME:TakePlayerBagItem(item_slot.Slot)
+	end
+	
 	SV.team_steel.Argued = true
   end
 end

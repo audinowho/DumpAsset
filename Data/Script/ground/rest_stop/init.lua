@@ -48,6 +48,39 @@ function rest_stop.SetupNpcs()
   --GROUND:Unhide("NPC_2")
   
 
+  if SV.team_dragon.Status == 3 then
+    GROUND:Unhide("NPC_Dragon_2")
+    GROUND:Unhide("NPC_Dragon_3")
+	
+	local questname = "QuestDragon"
+    local quest = SV.missions.Missions[questname]
+	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+	  GROUND:Unhide("NPC_Dragon_1")
+	end
+  elseif SV.team_dragon.Status == 4 then
+    GROUND:Unhide("NPC_Dragon_1")
+    GROUND:Unhide("NPC_Dragon_2")
+    GROUND:Unhide("NPC_Dragon_3")
+    GROUND:Unhide("NPC_Protege")
+    GROUND:Unhide("NPC_Protege_Tutor")
+  elseif SV.team_dragon.Status == 6 then
+    GROUND:Unhide("NPC_Dragon_1")
+    GROUND:Unhide("NPC_Dragon_2")
+    GROUND:Unhide("NPC_Dragon_3")
+    GROUND:Unhide("NPC_Protege_Tutor")
+	
+	local protegeTutor = CH('NPC_Protege_Tutor')
+	local protegeTutorData = RogueEssence.Dungeon.CharData()
+	protegeTutorData.BaseForm = RogueEssence.Dungeon.MonsterID("flygon", 0, "normal", Gender.Male)
+	protegeTutor.Data = protegeTutorData
+  elseif SV.team_dragon.Status == 8 then
+    GROUND:Unhide("NPC_Protege")
+	if SV.team_dragon.Cycle == 3 then
+      GROUND:Unhide("NPC_Dragon_1")
+      GROUND:Unhide("NPC_Dragon_2")
+      GROUND:Unhide("NPC_Dragon_3")
+	end
+  end
   
   if SV.team_firecracker.Status == 2 then
     GROUND:Unhide("NPC_Seer")
@@ -162,6 +195,108 @@ end
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
+
+function rest_stop.NPC_Dragon_1_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  rest_stop.DragonTalk()
+end
+  
+function rest_stop.NPC_Dragon_2_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  rest_stop.DragonTalk()
+end
+  
+function rest_stop.NPC_Dragon_3_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  rest_stop.DragonTalk()
+end
+  
+function rest_stop.NPC_Protege_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  rest_stop.DragonTalk()
+end
+  
+function rest_stop.NPC_Protege_Tutor_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  rest_stop.DragonTalk()
+end
+
+function rest_stop.DragonTalk()
+  local dragon1 = CH('NPC_Dragon_1')
+  local dragon2 = CH('NPC_Dragon_2')
+  local dragon3 = CH('NPC_Dragon_3')
+  local protege = CH('NPC_Protege')
+  local protegeTutor = CH('NPC_Protege_Tutor')
+  
+  if SV.team_dragon.Status == 3 then
+    local questname = "QuestDragon"
+    local quest = SV.missions.Missions[questname]
+	
+    if quest == nil then
+      UI:SetSpeaker(dragon3)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_001']))
+	  
+	  SV.missions.Missions["QuestDragon"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "snowbound_path", DestSegment = 0, DestFloor = 14,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("charizard", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("aerodactyl", 0, "normal", Gender.Male) }
+	
+    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:SetSpeaker(dragon3)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_002']))
+    else
+      rest_stop.Dragon_Complete()
+    end
+  
+  elseif SV.team_dragon.Status == 4 then
+      UI:SetSpeaker(dragon1)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Rescue_Line_002']))
+  elseif SV.team_dragon.Status == 6 then
+    if SV.team_dragon.SpokenTo == false then
+      UI:SetSpeaker(dragon1)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_003']))
+	else
+      UI:SetSpeaker(dragon1)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_004']))
+	end
+  elseif SV.team_dragon.Status == 8 then
+    UI:SetSpeaker(dragon1)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_005']))
+  end
+  
+  SV.team_dragon.SpokenTo = true
+end
+
+function rest_stop.Dragon_Complete()
+  local dragon1 = CH('NPC_Dragon_1')
+  local dragon2 = CH('NPC_Dragon_2')
+  local dragon3 = CH('NPC_Dragon_3')
+  local protege = CH('NPC_Protege')
+  local protegeTutor = CH('NPC_Protege_Tutor')
+  local player = CH('PLAYER')
+  
+  GROUND:Unhide("NPC_Protege")
+  GROUND:Unhide("NPC_Protege_Tutor")
+  
+  UI:SetSpeaker(dragon1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Rescue_Line_001']))
+  
+  local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_dragon_silk")
+  COMMON.GiftItem(player, receive_item)
+  
+  UI:SetSpeaker(dragon1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Rescue_Line_002']))
+  
+  local questname = "QuestDragon"
+  local quest = SV.missions.Missions[questname]
+  quest.Complete = COMMON.MISSION_ARCHIVED
+  SV.missions.FinishedMissions["QuestDragon"] = quest
+  SV.missions.Missions["QuestDragon"] = nil
+  
+  SV.team_dragon.Status = 4
+end
+
 
 function rest_stop.NPC_Seer_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

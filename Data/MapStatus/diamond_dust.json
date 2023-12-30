@@ -3,47 +3,24 @@
 "Object": {
 "$type": "RogueEssence.Data.MapStatusData, RogueEssence",
 "Name": {
-"DefaultText": "Fog",
+"DefaultText": "Diamond Dust",
 "LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "CarryOver": false,
 "Emitter": {
-"$type": "RogueEssence.Content.OverlayEmitter, RogueEssence",
-"LocHeight": 0,
-"finished": false,
-"Offset": 0,
-"Anim": {
-"AnimIndex": "Fog",
-"FrameTime": 3,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": -1,
-"Alpha": 255,
-"AnimFlip": 0
+"$type": "RogueEssence.Content.EmptySwitchOffEmitter, RogueEssence",
+"LocHeight": 0
 },
-"Movement": {
-"X": 0,
-"Y": 0
-},
-"FadeIn": 0,
-"FadeOut": 0,
-"Layer": 4,
-"Color": "51, 51, 51, 102"
-},
-"DefaultHidden": false,
+"DefaultHidden": true,
 "StatusStates": [
 {
 "$type": "RogueEssence.Dungeon.MapWeatherState, RogueEssence"
-},
-{
-"$type": "RogueEssence.Dungeon.MapCountDownState, RogueEssence",
-"Counter": 50
 }
 ],
 "OnMapRefresh": [],
@@ -106,53 +83,13 @@
 ],
 "Msg": false
 }
-},
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.MapStatusBattleLogEvent, PMDC",
-"Message": {
-"Key": "MSG_FOG_START"
-},
-"Delay": true
-}
 }
 ],
-"OnMapStatusRemoves": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.MapStatusBattleLogEvent, PMDC",
-"Message": {
-"Key": "MSG_FOG_END"
-},
-"Delay": true
-}
-}
-],
+"OnMapStatusRemoves": [],
 "OnMapStarts": [],
 "OnTurnStarts": [],
 "OnTurnEnds": [],
-"OnMapTurnEnds": [
-{
-"Key": {
-"str": [
-5
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.MapStatusCountDownEvent, PMDC"
-}
-}
-],
+"OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
 "OnRefresh": [],

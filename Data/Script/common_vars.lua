@@ -157,30 +157,34 @@ function COMMON.UpdateDayEndVars()
 	end
   end
   
+  
+  if SV.team_dragon.Status == 0 and SV.team_dragon.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_dragon, 1)
+  elseif SV.team_dragon.Status == 1 and SV.team_dragon.SpokenTo and SV.rest_stop.ExpositionComplete then
+    COMMON.UpdateCheckpointStatus(SV.team_dragon, 1)
+  elseif SV.team_dragon.Status == 2 and SV.team_dragon.SpokenTo and SV.final_stop.ExpositionComplete then
+    COMMON.UpdateCheckpointStatus(SV.team_dragon, 1)
+  elseif SV.team_dragon.Status == 4 then
+    COMMON.UpdateCheckpointStatus(SV.team_dragon, 1)
+  elseif SV.team_dragon.Status == 5 and SV.team_dragon.SpokenTo and SV.guildmaster_summit.GameComplete then
+    COMMON.UpdateCheckpointStatus(SV.team_dragon, 1)
+  elseif SV.team_dragon.Status == 6 and SV.team_dragon.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_dragon, 1)
+  elseif SV.team_dragon.Status == 8 then
+	SV.team_dragon.Cycle = math.random(3, 6)
+  end
+  
+  
   if SV.team_firecracker.Status == 0 and SV.team_firecracker.SpokenTo and SV.canyon_camp.ExpositionComplete then
-    SV.team_firecracker.DaysSinceCheckpoint = SV.team_firecracker.DaysSinceCheckpoint + 1
-	if SV.team_firecracker.DaysSinceCheckpoint >= 2 then
-      SV.team_firecracker.Status = 1
-	  SV.team_firecracker.DaysSinceCheckpoint = 0
-	  SV.team_firecracker.SpokenTo = false
-	end
+    COMMON.UpdateCheckpointStatus(SV.team_firecracker, 2)
   elseif SV.team_firecracker.Status == 1 and SV.team_firecracker.SpokenTo and SV.rest_stop.ExpositionComplete then
-    SV.team_firecracker.DaysSinceCheckpoint = SV.team_firecracker.DaysSinceCheckpoint + 1
-	if SV.team_firecracker.DaysSinceCheckpoint >= 3 then
-      SV.team_firecracker.Status = 2
-	  SV.team_firecracker.DaysSinceCheckpoint = 0
-	  SV.team_firecracker.SpokenTo = false
-	end
+    COMMON.UpdateCheckpointStatus(SV.team_firecracker, 3)
   elseif SV.team_firecracker.Status == 2 and SV.team_firecracker.SpokenTo and SV.final_stop.ExpositionComplete then
-    SV.team_firecracker.DaysSinceCheckpoint = SV.team_firecracker.DaysSinceCheckpoint + 1
-	if SV.team_firecracker.DaysSinceCheckpoint >= 3 then
-      SV.team_firecracker.Status = 3
-	  SV.team_firecracker.DaysSinceCheckpoint = 0
-	  SV.team_firecracker.SpokenTo = false
-	end
+    COMMON.UpdateCheckpointStatus(SV.team_firecracker, 3)
   elseif SV.team_firecracker.Status == 4 then
     SV.team_firecracker.Status = 5
 	SV.team_firecracker.DaysSinceCheckpoint = 0
+	SV.team_firecracker.SpokenTo = false
 	SV.team_firecracker.Cycle = 2
   elseif SV.team_firecracker.Status == 5 then
     local max_cycle = 5
@@ -234,5 +238,14 @@ function COMMON.UpdateDayEndVars()
 	end
   end
   
+end
+
+function COMMON.UpdateCheckpointStatus(checkpoint, limit)
+  checkpoint.DaysSinceCheckpoint = checkpoint.DaysSinceCheckpoint + 1
+	if checkpoint.DaysSinceCheckpoint >= limit then
+      checkpoint.Status = checkpoint.Status + 1
+	  checkpoint.DaysSinceCheckpoint = 0
+	  checkpoint.SpokenTo = false
+	end
 end
 

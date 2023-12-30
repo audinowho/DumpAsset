@@ -368,7 +368,6 @@ expanding_force = { Cost = 7, TutorSpecies = "indeedee", TutorForm = 1, Special 
 dual_wingbeat = { Cost = 7, TutorSpecies = "cramorant", TutorForm = 0, Special = true },
 coaching = { Cost = 7, TutorSpecies = "cinderace", TutorForm = 0, Special = true },
 lash_out = { Cost = 12, TutorSpecies = "thievul", TutorForm = 0, Special = true },
-draco_meteor = { Cost = 12, TutorSpecies = "", TutorForm = 0, Special = true },
 volt_tackle = { Cost = 8, TutorSpecies = "", TutorForm = 0, Special = true },
 meteor_beam = { Cost = 7, TutorSpecies = "", TutorForm = 0, Special = true },
 dragon_ascent = { Cost = 12, TutorSpecies = "", TutorForm = 0, Special = true },

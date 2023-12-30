@@ -240,6 +240,21 @@ function UpgradeTools:OnUpgrade()
 	}
   end
 
+  if SV.team_dragon == nil then
+	SV.team_dragon =
+	{
+	  Status = 0,
+	  SpokenTo = false,
+	  DaysSinceCheckpoint = 0,
+	  Cycle = 0
+	}
+  end
+  
+  if SV.final_stop.DragonPhase == nil then
+    SV.final_stop.DragonPhase = 0
+  end
+
+
   if SV.team_firecracker == nil then
 	SV.team_firecracker =
 	{

@@ -187,6 +187,29 @@ SV.team_steel =
   Rescued = false
 }
 
+
+SV.team_dragon =
+{
+  --0 = At Ravine Camp, introduced themselves
+  --1 = At Ravine Camp, advising an actual dragon type
+  --2 = At Ravine Camp, advising another actual dragon type
+  --3 = At Cave Camp, charizard's gone missing
+  --4 = At Cave Camp, Rescued, they all make up.
+  --5 = At Ravine Camp, Mentoring the two dragon types
+  --6 = At Cave Camp, training with Flygon.
+  --7 = At Blizzard Camp, ready to battle.
+  --8 = In Cycle
+  Status = 0,
+  SpokenTo = false,
+  DaysSinceCheckpoint = 0,
+  
+  --3 = canyon camp
+  --4 = cave camp
+  --5 = snow camp
+  --6 = summit (TODO)
+  Cycle = 0
+}
+
 SV.team_firecracker =
 {
   --0 = At Cliff Camp
@@ -199,13 +222,11 @@ SV.team_firecracker =
   SpokenTo = false,
   DaysSinceCheckpoint = 0,
   
-  --0 = base camp
-  --1 = forest camp
   --2 = cliff camp
   --3 = canyon camp
   --4 = cave camp
   --5 = snow camp
-  --6 = summit
+  --6 = summit (TODO)
   Cycle = 0
 }
 
@@ -317,7 +338,8 @@ SV.rest_stop =
 
 SV.final_stop = 
 {
-  ExpositionComplete  = false
+  ExpositionComplete  = false,
+  DragonPhase = 0
 }
 
 

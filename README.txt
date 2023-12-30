@@ -128,6 +128,7 @@ Translation:
 [PT] https://twitter.com/SquishyTheMew Squishy
 [ZH] Discord:lazychehra Chehra
 [ZH] https://twitter.com/Dewpoleon Dew
+[ZH] kaitensekai@qq.com 域外創音(IkigaiSouon)
 [ZH] https://sites.google.com/view/daniel-lee-site/home PikaNiko
 [ZH] Rockdu
 And 1 Anonymous

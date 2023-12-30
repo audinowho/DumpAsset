@@ -32,6 +32,15 @@ function final_stop.Enter(map)
     final_stop.SetupNpcs()
     final_stop.Summit_Fail()
 	SV.guildmaster_summit.BossPhase = 1
+  elseif SV.final_stop.DragonPhase == 2 then
+    final_stop.SetupNpcs()
+    final_stop.Dragon_Fail()
+	SV.final_stop.DragonPhase = 1
+  elseif SV.final_stop.DragonPhase == 3 then
+    final_stop.SetupNpcs()
+    final_stop.Dragon_Success()
+	SV.final_stop.DragonPhase = 4
+	SV.team_dragon.Status = 8
   else
     final_stop.SetupNpcs()
 	
@@ -50,6 +59,32 @@ end
 function final_stop.SetupNpcs()
   GROUND:Unhide("Rival_Late")
   
+
+  if SV.team_dragon.Status == 7 then
+    GROUND:Unhide("NPC_Dragon_1")
+    GROUND:Unhide("NPC_Dragon_2")
+    GROUND:Unhide("NPC_Dragon_3")
+    GROUND:Unhide("NPC_Protege_Tutor")
+	
+	local dragon1 = CH('NPC_Dragon_1')
+	local dragon2 = CH('NPC_Dragon_2')
+	local dragon3 = CH('NPC_Dragon_3')
+	local protegeTutor = CH('NPC_Protege_Tutor')
+	
+	if SV.final_stop.DragonPhase ~= 3 then
+	  GROUND:TeleportTo(dragon1, 292, 184, Direction.Down)
+	  GROUND:TeleportTo(dragon2, 264, 160, Direction.Down)
+	  GROUND:TeleportTo(dragon3, 320, 160, Direction.Down)
+	  GROUND:TeleportTo(protegeTutor, 292, 144, Direction.Down)
+	end
+  elseif SV.team_dragon.Status == 8 then
+    GROUND:Unhide("NPC_Protege_Tutor")
+	if SV.team_dragon.Cycle == 5 then
+      GROUND:Unhide("NPC_Dragon_1")
+      GROUND:Unhide("NPC_Dragon_2")
+      GROUND:Unhide("NPC_Dragon_3")
+	end
+  end
   
   if SV.team_firecracker.Status == 3 then
     GROUND:Unhide("NPC_Seer")
@@ -146,6 +181,160 @@ end
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
+
+
+function final_stop.NPC_Dragon_1_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  if SV.team_dragon.Status == 7 then
+    final_stop.DragonTalk()
+  elseif SV.team_dragon.Status == 8 then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_003']))
+  end
+end
+  
+function final_stop.NPC_Dragon_2_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  if SV.team_dragon.Status == 7 then
+    final_stop.DragonTalk()
+  elseif SV.team_dragon.Status == 8 then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_004']))
+  end
+end
+  
+function final_stop.NPC_Dragon_3_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  if SV.team_dragon.Status == 7 then
+    final_stop.DragonTalk()
+  elseif SV.team_dragon.Status == 8 then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_005']))
+  end
+end
+  
+function final_stop.NPC_Protege_Tutor_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  if SV.team_dragon.Status == 7 then
+    final_stop.DragonTalk()
+  elseif SV.team_dragon.Status == 8 then
+    local player = CH('PLAYER')
+    UI:SetSpeaker(chara)
+    local tutor_skill = "draco_meteor"
+	local skillData = _DATA:GetSkill(tutor_skill)
+	
+	local playerMonId = player.Data.BaseForm
+	local monData = _DATA:GetMonster(playerMonId.Species)
+	local formData = monData.Forms[playerMonId.Form]
+	
+	local already_learned = player.Data:HasBaseSkill(tutor_skill)
+	if already_learned then
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Intro'], skillData:GetIconName()))
+	elseif formData:CanLearnSkill(tutor_skill) then
+	  
+	  UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Tutor_Ask'], skillData:GetIconName()), false)
+	  UI:WaitForChoice()
+	  result = UI:ChoiceResult()
+	  
+	  if result then
+		--one more check against full list flow
+		local replace_msg = STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_REPLACE"):ToLocal(), skillData:GetIconName())
+		result = COMMON.LearnMoveFlow(player.Data, tutor_skill, replace_msg)
+	  end
+	  
+	  if result then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Accept']))
+      
+      --fade out, pause
+      local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")
+      GROUND:CharSetAction(chara, RogueEssence.Ground.PoseGroundAction(chara.Position, chara.Direction, animId))
+      GROUND:CharSetAction(player, RogueEssence.Ground.PoseGroundAction(player.Position, player.Direction, animId))
+		
+      GAME:FadeOut(false, 30)
+      GAME:WaitFrames(30)
+		
+      SOUND:PlayFanfare("Fanfare/LearnSkill")
+      local orig_settings = UI:ExportSpeakerSettings()
+      UI:ResetSpeaker(false)
+      UI:WaitShowDialogue(STRINGS:FormatKey("DLG_SKILL_LEARN", player.Data:GetDisplayName(true), skillData:GetIconName()))
+      UI:ImportSpeakerSettings(orig_settings)
+		
+      --fade in
+      GROUND:CharEndAnim(chara)
+      GROUND:CharEndAnim(player)
+      GAME:FadeIn(30)
+		
+	    --I learned this move from a traveling move tutor.  He said he'd pass by base town after I spoke to him.
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Taught']))
+		
+      --after teaching, unlock the tutor back at the hub
+      --the other moves can be found in dungeons by wandering tutors
+      SV.StarterTutor.Complete = true
+      SV.base_town.TutorMoves[tutor_skill] = true
+	  else
+	    --come back if you change your mind.
+	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Decline']))
+	  end
+	else
+	  --But the other townsfolk weren't interested in hearing about it.
+	  --If only there was someone I could share this knowledge with.
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Intro'], skillData:GetIconName()))
+	end
+	
+  end
+end
+
+function final_stop.DragonTalk()
+  local dragon1 = CH('NPC_Dragon_1')
+  local dragon2 = CH('NPC_Dragon_2')
+  local dragon3 = CH('NPC_Dragon_3')
+  local protegeTutor = CH('NPC_Protege_Tutor')
+  
+    UI:SetSpeaker(dragon1)
+
+    UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Dragon_Line_001']), true)
+    UI:WaitForChoice()
+    ch = UI:ChoiceResult()
+  
+    if ch then
+      UI:SetSpeaker(dragon1)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Accept']))
+	  SV.final_stop.DragonPhase = 1
+      SOUND:PlayBattleSE("EVT_Battle_Transition")
+      GAME:FadeOut(true, 60)
+      GAME:EnterDungeon('guildmaster_island', 0, 7, 0, RogueEssence.Data.GameProgress.DungeonStakes.Progress, true, true)
+	else
+      UI:SetSpeaker(dragon1)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Decline']))
+    end
+  
+end
+
+
+function final_stop.Dragon_Fail()
+  
+  --everyone is dead
+  GAME:FadeIn(20)
+  local dragon1 = CH('NPC_Dragon_1')
+  UI:SetSpeaker(dragon1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Fail_Line_001']))
+  --move back into position
+end
+
+function final_stop.Dragon_Success()
+  local player = CH('PLAYER')
+  
+  --they're dead
+  --move back into position
+  GAME:FadeIn(20)
+  --congrats
+  local dragon1 = CH('NPC_Dragon_1')
+  UI:SetSpeaker(dragon1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_002']))
+end
+
+
 
 function final_stop.NPC_Seer_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

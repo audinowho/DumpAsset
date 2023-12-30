@@ -77,16 +77,52 @@ end
 function canyon_camp.SetupNpcs()
   GROUND:Unhide("NPC_Seeker")
   GROUND:Unhide("NPC_Hidden")
-  GROUND:Unhide("NPC_Dragon_1")
-  GROUND:Unhide("NPC_Dragon_2")
-  GROUND:Unhide("NPC_Dragon_3")
   GROUND:Unhide("NPC_Strategy")
-  GROUND:Unhide("NPC_Wall")
+  GROUND:Unhide("NPC_Goals")
   GROUND:Unhide("NPC_NextCamp")
   
   if SV.team_steel.Argued == false then
     GROUND:Unhide("NPC_Argue_1")
     GROUND:Unhide("NPC_Argue_2")
+  end
+  
+  if SV.team_dragon.Status == 0 then
+    GROUND:Unhide("NPC_Dragon_1")
+    GROUND:Unhide("NPC_Dragon_2")
+    GROUND:Unhide("NPC_Dragon_3")
+  elseif SV.team_dragon.Status == 1 then
+    GROUND:Unhide("NPC_Dragon_1")
+    GROUND:Unhide("NPC_Dragon_2")
+    GROUND:Unhide("NPC_Dragon_3")
+    GROUND:Unhide("NPC_Protege_Tutor")
+  elseif SV.team_dragon.Status == 2 then
+    GROUND:Unhide("NPC_Dragon_1")
+    GROUND:Unhide("NPC_Dragon_2")
+    GROUND:Unhide("NPC_Dragon_3")
+    GROUND:Unhide("NPC_Protege")
+  elseif SV.team_dragon.Status == 5 then
+    GROUND:Unhide("NPC_Dragon_1")
+    GROUND:Unhide("NPC_Dragon_2")
+    GROUND:Unhide("NPC_Dragon_3")
+	
+	local protege = CH('NPC_Protege')
+	local protegeTutor = CH('NPC_Protege_Tutor')
+	GROUND:TeleportTo(protege, 496, 368, Direction.Up)
+	GROUND:TeleportTo(protegeTutor, 512, 368, Direction.Up)
+    GROUND:Unhide("NPC_Protege")
+    GROUND:Unhide("NPC_Protege_Tutor")
+	
+	local protegeData = RogueEssence.Dungeon.CharData()
+	protegeData.BaseForm = RogueEssence.Dungeon.MonsterID("flapple", 0, "normal", Gender.Male)
+	protege.Data = protegeData
+
+	local protegeTutorData = RogueEssence.Dungeon.CharData()
+	protegeTutorData.BaseForm = RogueEssence.Dungeon.MonsterID("vibrava", 0, "normal", Gender.Male)
+	protegeTutor.Data = protegeTutorData
+  elseif SV.team_dragon.Status == 8 and SV.team_dragon.Cycle == 3 then
+    GROUND:Unhide("NPC_Dragon_1")
+    GROUND:Unhide("NPC_Dragon_2")
+    GROUND:Unhide("NPC_Dragon_3")
   end
   
   if SV.team_firecracker.Status == 1 then
@@ -351,18 +387,88 @@ end
   
 function canyon_camp.NPC_Dragon_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+  canyon_camp.DragonTalk()
 end
   
 function canyon_camp.NPC_Dragon_2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+  canyon_camp.DragonTalk()
 end
   
 function canyon_camp.NPC_Dragon_3_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+  canyon_camp.DragonTalk()
 end
+  
+function canyon_camp.NPC_Protege_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  canyon_camp.DragonTalk()
+end
+  
+function canyon_camp.NPC_Protege_Tutor_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  canyon_camp.DragonTalk()
+end
+
+function canyon_camp.DragonTalk()
+  local dragon1 = CH('NPC_Dragon_1')
+  local dragon2 = CH('NPC_Dragon_2')
+  local dragon3 = CH('NPC_Dragon_3')
+  local protege = CH('NPC_Protege')
+  local protegeTutor = CH('NPC_Protege_Tutor')
+  
+  if SV.team_dragon.Status == 0 then
+    if SV.team_dragon.SpokenTo == false then
+      UI:SetSpeaker(dragon1)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_001']))
+  
+      UI:SetSpeaker(dragon2)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_002']))
+  
+      UI:SetSpeaker(dragon3)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_003']))
+  
+      UI:SetSpeaker(dragon1)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_004']))
+	else
+      UI:SetSpeaker(dragon1)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_005']))
+	end
+  elseif SV.team_dragon.Status == 1 then
+    if SV.team_dragon.SpokenTo == false then
+      UI:SetSpeaker(dragon1)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_006']))
+	else
+      UI:SetSpeaker(dragon1)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_007']))
+	end
+  
+  elseif SV.team_dragon.Status == 2 then
+    if SV.team_dragon.SpokenTo == false then
+      UI:SetSpeaker(dragon1)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_008']))
+	else
+      UI:SetSpeaker(dragon1)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_009']))
+	end
+  
+  elseif SV.team_dragon.Status == 5 then
+    if SV.team_dragon.SpokenTo == false then
+      UI:SetSpeaker(dragon1)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_010']))
+	else
+      UI:SetSpeaker(dragon1)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_011']))
+	end
+  
+  elseif SV.team_dragon.Status == 8 then
+    UI:SetSpeaker(dragon1)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_012']))
+  end
+  
+  SV.team_dragon.SpokenTo = true
+end
+
   
 function canyon_camp.NPC_Shiny_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

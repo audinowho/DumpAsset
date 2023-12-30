@@ -37,6 +37,10 @@ function guildmaster_island.ExitSegment(zone, result, rescue, segmentID, mapID)
 	    SV.rest_stop.BossPhase = 2
 	    COMMON.EndSession(result, 'guildmaster_island', -1,5,2)
 	    return
+	  elseif mapID == 7 then
+	    SV.final_stop.DragonPhase = 2
+	    COMMON.EndSession(result, 'guildmaster_island', -1,7,1)
+	    return
 	  elseif mapID == 8 then
 	    SV.guildmaster_summit.BossPhase = 2
 		if SV.guildmaster_summit.ClearedFromTrail then
@@ -57,6 +61,9 @@ function guildmaster_island.ExitSegment(zone, result, rescue, segmentID, mapID)
 	  elseif mapID == 6 then
 		SV.rest_stop.BossPhase = 3
 	    COMMON.EndSession(result, 'guildmaster_island', -1,6,1)
+	  elseif mapID == 7 then
+		SV.final_stop.DragonPhase = 3
+	    COMMON.EndSession(result, 'guildmaster_island', -1,7,1)
       elseif mapID == 8 then
         --for the boss segment, set a save variable
         --the MAP's script will play the final cutscene

@@ -3,31 +3,34 @@
 "Object": {
 "$type": "RogueEssence.Data.AITactic, RogueEssence",
 "Name": {
-"DefaultText": "Get Away",
+"DefaultText": "Lead Boss",
 "LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
-"ID": "get_away",
-"Assignable": true,
+"ID": "lead_boss",
+"Assignable": false,
 "Plans": [
 {
-"$type": "PMDC.Dungeon.AvoidAllPlan, PMDC",
-"IQ": 413,
+"$type": "PMDC.Dungeon.LeadSkillPlan, PMDC",
+"FirstMoveStatus": "last_used_move_slot",
+"IQ": 253,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 0
 },
 {
-"$type": "PMDC.Dungeon.ExplorePlan, PMDC",
-"IQ": 413,
+"$type": "PMDC.Dungeon.BossPlan, PMDC",
+"AttackPattern": 4,
+"PositionPattern": 2,
+"IQ": 253,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 0
 },
 {
 "$type": "PMDC.Dungeon.WaitPlan, PMDC",
-"IQ": 413,
+"IQ": 253,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 0

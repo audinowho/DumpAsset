@@ -57,7 +57,7 @@ end
 -- Map Begin Functions
 --------------------------------------------------
 function final_stop.SetupNpcs()
-  GROUND:Unhide("Rival_Late")
+  GROUND:Unhide("Rival_2")
   
 
   if SV.team_dragon.Status == 7 then

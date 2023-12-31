@@ -47,10 +47,10 @@ end
 -- Map Begin Functions
 --------------------------------------------------
 function cliff_camp.SetupNpcs()
-  GROUND:Unhide("Monk")
-  GROUND:Unhide("Rival_Early")
-  GROUND:Unhide("Undergrowth_1")
-  GROUND:Unhide("Undergrowth_2")
+  GROUND:Unhide("NPC_Monk")
+  GROUND:Unhide("Rival_1")
+  GROUND:Unhide("NPC_Undergrowth_1")
+  GROUND:Unhide("NPC_Undergrowth_2")
   GROUND:Unhide("NPC_Sightseer")
   
   if SV.Experimental and SV.team_firecracker.Status == 0 then
@@ -208,7 +208,7 @@ function cliff_camp.Teammate3_Action(chara, activator)
   COMMON.GroundInteract(activator, chara, true)
 end
 
-function cliff_camp.Undergrowth_1_Action(chara, activator)
+function cliff_camp.NPC_Undergrowth_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
@@ -222,7 +222,7 @@ function cliff_camp.Undergrowth_1_Action(chara, activator)
   GROUND:EntTurn(chara, Direction.DownRight)
 end
   
-function cliff_camp.Undergrowth_2_Action(chara, activator)
+function cliff_camp.NPC_Undergrowth_2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
   
@@ -236,14 +236,14 @@ function cliff_camp.Undergrowth_2_Action(chara, activator)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Bellsprout_Line_003']))
 end
   
-function cliff_camp.Rival_Early_Action(chara, activator)
+function cliff_camp.Rival_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Line_001']))
 end
   
-function cliff_camp.Monk_Action(chara, activator)
+function cliff_camp.NPC_Monk_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   UI:SetSpeaker(chara)

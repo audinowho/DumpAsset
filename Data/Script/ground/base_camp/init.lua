@@ -81,7 +81,7 @@ end
 function base_camp.SetupNpcs()
   GROUND:Unhide("Noctowl")
   GROUND:Unhide("NPC_Coast")
-  GROUND:Unhide("NPC_Range")
+  GROUND:Unhide("NPC_Unlucky")
   GROUND:Unhide("NPC_Entrance")
   
   
@@ -567,7 +567,7 @@ function base_camp.NPC_Coast_Action(chara, activator)
   GROUND:EntTurn(chara, Direction.Down)
 end
 
-function base_camp.NPC_Range_Action(chara, activator)
+function base_camp.NPC_Unlucky_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
   UI:SetSpeakerEmotion("Worried")
@@ -576,9 +576,9 @@ function base_camp.NPC_Range_Action(chara, activator)
   SOUND:PlayBattleSE("EVT_Emote_Sweating")
   GROUND:CharSetEmote(chara, "sweating", 1)
   GAME:WaitFrames(30)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Range_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Unlucky_Line_001']))
   UI:SetSpeakerEmotion("Sad")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Range_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Unlucky_Line_002']))
 end
 
 function base_camp.Statue_Center_Action(obj, activator)

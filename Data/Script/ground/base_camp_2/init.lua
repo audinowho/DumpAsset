@@ -95,7 +95,7 @@ function base_camp_2.SetupNpcs()
   GROUND:Unhide("NPC_Catch_1")
   GROUND:Unhide("NPC_Catch_2")
   GROUND:Unhide("NPC_Elder")
-  GROUND:Unhide("NPC_History")
+  GROUND:Unhide("NPC_Solo")
   GROUND:Unhide("NPC_Settling")
   GROUND:Unhide("NPC_Nonbeliever")
   GROUND:Unhide("NPC_Hesitant")
@@ -329,13 +329,13 @@ function base_camp_2.NPC_Elder_Action(chara, activator)
 end
 
 
-function base_camp_2.NPC_History_Action(chara, activator)
+function base_camp_2.NPC_Solo_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['History_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_001']))
   UI:SetSpeakerEmotion("Worried")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['History_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_002']))
 end
 
 

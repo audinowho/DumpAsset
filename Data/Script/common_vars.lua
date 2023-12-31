@@ -157,6 +157,137 @@ function COMMON.UpdateDayEndVars()
 	end
   end
   
+  if SV.base_town.JuiceShop == 0 and SV.forest_camp.ExpositionComplete then
+    SV.base_town.JuiceShop = 1
+  end
+  
+  if SV.team_hunter.Status == 0 and SV.team_hunter.SpokenTo and SV.canyon_camp.ExpositionComplete then
+    COMMON.UpdateCheckpointStatus(SV.team_hunter, 2)
+  elseif SV.team_hunter.Status == 2 and SV.team_hunter.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_hunter, 1)
+  end
+  
+  if SV.town_elder.Status == 0 and SV.town_elder.SpokenTo and _DATA.Save:GetDungeonUnlock("ambush_forest") == RogueEssence.Data.GameProgress.UnlockState.Completed then
+    COMMON.UpdateCheckpointStatus(SV.town_elder, 3)
+  elseif SV.town_elder.Status == 2 and SV.town_elder.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.town_elder, 1)
+  end
+  
+  if SV.forest_child.Status == 0 and SV.forest_child.SpokenTo and SV.rest_stop.ExpositionComplete then
+    COMMON.UpdateCheckpointStatus(SV.forest_child, 3)
+  elseif SV.forest_child.Status == 2 and SV.forest_child.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.forest_child, 1)
+  end
+  
+  if SV.team_catch.Status == 0 and SV.team_catch.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_catch, 1)
+  elseif SV.team_catch.Status == 1 and SV.team_catch.SpokenTo and SV.forest_camp.ExpositionComplete then
+    COMMON.UpdateCheckpointStatus(SV.team_catch, 1)
+  elseif SV.team_catch.Status == 2 and SV.team_catch.SpokenTo and SV.cliff_camp.ExpositionComplete then
+    COMMON.UpdateCheckpointStatus(SV.team_catch, 2)
+  elseif SV.team_catch.Status == 4 then
+    COMMON.UpdateCheckpointStatus(SV.team_catch, 1)
+  elseif SV.team_catch.Status == 5 then
+	SV.team_catch.Cycle = math.random(1, 6)
+  end
+  
+  if SV.team_rivals.Status == 0 and SV.team_rivals.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_rivals, 1)
+  elseif SV.team_rivals.Status == 1 and SV.team_rivals.SpokenTo and SV.rest_stop.ExpositionComplete then
+    COMMON.UpdateCheckpointStatus(SV.team_rivals, 1)
+  elseif SV.team_rivals.Status == 3 then
+    COMMON.UpdateCheckpointStatus(SV.team_rivals, 1)
+  elseif SV.team_rivals.Status == 5 then
+    COMMON.UpdateCheckpointStatus(SV.team_rivals, 1)
+  elseif SV.team_rivals.Status == 6 and SV.guildmaster_summit.GameComplete then
+    COMMON.UpdateCheckpointStatus(SV.team_rivals, 4)
+  elseif SV.team_rivals.Status == 7 and SV.team_rivals.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_rivals, 1)
+  elseif SV.team_rivals.Status == 6 then
+	SV.team_rivals.Cycle = math.random(1, 6)
+  end
+  
+  if SV.team_kidnapped.Status == 0 and SV.team_kidnapped.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
+  elseif SV.team_kidnapped.Status == 1 and SV.team_kidnapped.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
+  elseif SV.team_kidnapped.Status == 2 and SV.team_kidnapped.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
+  elseif SV.team_kidnapped.Status == 3 and _DATA.Save:GetDungeonUnlock("oblivion_valley") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+    COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
+  elseif SV.team_kidnapped.Status == 5 then
+    COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
+  elseif SV.team_kidnapped.Status == 6 then
+	SV.team_kidnapped.Cycle = math.random(1, 6)
+  end
+  
+  if SV.team_retreat.Status == 0 and SV.team_retreat.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_retreat, 2)
+  elseif SV.team_retreat.Status == 1 and SV.team_retreat.SpokenTo and _DATA.Save:GetDungeonUnlock("deserted_fortress") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+    COMMON.UpdateCheckpointStatus(SV.team_retreat, 2)
+  elseif SV.team_retreat.Status == 3 then
+    COMMON.UpdateCheckpointStatus(SV.team_retreat, 1)
+  elseif SV.team_retreat.Status == 4 then
+	SV.team_retreat.Cycle = math.random(1, 6)
+  end
+  
+  if SV.team_meditate.Status == 0 and SV.team_meditate.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_meditate, 1)
+  elseif SV.team_meditate.Status == 1 and SV.team_meditate.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_meditate, 1)
+  elseif SV.team_meditate.Status == 2 and SV.team_meditate.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_meditate, 4)
+  elseif SV.team_meditate.Status == 4 then
+    COMMON.UpdateCheckpointStatus(SV.team_meditate, 1)
+  elseif SV.team_meditate.Status == 6 then
+	SV.team_meditate.Cycle = math.random(3, 6)
+  end
+  
+
+  if SV.team_steel.Argued then
+    if not SV.team_steel.Rescued then
+      SV.team_steel.DaysSinceArgue = SV.team_steel.DaysSinceArgue + 1
+	end
+  end
+  
+  if SV.team_solo.Status == 0 and SV.team_solo.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
+  elseif SV.team_solo.Status == 1 and SV.team_solo.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
+  elseif SV.team_solo.Status == 2 and SV.team_solo.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_solo, 2)
+  elseif SV.team_solo.Status == 3 and SV.team_solo.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_solo, 2)
+  elseif SV.team_solo.Status == 5 then
+    COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
+  elseif SV.team_dragon.Status == 6 then
+	SV.team_dragon.Cycle = math.random(3, 6)
+  end
+  
+  if SV.team_psychic.Status == 0 and SV.team_psychic.SpokenTo and _DATA.Save:GetDungeonUnlock("sleeping_caldera") == RogueEssence.Data.GameProgress.UnlockState.Completed then
+    COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
+  elseif SV.team_psychic.Status == 1 and SV.team_psychic.SpokenTo and SV.rest_stop.ExpositionComplete then
+    COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
+  elseif SV.team_psychic.Status == 2 and SV.team_psychic.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
+  elseif SV.team_psychic.Status == 3 and SV.team_psychic.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
+  elseif SV.team_psychic.Status == 5 then
+    COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
+  elseif SV.team_psychic.Status == 6 then
+	SV.team_psychic.Cycle = math.random(3, 6)
+  end
+  
+  if SV.team_dark.Status == 1 then
+    COMMON.UpdateCheckpointStatus(SV.team_dark, 3)
+  elseif SV.team_dark.Status == 2 then
+    COMMON.UpdateCheckpointStatus(SV.team_dark, 3)
+  elseif SV.team_dark.Status == 4 then
+    COMMON.UpdateCheckpointStatus(SV.team_dark, 1)
+  elseif SV.team_dragon.Status == 5 then
+	SV.team_dragon.Cycle = math.random(3, 6)
+  end
+  
   
   if SV.team_dragon.Status == 0 and SV.team_dragon.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_dragon, 1)
@@ -225,12 +356,6 @@ function COMMON.UpdateDayEndVars()
 	end
   end
 
-
-  if SV.team_steel.Argued then
-    if not SV.team_steel.Rescued then
-      SV.team_steel.DaysSinceArgue = SV.team_steel.DaysSinceArgue + 1
-	end
-  end
   
   if SV.rest_stop.ExpositionComplete then
     if not SV.rest_stop.BossSolved then

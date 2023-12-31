@@ -166,6 +166,10 @@ function UpgradeTools:OnUpgrade()
 	SV.base_town.ValueTraded = false
   end
   
+  if SV.base_town.JuiceShop == nil then
+	SV.base_town.JuiceShop = 0
+  end
+  
 
   if SV.ambush_forest == nil then
     SV.ambush_forest = 
@@ -233,10 +237,132 @@ function UpgradeTools:OnUpgrade()
 	}
   end
 
+  if SV.team_hunter == nil then
+	SV.team_hunter =
+	{
+	  Status = 0,
+	  SpokenTo = false,
+	  DaysSinceCheckpoint = 0,
+	  Cycle = 0
+	}
+  end
+
+  if SV.town_elder == nil then
+	SV.town_elder =
+	{
+	  Status = 0,
+	  SpokenTo = false,
+	  DaysSinceCheckpoint = 0,
+	  Cycle = 0
+	}
+  end
+
+  if SV.forest_child == nil then
+	SV.forest_child =
+	{
+	  Status = 0,
+	  SpokenTo = false,
+	  DaysSinceCheckpoint = 0
+	}
+  end
+
+  if SV.team_catch == nil then
+	SV.team_catch =
+	{
+	  Status = 0,
+	  SpokenTo = false,
+	  DaysSinceCheckpoint = 0,
+	  Cycle = 0
+	}
+  end
+
+  if SV.team_rivals == nil then
+	SV.team_rivals =
+	{
+	  Status = 0,
+	  SpokenTo = false,
+	  DaysSinceCheckpoint = 0,
+	  Cycle = 0
+	}
+  end
+
+
+  if SV.team_kidnapped == nil then
+	SV.team_kidnapped =
+	{
+	  Status = 0,
+	  SpokenTo = false,
+	  DaysSinceCheckpoint = 0,
+	  Cycle = 0
+	}
+  end
+
+
   if SV.team_retreat == nil then
 	SV.team_retreat =
 	{
       Intro = false
+	}
+  end
+  
+  if SV.team_retreat.Status == nil then
+	SV.team_retreat =
+	{
+	  Status = 0,
+	  SpokenTo = false,
+	  DaysSinceCheckpoint = 0,
+	  
+	  Cycle = 0
+	}
+  end
+
+  if SV.team_meditate == nil then
+	SV.team_meditate =
+	{
+	  Status = 0,
+	  SpokenTo = false,
+	  DaysSinceCheckpoint = 0,
+	  
+	  Cycle = 0
+	}
+  end
+
+  if SV.team_steel == nil then
+	SV.team_steel =
+	{
+	  Argued = false,
+	  DaysSinceArgue = 0,
+	  Rescued = false
+	}
+  end
+
+  if SV.team_solo == nil then
+	SV.team_solo =
+	{
+	  Status = 0,
+	  SpokenTo = false,
+	  DaysSinceCheckpoint = 0,
+	  Cycle = 0
+	}
+  end
+
+  if SV.team_psychic == nil then
+	SV.team_psychic =
+	{
+	  Status = 0,
+	  SpokenTo = false,
+	  DaysSinceCheckpoint = 0,
+	  Cycle = 0
+	}
+  end
+
+  if SV.team_dark == nil then
+	SV.team_dark =
+	{
+	  GoalStatus = 0,
+	  SpokenTo = false,
+	  DaysSinceCheckpoint = 0,
+	  Cycle = 0
 	}
   end
 
@@ -262,15 +388,6 @@ function UpgradeTools:OnUpgrade()
 		SpokenTo = false,
 		DaysSinceCheckpoint = 0,
 		Cycle = 0
-	}
-  end
-
-  if SV.team_steel == nil then
-	SV.team_steel =
-	{
-	  Argued = false,
-	  DaysSinceArgue = 0,
-	  Rescued = false
 	}
   end
 

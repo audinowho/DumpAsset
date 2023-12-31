@@ -153,7 +153,13 @@ SV.base_town =
   ValueTraded = false,
   FreeRelearn = false,
   TutorOpen = false,
-  TutorMoves = {}
+  TutorMoves = {},
+  
+  --0 = Setting up
+  --1 = Wrong shipment, need help retrieving
+  --2 = Thanked for retrieving ingredient, bar's open!
+  --3 = Bar's got special orders!
+  JuiceShop = 0
 }
 
 SV.luminous_spring = 
@@ -174,11 +180,156 @@ SV.cliff_camp =
   TeamUndergrowthIntro = false
 }
 
-SV.team_retreat =
+SV.team_hunter =
 {
-  Intro = false
+  --0 = Base Camp, lost everything
+  --1 = Cliff Camp, asking about retrieving something from flyaway cliffs
+  --2 = Cliff Camp, thanks for retrieving keepsake
+  --3 = Cycling
+  Status = 0,
+  SpokenTo = false,
+  DaysSinceCheckpoint = 0,
+  
+  -- TODO
+  --3 = canyon camp
+  --4 = cave camp
+  --5 = snow camp
+  --6 = summit
+  Cycle = 0
 }
 
+SV.town_elder =
+{
+  --0 = Base Camp, talking about noctowl
+  --1 = Forest Camp, curious about a keepsake.  Mission given
+  --2 = Forest Camp, thanks for retrieving keepsake
+  --3 = Cycling
+  Status = 0,
+  SpokenTo = false,
+  DaysSinceCheckpoint = 0,
+  
+  -- TODO
+  --3 = canyon camp
+  --4 = cave camp
+  --5 = snow camp
+  --6 = summit
+  Cycle = 0
+}
+
+SV.forest_child =
+{
+  --0 = Forest Camp, talking about playing
+  --1 = Forest Camp, sick.  Mission given
+  --2 = Forest Camp, recovering
+  --3 = Post-recovery, also plays catch with the kids sometimes
+  Status = 0,
+  SpokenTo = false,
+  DaysSinceCheckpoint = 0
+}
+
+SV.team_catch =
+{
+  --0 = Base Town, playing catch
+  --1 = Base Camp, playing catch
+  --2 = Forest Camp, playing catch
+  --3 = Cliff Camp, playing catch and threw the ball away, now they need help
+  --4 = Cliff Camp, thanks for retrieval
+  --5 = Cycling
+  Status = 0,
+  SpokenTo = false,
+  DaysSinceCheckpoint = 0,
+  
+  -- TODO
+  --3 = canyon camp
+  --4 = cave camp
+  --5 = snow camp
+  --6 = summit
+  Cycle = 0
+}
+
+SV.team_rivals =
+{
+  --0 = Cliff Camp, in a rivalry
+  --1 = Ravine Camp, in a rivalry
+  --2 = Cave Camp, zangoose asks to rescue seviper
+  --3 = Cave Camp, post rescue
+  --4 = Cave Camp, seviper asks to rescue zangoose
+  --5 = Cave Camp, post rescue
+  --6 = Blizzard Camp, in a rivalry
+  --7 = Summit, in a rivalry
+  --8 = Cycling
+  Status = 0,
+  SpokenTo = false,
+  DaysSinceCheckpoint = 0,
+  
+  -- TODO
+  --3 = canyon camp
+  --4 = cave camp
+  --5 = snow camp
+  --6 = summit
+  Cycle = 0
+}
+
+SV.team_kidnapped =
+{
+  --0 = Base Camp, failed the trail
+  --1 = Forest Camp, looking for partner
+  --2 = Cliff Camp, meets drifloon
+  --3 = Cliff Camp, gone
+  --4 = Cliff Camp, sightseer is worried, asks you to get him back
+  --5 = Cliff Camp, thanks for rescue at oblivion valley
+  --6 = Cliff Camp, ended
+  Status = 0,
+  SpokenTo = false,
+  DaysSinceCheckpoint = 0,
+  
+  -- TODO
+  --3 = canyon camp
+  --4 = cave camp
+  --5 = snow camp
+  --6 = summit
+  Cycle = 0
+}
+
+SV.team_retreat =
+{
+  --0 = Forest Camp, gives an escape orb
+  --1 = Cliff Camp, advises on grass/distances
+  --2 = Cliff Camp, partner got trapped
+  --3 = Cliff Camp, thanks for rescue at fortress
+  --4 = Cliff Camp, ended
+  Status = 0,
+  SpokenTo = false,
+  DaysSinceCheckpoint = 0,
+  
+  -- TODO
+  --3 = canyon camp
+  --4 = cave camp
+  --5 = snow camp
+  --6 = summit
+  Cycle = 0
+}
+
+
+SV.team_meditate =
+{
+  --0 = Cliff Camp, asks about motivation
+  --1 = Ravine Camp, preparing to go to caldera
+  --2 = Ravine Camp, partner is doing fine
+  --3 = Ravine Camp, partner is worried, asks you to get him back
+  --4 = Ravine Camp, thanks for rescue at caldera
+  --5 = Ravine Camp, ended
+  Status = 0,
+  SpokenTo = false,
+  DaysSinceCheckpoint = 0,
+  
+  -- TODO
+  --3 = canyon camp
+  --4 = cave camp
+  --5 = snow camp
+  --6 = summit
+  Cycle = 0
+}
 
 SV.team_steel =
 {
@@ -187,6 +338,67 @@ SV.team_steel =
   Rescued = false
 }
 
+SV.team_solo =
+{
+  --0 = Base Camp, claims he can solo
+  --1 = Forest Camp, claims he can solo
+  --2 = Cliff Camp, claims he can solo
+  --3 = Ravine Camp, claims he can solo
+  --4 = Ravine Camp, floatzel is worried and you need to rescue prinplup
+  --5 = Ravine Camp, thanks for rescue at forsaken desert
+  --6 = Ravine Camp, ended
+  Status = 0,
+  SpokenTo = false,
+  DaysSinceCheckpoint = 0,
+  
+  -- TODO
+  --3 = canyon camp
+  --4 = cave camp
+  --5 = snow camp
+  --6 = summit
+  Cycle = 0
+}
+
+SV.team_psychic =
+{
+  --0 = Ravine Camp, strategizing about sleeping caldera
+  --1 = Ravine Camp, strategizing about copper quary
+  --2 = Cave Camp, splitting due to different wants
+  --3 = Ravine Camp, strategizing about relic tower
+  --4 = Ravine Camp, needs your help with kirlia at relic tower
+  --5 = Ravine Camp, thanks for rescue at relic tower
+  --6 = Ravine Camp, ended
+  Status = 0,
+  SpokenTo = false,
+  DaysSinceCheckpoint = 0,
+  
+  -- TODO
+  --3 = canyon camp
+  --4 = cave camp
+  --5 = snow camp
+  --6 = summit
+  Cycle = 0
+}
+
+SV.team_dark =
+{
+  --0 = Not yet started
+  --1 = In Cave Camp, pushing for the next dungeon
+  --2 = Disappeared
+  --3 = Returned, needs mission
+  --4 = Mission complete
+  --5 = Ended
+  GoalStatus = 0,
+  SpokenTo = false,
+  DaysSinceCheckpoint = 0,
+  
+  -- TODO
+  --3 = canyon camp
+  --4 = cave camp
+  --5 = snow camp
+  --6 = summit
+  Cycle = 0
+}
 
 SV.team_dragon =
 {
@@ -230,7 +442,7 @@ SV.team_firecracker =
   Cycle = 0
 }
 
---TODO
+
 SV.supply_corps =
 {
   --0 = Stopped at Snorlax, 

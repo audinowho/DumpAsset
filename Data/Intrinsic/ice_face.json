@@ -10,7 +10,7 @@
 "DefaultText": "The Pokémon's ice head can take a physical attack as a substitute, breaking in the process. The ice is restored in hail.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 248,
 "ProximityEvent": {
@@ -57,7 +57,52 @@
 "OnMapStarts": [],
 "OnTurnStarts": [],
 "OnTurnEnds": [],
-"OnMapTurnEnds": [],
+"OnMapTurnEnds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.WeatherFormeSingleEvent, PMDC",
+"ReqSpecies": "eiscue",
+"DefaultForme": -1,
+"WeatherPair": {
+"hail": 0
+},
+"Anims": [
+{
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Small_Blue_In",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"Sound": "DUN_Wonder_Tile",
+"Delay": 10
+}
+]
+}
+}
+],
 "OnWalks": [],
 "OnDeaths": [],
 "OnRefresh": [],
@@ -65,7 +110,94 @@
 "BeforeActions": [],
 "OnActions": [],
 "BeforeHittings": [],
-"BeforeBeingHits": [],
+"BeforeBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.CategoryNeededEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.BustFormEvent, PMDC",
+"ReqSpecies": "eiscue",
+"ReqForm": 0,
+"ResultForm": 1,
+"Msg": {
+"Key": "MSG_DISGUISE_DECOY"
+},
+"Anims": [
+{
+"Emitter": {
+"$type": "RogueEssence.Content.FiniteReleaseEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Ice_Pieces",
+"FrameTime": 6,
+"StartFrame": 0,
+"EndFrame": 0,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Ice_Pieces",
+"FrameTime": 12,
+"StartFrame": 1,
+"EndFrame": 1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Ice_Pieces",
+"FrameTime": 12,
+"StartFrame": 1,
+"EndFrame": 1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Speed": 60,
+"Bursts": 4,
+"ParticlesPerBurst": 4,
+"BurstTime": 2,
+"StartDistance": 8,
+"Layer": 3
+},
+"Sound": "DUN_Ice_Ball_2",
+"AffectTarget": true,
+"Delay": 10
+}
+]
+}
+],
+"NeededCategory": 1
+}
+}
+],
 "AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],

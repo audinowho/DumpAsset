@@ -7,10 +7,10 @@
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "Once per battle, the shroud that covers the Pokémon can protect it from an attack.",
+"DefaultText": "Once per floor, the shroud that covers the Pokémon can protect it from an attack.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 209,
 "ProximityEvent": {
@@ -65,7 +65,59 @@
 "BeforeActions": [],
 "OnActions": [],
 "BeforeHittings": [],
-"BeforeBeingHits": [],
+"BeforeBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AttackingMoveNeededEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.BustFormEvent, PMDC",
+"ReqSpecies": "mimikyu",
+"ReqForm": 0,
+"ResultForm": 1,
+"Msg": {
+"Key": "MSG_DISGUISE_DECOY"
+},
+"Anims": [
+{
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Puff_White",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"Sound": "_UNK_EVT_012",
+"AffectTarget": true,
+"Delay": 10
+}
+]
+}
+]
+}
+}
+],
 "AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],

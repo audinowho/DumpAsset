@@ -105,6 +105,9 @@ function canyon_camp.SetupNpcs()
     local quest = SV.missions.Missions[questname]
 	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
 	  GROUND:Unhide("NPC_Monk")
+	else
+	  local spar = CH('NPC_Spar')
+	  GROUND:TeleportTo(spar, 864, 360, Direction.DownLeft)
 	end
   elseif SV.team_meditate.Status == 4 then
     GROUND:Unhide("NPC_Monk")
@@ -780,6 +783,108 @@ function canyon_camp.Argument()
   end
 end
 
+
+  
+function canyon_camp.NPC_Monk_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  if SV.team_meditate.Status == 1 then
+    GROUND:CharTurnToChar(chara, player)
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Monk_Line_001']))
+	SV.team_meditate.SpokenTo = true
+  elseif SV.team_meditate.Status == 3 then
+    canyon_camp.Fighting_Complete()
+  elseif SV.team_meditate.Status == 4 then
+    GROUND:CharTurnToChar(chara, player)
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Monk_Line_002']))
+  elseif SV.team_meditate.Status == 5 then
+    GROUND:CharTurnToChar(chara, player)
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Monk_Line_002']))
+  end
+end
+
+  
+function canyon_camp.NPC_Spar_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+  
+  if SV.team_meditate.Status == 0 then
+  
+    GROUND:CharTurnToChar(chara, player)
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Line_001']))
+  elseif SV.team_meditate.Status == 1 then
+    GROUND:CharTurnToChar(chara, player)
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Line_002']))
+  elseif SV.team_meditate.Status == 2 then
+    GROUND:CharTurnToChar(chara, player)
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Line_002']))
+  elseif SV.team_meditate.Status == 3 then
+  
+  local questname = "QuestFighting"
+  local quest = SV.missions.Missions[questname]
+	
+  local days = SV.team_meditate.DaysSinceCheckpoint + 4
+  
+  if quest == nil then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Help_Line_001'], days))
+	
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "sleeping_caldera", DestSegment = 0, DestFloor = 8,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("meditite", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("makuhita", 0, "normal", Gender.Male) }
+	
+  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Help_Line_001'], days))
+  else
+    canyon_camp.Fighting_Complete()
+  end
+  
+  elseif SV.team_meditate.Status == 4 then
+    GROUND:CharTurnToChar(chara, player)
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Line_003']))
+  elseif SV.team_meditate.Status == 5 then
+    GROUND:CharTurnToChar(chara, player)
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Line_003']))
+  end
+end
+
+
+function canyon_camp.Fighting_Complete()
+  local monk = CH('NPC_Monk')
+  local spar = CH('NPC_Spar')
+  local player = CH('PLAYER')
+  
+  UI:SetSpeaker(spar)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Complete_Line_001']))
+  
+  UI:SetSpeaker(monk)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Complete_Line_002']))
+  
+  UI:SetSpeaker(spar)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Complete_Line_003']))
+  
+  local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_fighting_silk")
+  COMMON.GiftItem(player, receive_item)
+  
+  COMMON.CompleteMission("QuestFighting")
+  
+  SV.team_meditate.Status = 4
+end
+
 function canyon_camp.NPC_Seeker_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
@@ -821,7 +926,6 @@ function canyon_camp.NPC_Shortcut_Action(chara, activator)
   local player = CH('PLAYER')
   UI:SetSpeaker(chara)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Line_001']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Line_002']))
 end
   
 function canyon_camp.NPC_NextCamp_Action(chara, activator)

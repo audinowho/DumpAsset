@@ -729,6 +729,8 @@ function cliff_camp.NPC_Monk_Action(chara, activator)
   local player = CH('PLAYER')
   GROUND:CharTurnToChar(chara, player)
   
+  if not SV.team_meditate.SpokenTo then
+  
   local quest_choices = {STRINGS:Format(MapStrings['Monk_Option_Fame']), STRINGS:Format(MapStrings['Monk_Option_Fortune']),
     STRINGS:Format(MapStrings['Monk_Option_Curiosity']), STRINGS:Format(MapStrings['Monk_Option_Strength']),
     STRINGS:Format(MapStrings['Monk_Option_Unknown'])}
@@ -746,6 +748,10 @@ function cliff_camp.NPC_Monk_Action(chara, activator)
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Monk_Line_Strength']))
   else
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Monk_Line_Unknown']))
+  end
+  
+  SV.team_meditate.SpokenTo = true
+  
   end
   
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Monk_Line_002']))

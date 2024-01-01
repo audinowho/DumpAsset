@@ -240,8 +240,10 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.team_meditate, 1)
   elseif SV.team_meditate.Status == 1 and SV.team_meditate.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_meditate, 1)
-  elseif SV.team_meditate.Status == 2 and SV.team_meditate.SpokenTo then
+  elseif SV.team_meditate.Status == 2 then
     COMMON.UpdateCheckpointStatus(SV.team_meditate, 4)
+  elseif SV.team_meditate.Status == 3 then
+    SV.team_meditate.DaysSinceCheckpoint = SV.team_meditate.DaysSinceCheckpoint + 1
   elseif SV.team_meditate.Status == 4 then
     COMMON.UpdateCheckpointStatus(SV.team_meditate, 1)
   elseif SV.team_meditate.Status == 6 then

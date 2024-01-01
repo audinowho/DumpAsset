@@ -361,11 +361,7 @@ function forest_camp.Ground_Complete()
   
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Complete_Line_002']))
   
-  local questname = "QuestGround"
-  local quest = SV.missions.Missions[questname]
-  quest.Complete = COMMON.MISSION_ARCHIVED
-  SV.missions.FinishedMissions[questname] = quest
-  SV.missions.Missions[questname] = nil
+  COMMON.CompleteMission("QuestGround")
   
   SV.town_elder.Status = 2
 end
@@ -389,11 +385,12 @@ function forest_camp.Speedster_2_Action(chara, activator)
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
   
   local receive_item = RogueEssence.Dungeon.InvItem("orb_escape")
-  if not SV.team_retreat.Intro then
+  if not SV.team_retreat.SpokenTo then
     GROUND:CharTurnToChar(chara, player)--make the chara turn to the player
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Line_001']))
 	COMMON.GiftItem(player, receive_item)
-    SV.team_retreat.Intro = true
+	
+	SV.team_retreat.SpokenTo = true
   end
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Line_002'], receive_item:GetDisplayName()))
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Line_003']))
@@ -547,11 +544,7 @@ function forest_camp.Grass_Complete()
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_grass_silk")
   COMMON.GiftItem(player, receive_item)
   
-  local questname = "QuestGrass"
-  local quest = SV.missions.Missions[questname]
-  quest.Complete = COMMON.MISSION_ARCHIVED
-  SV.missions.FinishedMissions[questname] = quest
-  SV.missions.Missions[questname] = nil
+  COMMON.CompleteMission("QuestGrass")
   
   SV.forest_child.Status = 2
 end

@@ -226,7 +226,9 @@ function COMMON.UpdateDayEndVars()
   
   if SV.team_retreat.Status == 0 and SV.team_retreat.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_retreat, 2)
-  elseif SV.team_retreat.Status == 1 and SV.team_retreat.SpokenTo and _DATA.Save:GetDungeonUnlock("deserted_fortress") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+	
+	-- TODO: should be deserted_fortress
+  elseif SV.team_retreat.Status == 1 and SV.team_retreat.SpokenTo and _DATA.Save:GetDungeonUnlock("trickster_woods") ~= RogueEssence.Data.GameProgress.UnlockState.None then
     COMMON.UpdateCheckpointStatus(SV.team_retreat, 2)
   elseif SV.team_retreat.Status == 3 then
     COMMON.UpdateCheckpointStatus(SV.team_retreat, 1)

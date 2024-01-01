@@ -551,13 +551,15 @@ end
 
 function base_camp.NPC_Steel_1_Action(chara, activator)
 
+  local player = CH('PLAYER')
+  
   local questname = "QuestSteel"
   local quest = SV.missions.Missions[questname]
 	
   
   if quest == nil then
     UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    GROUND:CharTurnToChar(chara,player)
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Steel_Line_001']))
 	
 	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
@@ -568,7 +570,7 @@ function base_camp.NPC_Steel_1_Action(chara, activator)
 	
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    GROUND:CharTurnToChar(chara,player)
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Steel_Line_002']))
   else
     base_camp.Steel_Complete()
@@ -602,11 +604,7 @@ function base_camp.Steel_Complete()
   GROUND:Hide("NPC_Steel_1")
   GROUND:Hide("NPC_Steel_2")
   
-  local questname = "QuestSteel"
-  local quest = SV.missions.Missions[questname]
-  quest.Complete = COMMON.MISSION_ARCHIVED
-  SV.missions.FinishedMissions[questname] = quest
-  SV.missions.Missions[questname] = nil
+  COMMON.CompleteMission("QuestSteel")
   
   SV.team_steel.Rescued = true
 end

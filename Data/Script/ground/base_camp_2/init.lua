@@ -1593,11 +1593,7 @@ function base_camp_2.Bug_Complete()
   
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_004']))
   
-  local questname = "QuestBug"
-  local quest = SV.missions.Missions[questname]
-  quest.Complete = COMMON.MISSION_ARCHIVED
-  SV.missions.FinishedMissions[questname] = quest
-  SV.missions.Missions[questname] = nil
+  COMMON.CompleteMission("QuestBug")
   
   SV.base_town.JuiceShop = 2
 end

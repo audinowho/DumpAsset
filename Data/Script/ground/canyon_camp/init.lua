@@ -307,11 +307,7 @@ function canyon_camp.Rival_1_Action(chara, activator)
     local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_poison_silk")
   COMMON.GiftItem(player, receive_item)
   
-  local questname = "QuestRival1"
-  local quest = SV.missions.Missions[questname]
-  quest.Complete = COMMON.MISSION_ARCHIVED
-  SV.missions.FinishedMissions[questname] = quest
-  SV.missions.Missions[questname] = nil
+  COMMON.CompleteMission("QuestRival1")
   
   SV.team_rivals.Status = 3
   
@@ -427,9 +423,7 @@ function canyon_camp.NPC_Storehouse_Action(chara, activator)
         local receive_item = RogueEssence.Dungeon.InvItem("food_banana_big")
         COMMON.GiftItem(player, receive_item)
       --complete mission and move to done
-      quest.Complete = COMMON.MISSION_ARCHIVED
-      SV.missions.FinishedMissions[questname] = quest
-      SV.missions.Missions[questname] = nil
+	  COMMON.CompleteMission(questname)
       SV.supply_corps.Status = 7
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_005']))
     end

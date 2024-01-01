@@ -447,12 +447,7 @@ function final_stop.Fire_Complete()
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_fire_silk")
   COMMON.GiftItem(player, receive_item)
   
-  
-  local questname = "QuestFire"
-  local quest = SV.missions.Missions[questname]
-  quest.Complete = COMMON.MISSION_ARCHIVED
-  SV.missions.FinishedMissions[questname] = quest
-  SV.missions.Missions[questname] = nil
+  COMMON.CompleteMission("QuestFire")
   
   SV.team_firecracker.Status = 4
 end
@@ -473,9 +468,7 @@ function final_stop.NPC_Storehouse_Action(chara, activator)
       local receive_item = RogueEssence.Dungeon.InvItem("tm_focus_blast")
       COMMON.GiftItem(player, receive_item)
       --complete mission and move to done
-      quest.Complete = COMMON.MISSION_ARCHIVED
-      SV.missions.FinishedMissions[questname] = quest
-      SV.missions.Missions[questname] = nil
+	  COMMON.CompleteMission(questname)
       SV.supply_corps.Status = 17
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
     end

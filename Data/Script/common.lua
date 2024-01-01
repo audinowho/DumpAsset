@@ -1128,6 +1128,13 @@ function COMMON.FindMissionEscort(missionId)
   return escort
 end
 
+function COMMON.CompleteMission(questname)
+  local quest = SV.missions.Missions[questname]
+  quest.Complete = COMMON.MISSION_ARCHIVED
+  SV.missions.FinishedMissions[questname] = quest
+  SV.missions.Missions[questname] = nil
+end
+
 function COMMON.EndDungeonDay(result, zoneId, structureId, mapId, entryId)
   COMMON.EndDayCycle()
   GAME:EndDungeonRun(result, zoneId, structureId, mapId, entryId, true, true)

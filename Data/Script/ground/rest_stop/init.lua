@@ -297,11 +297,7 @@ function rest_stop.Rival_2_Action(chara, activator)
     local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_normal_silk")
   COMMON.GiftItem(player, receive_item)
   
-  local questname = "QuestRival2"
-  local quest = SV.missions.Missions[questname]
-  quest.Complete = COMMON.MISSION_ARCHIVED
-  SV.missions.FinishedMissions[questname] = quest
-  SV.missions.Missions[questname] = nil
+  COMMON.CompleteMission("QuestRival2")
   
   SV.team_rivals.Status = 6
   
@@ -405,11 +401,7 @@ function rest_stop.Dragon_Complete()
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_dragon_silk")
   COMMON.GiftItem(player, receive_item)
   
-  local questname = "QuestDragon"
-  local quest = SV.missions.Missions[questname]
-  quest.Complete = COMMON.MISSION_ARCHIVED
-  SV.missions.FinishedMissions[questname] = quest
-  SV.missions.Missions[questname] = nil
+  COMMON.CompleteMission("QuestDragon")
   
   SV.team_dragon.Status = 4
 end
@@ -471,9 +463,7 @@ function rest_stop.NPC_Storehouse_Action(chara, activator)
       local receive_item = RogueEssence.Dungeon.InvItem("tm_sludge_bomb")
       COMMON.GiftItem(player, receive_item)
       --complete mission and move to done
-      quest.Complete = COMMON.MISSION_ARCHIVED
-      SV.missions.FinishedMissions[questname] = quest
-      SV.missions.Missions[questname] = nil
+	  COMMON.CompleteMission(questname)
       SV.supply_corps.Status = 13
     end
   elseif SV.supply_corps.Status == 13 then
@@ -668,12 +658,7 @@ function rest_stop.Rock_Complete()
   GROUND:Hide("Boss_3")
   GROUND:Hide("Boss_4")
   
-  
-  local questname = "QuestRock"
-  local quest = SV.missions.Missions[questname]
-  quest.Complete = COMMON.MISSION_ARCHIVED
-  SV.missions.FinishedMissions[questname] = quest
-  SV.missions.Missions[questname] = nil
+  COMMON.CompleteMission("QuestRock")
   
   SV.rest_stop.BossSolved = true
 end

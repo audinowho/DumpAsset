@@ -47,11 +47,86 @@ end
 -- Map Begin Functions
 --------------------------------------------------
 function cliff_camp.SetupNpcs()
-  GROUND:Unhide("NPC_Monk")
-  GROUND:Unhide("Rival_1")
+  
   GROUND:Unhide("NPC_Undergrowth_1")
   GROUND:Unhide("NPC_Undergrowth_2")
   GROUND:Unhide("NPC_Sightseer")
+  
+  
+  if SV.team_hunter.Status == 1 then
+    GROUND:Unhide("NPC_Broke")
+	local broke = CH('NPC_Broke')
+	GROUND:TeleportTo(broke, 744, 268, Direction.Right)
+  elseif SV.team_hunter.Status == 2 then
+    GROUND:Unhide("NPC_Broke")
+  elseif SV.team_hunter.Status == 3 then
+    -- TODO cycling
+  end
+  
+  if SV.team_catch.Status == 3 then
+    GROUND:Unhide("NPC_Catch_1")
+	GROUND:Unhide("NPC_Catch_2")
+	
+	local questname = "QuestNormal"
+    local quest = SV.missions.Missions[questname]
+	if quest ~= nil then
+	  local catch1 = CH('NPC_Catch_1')
+	  local catch2 = CH('NPC_Catch_2')
+	  GROUND:TeleportTo(catch1, 420, 400, Direction.Down)
+	  GROUND:TeleportTo(catch2, 440, 384, Direction.Down)
+	end
+  elseif SV.team_catch.Status == 5 then
+    -- TODO cycling
+  end
+  
+  if SV.team_rivals.Status == 0 then
+    GROUND:Unhide("Rival_1")
+	GROUND:Unhide("Rival_2")
+  elseif SV.team_rivals.Status == 8 then
+    -- TODO cycling
+  end
+  
+  if SV.team_kidnapped.Status == 2 and SV.team_kidnapped.SpokenTo == false then
+    GROUND:Unhide("NPC_Unlucky")
+  elseif SV.team_catch.Status == 4 then
+    GROUND:Unhide("NPC_Unlucky")
+  elseif SV.team_catch.Status == 5 then
+    -- TODO cycling
+	GROUND:Unhide("NPC_Unlucky")
+  end
+  
+  
+  if SV.team_retreat.Status == 1 then
+	GROUND:Unhide("Speedster_1")
+	GROUND:Unhide("Speedster_2")
+  elseif SV.team_retreat.Status == 2 then
+    GROUND:Unhide("Speedster_1")
+	
+	local questname = "QuestElectric"
+    local quest = SV.missions.Missions[questname]
+	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+	  GROUND:Unhide("Speedster_2")
+	end
+  elseif SV.team_retreat.Status == 3 then
+	GROUND:Unhide("Speedster_1")
+	GROUND:Unhide("Speedster_2")
+  elseif SV.team_retreat.Status == 4 then
+    -- TODO cycling?
+	GROUND:Unhide("Speedster_1")
+	GROUND:Unhide("Speedster_2")
+  end
+  
+  if SV.team_meditate.Status == 0 then
+    GROUND:Unhide("NPC_Monk")
+  elseif SV.team_meditate.Status == 5 then
+    -- TODO cycling
+  end
+  
+  if SV.team_solo.Status == 2 and SV.team_solo.SpokenTo == false then
+    GROUND:Unhide("NPC_Solo")
+  elseif SV.team_solo.Status == 6 then
+    -- TODO cycling
+  end
   
   if SV.Experimental and SV.team_firecracker.Status == 0 then
     GROUND:Unhide("NPC_Seer")

@@ -44,9 +44,47 @@ end
 --------------------------------------------------
 
 function rest_stop.SetupNpcs()
-  --GROUND:Unhide("NPC_1")
-  --GROUND:Unhide("NPC_2")
   
+  if SV.team_rivals.Status == 2 then
+    GROUND:Unhide("Rival_2")
+	
+	local questname = "QuestRival1"
+    local quest = SV.missions.Missions[questname]
+	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+	  GROUND:Unhide("Rival_1")
+	end
+  elseif SV.team_rivals.Status == 3 then
+    GROUND:Unhide("Rival_1")
+	GROUND:Unhide("Rival_2")
+  elseif SV.team_rivals.Status == 4 then
+    GROUND:Unhide("Rival_1")
+	local questname = "QuestRival4"
+    local quest = SV.missions.Missions[questname]
+	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+	  GROUND:Unhide("Rival_2")
+	end
+  elseif SV.team_rivals.Status == 5 then
+    GROUND:Unhide("Rival_1")
+	GROUND:Unhide("Rival_2")
+  elseif SV.team_rivals.Status == 8 then
+    -- TODO cycling
+  end
+
+
+  if SV.team_psychic.Status == 2 then
+    GROUND:Unhide("NPC_Strategy")
+    GROUND:Unhide("NPC_Goals")
+  elseif SV.team_dark.Status == 1 then
+    GROUND:Unhide("NPC_Goals")
+  elseif SV.team_dark.Status == 3 then
+    GROUND:Unhide("NPC_Goals")
+  elseif SV.team_dark.Status == 4 then
+    GROUND:Unhide("NPC_Goals")
+  elseif SV.team_psychic.Status == 5 then
+    -- TODO cycling
+    GROUND:Unhide("NPC_Goals")
+  end
+
 
   if SV.team_dragon.Status == 3 then
     GROUND:Unhide("NPC_Dragon_2")

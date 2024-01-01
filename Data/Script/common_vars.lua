@@ -157,6 +157,8 @@ function COMMON.UpdateDayEndVars()
 	end
   end
   
+  if SV.Experimental then
+  
   if SV.base_town.JuiceShop == 0 and SV.forest_camp.ExpositionComplete then
     SV.base_town.JuiceShop = 1
   end
@@ -211,13 +213,11 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
   elseif SV.team_kidnapped.Status == 1 and SV.team_kidnapped.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
-  elseif SV.team_kidnapped.Status == 2 and SV.team_kidnapped.SpokenTo then
+  elseif SV.team_kidnapped.Status == 2 and SV.team_kidnapped.SpokenTo and _DATA.Save:GetDungeonUnlock("oblivion_valley") ~= RogueEssence.Data.GameProgress.UnlockState.None then
     COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
-  elseif SV.team_kidnapped.Status == 3 and _DATA.Save:GetDungeonUnlock("oblivion_valley") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+  elseif SV.team_kidnapped.Status == 4 then
     COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
   elseif SV.team_kidnapped.Status == 5 then
-    COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
-  elseif SV.team_kidnapped.Status == 6 then
 	SV.team_kidnapped.Cycle = math.random(1, 6)
   end
   
@@ -264,9 +264,9 @@ function COMMON.UpdateDayEndVars()
 	SV.team_dragon.Cycle = math.random(3, 6)
   end
   
-  if SV.team_psychic.Status == 0 and SV.team_psychic.SpokenTo and _DATA.Save:GetDungeonUnlock("sleeping_caldera") == RogueEssence.Data.GameProgress.UnlockState.Completed then
+  if SV.team_psychic.Status == 0 and _DATA.Save:GetDungeonUnlock("sleeping_caldera") == RogueEssence.Data.GameProgress.UnlockState.Completed then
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
-  elseif SV.team_psychic.Status == 1 and SV.team_psychic.SpokenTo and SV.rest_stop.ExpositionComplete then
+  elseif SV.team_psychic.Status == 1 and SV.rest_stop.ExpositionComplete then
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
   elseif SV.team_psychic.Status == 2 and SV.team_psychic.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
@@ -323,6 +323,8 @@ function COMMON.UpdateDayEndVars()
 	  max_cycle = 6
 	end
 	SV.team_firecracker.Cycle = math.random(2, max_cycle)
+  end
+  
   end
   
   if SV.supply_corps.Status == 1 then

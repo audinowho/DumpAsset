@@ -77,13 +77,72 @@ end
 function canyon_camp.SetupNpcs()
   GROUND:Unhide("NPC_Seeker")
   GROUND:Unhide("NPC_Hidden")
-  GROUND:Unhide("NPC_Strategy")
-  GROUND:Unhide("NPC_Goals")
   GROUND:Unhide("NPC_NextCamp")
+  GROUND:Unhide("NPC_Spar")
+  
+  if SV.team_rivals.Status == 1 then
+    GROUND:Unhide("Rival_1")
+	GROUND:Unhide("Rival_2")
+  elseif SV.team_rivals.Status == 8 then
+    -- TODO cycling
+  end
+  
+  if SV.team_meditate.Status == 1 then
+    GROUND:Unhide("NPC_Monk")
+  elseif SV.team_meditate.Status == 3 then
+	local questname = "QuestFighting"
+    local quest = SV.missions.Missions[questname]
+	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+	  GROUND:Unhide("NPC_Monk")
+	end
+  elseif SV.team_meditate.Status == 4 then
+    GROUND:Unhide("NPC_Monk")
+  elseif SV.team_meditate.Status == 5 then
+    -- TODO cycling
+	GROUND:Unhide("NPC_Monk")
+  end
+  
   
   if SV.team_steel.Argued == false then
     GROUND:Unhide("NPC_Argue_1")
     GROUND:Unhide("NPC_Argue_2")
+  end
+  
+  if SV.team_solo.Status == 3 and SV.team_solo.SpokenTo == false then
+    GROUND:Unhide("NPC_Solo")
+  elseif SV.team_solo.Status == 4 then
+	local questname = "QuestWater"
+    local quest = SV.missions.Missions[questname]
+	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+	  GROUND:Unhide("NPC_Solo")
+	end
+  elseif SV.team_solo.Status == 5 then
+    GROUND:Unhide("NPC_Solo")
+  elseif SV.team_solo.Status == 6 then
+    -- TODO cycling
+  end
+  
+  if SV.team_psychic.Status == 0 or SV.team_psychic.Status == 1 then
+    GROUND:Unhide("NPC_Strategy")
+    GROUND:Unhide("NPC_Goals")
+  elseif SV.team_psychic.Status == 3 then
+    GROUND:Unhide("NPC_Strategy")
+    GROUND:Unhide("NPC_Brains")
+  elseif SV.team_psychic.Status == 4 then
+    GROUND:Unhide("NPC_Brains")
+	
+	local questname = "QuestPsychic"
+    local quest = SV.missions.Missions[questname]
+	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+	  GROUND:Unhide("NPC_Strategy")
+	end
+  elseif SV.team_psychic.Status == 5 then
+    GROUND:Unhide("NPC_Strategy")
+    GROUND:Unhide("NPC_Brains")
+  elseif SV.team_psychic.Status == 6 then
+    -- TODO cycling
+    GROUND:Unhide("NPC_Strategy")
+    GROUND:Unhide("NPC_Brains")
   end
   
   if SV.team_dragon.Status == 0 then

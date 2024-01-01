@@ -81,14 +81,20 @@ end
 function base_camp.SetupNpcs()
   GROUND:Unhide("Noctowl")
   GROUND:Unhide("NPC_Coast")
-  GROUND:Unhide("NPC_Unlucky")
   GROUND:Unhide("NPC_Entrance")
   
   
+  if SV.team_catch.Status == 1 then
+    GROUND:Unhide("NPC_Catch_1")
+	GROUND:Unhide("NPC_Catch_2")
+  elseif SV.team_catch.Status == 5 then
+    -- TODO cycling
+  end
   
-  if SV.guildmaster_summit.GameComplete then
-    local noctowl = CH('Noctowl')
-    GROUND:TeleportTo(noctowl, 80, 288, Direction.Right)
+  if SV.team_kidnapped.Status == 0 then
+    GROUND:Unhide("NPC_Unlucky")
+  elseif SV.team_kidnapped.Status == 6 then
+    -- TODO cycling
   end
   
   if SV.team_steel.DaysSinceArgue >= 2 and not SV.team_steel.Rescued then
@@ -98,6 +104,11 @@ function base_camp.SetupNpcs()
 	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
 	  GROUND:Unhide("NPC_Steel_2")
 	end
+  end
+  
+  if SV.guildmaster_summit.GameComplete then
+    local noctowl = CH('Noctowl')
+    GROUND:TeleportTo(noctowl, 80, 288, Direction.Right)
   end
 end
 

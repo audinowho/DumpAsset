@@ -44,6 +44,13 @@ end
 --------------------------------------------------
 function guildmaster_summit.SetupNpcs()
   
+  if SV.team_rivals.Status == 7 then
+    GROUND:Unhide("Rival_1")
+	GROUND:Unhide("Rival_2")
+  elseif SV.team_rivals.Status == 8 then
+    -- TODO cycling
+  end
+  
   if SV.supply_corps.Status >= 20 then
 	if SV.supply_corps.ManagerCycle == 6 then
 	  GROUND:Unhide("NPC_Carry")

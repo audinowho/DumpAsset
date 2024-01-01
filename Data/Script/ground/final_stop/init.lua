@@ -57,8 +57,13 @@ end
 -- Map Begin Functions
 --------------------------------------------------
 function final_stop.SetupNpcs()
-  GROUND:Unhide("Rival_2")
   
+  if SV.team_rivals.Status == 6 then
+    GROUND:Unhide("Rival_1")
+	GROUND:Unhide("Rival_2")
+  elseif SV.team_rivals.Status == 8 then
+    -- TODO cycling
+  end
 
   if SV.team_dragon.Status == 7 then
     GROUND:Unhide("NPC_Dragon_1")

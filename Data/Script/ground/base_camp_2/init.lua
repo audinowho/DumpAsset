@@ -92,14 +92,45 @@ function base_camp_2.SetupNpcs()
   GROUND:Unhide("NPC_Food")
   GROUND:Unhide("NPC_Queen")
   GROUND:Unhide("NPC_King")
-  GROUND:Unhide("NPC_Catch_1")
-  GROUND:Unhide("NPC_Catch_2")
-  GROUND:Unhide("NPC_Elder")
-  GROUND:Unhide("NPC_Solo")
+  
+  
   GROUND:Unhide("NPC_Settling")
   GROUND:Unhide("NPC_Nonbeliever")
   GROUND:Unhide("NPC_Hesitant")
-  GROUND:Unhide("NPC_Broke")
+
+  
+  if SV.base_town.JuiceShop == 1 then
+	local juice = CH('Juice_Owner')
+	GROUND:TeleportTo(juice, 576, 160, Direction.Down)
+  end
+
+  if SV.team_hunter.Status == 0 then
+    GROUND:Unhide("NPC_Broke")
+  elseif SV.team_hunter.Status == 3 then
+    -- TODO cycling
+  end
+
+  if SV.town_elder.Status == 0 then
+    GROUND:Unhide("NPC_Elder")
+  elseif SV.town_elder.Status == 3 then
+    -- TODO cycling
+	GROUND:Unhide("NPC_Elder")
+  end
+
+  if SV.team_catch.Status == 0 then
+    GROUND:Unhide("NPC_Catch_1")
+	GROUND:Unhide("NPC_Catch_2")
+  elseif SV.team_catch.Status == 5 then
+    -- TODO cycling
+    GROUND:Unhide("NPC_Catch_1")
+	GROUND:Unhide("NPC_Catch_2")
+  end
+
+  if SV.team_solo.Status == 0 then
+    GROUND:Unhide("NPC_Solo")
+  elseif SV.team_solo.Status == 6 then
+    -- TODO cycling
+  end
 
   if SV.supply_corps.Status >= 20 then
 	if SV.supply_corps.ManagerCycle == 0 then

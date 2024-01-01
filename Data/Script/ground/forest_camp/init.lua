@@ -11,7 +11,9 @@ function forest_camp.Init(map)
   MapStrings = COMMON.AutoLoadLocalizedStrings()
   COMMON.RespawnAllies()
   
-  COMMON.CreateWalkArea("NPC_Camps", 168, 184, 48, 48)
+  if SV.forest_child.Status == 0 or SV.forest_child.Status == 3 then
+    COMMON.CreateWalkArea("NPC_Camps", 168, 184, 48, 48)
+  end
   
   local snorlax = CH('Snorlax')
   GROUND:CharSetAnim(snorlax, "Sleep", true)
@@ -66,9 +68,54 @@ end
 function forest_camp.SetupNpcs()
   GROUND:Unhide("NPC_Camps")
   GROUND:Unhide("NPC_Parent")
-  GROUND:Unhide("NPC_Child")
-  GROUND:Unhide("Speedster_1")
-  GROUND:Unhide("Speedster_2")
+  
+
+
+  if SV.town_elder.Status == 1 then
+    GROUND:Unhide("NPC_Elder")
+  elseif SV.town_elder.Status == 2 then
+    GROUND:Unhide("NPC_Elder")
+  elseif SV.town_elder.Status == 3 then
+    -- TODO cycling
+  end
+
+  if SV.forest_child.Status == 0 then
+    GROUND:Unhide("NPC_Child")
+  elseif SV.forest_child.Status == 1 or SV.forest_child.Status == 2 then
+    local parent = CH('NPC_Parent')
+	GROUND:EntTurn(parent, Direction.Right)
+	local camps = CH('NPC_Camps')
+	GROUND:TeleportTo(camps, 200, 336, Direction.Left)
+  elseif SV.forest_child.Status == 3 then
+    GROUND:Unhide("NPC_Child")
+  end
+  
+
+  if SV.team_catch.Status == 2 then
+    GROUND:Unhide("NPC_Catch_1")
+	GROUND:Unhide("NPC_Catch_2")
+  elseif SV.team_catch.Status == 5 then
+    -- TODO cycling
+  end
+  
+  if SV.team_kidnapped.Status == 1 then
+    GROUND:Unhide("NPC_Unlucky")
+  elseif SV.team_kidnapped.Status == 6 then
+    -- TODO cycling
+  end
+  
+  if SV.team_retreat.Status == 0 then
+	GROUND:Unhide("Speedster_1")
+	GROUND:Unhide("Speedster_2")
+  elseif SV.team_retreat.Status == 4 then
+    -- TODO cycling?
+  end
+  
+  if SV.team_solo.Status == 1 and SV.team_solo.SpokenTo == false then
+    GROUND:Unhide("NPC_Solo")
+  elseif SV.team_solo.Status == 6 then
+    -- TODO cycling
+  end
 
   if SV.supply_corps.Status == 0 then
     GROUND:Unhide("Snorlax")

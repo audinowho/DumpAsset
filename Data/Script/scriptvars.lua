@@ -182,7 +182,7 @@ SV.cliff_camp =
 
 SV.team_hunter =
 {
-  --0 = Base Camp, lost everything
+  --0 = Base Town, lost everything
   --1 = Cliff Camp, asking about retrieving something from flyaway cliffs
   --2 = Cliff Camp, thanks for retrieving keepsake
   --3 = Cycling
@@ -200,10 +200,10 @@ SV.team_hunter =
 
 SV.town_elder =
 {
-  --0 = Base Camp, talking about noctowl
+  --0 = Base Town, talking about noctowl
   --1 = Forest Camp, curious about a keepsake.  Mission given
   --2 = Forest Camp, thanks for retrieving keepsake
-  --3 = Cycling
+  --3 = Cycling?  Probably not.
   Status = 0,
   SpokenTo = false,
   DaysSinceCheckpoint = 0,
@@ -233,7 +233,7 @@ SV.team_catch =
   --1 = Base Camp, playing catch
   --2 = Forest Camp, playing catch
   --3 = Cliff Camp, playing catch and threw the ball away, now they need help
-  --4 = Cliff Camp, thanks for retrieval
+  --4 = Cliff Camp, thanks for retrieval (left)
   --5 = Cycling
   Status = 0,
   SpokenTo = false,
@@ -275,10 +275,10 @@ SV.team_kidnapped =
   --0 = Base Camp, failed the trail
   --1 = Forest Camp, looking for partner
   --2 = Cliff Camp, meets drifloon
-  --3 = Cliff Camp, gone
-  --4 = Cliff Camp, sightseer is worried, asks you to get him back
-  --5 = Cliff Camp, thanks for rescue at oblivion valley
-  --6 = Cliff Camp, ended
+  --2 = Cliff Camp, Spoken To, gone
+  --3 = Cliff Camp, sightseer is worried, asks you to get him back
+  --4 = Cliff Camp, thanks for rescue at oblivion valley
+  --5 = Cliff Camp, ended
   Status = 0,
   SpokenTo = false,
   DaysSinceCheckpoint = 0,
@@ -340,7 +340,7 @@ SV.team_steel =
 
 SV.team_solo =
 {
-  --0 = Base Camp, claims he can solo
+  --0 = Base Town, claims he can solo
   --1 = Forest Camp, claims he can solo
   --2 = Cliff Camp, claims he can solo
   --3 = Ravine Camp, claims he can solo

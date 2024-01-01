@@ -1483,8 +1483,6 @@ MISSION_GEN.REWARDS = {
 		{'evo_protector', 5},
 		{'evo_prism_scale', 5},
 		{'evo_kings_rock', 5},
-		{'evo_deep_sea_tooth', 5},
-		{'evo_deep_sea_scale', 5},
 		{'evo_sun_ribbon', 5},
 		{'evo_lunar_ribbon', 5},
 		{'evo_ice_stone', 5}

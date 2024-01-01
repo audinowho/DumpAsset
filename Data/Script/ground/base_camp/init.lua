@@ -87,7 +87,7 @@ function base_camp.SetupNpcs()
   if SV.team_catch.Status == 1 then
     GROUND:Unhide("NPC_Catch_1")
 	GROUND:Unhide("NPC_Catch_2")
-  elseif SV.team_catch.Status == 5 then
+  elseif SV.team_catch.Status == 4 then
     -- TODO cycling
   end
   
@@ -545,6 +545,8 @@ function base_camp.Catch_Action()
   GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
   
   SOUND:PlayBattleSE("DUN_Equip")
+  
+  SV.team_catch.SpokenTo = true
 end
 
 function base_camp.NPC_Steel_1_Action(chara, activator)

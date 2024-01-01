@@ -125,7 +125,7 @@ function base_camp_2.SetupNpcs()
   if SV.team_catch.Status == 0 then
     GROUND:Unhide("NPC_Catch_1")
 	GROUND:Unhide("NPC_Catch_2")
-  elseif SV.team_catch.Status == 5 then
+  elseif SV.team_catch.Status == 4 then
     -- TODO cycling
     GROUND:Unhide("NPC_Catch_1")
 	GROUND:Unhide("NPC_Catch_2")
@@ -478,6 +478,12 @@ function base_camp_2.Catch_Action()
   SOUND:PlayBattleSE("DUN_Equip")
   UI:SetSpeaker(catch1)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_005']))
+  
+  
+  if SV.Experimental then
+    SV.team_catch.SpokenTo = true
+  end
+  
   
   -- TODO cycling
 end

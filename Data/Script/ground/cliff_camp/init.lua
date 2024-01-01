@@ -75,7 +75,7 @@ function cliff_camp.SetupNpcs()
 	  GROUND:TeleportTo(catch1, 420, 400, Direction.Down)
 	  GROUND:TeleportTo(catch2, 440, 384, Direction.Down)
 	end
-  elseif SV.team_catch.Status == 5 then
+  elseif SV.team_catch.Status == 4 then
     -- TODO cycling
   end
   
@@ -407,7 +407,7 @@ function cliff_camp.Catch_Trouble()
 	
   SOUND:PlayBattleSE("_UNK_EVT_012")
   
-  itemAnim = RogueEssence.Content.ItemAnim(catch2.Bounds.Center, catch1.Bounds.Center, "Stone_White", 48, 1)
+  itemAnim = RogueEssence.Content.ItemAnim(catch2.Bounds.Center, RogueElements.Loc(400, 524), "Stone_White", 48, 1)
   GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
   
   UI:SetSpeaker(catch2)
@@ -461,6 +461,7 @@ function cliff_camp.Catch_Complete()
   SV.missions.FinishedMissions[questname] = quest
   SV.missions.Missions[questname] = nil
   
+  SV.team_catch.Status = 4
 end
 
 function cliff_camp.NPC_Undergrowth_1_Action(chara, activator)

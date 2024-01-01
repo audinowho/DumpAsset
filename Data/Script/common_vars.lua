@@ -171,13 +171,13 @@ function COMMON.UpdateDayEndVars()
   
   if SV.town_elder.Status == 0 and SV.town_elder.SpokenTo and _DATA.Save:GetDungeonUnlock("ambush_forest") == RogueEssence.Data.GameProgress.UnlockState.Completed then
     COMMON.UpdateCheckpointStatus(SV.town_elder, 3)
-  elseif SV.town_elder.Status == 2 and SV.town_elder.SpokenTo then
+  elseif SV.town_elder.Status == 2 then
     COMMON.UpdateCheckpointStatus(SV.town_elder, 1)
   end
   
   if SV.forest_child.Status == 0 and SV.forest_child.SpokenTo and SV.rest_stop.ExpositionComplete then
     COMMON.UpdateCheckpointStatus(SV.forest_child, 3)
-  elseif SV.forest_child.Status == 2 and SV.forest_child.SpokenTo then
+  elseif SV.forest_child.Status == 2 then
     COMMON.UpdateCheckpointStatus(SV.forest_child, 1)
   end
   

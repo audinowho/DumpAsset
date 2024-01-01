@@ -409,9 +409,9 @@ function forest_camp.NPC_Camps_Action(chara, activator)
   if SV.forest_child.Status == 0 then
     forest_camp.Talk_Camps()
   elseif SV.forest_child.Status == 1 then
-    forest_camp.Sick_Child_Action()
+    forest_camp.Sick_Child()
   elseif SV.forest_child.Status == 2 then
-    forest_camp.Sick_Child_Action()
+    forest_camp.Sick_Child()
   elseif SV.forest_child.Status == 3 then
     forest_camp.Talk_Camps()
   end
@@ -465,12 +465,16 @@ function forest_camp.Parent_Child()
   UI:SetSpeaker(parent)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Parent_Child_Line_002']))
   
-  elseif SV.forest_child.Status == 1 then
+  if SV.Experimental then
+    SV.forest_child.SpokenTo = true
+  end
   
-  GROUND:CharTurnToChar(player, child)
+  elseif SV.forest_child.Status == 3 then
+  
+  GROUND:CharTurnToChar(player, parent)
   UI:SetSpeaker(parent)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Cure_Line_004']))
-  GROUND:CharTurnToChar(player, parent)
+  GROUND:CharTurnToChar(player, child)
   UI:SetSpeaker(child)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Cure_Line_005']))
   
@@ -498,11 +502,12 @@ function forest_camp.Sick_Child()
 
 	GROUND:CharTurnToChar(player, camps)
 	GROUND:CharTurnToChar(player, parent)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sickness_Line_003']))
+	local destFloor = 8
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sickness_Line_003'], tostring(destFloor+1)))
 
 	
 	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
-      DestZone = "sickly_hollow", DestSegment = 0, DestFloor = 8,
+      DestZone = "sickly_hollow", DestSegment = 0, DestFloor = destFloor,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("sunflora", 0, "normal", Gender.Male) }

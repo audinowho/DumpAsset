@@ -610,6 +610,22 @@ function forest_camp.Catch_Action()
 end
 
 
+function forest_camp.NPC_Unlucky_Action(chara, activator)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  
+  UI:SetSpeaker(chara)
+  SOUND:PlayBattleSE("EVT_Emote_Sweating")
+  GROUND:CharSetEmote(chara, "sweating", 1)
+  GAME:WaitFrames(30)
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Unlucky_Line_001']))
+  
+  
+  if SV.Experimental then
+    SV.team_kidnapped.SpokenTo = true
+  end
+end
+
 function forest_camp.Teammate1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   COMMON.GroundInteract(activator, chara, true)

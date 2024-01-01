@@ -217,7 +217,7 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
 	-- TODO: should be oblivion valley
   elseif SV.team_kidnapped.Status == 2 and SV.team_kidnapped.SpokenTo and _DATA.Save:GetDungeonUnlock("secret_garden") ~= RogueEssence.Data.GameProgress.UnlockState.None then
-    COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
+    COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 2)
   elseif SV.team_kidnapped.Status == 4 then
     COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
   elseif SV.team_kidnapped.Status == 5 then

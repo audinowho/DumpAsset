@@ -11,8 +11,9 @@ function cliff_camp.Init(map)
   MapStrings = COMMON.AutoLoadLocalizedStrings()
   COMMON.RespawnAllies()
   
-  COMMON.CreateWalkArea("NPC_Sightseer", 144, 328, 48, 48)
-  
+  if SV.team_kidnapped.Status ~= 3 and SV.team_kidnapped.Status ~= 4 then
+    COMMON.CreateWalkArea("NPC_Sightseer", 144, 328, 48, 48)
+  end
   
 end
 
@@ -88,9 +89,24 @@ function cliff_camp.SetupNpcs()
   
   if SV.team_kidnapped.Status == 2 and SV.team_kidnapped.SpokenTo == false then
     GROUND:Unhide("NPC_Unlucky")
-  elseif SV.team_catch.Status == 4 then
+	GROUND:Unhide("NPC_Kidnap")
+	local unlucky = CH('NPC_Unlucky')
+	GROUND:TeleportTo(unlucky, 96, 456, Direction.Right)
+  elseif SV.team_kidnapped.Status == 3 then
+	local sightseer = CH('NPC_Sightseer')
+	GROUND:TeleportTo(sightseer, 160, 392, Direction.DownRight)
+
+	local questname = "QuestGhost"
+    local quest = SV.missions.Missions[questname]
+	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+	  GROUND:Unhide("NPC_Unlucky")
+	end
+  elseif SV.team_kidnapped.Status == 4 then
     GROUND:Unhide("NPC_Unlucky")
-  elseif SV.team_catch.Status == 5 then
+	
+	local sightseer = CH('NPC_Sightseer')
+	GROUND:TeleportTo(sightseer, 160, 392, Direction.DownRight)
+  elseif SV.team_kidnapped.Status == 5 then
     -- TODO cycling
 	GROUND:Unhide("NPC_Unlucky")
   end
@@ -464,6 +480,116 @@ function cliff_camp.Catch_Complete()
   SV.team_catch.Status = 4
 end
 
+
+function cliff_camp.NPC_Kidnap_Action(chara, activator)
+  cliff_camp.Kidnap_Sequence()
+end
+
+
+function cliff_camp.NPC_Unlucky_Action(chara, activator)
+  local player = CH('PLAYER')
+  
+  if SV.team_kidnapped.Status == 2 then
+    cliff_camp.Kidnap_Sequence()
+  elseif SV.team_kidnapped.Status == 3 then
+  
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Unlucky_Done_Line_001']))
+	
+    local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_ghost_silk")
+    COMMON.GiftItem(player, receive_item)
+  
+		
+	local questname = "QuestGhost"
+	local quest = SV.missions.Missions[questname]
+	quest.Complete = COMMON.MISSION_ARCHIVED
+	SV.missions.FinishedMissions[questname] = quest
+	SV.missions.Missions[questname] = nil
+
+	SV.team_kidnapped.Status = 4
+	
+  elseif SV.team_kidnapped.Status == 4 then
+  
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Unlucky_Done_Line_002']))
+  elseif SV.team_kidnapped.Status == 5 then
+  
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Unlucky_Done_Line_002']))
+  end
+end
+
+function cliff_camp.Kidnap_Sequence()
+  local unlucky = CH('NPC_Unlucky')
+  local kidnap = CH('NPC_Kidnap')
+  
+  UI:SetSpeaker(unlucky)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Kidnap_Line_001']))
+  
+  UI:SetSpeaker(kidnap)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Kidnap_Line_002']))
+  
+  UI:SetSpeaker(unlucky)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Kidnap_Line_003']))
+  
+  UI:SetSpeaker(kidnap)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Kidnap_Line_004']))
+  
+  GROUND:Hide("NPC_Unlucky")
+  GROUND:Hide("NPC_Kidnap")
+  
+  if SV.Experimental then
+    SV.team_kidnapped.SpokenTo = true
+  end
+end
+
+
+
+function cliff_camp.NPC_Sightseer_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  
+  if SV.team_kidnapped.Status == 3 then
+  
+  local questname = "QuestGhost"
+  local quest = SV.missions.Missions[questname]
+  
+  if quest == nil then
+
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sightseer_Quest_Line_001']))
+	
+	--TODO: later oblivion valley
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "secret_garden", DestSegment = 0, DestFloor = 9,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("meowth", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("pidgeotto", 0, "normal", Gender.Male) }
+	
+  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sightseer_Quest_Line_002']))
+  else
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sightseer_Quest_Line_003']))
+  end
+	
+  elseif SV.team_kidnapped.Status == 4 then
+  
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sightseer_Quest_Line_003']))
+  else
+
+  UI:SetSpeaker(chara)
+  local player = CH('PLAYER')
+  GROUND:CharTurnToChar(chara, player)
+  
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sightseer_Line_001']))
+  
+  end
+  
+end
+
 function cliff_camp.NPC_Undergrowth_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
@@ -669,16 +795,6 @@ function cliff_camp.NPC_Deliver_Action(chara, activator)
   end
 end
 
-
-function cliff_camp.NPC_Sightseer_Action(chara, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  UI:SetSpeaker(chara)
-  local player = CH('PLAYER')
-  GROUND:CharTurnToChar(chara, player)
-  
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sightseer_Line_001']))
-end
 
 function cliff_camp.NPC_DexRater_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

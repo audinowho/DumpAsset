@@ -641,6 +641,11 @@ function base_camp.NPC_Unlucky_Action(chara, activator)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Unlucky_Line_001']))
   UI:SetSpeakerEmotion("Sad")
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Unlucky_Line_002']))
+  
+  
+  if SV.Experimental then
+    SV.team_kidnapped.SpokenTo = true
+  end
 end
 
 function base_camp.Statue_Center_Action(obj, activator)

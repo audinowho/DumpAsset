@@ -83,6 +83,17 @@ function canyon_camp.SetupNpcs()
   if SV.team_rivals.Status == 1 then
     GROUND:Unhide("Rival_1")
 	GROUND:Unhide("Rival_2")
+  elseif SV.team_rivals.Status == 2 then
+    GROUND:Unhide("Rival_2")
+	
+	local questname = "QuestRival1"
+    local quest = SV.missions.Missions[questname]
+	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+	  GROUND:Unhide("Rival_1")
+	end
+  elseif SV.team_rivals.Status == 3 then
+    GROUND:Unhide("Rival_1")
+	GROUND:Unhide("Rival_2")
   elseif SV.team_rivals.Status == 8 then
     -- TODO cycling
   end
@@ -272,6 +283,94 @@ end
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
+
+
+  
+function canyon_camp.Rival_1_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+
+  if SV.team_rivals.Status == 1 then
+  
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Line_001']))
+  
+  SV.team_rivals.SpokenTo = true
+  
+  elseif SV.team_rivals.Status == 2 then
+  
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Help_Line_001']))
+  
+    local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_poison_silk")
+  COMMON.GiftItem(player, receive_item)
+  
+  local questname = "QuestRival1"
+  local quest = SV.missions.Missions[questname]
+  quest.Complete = COMMON.MISSION_ARCHIVED
+  SV.missions.FinishedMissions[questname] = quest
+  SV.missions.Missions[questname] = nil
+  
+  SV.team_rivals.Status = 3
+  
+  elseif SV.team_rivals.Status == 3 then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Help_Line_002']))
+  end
+  
+  
+  
+end
+  
+function canyon_camp.Rival_2_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+
+  if SV.team_rivals.Status == 1 then
+  
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Line_001']))
+  
+  SV.team_rivals.SpokenTo = true
+  
+  elseif SV.team_rivals.Status == 2 then
+  
+  local questname = "QuestRival1"
+  local quest = SV.missions.Missions[questname]
+	
+  
+  if quest == nil then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Help_Line_001']))
+	
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "copper_quarry", DestSegment = 0, DestFloor = 6,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("seviper", 0, "normal", Gender.Female),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("zangoose", 0, "normal", Gender.Female) }
+	
+  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Help_Line_002']))
+  else
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Help_Line_003']))
+  end
+  
+  elseif SV.team_rivals.Status == 3 then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Help_Line_003']))
+  end
+  
+end
 
 function canyon_camp.NPC_Seer_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

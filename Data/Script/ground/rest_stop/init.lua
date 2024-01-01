@@ -45,25 +45,18 @@ end
 
 function rest_stop.SetupNpcs()
   
-  if SV.team_rivals.Status == 2 then
-    GROUND:Unhide("Rival_2")
-	
-	local questname = "QuestRival1"
-    local quest = SV.missions.Missions[questname]
-	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
-	  GROUND:Unhide("Rival_1")
-	end
-  elseif SV.team_rivals.Status == 3 then
+  
+  if SV.team_rivals.Status == 4 then
     GROUND:Unhide("Rival_1")
 	GROUND:Unhide("Rival_2")
-  elseif SV.team_rivals.Status == 4 then
+  elseif SV.team_rivals.Status == 5 then
     GROUND:Unhide("Rival_1")
 	local questname = "QuestRival2"
     local quest = SV.missions.Missions[questname]
 	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
 	  GROUND:Unhide("Rival_2")
 	end
-  elseif SV.team_rivals.Status == 5 then
+  elseif SV.team_rivals.Status == 6 then
     GROUND:Unhide("Rival_1")
 	GROUND:Unhide("Rival_2")
   elseif SV.team_rivals.Status == 8 then
@@ -234,6 +227,95 @@ end
 -- Objects Callbacks
 --------------------------------------------------
 
+
+function rest_stop.Rival_1_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+
+  if SV.team_rivals.Status == 4 then
+  
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Line_001']))
+  
+  SV.team_rivals.SpokenTo = true
+  
+  elseif SV.team_rivals.Status == 5 then
+  
+  local questname = "QuestRival2"
+  local quest = SV.missions.Missions[questname]
+	
+  
+  if quest == nil then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Help_Line_001']))
+	
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "thunderstruck_pass", DestSegment = 0, DestFloor = 8,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("zangoose", 0, "normal", Gender.Female),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("seviper", 0, "normal", Gender.Female) }
+	
+  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Help_Line_002']))
+  else
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Help_Line_003']))
+  end
+  
+  elseif SV.team_rivals.Status == 6 then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Help_Line_003']))
+  end
+  
+  
+end
+  
+function rest_stop.Rival_2_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+
+  if SV.team_rivals.Status == 4 then
+  
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Line_001']))
+  
+  SV.team_rivals.SpokenTo = true
+  
+  elseif SV.team_rivals.Status == 5 then
+  
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Help_Line_001']))
+  
+    local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_normal_silk")
+  COMMON.GiftItem(player, receive_item)
+  
+  local questname = "QuestRival2"
+  local quest = SV.missions.Missions[questname]
+  quest.Complete = COMMON.MISSION_ARCHIVED
+  SV.missions.FinishedMissions[questname] = quest
+  SV.missions.Missions[questname] = nil
+  
+  SV.team_rivals.Status = 6
+  
+  elseif SV.team_rivals.Status == 6 then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Help_Line_002']))
+  end
+  
+  
+  
+end
+
+
 function rest_stop.NPC_Dragon_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   rest_stop.DragonTalk()
@@ -322,9 +404,6 @@ function rest_stop.Dragon_Complete()
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_dragon_silk")
   COMMON.GiftItem(player, receive_item)
-  
-  UI:SetSpeaker(dragon1)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Rescue_Line_002']))
   
   local questname = "QuestDragon"
   local quest = SV.missions.Missions[questname]

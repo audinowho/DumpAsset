@@ -49,14 +49,14 @@ function COMMON.UpdateDayEndVars()
 	  end
     end
 	
-
-    if _DATA.Save:GetDungeonUnlock("deserted_fortress") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+	--TODO: should be deserted_fortress
+    if _DATA.Save:GetDungeonUnlock("overgrown_wilds") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortFather"] == nil and SV.missions.FinishedMissions["EscortFather"] == nil then
         SV.missions.Missions["EscortFather"] = 
         {
-          DestZone = "deserted_fortress",
-          DestSegment = 0,
-          DestFloor = 6,
+          DestZone = "overgrown_wilds",
+          DestSegment = 1,
+          DestFloor = 1,
           FloorUnknown = true,
           TargetSpecies = RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male),
@@ -70,14 +70,15 @@ function COMMON.UpdateDayEndVars()
 		SV.family.FatherActiveDays = SV.family.FatherActiveDays + 1
 	  end
     end
-
-    if _DATA.Save:GetDungeonUnlock("barren_tundra") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+	
+	-- TODO: should be barren_tundra
+    if _DATA.Save:GetDungeonUnlock("snowbound_path") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortBrother"] == nil and SV.missions.FinishedMissions["EscortBrother"] == nil then
         SV.missions.Missions["EscortBrother"] = 
         {
-          DestZone = "barren_tundra",
-          DestSegment = 0,
-          DestFloor = 10,
+          DestZone = "snowbound_path",
+          DestSegment = 1,
+          DestFloor = 1,
           FloorUnknown = true,
           TargetSpecies = RogueEssence.Dungeon.MonsterID("wooper", 0, "normal", Gender.Male),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("wooper", 0, "normal", Gender.Male),
@@ -92,14 +93,14 @@ function COMMON.UpdateDayEndVars()
 	  end
     end
 	
-
-    if _DATA.Save:GetDungeonUnlock("wayward_wetlands") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+	-- TODO: should be wayward_wetlands
+    if _DATA.Save:GetDungeonUnlock("veiled_ridge") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortPet"] == nil and SV.missions.FinishedMissions["EscortPet"] == nil then
         SV.missions.Missions["EscortPet"] = 
         {
-          DestZone = "wayward_wetlands",
-          DestSegment = 0,
-          DestFloor = 10,
+          DestZone = "veiled_ridge",
+          DestSegment = 1,
+          DestFloor = 1,
           FloorUnknown = true,
           TargetSpecies = RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male),
@@ -114,13 +115,14 @@ function COMMON.UpdateDayEndVars()
 	  end
     end
 
-    if _DATA.Save:GetDungeonUnlock("the_sky") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+	-- TODO: should be the_sky
+    if _DATA.Save:GetDungeonUnlock("champions_road") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortGrandma"] == nil and SV.missions.FinishedMissions["EscortGrandma"] == nil then
         SV.missions.Missions["EscortGrandma"] = 
         {
-          DestZone = "the_sky",
-          DestSegment = 0,
-          DestFloor = 15,
+          DestZone = "champions_road",
+          DestSegment = 1,
+          DestFloor = 1,
           FloorUnknown = true,
           TargetSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male),
@@ -197,13 +199,15 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.team_rivals, 1)
   elseif SV.team_rivals.Status == 3 then
     COMMON.UpdateCheckpointStatus(SV.team_rivals, 1)
-  elseif SV.team_rivals.Status == 5 then
-    COMMON.UpdateCheckpointStatus(SV.team_rivals, 1)
-  elseif SV.team_rivals.Status == 6 and SV.guildmaster_summit.GameComplete then
-    COMMON.UpdateCheckpointStatus(SV.team_rivals, 4)
-  elseif SV.team_rivals.Status == 7 and SV.team_rivals.SpokenTo then
+  elseif SV.team_rivals.Status == 4 then
     COMMON.UpdateCheckpointStatus(SV.team_rivals, 1)
   elseif SV.team_rivals.Status == 6 then
+    COMMON.UpdateCheckpointStatus(SV.team_rivals, 1)
+  elseif SV.team_rivals.Status == 7 and SV.guildmaster_summit.GameComplete then
+    COMMON.UpdateCheckpointStatus(SV.team_rivals, 4)
+  elseif SV.team_rivals.Status == 8 and SV.team_rivals.SpokenTo then
+    COMMON.UpdateCheckpointStatus(SV.team_rivals, 1)
+  elseif SV.team_rivals.Status == 9 then
 	SV.team_rivals.Cycle = math.random(1, 6)
   end
   
@@ -211,7 +215,8 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
   elseif SV.team_kidnapped.Status == 1 and SV.team_kidnapped.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
-  elseif SV.team_kidnapped.Status == 2 and SV.team_kidnapped.SpokenTo and _DATA.Save:GetDungeonUnlock("oblivion_valley") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+	-- TODO: should be oblivion valley
+  elseif SV.team_kidnapped.Status == 2 and SV.team_kidnapped.SpokenTo and _DATA.Save:GetDungeonUnlock("secret_garden") ~= RogueEssence.Data.GameProgress.UnlockState.None then
     COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
   elseif SV.team_kidnapped.Status == 4 then
     COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)

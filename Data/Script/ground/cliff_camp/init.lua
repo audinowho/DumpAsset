@@ -79,10 +79,10 @@ function cliff_camp.SetupNpcs()
     -- TODO cycling
   end
   
-  if SV.team_rivals.Status == 0 then
+  if SV.Experimental and SV.team_rivals.Status == 0 then
     GROUND:Unhide("Rival_1")
 	GROUND:Unhide("Rival_2")
-  elseif SV.team_rivals.Status == 8 then
+  elseif SV.team_rivals.Status == 9 then
     -- TODO cycling
   end
   
@@ -497,6 +497,17 @@ function cliff_camp.Rival_1_Action(chara, activator)
   
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Line_001']))
+  
+  SV.team_rivals.SpokenTo = true
+end
+  
+function cliff_camp.Rival_2_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Line_001']))
+  
+  SV.team_rivals.SpokenTo = true
 end
   
 function cliff_camp.NPC_Monk_Action(chara, activator)

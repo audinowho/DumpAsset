@@ -58,10 +58,10 @@ end
 --------------------------------------------------
 function final_stop.SetupNpcs()
   
-  if SV.team_rivals.Status == 6 then
+  if SV.team_rivals.Status == 7 then
     GROUND:Unhide("Rival_1")
 	GROUND:Unhide("Rival_2")
-  elseif SV.team_rivals.Status == 8 then
+  elseif SV.team_rivals.Status == 9 then
     -- TODO cycling
   end
 
@@ -187,6 +187,24 @@ end
 -- Objects Callbacks
 --------------------------------------------------
 
+  
+function final_stop.Rival_1_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Line_001']))
+  
+  SV.team_rivals.SpokenTo = true
+end
+  
+function final_stop.Rival_2_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Line_001']))
+  
+  SV.team_rivals.SpokenTo = true
+end
 
 function final_stop.NPC_Dragon_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

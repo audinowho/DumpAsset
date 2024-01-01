@@ -184,9 +184,9 @@ function COMMON.UpdateDayEndVars()
   if SV.team_catch.Status == 0 and SV.team_catch.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_catch, 1)
   elseif SV.team_catch.Status == 1 and SV.team_catch.SpokenTo and SV.forest_camp.ExpositionComplete then
-    COMMON.UpdateCheckpointStatus(SV.team_catch, 1)
-  elseif SV.team_catch.Status == 2 and SV.team_catch.SpokenTo and SV.cliff_camp.ExpositionComplete then
     COMMON.UpdateCheckpointStatus(SV.team_catch, 2)
+  elseif SV.team_catch.Status == 2 and SV.team_catch.SpokenTo and _DATA.Save:GetDungeonUnlock("overgrown_wilds") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+    COMMON.UpdateCheckpointStatus(SV.team_catch, 1)
   elseif SV.team_catch.Status == 4 then
     COMMON.UpdateCheckpointStatus(SV.team_catch, 1)
   elseif SV.team_catch.Status == 5 then

@@ -313,6 +313,63 @@ function forest_camp.NPC_Deliver_Action(chara, activator)
 end
 
 
+function forest_camp.NPC_Elder_Action(chara, activator)
+  
+  if SV.town_elder.Status == 1 then
+  
+  local questname = "QuestGround"
+  local quest = SV.missions.Missions[questname]
+  
+  if quest == nil then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Line_001']))
+	
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "ambush_forest", DestSegment = 0, DestFloor = 11,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("mightyena", 0, "normal", Gender.Male) }
+	
+  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Line_002']))
+  else
+    forest_camp.Ground_Complete()
+  end
+  
+  elseif SV.town_elder.Status == 2 then
+    
+	UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Complete_Line_002']))
+  end
+  
+end
+
+function forest_camp.Ground_Complete()
+  local broke = CH('NPC_Elder')
+  local player = CH('PLAYER')
+  
+  GROUND:CharTurnToChar(broke,player)
+  
+  UI:SetSpeaker(broke)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Complete_Line_001']))
+  
+  local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_ground_silk")
+  COMMON.GiftItem(player, receive_item)
+  
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Complete_Line_002']))
+  
+  local questname = "QuestGround"
+  local quest = SV.missions.Missions[questname]
+  quest.Complete = COMMON.MISSION_ARCHIVED
+  SV.missions.FinishedMissions[questname] = quest
+  SV.missions.Missions[questname] = nil
+  
+  SV.town_elder.Status = 2
+end
+
 function forest_camp.Speedster_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   local player = CH('PLAYER')
@@ -348,6 +405,21 @@ end
 function forest_camp.NPC_Camps_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  
+  if SV.forest_child.Status == 0 then
+    forest_camp.Talk_Camps()
+  elseif SV.forest_child.Status == 1 then
+    forest_camp.Sick_Child_Action()
+  elseif SV.forest_child.Status == 2 then
+    forest_camp.Sick_Child_Action()
+  elseif SV.forest_child.Status == 3 then
+    forest_camp.Talk_Camps()
+  end
+  
+end
+
+function forest_camp.Talk_Camps()
+  local chara = CH('NPC_Camps')
   local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("faded_trail")
   local ground = _DATA:GetGround("cliff_camp")
   
@@ -359,22 +431,32 @@ end
 function forest_camp.NPC_Parent_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  forest_camp.Parent_Child_Action()
+  if SV.forest_child.Status == 0 then
+    forest_camp.Parent_Child()
+  elseif SV.forest_child.Status == 1 then
+    forest_camp.Sick_Child()
+  elseif SV.forest_child.Status == 2 then
+    forest_camp.Sick_Child()
+  elseif SV.forest_child.Status == 3 then
+    forest_camp.Parent_Child()
+  end
 end
 
 function forest_camp.NPC_Child_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  forest_camp.Parent_Child_Action()
+  forest_camp.Parent_Child()
 end
 
 
-function forest_camp.Parent_Child_Action()
+function forest_camp.Parent_Child()
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   local parent = CH('NPC_Parent')
   local child = CH('NPC_Child')
   local player = CH('PLAYER')
+  
+  if SV.forest_child.Status == 0 then
   
   GROUND:CharTurnToChar(player, child)
   UI:SetSpeaker(child)
@@ -382,8 +464,142 @@ function forest_camp.Parent_Child_Action()
   GROUND:CharTurnToChar(player, parent)
   UI:SetSpeaker(parent)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Parent_Child_Line_002']))
+  
+  elseif SV.forest_child.Status == 1 then
+  
+  GROUND:CharTurnToChar(player, child)
+  UI:SetSpeaker(parent)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Cure_Line_004']))
+  GROUND:CharTurnToChar(player, parent)
+  UI:SetSpeaker(child)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Cure_Line_005']))
+  
+  end
 end
 
+function forest_camp.Sick_Child()
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  if SV.forest_child.Status == 1 then
+  
+  local questname = "QuestGrass"
+  local quest = SV.missions.Missions[questname]
+  
+  if quest == nil then
+	local parent = CH('NPC_Parent')
+	local camps = CH('NPC_Camps')
+	local player = CH('PLAYER')
+
+	UI:SetSpeaker(parent)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sickness_Line_001']))
+
+	UI:SetSpeaker(camps)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sickness_Line_002']))
+
+	GROUND:CharTurnToChar(player, camps)
+	GROUND:CharTurnToChar(player, parent)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sickness_Line_003']))
+
+	
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "sickly_hollow", DestSegment = 0, DestFloor = 8,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("sunflora", 0, "normal", Gender.Male) }
+	
+  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+    local camps = CH('NPC_Camps')
+    UI:SetSpeaker(camps)
+    GROUND:CharTurnToChar(camps,CH('PLAYER'))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sickness_Line_004']))
+  else
+    forest_camp.Grass_Complete()
+  end
+  
+  elseif SV.forest_child.Status == 2 then
+    
+    local parent = CH('NPC_Parent')
+    UI:SetSpeaker(parent)
+    GROUND:CharTurnToChar(parent,CH('PLAYER'))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Cure_Line_003']))
+  end
+end
+
+function forest_camp.Grass_Complete()
+	local parent = CH('NPC_Parent')
+	local camps = CH('NPC_Camps')
+	local player = CH('PLAYER')
+  
+  GROUND:CharTurnToChar(parent,player)
+  GROUND:CharTurnToChar(camps,player)
+  
+  UI:SetSpeaker(camps)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Cure_Line_001']))
+  
+  UI:SetSpeaker(parent)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Cure_Line_002']))
+  
+  local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_grass_silk")
+  COMMON.GiftItem(player, receive_item)
+  
+  local questname = "QuestGrass"
+  local quest = SV.missions.Missions[questname]
+  quest.Complete = COMMON.MISSION_ARCHIVED
+  SV.missions.FinishedMissions[questname] = quest
+  SV.missions.Missions[questname] = nil
+  
+  SV.forest_child.Status = 2
+end
+
+
+function forest_camp.NPC_Catch_1_Action(chara, activator)
+  DEBUG.EnableDbgCoro()
+  
+  forest_camp.Catch_Action()
+end
+
+function forest_camp.NPC_Catch_2_Action(chara, activator)
+  DEBUG.EnableDbgCoro()
+  forest_camp.Catch_Action()
+  
+end
+
+function forest_camp.Catch_Action()
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local catch1 = CH('NPC_Catch_1')
+  local catch2 = CH('NPC_Catch_2')
+  local player = CH('PLAYER')
+  local itemAnim = nil
+  
+  GROUND:CharTurnToChar(player, catch1)
+  UI:SetSpeaker(catch1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_001']))
+  SOUND:PlayBattleSE("DUN_Throw_Start")
+  GROUND:CharSetAnim(catch1, "Rotate", false)
+  GAME:WaitFrames(18)
+  SOUND:PlayBattleSE("DUN_Throw_Arc")
+  itemAnim = RogueEssence.Content.ItemAnim(catch1.Bounds.Center, catch2.Bounds.Center, "Rock_Gray", 48, 1)
+  GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
+  
+  GROUND:CharTurnToChar(player, catch2)
+  GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
+	
+  SOUND:PlayBattleSE("DUN_Equip")
+  UI:SetSpeaker(catch2)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_002']))
+  SOUND:PlayBattleSE("DUN_Throw_Start")
+  GROUND:CharSetAnim(catch2, "Rotate", false)
+  GAME:WaitFrames(18)
+  SOUND:PlayBattleSE("DUN_Throw_Arc")
+  itemAnim = RogueEssence.Content.ItemAnim(catch2.Bounds.Center, catch1.Bounds.Center, "Rock_Gray", 48, 1)
+  GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
+  
+  GROUND:CharTurnToChar(player, catch1)
+  GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
+  
+  SOUND:PlayBattleSE("DUN_Equip")
+end
 
 
 function forest_camp.Teammate1_Action(chara, activator)

@@ -283,6 +283,186 @@ function cliff_camp.Teammate3_Action(chara, activator)
   COMMON.GroundInteract(activator, chara, true)
 end
 
+
+function cliff_camp.NPC_Broke_Action(chara, activator)
+  
+  if SV.team_hunter.Status == 1 then
+  
+  local questname = "QuestDark"
+  local quest = SV.missions.Missions[questname]
+  
+  if quest == nil then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_001']))
+	
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("mightyena", 0, "normal", Gender.Male) }
+	
+  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_002']))
+  else
+    cliff_camp.Dark_Complete()
+  end
+  
+  elseif SV.team_hunter.Status == 2 then
+    
+	UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_004']))
+  elseif SV.team_hunter.Status == 3 then
+    
+	--TODO: cycling
+  end
+  
+end
+
+function cliff_camp.Dark_Complete()
+  local broke = CH('NPC_Broke')
+  local player = CH('PLAYER')
+  
+  GROUND:CharTurnToChar(broke,player)
+  
+  UI:SetSpeaker(broke)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_003']))
+  
+  local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_dark_silk")
+  COMMON.GiftItem(player, receive_item)
+  
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_004']))
+  
+  local questname = "QuestDark"
+  local quest = SV.missions.Missions[questname]
+  quest.Complete = COMMON.MISSION_ARCHIVED
+  SV.missions.FinishedMissions[questname] = quest
+  SV.missions.Missions[questname] = nil
+  
+  SV.team_hunter.Status = 2
+end
+
+
+function cliff_camp.NPC_Catch_1_Action(chara, activator)
+  DEBUG.EnableDbgCoro()
+  
+  cliff_camp.Catch_Action()
+end
+
+function cliff_camp.NPC_Catch_2_Action(chara, activator)
+  DEBUG.EnableDbgCoro()
+  
+  cliff_camp.Catch_Action()
+end
+
+function cliff_camp.Catch_Action()
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local questname = "QuestNormal"
+  local quest = SV.missions.Missions[questname]
+  
+  if quest == nil then
+    cliff_camp.Catch_Trouble()
+	
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "overgrown_wilds", DestSegment = 0, DestFloor = 6,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("rattata", 0, "normal", Gender.Male) }
+	
+  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+    local catch1 = CH('NPC_Catch_1')
+    local catch2 = CH('NPC_Catch_2')
+	UI:SetSpeaker(catch1)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_005']))
+	UI:SetSpeaker(catch2)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_006']))
+  else
+    cliff_camp.Catch_Complete()
+  end
+end
+  
+
+function cliff_camp.Catch_Trouble()
+
+  local catch1 = CH('NPC_Catch_1')
+  local catch2 = CH('NPC_Catch_2')
+  local player = CH('PLAYER')
+  local itemAnim = nil
+  
+  GROUND:CharTurnToChar(player, catch1)
+  UI:SetSpeaker(catch1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_001']))
+  SOUND:PlayBattleSE("DUN_Throw_Start")
+  GROUND:CharSetAnim(catch1, "Rotate", false)
+  GAME:WaitFrames(18)
+  SOUND:PlayBattleSE("DUN_Throw_Arc")
+  itemAnim = RogueEssence.Content.ItemAnim(catch1.Bounds.Center, catch2.Bounds.Center, "Stone_White", 48, 1)
+  GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
+  
+  GROUND:CharTurnToChar(player, catch2)
+  GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
+	
+  SOUND:PlayBattleSE("_UNK_EVT_012")
+  
+  itemAnim = RogueEssence.Content.ItemAnim(catch2.Bounds.Center, catch1.Bounds.Center, "Stone_White", 48, 1)
+  GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
+  
+  UI:SetSpeaker(catch2)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_002']))
+  
+  GAME:WaitFrames(30)
+  
+  GROUND:TeleportTo(catch1, 420, 400, Direction.Down)
+  GROUND:TeleportTo(catch2, 440, 384, Direction.Down)
+  
+  UI:SetSpeaker(catch1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_003']))
+  
+  UI:SetSpeaker(catch2)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_004']))
+end
+
+
+
+function cliff_camp.Catch_Complete()
+
+  local catch1 = CH('NPC_Catch_1')
+  local catch2 = CH('NPC_Catch_2')
+  local player = CH('PLAYER')
+  
+  GROUND:CharTurnToChar(catch1, player)
+  GROUND:CharTurnToChar(catch2, player)
+  
+  UI:SetSpeaker(catch1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Done_Line_001']))
+  
+  UI:SetSpeaker(catch2)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Done_Line_002']))
+  
+  UI:SetSpeaker(catch1)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Done_Line_003']))
+  
+  
+  local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_normal_silk")
+  COMMON.GiftItem(player, receive_item)
+  
+  UI:SetSpeaker(catch2)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Done_Line_004']))
+  
+  GROUND:Hide("NPC_Catch_1")
+  GROUND:Hide("NPC_Catch_2")
+  
+  local questname = "QuestNormal"
+  local quest = SV.missions.Missions[questname]
+  quest.Complete = COMMON.MISSION_ARCHIVED
+  SV.missions.FinishedMissions[questname] = quest
+  SV.missions.Missions[questname] = nil
+  
+end
+
 function cliff_camp.NPC_Undergrowth_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player

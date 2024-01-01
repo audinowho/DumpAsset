@@ -58,7 +58,7 @@ function rest_stop.SetupNpcs()
 	GROUND:Unhide("Rival_2")
   elseif SV.team_rivals.Status == 4 then
     GROUND:Unhide("Rival_1")
-	local questname = "QuestRival4"
+	local questname = "QuestRival2"
     local quest = SV.missions.Missions[questname]
 	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
 	  GROUND:Unhide("Rival_2")
@@ -274,7 +274,7 @@ function rest_stop.DragonTalk()
       UI:SetSpeaker(dragon3)
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_001']))
 	  
-	  SV.missions.Missions["QuestDragon"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
       DestZone = "snowbound_path", DestSegment = 0, DestFloor = 14,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("charizard", 0, "normal", Gender.Male),
@@ -329,8 +329,8 @@ function rest_stop.Dragon_Complete()
   local questname = "QuestDragon"
   local quest = SV.missions.Missions[questname]
   quest.Complete = COMMON.MISSION_ARCHIVED
-  SV.missions.FinishedMissions["QuestDragon"] = quest
-  SV.missions.Missions["QuestDragon"] = nil
+  SV.missions.FinishedMissions[questname] = quest
+  SV.missions.Missions[questname] = nil
   
   SV.team_dragon.Status = 4
 end
@@ -485,7 +485,7 @@ function rest_stop.Rock_Boss(chara, activator)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rock_Boss_Line_001']))
 	
-	SV.missions.Missions["QuestRock"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
       DestZone = "veiled_ridge", DestSegment = 0, DestFloor = 10,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("exploud", 0, "normal", Gender.Male),
@@ -593,8 +593,8 @@ function rest_stop.Rock_Complete()
   local questname = "QuestRock"
   local quest = SV.missions.Missions[questname]
   quest.Complete = COMMON.MISSION_ARCHIVED
-  SV.missions.FinishedMissions["QuestRock"] = quest
-  SV.missions.Missions["QuestRock"] = nil
+  SV.missions.FinishedMissions[questname] = quest
+  SV.missions.Missions[questname] = nil
   
   SV.rest_stop.BossSolved = true
 end

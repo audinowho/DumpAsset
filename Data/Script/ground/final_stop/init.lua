@@ -354,7 +354,7 @@ function final_stop.NPC_Seer_Action(chara, activator)
       GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Help_Line_001']))
 	
-	  SV.missions.Missions["QuestFire"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
         DestZone = "snowbound_path", DestSegment = 0, DestFloor = 10,
         FloorUnknown = false,
         TargetSpecies = RogueEssence.Dungeon.MonsterID("typhlosion", 1, "normal", Gender.Male),
@@ -433,8 +433,8 @@ function final_stop.Fire_Complete()
   local questname = "QuestFire"
   local quest = SV.missions.Missions[questname]
   quest.Complete = COMMON.MISSION_ARCHIVED
-  SV.missions.FinishedMissions["QuestFire"] = quest
-  SV.missions.Missions["QuestFire"] = nil
+  SV.missions.FinishedMissions[questname] = quest
+  SV.missions.Missions[questname] = nil
   
   SV.team_firecracker.Status = 4
 end

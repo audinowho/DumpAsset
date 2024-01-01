@@ -100,8 +100,13 @@ function base_camp_2.SetupNpcs()
 
   
   if SV.base_town.JuiceShop == 1 then
-	local juice = CH('Juice_Owner')
-	GROUND:TeleportTo(juice, 576, 160, Direction.Down)
+    
+	local questname = "QuestBug"
+    local quest = SV.missions.Missions[questname]
+	if quest == nil then
+	  local juice = CH('Juice_Owner')
+	  GROUND:TeleportTo(juice, 576, 160, Direction.Down)
+	end
   end
 
   if SV.team_hunter.Status == 0 then
@@ -341,6 +346,10 @@ function base_camp_2.NPC_Broke_Action(chara, activator)
   SOUND:PlayBattleSE("EVT_Emote_Sweating")
   UI:SetSpeakerEmotion("Crying")
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_002']))
+  
+  if SV.Experimental then
+    SV.team_hunter.SpokenTo = true
+  end
 end
 
 
@@ -357,6 +366,13 @@ function base_camp_2.NPC_Elder_Action(chara, activator)
   UI:SetSpeaker(chara)
 
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Line_001']))
+  
+  if SV.Experimental then
+    SV.town_elder.SpokenTo = true
+  end
+  
+  --TODO: make him do something else after his mission?
+  
 end
 
 
@@ -462,6 +478,8 @@ function base_camp_2.Catch_Action()
   SOUND:PlayBattleSE("DUN_Equip")
   UI:SetSpeaker(catch1)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_005']))
+  
+  -- TODO cycling
 end
 
 base_camp_2.difficulty_tbl = { }
@@ -1511,14 +1529,81 @@ function base_camp_2.Music_Action(obj, activator)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Music_End']))
 end
 
-
 function base_camp_2.Juice_Action(obj, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   local chara = CH('Juice_Owner')
-  UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Intro']))
-  UI:WaitShowDialogue(STRINGS:Format("We're not open right now...[pause=0] Come back later."))
+  base_camp_2.Juice_Owner_Action(chara, activator)
 end
+
+function base_camp_2.Juice_Owner_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  if SV.base_town.JuiceShop == 0 then
+    UI:SetSpeaker(chara)
+  
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Intro']))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Setup']))
+  elseif SV.base_town.JuiceShop == 1 then
+  
+  local questname = "QuestBug"
+  local quest = SV.missions.Missions[questname]
+  
+  if quest == nil then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_001']))
+	
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "bramble_woods", DestSegment = 0, DestFloor = 4,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("shuckle", 0, "normal", Gender.Male) }
+	
+  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_002']))
+  else
+    base_camp_2.Bug_Complete()
+  end
+  
+  elseif SV.base_town.JuiceShop >= 2 then
+    base_camp_2.Juice_Shop(obj, activator)
+
+  end
+  
+end
+
+function base_camp_2.Bug_Complete()
+  local juice = CH('Juice_Owner')
+  local player = CH('PLAYER')
+  
+  GROUND:CharTurnToChar(juice,player)
+  
+  UI:SetSpeaker(juice)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_003']))
+  
+  local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_bug_silk")
+  COMMON.GiftItem(player, receive_item)
+  
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_004']))
+  
+  local questname = "QuestBug"
+  local quest = SV.missions.Missions[questname]
+  quest.Complete = COMMON.MISSION_ARCHIVED
+  SV.missions.FinishedMissions[questname] = quest
+  SV.missions.Missions[questname] = nil
+  
+  SV.base_town.JuiceShop = 2
+end
+
+function base_camp_2.Juice_Shop(obj, activator)
+  local chara = CH('Juice_Owner')
+  
+	UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Intro']))
+	UI:WaitShowDialogue(STRINGS:Format("[MENU GOES HERE]"))
+end
+
 
 function base_camp_2.West_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

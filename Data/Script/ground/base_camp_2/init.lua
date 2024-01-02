@@ -383,6 +383,10 @@ function base_camp_2.NPC_Solo_Action(chara, activator)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_001']))
   UI:SetSpeakerEmotion("Worried")
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_002']))
+  
+  
+  SV.team_solo.SpokenTo = true
+  
 end
 
 

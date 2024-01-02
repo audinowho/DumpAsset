@@ -675,6 +675,18 @@ function cliff_camp.Electric_Complete()
   SV.team_retreat.Status = 3
 end
 
+function cliff_camp.NPC_Solo_Action(chara, activator)
+  
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_001']))
+  
+  GROUND:Hide("NPC_Solo")
+  
+  SV.team_solo.SpokenTo = true
+  
+end
+
 
 function cliff_camp.NPC_Undergrowth_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

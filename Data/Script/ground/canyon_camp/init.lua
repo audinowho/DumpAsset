@@ -124,16 +124,22 @@ function canyon_camp.SetupNpcs()
   
   if SV.team_solo.Status == 3 and SV.team_solo.SpokenTo == false then
     GROUND:Unhide("NPC_Solo")
+	local solo = CH('NPC_Solo')
+	GROUND:TeleportTo(solo, 1064, 400, Direction.Right)
   elseif SV.team_solo.Status == 4 then
 	local questname = "QuestWater"
     local quest = SV.missions.Missions[questname]
 	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
 	  GROUND:Unhide("NPC_Solo")
+	else
+	  local shortcut = CH('NPC_Shortcut')
+	  GROUND:TeleportTo(shortcut, 912, 384, Direction.Right)
 	end
   elseif SV.team_solo.Status == 5 then
     GROUND:Unhide("NPC_Solo")
   elseif SV.team_solo.Status == 6 then
     -- TODO cycling
+    GROUND:Unhide("NPC_Solo")
   end
   
   if SV.team_psychic.Status == 0 or SV.team_psychic.Status == 1 then
@@ -885,6 +891,96 @@ function canyon_camp.Fighting_Complete()
   SV.team_meditate.Status = 4
 end
 
+
+  
+function canyon_camp.NPC_Shortcut_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+  
+  if SV.team_solo.Status < 4 then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Line_001']))
+  elseif SV.team_solo.Status == 4 then
+
+  local questname = "QuestWater"
+  local quest = SV.missions.Missions[questname]
+	
+  if quest == nil then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Quest_Line_001'], days))
+	
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "forsaken_desert", DestSegment = 0, DestFloor = 0,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("prinplup", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("floatzel", 0, "normal", Gender.Male) }
+	
+  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Quest_Line_002'], days))
+  else
+    canyon_camp.Water_Complete()
+  end
+
+  elseif SV.team_solo.Status == 5 then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Line_002']))
+  elseif SV.team_solo.Status == 6 then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Line_002']))
+  end
+end
+
+function canyon_camp.NPC_Solo_Action(chara, activator)
+  
+  
+  if SV.team_solo.Status == 3 then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_001']))
+	GROUND:Hide("NPC_Solo")
+    SV.team_solo.SpokenTo = true
+  elseif SV.team_solo.Status == 4 then
+    canyon_camp.Water_Complete()
+  elseif SV.team_solo.Status == 5 then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_002']))
+  elseif SV.team_solo.Status == 6 then
+    --TODO: cycle?
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_002']))
+  end
+end
+
+
+function canyon_camp.Water_Complete()
+  local shortcut = CH('NPC_Shortcut')
+  local solo = CH('NPC_Solo')
+  local player = CH('PLAYER')
+  
+  UI:SetSpeaker(shortcut)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Complete_Line_001']))
+  
+  UI:SetSpeaker(solo)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Complete_Line_002']))
+  
+  local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_water_silk")
+  COMMON.GiftItem(player, receive_item)
+  
+  
+  UI:SetSpeaker(shortcut)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Complete_Line_003']))
+  
+  UI:SetSpeaker(solo)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Complete_Line_004']))
+  
+  COMMON.CompleteMission("QuestWater")
+  
+  SV.team_solo.Status = 5
+end
+
 function canyon_camp.NPC_Seeker_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
@@ -918,14 +1014,6 @@ function canyon_camp.NPC_Hidden_Action(chara, activator)
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hidden_Line_002']))
   UI:SetSpeakerEmotion("Pain")
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hidden_Line_003']))
-end
-  
-function canyon_camp.NPC_Shortcut_Action(chara, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  local player = CH('PLAYER')
-  UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Line_001']))
 end
   
 function canyon_camp.NPC_NextCamp_Action(chara, activator)

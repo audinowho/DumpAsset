@@ -619,6 +619,19 @@ function forest_camp.NPC_Unlucky_Action(chara, activator)
   end
 end
 
+function forest_camp.NPC_Solo_Action(chara, activator)
+  
+  UI:SetSpeaker(chara)
+
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_001']))
+  
+  GROUND:Hide("NPC_Solo")
+  
+  SV.team_solo.SpokenTo = true
+  
+end
+
+
 function forest_camp.Teammate1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   COMMON.GroundInteract(activator, chara, true)

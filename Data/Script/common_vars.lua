@@ -267,8 +267,8 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.team_solo, 2)
   elseif SV.team_solo.Status == 5 then
     COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
-  elseif SV.team_dragon.Status == 6 then
-	SV.team_dragon.Cycle = math.random(3, 6)
+  elseif SV.team_solo.Status == 6 then
+	SV.team_solo.Cycle = math.random(3, 6)
   end
   
   if SV.team_psychic.Status == 0 and _DATA.Save:GetDungeonUnlock("sleeping_caldera") == RogueEssence.Data.GameProgress.UnlockState.Completed then

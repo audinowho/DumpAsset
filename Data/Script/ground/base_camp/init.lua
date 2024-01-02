@@ -83,6 +83,9 @@ function base_camp.SetupNpcs()
   GROUND:Unhide("NPC_Coast")
   GROUND:Unhide("NPC_Entrance")
   
+  --Wingull: 344, 264
+  --Noctowl: 64, 252
+  --Luxio: 104, 252
   
   if SV.team_catch.Status == 1 then
     GROUND:Unhide("NPC_Catch_1")

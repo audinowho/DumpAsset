@@ -591,6 +591,24 @@ function final_stop.NPC_Deliver_Action(chara, activator)
   end
 end
 
+
+
+function final_stop.NPC_Secluded_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Secluded_Line_001']))
+end
+
+function final_stop.NPC_Forbidden_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
+  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+  
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Forbidden_Line_001']))
+end
+
 function final_stop.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   

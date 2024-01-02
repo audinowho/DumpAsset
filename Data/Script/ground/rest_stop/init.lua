@@ -663,6 +663,115 @@ function rest_stop.Rock_Complete()
   SV.rest_stop.BossSolved = true
 end
 
+
+function rest_stop.NPC_Strategy_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+  
+  if SV.team_psychic.Status == 2 then
+  
+    if SV.team_psychic.SpokenTo then
+      UI:SetSpeaker(chara)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Line_002']))
+	else
+      rest_stop.Separate()
+	end
+	
+  elseif SV.team_psychic.Status == 6 then
+    --cycle?
+  end
+end
+
+function rest_stop.NPC_Goals_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+  
+  if SV.team_psychic.Status == 2 then
+  
+    if SV.team_psychic.SpokenTo then
+      UI:SetSpeaker(chara)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Line_002']))
+	else
+      rest_stop.Separate()
+	end
+	
+  elseif SV.team_dark.Status == 1 then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Line_003']))
+	
+  elseif SV.team_dark.Status == 3 then
+    
+  local questname = "QuestIce"
+  local quest = SV.missions.Missions[questname]
+	
+  if quest == nil then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Help_Line_001']))
+	
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "treacherous_mountain", DestSegment = 0, DestFloor = 9,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("ninetales", 1, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("sneasel", 0, "normal", Gender.Male) }
+	
+  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Help_Line_002']))
+  else
+    rest_stop.Ice_Complete()
+  end
+	
+  elseif SV.team_dark.Status == 4 then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Line_004']))
+	
+  elseif SV.team_dark.Status == 5 then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Line_004']))
+	
+  end
+end
+
+function rest_stop.Separate()
+  local strategy = CH('NPC_Strategy')
+  local goals = CH('NPC_Goals')
+  local player = CH('PLAYER')
+  
+  UI:SetSpeaker(strategy)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Line_001']))
+  
+  UI:SetSpeaker(goals)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Line_001']))
+  
+  UI:SetSpeaker(strategy)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Line_002']))
+  
+  UI:SetSpeaker(goals)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Line_002']))
+  
+  SV.team_psychic.SpokenTo = true
+end
+
+function rest_stop.Ice_Complete()
+  local goals = CH('NPC_Goals')
+  local player = CH('PLAYER')
+  
+  UI:SetSpeaker(goals)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Done_Line_001']))
+  
+  local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_ice_silk")
+  COMMON.GiftItem(player, receive_item)
+  
+  
+  COMMON.CompleteMission("QuestIce")
+  
+  SV.team_dark.Status = 5
+end
+
 function rest_stop.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   

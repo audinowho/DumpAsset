@@ -277,8 +277,9 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
   elseif SV.team_psychic.Status == 2 and SV.team_psychic.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
-  elseif SV.team_psychic.Status == 3 and SV.team_psychic.SpokenTo then
-    COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
+    COMMON.UpdateCheckpointStatus(SV.team_dark, 1)
+  elseif SV.team_psychic.Status == 3 and _DATA.Save:GetDungeonUnlock("relic_tower") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+    COMMON.UpdateCheckpointStatus(SV.team_psychic, 2)
   elseif SV.team_psychic.Status == 5 then
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
   elseif SV.team_psychic.Status == 6 then

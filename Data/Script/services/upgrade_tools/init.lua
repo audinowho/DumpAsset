@@ -359,7 +359,7 @@ function UpgradeTools:OnUpgrade()
   if SV.team_dark == nil then
 	SV.team_dark =
 	{
-	  GoalStatus = 0,
+	  Status = 0,
 	  SpokenTo = false,
 	  DaysSinceCheckpoint = 0,
 	  Cycle = 0

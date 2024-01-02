@@ -1,8 +1,13 @@
 ﻿require 'common'
 require 'mission_gen'
+require 'menu.SkillSelectMenu'
+require 'menu.SkillTutorMenu'
 
 local base_camp_2 = {}
 local MapStrings = {}
+--------------------------------------------------
+-- Map Callbacks
+--------------------------------------------------
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
@@ -43,7 +48,6 @@ function base_camp_2.Init(map)
     COMMON.CreateWalkArea("Assembly" .. tostring(14), 72, 264, 64, 64)
     COMMON.CreateWalkArea("Assembly" .. tostring(19), 400, 592, 56, 48)
     COMMON.CreateWalkArea("Assembly" .. tostring(22), 728, 352, 64, 48)
-    COMMON.CreateWalkArea("Assembly" .. tostring(23), 584, 608, 72, 56)
 
     COMMON.CreateWalkArea("NPC_Food", 144, 592, 32, 32)
     COMMON.CreateWalkArea("NPC_Settling", 344, 288, 48, 48)
@@ -79,11 +83,12 @@ function base_camp_2.Enter(map)
     --GROUND:Hide("Mission_Board")
     GROUND:Hide("Locator")
     GROUND:Hide("Locator_Owner")
-    
+
+
     if SV.TemporaryFlags.MissionCompleted then
         base_camp_2.Hand_In_Missions()
     end
-
+    
     base_camp_2.SetupNpcs()
 
     GAME:FadeIn(20)
@@ -94,16 +99,47 @@ end
 
 function base_camp_2.SetupNpcs()
     GROUND:Unhide("NPC_Food")
-    GROUND:Unhide("NPC_Mother")
-    GROUND:Unhide("NPC_Father")
-    GROUND:Unhide("NPC_Catch_1")
-    GROUND:Unhide("NPC_Catch_2")
-    GROUND:Unhide("NPC_Elder")
-    GROUND:Unhide("NPC_History")
+    GROUND:Unhide("NPC_Queen")
+    GROUND:Unhide("NPC_King")
+
+
     GROUND:Unhide("NPC_Settling")
     GROUND:Unhide("NPC_Nonbeliever")
     GROUND:Unhide("NPC_Hesitant")
-    GROUND:Unhide("NPC_Broke")
+
+
+    if SV.base_town.JuiceShop == 1 then
+        local juice = CH('Juice_Owner')
+        GROUND:TeleportTo(juice, 576, 160, Direction.Down)
+    end
+
+    if SV.team_hunter.Status == 0 then
+        GROUND:Unhide("NPC_Broke")
+    elseif SV.team_hunter.Status == 3 then
+        -- TODO cycling
+    end
+
+    if SV.town_elder.Status == 0 then
+        GROUND:Unhide("NPC_Elder")
+    elseif SV.town_elder.Status == 3 then
+        -- TODO cycling
+        GROUND:Unhide("NPC_Elder")
+    end
+
+    if SV.team_catch.Status == 0 then
+        GROUND:Unhide("NPC_Catch_1")
+        GROUND:Unhide("NPC_Catch_2")
+    elseif SV.team_catch.Status == 5 then
+        -- TODO cycling
+        GROUND:Unhide("NPC_Catch_1")
+        GROUND:Unhide("NPC_Catch_2")
+    end
+
+    if SV.team_solo.Status == 0 then
+        GROUND:Unhide("NPC_Solo")
+    elseif SV.team_solo.Status == 6 then
+        -- TODO cycling
+    end
 
     if SV.supply_corps.Status >= 20 then
         if SV.supply_corps.ManagerCycle == 0 then
@@ -112,11 +148,144 @@ function base_camp_2.SetupNpcs()
             GROUND:Unhide("NPC_Storehouse")
         end
     end
+
+    -- family appears if Returned = false
+    if SV.family.Returned == false then
+        -- and if they've been saved individually
+        if SV.family.Sister then
+            GROUND:Unhide("Family_Sister")
+        end
+        if SV.family.Mother then
+            GROUND:Unhide("Family_Mother")
+        end
+        if SV.family.Father then
+            GROUND:Unhide("Family_Father")
+        end
+        if SV.family.Brother then
+            GROUND:Unhide("Family_Brother")
+        end
+        if SV.family.Pet then
+            GROUND:Unhide("Family_Pet")
+        end
+        if SV.family.Grandma then
+            GROUND:Unhide("Family_Grandma")
+        end
+    end
 end
 
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
+
+
+function base_camp_2.Family_Sister_Action(obj, activator)
+
+    local group_check = base_camp_2.Isekai_Event()
+    if group_check then
+        return
+    end
+
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:SetSpeaker(chara)
+
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sister_Line_001']))
+    GROUND:EntTurn(chara, Direction.DownLeft)
+end
+
+function base_camp_2.Family_Mother_Action(obj, activator)
+
+    local group_check = base_camp_2.Isekai_Event()
+    if group_check then
+        return
+    end
+
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:SetSpeaker(chara)
+
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mother_Line_001']))
+    GROUND:EntTurn(chara, Direction.DownLeft)
+end
+
+function base_camp_2.Family_Father_Action(obj, activator)
+
+    local group_check = base_camp_2.Isekai_Event()
+    if group_check then
+        return
+    end
+
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:SetSpeaker(chara)
+
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Father_Line_001']))
+    GROUND:EntTurn(chara, Direction.DownLeft)
+end
+
+function base_camp_2.Family_Brother_Action(obj, activator)
+
+    local group_check = base_camp_2.Isekai_Event()
+    if group_check then
+        return
+    end
+
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:SetSpeaker(chara)
+
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Brother_Line_001']))
+    GROUND:EntTurn(chara, Direction.DownLeft)
+end
+
+function base_camp_2.Family_Pet_Action(obj, activator)
+
+    local group_check = base_camp_2.Isekai_Event()
+    if group_check then
+        return
+    end
+
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:SetSpeaker(chara)
+
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pet_Line_001']))
+    GROUND:EntTurn(chara, Direction.DownLeft)
+end
+
+function base_camp_2.Family_Grandma_Action(obj, activator)
+
+    local group_check = base_camp_2.Isekai_Event()
+    if group_check then
+        return
+    end
+
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:SetSpeaker(chara)
+
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Grandma_Line_001']))
+    GROUND:EntTurn(chara, Direction.DownLeft)
+end
+
+function base_camp_2.Isekai_Event()
+
+    if SV.family.TalkedReturn == false then
+        if SV.guild_hut.TookCard then
+            UI:ResetSpeaker()
+            SV.family.TalkedReturn = true
+            UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_001']))
+            GAME:FadeOut(false, 20)
+            GAME:FadeIn(20)
+            return true
+        end
+    else
+        if SV.family.Sister and SV.family.Mother and SV.family.Father and SV.family.Brother and SV.family.Pet and SV.family.Grandma then
+            UI:ResetSpeaker()
+            SV.family.Returned = true
+            UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_002']))
+            GAME:FadeOut(false, 20)
+            GAME:EnterGroundMap("guild_hut", "entrance_portal", false)
+            return true
+        end
+    end
+
+    return false
+end
 
 function base_camp_2.NPC_Food_Action(chara, activator)
     local player = CH('PLAYER')
@@ -200,30 +369,30 @@ function base_camp_2.NPC_Elder_Action(chara, activator)
 end
 
 
-function base_camp_2.NPC_History_Action(chara, activator)
+function base_camp_2.NPC_Solo_Action(chara, activator)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
     UI:SetSpeaker(chara)
 
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['History_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_001']))
     UI:SetSpeakerEmotion("Worried")
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['History_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_002']))
 end
 
 
-function base_camp_2.NPC_Father_Action(chara, activator)
+function base_camp_2.NPC_King_Action(chara, activator)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
     UI:SetSpeaker(chara)
 
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Father_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['King_Line_001']))
     GROUND:EntTurn(chara, Direction.DownLeft)
 end
 
 
-function base_camp_2.NPC_Mother_Action(chara, activator)
+function base_camp_2.NPC_Queen_Action(chara, activator)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
     UI:SetSpeaker(chara)
 
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mother_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Queen_Line_001']))
     GROUND:EntTurn(chara, Direction.UpRight)
 end
 
@@ -555,9 +724,9 @@ function base_camp_2.Shop_Action(obj, activator)
             if result then
                 for ii = #cart, 1, -1 do
                     if cart[ii].IsEquipped then
-                        GAME:TakePlayerEquippedItem(cart[ii].Slot)
+                        GAME:TakePlayerEquippedItem(cart[ii].Slot, true)
                     else
-                        GAME:TakePlayerBagItem(cart[ii].Slot)
+                        GAME:TakePlayerBagItem(cart[ii].Slot, true)
                     end
                 end
                 SOUND:PlayBattleSE("DUN_Money")
@@ -659,10 +828,10 @@ function base_camp_2.Appraisal_Action(obj, activator)
                         local stack = 0
                         if cart[ii].IsEquipped then
                             box = GAME:GetPlayerEquippedItem(cart[ii].Slot)
-                            GAME:TakePlayerEquippedItem(cart[ii].Slot)
+                            GAME:TakePlayerEquippedItem(cart[ii].Slot, true)
                         else
                             box = GAME:GetPlayerBagItem(cart[ii].Slot)
-                            GAME:TakePlayerBagItem(cart[ii].Slot)
+                            GAME:TakePlayerBagItem(cart[ii].Slot, true)
                         end
 
                         local treasure_item = box.HiddenValue
@@ -1074,15 +1243,9 @@ end
 
 function base_camp_2.Tutor_Can_Tutor(member, tutor_moves)
 
-    local playerMonId = member.BaseForm
-    local monData = _DATA:GetMonster(playerMonId.Species)
-    local formData = monData.Forms[playerMonId.Form]
-
-    for move_idx = 1, #tutor_moves, 1 do
-        local move = tutor_moves[move_idx].Skill
-        if formData:CanLearnSkill(move) then
-            return true
-        end
+    local valid_moves = COMMON.GetTutorableMoves(member, tutor_moves)
+    for move_idx, skill in pairs(valid_moves) do
+        return true
     end
 
     return false
@@ -1114,9 +1277,7 @@ function base_camp_2.Tutor_Remember_Flow(price)
             end
         elseif state == 1 then
             UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_What'], member:GetDisplayName(true)))
-            UI:RelearnMenu(member)
-            UI:WaitForChoice()
-            local result = UI:ChoiceResult()
+            local result = SkillSelectMenu.runRelearnMenu(member)
             if result ~= "" then
                 move = result
                 state = 2
@@ -1207,9 +1368,8 @@ function base_camp_2.Tutor_Teach_Flow(tutor_moves)
             end
         elseif state == 1 then
             UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Teach_What'], member:GetDisplayName(true)))
-            UI:RelearnMenu(member)
-            UI:WaitForChoice()
-            local result = UI:ChoiceResult()
+            local valid_moves = COMMON.GetTutorableMoves(member, tutor_moves) --moved out here
+            local result = SkillTutorMenu.runTutorMenu(valid_moves, "loot_heart_scale")
             if result ~= "" then
                 move = result
                 state = 2
@@ -1221,8 +1381,19 @@ function base_camp_2.Tutor_Teach_Flow(tutor_moves)
             local learnedMove = COMMON.LearnMoveFlow(member, move, STRINGS:Format(MapStrings['Tutor_Remember_Replace']))
 
             if learnedMove then
+                local price = COMMON.TUTOR[move].Cost
                 SOUND:PlayBattleSE("DUN_Money")
-                --GAME:RemoveFromPlayerMoney(price)
+                for ii = 1, price, 1 do
+                    local item_slot = GAME:FindPlayerItem("loot_heart_scale", true, true)
+                    if not item_slot:IsValid() then
+                        --it is a certainty that there is an item in storage, due to previous checks
+                        GAME:TakePlayerStorageItem("loot_heart_scale")
+                    elseif item_slot.IsEquipped then
+                        GAME:TakePlayerEquippedItem(item_slot.Slot)
+                    else
+                        GAME:TakePlayerBagItem(item_slot.Slot)
+                    end
+                end
                 UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Begin']))
                 base_camp_2.Tutor_Sequence()
                 SOUND:PlayFanfare("Fanfare/LearnSkill")
@@ -1240,9 +1411,11 @@ function base_camp_2.Tutor_Action(obj, activator)
 
     local price = 250
     local tutor_moves = {}
+    local can_tutor = false
     for move_key in pairs(SV.base_town.TutorMoves) do
         if COMMON.TUTOR[move_key] ~= nil then
-            --table.insert(tutor_moves, { Skill = move_key, Price = COMMON.TUTOR[move_key] } )
+            tutor_moves[move_key] = COMMON.TUTOR[move_key]
+            can_tutor = true
         end
     end
 
@@ -1257,7 +1430,7 @@ function base_camp_2.Tutor_Action(obj, activator)
         SV.base_town.FreeRelearn = true
     end
 
-    if #tutor_moves > 0 and SV.base_town.TutorOpen == false then
+    if can_tutor and SV.base_town.TutorOpen == false then
         UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Now_Teaches']))
         SV.base_town.TutorOpen = true
     end
@@ -1282,7 +1455,7 @@ function base_camp_2.Tutor_Action(obj, activator)
             tutor_choices[1] = RogueEssence.StringKey("MENU_RECALL_SKILL"):ToLocal()
             tutor_choices[2] = RogueEssence.StringKey("MENU_FORGET_SKILL"):ToLocal()
 
-            if #tutor_moves > 0 then
+            if can_tutor then
                 tutor_choices[3] = STRINGS:Format(MapStrings['Tutor_Option_Tutor'])
             end
 

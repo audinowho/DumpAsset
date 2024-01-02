@@ -459,7 +459,7 @@ MISSION_GEN.POKEMON = {
 	"quaxly",
 	"ralts","rattata","remoraid","rhyhorn","roggenrola","rowlet",
 	"salandit","sandile","sandshrew","sandygast","scraggy","seedot","seel","sentret","sewaddle","shellder","shellos","shieldon","shinx","shroomish","shuppet","silcoon","sinistea","skorupi","slakoth","slowpoke","slugma","smoochum","sneasel","snivy","snom","snorunt","snover","snubbull","sobble","solosis","spearow","spheal","spinarak","spoink","sprigatito","spritzee","squirtle","starly","staryu","stufful","stunky","sunkern","surskit","swablu","swinub","swirlix",
-	"taillow","tandemaus","teddiursa","tentacool","tepig","tinkatink","torchic","togepi","totodile","trapinch","treecko","trubbish","turtwig","tympole","tyrogue",
+	"taillow","teddiursa","tentacool","tepig","tinkatink","torchic","togepi","totodile","trapinch","treecko","trubbish","turtwig","tympole","tyrogue",
 
 	"vanillite","venonat","voltorb",
 	"wailmer","watchog","weedle","whismur","woobat","wooloo","wooper","wurmple","wynaut",

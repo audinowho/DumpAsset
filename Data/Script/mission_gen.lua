@@ -453,7 +453,7 @@ MISSION_GEN.POKEMON = {
 	"kabuto","kakuna","koffing","krabby","kricketot",
 	"larvesta","larvitar","ledyba","lileep","lillipup","litleo","litten","litwick","lotad","luvdisc",
 	"machop","magby","magikarp","magnemite","makuhita","mankey","mantyke","mareanie","mareep","meditite","metapod","mienfoo","mime_jr","minccino","morelull","mudbray","munna","mudkip","murkrow",
-	"natu","nickit","nidoran_m","nidoran_f","nincada","noibat","nosepass","numel","nymble",
+	"natu","nickit","nincada","noibat","nosepass","numel","nymble",
 	"oddish","omanyte","onix","oshawott",
  	"pansear","paras","patrat","pawmi","pawniard","petilil","phantump","pidgey","pidove","pineco","piplup","poliwag","ponyta","poochyena","popplio","porygon","psyduck","pumpkaboo","purrloin",
 	"quaxly",

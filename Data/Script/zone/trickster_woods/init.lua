@@ -1,4 +1,5 @@
 require 'common'
+require 'mission_gen'
 
 local trickster_woods = {}
 --------------------------------------------------
@@ -26,15 +27,19 @@ function trickster_woods.ExitSegment(zone, result, rescue, segmentID, mapID)
   PrintInfo("=>> ExitSegment_trickster_woods result "..tostring(result).." segment "..tostring(segmentID))
   
   --first check for rescue flag; if we're in rescue mode then take a different path
-  COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
+  MISSION_GEN.EndOfDay(result, segmentID)
+COMMON.SidequestExitDungeonMissionCheck(result, zone.ID, segmentID)
+COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)
+  elseif SV.TemporaryFlags.MissionCompleted then
+    COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 2, 0)
   elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
     if segmentID == 0 then
       COMMON.UnlockWithFanfare('deserted_fortress', true)
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 4, 0)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 3, 2)
     elseif segmentID == 1 then
       COMMON.UnlockWithFanfare('moonlit_courtyard', true)
       COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 3, 2)

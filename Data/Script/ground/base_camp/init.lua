@@ -381,6 +381,14 @@ function base_camp.Ferry_Action(obj, activator)
 end
 
 function base_camp.ShowFerryMenu(dungeon_entrances, ground_entrances)
+  local mission_dests = {}
+
+  for i = 1, 8, 1 do
+    local zone = SV.TakenBoard[i].Zone
+    if zone ~= nil and zone ~= '' and SV.TakenBoard[i].Taken then
+      mission_dests[zone] = 1
+    end
+  end
   
   --check for unlock of dungeons
   local open_dests = {}
@@ -394,6 +402,9 @@ function base_camp.ShowFerryMenu(dungeon_entrances, ground_entrances)
 		else
 		  zone_name = "[color=#00FFFF]"..zone_summary.Name:ToLocal().."[color]"
 		end
+        if mission_dests[dungeon_entrances[ii]] ~= nil then
+          zone_name = STRINGS:Format("\\uE10F ") .. zone_name --open letter
+        end
         table.insert(open_dests, { Name=zone_name, Dest=RogueEssence.Dungeon.ZoneLoc(dungeon_entrances[ii], 0, 0, 0) })
 	  end
 	end

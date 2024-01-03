@@ -1,4 +1,5 @@
 require 'common'
+require 'mission_gen'
 
 local sickly_hollow = {}
 --------------------------------------------------
@@ -26,9 +27,13 @@ function sickly_hollow.ExitSegment(zone, result, rescue, segmentID, mapID)
   PrintInfo("=>> ExitSegment_sickly_hollow result "..tostring(result).." segment "..tostring(segmentID))
   
   --first check for rescue flag; if we're in rescue mode then take a different path
-  COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
+  MISSION_GEN.EndOfDay(result, segmentID)
+COMMON.SidequestExitDungeonMissionCheck(result, zone.ID, segmentID)
+COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)
+  elseif SV.TemporaryFlags.MissionCompleted then
+    COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 2, 0)
   elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else

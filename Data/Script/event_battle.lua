@@ -2,12 +2,15 @@ require 'common'
 
 BATTLE_SCRIPT = {}
 
+RedirectionType = luanet.import_type('PMDC.Dungeon.Redirected')
+DmgMultType = luanet.import_type('PMDC.Dungeon.DmgMult')
+
 function BATTLE_SCRIPT.Test(owner, ownerChar, context, args)
   PrintInfo("Test")
 end
 
 function BATTLE_SCRIPT.AllyInteract(owner, ownerChar, context, args)
-  COMMON.DungeonInteract(context.User, context.Target, context.CancelState, context.TurnCancel)
+	COMMON.DungeonInteract(context.User, context.Target, context.CancelState, context.TurnCancel)
 end
 
 function BATTLE_SCRIPT.ShopkeeperInteract(owner, ownerChar, context, args)
@@ -82,7 +85,25 @@ function BATTLE_SCRIPT.EscortInteract(owner, ownerChar, context, args)
   local oldDir = context.Target.CharDir
   DUNGEON:CharTurnToChar(context.Target, context.User)
   UI:SetSpeaker(context.Target)
-  UI:WaitShowDialogue(RogueEssence.StringKey("TALK_FULL_0820"):ToLocal())
+  
+  --Basic for now, but choose a different line based on mission type/special 
+  --Should be expanded on in the future to be more dynamic, and to have more special lines for special pairs
+  local tbl = LTBL(context.Target)
+  local mission_slot = tbl.Escort
+  local job = SV.TakenBoard[mission_slot]
+  
+  if job.Type == COMMON.MISSION_TYPE_EXPLORATION then
+	  local zone_string = _DATA:GetZone(job.Zone).Segments[job.Segment]:ToString()
+	  zone_string = COMMON.CreateColoredSegmentString(zone_string)
+	  local floor = SV.StairType[job.Zone] .. '[color=#00FFFF]' .. tostring(job.Floor) .. '[color]' .. "F"
+	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_EXPLORATION_INTERACT"):ToLocal(), zone_string , floor))
+  elseif job.Type == COMMON.MISSION_TYPE_ESCORT then
+    if job.Special == MISSION_GEN.SPECIAL_CLIENT_LOVER then
+	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_LOVER_INTERACT"):ToLocal()))
+	else
+	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_INTERACT"):ToLocal(), _DATA:GetMonster(job.Target):GetColoredName())) 
+	end
+   end
   context.Target.CharDir = oldDir
 end
 
@@ -538,43 +559,43 @@ function BATTLE_SCRIPT.TutorTalk(owner, ownerChar, context, args)
 		result = UI:ChoiceResult()
 		
 		if result then
-		  local replace_msg = STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_REPLACE"):ToLocal(), skill_data:GetIconName())
-		  result = COMMON.LearnMoveFlow(context.User, move_idx, replace_msg)
+			local replace_msg = STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_REPLACE"):ToLocal(), skill_data:GetIconName())
+			result = COMMON.LearnMoveFlow(context.User, move_idx, replace_msg)
 		end
-		
+
 		if result then
-		  -- attempt to learn move
-		  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_ACCEPT"):ToLocal(), skill_data:GetIconName()))
-		  
-		  --attack in a 90-degree turn from the talk
-		  context.Target.CharDir = Direction.Down
-		  context.User.CharDir = Direction.Down
-		  
-		  BATTLE_SCRIPT.Tutor_Sequence(context.Target)
-		  
-		  --player does the same animation offset by a little time
-		  BATTLE_SCRIPT.Tutor_Sequence(context.User)
-		  
-		  SOUND:PlayFanfare("Fanfare/LearnSkill")
-		  local orig_settings = UI:ExportSpeakerSettings()
-		  UI:ResetSpeaker(false)
-		  UI:WaitShowDialogue(STRINGS:FormatKey("DLG_SKILL_LEARN", context.User:GetDisplayName(true), skill_data:GetIconName()))
-		  UI:ImportSpeakerSettings(orig_settings)
-		  
-		  DUNGEON:CharTurnToChar(context.Target, context.User)
-		  DUNGEON:CharTurnToChar(context.User, context.Target)
-		  
-		  tbl.TaughtMove = true
-		  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_VISIT"):ToLocal()))
+			-- attempt to learn move
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_ACCEPT"):ToLocal(), skill_data:GetIconName()))
+
+			--attack in a 90-degree turn from the talk
+			context.Target.CharDir = Direction.Down
+			context.User.CharDir = Direction.Down
+
+			BATTLE_SCRIPT.Tutor_Sequence(context.Target)
+
+			--player does the same animation offset by a little time
+			BATTLE_SCRIPT.Tutor_Sequence(context.User)
+
+			SOUND:PlayFanfare("Fanfare/LearnSkill")
+			local orig_settings = UI:ExportSpeakerSettings()
+			UI:ResetSpeaker(false)
+			UI:WaitShowDialogue(STRINGS:FormatKey("DLG_SKILL_LEARN", context.User:GetDisplayName(true), skill_data:GetIconName()))
+			UI:ImportSpeakerSettings(orig_settings)
+
+			DUNGEON:CharTurnToChar(context.Target, context.User)
+			DUNGEON:CharTurnToChar(context.User, context.Target)
+
+			tbl.TaughtMove = true
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_VISIT"):ToLocal()))
 		else
-		  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_DECLINE"):ToLocal(), skill_data:GetIconName()))
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_DECLINE"):ToLocal(), skill_data:GetIconName()))
 		end
-		
+
 		SV.base_town.TutorMoves[move_idx] = true
-		
+
 		context.TurnCancel.Cancel = true
 	else
-	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR"):ToLocal(), skill_data:GetIconName()))
+		UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR"):ToLocal(), skill_data:GetIconName()))
 
 	  context.Target.CharDir = oldDir
 	  context.CancelState.Cancel = true

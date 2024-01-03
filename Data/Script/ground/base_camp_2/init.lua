@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 require 'common'
 require 'mission_gen'
 require 'menu.SkillSelectMenu'
@@ -78,7 +77,7 @@ end
 function base_camp_2.Enter(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
 
-  GROUND:Hide("Mission_Board")
+  --GROUND:Hide("Mission_Board")
   GROUND:Hide("Locator")
   GROUND:Hide("Locator_Owner")
   

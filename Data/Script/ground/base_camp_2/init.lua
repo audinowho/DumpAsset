@@ -80,7 +80,11 @@ function base_camp_2.Enter(map)
   --GROUND:Hide("Mission_Board")
   GROUND:Hide("Locator")
   GROUND:Hide("Locator_Owner")
-  
+
+  if SV.TemporaryFlags.MissionCompleted then
+    base_camp_2.Hand_In_Missions()
+  end  
+    
   base_camp_2.SetupNpcs()
   
   GAME:FadeIn(20)

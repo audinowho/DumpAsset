@@ -393,19 +393,22 @@ function base_camp.ShowFerryMenu(dungeon_entrances, ground_entrances)
   --check for unlock of dungeons
   local open_dests = {}
   for ii = 1,#dungeon_entrances,1 do
-    if GAME:DungeonUnlocked(dungeon_entrances[ii]) then
-	local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_entrances[ii])
+    local zone = dungeon_entrances[ii]
+    if GAME:DungeonUnlocked(zone) then
+	local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(zone)
 	  if zone_summary.Released then
 	    local zone_name = ""
-	    if _DATA.Save:GetDungeonUnlock(dungeon_entrances[ii]) == RogueEssence.Data.GameProgress.UnlockState.Completed then
+	    if _DATA.Save:GetDungeonUnlock(zone) == RogueEssence.Data.GameProgress.UnlockState.Completed then
 		  zone_name = zone_summary:GetColoredName()
 		else
 		  zone_name = "[color=#00FFFF]"..zone_summary.Name:ToLocal().."[color]"
 		end
-        if mission_dests[dungeon_entrances[ii]] ~= nil then
+        if mission_dests[zone] ~= nil then
           zone_name = STRINGS:Format("\\uE10F ") .. zone_name --open letter
+        elseif COMMON.HasSidequestInZone(zone) then
+          zone_name = STRINGS:Format("\\uE111 ") .. zone_name --exclamation point 
         end
-        table.insert(open_dests, { Name=zone_name, Dest=RogueEssence.Dungeon.ZoneLoc(dungeon_entrances[ii], 0, 0, 0) })
+        table.insert(open_dests, { Name=zone_name, Dest=RogueEssence.Dungeon.ZoneLoc(zone, 0, 0, 0) })
 	  end
 	end
   end

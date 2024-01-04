@@ -2944,19 +2944,23 @@ function JobMenu:initialize(job_type, job_number, parent_board_menu)
   self.taken_count = MISSION_GEN.GetTakenCount()
   
   if self.type == COMMON.MISSION_TYPE_RESCUE then
-		self.objective = "Rescue " .. self.target .. "."
+		self.objective = Text.FormatKey("MISSION_OBJECTIVES_RESCUE", self.target)
   elseif self.type == COMMON.MISSION_TYPE_ESCORT then
-    self.objective = "Escort " .. self.client .. " to " .. self.target .. "."
-	elseif self.type == COMMON.MISSION_TYPE_EXPLORATION then
-		self.objective = "Explore with " .. self.client .. "."
-  elseif self.type == COMMON.MISSION_TYPE_OUTLAW or self.type == COMMON.MISSION_TYPE_OUTLAW_FLEE or self.type == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then 
-		self.objective = "Arrest " .. self.target .. "."
-	elseif self.type == COMMON.MISSION_TYPE_LOST_ITEM then 
-		self.objective = "Find " .. self.item .. " for " .. self.client .. "."
+        self.objective = Text.FormatKey("MISSION_OBJECTIVES_ESCORT", self.client, self.target)
+   elseif self.type == COMMON.MISSION_TYPE_EXPLORATION then
+		self.objective = Text.FormatKey("MISSION_OBJECTIVES_EXPLORATION", self.client)
+   elseif self.type == COMMON.MISSION_TYPE_OUTLAW then 
+		self.objective = Text.FormatKey("MISSION_OBJECTIVES_OUTLAW", self.target)
+  elseif self.type == COMMON.MISSION_TYPE_OUTLAW_FLEE then
+	    self.objective = Text.FormatKey("MISSION_OBJECTIVES_OUTLAW_FLEE", self.target)
+  elseif self.type == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then
+	  self.objective = Text.FormatKey("MISSION_OBJECTIVES_OUTLAW_MONSTER_HOUSE", self.target)
+  elseif self.type == COMMON.MISSION_TYPE_LOST_ITEM then 
+		self.objective = Text.FormatKey("MISSION_OBJECTIVES_LOST_ITEM", self.item, self.client)
 	elseif self.type == COMMON.MISSION_TYPE_DELIVERY then 
-		self.objective = "Deliver " .. self.item .. " to " .. self.client .. "."
+		self.objective = Text.FormatKey("MISSION_OBJECTIVES_DELIVERY", self.item, self.client)
   elseif self.type == COMMON.MISSION_TYPE_OUTLAW_ITEM then 
-		self.objective = "Reclaim " .. self.item .. " from " .. self.target .. "."
+		self.objective = Text.FormatKey("MISSION_OBJECTIVES_OUTLAW_ITEM", self.item, self.target) 
   end
   
   
@@ -3007,20 +3011,20 @@ function JobMenu:DrawJob()
   self.menu.MenuElements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(8, 8 + 12), self.menu.Bounds.Width - 8 * 2))
 
   --Standard title. Reuse this whenever a title is needed.
-  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Job Summary", RogueElements.Loc(16, 8)))
+  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_SUMMARY"), RogueElements.Loc(16, 8)))
   
   --Accepted element 
   self.menu.MenuElements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(8, self.menu.Bounds.Height - 24), self.menu.Bounds.Width - 8 * 2))
-  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Accepted: " .. self.taken_count .. "/8", RogueElements.Loc(96, self.menu.Bounds.Height - 20)))
+  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_ACCEPTED") .. self.taken_count .. "/8", RogueElements.Loc(96, self.menu.Bounds.Height - 20)))
 
 
   
   self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(self.flavor, RogueElements.Loc(16, 24)))
-  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Client:", RogueElements.Loc(16, 54)))
-  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Objective:", RogueElements.Loc(16, 68)))
-  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Place:", RogueElements.Loc(16, 82)))
-  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Difficulty:", RogueElements.Loc(16, 96)))
-  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Reward:", RogueElements.Loc(16, 110))) 
+  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_CLIENT"), RogueElements.Loc(16, 54)))
+  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_OBJECTIVE"), RogueElements.Loc(16, 68)))
+  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_PLACE"), RogueElements.Loc(16, 82)))
+  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_DIFFICULTY"), RogueElements.Loc(16, 96)))
+  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_REWARD"), RogueElements.Loc(16, 110))) 
 
   local client = self.client 
   client = string.gsub(client, "Magna", "Magnezone")
@@ -3128,7 +3132,14 @@ function JobMenu:AddJobToTaken()
 		elseif self.job_type == COMMON.MISSION_BOARD_MISSION then
 			SV.TakenBoard[freeIndex] = MISSION_GEN.ShallowCopy(SV.MissionBoard[self.job_number])
 		end 
+		
 		SV.TakenBoard[freeIndex].BackReference = self.job_number
+
+		--Suspend the job if there is currently an active sidequest in that dungeon
+		if COMMON.HasSidequestInZone(self.zone) then
+			self:FlipTakenStatus()
+		end
+		
 		MISSION_GEN.SortTaken()
 	end
 	
@@ -3167,8 +3178,8 @@ function JobMenu:OpenSubMenu()
 			
 		else --outlaw/mission boards
 			--we already made a check above to see if this is a job board and not taken 
-			--only selectable if there's room on the taken board for the job and we haven't already taken this mission
-			choices = {{"Take Job", MISSION_GEN.IsBoardFull(SV.TakenBoard) == false and not self.taken, function() self:FlipTakenStatus() 
+			--only selectable if there's room on the taken board for the job, there is no sidequest for the dungeon, and we haven't already taken this mission
+			choices = {{"Take Job", MISSION_GEN.IsBoardFull(SV.TakenBoard) == false and not COMMON.HasSidequestInZone(self.zone) and not self.taken, function() self:FlipTakenStatus() 
 																								 self:AddJobToTaken() _MENU:RemoveMenu() end },
 					   {"Cancel", true, function() _MENU:RemoveMenu() _MENU:RemoveMenu() end} }
 		end 

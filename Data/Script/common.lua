@@ -1123,11 +1123,9 @@ end
 
 function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
     for name, mission in pairs(SV.TakenBoard) do
-        PrintInfo("Checking Mission: "..tostring(name))
         if mission.Taken and mission.Completion == COMMON.MISSION_INCOMPLETE and zoneId == mission.Zone and mission.Client ~= "" then
             if mission.Type == COMMON.MISSION_TYPE_ESCORT or mission.Type == COMMON.MISSION_TYPE_EXPLORATION then -- escort
                 -- add escort to team
-                PrintInfo("Adding escort to team for Mission: "..tostring(name)) 
                 local player_count = GAME:GetPlayerPartyCount()
                 local guest_count = GAME:GetPlayerGuestCount()
 
@@ -1177,7 +1175,6 @@ function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
                 local tbl = LTBL(new_mob)
                 tbl.Escort = name
                 
-                PrintInfo("Adding to exploration: "..STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_ADD"):ToLocal(), new_mob.Name))
                 UI:ResetSpeaker()
                 UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_ADD"):ToLocal(), new_mob.Name))
             end
@@ -1439,11 +1436,11 @@ function COMMON.AskMissionWarpOut()
     while state > -1 do
         if state == 0 then
             if has_ongoing_mission then
-                UI:ChoiceMenuYesNo("You have more ongoing missions, but would you like to leave the dungeon now?", true)
+                UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_CONTINUE_ONGOING"):ToLocal()), true)
                 UI:WaitForChoice()
                 local leave_dungeon = UI:ChoiceResult()
                 if leave_dungeon then
-                    UI:ChoiceMenuYesNo("Do you really want to leave?", true)
+                    UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_CONTINUE_CONFIRM"):ToLocal()), true)
                     UI:WaitForChoice()
                     local leave_confirm = UI:ChoiceResult()
                     if leave_confirm then
@@ -1458,7 +1455,7 @@ function COMMON.AskMissionWarpOut()
                     SetMinimap()
                 end
             else
-                UI:ChoiceMenuYesNo("You have no more ongoing missions beyond this point.\nWould you like to leave the dungeon now?", false)
+                UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_CONTINUE_ONGOING"):ToLocal()), false)
                 UI:WaitForChoice()
                 local leave_dungeon = UI:ChoiceResult()
                 if leave_dungeon then

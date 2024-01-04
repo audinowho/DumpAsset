@@ -2317,18 +2317,14 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 	for dungeon_id, cur_dungeon_segments in pairs(SV.MissionPrereq.DungeonsCompleted) do
 		local dungeon_instance = _DATA:GetZone(dungeon_id)		
 		local dungeon_segment_index_cur = 1
-		PrintInfo("Checking to see if "..dungeon_id.." is a possible mission destination.")
 		if MISSION_GEN.DUNGEON_LIST[dungeon_id] ~= nil then
 			--Add the expected level
 			SV.ExpectedLevel[dungeon_id] = dungeon_instance.Level
 			dungeon_candidates[dungeon_candidate_index_cur] = dungeon_id
-			PrintInfo("Adding dungeon "..dungeon_id.." as a possible mission destination.")
 			local default_dungeon_candidate_needed = true
 			for dungeon_segment, value in pairs(cur_dungeon_segments) do
 				if MISSION_GEN.DUNGEON_LIST[dungeon_id][dungeon_segment] ~= nil then
 					local cur_difficulty = MISSION_GEN.DUNGEON_LIST[dungeon_id][dungeon_segment]
-
-					PrintInfo("Adding dungeon "..dungeon_id.." with segment "..dungeon_segment.." and difficulty "..cur_difficulty)
 
 					if dungeon_segments[dungeon_candidate_index_cur] == nil then
 						dungeon_segments[dungeon_candidate_index_cur] = {}
@@ -2344,8 +2340,6 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 			if default_dungeon_candidate_needed == true then
 				if MISSION_GEN.DUNGEON_LIST[dungeon_id][0] ~= nil then
 					local cur_difficulty = MISSION_GEN.DUNGEON_LIST[dungeon_id][0]
-
-					PrintInfo("Adding dungeon "..dungeon_id.." with default segment 0 and difficulty "..cur_difficulty)
 
 					if dungeon_segments[dungeon_candidate_index_cur] == nil then
 						dungeon_segments[dungeon_candidate_index_cur] = {}
@@ -2392,7 +2386,6 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		local missionOutlawRoll = math.random(3)
 		if missionOutlawRoll == 1 then
 			--1 in 3 chance of outlaw
-			PrintInfo("Generating new outlaw mission")
 			local roll = math.random(1, 10)
 			if roll <= 5 then
 				--5/10 chance of regular outlaw
@@ -2409,7 +2402,6 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 			end
 		else
 			--2 in 3 chance of normal
-			PrintInfo("Generating new normal mission")
 			local roll = math.random(1, 10)
 			if roll <= 2 then
 				--if there's already an escort or exploration mission generated for this dungeon, don't gen another one and just make it a rescue.
@@ -2729,8 +2721,6 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		local current_index = 0
 		local noMissionFloors = COMMON.GetNoMissionFloors(current_segment)
 		local valid_floor_candidates = {}
-		
-		PrintInfo(#noMissionFloors.." no mission floors found for dungeon "..dungeon)
 		 
 		--Make sure that the dungeon floor added is valid
 		for i = 1, floor_candidates_length, 1 do
@@ -2855,8 +2845,6 @@ function MISSION_GEN.SortTaken()
 end
 
 function MISSION_GEN.SortMission()
-	PrintInfo("Sorting mission board with size "..#SV.MissionBoard)
-	
 	if #SV.MissionBoard > 1 then
 		table.sort(SV.MissionBoard, MISSION_GEN.JobSortFunction)
 	end
@@ -3352,9 +3340,7 @@ function BoardMenu:DrawBoard()
 		if self.jobs[i].Taken then
 			taken_string = 'true'
 		end
-
-		PrintInfo("Creating board job for title "..title.." and zone "..self.jobs[i].Zone.." and segment "..self.jobs[i].Segment.." and taken "..taken_string)
-
+		
 		local zone = _DATA:GetZone(self.jobs[i].Zone).Segments[self.jobs[i].Segment]:ToString()
 		zone = COMMON.CreateColoredSegmentString(zone)
 		local floor =  MISSION_GEN.GetStairsType(self.jobs[i].Zone) ..'[color=#00FFFF]' .. tostring(self.jobs[i].Floor) .. "[color]F"

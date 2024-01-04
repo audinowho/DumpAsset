@@ -324,12 +324,12 @@ function forest_camp.NPC_Elder_Action(chara, activator)
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Line_001']))
-	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
-      DestZone = "ambush_forest", DestSegment = 0, DestFloor = 11,
-      FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("mightyena", 0, "normal", Gender.Male) }
+
+    COMMON.CreateMission(questname, "ambush_forest", 0, 11, false,
+            RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
+            RogueEssence.Dungeon.MonsterID("mightyena", 0, "normal", Gender.Male),
+            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
+            nil)
 	
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
@@ -502,12 +502,11 @@ function forest_camp.Sick_Child()
 	local destFloor = 8
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sickness_Line_003'], tostring(destFloor+1)))
 
-	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
-      DestZone = "sickly_hollow", DestSegment = 0, DestFloor = destFloor,
-      FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("sunflora", 0, "normal", Gender.Male) }
+    COMMON.CreateMission(questname, "sickly_hollow", 0, destFloor, false,
+            RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
+            RogueEssence.Dungeon.MonsterID("sunflora", 0, "normal", Gender.Male),
+            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
+            nil)
 	
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     local camps = CH('NPC_Camps')

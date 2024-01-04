@@ -371,12 +371,12 @@ function final_stop.NPC_Seer_Action(chara, activator)
       UI:SetSpeaker(chara)
       GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Help_Line_001']))
-	
-	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
-        DestZone = "snowbound_path", DestSegment = 0, DestFloor = 10,
-        FloorUnknown = false,
-        TargetSpecies = RogueEssence.Dungeon.MonsterID("typhlosion", 1, "normal", Gender.Male),
-        ClientSpecies = RogueEssence.Dungeon.MonsterID("delphox", 0, "normal", Gender.Male) }
+
+      COMMON.CreateMission(questname, "snowbound_path", 0, 10, false,
+              RogueEssence.Dungeon.MonsterID("typhlosion", 0, "normal", Gender.Male),
+              RogueEssence.Dungeon.MonsterID("delphox", 0, "normal", Gender.Male),
+              COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
+              nil)
 	
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
 	  GROUND:CharTurnToChar(chara,CH('PLAYER'))
@@ -519,12 +519,22 @@ function final_stop.NPC_Carry_Action(chara, activator)
     if quest == nil then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_001']))
       --add the quest
+      --Do this manually to set disguise settings
+      --Update this when COMMON.CreateMission is updated
       SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_DISGUISE,
         DestZone = "snowbound_path", DestSegment = 0, DestFloor = 12,
         FloorUnknown = true,
         ClientSpecies = chara.CurrentForm,
         TargetSpecies = RogueEssence.Dungeon.MonsterID("zoroark", 1, "normal", Gender.Male),
         DisguiseSpecies = RogueEssence.Dungeon.MonsterID("swalot", 0, "normal", Gender.Male), DisguiseTalk = "DisguiseTalk", DisguiseHit = "DisguiseHit" }
+
+      for i = 1, 8, 1 do
+        local zone = SV.TakenBoard[i].Zone
+        if zone ~= nil and zone ~= '' and zone == dest_zone then
+          SV.TakenBoard[i].Taken = false
+        end
+      end
+    
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_002']))
     else

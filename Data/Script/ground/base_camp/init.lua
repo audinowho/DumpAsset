@@ -575,12 +575,12 @@ function base_camp.NPC_Steel_1_Action(chara, activator)
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Steel_Line_001']))
-	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
-      DestZone = "guildmaster_trail", DestSegment = 0, DestFloor = 14,
-      FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("scizor", 0, "normal", Gender.Male),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("steelix", 0, "normal", Gender.Male) }
+
+    COMMON.CreateMission(questname, "guildmaster_trail", 0, 14, false,
+            RogueEssence.Dungeon.MonsterID("scizor", 0, "normal", Gender.Male),
+            RogueEssence.Dungeon.MonsterID("steelix", 0, "normal", Gender.Male),
+            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
+            nil)
 	
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)

@@ -8,7 +8,12 @@ function COMMON.UpdateDayEndVars()
   if SV.Experimental ~= nil then
     if _DATA.Save:GetDungeonUnlock("faultline_ridge") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortSister"] == nil and SV.missions.FinishedMissions["EscortSister"] == nil then
-        COMMON.CreateMission("EscortSister", "faultline_ridge", 0, 5, true, RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female), RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female), COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_ESCORT_OUT, { EscortStartMsg = "TALK_ESCORT_SISTER_START", EscortAcceptMsg = "TALK_ESCORT_SISTER_ACCEPT", EscortInteract = "EscortInteractSister" })
+        COMMON.CreateMission("EscortSister", "faultline_ridge", 0, 5, true, 
+                RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female), 
+                RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female), 
+                COMMON.MISSION_INCOMPLETE, 
+                COMMON.MISSION_TYPE_ESCORT_OUT, 
+                { EscortStartMsg = "TALK_ESCORT_SISTER_START", EscortAcceptMsg = "TALK_ESCORT_SISTER_ACCEPT", EscortInteract = "EscortInteractSister" })
       end
 	  
 	  if SV.family.Sister == false then
@@ -19,7 +24,12 @@ function COMMON.UpdateDayEndVars()
 
     if _DATA.Save:GetDungeonUnlock("castaway_cave") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortMother"] == nil and SV.missions.FinishedMissions["EscortMother"] == nil then
-        COMMON.CreateMission("EscortMother", "castaway_cave", 0, 7, true, RogueEssence.Dungeon.MonsterID("swellow", 0, "normal", Gender.Female), RogueEssence.Dungeon.MonsterID("swellow", 0, "normal", Gender.Female), COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_ESCORT_OUT, { EscortStartMsg = "TALK_ESCORT_MOTHER_START", EscortAcceptMsg = "TALK_ESCORT_MOTHER_ACCEPT", EscortInteract = "EscortInteractMother" })
+        COMMON.CreateMission("EscortMother", "castaway_cave", 0, 7, true, 
+                RogueEssence.Dungeon.MonsterID("swellow", 0, "normal", Gender.Female), 
+                RogueEssence.Dungeon.MonsterID("swellow", 0, "normal", Gender.Female), 
+                COMMON.MISSION_INCOMPLETE, 
+                COMMON.MISSION_TYPE_ESCORT_OUT, 
+                { EscortStartMsg = "TALK_ESCORT_MOTHER_START", EscortAcceptMsg = "TALK_ESCORT_MOTHER_ACCEPT", EscortInteract = "EscortInteractMother" })
       end
 	  
 	  if SV.family.Mother == false then
@@ -30,7 +40,12 @@ function COMMON.UpdateDayEndVars()
 	--TODO: should be deserted_fortress
     if _DATA.Save:GetDungeonUnlock("overgrown_wilds") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortFather"] == nil and SV.missions.FinishedMissions["EscortFather"] == nil then
-        COMMON.CreateMission("EscortFather", "overgrown_wilds", 1, 1, true, RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male), RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male), COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_ESCORT_OUT, { EscortStartMsg = "TALK_ESCORT_FATHER_START", EscortAcceptMsg = "TALK_ESCORT_FATHER_ACCEPT", EscortInteract = "EscortInteractFather" })
+        COMMON.CreateMission("EscortFather", "overgrown_wilds", 1, 1, true, 
+                RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male), 
+                RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male), 
+                COMMON.MISSION_INCOMPLETE, 
+                COMMON.MISSION_TYPE_ESCORT_OUT, 
+                { EscortStartMsg = "TALK_ESCORT_FATHER_START", EscortAcceptMsg = "TALK_ESCORT_FATHER_ACCEPT", EscortInteract = "EscortInteractFather" })
       end
 	  
 	  if SV.family.Father == false then
@@ -41,7 +56,12 @@ function COMMON.UpdateDayEndVars()
 	-- TODO: should be barren_tundra
     if _DATA.Save:GetDungeonUnlock("snowbound_path") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortBrother"] == nil and SV.missions.FinishedMissions["EscortBrother"] == nil then
-        COMMON.CreateMission("EscortBrother", "snowbound_path", 1, 1, true, RogueEssence.Dungeon.MonsterID("wooper", 0, "normal", Gender.Male), RogueEssence.Dungeon.MonsterID("wooper", 0, "normal", Gender.Male), COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_ESCORT_OUT, { EscortStartMsg = "TALK_ESCORT_BROTHER_START", EscortAcceptMsg = "TALK_ESCORT_BROTHER_ACCEPT", EscortInteract = "EscortInteractBrother" })
+        COMMON.CreateMission("EscortBrother", "snowbound_path", 1, 1, true, 
+                RogueEssence.Dungeon.MonsterID("wooper", 0, "normal", Gender.Male), 
+                RogueEssence.Dungeon.MonsterID("wooper", 0, "normal", Gender.Male),
+                COMMON.MISSION_INCOMPLETE, 
+                COMMON.MISSION_TYPE_ESCORT_OUT, 
+                { EscortStartMsg = "TALK_ESCORT_BROTHER_START", EscortAcceptMsg = "TALK_ESCORT_BROTHER_ACCEPT", EscortInteract = "EscortInteractBrother" })
       end
 	  
 	  if SV.family.Brother == false then
@@ -52,7 +72,12 @@ function COMMON.UpdateDayEndVars()
 	-- TODO: should be wayward_wetlands
     if _DATA.Save:GetDungeonUnlock("veiled_ridge") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortPet"] == nil and SV.missions.FinishedMissions["EscortPet"] == nil then
-        COMMON.CreateMission("EscortPet", "veiled_ridge", 1, 1, true, RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male), RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male), COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_ESCORT_OUT, { EscortStartMsg = "TALK_ESCORT_PET_START", EscortAcceptMsg = "TALK_ESCORT_PET_ACCEPT", EscortInteract = "EscortInteractPet" })
+        COMMON.CreateMission("EscortPet", "veiled_ridge", 1, 1, true, 
+                RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male), 
+                RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male), 
+                COMMON.MISSION_INCOMPLETE, 
+                COMMON.MISSION_TYPE_ESCORT_OUT, 
+                { EscortStartMsg = "TALK_ESCORT_PET_START", EscortAcceptMsg = "TALK_ESCORT_PET_ACCEPT", EscortInteract = "EscortInteractPet" })
       end
 	  
 	  if SV.family.Pet == false then
@@ -63,7 +88,12 @@ function COMMON.UpdateDayEndVars()
 	-- TODO: should be the_sky
     if _DATA.Save:GetDungeonUnlock("champions_road") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortGrandma"] == nil and SV.missions.FinishedMissions["EscortGrandma"] == nil then
-        COMMON.CreateMission("EscortGrandma", "champions_road", 1, 1, true, RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male), RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male), COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_ESCORT_OUT, { EscortStartMsg = "TALK_ESCORT_GRANDMA_START", EscortAcceptMsg = "TALK_ESCORT_GRANDMA_ACCEPT", EscortInteract = "EscortInteractGrandma" })
+        COMMON.CreateMission("EscortGrandma", "champions_road", 1, 1, true, 
+                RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male), 
+                RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male), 
+                COMMON.MISSION_INCOMPLETE, 
+                COMMON.MISSION_TYPE_ESCORT_OUT, 
+                { EscortStartMsg = "TALK_ESCORT_GRANDMA_START", EscortAcceptMsg = "TALK_ESCORT_GRANDMA_ACCEPT", EscortInteract = "EscortInteractGrandma" })
       end
 	  
 	  if SV.family.Grandma == false then

@@ -352,12 +352,11 @@ function canyon_camp.Rival_2_Action(chara, activator)
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Help_Line_001']))
-	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
-      DestZone = "copper_quarry", DestSegment = 0, DestFloor = 6,
-      FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("seviper", 0, "normal", Gender.Female),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("zangoose", 0, "normal", Gender.Female) }
+    COMMON.CreateMission(questname, "copper_quarry", 0, 6, false, 
+            RogueEssence.Dungeon.MonsterID("seviper", 0, "normal", Gender.Female), 
+            RogueEssence.Dungeon.MonsterID("zangoose", 0, "normal", Gender.Female), 
+            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE, 
+            nil)
 	
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
@@ -420,10 +419,13 @@ function canyon_camp.NPC_Storehouse_Action(chara, activator)
     if quest == nil then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
 	  --add the quest
-	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_HOUSE,
-      DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6, FloorUnknown = true,
-      ClientSpecies = chara.CurrentForm,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("toxicroak", 0, "normal", Gender.Male) }
+
+      COMMON.CreateMission(questname, "flyaway_cliffs", 0, 6, false,
+              RogueEssence.Dungeon.MonsterID("toxicroak", 0, "normal", Gender.Male),
+              chara.CurrentForm,
+              COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_OUTLAW_HOUSE,
+              nil)
+      
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_003']))
     else
@@ -842,13 +844,13 @@ function canyon_camp.NPC_Spar_Action(chara, activator)
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Help_Line_001'], days))
-	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
-      DestZone = "sleeping_caldera", DestSegment = 0, DestFloor = 8,
-      FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("meditite", 0, "normal", Gender.Male),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("makuhita", 0, "normal", Gender.Male) }
-	
+
+    COMMON.CreateMission(questname, "sleeping_caldera", 0, 8, false,
+            RogueEssence.Dungeon.MonsterID("meditite", 0, "normal", Gender.Male),
+            RogueEssence.Dungeon.MonsterID("makuhita", 0, "normal", Gender.Male),
+            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
+            nil)
+    
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
@@ -910,12 +912,12 @@ function canyon_camp.NPC_Shortcut_Action(chara, activator)
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Quest_Line_001']))
-	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
-      DestZone = "forsaken_desert", DestSegment = 0, DestFloor = 0,
-      FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("prinplup", 0, "normal", Gender.Male),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("floatzel", 0, "normal", Gender.Male) }
+
+    COMMON.CreateMission(questname, "forsaken_desert", 0, 0, false,
+            RogueEssence.Dungeon.MonsterID("prinplup", 0, "normal", Gender.Male),
+            RogueEssence.Dungeon.MonsterID("floatzel", 0, "normal", Gender.Male),
+            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
+            nil)
 	
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
@@ -1090,12 +1092,12 @@ function canyon_camp.NPC_Brains_Action(chara, activator)
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Brains_Line_002']))
-	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
-      DestZone = "relic_tower", DestSegment = 0, DestFloor = 8,
-      FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("kirlia", 0, "normal", Gender.Male),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("girafarig", 0, "normal", Gender.Male) }
+
+    COMMON.CreateMission(questname, "relic_tower", 0, 8, false,
+            RogueEssence.Dungeon.MonsterID("kirlia", 0, "normal", Gender.Male),
+            RogueEssence.Dungeon.MonsterID("girafarig", 0, "normal", Gender.Male),
+            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
+            nil)
 	
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)

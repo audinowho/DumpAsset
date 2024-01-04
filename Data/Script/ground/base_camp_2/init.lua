@@ -1572,12 +1572,12 @@ function base_camp_2.Juice_Owner_Action(chara, activator)
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_001']))
-	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
-      DestZone = "bramble_woods", DestSegment = 0, DestFloor = 4,
-      FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("shuckle", 0, "normal", Gender.Male) }
+
+    COMMON.CreateMission(questname, "bramble_woods", 0, 4, false,
+            RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
+            RogueEssence.Dungeon.MonsterID("shuckle", 0, "normal", Gender.Male),
+            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
+            nil)
 	
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)

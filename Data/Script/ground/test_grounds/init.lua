@@ -483,7 +483,7 @@ function test_grounds.Magnezone_Action(chara, activator)
     local chres = UI:ChoiceResult() 
     if chres then
 	  -- Type 0 = Rescue
-	  SV.missions.Missions["OutlawQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW,
+      SV.missions.Missions["OutlawQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW,
       DestZone = "debug_zone", DestSegment = 4, DestFloor = 9,
       FloorUnknown = true,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("riolu", 0, "normal", Gender.Male),

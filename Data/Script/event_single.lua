@@ -633,18 +633,18 @@ function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
 		UI:ResetSpeaker()
 		DUNGEON:CharTurnToChar(outlaw, GAME:GetPlayerPartyMember(0))
 		COMMON.TeamTurnTo(outlaw)
-		UI:WaitShowDialogue("Wanted outlaw spotted!")
+		UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW"):ToLocal()))
 
 		if mission.Type == COMMON.MISSION_TYPE_OUTLAW_FLEE then
 			GAME:WaitFrames(20)
 			UI:SetSpeaker(outlaw)
-			UI:WaitShowDialogue("Waah! A-adventurers! Run for it!")
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW_FLEE"):ToLocal()))
 			local leaderDir = _DUNGEON.ActiveTeam.Leader.CharDir
 			outlaw.CharDir = leaderDir
 		elseif mission.Type == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then
 			GAME:WaitFrames(20)
 			UI:SetSpeaker(outlaw)
-			UI:WaitShowDialogue("You've fallen into my trap!")
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW_TRAP"):ToLocal()))
 			SOUND:FadeOutBGM(20)
 			GAME:WaitFrames(20)
 
@@ -767,13 +767,13 @@ function SINGLE_CHAR_SCRIPT.OnMonsterHouseOutlawCheck(owner, ownerChar, context,
 			if found_goon and not found_outlaw then
 				GAME:WaitFrames(20)
 				UI:ResetSpeaker()
-				UI:WaitShowDialogue("Yes! You defeated " .. outlaw_name .. "! Defeat the rest of the goons!" )
+				UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW_BOSS_DEFEATED"):ToLocal(), outlaw_name))
 				SV.MonsterHouseMessageNotified = true
 			end
 			if not found_goon and found_outlaw then
 				GAME:WaitFrames(40)
 				UI:SetSpeaker(found_outlaw)
-				UI:WaitShowDialogue("Grr! You won't be able to defeat me!")
+				UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW_MINIONS_DEFEATED"):ToLocal()))
 				SV.MonsterHouseMessageNotified = true
 			end
 		end
@@ -784,7 +784,7 @@ function SINGLE_CHAR_SCRIPT.OnMonsterHouseOutlawCheck(owner, ownerChar, context,
 			curr_mission.Completion = 1
 			GAME:WaitFrames(20)
 			UI:ResetSpeaker()
-			UI:WaitShowDialogue("Yes!\nKnocked out outlaw " .. outlaw_name .. " and goons!")
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW_HOUSE_DEFEATED"):ToLocal(), outlaw_name))
 			SV.TemporaryFlags.PriorMapSetting = _DUNGEON.ShowMap
 			_DUNGEON.ShowMap = _DUNGEON.MinimapState.None
 			COMMON.AskMissionWarpOut()
@@ -816,7 +816,7 @@ function SINGLE_CHAR_SCRIPT.OutlawCheck(owner, ownerChar, context, args)
 			curr_mission.Completion = 1
 			GAME:WaitFrames(50)
 			UI:ResetSpeaker()
-			UI:WaitShowDialogue("Yes!\nKnocked out outlaw " .. outlaw_name .. "!")
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW_DEFEATED"):ToLocal(), outlaw_name))
 			--Clear but remember minimap state
 			SV.TemporaryFlags.PriorMapSetting = _DUNGEON.ShowMap
 			_DUNGEON.ShowMap = _DUNGEON.MinimapState.None
@@ -836,7 +836,7 @@ function SINGLE_CHAR_SCRIPT.OutlawItemCheck(owner, ownerChar, context, args)
 			SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
 			GAME:WaitFrames(50)
 			UI:ResetSpeaker()
-			UI:WaitShowDialogue("Yes!\nYou reclaimed the " .. item_name .. "!")
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW_ITEM_RETRIEVED"):ToLocal(), item_name))
 			--Clear but remember minimap state
 			SV.TemporaryFlags.PriorMapSetting = _DUNGEON.ShowMap
 			_DUNGEON.ShowMap = _DUNGEON.MinimapState.None

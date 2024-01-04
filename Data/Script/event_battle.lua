@@ -320,7 +320,7 @@ function BATTLE_SCRIPT.RescueReached(owner, ownerChar, context, args)
 end
 
 function RescueCheck(context, targetName, mission)
-    UI:ChoiceMenuYesNo("Yes! You've found " .. targetName .. "!\nDo you want to use your badge to rescue " .. targetName .. "?", false)
+    UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("MISSION_RESCUE_REACHED"):ToLocal(), targetName, targetName), false)
     UI:WaitForChoice()
     local use_badge = UI:ChoiceResult()
     if use_badge then
@@ -331,27 +331,27 @@ function RescueCheck(context, targetName, mission)
         _DUNGEON.ShowMap = _DUNGEON.MinimapState.None
         GAME:WaitFrames(20)
         mission.Completion = 1
-        UI:WaitShowDialogue("Your badge shines on " .. targetName .. ", and ".. targetName .. " is transported away magically!" )
+        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_RESCUE_BADGE"):ToLocal(), targetName, targetName))
         GAME:WaitFrames(20)
         UI:SetSpeaker(context.Target)
 
         --different responses for special targets
         if mission.Special == MISSION_GEN.SPECIAL_CLIENT_CHILD then
             UI:SetSpeakerEmotion("Joyous")
-            UI:WaitShowDialogue("Thank you for rescuing me! This place was so scary! I can't wait to see my family again!")
+            UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_RESCUE_CHILD"):ToLocal()))
         elseif mission.Special == MISSION_GEN.SPECIAL_CLIENT_FRIEND then
-            UI:WaitShowDialogue("Oh, my friend sent you to rescue me? Thank goodness! We'll see you at the guild later to say thanks!")
+            UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_RESCUE_FRIEND"):ToLocal()))
         elseif mission.Special == MISSION_GEN.SPECIAL_CLIENT_RIVAL then
-            UI:WaitShowDialogue("Tch, my rival sent you to rescue me, huh? Well, thank you. We'll reward you later at the guild.")
+            UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_RESCUE_RIVAL"):ToLocal()))
         elseif mission.Special == MISSION_GEN.SPECIAL_CLIENT_LOVER then
             UI:SetSpeakerEmotion("Joyous")
-            UI:WaitShowDialogue("Oh, my beloved " .. _DATA:GetMonster(mission.Client):GetColoredName() .. " sent you to rescue me? I can't wait to reunite with them!")
+            UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_RESCUE_LOVERS"):ToLocal(), _DATA:GetMonster(mission.Client):GetColoredName()))
         else
-            UI:WaitShowDialogue("Thanks for the rescue!\nI'll see you at the guild after with your reward!")
+            UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_RESCUE_NORMAL"):ToLocal()))
         end
         GAME:WaitFrames(20)
         UI:ResetSpeaker()
-        UI:WaitShowDialogue(targetName .. " escaped from the dungeon!")
+        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_RESCUE_DEPART"):ToLocal(), targetName))
         GAME:WaitFrames(20)
         -- warp out
         TASK:WaitTask(_DUNGEON:ProcessBattleFX(context.Target, context.Target, _DATA.SendHomeFX))
@@ -366,19 +366,19 @@ function RescueCheck(context, targetName, mission)
         UI:SetSpeaker(context.Target)
         if mission.Special == MISSION_GEN.SPECIAL_CLIENT_CHILD then
             UI:SetSpeakerEmotion("Crying")
-            UI:WaitShowDialogue("Waaah! It's s-scary here! P-please help me!")
+            UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_CLIENT_CHILD"):ToLocal()))
         elseif mission.Special == MISSION_GEN.SPECIAL_CLIENT_FRIEND then
             UI:SetSpeakerEmotion("Surprised")
-            UI:WaitShowDialogue("Please don't leave me here! My friend is probably worried sick!")
+            UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_CLIENT_FRIEND"):ToLocal()))
         elseif mission.Special == MISSION_GEN.SPECIAL_CLIENT_RIVAL then
             UI:SetSpeakerEmotion("Worried")
-            UI:WaitShowDialogue("Woah, don't just leave me hanging here!")
+            UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_CLIENT_RIVAL"):ToLocal()))
         elseif mission.Special == MISSION_GEN.SPECIAL_CLIENT_LOVER then
             UI:SetSpeakerEmotion("Worried")
-            UI:WaitShowDialogue("Please, get me out of here! I just want to see my dear " .. _DATA:GetMonster(mission.Client):GetColoredName() .. " again!")
+            UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_CLIENT_LOVER"):ToLocal(), _DATA:GetMonster(mission.Client):GetColoredName()))
         else
             UI:SetSpeakerEmotion("Surprised")
-            UI:WaitShowDialogue("H-hey! Don't just leave me here!")
+            UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_CLIENT_NORMAL"):ToLocal()))
         end
         --change map setting back to what it was
         _DUNGEON.ShowMap = map_setting
@@ -393,7 +393,7 @@ function DeliveryCheck(context, targetName, mission)
     local item_name =  RogueEssence.Dungeon.InvItem(mission.Item):GetDisplayName()
 
     if has_item then
-        UI:ChoiceMenuYesNo("Yes! You've located " .. targetName .. "!" .. " Do you want to deliver the requested " .. item_name .. " to " .. targetName .. "?")
+        UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("MISSION_DELIVERY_REACHED"):ToLocal(), targetName, item_name, targetName))
         UI:WaitForChoice()
         local deliver_item = UI:ChoiceResult()
         if deliver_item then
@@ -410,10 +410,10 @@ function DeliveryCheck(context, targetName, mission)
             end
             GAME:WaitFrames(20)
             UI:SetSpeaker(context.Target)
-            UI:WaitShowDialogue("Thanks for the " .. item_name .. "!\n I'll see you at the guild after with your reward!")
+            UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_DELIVERY_RECEIVED"):ToLocal(), item_name))
             GAME:WaitFrames(20)
             UI:ResetSpeaker()
-            UI:WaitShowDialogue(targetName .. " escaped from the dungeon!")
+            UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_RESCUE_DEPART"):ToLocal(), targetName))
             GAME:WaitFrames(20)
             TASK:WaitTask(_DUNGEON:ProcessBattleFX(context.Target, context.Target, _DATA.SendHomeFX))
             _DUNGEON:RemoveChar(context.Target)
@@ -426,19 +426,19 @@ function DeliveryCheck(context, targetName, mission)
             GAME:WaitFrames(20)
             UI:SetSpeaker(context.Target)
             UI:SetSpeakerEmotion("Sad")
-            UI:WaitShowDialogue("Oh, please! I really need that " .. item_name .. "...")
+            UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_CLIENT_DELIVERY"):ToLocal(), item_name))
             --change map setting back to what it was
             _DUNGEON.ShowMap = map_setting
             GAME:WaitFrames(20)		end
     else
-        UI:WaitShowDialogue("The requested " .. item_name .. " isn't in the Treasure Bag.\nThere is nothing to deliver.")
+        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_DELIVERY_EMPTY"):ToLocal(), item_name))
         --quickly hide the minimap for the 20 frame pause
         local map_setting = _DUNGEON.ShowMap
         _DUNGEON.ShowMap = _DUNGEON.MinimapState.None
         GAME:WaitFrames(20)
         UI:SetSpeaker(context.Target)
         UI:SetSpeakerEmotion("Sad")
-        UI:WaitShowDialogue("Huh, you don't have the " .. item_name .. "? That's too bad...")
+        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_CLIENT_DELIVERY_EMPTY"):ToLocal(), item_name))
         --change map setting back to what it was
         _DUNGEON.ShowMap = map_setting
         GAME:WaitFrames(20)

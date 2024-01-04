@@ -5,6 +5,8 @@ require 'menu.SkillTutorMenu'
 
 local base_camp_2 = {}
 local MapStrings = {}
+
+MissionBoardStateType = luanet.import_type('PMDC.Dungeon.MissionBoardState')
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
@@ -77,7 +79,11 @@ end
 function base_camp_2.Enter(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
 
-  --GROUND:Hide("Mission_Board")
+  local mission_table = _DATA.UniversalEvent.UniversalStates:GetWithDefault(luanet.ctype(MissionBoardStateType))
+  if mission_table == nil or mission_table.EnableMissionBoard == false then
+      GROUND:Hide("Mission_Board")
+  end
+    
   GROUND:Hide("Locator")
   GROUND:Hide("Locator_Owner")
 

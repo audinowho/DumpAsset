@@ -53,6 +53,19 @@ function cliff_camp.SetupNpcs()
   GROUND:Unhide("NPC_Undergrowth_2")
   GROUND:Unhide("NPC_Sightseer")
   
+  if not SV.family.Father and SV.family.FatherActiveDays >= 3 then
+  
+	local undergrowth1 = CH('NPC_Undergrowth_2')
+	local undergrowth2 = CH('NPC_Undergrowth_1')
+	GROUND:TeleportTo(undergrowth1, 312, 240, Direction.DownRight)
+	GROUND:TeleportTo(undergrowth2, 336, 268, Direction.UpLeft)
+  elseif not SV.family.Pet and SV.family.PetActiveDays >= 3 and SV.family.Sister and SV.family.Mother and SV.family.Father and SV.family.Brother then
+  
+	local undergrowth1 = CH('NPC_Undergrowth_2')
+	local undergrowth2 = CH('NPC_Undergrowth_1')
+	GROUND:TeleportTo(undergrowth1, 312, 240, Direction.DownRight)
+	GROUND:TeleportTo(undergrowth2, 336, 268, Direction.UpLeft)
+  end
   
   if SV.team_hunter.Status == 1 then
     GROUND:Unhide("NPC_Broke")
@@ -690,6 +703,14 @@ end
 
 function cliff_camp.NPC_Undergrowth_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  
+  if not SV.family.Father and SV.family.FatherActiveDays >= 3 then
+    cliff_camp.NPC_Undergrowth_Concern()
+  elseif not SV.family.Pet and SV.family.PetActiveDays >= 3 and SV.family.Sister and SV.family.Mother and SV.family.Father and SV.family.Brother then
+    cliff_camp.NPC_Undergrowth_Concern()
+  else
+  
   GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
   if not SV.cliff_camp.TeamUndergrowthIntro then
@@ -700,20 +721,56 @@ function cliff_camp.NPC_Undergrowth_1_Action(chara, activator)
   UI:SetSpeakerEmotion("Worried")
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Bellsprout_Line_002']))
   GROUND:EntTurn(chara, Direction.DownRight)
+  
+  end
 end
   
 function cliff_camp.NPC_Undergrowth_2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  if not SV.family.Father and SV.family.FatherActiveDays >= 3 then
+    cliff_camp.NPC_Undergrowth_Concern()
+  elseif not SV.family.Pet and SV.family.PetActiveDays >= 3 and SV.family.Sister and SV.family.Mother and SV.family.Father and SV.family.Brother then
+    cliff_camp.NPC_Undergrowth_Concern()
+  else
+  
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
   
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shroomish_Line_001']))
   
-  local partner = CH('Undergrowth_1')
+  local partner = CH('NPC_Undergrowth_1')
   UI:SetSpeaker(partner)
   UI:SetSpeakerEmotion("Pain")
   GROUND:CharSetEmote(partner, "sweating", 1)
   SOUND:PlayBattleSE("EVT_Emote_Sweating")
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Bellsprout_Line_003']))
+  
+  end
+end
+
+
+function cliff_camp.NPC_Undergrowth_Concern()
+  local undergrowth1 = CH('NPC_Undergrowth_1')
+  local undergrowth2 = CH('NPC_Undergrowth_2')
+  
+  if not SV.family.Father and SV.family.FatherActiveDays >= 3 then
+    
+	UI:SetSpeaker(undergrowth1)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Father_Line_001']))
+	
+	UI:SetSpeaker(undergrowth2)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Father_Line_002']))
+	
+  elseif not SV.family.Pet and SV.family.PetActiveDays >= 3 and SV.family.Sister and SV.family.Mother and SV.family.Father and SV.family.Brother then
+  
+	UI:SetSpeaker(undergrowth1)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Pet_Line_001']))
+	
+	UI:SetSpeaker(undergrowth2)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Pet_Line_002']))
+	
+  end
+  
 end
   
 function cliff_camp.Rival_1_Action(chara, activator)

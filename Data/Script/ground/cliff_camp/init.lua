@@ -325,18 +325,23 @@ function cliff_camp.NPC_Broke_Action(chara, activator)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_001']))
 	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
       DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6,
       FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
+	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_dark"),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("mightyena", 0, "normal", Gender.Male) }
 	
-  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_002']))
   else
-    cliff_camp.Dark_Complete()
+  
+	COMMON.TakeMissionItem(quest)
+	
+    if quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_002']))
+    else
+      cliff_camp.Dark_Complete()
+	end
   end
   
   elseif SV.team_hunter.Status == 2 then
@@ -391,21 +396,26 @@ function cliff_camp.Catch_Action()
   if quest == nil then
     cliff_camp.Catch_Trouble()
 	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
       DestZone = "overgrown_wilds", DestSegment = 0, DestFloor = 6,
       FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
+	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_normal"),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("rattata", 0, "normal", Gender.Male) }
 	
-  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-    local catch1 = CH('NPC_Catch_1')
-    local catch2 = CH('NPC_Catch_2')
-	UI:SetSpeaker(catch1)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_005']))
-	UI:SetSpeaker(catch2)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_006']))
   else
-    cliff_camp.Catch_Complete()
+  
+	COMMON.TakeMissionItem(quest)
+	
+    if quest.Complete == COMMON.MISSION_INCOMPLETE then
+      local catch1 = CH('NPC_Catch_1')
+      local catch2 = CH('NPC_Catch_2')
+	  UI:SetSpeaker(catch1)
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_005']))
+	  UI:SetSpeaker(catch2)
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_006']))
+    else
+      cliff_camp.Catch_Complete()
+	end
   end
 end
   

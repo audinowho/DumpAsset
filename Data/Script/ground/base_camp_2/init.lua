@@ -1562,18 +1562,23 @@ function base_camp_2.Juice_Owner_Action(chara, activator)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_001']))
 	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
       DestZone = "bramble_woods", DestSegment = 0, DestFloor = 4,
       FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
+	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_bug"),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("shuckle", 0, "normal", Gender.Male) }
 	
-  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_002']))
   else
-    base_camp_2.Bug_Complete()
+  
+	COMMON.TakeMissionItem(quest)
+	
+    if quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_002']))
+    else
+      base_camp_2.Bug_Complete()
+    end
   end
   
   elseif SV.base_town.JuiceShop >= 2 then

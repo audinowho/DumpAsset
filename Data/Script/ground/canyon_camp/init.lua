@@ -285,7 +285,6 @@ function canyon_camp.BeginExposition()
   GAME:FadeIn(20)
   
   GAME:UnlockDungeon('copper_quarry')
-  GAME:UnlockDungeon('forsaken_desert')
   GAME:UnlockDungeon('sleeping_caldera')
 end
 
@@ -1021,7 +1020,13 @@ function canyon_camp.NPC_NextCamp_Action(chara, activator)
   
   local player = CH('PLAYER')
   UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['NextCamp_Line_001']))
+  
+  if _DATA.Save:GetDungeonUnlock("forsaken_desert") == RogueEssence.Data.GameProgress.UnlockState.None then
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Desert_Line_001']))
+	COMMON.UnlockWithFanfare("forsaken_desert", false)
+  else
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Desert_Line_002']))
+  end
 end
   
   

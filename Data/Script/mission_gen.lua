@@ -2965,10 +2965,12 @@ function JobMenu:initialize(job_type, job_number, parent_board_menu)
   
   
   self.zone = ""
+  self.zone_name = ""
   if job.Zone ~= "" then
 	  local zone_string = _DATA:GetZone(job.Zone).Segments[job.Segment]:ToString()
 	  zone_string = COMMON.CreateColoredSegmentString(zone_string)
 	  self.zone = zone_string
+	  self.zone_name = job.Zone
   end
   
   self.floor = ""
@@ -3137,7 +3139,7 @@ function JobMenu:AddJobToTaken()
 
 		--Suspend the job if there is currently an active sidequest in that dungeon
 		if COMMON.HasSidequestInZone(SV.TakenBoard[freeIndex].Zone) then
-			self:FlipTakenStatus()
+			SV.TakenBoard[freeIndex].Taken = false
 		end
 		
 		MISSION_GEN.SortTaken()
@@ -3169,17 +3171,20 @@ function JobMenu:OpenSubMenu()
 		--print(self.job_type .. " taken: " .. tostring(self.taken))
 		if self.job_type == COMMON.MISSION_BOARD_TAKEN then
 			local choice_str = Text.FormatKey("MISSION_BOARD_TAKE_JOB")
+			local take_job = true
 			if self.taken then
 				choice_str = Text.FormatKey("MISSION_BOARD_SUSPEND")
+				take_job = false
 			end
-			choices = {	{choice_str, true, function() self:FlipTakenStatus() _MENU:RemoveMenu() _MENU:RemoveMenu() end},
+			choices = {	{choice_str, not take_job or not COMMON.HasSidequestInZone(self.zone_name), function() self:FlipTakenStatus() _MENU:RemoveMenu() _MENU:RemoveMenu() end},
 						{Text.FormatKey("MISSION_BOARD_DELETE"), true, function() self:DeleteJob() _MENU:RemoveMenu() end},
 						{Text.FormatKey("MISSION_BOARD_CANCEL"), true, function() _MENU:RemoveMenu() _MENU:RemoveMenu() end} }
 			
 		else --outlaw/mission boards
 			--we already made a check above to see if this is a job board and not taken 
 			--only selectable if there's room on the taken board for the job, there is no sidequest for the dungeon, and we haven't already taken this mission
-			choices = {{Text.FormatKey("MISSION_BOARD_TAKE_JOB"), MISSION_GEN.IsBoardFull(SV.TakenBoard) == false and not COMMON.HasSidequestInZone(self.zone) and not self.taken, function() self:FlipTakenStatus() 
+			
+			choices = {{Text.FormatKey("MISSION_BOARD_TAKE_JOB"), MISSION_GEN.IsBoardFull(SV.TakenBoard) == false and not self.taken, function() self:FlipTakenStatus() 
 																								 self:AddJobToTaken() _MENU:RemoveMenu() end },
 					   {Text.FormatKey("MISSION_BOARD_CANCEL"), true, function() _MENU:RemoveMenu() _MENU:RemoveMenu() end} }
 		end 

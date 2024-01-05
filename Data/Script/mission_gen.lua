@@ -3136,7 +3136,7 @@ function JobMenu:AddJobToTaken()
 		SV.TakenBoard[freeIndex].BackReference = self.job_number
 
 		--Suspend the job if there is currently an active sidequest in that dungeon
-		if COMMON.HasSidequestInZone(self.zone) then
+		if COMMON.HasSidequestInZone(SV.TakenBoard[freeIndex].Zone) then
 			self:FlipTakenStatus()
 		end
 		
@@ -3168,20 +3168,20 @@ function JobMenu:OpenSubMenu()
 		local choices = {}
 		--print(self.job_type .. " taken: " .. tostring(self.taken))
 		if self.job_type == COMMON.MISSION_BOARD_TAKEN then
-			local choice_str = "Take Job"
+			local choice_str = Text.FormatKey("MISSION_BOARD_TAKE_JOB")
 			if self.taken then
-				choice_str = 'Suspend'
+				choice_str = Text.FormatKey("MISSION_BOARD_SUSPEND")
 			end
 			choices = {	{choice_str, true, function() self:FlipTakenStatus() _MENU:RemoveMenu() _MENU:RemoveMenu() end},
-						{"Delete", true, function() self:DeleteJob() _MENU:RemoveMenu() end},
-						{"Cancel", true, function() _MENU:RemoveMenu() _MENU:RemoveMenu() end} }
+						{Text.FormatKey("MISSION_BOARD_DELETE"), true, function() self:DeleteJob() _MENU:RemoveMenu() end},
+						{Text.FormatKey("MISSION_BOARD_CANCEL"), true, function() _MENU:RemoveMenu() _MENU:RemoveMenu() end} }
 			
 		else --outlaw/mission boards
 			--we already made a check above to see if this is a job board and not taken 
 			--only selectable if there's room on the taken board for the job, there is no sidequest for the dungeon, and we haven't already taken this mission
-			choices = {{"Take Job", MISSION_GEN.IsBoardFull(SV.TakenBoard) == false and not COMMON.HasSidequestInZone(self.zone) and not self.taken, function() self:FlipTakenStatus() 
+			choices = {{Text.FormatKey("MISSION_BOARD_TAKE_JOB"), MISSION_GEN.IsBoardFull(SV.TakenBoard) == false and not COMMON.HasSidequestInZone(self.zone) and not self.taken, function() self:FlipTakenStatus() 
 																								 self:AddJobToTaken() _MENU:RemoveMenu() end },
-					   {"Cancel", true, function() _MENU:RemoveMenu() _MENU:RemoveMenu() end} }
+					   {Text.FormatKey("MISSION_BOARD_CANCEL"), true, function() _MENU:RemoveMenu() _MENU:RemoveMenu() end} }
 		end 
 	
 		submenu = RogueEssence.Menu.ScriptableSingleStripMenu(232, 138, 24, choices, 0, function() _MENU:RemoveMenu() _MENU:RemoveMenu() end) 
@@ -3326,7 +3326,7 @@ function BoardMenu:DrawBoard()
   self.menu.MenuElements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(8, 8 + 12), self.menu.Bounds.Width - 8 * 2))
 
   --Standard title. Reuse this whenever a title is needed.
-  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Notice Board", RogueElements.Loc(16, 8)))
+  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_BOARD_NOTICE"), RogueElements.Loc(16, 8)))
   
   --page element
   self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("(" .. tostring(self.page) .. "/" .. tostring(self.total_pages) .. ")", RogueElements.Loc(self.menu.Bounds.Width - 35, 8)))
@@ -3334,7 +3334,7 @@ function BoardMenu:DrawBoard()
 	
   --Accepted element 
   self.menu.MenuElements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(8, self.menu.Bounds.Height - 24), self.menu.Bounds.Width - 8 * 2))
-  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Accepted: " .. tostring(self.taken_count) .. "/8", RogueElements.Loc(96, self.menu.Bounds.Height - 20)))
+  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_BOARD_ACCEPTED") .. tostring(self.taken_count) .. "/8", RogueElements.Loc(96, self.menu.Bounds.Height - 20)))
 
 
   self.menu.MenuElements:Add(self.cursor)
@@ -3520,31 +3520,31 @@ function BoardSelectionMenu:DrawMenu()
   local board_name = ""
   if self.board_type == COMMON.MISSION_BOARD_OUTLAW then
 	if SV.OutlawBoard[1].Client == '' then 
-		board_name = "[color=#FF0000]Outlaw Notice Board[color]"
+		board_name = "[color=#FF0000]"..Text.FormatKey("MISSION_BOARD_NAME_OUTLAW").."[color]"
 		self.board_populated = false
 	else
-		board_name = "Outlaw Notice Board" 
+		board_name = Text.FormatKey("MISSION_BOARD_NAME_OUTLAW")
 	end
   else
 	if MISSION_GEN.MissionBoardIsEmpty() then 
-		board_name = "[color=#FF0000]Job Bulletin Board[color]"
+		board_name = "[color=#FF0000]"..Text.FormatKey("MISSION_BOARD_NAME_MISSION").."[color]"
 		self.board_populated = false
 	else
-		board_name = "Job Bulletin Board" 
+		board_name = Text.FormatKey("MISSION_BOARD_NAME_MISSION")
 	end	
   end
   
   --color this red if there's no jobs, mark there's no jobs taken
-  self.job_list = "Job List"
+  self.job_list = Text.FormatKey("MISSION_BOARD_NAME_TAKEN")
   self.taken_populated = true 
   if MISSION_GEN.TakenBoardIsEmpty() then
-	self.job_list = "[color=#FF0000]Job List[color]"
+	self.job_list = "[color=#FF0000]"..Text.FormatKey("MISSION_BOARD_NAME_TAKEN").."[color]"
 	self.taken_populated = false 
   end
   
   self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(board_name, RogueElements.Loc(21, 8)))
   self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(self.job_list, RogueElements.Loc(21, 22)))
-  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Exit", RogueElements.Loc(21, 36)))
+  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_BOARD_EXIT"), RogueElements.Loc(21, 36)))
 
   self.menu.MenuElements:Add(self.cursor)
 end 

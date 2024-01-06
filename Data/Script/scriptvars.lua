@@ -46,7 +46,8 @@ SV.checkpoint =
 
 SV.adventure = 
 {
-  Thief    = false
+  Thief    = false,
+  Tutors = { }
 }
 
 SV.base_shop = {

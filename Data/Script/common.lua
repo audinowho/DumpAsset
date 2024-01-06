@@ -1184,6 +1184,7 @@ function COMMON.EndDayCycle()
   --reshuffle items
 
   SV.adventure.Thief = false
+  SV.adventure.Tutors = { }
   SV.base_shop = { }
   
   math.randomseed(GAME:GetDailySeed())

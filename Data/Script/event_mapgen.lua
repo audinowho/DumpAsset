@@ -207,6 +207,10 @@ function FLOOR_GEN_SCRIPT.SpawnRandomTutor(map, args)
   local valid_moves = {}
   --iterate through all tutor moves
   for move_idx, skill in pairs(COMMON.TUTOR) do
+	--Were they already encountered in this adventure?  skip
+	if SV.adventure.Tutors[move_idx] ~= nil then
+	  goto continue
+	end
 	--do they not fall in range of cost?  skip
 	if skill.Cost < args.MinCost or skill.Cost >= args.MaxCost then
 	  goto continue
@@ -307,6 +311,8 @@ function FLOOR_GEN_SCRIPT.SpawnRandomTutor(map, args)
 	  mobPlacement.Filters:Add(PMDC.LevelGen.RoomFilterConnectivity(PMDC.LevelGen.ConnectivityRoom.Connectivity.Main))
 	  mobPlacement.ClumpFactor = 20
 	  mobPlacement:Apply(map)
+	  
+	  SV.adventure.Tutors[tutor_move] = true
   end
 end
 

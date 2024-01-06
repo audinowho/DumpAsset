@@ -4,12 +4,7 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Copper Quarry",
-"LocalTexts": {
-"de": "Kupfersteinbruch",
-"es": "Cantera Bronce",
-"it": "Miniera di Rame",
-"zh-hans": "采铜矿场"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -6663,7 +6658,28 @@
 "regidrago",
 "glastrier",
 "spectrier",
-"calyrex"
+"calyrex",
+"enamorus",
+"great_tusk",
+"scream_tail",
+"brute_bonnet",
+"flutter_mane",
+"slither_wing",
+"sandy_shocks",
+"iron_treads",
+"iron_bundle",
+"iron_hands",
+"iron_jugulis",
+"iron_moth",
+"iron_thorns",
+"wo_chien",
+"chien_pao",
+"ting_lu",
+"chi_yu",
+"roaring_moon",
+"iron_valiant",
+"koraidon",
+"miraidon"
 ],
 "Rarity": {
 "Min": 2,
@@ -6699,13 +6715,8 @@
 ]
 },
 "Name": {
-"DefaultText": "Copper Quarry\\n{0}F",
-"LocalTexts": {
-"de": "Kupfersteinbruch\\nE{0}",
-"es": "Cantera Bronce\\nP{0}",
-"it": "Miniera di Rame\\nP{0}",
-"zh-hans": "采铜矿场\\n{0}F"
-}
+"DefaultText": "Copper Quarry\n{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -7474,7 +7485,7 @@
 "Amount": 0,
 "Price": 0
 },
-"Rate": 10,
+"Rate": 15,
 "Range": {
 "Min": 0,
 "Max": 11
@@ -7484,7 +7495,7 @@
 "SpawnRates": {
 "nodes": [
 {
-"Item": 2,
+"Item": 4,
 "Range": {
 "Min": 0,
 "Max": 11
@@ -8074,8 +8085,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 35,
-"Max": 35
+"Min": 32,
+"Max": 32
 },
 "SpecifiedSkills": [
 "iron_head",
@@ -8140,6 +8151,87 @@
 }
 ],
 "SpecificSpawns": []
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
+"StepPriority": {
+"str": [
+6,
+2,
+1
+]
+},
+"Spawns": {
+"$type": "RogueElements.RandBag`1[[RogueElements.IGenStep, RogueElements]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueEssence.LevelGen.PlaceRandomMobsStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Filters": [],
+"IncludeHalls": false,
+"Spawn": {
+"$type": "RogueEssence.LevelGen.PresetMultiTeamSpawner`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"Spawns": [
+{
+"Explorer": true,
+"Spawns": [
+{
+"BaseForm": {
+"Species": "linoone",
+"Form": 0,
+"Skin": "normal",
+"Gender": 1
+},
+"Level": {
+"Min": 28,
+"Max": 28
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "slow_wander",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnInteractable, PMDC",
+"CheckEvents": [
+{
+"$type": "PMDC.Dungeon.NpcDialogueBattleEvent, PMDC",
+"Message": {
+"Key": "TALK_ADVICE_QUARRY"
+},
+"HideSpeaker": false,
+"Emote": {
+"Emote": 0,
+"Reverse": false
+}
+}
+]
+}
+]
+}
+]
+}
+]
+},
+"Ally": true,
+"ClumpFactor": 0
+}
+],
+"removeOnRoll": true
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 1
+},
+"Replaceable": true,
+"FloorRange": {
+"Min": 7,
+"Max": 9
+}
+},
+"ModStates": []
 },
 {
 "$type": "RogueEssence.LevelGen.TileSpawnZoneStep, RogueEssence",
@@ -10105,12 +10197,12 @@
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
-"MaxHPBonus": 128,
-"AtkBonus": 128,
-"DefBonus": 128,
-"SpAtkBonus": 128,
-"SpDefBonus": 128,
-"SpeedBonus": 128
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
 }
 ]
 },
@@ -10167,12 +10259,12 @@
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
-"MaxHPBonus": 128,
-"AtkBonus": 128,
-"DefBonus": 128,
-"SpAtkBonus": 128,
-"SpDefBonus": 128,
-"SpeedBonus": 128
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
 }
 ]
 },
@@ -10229,12 +10321,12 @@
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
-"MaxHPBonus": 128,
-"AtkBonus": 128,
-"DefBonus": 128,
-"SpAtkBonus": 128,
-"SpDefBonus": 128,
-"SpeedBonus": 128
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
 }
 ]
 },
@@ -10291,12 +10383,12 @@
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
-"MaxHPBonus": 128,
-"AtkBonus": 128,
-"DefBonus": 128,
-"SpAtkBonus": 128,
-"SpDefBonus": 128,
-"SpeedBonus": 128
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
 }
 ]
 },
@@ -10353,12 +10445,12 @@
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
-"MaxHPBonus": 128,
-"AtkBonus": 128,
-"DefBonus": 128,
-"SpAtkBonus": 128,
-"SpDefBonus": 128,
-"SpeedBonus": 128
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnDiscriminator, PMDC",
@@ -11086,6 +11178,81 @@
 "Spawn": {
 "IsMoney": false,
 "Cursed": false,
+"Value": "evo_thunder_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 2500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_fire_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 2500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_water_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 2500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_leaf_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 2500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_ice_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 2500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
 "Value": "food_apple_huge",
 "HiddenValue": "",
 "Amount": 0,
@@ -11170,12 +11337,12 @@
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
-"MaxHPBonus": 128,
-"AtkBonus": 128,
-"DefBonus": 128,
-"SpAtkBonus": 128,
-"SpDefBonus": 128,
-"SpeedBonus": 128
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
 }
 ]
 },
@@ -11239,12 +11406,12 @@
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
-"MaxHPBonus": 128,
-"AtkBonus": 128,
-"DefBonus": 128,
-"SpAtkBonus": 128,
-"SpDefBonus": 128,
-"SpeedBonus": 128
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
 }
 ]
 },
@@ -11308,12 +11475,12 @@
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
-"MaxHPBonus": 128,
-"AtkBonus": 128,
-"DefBonus": 128,
-"SpAtkBonus": 128,
-"SpDefBonus": 128,
-"SpeedBonus": 128
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
 }
 ]
 },
@@ -11377,12 +11544,12 @@
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
-"MaxHPBonus": 128,
-"AtkBonus": 128,
-"DefBonus": 128,
-"SpAtkBonus": 128,
-"SpDefBonus": 128,
-"SpeedBonus": 128
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
 }
 ]
 },
@@ -11446,12 +11613,12 @@
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
-"MaxHPBonus": 128,
-"AtkBonus": 128,
-"DefBonus": 128,
-"SpAtkBonus": 128,
-"SpDefBonus": 128,
-"SpeedBonus": 128
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
 }
 ]
 },
@@ -11515,12 +11682,12 @@
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
-"MaxHPBonus": 128,
-"AtkBonus": 128,
-"DefBonus": 128,
-"SpAtkBonus": 128,
-"SpDefBonus": 128,
-"SpeedBonus": 128
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
 },
 {
 "$type": "PMDC.LevelGen.MobSpawnDiscriminator, PMDC",
@@ -14826,11 +14993,8 @@
 ]
 },
 "Name": {
-"DefaultText": "Lodestone Quarry\\nB{0}F",
-"LocalTexts": {
-"de": "Magnetitsteinbruch\\nU{0}",
-"zh-hans": "磁力矿场\\nB{0}F"
-}
+"DefaultText": "Lodestone Quarry\nB{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -17262,13 +17426,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Secret Room",
-"LocalTexts": {
-"de": "Geheimer Raum",
-"es": "Piso Secreto",
-"pt": "Sala Secreta",
-"it": "Stanza Segreta",
-"zh-hans": "秘密之间"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -17457,7 +17615,28 @@
 "regidrago",
 "glastrier",
 "spectrier",
-"calyrex"
+"calyrex",
+"enamorus",
+"great_tusk",
+"scream_tail",
+"brute_bonnet",
+"flutter_mane",
+"slither_wing",
+"sandy_shocks",
+"iron_treads",
+"iron_bundle",
+"iron_hands",
+"iron_jugulis",
+"iron_moth",
+"iron_thorns",
+"wo_chien",
+"chien_pao",
+"ting_lu",
+"chi_yu",
+"roaring_moon",
+"iron_valiant",
+"koraidon",
+"miraidon"
 ],
 "Rarity": {
 "Min": 2,
@@ -17591,13 +17770,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -19925,13 +20098,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -22275,13 +22442,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -24637,13 +24798,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -26971,13 +27126,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -29321,13 +29470,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }

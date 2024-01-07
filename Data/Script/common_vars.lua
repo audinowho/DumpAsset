@@ -384,3 +384,6 @@ function COMMON.UpdateCheckpointStatus(checkpoint, limit)
 	end
 end
 
+function COMMON.ExitDungeonMissionCheckEx(result, zoneId, segmentID)
+
+end

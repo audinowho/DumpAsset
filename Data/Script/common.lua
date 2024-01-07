@@ -1090,6 +1090,11 @@ end
 
 
 function COMMON.ExitDungeonMissionCheck(result, zoneId, segmentID)
+  --TODO: remove this hack when referencing base game in mod scripts is complete
+  if COMMON.ExitDungeonMissionCheckEx ~= nil then
+    COMMON.ExitDungeonMissionCheckEx(result, zoneId, segmentID)
+  end
+  
   -- clear any escorts from party
   local party = GAME:GetPlayerGuestTable()
   for i, p in ipairs(party) do

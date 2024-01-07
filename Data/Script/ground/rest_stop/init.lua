@@ -253,6 +253,7 @@ function rest_stop.Rival_1_Action(chara, activator)
 
     COMMON.CreateMission(questname, "thunderstruck_pass", 0, 5, false,
             RogueEssence.Dungeon.MonsterID("zangoose", 0, "normal", Gender.Female),
+            nil,
             RogueEssence.Dungeon.MonsterID("seviper", 0, "normal", Gender.Female),
             COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
             nil)
@@ -354,6 +355,7 @@ function rest_stop.DragonTalk()
 
       COMMON.CreateMission(questname, "snowbound_path", 0, 14, false,
               RogueEssence.Dungeon.MonsterID("charizard", 0, "normal", Gender.Male),
+              nil,
               RogueEssence.Dungeon.MonsterID("aerodactyl", 0, "normal", Gender.Male),
               COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
               nil)
@@ -453,6 +455,7 @@ function rest_stop.NPC_Storehouse_Action(chara, activator)
 
       COMMON.CreateMission(questname, "copper_quarry", 0, 4, true,
               RogueEssence.Dungeon.MonsterID("weavile", 0, "normal", Gender.Male),
+			  nil,
               chara.CurrentForm,
               COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
               nil)
@@ -558,6 +561,7 @@ function rest_stop.Rock_Boss(chara, activator)
 
     COMMON.CreateMission(questname, "veiled_ridge", 0, 10, false,
             RogueEssence.Dungeon.MonsterID("exploud", 0, "normal", Gender.Male),
+            nil,
             RogueEssence.Dungeon.MonsterID("aggron", 0, "normal", Gender.Male),
             COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
             nil)
@@ -715,6 +719,7 @@ function rest_stop.NPC_Goals_Action(chara, activator)
 
     COMMON.CreateMission(questname, "treacherous_mountain", 0, 9, true,
             RogueEssence.Dungeon.MonsterID("ninetales", 0, "normal", Gender.Male),
+            nil,
             RogueEssence.Dungeon.MonsterID("sneasel", 0, "normal", Gender.Male),
             COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
             nil)

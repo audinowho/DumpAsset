@@ -327,6 +327,7 @@ function forest_camp.NPC_Elder_Action(chara, activator)
 
     COMMON.CreateMission(questname, "ambush_forest", 0, 11, false,
             RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
+            nil,
             RogueEssence.Dungeon.MonsterID("mightyena", 0, "normal", Gender.Male),
             COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
             nil)
@@ -504,6 +505,7 @@ function forest_camp.Sick_Child()
 
     COMMON.CreateMission(questname, "sickly_hollow", 0, destFloor, false,
             RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
+            nil,
             RogueEssence.Dungeon.MonsterID("sunflora", 0, "normal", Gender.Male),
             COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
             nil)

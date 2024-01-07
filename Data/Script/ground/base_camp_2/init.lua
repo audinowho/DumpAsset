@@ -1575,6 +1575,7 @@ function base_camp_2.Juice_Owner_Action(chara, activator)
 
     COMMON.CreateMission(questname, "bramble_woods", 0, 4, false,
             RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
+            nil,
             RogueEssence.Dungeon.MonsterID("shuckle", 0, "normal", Gender.Male),
             COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_LOST_ITEM,
             nil)

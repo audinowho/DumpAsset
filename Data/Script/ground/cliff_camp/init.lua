@@ -314,6 +314,7 @@ function cliff_camp.NPC_Broke_Action(chara, activator)
 
     COMMON.CreateMission(questname, "flyaway_cliffs", 0, 6, false,
             RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
+            nil,
             RogueEssence.Dungeon.MonsterID("mightyena", 0, "normal", Gender.Male),
             COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
             nil)
@@ -380,6 +381,7 @@ function cliff_camp.Catch_Action()
 
     COMMON.CreateMission(questname, "overgrown_wilds", 0, 6, false,
             RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
+            nil,
             RogueEssence.Dungeon.MonsterID("rattata", 0, "normal", Gender.Male),
             COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
             nil)
@@ -549,6 +551,7 @@ function cliff_camp.NPC_Sightseer_Action(chara, activator)
 	--TODO: later oblivion valley
     COMMON.CreateMission(questname, "secret_garden", 0, 9, false,
             RogueEssence.Dungeon.MonsterID("meowth", 0, "normal", Gender.Male),
+            nil,
             RogueEssence.Dungeon.MonsterID("pidgeotto", 0, "normal", Gender.Male),
             COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
             nil)
@@ -631,6 +634,7 @@ function cliff_camp.Speedster_2_Action(chara, activator)
 	--TODO: later deserted fortress
     COMMON.CreateMission(questname, "trickster_woods", 0, 6, false,
             RogueEssence.Dungeon.MonsterID("doduo", 0, "normal", Gender.Male),
+            nil,
             RogueEssence.Dungeon.MonsterID("pachirisu", 0, "normal", Gender.Male),
             COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
             nil)
@@ -818,6 +822,7 @@ function cliff_camp.NPC_Storehouse_Action(chara, activator)
 	  --add the quest
       COMMON.CreateMission(questname, "faded_trail", 0, 5, true,
               RogueEssence.Dungeon.MonsterID("murkrow", 0, "normal", Gender.Male),
+              nil,
               chara.CurrentForm,
               COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_OUTLAW,
               nil)

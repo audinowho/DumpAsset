@@ -324,19 +324,24 @@ function forest_camp.NPC_Elder_Action(chara, activator)
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Line_001']))
-
-    COMMON.CreateMission(questname, "ambush_forest", 0, 11, false,
-            RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
-            RogueEssence.Dungeon.MonsterID("mightyena", 0, "normal", Gender.Male),
-            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
-            nil)
 	
-  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Line_002']))
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+      DestZone = "ambush_forest", DestSegment = 0, DestFloor = 11,
+      FloorUnknown = false,
+	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_ground"),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("donphan", 0, "normal", Gender.Male) }
+	
   else
-    forest_camp.Ground_Complete()
+  
+	COMMON.TakeMissionItem(quest)
+	
+    if quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Line_002']))
+    else
+      forest_camp.Ground_Complete()
+    end
   end
   
   elseif SV.town_elder.Status == 2 then
@@ -499,22 +504,28 @@ function forest_camp.Sick_Child()
 
 	GROUND:CharTurnToChar(player, camps)
 	GROUND:CharTurnToChar(player, parent)
-	local destFloor = 8
+	local destFloor = 10
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sickness_Line_003'], tostring(destFloor+1)))
 
-    COMMON.CreateMission(questname, "sickly_hollow", 0, destFloor, false,
-            RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
-            RogueEssence.Dungeon.MonsterID("sunflora", 0, "normal", Gender.Male),
-            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
-            nil)
 	
-  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-    local camps = CH('NPC_Camps')
-    UI:SetSpeaker(camps)
-    GROUND:CharTurnToChar(camps,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sickness_Line_004']))
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+      DestZone = "sickly_hollow", DestSegment = 0, DestFloor = destFloor,
+      FloorUnknown = false,
+	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_grass"),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("sunflora", 0, "normal", Gender.Male) }
+	
   else
-    forest_camp.Grass_Complete()
+  
+	COMMON.TakeMissionItem(quest)
+	
+    if quest.Complete == COMMON.MISSION_INCOMPLETE then
+      local camps = CH('NPC_Camps')
+      UI:SetSpeaker(camps)
+      GROUND:CharTurnToChar(camps,CH('PLAYER'))
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sickness_Line_004']))
+    else
+      forest_camp.Grass_Complete()
+	end
   end
   
   elseif SV.forest_child.Status == 2 then

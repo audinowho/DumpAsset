@@ -53,6 +53,19 @@ function cliff_camp.SetupNpcs()
   GROUND:Unhide("NPC_Undergrowth_2")
   GROUND:Unhide("NPC_Sightseer")
   
+  if not SV.family.Father and SV.family.FatherActiveDays >= 3 then
+  
+	local undergrowth1 = CH('NPC_Undergrowth_2')
+	local undergrowth2 = CH('NPC_Undergrowth_1')
+	GROUND:TeleportTo(undergrowth1, 312, 240, Direction.DownRight)
+	GROUND:TeleportTo(undergrowth2, 336, 268, Direction.UpLeft)
+  elseif not SV.family.Pet and SV.family.PetActiveDays >= 3 and SV.family.Sister and SV.family.Mother and SV.family.Father and SV.family.Brother then
+  
+	local undergrowth1 = CH('NPC_Undergrowth_2')
+	local undergrowth2 = CH('NPC_Undergrowth_1')
+	GROUND:TeleportTo(undergrowth1, 312, 240, Direction.DownRight)
+	GROUND:TeleportTo(undergrowth2, 336, 268, Direction.UpLeft)
+  end
   
   if SV.team_hunter.Status == 1 then
     GROUND:Unhide("NPC_Broke")
@@ -311,19 +324,24 @@ function cliff_camp.NPC_Broke_Action(chara, activator)
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_001']))
-
-    COMMON.CreateMission(questname, "flyaway_cliffs", 0, 6, false,
-            RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
-            RogueEssence.Dungeon.MonsterID("mightyena", 0, "normal", Gender.Male),
-            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
-            nil)
 	
-  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_002']))
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+      DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6,
+      FloorUnknown = false,
+	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_dark"),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("mightyena", 0, "normal", Gender.Male) }
+	
   else
-    cliff_camp.Dark_Complete()
+  
+	COMMON.TakeMissionItem(quest)
+	
+    if quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_002']))
+    else
+      cliff_camp.Dark_Complete()
+	end
   end
   
   elseif SV.team_hunter.Status == 2 then
@@ -377,22 +395,27 @@ function cliff_camp.Catch_Action()
   
   if quest == nil then
     cliff_camp.Catch_Trouble()
-
-    COMMON.CreateMission(questname, "overgrown_wilds", 0, 6, false,
-            RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
-            RogueEssence.Dungeon.MonsterID("rattata", 0, "normal", Gender.Male),
-            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
-            nil)
 	
-  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-    local catch1 = CH('NPC_Catch_1')
-    local catch2 = CH('NPC_Catch_2')
-	UI:SetSpeaker(catch1)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_005']))
-	UI:SetSpeaker(catch2)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_006']))
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+      DestZone = "overgrown_wilds", DestSegment = 0, DestFloor = 6,
+      FloorUnknown = false,
+	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_normal"),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("rattata", 0, "normal", Gender.Male) }
+	
   else
-    cliff_camp.Catch_Complete()
+  
+	COMMON.TakeMissionItem(quest)
+	
+    if quest.Complete == COMMON.MISSION_INCOMPLETE then
+      local catch1 = CH('NPC_Catch_1')
+      local catch2 = CH('NPC_Catch_2')
+	  UI:SetSpeaker(catch1)
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_005']))
+	  UI:SetSpeaker(catch2)
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_006']))
+    else
+      cliff_camp.Catch_Complete()
+	end
   end
 end
   
@@ -547,11 +570,11 @@ function cliff_camp.NPC_Sightseer_Action(chara, activator)
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sightseer_Quest_Line_001']))
 	
 	--TODO: later oblivion valley
-    COMMON.CreateMission(questname, "secret_garden", 0, 9, false,
-            RogueEssence.Dungeon.MonsterID("meowth", 0, "normal", Gender.Male),
-            RogueEssence.Dungeon.MonsterID("pidgeotto", 0, "normal", Gender.Male),
-            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
-            nil)
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "secret_garden", DestSegment = 0, DestFloor = 9,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("meowth", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("pidgeotto", 0, "normal", Gender.Male) }
 	
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
@@ -629,11 +652,11 @@ function cliff_camp.Speedster_2_Action(chara, activator)
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Help_Line_001']))
 	
 	--TODO: later deserted fortress
-    COMMON.CreateMission(questname, "trickster_woods", 0, 6, false,
-            RogueEssence.Dungeon.MonsterID("doduo", 0, "normal", Gender.Male),
-            RogueEssence.Dungeon.MonsterID("pachirisu", 0, "normal", Gender.Male),
-            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
-            nil)
+	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "trickster_woods", DestSegment = 0, DestFloor = 6,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("doduo", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("pachirisu", 0, "normal", Gender.Male) }
 	
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
@@ -690,6 +713,14 @@ end
 
 function cliff_camp.NPC_Undergrowth_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  
+  if not SV.family.Father and SV.family.FatherActiveDays >= 3 then
+    cliff_camp.NPC_Undergrowth_Concern()
+  elseif not SV.family.Pet and SV.family.PetActiveDays >= 3 and SV.family.Sister and SV.family.Mother and SV.family.Father and SV.family.Brother then
+    cliff_camp.NPC_Undergrowth_Concern()
+  else
+  
   GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
   if not SV.cliff_camp.TeamUndergrowthIntro then
@@ -700,20 +731,56 @@ function cliff_camp.NPC_Undergrowth_1_Action(chara, activator)
   UI:SetSpeakerEmotion("Worried")
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Bellsprout_Line_002']))
   GROUND:EntTurn(chara, Direction.DownRight)
+  
+  end
 end
   
 function cliff_camp.NPC_Undergrowth_2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  if not SV.family.Father and SV.family.FatherActiveDays >= 3 then
+    cliff_camp.NPC_Undergrowth_Concern()
+  elseif not SV.family.Pet and SV.family.PetActiveDays >= 3 and SV.family.Sister and SV.family.Mother and SV.family.Father and SV.family.Brother then
+    cliff_camp.NPC_Undergrowth_Concern()
+  else
+  
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
   
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shroomish_Line_001']))
   
-  local partner = CH('Undergrowth_1')
+  local partner = CH('NPC_Undergrowth_1')
   UI:SetSpeaker(partner)
   UI:SetSpeakerEmotion("Pain")
   GROUND:CharSetEmote(partner, "sweating", 1)
   SOUND:PlayBattleSE("EVT_Emote_Sweating")
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Bellsprout_Line_003']))
+  
+  end
+end
+
+
+function cliff_camp.NPC_Undergrowth_Concern()
+  local undergrowth1 = CH('NPC_Undergrowth_1')
+  local undergrowth2 = CH('NPC_Undergrowth_2')
+  
+  if not SV.family.Father and SV.family.FatherActiveDays >= 3 then
+    
+	UI:SetSpeaker(undergrowth1)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Father_Line_001']))
+	
+	UI:SetSpeaker(undergrowth2)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Father_Line_002']))
+	
+  elseif not SV.family.Pet and SV.family.PetActiveDays >= 3 and SV.family.Sister and SV.family.Mother and SV.family.Father and SV.family.Brother then
+  
+	UI:SetSpeaker(undergrowth1)
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Pet_Line_001']))
+	
+	UI:SetSpeaker(undergrowth2)
+	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Pet_Line_002']))
+	
+  end
+  
 end
   
 function cliff_camp.Rival_1_Action(chara, activator)
@@ -816,11 +883,10 @@ function cliff_camp.NPC_Storehouse_Action(chara, activator)
     if quest == nil then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_003']))
 	  --add the quest
-      COMMON.CreateMission(questname, "faded_trail", 0, 5, true,
-              RogueEssence.Dungeon.MonsterID("murkrow", 0, "normal", Gender.Male),
-              chara.CurrentForm,
-              COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_OUTLAW,
-              nil)
+	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW,
+      DestZone = "faded_trail", DestSegment = 0, DestFloor = 5, FloorUnknown = true,
+      ClientSpecies = chara.CurrentForm,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("murkrow", 0, "normal", Gender.Male) }
 	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_004']))
 	else

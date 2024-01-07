@@ -83,6 +83,20 @@ function base_camp.SetupNpcs()
   GROUND:Unhide("NPC_Coast")
   GROUND:Unhide("NPC_Entrance")
   
+  --Noctowl: 64, 252
+  --Luxio: 104, 252
+  if not SV.family.Sister and SV.family.SisterActiveDays >= 3 then
+	local noctowl = CH('Noctowl')
+	local entrance = CH('NPC_Entrance')
+	GROUND:TeleportTo(noctowl, 64, 252, Direction.Right)
+	GROUND:TeleportTo(entrance, 104, 252, Direction.Left)
+  end
+  
+  --Wingull: 344, 264
+  if not SV.family.Mother and SV.family.MotherActiveDays >= 3 then
+	local coast = CH('NPC_Coast')
+	GROUND:TeleportTo(coast, 232, 456, Direction.Down)
+  end
   
   if SV.team_catch.Status == 1 then
     GROUND:Unhide("NPC_Catch_1")
@@ -625,19 +639,50 @@ end
 
 
 function base_camp.NPC_Entrance_Action(chara, activator)
+
+  if not SV.family.Sister and SV.family.SisterActiveDays >= 3 then
+  local noctowl = CH('Noctowl')
+  
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Sister_Line_001']))
+  
+  UI:SetSpeaker(noctowl)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Sister_Line_002']))
+  
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Sister_Line_003']))
+  
+  UI:SetSpeaker(noctowl)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Sister_Line_004']))
+  
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Sister_Line_005']))
+  else
+  
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Warn_Line_001']))
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Warn_Line_002']))
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Warn_Line_003']))
+  
+  end
 end
 
 function base_camp.NPC_Coast_Action(chara, activator)
+
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
+  if not SV.family.Mother and SV.family.MotherActiveDays >= 3 then
+  
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Mother_Line_001']))
+	
+  else
+
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Outside_Line_001']))
+  
+  end
   GROUND:EntTurn(chara, Direction.Down)
 end
 

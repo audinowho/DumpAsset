@@ -385,6 +385,7 @@ function final_stop.NPC_Seer_Action(chara, activator)
 
       COMMON.CreateMission(questname, "snowbound_path", 0, 10, false,
               RogueEssence.Dungeon.MonsterID("typhlosion", 0, "normal", Gender.Male),
+              nil,
               RogueEssence.Dungeon.MonsterID("delphox", 0, "normal", Gender.Male),
               COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
               nil)
@@ -537,6 +538,7 @@ function final_stop.NPC_Carry_Action(chara, activator)
         FloorUnknown = true,
         ClientSpecies = chara.CurrentForm,
         TargetSpecies = RogueEssence.Dungeon.MonsterID("zoroark", 1, "normal", Gender.Male),
+        nil,
         DisguiseSpecies = RogueEssence.Dungeon.MonsterID("swalot", 0, "normal", Gender.Male), DisguiseTalk = "DisguiseTalk", DisguiseHit = "DisguiseHit" }
 
       for i = 1, 8, 1 do

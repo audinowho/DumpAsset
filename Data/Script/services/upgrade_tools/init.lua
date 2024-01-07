@@ -466,6 +466,10 @@ function UpgradeTools:OnUpgrade()
 	}
   end
   
+  if SV.adventure.Tutors == nil then
+    SV.adventure.Tutors = { }
+  end
+  
   PrintInfo("=>> Loaded version")
 end
 

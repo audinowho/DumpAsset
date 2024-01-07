@@ -236,7 +236,36 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
             local priority = RogueElements.Priority(-6, 1)
             queue:Enqueue(priority, destNote)
         end
-      else
+      elseif mission.Type == COMMON.MISSION_TYPE_LOST_ITEM then
+	    local has_item = false
+	    
+		local item_slot = GAME:FindPlayerItem(mission.TargetItem.ID, true, true)
+		if not item_slot:IsValid() then
+			if GAME:GetPlayerStorageItemCount(mission.TargetItem.ID) > 0 then
+			  has_item = true
+			end
+		else
+			has_item = true
+		end
+		
+		if not has_item then
+		
+		local lost_item = RogueEssence.Dungeon.MapItem(mission.TargetItem)
+		local preset_picker = LUA_ENGINE:MakeGenericType(PresetPickerType, { MapItemType }, { lost_item })
+		local multi_preset_picker = LUA_ENGINE:MakeGenericType(PresetMultiRandType, { MapItemType }, { preset_picker })
+		local picker_spawner = LUA_ENGINE:MakeGenericType(PickerSpawnType, {  MapGenContextType, MapItemType }, { multi_preset_picker })
+		local random_room_spawn = LUA_ENGINE:MakeGenericType(RandomRoomSpawnStepType, { MapGenContextType, MapItemType }, { })
+		random_room_spawn.Spawn = picker_spawner
+		random_room_spawn.Filters:Add(PMDC.LevelGen.RoomFilterConnectivity(PMDC.LevelGen.ConnectivityRoom.Connectivity.Main))
+		local priority = RogueElements.Priority(5, 2, 1)
+		queue:Enqueue(priority, random_room_spawn)
+		
+        if not mission.FloorUnknown then
+          destinationFloor = true
+        end
+		
+		end
+	  else
         post_mob.Tactic = "slow_patrol"
         if mission.Type == COMMON.MISSION_TYPE_RESCUE then -- rescue
             post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)
@@ -326,6 +355,10 @@ function FLOOR_GEN_SCRIPT.SpawnRandomTutor(map, args)
   local valid_moves = {}
   --iterate through all tutor moves
   for move_idx, skill in pairs(COMMON.TUTOR) do
+	--Were they already encountered in this adventure?  skip
+	if SV.adventure.Tutors[move_idx] ~= nil then
+	  goto continue
+	end
 	--do they not fall in range of cost?  skip
 	if skill.Cost < args.MinCost or skill.Cost >= args.MaxCost then
 	  goto continue
@@ -426,6 +459,8 @@ function FLOOR_GEN_SCRIPT.SpawnRandomTutor(map, args)
 	  mobPlacement.Filters:Add(PMDC.LevelGen.RoomFilterConnectivity(PMDC.LevelGen.ConnectivityRoom.Connectivity.Main))
 	  mobPlacement.ClumpFactor = 20
 	  mobPlacement:Apply(map)
+	  
+	  SV.adventure.Tutors[tutor_move] = true
   end
 end
 

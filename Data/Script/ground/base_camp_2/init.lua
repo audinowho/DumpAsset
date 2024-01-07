@@ -1572,20 +1572,24 @@ function base_camp_2.Juice_Owner_Action(chara, activator)
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_001']))
-
     COMMON.CreateMission(questname, "bramble_woods", 0, 4, false,
-            RogueEssence.Dungeon.MonsterID("unown", 0, "normal", Gender.Male),
             nil,
+            RogueEssence.Dungeon.InvItem("lost_item_bug"),
             RogueEssence.Dungeon.MonsterID("shuckle", 0, "normal", Gender.Male),
             COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_LOST_ITEM,
             nil)
 	
-  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_002']))
   else
-    base_camp_2.Bug_Complete()
+  
+	COMMON.TakeMissionItem(quest)
+	
+    if quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_002']))
+    else
+      base_camp_2.Bug_Complete()
+    end
   end
   
   elseif SV.base_town.JuiceShop >= 2 then

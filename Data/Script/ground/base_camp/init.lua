@@ -592,7 +592,6 @@ function base_camp.NPC_Steel_1_Action(chara, activator)
 
     COMMON.CreateMission(questname, "guildmaster_trail", 0, 14, false,
             RogueEssence.Dungeon.MonsterID("scizor", 0, "normal", Gender.Male),
-            nil,
             RogueEssence.Dungeon.MonsterID("steelix", 0, "normal", Gender.Male),
             COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
             nil)

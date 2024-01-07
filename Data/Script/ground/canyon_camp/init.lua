@@ -352,8 +352,7 @@ function canyon_camp.Rival_2_Action(chara, activator)
     GROUND:CharTurnToChar(chara,player)
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Help_Line_001']))
     COMMON.CreateMission(questname, "copper_quarry", 0, 6, false, 
-            RogueEssence.Dungeon.MonsterID("seviper", 0, "normal", Gender.Female),
-            nil,
+            RogueEssence.Dungeon.MonsterID("seviper", 0, "normal", Gender.Female), 
             RogueEssence.Dungeon.MonsterID("zangoose", 0, "normal", Gender.Female), 
             COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE, 
             nil)
@@ -422,7 +421,6 @@ function canyon_camp.NPC_Storehouse_Action(chara, activator)
 
       COMMON.CreateMission(questname, "flyaway_cliffs", 0, 6, false,
               RogueEssence.Dungeon.MonsterID("toxicroak", 0, "normal", Gender.Male),
-              nil,
               chara.CurrentForm,
               COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_OUTLAW_HOUSE,
               nil)
@@ -848,7 +846,6 @@ function canyon_camp.NPC_Spar_Action(chara, activator)
 
     COMMON.CreateMission(questname, "sleeping_caldera", 0, 8, false,
             RogueEssence.Dungeon.MonsterID("meditite", 0, "normal", Gender.Male),
-            nil,
             RogueEssence.Dungeon.MonsterID("makuhita", 0, "normal", Gender.Male),
             COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
             nil)
@@ -917,7 +914,6 @@ function canyon_camp.NPC_Shortcut_Action(chara, activator)
 
     COMMON.CreateMission(questname, "forsaken_desert", 0, 0, false,
             RogueEssence.Dungeon.MonsterID("prinplup", 0, "normal", Gender.Male),
-            nil,
             RogueEssence.Dungeon.MonsterID("floatzel", 0, "normal", Gender.Male),
             COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
             nil)
@@ -1104,7 +1100,6 @@ function canyon_camp.NPC_Brains_Action(chara, activator)
 
     COMMON.CreateMission(questname, "relic_tower", 0, 8, false,
             RogueEssence.Dungeon.MonsterID("kirlia", 0, "normal", Gender.Male),
-            nil,
             RogueEssence.Dungeon.MonsterID("girafarig", 0, "normal", Gender.Male),
             COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
             nil)

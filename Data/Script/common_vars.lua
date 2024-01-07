@@ -10,7 +10,6 @@ function COMMON.UpdateDayEndVars()
       if SV.missions.Missions["EscortSister"] == nil and SV.missions.FinishedMissions["EscortSister"] == nil then
         COMMON.CreateMission("EscortSister", "faultline_ridge", 0, 5, true, 
                 RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female), 
-				nil,
                 RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female), 
                 COMMON.MISSION_INCOMPLETE, 
                 COMMON.MISSION_TYPE_ESCORT_OUT, 
@@ -27,7 +26,6 @@ function COMMON.UpdateDayEndVars()
       if SV.missions.Missions["EscortMother"] == nil and SV.missions.FinishedMissions["EscortMother"] == nil then
         COMMON.CreateMission("EscortMother", "castaway_cave", 0, 7, true, 
                 RogueEssence.Dungeon.MonsterID("swellow", 0, "normal", Gender.Female), 
-				nil,
                 RogueEssence.Dungeon.MonsterID("swellow", 0, "normal", Gender.Female), 
                 COMMON.MISSION_INCOMPLETE, 
                 COMMON.MISSION_TYPE_ESCORT_OUT, 
@@ -44,7 +42,6 @@ function COMMON.UpdateDayEndVars()
       if SV.missions.Missions["EscortFather"] == nil and SV.missions.FinishedMissions["EscortFather"] == nil then
         COMMON.CreateMission("EscortFather", "overgrown_wilds", 1, 1, true, 
                 RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male), 
-				nil,
                 RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male), 
                 COMMON.MISSION_INCOMPLETE, 
                 COMMON.MISSION_TYPE_ESCORT_OUT, 
@@ -61,7 +58,6 @@ function COMMON.UpdateDayEndVars()
       if SV.missions.Missions["EscortBrother"] == nil and SV.missions.FinishedMissions["EscortBrother"] == nil then
         COMMON.CreateMission("EscortBrother", "snowbound_path", 1, 1, true, 
                 RogueEssence.Dungeon.MonsterID("wooper", 0, "normal", Gender.Male), 
-				nil,
                 RogueEssence.Dungeon.MonsterID("wooper", 0, "normal", Gender.Male),
                 COMMON.MISSION_INCOMPLETE, 
                 COMMON.MISSION_TYPE_ESCORT_OUT, 
@@ -78,7 +74,6 @@ function COMMON.UpdateDayEndVars()
       if SV.missions.Missions["EscortPet"] == nil and SV.missions.FinishedMissions["EscortPet"] == nil then
         COMMON.CreateMission("EscortPet", "veiled_ridge", 1, 1, true, 
                 RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male), 
-				nil,
                 RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male), 
                 COMMON.MISSION_INCOMPLETE, 
                 COMMON.MISSION_TYPE_ESCORT_OUT, 
@@ -94,9 +89,8 @@ function COMMON.UpdateDayEndVars()
     if _DATA.Save:GetDungeonUnlock("champions_road") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortGrandma"] == nil and SV.missions.FinishedMissions["EscortGrandma"] == nil then
         COMMON.CreateMission("EscortGrandma", "champions_road", 1, 1, true, 
-                RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Genderless), 
-				nil,
-                RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Genderless), 
+                RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male), 
+                RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male), 
                 COMMON.MISSION_INCOMPLETE, 
                 COMMON.MISSION_TYPE_ESCORT_OUT, 
                 { EscortStartMsg = "TALK_ESCORT_GRANDMA_START", EscortAcceptMsg = "TALK_ESCORT_GRANDMA_ACCEPT", EscortInteract = "EscortInteractGrandma" })
@@ -347,7 +341,7 @@ end
 
 --Creates the mission and suspends all active jobs that take place in dest_zone
 --Jobs are suspended regardless of dest_segment as moving to the job rewards from any segment can disrupt mission rewards (i.e. escort family missions)
-function COMMON.CreateMission(key, dest_zone, dest_segment, dest_floor, floor_unknown, target_species, target_item, client_complete, complete, mission_type, escort_table)
+function COMMON.CreateMission(key, dest_zone, dest_segment, dest_floor, floor_unknown, target_species, client_complete, complete, type, escort_table)
   SV.missions.Missions[key] =
   {
     DestZone = dest_zone,
@@ -355,10 +349,9 @@ function COMMON.CreateMission(key, dest_zone, dest_segment, dest_floor, floor_un
     DestFloor = dest_floor,
     FloorUnknown = floor_unknown,
     TargetSpecies = target_species,
-	TargetItem = target_item,
     ClientSpecies = client_complete,
     Complete = complete,
-    Type = mission_type,
+    Type = type,
     EscortTable = escort_table
   }
 

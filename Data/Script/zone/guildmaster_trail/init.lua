@@ -1,5 +1,4 @@
 require 'common'
-require 'mission_gen'
 
 local guildmaster_trail = {}
 --------------------------------------------------
@@ -30,18 +29,14 @@ function guildmaster_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
   --need to restart to title
   
   --first check for rescue flag; if we're in rescue mode then take a different path
-  MISSION_GEN.EndOfDay(result, segmentID)
-COMMON.SidequestExitDungeonMissionCheck(result, zone.ID, segmentID)
-COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
+  COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
   if rescue == true then
     COMMON.EndRescue(zone, result, segmentID)
   else
 	if not SV.base_camp.ExpositionComplete then
 	  GAME:SetRescueAllowed(true)
 	end
-	if SV.TemporaryFlags.MissionCompleted then
-	  COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 2, 0)
-    elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
+    if result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
     --if result is defeat, unknown, timed out, or escaped, end the game with the destination as the last checkpoint
     --defeat is the same for all segments
 	  if mapID > SV.guildmaster_trail.FloorsCleared then

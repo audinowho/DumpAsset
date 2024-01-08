@@ -420,5 +420,9 @@ function COMMON.ExitDungeonMissionCheckEx(result, zoneId, segmentID)
   end
 
   MISSION_GEN.EndOfDay(result, segmentID)
+
+  if SV.TemporaryFlags.MissionCompleted then
+    COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 2, 0)
+  end
 end
 

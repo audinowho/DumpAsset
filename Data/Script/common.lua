@@ -1446,7 +1446,7 @@ function COMMON.AskMissionWarpOut()
                     SetMinimap()
                 end
             else
-                UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_CONTINUE_ONGOING"):ToLocal()), false)
+                UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_CONTINUE_NO_ONGOING"):ToLocal()), false)
                 UI:WaitForChoice()
                 local leave_dungeon = UI:ChoiceResult()
                 if leave_dungeon then

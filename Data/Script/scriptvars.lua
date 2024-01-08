@@ -51,8 +51,7 @@ SV.MissionPrereq =
 
 SV.adventure = 
 {
-  Thief    = false,
-  Tutors = { }
+  Thief    = false
 }
 
 SV.base_shop = {

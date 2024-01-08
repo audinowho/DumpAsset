@@ -58,17 +58,6 @@ end
 --------------------------------------------------
 function final_stop.SetupNpcs()
   
-  GROUND:Unhide("NPC_Secluded")
-  GROUND:Unhide("NPC_Forbidden")
-  
-  if not SV.family.Brother and SV.family.BrotherActiveDays >= 3 then
-	local forbidden = CH('NPC_Forbidden')
-	GROUND:TeleportTo(forbidden, 292, 88, Direction.Down)
-  elseif not SV.family.Grandma and SV.family.GrandmaActiveDays >= 3 and SV.family.Sister and SV.family.Mother and SV.family.Father and SV.family.Brother and SV.family.Pet then
-	local forbidden = CH('NPC_Forbidden')
-	GROUND:TeleportTo(forbidden, 292, 88, Direction.Down)
-  end
-  
   if SV.team_rivals.Status == 7 then
     GROUND:Unhide("Rival_1")
 	GROUND:Unhide("Rival_2")
@@ -609,33 +598,6 @@ function final_stop.NPC_Deliver_Action(chara, activator)
     end
   elseif SV.supply_corps.Status == 20 then
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_Route']))
-  end
-end
-
-
-
-function final_stop.NPC_Secluded_Action(chara, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
-  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Secluded_Line_001']))
-end
-
-function final_stop.NPC_Forbidden_Action(chara, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
-  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  
-  if not SV.family.Brother and SV.family.BrotherActiveDays >= 3 then
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Brother_Line_001']))
-  elseif not SV.family.Grandma and SV.family.GrandmaActiveDays >= 3 and SV.family.Sister and SV.family.Mother and SV.family.Father and SV.family.Brother and SV.family.Pet then
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Grandma_Line_001']))
-  else
-  
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Forbidden_Line_001']))
-  
   end
 end
 

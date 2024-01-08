@@ -194,11 +194,9 @@ function SINGLE_CHAR_SCRIPT.GuildBlock(owner, ownerChar, context, args)
     UI:SetAutoFinish(true)
     UI:WaitShowDialogue(RogueEssence.StringKey("DLG_LOCK_GUILD"):ToLocal())
   else
-    
     UI:ResetSpeaker()
     UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_LOCK_GUILD_OPEN"):ToLocal(), context.User:GetDisplayName(true)))
-	
-	_DUNGEON.PendingLeaderAction = _DUNGEON:ProcessPlayerInput(RogueEssence.Dungeon.GameAction(RogueEssence.Dungeon.GameAction.ActionType.Tile, Dir8.None, 1))
+    TASK:WaitTask(owner:InteractWithTile(context))
   end
 end
 

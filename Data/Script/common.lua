@@ -1267,20 +1267,6 @@ function COMMON.FindMissionEscort(missionId)
   return escort
 end
 
-function COMMON.TakeMissionItem(quest)
-
-    local item_slot = GAME:FindPlayerItem(quest.TargetItem.ID, true, true)
-	if not item_slot:IsValid() then
-		--do nothing
-	elseif item_slot.IsEquipped then
-		GAME:TakePlayerEquippedItem(item_slot.Slot)
-		quest.Complete = COMMON.MISSION_COMPLETE
-	else
-		GAME:TakePlayerBagItem(item_slot.Slot)
-		quest.Complete = COMMON.MISSION_COMPLETE
-	end
-end
-
 function COMMON.CompleteMission(questname)
   local quest = SV.missions.Missions[questname]
   quest.Complete = COMMON.MISSION_ARCHIVED
@@ -1492,7 +1478,6 @@ function COMMON.EndDayCycle()
   --reshuffle items
 
   SV.adventure.Thief = false
-  SV.adventure.Tutors = { }
   SV.base_shop = { }
   
   math.randomseed(GAME:GetDailySeed())

@@ -1608,8 +1608,47 @@ function base_camp_2.Bug_Complete()
   SV.base_town.JuiceShop = 2
 end
 
+base_camp_2.boost_tbl = { }
+--{ Level = 0, EXP = 100, HP = 0, Atk = 0, Def = 0, SpAtk = 0, SpDef = 0, Speed = 0, NegateExp = false, NegateStat = false }
+base_camp_2.boost_tbl["food_apple"] = { EXP = 100 }
+base_camp_2.boost_tbl["food_apple_big"] = { EXP = 300 }
+base_camp_2.boost_tbl["food_apple_huge"] = { EXP = 1000 }
+base_camp_2.boost_tbl["food_apple_perfect"] = { EXP = 5000 }
+base_camp_2.boost_tbl["food_apple_golden"] = { EXP = 25000 }
+base_camp_2.boost_tbl["food_banana"] = { EXP = 500 }
+base_camp_2.boost_tbl["food_banana_big"] = { EXP = 2500 }
+base_camp_2.boost_tbl["food_banana_golden"] = { EXP = 100000 }
+base_camp_2.boost_tbl["berry_oran"] = { HP = 1 }
+base_camp_2.boost_tbl["berry_leppa"] = { HP = 1 }
+base_camp_2.boost_tbl["berry_sitrus"] = { HP = 1 }
+base_camp_2.boost_tbl["berry_lum"] = { HP = 1 }
+base_camp_2.boost_tbl["berry_starf"] = { HP = 2 }
+base_camp_2.boost_tbl["berry_liechi"] = { Atk = 2 }
+base_camp_2.boost_tbl["berry_ganlon"] = { Def = 2 }
+base_camp_2.boost_tbl["berry_petaya"] = { SpAtk = 2 }
+base_camp_2.boost_tbl["berry_apicot"] = { SpDef = 2 }
+base_camp_2.boost_tbl["berry_salac"] = { Speed = 2 }
+base_camp_2.boost_tbl["berry_enigma"] = { HP = 1 }
+base_camp_2.boost_tbl["berry_micle"] = { Atk = 1, SpAtk = 1 }
+base_camp_2.boost_tbl["boost_nectar"] = { HP = 1, Atk = 1, Def = 1, SpAtk = 1, SpDef = 1, Speed = 1 }
+base_camp_2.boost_tbl["boost_hp_up"] = { HP = 4 }
+base_camp_2.boost_tbl["boost_protein"] = { Atk = 4 }
+base_camp_2.boost_tbl["boost_iron"] = { Def = 4 }
+base_camp_2.boost_tbl["boost_calcium"] = { SpAtk = 4 }
+base_camp_2.boost_tbl["boost_zinc"] = { SpDef = 4 }
+base_camp_2.boost_tbl["boost_carbos"] = { Speed = 4 }
+base_camp_2.boost_tbl["seed_joy"] = { Level = 1 }
+base_camp_2.boost_tbl["seed_golden"] = { Level = 5 }
+base_camp_2.boost_tbl["seed_doom"] = { Level = -5 }
+base_camp_2.boost_tbl["food_grimy"] = { NegateExp = true }
+base_camp_2.boost_tbl["herb_white"] = { NegateStat = true }
+base_camp_2.boost_tbl["herb_power"] = { NegateStat = true }
+base_camp_2.boost_tbl["herb_mental"] = { NegateStat = true }
 
 function base_camp_2.Drink_Order_Flow()
+
+  local catalog = { }
+
   local state = 0
   local member = nil
   local cart = { }
@@ -1617,6 +1656,7 @@ function base_camp_2.Drink_Order_Flow()
   while state > -1 do
   
     if state == 0 then
+	  --pass in base_camp_2.boost_tbl as the table of eligible items
 	  UI:SellMenu()
 	  UI:WaitForChoice()
 	  local result = UI:ChoiceResult()

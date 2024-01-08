@@ -383,3 +383,32 @@ function COMMON.UpdateCheckpointStatus(checkpoint, limit)
 	end
 end
 
+function COMMON.ExitDungeonMissionCheckEx(result, zoneId, segmentID)
+  --remove all guests from the dungeon
+  RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS = 4
+
+  _DATA.Save.ActiveTeam.Guests:Clear()
+
+  --Remove any lost/stolen items. If the item's ID starts with "mission" then delete it on exiting the dungeon.
+  local itemCount = GAME:GetPlayerBagCount()
+  local item
+
+  local i = 0
+  while i <= itemCount - 1 do
+    item = GAME:GetPlayerBagItem(i)
+    if string.sub(item.ID, 1, 7) == "mission" then
+      GAME:TakePlayerBagItem(i)
+      itemCount = itemCount - 1
+    else
+      i = i + 1
+    end
+  end
+
+  --send equipped items to storage
+  for i = 1, GAME:GetPlayerPartyCount(), 1 do
+    item = GAME:GetPlayerEquippedItem(i-1)
+    if string.sub(item.ID, 1, 7) == "mission" then
+      GAME:TakePlayerEquippedItem(i-1)
+    end
+  end
+end

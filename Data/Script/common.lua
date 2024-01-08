@@ -1223,33 +1223,33 @@ function COMMON.SidequestExitDungeonMissionCheck(result, zoneId, segmentID)
     end
 end
 
-
-function COMMON.ExitDungeonMissionCheck(result, zoneId, segmentID)    
-    --remove all guests from the dungeon
-    RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS = 4
-    
-    _DATA.Save.ActiveTeam.Guests:Clear()
-
-    --Remove any lost/stolen items. If the item's ID starts with "mission" then delete it on exiting the dungeon.
-    local itemCount = GAME:GetPlayerBagCount()
-    local item
-
-    local i = 0
-    while i <= itemCount - 1 do
-        item = GAME:GetPlayerBagItem(i)
-        if string.sub(item.ID, 1, 7) == "mission" then
-            GAME:TakePlayerBagItem(i)
-            itemCount = itemCount - 1
-        else
-            i = i + 1
-        end
+function COMMON.ExitDungeonMissionCheck(result, zoneId, segmentID)
+    --TODO: remove this hack when referencing base game in mod scripts is complete
+    if COMMON.ExitDungeonMissionCheckEx ~= nil then
+        COMMON.ExitDungeonMissionCheckEx(result, zoneId, segmentID)
     end
 
-    --send equipped items to storage
-    for i = 1, GAME:GetPlayerPartyCount(), 1 do
-        item = GAME:GetPlayerEquippedItem(i-1)
-        if string.sub(item.ID, 1, 7) == "mission" then
-            GAME:TakePlayerEquippedItem(i-1)
+    -- clear any escorts from party
+    local party = GAME:GetPlayerGuestTable()
+    for i, p in ipairs(party) do
+        local e_tbl = LTBL(p)
+        if e_tbl ~= nil then
+            local mission = SV.missions.Missions[e_tbl.Escort]
+            if mission ~= nil then
+                if mission.Type == COMMON.MISSION_TYPE_ESCORT then
+                    _DUNGEON:RemoveChar(p)
+                elseif mission.Type == COMMON.MISSION_TYPE_ESCORT_OUT then
+                    if p.Dead == false then
+                        if result == RogueEssence.Data.GameProgress.ResultType.Cleared then
+                            mission.Complete = COMMON.MISSION_COMPLETE
+                        else
+                            UI:ResetSpeaker()
+                            UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_LOST_GUEST"):ToLocal(), p:GetDisplayName(true)))
+                        end
+                    end
+                    _DATA.Save.ActiveTeam.Guests:RemoveAt(i-1)
+                end
+            end
         end
     end
 end

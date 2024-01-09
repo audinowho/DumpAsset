@@ -24,9 +24,9 @@ end
 function guildmaster_island.ExitSegment(zone, result, rescue, segmentID, mapID)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
 
-  COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
-  if rescue == true then
-    COMMON.EndRescue(zone, result, segmentID)
+  local exited = COMMON.ExitDungeonMissionCheck(result, rescue, zone.ID, segmentID)
+  if exited == true then
+    --do nothing
   elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
     if segmentID == 0 then
 	  if mapID == 3 then

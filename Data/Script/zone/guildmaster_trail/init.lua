@@ -29,9 +29,9 @@ function guildmaster_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
   --need to restart to title
   
   --first check for rescue flag; if we're in rescue mode then take a different path
-  COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
-  if rescue == true then
-    COMMON.EndRescue(zone, result, segmentID)
+  local exited = COMMON.ExitDungeonMissionCheck(result, rescue, zone.ID, segmentID)
+  if exited == true then
+    --do nothing
   else
 	if not SV.base_camp.ExpositionComplete then
 	  GAME:SetRescueAllowed(true)

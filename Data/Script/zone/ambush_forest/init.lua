@@ -26,9 +26,9 @@ function ambush_forest.ExitSegment(zone, result, rescue, segmentID, mapID)
   PrintInfo("=>> ExitSegment_ambush_forest result "..tostring(result).." segment "..tostring(segmentID))
   
   --first check for rescue flag; if we're in rescue mode then take a different path
-  COMMON.ExitDungeonMissionCheck(result, zone.ID, segmentID)
-  if rescue == true then
-    COMMON.EndRescue(zone, result, segmentID)
+  local exited = COMMON.ExitDungeonMissionCheck(result, rescue, zone.ID, segmentID)
+  if exited == true then
+    --do nothing
   elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
     if segmentID == 2 then
 	  SV.ambush_forest.BossPhase = 1

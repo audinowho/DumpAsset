@@ -1089,12 +1089,25 @@ function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
 end
 
 
-function COMMON.ExitDungeonMissionCheck(result, zoneId, segmentID)
+function COMMON.ExitDungeonMissionCheck(result, rescue, zoneId, segmentID)
+  
+  exited = false
   --TODO: remove this hack when referencing base game in mod scripts is complete
   if COMMON.ExitDungeonMissionCheckEx ~= nil then
-    COMMON.ExitDungeonMissionCheckEx(result, zoneId, segmentID)
+     exited = COMMON.ExitDungeonMissionCheckEx(result, rescue, zoneId, segmentID)
   end
   
+  COMMON.ClearEscorts(result, zoneId, segmentID)
+  
+  if rescue == true then
+    exited = COMMON.EndRescue(zone, result, segmentID)
+  end
+  
+  return exited
+end
+
+function COMMON.ClearEscorts(result, zoneId, segmentID)
+
   -- clear any escorts from party
   local party = GAME:GetPlayerGuestTable()
   for i, p in ipairs(party) do

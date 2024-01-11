@@ -392,10 +392,10 @@ end
 function COMMON.CreateMission(key, mission)
   SV.missions.Missions[key] = mission
 
-  if mission.dest_zone ~= nil then
+  if mission.DestZone ~= nil then
     for i = 1, 8, 1 do
       local zone = SV.TakenBoard[i].Zone
-      if zone ~= nil and zone ~= '' and zone == mission.dest_zone then
+      if zone ~= nil and zone ~= '' and zone == mission.DestZone then
         SV.TakenBoard[i].Taken = false
       end
     end

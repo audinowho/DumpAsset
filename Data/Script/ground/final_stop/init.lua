@@ -535,7 +535,6 @@ function final_stop.NPC_Carry_Action(chara, activator)
         FloorUnknown = true,
         ClientSpecies = chara.CurrentForm,
         TargetSpecies = RogueEssence.Dungeon.MonsterID("zoroark", 1, "normal", Gender.Male),
-        nil,
         DisguiseSpecies = RogueEssence.Dungeon.MonsterID("swalot", 0, "normal", Gender.Male), DisguiseTalk = "DisguiseTalk", DisguiseHit = "DisguiseHit" }
 		)
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then

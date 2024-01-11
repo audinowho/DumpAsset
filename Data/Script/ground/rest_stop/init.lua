@@ -250,14 +250,14 @@ function rest_stop.Rival_1_Action(chara, activator)
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Help_Line_001']))
-
-    COMMON.CreateMission(questname, "thunderstruck_pass", 0, 5, false,
-            RogueEssence.Dungeon.MonsterID("zangoose", 0, "normal", Gender.Female),
-            nil,
-            RogueEssence.Dungeon.MonsterID("seviper", 0, "normal", Gender.Female),
-            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
-            nil)
 	
+	COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "thunderstruck_pass", DestSegment = 0, DestFloor = 8,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("zangoose", 0, "normal", Gender.Female),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("seviper", 0, "normal", Gender.Female) }
+	)
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
@@ -352,14 +352,14 @@ function rest_stop.DragonTalk()
     if quest == nil then
       UI:SetSpeaker(dragon3)
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_001']))
-
-      COMMON.CreateMission(questname, "snowbound_path", 0, 14, false,
-              RogueEssence.Dungeon.MonsterID("charizard", 0, "normal", Gender.Male),
-              nil,
-              RogueEssence.Dungeon.MonsterID("aerodactyl", 0, "normal", Gender.Male),
-              COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
-              nil)
-	
+	  
+	  COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "snowbound_path", DestSegment = 0, DestFloor = 14,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("charizard", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("aerodactyl", 0, "normal", Gender.Male) }
+	)
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
       UI:SetSpeaker(dragon3)
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_002']))
@@ -452,14 +452,13 @@ function rest_stop.NPC_Storehouse_Action(chara, activator)
     if quest == nil then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
 	  --add the quest
-
-      COMMON.CreateMission(questname, "copper_quarry", 0, 4, true,
-              RogueEssence.Dungeon.MonsterID("weavile", 0, "normal", Gender.Male),
-			  nil,
-              chara.CurrentForm,
-              COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
-              nil)
-      
+	  COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW,
+      DestZone = "copper_quarry", DestSegment = 0, DestFloor = 4,
+      FloorUnknown = true,
+      ClientSpecies = chara.CurrentForm,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("weavile", 0, "normal", Gender.Male) }
+	  )
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_003']))
     else
@@ -558,14 +557,14 @@ function rest_stop.Rock_Boss(chara, activator)
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rock_Boss_Line_001']))
-
-    COMMON.CreateMission(questname, "veiled_ridge", 0, 10, false,
-            RogueEssence.Dungeon.MonsterID("exploud", 0, "normal", Gender.Male),
-            nil,
-            RogueEssence.Dungeon.MonsterID("aggron", 0, "normal", Gender.Male),
-            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
-            nil)
 	
+	COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "veiled_ridge", DestSegment = 0, DestFloor = 10,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("exploud", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("aggron", 0, "normal", Gender.Male) }
+	)
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
@@ -716,14 +715,14 @@ function rest_stop.NPC_Goals_Action(chara, activator)
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Help_Line_001']))
-
-    COMMON.CreateMission(questname, "treacherous_mountain", 0, 9, true,
-            RogueEssence.Dungeon.MonsterID("ninetales", 0, "normal", Gender.Male),
-            nil,
-            RogueEssence.Dungeon.MonsterID("sneasel", 0, "normal", Gender.Male),
-            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
-            nil)
 	
+	COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "treacherous_mountain", DestSegment = 0, DestFloor = 9,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("ninetales", 1, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("sneasel", 0, "normal", Gender.Male) }
+	)
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)

@@ -145,9 +145,7 @@ function base_camp.CheckMissions()
       SV.magnagate.Cards = SV.magnagate.Cards + 1
 	  SV.family.Mother = true
       COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_WATER"):ToLocal())
-      quest.Complete = COMMON.MISSION_ARCHIVED
-      SV.missions.FinishedMissions["EscortMother"] = quest
-      SV.missions.Missions["EscortMother"] = nil
+	  COMMON.CompleteMission("EscortMother")
 	  
     end
   end
@@ -395,34 +393,20 @@ function base_camp.Ferry_Action(obj, activator)
 end
 
 function base_camp.ShowFerryMenu(dungeon_entrances, ground_entrances)
-  local mission_dests = {}
-
-  for i = 1, 8, 1 do
-    local zone = SV.TakenBoard[i].Zone
-    if zone ~= nil and zone ~= '' and SV.TakenBoard[i].Taken then
-      mission_dests[zone] = 1
-    end
-  end
   
   --check for unlock of dungeons
   local open_dests = {}
   for ii = 1,#dungeon_entrances,1 do
-    local zone = dungeon_entrances[ii]
-    if GAME:DungeonUnlocked(zone) then
-	local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(zone)
+    if GAME:DungeonUnlocked(dungeon_entrances[ii]) then
+	local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_entrances[ii])
 	  if zone_summary.Released then
 	    local zone_name = ""
-	    if _DATA.Save:GetDungeonUnlock(zone) == RogueEssence.Data.GameProgress.UnlockState.Completed then
+	    if _DATA.Save:GetDungeonUnlock(dungeon_entrances[ii]) == RogueEssence.Data.GameProgress.UnlockState.Completed then
 		  zone_name = zone_summary:GetColoredName()
 		else
 		  zone_name = "[color=#00FFFF]"..zone_summary.Name:ToLocal().."[color]"
 		end
-        if mission_dests[zone] ~= nil then
-          zone_name = STRINGS:Format("\\uE10F ") .. zone_name --open letter
-        elseif COMMON.HasSidequestInZone(zone) then
-          zone_name = STRINGS:Format("\\uE111 ") .. zone_name --exclamation point 
-        end
-        table.insert(open_dests, { Name=zone_name, Dest=RogueEssence.Dungeon.ZoneLoc(zone, 0, 0, 0) })
+        table.insert(open_dests, { Name=zone_name, Dest=RogueEssence.Dungeon.ZoneLoc(dungeon_entrances[ii], 0, 0, 0) })
 	  end
 	end
   end
@@ -589,13 +573,14 @@ function base_camp.NPC_Steel_1_Action(chara, activator)
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Steel_Line_001']))
-
-    COMMON.CreateMission(questname, "guildmaster_trail", 0, 14, false,
-            RogueEssence.Dungeon.MonsterID("scizor", 0, "normal", Gender.Male),
-            nil,
-            RogueEssence.Dungeon.MonsterID("steelix", 0, "normal", Gender.Male),
-            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
-            nil)
+	
+	COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+      DestZone = "guildmaster_trail", DestSegment = 0, DestFloor = 14,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("scizor", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("steelix", 0, "normal", Gender.Male) }
+	  )
 	
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)

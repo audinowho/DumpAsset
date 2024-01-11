@@ -157,9 +157,7 @@ function forest_camp.CheckMissions()
       SV.magnagate.Cards = SV.magnagate.Cards + 1
 	  SV.family.Sister = true
       COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_SUN"):ToLocal())
-      quest.Complete = COMMON.MISSION_ARCHIVED
-      SV.missions.FinishedMissions["EscortSister"] = quest
-      SV.missions.Missions["EscortSister"] = nil
+	  COMMON.CompleteMission("EscortSister")
 	  
     end
   end
@@ -324,13 +322,14 @@ function forest_camp.NPC_Elder_Action(chara, activator)
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Line_001']))
-    COMMON.CreateMission(questname, "ambush_forest", 0, 11, false,
-            nil,
-            RogueEssence.Dungeon.InvItem("lost_item_ground"),
-            RogueEssence.Dungeon.MonsterID("mightyena", 0, "normal", Gender.Male),
-            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
-            nil)
 	
+	COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+      DestZone = "ambush_forest", DestSegment = 0, DestFloor = 11,
+      FloorUnknown = false,
+	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_ground"),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("donphan", 0, "normal", Gender.Male) }
+	)
   else
   
 	COMMON.TakeMissionItem(quest)
@@ -507,13 +506,14 @@ function forest_camp.Sick_Child()
 	local destFloor = 10
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sickness_Line_003'], tostring(destFloor+1)))
 
-    COMMON.CreateMission(questname, "sickly_hollow", 0, destFloor, false,
-            nil,
-            RogueEssence.Dungeon.InvItem("lost_item_grass"),
-            RogueEssence.Dungeon.MonsterID("sunflora", 0, "normal", Gender.Male),
-            COMMON.MISSION_INCOMPLETE, COMMON.MISSION_TYPE_RESCUE,
-            nil)
 	
+	COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+      DestZone = "sickly_hollow", DestSegment = 0, DestFloor = destFloor,
+      FloorUnknown = false,
+	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_grass"),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("sunflora", 0, "normal", Gender.Male) }
+	)
   else
   
 	COMMON.TakeMissionItem(quest)

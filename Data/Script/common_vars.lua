@@ -8,13 +8,19 @@ function COMMON.UpdateDayEndVars()
   if SV.Experimental ~= nil then
     if _DATA.Save:GetDungeonUnlock("faultline_ridge") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortSister"] == nil and SV.missions.FinishedMissions["EscortSister"] == nil then
-        COMMON.CreateMission("EscortSister", "faultline_ridge", 0, 5, true, 
-                RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female), 
-				nil,
-                RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female), 
-                COMMON.MISSION_INCOMPLETE, 
-                COMMON.MISSION_TYPE_ESCORT_OUT, 
-                { EscortStartMsg = "TALK_ESCORT_SISTER_START", EscortAcceptMsg = "TALK_ESCORT_SISTER_ACCEPT", EscortInteract = "EscortInteractSister" })
+	    COMMON.CreateMission("EscortSister",
+        {
+          DestZone = "faultline_ridge",
+          DestSegment = 0,
+          DestFloor = 5,
+          FloorUnknown = true,
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female),
+          Complete = COMMON.MISSION_INCOMPLETE,
+          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          EscortTable = { EscortStartMsg = "TALK_ESCORT_SISTER_START", EscortAcceptMsg = "TALK_ESCORT_SISTER_ACCEPT", EscortInteract = "EscortInteractSister" }
+        }
+		)
       end
 	  
 	  if SV.family.Sister == false then
@@ -25,13 +31,19 @@ function COMMON.UpdateDayEndVars()
 
     if _DATA.Save:GetDungeonUnlock("castaway_cave") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortMother"] == nil and SV.missions.FinishedMissions["EscortMother"] == nil then
-        COMMON.CreateMission("EscortMother", "castaway_cave", 0, 7, true, 
-                RogueEssence.Dungeon.MonsterID("swellow", 0, "normal", Gender.Female), 
-				nil,
-                RogueEssence.Dungeon.MonsterID("swellow", 0, "normal", Gender.Female), 
-                COMMON.MISSION_INCOMPLETE, 
-                COMMON.MISSION_TYPE_ESCORT_OUT, 
-                { EscortStartMsg = "TALK_ESCORT_MOTHER_START", EscortAcceptMsg = "TALK_ESCORT_MOTHER_ACCEPT", EscortInteract = "EscortInteractMother" })
+	    COMMON.CreateMission("EscortMother",
+        {
+          DestZone = "castaway_cave",
+          DestSegment = 0,
+          DestFloor = 7,
+          FloorUnknown = true,
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("swellow", 0, "normal", Gender.Female),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("swellow", 0, "normal", Gender.Female),
+          Complete = COMMON.MISSION_INCOMPLETE,
+          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          EscortTable = { EscortStartMsg = "TALK_ESCORT_MOTHER_START", EscortAcceptMsg = "TALK_ESCORT_MOTHER_ACCEPT", EscortInteract = "EscortInteractMother" }
+        }
+		)
       end
 	  
 	  if SV.family.Mother == false then
@@ -42,13 +54,19 @@ function COMMON.UpdateDayEndVars()
 	--TODO: should be deserted_fortress
     if _DATA.Save:GetDungeonUnlock("overgrown_wilds") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortFather"] == nil and SV.missions.FinishedMissions["EscortFather"] == nil then
-        COMMON.CreateMission("EscortFather", "overgrown_wilds", 1, 1, true, 
-                RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male), 
-				nil,
-                RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male), 
-                COMMON.MISSION_INCOMPLETE, 
-                COMMON.MISSION_TYPE_ESCORT_OUT, 
-                { EscortStartMsg = "TALK_ESCORT_FATHER_START", EscortAcceptMsg = "TALK_ESCORT_FATHER_ACCEPT", EscortInteract = "EscortInteractFather" })
+	    COMMON.CreateMission("EscortFather",
+        {
+          DestZone = "overgrown_wilds",
+          DestSegment = 1,
+          DestFloor = 1,
+          FloorUnknown = true,
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male),
+          Complete = COMMON.MISSION_INCOMPLETE,
+          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          EscortTable = { EscortStartMsg = "TALK_ESCORT_FATHER_START", EscortAcceptMsg = "TALK_ESCORT_FATHER_ACCEPT", EscortInteract = "EscortInteractFather" }
+        }
+		)
       end
 	  
 	  if SV.family.Father == false then
@@ -59,13 +77,19 @@ function COMMON.UpdateDayEndVars()
 	-- TODO: should be barren_tundra
     if _DATA.Save:GetDungeonUnlock("snowbound_path") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortBrother"] == nil and SV.missions.FinishedMissions["EscortBrother"] == nil then
-        COMMON.CreateMission("EscortBrother", "snowbound_path", 1, 1, true, 
-                RogueEssence.Dungeon.MonsterID("wooper", 0, "normal", Gender.Male), 
-				nil,
-                RogueEssence.Dungeon.MonsterID("wooper", 0, "normal", Gender.Male),
-                COMMON.MISSION_INCOMPLETE, 
-                COMMON.MISSION_TYPE_ESCORT_OUT, 
-                { EscortStartMsg = "TALK_ESCORT_BROTHER_START", EscortAcceptMsg = "TALK_ESCORT_BROTHER_ACCEPT", EscortInteract = "EscortInteractBrother" })
+	    COMMON.CreateMission("EscortFather",
+        {
+          DestZone = "snowbound_path",
+          DestSegment = 1,
+          DestFloor = 1,
+          FloorUnknown = true,
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("wooper", 0, "normal", Gender.Male),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("wooper", 0, "normal", Gender.Male),
+          Complete = COMMON.MISSION_INCOMPLETE,
+          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          EscortTable = { EscortStartMsg = "TALK_ESCORT_BROTHER_START", EscortAcceptMsg = "TALK_ESCORT_BROTHER_ACCEPT", EscortInteract = "EscortInteractBrother" }
+        }
+		)
       end
 	  
 	  if SV.family.Brother == false then
@@ -76,13 +100,19 @@ function COMMON.UpdateDayEndVars()
 	-- TODO: should be wayward_wetlands
     if _DATA.Save:GetDungeonUnlock("veiled_ridge") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortPet"] == nil and SV.missions.FinishedMissions["EscortPet"] == nil then
-        COMMON.CreateMission("EscortPet", "veiled_ridge", 1, 1, true, 
-                RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male), 
-				nil,
-                RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male), 
-                COMMON.MISSION_INCOMPLETE, 
-                COMMON.MISSION_TYPE_ESCORT_OUT, 
-                { EscortStartMsg = "TALK_ESCORT_PET_START", EscortAcceptMsg = "TALK_ESCORT_PET_ACCEPT", EscortInteract = "EscortInteractPet" })
+	    COMMON.CreateMission("EscortPet",
+        {
+          DestZone = "veiled_ridge",
+          DestSegment = 1,
+          DestFloor = 1,
+          FloorUnknown = true,
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male),
+          Complete = COMMON.MISSION_INCOMPLETE,
+          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          EscortTable = { EscortStartMsg = "TALK_ESCORT_PET_START", EscortAcceptMsg = "TALK_ESCORT_PET_ACCEPT", EscortInteract = "EscortInteractPet" }
+        }
+		)
       end
 	  
 	  if SV.family.Pet == false then
@@ -93,13 +123,18 @@ function COMMON.UpdateDayEndVars()
 	-- TODO: should be the_sky
     if _DATA.Save:GetDungeonUnlock("champions_road") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortGrandma"] == nil and SV.missions.FinishedMissions["EscortGrandma"] == nil then
-        COMMON.CreateMission("EscortGrandma", "champions_road", 1, 1, true, 
-                RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Genderless), 
-				nil,
-                RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Genderless), 
-                COMMON.MISSION_INCOMPLETE, 
-                COMMON.MISSION_TYPE_ESCORT_OUT, 
-                { EscortStartMsg = "TALK_ESCORT_GRANDMA_START", EscortAcceptMsg = "TALK_ESCORT_GRANDMA_ACCEPT", EscortInteract = "EscortInteractGrandma" })
+	    COMMON.CreateMission("EscortGrandma",
+        {
+          DestZone = "champions_road",
+          DestSegment = 1,
+          DestFloor = 1,
+          FloorUnknown = true,
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male),
+          Complete = COMMON.MISSION_INCOMPLETE,
+          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          EscortTable = { EscortStartMsg = "TALK_ESCORT_GRANDMA_START", EscortAcceptMsg = "TALK_ESCORT_GRANDMA_ACCEPT", EscortInteract = "EscortInteractGrandma" }
+        })
       end
 	  
 	  if SV.family.Grandma == false then
@@ -345,27 +380,24 @@ function COMMON.UpdateDayEndVars()
   
 end
 
---Creates the mission and suspends all active jobs that take place in dest_zone
---Jobs are suspended regardless of dest_segment as moving to the job rewards from any segment can disrupt mission rewards (i.e. escort family missions)
-function COMMON.CreateMission(key, dest_zone, dest_segment, dest_floor, floor_unknown, target_species, target_item, client_complete, complete, mission_type, escort_table)
-  SV.missions.Missions[key] =
-  {
-    DestZone = dest_zone,
-    DestSegment = dest_segment,
-    DestFloor = dest_floor,
-    FloorUnknown = floor_unknown,
-    TargetSpecies = target_species,
-	TargetItem = target_item,
-    ClientSpecies = client_complete,
-    Complete = complete,
-    Type = mission_type,
-    EscortTable = escort_table
-  }
+function COMMON.UpdateCheckpointStatus(checkpoint, limit)
+  checkpoint.DaysSinceCheckpoint = checkpoint.DaysSinceCheckpoint + 1
+	if checkpoint.DaysSinceCheckpoint >= limit then
+      checkpoint.Status = checkpoint.Status + 1
+	  checkpoint.DaysSinceCheckpoint = 0
+	  checkpoint.SpokenTo = false
+	end
+end
 
-  for i = 1, 8, 1 do
-    local zone = SV.TakenBoard[i].Zone
-    if zone ~= nil and zone ~= '' and zone == dest_zone then
-      SV.TakenBoard[i].Taken = false
+function COMMON.CreateMission(key, mission)
+  SV.missions.Missions[key] = mission
+
+  if mission.dest_zone ~= nil then
+    for i = 1, 8, 1 do
+      local zone = SV.TakenBoard[i].Zone
+      if zone ~= nil and zone ~= '' and zone == mission.dest_zone then
+        SV.TakenBoard[i].Taken = false
+      end
     end
   end
 end
@@ -379,15 +411,6 @@ function COMMON.HasSidequestInZone(zone)
   end
 
   return false
-end
-
-function COMMON.UpdateCheckpointStatus(checkpoint, limit)
-  checkpoint.DaysSinceCheckpoint = checkpoint.DaysSinceCheckpoint + 1
-	if checkpoint.DaysSinceCheckpoint >= limit then
-      checkpoint.Status = checkpoint.Status + 1
-	  checkpoint.DaysSinceCheckpoint = 0
-	  checkpoint.SpokenTo = false
-	end
 end
 
 function COMMON.ExitDungeonMissionCheckEx(result, zoneId, segmentID)
@@ -428,4 +451,3 @@ function COMMON.ExitDungeonMissionCheckEx(result, zoneId, segmentID)
 
   return false
 end
-

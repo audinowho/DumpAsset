@@ -157,9 +157,7 @@ function forest_camp.CheckMissions()
       SV.magnagate.Cards = SV.magnagate.Cards + 1
 	  SV.family.Sister = true
       COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_SUN"):ToLocal())
-      quest.Complete = COMMON.MISSION_ARCHIVED
-      SV.missions.FinishedMissions["EscortSister"] = quest
-      SV.missions.Missions["EscortSister"] = nil
+	  COMMON.CompleteMission("EscortSister")
 	  
     end
   end
@@ -325,12 +323,13 @@ function forest_camp.NPC_Elder_Action(chara, activator)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Line_001']))
 	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+	COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
       DestZone = "ambush_forest", DestSegment = 0, DestFloor = 11,
       FloorUnknown = false,
 	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_ground"),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("donphan", 0, "normal", Gender.Male) }
-	
+	)
   else
   
 	COMMON.TakeMissionItem(quest)
@@ -508,12 +507,13 @@ function forest_camp.Sick_Child()
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sickness_Line_003'], tostring(destFloor+1)))
 
 	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+	COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
       DestZone = "sickly_hollow", DestSegment = 0, DestFloor = destFloor,
       FloorUnknown = false,
 	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_grass"),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("sunflora", 0, "normal", Gender.Male) }
-	
+	)
   else
   
 	COMMON.TakeMissionItem(quest)

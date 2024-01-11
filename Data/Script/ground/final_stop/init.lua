@@ -165,9 +165,7 @@ function final_stop.CheckMissions()
       SV.magnagate.Cards = SV.magnagate.Cards + 1
 	  SV.family.Brother = true
       COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_MIST"):ToLocal())
-      quest.Complete = COMMON.MISSION_ARCHIVED
-      SV.missions.FinishedMissions["EscortBrother"] = quest
-      SV.missions.Missions["EscortBrother"] = nil
+	  COMMON.CompleteMission("EscortBrother")
 	  
     end
   end
@@ -383,12 +381,13 @@ function final_stop.NPC_Seer_Action(chara, activator)
       GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Help_Line_001']))
 	
-	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	  COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
         DestZone = "snowbound_path", DestSegment = 0, DestFloor = 10,
         FloorUnknown = false,
         TargetSpecies = RogueEssence.Dungeon.MonsterID("typhlosion", 1, "normal", Gender.Male),
         ClientSpecies = RogueEssence.Dungeon.MonsterID("delphox", 0, "normal", Gender.Male) }
-	
+	)
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
 	  GROUND:CharTurnToChar(chara,CH('PLAYER'))
       UI:SetSpeaker(chara)
@@ -530,12 +529,14 @@ function final_stop.NPC_Carry_Action(chara, activator)
     if quest == nil then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_001']))
       --add the quest
-      SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_DISGUISE,
+      COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_DISGUISE,
         DestZone = "snowbound_path", DestSegment = 0, DestFloor = 12,
         FloorUnknown = true,
         ClientSpecies = chara.CurrentForm,
         TargetSpecies = RogueEssence.Dungeon.MonsterID("zoroark", 1, "normal", Gender.Male),
         DisguiseSpecies = RogueEssence.Dungeon.MonsterID("swalot", 0, "normal", Gender.Male), DisguiseTalk = "DisguiseTalk", DisguiseHit = "DisguiseHit" }
+		)
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_002']))
     else

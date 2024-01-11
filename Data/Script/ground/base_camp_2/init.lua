@@ -1562,11 +1562,13 @@ function base_camp_2.Juice_Owner_Action(chara, activator)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_001']))
 	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+	COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
       DestZone = "bramble_woods", DestSegment = 0, DestFloor = 4,
       FloorUnknown = false,
 	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_bug"),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("shuckle", 0, "normal", Gender.Male) }
+	  )
 	
   else
   

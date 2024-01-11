@@ -483,19 +483,19 @@ function test_grounds.Magnezone_Action(chara, activator)
     local chres = UI:ChoiceResult() 
     if chres then
 	  -- Type 0 = Rescue
-	  SV.missions.Missions["OutlawQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW,
+	  COMMON.CreateMission("OutlawQuest",
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW,
       DestZone = "debug_zone", DestSegment = 4, DestFloor = 9,
       FloorUnknown = true,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("riolu", 0, "normal", Gender.Male),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("magnezone", 0, "normal", Gender.Genderless) }
+	  )
       UI:WaitShowDialogue("You can find the perpetrator at Replay Test Zone 10F.  Good luck!")
     end
   else
     if quest.Complete == COMMON.MISSION_COMPLETE then
 	  UI:WaitShowDialogue("Outlaw mission state: Complete.  Give a reward and mark mission as rewarded.")
-	  quest.Complete = COMMON.MISSION_ARCHIVED
-	  SV.missions.FinishedMissions["OutlawQuest"] = quest
-	  SV.missions.Missions["OutlawQuest"] = nil
+	  COMMON.CompleteMission("OutlawQuest")
 	else
 	  -- there is an outlaw quest, but it hasn't been completed?  ask to abandon
       UI:ChoiceMenuYesNo("Outlaw mission state: Incomplete.  Do you want to abandon the mission?")
@@ -529,19 +529,19 @@ function test_grounds.Butterfree_Action(chara, activator)
     local chres = UI:ChoiceResult() 
     if chres then
 	  -- Type 0 = Rescue
-	  SV.missions.Missions["CaterQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	  COMMON.CreateMission("CaterQuest",
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
       DestZone = "debug_zone", DestSegment = 4, DestFloor = 4,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("caterpie", 0, "normal", Gender.Male),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("butterfree", 0, "normal", Gender.Male) }
+	  )
       UI:WaitShowDialogue("You can find Caterpie at Replay Test Zone 5F.  Good luck!")
     end
   else
     if quest.Complete == COMMON.MISSION_COMPLETE then
 	  UI:WaitShowDialogue("Caterpie mission state: Complete.  Give a reward and mark mission as rewarded.")
-	  quest.Complete = COMMON.MISSION_ARCHIVED
-	  SV.missions.FinishedMissions["CaterQuest"] = quest
-	  SV.missions.Missions["CaterQuest"] = nil
+	  COMMON.CompleteMission("CaterQuest")
 	else
 	  -- there is a caterpie quest, but it hasn't been completed?  ask to abandon
       UI:ChoiceMenuYesNo("Caterpie mission state: Incomplete.  Do you want to abandon the mission?")
@@ -586,20 +586,20 @@ function test_grounds.Volbeat_Action(chara, activator)
     local chres = UI:ChoiceResult() 
     if chres then
 	  -- Type 1 = Escort
-	  SV.missions.Missions["VolmiseQuest"] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_ESCORT,
+	  COMMON.CreateMission("VolmiseQuest",
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_ESCORT,
       DestZone = "debug_zone", DestSegment = 4, DestFloor = 3,
       FloorUnknown = true,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("illumise", 0, "normal", Gender.Female),
       EscortSpecies = RogueEssence.Dungeon.MonsterID("volbeat", 0, "normal", Gender.Male),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("volbeat", 0, "normal", Gender.Male) }
+	  )
       UI:WaitShowDialogue("You can find Illumise at Replay Test Zone ?F.  I'll join you when you enter!")
     end
   else
     if quest.Complete == COMMON.MISSION_COMPLETE then
 	  UI:WaitShowDialogue("Volmise mission state: Complete.  Give a reward and mark mission as rewarded.")
-	  quest.Complete = COMMON.MISSION_ARCHIVED
-	  SV.missions.FinishedMissions["VolmiseQuest"] = quest
-	  SV.missions.Missions["VolmiseQuest"] = nil
+	  COMMON.CompleteMission("VolmiseQuest")
 	else
 	  -- there is a caterpie quest, but it hasn't been completed?  ask to abandon
       UI:ChoiceMenuYesNo("Volmise mission state: Incomplete.  Do you want to abandon the mission?")

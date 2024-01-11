@@ -221,9 +221,7 @@ function cliff_camp.CheckMissions()
       SV.magnagate.Cards = SV.magnagate.Cards + 1
 	  SV.family.Pet = true
       COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_GRASS"):ToLocal())
-      quest.Complete = COMMON.MISSION_ARCHIVED
-      SV.missions.FinishedMissions["EscortPet"] = quest
-      SV.missions.Missions["EscortPet"] = nil
+	  COMMON.CompleteMission("EscortPet")
 	  
     end
   end
@@ -243,9 +241,7 @@ function cliff_camp.CheckMissions()
       SV.magnagate.Cards = SV.magnagate.Cards + 1
 	  SV.family.Grandma = true
       COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_WIND"):ToLocal())
-      quest.Complete = COMMON.MISSION_ARCHIVED
-      SV.missions.FinishedMissions["EscortGrandma"] = quest
-      SV.missions.Missions["EscortGrandma"] = nil
+	  COMMON.CompleteMission("EscortGrandma")
 	  
     end
   end
@@ -325,12 +321,13 @@ function cliff_camp.NPC_Broke_Action(chara, activator)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_001']))
 	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+	COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
       DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6,
       FloorUnknown = false,
 	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_dark"),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("mightyena", 0, "normal", Gender.Male) }
-	
+	)
   else
   
 	COMMON.TakeMissionItem(quest)
@@ -396,12 +393,13 @@ function cliff_camp.Catch_Action()
   if quest == nil then
     cliff_camp.Catch_Trouble()
 	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+	COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
       DestZone = "overgrown_wilds", DestSegment = 0, DestFloor = 6,
       FloorUnknown = false,
 	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_normal"),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("rattata", 0, "normal", Gender.Male) }
-	
+	)
   else
   
 	COMMON.TakeMissionItem(quest)
@@ -570,12 +568,13 @@ function cliff_camp.NPC_Sightseer_Action(chara, activator)
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sightseer_Quest_Line_001']))
 	
 	--TODO: later oblivion valley
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
       DestZone = "secret_garden", DestSegment = 0, DestFloor = 9,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("meowth", 0, "normal", Gender.Male),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("pidgeotto", 0, "normal", Gender.Male) }
-	
+	)
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sightseer_Quest_Line_002']))
@@ -652,12 +651,13 @@ function cliff_camp.Speedster_2_Action(chara, activator)
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Help_Line_001']))
 	
 	--TODO: later deserted fortress
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
       DestZone = "trickster_woods", DestSegment = 0, DestFloor = 6,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("doduo", 0, "normal", Gender.Male),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("pachirisu", 0, "normal", Gender.Male) }
-	
+	)
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
@@ -883,10 +883,12 @@ function cliff_camp.NPC_Storehouse_Action(chara, activator)
     if quest == nil then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_003']))
 	  --add the quest
-	  SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW,
+	  COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW,
       DestZone = "faded_trail", DestSegment = 0, DestFloor = 5, FloorUnknown = true,
       ClientSpecies = chara.CurrentForm,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("murkrow", 0, "normal", Gender.Male) }
+	  )
 	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_004']))
 	else

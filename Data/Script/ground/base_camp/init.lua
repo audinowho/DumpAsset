@@ -145,9 +145,7 @@ function base_camp.CheckMissions()
       SV.magnagate.Cards = SV.magnagate.Cards + 1
 	  SV.family.Mother = true
       COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_WATER"):ToLocal())
-      quest.Complete = COMMON.MISSION_ARCHIVED
-      SV.missions.FinishedMissions["EscortMother"] = quest
-      SV.missions.Missions["EscortMother"] = nil
+	  COMMON.CompleteMission("EscortMother")
 	  
     end
   end
@@ -576,11 +574,13 @@ function base_camp.NPC_Steel_1_Action(chara, activator)
     GROUND:CharTurnToChar(chara,player)
 	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Steel_Line_001']))
 	
-	SV.missions.Missions[questname] = { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
       DestZone = "guildmaster_trail", DestSegment = 0, DestFloor = 14,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("scizor", 0, "normal", Gender.Male),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("steelix", 0, "normal", Gender.Male) }
+	  )
 	
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)

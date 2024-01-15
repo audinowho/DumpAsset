@@ -5,16 +5,6 @@ MobSpawnType = luanet.import_type('RogueEssence.LevelGen.MobSpawn')
 
 SINGLE_CHAR_SCRIPT = {}
 
-local function in_array(value, array)
-	for index = 1, #array do
-		if array[index] == value then
-			return true
-		end
-	end
-
-	return false -- We could ommit this part, as nil is like false
-end
-
 function SINGLE_CHAR_SCRIPT.Test(owner, ownerChar, context, args)
   PrintInfo("Test")
 end
@@ -572,7 +562,7 @@ function SpawnOutlaw(origin, radius, mission_num)
 	--generate the skill candidate list based on level and the blacklist
 	for i = 0,  _DATA:GetMonster(new_mob.BaseForm.Species).Forms[new_mob.BaseForm.Form].LevelSkills.Count - 1, 1 do
 		local skill =_DATA:GetMonster(new_mob.BaseForm.Species).Forms[new_mob.BaseForm.Form].LevelSkills[i].Skill
-		if _DATA:GetMonster(new_mob.BaseForm.Species).Forms[new_mob.BaseForm.Form].LevelSkills[i].Level <= new_mob.Level and not in_array(skill, skill_blacklist) then
+		if _DATA:GetMonster(new_mob.BaseForm.Species).Forms[new_mob.BaseForm.Form].LevelSkills[i].Level <= new_mob.Level and not COMMON.InArray(skill, skill_blacklist) then
 			--print("new skill candidate!: " .. skill)
 			table.insert(skill_candidates, skill)
 		end

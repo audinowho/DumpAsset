@@ -1301,6 +1301,16 @@ function COMMON.ResetAnims()
     end
 end
 
+function COMMON.InArray(value, array)
+    for index = 1, #array do
+        if array[index] == value then
+            return true
+        end
+    end
+
+    return false -- We could ommit this part, as nil is like false
+end
+
 function COMMON.EndDungeonDay(result, zoneId, structureId, mapId, entryId)
   COMMON.EndDayCycle()
     

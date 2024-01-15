@@ -274,7 +274,7 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
             post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
           elseif mission.Type == COMMON.MISSION_TYPE_ESCORT then -- escort
             post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)
-          local dialogue = RogueEssence.Dungeon.BattleScriptEvent("SidequestEscortRescueReached")
+          local dialogue = RogueEssence.Dungeon.BattleScriptEvent("SidequestEscortReached")
             post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
             post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
           elseif mission.Type == COMMON.MISSION_TYPE_ESCORT_OUT then -- escort
@@ -313,7 +313,7 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
   if outlawFloor then
     -- add destination floor notification
     local activeEffect = RogueEssence.Data.ActiveEffect()
-    activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("OutlawSidequestFloor", Serpent.line({ Silent = outlawSilent })))
+    activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("SidequestOutlawFloor", Serpent.line({ Silent = outlawSilent })))
 	local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
 	local priority = RogueElements.Priority(-6)
 	queue:Enqueue(priority, destNote)

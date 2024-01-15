@@ -413,22 +413,22 @@ function SINGLE_CHAR_SCRIPT.DestinationFloor(owner, ownerChar, context, args)
   UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_DESTINATION"):ToLocal()))
 end
 
-function SINGLE_CHAR_SCRIPT.OutlawSidequestFloor(owner, ownerChar, context, args)
-	if context.User ~= nil then
-		return
-	end
-
-	if not args.Silent then
-		SOUND:PlayBGM("C07. Outlaw.ogg", false)
-		UI:ResetSpeaker()
-		UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW"):ToLocal()))
-	end
-
-	-- add a map status for outlaw clear check
-	local checkClearStatus = "outlaw_clear_check" -- outlaw clear check
-	local status = RogueEssence.Dungeon.MapStatus(checkClearStatus)
-	status:LoadFromData()
-	TASK:WaitTask(_DUNGEON:AddMapStatus(status))
+function SINGLE_CHAR_SCRIPT.SidequestOutlawFloor(owner, ownerChar, context, args)
+  if context.User ~= nil then
+    return
+  end
+  
+  if not args.Silent then
+    SOUND:PlayBGM("C07. Outlaw.ogg", false)
+    UI:ResetSpeaker()
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW"):ToLocal()))
+  end
+  
+  -- add a map status for outlaw clear check
+  local checkClearStatus = "outlaw_clear_check" -- outlaw clear check
+  local status = RogueEssence.Dungeon.MapStatus(checkClearStatus)
+  status:LoadFromData()
+  TASK:WaitTask(_DUNGEON:AddMapStatus(status))
 end
 
 function SINGLE_CHAR_SCRIPT.OutlawHouse(owner, ownerChar, context, args)

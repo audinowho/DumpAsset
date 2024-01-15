@@ -445,6 +445,7 @@ function DeliveryCheck(context, targetName, mission)
     end
 end
 
+
 function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
     context.CancelState.Cancel = false
     context.TurnCancel.Cancel = true
@@ -495,50 +496,6 @@ function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
     end
 end
 
-function BATTLE_SCRIPT.EscortOutReached(owner, ownerChar, context, args)
-
-    context.CancelState.Cancel = true
-
-    local tbl = LTBL(context.Target)
-
-    local mission = SV.missions.Missions[tbl.Mission]
-
-    local oldDir = context.Target.CharDir
-    DUNGEON:CharTurnToChar(context.Target, context.User)
-
-    UI:SetSpeaker(context.Target)
-    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(args.EscortStartMsg):ToLocal()))
-
-    -- ask to join
-    UI:ResetSpeaker()
-    UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("TALK_ESCORT_ASK"):ToLocal()), false)
-    UI:WaitForChoice()
-    result = UI:ChoiceResult()
-    if result then
-        -- join the team
-
-        _DUNGEON:RemoveChar(context.Target)
-        local tactic = _DATA:GetAITactic(_DATA.DefaultAI)
-        context.Target.Tactic =  RogueEssence.Data.AITactic(tactic)
-        _DATA.Save.ActiveTeam.Guests:Add(context.Target)
-        context.Target:RefreshTraits()
-        context.Target.Tactic:Initialize(context.Target)
-
-        context.Target:FullRestore()
-
-        context.Target.ActionEvents:Clear()
-        local talk_evt = RogueEssence.Dungeon.BattleScriptEvent(args.EscortInteract)
-        context.Target.ActionEvents:Add(talk_evt)
-
-        SOUND:PlayFanfare("Fanfare/Note")
-        UI:ResetSpeaker()
-        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT_GUEST"):ToLocal(), context.Target:GetDisplayName(true)))
-        UI:SetSpeaker(context.Target)
-        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(args.EscortAcceptMsg):ToLocal()))
-    end
-
-end
-
 function BATTLE_SCRIPT.SidequestRescueReached(owner, ownerChar, context, args)
 
     context.CancelState.Cancel = true
@@ -572,8 +529,7 @@ function BATTLE_SCRIPT.SidequestRescueReached(owner, ownerChar, context, args)
     end
 end
 
-
-function BATTLE_SCRIPT.SidequestEscortRescueReached(owner, ownerChar, context, args)
+function BATTLE_SCRIPT.SidequestEscortReached(owner, ownerChar, context, args)
 
     context.CancelState.Cancel = true
 

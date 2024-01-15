@@ -1,14 +1,15 @@
 require 'common'
 require 'mission_gen'
 require 'menu.InventorySelectMenu'
-require 'menu.SkillSelectMenu'
-require 'menu.SkillTutorMenu'
 require 'menu.TeamSelectMenu'
+
+local base_camp_2_tutor = require 'ground.base_camp_2.base_camp_2_tutor'
+local base_camp_2_juice = require 'ground.base_camp_2.base_camp_2_juice'
+local base_camp_2_bulletin = require 'ground.base_camp_2.base_camp_2_bulletin'
 
 local base_camp_2 = {}
 local MapStrings = {}
 
-MissionBoardStateType = luanet.import_type('PMDC.Dungeon.MissionBoardState')
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
@@ -16,8 +17,11 @@ function base_camp_2.Init(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo("=>> Init_base_camp_2")
   MapStrings = COMMON.AutoLoadLocalizedStrings()
-  GROUND:RefreshPlayer()
+  base_camp_2_tutor.InitStrings(MapStrings)
+  base_camp_2_juice.InitStrings(MapStrings)
+  base_camp_2_bulletin.InitStrings(MapStrings)
   
+  GROUND:RefreshPlayer()
 
   --get assembly ready
   local assemblyCount = GAME:GetPlayerAssemblyCount()
@@ -74,26 +78,15 @@ function base_camp_2.Init(map)
     SOUND:PlayBGM(SV.base_town.Song, true)
   end
   
-  
   GROUND:AddMapStatus("clouds_overhead")
 end
 
 function base_camp_2.Enter(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-
-  local mission_table = _DATA.UniversalEvent.UniversalStates:GetWithDefault(luanet.ctype(MissionBoardStateType))
-  if mission_table == nil or mission_table.EnableMissionBoard == false then
-      GROUND:Hide("Mission_Board")
-  end
-    
-  GROUND:Hide("Locator")
-  GROUND:Hide("Locator_Owner")
-
-  if SV.TemporaryFlags.MissionCompleted then
-    base_camp_2.Hand_In_Missions()
-  end  
-    
+  
   base_camp_2.SetupNpcs()
+  
+  base_camp_2_bulletin.Enter(map)
   
   GAME:FadeIn(20)
 end
@@ -1244,287 +1237,6 @@ function base_camp_2.Swap_Action(obj, activator)
 	end
 end
 
-function base_camp_2.Tutor_Sequence()
-
-	local chara = CH('Tutor_Owner')
-	GAME:WaitFrames(10)
-	GROUND:CharSetAnim(chara, "Strike", false)
-	GAME:WaitFrames(15)
-	local emitter = RogueEssence.Content.FlashEmitter()
-	emitter.FadeInTime = 2
-	emitter.HoldTime = 4
-	emitter.FadeOutTime = 2
-	emitter.StartColor = Color(0, 0, 0, 0)
-	emitter.Layer = DrawLayer.Top
-	emitter.Anim = RogueEssence.Content.BGAnimData("White", 0)
-	GROUND:PlayVFX(emitter, chara.MapLoc.X, chara.MapLoc.Y)
-	SOUND:PlayBattleSE("EVT_Battle_Flash")
-	GAME:WaitFrames(10)
-	GROUND:CharSetAnim(chara, "Idle", true)
-	GAME:WaitFrames(30)
-end
-
-
-function base_camp_2.Tutor_Can_Remember(member)
-  return GAME:CanRelearn(member)
-end
-
-function base_camp_2.Tutor_Can_Forget(member)
-  return GAME:CanForget(member)
-end
-
-function base_camp_2.Tutor_Can_Tutor(member, tutor_moves)
-  
-  local valid_moves = COMMON.GetTutorableMoves(member, tutor_moves)
-	for move_idx, skill in pairs(valid_moves) do
-		return true
-	end
-  
-  return false
-end
-
-
-function base_camp_2.Tutor_Remember_Flow(price)
-    
-	local state = 0
-  local member = nil
-  local move = ""
-	
-	if price > GAME:GetPlayerMoney() then
-		UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_No_Money']))
-		return
-	end
-    
-	while state > -1 do
-		if state == 0 then
-			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Who']))
-			UI:TutorTeamMenu(base_camp_2.Tutor_Can_Remember)
-			UI:WaitForChoice()
-			local result = UI:ChoiceResult()
-			if result > -1 then
-				state = 1
-				member = GAME:GetPlayerPartyMember(result)
-			else
-				state = -1
-			end
-		elseif state == 1 then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_What'], member:GetDisplayName(true)))
-      local result = SkillSelectMenu.runRelearnMenu(member)
-      if result ~= "" then
-        move = result
-        state = 2
-      else
-        state = 0
-      end
-		elseif state == 2 then
-        local moveEntry = _DATA:GetSkill(move)
-		    local learnedMove = COMMON.LearnMoveFlow(member, move, STRINGS:Format(MapStrings['Tutor_Remember_Replace']))
-			
-			if learnedMove then
-				if price > 0 then
-				  SOUND:PlayBattleSE("DUN_Money")
-				  GAME:RemoveFromPlayerMoney(price)
-				end
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Begin']))
-				base_camp_2.Tutor_Sequence()
-				SOUND:PlayFanfare("Fanfare/LearnSkill")
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
-				state = -1
-			else
-				state = 1
-			end
-		end
-	end
-end
-
-
-function base_camp_2.Tutor_Forget_Flow()
-  local state = 0
-  local member = nil
-  local move = ""
-  
-  while state > -1 do
-  
-    if state == 0 then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_Who']))
-      UI:TutorTeamMenu(base_camp_2.Tutor_Can_Forget)
-      UI:WaitForChoice()
-      local result = UI:ChoiceResult()
-      if result > -1 then
-        member = GAME:GetPlayerPartyMember(result)
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_What'], member:GetDisplayName(true)))
-        state = 1
-      else
-        state = -1
-      end
-    elseif state == 1 then
-      UI:ForgetMenu(member)
-      UI:WaitForChoice()
-      local result = UI:ChoiceResult()
-      if result > -1 then
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_Begin']))
-        move = GAME:GetCharacterSkill(member, result)
-        local moveEntry = _DATA:GetSkill(move)
-        GAME:ForgetSkill(member, result)
-        base_camp_2.Tutor_Sequence()
-        SOUND:PlayFanfare("Fanfare/LearnSkill")
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
-        state = -1
-      else
-        state = 0
-      end
-    end
-  
-  end
-  
-end
-
-
-function base_camp_2.Tutor_Teach_Flow(tutor_moves)
-    
-	local state = 0
-    local member = nil
-    local move = ""
-	
-	while state > -1 do
-		if state == 0 then
-			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Teach_Who']))
-			UI:TutorTeamMenu(function(chara) return base_camp_2.Tutor_Can_Tutor(chara, tutor_moves) end)
-			UI:WaitForChoice()
-			local result = UI:ChoiceResult()
-			if result > -1 then
-				state = 1
-				member = GAME:GetPlayerPartyMember(result)
-			else
-				state = -1
-			end
-		elseif state == 1 then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Teach_What'], member:GetDisplayName(true)))
-	  local valid_moves = COMMON.GetTutorableMoves(member, tutor_moves) --moved out here
-	  local result = SkillTutorMenu.runTutorMenu(valid_moves, "loot_heart_scale")
-      if result ~= "" then
-        move = result
-        state = 2
-      else
-        state = 0
-      end
-		elseif state == 2 then
-      local moveEntry = _DATA:GetSkill(move)
-			local learnedMove = COMMON.LearnMoveFlow(member, move, STRINGS:Format(MapStrings['Tutor_Remember_Replace']))
-			
-			if learnedMove then
-				local price = COMMON.TUTOR[move].Cost
-				SOUND:PlayBattleSE("DUN_Money")
-				for ii = 1, price, 1 do
-					local item_slot = GAME:FindPlayerItem("loot_heart_scale", true, true)
-					if not item_slot:IsValid() then
-						--it is a certainty that there is an item in storage, due to previous checks
-						GAME:TakePlayerStorageItem("loot_heart_scale")
-					elseif item_slot.IsEquipped then
-						GAME:TakePlayerEquippedItem(item_slot.Slot)
-					else
-						GAME:TakePlayerBagItem(item_slot.Slot)
-					end
-				end
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Begin']))
-				base_camp_2.Tutor_Sequence()
-				SOUND:PlayFanfare("Fanfare/LearnSkill")
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Teach_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
-				state = -1
-			else
-				state = 1
-			end
-		end
-	end
-end
-
-function base_camp_2.Tutor_Action(obj, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  local price = 250
-  local tutor_moves = {}
-  local can_tutor = false
-  for move_key in pairs(SV.base_town.TutorMoves) do
-    if COMMON.TUTOR[move_key] ~= nil then
-      tutor_moves[move_key] = COMMON.TUTOR[move_key]
-	  can_tutor = true
-    end
-  end
-  
-  
-  local state = 0
-  local repeated = false
-  local chara = CH('Tutor_Owner')
-  UI:SetSpeaker(chara)
-  
-  if SV.guildmaster_summit.GameComplete and SV.base_town.FreeRelearn == false then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Now_Free']))
-    SV.base_town.FreeRelearn = true
-  end
-  
-  if can_tutor and SV.base_town.TutorOpen == false then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Now_Teaches']))
-	SV.base_town.TutorOpen = true
-  end
-  
-  if SV.base_town.FreeRelearn then
-    price = 0
-  end
-  
-  
-	while state > -1 do
-		if state == 0 then
-			local msg = STRINGS:Format(MapStrings['Tutor_Intro'], STRINGS:FormatKey("MONEY_AMOUNT", price))
-			if price == 0 then
-			  msg = STRINGS:Format(MapStrings['Tutor_Intro_Free'])
-			end
-			
-			if repeated == true then
-				msg = STRINGS:Format(MapStrings['Tutor_Intro_Return'])
-			end
-			
-			local tutor_choices = {}
-			tutor_choices[1] = RogueEssence.StringKey("MENU_RECALL_SKILL"):ToLocal()
-			tutor_choices[2] = RogueEssence.StringKey("MENU_FORGET_SKILL"):ToLocal()
-			
-			if can_tutor then
-				tutor_choices[3] = STRINGS:Format(MapStrings['Tutor_Option_Tutor'])
-			end
-			
-			tutor_choices[4] = STRINGS:FormatKey("MENU_INFO")
-			tutor_choices[5] = STRINGS:FormatKey("MENU_EXIT")
-			
-			UI:BeginChoiceMenu(msg, tutor_choices, 1, 5)
-			
-			UI:WaitForChoice()
-			local result = UI:ChoiceResult()
-			
-			repeated = true
-			if result == 1 then
-			    base_camp_2.Tutor_Remember_Flow(price)
-			elseif result == 2 then
-				base_camp_2.Tutor_Forget_Flow()
-			elseif result == 3 then
-			    base_camp_2.Tutor_Teach_Flow(tutor_moves)
-			elseif result == 4 then
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Info_001']))
-				if SV.base_town.FreeRelearn then
-				    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Info_003']))
-				else
-				    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Info_002']))
-				end
-				if SV.base_town.TutorOpen then
-				    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Info_004']))
-				end
-			else
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Goodbye']))
-				state = -1
-			end
-		end
-	end
-end
-
-
 
 function base_camp_2.Locator_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
@@ -1552,248 +1264,20 @@ function base_camp_2.Music_Action(obj, activator)
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Music_End']))
 end
 
+function base_camp_2.Tutor_Action(obj, activator)
+  base_camp_2_tutor.Tutor_Action(obj, activator)
+end
+
 function base_camp_2.Juice_Action(obj, activator)
   local chara = CH('Juice_Owner')
-  base_camp_2.Juice_Owner_Action(chara, activator)
+  base_camp_2_juice.Juice_Owner_Action(chara, activator)
 end
 
 function base_camp_2.Juice_Owner_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  if SV.base_town.JuiceShop == 0 then
-    UI:SetSpeaker(chara)
-  
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Intro']))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Setup']))
-  elseif SV.base_town.JuiceShop == 1 then
-  
-  local questname = "QuestBug"
-  local quest = SV.missions.Missions[questname]
-  
-  if quest == nil then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_001']))
-	
-	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
-      DestZone = "bramble_woods", DestSegment = 0, DestFloor = 4,
-      FloorUnknown = false,
-	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_bug"),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("shuckle", 0, "normal", Gender.Male) }
-	  )
-	
-  else
-  
-	COMMON.TakeMissionItem(quest)
-	
-    if quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:SetSpeaker(chara)
-      GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_002']))
-    else
-      base_camp_2.Bug_Complete()
-    end
-  end
-  
-  elseif SV.base_town.JuiceShop >= 2 then
-
-    base_camp_2.Juice_Shop(obj, activator)
-
-  end
-  
+  base_camp_2_juice.Juice_Owner_Action(chara, activator)
 end
 
-function base_camp_2.Bug_Complete()
-  local juice = CH('Juice_Owner')
-  local player = CH('PLAYER')
-  
-  GROUND:CharTurnToChar(juice,player)
-  
-  UI:SetSpeaker(juice)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_003']))
-  
-  local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_bug_silk")
-  COMMON.GiftItem(player, receive_item)
-  
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_004']))
-  
-  COMMON.CompleteMission("QuestBug")
-  
-  SV.base_town.JuiceShop = 2
-end
-
-base_camp_2.boost_tbl = { }
---{ Level = 0, EXP = 100, HP = 0, Atk = 0, Def = 0, SpAtk = 0, SpDef = 0, Speed = 0, NegateExp = false, NegateStat = false, GummiEffect = nil}
-base_camp_2.boost_tbl["food_apple"] = { EXP = 100 }
-base_camp_2.boost_tbl["food_apple_big"] = { EXP = 300 }
-base_camp_2.boost_tbl["food_apple_huge"] = { EXP = 1000 }
-base_camp_2.boost_tbl["food_apple_perfect"] = { EXP = 5000 }
-base_camp_2.boost_tbl["food_apple_golden"] = { EXP = 25000 }
-base_camp_2.boost_tbl["food_banana"] = { EXP = 500 }
-base_camp_2.boost_tbl["food_banana_big"] = { EXP = 2500 }
-base_camp_2.boost_tbl["food_banana_golden"] = { EXP = 100000 }
-base_camp_2.boost_tbl["berry_oran"] = { HP = 1 }
-base_camp_2.boost_tbl["berry_leppa"] = { HP = 1 }
-base_camp_2.boost_tbl["berry_sitrus"] = { HP = 1 }
-base_camp_2.boost_tbl["berry_lum"] = { HP = 1 }
-base_camp_2.boost_tbl["berry_starf"] = { HP = 2 }
-base_camp_2.boost_tbl["berry_liechi"] = { Atk = 2 }
-base_camp_2.boost_tbl["berry_ganlon"] = { Def = 2 }
-base_camp_2.boost_tbl["berry_petaya"] = { SpAtk = 2 }
-base_camp_2.boost_tbl["berry_apicot"] = { SpDef = 2 }
-base_camp_2.boost_tbl["berry_salac"] = { Speed = 2 }
-base_camp_2.boost_tbl["berry_enigma"] = { HP = 1 }
-base_camp_2.boost_tbl["berry_micle"] = { Atk = 1, SpAtk = 1 }
-base_camp_2.boost_tbl["gummi_black"] = { GummiEffect = 'dark' }
-base_camp_2.boost_tbl["gummi_blue"] = { GummiEffect = 'water' }
-base_camp_2.boost_tbl["gummi_brown"] = { GummiEffect = 'ground' }
-base_camp_2.boost_tbl["gummi_clear"] = { GummiEffect = 'ice' }
-base_camp_2.boost_tbl["gummi_gold"] = { GummiEffect = 'psychic' }
-base_camp_2.boost_tbl["gummi_grass"] = { GummiEffect = 'grass' }
-base_camp_2.boost_tbl["gummi_gray"] = { GummiEffect = 'rock' }
-base_camp_2.boost_tbl["gummi_green"] = { GummiEffect = 'bug' }
-base_camp_2.boost_tbl["gummi_magenta"] = { GummiEffect = 'fairy' }
-base_camp_2.boost_tbl["gummi_orange"] = { GummiEffect = 'fighting' }
-base_camp_2.boost_tbl["gummi_pink"] = { GummiEffect = 'poison' }
-base_camp_2.boost_tbl["gummi_purple"] = { GummiEffect = 'ghost' }
-base_camp_2.boost_tbl["gummi_red"] = { GummiEffect = 'fire' }
-base_camp_2.boost_tbl["gummi_royal"] = { GummiEffect = 'dragon' }
-base_camp_2.boost_tbl["gummi_silver"] = { GummiEffect = 'steel' }
-base_camp_2.boost_tbl["gummi_sky"] = { GummiEffect = 'flying' }
-base_camp_2.boost_tbl["gummi_white"] = { GummiEffect = 'normal' }
-base_camp_2.boost_tbl["gummi_yellow"] = { GummiEffect = 'electric' }
-base_camp_2.boost_tbl["gummi_wonder"] = { HP = 1, Atk = 1, Def = 1, SpAtk = 1, SpDef = 1, Speed = 1 }
-base_camp_2.boost_tbl["boost_nectar"] = { HP = 1, Atk = 1, Def = 1, SpAtk = 1, SpDef = 1, Speed = 1 }
-base_camp_2.boost_tbl["boost_hp_up"] = { HP = 4 }
-base_camp_2.boost_tbl["boost_protein"] = { Atk = 4 }
-base_camp_2.boost_tbl["boost_iron"] = { Def = 4 }
-base_camp_2.boost_tbl["boost_calcium"] = { SpAtk = 4 }
-base_camp_2.boost_tbl["boost_zinc"] = { SpDef = 4 }
-base_camp_2.boost_tbl["boost_carbos"] = { Speed = 4 }
-base_camp_2.boost_tbl["seed_joy"] = { Level = 1 }
-base_camp_2.boost_tbl["seed_golden"] = { Level = 5 }
-base_camp_2.boost_tbl["seed_doom"] = { Level = -5 }
-base_camp_2.boost_tbl["food_grimy"] = { NegateExp = true }
-base_camp_2.boost_tbl["herb_white"] = { NegateStat = true }
-base_camp_2.boost_tbl["herb_power"] = { NegateStat = true }
-base_camp_2.boost_tbl["herb_mental"] = { NegateStat = true }
-
-function base_camp_2.Drink_Order_Flow()
-
-  local catalog = { }
-
-  local state = 0
-  local member = nil
-  local cart = { }
-  
-  while state > -1 do
-  
-    if state == 0 then
-      --passing in base_camp_2.boost_tbl as the table of eligible items
-      local filter = function(slot) return not not base_camp_2.boost_tbl[slot.ID] end
-      local result = InventorySelectMenu.run(STRINGS:FormatKey("MENU_ITEM_TITLE"), filter)
-			
-	  if #result > 0 then
-		cart = result
-		state = 1
-	  else
-		state = -1
-	  end
-    elseif state == 1 then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Who']))
-      local member = TeamSelectMenu.runPartyMenu()
-	  
-      if member then
-	  
-		for ii = #cart, 1, -1 do
-			if cart[ii].IsEquipped then
-				GAME:TakePlayerEquippedItem(cart[ii].Slot, true)
-			else
-				GAME:TakePlayerBagItem(cart[ii].Slot, true)
-			end
-		end
-		cart = {}
-
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Begin']))
-		SOUND:PlayBattleSE("DUN_Drink")
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Drink'], member:GetDisplayName(true)))
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Result_None'], member:GetDisplayName(true)))
-        state = -1
-      else
-        state = 0
-      end
-    end
-  
-  end
-  
-end
-
-function base_camp_2.Drink_Specialties_Flow()
-
-end
-
-
-function base_camp_2.Juice_Shop(obj, activator)
-
-  local state = 0
-  local repeated = false
-  local chara = CH('Juice_Owner')
-  UI:SetSpeaker(chara)
-	
-  if SV.guildmaster_summit.GameComplete and SV.base_town.JuiceShop == 2 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Now_Specialty']))
-    SV.base_town.JuiceShop = 3
-  end
-	
-	while state > -1 do
-		if state == 0 then
-			msg = STRINGS:Format(MapStrings['Juice_Intro'])
-			if repeated == true then
-				msg = STRINGS:Format(MapStrings['Juice_Intro_Return'])
-			end
-			
-			local juice_choices = {}
-			juice_choices[1] = STRINGS:Format(MapStrings['Juice_Option_Order'])
-			
-			
-			if has_specialties then
-				juice_choices[2] = STRINGS:Format(MapStrings['Juice_Option_Specialties'])
-			end
-			
-			juice_choices[3] = STRINGS:FormatKey("MENU_INFO")
-			juice_choices[4] = STRINGS:FormatKey("MENU_EXIT")
-			
-			UI:BeginChoiceMenu(msg, juice_choices, 1, 4)
-			
-			UI:WaitForChoice()
-			local result = UI:ChoiceResult()
-			
-			repeated = true
-			if result == 1 then
-				local bag_count = GAME:GetPlayerBagCount() + GAME:GetPlayerEquippedCount()
-				if bag_count > 0 then
-					--TODO: use the enum instead of a hardcoded number
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order'], STRINGS:LocalKeyString(26)))
-					base_camp_2.Drink_Order_Flow()
-				else
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Bag_Empty']))
-				end
-			elseif result == 2 then
-				base_camp_2.Drink_Specialties_Flow()
-			elseif result == 3 then
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Info_001']))
-				if SV.base_town.JuiceShop == 3 then
-				    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Info_002']))
-				end
-			else
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Goodbye']))
-				state = -1
-			end
-		end
-	end
-	
-end
 
 
 function base_camp_2.West_Exit_Touch(obj, activator)
@@ -1817,27 +1301,8 @@ end
 function base_camp_2.Mission_Board_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  UI:ResetSpeaker()
-  UI:SetCenter(true, true)
-  UI:WaitShowDialogue("Try to show a custom menu.[scroll]Are you ready?")
+  base_camp_2_bulletin.Mission_Board_Action(obj, activator)
   
-  local choices = LUA_ENGINE:MakeGenericType(ListType, { MenuTextChoiceType }, { })
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice 0", UI:GetChoiceAction(0)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice one", UI:GetChoiceAction(1)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice two", UI:GetChoiceAction(2)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice tres", UI:GetChoiceAction(3)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice quatro", UI:GetChoiceAction(4)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice V", UI:GetChoiceAction(5)))
-  choices:Add(RogueEssence.Menu.MenuTextChoice("Choice VI", UI:GetChoiceAction(6)))
-  local custom_menu = RogueEssence.Menu.CustomMultiPageMenu(RogueElements.Loc(8, 16), 144, "Custom Menu Test", choices:ToArray(), 5, 4, UI:GetChoiceAction(-1), nil)
-  UI:ChooseCustomMenu(custom_menu)
-  UI:WaitForChoice()
-  local chres = UI:ChoiceResult()
-  if chres > -1 then
-    UI:WaitShowDialogue("You chose option " .. tostring(chres))
-  else
-    UI:WaitShowDialogue("You cancelled.")
-  end
 end
 
 

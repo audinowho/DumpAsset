@@ -1,4 +1,4 @@
-# Starter Mod #
+# All Starters #
 A mod that adds starters from all PMD games (including the WiiWare ones), as well as the starters from the main series.
 Pokémon with multiple forms, such as Vulpix and Meowth, have all their forms available.
 

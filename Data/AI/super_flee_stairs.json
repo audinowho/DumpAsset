@@ -3,28 +3,34 @@
 "Object": {
 "$type": "RogueEssence.Data.AITactic, RogueEssence",
 "Name": {
-"DefaultText": "Staged Boss",
+"DefaultText": "Super Flee Stairs",
 "LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
-"ID": "staged_boss",
+"ID": "super_flee_stairs",
 "Assignable": false,
 "Plans": [
 {
-"$type": "PMDC.Dungeon.BossPlan, PMDC",
-"AttackPattern": 4,
-"PositionPattern": 2,
-"IQ": 253,
-"RestrictedMobilityTypes": 0,
+"$type": "PMDC.Dungeon.ExplorePlan, PMDC",
+"IQ": 128,
+"RestrictedMobilityTypes": 14,
 "RestrictMobilityPassable": false,
 "AttackRange": 0,
 "StatusRange": 0,
-"SelfStatusRange": 0
+"SelfStatusRange": 4
 },
 {
-"$type": "PMDC.Dungeon.WaitPlan, PMDC",
-"IQ": 253,
+"$type": "PMDC.Dungeon.FleeStairsPlan, PMDC",
+"stairIds": [
+"stairs_back_down",
+"stairs_back_up",
+"stairs_exit_down",
+"stairs_exit_up",
+"stairs_go_up",
+"stairs_go_down"
+],
+"IQ": 128,
 "RestrictedMobilityTypes": 0,
 "RestrictMobilityPassable": false,
 "AttackRange": 0,

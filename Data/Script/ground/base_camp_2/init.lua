@@ -1,7 +1,9 @@
 require 'common'
 require 'mission_gen'
+require 'menu.InventorySelectMenu'
 require 'menu.SkillSelectMenu'
 require 'menu.SkillTutorMenu'
+require 'menu.TeamSelectMenu'
 
 local base_camp_2 = {}
 local MapStrings = {}
@@ -1622,7 +1624,7 @@ function base_camp_2.Bug_Complete()
 end
 
 base_camp_2.boost_tbl = { }
---{ Level = 0, EXP = 100, HP = 0, Atk = 0, Def = 0, SpAtk = 0, SpDef = 0, Speed = 0, NegateExp = false, NegateStat = false }
+--{ Level = 0, EXP = 100, HP = 0, Atk = 0, Def = 0, SpAtk = 0, SpDef = 0, Speed = 0, NegateExp = false, NegateStat = false, GummiEffect = nil}
 base_camp_2.boost_tbl["food_apple"] = { EXP = 100 }
 base_camp_2.boost_tbl["food_apple_big"] = { EXP = 300 }
 base_camp_2.boost_tbl["food_apple_huge"] = { EXP = 1000 }
@@ -1643,6 +1645,25 @@ base_camp_2.boost_tbl["berry_apicot"] = { SpDef = 2 }
 base_camp_2.boost_tbl["berry_salac"] = { Speed = 2 }
 base_camp_2.boost_tbl["berry_enigma"] = { HP = 1 }
 base_camp_2.boost_tbl["berry_micle"] = { Atk = 1, SpAtk = 1 }
+base_camp_2.boost_tbl["gummi_black"] = { GummiEffect = 'dark' }
+base_camp_2.boost_tbl["gummi_blue"] = { GummiEffect = 'water' }
+base_camp_2.boost_tbl["gummi_brown"] = { GummiEffect = 'ground' }
+base_camp_2.boost_tbl["gummi_clear"] = { GummiEffect = 'ice' }
+base_camp_2.boost_tbl["gummi_gold"] = { GummiEffect = 'psychic' }
+base_camp_2.boost_tbl["gummi_grass"] = { GummiEffect = 'grass' }
+base_camp_2.boost_tbl["gummi_gray"] = { GummiEffect = 'rock' }
+base_camp_2.boost_tbl["gummi_green"] = { GummiEffect = 'bug' }
+base_camp_2.boost_tbl["gummi_magenta"] = { GummiEffect = 'fairy' }
+base_camp_2.boost_tbl["gummi_orange"] = { GummiEffect = 'fighting' }
+base_camp_2.boost_tbl["gummi_pink"] = { GummiEffect = 'poison' }
+base_camp_2.boost_tbl["gummi_purple"] = { GummiEffect = 'ghost' }
+base_camp_2.boost_tbl["gummi_red"] = { GummiEffect = 'fire' }
+base_camp_2.boost_tbl["gummi_royal"] = { GummiEffect = 'dragon' }
+base_camp_2.boost_tbl["gummi_silver"] = { GummiEffect = 'steel' }
+base_camp_2.boost_tbl["gummi_sky"] = { GummiEffect = 'flying' }
+base_camp_2.boost_tbl["gummi_white"] = { GummiEffect = 'normal' }
+base_camp_2.boost_tbl["gummi_yellow"] = { GummiEffect = 'electric' }
+base_camp_2.boost_tbl["gummi_wonder"] = { HP = 1, Atk = 1, Def = 1, SpAtk = 1, SpDef = 1, Speed = 1 }
 base_camp_2.boost_tbl["boost_nectar"] = { HP = 1, Atk = 1, Def = 1, SpAtk = 1, SpDef = 1, Speed = 1 }
 base_camp_2.boost_tbl["boost_hp_up"] = { HP = 4 }
 base_camp_2.boost_tbl["boost_protein"] = { Atk = 4 }
@@ -1669,10 +1690,9 @@ function base_camp_2.Drink_Order_Flow()
   while state > -1 do
   
     if state == 0 then
-	  --pass in base_camp_2.boost_tbl as the table of eligible items
-	  UI:SellMenu()
-	  UI:WaitForChoice()
-	  local result = UI:ChoiceResult()
+      --passing in base_camp_2.boost_tbl as the table of eligible items
+      local filter = function(slot) return not not base_camp_2.boost_tbl[slot.ID] end
+      local result = InventorySelectMenu.run(STRINGS:FormatKey("MENU_ITEM_TITLE"), filter)
 			
 	  if #result > 0 then
 		cart = result
@@ -1682,11 +1702,9 @@ function base_camp_2.Drink_Order_Flow()
 	  end
     elseif state == 1 then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Who']))
-      UI:TutorTeamMenu(base_camp_2.Tutor_Can_Forget)
-      UI:WaitForChoice()
-      local result = UI:ChoiceResult()
+      local member = TeamSelectMenu.runPartyMenu()
 	  
-      if result > -1 then
+      if member then
 	  
 		for ii = #cart, 1, -1 do
 			if cart[ii].IsEquipped then
@@ -1696,8 +1714,7 @@ function base_camp_2.Drink_Order_Flow()
 			end
 		end
 		cart = {}
-	  
-	    member = GAME:GetPlayerPartyMember(result)
+
         UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Begin']))
 		SOUND:PlayBattleSE("DUN_Drink")
         UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Drink'], member:GetDisplayName(true)))

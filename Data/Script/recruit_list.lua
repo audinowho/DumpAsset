@@ -118,6 +118,7 @@ end
 
 
 function RECRUIT_LIST.compileCurrentList()
+    if _DATA.Save.NoRecruiting then return {} end
     
     local list = RECRUIT_LIST.compileInitialFloorList()
 
@@ -177,7 +178,6 @@ function RecruitmentListMenu:initialize()
 
     self.menu = RogueEssence.Menu.ScriptableMenu(32, 32, 256, 176, function(input) self:Update(input) end)
     self.dirPressed = false
-    self.list = {}
     self.list = RECRUIT_LIST.compileCurrentList()
     self.page = 0
     self.PAGE_MAX = math.max((#self.list-1)//self.ENTRY_LIMIT+1, 0)
@@ -193,7 +193,7 @@ function RecruitmentListMenu:DrawMenu()
     self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(RogueEssence.StringKey("MENU_RECRUITMENT_TITLE"):ToLocal(), RogueElements.Loc(16, 8)))
 
     -- add a special message if there are no entries or recruiting is disabled altogether
-    if #self.list<1 or _DATA.Save.NoRecruiting then
+    if #self.list<1 then
         self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(RogueEssence.StringKey("MENU_RECRUITMENT_NONE"):ToLocal(), RogueElements.Loc(16, 24)))
         return
     end

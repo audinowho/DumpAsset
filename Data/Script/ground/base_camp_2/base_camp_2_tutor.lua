@@ -1,6 +1,7 @@
 require 'common'
 require 'menu.SkillSelectMenu'
 require 'menu.SkillTutorMenu'
+require 'menu.TeamSelectMenu'
 
 local base_camp_2_tutor = {}
 local MapStrings = {}
@@ -63,12 +64,11 @@ function base_camp_2_tutor.Tutor_Remember_Flow(price)
 	while state > -1 do
 		if state == 0 then
 			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Who']))
-			UI:TutorTeamMenu(base_camp_2_tutor.Tutor_Can_Remember)
-			UI:WaitForChoice()
-			local result = UI:ChoiceResult()
-			if result > -1 then
+			local chosen_member = TeamSelectMenu.runPartyMenu(base_camp_2_tutor.Tutor_Can_Remember)
+			
+			if chosen_member ~= nil then
 				state = 1
-				member = GAME:GetPlayerPartyMember(result)
+				member = chosen_member
 			else
 				state = -1
 			end
@@ -112,16 +112,16 @@ function base_camp_2_tutor.Tutor_Forget_Flow()
   
     if state == 0 then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_Who']))
-      UI:TutorTeamMenu(base_camp_2_tutor.Tutor_Can_Forget)
-      UI:WaitForChoice()
-      local result = UI:ChoiceResult()
-      if result > -1 then
-        member = GAME:GetPlayerPartyMember(result)
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_What'], member:GetDisplayName(true)))
-        state = 1
-      else
-        state = -1
-      end
+      local chosen_member = TeamSelectMenu.runPartyMenu(base_camp_2_tutor.Tutor_Can_Forget)
+	  
+	  if chosen_member ~= nil then
+		  state = 1
+		  member = chosen_member
+		  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_What'], member:GetDisplayName(true)))
+	  else
+		  state = -1
+	  end
+	  
     elseif state == 1 then
       UI:ForgetMenu(member)
       UI:WaitForChoice()
@@ -154,15 +154,15 @@ function base_camp_2_tutor.Tutor_Teach_Flow(tutor_moves)
 	while state > -1 do
 		if state == 0 then
 			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Teach_Who']))
-			UI:TutorTeamMenu(function(chara) return base_camp_2_tutor.Tutor_Can_Tutor(chara, tutor_moves) end)
-			UI:WaitForChoice()
-			local result = UI:ChoiceResult()
-			if result > -1 then
+			local chosen_member = TeamSelectMenu.runPartyMenu(function(chara) return base_camp_2_tutor.Tutor_Can_Tutor(chara, tutor_moves) end)
+			
+			if chosen_member ~= nil then
 				state = 1
-				member = GAME:GetPlayerPartyMember(result)
+				member = chosen_member
 			else
 				state = -1
 			end
+	  
 		elseif state == 1 then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Teach_What'], member:GetDisplayName(true)))
 	  local valid_moves = COMMON.GetTutorableMoves(member, tutor_moves) --moved out here

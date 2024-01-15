@@ -15,8 +15,8 @@ function base_camp_2_bulletin.Enter(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
 
   local mission_table = _DATA.UniversalEvent.UniversalStates:GetWithDefault(luanet.ctype(MissionBoardStateType))
-  if mission_table == nil or mission_table.EnableMissionBoard == false then
-    GROUND:Hide("Mission_Board")
+  if mission_table ~= nil and mission_table.EnableMissionBoard == true then
+    GROUND:Unhide("Mission_Board")
   end
 
   GROUND:Hide("Locator")

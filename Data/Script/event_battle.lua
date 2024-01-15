@@ -274,7 +274,7 @@ function BATTLE_SCRIPT.EscortInteractPet(owner, ownerChar, context, args)
 end
 
 
-function BATTLE_SCRIPT.RescueReached(owner, ownerChar, context, args)
+function BATTLE_SCRIPT.SidequestRescueReached(owner, ownerChar, context, args)
 
   context.CancelState.Cancel = true
   
@@ -308,7 +308,7 @@ function BATTLE_SCRIPT.RescueReached(owner, ownerChar, context, args)
 end
 
 
-function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
+function BATTLE_SCRIPT.SidequestEscortReached(owner, ownerChar, context, args)
   
   context.CancelState.Cancel = true
   
@@ -340,7 +340,7 @@ function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
   end
 end
 
-function BATTLE_SCRIPT.EscortOutReached(owner, ownerChar, context, args)
+function BATTLE_SCRIPT.SidequestEscortOutReached(owner, ownerChar, context, args)
   
   local tbl = LTBL(context.Target)
   

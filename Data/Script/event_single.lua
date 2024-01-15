@@ -368,7 +368,7 @@ function SINGLE_CHAR_SCRIPT.DestinationFloor(owner, ownerChar, context, args)
 end
 
 
-function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
+function SINGLE_CHAR_SCRIPT.SidequestOutlawFloor(owner, ownerChar, context, args)
   if context.User ~= nil then
     return
   end

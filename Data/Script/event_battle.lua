@@ -446,7 +446,7 @@ function DeliveryCheck(context, targetName, mission)
 end
 
 
-function BATTLE_SCRIPT.EscortRescueReached(owner, ownerChar, context, args)
+function BATTLE_SCRIPT.EscortReached(owner, ownerChar, context, args)
     context.CancelState.Cancel = false
     context.TurnCancel.Cancel = true
     --Mark this as the last dungeon entered.

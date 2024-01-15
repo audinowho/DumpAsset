@@ -75,7 +75,7 @@ function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed
               post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
               post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable('{ Mission = '..name..' }'))
             elseif mission.Type == COMMON.MISSION_TYPE_ESCORT then -- escort
-              local dialogue = RogueEssence.Dungeon.BattleScriptEvent("EscortRescueReached")
+              local dialogue = RogueEssence.Dungeon.BattleScriptEvent("EscortReached")
               post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
               post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable('{ Mission = '..name..' }'))
             end

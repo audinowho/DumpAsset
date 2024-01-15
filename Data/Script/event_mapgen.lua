@@ -21,10 +21,6 @@ PresetPickerType = luanet.import_type('RogueElements.PresetPicker`1')
 MapItemType = luanet.import_type('RogueEssence.Dungeon.MapItem')
 
 
-function ZONE_GEN_SCRIPT.Mysteriosity(zoneContext, context, queue, seed, args)
-  PrintInfo("Test")
-end
-
 function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed, args)
   SV.DestinationFloorNotified = false
   SV.MonsterHouseMessageNotified = false

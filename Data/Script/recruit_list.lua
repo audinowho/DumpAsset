@@ -8,12 +8,8 @@ RECRUIT_LIST = {}
     This file contains all functions necessary to generate Recruitment Lists for dungeons, as well as
     the routine used to show the list itself
 
-    Every time a floor is loaded, the system takes a snapshot of what Pokémon are in the spawn pool
-    and adds to them those that are not in the spawn pool but are spawned regardless on turn 0 (like
-    Ralts in Moonlit Courtyard, for example). Those that are not in the spawn pool will be marked with
-    an asterisk when the Recruitment List is opened.
-
-    When opening the menu, the game will check again for any other recruitable, spawned monster (Monster
+    When opening the menu, the game will check the current floor's spawn pool and compile a list of all
+    enabled entries, then it will take a snapshot of any other recruitable monster on the floor (Monster
     Houses and other special events) and will show them at the bottom of the list, in cyan if not recruited
     and in a faded version of the recruit color if they are.
 ]]--
@@ -70,21 +66,27 @@ function RECRUIT_LIST.compileInitialFloorList()
     for i = 0, spawns.Count-1, 1 do
         local spawnList = spawns:GetSpawn(i):GetPossibleSpawns()
         for j = 0, spawnList.Count-1, 1 do
-            local member = spawnList:GetSpawn(j).BaseForm.Species
-            local hide = false
+            local spawn = spawnList:GetSpawn(j)
 
-            -- check if the mon is recruitable
-            local features = spawnList:GetSpawn(j).SpawnFeatures
-            for f = 0, features.Count-1, 1 do
-                if LUA_ENGINE:TypeOf(features[f]) == luanet.ctype(UnrecruitableType) then
-                    hide = true -- do not show in recruit list if cannot recruit
+            -- only include if conditions are met
+            if spawn:CanSpawn() then
+                local member = spawn.BaseForm.Species
+                PrintInfo(member)
+                local hide = false
+
+                -- check if the mon is recruitable
+                local features = spawn.SpawnFeatures
+                for f = 0, features.Count-1, 1 do
+                    if LUA_ENGINE:TypeOf(features[f]) == luanet.ctype(UnrecruitableType) then
+                        hide = true -- do not show in recruit list if cannot recruit
+                    end
                 end
-            end
 
-            -- add the member and its display mode to the list
-            if not hide and list.entries[member] == nil then
-                table.insert(list.keys, member)
-                list.entries[member] = false
+                -- add the member and its display mode to the list
+                if not hide and list.entries[member] == nil then
+                    table.insert(list.keys, member)
+                    list.entries[member] = false
+                end
             end
         end
     end
@@ -96,6 +98,7 @@ function RECRUIT_LIST.compileInitialFloorList()
         for j = 0, team.Count-1, 1 do
             local member = team[j].BaseForm.Species
             local hide = false
+            PrintInfo(member)
 
             -- do not show in recruit list if cannot recruit
             if team[j].Unrecruitable then hide = true end
@@ -119,7 +122,7 @@ end
 
 function RECRUIT_LIST.compileCurrentList()
     if _DATA.Save.NoRecruiting then return {} end
-    
+
     local list = RECRUIT_LIST.compileInitialFloorList()
 
     -- turn first list into final output
@@ -144,23 +147,6 @@ function RECRUIT_LIST.compileCurrentList()
     end
 
     return ret
-end
-
-
-
--- Returns the class of an object as string. Useful to extract and check C# classes
-function RECRUIT_LIST.getClass(csobject)
-    if not csobject then return "nil" end
-    local namet = getmetatable(csobject).__name
-    if not namet then return type(csobject) end
-    for a in namet:gmatch('([^,]+)') do
-        return a
-    end
-end
-
--- Returns the class of an object as string. Useful to extract and check C# classes
-function RECRUIT_LIST.tri(check, y, n)
-    if check then return y else return n end
 end
 
 -- -----------------------------------------------
@@ -221,10 +207,12 @@ function RecruitmentListMenu:DrawMenu()
         local ypad = 24
         local xdist = ((self.menu.Bounds.Width-32)//self.ENTRY_COLUMNS)
         local ydist = 14
-        local xadjust = RECRUIT_LIST.tri(self.list[i].asterisk and self.list[i].mode > RECRUIT_LIST.undiscovered, 10, 0)
+        if self.list[i].asterisk and self.list[i].mode > RECRUIT_LIST.undiscovered then
+            xpad = xpad - 10
+        end
 
         -- add element
-        local x = xpad + xdist * col - xadjust
+        local x = xpad + xdist * col
         local y = ypad + ydist * line
         local text = RECRUIT_LIST.colorName(self.list[i].species, self.list[i].mode, self.list[i].asterisk)
         self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(text, RogueElements.Loc(x, y)))

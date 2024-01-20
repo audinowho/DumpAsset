@@ -71,7 +71,6 @@ function RECRUIT_LIST.compileInitialFloorList()
             -- only include if conditions are met
             if spawn:CanSpawn() then
                 local member = spawn.BaseForm.Species
-                PrintInfo(member)
                 local hide = false
 
                 -- check if the mon is recruitable
@@ -98,7 +97,6 @@ function RECRUIT_LIST.compileInitialFloorList()
         for j = 0, team.Count-1, 1 do
             local member = team[j].BaseForm.Species
             local hide = false
-            PrintInfo(member)
 
             -- do not show in recruit list if cannot recruit
             if team[j].Unrecruitable then hide = true end

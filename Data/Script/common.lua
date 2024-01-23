@@ -133,7 +133,7 @@ function COMMON.ShowTeamAssemblyMenu(obj, init_fun)
   end
 end
 
-function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
+function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances, force_list, speaker, confirm_msg)
   
   local open_dests = {}
   --check for unlock of grounds
@@ -164,11 +164,50 @@ function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
   end
   
   local dest = RogueEssence.Dungeon.ZoneLoc.Invalid
-  if #open_dests == 1 then
+  if #open_dests > 1 or force_list then
+    if before_list ~= nil then
+	  before_list(dest)
+	end
+	
+    SOUND:PlaySE("Menu/Skip")
+	default_choice = 1
+	while true do
+      UI:ResetSpeaker()
+      UI:DestinationMenu(open_dests, default_choice)
+	  UI:WaitForChoice()
+	  default_choice = UI:ChoiceResult()
+	
+	  if default_choice == nil then
+	    break
+	  end
+	  ask_dest = open_dests[default_choice].Dest
+      if ask_dest.StructID.Segment >= 0 then	  
+	    --chosen dungeon entry
+		if speaker ~= nil then
+		  UI:SetSpeaker(speaker)
+		else
+          UI:ResetSpeaker(false)
+		end
+	    UI:DungeonChoice(open_dests[default_choice].Name, ask_dest)
+        UI:WaitForChoice()
+        if UI:ChoiceResult() then
+	      dest = ask_dest
+	      break
+	    end
+	  else 
+	    dest = ask_dest
+	    break
+	  end
+	end
+  elseif #open_dests == 1 then
     if open_dests[1].Dest.StructID.Segment < 0 then
 	  --single ground entry
-      UI:ResetSpeaker(false)
-      SOUND:PlaySE("Menu/Skip")
+	  if speaker ~= nil then
+	    UI:SetSpeaker(speaker)
+	  else
+        UI:ResetSpeaker(false)
+        SOUND:PlaySE("Menu/Skip")
+	  end
 	  UI:ChoiceMenuYesNo(STRINGS:FormatKey("DLG_ASK_ENTER_GROUND", open_dests[1].Name))
       UI:WaitForChoice()
       if UI:ChoiceResult() then
@@ -176,26 +215,26 @@ function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
 	  end
 	else
 	  --single dungeon entry
-      UI:ResetSpeaker(false)
-      SOUND:PlaySE("Menu/Skip")
+	  if speaker ~= nil then
+	    UI:SetSpeaker(speaker)
+	  else
+        UI:ResetSpeaker(false)
+        SOUND:PlaySE("Menu/Skip")
+	  end
 	  UI:DungeonChoice(open_dests[1].Name, open_dests[1].Dest)
       UI:WaitForChoice()
       if UI:ChoiceResult() then
 	    dest = open_dests[1].Dest
 	  end
 	end
-  elseif #open_dests > 1 then
-    
-    UI:ResetSpeaker()
-    SOUND:PlaySE("Menu/Skip")
-    UI:DestinationMenu(open_dests)
-	UI:WaitForChoice()
-	dest = UI:ChoiceResult()
   else
     PrintInfo("No valid destinations found!")
   end
   
   if dest:IsValid() then
+    if confirm_msg ~= nil then
+	  UI:WaitShowDialogue(confirm_msg)
+	end
 	if dest.StructID.Segment > -1 then
 	  --pre-loads the zone on a separate thread while we fade out, just for a little optimization
 	  _DATA:PreLoadZone(dest.ID)

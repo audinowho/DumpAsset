@@ -389,7 +389,12 @@ function base_camp.Ferry_Action(obj, activator)
   end
   local dungeon_entrances = { 'lava_floe_island', 'castaway_cave', 'eon_island', 'lost_seas', 'inscribed_cave', 'prism_isles' }
   local ground_entrances = {}
-  base_camp.ShowFerryMenu(dungeon_entrances,ground_entrances)
+  
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ferry_Line_002']))
+  
+  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances, true,
+  ferry,
+  STRINGS:Format(MapStrings['Ferry_Line_003']))
 end
 
 function base_camp.ShowFerryMenu(dungeon_entrances, ground_entrances)
@@ -424,7 +429,7 @@ function base_camp.ShowFerryMenu(dungeon_entrances, ground_entrances)
   
   local dest = RogueEssence.Dungeon.ZoneLoc.Invalid
   
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ferry_Line_002']))
+    
     UI:DestinationMenu(open_dests)
 	UI:WaitForChoice()
 	dest = UI:ChoiceResult()

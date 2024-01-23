@@ -86,51 +86,413 @@ base_camp_2_juice.boost_tbl["food_apple_golden"] = { EXP = 25000 }
 base_camp_2_juice.boost_tbl["food_banana"] = { EXP = 500 }
 base_camp_2_juice.boost_tbl["food_banana_big"] = { EXP = 2500 }
 base_camp_2_juice.boost_tbl["food_banana_golden"] = { EXP = 100000 }
+
 base_camp_2_juice.boost_tbl["berry_oran"] = { HP = 1 }
 base_camp_2_juice.boost_tbl["berry_leppa"] = { HP = 1 }
 base_camp_2_juice.boost_tbl["berry_sitrus"] = { HP = 1 }
 base_camp_2_juice.boost_tbl["berry_lum"] = { HP = 1 }
-base_camp_2_juice.boost_tbl["berry_starf"] = { HP = 2 }
+
+base_camp_2_juice.boost_tbl["berry_passho"] = { HP = 1 }
+base_camp_2_juice.boost_tbl["berry_colbur"] = { HP = 1 }
+base_camp_2_juice.boost_tbl["bery_yache"] = { SpDef = 1 }
+base_camp_2_juice.boost_tbl["berry_rindo"] = { SpDef = 1 }
+base_camp_2_juice.boost_tbl["berry_tanga"] = { Speed = 1 }
+base_camp_2_juice.boost_tbl["berry_shuca"] = { Atk = 1 }
+base_camp_2_juice.boost_tbl["berry_chople"] = { Atk = 1 }
+base_camp_2_juice.boost_tbl["berry_payapa"] = { SpAtk = 1 }
+base_camp_2_juice.boost_tbl["berry_kebia"] = { Def = 1 }
+base_camp_2_juice.boost_tbl["berry_kasib"] = { SpAtk = 1 }
+base_camp_2_juice.boost_tbl["berry_occa"] = { SpAtk = 1 }
+base_camp_2_juice.boost_tbl["berry_haban"] = { Atk = 1 }
+base_camp_2_juice.boost_tbl["berry_babiri"] = { Def = 1 }
+base_camp_2_juice.boost_tbl["berry_chilan"] = { HP = 1 }
+base_camp_2_juice.boost_tbl["berry_wacan"] = { Speed = 1 }
+base_camp_2_juice.boost_tbl["berry_coba"] = { Speed = 1 }
+base_camp_2_juice.boost_tbl["berry_charti"] = { Def = 1 }
+base_camp_2_juice.boost_tbl["berry_roseli"] = { SpDef = 1 }
+
+base_camp_2_juice.boost_tbl["berry_jaboca"] = { Def = 1 }
+base_camp_2_juice.boost_tbl["berry_rowap"] = { SpDef = 1 }
+
 base_camp_2_juice.boost_tbl["berry_liechi"] = { Atk = 2 }
 base_camp_2_juice.boost_tbl["berry_ganlon"] = { Def = 2 }
 base_camp_2_juice.boost_tbl["berry_petaya"] = { SpAtk = 2 }
 base_camp_2_juice.boost_tbl["berry_apicot"] = { SpDef = 2 }
 base_camp_2_juice.boost_tbl["berry_salac"] = { Speed = 2 }
-base_camp_2_juice.boost_tbl["berry_enigma"] = { HP = 1 }
+base_camp_2_juice.boost_tbl["berry_starf"] = { HP = 2 }
 base_camp_2_juice.boost_tbl["berry_micle"] = { Atk = 1, SpAtk = 1 }
-base_camp_2_juice.boost_tbl["gummi_black"] = { GummiEffect = 'dark' }
-base_camp_2_juice.boost_tbl["gummi_blue"] = { GummiEffect = 'water' }
-base_camp_2_juice.boost_tbl["gummi_brown"] = { GummiEffect = 'ground' }
-base_camp_2_juice.boost_tbl["gummi_clear"] = { GummiEffect = 'ice' }
-base_camp_2_juice.boost_tbl["gummi_gold"] = { GummiEffect = 'psychic' }
-base_camp_2_juice.boost_tbl["gummi_grass"] = { GummiEffect = 'grass' }
-base_camp_2_juice.boost_tbl["gummi_gray"] = { GummiEffect = 'rock' }
-base_camp_2_juice.boost_tbl["gummi_green"] = { GummiEffect = 'bug' }
-base_camp_2_juice.boost_tbl["gummi_magenta"] = { GummiEffect = 'fairy' }
-base_camp_2_juice.boost_tbl["gummi_orange"] = { GummiEffect = 'fighting' }
-base_camp_2_juice.boost_tbl["gummi_pink"] = { GummiEffect = 'poison' }
-base_camp_2_juice.boost_tbl["gummi_purple"] = { GummiEffect = 'ghost' }
-base_camp_2_juice.boost_tbl["gummi_red"] = { GummiEffect = 'fire' }
-base_camp_2_juice.boost_tbl["gummi_royal"] = { GummiEffect = 'dragon' }
-base_camp_2_juice.boost_tbl["gummi_silver"] = { GummiEffect = 'steel' }
-base_camp_2_juice.boost_tbl["gummi_sky"] = { GummiEffect = 'flying' }
-base_camp_2_juice.boost_tbl["gummi_white"] = { GummiEffect = 'normal' }
-base_camp_2_juice.boost_tbl["gummi_yellow"] = { GummiEffect = 'electric' }
-base_camp_2_juice.boost_tbl["gummi_wonder"] = { HP = 1, Atk = 1, Def = 1, SpAtk = 1, SpDef = 1, Speed = 1 }
+
+base_camp_2_juice.boost_tbl["berry_enigma"] = { HP = 1 }
+
+base_camp_2_juice.boost_tbl["gummi_wonder"] = { HP = 2, Atk = 2, Def = 2, SpAtk = 2, SpDef = 2, Speed = 2 }
+
+base_camp_2_juice.boost_tbl["gummi_blue"] = { HP = 2, GummiEffect = 'water' }
+base_camp_2_juice.boost_tbl["gummi_black"] = { HP = 2, GummiEffect = 'dark' }
+base_camp_2_juice.boost_tbl["gummi_clear"] = { SpDef = 2, GummiEffect = 'ice' }
+base_camp_2_juice.boost_tbl["gummi_grass"] = { SpDef = 2, GummiEffect = 'grass' }
+base_camp_2_juice.boost_tbl["gummi_green"] = { Speed = 2, GummiEffect = 'bug' }
+base_camp_2_juice.boost_tbl["gummi_brown"] = { Atk = 2, GummiEffect = 'ground' }
+base_camp_2_juice.boost_tbl["gummi_orange"] = { Atk = 2, GummiEffect = 'fighting' }
+base_camp_2_juice.boost_tbl["gummi_gold"] = { SpAtk = 2, GummiEffect = 'psychic' }
+base_camp_2_juice.boost_tbl["gummi_pink"] = { Def = 2, GummiEffect = 'poison' }
+base_camp_2_juice.boost_tbl["gummi_purple"] = { SpAtk = 2, GummiEffect = 'ghost' }
+base_camp_2_juice.boost_tbl["gummi_red"] = { SpAtk = 2, GummiEffect = 'fire' }
+base_camp_2_juice.boost_tbl["gummi_royal"] = { Atk = 2, GummiEffect = 'dragon' }
+base_camp_2_juice.boost_tbl["gummi_silver"] = { Def = 2, GummiEffect = 'steel' }
+base_camp_2_juice.boost_tbl["gummi_white"] = { HP = 2, GummiEffect = 'normal' }
+base_camp_2_juice.boost_tbl["gummi_yellow"] = { Speed = 2, GummiEffect = 'electric' }
+base_camp_2_juice.boost_tbl["gummi_sky"] = { Speed = 2, GummiEffect = 'flying' }
+base_camp_2_juice.boost_tbl["gummi_gray"] = { Def = 2, GummiEffect = 'rock' }
+base_camp_2_juice.boost_tbl["gummi_magenta"] = { SpDef = 2, GummiEffect = 'fairy' }
+
+base_camp_2_juice.boost_tbl["seed_plain"] = { EXP = 100 }
+base_camp_2_juice.boost_tbl["seed_reviver"] = { EXP = 800 }
+
+base_camp_2_juice.boost_tbl["seed_joy"] = { Level = 1 }
+base_camp_2_juice.boost_tbl["seed_golden"] = { Level = 5 }
+base_camp_2_juice.boost_tbl["seed_doom"] = { Level = -5 }
+
+base_camp_2_juice.boost_tbl["seed_hunger"] = { EXP = 500 }
+
+base_camp_2_juice.boost_tbl["seed_warp"] = { Speed = 1 }
+base_camp_2_juice.boost_tbl["seed_sleep"] = { HP = 1 }
+base_camp_2_juice.boost_tbl["seed_vile"] = { Def = 1, SpDef = 1 }
+base_camp_2_juice.boost_tbl["seed_blast"] = { Atk = 1 }
+base_camp_2_juice.boost_tbl["seed_blinker"] = { Speed = 1 }
+
+base_camp_2_juice.boost_tbl["seed_pure"] = { EXP = 100 }
+base_camp_2_juice.boost_tbl["seed_ice"] = { Speed = 1 }
+base_camp_2_juice.boost_tbl["seed_decoy"] = { SpDef = 1 }
+base_camp_2_juice.boost_tbl["seed_last_chance"] = { Atk = 1, SpAtk = 1 }
+base_camp_2_juice.boost_tbl["seed_ban"] = { EXP = 100 }
+
 base_camp_2_juice.boost_tbl["boost_nectar"] = { HP = 1, Atk = 1, Def = 1, SpAtk = 1, SpDef = 1, Speed = 1 }
+
+
 base_camp_2_juice.boost_tbl["boost_hp_up"] = { HP = 4 }
 base_camp_2_juice.boost_tbl["boost_protein"] = { Atk = 4 }
 base_camp_2_juice.boost_tbl["boost_iron"] = { Def = 4 }
 base_camp_2_juice.boost_tbl["boost_calcium"] = { SpAtk = 4 }
 base_camp_2_juice.boost_tbl["boost_zinc"] = { SpDef = 4 }
 base_camp_2_juice.boost_tbl["boost_carbos"] = { Speed = 4 }
-base_camp_2_juice.boost_tbl["seed_joy"] = { Level = 1 }
-base_camp_2_juice.boost_tbl["seed_golden"] = { Level = 5 }
-base_camp_2_juice.boost_tbl["seed_doom"] = { Level = -5 }
-base_camp_2_juice.boost_tbl["food_grimy"] = { NegateExp = true }
-base_camp_2_juice.boost_tbl["herb_white"] = { NegateStat = true }
-base_camp_2_juice.boost_tbl["herb_power"] = { NegateStat = true }
+
+base_camp_2_juice.boost_tbl["medicine_amber_tear"] = { HP = 1, Atk = 1, Def = 1, SpAtk = 1, SpDef = 1, Speed = 1 }
+
 base_camp_2_juice.boost_tbl["herb_mental"] = { NegateStat = true }
+base_camp_2_juice.boost_tbl["herb_power"] = { NegateStat = true }
+base_camp_2_juice.boost_tbl["herb_white"] = { NegateStat = true }
+
+base_camp_2_juice.boost_tbl["food_grimy"] = { NegateExp = true }
+
+
+function base_camp_2_juice.getTotalBoost(cart, member)
+	local playerMonId = member.BaseForm
+	local mon = _DATA:GetMonster(playerMonId.Species)
+	local form = mon.Forms[playerMonId.Form]
+
+	total_boost = { EXP = 0, Level = 0, HP = 0, Atk = 0, Def = 0, SpAtk = 0, SpDef = 0, Speed = 0 }
+	
+	negate_exp = false
+	negate_stat = false
+	
+	for ii = 1, #cart, 1 do
+		local item
+		if cart[ii].IsEquipped then
+			item = GAME:GetPlayerEquippedItem(cart[ii].Slot)
+		else
+			item = GAME:GetPlayerBagItem(cart[ii].Slot)
+		end
+		local boost = base_camp_2_juice.boost_tbl[item.ID]
+		
+		if boost ~= nil then
+			if boost.GummiEffect ~= nil then
+				local main_boost = 0
+				local all_boost = 0
+				
+				local matchup = PMDC.Dungeon.PreTypeEvent.CalculateTypeMatchup(boost.GummiEffect, form.Element1)
+				matchup = matchup + PMDC.Dungeon.PreTypeEvent.CalculateTypeMatchup(boost.GummiEffect, form.Element2)
+				
+				if boost.GummiEffect == form.Element1 or boost.GummiEffect == form.Element2 then
+					main_boost = 2
+					all_boost = 2
+				elseif matchup >= S_E_2 then
+					main_boost = 2
+					all_boost = 1
+				elseif matchup == NRM_2 then
+					main_boost = 2
+					all_boost = 0
+				elseif matchup > N_E_2 then
+					main_boost = 1
+					all_boost = 0
+				end
+				
+				if boost.HP ~= nil then
+					total_boost.HP = total_boost.HP + main_boost
+				else
+					total_boost.HP = total_boost.HP + all_boost
+				end
+				if boost.Atk ~= nil then
+					total_boost.Atk = total_boost.Atk + main_boost
+				else
+					total_boost.Atk = total_boost.Atk + all_boost
+				end
+				if boost.Def ~= nil then
+					total_boost.Def = total_boost.Def + main_boost
+				else
+					total_boost.Def = total_boost.Def + all_boost
+				end
+				if boost.SpAtk ~= nil then
+					total_boost.SpAtk = total_boost.SpAtk + main_boost
+				else
+					total_boost.SpAtk = total_boost.SpAtk + all_boost
+				end
+				if boost.SpDef ~= nil then
+					total_boost.SpDef = total_boost.SpDef + main_boost
+				else
+					total_boost.SpDef = total_boost.SpDef + all_boost
+				end
+				if boost.Speed ~= nil then
+					total_boost.Speed = total_boost.Speed + main_boost
+				else
+					total_boost.Speed = total_boost.Speed + all_boost
+				end
+			else
+				if boost.EXP ~= nil then
+					total_boost.EXP = total_boost.EXP + boost.EXP
+				end
+				if boost.Level ~= nil then
+					total_boost.Level = total_boost.Level + boost.Level
+				end
+				if boost.HP ~= nil then
+					total_boost.HP = total_boost.HP + boost.HP
+				end
+				if boost.Atk ~= nil then
+					total_boost.Atk = total_boost.Atk + boost.Atk
+				end
+				if boost.Def ~= nil then
+					total_boost.Def = total_boost.Def + boost.Def
+				end
+				if boost.SpAtk ~= nil then
+					total_boost.SpAtk = total_boost.SpAtk + boost.SpAtk
+				end
+				if boost.SpDef ~= nil then
+					total_boost.SpDef = total_boost.SpDef + boost.SpDef
+				end
+				if boost.Speed ~= nil then
+					total_boost.Speed = total_boost.Speed + boost.Speed
+				end
+			end
+			
+			if boost.NegateExp then
+				negate_exp = true
+			end
+			if boost.NegateStat then
+				negate_stat = true
+			end
+		end
+	end
+	
+	if negate_exp then
+		total_boost.EXP = total_boost.EXP * -1
+		total_boost.Level = total_boost.Level * -1
+	end
+	
+	if negate_stat then
+		total_boost.HP = total_boost.HP * -1
+		total_boost.Atk = total_boost.Atk * -1
+		total_boost.Def = total_boost.Def * -1
+		total_boost.SpAtk = total_boost.SpAtk * -1
+		total_boost.SpDef = total_boost.SpDef * -1
+		total_boost.Speed = total_boost.Speed * -1
+	end
+	
+	return total_boost
+end
+
+function base_camp_2_juice.Drink_Flow(boost, member)
+	local any_boost = false
+	local changed_stats = {}
+	local changed_amounts = {}
+	local any_stat_boosted = false
+	local any_stat_dropped = false
+	
+	local old_level = member.Level
+	local old_hp = member.MaxHP
+	local old_atk = member.BaseAtk
+	local old_def = member.BaseDef
+	local old_sp_atk = member.BaseMAtk
+	local old_sp_def = member.BaseMDef
+	local old_speed = member.BaseSpeed
+	
+	if boost.HP ~= 0 then
+		member.MaxHPBonus = math.max(0, math.min(member.MaxHPBonus + boost.HP, PMDC.Data.MonsterFormData.MAX_STAT_BOOST))
+		local diff = member.MaxHP - old_hp
+		if diff > 0 then
+			table.insert(changed_stats, RogueEssence.Data.Stat.HP)
+			table.insert(changed_amounts, diff)
+			any_stat_boosted = true
+		elseif diff < 0 then
+			table.insert(changed_stats, RogueEssence.Data.Stat.HP)
+			table.insert(changed_amounts, diff)
+			any_stat_dropped = true
+		end
+	end
+	if boost.Atk ~= 0 then
+		member.AtkBonus = math.max(0, math.min(member.AtkBonus + boost.Atk, PMDC.Data.MonsterFormData.MAX_STAT_BOOST))
+		local diff = member.BaseAtk - old_atk
+		if diff > 0 then
+			table.insert(changed_stats, RogueEssence.Data.Stat.Attack)
+			table.insert(changed_amounts, diff)
+			any_stat_boosted = true
+		elseif diff < 0 then
+			table.insert(changed_stats, RogueEssence.Data.Stat.Attack)
+			table.insert(changed_amounts, diff)
+			any_stat_dropped = true
+		end
+	end
+	if boost.Def ~= 0 then
+		member.DefBonus = math.max(0, math.min(member.DefBonus + boost.Def, PMDC.Data.MonsterFormData.MAX_STAT_BOOST))
+		local diff = member.BaseDef - old_def
+		if diff > 0 then
+			table.insert(changed_stats, RogueEssence.Data.Stat.Defense)
+			table.insert(changed_amounts, diff)
+			any_stat_boosted = true
+		elseif diff < 0 then
+			table.insert(changed_stats, RogueEssence.Data.Stat.Defense)
+			table.insert(changed_amounts, diff)
+			any_stat_dropped = true
+		end
+	end
+	if boost.SpAtk ~= 0 then
+		member.MAtkBonus = math.max(0, math.min(member.MAtkBonus + boost.SpAtk, PMDC.Data.MonsterFormData.MAX_STAT_BOOST))
+		local diff = member.BaseMAtk - old_sp_atk
+		if diff > 0 then
+			table.insert(changed_stats, RogueEssence.Data.Stat.MAtk)
+			table.insert(changed_amounts, diff)
+			any_stat_boosted = true
+		elseif diff < 0 then
+			table.insert(changed_stats, RogueEssence.Data.Stat.MAtk)
+			table.insert(changed_amounts, diff)
+			any_stat_dropped = true
+		end
+	end
+	if boost.SpDef ~= 0 then
+		member.MDefBonus = math.max(0, math.min(member.MDefBonus + boost.SpDef, PMDC.Data.MonsterFormData.MAX_STAT_BOOST))
+		local diff = member.BaseMDef - old_sp_def
+		if diff > 0 then
+			table.insert(changed_stats, RogueEssence.Data.Stat.MDef)
+			table.insert(changed_amounts, diff)
+			any_stat_boosted = true
+		elseif diff < 0 then
+			table.insert(changed_stats, RogueEssence.Data.Stat.MDef)
+			table.insert(changed_amounts, diff)
+			any_stat_dropped = true
+		end
+	end
+	if boost.Speed ~= 0 then
+		member.SpeedBonus = math.max(0, math.min(member.SpeedBonus + boost.Speed, PMDC.Data.MonsterFormData.MAX_STAT_BOOST))
+		local diff = member.BaseSpeed - old_speed
+		if diff > 0 then
+			table.insert(changed_stats, RogueEssence.Data.Stat.Speed)
+			table.insert(changed_amounts, diff)
+			any_stat_boosted = true
+		elseif diff < 0 then
+			table.insert(changed_stats, RogueEssence.Data.Stat.Speed)
+			table.insert(changed_amounts, diff)
+			any_stat_dropped = true
+		end
+	end
+	
+	if boost.EXP ~= 0 then
+		member.EXP = member.EXP + boost.EXP
+		
+        local growth = _DATA:GetMonster(member.BaseForm.Species).EXPTable
+        local growth_data = _DATA:GetGrowth(growth)
+		
+		while member.EXP < 0 do
+			if member.Level <= 1 then
+				member.EXP = 0
+			else
+				member.Level = member.Level - 1
+				member.EXP = member.EXP + growth_data:GetExpToNext(member.Level - 1)
+			end
+		end
+		
+		while true do
+			if member.Level >= _DATA.Start.MaxLevel then
+				member.EXP = 0
+				break
+			elseif member.EXP >= growth_data:GetExpToNext(member.Level) then
+				member.Level = member.Level + 1
+				member.EXP = member.EXP - growth_data:GetExpToNext(member.Level)
+			else
+				break
+			end
+		end
+	end
+	
+	if boost.Level ~= 0 then
+		member.EXP = 0
+		member.Level = math.max(1, math.min(member.Level + boost.Level, _DATA.Start.MaxLevel))
+	end
+	
+	member.HP = member.MaxHP
+	
+	if boost.EXP > 0 then
+		UI:WaitShowDialogue(STRINGS:FormatKey("MSG_EXP_GAIN_MEMBER", member:GetDisplayName(true), boost.EXP))
+		any_boost = true
+	elseif boost.EXP < 0 then
+		UI:WaitShowDialogue(STRINGS:FormatKey("MSG_EXP_LOSS_MEMBER", member:GetDisplayName(true), boost.EXP * -1))
+		any_boost = true
+	end
+	
+	if member.Level ~= old_level then
+		if member.Level > old_level and any_stat_boosted then
+			--level up fanfare
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_LEVEL_STAT_BOOST"):ToLocal(), member:GetDisplayName(true)))
+		elseif member.Level < old_level and any_stat_dropped then
+			--level down fanfare
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_LEVEL_STAT_DROP"):ToLocal(), member:GetDisplayName(true)))
+		elseif any_stat_boosted or any_stat_dropped then
+			--a weird stat change fanfare?
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_LEVEL_STAT_CHANGE"):ToLocal(), member:GetDisplayName(true)))
+		elseif member.Level > old_level then
+			--level up fanfare
+			UI:WaitShowDialogue(STRINGS:FormatKey("DLG_LEVEL_UP", member:GetDisplayName(true), member.Level))
+		elseif member.Level < old_level then
+			--level down fanfare
+			UI:WaitShowDialogue(STRINGS:FormatKey("DLG_LEVEL_DOWN", member:GetDisplayName(true), member.Level))
+		end
+		--show level diff menu
+		UI:SetCustomMenu(RogueEssence.Menu.LevelUpMenu(member, old_level, old_hp, old_speed, old_atk, old_def, old_sp_atk, old_sp_def))
+		UI:WaitForChoice()
+		any_boost = true
+	elseif any_stat_boosted then
+		if #changed_stats > 1 then
+			--increase sound?
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_STAT_BOOST_MULTI"):ToLocal(), member:GetDisplayName(true)))
+		else
+			--increase sound?
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_STAT_BOOST"):ToLocal(), member:GetDisplayName(true), changed_stats[1], changed_amounts[1]))
+		end
+		any_boost = true
+	elseif any_stat_dropped then
+		if #changed_stats > 1 then
+			--drop sound?
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_STAT_DROP_MULTI"):ToLocal(), member:GetDisplayName(true)))
+		else
+			--drop sound?
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_STAT_DROP"):ToLocal(), member:GetDisplayName(true), changed_stats[1], changed_amounts[1] * -1))
+		end
+		any_boost = true
+	end
+	
+	if not any_boost then
+		UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Result_None'], member:GetDisplayName(true)))
+	end
+	
+end
+
 
 function base_camp_2_juice.Drink_Order_Flow()
 
@@ -143,22 +505,24 @@ function base_camp_2_juice.Drink_Order_Flow()
   while state > -1 do
   
     if state == 0 then
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Who']))
+	  member = TeamSelectMenu.runPartyMenu()
+      if member then
+		state = 1
+	  else
+		state = -1
+	  end
+    elseif state == 1 then
+	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_What'], STRINGS:LocalKeyString(26)))
       --passing in base_camp_2_juice.boost_tbl as the table of eligible items
       local filter = function(slot) return not not base_camp_2_juice.boost_tbl[slot.ID] end
       local result = InventorySelectMenu.run(STRINGS:FormatKey("MENU_ITEM_TITLE"), filter)
 			
 	  if #result > 0 then
 		cart = result
-		state = 1
-	  else
-		state = -1
-	  end
-    elseif state == 1 then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Who']))
-      local member = TeamSelectMenu.runPartyMenu()
-	  
-      if member then
-	  
+
+		local total_boost = base_camp_2_juice.getTotalBoost(cart, member)
+		
 		for ii = #cart, 1, -1 do
 			if cart[ii].IsEquipped then
 				GAME:TakePlayerEquippedItem(cart[ii].Slot, true)
@@ -171,7 +535,7 @@ function base_camp_2_juice.Drink_Order_Flow()
         UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Begin']))
 		SOUND:PlayBattleSE("DUN_Drink")
         UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Drink'], member:GetDisplayName(true)))
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Result_None'], member:GetDisplayName(true)))
+		base_camp_2_juice.Drink_Flow(total_boost, member)
         state = -1
       else
         state = 0
@@ -226,8 +590,6 @@ function base_camp_2_juice.Juice_Shop(obj, activator)
 			if result == 1 then
 				local bag_count = GAME:GetPlayerBagCount() + GAME:GetPlayerEquippedCount()
 				if bag_count > 0 then
-					--TODO: use the enum instead of a hardcoded number
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order'], STRINGS:LocalKeyString(26)))
 					base_camp_2_juice.Drink_Order_Flow()
 				else
 					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Bag_Empty']))

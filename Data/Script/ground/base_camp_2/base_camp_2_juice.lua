@@ -1,5 +1,5 @@
 require 'common'
-require 'menu.InventorySelectMenu'
+require 'menu.JuiceShopMenu'
 require 'menu.TeamSelectMenu'
 
 local base_camp_2_juice = {}
@@ -511,10 +511,9 @@ function base_camp_2_juice.Drink_Order_Flow()
 	  end
     elseif state == 1 then
 	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_What'], STRINGS:LocalKeyString(26)))
-      --passing in base_camp_2_juice.boost_tbl as the table of eligible items
-      local filter = function(slot) return not not base_camp_2_juice.boost_tbl[slot.ID] end
-      local result = InventorySelectMenu.run(STRINGS:FormatKey("MENU_ITEM_TITLE"), filter)
-			
+
+	  local result = JuiceShopMenu.run(STRINGS:FormatKey("MENU_ITEM_TITLE"), member, base_camp_2_juice.boost_tbl, true, SV.base_town.JuiceShop == 2, function(cart, member) return base_camp_2_juice.getTotalBoost(cart, member) end) -- TODO > 2: only show preview after beating the game
+
 	  if #result > 0 then
 		cart = result
 

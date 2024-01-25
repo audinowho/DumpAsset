@@ -512,7 +512,7 @@ function base_camp_2_juice.Drink_Order_Flow()
     elseif state == 1 then
 	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_What'], STRINGS:LocalKeyString(26)))
 
-	  local result = JuiceShopMenu.run(STRINGS:FormatKey("MENU_ITEM_TITLE"), member, base_camp_2_juice.boost_tbl, true, SV.base_town.JuiceShop == 2, function(cart, member) return base_camp_2_juice.getTotalBoost(cart, member) end) -- TODO > 2: only show preview after beating the game
+	  local result = JuiceShopMenu.run(STRINGS:FormatKey("MENU_ITEM_TITLE"), member, base_camp_2_juice.boost_tbl, true, SV.base_town.JuiceShop > 2, function(cart, member) return base_camp_2_juice.getTotalBoost(cart, member) end) -- preview is set to be post game only
 
 	  if #result > 0 then
 		cart = result

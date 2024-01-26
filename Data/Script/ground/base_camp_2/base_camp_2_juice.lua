@@ -1,5 +1,5 @@
 require 'common'
-require 'menu.InventorySelectMenu'
+require 'menu.JuiceShopMenu'
 require 'menu.TeamSelectMenu'
 
 local base_camp_2_juice = {}
@@ -422,8 +422,8 @@ function base_camp_2_juice.Drink_Flow(boost, member)
 				member.EXP = 0
 				break
 			elseif member.EXP >= growth_data:GetExpToNext(member.Level) then
-				member.Level = member.Level + 1
 				member.EXP = member.EXP - growth_data:GetExpToNext(member.Level)
+				member.Level = member.Level + 1
 			else
 				break
 			end
@@ -470,6 +470,8 @@ function base_camp_2_juice.Drink_Flow(boost, member)
 		if #changed_stats > 1 then
 			--increase sound?
 			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_STAT_BOOST_MULTI"):ToLocal(), member:GetDisplayName(true)))
+			UI:SetCustomMenu(RogueEssence.Menu.LevelUpMenu(member, old_level, old_hp, old_speed, old_atk, old_def, old_sp_atk, old_sp_def))
+			UI:WaitForChoice()
 		else
 			--increase sound?
 			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_STAT_BOOST"):ToLocal(), member:GetDisplayName(true), changed_stats[1], changed_amounts[1]))
@@ -479,6 +481,8 @@ function base_camp_2_juice.Drink_Flow(boost, member)
 		if #changed_stats > 1 then
 			--drop sound?
 			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_STAT_DROP_MULTI"):ToLocal(), member:GetDisplayName(true)))
+			UI:SetCustomMenu(RogueEssence.Menu.LevelUpMenu(member, old_level, old_hp, old_speed, old_atk, old_def, old_sp_atk, old_sp_def))
+			UI:WaitForChoice()
 		else
 			--drop sound?
 			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_STAT_DROP"):ToLocal(), member:GetDisplayName(true), changed_stats[1], changed_amounts[1] * -1))
@@ -511,10 +515,9 @@ function base_camp_2_juice.Drink_Order_Flow()
 	  end
     elseif state == 1 then
 	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_What'], STRINGS:LocalKeyString(26)))
-      --passing in base_camp_2_juice.boost_tbl as the table of eligible items
-      local filter = function(slot) return not not base_camp_2_juice.boost_tbl[slot.ID] end
-      local result = InventorySelectMenu.run(STRINGS:FormatKey("MENU_ITEM_TITLE"), filter)
-			
+
+	  local result = JuiceShopMenu.run(STRINGS:FormatKey("MENU_ITEM_TITLE"), member, base_camp_2_juice.boost_tbl, true, SV.base_town.JuiceShop > 2, function(cart, member) return base_camp_2_juice.getTotalBoost(cart, member) end) -- preview is set to be post game only
+
 	  if #result > 0 then
 		cart = result
 

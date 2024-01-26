@@ -2,24 +2,25 @@
     InventorySelectMenu
     lua port by MistressNebula
 
-    Opens a menu, potentially with multiple pages, that allows the player to select an item
-    in their inventory.
+    Opens a menu, potentially with multiple pages, that allows the player to select one or
+    more items in their inventory.
     It contains a run method for quick instantiation.
     This equivalent is NOT SAFE FOR REPLAYS. Do NOT use in dungeons until further notice.
 ]]
 
 
---- Menu for selecting a skill from a specific list of items.
+--- Menu for selecting items from the player's inventory.
 InventorySelectMenu = Class("InventorySelectMenu")
 
 --- Creates a new ``InventorySelectMenu`` instance using the provided list and callbacks.
 --- @param title string the title this window will have.
---- @param filter function a function that takes ``RogueEssence.Dungeon.InvSlot`` object and returns a boolean. Any slot that does not pass this check will have its option disabled in the menu. Defaults to ``return true``.
+--- @param filter function a function that takes a ``RogueEssence.Dungeon.InvSlot`` object and returns a boolean. Any slot that does not pass this check will have its option disabled in the menu. Defaults to ``return true``.
 --- @param confirm_action function the function called when the selection is confirmed. It will have a table array of ``RogueEssence.Dungeon.InvSlot`` objects passed to it as a parameter.
 --- @param refuse_action function the function called when the player presses the cancel or menu button.
 --- @param menu_width number the width of this window. Default is 176.
-function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_action, menu_width, includeEquips)
-    if includeEquips == nil then includeEquips = true end
+--- @param include_equips boolean if true, the menu will include equipped items.
+function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_action, menu_width, include_equips)
+    if include_equips == nil then include_equips = true end
 
     -- constants
     self.MAX_ELEMENTS = 8
@@ -29,7 +30,7 @@ function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_ac
     self.refuseAction = refuse_action
     self.menuWidth = menu_width or 176
     self.filter = filter or function(_) return true end
-    self.includeEquips = includeEquips
+    self.includeEquips = include_equips
     self.slotList = self:load_slots()
     self.optionsList = self:generate_options()
     self.max_choices = self:count_valid()
@@ -46,7 +47,7 @@ function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_ac
     local option_array = luanet.make_array(RogueEssence.Menu.MenuElementChoice, self.optionsList)
     self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(origin, self.menuWidth, title, option_array, 0, self.MAX_ELEMENTS, refuse_action, refuse_action, false, self.max_choices, self.multiConfirmAction)
     self.menu.ChoiceChangedFunction = function() self:updateSummary() end
-    --self.menu.ChoiceToggledFunction = function() self:updateSummary() end TODO drink effect preview window update function at some point somewhere, probably in a subclass
+	self.menu.MultiSelectChangedFunction = function() self:updateSummary() end
 
     -- create the summary window
     local GraphicsManager = RogueEssence.Content.GraphicsManager
@@ -55,7 +56,6 @@ function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_ac
             RogueElements.Loc(16, GraphicsManager.ScreenHeight - 8 - GraphicsManager.MenuBG.TileHeight * 2 - 14 * 4), --LINE_HEIGHT = 12, VERT_SPACE = 14
             RogueElements.Loc(GraphicsManager.ScreenWidth - 16, GraphicsManager.ScreenHeight - 8)))
     self.menu.SummaryMenus:Add(self.summary)
-    --TODO drink effect preview window at some point somewhere, probably in a subclass
     self:updateSummary()
 end
 
@@ -89,6 +89,7 @@ function InventorySelectMenu:generate_options()
     local options = {}
     for i=1, #self.slotList, 1 do
         local slot = self.slotList[i]
+        local enabled = self.filter(slot)
         local item, equip_id = nil, nil
         if slot.IsEquipped then
             equip_id = slot.Slot
@@ -96,7 +97,6 @@ function InventorySelectMenu:generate_options()
         else
             item = _DATA.Save.ActiveTeam:GetInv(slot.Slot)
         end
-        local enabled = self.filter(item)
         local color = Color.White
         if not enabled then color = Color.Red end
 
@@ -152,7 +152,7 @@ end
 --- Creates a basic ``InventorySelectMenu`` instance using the provided parameters, then runs it and returns its output.
 --- @param title string the title this window will have
 --- @param filter function a function that takes a ``RogueEssence.Dungeon.InvSlot`` object and returns a boolean. Any ``InvSlot`` that does not pass this check will have its option disabled in the menu. Defaults to ``return true``.
---- @param includeEquips boolean if true, the party's equipped items will be included in the menu. defaults to true.
+--- @param includeEquips boolean if true, the party's equipped items will be included in the menu. Defaults to true.
 --- @return userdata a table array containing the chosen ``RogueEssence.Dungeon.InvSlot`` objects.
 function InventorySelectMenu.run(title, filter, includeEquips)
 

@@ -4,37 +4,69 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Twin Beam",
-"LocalTexts": {
-"es": "Láser Doble",
-"it": "Doppioraggio",
-"ja": "ツインビーム",
-"ja-jp": "ツインビーム",
-"zh-hans": "双光束",
-"zh-hant": "双光束"
-}
-},
-"Desc": {
-"DefaultText": "",
 "LocalTexts": {}
 },
-"Released": false,
+"Desc": {
+"DefaultText": "The user shoots mystical beams from its eyes to inflict damage. The target is hit twice in a row.",
+"LocalTexts": {}
+},
+"Released": true,
 "Comment": "",
 "IndexNum": 888,
 "BaseCharges": 10,
-"Strikes": 1,
+"Strikes": 2,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Dungeon.ProjectileAction, RogueEssence",
+"Anim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
 },
-"WideAngle": 0,
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+},
+"StreamEmitter": {
+"$type": "RogueEssence.Content.StreamEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Dragon_Pulse_Particle_Purple",
+"FrameTime": 3,
+"StartFrame": 0,
+"EndFrame": 0,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Shots": 12,
+"BurstTime": 1,
+"StartDistance": 16,
+"EndDiff": 0,
+"Layer": 2
+},
+"Rays": 0,
+"Speed": 18,
+"Boomerang": false,
+"ItemSprite": "",
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
+"ActionType": 7
 },
+"HitTiles": true,
+"Range": 8,
+"StopAtHit": true,
+"StopAtWall": true,
 "TargetAlignments": 4,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
@@ -43,7 +75,7 @@
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Power_Swap",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0

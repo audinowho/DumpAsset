@@ -1238,15 +1238,15 @@ end
 
 function COMMON.ExitDungeonMissionCheck(result, rescue, zoneId, segmentID)
   
-  exited = false
-
   COMMON.ClearEscorts(result, zoneId, segmentID)
+  
+  exited = false
   
   --TODO: remove this hack when referencing base game in mod scripts is complete
   if COMMON.ExitDungeonMissionCheckEx ~= nil then
      exited = COMMON.ExitDungeonMissionCheckEx(result, rescue, zoneId, segmentID)
   end
-    
+  
   if rescue == true then
     exited = COMMON.EndRescue(zone, result, segmentID)
   end

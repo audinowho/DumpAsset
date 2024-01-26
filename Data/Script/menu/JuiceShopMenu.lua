@@ -180,9 +180,9 @@ function DrinkPreviewSummary:initialize(left, top, right, bottom, character, ing
     self.window.Elements:Add(self.xp_bar)
     self.window.Elements:Add(self.bar_upper)
 
-    local hp_label,  spd_label = STRINGS:FormatKey("_ENUM_Stat_HP"),           STRINGS:FormatKey("_ENUM_Stat_Speed_tiny")
-    local atk_label, sat_label = STRINGS:FormatKey("_ENUM_Stat_Attack_tiny"),  STRINGS:FormatKey("_ENUM_Stat_MAtk_tinier")
-    local def_label, sdf_label = STRINGS:FormatKey("_ENUM_Stat_Defense_tiny"), STRINGS:FormatKey("_ENUM_Stat_MDef_tinier")
+    local hp_label,  spd_label = STRINGS:FormatKey("_ENUM_Stat_HP_tinier"),      STRINGS:FormatKey("_ENUM_Stat_Speed_tinier")
+    local atk_label, sat_label = STRINGS:FormatKey("_ENUM_Stat_Attack_tinier"),  STRINGS:FormatKey("_ENUM_Stat_MAtk_tinier")
+    local def_label, sdf_label = STRINGS:FormatKey("_ENUM_Stat_Defense_tinier"), STRINGS:FormatKey("_ENUM_Stat_MDef_tinier")
 
     self.window.Elements:Add(RogueEssence.Menu.MenuText(hp_label,  RogueElements.Loc(x_pos,  GraphicsManager.MenuBG.TileHeight + 14*3)))
     self.window.Elements:Add(RogueEssence.Menu.MenuText(spd_label, RogueElements.Loc(x_pos3, GraphicsManager.MenuBG.TileHeight + 14*3)))

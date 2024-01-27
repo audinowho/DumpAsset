@@ -441,12 +441,15 @@ function COMMON.ExitDungeonMissionCheckEx(result, zoneId, segmentID)
       GAME:TakePlayerEquippedItem(i-1)
     end
   end
+  
+  if SV.MissionsEnabled then
+  
+    MISSION_GEN.EndOfDay(result, segmentID)
 
-  MISSION_GEN.EndOfDay(result, segmentID)
-
-  if SV.TemporaryFlags.MissionCompleted then
-    COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 2, 0)
-    return true
+    if SV.TemporaryFlags.MissionCompleted then
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 2, 0)
+      return true
+    end
   end
 
   return false

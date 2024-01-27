@@ -212,11 +212,13 @@ function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances)
 		else
 		  zone_name = "[color=#00FFFF]"..zone_summary.Name:ToLocal().."[color]"
 		end
+		if SV.MissionsEnabled then
         if mission_dests[zone] ~= nil then
-          zone_name = STRINGS:Format("\\uE10F ") .. zone_name --open letter
+          zone_name = STRINGS:Format("\\uE10F") .. zone_name --open letter
         elseif COMMON.HasSidequestInZone(zone) then
-          zone_name = STRINGS:Format("\\uE111 ") .. zone_name --exclamation point 
+          zone_name = STRINGS:Format("\\uE111") .. zone_name --exclamation point
         end
+		end
         table.insert(open_dests, { Name=zone_name, Dest=RogueEssence.Dungeon.ZoneLoc(zone, 0, 0, 0) })
 	  end
 	end

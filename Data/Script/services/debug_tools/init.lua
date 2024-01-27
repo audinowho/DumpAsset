@@ -65,6 +65,8 @@ function DebugTools:OnMenuButtonPressed()
   
   --Custom menu stuff for jobs. 
   --Check if we're in a dungeon or not. Only do main menu changes outside of a dungeon. Do others menu changes in dungeon only.
+  if SV.MissionsEnabled then
+  
   if RogueEssence.GameManager.Instance.CurrentScene == RogueEssence.Dungeon.DungeonScene.Instance then
     DebugTools.MainMenu.Choices:RemoveAt(5)
     DebugTools.MainMenu.Choices:Insert(5, RogueEssence.Menu.MenuTextChoice(Text.FormatKey("MENU_OTHERS_TITLE"), function () _MENU:AddMenu(DebugTools:CustomDungeonOthersMenu(), false) end))
@@ -78,6 +80,14 @@ function DebugTools:OnMenuButtonPressed()
 	
 	DebugTools.MainMenu.Choices:Insert(4, RogueEssence.Menu.MenuTextChoice(Text.FormatKey("MENU_JOBLIST_TITLE"), function () _MENU:AddMenu(BoardMenu:new(COMMON.MISSION_BOARD_TAKEN, nil, DebugTools.MainMenu).menu, false) end, taken_count > 0, job_list_color))
  
+  end
+  
+  else
+  
+  if RogueEssence.GameManager.Instance.CurrentScene == RogueEssence.Dungeon.DungeonScene.Instance then
+    DebugTools.MainMenu.Choices[5] = RogueEssence.Menu.MenuTextChoice(STRINGS:FormatKey("MENU_OTHERS_TITLE"), function () _MENU:AddMenu(DebugTools:OthersMenuWithRecruitScan(), false) end)
+  end
+  
   end
  
   DebugTools.MainMenu:SetupTitleAndSummary()

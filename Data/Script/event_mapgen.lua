@@ -22,6 +22,11 @@ MapItemType = luanet.import_type('RogueEssence.Dungeon.MapItem')
 
 
 function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed, args)
+  
+  if not SV.MissionsEnabled then
+    return
+  end
+  
   SV.DestinationFloorNotified = false
   SV.MonsterHouseMessageNotified = false
   SV.OutlawDefeated = false

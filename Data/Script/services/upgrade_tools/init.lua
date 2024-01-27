@@ -470,6 +470,9 @@ function UpgradeTools:OnUpgrade()
     SV.adventure.Tutors = { }
   end
   
+  if SV.MissionsEnabled == true then
+    SV.MissionsEnabled = false
+  end
   PrintInfo("=>> Loaded version")
 end
 

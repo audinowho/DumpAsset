@@ -43,6 +43,8 @@ SV.checkpoint =
   Map  = 1, Entry  = 0
 }
 
+SV.MissionsEnabled = false
+
 SV.MissionPrereq =
 {
   DungeonsCompleted = {}, --Uses a bitmap to determine which sections are complete (

@@ -335,8 +335,8 @@ function base_camp_2.NPC_Storehouse_Action(chara, activator)
 end
 
 function base_camp_2.NPC_Settling_Action(chara, activator)
-    GROUND:CharTurnToChar(chara,CH('PLAYER'))
-    UI:SetSpeaker(chara)
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
 
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Settling_Line_001']))
 end
@@ -1246,21 +1246,21 @@ function base_camp_2.Locator_Action(obj, activator)
 end
 
 function base_camp_2.Music_Action(obj, activator)
-    DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-    local chara = CH('Music_Owner')
-    UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Music_Intro']))
-    local unlocks = {}
-    if SV.cliff_camp.ExpositionComplete then
-        table.insert(unlocks, "MAIN_001")
-    end
-    UI:ShowMusicMenu(unlocks)
-    UI:WaitForChoice()
-    local result = UI:ChoiceResult()
-    if result ~= nil then
-        SV.base_town.Song = result
-    end
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Music_End']))
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  local chara = CH('Music_Owner')
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Music_Intro']))
+  local unlocks = {}
+  if SV.cliff_camp.ExpositionComplete then
+    table.insert(unlocks, "MAIN_001")
+  end
+  UI:ShowMusicMenu(unlocks)
+  UI:WaitForChoice()
+  local result = UI:ChoiceResult()
+  if result ~= nil then
+	SV.base_town.Song = result
+  end
+  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Music_End']))
 end
 
 function base_camp_2.Tutor_Action(obj, activator)
@@ -1504,5 +1504,8 @@ function base_camp_2.Assembly40_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   COMMON.GroundInteract(activator, chara, false)
 end
+
+
+
 
 return base_camp_2

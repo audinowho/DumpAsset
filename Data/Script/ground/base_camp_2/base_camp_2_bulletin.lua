@@ -4,8 +4,6 @@ require 'mission_gen'
 local base_camp_2_bulletin = {}
 local MapStrings = {}
 
-MissionBoardStateType = luanet.import_type('PMDC.Dungeon.MissionBoardState')
-
 function base_camp_2_bulletin.InitStrings(mapStrings)
   MapStrings = mapStrings
 end
@@ -14,8 +12,7 @@ end
 function base_camp_2_bulletin.Enter(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
 
-  local mission_table = _DATA.UniversalEvent.UniversalStates:GetWithDefault(luanet.ctype(MissionBoardStateType))
-  if mission_table ~= nil and mission_table.EnableMissionBoard == true then
+  if SV.MissionsEnabled == true then
     GROUND:Unhide("Mission_Board")
   end
 

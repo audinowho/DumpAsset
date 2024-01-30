@@ -1,5 +1,5 @@
 require 'common'
-require 'menu.JuiceShopMenu'
+require 'menu.juice.JuiceShopMenu'
 require 'menu.TeamSelectMenu'
 
 local base_camp_2_juice = {}

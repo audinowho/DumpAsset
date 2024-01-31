@@ -1,5 +1,6 @@
 require 'common'
 require 'menu.juice.JuiceShopMenu'
+require 'menu.juice.SpecialtiesMenu'
 require 'menu.TeamSelectMenu'
 
 local base_camp_2_juice = {}
@@ -830,14 +831,7 @@ function base_camp_2_juice.Drink_Specialties_Flow()
   while state > -1 do
   
     if state == 0 then
-      --pass in a list of specialties to display as a multpage menu.
-	  --when a specialty is chosen, a second menu pops up to choose order size. (similar to choosing an item)
-	  --Include a summary menu for the specialty list.  It will show the selection's description.
-	  --as well as a summary menu for the order size menu (it can draw on top of the first summary menu)
-      selection = SpecialtiesMenu.run(base_camp_2_juice.specialties)
-	  --the resulting selection is either nil (if they didnt pick anything)
-	  --or it's in the format of the temp value below
-	  selection = { Choice = 1, Size = 1 }
+      selection = SpecialtiesMenu.run("Specialties", base_camp_2_juice.specialties)
       if selection then
 		state = 1
 	  else
@@ -871,8 +865,7 @@ function base_camp_2_juice.Drink_Specialties_Flow()
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Who_Multi'], STRINGS:LocalKeyString(26)))
 	  --change this to pick multiple team members.  You may want to make an AssemblySelectMenu instead...
 	  --the filter determines whether the menu option is enabled or not.  We disable choosing those who cannot be boosted further
-	  local members = TeamSelectMenu.runJuiceChoiceMenu(function(target) base_camp_2_juice.Can_Eat(target, total_boost) end)
-	  
+	  local members = TeamMultiSelectMenu.runMultiPartyMenu(function(target) return base_camp_2_juice.Can_Eat(target, total_boost) end)
 	  if #members > 0 then
 		local tribute = base_camp_2_juice.Compute_Total_Tribute(target, total_boost)
 

@@ -37,7 +37,8 @@ function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_ac
 
     self.multiConfirmAction = function(list)
         _MENU:RemoveMenu()
-        self.confirmAction(self:multiConfirm(list))
+        self.choices = self:multiConfirm(list)
+        self.confirmAction(self.choices)
     end
 
     self.choices = {} -- result
@@ -123,8 +124,7 @@ end
 --- the chosen index as the single element of a table array.
 --- @param index number the index of the chosen character, wrapped inside of a single element table array.
 function InventorySelectMenu:choose(index)
-    self.choices = {index-1}
-    self.multiConfirmAction(self.choices)
+    self.multiConfirmAction({index-1})
 end
 
 --- Updates the summary window.
@@ -139,7 +139,6 @@ function InventorySelectMenu:multiConfirm(list)
     local result = {}
     for _, index in pairs(list) do
         local inv_slot = self.slotList[index+1]
-        PrintInfo(tostring(inv_slot.IsEquipped).."\t"..tostring(inv_slot.Slot))
         table.insert(result, inv_slot)
     end
     return result

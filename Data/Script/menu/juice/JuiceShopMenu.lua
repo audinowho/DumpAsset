@@ -5,7 +5,7 @@
     Opens a menu, potentially with multiple pages, that allows the player to select one or
     more items in their inventory, visualizing the effect of the resulting drinks on the target.
     It contains a run method for quick instantiation.
-    This equivalent is NOT SAFE FOR REPLAYS. Do NOT use in dungeons until further notice.
+    This menu is NOT SAFE FOR REPLAYS. Do NOT use in dungeons until further notice.
 ]]
 require 'common'
 require 'menu.InventorySelectMenu'
@@ -13,17 +13,16 @@ require 'menu.InventorySelectMenu'
 --- Menu for selecting items from the player's inventory.
 JuiceShopMenu = Class("JuiceShopMenu", InventorySelectMenu)
 
---- Creates a new ``InventorySelectMenu`` instance using the provided list and callbacks.
+--- Creates a new ``JuiceShopMenu`` instance using the provided list and callbacks.
 --- @param title string the title this window will have.
 --- @param character userdata the ``RogueEssence.Dungeon.Character`` object the resulting drink's effect is to be applied to.
---- @param ingredients table a list of key-value pairs where key is an item id and the value is a table of drink effects, as defined in the ``DrinkPreviewSummary`` class.
+--- @param ingredients table a list of key-value pairs where key is an item id and the value is a table of drink effects. See ``ground.base_camp_2.base_camp_2_juice`` for examples.
 --- @param confirm_action function the function called when the selection is confirmed. It will have a table array of ``RogueEssence.Dungeon.InvSlot`` objects passed to it as a parameter.
 --- @param refuse_action function the function called when the player presses the cancel or menu button.
 --- @param include_equips boolean if true, the menu will include equipped items.
 --- @param show_preview boolean if true, the preview menu will be shown.
---- @param boost_function function
+--- @param boost_function function the function that will be used by the preview window to calculate the total boost.
 function JuiceShopMenu:initialize(title, character, ingredients, confirm_action, refuse_action, include_equips, show_preview, boost_function)
-
     -- generate enabled slots filter function
     self.ingredients = ingredients
     local filter = function(slot)
@@ -65,6 +64,8 @@ function JuiceShopMenu:getCart()
     return list
 end
 
+--- Returns the selected menu option and its corresponding slot
+--- @return table a table containing an ``option`` and a ``slot`` property
 function JuiceShopMenu:getSelectedOption()
     local i = self.menu.CurrentChoiceTotal+1
     return {
@@ -74,7 +75,7 @@ function JuiceShopMenu:getSelectedOption()
 end
 
 
---- Updates the summary window.
+--- Updates the summary window and, if present, the summary window
 function JuiceShopMenu:updateSummary()
     InventorySelectMenu.updateSummary(self)
     if self.preview then
@@ -91,6 +92,13 @@ end
 --- Summary menu that previews a drink's effect on a character's stats.
 DrinkPreviewSummary = Class("DrinkPreviewSummary")
 
+--- Generates a new DrinkPreviewSummary object set in the provided coordinates using the provided data.
+--- @param left number the x coordinate of the left side of the window.
+--- @param top number the y coordinate of the top side of the window.
+--- @param right number the x coordinate of the right side of the window.
+--- @param bottom number the y coordinate of the bottom side of the window.
+--- @param ingredient_effect_table table a list of key-value pairs where key is an item id and the value is a table of drink effects. See ``ground.base_camp_2.base_camp_2_juice`` for examples.
+--- @param boost_function function the function that will be used by the preview window to calculate the total boost.
 function DrinkPreviewSummary:initialize(left, top, right, bottom, character, ingredient_effect_table, boost_function)
     self.boost_function = boost_function
     self.character = character
@@ -206,6 +214,9 @@ function DrinkPreviewSummary:initialize(left, top, right, bottom, character, ing
     self.window.Elements:Add(self.sdf_text)
 end
 
+--- Updates the list of currently selected items in the menu and then updates the menu itself.
+--- @param list table a list of ``string`` item ids.
+--- @param current_option table a table containing an ``option`` and a ``slot`` property
 function DrinkPreviewSummary:setSlots(list, current_option)
     self.cart = list
     self.selected_option = current_option
@@ -213,6 +224,8 @@ function DrinkPreviewSummary:setSlots(list, current_option)
     self:updateMenu()
 end
 
+--- Updates the list of currently selected items in the menu and runs the total boost calculation, storing
+--- all the data necessary for drawing the final effect of the boosts.
 function DrinkPreviewSummary:updateData()
     local selected = self.selected_option.option.Selected
     local slot = self.selected_option.slot
@@ -333,6 +346,7 @@ function DrinkPreviewSummary:updateData()
     self.selection_data.Speed = form:GetStat(self.selection_data.Level, RogueEssence.Data.Stat.Speed,   self.selection_data.SpeedBonus)
 end
 
+--- Uses the currently stored data to apply changes to the display elements of the menu.
 function DrinkPreviewSummary:updateMenu()
     local GraphicsManager = RogueEssence.Content.GraphicsManager
     local getColor = function(change, pos, def, neg)
@@ -440,8 +454,8 @@ end
 --- @param ingredients table a list of key-value pairs where the keys are item ids and the values are the drink effects, as specified in ``ground.base_camp_2.base_camp_2_juice``. Only items in this list will be enabled.
 --- @param includeEquips boolean if true, the party's equipped items will be included in the menu. Defaults to true.
 --- @param show_preview boolean if true, the drink summary window will be shown. Defaults to false.
---- @param boost_function function
---- @return userdata a table array containing the chosen ``RogueEssence.Dungeon.InvSlot`` objects.
+--- @param boost_function function the function that will be used by the preview window to calculate the total boost.
+--- @return table a table array containing the chosen ``RogueEssence.Dungeon.InvSlot`` objects.
 function JuiceShopMenu.run(title, character, ingredients, includeEquips, show_preview, boost_function)
 
     local ret = {}

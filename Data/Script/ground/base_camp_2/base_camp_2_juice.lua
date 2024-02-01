@@ -190,10 +190,10 @@ function base_camp_2_juice.getTotalBoost(cart, member)
 	local mon = _DATA:GetMonster(playerMonId.Species)
 	local form = mon.Forms[playerMonId.Form]
 
-	total_boost = { EXP = 0, Level = 0, HP = 0, Atk = 0, Def = 0, SpAtk = 0, SpDef = 0, Speed = 0 }
+	local total_boost = { EXP = 0, Level = 0, HP = 0, Atk = 0, Def = 0, SpAtk = 0, SpDef = 0, Speed = 0 }
 	
-	negate_exp = false
-	negate_stat = false
+	local negate_exp = false
+	local negate_stat = false
 	
 	for ii = 1, #cart, 1 do
 		local item
@@ -215,13 +215,13 @@ function base_camp_2_juice.getTotalBoost(cart, member)
 				if boost.GummiEffect == form.Element1 or boost.GummiEffect == form.Element2 then
 					main_boost = 2
 					all_boost = 2
-				elseif matchup >= S_E_2 then
+				elseif matchup >= PMDC.Dungeon.PreTypeEvent.S_E_2 then
 					main_boost = 2
 					all_boost = 1
-				elseif matchup == NRM_2 then
+				elseif matchup == PMDC.Dungeon.PreTypeEvent.NRM_2 then
 					main_boost = 2
 					all_boost = 0
-				elseif matchup > N_E_2 then
+				elseif matchup > PMDC.Dungeon.PreTypeEvent.N_E_2 then
 					main_boost = 1
 					all_boost = 0
 				end

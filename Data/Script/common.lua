@@ -987,6 +987,8 @@ function COMMON.GroundInteract(chara, target)
   local key = "TALK_WAIT_%04d"
   
   local running_pool = {table.unpack(pool)}
+  
+  --TODO: valid quote filtering
   local valid_quote = false
   local chosen_quote = ""
   

@@ -1304,205 +1304,252 @@ function base_camp_2.Mission_Board_Action(obj, activator)
   
 end
 
+function base_camp_2.AssemblyInteract(chara, target)
+  GROUND:CharTurnToChar(target, chara)
+  UI:SetSpeaker(target)
+  
+  local mon = _DATA:GetMonster(target.CurrentForm.Species)
+  local form = mon.Forms[target.CurrentForm.Form]
+  
+  local personality = form:GetPersonalityType(target.Data.Discriminator)
+  
+  local talk_string = nil
+  
+  --TODO: accept variations of the talkstrings (VAR_XX)
+  --look for a talkstring of this species, form, gender
+  if talk_string == nil then
+    local var_key = string.format("TALK_REST_%04d_%02d_%02d_VAR_00", mon.IndexNum, target.CurrentForm.Form, LUA_ENGINE:EnumToNumeric(target.CurrentForm.Gender))
+    if RogueEssence.Text.StringsEx:ContainsKey(var_key) then
+      talk_string = RogueEssence.Text.StringsEx[var_key]
+    end
+  end
+  
+  if talk_string == nil then
+    --if talkstring is nil, look for a talkstring of this species, form
+	local var_key = string.format("TALK_REST_%04d_%02d_VAR_00", mon.IndexNum, target.CurrentForm.Form)
+    if RogueEssence.Text.StringsEx:ContainsKey(var_key) then
+      talk_string = RogueEssence.Text.StringsEx[var_key]
+    end
+  end
+  
+  if talk_string == nil then
+    --if talkstring is nil, look for a talkstring of this species
+	local var_key = string.format("TALK_REST_%04d_VAR_00", mon.IndexNum)
+    if RogueEssence.Text.StringsEx:ContainsKey(var_key) then
+      talk_string = RogueEssence.Text.StringsEx[var_key]
+    end
+  end
+  
+  if talk_string == nil then
+    --if talkstring is still nil, fall back to groundinteract
+	COMMON.GroundInteract(chara, target)
+  else
+    --otherwise, print the talkstring
+	UI:WaitShowDialogue(STRINGS:Format(talk_string))
+  end
+  
+  
+end
+
 
 function base_camp_2.Assembly1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly3_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly4_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly5_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly6_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly7_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly8_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly9_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly10_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly11_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly12_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly13_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly14_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly15_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly16_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly17_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly18_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly19_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly20_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly21_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly22_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly23_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly24_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly25_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly26_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly27_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly28_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly29_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly30_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly31_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly32_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly33_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly34_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly35_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly36_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly37_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly38_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly39_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 function base_camp_2.Assembly40_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, false)
+  base_camp_2.AssemblyInteract(activator, chara)
 end
 
 

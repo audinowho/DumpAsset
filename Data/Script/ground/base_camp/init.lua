@@ -728,17 +728,17 @@ end
 
 function base_camp.Teammate1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, true)
+  COMMON.GroundInteract(activator, chara)
 end
 
 function base_camp.Teammate2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, true)
+  COMMON.GroundInteract(activator, chara)
 end
 
 function base_camp.Teammate3_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, true)
+  COMMON.GroundInteract(activator, chara)
 end
 
 function base_camp.SisterReminderActive()

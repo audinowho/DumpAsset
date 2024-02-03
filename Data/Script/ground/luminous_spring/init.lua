@@ -207,17 +207,17 @@ end
 
 function luminous_spring.Teammate1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, true)
+  COMMON.GroundInteract(activator, chara)
 end
 
 function luminous_spring.Teammate2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, true)
+  COMMON.GroundInteract(activator, chara)
 end
 
 function luminous_spring.Teammate3_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, true)
+  COMMON.GroundInteract(activator, chara)
 end
 
 

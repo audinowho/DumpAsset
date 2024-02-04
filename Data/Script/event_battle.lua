@@ -276,19 +276,18 @@ end
 
 function BATTLE_SCRIPT.SidequestRescueReached(owner, ownerChar, context, args)
 
-  context.CancelState.Cancel = true
-  
   local tbl = LTBL(context.Target)
   local mission = SV.missions.Missions[tbl.Mission]
   
+  local oldDir = context.Target.CharDir
   DUNGEON:CharTurnToChar(context.Target, context.User)
   
   UI:ResetSpeaker()
   local target_name = _DATA:GetMonster(mission.TargetSpecies.Species).Name
-	UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_RESCUE_ASK"):ToLocal(), target_name:ToLocal()), false)
-	UI:WaitForChoice()
-	result = UI:ChoiceResult()
-	if result then
+  UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_RESCUE_ASK"):ToLocal(), target_name:ToLocal()), false)
+  UI:WaitForChoice()
+  result = UI:ChoiceResult()
+  if result then
   
     mission.Complete = COMMON.MISSION_COMPLETE
     
@@ -304,13 +303,16 @@ function BATTLE_SCRIPT.SidequestRescueReached(owner, ownerChar, context, args)
     _DUNGEON:RemoveChar(context.Target)
     
     DUNGEON:CharEndAnim(context.User)
+
+	context.TurnCancel.Cancel = true
+  else
+	context.Target.CharDir = oldDir
+	context.CancelState.Cancel = true
   end
 end
 
 
 function BATTLE_SCRIPT.SidequestEscortReached(owner, ownerChar, context, args)
-  
-  context.CancelState.Cancel = true
   
   local tbl = LTBL(context.Target)
   local escort = COMMON.FindMissionEscort(tbl.Mission)
@@ -337,6 +339,10 @@ function BATTLE_SCRIPT.SidequestEscortReached(owner, ownerChar, context, args)
   
     UI:ResetSpeaker()
     UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_REMINDER"):ToLocal(), client_name:ToLocal()))
+	
+	context.TurnCancel.Cancel = true
+  else
+	context.CancelState.Cancel = true
   end
 end
 

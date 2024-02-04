@@ -466,7 +466,7 @@ function COMMON.LearnMoveFlow(member, move, replace_msg)
 		UI:WaitForChoice()
 		local result = UI:ChoiceResult()
 		if result > -1 and result < 4 then
-			GAME:SetCharacterSkill(member, move, result)
+			GAME:SetCharacterSkill(member, move, result, _DATA.Save:GetDefaultEnable(move))
 			return true
 		end
 	end

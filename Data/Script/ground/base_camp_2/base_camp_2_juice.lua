@@ -1,5 +1,6 @@
 require 'common'
-require 'menu.JuiceShopMenu'
+require 'menu.juice.JuiceShopMenu'
+require 'menu.juice.SpecialtiesMenu'
 require 'menu.TeamSelectMenu'
 
 local base_camp_2_juice = {}
@@ -189,10 +190,10 @@ function base_camp_2_juice.getTotalBoost(cart, member)
 	local mon = _DATA:GetMonster(playerMonId.Species)
 	local form = mon.Forms[playerMonId.Form]
 
-	total_boost = { EXP = 0, Level = 0, HP = 0, Atk = 0, Def = 0, SpAtk = 0, SpDef = 0, Speed = 0 }
+	local total_boost = { EXP = 0, Level = 0, HP = 0, Atk = 0, Def = 0, SpAtk = 0, SpDef = 0, Speed = 0 }
 	
-	negate_exp = false
-	negate_stat = false
+	local negate_exp = false
+	local negate_stat = false
 	
 	for ii = 1, #cart, 1 do
 		local item
@@ -214,13 +215,13 @@ function base_camp_2_juice.getTotalBoost(cart, member)
 				if boost.GummiEffect == form.Element1 or boost.GummiEffect == form.Element2 then
 					main_boost = 2
 					all_boost = 2
-				elseif matchup >= S_E_2 then
+				elseif matchup >= PMDC.Dungeon.PreTypeEvent.S_E_2 then
 					main_boost = 2
 					all_boost = 1
-				elseif matchup == NRM_2 then
+				elseif matchup == PMDC.Dungeon.PreTypeEvent.NRM_2 then
 					main_boost = 2
 					all_boost = 0
-				elseif matchup > N_E_2 then
+				elseif matchup > PMDC.Dungeon.PreTypeEvent.N_E_2 then
 					main_boost = 1
 					all_boost = 0
 				end
@@ -834,14 +835,7 @@ function base_camp_2_juice.Drink_Specialties_Flow()
   while state > -1 do
   
     if state == 0 then
-      --pass in a list of specialties to display as a multpage menu.
-	  --when a specialty is chosen, a second menu pops up to choose order size. (similar to choosing an item)
-	  --Include a summary menu for the specialty list.  It will show the selection's description.
-	  --as well as a summary menu for the order size menu (it can draw on top of the first summary menu)
-      selection = SpecialtiesMenu.run(base_camp_2_juice.specialties)
-	  --the resulting selection is either nil (if they didnt pick anything)
-	  --or it's in the format of the temp value below
-	  selection = { Choice = 1, Size = 1 }
+      selection = SpecialtiesMenu.run("Specialties", base_camp_2_juice.specialties)
       if selection then
 		state = 1
 	  else
@@ -875,8 +869,7 @@ function base_camp_2_juice.Drink_Specialties_Flow()
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Who_Multi'], STRINGS:LocalKeyString(26)))
 	  --change this to pick multiple team members.  You may want to make an AssemblySelectMenu instead...
 	  --the filter determines whether the menu option is enabled or not.  We disable choosing those who cannot be boosted further
-	  local members = TeamSelectMenu.runJuiceChoiceMenu(function(target) base_camp_2_juice.Can_Eat(target, total_boost) end)
-	  
+	  local members = TeamMultiSelectMenu.runMultiPartyMenu(function(target) return base_camp_2_juice.Can_Eat(target, total_boost) end)
 	  if #members > 0 then
 		local tribute = base_camp_2_juice.Compute_Total_Tribute(target, total_boost)
 

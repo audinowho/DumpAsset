@@ -10,7 +10,7 @@
     This equivalent is NOT SAFE FOR REPLAYS. Do not use in dungeons until further notice.
 ]]
 require 'common'
-require 'menu.SkillSelectMenu'
+require 'menu.skill.SkillSelectMenu'
 
 --- Menu for selecting a skill from a specific list of skills.
 SkillTutorMenu = Class("SkillTutorMenu", SkillSelectMenu)

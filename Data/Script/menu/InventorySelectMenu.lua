@@ -18,7 +18,7 @@ InventorySelectMenu = Class("InventorySelectMenu")
 --- @param confirm_action function the function called when the selection is confirmed. It will have a table array of ``RogueEssence.Dungeon.InvSlot`` objects passed to it as a parameter.
 --- @param refuse_action function the function called when the player presses the cancel or menu button.
 --- @param menu_width number the width of this window. Default is 176.
---- @param include_equips boolean if true, the menu will include equipped items.
+--- @param include_equips boolean if true, the menu will include equipped items. Defaults to true.
 function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_action, menu_width, include_equips)
     if include_equips == nil then include_equips = true end
 
@@ -37,7 +37,8 @@ function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_ac
 
     self.multiConfirmAction = function(list)
         _MENU:RemoveMenu()
-        self.confirmAction(self:multiConfirm(list))
+        self.choices = self:multiConfirm(list)
+        self.confirmAction(self.choices)
     end
 
     self.choices = {} -- result
@@ -124,8 +125,7 @@ end
 --- the chosen index as the single element of a table array.
 --- @param index number the index of the chosen character, wrapped inside of a single element table array.
 function InventorySelectMenu:choose(index)
-    self.choices = {index-1}
-    self.multiConfirmAction(self.choices)
+    self.multiConfirmAction({index-1})
 end
 
 --- Updates the summary window.
@@ -140,7 +140,6 @@ function InventorySelectMenu:multiConfirm(list)
     local result = {}
     for _, index in pairs(list) do
         local inv_slot = self.slotList[index+1]
-        PrintInfo(tostring(inv_slot.IsEquipped).."\t"..tostring(inv_slot.Slot))
         table.insert(result, inv_slot)
     end
     return result

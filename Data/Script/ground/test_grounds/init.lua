@@ -359,21 +359,88 @@ function test_grounds.SouthExit_Touch(obj, activator)
     { Name="Replay Test Zone", Dest=RogueEssence.Dungeon.ZoneLoc('debug_zone', 4, 0, 0) },
     { Name="Base Camp", Dest=RogueEssence.Dungeon.ZoneLoc('guildmaster_island', -1, 1, 0) }
   }
-  local open_dungeons = { 0 }
-  local ground_entrances = { 1 }
   
-  UI:ResetSpeaker()
-  SOUND:PlaySE("Menu/Skip")
-  UI:DestinationMenu(open_dests)
-  UI:WaitForChoice()
-  dest = UI:ChoiceResult()
-
+  local dest = RogueEssence.Dungeon.ZoneLoc.Invalid
+  if #open_dests > 1 or force_list then
+    if before_list ~= nil then
+	  before_list(dest)
+	end
+	
+    SOUND:PlaySE("Menu/Skip")
+	default_choice = 1
+	while true do
+      UI:ResetSpeaker()
+      UI:DestinationMenu(open_dests, default_choice)
+	  UI:WaitForChoice()
+	  default_choice = UI:ChoiceResult()
+	
+	  if default_choice == nil then
+	    break
+	  end
+	  ask_dest = open_dests[default_choice].Dest
+      if ask_dest.StructID.Segment >= 0 then	  
+	    --chosen dungeon entry
+		if speaker ~= nil then
+		  UI:SetSpeaker(speaker)
+		else
+          UI:ResetSpeaker(false)
+		end
+	    UI:DungeonChoice(open_dests[default_choice].Name, ask_dest)
+        UI:WaitForChoice()
+        if UI:ChoiceResult() then
+	      dest = ask_dest
+	      break
+	    end
+	  else 
+	    dest = ask_dest
+	    break
+	  end
+	end
+  elseif #open_dests == 1 then
+    if open_dests[1].Dest.StructID.Segment < 0 then
+	  --single ground entry
+	  if speaker ~= nil then
+	    UI:SetSpeaker(speaker)
+	  else
+        UI:ResetSpeaker(false)
+        SOUND:PlaySE("Menu/Skip")
+	  end
+	  UI:ChoiceMenuYesNo(STRINGS:FormatKey("DLG_ASK_ENTER_GROUND", open_dests[1].Name))
+      UI:WaitForChoice()
+      if UI:ChoiceResult() then
+	    dest = open_dests[1].Dest
+	  end
+	else
+	  --single dungeon entry
+	  if speaker ~= nil then
+	    UI:SetSpeaker(speaker)
+	  else
+        UI:ResetSpeaker(false)
+        SOUND:PlaySE("Menu/Skip")
+	  end
+	  UI:DungeonChoice(open_dests[1].Name, open_dests[1].Dest)
+      UI:WaitForChoice()
+      if UI:ChoiceResult() then
+	    dest = open_dests[1].Dest
+	  end
+	end
+  else
+    PrintInfo("No valid destinations found!")
+  end
+  
   if dest:IsValid() then
-    SOUND:PlayBGM("", true)
-    GAME:FadeOut(false, 20)
+    if confirm_msg ~= nil then
+	  UI:WaitShowDialogue(confirm_msg)
+	end
 	if dest.StructID.Segment > -1 then
+	  --pre-loads the zone on a separate thread while we fade out, just for a little optimization
+	  _DATA:PreLoadZone(dest.ID)
+	  SOUND:PlayBGM("", true)
+      GAME:FadeOut(false, 20)
 	  GAME:EnterDungeon(dest.ID, dest.StructID.Segment, dest.StructID.ID, dest.EntryPoint, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
 	else
+	  SOUND:PlayBGM("", true)
+      GAME:FadeOut(false, 20)
 	  GAME:EnterZone(dest.ID, dest.StructID.Segment, dest.StructID.ID, dest.EntryPoint)
 	end
   end

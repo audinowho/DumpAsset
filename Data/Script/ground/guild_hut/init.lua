@@ -362,17 +362,17 @@ end
 
 function guild_hut.Teammate1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, true)
+  COMMON.GroundInteract(activator, chara)
 end
 
 function guild_hut.Teammate2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, true)
+  COMMON.GroundInteract(activator, chara)
 end
 
 function guild_hut.Teammate3_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, true)
+  COMMON.GroundInteract(activator, chara)
 end
 
 return guild_hut

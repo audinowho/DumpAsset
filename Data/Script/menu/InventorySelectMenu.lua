@@ -49,6 +49,7 @@ function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_ac
     local option_array = luanet.make_array(RogueEssence.Menu.MenuElementChoice, self.optionsList)
     self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(origin, self.menuWidth, title, option_array, 0, self.MAX_ELEMENTS, refuse_action, refuse_action, false, self.max_choices, self.multiConfirmAction)
     self.menu.ChoiceChangedFunction = function() self:updateSummary() end
+	  self.menu.MultiSelectChangedFunction = function() self:updateSummary() end
     self.menu.UpdateFunction = function(input) self:updateFunction(input) end
 
     -- create the summary window

@@ -423,8 +423,8 @@ function base_camp_2_juice.Drink_Flow(boost, member)
 				member.EXP = 0
 				break
 			elseif member.EXP >= growth_data:GetExpToNext(member.Level) then
-				member.Level = member.Level + 1
 				member.EXP = member.EXP - growth_data:GetExpToNext(member.Level)
+				member.Level = member.Level + 1
 			else
 				break
 			end
@@ -471,6 +471,8 @@ function base_camp_2_juice.Drink_Flow(boost, member)
 		if #changed_stats > 1 then
 			--increase sound?
 			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_STAT_BOOST_MULTI"):ToLocal(), member:GetDisplayName(true)))
+			UI:SetCustomMenu(RogueEssence.Menu.LevelUpMenu(member, old_level, old_hp, old_speed, old_atk, old_def, old_sp_atk, old_sp_def))
+			UI:WaitForChoice()
 		else
 			--increase sound?
 			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_STAT_BOOST"):ToLocal(), member:GetDisplayName(true), changed_stats[1], changed_amounts[1]))
@@ -480,6 +482,8 @@ function base_camp_2_juice.Drink_Flow(boost, member)
 		if #changed_stats > 1 then
 			--drop sound?
 			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_STAT_DROP_MULTI"):ToLocal(), member:GetDisplayName(true)))
+			UI:SetCustomMenu(RogueEssence.Menu.LevelUpMenu(member, old_level, old_hp, old_speed, old_atk, old_def, old_sp_atk, old_sp_def))
+			UI:WaitForChoice()
 		else
 			--drop sound?
 			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_STAT_DROP"):ToLocal(), member:GetDisplayName(true), changed_stats[1], changed_amounts[1] * -1))

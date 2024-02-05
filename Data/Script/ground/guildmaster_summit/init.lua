@@ -568,17 +568,17 @@ end
 
 function guildmaster_summit.Teammate1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, true)
+  COMMON.GroundInteract(activator, chara)
 end
 
 function guildmaster_summit.Teammate2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, true)
+  COMMON.GroundInteract(activator, chara)
 end
 
 function guildmaster_summit.Teammate3_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.GroundInteract(activator, chara, true)
+  COMMON.GroundInteract(activator, chara)
 end
 
 

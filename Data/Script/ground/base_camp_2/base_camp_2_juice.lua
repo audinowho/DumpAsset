@@ -1,7 +1,7 @@
 require 'common'
 require 'menu.juice.JuiceShopMenu'
 require 'menu.juice.SpecialtiesMenu'
-require 'menu.TeamSelectMenu'
+require 'menu.team.TeamSelectMenu'
 
 local base_camp_2_juice = {}
 local MapStrings = {}

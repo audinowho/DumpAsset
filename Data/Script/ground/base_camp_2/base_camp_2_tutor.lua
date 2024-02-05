@@ -1,7 +1,7 @@
 require 'common'
 require 'menu.skill.SkillSelectMenu'
 require 'menu.skill.SkillTutorMenu'
-require 'menu.TeamSelectMenu'
+require 'menu.team.TeamSelectMenu'
 
 local base_camp_2_tutor = {}
 local MapStrings = {}

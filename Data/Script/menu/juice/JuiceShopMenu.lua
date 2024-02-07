@@ -23,8 +23,12 @@ JuiceShopMenu = Class("JuiceShopMenu", InventorySelectMenu)
 --- @param show_preview boolean if true, the preview menu will be shown.
 --- @param boost_function function the function that will be used by the preview window to calculate the total boost.
 function JuiceShopMenu:initialize(title, character, ingredients, confirm_action, refuse_action, include_equips, show_preview, boost_function)
-    -- generate enabled slots filter function
+    -- parsing data
+    self.character = character
     self.ingredients = ingredients
+    self.show_preview = show_preview
+    self.boost_function = boost_function
+    -- generate enabled slots filter function
     local filter = function(slot)
         if slot.IsEquipped then
             local item = _DATA.Save.ActiveTeam.Players[slot.Slot].EquippedItem
@@ -74,6 +78,11 @@ function JuiceShopMenu:getSelectedOption()
     }
 end
 
+--- Returns a newly created copy of this object
+--- @return table a ``JuiceShopMenu``.
+function JuiceShopMenu:cloneMenu()
+    return JuiceShopMenu:new(self.title, self.character, self.ingredients, self.confirmAction, self.refuseAction, self.includeEquips, self.show_preview, self.boost_function)
+end
 
 --- Updates the summary window and, if present, the summary window
 function JuiceShopMenu:updateSummary()

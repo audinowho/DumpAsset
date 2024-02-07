@@ -26,6 +26,7 @@ function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_ac
     self.MAX_ELEMENTS = 8
 
     -- parsing data
+    self.title = title
     self.confirmAction = confirm_action
     self.refuseAction = refuse_action
     self.menuWidth = menu_width or 176
@@ -48,7 +49,8 @@ function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_ac
     local option_array = luanet.make_array(RogueEssence.Menu.MenuElementChoice, self.optionsList)
     self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(origin, self.menuWidth, title, option_array, 0, self.MAX_ELEMENTS, refuse_action, refuse_action, false, self.max_choices, self.multiConfirmAction)
     self.menu.ChoiceChangedFunction = function() self:updateSummary() end
-	self.menu.MultiSelectChangedFunction = function() self:updateSummary() end
+	  self.menu.MultiSelectChangedFunction = function() self:updateSummary() end
+    self.menu.UpdateFunction = function(input) self:updateFunction(input) end
 
     -- create the summary window
     local GraphicsManager = RogueEssence.Content.GraphicsManager
@@ -126,6 +128,25 @@ end
 --- @param index number the index of the chosen character, wrapped inside of a single element table array.
 function InventorySelectMenu:choose(index)
     self.multiConfirmAction({index-1})
+end
+
+--- Uses the current input to apply changes to the menu.
+--- @param input userdata the ``RogueEssense.InputManager``.
+function InventorySelectMenu:updateFunction(input)
+    if input:JustPressed(RogueEssence.FrameInput.InputType.SortItems) then
+        _GAME:SE("Menu/Sort")
+        _DATA.Save.ActiveTeam:SortItems()
+        local new_menu = self:cloneMenu()
+        _MENU:ReplaceMenu(new_menu.menu)
+        new_menu.menu:SetCurrentPage(self.menu.CurrentPage)
+        new_menu.menu.CurrentChoice = self.menu.CurrentChoice
+    end
+end
+
+--- Returns a newly created copy of this object
+--- @return table an ``InventorySelectMenu``.
+function InventorySelectMenu:cloneMenu()
+    return InventorySelectMenu:new(self.title, self.filter, self.confirmAction, self.refuseAction, self.menuWidth, self.includeEquips)
 end
 
 --- Updates the summary window.

@@ -268,7 +268,7 @@ function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, context, args)
 		  -- check to see if the shopkeeper can see the player and warp there
 		  local near_mat = false
 		  local dirs = { Direction.Down, Direction.DownLeft, Direction.Left, Direction.UpLeft, Direction.Up, Direction.UpRight, Direction.Right, Direction.DownRight }
-		  for idx, dir in pairs(dirs) do
+		  for idx, dir in ipairs(dirs) do
             if COMMON.ShopTileCheck(baseLoc, dir) then
 		      near_mat = true
 		    end
@@ -402,7 +402,9 @@ end
 function SINGLE_CHAR_SCRIPT.OutlawClearCheck(owner, ownerChar, context, args)
   -- check for no outlaw in the mission list
   remaining_outlaw = false
-  for name, mission in pairs(SV.missions.Missions) do
+
+  for _, name in ipairs(COMMON.GetSortedKeys(SV.missions.Missions)) do
+    mission = SV.missions.Missions[name]
     if mission.Complete == COMMON.MISSION_INCOMPLETE and _ZONE.CurrentZoneID == mission.DestZone
 	  and _ZONE.CurrentMapID.Segment == mission.DestSegment and _ZONE.CurrentMapID.ID == mission.DestFloor then
 	  local found_outlaw = COMMON.FindNpcWithTable(true, "Mission", name)

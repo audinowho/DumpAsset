@@ -68,6 +68,15 @@ function COMMON.AutoLoadLocalizedStrings()
   return STRINGS:MakePackageStringTable(packagepath)
 end
 
+function COMMON.GetSortedKeys(dict)
+  keys = {}
+  for key, _ in pairs(dict) do
+    table.insert(keys, key)
+  end
+  table.sort(keys)
+  return keys
+end
+
 COMMON.MISSION_TYPE_RESCUE = 0
 COMMON.MISSION_TYPE_ESCORT = 1
 COMMON.MISSION_TYPE_ESCORT_OUT = 2
@@ -1121,7 +1130,9 @@ function COMMON.BeginDungeon(zoneId, segmentID, mapId)
 end
 
 function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
-  for name, mission in pairs(SV.missions.Missions) do
+
+  for _, name in ipairs(COMMON.GetSortedKeys(SV.missions.Missions)) do
+    mission = SV.missions.Missions[name]
 	if mission.Complete == COMMON.MISSION_INCOMPLETE and zoneId == mission.DestZone and segmentID == mission.DestSegment then
 	  if mission.Type == 1 then -- escort
 		

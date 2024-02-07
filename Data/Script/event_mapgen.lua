@@ -26,7 +26,9 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
   local destinationFloor = false
   local outlawFloor = false
   local outlawSilent = false
-  for name, mission in pairs(SV.missions.Missions) do
+
+  for _, name in ipairs(COMMON.GetSortedKeys(SV.missions.Missions)) do
+    mission = SV.missions.Missions[name]
     if mission.Complete == COMMON.MISSION_INCOMPLETE and zoneContext.CurrentZone == mission.DestZone
 	  and zoneContext.CurrentSegment == mission.DestSegment and zoneContext.CurrentID == mission.DestFloor then
       local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
@@ -206,7 +208,10 @@ function FLOOR_GEN_SCRIPT.SpawnRandomTutor(map, args)
   
   local valid_moves = {}
   --iterate through all tutor moves
-  for move_idx, skill in pairs(COMMON.TUTOR) do
+
+  for _, move_idx in ipairs(COMMON.GetSortedKeys(COMMON.TUTOR)) do
+    skill = COMMON.TUTOR[move_idx]
+	
 	--Were they already encountered in this adventure?  skip
 	if SV.adventure.Tutors[move_idx] ~= nil then
 	  goto continue
@@ -255,7 +260,7 @@ function FLOOR_GEN_SCRIPT.SpawnRandomTutor(map, args)
 	--do they not match the types provided?  skip
 	local has_element = false
 	local skill_data = _DATA:GetSkill(move_idx)
-	for _, element_id in pairs(args.Elements) do
+	for _, element_id in ipairs(args.Elements) do
 	  --check to see if the skill is of the correct element
 	  if skill_data.Data.Element == element_id then
 	    has_element = true
@@ -273,12 +278,11 @@ function FLOOR_GEN_SCRIPT.SpawnRandomTutor(map, args)
   end
   
 
-  
-
 
   if #valid_moves > 0 then
 	  --choose a random move out of the valid ones
 	  local rand_idx = map.Rand:Next(#valid_moves) + 1
+	  
 	  --set the tutor id
 	  local tutor_move = valid_moves[rand_idx]
 	  

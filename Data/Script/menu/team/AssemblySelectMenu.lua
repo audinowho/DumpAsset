@@ -168,7 +168,7 @@ end
 --- @param new_mode userdata the ``RogueEssence.Menu.AssemblyMenu.AssemblySortMode`` to be applied
 --- @return table an ``AssemblySelectMenu``.
 function AssemblySelectMenu:cloneMenu(new_mode)
-    AssemblySelectMenu:new(self.filter, self.confirmAction, self.refuseAction, self.use_submenu, self.menuWidth, new_mode)
+    return AssemblySelectMenu:new(self.filter, self.confirmAction, self.refuseAction, self.use_submenu, self.menuWidth, new_mode)
 end
 
 --- Updates the portrait and the summary window.
@@ -255,7 +255,7 @@ end
 --- @param new_mode userdata the ``RogueEssence.Menu.AssemblyMenu.AssemblySortMode`` to be applied
 --- @return table an ``AssemblySelectMenu``.
 function AssemblyMultiSelectMenu:cloneMenu(new_mode)
-    AssemblyMultiSelectMenu:new(self.filter, self.confirmAction, self.refuseAction, self.use_submenu, self.menuWidth, new_mode)
+    return AssemblyMultiSelectMenu:new(self.filter, self.confirmAction, self.refuseAction, self.use_submenu, self.menuWidth, new_mode)
 end
 
 

@@ -585,6 +585,7 @@ base_camp_2_juice.specialties = {
 	{ 
 		Name = "+HP EV Dish",
 		Desc = "Flavor Text here. Increases HP.",
+		Sizes =
 		{
 			{ Name = "Small", Desc = "Boosts HP EVs by 8.", Effect = { HP = 8 } },
 			{ Name = "Medium", Desc = "Boosts HP EVs by 16.", Effect = { HP = 16 } },

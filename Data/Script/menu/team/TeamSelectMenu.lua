@@ -19,8 +19,9 @@ TeamSelectMenu = Class("TeamSelectMenu")
 --- @param filter function a function that takes a ``RogueEssence.Dungeon.Character`` object and returns a boolean. Any character that does not pass this check will have its option disabled in the menu. Defaults to ``return true``.
 --- @param confirm_action function the function called when a slot is chosen. It will have a ``RogueEssence.Dungeon.Character`` passed to it as a parameter.
 --- @param refuse_action function the function called when the player presses the cancel or menu button.
+--- @param use_submenu boolean whether or not to call the ``TeamSelectSubMenu`` before returning. Defaults to true.
 --- @param menu_width number the width of this window. Default is 160.
-function TeamSelectMenu:initialize(title, char_list, filter, confirm_action, refuse_action, menu_width)
+function TeamSelectMenu:initialize(title, char_list, filter, confirm_action, refuse_action, use_submenu, menu_width)
     -- param validity check
     local len = 0
     if type(char_list) == 'table' then len = #char_list
@@ -37,11 +38,13 @@ function TeamSelectMenu:initialize(title, char_list, filter, confirm_action, ref
     self.title = title
     self.confirmAction = confirm_action
     self.refuseAction = refuse_action
+    self.use_submenu = use_submenu
     self.menuWidth = menu_width or 160
     self.filter = filter or function(_) return true end
     self.charList = self:load_chars(char_list)
     self.optionsList = self:generate_options()
     if #self.optionsList<self.MAX_ELEMENTS then self.MAX_ELEMENTS = #self.optionsList end
+    if self.use_submenu == nil then self.use_submenu = true end
 
     self.choice = nil -- result
 
@@ -57,6 +60,7 @@ function TeamSelectMenu:initialize(title, char_list, filter, confirm_action, ref
     self:updateSummary()
 end
 
+--- Performs the final adjustments and creates the actual menu object.
 function TeamSelectMenu:createMenu()
     local origin = RogueElements.Loc(16,16)
     local option_array = luanet.make_array(RogueEssence.Menu.MenuElementChoice, self.optionsList)
@@ -99,14 +103,31 @@ function TeamSelectMenu:generate_options()
     return options
 end
 
---- Closes the menu and calls the menu's confirmation callback.
---- The result must be retrieved by accessing the choice variable of this object, which will hold
---- the chosen character.
+--- Calls the menu's confirmation callback and stores the chosen character in the choice variable of this object.
+--- If the menu is set to use the sub_menu, the aforementioned process will be performed only if the sub_menu
+--- returns true.
 --- @param index number the chosen character.
 function TeamSelectMenu:choose(index)
-    self.choice = self.charList[index]
-    _MENU:RemoveMenu()
-    self.confirmAction(self.choice)
+    local callback = function(ret)
+        if ret==true then
+            self.choice = self.charList[index]
+            self.confirmAction(self.choice)
+        end
+        _MENU:RemoveMenu()
+    end
+
+    if self.use_submenu then
+        self:callSubMenu(callback)
+    else
+        self.choice = self.charList[index]
+        self.confirmAction(self.choice)
+    end
+end
+
+--- Summons a ``TeamSelectSubMenu`` with the provided callback.
+--- @param callback function the function that will be called by the menu upon running confirm or cancel operations. It will have a boolean passed as a parameter.
+function TeamSelectMenu:callSubMenu(callback)
+    _MENU:AddMenu(TeamSelectSubMenu:new(self, function() callback(true) end, function() callback(false) end).menu, true)
 end
 
 --- Updates the summary window.
@@ -115,8 +136,10 @@ function TeamSelectMenu:updateSummary()
 end
 
 
+-------------------------------------------------------------------------------------------
 --- Menu for selecting one or more characters from a specific list of ``RogueEssence.Dungeon.Character`` objects.
 TeamMultiSelectMenu = Class("TeamMultiSelectMenu", TeamSelectMenu)
+-------------------------------------------------------------------------------------------
 
 --- Creates a new ``TeamMultiSelectMenu`` instance using the provided list and callbacks.
 --- This function throws an error if the parameter ``char_list`` contains less than 1 entries.
@@ -128,14 +151,13 @@ TeamMultiSelectMenu = Class("TeamMultiSelectMenu", TeamSelectMenu)
 --- @param menu_width number the width of this window. Default is 160.
 function TeamMultiSelectMenu:initialize(title, char_list, filter, confirm_action, refuse_action, menu_width)
     self.multiConfirmAction = function(list)
-        _MENU:RemoveMenu()
         self.choice = self:multiConfirm(list)
         self.confirmAction(self.choice)
     end
     TeamSelectMenu.initialize(self, title, char_list, filter, confirm_action, refuse_action, menu_width)
 end
 
---- Creates the menu
+--- Performs the final adjustments and creates the actual menu object.
 function TeamMultiSelectMenu:createMenu()
     local valid = self:count_valid()
     local origin = RogueElements.Loc(16,16)
@@ -154,12 +176,24 @@ function TeamMultiSelectMenu:count_valid()
     return count
 end
 
---- Closes the menu and calls the menu's confirmation callback.
---- The result must be retrieved by accessing the choice variable of this object, which will hold
---- the chosen character as the single element of a table array.
+--- Calls the menu's confirmation callback and stores the table array of chosen charactes in the choice
+--- variable of this object.
+--- If the menu is set to use the sub_menu, the aforementioned process will be performed only if the sub_menu
+--- returns true.
 --- @param index number the chosen character, wrapped inside of a single element table array.
 function TeamMultiSelectMenu:choose(index)
-    self.multiConfirmAction({index-1})
+    local callback = function(ret)
+        if ret==true then
+            self.multiConfirmAction({index-1})
+        end
+        _MENU:RemoveMenu()
+    end
+
+    if self.use_submenu then
+        self:callSubMenu(callback)
+    else
+        self.multiConfirmAction({index-1})
+    end
 end
 
 --- Extract the list of selected slots.
@@ -175,19 +209,53 @@ function TeamMultiSelectMenu:multiConfirm(list)
 end
 
 
+-------------------------------------------------------------------------------------------
+--- Menu for choosing what to do with the chosen character.
+TeamSelectSubMenu = Class("TeamSelectSubMenu")
+-------------------------------------------------------------------------------------------
+
+--- Creates a new ``TeamSelectSubMenu`` instance using the provided data and callbacks.
+--- @param parent table a ``TeamSelectMenu``
+--- @param confirm_action function the function called when the first option is pressed.
+--- @param refuse_action function the function called when the third option or the cancel or menu buttons are pressed.
+function TeamSelectSubMenu:initialize(parent, confirm_action, refuse_action)
+    self.parent = parent
+    local x, y, w = parent.menu.Bounds.Right, parent.menu.Bounds.Top, 64
+    local summary_action = function()
+        self:openSummary()
+    end
+    
+    local choices = {
+        {STRINGS:FormatKey("MENU_CHOOSE"),       true, confirm_action},
+        {STRINGS:FormatKey("MENU_TEAM_SUMMARY"), true, summary_action},
+        {STRINGS:FormatKey("MENU_EXIT"),         true, refuse_action}
+    }
+    self.menu = RogueEssence.Menu.ScriptableSingleStripMenu(x, y, w, choices, 0, refuse_action)
+end
+
+--- Opens the ``RogueEssence.Menu.MemberFeaturesMenu`` of the character selected in the parent menu.
+function TeamSelectSubMenu:openSummary()
+    _MENU:AddMenu(RogueEssence.Menu.MemberFeaturesMenu(self.parent.menu.CurrentChoiceTotal, false, false), false)
+end
 
 
 
+
+-------------------------------------------------------------------------------------------
 --- Creates a basic ``TeamSelectMenu`` instance using the provided list and callbacks, then runs it and returns its output.
 --- @param title string the title this window will have
 --- @param char_list table an array, list or lua array table containing ``RogueEssence.Dungeon.Character`` objects.
 --- @param filter function a function that takes a ``RogueEssence.Dungeon.Character`` object and returns a boolean. Any character that does not pass this check will have its option disabled in the menu. Defaults to ``return true``.
+--- @param use_submenu boolean whether or not to call the ``TeamSelectSubMenu`` before returning. Defaults to true.
 --- @return userdata the selected character if one was chosen in the menu; ``nil`` otherwise.
-function TeamSelectMenu.run(title, char_list, filter)
+function TeamSelectMenu.run(title, char_list, filter, use_submenu)
     local ret
-    local choose = function(char) ret = char end
+    local choose = function(char)
+        ret = char
+        _MENU:RemoveMenu()
+    end
     local refuse = function() _MENU:RemoveMenu() end
-    local menu = TeamSelectMenu:new(title, char_list, filter, choose, refuse)
+    local menu = TeamSelectMenu:new(title, char_list, filter, choose, refuse, use_submenu)
     UI:SetCustomMenu(menu.menu)
     UI:WaitForChoice()
     return ret
@@ -195,13 +263,15 @@ end
 
 --- Creates a ``TeamSelectMenu`` instance that allows a choice between the current party members.
 --- @param filter function a function that takes a ``RogueEssence.Dungeon.Character`` object and returns a boolean. Any character that does not pass this check will have its option disabled in the menu. Defaults to ``return true``.
+--- @param use_submenu boolean whether or not to call the ``TeamSelectSubMenu`` before returning. Defaults to true.
 --- @return userdata the selected character if one was chosen in the menu; ``nil`` otherwise.
-function TeamSelectMenu.runPartyMenu(filter)
+function TeamSelectMenu.runPartyMenu(filter, use_submenu)
     local char_list = _DATA.Save.ActiveTeam.Players
 
-    return TeamSelectMenu.run(STRINGS:FormatKey("MENU_TEAM_TITLE"), char_list, filter)
+    return TeamSelectMenu.run(STRINGS:FormatKey("MENU_TEAM_TITLE"), char_list, filter, use_submenu)
 end
 
+-------------------------------------------------------------------------------------------
 --- Creates a basic ``TeamMultiSelectMenu`` instance using the provided list and callbacks, then runs it and returns its output.
 --- @param title string the title this window will have
 --- @param char_list table an array, list or lua array table containing ``RogueEssence.Dungeon.Character`` objects.
@@ -209,7 +279,10 @@ end
 --- @return table the list of selected characters if at least one was chosen in the menu; ``nil`` otherwise.
 function TeamMultiSelectMenu.runMultiMenu(title, char_list, filter)
     local ret = {}
-    local choose = function(chars) ret = chars end
+    local choose = function(chars)
+        ret = chars
+        _MENU:RemoveMenu()
+    end
     local refuse = function() _MENU:RemoveMenu() end
     local menu = TeamMultiSelectMenu:new(title, char_list, filter, choose, refuse)
     UI:SetCustomMenu(menu.menu)

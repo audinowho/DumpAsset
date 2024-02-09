@@ -390,7 +390,7 @@ SV.team_dark =
   --3 = Returned, needs mission
   --4 = Mission complete
   --5 = Ended
-  GoalStatus = 0,
+  Status = 0,
   SpokenTo = false,
   DaysSinceCheckpoint = 0,
   

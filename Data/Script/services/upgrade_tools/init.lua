@@ -365,6 +365,14 @@ function UpgradeTools:OnUpgrade()
 	  Cycle = 0
 	}
   end
+  
+  if SV.team_dark.Status == nil then
+    if SV.team_psychic.Status == 3 then
+	  SV.team_dark.Status = 1
+	else
+      SV.team_dark.Status = 0
+	end
+  end
 
   if SV.team_dragon == nil then
 	SV.team_dragon =

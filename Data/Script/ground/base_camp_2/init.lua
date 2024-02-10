@@ -1,6 +1,4 @@
 require 'common'
-require 'menu.InventorySelectMenu'
-require 'menu.TeamSelectMenu'
 
 local base_camp_2_tutor = require 'ground.base_camp_2.base_camp_2_tutor'
 local base_camp_2_juice = require 'ground.base_camp_2.base_camp_2_juice'

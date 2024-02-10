@@ -1,7 +1,8 @@
 require 'common'
 require 'menu.juice.JuiceShopMenu'
 require 'menu.juice.SpecialtiesMenu'
-require 'menu.TeamSelectMenu'
+require 'menu.team.AssemblySelectMenu'
+require 'menu.team.TeamSelectMenu'
 
 local base_camp_2_juice = {}
 local MapStrings = {}
@@ -584,6 +585,7 @@ base_camp_2_juice.specialties = {
 	{ 
 		Name = "+HP EV Dish",
 		Desc = "Flavor Text here. Increases HP.",
+		Sizes =
 		{
 			{ Name = "Small", Desc = "Boosts HP EVs by 8.", Effect = { HP = 8 } },
 			{ Name = "Medium", Desc = "Boosts HP EVs by 16.", Effect = { HP = 16 } },
@@ -869,7 +871,8 @@ function base_camp_2_juice.Drink_Specialties_Flow()
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Who_Multi'], STRINGS:LocalKeyString(26)))
 	  --change this to pick multiple team members.  You may want to make an AssemblySelectMenu instead...
 	  --the filter determines whether the menu option is enabled or not.  We disable choosing those who cannot be boosted further
-	  local members = TeamMultiSelectMenu.runMultiPartyMenu(function(target) return base_camp_2_juice.Can_Eat(target, total_boost) end)
+	  local members = AssemblyMultiSelectMenu.runMultiMenu(function(target) return base_camp_2_juice.Can_Eat(target, total_boost) end)
+
 	  if #members > 0 then
 		local tribute = base_camp_2_juice.Compute_Total_Tribute(target, total_boost)
 

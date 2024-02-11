@@ -11,6 +11,7 @@ COMMON.ESSENTIALS = {
   { Index = "berry_leppa", Amount = 0, Price = 80},
   { Index = "berry_lum", Amount = 0, Price = 120},
   { Index = "seed_reviver", Amount = 0, Price = 500},
+  { Index = "apricorn_plain", Amount = 0, Price = 400},
   { Index = "apricorn_plain", Amount = 0, Price = 400}
 }
   
@@ -21,7 +22,7 @@ COMMON.UTILITIES = {
   { Index = "seed_sleep", Amount = 0, Price = 80},
   { Index = "seed_blast", Amount = 0, Price = 200},
   { Index = "seed_blinker", Amount = 0, Price = 80},
-  { Index = "seed_pure", Amount = 0, Price = 350},
+  { Index = "seed_vile", Amount = 0, Price = 80},
   { Index = "seed_ice", Amount = 0, Price = 80},
   { Index = "seed_decoy", Amount = 0, Price = 80},
   { Index = "seed_last_chance", Amount = 0, Price = 150},

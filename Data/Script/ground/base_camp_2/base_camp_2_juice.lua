@@ -170,12 +170,12 @@ base_camp_2_juice.boost_tbl["seed_ban"] = { EXP = 100 }
 
 base_camp_2_juice.boost_tbl["boost_nectar"] = { HP = 1, Atk = 1, Def = 1, SpAtk = 1, SpDef = 1, Speed = 1 }
 
-base_camp_2_juice.boost_tbl["boost_hp_up"] = { HP = 4 }
-base_camp_2_juice.boost_tbl["boost_protein"] = { Atk = 4 }
-base_camp_2_juice.boost_tbl["boost_iron"] = { Def = 4 }
-base_camp_2_juice.boost_tbl["boost_calcium"] = { SpAtk = 4 }
-base_camp_2_juice.boost_tbl["boost_zinc"] = { SpDef = 4 }
-base_camp_2_juice.boost_tbl["boost_carbos"] = { Speed = 4 }
+base_camp_2_juice.boost_tbl["boost_hp_up"] = { HP = 8 }
+base_camp_2_juice.boost_tbl["boost_protein"] = { Atk = 8 }
+base_camp_2_juice.boost_tbl["boost_iron"] = { Def = 8 }
+base_camp_2_juice.boost_tbl["boost_calcium"] = { SpAtk = 8 }
+base_camp_2_juice.boost_tbl["boost_zinc"] = { SpDef = 8 }
+base_camp_2_juice.boost_tbl["boost_carbos"] = { Speed = 8 }
 
 base_camp_2_juice.boost_tbl["medicine_amber_tear"] = { HP = 1, Atk = 1, Def = 1, SpAtk = 1, SpDef = 1, Speed = 1 }
 
@@ -184,6 +184,9 @@ base_camp_2_juice.boost_tbl["herb_power"] = { NegateStat = true }
 base_camp_2_juice.boost_tbl["herb_white"] = { NegateStat = true }
 
 base_camp_2_juice.boost_tbl["food_grimy"] = { NegateExp = true }
+
+
+
 
 
 function base_camp_2_juice.getTotalBoost(cart, member)
@@ -207,55 +210,96 @@ function base_camp_2_juice.getTotalBoost(cart, member)
 		
 		if boost ~= nil then
 			if boost.GummiEffect ~= nil then
-				local main_boost = 0
-				local all_boost = 0
 				
 				local matchup = PMDC.Dungeon.PreTypeEvent.CalculateTypeMatchup(boost.GummiEffect, form.Element1)
 				matchup = matchup + PMDC.Dungeon.PreTypeEvent.CalculateTypeMatchup(boost.GummiEffect, form.Element2)
 				
+				local main_stat = ""
+				if boost.HP ~= nil then
+					main_stat = "HP"
+				end
+				if boost.Atk ~= nil then
+					main_stat = "Atk"
+				end
+				if boost.Def ~= nil then
+					main_stat = "Def"
+				end
+				if boost.SpAtk ~= nil then
+					main_stat = "SpAtk"
+				end
+				if boost.SpDef ~= nil then
+					main_stat = "SpDef"
+				end
+				if boost.Speed ~= nil then
+					main_stat = "Speed"
+				end
+				
+				local stats = {}
+				
+				local main_boost = 0
+				local all_boost = 0
+				
+				
 				if boost.GummiEffect == form.Element1 or boost.GummiEffect == form.Element2 then
 					main_boost = 2
-					all_boost = 2
+					all_boost = 1
+					
+					table.insert(stats, "HP")
+					table.insert(stats, "Atk")
+					table.insert(stats, "Def")
+					table.insert(stats, "SpAtk")
+					table.insert(stats, "SpDef")
+					table.insert(stats, "Speed")
 				elseif matchup >= PMDC.Dungeon.PreTypeEvent.S_E_2 then
 					main_boost = 2
 					all_boost = 1
+					
+					top_stats = {}
+					if main_stat ~= "HP" then
+					  table.insert(top_stats, { RogueEssence.Data.Stat.HP, "HP"})
+					end
+					if main_stat ~= "Atk" then
+					  table.insert(top_stats, { RogueEssence.Data.Stat.Attack, "Atk"})
+					end
+					if main_stat ~= "Def" then
+					  table.insert(top_stats, { RogueEssence.Data.Stat.Defense, "Def"})
+					end
+					if main_stat ~= "SpAtk" then
+					  table.insert(top_stats, { RogueEssence.Data.Stat.MAtk, "SpAtk"})
+					end
+					if main_stat ~= "SpDef" then
+					  table.insert(top_stats, { RogueEssence.Data.Stat.MDef, "SpDef"})
+					end
+					if main_stat ~= "Speed" then
+					  table.insert(top_stats, { RogueEssence.Data.Stat.Speed, "Speed"})
+					end
+					
+
+					table.sort(top_stats, 
+					  function(a, b)
+					    return form:GetBaseStat(a[1]) > form:GetBaseStat(b[1])
+					  end
+					)
+					
+					table.insert(stats, top_stats[1][2])
+					table.insert(stats, top_stats[2][2])
+					table.insert(stats, main_stat)
 				elseif matchup == PMDC.Dungeon.PreTypeEvent.NRM_2 then
 					main_boost = 2
 					all_boost = 0
+					table.insert(stats, main_stat)
 				elseif matchup > PMDC.Dungeon.PreTypeEvent.N_E_2 then
 					main_boost = 1
 					all_boost = 0
+					table.insert(stats, main_stat)
 				end
 				
-				if boost.HP ~= nil then
-					total_boost.HP = total_boost.HP + main_boost
-				else
-					total_boost.HP = total_boost.HP + all_boost
-				end
-				if boost.Atk ~= nil then
-					total_boost.Atk = total_boost.Atk + main_boost
-				else
-					total_boost.Atk = total_boost.Atk + all_boost
-				end
-				if boost.Def ~= nil then
-					total_boost.Def = total_boost.Def + main_boost
-				else
-					total_boost.Def = total_boost.Def + all_boost
-				end
-				if boost.SpAtk ~= nil then
-					total_boost.SpAtk = total_boost.SpAtk + main_boost
-				else
-					total_boost.SpAtk = total_boost.SpAtk + all_boost
-				end
-				if boost.SpDef ~= nil then
-					total_boost.SpDef = total_boost.SpDef + main_boost
-				else
-					total_boost.SpDef = total_boost.SpDef + all_boost
-				end
-				if boost.Speed ~= nil then
-					total_boost.Speed = total_boost.Speed + main_boost
-				else
-					total_boost.Speed = total_boost.Speed + all_boost
+				for i, stat in ipairs(stats) do
+				  if stat == main_stat then
+				    total_boost[stat] = total_boost[stat] + main_boost
+				  else
+				    total_boost[stat] = total_boost[stat] + all_boost
+				  end
 				end
 			else
 				if boost.EXP ~= nil then
@@ -476,7 +520,7 @@ function base_camp_2_juice.Drink_Flow(boost, member)
 			UI:WaitForChoice()
 		else
 			--increase sound?
-			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_STAT_BOOST"):ToLocal(), member:GetDisplayName(true), changed_stats[1], changed_amounts[1]))
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_STAT_BOOST"):ToLocal(), member:GetDisplayName(true), RogueEssence.Text.ToLocal(changed_stats[1], nil), changed_amounts[1]))
 		end
 		any_boost = true
 	elseif any_stat_dropped then
@@ -487,7 +531,7 @@ function base_camp_2_juice.Drink_Flow(boost, member)
 			UI:WaitForChoice()
 		else
 			--drop sound?
-			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_STAT_DROP"):ToLocal(), member:GetDisplayName(true), changed_stats[1], changed_amounts[1] * -1))
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_STAT_DROP"):ToLocal(), member:GetDisplayName(true), RogueEssence.Text.ToLocal(changed_stats[1], nil), changed_amounts[1] * -1))
 		end
 		any_boost = true
 	end

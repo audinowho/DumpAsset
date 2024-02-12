@@ -1,15 +1,10 @@
 ﻿{
-"Version": "0.7.24.0",
+"Version": "0.7.25.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Flyaway Cliffs",
-"LocalTexts": {
-"de": "Ausflugsklippen",
-"es": "Acantilado Nido",
-"it": "Colline del Volo",
-"zh-hans": "飞翔悬崖"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -7269,13 +7264,8 @@
 ]
 },
 "Name": {
-"DefaultText": "Flyaway Cliffs\\n{0}F",
-"LocalTexts": {
-"de": "Ausflugsklippen\\nE{0}",
-"es": "Acantilado Nido\\nP{0}",
-"it": "Colline del Volo\\nP{0}",
-"zh-hans": "飞翔悬崖\\n{0}F"
-}
+"DefaultText": "Flyaway Cliffs\n{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -7300,7 +7290,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.24.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -9441,7 +9431,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.24.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.StairsModGenState"
 }
 ]
@@ -9510,13 +9500,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Secret Room",
-"LocalTexts": {
-"de": "Geheimer Raum",
-"es": "Piso Secreto",
-"pt": "Sala Secreta",
-"it": "Stanza Segreta",
-"zh-hans": "秘密之间"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -9620,6 +9604,14 @@
 "Y": 4
 }
 ],
+"Spawn": {
+"$type": "RogueElements.MultiStepSpawner`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueElements.IStepSpawner`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueElements.IStepSpawner`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements]], RogueElements",
+"$values": [
+{
 "Spawn": {
 "$type": "RogueEssence.LevelGen.BoxSpawner`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
 "BoxID": "box_heavy",
@@ -9741,6 +9733,17 @@
 "Max": 3
 },
 "Amount": {
+"Min": 1,
+"Max": 1
+}
+}
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
 "Min": 1,
 "Max": 1
 }
@@ -9869,13 +9872,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -12314,13 +12311,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -14775,13 +14766,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }

@@ -1,15 +1,10 @@
 ﻿{
-"Version": "0.7.24.0",
+"Version": "0.7.25.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Fertile Valley",
-"LocalTexts": {
-"de": "Fruchtbares Tal",
-"es": "Valle Fértil",
-"it": "Valle Fertile",
-"zh-hans": "丰饶山谷"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -5636,13 +5631,8 @@
 ]
 },
 "Name": {
-"DefaultText": "Fertile Valley\\nB{0}F",
-"LocalTexts": {
-"de": "Fruchtbares Tal\\nU{0}",
-"es": "Valle Fértil\\nP-{0}",
-"it": "Valle Fertile\\nP-{0}",
-"zh-hans": "丰饶山谷\\nB{0}F"
-}
+"DefaultText": "Fertile Valley\nB{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -5667,7 +5657,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.24.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -5855,7 +5845,7 @@
 "Spawns": [
 {
 "Spawn": {
-"ID": "apricorn_plain",
+"ID": "apricorn_blue",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,
@@ -5883,6 +5873,20 @@
 },
 {
 "Spawn": {
+"ID": "apricorn_brown",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 5,
+"Range": {
+"Min": 0,
+"Max": 8
+}
+},
+{
+"Spawn": {
 "ID": "apricorn_purple",
 "Cursed": false,
 "HiddenValue": "",
@@ -5897,7 +5901,35 @@
 },
 {
 "Spawn": {
-"ID": "apricorn_brown",
+"ID": "apricorn_red",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 5,
+"Range": {
+"Min": 0,
+"Max": 8
+}
+},
+{
+"Spawn": {
+"ID": "apricorn_white",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 5,
+"Range": {
+"Min": 0,
+"Max": 8
+}
+},
+{
+"Spawn": {
+"ID": "apricorn_yellow",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,
@@ -5927,7 +5959,7 @@
 "SpawnRates": {
 "nodes": [
 {
-"Item": 3,
+"Item": 30,
 "Range": {
 "Min": 0,
 "Max": 8
@@ -7183,7 +7215,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.24.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.StairsModGenState"
 }
 ]
@@ -10588,13 +10620,8 @@
 ]
 },
 "Name": {
-"DefaultText": "Muddy Valley\\nB{0}F",
-"LocalTexts": {
-"de": "Schlammiges Tal\\nU{0}",
-"es": "Valle Lodoso\\nP-{0}",
-"it": "Valle Fangosa\\nP-{0}",
-"zh-hans": "泥泞山谷\\nB{0}F"
-}
+"DefaultText": "Muddy Valley\nB{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -10619,7 +10646,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.24.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -11670,13 +11697,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Secret Room",
-"LocalTexts": {
-"de": "Geheimer Raum",
-"es": "Piso Secreto",
-"pt": "Sala Secreta",
-"it": "Stanza Segreta",
-"zh-hans": "秘密之间"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -11780,6 +11801,14 @@
 "Y": 5
 }
 ],
+"Spawn": {
+"$type": "RogueElements.MultiStepSpawner`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueElements.IStepSpawner`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueElements.IStepSpawner`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements]], RogueElements",
+"$values": [
+{
 "Spawn": {
 "$type": "RogueEssence.LevelGen.BoxSpawner`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
 "BoxID": "box_heavy",
@@ -11905,6 +11934,17 @@
 "Max": 1
 }
 }
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 1
+}
+}
 }
 }
 },
@@ -11991,13 +12031,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -14436,13 +14470,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -16897,13 +16925,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -19370,13 +19392,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -21815,13 +21831,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -24276,13 +24286,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }

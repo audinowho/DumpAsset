@@ -82,12 +82,12 @@ base_camp_2_juice.boost_tbl = { }
 --{ Level = 0, EXP = 100, HP = 0, Atk = 0, Def = 0, SpAtk = 0, SpDef = 0, Speed = 0, NegateExp = false, NegateStat = false, GummiEffect = nil}
 base_camp_2_juice.boost_tbl["food_apple"] = { EXP = 100 }
 base_camp_2_juice.boost_tbl["food_apple_big"] = { EXP = 300 }
-base_camp_2_juice.boost_tbl["food_apple_huge"] = { EXP = 1000 }
-base_camp_2_juice.boost_tbl["food_apple_perfect"] = { EXP = 5000 }
-base_camp_2_juice.boost_tbl["food_apple_golden"] = { EXP = 25000 }
-base_camp_2_juice.boost_tbl["food_banana"] = { EXP = 500 }
-base_camp_2_juice.boost_tbl["food_banana_big"] = { EXP = 2500 }
-base_camp_2_juice.boost_tbl["food_banana_golden"] = { EXP = 100000 }
+base_camp_2_juice.boost_tbl["food_apple_huge"] = { EXP = 2500 }
+base_camp_2_juice.boost_tbl["food_apple_perfect"] = { EXP = 25000 }
+base_camp_2_juice.boost_tbl["food_apple_golden"] = { Level = 100 }
+base_camp_2_juice.boost_tbl["food_banana"] = { EXP = 1000 }
+base_camp_2_juice.boost_tbl["food_banana_big"] = { EXP = 5000 }
+base_camp_2_juice.boost_tbl["food_banana_golden"] = { Level = 100 }
 
 base_camp_2_juice.boost_tbl["berry_oran"] = { HP = 1 }
 base_camp_2_juice.boost_tbl["berry_leppa"] = { HP = 1 }

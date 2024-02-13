@@ -111,16 +111,11 @@ function moonlit_end.Cutscene_Trigger_Touch(obj, activator)
   
 
   local mon_id = RogueEssence.Dungeon.MonsterID("cresselia", 0, "normal", Gender.Genderless)
-  local player = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 30, "", 0)
-  player.MetAt = _ZONE.CurrentGround:GetColoredName()
-  player.MetLoc = RogueEssence.Dungeon.ZoneLoc(_ZONE.CurrentZoneID, _ZONE.CurrentMapID)
-  _DATA.Save.ActiveTeam.Assembly:Add(player)
-  SOUND:PlayFanfare("Fanfare/JoinTeam")
-  _DATA.Save:RegisterMonster(mon_id.Species)
-  _DATA.Save:RogueUnlockMonster(mon_id.Species)
-
-  UI:ResetSpeaker()
-  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT"):ToLocal(), cresselia:GetDisplayName(), _DATA.Save.ActiveTeam.Name))
+  local recruit = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 30, "", 0)
+  local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
+  recruit.ActionEvents:Add(talk_evt)
+	
+  COMMON.JoinTeamWithFanfare(recruit, false)
   
   SOUND:FadeOutBGM()
   GAME:FadeOut(false, 30)
@@ -226,16 +221,11 @@ function moonlit_end.PostBattle_Success()
   
 
   local mon_id = RogueEssence.Dungeon.MonsterID("cresselia", 0, "normal", Gender.Genderless)
-  local player = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 30, "", 0)
-  player.MetAt = _ZONE.CurrentGround:GetColoredName()
-  player.MetLoc = RogueEssence.Dungeon.ZoneLoc(_ZONE.CurrentZoneID, _ZONE.CurrentMapID)
-  _DATA.Save.ActiveTeam.Assembly:Add(player)
-  SOUND:PlayFanfare("Fanfare/JoinTeam")
-  _DATA.Save:RegisterMonster(mon_id.Species)
-  _DATA.Save:RogueUnlockMonster(mon_id.Species)
-
-  UI:ResetSpeaker()
-  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT"):ToLocal(), cresselia:GetDisplayName(), _DATA.Save.ActiveTeam.Name))
+  local recruit = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 30, "", 0)
+  local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
+  recruit.ActionEvents:Add(talk_evt)
+	
+  COMMON.JoinTeamWithFanfare(recruit, false)
   
   SOUND:FadeOutBGM()
   GAME:FadeOut(false, 30)

@@ -167,9 +167,11 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
 	
     -- if not in rogue mode, have them join the team
     local mon_id = RogueEssence.Dungeon.MonsterID("shaymin", 0, "normal", Gender.Genderless)
-	local recruit = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, "", 0)
-	COMMON.JoinTeamWithFanfare(recruit, false)
-	
+    local recruit = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, "", 0)
+    local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
+    recruit.ActionEvents:Add(talk_evt)
+    COMMON.JoinTeamWithFanfare(recruit, false)
+
     GAME:WaitFrames(30)
   
     UI:SetSpeaker(shaymin)

@@ -124,6 +124,7 @@ Translation:
 [FR] Discord:veemaru Mathieu "Maru" V
 [IT] Discord:digital_hazard Digital Hazard
 [IT] Discord:saiphdeer Saiph
+[JA] https://www.pixiv.net/users/75745630 ｷﾇ
 [KO] https://www.reddit.com/user/Bashful_Barry/ Barry
 [PT] https://twitter.com/SquishyTheMew Squishy
 [ZH] Discord:lazychehra Chehra

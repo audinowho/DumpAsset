@@ -179,9 +179,9 @@ base_camp_2_juice.boost_tbl["boost_carbos"] = { Speed = 8 }
 
 base_camp_2_juice.boost_tbl["medicine_amber_tear"] = { HP = 1, Atk = 1, Def = 1, SpAtk = 1, SpDef = 1, Speed = 1 }
 
-base_camp_2_juice.boost_tbl["herb_mental"] = { NegateStat = true }
-base_camp_2_juice.boost_tbl["herb_power"] = { NegateStat = true }
-base_camp_2_juice.boost_tbl["herb_white"] = { NegateStat = true }
+base_camp_2_juice.boost_tbl["herb_mental"] = { NegateStatA = true }
+base_camp_2_juice.boost_tbl["herb_power"] = { NegateStatB = true }
+base_camp_2_juice.boost_tbl["herb_white"] = { NegateStatC = true }
 
 base_camp_2_juice.boost_tbl["food_grimy"] = { NegateExp = true }
 
@@ -197,7 +197,9 @@ function base_camp_2_juice.getTotalBoost(cart, member)
 	local total_boost = { EXP = 0, Level = 0, HP = 0, Atk = 0, Def = 0, SpAtk = 0, SpDef = 0, Speed = 0 }
 	
 	local negate_exp = false
-	local negate_stat = false
+	local negate_a = false
+	local negate_b = false
+	local negate_c = false
 	
 	for ii = 1, #cart, 1 do
 		local item
@@ -331,24 +333,49 @@ function base_camp_2_juice.getTotalBoost(cart, member)
 			if boost.NegateExp then
 				negate_exp = true
 			end
-			if boost.NegateStat then
-				negate_stat = true
+			if boost.NegateStatA then
+				negate_a = true
+			end
+			if boost.NegateStatB then
+				negate_b = true
+			end
+			if boost.NegateStatC then
+				negate_c = true
 			end
 		end
 	end
 	
-	if negate_exp then
-		total_boost.EXP = total_boost.EXP * -1
-		total_boost.Level = total_boost.Level * -1
-	end
+	if negate_exp and negate_a and negate_b and negate_c then
+		total_boost.EXP = 0
+		total_boost.Level = -100
+		total_boost.HP = -256
+		total_boost.Atk = -256
+		total_boost.Def = -256
+		total_boost.SpAtk = -256
+		total_boost.SpDef = -256
+		total_boost.Speed = -256
+	else
 	
-	if negate_stat then
-		total_boost.HP = total_boost.HP * -1
-		total_boost.Atk = total_boost.Atk * -1
-		total_boost.Def = total_boost.Def * -1
-		total_boost.SpAtk = total_boost.SpAtk * -1
-		total_boost.SpDef = total_boost.SpDef * -1
-		total_boost.Speed = total_boost.Speed * -1
+		if negate_exp then
+			total_boost.EXP = total_boost.EXP * -1
+			total_boost.Level = total_boost.Level * -1
+		end
+		
+		if negate_a and negate_b and negate_c then
+			total_boost.HP = -256
+			total_boost.Atk = -256
+			total_boost.Def = -256
+			total_boost.SpAtk = -256
+			total_boost.SpDef = -256
+			total_boost.Speed = -256
+		elseif negate_a or negate_b or negate_c then
+			total_boost.HP = total_boost.HP * -1
+			total_boost.Atk = total_boost.Atk * -1
+			total_boost.Def = total_boost.Def * -1
+			total_boost.SpAtk = total_boost.SpAtk * -1
+			total_boost.SpDef = total_boost.SpDef * -1
+			total_boost.Speed = total_boost.Speed * -1
+		end
 	end
 	
 	return total_boost

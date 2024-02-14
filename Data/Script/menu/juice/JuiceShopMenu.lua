@@ -173,6 +173,7 @@ function DrinkPreviewSummary:initialize(left, top, right, bottom, character, ing
     local x_pos3 = (self.window.Bounds.Width + GraphicsManager.MenuBG.TileWidth)//2 +3
     local x_pos4 = self.window.Bounds.Width - GraphicsManager.MenuBG.TileWidth * 2
     self.growth = _DATA:GetGrowth(_DATA:GetMonster(character.BaseForm.Species).EXPTable)
+    self.lvl_limit = self.growth.EXPTable.Length
 
     self.window.Elements:Add(RogueEssence.Menu.MenuText(character:GetDisplayName(false), RogueElements.Loc(x_pos, GraphicsManager.MenuBG.TileHeight)))
 
@@ -181,8 +182,8 @@ function DrinkPreviewSummary:initialize(left, top, right, bottom, character, ing
     self.window.Elements:Add(self.level_text)
 
     local exp_text = STRINGS:FormatKey("MENU_TEAM_EXP_SHORT")..": "
-    PrintInfo(self.data.Level)
-    local max = self.growth:GetExpToNext(self.data.Level)
+    local max = 0
+    if self.data.Level<self.lvl_limit then max = self.growth:GetExpToNext(self.data.Level) end
     local x_offset = GraphicsManager.TextFont:SubstringWidth(exp_text)
     local ratio = 1
     if max ~= 0 then ratio = self.data.EXP/max end
@@ -282,16 +283,21 @@ function DrinkPreviewSummary:updateData()
             self.data.EXP = 0
         end
     else
-        local toLvl = self.growth:GetExpToNext(self.data.Level)
-        while self.data.EXP>=toLvl and self.data.Level<100 do
-            self.data.Level = self.data.Level+1
-            self.data.EXP   = self.data.EXP - toLvl
-            toLvl = self.growth:GetExpToNext(self.data.Level)
+        if self.data.Level<self.lvl_limit then
+            local toLvl = self.growth:GetExpToNext(self.data.Level)
+            while self.data.EXP>=toLvl and self.data.Level<self.lvl_limit do
+                self.data.Level = self.data.Level+1
+                self.data.EXP   = self.data.EXP - toLvl
+                if self.data.Level<self.lvl_limit then
+                    toLvl = self.growth:GetExpToNext(self.data.Level)
+                end
+            end
         end
-        if self.data.Level==100 then
+        if self.data.Level==self.lvl_limit then
             self.data.EXP = 0
         end
     end
+
     if self.selection_data.EXP<0 then
         while self.selection_data.EXP<0 and self.selection_data.Level>1 do
             self.selection_data.Level = self.selection_data.Level-1
@@ -302,13 +308,17 @@ function DrinkPreviewSummary:updateData()
             self.selection_data.EXP = 0
         end
     else
-        local toLvl = self.growth:GetExpToNext(self.selection_data.Level)
-        while self.selection_data.EXP>=toLvl and self.selection_data.Level<100 do
-            self.selection_data.Level = self.selection_data.Level+1
-            self.selection_data.EXP   = self.selection_data.EXP - toLvl
-            toLvl = self.growth:GetExpToNext(self.selection_data.Level)
+        if self.selection_data.Level<self.lvl_limit then
+            local toLvl = self.growth:GetExpToNext(self.selection_data.Level)
+            while self.selection_data.EXP>=toLvl and self.selection_data.Level<self.lvl_limit do
+                self.selection_data.Level = self.selection_data.Level+1
+                self.selection_data.EXP   = self.selection_data.EXP - toLvl
+                if self.selection_data.Level<self.lvl_limit then
+                    toLvl = self.growth:GetExpToNext(self.selection_data.Level)
+                end
+            end
         end
-        if self.selection_data.Level==100 then
+        if self.selection_data.Level==self.lvl_limit then
             self.selection_data.EXP = 0
         end
     end
@@ -364,7 +374,7 @@ function DrinkPreviewSummary:updateMenu()
         else return def end
     end
     local getTextColor = function(change) return getColor(change, Color.Cyan, Color.White, Color.Red) end
-    local getAdjustColor = function(change) return getColor(change, Color.Lime, Color.MediumPurple, Color.Red) end
+    local getAdjustColor = function(change) return getColor(change, Color.Lime, Color.White, Color.Red) end
 
     -- compute level and exp difference for coloring
     local level_change = self.data.Level - self.startData.Level
@@ -418,12 +428,14 @@ function DrinkPreviewSummary:updateMenu()
     local x_offset = GraphicsManager.TextFont:SubstringWidth(exp_text)
     local max_len = self.window.Bounds.Width - GraphicsManager.MenuBG.TileWidth * 4 - x_offset
 
-    local max = self.growth:GetExpToNext(self.data.Level)
+    local max = 0
+    if self.data.Level<self.lvl_limit then max = self.growth:GetExpToNext(self.data.Level) end
     local ratio = 1
     if max ~= 0 then ratio = self.data.EXP/max end
     local len = max_len * ratio
 
-    local max_adj = self.growth:GetExpToNext(self.selection_data.Level)
+    local max_adj = 0
+    if self.selection_data.Level<self.lvl_limit then max_adj = self.growth:GetExpToNext(self.selection_data.Level) end
     local ratio_adj = 1
     if max_adj ~= 0 then ratio_adj = self.selection_data.EXP/max_adj end
     local len_adj = max_len * ratio_adj
@@ -437,19 +449,21 @@ function DrinkPreviewSummary:updateMenu()
     self.bar_upper.Color = getAdjustColor(exp_adjust)
 
     --compute gauge layers setup
-    if level_adjust>0 then
-        if level_adjust>1 then self.xp_bar.Length = 0 end
-        self.bar_lower.Color = Color.Green
-        self.bar_upper.Length = len_adj
-    elseif level_adjust == 0 then
-        if exp_adjust>0 then
-            self.bar_lower.Length = len_adj
+    if self.selection_data.Level<self.lvl_limit then
+        if level_adjust>0 then
+            if level_adjust>1 then self.xp_bar.Length = 0 end
+            self.bar_lower.Color = Color.Green
+            self.bar_upper.Length = len_adj
+        elseif level_adjust == 0 then
+            if exp_adjust>0 then
+                self.bar_lower.Length = len_adj
+            else
+                self.xp_bar.Length = len_adj
+                self.bar_lower.Length = len
+            end
         else
             self.xp_bar.Length = len_adj
-            self.bar_lower.Length = len
         end
-    else
-        self.xp_bar.Length = len_adj
     end
 end
 

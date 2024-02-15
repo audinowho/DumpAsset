@@ -486,7 +486,7 @@ function base_camp_2_juice.Drink_Flow(boost, member)
 				member.EXP = 0
 			else
 				member.Level = member.Level - 1
-				member.EXP = member.EXP + growth_data:GetExpToNext(member.Level - 1)
+				member.EXP = member.EXP + growth_data:GetExpToNext(member.Level)
 			end
 		end
 		

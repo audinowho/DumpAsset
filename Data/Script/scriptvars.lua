@@ -131,6 +131,7 @@ SV.manaphy_egg =
 SV.sleeping_caldera = 
 {
   TookTreasure  = false,
+  TookMusicBox  = false,
   GotHeatran = false
 }
 

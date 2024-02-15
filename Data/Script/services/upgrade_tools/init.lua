@@ -133,8 +133,13 @@ function UpgradeTools:OnUpgrade()
     SV.sleeping_caldera = 
     {
       TookTreasure  = false,
+      TookMusicBox  = false,
       GotHeatran = false
     }
+  end
+  
+  if SV.sleeping_caldera.TookMusicBox == nil then
+    SV.sleeping_caldera.TookMusicBox = false
   end
   
   if SV.dex == nil then

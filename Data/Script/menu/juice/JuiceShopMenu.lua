@@ -173,7 +173,6 @@ function DrinkPreviewSummary:initialize(left, top, right, bottom, character, ing
     local x_pos3 = (self.window.Bounds.Width + GraphicsManager.MenuBG.TileWidth)//2 +3
     local x_pos4 = self.window.Bounds.Width - GraphicsManager.MenuBG.TileWidth * 2
     self.growth = _DATA:GetGrowth(_DATA:GetMonster(character.BaseForm.Species).EXPTable)
-    self.lvl_limit = self.growth.EXPTable.Length
 
     self.window.Elements:Add(RogueEssence.Menu.MenuText(character:GetDisplayName(false), RogueElements.Loc(x_pos, GraphicsManager.MenuBG.TileHeight)))
 
@@ -183,7 +182,7 @@ function DrinkPreviewSummary:initialize(left, top, right, bottom, character, ing
 
     local exp_text = STRINGS:FormatKey("MENU_TEAM_EXP_SHORT")..": "
     local max = 0
-    if self.data.Level<self.lvl_limit then max = self.growth:GetExpToNext(self.data.Level) end
+    if self.data.Level<_DATA.Start.MaxLevel then max = self.growth:GetExpToNext(self.data.Level) end
     local x_offset = GraphicsManager.TextFont:SubstringWidth(exp_text)
     local ratio = 1
     if max ~= 0 then ratio = self.data.EXP/max end
@@ -253,7 +252,8 @@ function DrinkPreviewSummary:updateData()
     local changes = self.boost_function(cart, self.character)
     local selected_changes = self.boost_function(adj_cart, self.character)
 
-    self.data.Level = self.startData.Level + changes.Level
+    --TODO test
+    self.data.Level = self.startData.Level
     self.data.EXP =   self.startData.EXP   + changes.EXP
     self.data.MaxHPBonus = self.startData.MaxHPBonus + changes.HP
     self.data.AtkBonus   = self.startData.AtkBonus   + changes.Atk
@@ -262,7 +262,7 @@ function DrinkPreviewSummary:updateData()
     self.data.MDefBonus  = self.startData.MDefBonus  + changes.SpDef
     self.data.SpeedBonus = self.startData.SpeedBonus + changes.Speed
 
-    self.selection_data.Level = self.startData.Level + selected_changes.Level
+    self.selection_data.Level = self.startData.Level
     self.selection_data.EXP =   self.startData.EXP   + selected_changes.EXP
     self.selection_data.MaxHPBonus = self.startData.MaxHPBonus + selected_changes.HP
     self.selection_data.AtkBonus   = self.startData.AtkBonus   + selected_changes.Atk
@@ -283,17 +283,17 @@ function DrinkPreviewSummary:updateData()
             self.data.EXP = 0
         end
     else
-        if self.data.Level<self.lvl_limit then
+        if self.data.Level<_DATA.Start.MaxLevel then
             local toLvl = self.growth:GetExpToNext(self.data.Level)
-            while self.data.EXP>=toLvl and self.data.Level<self.lvl_limit do
+            while self.data.EXP>=toLvl and self.data.Level<_DATA.Start.MaxLevel do
                 self.data.Level = self.data.Level+1
                 self.data.EXP   = self.data.EXP - toLvl
-                if self.data.Level<self.lvl_limit then
+                if self.data.Level<_DATA.Start.MaxLevel then
                     toLvl = self.growth:GetExpToNext(self.data.Level)
                 end
             end
         end
-        if self.data.Level==self.lvl_limit then
+        if self.data.Level==_DATA.Start.MaxLevel then
             self.data.EXP = 0
         end
     end
@@ -308,20 +308,26 @@ function DrinkPreviewSummary:updateData()
             self.selection_data.EXP = 0
         end
     else
-        if self.selection_data.Level<self.lvl_limit then
+        if self.selection_data.Level<_DATA.Start.MaxLevel then
             local toLvl = self.growth:GetExpToNext(self.selection_data.Level)
-            while self.selection_data.EXP>=toLvl and self.selection_data.Level<self.lvl_limit do
+            while self.selection_data.EXP>=toLvl and self.selection_data.Level<_DATA.Start.MaxLevel do
                 self.selection_data.Level = self.selection_data.Level+1
                 self.selection_data.EXP   = self.selection_data.EXP - toLvl
-                if self.selection_data.Level<self.lvl_limit then
+                if self.selection_data.Level<_DATA.Start.MaxLevel then
                     toLvl = self.growth:GetExpToNext(self.selection_data.Level)
                 end
             end
         end
-        if self.selection_data.Level==self.lvl_limit then
+        if self.selection_data.Level==_DATA.Start.MaxLevel then
             self.selection_data.EXP = 0
         end
     end
+
+
+    self.data.Level = math.max(1, math.min(self.data.Level + changes.Level, _DATA.Start.MaxLevel))
+    self.selection_data.Level = math.max(1,math.min(self.selection_data.Level + selected_changes.Level, _DATA.Start.MaxLevel))
+    if changes.Level ~= 0 then self.data.EXP = 0 end
+    if selected_changes.Level ~= 0 then self.selection_data.EXP = 0 end
 
     -- -------------------------------------------------------------- --
 
@@ -429,13 +435,13 @@ function DrinkPreviewSummary:updateMenu()
     local max_len = self.window.Bounds.Width - GraphicsManager.MenuBG.TileWidth * 4 - x_offset
 
     local max = 0
-    if self.data.Level<self.lvl_limit then max = self.growth:GetExpToNext(self.data.Level) end
+    if self.data.Level<_DATA.Start.MaxLevel then max = self.growth:GetExpToNext(self.data.Level) end
     local ratio = 1
     if max ~= 0 then ratio = self.data.EXP/max end
     local len = max_len * ratio
 
     local max_adj = 0
-    if self.selection_data.Level<self.lvl_limit then max_adj = self.growth:GetExpToNext(self.selection_data.Level) end
+    if self.selection_data.Level<_DATA.Start.MaxLevel then max_adj = self.growth:GetExpToNext(self.selection_data.Level) end
     local ratio_adj = 1
     if max_adj ~= 0 then ratio_adj = self.selection_data.EXP/max_adj end
     local len_adj = max_len * ratio_adj
@@ -449,10 +455,10 @@ function DrinkPreviewSummary:updateMenu()
     self.bar_upper.Color = getAdjustColor(exp_adjust)
 
     --compute gauge layers setup
-    if self.selection_data.Level<self.lvl_limit then
+    if self.selection_data.Level<_DATA.Start.MaxLevel then
         if level_adjust>0 then
             if level_adjust>1 then self.xp_bar.Length = 0 end
-            self.bar_lower.Color = Color.Green
+            if self.selection_data.EXP ~= 0 then self.bar_lower.Color = Color.Green end
             self.bar_upper.Length = len_adj
         elseif level_adjust == 0 then
             if exp_adjust>0 then

@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.24.0",
+"Version": "0.7.25.0",
 "Object": {
 "$type": "RogueEssence.Data.MapStatusData, RogueEssence",
 "Name": {
@@ -21,6 +21,14 @@
 "StatusStates": [
 {
 "$type": "RogueEssence.Dungeon.MapWeatherState, RogueEssence"
+},
+{
+"$type": "RogueEssence.Dungeon.MapCountDownState, RogueEssence",
+"Counter": 50
+},
+{
+"$type": "PMDC.Dungeon.MapTickState, PMDC",
+"Counter": 0
 }
 ],
 "OnMapRefresh": [],
@@ -89,7 +97,28 @@
 "OnMapStarts": [],
 "OnTurnStarts": [],
 "OnTurnEnds": [],
-"OnMapTurnEnds": [],
+"OnMapTurnEnds": [
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MapTickEvent, PMDC"
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MapStatusCountDownEvent, PMDC"
+}
+}
+],
 "OnWalks": [],
 "OnDeaths": [],
 "OnRefresh": [],

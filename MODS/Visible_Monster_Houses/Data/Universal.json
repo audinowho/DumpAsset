@@ -1,8 +1,13 @@
 ﻿{
-"Version": "0.7.18.0",
+"Version": "0.7.23.0",
 "Object": {
 "$type": "RogueEssence.Data.UniversalActiveEffect, RogueEssence",
 "ZoneSteps": [
+{
+"$type": "RogueEssence.LevelGen.ScriptZoneStep, RogueEssence",
+"Script": "GenerateMissionFromSV",
+"ArgTable": "{}"
+},
 {
 "$type": "RogueEssence.LevelGen.ScriptZoneStep, RogueEssence",
 "Script": "SpawnMissionNpcFromSV",
@@ -511,11 +516,11 @@
 "Challenge": "shiny_square"
 },
 {
-"$type": "PMDC.Dungeon.MonsterHouseTableState, PMDC",
-"MonsterHouseWarningTile": "tile_warning",
-"ChestAmbushWarningTile": "chest_house_full",
-"NoMonsterHallOnBlockLightTiles": true,
-"NoMonsterHouseEntrances": true
+  "$type": "PMDC.Dungeon.MonsterHouseTableState, PMDC",
+  "MonsterHouseWarningTile": "tile_warning",
+  "ChestAmbushWarningTile": "chest_house_full",
+  "NoMonsterHallOnBlockLightTiles": true,
+  "NoMonsterHouseEntrances": true
 }
 ],
 "BeforeTryActions": [],
@@ -639,6 +644,20 @@
 ]
 },
 "Value": {
+"$type": "PMDC.Dungeon.StealthEvoEvent, PMDC",
+"CheckSpecies": [
+"tandemaus"
+],
+"PercentChance": 35
+}
+},
+{
+"Key": {
+"str": [
+-10
+]
+},
+"Value": {
 "$type": "PMDC.Dungeon.FadeInEvent, PMDC"
 }
 },
@@ -707,21 +726,12 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.HandoutPiecewiseExpEvent, PMDC",
-"ScaleMin": 5,
-"ScaleAdd": 0,
-"UnderleveledHandout": {
-"$type": "PMDC.Dungeon.HandoutStackExpEvent, PMDC",
+"$type": "PMDC.Dungeon.HandoutRelativeExpEvent, PMDC",
 "Numerator": 1,
 "Denominator": 7,
-"LevelBuffer": 7
-},
-"OverleveledHandout": {
-"$type": "PMDC.Dungeon.HandoutHarmonicExpEvent, PMDC",
-"Numerator": 1,
-"Denominator": 7,
-"LevelBuffer": 7
-}
+"LevelBuffer": 5,
+"PowerCurve": 2,
+"IgnoreMark": false
 }
 }
 ],

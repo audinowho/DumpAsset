@@ -483,6 +483,519 @@ function UpgradeTools:OnUpgrade()
     SV.adventure.Tutors = { }
   end
   
+  if SV.MissionsEnabled == true then
+    SV.MissionsEnabled = false
+  end
+  
+if SV.MissionsEnabled == nil then
+
+SV.MissionPrereq =
+{
+  DungeonsCompleted = {}, --Uses a bitmap to determine which sections are complete (
+  NumDungeonsCompleted = 0
+}
+
+SV.DestinationFloorNotified = false
+SV.MonsterHouseMessageNotified = false
+SV.OutlawDefeated = false
+SV.OutlawGoonsDefeated = false
+SV.MapTurnCounter = -1
+
+SV.TemporaryFlags =
+{
+  MissionCompleted = false,--used to mark if there are any pending missions to hand in.
+  PriorMapSetting = nil,--Used to mark what the player had their minimap setting whenever the game needs to temporarily change it to something else.
+}
+
+--empty string or a -1 indicates that there's nothing there currently.
+--board of jobs you've actually taken.
+SV.TakenBoard =
+{
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = "",
+    BackReference = -1
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = "",
+    BackReference = -1
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = "",
+    BackReference = -1
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = "",
+    BackReference = -1
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = "",
+    BackReference = -1
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = "",
+    BackReference = -1
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = "",
+    BackReference = -1
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = "",
+    BackReference = -1
+  }
+
+}
+
+--Needed to save data about dungeons
+SV.ExpectedLevel = {}
+SV.DungeonOrder = {}
+SV.StairType = {}
+
+--jobs on the mission board.
+SV.MissionBoard =
+{
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = ""
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = ""
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = ""
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = ""
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = ""
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = ""
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = ""
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = ""
+  }
+
+}
+
+--Jobs on the outlaw board.
+SV.OutlawBoard =
+{
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = ""
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = 1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = ""
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = ""
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = ""
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = ""
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = ""
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = ""
+  },
+  {
+    Client = "",
+    Target = "",
+    Flavor = "",
+    Title = "",
+    Zone = "",
+    Segment = -1,
+    Floor = -1,
+    Reward = "",
+    Type = -1,
+    Completion = -1,
+    Taken = false,
+    Difficulty = "",
+    Item = "",
+    Special = "",
+    ClientGender = -1,
+    TargetGender = -1,
+    BonusReward = ""
+  }
+}
+
+end
+  
   PrintInfo("=>> Loaded version")
 end
 

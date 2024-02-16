@@ -807,6 +807,11 @@
             Contains data about which cells a room occupies in a GridFloorPlan.
             </summary>
         </member>
+        <member name="P:RogueElements.GridRoomPlan.PreferHall">
+            <summary>
+            Prefers to be counted as a hall when translated into floorplan rooms
+            </summary>
+        </member>
         <member name="T:RogueElements.InitGridPlanStep`1">
             <summary>
             Initializes an empty grid plan, which is a grid of rooms and connecting hallways.
@@ -845,6 +850,13 @@
             <summary>
             Determines if the map is wrapped around.
             </summary>
+        </member>
+        <member name="T:RogueElements.GridPathCross`1">
+            <summary>
+            Creates a grid plan made up of a center room and halls and rooms extending off in the four cardinal directions.
+            For best results, it is recommended to make grid height and width odd numbers.
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
         <member name="T:RogueElements.GridPathSpecific`1">
             <summary>
@@ -935,6 +947,14 @@
             </summary>
             <param name="floorPlan"></param>
             <param name="loc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueElements.GridPathBranch`1.PopRandomLocEqual(RogueElements.IRandom,System.Collections.Generic.List{RogueElements.Loc})">
+            <summary>
+            Gets a possible terminal room to expand.  Equal distribution.
+            </summary>
+            <param name="rand"></param>
+            <param name="locs"></param>
             <returns></returns>
         </member>
         <member name="T:RogueElements.GridPathCircle`1">
@@ -1177,6 +1197,11 @@
         <member name="T:RogueElements.RoomFilterDefaultGen">
             <summary>
             Filters for rooms using the default generator.
+            </summary>
+        </member>
+        <member name="T:RogueElements.RoomFilterHall">
+            <summary>
+            Filters for rooms using the hall plan.
             </summary>
         </member>
         <member name="T:RogueElements.RoomGen`1">
@@ -1599,6 +1624,13 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="T:RogueElements.EraseIsolatedFromSpawnStep`2">
+            <summary>
+            Erases blobs of terrain that do not touch walkable ground.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TEntrance"></typeparam>
+        </member>
         <member name="T:RogueElements.EraseIsolatedStep`1">
             <summary>
             Erases blobs of terrain that do not touch walkable ground.
@@ -1657,14 +1689,14 @@
             The number of blobs to place.
             </summary>
         </member>
-        <member name="P:RogueElements.BlobWaterStep`1.AreaScale">
-            <summary>
-            The NxN size range of the acceptable area the blob takes.  It is measured in tiles.
-            </summary>
-        </member>
         <member name="P:RogueElements.BlobWaterStep`1.GenerateScale">
             <summary>
-            The NxN size range of the area creating the blob.  It is measured in tiles.
+            The NxN size range of the area creating the blob.  It is measured in tiles.  It is recommended to pick a range with at least 4 between min and max.
+            </summary>
+        </member>
+        <member name="P:RogueElements.BlobWaterStep`1.AreaScale">
+            <summary>
+            The NxN size range of the acceptable area the blob takes.  It is measured in tiles.  It is recommended to pick a range with at least 4 between min and max.  Must be equal to or smaller than Generate Scale.
             </summary>
         </member>
         <member name="P:RogueElements.BlobWaterStep`1.BlobStencil">
@@ -1768,9 +1800,16 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="P:RogueElements.NoChokepointStencil`1.TileStencil">
+            <summary>
+            The stencil should return true if the tile is considered walkable. (Tile-being-choked)
+            </summary>
+        </member>
         <member name="P:RogueElements.NoChokepointStencil`1.Global">
             <summary>
             Determines if the entire map should be checked for connectivity, or just the immediate surrounding tiles.
+            If turned off, the gen will refuse to break ANY chokepoint period.
+            If turned on, it will break any chokepoint that has another way around somewhere, while still preventing true unsolvability.
             </summary>
         </member>
         <member name="T:RogueElements.NoChokepointTerrainStencil`1">
@@ -2065,6 +2104,11 @@
             Selects an item randomly from a weighted list.
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:RogueElements.SpawnList`1.RemoveOnRoll">
+            <summary>
+            False if this is a bag with replacement.  True if not.
+            </summary>
         </member>
         <member name="M:RogueElements.SpawnList`1.CopyState">
             <summary>

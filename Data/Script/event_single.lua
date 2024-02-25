@@ -724,6 +724,9 @@ function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
 			--to prevent accidental button mashing making you waste your turn
 			GAME:WaitFrames(20)
 		end
+
+		--Starts the player in team mode which they likely want to be in, this can help prevent desyncs as well
+		_DUNGEON:SetTeamMode(true)
 	end
 end
 

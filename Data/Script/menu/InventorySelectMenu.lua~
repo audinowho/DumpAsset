@@ -146,8 +146,6 @@ function InventorySelectMenu:updateFunction(input)
     end
 end
 
---- Takes the currently selected equipment ids and inventory items and stores them in lists.
---- @return table, table the list of selected equipment indexes, the list of selected items
 function InventorySelectMenu:saveSelectedItems()
     local selected_equips = {}
     local selected = {}
@@ -166,9 +164,6 @@ function InventorySelectMenu:saveSelectedItems()
     return selected_equips, selected
 end
 
---- Takes a list of equipment ids and one of items and selects the corresponding options.
---- @param selected_equips table a list of integer equipment ids to be selected
---- @param selected table a list of InvItem objects to be selected
 function InventorySelectMenu:loadSelectedItems(selected_equips, selected)
     for index = #self.slotList, 1, -1 do
         local slot = self.slotList[index]

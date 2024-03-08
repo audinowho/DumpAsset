@@ -537,7 +537,7 @@ function SpawnOutlaw(origin, radius, mission_num)
 	-- local gender = form:RollGender(RogueElements.MathUtils.Rand)
 	mob_data.BaseForm = RogueEssence.Dungeon.MonsterID(mission.Target, base_form_idx, "normal", COMMON.NumToGender(mission.TargetGender))
 	mob_data.Level = math.floor(SV.ExpectedLevel[mission.Zone] * 1.15)
-	local ability = form:RollIntrinsic(RogueElements.MathUtils.Rand, 3)
+	local ability = form:RollIntrinsic(_DATA.Save.Rand, 3)
 	mob_data.BaseIntrinsics[0] = ability
 	local new_mob = RogueEssence.Dungeon.Character(mob_data)
 	--Old move learning logic
@@ -724,6 +724,9 @@ function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
 			--to prevent accidental button mashing making you waste your turn
 			GAME:WaitFrames(20)
 		end
+
+		--Starts the player in team mode which they likely want to be in, this can help prevent desyncs as well
+		_DUNGEON:SetTeamMode(true)
 	end
 end
 

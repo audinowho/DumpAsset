@@ -413,7 +413,7 @@ function COMMON.HasSidequestInZone(zone)
   return false
 end
 
-function COMMON.ExitDungeonMissionCheckEx(result, zoneId, segmentID)
+function COMMON.ExitDungeonMissionCheckEx(result, rescue, zoneId, segmentID)
   --remove all guests from the dungeon
   RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS = 4
 

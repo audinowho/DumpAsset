@@ -4,51 +4,31 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Brutal Swing",
-"LocalTexts": {
-"fr": "Centrifugifle",
-"de": "Wirbler",
-"es": "Giro Vil",
-"it": "Vorticolpo",
-"ko": "세차게휘두르기",
-"ja": "ぶんまわす",
-"ja-jp": "ぶんまわす",
-"zh-hans": "狂舞挥打",
-"zh-hant": "狂舞揮打"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "The user swings its body around violently to inflict damage on everything in its vicinity.",
-"LocalTexts": {
-"fr": "Le lanceur pivote pour prendre de l'élan et infliger des dégâts.",
-"de": "Der Anwender dreht schwungvoll seinen Körper und fügt den Pokémon in seiner Nähe dabei Schaden zu.",
-"es": "Hace pivotar su cuerpo para causar daño a su alrededor.",
-"it": "Chi la usa infligge danni intorno a sé facendo ruotare una parte del suo corpo.",
-"ko": "자신의 몸을 세차게 휘둘러서 상대에게 데미지를 준다.",
-"ja": "じぶんの　からだを ぶんまわして　あいてに ダメージを　あたえる。",
-"ja-jp": "自分の　体を ぶんまわして　相手に ダメージを　与える。",
-"zh-hans": "用自己的身体狂舞挥打，给予对手伤害。",
-"zh-hant": "用自己的身體狂舞揮打， 給予對手傷害。"
-}
+"LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 693,
-"BaseCharges": 20,
+"BaseCharges": 17,
 "Strikes": 1,
 "HitboxAction": {
 "$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
+"HitTiles": true,
 "BurstTiles": 0,
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"WideAngle": 0,
+"WideAngle": 3,
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
+"ActionType": 6
 },
-"TargetAlignments": 4,
+"TargetAlignments": 6,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -56,10 +36,29 @@
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Spacial_Rend",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Cut_Dark",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,
@@ -70,7 +69,7 @@
 "LagBehindTime": 0
 },
 "Explosion": {
-"TargetAlignments": 4,
+"TargetAlignments": 6,
 "HitTiles": false,
 "Range": 0,
 "Speed": 0,
@@ -103,8 +102,11 @@
 "HitRate": 100,
 "SkillStates": [
 {
+"$type": "PMDC.Dungeon.ContactState, PMDC"
+},
+{
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 60
+"Power": 70
 }
 ],
 "BeforeTryActions": [],
@@ -132,8 +134,27 @@
 "Delay": 0,
 "Sound": "",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Shadow_Sneak_Hit",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,

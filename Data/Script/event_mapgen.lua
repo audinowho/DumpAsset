@@ -501,3 +501,25 @@ function FLOOR_GEN_SCRIPT.CastawayCaveRevisit(map, args)
 end
 
 
+function FLOOR_GEN_SCRIPT.SleepingCalderaRevisit(map, args)
+  if not SV.sleeping_caldera.TookMusicBox then
+    return
+  end
+  
+  local item = nil
+  
+  for ii = 0, map.Items.Count - 1, 1 do
+	if map.Items[ii].Value == "loot_music_box" then
+	  item = map.Items[ii]
+	  break
+	end
+  end
+  
+  if item ~= nil then
+    item.Value = "box_deluxe"
+	item.HiddenValue = "xcl_element_fire_dust"
+  end
+  
+end
+
+

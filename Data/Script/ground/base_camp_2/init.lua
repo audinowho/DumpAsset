@@ -516,6 +516,7 @@ base_camp_2.difficulty_tbl["fertile_valley"] = 1
 base_camp_2.difficulty_tbl["ambush_forest"] = 3
 base_camp_2.difficulty_tbl["treacherous_mountain"] = 3
 base_camp_2.difficulty_tbl["copper_quarry"] = 3
+base_camp_2.difficulty_tbl["depleted_basin"] = 3
 base_camp_2.difficulty_tbl["forsaken_desert"] = 3
 base_camp_2.difficulty_tbl["snowbound_path"] = 3
 base_camp_2.difficulty_tbl["relic_tower"] = 3

@@ -370,7 +370,10 @@ function COMMON.UpdateDayEndVars()
 	  SV.supply_corps.ManagerCycle = 6 - (SV.supply_corps.ManagerCycle - 6)
 	end
   end
-
+  
+  if SV.canyon_camp.ExpositionComplete then
+    GAME:UnlockDungeon('depleted_basin')
+  end
   
   if SV.rest_stop.ExpositionComplete then
     if not SV.rest_stop.BossSolved then

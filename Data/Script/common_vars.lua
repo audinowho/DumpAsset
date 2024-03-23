@@ -266,8 +266,8 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
   elseif SV.team_solo.Status == 1 and SV.team_solo.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
-  elseif SV.team_solo.Status == 2 and SV.team_solo.SpokenTo then
-    COMMON.UpdateCheckpointStatus(SV.team_solo, 2)
+  elseif SV.team_solo.Status == 2 and SV.team_solo.SpokenTo and _DATA.Save:GetDungeonUnlock("forsaken_desert") == RogueEssence.Data.GameProgress.UnlockState.Completed then
+    COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
   elseif SV.team_solo.Status == 3 and SV.team_solo.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_solo, 2)
   elseif SV.team_solo.Status == 5 then

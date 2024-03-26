@@ -39,6 +39,13 @@ function MissionService:OnDeinit()
   PrintInfo("\n<!> ExampleSvc: Deinit..")
 end
 
+function MissionService:OnNewGame()
+  assert(self, 'MissionService:OnNewGame() : self is null!')
+
+  SV.MissionsEnabled = true
+
+end
+
 function MissionService:OnUpgrade()
   assert(self, 'MissionService:OnUpgrade() : self is null!')
   
@@ -51,6 +58,7 @@ end
 function MissionService:Subscribe(med)
   med:Subscribe("MissionService", EngineServiceEvents.Init,                function() self.OnInit(self) end )
   med:Subscribe("MissionService", EngineServiceEvents.Deinit,              function() self.OnDeinit(self) end )
+  med:Subscribe("MissionService", EngineServiceEvents.NewGame,            function() self.OnNewGame(self) end )
   med:Subscribe("MissionService", EngineServiceEvents.UpgradeSave,        function() self.OnUpgrade(self) end )
 end
 

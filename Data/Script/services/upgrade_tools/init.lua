@@ -483,6 +483,10 @@ function UpgradeTools:OnUpgrade()
     SV.adventure.Tutors = { }
   end
   
+  if SV.Experimental == nil then
+    SV.Experimental = false
+  end
+  
   PrintInfo("=>> Loaded version")
 end
 

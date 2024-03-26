@@ -5,7 +5,7 @@
 
 function COMMON.UpdateDayEndVars()
 
-  if SV.Experimental ~= nil then
+  if SV.Experimental then
     if _DATA.Save:GetDungeonUnlock("faultline_ridge") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortSister"] == nil and SV.missions.FinishedMissions["EscortSister"] == nil then
 	    COMMON.CreateMission("EscortSister",

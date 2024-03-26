@@ -1051,7 +1051,7 @@ function base_camp_2.Swap_Action(obj, activator)
   end
 
   
-  local Prices = { 1000, 5000, 20000, 50000, 100000 }
+  local Prices = { 1000, 5000, 25000 }
   local player = CH('PLAYER')
   local chara = CH('Swap_Owner')
   UI:SetSpeaker(chara)

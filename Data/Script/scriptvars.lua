@@ -30,6 +30,9 @@ SV.Services =
 -----------------------------------------------
 -- General Defaults
 -----------------------------------------------
+
+SV.Experimental = false
+
 SV.General =
 {
   Rescue = nil,

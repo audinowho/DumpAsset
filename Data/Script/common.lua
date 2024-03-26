@@ -401,7 +401,7 @@ function COMMON.GiftKeyItem(player, item_name)
   
   -- item names are expected to be passed in without formatting
   -- the standard color for event items is always green
-  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_RECEIVE_ITEM"):ToLocal(), player:GetDisplayName(), string.format("[color=#00FF00]%s[color]", item_name)))
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_RECEIVE_KEY_ITEM"):ToLocal(), player:GetDisplayName(), string.format("[color=#00FF00]%s[color]", item_name)))
   UI:ImportSpeakerSettings(orig_settings)
 end
 

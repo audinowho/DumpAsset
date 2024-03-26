@@ -455,7 +455,7 @@ function base_camp.Sign_Action(obj, activator)
   UI:SetAutoFinish(false)
   
   base_camp.sign_count = base_camp.sign_count + 1
-  if base_camp.sign_count > 5 and SV.Experimental == nil then
+  if base_camp.sign_count > 5 and SV.Experimental ~= true then
     UI:ChoiceMenuYesNo("UNLOCK THE HALF FINISHED STORY? NO GOING BACK.", true)
     UI:WaitForChoice()
     ch = UI:ChoiceResult()

@@ -57,7 +57,7 @@ function guildmaster_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
           COMMON.EndDungeonDay(result, 'guildmaster_island', -1,8,0)
 	    else
 		  --didnt clear the game yet?  Go to the summit for the final test
-		  if SV.Experimental ~= nil then
+		  if SV.Experimental then
 			if mapID >= SV.guildmaster_trail.FloorsCleared then
 			  SV.guildmaster_trail.FloorsCleared = mapID
 			end  

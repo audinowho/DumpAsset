@@ -4,21 +4,13 @@
 "$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
 "Name": {
 "DefaultText": "Toxic Debris",
-"LocalTexts": {
-"fr": "Dépôt Toxique",
-"de": "Giftbelag",
-"es": "Capa Tóxica",
-"it": "Mantossina",
-"ja": "どくげしょう",
-"ja-jp": "どくげしょう",
-"zh-hans": "毒满地"
-}
-},
-"Desc": {
-"DefaultText": "",
 "LocalTexts": {}
 },
-"Released": false,
+"Desc": {
+"DefaultText": "Scatters poison spikes when the Pokémon takes damage from physical moves.",
+"LocalTexts": {}
+},
+"Released": true,
 "Comment": "",
 "IndexNum": 295,
 "ProximityEvent": {
@@ -75,7 +67,49 @@
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],
-"AfterBeingHits": [],
+"AfterBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.CategoryNeededEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.CounterTrapEvent, PMDC",
+"TrapID": "trap_toxic_spikes",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Puff_Purple",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"Sound": "DUN_Substitute"
+}
+],
+"NeededCategory": 1
+}
+}
+],
 "OnHitTiles": [],
 "AfterActions": [],
 "UserElementEffects": [],

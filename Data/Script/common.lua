@@ -1245,7 +1245,12 @@ function COMMON.EndDungeonDay(result, zoneId, structureId, mapId, entryId)
       result = UI:ChoiceResult()
       GAME:WaitFrames(50);
       if result then
-        local config = RogueEssence.Data.RogueConfig.RerollFromOther(_DATA.Save.Config)
+	    local curConfig = _DATA.Save.Config
+		-- set current save file to main save file, this is to get the right starterlist
+		-- this is hacky since it sets the current save file in an inconsisten state with the lua, but it's technically the most accurate way in lua
+		-- also this state won't last long- it'll be cleared on our reset
+		_DATA.Save = _DATA:GetProgress()
+		local config = RogueEssence.Data.RogueConfig.RerollFromOther(curConfig)
         GAME:RestartRogue(config)
       else 
         GAME:RestartToTitle()

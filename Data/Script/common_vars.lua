@@ -77,7 +77,7 @@ function COMMON.UpdateDayEndVars()
 	-- TODO: should be barren_tundra
     if _DATA.Save:GetDungeonUnlock("snowbound_path") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortBrother"] == nil and SV.missions.FinishedMissions["EscortBrother"] == nil then
-	    COMMON.CreateMission("EscortFather",
+	    COMMON.CreateMission("EscortBrother",
         {
           DestZone = "snowbound_path",
           DestSegment = 1,

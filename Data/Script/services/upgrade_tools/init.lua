@@ -447,6 +447,10 @@ function UpgradeTools:OnUpgrade()
     SV.family.Grandma = true
   end
   
+  if SV.missions.Missions["EscortFather"] ~= nil and SV.missions.Missions["EscortFather"].DestZone == "snowbound_path" then
+    SV.missions.Missions["EscortFather"] = nil
+  end
+  
   if SV.family.BrotherActiveDays == nil then
     SV.family.BrotherActiveDays = 0
 	SV.family.Brother = false

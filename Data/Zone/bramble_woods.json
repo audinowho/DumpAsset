@@ -54,7 +54,7 @@
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "CellWidth": 10,
 "CellHeight": 10,
-"CellX": 4,
+"CellX": 3,
 "CellY": 3,
 "CellWall": 1,
 "Wrap": false
@@ -508,7 +508,7 @@
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "CellWidth": 10,
 "CellHeight": 10,
-"CellX": 4,
+"CellX": 3,
 "CellY": 3,
 "CellWall": 1,
 "Wrap": false
@@ -962,7 +962,7 @@
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "CellWidth": 10,
 "CellHeight": 10,
-"CellX": 4,
+"CellX": 3,
 "CellY": 3,
 "CellWall": 1,
 "Wrap": false
@@ -1417,7 +1417,7 @@
 "CellWidth": 9,
 "CellHeight": 9,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -2013,7 +2013,7 @@
 "CellWidth": 9,
 "CellHeight": 9,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -2886,7 +2886,7 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.LevelGen.MoneySpawn, RogueEssence]], RogueElements",
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
 {
@@ -2895,17 +2895,19 @@
 }
 ],
 "Spawn": {
-"$type": "RogueEssence.LevelGen.BulkSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.LevelGen.MoneySpawn, RogueEssence]], RogueEssence",
-"SpecificSpawns": [
-{
-"Amount": 100
+"$type": "RogueEssence.LevelGen.BoxSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"BoxID": "box_light",
+"BaseSpawner": {
+"$type": "PMDC.LevelGen.SpeciesItemContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Rarity": {
+"Min": 1,
+"Max": 2
 },
-{
-"Amount": 100
+"Amount": {
+"Min": 1,
+"Max": 1
 }
-],
-"RandomSpawns": [],
-"SpawnAmount": 0
+}
 }
 }
 },
@@ -2989,7 +2991,7 @@
 "CellWidth": 9,
 "CellHeight": 9,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -3700,7 +3702,7 @@
 "CellWidth": 9,
 "CellHeight": 9,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -4888,20 +4890,6 @@
 "Spawns": [
 {
 "Spawn": {
-"ID": "apricorn_blue",
-"Cursed": false,
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0
-},
-"Rate": 2,
-"Range": {
-"Min": 0,
-"Max": 7
-}
-},
-{
-"Spawn": {
 "ID": "apricorn_green",
 "Cursed": false,
 "HiddenValue": "",
@@ -4917,34 +4905,6 @@
 {
 "Spawn": {
 "ID": "apricorn_white",
-"Cursed": false,
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0
-},
-"Rate": 2,
-"Range": {
-"Min": 0,
-"Max": 7
-}
-},
-{
-"Spawn": {
-"ID": "apricorn_red",
-"Cursed": false,
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0
-},
-"Rate": 2,
-"Range": {
-"Min": 0,
-"Max": 7
-}
-},
-{
-"Spawn": {
-"ID": "apricorn_yellow",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,

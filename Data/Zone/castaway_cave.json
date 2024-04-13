@@ -21276,11 +21276,53 @@
 "ItemThemes": [
 {
 "Spawn": {
+"$type": "PMDC.LevelGen.ItemStateType, PMDC",
+"UseType": {
+"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.GummiState"
+},
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 3,
+"Max": 3
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
+"Themes": [
+{
+"$type": "PMDC.LevelGen.ItemStateType, PMDC",
+"UseType": {
+"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.GummiState"
+},
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 1,
+"Max": 1
+}
+},
+{
 "$type": "PMDC.LevelGen.ItemThemeNone, PMDC",
 "SpecialRatio": 100,
 "Amount": {
 "Min": 1,
 "Max": 3
+}
+}
+],
+"Amount": {
+"Min": 0,
+"Max": 0
 }
 },
 "Rate": 30,

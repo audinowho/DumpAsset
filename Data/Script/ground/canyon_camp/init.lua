@@ -1004,7 +1004,7 @@ function canyon_camp.NPC_Hidden_Action(chara, activator)
   
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   
-  local dungeon_id = 'secret_garden'
+  local dungeon_id = 'sleeping_caldera'
   if not GAME:DungeonUnlocked(dungeon_id) then
     UI:SetSpeaker(chara)
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hidden_Line_001']))

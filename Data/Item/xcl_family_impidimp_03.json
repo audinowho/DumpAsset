@@ -3,11 +3,11 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Lillipup Fang",
+"DefaultText": "Impidimp Gasp",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A rare treasure for the Lillipup family. When kept in the bag, it reveals the number of items laying on the ground whenever the Pokémon reaches a new floor.",
+"DefaultText": "A rare treasure for the Impidimp family. When kept in the bag, the Pokémon will do increased damage if its previous move missed.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -23,14 +23,14 @@
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 2
+"ItemType": 11
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
-"lillipup",
-"herdier",
-"stoutland"
+"impidimp",
+"morgrem",
+"grimmsnarl"
 ]
 },
 {
@@ -188,51 +188,7 @@
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
 "OnMapStatusRemoves": [],
-"OnMapStarts": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilySingleEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.AcuteSnifferEvent, PMDC",
-"SniffedStatusID": "items_sniffed",
-"Anims": [
-{
-"Emitter": {
-"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
-"LocHeight": 0,
-"finished": false,
-"Offset": 0,
-"Anim": {
-"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
-"Anim": {
-"AnimIndex": "Circle_Small_Blue_In",
-"FrameTime": 2,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": -1,
-"Alpha": 255,
-"AnimFlip": 0
-},
-"TotalTime": 0,
-"Cycles": 1,
-"FrameOffset": 0
-},
-"Layer": 2,
-"UseDest": false
-},
-"Sound": "",
-"Delay": 0
-}
-]
-}
-}
-}
-],
+"OnMapStarts": [],
 "OnTurnStarts": [],
 "OnTurnEnds": [],
 "OnMapTurnEnds": [],
@@ -242,7 +198,24 @@
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
-"BeforeHittings": [],
+"BeforeHittings": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.MultWhenMissEvent, PMDC",
+"StatusID": "missed_all_last_turn",
+"Numerator": 4,
+"Denominator": 3
+}
+}
+}
+],
 "BeforeBeingHits": [],
 "AfterHittings": [],
 "AfterBeingHits": [],

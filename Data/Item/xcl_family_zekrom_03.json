@@ -3,14 +3,14 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Lillipup Fang",
+"DefaultText": "Zekrom Fang",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A rare treasure for the Lillipup family. When kept in the bag, it reveals the number of items laying on the ground whenever the Pokémon reaches a new floor.",
+"DefaultText": "A rare treasure for the Zekrom family. When kept in the bag, the Pokémon cannot have its Special Attack lowered.",
 "LocalTexts": {}
 },
-"Released": true,
+"Released": false,
 "Comment": "",
 "Sprite": "Box_Yellow",
 "Icon": 10,
@@ -28,9 +28,7 @@
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
-"lillipup",
-"herdier",
-"stoutland"
+"zekrom"
 ]
 },
 {
@@ -182,13 +180,7 @@
 },
 "OnEquips": [],
 "OnPickups": [],
-"BeforeStatusAdds": [],
-"BeforeStatusAddings": [],
-"OnStatusAdds": [],
-"OnStatusRemoves": [],
-"OnMapStatusAdds": [],
-"OnMapStatusRemoves": [],
-"OnMapStarts": [
+"BeforeStatusAdds": [
 {
 "Key": {
 "str": [
@@ -196,43 +188,29 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.FamilySingleEvent, PMDC",
+"$type": "PMDC.Dungeon.FamilyStatusEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.AcuteSnifferEvent, PMDC",
-"SniffedStatusID": "items_sniffed",
-"Anims": [
-{
-"Emitter": {
-"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
-"LocHeight": 0,
-"finished": false,
-"Offset": 0,
-"Anim": {
-"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
-"Anim": {
-"AnimIndex": "Circle_Small_Blue_In",
-"FrameTime": 2,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": -1,
-"Alpha": 255,
-"AnimFlip": 0
+"$type": "PMDC.Dungeon.StatChangeCheck, PMDC",
+"Message": {
+"Key": "MSG_STAT_DROP_PROTECT"
 },
-"TotalTime": 0,
-"Cycles": 1,
-"FrameOffset": 0
-},
-"Layer": 2,
-"UseDest": false
-},
-"Sound": "",
-"Delay": 0
-}
-]
+"Stats": [
+3
+],
+"Drop": true,
+"Boost": false,
+"IncludeSelf": false,
+"Anims": []
 }
 }
 }
 ],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
 "OnTurnStarts": [],
 "OnTurnEnds": [],
 "OnMapTurnEnds": [],

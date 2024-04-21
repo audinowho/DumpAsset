@@ -3,34 +3,32 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Scyther Fang",
+"DefaultText": "Meloetta Tiara",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A rare treasure for the Scyther family. When kept in the bag, the Pokémon will not take damage from counter attacks.",
+"DefaultText": "A rare treasure for the Meloetta family. When kept in the bag, the Pokémon will recover from status effects after defeating an enemy.",
 "LocalTexts": {}
 },
-"Released": true,
+"Released": false,
 "Comment": "",
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 800,
-"Rarity": 1,
+"Price": 1600,
+"Rarity": 2,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 2
+"ItemType": 55
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
-"scyther",
-"scizor",
-"kleavor"
+"meloetta"
 ]
 },
 {
@@ -194,25 +192,7 @@
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
-"OnRefresh": [
-{
-"Key": {
-"str": [
--1
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.MiscEvent, PMDC",
-"Effect": {
-"$type": "PMDC.Dungeon.HitAndRunState, PMDC",
-"OriginItem": "xcl_family_scyther_02"
-}
-}
-}
-}
-],
+"OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
@@ -221,7 +201,66 @@
 "AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],
-"AfterActions": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.KnockOutNeededEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.RemoveStateStatusBattleEvent, PMDC",
+"States": [
+{
+"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.BadStatusState"
+}
+],
+"AffectTarget": false,
+"Msg": {
+"Key": "MSG_CURE_SELF"
+},
+"Anims": [
+{
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Small_Blue_In",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"Sound": "DUN_Wonder_Tile",
+"AffectTarget": false,
+"Delay": 10
+}
+]
+}
+]
+}
+}
+}
+],
 "UserElementEffects": [],
 "TargetElementEffects": [],
 "ModifyHPs": [],

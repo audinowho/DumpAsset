@@ -3,34 +3,32 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Scyther Fang",
+"DefaultText": "Victini Heart",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A rare treasure for the Scyther family. When kept in the bag, the Pokémon will not take damage from counter attacks.",
+"DefaultText": "A rare treasure for the Victini family. When kept in the bag, it restores the PP of all moves when the Pokémon reaches a new floor.",
 "LocalTexts": {}
 },
-"Released": true,
+"Released": false,
 "Comment": "",
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 800,
-"Rarity": 1,
+"Price": 1600,
+"Rarity": 2,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 2
+"ItemType": 37
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
-"scyther",
-"scizor",
-"kleavor"
+"victini"
 ]
 },
 {
@@ -188,31 +186,28 @@
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
 "OnMapStatusRemoves": [],
-"OnMapStarts": [],
+"OnMapStarts": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilySingleEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.DeepBreathEvent, PMDC",
+"RestoreAll": true
+}
+}
+}
+],
 "OnTurnStarts": [],
 "OnTurnEnds": [],
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
-"OnRefresh": [
-{
-"Key": {
-"str": [
--1
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.MiscEvent, PMDC",
-"Effect": {
-"$type": "PMDC.Dungeon.HitAndRunState, PMDC",
-"OriginItem": "xcl_family_scyther_02"
-}
-}
-}
-}
-],
+"OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],

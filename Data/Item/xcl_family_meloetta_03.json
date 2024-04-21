@@ -3,14 +3,14 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Scyther Fang",
+"DefaultText": "Meloetta Song",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A rare treasure for the Scyther family. When kept in the bag, the Pokémon will not take damage from counter attacks.",
+"DefaultText": "A rare treasure for the Meloetta family. When kept in the bag, the Pokémon is more likely to evade attacks when at low HP.",
 "LocalTexts": {}
 },
-"Released": true,
+"Released": false,
 "Comment": "",
 "Sprite": "Box_Yellow",
 "Icon": 10,
@@ -23,14 +23,12 @@
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 2
+"ItemType": 13
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
-"scyther",
-"scizor",
-"kleavor"
+"meloetta"
 ]
 },
 {
@@ -194,30 +192,26 @@
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
-"OnRefresh": [
-{
-"Key": {
-"str": [
--1
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.MiscEvent, PMDC",
-"Effect": {
-"$type": "PMDC.Dungeon.HitAndRunState, PMDC",
-"OriginItem": "xcl_family_scyther_02"
-}
-}
-}
-}
-],
+"OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
 "BeforeHittings": [],
-"BeforeBeingHits": [],
+"BeforeBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.EvasiveInPinchEvent, PMDC"
+}
+}
+}
+],
 "AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],

@@ -7,7 +7,7 @@
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A rare treasure for the Pelipper family. When kept in the bag, the Pokémon changes the floor to Rain after using a Special move.",
+"DefaultText": "A rare treasure for the Pelipper family. When kept in the bag, the Pokémon's HP is restored when it eats a food item.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -200,9 +200,7 @@
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],
-"AfterBeingHits": [],
-"OnHitTiles": [],
-"AfterActions": [
+"AfterBeingHits": [
 {
 "Key": {
 "str": [
@@ -212,28 +210,21 @@
 "Value": {
 "$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.CategoryNeededEvent, PMDC",
+"$type": "PMDC.Dungeon.FoodNeededEvent, PMDC",
 "BaseEvents": [
 {
-"$type": "PMDC.Dungeon.GiveMapStatusEvent, PMDC",
-"StatusID": "rain",
-"Counter": 10,
-"MsgOverride": {
-"Key": null
-},
-"States": [
-{
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.ExtendWeatherState"
+"$type": "PMDC.Dungeon.RestoreHPEvent, PMDC",
+"Numerator": 1,
+"Denominator": 3,
+"AffectTarget": true
 }
 ]
 }
-],
-"NeededCategory": 2
-}
 }
 }
 ],
+"OnHitTiles": [],
+"AfterActions": [],
 "UserElementEffects": [],
 "TargetElementEffects": [],
 "ModifyHPs": [],

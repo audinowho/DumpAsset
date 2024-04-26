@@ -1307,8 +1307,8 @@ function COMMON.EndDayCycle()
 		table.insert(SV.base_shop, base_data)
 	end
   
-  --1-2 special item, always
-  type_count = math.random(1, 2)
+  --2 special item, always
+  type_count = 2
 	for ii = 1, type_count, 1 do
 		local base_data = COMMON.SPECIAL[math.random(1, #COMMON.SPECIAL)]
 		table.insert(SV.base_shop, base_data)

@@ -277,8 +277,6 @@ function FLOOR_GEN_SCRIPT.SpawnRandomTutor(map, args)
 	::continue::
   end
   
-
-
   if #valid_moves > 0 then
 	  --choose a random move out of the valid ones
 	  local rand_idx = map.Rand:Next(#valid_moves) + 1
@@ -502,14 +500,14 @@ end
 
 
 function FLOOR_GEN_SCRIPT.SleepingCalderaRevisit(map, args)
-  if not SV.sleeping_caldera.TookMusicBox then
+  if not SV.sleeping_caldera.TreasureTaken then
     return
   end
   
   local item = nil
   
   for ii = 0, map.Items.Count - 1, 1 do
-	if map.Items[ii].Value == "loot_music_box" then
+	if map.Items[ii].Value == "loot_secret_slab" then
 	  item = map.Items[ii]
 	  break
 	end

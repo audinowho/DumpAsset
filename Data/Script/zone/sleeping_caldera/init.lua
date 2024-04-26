@@ -39,8 +39,8 @@ function sleeping_caldera.ExitSegment(zone, result, rescue, segmentID, mapID)
       if item.ID == "box_deluxe" then
 		got_treasure = true
       end
-      if item.ID == "loot_music_box" then
-        SV.sleeping_caldera.TookMusicBox = true
+      if item.ID == "loot_secret_slab" then
+        SV.sleeping_caldera.TreasureTaken = true
 		got_treasure = true
       end
     end
@@ -52,8 +52,8 @@ function sleeping_caldera.ExitSegment(zone, result, rescue, segmentID, mapID)
       if player.EquippedItem.ID == "box_deluxe" then 
 		got_treasure = true
       end
-      if player.EquippedItem.ID == "loot_music_box" then 
-        SV.sleeping_caldera.TookMusicBox = true
+      if player.EquippedItem.ID == "loot_secret_slab" then 
+        SV.sleeping_caldera.TreasureTaken = true
 		got_treasure = true
       end
     end
@@ -78,8 +78,8 @@ function sleeping_caldera.ExitSegment(zone, result, rescue, segmentID, mapID)
       if item.ID == "box_deluxe" then
 		got_treasure = true
       end
-      if item.ID == "loot_music_box" then
-        SV.sleeping_caldera.TookMusicBox = true
+      if item.ID == "loot_secret_slab" then
+        SV.sleeping_caldera.TreasureTaken = true
 		got_treasure = true
       end
     end
@@ -91,8 +91,8 @@ function sleeping_caldera.ExitSegment(zone, result, rescue, segmentID, mapID)
       if player.EquippedItem.ID == "box_deluxe" then 
 		got_treasure = true
       end
-      if player.EquippedItem.ID == "loot_music_box" then 
-        SV.sleeping_caldera.TookMusicBox = true
+      if player.EquippedItem.ID == "loot_secret_slab" then 
+        SV.sleeping_caldera.TreasureTaken = true
 		got_treasure = true
       end
     end

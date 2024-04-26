@@ -79,7 +79,7 @@ end
 
 function ITEM_SCRIPT.SleepingCalderaShift(owner, ownerChar, context, args)
   if not SV.sleeping_caldera.TookTreasure then
-    if context.Item.Value == "box_deluxe" or context.Item.Value == "loot_music_box" then
+    if context.Item.Value == "box_deluxe" or context.Item.Value == "loot_secret_slab" then
 	  SV.sleeping_caldera.TookTreasure = true
 	  GAME:WaitFrames(60)
 	  SOUND:PlayBGM("", false)

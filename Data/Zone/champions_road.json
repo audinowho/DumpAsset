@@ -36895,6 +36895,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",
@@ -41176,11 +41179,45 @@
 "Min": 0,
 "Max": 23
 }
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_heart_scale",
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 23
+}
 }
 ],
 "ItemThemes": [
 {
 "Spawn": {
+"$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
+"Themes": [
+{
+"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
+"Range": [
+"loot_heart_scale"
+],
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 1,
+"Max": 3
+}
+},
+{
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
 "assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
@@ -41189,8 +41226,14 @@
 "UseMapItems": true,
 "UseSpecialItems": true,
 "Amount": {
-"Min": 3,
-"Max": 3
+"Min": 2,
+"Max": 4
+}
+}
+],
+"Amount": {
+"Min": 0,
+"Max": 0
 }
 },
 "Rate": 10,
@@ -41204,11 +41247,10 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemStateType, PMDC",
-"UseType": {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.GummiState"
-},
+"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
+"Range": [
+"loot_heart_scale"
+],
 "UseMapItems": true,
 "UseSpecialItems": true,
 "Amount": {
@@ -44324,15 +44366,24 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_heart_scale"
-],
-"UseMapItems": true,
-"UseSpecialItems": true,
+"$type": "PMDC.LevelGen.ItemThemeBox, PMDC",
+"Spawner": {
+"BoxID": "box_light",
+"BaseSpawner": {
+"$type": "PMDC.LevelGen.SpeciesItemContextSpawner`1[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence]], PMDC",
+"Rarity": {
+"Min": 1,
+"Max": 2
+},
 "Amount": {
 "Min": 1,
-"Max": 4
+"Max": 1
+}
+}
+},
+"Amount": {
+"Min": 1,
+"Max": 3
 }
 },
 {
@@ -44360,13 +44411,34 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
+"$type": "PMDC.LevelGen.ItemThemeBox, PMDC",
+"Spawner": {
+"BoxID": "box_light",
+"BaseSpawner": {
+"$type": "PMDC.LevelGen.SpeciesItemContextSpawner`1[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence]], PMDC",
+"Rarity": {
+"Min": 1,
+"Max": 2
+},
+"Amount": {
+"Min": 1,
+"Max": 1
+}
+}
+},
+"Amount": {
+"Min": 1,
+"Max": 1
+}
+},
+{
 "$type": "PMDC.LevelGen.ItemThemeType, PMDC",
 "UseType": 6,
 "UseMapItems": false,
 "UseSpecialItems": true,
 "Amount": {
-"Min": 3,
-"Max": 5
+"Min": 2,
+"Max": 4
 }
 },
 {
@@ -44398,28 +44470,29 @@
 },
 {
 "Spawn": {
-"$type": "PMDC.LevelGen.ItemStateType, PMDC",
-"UseType": {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.GummiState"
-},
-"UseMapItems": true,
-"UseSpecialItems": true,
-"Amount": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 30,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
+{
+"$type": "PMDC.LevelGen.ItemThemeBox, PMDC",
+"Spawner": {
+"BoxID": "box_light",
+"BaseSpawner": {
+"$type": "PMDC.LevelGen.SpeciesItemContextSpawner`1[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence]], PMDC",
+"Rarity": {
+"Min": 1,
+"Max": 2
+},
+"Amount": {
+"Min": 1,
+"Max": 1
+}
+}
+},
+"Amount": {
+"Min": 1,
+"Max": 1
+}
+},
 {
 "$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
 "Range": [
@@ -44428,8 +44501,45 @@
 "UseMapItems": true,
 "UseSpecialItems": true,
 "Amount": {
+"Min": 3,
+"Max": 6
+}
+}
+],
+"Amount": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 30,
+"Range": {
+"Min": 0,
+"Max": 23
+}
+},
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
+"Themes": [
+{
+"$type": "PMDC.LevelGen.ItemThemeBox, PMDC",
+"Spawner": {
+"BoxID": "box_light",
+"BaseSpawner": {
+"$type": "PMDC.LevelGen.SpeciesItemContextSpawner`1[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence]], PMDC",
+"Rarity": {
 "Min": 1,
-"Max": 4
+"Max": 2
+},
+"Amount": {
+"Min": 1,
+"Max": 1
+}
+}
+},
+"Amount": {
+"Min": 1,
+"Max": 3
 }
 },
 {
@@ -44462,15 +44572,24 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_heart_scale"
-],
-"UseMapItems": true,
-"UseSpecialItems": true,
+"$type": "PMDC.LevelGen.ItemThemeBox, PMDC",
+"Spawner": {
+"BoxID": "box_light",
+"BaseSpawner": {
+"$type": "PMDC.LevelGen.SpeciesItemContextSpawner`1[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence]], PMDC",
+"Rarity": {
+"Min": 1,
+"Max": 2
+},
 "Amount": {
 "Min": 1,
-"Max": 4
+"Max": 1
+}
+}
+},
+"Amount": {
+"Min": 1,
+"Max": 3
 }
 },
 {
@@ -44630,7 +44749,7 @@
 "IsMoney": false,
 "Cursed": false,
 "Value": "box_deluxe",
-"HiddenValue": "xcl_family_ho_oh_beasts_08",
+"HiddenValue": "xcl_family_bird_trio_09",
 "Amount": 0,
 "Price": 0,
 "TileLoc": {
@@ -44645,7 +44764,37 @@
 "IsMoney": false,
 "Cursed": false,
 "Value": "box_deluxe",
-"HiddenValue": "xcl_family_ho_oh_beasts_09",
+"HiddenValue": "xcl_family_bird_trio_10",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "box_deluxe",
+"HiddenValue": "xcl_family_bird_trio_09",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "box_deluxe",
+"HiddenValue": "xcl_family_bird_trio_10",
 "Amount": 0,
 "Price": 0,
 "TileLoc": {
@@ -44676,6 +44825,36 @@
 "Cursed": false,
 "Value": "box_deluxe",
 "HiddenValue": "xcl_family_ho_oh_beasts_13",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "box_deluxe",
+"HiddenValue": "xcl_family_ho_oh_beasts_08",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "box_deluxe",
+"HiddenValue": "xcl_family_ho_oh_beasts_09",
 "Amount": 0,
 "Price": 0,
 "TileLoc": {
@@ -44810,7 +44989,7 @@
 "IsMoney": false,
 "Cursed": false,
 "Value": "box_deluxe",
-"HiddenValue": "xcl_family_lake_trio_06",
+"HiddenValue": "xcl_family_lati_duo_04",
 "Amount": 0,
 "Price": 0,
 "TileLoc": {
@@ -44825,7 +45004,7 @@
 "IsMoney": false,
 "Cursed": false,
 "Value": "box_deluxe",
-"HiddenValue": "xcl_family_lake_trio_07",
+"HiddenValue": "xcl_family_lati_duo_05",
 "Amount": 0,
 "Price": 0,
 "TileLoc": {
@@ -44870,7 +45049,7 @@
 "IsMoney": false,
 "Cursed": false,
 "Value": "box_deluxe",
-"HiddenValue": "xcl_family_heatran_02",
+"HiddenValue": "xcl_family_lake_trio_06",
 "Amount": 0,
 "Price": 0,
 "TileLoc": {
@@ -44885,7 +45064,67 @@
 "IsMoney": false,
 "Cursed": false,
 "Value": "box_deluxe",
-"HiddenValue": "xcl_family_heatran_03",
+"HiddenValue": "xcl_family_lake_trio_07",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "box_deluxe",
+"HiddenValue": "xcl_family_lake_trio_06",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "box_deluxe",
+"HiddenValue": "xcl_family_lake_trio_07",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "box_deluxe",
+"HiddenValue": "xcl_family_lake_trio_06",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "box_deluxe",
+"HiddenValue": "xcl_family_lake_trio_07",
 "Amount": 0,
 "Price": 0,
 "TileLoc": {
@@ -50367,6 +50606,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",

@@ -37823,121 +37823,7 @@
 "Spawn": {
 "IsMoney": false,
 "Cursed": false,
-"Value": "evo_thunder_stone",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "evo_leaf_stone",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "evo_ice_stone",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "evo_fire_stone",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 20
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "evo_water_stone",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 20
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
 "Value": "evo_moon_stone",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 4,
-"Range": {
-"Min": 0,
-"Max": 20
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "evo_leaf_stone",
 "HiddenValue": "",
 "Amount": 0,
 "Price": 0,
@@ -37995,6 +37881,25 @@
 "IsMoney": false,
 "Cursed": false,
 "Value": "evo_sun_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 20
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_reaper_cloth",
 "HiddenValue": "",
 "Amount": 0,
 "Price": 0,
@@ -40695,15 +40600,24 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_heart_scale"
-],
-"UseMapItems": true,
-"UseSpecialItems": true,
+"$type": "PMDC.LevelGen.ItemThemeBox, PMDC",
+"Spawner": {
+"BoxID": "box_light",
+"BaseSpawner": {
+"$type": "PMDC.LevelGen.SpeciesItemContextSpawner`1[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence]], PMDC",
+"Rarity": {
+"Min": 1,
+"Max": 2
+},
 "Amount": {
 "Min": 1,
-"Max": 4
+"Max": 1
+}
+}
+},
+"Amount": {
+"Min": 1,
+"Max": 3
 }
 },
 {
@@ -40731,13 +40645,34 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
+"$type": "PMDC.LevelGen.ItemThemeBox, PMDC",
+"Spawner": {
+"BoxID": "box_light",
+"BaseSpawner": {
+"$type": "PMDC.LevelGen.SpeciesItemContextSpawner`1[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence]], PMDC",
+"Rarity": {
+"Min": 1,
+"Max": 2
+},
+"Amount": {
+"Min": 1,
+"Max": 1
+}
+}
+},
+"Amount": {
+"Min": 1,
+"Max": 1
+}
+},
+{
 "$type": "PMDC.LevelGen.ItemThemeType, PMDC",
 "UseType": 6,
 "UseMapItems": false,
 "UseSpecialItems": true,
 "Amount": {
-"Min": 3,
-"Max": 5
+"Min": 2,
+"Max": 4
 }
 },
 {
@@ -40769,28 +40704,29 @@
 },
 {
 "Spawn": {
-"$type": "PMDC.LevelGen.ItemStateType, PMDC",
-"UseType": {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.GummiState"
-},
-"UseMapItems": true,
-"UseSpecialItems": true,
-"Amount": {
-"Min": 3,
-"Max": 7
-}
-},
-"Rate": 30,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
+{
+"$type": "PMDC.LevelGen.ItemThemeBox, PMDC",
+"Spawner": {
+"BoxID": "box_light",
+"BaseSpawner": {
+"$type": "PMDC.LevelGen.SpeciesItemContextSpawner`1[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence]], PMDC",
+"Rarity": {
+"Min": 1,
+"Max": 2
+},
+"Amount": {
+"Min": 1,
+"Max": 1
+}
+}
+},
+"Amount": {
+"Min": 1,
+"Max": 1
+}
+},
 {
 "$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
 "Range": [
@@ -40799,8 +40735,45 @@
 "UseMapItems": true,
 "UseSpecialItems": true,
 "Amount": {
+"Min": 3,
+"Max": 6
+}
+}
+],
+"Amount": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 30,
+"Range": {
+"Min": 0,
+"Max": 20
+}
+},
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
+"Themes": [
+{
+"$type": "PMDC.LevelGen.ItemThemeBox, PMDC",
+"Spawner": {
+"BoxID": "box_light",
+"BaseSpawner": {
+"$type": "PMDC.LevelGen.SpeciesItemContextSpawner`1[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence]], PMDC",
+"Rarity": {
 "Min": 1,
-"Max": 4
+"Max": 2
+},
+"Amount": {
+"Min": 1,
+"Max": 1
+}
+}
+},
+"Amount": {
+"Min": 1,
+"Max": 3
 }
 },
 {
@@ -40833,15 +40806,24 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_heart_scale"
-],
-"UseMapItems": true,
-"UseSpecialItems": true,
+"$type": "PMDC.LevelGen.ItemThemeBox, PMDC",
+"Spawner": {
+"BoxID": "box_light",
+"BaseSpawner": {
+"$type": "PMDC.LevelGen.SpeciesItemContextSpawner`1[[RogueEssence.LevelGen.BaseMapGenContext, RogueEssence]], PMDC",
+"Rarity": {
+"Min": 1,
+"Max": 2
+},
 "Amount": {
 "Min": 1,
-"Max": 4
+"Max": 1
+}
+}
+},
+"Amount": {
+"Min": 1,
+"Max": 3
 }
 },
 {
@@ -41841,11 +41823,45 @@
 "Min": 0,
 "Max": 20
 }
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_heart_scale",
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 20
+}
 }
 ],
 "ItemThemes": [
 {
 "Spawn": {
+"$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
+"Themes": [
+{
+"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
+"Range": [
+"loot_heart_scale"
+],
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 2,
+"Max": 2
+}
+},
+{
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
 "assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
@@ -41854,28 +41870,14 @@
 "UseMapItems": true,
 "UseSpecialItems": true,
 "Amount": {
-"Min": 2,
+"Min": 1,
 "Max": 4
 }
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 20
 }
-},
-{
-"Spawn": {
-"$type": "PMDC.LevelGen.ItemStateType, PMDC",
-"UseType": {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.GummiState"
-},
-"UseMapItems": true,
-"UseSpecialItems": true,
+],
 "Amount": {
-"Min": 3,
-"Max": 3
+"Min": 0,
+"Max": 0
 }
 },
 "Rate": 10,
@@ -41889,11 +41891,51 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
+"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
+"Range": [
+"loot_heart_scale"
+],
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 1,
+"Max": 3
+}
+},
+{
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
 "assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 2,
+"Max": 4
+}
+}
+],
+"Amount": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 20
+}
+},
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
+"Themes": [
+{
+"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
+"Range": [
+"loot_heart_scale"
+],
 "UseMapItems": true,
 "UseSpecialItems": true,
 "Amount": {
@@ -42797,6 +42839,25 @@
 "Min": 0,
 "Max": 20
 }
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_heart_scale",
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 20
+}
 }
 ],
 "ItemThemes": [
@@ -42807,7 +42868,7 @@
 {
 "$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
 "Range": [
-"loot_pearl"
+"loot_heart_scale"
 ],
 "UseMapItems": true,
 "UseSpecialItems": true,
@@ -42838,6 +42899,21 @@
 },
 {
 "Spawn": {
+"$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
+"Themes": [
+{
+"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
+"Range": [
+"loot_heart_scale"
+],
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 3,
+"Max": 3
+}
+},
+{
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
 "assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
@@ -42846,8 +42922,14 @@
 "UseMapItems": true,
 "UseSpecialItems": true,
 "Amount": {
-"Min": 5,
-"Max": 10
+"Min": 4,
+"Max": 7
+}
+}
+],
+"Amount": {
+"Min": 0,
+"Max": 0
 }
 },
 "Rate": 10,
@@ -43261,6 +43343,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",
@@ -45285,6 +45370,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",

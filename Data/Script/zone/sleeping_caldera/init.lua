@@ -40,7 +40,6 @@ function sleeping_caldera.ExitSegment(zone, result, rescue, segmentID, mapID)
 		got_treasure = true
       end
       if item.ID == "loot_secret_slab" then
-        SV.sleeping_caldera.TreasureTaken = true
 		got_treasure = true
       end
     end
@@ -53,7 +52,6 @@ function sleeping_caldera.ExitSegment(zone, result, rescue, segmentID, mapID)
 		got_treasure = true
       end
       if player.EquippedItem.ID == "loot_secret_slab" then 
-        SV.sleeping_caldera.TreasureTaken = true
 		got_treasure = true
       end
     end
@@ -79,7 +77,6 @@ function sleeping_caldera.ExitSegment(zone, result, rescue, segmentID, mapID)
 		got_treasure = true
       end
       if item.ID == "loot_secret_slab" then
-        SV.sleeping_caldera.TreasureTaken = true
 		got_treasure = true
       end
     end
@@ -92,7 +89,6 @@ function sleeping_caldera.ExitSegment(zone, result, rescue, segmentID, mapID)
 		got_treasure = true
       end
       if player.EquippedItem.ID == "loot_secret_slab" then 
-        SV.sleeping_caldera.TreasureTaken = true
 		got_treasure = true
       end
     end

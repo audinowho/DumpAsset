@@ -500,7 +500,7 @@ end
 
 
 function FLOOR_GEN_SCRIPT.SleepingCalderaRevisit(map, args)
-  if not _DATA.Save.ActiveTeam.Storage:ContainsKey("loot_secret_slab") then
+  if not SV.sleeping_caldera.TreasureTaken then
     return
   end
   

@@ -20,6 +20,11 @@ function sleeping_caldera.EnterSegment(zone, rescuing, segmentID, mapID)
     COMMON.BeginDungeon(zone.ID, segmentID, mapID)
   end
   SV.sleeping_caldera.TookTreasure = false
+  if _DATA.Save.ActiveTeam.Storage:ContainsKey("loot_secret_slab") then
+    SV.sleeping_caldera.TreasureTaken = true
+  else
+    SV.sleeping_caldera.TreasureTaken = false
+  end
 end
 
 function sleeping_caldera.ExitSegment(zone, result, rescue, segmentID, mapID)

@@ -142,7 +142,7 @@ function SINGLE_CHAR_SCRIPT.SleepingCalderaSummonHeatran(owner, ownerChar, conte
 	  local new_team = RogueEssence.Dungeon.MonsterTeam()
 	  local mob_data = RogueEssence.Dungeon.CharData()
 	  mob_data.BaseForm = RogueEssence.Dungeon.MonsterID("heatran", 0, "normal", Gender.Male)
-	  mob_data.Level = 40;
+	  mob_data.Level = 50;
 	  mob_data.BaseSkills[0] = RogueEssence.Dungeon.SlotSkill("magma_storm")
 	  mob_data.BaseSkills[1] = RogueEssence.Dungeon.SlotSkill("iron_head")
 	  mob_data.BaseSkills[2] = RogueEssence.Dungeon.SlotSkill("scary_face")

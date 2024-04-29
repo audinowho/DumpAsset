@@ -21,7 +21,7 @@
 "BagSize": -1,
 "Persistent": true,
 "Rescues": 2,
-"Rogue": 2,
+"Rogue": 3,
 "Segments": [
 {
 "$type": "RogueEssence.LevelGen.LayeredSegment, RogueEssence",
@@ -854,6 +854,53 @@
 "Spawner": {
 "$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
 "$values": []
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 1
+}
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+6,
+1
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.RandBag`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"IsMoney": false,
+"Cursed": false,
+"Value": "machine_recall_box",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+}
+],
+"removeOnRoll": false
 },
 "AmountSpawner": {
 "$type": "RogueElements.RandRange, RogueElements",
@@ -31391,7 +31438,7 @@
 },
 {
 "Spawn": {
-"ID": "tm_recycle",
+"ID": "tm_hyper_beam",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,
@@ -31433,7 +31480,7 @@
 },
 {
 "Spawn": {
-"ID": "tm_telekinesis",
+"ID": "tm_protect",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,
@@ -32071,8 +32118,8 @@
 "Gender": -1
 },
 "Level": {
-"Min": 28,
-"Max": 28
+"Min": 27,
+"Max": 27
 },
 "SpecifiedSkills": [
 "flame_charge"

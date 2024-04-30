@@ -1,10 +1,15 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Sleeping Caldera",
-"LocalTexts": {}
+"LocalTexts": {
+"de": "Schlafende Caldera",
+"es": "Caldera Durmiente",
+"it": "Caldera Dormiente",
+"zh-hans": "沉睡火山口"
+}
 },
 "Released": true,
 "Comment": "",
@@ -20464,30 +20469,11 @@
 "Value": {
 "$type": "RogueElements.ResizeFloorStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
 "AddedSize": {
-"X": 20,
-"Y": 16
+"X": 22,
+"Y": 22
 },
 "ExpandDir": -1,
 "SpaceExpandDir": 7
-}
-},
-{
-"Key": {
-"str": [
--2,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.ClampFloorStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
-"MinSize": {
-"X": 0,
-"Y": 0
-},
-"MaxSize": {
-"X": 78,
-"Y": 54
-}
 }
 },
 {
@@ -20561,6 +20547,9 @@
 },
 {
 "$type": "PMDC.LevelGen.NoEventRoom, PMDC"
+},
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
 }
 ],
 "GenericHalls": {
@@ -20587,6 +20576,25 @@
 ]
 },
 "HallComponents": []
+}
+},
+{
+"Key": {
+"str": [
+-2,
+2
+]
+},
+"Value": {
+"$type": "RogueElements.ClampFloorStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueElements",
+"MinSize": {
+"X": 0,
+"Y": 0
+},
+"MaxSize": {
+"X": 78,
+"Y": 54
+}
 }
 },
 {
@@ -30070,8 +30078,13 @@
 ]
 },
 "Name": {
-"DefaultText": "Sleeping Caldera\nB{0}F",
-"LocalTexts": {}
+"DefaultText": "Sleeping Caldera\\nB{0}F",
+"LocalTexts": {
+"de": "Schlafende Caldera\\nU{0}",
+"es": "Caldera Durmiente\\nP-{0}",
+"it": "Caldera Dormiente\\nP-{0}",
+"zh-hans": "沉睡火山口\\nB{0}F"
+}
 },
 "Priority": {
 "str": [
@@ -30096,7 +30109,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]

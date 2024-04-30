@@ -133,13 +133,13 @@ function UpgradeTools:OnUpgrade()
     SV.sleeping_caldera = 
     {
       TookTreasure  = false,
-      TookMusicBox  = false,
+      TreasureTaken  = false,
       GotHeatran = false
     }
   end
   
-  if SV.sleeping_caldera.TookMusicBox == nil then
-    SV.sleeping_caldera.TookMusicBox = false
+  if SV.sleeping_caldera.TreasureTaken == nil then
+    SV.sleeping_caldera.TreasureTaken = false
   end
   
   if SV.dex == nil then
@@ -447,6 +447,10 @@ function UpgradeTools:OnUpgrade()
     SV.family.Grandma = true
   end
   
+  if SV.missions.Missions["EscortFather"] ~= nil and SV.missions.Missions["EscortFather"].DestZone == "snowbound_path" then
+    SV.missions.Missions["EscortFather"] = nil
+  end
+  
   if SV.family.BrotherActiveDays == nil then
     SV.family.BrotherActiveDays = 0
 	SV.family.Brother = false
@@ -481,6 +485,10 @@ function UpgradeTools:OnUpgrade()
   
   if SV.adventure.Tutors == nil then
     SV.adventure.Tutors = { }
+  end
+  
+  if SV.Experimental == nil then
+    SV.Experimental = false
   end
   
   if SV.MissionsEnabled == true then

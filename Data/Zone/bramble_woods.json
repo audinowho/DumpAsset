@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -59,7 +59,7 @@
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "CellWidth": 10,
 "CellHeight": 10,
-"CellX": 4,
+"CellX": 3,
 "CellY": 3,
 "CellWall": 1,
 "Wrap": false
@@ -513,7 +513,7 @@
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "CellWidth": 10,
 "CellHeight": 10,
-"CellX": 4,
+"CellX": 3,
 "CellY": 3,
 "CellWall": 1,
 "Wrap": false
@@ -967,7 +967,7 @@
 "$type": "RogueElements.InitGridPlanStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueElements",
 "CellWidth": 10,
 "CellHeight": 10,
-"CellX": 4,
+"CellX": 3,
 "CellY": 3,
 "CellWall": 1,
 "Wrap": false
@@ -1422,7 +1422,7 @@
 "CellWidth": 9,
 "CellHeight": 9,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -2018,7 +2018,7 @@
 "CellWidth": 9,
 "CellHeight": 9,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -2891,7 +2891,7 @@
 ]
 },
 "Value": {
-"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.LevelGen.MoneySpawn, RogueEssence]], RogueElements",
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
 "IncludeHalls": false,
 "Filters": [
 {
@@ -2900,17 +2900,19 @@
 }
 ],
 "Spawn": {
-"$type": "RogueEssence.LevelGen.BulkSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.LevelGen.MoneySpawn, RogueEssence]], RogueEssence",
-"SpecificSpawns": [
-{
-"Amount": 100
+"$type": "RogueEssence.LevelGen.BoxSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"BoxID": "box_light",
+"BaseSpawner": {
+"$type": "PMDC.LevelGen.SpeciesItemContextSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"Rarity": {
+"Min": 1,
+"Max": 2
 },
-{
-"Amount": 100
+"Amount": {
+"Min": 1,
+"Max": 1
 }
-],
-"RandomSpawns": [],
-"SpawnAmount": 0
+}
 }
 }
 },
@@ -2994,7 +2996,7 @@
 "CellWidth": 9,
 "CellHeight": 9,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -3705,7 +3707,7 @@
 "CellWidth": 9,
 "CellHeight": 9,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -4531,8 +4533,8 @@
 ]
 },
 "StartAmount": {
-"Min": 55,
-"Max": 60
+"Min": 75,
+"Max": 80
 },
 "AddAmount": {
 "Min": 4,
@@ -4540,7 +4542,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -4898,20 +4900,6 @@
 "Spawns": [
 {
 "Spawn": {
-"ID": "apricorn_blue",
-"Cursed": false,
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0
-},
-"Rate": 2,
-"Range": {
-"Min": 0,
-"Max": 7
-}
-},
-{
-"Spawn": {
 "ID": "apricorn_green",
 "Cursed": false,
 "HiddenValue": "",
@@ -4927,34 +4915,6 @@
 {
 "Spawn": {
 "ID": "apricorn_white",
-"Cursed": false,
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0
-},
-"Rate": 2,
-"Range": {
-"Min": 0,
-"Max": 7
-}
-},
-{
-"Spawn": {
-"ID": "apricorn_red",
-"Cursed": false,
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0
-},
-"Rate": 2,
-"Range": {
-"Min": 0,
-"Max": 7
-}
-},
-{
-"Spawn": {
-"ID": "apricorn_yellow",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,
@@ -7686,8 +7646,8 @@
 ]
 },
 "StartAmount": {
-"Min": 95,
-"Max": 140
+"Min": 115,
+"Max": 160
 },
 "AddAmount": {
 "Min": 4,
@@ -7695,7 +7655,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -10514,7 +10474,7 @@
 {
 "$type": "PMDC.Dungeon.DestState, PMDC",
 "Dest": {
-"Segment": -3,
+"Segment": -2,
 "ID": 1
 },
 "Relative": true,
@@ -10860,6 +10820,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",
@@ -12975,7 +12938,7 @@
 {
 "$type": "PMDC.Dungeon.DestState, PMDC",
 "Dest": {
-"Segment": -3,
+"Segment": -2,
 "ID": 1
 },
 "Relative": true,
@@ -13321,6 +13284,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",
@@ -15436,7 +15402,7 @@
 {
 "$type": "PMDC.Dungeon.DestState, PMDC",
 "Dest": {
-"Segment": -3,
+"Segment": -2,
 "ID": 1
 },
 "Relative": true,
@@ -15782,6 +15748,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",
@@ -17893,7 +17862,7 @@
 {
 "$type": "PMDC.Dungeon.DestState, PMDC",
 "Dest": {
-"Segment": -3,
+"Segment": -2,
 "ID": 1
 },
 "Relative": true,
@@ -18239,6 +18208,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",
@@ -20354,7 +20326,7 @@
 {
 "$type": "PMDC.Dungeon.DestState, PMDC",
 "Dest": {
-"Segment": -3,
+"Segment": -2,
 "ID": 1
 },
 "Relative": true,
@@ -20700,6 +20672,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",
@@ -22815,7 +22790,7 @@
 {
 "$type": "PMDC.Dungeon.DestState, PMDC",
 "Dest": {
-"Segment": -3,
+"Segment": -2,
 "ID": 1
 },
 "Relative": true,
@@ -23161,6 +23136,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",

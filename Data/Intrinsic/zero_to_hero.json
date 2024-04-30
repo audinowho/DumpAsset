@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
 "Name": {
@@ -15,10 +15,10 @@
 }
 },
 "Desc": {
-"DefaultText": "",
+"DefaultText": "The Pokémon switches between Zero Form and Hero Form when entering a new floor.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 278,
 "ProximityEvent": {
@@ -62,7 +62,21 @@
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
 "OnMapStatusRemoves": [],
-"OnMapStarts": [],
+"OnMapStarts": [
+{
+"Key": {
+"str": [
+-10
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RevolvingFormeEvent, PMDC",
+"ReqSpecies": "palfin",
+"Form1": 0,
+"Form2": 1
+}
+}
+],
 "OnTurnStarts": [],
 "OnTurnEnds": [],
 "OnMapTurnEnds": [],

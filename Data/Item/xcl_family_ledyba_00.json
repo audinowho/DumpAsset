@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
@@ -14,15 +14,15 @@
 }
 },
 "Desc": {
-"DefaultText": "An exclusive item for the Ledian family. When kept in the bag, the Pokémon's Defense is raised slightly when it uses a Status move.",
+"DefaultText": "An exclusive item for the Ledian family. When kept in the bag, the Pokémon's Status moves may increase the user's Movement Speed.",
 "LocalTexts": {
-"fr-ca": "Un objet exclusif pour la famille de Ledian. When kept in the bag, the Pokémon's Defense is raised slightly when it uses a Status move.",
-"de": "Ein exklusives Item für die Ledian Familie. Wenn es innerhalb des Beutels getragen wird, erhöht sich der Verteidigung-Wert vom Pokémon ein wenig, wenn es eine Status-Attacke verwendet.",
-"es": "Un objeto exclusivo para la familia Ledian. When kept in the bag, the Pokémon's Defense is raised slightly when it uses a Status move.",
-"pt": "Um item exclusivo para a familia Ledian. When kept in the bag, the Pokémon's Defense is raised slightly when it uses a Status move.",
-"it": "Uno strumento esclusivo per la famiglia di Ledian. When kept in the bag, the Pokémon's Defense is raised slightly when it uses a Status move.",
-"ko": "레디안 라인에게 한정된 아이템. When kept in the bag, the Pokémon's Defense is raised slightly when it uses a Status move.",
-"zh-hans": "安瓢虫一家的专属道具。放在包里时，使用变化招式后会提高防御。"
+"fr-ca": "Un objet exclusif pour la famille de Ledian. When kept in the bag, the Pokémon's Status moves may increase the user's Movement Speed.",
+"de": "Ein exklusives Item für die Ledian Familie. When kept in the bag, the Pokémon's Status moves may increase the user's Movement Speed.",
+"es": "Un objeto exclusivo para la familia Ledian. When kept in the bag, the Pokémon's Status moves may increase the user's Movement Speed.",
+"pt": "Um item exclusivo para a familia Ledian. When kept in the bag, the Pokémon's Status moves may increase the user's Movement Speed.",
+"it": "Uno strumento esclusivo per la famiglia di Ledian. When kept in the bag, the Pokémon's Status moves may increase the user's Movement Speed.",
+"ko": "레디안 라인에게 한정된 아이템. When kept in the bag, the Pokémon's Status moves may increase the user's Movement Speed.",
+"zh-hans": "安瓢虫一家的专属道具。When kept in the bag, the Pokémon's Status moves may increase the user's Movement Speed."
 }
 },
 "Released": true,
@@ -30,8 +30,8 @@
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 4000,
-"Rarity": 5,
+"Price": 2400,
+"Rarity": 3,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
@@ -230,9 +230,12 @@
 "$type": "PMDC.Dungeon.CategoryNeededEvent, PMDC",
 "BaseEvents": [
 {
+"$type": "PMDC.Dungeon.OnHitAnyEvent, PMDC",
+"BaseEvents": [
+{
 "$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
 "Stack": 1,
-"StatusID": "mod_defense",
+"StatusID": "mod_speed",
 "AffectTarget": false,
 "SilentCheck": true,
 "Anonymous": false,
@@ -240,6 +243,10 @@
 "Key": "MSG_EXCL_ITEM_TYPE"
 },
 "Anims": []
+}
+],
+"RequireDamage": false,
+"Chance": 25
 }
 ],
 "NeededCategory": 3

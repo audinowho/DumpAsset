@@ -462,7 +462,7 @@ function COMMON.GiftKeyItem(player, item_name)
   
   -- item names are expected to be passed in without formatting
   -- the standard color for event items is always green
-  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_RECEIVE_ITEM"):ToLocal(), player:GetDisplayName(), string.format("[color=#00FF00]%s[color]", item_name)))
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_RECEIVE_KEY_ITEM"):ToLocal(), player:GetDisplayName(), string.format("[color=#00FF00]%s[color]", item_name)))
   UI:ImportSpeakerSettings(orig_settings)
 end
 
@@ -1393,7 +1393,12 @@ function COMMON.EndDungeonDay(result, zoneId, structureId, mapId, entryId)
       result = UI:ChoiceResult()
       GAME:WaitFrames(50);
       if result then
-        local config = RogueEssence.Data.RogueConfig.RerollFromOther(_DATA.Save.Config)
+	    local curConfig = _DATA.Save.Config
+		-- set current save file to main save file, this is to get the right starterlist
+		-- this is hacky since it sets the current save file in an inconsisten state with the lua, but it's technically the most accurate way in lua
+		-- also this state won't last long- it'll be cleared on our reset
+		_DATA.Save = _DATA:GetProgress()
+		local config = RogueEssence.Data.RogueConfig.RerollFromOther(curConfig)
         GAME:RestartRogue(config)
       else 
         GAME:RestartToTitle()
@@ -1590,8 +1595,8 @@ function COMMON.EndDayCycle()
 		table.insert(SV.base_shop, base_data)
 	end
   
-  --1-2 special item, always
-  type_count = math.random(1, 2)
+  --2 special item, always
+  type_count = 2
 	for ii = 1, type_count, 1 do
 		local base_data = COMMON.SPECIAL[math.random(1, #COMMON.SPECIAL)]
 		table.insert(SV.base_shop, base_data)

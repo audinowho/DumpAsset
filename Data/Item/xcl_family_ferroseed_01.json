@@ -1,0 +1,241 @@
+﻿{
+"Version": "0.8.0.0",
+"Object": {
+"$type": "RogueEssence.Data.ItemData, RogueEssence",
+"Name": {
+"DefaultText": "Ferrothorn Shield",
+"LocalTexts": {
+"fr": "Bouclier de Noacier",
+"de": "Tentantel Schild",
+"es": "Escudo Ferrothorn",
+"it": "Scudo Ferrothorn",
+"zh-hans": "坚果哑铃护盾"
+}
+},
+"Desc": {
+"DefaultText": "An exclusive item for the Ferrothorn family. When kept in the bag, the Pokémon will step in to take Poison-type attacks for nearby allies.",
+"LocalTexts": {
+"fr-ca": "Un objet exclusif pour la famille de Ferrothorn. When kept in the bag, the Pokémon will step in to take Poison-type attacks for nearby allies.",
+"de": "Ein exklusives Item für die Tentantel Familie. Wenn es innerhalb des Beutels getragen wird, übernimmt das Pokémon Schaden vom Typ Gift von nahen Verbündeten.",
+"es": "Un objeto exclusivo para la familia Ferrothorn. When kept in the bag, the Pokémon will step in to take Poison-type attacks for nearby allies.",
+"pt": "Um item exclusivo para a familia Ferrothorn. When kept in the bag, the Pokémon will step in to take Poison-type attacks for nearby allies.",
+"it": "Uno strumento esclusivo per la famiglia di Ferrothorn. When kept in the bag, the Pokémon will step in to take Poison-type attacks for nearby allies.",
+"ko": "너트령 라인에게 한정된 아이템. When kept in the bag, the Pokémon will step in to take Poison-type attacks for nearby allies.",
+"zh-hans": "坚果哑铃一家的专属道具。放在包里时，这只宝可梦会替附近的队友抵挡毒属性攻击。"
+}
+},
+"Released": true,
+"Comment": "",
+"Sprite": "Box_Yellow",
+"Icon": 10,
+"SortCategory": 17,
+"Price": 1600,
+"Rarity": 2,
+"MaxStack": 0,
+"CannotDrop": true,
+"BagEffect": true,
+"ItemStates": [
+{
+"$type": "PMDC.Dungeon.ExclusiveState, PMDC",
+"ItemType": 66
+},
+{
+"$type": "PMDC.Dungeon.FamilyState, PMDC",
+"Members": [
+"ferroseed",
+"ferrothorn"
+]
+},
+{
+"$type": "RogueEssence.Dungeon.MaterialState, RogueEssence"
+}
+],
+"GroundUseActions": [],
+"UseAction": {
+"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
+"HitTiles": false,
+"BurstTiles": 0,
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"WideAngle": 0,
+"CharAnimData": {
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
+},
+"TargetAlignments": 0,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"PreActions": [],
+"ActionFX": {
+"Delay": 0,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+"LagBehindTime": 0
+},
+"Explosion": {
+"TargetAlignments": 0,
+"HitTiles": false,
+"Range": 0,
+"Speed": 0,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
+"LocHeight": 0
+},
+"IntroFX": [],
+"ExplodeFX": {
+"Delay": 0,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+},
+"UseEvent": {
+"Element": "none",
+"Category": 0,
+"HitRate": -1,
+"SkillStates": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeExplosions": [],
+"BeforeHits": [],
+"OnHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"ElementEffects": [],
+"IntroFX": [],
+"HitFX": {
+"Delay": 0,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+"HitCharAction": {
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
+}
+},
+"UsageType": 8,
+"ArcThrow": false,
+"BreakOnThrow": false,
+"ThrowAnim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"ProximityEvent": {
+"Radius": 1,
+"TargetAlignments": 4,
+"BeforeExplosions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.DrawAttackEvent, PMDC",
+"Element": "poison",
+"DrawFrom": 2,
+"Msg": {
+"Key": "MSG_DRAW_ATTACK"
+}
+}
+}
+],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+}
+}

@@ -1,27 +1,28 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Shedinja Mask",
+"DefaultText": "Florges Bow",
 "LocalTexts": {
-"fr": "Masque de Munja",
-"de": "Ninjatom Maske",
-"es": "Máscara Shedinja",
-"it": "Maschera Shedinja",
-"zh-hans": "脱壳忍者兜帽"
+"fr": "Ruban de Florges",
+"de": "Florges Bogen",
+"es": "Lazo Florges",
+"pt": "Laço Florges",
+"it": "Fiocco Florges",
+"zh-hans": "花洁夫人缎带"
 }
 },
 "Desc": {
-"DefaultText": "An exclusive item for Shedinja. When kept in the bag, the Pokémon can traverse water, lava, and pits.",
+"DefaultText": "An exclusive item for the Florges family. When kept in the bag, it reduces damage done by Poison-type attacks.",
 "LocalTexts": {
-"fr-ca": "Un object exclusif pour Shedinja When kept in the bag, the Pokémon can traverse water, lava, and pits.",
-"de": "Ein exklusives Item für Ninjatom. Wenn es innerhalb des Beutels getragen wird, kann das Pokémon über Wasser, Lava und Schluchten laufen.",
-"es": "Un objeto exclusivo para Shedinja. Al llevarlo en la bolsa, el Pokémon puede atravesar agua, lava y agujeros. ",
-"pt": "Um item exclusivo para Shedinja. When kept in the bag, the Pokémon can traverse water, lava, and pits.",
-"it": "Uno strumento esclusivo per Shedinja. Quando tenuto in borsa, il Pokémon può attraversare acqua, lava, e buche.",
-"ko": "껍질몬에게 한정된 아이템. When kept in the bag, the Pokémon can traverse water, lava, and pits.",
-"zh-hans": "脱壳忍者的专属道具。放在包里时，宝可梦可以穿越水、岩浆和坑。"
+"fr-ca": "Un objet exclusif pour la famille de Florges. When kept in the bag, it reduces damage done by Poison-type attacks.",
+"de": "Ein exklusives Item für die Florges Familie. Wenn es innerhalb des Beutels getragen wird, reduziert es den Schaden von Gift-Typ Angriffen.",
+"es": "Un objeto exclusivo para la familia Florges. When kept in the bag, it reduces damage done by Poison-type attacks.",
+"pt": "Um item exclusivo para a familia Florges. When kept in the bag, it reduces damage done by Poison-type attacks.",
+"it": "Uno strumento esclusivo per la famiglia di Florges. When kept in the bag, it reduces damage done by Poison-type attacks.",
+"ko": "플라제스 라인에게 한정된 아이템. When kept in the bag, it reduces damage done by Poison-type attacks.",
+"zh-hans": "花洁夫人一家的专属道具。放在包里时，减少受到的毒属性招式伤害。"
 }
 },
 "Released": true,
@@ -29,20 +30,22 @@
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 3200,
-"Rarity": 4,
+"Price": 2400,
+"Rarity": 3,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 63
+"ItemType": 48
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
-"shedinja"
+"flabebe",
+"floette",
+"florges"
 ]
 },
 {
@@ -206,55 +209,60 @@
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
-"OnRefresh": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
-"Mobility": 1
-}
-}
-},
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
-"Mobility": 4
-}
-}
-},
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
-"Mobility": 2
-}
-}
-}
-],
+"OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
 "BeforeHittings": [],
-"BeforeBeingHits": [],
+"BeforeBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.MultiplyElementEvent, PMDC",
+"MultElement": "poison",
+"Numerator": 1,
+"Denominator": 2,
+"Anims": [
+{
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Small_Blue_In",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"Sound": "DUN_Screen_Hit",
+"AffectTarget": true,
+"Delay": 10
+}
+],
+"Msg": false
+}
+}
+}
+],
 "AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],

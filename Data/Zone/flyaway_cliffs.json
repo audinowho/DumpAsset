@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -60,7 +60,7 @@
 "CellWidth": 10,
 "CellHeight": 10,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -637,7 +637,7 @@
 "CellWidth": 10,
 "CellHeight": 10,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -1214,7 +1214,7 @@
 "CellWidth": 10,
 "CellHeight": 10,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -1951,7 +1951,7 @@
 "CellWidth": 10,
 "CellHeight": 10,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -2688,7 +2688,7 @@
 "CellWidth": 10,
 "CellHeight": 10,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -3425,7 +3425,7 @@
 "CellWidth": 10,
 "CellHeight": 10,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -4162,7 +4162,7 @@
 "CellWidth": 10,
 "CellHeight": 10,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -4899,7 +4899,7 @@
 "CellWidth": 10,
 "CellHeight": 10,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -5636,7 +5636,7 @@
 "CellWidth": 10,
 "CellHeight": 10,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -6373,7 +6373,7 @@
 "CellWidth": 10,
 "CellHeight": 10,
 "CellX": 4,
-"CellY": 4,
+"CellY": 3,
 "CellWall": 1,
 "Wrap": false
 }
@@ -7292,8 +7292,8 @@
 ]
 },
 "StartAmount": {
-"Min": 85,
-"Max": 90
+"Min": 125,
+"Max": 130
 },
 "AddAmount": {
 "Min": 8,
@@ -7301,7 +7301,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -8405,7 +8405,7 @@
 "poison_jab"
 ],
 "Intrinsic": "defiant",
-"Tactic": "wander_dumb",
+"Tactic": "wander_normal",
 "SpawnConditions": [],
 "SpawnFeatures": [
 {
@@ -9240,13 +9240,261 @@
 }
 }
 ],
-"Items": [],
+"Items": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "medicine_elixir",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 200,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "medicine_potion",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 200,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "medicine_max_potion",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 100,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "medicine_full_heal",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 200,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "medicine_x_attack",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 50,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "medicine_x_defense",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 50,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "medicine_x_sp_atk",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 50,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "medicine_x_sp_def",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 50,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "medicine_x_speed",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 50,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "medicine_x_accuracy",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 50,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "medicine_dire_hit",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 50,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "seed_reviver",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 200,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "machine_recall_box",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 500,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+}
+],
 "ItemAmount": {
 "nodes": [
 {
 "Item": {
 "Min": 0,
-"Max": 0
+"Max": 2
 },
 "Range": {
 "Min": 0,
@@ -9367,7 +9615,7 @@
 "$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
 "Min": 1,
 "Max": 8,
-"Rate": 35
+"Rate": 40
 },
 "Replaceable": false,
 "FloorRange": {
@@ -9430,9 +9678,10 @@
 "SpreadPlan": {
 "$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
 "Quota": {
-"$type": "RogueElements.RandRange, RogueElements",
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
 "Min": 1,
-"Max": 1
+"Max": 6,
+"Rate": 30
 },
 "Replaceable": false,
 "FloorRange": {
@@ -9442,7 +9691,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.StairsModGenState"
 }
 ]
@@ -9641,6 +9890,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",
@@ -9793,7 +10045,7 @@
 "Spawn": {
 "BaseForm": {
 "Species": "vivillon",
-"Form": 0,
+"Form": 2,
 "Skin": "",
 "Gender": -1
 },
@@ -12087,6 +12339,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",
@@ -14548,6 +14803,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",
@@ -17009,6 +17267,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",

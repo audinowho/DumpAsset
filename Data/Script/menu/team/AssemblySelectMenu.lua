@@ -295,15 +295,16 @@ end
 
 --- Creates a basic ``TeamSelectMenu`` instance using the provided list and callbacks, then runs it and returns its output.
 --- @param filter function a function that takes a ``RogueEssence.Dungeon.Character`` object and returns a boolean. Any character that does not pass this check will have its option disabled in the menu. Defaults to ``return true``.
+--- @param use_submenu boolean whether or not to call the ``AssemblySelectSubMenu`` before returning. Defaults to true.
 --- @return userdata the selected character if one was chosen in the menu; ``nil`` otherwise.
-function AssemblySelectMenu.run(filter)
+function AssemblySelectMenu.run(filter, use_submenu)
     local ret
     local choose = function(char)
         ret = char
         _MENU:RemoveMenu()
     end
     local refuse = function() _MENU:RemoveMenu() end
-    local menu = AssemblySelectMenu:new(filter, choose, refuse)
+    local menu = AssemblySelectMenu:new(filter, choose, refuse, use_submenu)
     UI:SetCustomMenu(menu.menu)
     UI:WaitForChoice()
     return ret
@@ -312,8 +313,9 @@ end
 
 --- Creates a basic ``TeamMultiSelectMenu`` instance using the provided list and callbacks, then runs it and returns its output.
 --- @param filter function a function that takes a ``RogueEssence.Dungeon.Character`` object and returns a boolean. Any character that does not pass this check will have its option disabled in the menu. Defaults to ``return true``.
+--- @param use_submenu boolean whether or not to call the ``AssemblySelectSubMenu`` before returning. Defaults to true. Only appears if a character is chosen without selecting.
 --- @return table the list of selected characters if at least one was chosen in the menu; ``nil`` otherwise.
-function AssemblyMultiSelectMenu.runMultiMenu(filter)
+function AssemblyMultiSelectMenu.runMultiMenu(filter, use_submenu)
     local ret = {}
 
     local choose = function(chars)
@@ -322,7 +324,7 @@ function AssemblyMultiSelectMenu.runMultiMenu(filter)
     end
 
     local refuse = function() _MENU:RemoveMenu() end
-    local menu = AssemblyMultiSelectMenu:new(filter, choose, refuse)
+    local menu = AssemblyMultiSelectMenu:new(filter, choose, refuse, use_submenu)
     UI:SetCustomMenu(menu.menu)
     UI:WaitForChoice()
     return ret

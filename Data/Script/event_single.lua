@@ -78,7 +78,7 @@ function SINGLE_CHAR_SCRIPT.SleepingCalderaAltTiles(owner, ownerChar, context, a
 		end
 	  end
 	  --also remove any stairs down
-	  if tl.Effect.ID == "stairs_go_down" then
+	  if tl.Effect.ID == "stairs_go_down" or tl.Effect.ID == "tile_boss" then
 		tl.Effect = RogueEssence.Dungeon.EffectTile(loc)
 	  end
 	end
@@ -89,11 +89,16 @@ function SINGLE_CHAR_SCRIPT.SleepingCalderaAltTiles(owner, ownerChar, context, a
     _ZONE.CurrentMap.TextureMap["unbreakable"] = RogueEssence.Dungeon.AutoTile("dark_crater_wall")
     _ZONE.CurrentMap.TextureMap["wall"] = RogueEssence.Dungeon.AutoTile("dark_crater_wall")
     _ZONE.CurrentMap.TextureMap["floor"] = RogueEssence.Dungeon.AutoTile("dark_crater_floor")
-  else
+  elseif _ZONE.CurrentMap.ID < 14 then
     _ZONE.CurrentMap.BlankBG = RogueEssence.Dungeon.AutoTile("deep_dark_crater_wall")
     _ZONE.CurrentMap.TextureMap["unbreakable"] = RogueEssence.Dungeon.AutoTile("deep_dark_crater_wall")
     _ZONE.CurrentMap.TextureMap["wall"] = RogueEssence.Dungeon.AutoTile("deep_dark_crater_wall")
     _ZONE.CurrentMap.TextureMap["floor"] = RogueEssence.Dungeon.AutoTile("deep_dark_crater_floor")
+  else
+    _ZONE.CurrentMap.BlankBG = RogueEssence.Dungeon.AutoTile("magma_cavern_3_wall")
+    _ZONE.CurrentMap.TextureMap["unbreakable"] = RogueEssence.Dungeon.AutoTile("magma_cavern_3_wall")
+    _ZONE.CurrentMap.TextureMap["wall"] = RogueEssence.Dungeon.AutoTile("magma_cavern_3_wall")
+    _ZONE.CurrentMap.TextureMap["floor"] = RogueEssence.Dungeon.AutoTile("magma_cavern_3_floor")
   end
   --call recalculate all autotiles for the entire map
   _ZONE.CurrentMap:CalculateAutotiles(RogueElements.Loc(0, 0), RogueElements.Loc(_ZONE.CurrentMap.Width, _ZONE.CurrentMap.Height))
@@ -140,7 +145,7 @@ function SINGLE_CHAR_SCRIPT.SleepingCalderaSummonHeatran(owner, ownerChar, conte
 	  local new_team = RogueEssence.Dungeon.MonsterTeam()
 	  local mob_data = RogueEssence.Dungeon.CharData()
 	  mob_data.BaseForm = RogueEssence.Dungeon.MonsterID("heatran", 0, "normal", Gender.Male)
-	  mob_data.Level = 40;
+	  mob_data.Level = 50;
 	  mob_data.BaseSkills[0] = RogueEssence.Dungeon.SlotSkill("magma_storm")
 	  mob_data.BaseSkills[1] = RogueEssence.Dungeon.SlotSkill("iron_head")
 	  mob_data.BaseSkills[2] = RogueEssence.Dungeon.SlotSkill("scary_face")

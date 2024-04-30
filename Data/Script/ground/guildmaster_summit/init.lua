@@ -346,7 +346,7 @@ function guildmaster_summit.PostBattle()
 	SV.guildmaster_trail.FloorsCleared = 30
   end
   COMMON.EndDayCycle()
-  GAME:EndDungeonRun(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 1, 0, true, false, dungeon_to_clear)
+  GAME:EndDungeonRun(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 1, 0, false, false, dungeon_to_clear)
   GAME:RestartToTitle()
 end
 

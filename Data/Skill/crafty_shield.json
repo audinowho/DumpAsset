@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -30,25 +30,27 @@
 "zh-hant": "使用神奇的力量 防禦住攻擊我方的變化招式。 但無法防禦住攻擊招式的攻擊。"
 }
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 578,
-"BaseCharges": 10,
+"BaseCharges": 16,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
+"$type": "RogueEssence.Dungeon.AreaAction, RogueEssence",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
 "LocHeight": 0
 },
-"WideAngle": 0,
+"HitTiles": false,
+"BurstTiles": 0,
+"HitArea": 0,
+"Range": 4,
+"Speed": 0,
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
+"ActionType": 37
 },
-"TargetAlignments": 4,
+"TargetAlignments": 3,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -56,7 +58,7 @@
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Aurora_Beam_2",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -70,7 +72,7 @@
 "LagBehindTime": 0
 },
 "Explosion": {
-"TargetAlignments": 4,
+"TargetAlignments": 3,
 "HitTiles": false,
 "Range": 0,
 "Speed": 0,
@@ -107,7 +109,26 @@
 "OnActions": [],
 "BeforeExplosions": [],
 "BeforeHits": [],
-"OnHits": [],
+"OnHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
+"StatusID": "crafty_shield",
+"AffectTarget": true,
+"SilentCheck": false,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+}
+],
 "OnHitTiles": [],
 "AfterActions": [],
 "ElementEffects": [],
@@ -116,8 +137,27 @@
 "Delay": 0,
 "Sound": "",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Protect_Pink",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 4,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,

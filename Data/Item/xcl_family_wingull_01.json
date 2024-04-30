@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
@@ -13,15 +13,15 @@
 }
 },
 "Desc": {
-"DefaultText": "An exclusive item for the Pelipper family. When kept in the bag, the Pokémon changes the floor to Rain after using a Special move.",
+"DefaultText": "An exclusive item for the Pelipper family. When kept in the bag, the Pokémon's HP is restored when it eats a food item.",
 "LocalTexts": {
-"fr-ca": "Un objet exclusif pour la famille de Pelipper. When kept in the bag, the Pokémon changes the floor to Rain after using a Special move.",
-"de": "Ein exklusives Item für die Pelipper Familie. Wenn es innerhalb des Beutels getragen wird, ändert das Pokémon die Ebene zu Regen wenn es eine Spezial Attacke benutzt.",
-"es": "Un objeto exclusivo para la familia Pelipper. Al llevarlo en la bolsa, el Pokémon cambia el piso a Lluvioso después de usar un movimiento Especial.",
-"pt": "Um item exclusivo para a familia Pelipper. When kept in the bag, the Pokémon changes the floor to Rain after using a Special move.",
-"it": "Uno strumento esclusivo per la famiglia di Pelipper. When kept in the bag, the Pokémon changes the floor to Rain after using a Special move.",
-"ko": "패리퍼 라인에게 한정된 아이템. When kept in the bag, the Pokémon changes the floor to Rain after using a Special move.",
-"zh-hans": "大嘴鸥一家的专属道具。放在包里时，使用特殊招式后会将楼层变为下雨状态。"
+"fr-ca": "Un objet exclusif pour la famille de Pelipper. When kept in the bag, the Pokémon's HP is restored when it eats a food item.",
+"de": "Ein exklusives Item für die Pelipper Familie. Wenn es innerhalb des Beutels getragen wird, werden die KP des Pokémons geheilt sobald es ein Nahrungsitem isst.",
+"es": "Un objeto exclusivo para la familia Pelipper. Al llevarlo en la bolsa se restaura los PS del Pokémon al comer alimentos.",
+"pt": "Um item exclusivo para a familia Pelipper. When kept in the bag, the Pokémon's HP is restored when it eats a food item.",
+"it": "Uno strumento esclusivo per la famiglia di Pelipper. When kept in the bag, the Pokémon's HP is restored when it eats a food item.",
+"ko": "패리퍼 라인에게 한정된 아이템. When kept in the bag, the Pokémon's HP is restored when it eats a food item.",
+"zh-hans": "大嘴鸥一家的专属道具。放在包里时，食用食物后会回复HP。"
 }
 },
 "Released": true,
@@ -29,8 +29,8 @@
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 3200,
-"Rarity": 4,
+"Price": 1600,
+"Rarity": 2,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
@@ -214,9 +214,7 @@
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],
-"AfterBeingHits": [],
-"OnHitTiles": [],
-"AfterActions": [
+"AfterBeingHits": [
 {
 "Key": {
 "str": [
@@ -226,28 +224,21 @@
 "Value": {
 "$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.CategoryNeededEvent, PMDC",
+"$type": "PMDC.Dungeon.FoodNeededEvent, PMDC",
 "BaseEvents": [
 {
-"$type": "PMDC.Dungeon.GiveMapStatusEvent, PMDC",
-"StatusID": "rain",
-"Counter": 10,
-"MsgOverride": {
-"Key": null
-},
-"States": [
-{
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.ExtendWeatherState"
+"$type": "PMDC.Dungeon.RestoreHPEvent, PMDC",
+"Numerator": 1,
+"Denominator": 3,
+"AffectTarget": true
 }
 ]
 }
-],
-"NeededCategory": 2
-}
 }
 }
 ],
+"OnHitTiles": [],
+"AfterActions": [],
 "UserElementEffects": [],
 "TargetElementEffects": [],
 "ModifyHPs": [],

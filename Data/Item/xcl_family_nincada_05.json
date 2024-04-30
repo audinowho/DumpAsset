@@ -1,27 +1,27 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Nincada Dust",
+"DefaultText": "Shedinja Mask",
 "LocalTexts": {
-"fr": "Poussière de Ningale",
-"de": "Nincada Staub",
-"es": "Polvo Nincada",
-"it": "Polvere Nincada",
-"zh-hans": "土居忍士粉末"
+"fr": "Masque de Munja",
+"de": "Ninjatom Maske",
+"es": "Máscara Shedinja",
+"it": "Maschera Shedinja",
+"zh-hans": "脱壳忍者兜帽"
 }
 },
 "Desc": {
-"DefaultText": "An exclusive item for Nincada, and Ninjask. When kept in the bag, it changes the Pokémon's regular attack into a dash.",
+"DefaultText": "An exclusive item for Shedinja. When kept in the bag, the Pokémon can traverse water, lava, and pits.",
 "LocalTexts": {
-"fr-ca": "Un object exclusif pour Nincada, and Ninjask When kept in the bag, it changes the Pokémon's regular attack into a dash.",
-"de": "Ein exklusives Item für Nincada und Ninjask. Wenn es innerhalb des Beutels getragen wird, wird der reguläre Angriff des Pokémon durch einen Sprintangriff ersetzt. ",
-"es": "Un objeto exclusivo para Nincada y Ninjask. When kept in the bag, it changes the Pokémon's regular attack into a dash.",
-"pt": "Um item exclusivo para Nincada, and Ninjask. When kept in the bag, it changes the Pokémon's regular attack into a dash.",
-"it": "Uno strumento esclusivo per Nincadae Ninjask. When kept in the bag, it changes the Pokémon's regular attack into a dash.",
-"ko": "토중몬, 그리고아이스크에게 한정된 아이템. When kept in the bag, it changes the Pokémon's regular attack into a dash.",
-"zh-hans": "土居忍士和铁面忍者的专属道具。放在包里时，普通攻击会变为冲撞类。"
+"fr-ca": "Un object exclusif pour Shedinja When kept in the bag, the Pokémon can traverse water, lava, and pits.",
+"de": "Ein exklusives Item für Ninjatom. Wenn es innerhalb des Beutels getragen wird, kann das Pokémon über Wasser, Lava und Schluchten laufen.",
+"es": "Un objeto exclusivo para Shedinja. Al llevarlo en la bolsa, el Pokémon puede atravesar agua, lava y agujeros. ",
+"pt": "Um item exclusivo para Shedinja. When kept in the bag, the Pokémon can traverse water, lava, and pits.",
+"it": "Uno strumento esclusivo per Shedinja. Quando tenuto in borsa, il Pokémon può attraversare acqua, lava, e buche.",
+"ko": "껍질몬에게 한정된 아이템. When kept in the bag, the Pokémon can traverse water, lava, and pits.",
+"zh-hans": "脱壳忍者的专属道具。放在包里时，宝可梦可以穿越水、岩浆和坑。"
 }
 },
 "Released": true,
@@ -29,21 +29,20 @@
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 2400,
-"Rarity": 3,
+"Price": 1600,
+"Rarity": 2,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 26
+"ItemType": 63
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
-"nincada",
-"ninjask"
+"shedinja"
 ]
 },
 {
@@ -207,101 +206,53 @@
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
-"OnRefresh": [],
+"OnRefresh": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
+"Mobility": 1
+}
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
+"Mobility": 4
+}
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
+"Mobility": 2
+}
+}
+}
+],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [
-{
-"Key": {
-"str": [
--3
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.RegularAttackNeededEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.ChangeActionEvent, PMDC",
-"NewAction": {
-"$type": "RogueEssence.Dungeon.DashAction, RogueEssence",
-"Anim": {
-"AnimIndex": "",
-"FrameTime": 1,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": -1,
-"Alpha": 255,
-"AnimFlip": 0
-},
-"AnimOffset": 0,
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
-},
-"WideAngle": 0,
-"SnapBack": false,
-"CharAnim": 5,
-"AppearanceMod": 0,
-"HitTiles": true,
-"Range": 2,
-"StopAtHit": true,
-"StopAtWall": true,
-"TargetAlignments": 4,
-"TileEmitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
-},
-"PreActions": [
-{
-"Delay": 0,
-"Sound": "DUN_Attack",
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
-},
-"ScreenMovement": {
-"MinShake": 0,
-"MaxShake": 0,
-"MaxShakeTime": 0
-}
-}
-],
-"ActionFX": {
-"Delay": 0,
-"Sound": "",
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
-},
-"ScreenMovement": {
-"MinShake": 0,
-"MaxShake": 0,
-"MaxShakeTime": 0
-}
-},
-"LagBehindTime": 0
-}
-}
-}
-}
-},
-{
-"Key": {
-"str": [
--3
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.RegularAttackNeededEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.TraitorEvent, PMDC"
-}
-}
-}
-}
-],
+"OnActions": [],
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],

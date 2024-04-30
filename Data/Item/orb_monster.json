@@ -1,16 +1,20 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
 "DefaultText": "Monster Orb",
-"LocalTexts": {}
+"LocalTexts": {
+"zh-hans": "怪兽屋之玉"
+}
 },
 "Desc": {
 "DefaultText": "An orb that summons a monster house near the user.",
-"LocalTexts": {}
+"LocalTexts": {
+"zh-hans": "一种不可思议之玉，使用后会在附近制造一个怪兽屋。"
+}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "Sprite": "Orb_Green",
 "Icon": 9,
@@ -135,7 +139,12 @@
 "Value": {
 "$type": "PMDC.Dungeon.BattlelessEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.MonsterHouseOwnerEvent, PMDC"
+"$type": "PMDC.Dungeon.MonsterHouseOwnerEvent, PMDC",
+"MobRange": {
+"Min": 7,
+"Max": 13
+},
+"ItemPercent": 50
 },
 "AffectTarget": true
 }

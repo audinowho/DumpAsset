@@ -47,7 +47,8 @@ function guildmaster_island.ExitSegment(zone, result, rescue, segmentID, mapID)
 	      SV.guildmaster_summit.BossPhase = 1
 	      COMMON.EndDungeonDay(result, 'guildmaster_island', -1,1,0)
 		else
-		  COMMON.EndDungeonDay(result, 'guildmaster_island', -1,7,2)
+		  COMMON.EndDayCycle()
+		  COMMON.EndSession(RogueEssence.Data.GameProgress.ResultType.Escaped, 'guildmaster_island', -1,7,2)
 		end
 	    return
 	  end
@@ -69,7 +70,11 @@ function guildmaster_island.ExitSegment(zone, result, rescue, segmentID, mapID)
         --the MAP's script will play the final cutscene
         --AND it will end the game
         SV.guildmaster_summit.BossPhase = 3
-        GAME:EnterZone('guildmaster_island', -1, 8, 0)
+		if SV.guildmaster_summit.ClearedFromTrail then
+		  GAME:EnterZone('guildmaster_trail',-1,0,0)
+		else
+          GAME:EnterZone('guildmaster_island', -1, 8, 0)
+		end
 	  else
 	    PrintInfo("No exit procedure found!")
 		COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

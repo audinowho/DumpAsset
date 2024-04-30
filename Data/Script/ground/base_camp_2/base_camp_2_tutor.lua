@@ -1,7 +1,7 @@
 require 'common'
 require 'menu.skill.SkillSelectMenu'
 require 'menu.skill.SkillTutorMenu'
-require 'menu.team.TeamSelectMenu'
+require 'menu.team.AssemblySelectMenu'
 
 local base_camp_2_tutor = {}
 local MapStrings = {}
@@ -64,7 +64,7 @@ function base_camp_2_tutor.Tutor_Remember_Flow(price)
 	while state > -1 do
 		if state == 0 then
 			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Who']))
-			local chosen_member = TeamSelectMenu.runPartyMenu(base_camp_2_tutor.Tutor_Can_Remember, false)
+			local chosen_member = AssemblySelectMenu.run(base_camp_2_tutor.Tutor_Can_Remember, false)
 			
 			if chosen_member ~= nil then
 				state = 1
@@ -112,7 +112,7 @@ function base_camp_2_tutor.Tutor_Forget_Flow()
   
     if state == 0 then
       UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_Who']))
-      local chosen_member = TeamSelectMenu.runPartyMenu(base_camp_2_tutor.Tutor_Can_Forget, false)
+      local chosen_member = AssemblySelectMenu.run(base_camp_2_tutor.Tutor_Can_Forget, false)
 	  
 	  if chosen_member ~= nil then
 		  state = 1
@@ -154,7 +154,7 @@ function base_camp_2_tutor.Tutor_Teach_Flow(tutor_moves)
 	while state > -1 do
 		if state == 0 then
 			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Teach_Who']))
-			local chosen_member = TeamSelectMenu.runPartyMenu(function(chara) return base_camp_2_tutor.Tutor_Can_Tutor(chara, tutor_moves) end, false)
+			local chosen_member = AssemblySelectMenu.run(function(chara) return base_camp_2_tutor.Tutor_Can_Tutor(chara, tutor_moves) end, false)
 			
 			if chosen_member ~= nil then
 				state = 1

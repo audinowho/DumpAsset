@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
@@ -14,15 +14,15 @@
 }
 },
 "Desc": {
-"DefaultText": "An exclusive item for Tauros. When kept in the bag, some of the Pokémon's moves will break walls.",
+"DefaultText": "An exclusive item for Tauros. When kept in the bag, the Pokémon will recover from status effects after defeating an enemy.",
 "LocalTexts": {
-"fr-ca": "Un object exclusif pour Tauros When kept in the bag, some of the Pokémon's moves will break walls.",
-"de": "Ein exklusives Item für Tauros. Wenn es innerhalb des Beutels getragen wird, können einige Attacken des Pokémon Wände zerbrechen.",
-"es": "Un objeto exclusivo para Tauros. When kept in the bag, some of the Pokémon's moves will break walls.",
-"pt": "Um item exclusivo para Tauros. When kept in the bag, some of the Pokémon's moves will break walls.",
-"it": "Uno strumento esclusivo per Tauros. When kept in the bag, some of the Pokémon's moves will break walls.",
-"ko": "켄타로스에게 한정된 아이템. When kept in the bag, some of the Pokémon's moves will break walls.",
-"zh-hans": "肯泰罗的专属道具。放在包里时，宝可梦的一些招式可以打碎墙壁。"
+"fr-ca": "Un object exclusif pour Tauros When kept in the bag, the Pokémon will recover from status effects after defeating an enemy.",
+"de": "Ein exklusives Item für Tauros. Wenn es innerhalb des Beutels getragen wird, erholt sich das Pokémon von Statuseffekten nachdem ein Gegner besiegt wurde.",
+"es": "Un objeto exclusivo para Tauros. Al llevarlo en la bolsa, el Pokémon se recuperará de sus problemas de estado tras derrotar a un enemigo.",
+"pt": "Um item exclusivo para Tauros. When kept in the bag, the Pokémon will recover from status effects after defeating an enemy.",
+"it": "Uno strumento esclusivo per Tauros. Quando tenuto in borsa, il Pokémon guarirà da ogni problema di stato dopo aver sconfitto un nemico.",
+"ko": "켄타로스에게 한정된 아이템. When kept in the bag, the Pokémon will recover from status effects after defeating an enemy.",
+"zh-hans": "肯泰罗的专属道具。放在包里时，在击败对手后能够治愈异常状态。"
 }
 },
 "Released": true,
@@ -30,8 +30,8 @@
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 4000,
-"Rarity": 5,
+"Price": 2400,
+"Rarity": 3,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
@@ -210,7 +210,13 @@
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [
 {
 "Key": {
 "str": [
@@ -220,42 +226,23 @@
 "Value": {
 "$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.MeleeHitTilesEvent, PMDC",
-"Tile": 1
-}
-}
-}
-],
-"BeforeHittings": [],
-"BeforeBeingHits": [],
-"AfterHittings": [],
-"AfterBeingHits": [],
-"OnHitTiles": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.OnMoveUseEvent, PMDC",
+"$type": "PMDC.Dungeon.KnockOutNeededEvent, PMDC",
 "BaseEvents": [
 {
-"$type": "PMDC.Dungeon.OnMeleeActionEvent, PMDC",
-"Invert": false,
-"BaseEvents": [
-{
-"$type": "PMDC.Dungeon.RemoveTerrainStateEvent, PMDC",
+"$type": "PMDC.Dungeon.RemoveStateStatusBattleEvent, PMDC",
 "States": [
 {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
-"type": "PMDC.Dungeon.WallTerrainState"
+"assembly": "PMDC, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.BadStatusState"
 }
 ],
-"RemoveSound": "DUN_Rollout",
-"RemoveAnim": {
+"AffectTarget": false,
+"Msg": {
+"Key": "MSG_CURE_SELF"
+},
+"Anims": [
+{
+"Emitter": {
 "$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
 "LocHeight": 0,
 "finished": false,
@@ -263,8 +250,8 @@
 "Anim": {
 "$type": "RogueEssence.Content.StaticAnim, RogueEssence",
 "Anim": {
-"AnimIndex": "Wall_Break",
-"FrameTime": 2,
+"AnimIndex": "Circle_Small_Blue_In",
+"FrameTime": 1,
 "StartFrame": -1,
 "EndFrame": -1,
 "AnimDir": -1,
@@ -277,7 +264,10 @@
 },
 "Layer": 2,
 "UseDest": false
-}
+},
+"Sound": "DUN_Wonder_Tile",
+"AffectTarget": false,
+"Delay": 10
 }
 ]
 }
@@ -286,7 +276,6 @@
 }
 }
 ],
-"AfterActions": [],
 "UserElementEffects": [],
 "TargetElementEffects": [],
 "ModifyHPs": [],

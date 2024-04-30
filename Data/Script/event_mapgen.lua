@@ -427,8 +427,6 @@ function FLOOR_GEN_SCRIPT.SpawnRandomTutor(map, args)
 	::continue::
   end
   
-
-
   if #valid_moves > 0 then
 	  --choose a random move out of the valid ones
 	  local rand_idx = map.Rand:Next(#valid_moves) + 1
@@ -646,6 +644,28 @@ function FLOOR_GEN_SCRIPT.CastawayCaveRevisit(map, args)
   if item ~= nil then
     item.Value = "box_deluxe"
 	item.HiddenValue = "empty"
+  end
+  
+end
+
+
+function FLOOR_GEN_SCRIPT.SleepingCalderaRevisit(map, args)
+  if not SV.sleeping_caldera.TreasureTaken then
+    return
+  end
+  
+  local item = nil
+  
+  for ii = 0, map.Items.Count - 1, 1 do
+	if map.Items[ii].Value == "loot_secret_slab" then
+	  item = map.Items[ii]
+	  break
+	end
+  end
+  
+  if item ~= nil then
+    item.Value = "box_deluxe"
+	item.HiddenValue = "xcl_element_fire_dust"
   end
   
 end

@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
@@ -13,15 +13,15 @@
 }
 },
 "Desc": {
-"DefaultText": "An exclusive item for Flareon. When kept in the bag, it causes the Pokémon's regular attack to remove the target's ability.",
+"DefaultText": "An exclusive item for Flareon. When kept in the bag, the Pokémon's regular attack explodes outwards with splash damage.",
 "LocalTexts": {
-"fr-ca": "Un object exclusif pour Flareon When kept in the bag, it causes the Pokémon's regular attack to remove the target's ability.",
-"de": "Ein exklusives Item für Flamara. Wenn es innerhalb des Beutels getragen wird, entfernt der reguläre Angriff des Pokémon die Fähigkeit des Ziels.",
-"es": "Un objeto exclusivo para Flareon. Al llevarlo en la bolsa causa que los ataques normales del Pokémon  eliminen la habilidad del objetivo.",
-"pt": "Um item exclusivo para Flareon. When kept in the bag, it causes the Pokémon's regular attack to remove the target's ability.",
-"it": "Uno strumento esclusivo per Flareon. When kept in the bag, it causes the Pokémon's regular attack to remove the target's ability.",
-"ko": "부스터에게 한정된 아이템. When kept in the bag, it causes the Pokémon's regular attack to remove the target's ability.",
-"zh-hans": "火伊布的专属道具。放在包里时，普通攻击可以消除对手的特性。"
+"fr-ca": "Un object exclusif pour Flareon When kept in the bag, the Pokémon's regular attack explodes outwards with splash damage.",
+"de": "Ein exklusives Item für Flamara. Wenn es innerhalb des Beutels getragen wird, kann der reguläre Angriff explodieren und weitreichenden Schaden anrichten.",
+"es": "Un objeto exclusivo para Flareon. Al llevarlo en la bolsa, el ataque normal del Pokémon puede explotar hacia fuera y hacer daño por salpicadura.",
+"pt": "Um item exclusivo para Flareon. When kept in the bag, the Pokémon's regular attack explodes outwards with splash damage.",
+"it": "Uno strumento esclusivo per Flareon. When kept in the bag, the Pokémon's regular attack explodes outwards with splash damage.",
+"ko": "부스터에게 한정된 아이템. When kept in the bag, the Pokémon's regular attack explodes outwards with splash damage.",
+"zh-hans": "火伊布的专属道具。放在包里时，普通攻击会有爆炸溅射伤害。"
 }
 },
 "Released": true,
@@ -29,8 +29,8 @@
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 3200,
-"Rarity": 4,
+"Price": 1600,
+"Rarity": 2,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
@@ -209,14 +209,11 @@
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [],
-"BeforeHittings": [],
-"BeforeBeingHits": [],
-"AfterHittings": [
+"OnActions": [
 {
 "Key": {
 "str": [
-0
+-3
 ]
 },
 "Value": {
@@ -224,15 +221,63 @@
 "BaseEvent": {
 "$type": "PMDC.Dungeon.RegularAttackNeededEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.ChangeToAbilityEvent, PMDC",
-"TargetAbility": "none",
-"AffectTarget": true,
-"SilentCheck": true
+"$type": "PMDC.Dungeon.ChangeExplosionEvent, PMDC",
+"NewAction": {
+"TargetAlignments": 6,
+"HitTiles": true,
+"Range": 1,
+"Speed": 10,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"Emitter": {
+"$type": "RogueEssence.Content.CircleSquareAreaEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Blast_Seed",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"ParticlesPerTile": 0.8,
+"RangeDiff": 0,
+"Layer": 2
+},
+"IntroFX": [],
+"ExplodeFX": {
+"Delay": 0,
+"Sound": "DUN_Blast_Seed",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+}
 }
 }
 }
 }
 ],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],
 "AfterActions": [],

@@ -1,0 +1,241 @@
+﻿{
+"Version": "0.8.0.0",
+"Object": {
+"$type": "RogueEssence.Data.ItemData, RogueEssence",
+"Name": {
+"DefaultText": "Heliolisk Crest",
+"LocalTexts": {
+"fr": "Blason de Iguolta",
+"de": "Elezard Wappen",
+"es": "Blasón Heliolisk",
+"it": "Stemma Heliolisk",
+"zh-hans": "光电伞蜥徽章"
+}
+},
+"Desc": {
+"DefaultText": "An exclusive item for the Heliolisk family. When kept in the bag, the Pokémon's Attack Range is increased when the floor has the Sunny status.",
+"LocalTexts": {
+"fr-ca": "Un objet exclusif pour la famille de Heliolisk. When kept in the bag, the Pokémon's Attack Range is increased when the floor has the Sunny status.",
+"de": "Ein exklusives Item für die Elezard Familie. Wenn es innerhalb des Beutels getragen wird, hat das Pokémon eine erhöhte Angriffsreichweite solange die Ebene den Sonnig Status hat.",
+"es": "Un objeto exclusivo para la familia Heliolisk. Al llevarlo en la bolsa, el Rango de Ataque del Pokémon aumenta cuando el piso está en el estado Soleado.",
+"pt": "Um item exclusivo para a familia Heliolisk. When kept in the bag, the Pokémon's Attack Range is increased when the floor has the Sunny status.",
+"it": "Uno strumento esclusivo per la famiglia di Heliolisk. Quando tenuto in borsa, il Raggio degli attacchi del Pokémon aumenta quando il piano ha lo status Sole.",
+"ko": "일레도리자드 라인에게 한정된 아이템. When kept in the bag, the Pokémon's Attack Range is increased when the floor has the Sunny status.",
+"zh-hans": "光电伞蜥一家的专属道具。放在包里时，当楼层状态是日照强烈时，宝可梦的攻击范围就会增加。"
+}
+},
+"Released": false,
+"Comment": "",
+"Sprite": "Box_Yellow",
+"Icon": 10,
+"SortCategory": 17,
+"Price": 1600,
+"Rarity": 2,
+"MaxStack": 0,
+"CannotDrop": true,
+"BagEffect": true,
+"ItemStates": [
+{
+"$type": "PMDC.Dungeon.ExclusiveState, PMDC",
+"ItemType": 28
+},
+{
+"$type": "PMDC.Dungeon.FamilyState, PMDC",
+"Members": [
+"helioptile",
+"heliolisk"
+]
+},
+{
+"$type": "RogueEssence.Dungeon.MaterialState, RogueEssence"
+}
+],
+"GroundUseActions": [],
+"UseAction": {
+"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
+"HitTiles": false,
+"BurstTiles": 0,
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"WideAngle": 0,
+"CharAnimData": {
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
+},
+"TargetAlignments": 0,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"PreActions": [],
+"ActionFX": {
+"Delay": 0,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+"LagBehindTime": 0
+},
+"Explosion": {
+"TargetAlignments": 0,
+"HitTiles": false,
+"Range": 0,
+"Speed": 0,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
+"LocHeight": 0
+},
+"IntroFX": [],
+"ExplodeFX": {
+"Delay": 0,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+},
+"UseEvent": {
+"Element": "none",
+"Category": 0,
+"HitRate": -1,
+"SkillStates": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeExplosions": [],
+"BeforeHits": [],
+"OnHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"ElementEffects": [],
+"IntroFX": [],
+"HitFX": {
+"Delay": 0,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+"HitCharAction": {
+"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
+"Process": 0,
+"AnimOverride": 0
+}
+},
+"UsageType": 8,
+"ArcThrow": false,
+"BreakOnThrow": false,
+"ThrowAnim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"ProximityEvent": {
+"Radius": -1,
+"TargetAlignments": 0,
+"BeforeExplosions": [],
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+},
+"OnEquips": [],
+"OnPickups": [],
+"BeforeStatusAdds": [],
+"BeforeStatusAddings": [],
+"OnStatusAdds": [],
+"OnStatusRemoves": [],
+"OnMapStatusAdds": [],
+"OnMapStatusRemoves": [],
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.WeatherAddRangeEvent, PMDC",
+"WeatherID": "sunny",
+"Range": 1
+}
+}
+}
+],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [],
+"UserElementEffects": [],
+"TargetElementEffects": [],
+"ModifyHPs": [],
+"RestoreHPs": []
+}
+}

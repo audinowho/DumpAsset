@@ -1,4 +1,5 @@
 require 'common'
+require 'menu.team.AssemblySelectMenu'
 
 local luminous_spring = {}
 local MapStrings = {}
@@ -80,12 +81,9 @@ function luminous_spring.Spring_Touch(obj, activator)
 			end
 		elseif state == 1 then
 			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_Ask_Who']))
-			UI:ShowPromoteMenu()
-			UI:WaitForChoice()
-			local result = UI:ChoiceResult()
-			if result > -1 then
+			member = AssemblySelectMenu.run()
+			if member then
 				state = 2
-				member = GAME:GetPlayerPartyMember(result)--GAME:GetPlayerAssemblyMember(result)
 			else
 				state = 0
 			end

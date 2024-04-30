@@ -75,8 +75,10 @@ end
 -- Map Begin Functions
 --------------------------------------------------
 function canyon_camp.SetupNpcs()
-  GROUND:Unhide("NPC_Seeker")
-  GROUND:Unhide("NPC_Hidden")
+  if SV.rest_stop.ExpositionComplete then
+    GROUND:Unhide("NPC_Seeker")
+    GROUND:Unhide("NPC_Hidden")
+  end
   GROUND:Unhide("NPC_NextCamp")
   GROUND:Unhide("NPC_Spar")
   
@@ -283,7 +285,7 @@ function canyon_camp.BeginExposition()
   GAME:FadeIn(20)
   
   GAME:UnlockDungeon('copper_quarry')
-  GAME:UnlockDungeon('sleeping_caldera')
+  GAME:UnlockDungeon('depleted_basin')
 end
 
 --------------------------------------------------
@@ -1002,7 +1004,7 @@ function canyon_camp.NPC_Hidden_Action(chara, activator)
   
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   
-  local dungeon_id = 'secret_garden'
+  local dungeon_id = 'sleeping_caldera'
   if not GAME:DungeonUnlocked(dungeon_id) then
     UI:SetSpeaker(chara)
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hidden_Line_001']))
@@ -1166,7 +1168,7 @@ end
 function canyon_camp.East_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local dungeon_entrances = { 'copper_quarry', 'forsaken_desert', 'relic_tower', 'sleeping_caldera', 'royal_halls', 'starfall_heights', 'wisdom_road', 'sacred_tower'}
+  local dungeon_entrances = { 'copper_quarry', 'depleted_basin', 'forsaken_desert', 'relic_tower', 'sleeping_caldera', 'royal_halls', 'starfall_heights', 'wisdom_road', 'sacred_tower'}
   local ground_entrances = {{Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
   {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
   {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}

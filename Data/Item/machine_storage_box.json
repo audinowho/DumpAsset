@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
@@ -13,23 +13,17 @@
 }
 },
 "Desc": {
-"DefaultText": "A marvelous box that lets the user add any item from storage into the Treasure Bag.",
-"LocalTexts": {
-"fr": "Une boîte merveilleuse qui permet à l'utilisateur d'ajouter objet de la Réserve dans son Sac à Trésor.",
-"de": "Diese fabelhafte Box erlaubt dem Nutzer ein beliebiges Item vom Lager in den Schatzbeutel hinzuzufügen.",
-"it": "Un magnifico forziere che permette all'utilizzatore di aggiungere qualsiasi strumento dal deposito alla Sacca dei Tesori. ",
-"ko": "보관하고 있던 도구를 하나 가방에 옮겨주는 환상적인 상자.",
-"zh-hans": "不可思议的箱子。使用者可以将仓库里的一个道具取出至背包。"
-}
+"DefaultText": "A marvelous box that sends the item currently held by the user to storage.",
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
 "Sprite": "Machine_Gray",
 "Icon": 12,
 "SortCategory": 12,
-"Price": 800,
+"Price": 150,
 "Rarity": 0,
-"MaxStack": 0,
+"MaxStack": 3,
 "CannotDrop": false,
 "BagEffect": false,
 "ItemStates": [
@@ -140,7 +134,7 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.StorageBoxEvent, PMDC"
+"$type": "PMDC.Dungeon.DepositBoxEvent, PMDC"
 }
 }
 ],
@@ -156,7 +150,7 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.WithdrawItemEvent, PMDC"
+"$type": "PMDC.Dungeon.StoreItemEvent, PMDC"
 }
 }
 ],

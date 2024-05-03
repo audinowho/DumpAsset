@@ -22,7 +22,10 @@ MapItemType = luanet.import_type('RogueEssence.Dungeon.MapItem')
 
 
 function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed, args)
-  
+  if _DATA.Save.Rescue ~= nil and _DATA.Save.Rescue.Rescuing then
+    return
+  end
+    
   if not SV.MissionsEnabled then
     return
   end

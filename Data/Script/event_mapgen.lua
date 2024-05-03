@@ -22,7 +22,7 @@ MapItemType = luanet.import_type('RogueEssence.Dungeon.MapItem')
 
 
 function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed, args)
-  if _DATA.Save.Rescue.Rescuing then
+  if _DATA.Save.Rescue ~= nil and _DATA.Save.Rescue.Rescuing then
     return
   end
   

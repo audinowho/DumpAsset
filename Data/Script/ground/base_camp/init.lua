@@ -124,6 +124,13 @@ function base_camp.SetupNpcs()
     local noctowl = CH('Noctowl')
     GROUND:TeleportTo(noctowl, 80, 288, Direction.Right)
   end
+  
+  if not SV.family.Sister and SV.family.SisterActiveDays >= 3 then
+	local noctowl = CH('Noctowl')
+	local entrance = CH('NPC_Entrance')
+	GROUND:CharTurnToChar(noctowl,entrance)
+	GROUND:CharTurnToChar(entrance,noctowl)
+  end
 end
 
 

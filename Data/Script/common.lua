@@ -1184,6 +1184,7 @@ function COMMON.EndRescue(zone, result, rescue, segmentID)
   GAME:EndDungeonRun(result, zoneId, structureId, mapId, entryId, true, true)
   SV.General.Rescue = result
   GAME:EnterZone(zoneId, structureId, mapId, entryId)
+  return true
 end
 
 function COMMON.BeginDungeon(zoneId, segmentID, mapId)

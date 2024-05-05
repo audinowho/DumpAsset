@@ -175,6 +175,10 @@ end
 
 --This method is for spawning main game sidequests
 function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed, args)
+  if _DATA.Save.Rescue ~= nil and _DATA.Save.Rescue.Rescuing then
+    return
+  end
+  
   -- choose a the floor to spawn it on
   local destinationFloor = false
   local outlawFloor = false

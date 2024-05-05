@@ -123,6 +123,7 @@ function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed
   if missionNum ~= nil then
     --tbl.MissionNumber = missionNum
   end
+  
   if escortDeathEvent then
     --tbl.EscortMissionNum = escortMissionNum
     activeEffect.OnDeaths:Add(6, RogueEssence.Dungeon.SingleCharScriptEvent("MissionGuestCheck", '{ Mission = '..escortMissionNum..' }'))
@@ -167,10 +168,12 @@ function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed
     activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("OutlawFloor", '{ Mission = '..missionNum..' }'))
     --tbl.MissionType = COMMON.MISSION_BOARD_MISSION 
   end
-
-  local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
-  local priority = RogueElements.Priority(-6)
-  queue:Enqueue(priority, destNote)
+  
+  if escortDeathEvent or destinationFloor or outlawFloor then
+    local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
+    local priority = RogueElements.Priority(-6)
+    queue:Enqueue(priority, destNote)
+  end
 end
 
 --This method is for spawning main game sidequests

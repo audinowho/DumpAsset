@@ -135,67 +135,62 @@ end
 function InventorySelectMenu:updateFunction(input)
     if input:JustPressed(RogueEssence.FrameInput.InputType.SortItems) then
         _GAME:SE("Menu/Sort")
-        _DATA.Save.ActiveTeam:SortItems()
-        local equips_selected, selected = self:saveSelectedItems()
-        local new_menu = self:cloneMenu()
-        new_menu:loadSelectedItems(equips_selected, selected)
-        _MENU:ReplaceMenu(new_menu.menu)
-        new_menu.menu:SetCurrentPage(self.menu.CurrentPage)
-        new_menu.menu.CurrentChoice = self.menu.CurrentChoice
-        new_menu:updateSummary()
+        self:SortCommand()
     end
 end
 
---- Takes the currently selected equipment ids and inventory items and stores them in lists.
---- @return table, table the list of selected equipment indexes, the list of selected items
-function InventorySelectMenu:saveSelectedItems()
-    local selected_equips = {}
+--- Sorts the inventory and genertes a new menu to replace this one with, reselecting any
+--- selected slot in the process.
+function InventorySelectMenu:SortCommand()
+     --generate list of selected items
+    local equip_selected = {}
     local selected = {}
-
-    for index, option in pairs(self.optionsList) do
-        if option.Selected then
-            local slot = self.slotList[index]
-            if slot.IsEquipped then
-                table.insert(selected_equips, slot.Slot)
-            else
-                local item = _DATA.Save.ActiveTeam:GetInv(slot.Slot)
-                table.insert(selected, item)
+    local eqIndex = 0
+    for i = 0, _DATA.Save.ActiveTeam.Players.Count - 1, 1 do
+        local activeChar = _DATA.Save.ActiveTeam.Players[i]
+        if activeChar.EquippedItem.ID ~= nil and activeChar.EquippedItem.ID ~= "" then
+            if self.menu:GetTotalChoiceAtIndex(eqIndex).Selected then
+                table.insert(equip_selected, eqIndex)
             end
+            eqIndex = eqIndex+1
         end
     end
-    return selected_equips, selected
-end
-
---- Takes a list of equipment ids and one of items and selects the corresponding options.
---- @param selected_equips table a list of integer equipment ids to be selected
---- @param selected table a list of InvItem objects to be selected
-function InventorySelectMenu:loadSelectedItems(selected_equips, selected)
-    for index = #self.slotList, 1, -1 do
-        local slot = self.slotList[index]
-        if slot.IsEquipped then
-            for _, slot_id in pairs(selected_equips) do
-                if slot.Slot == slot_id then
-                    self.optionsList[index]:SilentSelect(true)
-                    break
-                end
-            end
-        else
-            local item = _DATA.Save.ActiveTeam:GetInv(slot.Slot)
-            for i, slot_item in pairs(selected) do
-                if slot_item.ID    == item.ID    and slot_item.Amount == item.Amount and
-                   slot_item.Price == item.Price and slot_item.Cursed == item.Cursed and
-                   slot_item.HiddenValue == item.HiddenValue then
-                    table.remove(selected, i)
-                    self.optionsList[index]:SilentSelect(true)
-                    break
-                end
-            end
+    for i = 0, _DATA.Save.ActiveTeam:GetInvCount()-1, 1 do
+        if self.menu:GetTotalChoiceAtIndex(i+eqIndex).Selected then
+            table.insert(selected, i)
         end
+    end    
+
+    -- get mapping
+    local mapping = _DATA.Save.ActiveTeam:GetSortMapping(true);
+
+    -- reorder the inventory
+    _DATA.Save.ActiveTeam:SortItems()
+    -- create the new menu
+    local newMenu = self:cloneMenu()
+
+    -- reselect equip slots
+    for i = 1, #equip_selected, 1 do
+        local slot = equip_selected[i]
+        newMenu.menu:GetTotalChoiceAtIndex(slot):SilentSelect(true)
     end
+    -- reselect the rest of the inventory
+    for i = #selected, 1, -1 do
+        local oldPos = selected[i]
+        local newPos = mapping[oldPos]
+        local index = newPos + eqIndex
+        newMenu.menu:GetTotalChoiceAtIndex(index):SilentSelect(true)
+    end
+    -- replace the menu
+    _MENU:ReplaceMenu(newMenu.menu)
+    -- set cursor position and update summary
+    newMenu.menu:SetCurrentPage(self.menu.CurrentPage)
+    newMenu.menu.CurrentChoice = self.menu.CurrentChoice
+    newMenu:updateSummary()
 end
 
 --- Returns a newly created copy of this object
---- @return table an ``InventorySelectMenu``.
+--- @return userdata an ``InventorySelectMenu``.
 function InventorySelectMenu:cloneMenu()
     return InventorySelectMenu:new(self.title, self.filter, self.confirmAction, self.refuseAction, self.menuWidth, self.includeEquips)
 end

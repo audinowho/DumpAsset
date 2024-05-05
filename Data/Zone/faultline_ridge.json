@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -555,6 +555,53 @@
 "Amount": {
 "Min": 3,
 "Max": 6
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+6,
+1
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.RandBag`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"IsMoney": false,
+"Cursed": false,
+"Value": "key",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+}
+],
+"removeOnRoll": false
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 1
+}
 }
 }
 }
@@ -5936,8 +5983,8 @@
 ]
 },
 "StartAmount": {
-"Min": 70,
-"Max": 75
+"Min": 100,
+"Max": 105
 },
 "AddAmount": {
 "Min": 6,
@@ -5945,7 +5992,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -6408,7 +6455,7 @@
 "Amount": 0,
 "Price": 0
 },
-"Rate": 2,
+"Rate": 10,
 "Range": {
 "Min": 0,
 "Max": 10
@@ -6422,7 +6469,21 @@
 "Amount": 0,
 "Price": 0
 },
-"Rate": 2,
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"ID": "key",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0
+},
+"Rate": 10,
 "Range": {
 "Min": 0,
 "Max": 10
@@ -7121,6 +7182,101 @@
 "Spawn": {
 "IsMoney": false,
 "Cursed": false,
+"Value": "evo_thunder_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 20,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_fire_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 20,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_water_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 20,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_leaf_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 20,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_ice_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 20,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
 "Value": "gummi_wonder",
 "HiddenValue": "",
 "Amount": 0,
@@ -7501,44 +7657,6 @@
 "Spawn": {
 "IsMoney": false,
 "Cursed": false,
-"Value": "medicine_elixir",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 20,
-"Range": {
-"Min": 0,
-"Max": 10
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_potion",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 20,
-"Range": {
-"Min": 0,
-"Max": 10
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
 "Value": "medicine_max_elixir",
 "HiddenValue": "",
 "Amount": 0,
@@ -7577,158 +7695,6 @@
 "Spawn": {
 "IsMoney": false,
 "Cursed": false,
-"Value": "medicine_full_heal",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 20,
-"Range": {
-"Min": 0,
-"Max": 10
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_x_attack",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 10
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_x_defense",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 10
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_x_sp_atk",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 10
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_x_sp_def",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 10
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_x_speed",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 10
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_x_accuracy",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 10
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "medicine_dire_hit",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 10
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
 "Value": "medicine_amber_tear",
 "HiddenValue": "",
 "Amount": 1,
@@ -7743,16 +7709,138 @@
 "Min": 0,
 "Max": 10
 }
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_heart_scale",
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 10
+}
 }
 ],
 "ItemThemes": [
 {
 "Spawn": {
+"$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
+"Themes": [
+{
+"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
+"Range": [
+"loot_heart_scale"
+],
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 2,
+"Max": 2
+}
+},
+{
+"$type": "PMDC.LevelGen.ItemStateType, PMDC",
+"UseType": {
+"assembly": "PMDC, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.EvoState"
+},
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 1,
+"Max": 4
+}
+}
+],
+"Amount": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
+"Themes": [
+{
+"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
+"Range": [
+"loot_heart_scale"
+],
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 1,
+"Max": 3
+}
+},
+{
+"$type": "PMDC.LevelGen.ItemStateType, PMDC",
+"UseType": {
+"assembly": "PMDC, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.GummiState"
+},
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 2,
+"Max": 4
+}
+}
+],
+"Amount": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+},
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
+"Themes": [
+{
+"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
+"Range": [
+"loot_heart_scale"
+],
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 1,
+"Max": 1
+}
+},
+{
 "$type": "PMDC.LevelGen.ItemThemeNone, PMDC",
 "SpecialRatio": 100,
 "Amount": {
 "Min": 1,
 "Max": 3
+}
+}
+],
+"Amount": {
+"Min": 0,
+"Max": 0
 }
 },
 "Rate": 30,
@@ -7807,7 +7895,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ChestModGenState"
 }
 ]
@@ -7865,9 +7953,10 @@
 "SpreadPlan": {
 "$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
 "Quota": {
-"$type": "RogueElements.RandRange, RogueElements",
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
 "Min": 1,
-"Max": 1
+"Max": 6,
+"Rate": 30
 },
 "Replaceable": false,
 "FloorRange": {
@@ -7877,7 +7966,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.StairsModGenState"
 }
 ]
@@ -8068,6 +8157,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",
@@ -10476,6 +10568,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",
@@ -12937,6 +13032,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",
@@ -15398,6 +15496,9 @@
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",

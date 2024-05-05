@@ -297,8 +297,8 @@ function guild_hut.Card_Portal_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   local dungeon_entrances = { 'tropical_path', 'faded_trail', 'bramble_woods', 'faultline_ridge', 'trickster_woods',
-    'moonlit_courtyard', 'flyaway_cliffs', 'fertile_valley', 'overgrown_wilds', 'lava_floe_island', 'castaway_cave',
-    'copper_quarry', 'forsaken_desert', 'relic_tower', 'sleeping_caldera', 'thunderstruck_pass', 'veiled_ridge',
+    'moonlit_courtyard', 'fertile_valley', 'flyaway_cliffs', 'overgrown_wilds', 'lava_floe_island', 'castaway_cave',
+    'copper_quarry', 'depleted_basin', 'forsaken_desert', 'relic_tower', 'sleeping_caldera', 'thunderstruck_pass', 'veiled_ridge',
     'snowbound_path', 'champions_road',
     'ambush_forest', 'treacherous_mountain', 'barren_tundra', 'energy_garden', 'wayward_wetlands', 'sickly_hollow',
     'cave_of_solace', 'royal_halls', 'the_sky', 'guildmaster_trail', 'secret_garden', 'the_abyss'}

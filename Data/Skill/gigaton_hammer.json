@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -14,33 +14,94 @@
 }
 },
 "Desc": {
-"DefaultText": "",
+"DefaultText": "The user swings its whole body around to attack with its huge hammer. This move can't be used twice in a row.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 893,
-"BaseCharges": 5,
+"BaseCharges": 8,
 "Strikes": 1,
 "HitboxAction": {
 "$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
 "HitTiles": false,
-"BurstTiles": 0,
+"BurstTiles": 2,
 "Emitter": {
+"$type": "RogueEssence.Content.MoveToEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Anim": {
+"AnimIndex": "Gigaton_Hammer_PMDO",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"OffsetStart": {
+"X": 0,
+"Y": 0
+},
+"OffsetEnd": {
+"X": 0,
+"Y": 0
+},
+"HeightStart": 32,
+"HeightEnd": 10,
+"LingerStart": 0,
+"LingerEnd": 4,
+"MoveTime": 4,
+"ResultAnim": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"WideAngle": 0,
+"ResultLayer": 2
+},
+"WideAngle": 1,
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
+"ActionType": 23
 },
 "TargetAlignments": 4,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"PreActions": [],
+"PreActions": [
+{
+"Delay": 0,
+"Sound": "DUN_Move_Start",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Charge_Up",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
 "ActionFX": {
 "Delay": 0,
 "Sound": "",
@@ -54,33 +115,72 @@
 "MaxShakeTime": 0
 }
 },
-"LagBehindTime": 0
+"LagBehindTime": 3
 },
 "Explosion": {
-"TargetAlignments": 4,
-"HitTiles": false,
-"Range": 0,
-"Speed": 0,
+"TargetAlignments": 6,
+"HitTiles": true,
+"Range": 1,
+"Speed": 3,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.CircleSquareAreaEmitter, RogueEssence",
+"LocHeight": 20,
+"Anims": [
+{
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Dig",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"ParticlesPerTile": 2.0,
+"RangeDiff": -16,
+"Layer": 2
 },
 "IntroFX": [],
 "ExplodeFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "EVT_Tower_Quake",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Earthquake_Ranger",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,
-"MaxShake": 0,
-"MaxShakeTime": 0
+"MaxShake": 8,
+"MaxShakeTime": 30
 }
 }
 },
@@ -90,8 +190,11 @@
 "HitRate": 100,
 "SkillStates": [
 {
+"$type": "PMDC.Dungeon.ContactState, PMDC"
+},
+{
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 160
+"Power": 140
 }
 ],
 "BeforeTryActions": [],
@@ -111,8 +214,49 @@
 }
 }
 ],
-"OnHitTiles": [],
-"AfterActions": [],
+"OnHitTiles": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveTerrainStateEvent, PMDC",
+"States": [
+{
+"assembly": "PMDC, Version=0.7.14.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.WallTerrainState"
+}
+],
+"RemoveSound": "",
+"RemoveAnim": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+}
+}
+}
+],
+"AfterActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.CounterDisableBattleEvent, PMDC",
+"StatusID": "cooldown",
+"AffectTarget": false,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+}
+],
 "ElementEffects": [],
 "IntroFX": [],
 "HitFX": {

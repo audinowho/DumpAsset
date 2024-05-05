@@ -297,6 +297,15 @@
   <data name="_ENUM_InputType_Turn" xml:space="preserve">
     <value>转向</value>
     <comment></comment>  </data>
+  <data name="_ENUM_MinimapStyle_Black" xml:space="preserve">
+    <value>黑色</value>
+    <comment></comment>  </data>
+  <data name="_ENUM_MinimapStyle_Blue" xml:space="preserve">
+    <value>蓝色</value>
+    <comment></comment>  </data>
+  <data name="_ENUM_MinimapStyle_White" xml:space="preserve">
+    <value>白色</value>
+    <comment></comment>  </data>
   <data name="_ENUM_NetCloseReason_AlreadyConnected_msg" xml:space="preserve">
     <value>您已从另一个应用程序连接。</value>
     <comment></comment>  </data>
@@ -573,9 +582,15 @@
   <data name="DLG_RESTRICT_ITEM_ALL" xml:space="preserve">
     <value>所有道具</value>
     <comment>Will be used in the sentence "All items have been stored away." May be used in the middle of a sentence so do not capitalize.</comment>  </data>
+  <data name="DLG_RESTRICT_ITEM_ALL_NON_TREASURE" xml:space="preserve">
+    <value>宝物以外的所有道具</value>
+    <comment></comment>  </data>
   <data name="DLG_RESTRICT_ITEM_SLOT" xml:space="preserve">
     <value>第{0}项之后的道具</value>
     <comment>Will be used in the sentence "Items beyond the Xth slot have been stored away." May be used in the middleof a sentence so do not capitalize.</comment>  </data>
+  <data name="DLG_RESTRICT_ITEM_SLOT_NON_TREASURE" xml:space="preserve">
+    <value>第{0}项之后，宝物以外的道具</value>
+    <comment></comment>  </data>
   <data name="DLG_RESTRICT_LEVEL" xml:space="preserve">
     <value>队伍等级已暂时降至Lv. {0}。</value>
     <comment></comment>  </data>
@@ -1186,7 +1201,7 @@
     <value>库存价值: {0}</value>
     <comment>For labeling the total value of all the items in the inventory</comment>  </data>
   <data name="MENU_RESULTS_INVENTORY_TITLE" xml:space="preserve">
-    <value>道具库存</value>
+    <value>道具库存 ({0}/{1})</value>
     <comment>Title for the window displaying the inventory results of the last outing</comment>  </data>
   <data name="MENU_RESULTS_QUIT" xml:space="preserve">
     <value>在{0}放弃了。</value>
@@ -1262,6 +1277,9 @@
     <comment>The Full-Screen option when setting window size in the Settings menu</comment>  </data>
   <data name="MENU_SETTINGS_LANGUAGE" xml:space="preserve">
     <value>语言</value>
+    <comment></comment>  </data>
+  <data name="MENU_SETTINGS_MINIMAP_COLOR" xml:space="preserve">
+    <value>小地图颜色</value>
     <comment></comment>  </data>
   <data name="MENU_SETTINGS_MINIMAP_VISIBILITY" xml:space="preserve">
     <value>小地图</value>
@@ -1407,6 +1425,9 @@
   <data name="MENU_TEAM_EXP" xml:space="preserve">
     <value>经验值: {0}/{1}</value>
     <comment>For labeling a team member's current EXP out of the amount needed to level up</comment>  </data>
+  <data name="MENU_TEAM_EXP_SHORT" xml:space="preserve">
+    <value>经验值</value>
+    <comment></comment>  </data>
   <data name="MENU_TEAM_FEATURES" xml:space="preserve">
     <value>说明</value>
     <comment>Title of the Features menu, detailing the features of a team member</comment>  </data>
@@ -1864,7 +1885,7 @@
     <value>自己/多个对手</value>
     <comment>For when a move can hit foe and self (plural). Used in RANGE_ strings</comment>  </data>
   <data name="TEAM_NAME" xml:space="preserve">
-    <value>{0}队</value>
+    <value>{0}探险队</value>
     <comment>For putting together the team name.</comment>  </data>
   <data name="TRANSFER_ALL" xml:space="preserve">
     <value>无限制</value>

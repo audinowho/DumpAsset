@@ -84,6 +84,7 @@ COMMON.ORBS = {
   
 COMMON.SPECIAL = {
   { Index = "key", Amount = 3, Price = 4000},
+  { Index = "machine_storage_box", Amount = 3, Price = 1200},
   { Index = "orb_revival", Amount = 0, Price = 1000},
   { Index = "orb_escape", Amount = 0, Price = 150},
   { Index = "orb_escape", Amount = 0, Price = 150}

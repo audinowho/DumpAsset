@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -72809,7 +72809,7 @@ false
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.HeldState"
 },
 "UseMapItems": false,
@@ -72825,7 +72825,7 @@ false
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.DrinkState"
 },
 "UseMapItems": false,
@@ -72841,7 +72841,7 @@ false
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": false,
@@ -74975,7 +74975,11 @@ false
 "$type": "RogueElements.SpecificSpawnStep`2[[RogueEssence.LevelGen.MapLoadContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
 "SpawnLocs": [
 {
-"X": 7,
+"X": 6,
+"Y": 6
+},
+{
+"X": 8,
 "Y": 6
 }
 ],
@@ -74991,6 +74995,9 @@ false
 "moltres",
 "mewtwo",
 "mew",
+"entei",
+"raikou",
+"suicune",
 "lugia",
 "ho_oh",
 "celebi",
@@ -75100,8 +75107,8 @@ false
 "Max": 3
 },
 "Amount": {
-"Min": 1,
-"Max": 1
+"Min": 2,
+"Max": 2
 }
 }
 }
@@ -75133,7 +75140,21 @@ false
 {
 "ID": "box_glittery",
 "Cursed": false,
+"HiddenValue": "ammo_golden_thorn",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_glittery",
+"Cursed": false,
 "HiddenValue": "loot_nugget",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "box_glittery",
+"Cursed": false,
+"HiddenValue": "apricorn_glittery",
 "Amount": 0,
 "Price": 0
 }
@@ -75198,7 +75219,7 @@ false
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.7.25.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.0.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -75335,7 +75356,7 @@ false
 "Amount": 0,
 "Price": 0
 },
-"Rate": 10,
+"Rate": 5,
 "Range": {
 "Min": 0,
 "Max": 4
@@ -75349,7 +75370,7 @@ false
 "Amount": 0,
 "Price": 0
 },
-"Rate": 5,
+"Rate": 10,
 "Range": {
 "Min": 0,
 "Max": 4
@@ -75420,7 +75441,7 @@ false
 "Amount": 0,
 "Price": 0
 },
-"Rate": 10,
+"Rate": 5,
 "Range": {
 "Min": 0,
 "Max": 4
@@ -75434,7 +75455,7 @@ false
 "Amount": 1,
 "Price": 0
 },
-"Rate": 5,
+"Rate": 10,
 "Range": {
 "Min": 0,
 "Max": 4
@@ -75471,6 +75492,20 @@ false
 },
 {
 "Spawn": {
+"ID": "ammo_rare_fossil",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0
+},
+"Rate": 3,
+"Range": {
+"Min": 0,
+"Max": 4
+}
+},
+{
+"Spawn": {
 "ID": "ammo_geo_pebble",
 "Cursed": false,
 "HiddenValue": "",
@@ -75491,7 +75526,7 @@ false
 "Amount": 2,
 "Price": 0
 },
-"Rate": 3,
+"Rate": 5,
 "Range": {
 "Min": 0,
 "Max": 4
@@ -75519,7 +75554,7 @@ false
 "Amount": 3,
 "Price": 0
 },
-"Rate": 3,
+"Rate": 10,
 "Range": {
 "Min": 0,
 "Max": 4
@@ -75669,7 +75704,7 @@ false
 "Spawns": [
 {
 "Spawn": {
-"ID": "held_power_band",
+"ID": "held_charcoal",
 "Cursed": true,
 "HiddenValue": "",
 "Amount": 0,
@@ -75683,7 +75718,7 @@ false
 },
 {
 "Spawn": {
-"ID": "held_power_band",
+"ID": "held_charcoal",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,
@@ -75697,7 +75732,7 @@ false
 },
 {
 "Spawn": {
-"ID": "held_defense_scarf",
+"ID": "held_mystic_water",
 "Cursed": true,
 "HiddenValue": "",
 "Amount": 0,
@@ -75711,7 +75746,7 @@ false
 },
 {
 "Spawn": {
-"ID": "held_defense_scarf",
+"ID": "held_mystic_water",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,

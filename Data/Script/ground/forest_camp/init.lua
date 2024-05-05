@@ -215,7 +215,7 @@ function forest_camp.Snorlax_Action(chara, activator)
   UI:ResetSpeaker()
   UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_001']))
   
-  if SV.Experimental == nil then
+  if SV.Experimental ~= true then
     return
   end
   

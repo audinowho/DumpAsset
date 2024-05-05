@@ -54,11 +54,11 @@ CentOS: sudo yum install libgdiplus
 
 [PLAYER TIPS - for if you want to win]
 -When you go up a floor, there is no turning back.
--You will only gain EXP from defeating a Pokémon if you used a move on it.
+-You will only gain EXP from defeating a Pokémon if you used a move or item on it.
 -Recruit Pokémon by throwing Apricorns. Weakening the target can increase your chances of success, but statusing it WILL NOT.
 -Wild Pokémon always start with 1/2 of their max PP and 50% fullness.
--There is ALWAYS a Plain Apricorn somewhere on the first floor.
--All Pokémon types, abilities, and movesets are up to date in accordance with Pokémon Omega Ruby and Alpha Sapphire.
+-There is ALWAYS a Plain Apricorn somewhere on the first floor of guildmaster trail.
+-All Pokémon types, abilities, and movesets are up to date in accordance with Pokémon Omega Ruby and Alpha Sapphire.  Anything introduced later uses the set of the earliest generation it was introduced in.
 -The statistics and effects of moves, items, abilities, and status conditions are tweaked can can be SIGNIFICANTLY DIFFERENT from how they are in main series Pokémon titles, and even Pokémon Mystery Dungeon titles.
 -You can never miss twice in a row.  Thus if you miss an attack, you can be certain that the next one will hit.  The only exceptions are moves, abilities, etc. that allow 100% avoidance.
 -Sticky items cannot be USED.  However, they can be HELD and still continue to give their held-item effects. You can't take off a sticky item if you've held it.
@@ -66,7 +66,7 @@ CentOS: sudo yum install libgdiplus
 -Press Alt in text input to change the accent of the last letter you typed (ex. "e" becomes "é")
 -Many traps (including Wonder Tiles) affect all tiles adjacent to them.  Keep this in mind when positioning.
 -Pokémon that evolve by friendship need to have a certain number of evolved allies with them.
--Pokémon that evolve by location need to be in the correct environment.
+-Pokémon that evolve by location or regional variants need to be in the correct environment.
 -If you throw held items at an enemy, they will catch it if they aren't holding one already.
 
 [SERVER HOSTING TIPS - help other people trade/rescue]
@@ -92,6 +92,10 @@ Discord:touhou_project TouhouProject, for code contributions
 Alexander Groeger, for code contributions 
 https://twitter.com/_palika_ Palika, for script contributions
 https://github.com/Parakoopa Parakoopa, for tiles dtef parsing
+Discord:mistressnebula MistressNebula, for code contributions and item design
+https://github.com/Deeshura Deeshura, for item design
+Discord:shitpost_sunkern Shitpost Sunkern, for item design
+https://twitter.com/EthanLac13 FlowerSnek, for item design
 http://musicalcombusken.deviantart.com/ MusicalCombusken, for the title logo
 https://www.reddit.com/user/SilverDeoxys563 SilverDeoxys563, for various Trap graphics
 http://fable-amare.deviantart.com/ Fable, for custom portraits
@@ -143,3 +147,4 @@ Kevin Penkin, for the Made in Abyss track
 
 
 See Licenses for more details
+View sprite_credits.txt for full sprite and portrait credits.

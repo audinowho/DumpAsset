@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -123,11 +123,11 @@
 "Data": {
 "Element": "fairy",
 "Category": 2,
-"HitRate": 85,
+"HitRate": 70,
 "SkillStates": [
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 105
+"Power": 90
 }
 ],
 "BeforeTryActions": [],
@@ -145,7 +145,10 @@
 "Value": {
 "$type": "PMDC.Dungeon.DamageFormulaEvent, PMDC"
 }
-},
+}
+],
+"OnHitTiles": [],
+"AfterActions": [
 {
 "Key": {
 "str": [
@@ -153,9 +156,6 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.AdditionalEndEvent, PMDC",
-"BaseEvents": [
-{
 "$type": "PMDC.Dungeon.InvokeCustomBattleEvent, PMDC",
 "HitboxAction": {
 "$type": "RogueEssence.Dungeon.AreaAction, RogueEssence",
@@ -289,16 +289,12 @@
 }
 },
 "Msg": {
-"Key": null
+"Key": ""
 },
-"AffectTarget": true
-}
-]
+"AffectTarget": false
 }
 }
 ],
-"OnHitTiles": [],
-"AfterActions": [],
 "ElementEffects": [],
 "IntroFX": [],
 "HitFX": {

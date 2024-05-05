@@ -1,20 +1,14 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.TileData, RogueEssence",
 "Name": {
-"DefaultText": "Mirage Tablet",
-"LocalTexts": {
-"de": "Trugbild-Tafel",
-"zh-hans": "幻象石板"
-}
+"DefaultText": "Mirage Tile",
+"LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A stone tablet engraved with a set of names. There is an indent at the bottom that fits an Explorer Badge...",
-"LocalTexts": {
-"de": "Eine Steintafel mit einigen eingravierten Namen. Auf der Unterseite ist eine Einkerbung, in die ein Erkunderorden hineinpasst...",
-"zh-hans": "一块石板，上面刻着一组名字。底部有一个凹槽，正好与探险队徽章相嵌合……"
-}
+"DefaultText": "A tile that shows the mirage of a formidable team of Pokémon.",
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -47,11 +41,21 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.TriggerUnderfootEvent, PMDC"
+"$type": "PMDC.Dungeon.AskLeaderEvent, PMDC"
 }
 }
 ],
 "InteractWithTiles": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AskIfDangerEvent, PMDC"
+}
+},
 {
 "Key": {
 "str": [

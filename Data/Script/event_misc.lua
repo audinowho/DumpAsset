@@ -79,7 +79,7 @@ end
 
 function ITEM_SCRIPT.SleepingCalderaShift(owner, ownerChar, context, args)
   if not SV.sleeping_caldera.TookTreasure then
-    if context.Item.Value == "box_deluxe" then
+    if context.Item.Value == "box_deluxe" or context.Item.Value == "loot_secret_slab" then
 	  SV.sleeping_caldera.TookTreasure = true
 	  GAME:WaitFrames(60)
 	  SOUND:PlayBGM("", false)
@@ -118,14 +118,25 @@ function ITEM_SCRIPT.SleepingCalderaShift(owner, ownerChar, context, args)
 			  end
 			end
 		  end
+		  --also remove any stairs down
+		  if tl.Effect.ID == "stairs_go_down" or tl.Effect.ID == "tile_boss" then
+			tl.Effect = RogueEssence.Dungeon.EffectTile(loc)
+		  end
 		end
 	  end
 	  
 	  --set the tileset dictionary to lava
-	  _ZONE.CurrentMap.BlankBG = RogueEssence.Dungeon.AutoTile("deep_dark_crater_wall")
-	  _ZONE.CurrentMap.TextureMap["unbreakable"] = RogueEssence.Dungeon.AutoTile("deep_dark_crater_wall")
-	  _ZONE.CurrentMap.TextureMap["wall"] = RogueEssence.Dungeon.AutoTile("deep_dark_crater_wall")
-	  _ZONE.CurrentMap.TextureMap["floor"] = RogueEssence.Dungeon.AutoTile("deep_dark_crater_floor")
+	  if _ZONE.CurrentMap.ID < 14 then
+	    _ZONE.CurrentMap.BlankBG = RogueEssence.Dungeon.AutoTile("deep_dark_crater_wall")
+	    _ZONE.CurrentMap.TextureMap["unbreakable"] = RogueEssence.Dungeon.AutoTile("deep_dark_crater_wall")
+	    _ZONE.CurrentMap.TextureMap["wall"] = RogueEssence.Dungeon.AutoTile("deep_dark_crater_wall")
+	    _ZONE.CurrentMap.TextureMap["floor"] = RogueEssence.Dungeon.AutoTile("deep_dark_crater_floor")
+	  else
+	    _ZONE.CurrentMap.BlankBG = RogueEssence.Dungeon.AutoTile("magma_cavern_3_wall")
+	    _ZONE.CurrentMap.TextureMap["unbreakable"] = RogueEssence.Dungeon.AutoTile("magma_cavern_3_wall")
+	    _ZONE.CurrentMap.TextureMap["wall"] = RogueEssence.Dungeon.AutoTile("magma_cavern_3_wall")
+	    _ZONE.CurrentMap.TextureMap["floor"] = RogueEssence.Dungeon.AutoTile("magma_cavern_3_floor")
+	  end
 	  --call recalculate all autotiles for the entire map
 	  _ZONE.CurrentMap:CalculateAutotiles(RogueElements.Loc(0, 0), RogueElements.Loc(_ZONE.CurrentMap.Width, _ZONE.CurrentMap.Height))
 	  _ZONE.CurrentMap:CalculateTerrainAutotiles(RogueElements.Loc(0, 0), RogueElements.Loc(_ZONE.CurrentMap.Width, _ZONE.CurrentMap.Height))

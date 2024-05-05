@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Dungeon.Map, RogueEssence",
 "Name": {
@@ -1110,7 +1110,7 @@
 "AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": 5
+"NeighborCode": 141
 },
 "StableTex": false
 },
@@ -1132,7 +1132,7 @@
 "AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": 141
+"NeighborCode": 205
 },
 "StableTex": false
 },
@@ -1239,12 +1239,12 @@
 [
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "wall",
 "TileTex": {
 "AutoTileset": "test_dungeon_wall",
 "Associates": [],
 "Layers": [],
-"NeighborCode": 77
+"NeighborCode": 205
 },
 "StableTex": false
 },
@@ -1261,12 +1261,12 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "wall",
 "TileTex": {
 "AutoTileset": "test_dungeon_wall",
 "Associates": [],
 "Layers": [],
-"NeighborCode": 5
+"NeighborCode": 76
 },
 "StableTex": false
 },
@@ -1283,12 +1283,12 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "test_dungeon_wall",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": 12
+"NeighborCode": 155
 },
 "StableTex": false
 },
@@ -1310,7 +1310,7 @@
 "AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": 155
+"NeighborCode": 255
 },
 "StableTex": false
 },
@@ -1417,12 +1417,12 @@
 [
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "wall",
 "TileTex": {
 "AutoTileset": "test_dungeon_wall",
 "Associates": [],
 "Layers": [],
-"NeighborCode": 110
+"NeighborCode": 255
 },
 "StableTex": false
 },
@@ -1439,12 +1439,12 @@
 },
 {
 "Data": {
-"ID": "floor",
+"ID": "wall",
 "TileTex": {
-"AutoTileset": "test_dungeon_floor",
+"AutoTileset": "test_dungeon_wall",
 "Associates": [],
 "Layers": [],
-"NeighborCode": 0
+"NeighborCode": 110
 },
 "StableTex": false
 },
@@ -1461,12 +1461,12 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "test_dungeon_wall",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": 10
+"NeighborCode": 155
 },
 "StableTex": false
 },
@@ -1475,15 +1475,10 @@
 "X": 4,
 "Y": 2
 },
-"ID": "sealed_door",
-"Revealed": true,
+"ID": "",
+"Revealed": false,
 "Owner": 0,
-"TileStates": [
-{
-"$type": "PMDC.Dungeon.UnlockState, PMDC",
-"UnlockItem": "key"
-}
-]
+"TileStates": []
 }
 },
 {
@@ -1493,7 +1488,7 @@
 "AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": 155
+"NeighborCode": 255
 },
 "StableTex": false
 },
@@ -1524,8 +1519,8 @@
 "X": 4,
 "Y": 4
 },
-"ID": "",
-"Revealed": false,
+"ID": "stairs_go_down",
+"Revealed": true,
 "Owner": 0,
 "TileStates": []
 }
@@ -1600,12 +1595,12 @@
 [
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "wall",
 "TileTex": {
 "AutoTileset": "test_dungeon_wall",
 "Associates": [],
 "Layers": [],
-"NeighborCode": 39
+"NeighborCode": 55
 },
 "StableTex": false
 },
@@ -1622,12 +1617,12 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "wall",
 "TileTex": {
 "AutoTileset": "test_dungeon_wall",
 "Associates": [],
 "Layers": [],
-"NeighborCode": 5
+"NeighborCode": 38
 },
 "StableTex": false
 },
@@ -1644,12 +1639,12 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
-"AutoTileset": "test_dungeon_wall",
+"AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": 6
+"NeighborCode": 155
 },
 "StableTex": false
 },
@@ -1671,7 +1666,7 @@
 "AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": 155
+"NeighborCode": 255
 },
 "StableTex": false
 },
@@ -1827,7 +1822,7 @@
 "AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": 5
+"NeighborCode": 23
 },
 "StableTex": false
 },
@@ -1849,7 +1844,7 @@
 "AutoTileset": "test_dungeon_floor",
 "Associates": [],
 "Layers": [],
-"NeighborCode": 23
+"NeighborCode": 55
 },
 "StableTex": false
 },
@@ -2316,13 +2311,13 @@
 {
 "IsMoney": false,
 "Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_element_fire_dust",
+"Value": "loot_secret_slab",
+"HiddenValue": "",
 "Amount": 0,
 "Price": 0,
 "TileLoc": {
 "X": 4,
-"Y": 1
+"Y": 2
 }
 }
 ]

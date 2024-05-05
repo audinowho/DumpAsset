@@ -1,27 +1,28 @@
 ﻿{
-"Version": "0.7.25.0",
+"Version": "0.8.0.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Shaymin Hair",
+"DefaultText": "Shaymin Aroma",
 "LocalTexts": {
-"fr": "Cheveux de Shaymin",
-"de": "Shaymin Haare",
-"es": "Pelo Shaymin",
-"it": "Pelo Shaymin",
-"zh-hans": "谢米绒毛"
+"fr": "Arôme de Shaymin",
+"de": "Shaymin Aroma",
+"es": "Aroma Shaymin",
+"pt": "Perfume Shaymin",
+"it": "Aroma Shaymin",
+"zh-hans": "谢米香水"
 }
 },
 "Desc": {
-"DefaultText": "An exclusive item for Shaymin. When kept in the bag, it reveals the direction of the staircase whenever the Pokémon reaches a new floor.",
+"DefaultText": "An exclusive item for Shaymin. When kept in the bag, the Pokémon gives back recovered HP when it is healed by another Pokémon.",
 "LocalTexts": {
-"fr-ca": "Un object exclusif pour Shaymin When kept in the bag, it reveals the direction of the staircase whenever the Pokémon reaches a new floor.",
-"de": "Ein exklusives Item für Shaymin. Wenn es innerhalb des Beutels getragen wird, zeigt es dem Pokémon beim Erreichen einer neuen Ebene den Weg zur nächsten Treppe.",
-"es": "Un objeto exclusivo para Shaymin. When kept in the bag, it reveals the direction of the staircase whenever the Pokémon reaches a new floor.",
-"pt": "Um item exclusivo para Shaymin. When kept in the bag, it reveals the direction of the staircase whenever the Pokémon reaches a new floor.",
-"it": "Uno strumento esclusivo per Shaymin. When kept in the bag, it reveals the direction of the staircase whenever the Pokémon reaches a new floor.",
-"ko": "쉐이미에게 한정된 아이템. When kept in the bag, it reveals the direction of the staircase whenever the Pokémon reaches a new floor.",
-"zh-hans": "谢米的专属道具。放在包里时，到达新楼层后，会显示楼梯方向。"
+"fr-ca": "Un object exclusif pour Shaymin When kept in the bag, the Pokémon gives back recovered HP when it is healed by another Pokémon.",
+"de": "Ein exklusives Item für Shaymin. Wenn es innerhalb des Beutels getragen wird, gibt das Pokémon genesene KP zurück, wenn es von einem anderen Pokémon geheilt wird.",
+"es": "Un objeto exclusivo para Shaymin. Al llevarlo en la bolsa, el Pokémon devuelve los PS recuperados cuando es curado por otro Pokémon.",
+"pt": "Um item exclusivo para Shaymin. When kept in the bag, the Pokémon gives back recovered HP when it is healed by another Pokémon.",
+"it": "Uno strumento esclusivo per Shaymin. When kept in the bag, the Pokémon gives back recovered HP when it is healed by another Pokémon.",
+"ko": "쉐이미에게 한정된 아이템. When kept in the bag, the Pokémon gives back recovered HP when it is healed by another Pokémon.",
+"zh-hans": "谢米的专属道具。放在包里时，当宝可梦被治疗后，会返还部分HP。"
 }
 },
 "Released": true,
@@ -29,15 +30,15 @@
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 1600,
-"Rarity": 2,
+"Price": 800,
+"Rarity": 1,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 5
+"ItemType": 38
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
@@ -200,45 +201,7 @@
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
 "OnMapStatusRemoves": [],
-"OnMapStarts": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilySingleEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.StairSensorEvent, PMDC",
-"SniffedStatusID": "stairs_sensed",
-"Emitter": {
-"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
-"LocHeight": 0,
-"finished": false,
-"Offset": 0,
-"Anim": {
-"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
-"Anim": {
-"AnimIndex": "Stair_Sensor_Arrow",
-"FrameTime": 6,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": -1,
-"Alpha": 255,
-"AnimFlip": 0
-},
-"TotalTime": 0,
-"Cycles": 6,
-"FrameOffset": 0
-},
-"Layer": 4,
-"UseDest": false
-}
-}
-}
-}
-],
+"OnMapStarts": [],
 "OnTurnStarts": [],
 "OnTurnEnds": [],
 "OnMapTurnEnds": [],
@@ -251,7 +214,53 @@
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],
-"AfterBeingHits": [],
+"AfterBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.CounterHealEvent, PMDC",
+"Numerator": 1,
+"Denominator": 2,
+"Anims": [
+{
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Small_Blue_Out",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"Sound": "DUN_Growth",
+"AffectTarget": true,
+"Delay": 10
+}
+]
+}
+}
+}
+],
 "OnHitTiles": [],
 "AfterActions": [],
 "UserElementEffects": [],

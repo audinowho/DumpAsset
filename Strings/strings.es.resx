@@ -321,6 +321,15 @@
   <data name="_ENUM_SkillCategory_Status" xml:space="preserve">
     <value>Estado</value>
     <comment></comment>  </data>
+  <data name="_ENUM_SkillDefault_All" xml:space="preserve">
+    <value>Todo</value>
+    <comment></comment>  </data>
+  <data name="_ENUM_SkillDefault_Attacks" xml:space="preserve">
+    <value>Ataques</value>
+    <comment></comment>  </data>
+  <data name="_ENUM_SkillDefault_None" xml:space="preserve">
+    <value>Nada</value>
+    <comment></comment>  </data>
   <data name="_ENUM_Stat_Attack" xml:space="preserve">
     <value>Ataque</value>
     <comment></comment>  </data>
@@ -561,9 +570,15 @@
   <data name="DLG_RESTRICT_ITEM_ALL" xml:space="preserve">
     <value>todos los objetos</value>
     <comment>Will be used in the sentence "All items have been stored away." May be used in the middle of a sentence so do not capitalize.</comment>  </data>
+  <data name="DLG_RESTRICT_ITEM_ALL_NON_TREASURE" xml:space="preserve">
+    <value>todos los objetos (excepto tesoros)</value>
+    <comment></comment>  </data>
   <data name="DLG_RESTRICT_ITEM_SLOT" xml:space="preserve">
     <value>objetos más allá de la posición {0}</value>
     <comment>Will be used in the sentence "Items beyond the Xth slot have been stored away." May be used in the middleof a sentence so do not capitalize.</comment>  </data>
+  <data name="DLG_RESTRICT_ITEM_SLOT_NON_TREASURE" xml:space="preserve">
+    <value>objetos que no sean tesoros más allá de la posición {0}.</value>
+    <comment></comment>  </data>
   <data name="DLG_RESTRICT_LEVEL" xml:space="preserve">
     <value>Los miembros del equipo han sido reducidos temporalmente al nivel {0}.</value>
     <comment></comment>  </data>
@@ -676,10 +691,13 @@
     <value>¿Qué quieres hacer?</value>
     <comment></comment>  </data>
   <data name="GAME_ERROR_SPLASH" xml:space="preserve">
-    <value>El juego ha sido interrumpido\ndebido a que se generaron demasiados errores.\n\nPor favor, cierre el juego y reinícialo.</value>
+    <value>El juego ha sido interrumpidodebido a\nque se generaron demasiados errores.\n\nPor favor cierre el juego y reinícielo.</value>
     <comment>For chinese, japanese and Korean, try to use as few characters as possible.</comment>  </data>
+  <data name="GAME_LOAD_READY" xml:space="preserve">
+    <value>Pulsa una tecla para continuar</value>
+    <comment></comment>  </data>
   <data name="GAME_SPLASH" xml:space="preserve">
-    <value>Este es un fangame gratuito\n creado por los fans de\n Pokemon Mundo Misterioso.\n\n Por favor apoya a la serie\n comprando los juegos oficiales\n\n\nPokemon Mundo Misterioso pertenece a\n\nPokemon\nCreatures Inc\nGAME FREAK Inc\nSpike Chunsoft</value>
+    <value>Este es un fangame gratuito\ncreado por los fans de\nPokémon Mundo Misterioso.\n\nPor favor apoya a la serie\ncomprando los juegos oficiales\n\n\n\nPokémon Mundo Misterioso pertenece a\n\nPokemon\nCreatures Inc\nGAME FREAK Inc\nSpike Chunsoft</value>
     <comment>CAREFUL.  A line can only contain up to 40 characters before it overflows the screen!  there are NO ASCII limitations now!</comment>  </data>
   <data name="GAME_TITLE" xml:space="preserve">
     <value>Pokémon Mundo Misterioso: Orígenes</value>
@@ -972,6 +990,9 @@
   <data name="MENU_LABEL" xml:space="preserve">
     <value>{0}:</value>
     <comment>For putting a colon in front as with a labeling stats</comment>  </data>
+  <data name="MENU_LEVEL_UP" xml:space="preserve">
+    <value>Estadísticas de {0}</value>
+    <comment></comment>  </data>
   <data name="MENU_MAIL_AOK_TITLE" xml:space="preserve">
     <value>Correo A-OK</value>
     <comment></comment>  </data>
@@ -1159,7 +1180,7 @@
     <value>Valor del Inventario: {0}</value>
     <comment>For labeling the total value of all the items in the inventory</comment>  </data>
   <data name="MENU_RESULTS_INVENTORY_TITLE" xml:space="preserve">
-    <value>Inventario</value>
+    <value>Inventario ({0}/{1})</value>
     <comment>Title for the window displaying the inventory results of the last outing</comment>  </data>
   <data name="MENU_RESULTS_QUIT" xml:space="preserve">
     <value>se rindió en {0}.</value>
@@ -1380,6 +1401,9 @@
   <data name="MENU_TEAM_EXP" xml:space="preserve">
     <value>Exp.: {0}/{1}</value>
     <comment>For labeling a team member's current EXP out of the amount needed to level up</comment>  </data>
+  <data name="MENU_TEAM_EXP_SHORT" xml:space="preserve">
+    <value>Exp.</value>
+    <comment></comment>  </data>
   <data name="MENU_TEAM_FEATURES" xml:space="preserve">
     <value>Caracteristicas</value>
     <comment>Title of the Features menu, detailing the features of a team member</comment>  </data>
@@ -1597,13 +1621,16 @@
     <value>¡El {0} se pegó con {1}!</value>
     <comment></comment>  </data>
   <data name="MSG_EXP_GAIN" xml:space="preserve">
-    <value>El equipo ganó [color=#00FFFF]{0}[color] Puntos de Experiencia.</value>
+    <value>¡El equipo ganó [color=#00FFFF]{0}[color] Puntos de Experiencia!</value>
     <comment></comment>  </data>
   <data name="MSG_EXP_GAIN_MEMBER" xml:space="preserve">
-    <value>{0} ganó [color=#00FFFF]{1}[color] Puntos de Experiencia.</value>
+    <value>¡{0} ganó [color=#00FFFF]{1}[color] Puntos de Experiencia!</value>
+    <comment></comment>  </data>
+  <data name="MSG_EXP_LOSS_MEMBER" xml:space="preserve">
+    <value>¡{0} perdió [color=#00FFFF]{1}[color] Puntos de Experiencia!</value>
     <comment></comment>  </data>
   <data name="MSG_HP_RESTORE" xml:space="preserve">
-    <value>{0} recuperó [color=#00FFFF]{1}[color] PS</value>
+    <value>{0} recuperó [color=#00FFFF]{1}[color] PS.</value>
     <comment></comment>  </data>
   <data name="MSG_HUNGER_CRITICAL" xml:space="preserve">
     <value>Te mareas del hambre...</value>
@@ -1776,6 +1803,9 @@
   <data name="RANGE_OFFSET_AREA" xml:space="preserve">
     <value>{1} en área, {0} casillas a lo lejos</value>
     <comment></comment>  </data>
+  <data name="RANGE_OFFSET_CROSS" xml:space="preserve">
+    <value>{1} en cruz, {0} casillas a lo lejos</value>
+    <comment></comment>  </data>
   <data name="RANGE_OFFSET_SIDES" xml:space="preserve">
     <value>{1} en línea, {0} casillas a lo lejos</value>
     <comment>Ex. "Foe in Tile/Sides, 3 Tiles Away" Used for attacks that hit a disjointed row such as Rock Slide. https://cdn.discordapp.com/attachments/626994148494409738/748631075344875570/unknown.png</comment>  </data>
@@ -1827,6 +1857,12 @@
   <data name="TEAM_NAME" xml:space="preserve">
     <value>Equipo {0}</value>
     <comment>For putting together the team name.</comment>  </data>
+  <data name="TRANSFER_ALL" xml:space="preserve">
+    <value>Todo</value>
+    <comment></comment>  </data>
+  <data name="TRANSFER_ITEMS" xml:space="preserve">
+    <value>Solo Objetos</value>
+    <comment></comment>  </data>
   <data name="ZONE_EXPECT_LEVEL" xml:space="preserve">
     <value>Nivel Recomendado:{0}</value>
     <comment></comment>  </data>

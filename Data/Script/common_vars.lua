@@ -5,7 +5,7 @@
 
 function COMMON.UpdateDayEndVars()
 
-  if SV.Experimental ~= nil then
+  if SV.Experimental then
     if _DATA.Save:GetDungeonUnlock("faultline_ridge") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortSister"] == nil and SV.missions.FinishedMissions["EscortSister"] == nil then
 	    COMMON.CreateMission("EscortSister",
@@ -77,7 +77,7 @@ function COMMON.UpdateDayEndVars()
 	-- TODO: should be barren_tundra
     if _DATA.Save:GetDungeonUnlock("snowbound_path") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortBrother"] == nil and SV.missions.FinishedMissions["EscortBrother"] == nil then
-	    COMMON.CreateMission("EscortFather",
+	    COMMON.CreateMission("EscortBrother",
         {
           DestZone = "snowbound_path",
           DestSegment = 1,
@@ -266,8 +266,8 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
   elseif SV.team_solo.Status == 1 and SV.team_solo.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
-  elseif SV.team_solo.Status == 2 and SV.team_solo.SpokenTo then
-    COMMON.UpdateCheckpointStatus(SV.team_solo, 2)
+  elseif SV.team_solo.Status == 2 and SV.team_solo.SpokenTo and _DATA.Save:GetDungeonUnlock("forsaken_desert") == RogueEssence.Data.GameProgress.UnlockState.Completed then
+    COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
   elseif SV.team_solo.Status == 3 and SV.team_solo.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_solo, 2)
   elseif SV.team_solo.Status == 5 then
@@ -276,7 +276,7 @@ function COMMON.UpdateDayEndVars()
 	SV.team_solo.Cycle = math.random(3, 6)
   end
   
-  if SV.team_psychic.Status == 0 and _DATA.Save:GetDungeonUnlock("sleeping_caldera") == RogueEssence.Data.GameProgress.UnlockState.Completed then
+  if SV.team_psychic.Status == 0 and _DATA.Save:GetDungeonUnlock("depleted_basin") == RogueEssence.Data.GameProgress.UnlockState.Completed then
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
   elseif SV.team_psychic.Status == 1 and SV.rest_stop.ExpositionComplete then
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
@@ -370,7 +370,10 @@ function COMMON.UpdateDayEndVars()
 	  SV.supply_corps.ManagerCycle = 6 - (SV.supply_corps.ManagerCycle - 6)
 	end
   end
-
+  
+  if SV.canyon_camp.ExpositionComplete then
+    GAME:UnlockDungeon('depleted_basin')
+  end
   
   if SV.rest_stop.ExpositionComplete then
     if not SV.rest_stop.BossSolved then

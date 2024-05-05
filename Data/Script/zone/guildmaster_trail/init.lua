@@ -57,12 +57,12 @@ function guildmaster_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
           COMMON.EndDungeonDay(result, 'guildmaster_island', -1,8,0)
 	    else
 		  --didnt clear the game yet?  Go to the summit for the final test
-		  if SV.Experimental ~= nil then
+		  if SV.Experimental then
 			if mapID >= SV.guildmaster_trail.FloorsCleared then
 			  SV.guildmaster_trail.FloorsCleared = mapID
 			end  
 			SV.guildmaster_summit.ClearedFromTrail = true
-	        GAME:EnterZone('guildmaster_island',-1,8,0)
+	        GAME:EnterZone('guildmaster_trail',-1,0,0)
 		  else
 		    GAME:UnlockDungeon('tropical_path')
 		    SV.base_camp.ExpositionComplete = true

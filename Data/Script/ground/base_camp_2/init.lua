@@ -516,6 +516,7 @@ base_camp_2.difficulty_tbl["fertile_valley"] = 1
 base_camp_2.difficulty_tbl["ambush_forest"] = 3
 base_camp_2.difficulty_tbl["treacherous_mountain"] = 3
 base_camp_2.difficulty_tbl["copper_quarry"] = 3
+base_camp_2.difficulty_tbl["depleted_basin"] = 3
 base_camp_2.difficulty_tbl["forsaken_desert"] = 3
 base_camp_2.difficulty_tbl["snowbound_path"] = 3
 base_camp_2.difficulty_tbl["relic_tower"] = 3
@@ -1050,7 +1051,7 @@ function base_camp_2.Swap_Action(obj, activator)
   end
 
   
-  local Prices = { 1000, 5000, 20000, 50000, 100000 }
+  local Prices = { 1000, 5000, 25000 }
   local player = CH('PLAYER')
   local chara = CH('Swap_Owner')
   UI:SetSpeaker(chara)
@@ -1170,7 +1171,7 @@ function base_camp_2.Swap_Action(obj, activator)
 				end
 				
 				SV.base_town.ValueTradeItem = trade.Item
-				if itemEntry.Rarity == 5 then
+				if itemEntry.Rarity == 3 then
 				  UI:SetSpeakerEmotion("Inspired")
 				  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Complete_Max_001']))
 				  
@@ -1190,7 +1191,7 @@ function base_camp_2.Swap_Action(obj, activator)
 		elseif state == 4 then
 			
 			local itemEntry = _DATA:GetItem(SV.base_town.ValueTradeItem)
-			if itemEntry.Rarity == 5 then
+			if itemEntry.Rarity == 3 then
 			  if SV.base_town.ValueTraded == false then
 			  
 			    SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")

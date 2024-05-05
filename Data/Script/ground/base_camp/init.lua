@@ -124,6 +124,13 @@ function base_camp.SetupNpcs()
     local noctowl = CH('Noctowl')
     GROUND:TeleportTo(noctowl, 80, 288, Direction.Right)
   end
+  
+  if not SV.family.Sister and SV.family.SisterActiveDays >= 3 then
+	local noctowl = CH('Noctowl')
+	local entrance = CH('NPC_Entrance')
+	GROUND:CharTurnToChar(noctowl,entrance)
+	GROUND:CharTurnToChar(entrance,noctowl)
+  end
 end
 
 
@@ -455,7 +462,7 @@ function base_camp.Sign_Action(obj, activator)
   UI:SetAutoFinish(false)
   
   base_camp.sign_count = base_camp.sign_count + 1
-  if base_camp.sign_count > 5 and SV.Experimental == nil then
+  if base_camp.sign_count > 5 and SV.Experimental ~= true then
     UI:ChoiceMenuYesNo("UNLOCK THE HALF FINISHED STORY? NO GOING BACK.", true)
     UI:WaitForChoice()
     ch = UI:ChoiceResult()

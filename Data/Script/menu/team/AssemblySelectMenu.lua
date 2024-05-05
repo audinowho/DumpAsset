@@ -253,11 +253,52 @@ end
 
 --- Returns a newly created copy of this object with the provided ``RogueEssence.Menu.AssemblyMenu.AssemblySortMode``
 --- @param new_mode userdata the ``RogueEssence.Menu.AssemblyMenu.AssemblySortMode`` to be applied
---- @return table an ``AssemblySelectMenu``.
+--- @return table an ``AssemblyMultiSelectMenu``.
 function AssemblyMultiSelectMenu:cloneMenu(new_mode)
-    return AssemblyMultiSelectMenu:new(self.filter, self.confirmAction, self.refuseAction, self.use_submenu, self.menuWidth, new_mode)
+    local selected_team, selected = self:saveSelectedMembers()
+    local new_menu = AssemblyMultiSelectMenu:new(self.filter, self.confirmAction, self.refuseAction, self.use_submenu, self.menuWidth, new_mode)
+    new_menu:loadSelectedMembers(selected_team, selected)
+    return new_menu
 end
 
+--- Takes the currently selected assembly and team indexes and stores them in lists.
+--- @return table, table the list of selected team indexes, the list of selected assembly indexes
+function AssemblyMultiSelectMenu:saveSelectedMembers()
+    local selected = {}
+    local selected_team = {}
+
+    local num = _DATA.Save.ActiveTeam.Players.Count
+    for index, option in pairs(self.optionsList) do
+        if option.Selected then
+            if index <= num then
+                table.insert(selected_team, index)
+            else
+                local i = index - num
+                table.insert(selected, self.assemblyIndexes[i])
+            end
+        end
+    end
+    return selected_team, selected
+end
+
+--- Takes a list of assembly indexes and selects the corresponding options.
+--- @param selected_team table a list of integer team indexes to be selected
+--- @param selected table a list of integer assembly indexes to be selected
+function AssemblyMultiSelectMenu:loadSelectedMembers(selected_team, selected)
+    local num = _DATA.Save.ActiveTeam.Players.Count
+    for _, index in pairs(selected_team) do
+        self.optionsList[index]:SilentSelect(true)
+    end
+    for i=1, #self.assemblyIndexes, 1 do
+        for pos, val in pairs(selected) do
+            if val == self.assemblyIndexes[i] then
+                table.remove(selected, pos)
+                self.optionsList[i+num]:SilentSelect(true)
+                break
+            end
+        end
+    end
+end
 
 -------------------------------------------------------------------------------------------
 --- Menu for choosing what to do with the chosen character. Assembly menu version.

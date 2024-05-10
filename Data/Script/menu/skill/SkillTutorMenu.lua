@@ -152,8 +152,8 @@ end
 --- - value: a table ``{Cost, Currency}`` entry.
 ---
 --- The value table must, in turn, be structured like so:
---- - Cost: a number. It indicates the price of the skill in the given currency.
---- - Currency: an item id string, or ``""``. It's the item required to purchase the skill. If omitted, the
+--- - Cost = number. It indicates the price of the skill in the given currency. If omitted, it will be free.
+--- - Currency = string. It must be either an item id or ``""``. It's the item required to purchase the skill. If omitted, the
 ---     parameter ``default_currency`` will be used. If ``""``, money will be used.
 ---
 --- This function throws an error if the parameter ``skill_list`` contains less than 1 entries,

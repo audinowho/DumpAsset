@@ -165,16 +165,24 @@ function SkillTutorMenu.runTutorMenu(tutor_moves, default_currency)
     --moved GetTutorableMoves call to base_camp_2\init, line 1199   -Nebula
     local tutor_skills = {}
     local tutor_prices = {}
+
     for move_idx, data in pairs(tutor_moves) do
-        table.insert(tutor_skills, move_idx)
+        local pos = #tutor_skills+1
+        for i=1, #tutor_skills, 1 do
+            if move_idx<tutor_skills[i] then
+                pos = i
+                break
+            end
+        end
+        table.insert(tutor_skills, pos, move_idx)
 
         if not data.Cost then
-            table.insert(tutor_prices, {0, ""})
+            table.insert(tutor_prices, pos, {0, ""})
         else
             local cost = data.Cost
             local currency = default_currency
             if data.Currency then currency = data.Currency end
-            table.insert(tutor_prices, {cost, currency})
+            table.insert(tutor_prices, pos, {cost, currency})
         end
     end
 

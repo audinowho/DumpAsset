@@ -77,7 +77,10 @@ function SkillTutorMenu:load_currencies(price_list)
     local list = {}
     for i=1, #price_list, 1 do
         local currency = price_list[i][2]
-        if not list[currency] then list[currency] = COMMON.GetPlayerItemCount(currency) end
+        if not list[currency] then
+            if currency == "" then list[currency] = GAME:GetPlayerMoney()
+            else list[currency] = COMMON.GetPlayerItemCount(currency) end
+        end
     end
     return list
 end
@@ -103,7 +106,7 @@ function SkillTutorMenu:generate_options()
         skill_price = "[color="..color.."]"..skill_price.."[color]"
         --add icon
         if currency == "" then
-            skill_price = skill_price..STRINGS.FormatKey("MONEY_AMOUNT" ,price[1])
+            skill_price = skill_price..STRINGS:FormatKey("MONEY_AMOUNT" ,"")
         else
             local currency_icon = _DATA:GetItem(currency).Icon
             if currency_icon > -1 then
@@ -129,9 +132,9 @@ function SkillTutorMenu:updateSummary()
 
     local currency = self.priceList[choice][2]
     local amount = self.currencyList[currency]
-    if currency[2] == "" then
-        self.currency_title:SetText(STRINGS.FormatKey("MENU_STORAGE_MONEY")..":")
-        self.currency_text:SetText(STRINGS.FormatKey("MONEY_AMOUNT" , amount))
+    if currency == "" then
+        self.currency_title:SetText(STRINGS:FormatKey("MENU_STORAGE_MONEY")..":")
+        self.currency_text:SetText(STRINGS:FormatKey("MONEY_AMOUNT" , amount))
     else
         local item_name = _DATA:GetItem(currency):GetIconName()
         self.currency_title:SetText(RogueEssence.StringKey("MENU_CURRENCY_AVAILABLE"):ToLocal()..":")

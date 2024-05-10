@@ -1,7 +1,5 @@
 require 'common'
 
-BATTLE_SCRIPT = {}
-
 function BATTLE_SCRIPT.Test(owner, ownerChar, context, args)
   PrintInfo("Test")
 end

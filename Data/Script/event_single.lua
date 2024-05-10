@@ -1,7 +1,5 @@
 require 'common'
 
-SINGLE_CHAR_SCRIPT = {}
-
 function SINGLE_CHAR_SCRIPT.Test(owner, ownerChar, context, args)
   PrintInfo("Test")
 end

@@ -1,15 +1,9 @@
 require 'common'
 
-misc_helpers = {}
-
-STATUS_SCRIPT = {}
-
 function STATUS_SCRIPT.Test(owner, ownerChar, context, args)
   PrintInfo("Test")
 end
 
-
-MAP_STATUS_SCRIPT = {}
 
 function MAP_STATUS_SCRIPT.Test(owner, ownerChar, character, status, msg, args)
   PrintInfo("Test")
@@ -52,8 +46,6 @@ function MAP_STATUS_SCRIPT.SetShopkeeperHostile(owner, ownerChar, character, sta
   -- force everyone to skip their turn for this entire session
   _DUNGEON:SkipRemainingTurns()
 end
-
-ITEM_SCRIPT = {}
 
 function ITEM_SCRIPT.Test(owner, ownerChar, context, args)
   PrintInfo("Test")
@@ -153,14 +145,10 @@ function ITEM_SCRIPT.SleepingCalderaShift(owner, ownerChar, context, args)
   end
 end
 
-REFRESH_SCRIPT = {}
-
 function REFRESH_SCRIPT.Test(owner, ownerChar, character, args)
   PrintInfo("Test")
 end
 
-
-SKILL_CHANGE_SCRIPT = {}
 
 function SKILL_CHANGE_SCRIPT.Test(owner, character, skillIndices, args)
   PrintInfo("Test")

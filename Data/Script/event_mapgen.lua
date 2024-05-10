@@ -1,8 +1,6 @@
 require 'common'
 
 
-ZONE_GEN_SCRIPT = {}
-
 function ZONE_GEN_SCRIPT.Test(zoneContext, context, queue, seed, args)
   PrintInfo("Test")
 end
@@ -178,8 +176,6 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
   end
 end
 
-
-FLOOR_GEN_SCRIPT = {}
 
 
 PresetPickerType = luanet.import_type('RogueElements.PresetPicker`1')

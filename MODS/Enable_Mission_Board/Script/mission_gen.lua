@@ -2334,6 +2334,7 @@ function MISSION_GEN.GenerateBoard(result, board_type)
                         dungeon_segments[dungeon_candidate_index_cur][dungeon_segment_index_cur] = dungeon_segment
                     end
                     default_dungeon_candidate_needed = false
+					dungeon_segment_index_cur = dungeon_segment_index_cur + 1
                 end
             end
 

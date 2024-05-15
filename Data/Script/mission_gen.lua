@@ -54,6 +54,7 @@ MISSION_GEN.DUNGEON_LIST["secret_garden"] = { [0] = "STAR_3" } --Secret Garden
 MISSION_GEN.DUNGEON_LIST["flyaway_cliffs"] = { [0] = "C" } --Flyaway Cliffs
 MISSION_GEN.DUNGEON_LIST["fertile_valley"] = { [0] = "D", [1] = "C" } --Fertile Valley, Muddy Valley
 MISSION_GEN.DUNGEON_LIST["copper_quarry"] = { [0] = "C", [1] = "B" } --Copper Quarry, Lodestone Quarry
+MISSION_GEN.DUNGEON_LIST["depleted_basin"] = { [0] = "C" } --Depleted Basin
 MISSION_GEN.DUNGEON_LIST["forsaken_desert"] = { [0] = "A" } --Forsaken Desert
 MISSION_GEN.DUNGEON_LIST["relic_tower"] = { [0] = "S" } --Relic Tower
 MISSION_GEN.DUNGEON_LIST["sleeping_caldera"] = { [0] = "B" } --Sleeping Caldera
@@ -2334,6 +2335,7 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 						dungeon_segments[dungeon_candidate_index_cur][dungeon_segment_index_cur] = dungeon_segment
 					end
 					default_dungeon_candidate_needed = false
+					dungeon_segment_index_cur = dungeon_segment_index_cur + 1
 				end
 			end
 

@@ -100,17 +100,21 @@ function SkillTutorMenu:generate_options()
         --build text
         local skill_name = _DATA:GetSkill(self.skillList[i]).Name:ToLocal()
         local skill_price = tostring(amount)
+        --special "free" line
+        if amount <= 0 then skill_price = STRINGS:FormatKey("MENU_COST_FREE") end
         local color = "#FF0000"
         if enabled then color = "#00FF00" end
         skill_name = "[color="..color.."]"..skill_name.."[color]"
         skill_price = "[color="..color.."]"..skill_price.."[color]"
         --add icon
-        if currency == "" then
-            skill_price = skill_price..STRINGS:FormatKey("MONEY_AMOUNT" ,"")
-        else
-            local currency_icon = _DATA:GetItem(currency).Icon
-            if currency_icon > -1 then
-                skill_price = skill_price..utf8.char(57504+currency_icon)
+        if amount>0 then
+            if currency == "" then
+                skill_price = skill_price..STRINGS:FormatKey("MONEY_AMOUNT" ,"")
+            else
+                local currency_icon = _DATA:GetItem(currency).Icon
+                if currency_icon > -1 then
+                    skill_price = skill_price..utf8.char(57504+currency_icon)
+                end
             end
         end
         --compose elements

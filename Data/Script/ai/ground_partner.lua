@@ -93,6 +93,7 @@ end
 
 function StateFollow:SetTask(entity)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  local initial_pos = self.parentAI.LastTargetPosition
   local targetpos = Queue.popright(self.parentAI.TargetMemory)--get next coordinate to travel to
   self.parentAI.QueueLength = self.parentAI.QueueLength - 1
   local distance = GetDistance(self.parentAI.LastTargetPosition, targetpos)
@@ -101,14 +102,37 @@ function StateFollow:SetTask(entity)
   local run = false
   local speed = 2
   
+  --there are some scenarios where a speed of 2 over a distance of 5 is normally called for. this usually happens if the player runs and then walks instead of runs, and the partner has to do that same transition.
+  --this takes 3 frames to do. There's no GOOD solution to this as 2.5 speed isn't possible, but 3 frames for a 3 and then 2 movement over 2 frames is more ideal than 2>2>1 movement over 3 frames.
+  if distance == 5 and speed == 2 then speed = 3 end
+  
+  --print(self.parentAI.TravelLength)
+  
   --run if the distance is above a certain threshold, but don't run if the distance the partner needs to walk is a "walkable" distance
   if self.parentAI.TravelLength > self.parentAI.ComfortZone + 2 and distance > 2 then
     run = true
 	speed = 5
   end 
   
+  --if the target is too far away and we're not already running, clear the queue and fill it with running steps to catch up.
+  if not run and self.parentAI.TravelLength > self.parentAI.ComfortZone + 8 then 
+	self.parentAI.InitialSteps = 10
+	self.parentAI:ClearQueue()
+	self.parentAI:PopulateQueue(initial_pos, self.parentAI.TargetEntity.Position)
+	self.parentAI.InitialSteps = 6
+
+	targetpos = Queue.popright(self.parentAI.TargetMemory)--get next coordinate to travel to
+	self.parentAI.QueueLength = self.parentAI.QueueLength - 1
+	distance = GetDistance(self.parentAI.LastTargetPosition, targetpos)
+	self.parentAI.TravelLength = self.parentAI.TravelLength - distance
+	
+	run = true 
+	speed = 5
+  end
+  
+  
   self.parentAI.LastTargetPosition = targetpos--set LastTaskPosition to the one we're about to move to 
-  --PrintInfo("Walking to "..tostring(targetpos.X)..","..tostring(targetpos.Y).." dist:"..tostring(distance))
+  --PrintInfo("Walking to "..tostring(targetpos.X)..","..tostring(targetpos.Y).." dist:"..tostring(distance) .." speed: " .. tostring(speed) .. " run: " ..tostring(run) .. " queue length: " .. tostring(self.parentAI.QueueLength))
   TASK:StartEntityTask(entity, 
     function()
       GROUND:MoveToPosition(entity, targetpos.X, targetpos.Y, run, speed)
@@ -128,6 +152,8 @@ function StateFollow:Run(entity)
   --Suspend while interacting with the entity
   if ent.IsInteracting then 
     self.parentAI:SetState("Idle")
+	 
+  
   elseif not ent:CurrentTask() then 
     --threshold for switching back is slightly lower to prevent stuttering walk
 	if self.parentAI.TravelLength > self.parentAI.ComfortZone - 2 then
@@ -227,6 +253,8 @@ function ground_partner:PopulateQueue(startPos, endPos)
 	self.QueueLength = self.QueueLength + 1
 	self.TravelLength = self.TravelLength + distance
 	curPos = targetLoc
+	--print("travel length in population for i = " .. tostring(i) .. ": " .. tostring(self.TravelLength))
+	--print("x: " .. tostring(xPos) .. ", y: " .. tostring(yPos))
   end
 end 
 

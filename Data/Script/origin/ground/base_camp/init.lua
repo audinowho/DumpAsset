@@ -404,55 +404,6 @@ function base_camp.Ferry_Action(obj, activator)
   STRINGS:Format(MapStrings['Ferry_Line_003']))
 end
 
-function base_camp.ShowFerryMenu(dungeon_entrances, ground_entrances)
-  
-  --check for unlock of dungeons
-  local open_dests = {}
-  for ii = 1,#dungeon_entrances,1 do
-    if GAME:DungeonUnlocked(dungeon_entrances[ii]) then
-	local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_entrances[ii])
-	  if zone_summary.Released then
-	    local zone_name = ""
-	    if _DATA.Save:GetDungeonUnlock(dungeon_entrances[ii]) == RogueEssence.Data.GameProgress.UnlockState.Completed then
-		  zone_name = zone_summary:GetColoredName()
-		else
-		  zone_name = "[color=#00FFFF]"..zone_summary.Name:ToLocal().."[color]"
-		end
-        table.insert(open_dests, { Name=zone_name, Dest=RogueEssence.Dungeon.ZoneLoc(dungeon_entrances[ii], 0, 0, 0) })
-	  end
-	end
-  end
-  
-  --check for unlock of grounds
-  for ii = 1,#ground_entrances,1 do
-    if ground_entrances[ii].Flag then
-	  local ground_id = ground_entrances[ii].Zone
-	  local zone = _DATA:GetZone(ground_id)
-	  local ground = _DATA:GetGround(zone.GroundMaps[ground_entrances[ii].ID])
-	  local ground_name = ground:GetColoredName()
-      table.insert(open_dests, { Name=ground_name, Dest=RogueEssence.Dungeon.ZoneLoc(ground_id, -1, ground_entrances[ii].ID, ground_entrances[ii].Entry) })
-	end
-  end
-  
-  local dest = RogueEssence.Dungeon.ZoneLoc.Invalid
-  
-    
-    UI:DestinationMenu(open_dests)
-	UI:WaitForChoice()
-	dest = UI:ChoiceResult()
-  
-  if dest:IsValid() then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ferry_Line_003']))
-    SOUND:PlayBGM("", true)
-    GAME:FadeOut(false, 20)
-	if dest.StructID.Segment > -1 then
-	  GAME:EnterDungeon(dest.ID, dest.StructID.Segment, dest.StructID.ID, dest.EntryPoint, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
-	else
-	  GAME:EnterZone(dest.ID, dest.StructID.Segment, dest.StructID.ID, dest.EntryPoint)
-	end
-  end
-end
-
 base_camp.sign_count = 0
 function base_camp.Sign_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
@@ -463,7 +414,7 @@ function base_camp.Sign_Action(obj, activator)
   
   base_camp.sign_count = base_camp.sign_count + 1
   if base_camp.sign_count > 5 and SV.Experimental ~= true then
-    UI:ChoiceMenuYesNo("UNLOCK THE HALF FINISHED STORY? NO GOING BACK.", true)
+    UI:ChoiceMenuYesNo("UNLOCK THE HALF FINISHED STORY? NO TURNING OFF.", true)
     UI:WaitForChoice()
     ch = UI:ChoiceResult()
 	if ch then

@@ -29,7 +29,7 @@ function test_grounds.Init(map)
   COMMON.RespawnStarterPartner()
   
   local partner = CH('Partner')
-  AI:SetCharacterAI(partner, "ai.ground_partner", CH('PLAYER'), partner.Position)
+  AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
   partner.CollisionDisabled = true
 	
   --Set Poochy AI
@@ -38,7 +38,7 @@ function test_grounds.Init(map)
   local poochzone = {X = poochy.X - 100, Y = poochy.Y - 100, 
                      W = 200, H = 200};
   AI:SetCharacterAI(poochy,                                      --[[Entity that will use the AI]]--
-                    "ai.ground_default",                         --[[Class path to the AI class to use]]--
+                    "origin.ai.ground_default",                         --[[Class path to the AI class to use]]--
                     RogueElements.Loc(poochzone.X, poochzone.Y), --[[Top left corner pos of the allowed idle wander area]]--
                     RogueElements.Loc(poochzone.W, poochzone.H), --[[Width and Height of the allowed idle wander area]]--
                     0.5,                                         --[[Wandering speed]]--

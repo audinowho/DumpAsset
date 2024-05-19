@@ -267,7 +267,7 @@ function COMMON.CreateWalkArea(name, x, y, w, h)
   end
   --Set the area to wander in
   AI:SetCharacterAI(chara,                                      --[[Entity that will use the AI]]--
-                    "ai.ground_default",                         --[[Class path to the AI class to use]]--
+                    "origin.ai.ground_default",                         --[[Class path to the AI class to use]]--
                     RogueElements.Loc(x, y), --[[Top left corner pos of the allowed idle wander area]]--
                     RogueElements.Loc(w, h), --[[Width and Height of the allowed idle wander area]]--
                     1,                                         --[[Wandering speed]]--

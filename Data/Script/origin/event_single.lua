@@ -1,4 +1,4 @@
-require 'common'
+require 'origin.common'
 
 function SINGLE_CHAR_SCRIPT.Test(owner, ownerChar, context, args)
   PrintInfo("Test")

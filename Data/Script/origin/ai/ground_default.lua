@@ -3,9 +3,9 @@
   
   An entity running this AI will randomly turn and wander a bit from time to time.
 ]]--
-require 'common'
-local BaseAI = require 'ai.ground_baseai'
-local BaseState = require 'ai.base_state'
+require 'origin.common'
+local BaseAI = require 'origin.ai.ground_baseai'
+local BaseState = require 'origin.ai.base_state'
 
 -------------------------------
 -- States Class Definitions

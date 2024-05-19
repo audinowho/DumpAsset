@@ -1,4 +1,4 @@
-require 'common'
+require 'origin.common'
 
 local canyon_camp = {}
 local MapStrings = {}

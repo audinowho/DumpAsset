@@ -6,7 +6,7 @@
     It contains a few run methods for quick instantiation.
     This equivalent is NOT SAFE FOR REPLAYS. Do NOT use in dungeons until further notice.
 ]]
-require 'menu.team.TeamSelectMenu'
+require 'origin.menu.team.TeamSelectMenu'
 
 --- Menu for selecting a character from the assembly.
 AssemblySelectMenu = Class("AssemblySelectMenu", TeamSelectMenu)

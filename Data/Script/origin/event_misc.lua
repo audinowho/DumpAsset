@@ -1,4 +1,4 @@
-require 'common'
+require 'origin.common'
 
 function STATUS_SCRIPT.Test(owner, ownerChar, context, args)
   PrintInfo("Test")

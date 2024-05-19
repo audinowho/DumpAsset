@@ -7,8 +7,8 @@
     It contains a run method for quick instantiation.
     This menu is NOT SAFE FOR REPLAYS. Do NOT use in dungeons until further notice.
 ]]
-require 'common'
-require 'menu.DescriptionSummary'
+require 'origin.common'
+require 'origin.menu.DescriptionSummary'
 
 ---Menu for selecting a drink Specialty from a list of possible specialties.
 SpecialtiesMenu = Class('SpecialtiesMenu')

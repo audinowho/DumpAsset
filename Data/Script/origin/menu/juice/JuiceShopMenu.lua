@@ -7,8 +7,8 @@
     It contains a run method for quick instantiation.
     This menu is NOT SAFE FOR REPLAYS. Do NOT use in dungeons until further notice.
 ]]
-require 'common'
-require 'menu.InventorySelectMenu'
+require 'origin.common'
+require 'origin.menu.InventorySelectMenu'
 
 --- Menu for selecting items from the player's inventory.
 JuiceShopMenu = Class("JuiceShopMenu", InventorySelectMenu)

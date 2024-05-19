@@ -1,4 +1,4 @@
-require 'common'
+require 'origin.common'
 
 local lava_floe_island = {}
 --------------------------------------------------

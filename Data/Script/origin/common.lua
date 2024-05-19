@@ -2,7 +2,7 @@
     common.lua
     A collection of frequently used functions and values!
 ]]--
-require 'common_gen'
+require 'origin.common_gen'
 
 ----------------------------------------
 -- Lib Definitions
@@ -53,10 +53,10 @@ end
 ----------------------------------------
 COMMON = {}
 
-require 'common_talk'
-require 'common_shop'
-require 'common_vars'
-require 'common_tutor'
+require 'origin.common_talk'
+require 'origin.common_shop'
+require 'origin.common_vars'
+require 'origin.common_tutor'
 
 --Automatically load the appropriate localization for the specified package, or defaults to english!
 function COMMON.AutoLoadLocalizedStrings()

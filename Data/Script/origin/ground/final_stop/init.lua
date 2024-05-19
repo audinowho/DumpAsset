@@ -1,4 +1,4 @@
-require 'common'
+require 'origin.common'
 
 local final_stop = {}
 local MapStrings = {}

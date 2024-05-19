@@ -1,5 +1,5 @@
-require 'common'
-require 'menu.team.AssemblySelectMenu'
+require 'origin.common'
+require 'origin.menu.team.AssemblySelectMenu'
 
 local luminous_spring = {}
 local MapStrings = {}

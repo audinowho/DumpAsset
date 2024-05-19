@@ -11,8 +11,7 @@
 --------------------------------------------------------------------------------------------------------------
 -- Service Packages
 --------------------------------------------------------------------------------------------------------------
---require 'services.chatter'
-require 'services.debug_tools'
-require 'services.upgrade_tools'
+require 'origin.services.debug_tools'
+require 'origin.services.upgrade_tools'
 
 math.randomseed(os.time())

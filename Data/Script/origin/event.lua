@@ -1,5 +1,5 @@
-require 'event_single'
-require 'event_battle'
-require 'event_misc'
-require 'event_mapgen'
+require 'origin.event_single'
+require 'origin.event_battle'
+require 'origin.event_misc'
+require 'origin.event_mapgen'
 

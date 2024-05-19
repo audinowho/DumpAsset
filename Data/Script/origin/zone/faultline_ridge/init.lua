@@ -1,4 +1,4 @@
-require 'common'
+require 'origin.common'
 
 local faultline_ridge = {}
 --------------------------------------------------

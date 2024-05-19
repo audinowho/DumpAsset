@@ -1,7 +1,7 @@
 --[[
     Base AI state class
 ]]--
-require 'common'
+require 'origin.common'
 
 local BaseState = Class('BaseState')
 

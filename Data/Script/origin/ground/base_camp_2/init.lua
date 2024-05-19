@@ -1,8 +1,8 @@
-require 'common'
+require 'origin.common'
 
-local base_camp_2_tutor = require 'ground.base_camp_2.base_camp_2_tutor'
-local base_camp_2_juice = require 'ground.base_camp_2.base_camp_2_juice'
-local base_camp_2_bulletin = require 'ground.base_camp_2.base_camp_2_bulletin'
+local base_camp_2_tutor = require 'origin.ground.base_camp_2.base_camp_2_tutor'
+local base_camp_2_juice = require 'origin.ground.base_camp_2.base_camp_2_juice'
+local base_camp_2_bulletin = require 'origin.ground.base_camp_2.base_camp_2_bulletin'
 
 local base_camp_2 = {}
 local MapStrings = {}

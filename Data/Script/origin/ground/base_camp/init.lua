@@ -1,4 +1,4 @@
-require 'common'
+require 'origin.common'
 
 local base_camp = {}
 local MapStrings = {}

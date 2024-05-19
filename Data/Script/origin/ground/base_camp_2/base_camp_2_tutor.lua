@@ -1,7 +1,7 @@
-require 'common'
-require 'menu.skill.SkillSelectMenu'
-require 'menu.skill.SkillTutorMenu'
-require 'menu.team.AssemblySelectMenu'
+require 'origin.common'
+require 'origin.menu.skill.SkillSelectMenu'
+require 'origin.menu.skill.SkillTutorMenu'
+require 'origin.menu.team.AssemblySelectMenu'
 
 local base_camp_2_tutor = {}
 local MapStrings = {}

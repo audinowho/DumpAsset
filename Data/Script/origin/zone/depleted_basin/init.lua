@@ -1,4 +1,4 @@
-require 'common'
+require 'origin.common'
 
 local depleted_basin = {}
 --------------------------------------------------

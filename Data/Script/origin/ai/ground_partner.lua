@@ -4,10 +4,10 @@
   An entity running this AI will follow the target entity. Typically, this should be the hero,
   but it also can be used to follow other characters in a similar manner.
 ]]--
-require 'common'
-require 'queue'
-local BaseAI = require 'ai.ground_baseai'
-local BaseState = require 'ai.base_state'
+require 'origin.common'
+require 'origin.queue'
+local BaseAI = require 'origin.ai.ground_baseai'
+local BaseState = require 'origin.ai.base_state'
 
 
 -------------------------------

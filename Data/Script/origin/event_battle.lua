@@ -1,4 +1,4 @@
-require 'common'
+require 'origin.common'
 
 function BATTLE_SCRIPT.Test(owner, ownerChar, context, args)
   PrintInfo("Test")

@@ -1,8 +1,8 @@
 --[[
     A base AI class that does nothing.
 ]]--
-require 'common'
-local BaseState = require 'ai.base_state'
+require 'origin.common'
+local BaseState = require 'origin.ai.base_state'
 
 local BaseAI = Class('BaseAI')
 

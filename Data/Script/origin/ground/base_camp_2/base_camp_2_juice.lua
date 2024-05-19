@@ -1,8 +1,8 @@
-require 'common'
-require 'menu.juice.JuiceShopMenu'
-require 'menu.juice.SpecialtiesMenu'
-require 'menu.team.AssemblySelectMenu'
-require 'menu.team.TeamSelectMenu'
+require 'origin.common'
+require 'origin.menu.juice.JuiceShopMenu'
+require 'origin.menu.juice.SpecialtiesMenu'
+require 'origin.menu.team.AssemblySelectMenu'
+require 'origin.menu.team.TeamSelectMenu'
 
 local base_camp_2_juice = {}
 local MapStrings = {}

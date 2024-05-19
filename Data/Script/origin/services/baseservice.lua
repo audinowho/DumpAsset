@@ -7,7 +7,7 @@
   This allows it to override or modify usual game behavior as the game runs, or offer additional services to script packages.
 ]]--
 
-require 'common'
+require 'origin.common'
 
 
 -------------------------------------------------------

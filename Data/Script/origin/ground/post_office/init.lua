@@ -1,4 +1,4 @@
-require 'common'
+require 'origin.common'
 
 local post_office = {}
 local MapStrings = {}

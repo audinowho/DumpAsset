@@ -1,4 +1,4 @@
-require 'common'
+require 'origin.common'
 
 
 function ZONE_GEN_SCRIPT.Test(zoneContext, context, queue, seed, args)

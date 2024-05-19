@@ -9,8 +9,8 @@
     an (almost) exact equivalent of UI:RelearnMenu.
     This equivalent is NOT SAFE FOR REPLAYS. Do not use in dungeons until further notice.
 ]]
-require 'common'
-require 'menu.skill.SkillSelectMenu'
+require 'origin.common'
+require 'origin.menu.skill.SkillSelectMenu'
 
 --- Menu for selecting a skill from a specific list of skills.
 SkillTutorMenu = Class("SkillTutorMenu", SkillSelectMenu)

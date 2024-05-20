@@ -1,4 +1,4 @@
-require 'common'
+require 'origin.common'
 
 
 function BATTLE_SCRIPT.GenderCapsuleEvent(owner, ownerChar, context, args)

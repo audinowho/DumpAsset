@@ -5,8 +5,8 @@
     
     **NOTE:** After declaring you service, you have to include your package inside the main.lua file!
 ]]--
-require 'common'
-require 'services.baseservice'
+require 'origin.common'
+require 'origin.services.baseservice'
 
 --Declare class MusicService
 local MusicService = Class('MusicService', BaseService)

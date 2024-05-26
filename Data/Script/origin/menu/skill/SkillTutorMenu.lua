@@ -77,7 +77,10 @@ function SkillTutorMenu:load_currencies(price_list)
     local list = {}
     for i=1, #price_list, 1 do
         local currency = price_list[i][2]
-        if not list[currency] then list[currency] = COMMON.GetPlayerItemCount(currency) end
+        if not list[currency] then
+            if currency == "" then list[currency] = GAME:GetPlayerMoney()
+            else list[currency] = COMMON.GetPlayerItemCount(currency) end
+        end
     end
     return list
 end
@@ -97,17 +100,21 @@ function SkillTutorMenu:generate_options()
         --build text
         local skill_name = _DATA:GetSkill(self.skillList[i]).Name:ToLocal()
         local skill_price = tostring(amount)
+        --special "free" line
+        if amount <= 0 then skill_price = STRINGS:FormatKey("MENU_COST_FREE") end
         local color = "#FF0000"
         if enabled then color = "#00FF00" end
         skill_name = "[color="..color.."]"..skill_name.."[color]"
         skill_price = "[color="..color.."]"..skill_price.."[color]"
         --add icon
-        if currency == "" then
-            skill_price = skill_price..STRINGS.FormatKey("MONEY_AMOUNT" ,price[1])
-        else
-            local currency_icon = _DATA:GetItem(currency).Icon
-            if currency_icon > -1 then
-                skill_price = skill_price..utf8.char(57504+currency_icon)
+        if amount>0 then
+            if currency == "" then
+                skill_price = skill_price..STRINGS:FormatKey("MONEY_AMOUNT" ,"")
+            else
+                local currency_icon = _DATA:GetItem(currency).Icon
+                if currency_icon > -1 then
+                    skill_price = skill_price..utf8.char(57504+currency_icon)
+                end
             end
         end
         --compose elements
@@ -129,9 +136,9 @@ function SkillTutorMenu:updateSummary()
 
     local currency = self.priceList[choice][2]
     local amount = self.currencyList[currency]
-    if currency[2] == "" then
-        self.currency_title:SetText(STRINGS.FormatKey("MENU_STORAGE_MONEY")..":")
-        self.currency_text:SetText(STRINGS.FormatKey("MONEY_AMOUNT" , amount))
+    if currency == "" then
+        self.currency_title:SetText(STRINGS:FormatKey("MENU_STORAGE_MONEY")..":")
+        self.currency_text:SetText(STRINGS:FormatKey("MONEY_AMOUNT" , amount))
     else
         local item_name = _DATA:GetItem(currency):GetIconName()
         self.currency_title:SetText(RogueEssence.StringKey("MENU_CURRENCY_AVAILABLE"):ToLocal()..":")
@@ -149,8 +156,8 @@ end
 --- - value: a table ``{Cost, Currency}`` entry.
 ---
 --- The value table must, in turn, be structured like so:
---- - Cost: a number. It indicates the price of the skill in the given currency.
---- - Currency: an item id string, or ``""``. It's the item required to purchase the skill. If omitted, the
+--- - Cost = number. It indicates the price of the skill in the given currency. If omitted, it will be free.
+--- - Currency = string. It must be either an item id or ``""``. It's the item required to purchase the skill. If omitted, the
 ---     parameter ``default_currency`` will be used. If ``""``, money will be used.
 ---
 --- This function throws an error if the parameter ``skill_list`` contains less than 1 entries,
@@ -162,16 +169,24 @@ function SkillTutorMenu.runTutorMenu(tutor_moves, default_currency)
     --moved GetTutorableMoves call to base_camp_2\init, line 1199   -Nebula
     local tutor_skills = {}
     local tutor_prices = {}
+
     for move_idx, data in pairs(tutor_moves) do
-        table.insert(tutor_skills, move_idx)
+        local pos = #tutor_skills+1
+        for i=1, #tutor_skills, 1 do
+            if move_idx<tutor_skills[i] then
+                pos = i
+                break
+            end
+        end
+        table.insert(tutor_skills, pos, move_idx)
 
         if not data.Cost then
-            table.insert(tutor_prices, {0, ""})
+            table.insert(tutor_prices, pos, {0, ""})
         else
             local cost = data.Cost
             local currency = default_currency
             if data.Currency then currency = data.Currency end
-            table.insert(tutor_prices, {cost, currency})
+            table.insert(tutor_prices, pos, {cost, currency})
         end
     end
 

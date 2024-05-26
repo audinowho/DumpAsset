@@ -9,5 +9,5 @@
 --------------------------------------------------------------------------------------------------------------
 -- Service Packages
 --------------------------------------------------------------------------------------------------------------
-require 'services.debug_tools'
-require 'services.mission_service'
+require 'enable_mission_board.services.menu_tools'
+require 'enable_mission_board.services.mission_service'

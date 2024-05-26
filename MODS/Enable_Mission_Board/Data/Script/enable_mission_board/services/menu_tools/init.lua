@@ -1,7 +1,7 @@
-﻿require 'common'
-require 'services.baseservice'
+﻿require 'enable_mission_board.common'
+require 'origin.services.baseservice'
 require 'origin.recruit_list'
-require 'mission_gen'
+require 'enable_mission_board.mission_gen'
 
 
 local MenuTools = Class('MenuTools', BaseService)
@@ -102,4 +102,5 @@ end
 
 --Add our service
 SCRIPT:AddService("MenuTools", MenuTools:new())
+
 return MenuTools

@@ -1,5 +1,5 @@
-﻿require 'common'
-require 'mission_gen'
+﻿require 'enable_mission_board.common'
+require 'enable_mission_board.mission_gen'
 
 --TODO: May need to replace this when diff-based modding is enabled 
 local base_camp_2_bulletin = {}

@@ -1,4 +1,4 @@
-﻿require 'common'
+﻿require 'enable_mission_board.common'
 
 --Halcyon Custom work ported to PMDO Vanilla:
 --Code in this folder is used to generate, display, and handle randomized missions

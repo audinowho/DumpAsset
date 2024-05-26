@@ -1,4 +1,4 @@
-﻿require 'common'
+﻿require 'enable_mission_board.common'
 
 RedirectionType = luanet.import_type('PMDC.Dungeon.Redirected')
 DmgMultType = luanet.import_type('PMDC.Dungeon.DmgMult')

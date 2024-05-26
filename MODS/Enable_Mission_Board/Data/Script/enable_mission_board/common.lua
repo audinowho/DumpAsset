@@ -2,8 +2,8 @@
     common.lua
     A collection of frequently used functions and values!
 ]]--
-require 'common_gen'
-require 'menu/MemberReturnMenu'
+require 'enable_mission_board.menu.MemberReturnMenu'
+require 'enable_mission_board.common_vars'
 
 LoadGenType = luanet.import_type('RogueEssence.LevelGen.LoadGen')
 ChanceFloorGenType = luanet.import_type('RogueEssence.LevelGen.ChanceFloorGen')

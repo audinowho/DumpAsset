@@ -1,4 +1,4 @@
-require 'common'
+require 'enable_mission_board.common'
 
 ListType = luanet.import_type('System.Collections.Generic.List`1')
 MobSpawnType = luanet.import_type('RogueEssence.LevelGen.MobSpawn')

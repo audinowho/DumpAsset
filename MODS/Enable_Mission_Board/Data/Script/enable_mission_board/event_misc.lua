@@ -1,5 +1,4 @@
-﻿require 'common'
-require 'GeneralFunctions'
+﻿require 'enable_mission_board.common'
 
 function ITEM_SCRIPT.MissionItemPickup(owner, ownerChar, context, args)
     local mission_num = args.Mission
@@ -16,7 +15,7 @@ function ITEM_SCRIPT.MissionItemPickup(owner, ownerChar, context, args)
 
         --Slight pause before asking to warp out 
         GAME:WaitFrames(20)
-        GeneralFunctions.AskMissionWarpOut()
+        COMMON.AskMissionWarpOut()
     end
 end
 

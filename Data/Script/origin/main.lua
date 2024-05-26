@@ -13,5 +13,6 @@
 --------------------------------------------------------------------------------------------------------------
 require 'origin.services.debug_tools'
 require 'origin.services.upgrade_tools'
+require 'origin.services.menu_tools'
 
 math.randomseed(os.time())

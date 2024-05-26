@@ -1,8 +1,5 @@
 ﻿require 'common'
 
---TODO: May need to replace this when diff-based modding is enabled
-ZONE_GEN_SCRIPT = {}
-
 function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed, args)
     if _DATA.Save.Rescue ~= nil and _DATA.Save.Rescue.Rescuing then
         return

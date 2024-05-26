@@ -494,38 +494,6 @@ function UpgradeTools:OnUpgrade()
   PrintInfo("=>> Loaded version")
 end
 
---[[---------------------------------------------------------------
-    UpgradeTools:OnLossPenalty()
-      Called when the player fails a dungeon in main progress
-  ---------------------------------------------------------------]]
-function UpgradeTools:OnLossPenalty(save) 
-  assert(self, 'UpgradeTools:OnLossPenalty() : self is null!')
- 
-  --remove money
-  save.ActiveTeam.Money = 0
-  local inv_count = save.ActiveTeam:GetInvCount() - 1
-
-  --remove bag items
-  for i = inv_count, 0, -1 do
-    local entry = _DATA:GetItem(save.ActiveTeam:GetInv(i).ID)
-    if not entry.CannotDrop then
-      save.ActiveTeam:RemoveFromInv(i)
-    end
-  end
-  
-  --remove equips
-  local player_count = save.ActiveTeam.Players.Count
-  for i = 0, player_count - 1, 1 do 
-    local player = save.ActiveTeam.Players[i]
-    if player.EquippedItem.ID ~= '' and player.EquippedItem.ID ~= nil then 
-      local entry = _DATA:GetItem(player.EquippedItem.ID)
-      if not entry.CannotDrop then
-         player:SilentDequipItem()
-      end
-    end
-  end
-end
-
 ---Summary
 -- Subscribe to all channels this service wants callbacks from
 function UpgradeTools:Subscribe(med)
@@ -535,14 +503,6 @@ end
 ---Summary
 -- un-subscribe to all channels this service subscribed to
 function UpgradeTools:UnSubscribe(med)
-end
-
----Summary
--- The update method is run as a coroutine for each services.
-function UpgradeTools:Update(gtime)
---  while(true)
---    coroutine.yield()
---  end
 end
 
 --Add our service

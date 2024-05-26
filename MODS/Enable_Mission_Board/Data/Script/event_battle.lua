@@ -1,14 +1,7 @@
 ﻿require 'common'
 
---TODO: May need to replace this when diff-based modding is enabled
-BATTLE_SCRIPT = {}
-
 RedirectionType = luanet.import_type('PMDC.Dungeon.Redirected')
 DmgMultType = luanet.import_type('PMDC.Dungeon.DmgMult')
-
-function BATTLE_SCRIPT.AllyInteract(owner, ownerChar, context, args)
-    COMMON.DungeonInteract(context.User, context.Target, context.CancelState, context.TurnCancel)
-end
 
 function BATTLE_SCRIPT.EscortInteract(owner, ownerChar, context, args)
     context.CancelState.Cancel = true
@@ -235,123 +228,5 @@ function BATTLE_SCRIPT.EscortReached(owner, ownerChar, context, args)
                 UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_UNAVAILABLE"):ToLocal(), escortName))
             end
         end
-    end
-end
-
-function BATTLE_SCRIPT.SidequestRescueReached(owner, ownerChar, context, args)
-
-    local tbl = LTBL(context.Target)
-    local mission = SV.missions.Missions[tbl.Mission]
-
-    local oldDir = context.Target.CharDir
-    DUNGEON:CharTurnToChar(context.Target, context.User)
-
-    UI:ResetSpeaker()
-    local target_name = _DATA:GetMonster(mission.TargetSpecies.Species).Name
-    UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_RESCUE_ASK"):ToLocal(), target_name:ToLocal()), false)
-    UI:WaitForChoice()
-    result = UI:ChoiceResult()
-    if result then
-
-        mission.Complete = COMMON.MISSION_COMPLETE
-
-        local poseAction = RogueEssence.Dungeon.CharAnimPose(context.User.CharLoc, context.User.CharDir, 50, 0)
-        DUNGEON:CharSetAction(context.User, poseAction)
-        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_RESCUE_DONE"):ToLocal(), target_name:ToLocal()))
-
-        UI:SetSpeaker(context.Target)
-        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_RESCUE_THANKS"):ToLocal()))
-
-        -- warp out
-        TASK:WaitTask(_DUNGEON:ProcessBattleFX(context.Target, context.Target, _DATA.SendHomeFX))
-        _DUNGEON:RemoveChar(context.Target)
-
-        DUNGEON:CharEndAnim(context.User)
-
-        context.TurnCancel.Cancel = true
-    else
-        context.Target.CharDir = oldDir
-        context.CancelState.Cancel = true
-    end
-end
-
-function BATTLE_SCRIPT.SidequestEscortReached(owner, ownerChar, context, args)
-
-    local tbl = LTBL(context.Target)
-    local escort = COMMON.FindMissionEscort(tbl.Mission)
-
-    PrintInfo("Completing escort out mission")
-    if escort then
-
-        local mission = SV.missions.Missions[tbl.Mission]
-        mission.Complete = COMMON.MISSION_COMPLETE
-
-        local oldDir = context.Target.CharDir
-        DUNGEON:CharTurnToChar(context.Target, context.User)
-
-        --UI:SetSpeaker(context.Target)
-        UI:ResetSpeaker()
-        local client_name = _DATA:GetMonster(mission.ClientSpecies.Species).Name
-        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_ESCORT_DONE"):ToLocal(), client_name:ToLocal()))
-
-        -- warp out
-        TASK:WaitTask(_DUNGEON:ProcessBattleFX(escort, escort, _DATA.SendHomeFX))
-        _DUNGEON:RemoveChar(escort)
-
-        TASK:WaitTask(_DUNGEON:ProcessBattleFX(context.Target, context.Target, _DATA.SendHomeFX))
-        _DUNGEON:RemoveChar(context.Target)
-
-        UI:ResetSpeaker()
-        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_REMINDER"):ToLocal(), client_name:ToLocal()))
-
-        context.TurnCancel.Cancel = true
-    else
-        context.CancelState.Cancel = true
-    end
-end
-
-function BATTLE_SCRIPT.SidequestEscortOutReached(owner, ownerChar, context, args)
-
-    local tbl = LTBL(context.Target)
-
-    local mission = SV.missions.Missions[tbl.Mission]
-
-    local oldDir = context.Target.CharDir
-    DUNGEON:CharTurnToChar(context.Target, context.User)
-
-    UI:SetSpeaker(context.Target)
-    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(args.EscortStartMsg):ToLocal()))
-
-    -- ask to join
-    UI:ResetSpeaker()
-    UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("TALK_ESCORT_ASK"):ToLocal()), false)
-    UI:WaitForChoice()
-    result = UI:ChoiceResult()
-    if result then
-        -- join the team
-
-        _DUNGEON:RemoveChar(context.Target)
-        local tactic = _DATA:GetAITactic(_DATA.DefaultAI)
-        context.Target.Tactic =  RogueEssence.Data.AITactic(tactic)
-        _DATA.Save.ActiveTeam.Guests:Add(context.Target)
-        context.Target:RefreshTraits()
-        context.Target.Tactic:Initialize(context.Target)
-
-        context.Target:FullRestore()
-
-        context.Target.ActionEvents:Clear()
-        local talk_evt = RogueEssence.Dungeon.BattleScriptEvent(args.EscortInteract)
-        context.Target.ActionEvents:Add(talk_evt)
-
-        SOUND:PlayFanfare("Fanfare/Note")
-        UI:ResetSpeaker()
-        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT_GUEST"):ToLocal(), context.Target:GetDisplayName(true)))
-        UI:SetSpeaker(context.Target)
-        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(args.EscortAcceptMsg):ToLocal()))
-
-        context.TurnCancel.Cancel = true
-    else
-        context.Target.CharDir = oldDir
-        context.CancelState.Cancel = true
     end
 end

@@ -7,7 +7,6 @@
 ]]--
 require 'origin.common'
 require 'origin.services.baseservice'
-require 'origin.recruit_list'
 
 --Declare class DebugTools
 local DebugTools = Class('DebugTools', BaseService)
@@ -50,37 +49,6 @@ function DebugTools:OnDeinit()
   PrintInfo("\n<!> ExampleSvc: Deinit..")
 end
 
---[[---------------------------------------------------------------
-    DebugTools:OnMenuButtonPressed()
-      When the main menu button is pressed or the main menu should be enabled this is called!
-      This is called as a coroutine.
----------------------------------------------------------------]]
-function DebugTools:OnMenuButtonPressed()
-  -- TODO: Remove this when the memory leak is fixed or confirmed not a leak
-  if DebugTools.MainMenu == nil then
-    DebugTools.MainMenu = RogueEssence.Menu.MainMenu()
-  end
-  DebugTools.MainMenu:SetupChoices()
-  if RogueEssence.GameManager.Instance.CurrentScene == RogueEssence.Dungeon.DungeonScene.Instance then
-    DebugTools.MainMenu.Choices[5] = RogueEssence.Menu.MenuTextChoice(STRINGS:FormatKey("MENU_OTHERS_TITLE"), function () _MENU:AddMenu(DebugTools:OthersMenuWithRecruitScan(), false) end)
-  end
-  DebugTools.MainMenu:SetupTitleAndSummary()
-  DebugTools.MainMenu:InitMenu()
-  TASK:WaitTask(_MENU:ProcessMenuCoroutine(DebugTools.MainMenu))
-end
-
-function DebugTools:OthersMenuWithRecruitScan()
-  -- TODO: Remove this when the memory leak is fixed or confirmed not a leak
-  if DebugTools.OthersMenu == nil then
-    DebugTools.OthersMenu = RogueEssence.Menu.OthersMenu()
-  end
-  DebugTools.OthersMenu:SetupChoices();
-  if RogueEssence.GameManager.Instance.CurrentScene == RogueEssence.Dungeon.DungeonScene.Instance then
-    DebugTools.OthersMenu.Choices:Insert(1, RogueEssence.Menu.MenuTextChoice(RogueEssence.StringKey("MENU_RECRUITMENT"):ToLocal(), function () _MENU:AddMenu(RecruitmentListMenu:new().menu, false) end))
-  end
-  DebugTools.OthersMenu:InitMenu();
-  return DebugTools.OthersMenu
-end
 
 --[[---------------------------------------------------------------
     DebugTools:OnNewGame()
@@ -193,24 +161,13 @@ end
 function DebugTools:Subscribe(med)
   med:Subscribe("DebugTools", EngineServiceEvents.Init,                function() self.OnInit(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.Deinit,              function() self.OnDeinit(self) end )
-  med:Subscribe("DebugTools", EngineServiceEvents.MenuButtonPressed,        function() self.OnMenuButtonPressed() end )
   med:Subscribe("DebugTools", EngineServiceEvents.NewGame,        function() self.OnNewGame(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.LossPenalty,        function(_, args) self.OnLossPenalty(self, args[0]) end )
---  med:Subscribe("DebugTools", EngineServiceEvents.GraphicsUnload,      function() self.OnGraphicsUnload(self) end )
---  med:Subscribe("DebugTools", EngineServiceEvents.Restart,             function() self.OnRestart(self) end )
 end
 
 ---Summary
 -- un-subscribe to all channels this service subscribed to
 function DebugTools:UnSubscribe(med)
-end
-
----Summary
--- The update method is run as a coroutine for each services.
-function DebugTools:Update(gtime)
---  while(true)
---    coroutine.yield()
---  end
 end
 
 --Add our service

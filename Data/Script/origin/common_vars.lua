@@ -397,6 +397,8 @@ function COMMON.CreateMission(key, mission)
 
 end
 
+
+
 function COMMON.ExitDungeonMissionCheckEx(result, rescue, zoneId, segmentID)
 
 end

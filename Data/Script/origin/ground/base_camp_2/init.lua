@@ -2,7 +2,6 @@ require 'origin.common'
 
 local base_camp_2_tutor = require 'origin.ground.base_camp_2.base_camp_2_tutor'
 local base_camp_2_juice = require 'origin.ground.base_camp_2.base_camp_2_juice'
-local base_camp_2_bulletin = require 'origin.ground.base_camp_2.base_camp_2_bulletin'
 
 local base_camp_2 = {}
 local MapStrings = {}
@@ -16,7 +15,6 @@ function base_camp_2.Init(map)
   MapStrings = COMMON.AutoLoadLocalizedStrings()
   base_camp_2_tutor.InitStrings(MapStrings)
   base_camp_2_juice.InitStrings(MapStrings)
-  base_camp_2_bulletin.InitStrings(MapStrings)
   
   GROUND:RefreshPlayer()
 
@@ -82,8 +80,6 @@ function base_camp_2.Enter(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   base_camp_2.SetupNpcs()
-  
-  base_camp_2_bulletin.Enter(map)
   
   GAME:FadeIn(20)
 end
@@ -1294,13 +1290,6 @@ function base_camp_2.Post_Office_Entrance_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   GAME:FadeOut(false, 20)
   GAME:EnterGroundMap("post_office", "entrance_south", true)
-end
-
-function base_camp_2.Mission_Board_Action(obj, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  base_camp_2_bulletin.Mission_Board_Action(obj, activator)
-  
 end
 
 function base_camp_2.AssemblyInteract(chara, target)

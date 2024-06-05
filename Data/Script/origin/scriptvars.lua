@@ -19,6 +19,8 @@
     SV.AnotherVariable = function() PrintInfo('lmao') end
 ]]--
 
+SV = {}
+
 -----------------------------------------------
 -- Services Defaults
 -----------------------------------------------

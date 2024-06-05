@@ -2,16 +2,17 @@
 require 'enable_mission_board.mission_gen'
 
 
-local base_tbl = require('origin.ground.base_camp_2')
 local base_camp_2_bulletin = {}
 local MapStrings = {}
 
+local base_init = CURMAPSCR.Init
 function base_camp_2_bulletin.Init(map)
   MapStrings = COMMON.AutoLoadLocalizedStrings()
   
-  base_tbl.Init(map)
+  base_init(map)
 end
 
+local base_enter = CURMAPSCR.Enter
 function base_camp_2_bulletin.Enter(map)
     DEBUG.EnableDbgCoro() --Enable debugging this coroutine
 
@@ -23,7 +24,7 @@ function base_camp_2_bulletin.Enter(map)
         base_camp_2_bulletin.Hand_In_Missions()
     end
 
-  base_tbl.Enter(map)
+  base_enter(map)
 end
 
 

@@ -1,14 +1,14 @@
 require 'origin.common'
 
 local canyon_camp = {}
-local MapStrings = {}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
 function canyon_camp.Init(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo("=>> Init_canyon_camp")
-  MapStrings = COMMON.AutoLoadLocalizedStrings()
+
   COMMON.RespawnAllies()
   
   --set the tutor's appearance based on 
@@ -302,7 +302,7 @@ function canyon_camp.Rival_1_Action(chara, activator)
   if SV.team_rivals.Status == 1 then
   
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_001']))
   
   SV.team_rivals.SpokenTo = true
   
@@ -310,7 +310,7 @@ function canyon_camp.Rival_1_Action(chara, activator)
   
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Help_Line_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Help_Line_001']))
   
     local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_poison_silk")
   COMMON.GiftItem(player, receive_item)
@@ -322,7 +322,7 @@ function canyon_camp.Rival_1_Action(chara, activator)
   elseif SV.team_rivals.Status == 3 then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Help_Line_002']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Help_Line_002']))
   end
   
   
@@ -337,7 +337,7 @@ function canyon_camp.Rival_2_Action(chara, activator)
   if SV.team_rivals.Status == 1 then
   
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_001']))
   
   SV.team_rivals.SpokenTo = true
   
@@ -350,7 +350,7 @@ function canyon_camp.Rival_2_Action(chara, activator)
   if quest == nil then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Help_Line_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Help_Line_001']))
 	
 	COMMON.CreateMission(questname,
 	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
@@ -362,17 +362,17 @@ function canyon_camp.Rival_2_Action(chara, activator)
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Help_Line_002']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Help_Line_002']))
   else
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Help_Line_003']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Help_Line_003']))
   end
   
   elseif SV.team_rivals.Status == 3 then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Help_Line_003']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Help_Line_003']))
   end
   
 end
@@ -383,10 +383,10 @@ function canyon_camp.NPC_Seer_Action(chara, activator)
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
   
   if SV.team_firecracker.Status ~= 5 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seer_Line_001']))
 	SV.team_firecracker.SpokenTo = true
   else
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seer_Line_002']))
   end
 end
 
@@ -396,10 +396,10 @@ function canyon_camp.NPC_Conjurer_Action(chara, activator)
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
   
   if SV.team_firecracker.Status ~= 5 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Conjurer_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Conjurer_Line_001']))
 	SV.team_firecracker.SpokenTo = true
   else
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Conjurer_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Conjurer_Line_002']))
   end
 end
 
@@ -410,15 +410,15 @@ function canyon_camp.NPC_Storehouse_Action(chara, activator)
   UI:SetSpeaker(chara)
 	
   if SV.supply_corps.Status <= 4 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_001']))
     SV.supply_corps.Status = 5
   elseif SV.supply_corps.Status == 5 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_001']))
   elseif SV.supply_corps.Status == 6 then
     local questname = "OutlawForest2"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_002']))
 	  --add the quest
 	  COMMON.CreateMission(questname,
 	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_HOUSE,
@@ -427,28 +427,28 @@ function canyon_camp.NPC_Storehouse_Action(chara, activator)
       TargetSpecies = RogueEssence.Dungeon.MonsterID("toxicroak", 0, "normal", Gender.Male) }
 	  )
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_003']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_003']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_004']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_004']))
       --give reward
         local receive_item = RogueEssence.Dungeon.InvItem("food_banana_big")
         COMMON.GiftItem(player, receive_item)
       --complete mission and move to done
 	  COMMON.CompleteMission(questname)
       SV.supply_corps.Status = 7
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_005']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_005']))
     end
   elseif SV.supply_corps.Status == 7 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_006']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_006']))
   elseif SV.supply_corps.Status == 8 then
     local unlock = _DATA.Save:GetDungeonUnlock("ambush_forest") -- make this the dungeon unlock state
     if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_007']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_007']))
       COMMON.UnlockWithFanfare("ambush_forest", false)
     elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_008']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_008']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_009']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_009']))
       --increase rank for bag space
       _DATA.Save.ActiveTeam:SetRank("bronze")
       SOUND:PlayFanfare("Fanfare/RankUp")
@@ -458,13 +458,13 @@ function canyon_camp.NPC_Storehouse_Action(chara, activator)
       UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_BAG_SIZE"):ToLocal(), rank.BagSize))
       UI:SetSpeaker(chara)
       UI:SetCenter(false)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_010']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_010']))
       SV.supply_corps.Status = 9
     end
   elseif SV.supply_corps.Status == 9 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_011']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_011']))
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_Route']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_Route']))
   end
 end
 
@@ -478,32 +478,32 @@ function canyon_camp.NPC_Carry_Action(chara, activator)
     local questname = "OutlawForest2"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_001']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_001']))
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_002']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_003']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_003']))
     end
   elseif SV.supply_corps.Status == 7 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_004']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_004']))
   elseif SV.supply_corps.Status == 8 then
     local unlock = _DATA.Save:GetDungeonUnlock("ambush_forest") -- make this the dungeon unlock state
     if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_005']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_005']))
     elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_006']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_006']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_007']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_007']))
     end
   elseif SV.supply_corps.Status == 9 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_008']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_008']))
   elseif SV.supply_corps.Status == 10 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_009']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_009']))
     SV.supply_corps.Status = 11
   elseif SV.supply_corps.Status == 11 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_009']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_009']))
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_Route']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_Route']))
   end
   
 end
@@ -518,32 +518,32 @@ function canyon_camp.NPC_Deliver_Action(chara, activator)
     local questname = "OutlawForest2"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_001']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_001']))
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_002']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_003']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_003']))
     end
   elseif SV.supply_corps.Status == 7 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_004']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_004']))
   elseif SV.supply_corps.Status == 8 then
     local unlock = _DATA.Save:GetDungeonUnlock("ambush_forest") -- make this the dungeon unlock state
     if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_005']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_005']))
     elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_006']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_006']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_007']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_007']))
     end
   elseif SV.supply_corps.Status == 9 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_008']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_008']))
   elseif SV.supply_corps.Status == 10 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_009']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_009']))
 	SV.supply_corps.Status = 11
   elseif SV.supply_corps.Status == 11 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_009']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_009']))
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_Route']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_Route']))
   end
 end
 
@@ -583,50 +583,50 @@ function canyon_camp.DragonTalk()
   if SV.team_dragon.Status == 0 then
     if SV.team_dragon.SpokenTo == false then
       UI:SetSpeaker(dragon1)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_001']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_001']))
   
       UI:SetSpeaker(dragon2)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_002']))
   
       UI:SetSpeaker(dragon3)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_003']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_003']))
   
       UI:SetSpeaker(dragon1)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_004']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_004']))
 	else
       UI:SetSpeaker(dragon1)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_005']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_005']))
 	end
   elseif SV.team_dragon.Status == 1 then
     if SV.team_dragon.SpokenTo == false then
       UI:SetSpeaker(dragon1)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_006']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_006']))
 	else
       UI:SetSpeaker(dragon1)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_007']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_007']))
 	end
   
   elseif SV.team_dragon.Status == 2 then
     if SV.team_dragon.SpokenTo == false then
       UI:SetSpeaker(dragon1)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_008']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_008']))
 	else
       UI:SetSpeaker(dragon1)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_009']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_009']))
 	end
   
   elseif SV.team_dragon.Status == 5 then
     if SV.team_dragon.SpokenTo == false then
       UI:SetSpeaker(dragon1)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_010']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_010']))
 	else
       UI:SetSpeaker(dragon1)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_011']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_011']))
 	end
   
   elseif SV.team_dragon.Status == 8 then
     UI:SetSpeaker(dragon1)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_012']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_012']))
   end
   
   SV.team_dragon.SpokenTo = true
@@ -641,16 +641,16 @@ function canyon_camp.NPC_Shiny_Action(chara, activator)
   GROUND:CharTurnToChar(chara, player)--make the chara turn to the player
   if not SV.canyon_camp.ShinyIntro then
     if player.CurrentForm.Skin == "normal" then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shiny_Line_001']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shiny_Line_001']))
     else
       SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
       GROUND:CharSetEmote(chara, "exclaim", 1)
 	  GAME:WaitFrames(30)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shiny_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shiny_Line_002']))
 	  SV.canyon_camp.ShinyIntro = true
     end
   else
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shiny_Line_003']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shiny_Line_003']))
   end
 end
   
@@ -673,7 +673,7 @@ function canyon_camp.NPC_Tutor_Action(chara, activator)
   if SV.StarterTutor.Complete == false then
     
 	local skillData = _DATA:GetSkill(tutor_skill)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Intro'], skillData:GetIconName()))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Intro'], skillData:GetIconName()))
 	
 	local playerMonId = player.Data.BaseForm
 	local monData = _DATA:GetMonster(playerMonId.Species)
@@ -681,10 +681,10 @@ function canyon_camp.NPC_Tutor_Action(chara, activator)
 	
 	local already_learned = player.Data:HasBaseSkill(tutor_skill)
 	if already_learned then
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Already'], skillData:GetIconName()))
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Already'], skillData:GetIconName()))
 	elseif formData:CanLearnSkill(tutor_skill) then
 	  
-	  UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Tutor_Ask'], monData:GetColoredName(), skillData:GetIconName()), false)
+	  UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Tutor_Ask'], monData:GetColoredName(), skillData:GetIconName()), false)
 	  UI:WaitForChoice()
 	  result = UI:ChoiceResult()
 	  
@@ -695,7 +695,7 @@ function canyon_camp.NPC_Tutor_Action(chara, activator)
 	  end
 	  
 	  if result then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Accept']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Accept']))
       
       --fade out, pause
       local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")
@@ -717,7 +717,7 @@ function canyon_camp.NPC_Tutor_Action(chara, activator)
       GAME:FadeIn(30)
 		
 	    --I learned this move from a traveling move tutor.  He said he'd pass by base town after I spoke to him.
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Taught']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Taught']))
 		
       --after teaching, unlock the tutor back at the hub
       --the other moves can be found in dungeons by wandering tutors
@@ -725,16 +725,16 @@ function canyon_camp.NPC_Tutor_Action(chara, activator)
       SV.base_town.TutorMoves[tutor_skill] = true
 	  else
 	    --come back if you change your mind.
-	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Decline']))
+	    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Decline']))
 	  end
 	else
 	  --But the other townsfolk weren't interested in hearing about it.
 	  --If only there was someone I could share this knowledge with.
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Incompatible']))
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Incompatible']))
 	end
   else
 	--There are other tutors wandering around in the dungeons. They've spent too much time training in dungeons without outside contact, but I'm sure they'd appreciate company.
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Done']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Done']))
   end
 	
   
@@ -763,20 +763,20 @@ function canyon_camp.Argument()
   
   local item_slot = GAME:FindPlayerItem("held_metal_coat", true, true)
 	if item_slot:IsValid() then
-		argue_choices[3] = STRINGS:Format(MapStrings['Argue_Option'], itemEntry:GetIconName())
+		argue_choices[3] = STRINGS:Format(STRINGS.MapStrings['Argue_Option'], itemEntry:GetIconName())
 	end
 			
   UI:SetSpeaker(arg1)
-  UI:BeginChoiceMenu(STRINGS:Format(MapStrings['Argue_Line_001']), argue_choices, 1, -1)
+  UI:BeginChoiceMenu(STRINGS:Format(STRINGS.MapStrings['Argue_Line_001']), argue_choices, 1, -1)
   UI:WaitForChoice()
   result = UI:ChoiceResult()
   
   if result < 3 then
     UI:SetSpeaker(arg2)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Argue_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Argue_Line_002']))
   else
     SOUND:PlayBattleSE("EVT_CH02_Box_Open")
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Argue_Solved_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Argue_Solved_Line_001']))
 	GROUND:Hide("NPC_Argue_1")
 	GROUND:Hide("NPC_Argue_2")
 	
@@ -799,18 +799,18 @@ function canyon_camp.NPC_Monk_Action(chara, activator)
   if SV.team_meditate.Status == 1 then
     GROUND:CharTurnToChar(chara, player)
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Monk_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Monk_Line_001']))
 	SV.team_meditate.SpokenTo = true
   elseif SV.team_meditate.Status == 3 then
     canyon_camp.Fighting_Complete()
   elseif SV.team_meditate.Status == 4 then
     GROUND:CharTurnToChar(chara, player)
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Monk_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Monk_Line_002']))
   elseif SV.team_meditate.Status == 5 then
     GROUND:CharTurnToChar(chara, player)
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Monk_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Monk_Line_002']))
   end
 end
 
@@ -824,15 +824,15 @@ function canyon_camp.NPC_Spar_Action(chara, activator)
   
     GROUND:CharTurnToChar(chara, player)
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Spar_Line_001']))
   elseif SV.team_meditate.Status == 1 then
     GROUND:CharTurnToChar(chara, player)
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Spar_Line_002']))
   elseif SV.team_meditate.Status == 2 then
     GROUND:CharTurnToChar(chara, player)
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Spar_Line_002']))
   elseif SV.team_meditate.Status == 3 then
   
   local questname = "QuestFighting"
@@ -843,7 +843,7 @@ function canyon_camp.NPC_Spar_Action(chara, activator)
   if quest == nil then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Help_Line_001'], days))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Spar_Help_Line_001'], days))
 	
 	COMMON.CreateMission(questname,
 	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
@@ -855,7 +855,7 @@ function canyon_camp.NPC_Spar_Action(chara, activator)
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Help_Line_001'], days))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Spar_Help_Line_001'], days))
   else
     canyon_camp.Fighting_Complete()
   end
@@ -863,11 +863,11 @@ function canyon_camp.NPC_Spar_Action(chara, activator)
   elseif SV.team_meditate.Status == 4 then
     GROUND:CharTurnToChar(chara, player)
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Line_003']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Spar_Line_003']))
   elseif SV.team_meditate.Status == 5 then
     GROUND:CharTurnToChar(chara, player)
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Line_003']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Spar_Line_003']))
   end
 end
 
@@ -878,13 +878,13 @@ function canyon_camp.Fighting_Complete()
   local player = CH('PLAYER')
   
   UI:SetSpeaker(spar)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Complete_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Spar_Complete_Line_001']))
   
   UI:SetSpeaker(monk)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Complete_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Spar_Complete_Line_002']))
   
   UI:SetSpeaker(spar)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Spar_Complete_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Spar_Complete_Line_003']))
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_fighting_silk")
   COMMON.GiftItem(player, receive_item)
@@ -903,7 +903,7 @@ function canyon_camp.NPC_Shortcut_Action(chara, activator)
   
   if SV.team_solo.Status < 4 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shortcut_Line_001']))
   elseif SV.team_solo.Status == 4 then
 
   local questname = "QuestWater"
@@ -912,7 +912,7 @@ function canyon_camp.NPC_Shortcut_Action(chara, activator)
   if quest == nil then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Quest_Line_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shortcut_Quest_Line_001']))
 	
 	COMMON.CreateMission(questname,
 	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
@@ -924,17 +924,17 @@ function canyon_camp.NPC_Shortcut_Action(chara, activator)
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Quest_Line_002']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shortcut_Quest_Line_002']))
   else
     canyon_camp.Water_Complete()
   end
 
   elseif SV.team_solo.Status == 5 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shortcut_Line_002']))
   elseif SV.team_solo.Status == 6 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shortcut_Line_002']))
   end
 end
 
@@ -943,18 +943,18 @@ function canyon_camp.NPC_Solo_Action(chara, activator)
   
   if SV.team_solo.Status == 3 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Solo_Line_001']))
 	GROUND:Hide("NPC_Solo")
     SV.team_solo.SpokenTo = true
   elseif SV.team_solo.Status == 4 then
     canyon_camp.Water_Complete()
   elseif SV.team_solo.Status == 5 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Solo_Line_002']))
   elseif SV.team_solo.Status == 6 then
     --TODO: cycle?
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Solo_Line_002']))
   end
 end
 
@@ -965,20 +965,20 @@ function canyon_camp.Water_Complete()
   local player = CH('PLAYER')
   
   UI:SetSpeaker(shortcut)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Complete_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shortcut_Complete_Line_001']))
   
   UI:SetSpeaker(solo)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Complete_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shortcut_Complete_Line_002']))
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_water_silk")
   COMMON.GiftItem(player, receive_item)
   
   
   UI:SetSpeaker(shortcut)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Complete_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shortcut_Complete_Line_003']))
   
   UI:SetSpeaker(solo)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shortcut_Complete_Line_004']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shortcut_Complete_Line_004']))
   
   COMMON.CompleteMission("QuestWater")
   
@@ -989,14 +989,14 @@ function canyon_camp.NPC_Seeker_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seeker_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seeker_Line_001']))
   SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
   GROUND:CharSetEmote(chara, "exclaim", 1)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   GAME:WaitFrames(30)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seeker_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seeker_Line_002']))
   GROUND:CharSetEmote(chara, "glowing", 4)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seeker_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seeker_Line_003']))
 end
   
 function canyon_camp.NPC_Hidden_Action(chara, activator)
@@ -1007,7 +1007,7 @@ function canyon_camp.NPC_Hidden_Action(chara, activator)
   local dungeon_id = 'sleeping_caldera'
   if not GAME:DungeonUnlocked(dungeon_id) then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hidden_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hidden_Line_001']))
     GAME:FadeOut(false, 20)
     GAME:WaitFrames(30)
     COMMON.UnlockWithFanfare(dungeon_id, false)
@@ -1015,9 +1015,9 @@ function canyon_camp.NPC_Hidden_Action(chara, activator)
     GAME:FadeIn(20)
   end
   UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hidden_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hidden_Line_002']))
   UI:SetSpeakerEmotion("Pain")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hidden_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hidden_Line_003']))
 end
   
 function canyon_camp.NPC_NextCamp_Action(chara, activator)
@@ -1027,10 +1027,10 @@ function canyon_camp.NPC_NextCamp_Action(chara, activator)
   UI:SetSpeaker(chara)
   
   if _DATA.Save:GetDungeonUnlock("forsaken_desert") == RogueEssence.Data.GameProgress.UnlockState.None then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Desert_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Desert_Line_001']))
 	COMMON.UnlockWithFanfare("forsaken_desert", false)
   else
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Desert_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Desert_Line_002']))
   end
 end
   
@@ -1042,11 +1042,11 @@ function canyon_camp.NPC_Goals_Action(chara, activator)
   
   if SV.team_psychic.Status == 0 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Line_001']))
 	
   elseif SV.team_psychic.Status == 1 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Line_002']))
   end
 end
 
@@ -1058,26 +1058,26 @@ function canyon_camp.NPC_Strategy_Action(chara, activator)
   
   if SV.team_psychic.Status == 0 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_001']))
 	
   elseif SV.team_psychic.Status == 1 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_002']))
 	
   elseif SV.team_psychic.Status == 3 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Line_003']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_003']))
 	
 	SV.team_psychic.SpokenTo = true
   elseif SV.team_psychic.Status == 4 then
 	canyon_camp.Psychic_Complete()
   elseif SV.team_psychic.Status == 5 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Line_004']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_004']))
 	
   elseif SV.team_psychic.Status == 6 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Line_004']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_004']))
 	
   end
 end
@@ -1089,7 +1089,7 @@ function canyon_camp.NPC_Brains_Action(chara, activator)
   
   if SV.team_psychic.Status == 3 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Brains_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Brains_Line_001']))
 	
   elseif SV.team_psychic.Status == 4 then
 	
@@ -1099,7 +1099,7 @@ function canyon_camp.NPC_Brains_Action(chara, activator)
   if quest == nil then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Brains_Line_002']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Brains_Line_002']))
 	
 	COMMON.CreateMission(questname,
 	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
@@ -1111,18 +1111,18 @@ function canyon_camp.NPC_Brains_Action(chara, activator)
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Brains_Line_003']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Brains_Line_003']))
   else
     canyon_camp.Psychic_Complete()
   end
 	
   elseif SV.team_psychic.Status == 5 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Brains_Line_004']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Brains_Line_004']))
 	
   elseif SV.team_psychic.Status == 6 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Brains_Line_004']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Brains_Line_004']))
 	
   end
 end
@@ -1133,13 +1133,13 @@ function canyon_camp.Psychic_Complete()
   local player = CH('PLAYER')
   
   UI:SetSpeaker(strategy)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Rescued_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Rescued_Line_001']))
   
   UI:SetSpeaker(brains)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Rescued_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Rescued_Line_002']))
   
   UI:SetSpeaker(strategy)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Rescued_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Rescued_Line_003']))
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_psychic_silk")
   COMMON.GiftItem(player, receive_item)
@@ -1154,7 +1154,7 @@ function canyon_camp.NPC_Fairy_Action(chara, activator)
   
   UI:SetSpeaker(chara)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Fairy_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Fairy_Line_001']))
 end
 
 

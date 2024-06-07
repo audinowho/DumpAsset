@@ -1,14 +1,14 @@
 require 'origin.common'
 
 local guild_path = {}
-local MapStrings = {}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
 function guild_path.Init(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo("=>> Init_guild_path")
-  MapStrings = COMMON.AutoLoadLocalizedStrings()
+
   GROUND:RefreshPlayer()
 end
 

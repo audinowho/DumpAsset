@@ -1,14 +1,14 @@
 require 'origin.common'
 
 local base_camp = {}
-local MapStrings = {}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
 function base_camp.Init(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo("=>> Init_base_camp")
-  MapStrings = COMMON.AutoLoadLocalizedStrings()
+
   
   COMMON.RespawnAllies()
 end
@@ -210,7 +210,7 @@ function base_camp.BeginExposition()
     UI:SetSpeaker(STRINGS:Format("\\uE040"), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	
     local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get('guildmaster_trail')
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001'], zone:GetColoredName()))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001'], zone:GetColoredName()))
     --move the noctowl to a new position
     GROUND:TeleportTo(noctowl, 244, 286, Direction.Up)
     GAME:FadeIn(20)
@@ -218,14 +218,14 @@ function base_camp.BeginExposition()
 
   UI:SetSpeaker(noctowl)
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_003']))
   
   GROUND:CharSetEmote(player, "shock", 1)
   SOUND:PlayBattleSE("EVT_Emote_Shock_Bad")
   GAME:WaitFrames(60)
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_004']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_004']))
     
   local ch = false
   local name = ""
@@ -239,26 +239,26 @@ function base_camp.BeginExposition()
     --UI:WaitShowDialogue("I see... {0}? [Exactly.] [Actually, it's...]")
     
 
-    UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Expo_Cutscene_Line_005'], name), true)
+    UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_005'], name), true)
     UI:WaitForChoice()
     ch = UI:ChoiceResult()
   end
   
   GAME:SetTeamName(name)
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_006']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_006']))
   
   local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get('guildmaster_trail')
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_007'], zone:GetColoredName()))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_007'], zone:GetColoredName()))
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_008']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_008']))
   
   GROUND:EntTurn(player, Direction.DownRight)
   GROUND:MoveInDirection(noctowl, Direction.UpRight, 17, false, 2)
   
   GROUND:EntTurn(player, Direction.Right)
   GROUND:EntTurn(noctowl, Direction.Left)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_009']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_009']))
   
   GROUND:EntTurn(player, Direction.UpRight)
   GROUND:MoveInDirection(noctowl, Direction.UpLeft, 17, false, 2)
@@ -267,7 +267,7 @@ function base_camp.BeginExposition()
   GROUND:EntTurn(noctowl, Direction.Down)
   
   zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get('tropical_path')
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_010'], zone:GetColoredName()))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_010'], zone:GetColoredName()))
   
   --UI:WaitShowDialogue("It amazes me that the likes of you still come to this island.")
   --UI:WaitShowDialogue("I had believed the rush to explore this island died down years ago.")
@@ -278,7 +278,7 @@ function base_camp.BeginExposition()
   
   GROUND:EntTurn(player, Direction.Left)
   GROUND:EntTurn(noctowl, Direction.Right)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_011']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_011']))
   
   
   GROUND:MoveInDirection(noctowl, Direction.Left, 101, false, 2)
@@ -312,21 +312,21 @@ function base_camp.RewardDialogue()
   UI:SetSpeaker(noctowl)
   
   UI:WaitShowDialogue("Your badge... that insignia!")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Reward_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Noctowl_Reward_Line_001']))
   --UI:WaitShowDialogue("Where did you come from...?")
   --UI:WaitShowDialogue("Could it be...?")
   
   --UI:WaitShowDialogue("When the guildmasters first put up the challenge, I was there.")
   --UI:WaitShowDialogue("I witnessed them set off for the summit, never to return.")
   --UI:WaitShowDialogue("Countless others followed, but never succeeded.")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Reward_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Noctowl_Reward_Line_002']))
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Reward_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Noctowl_Reward_Line_003']))
   
   local receive_item = RogueEssence.Dungeon.InvItem("apricorn_perfect")
   COMMON.GiftItem(player, receive_item)
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Reward_Line_004']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Noctowl_Reward_Line_004']))
   
   GROUND:MoveToPosition(noctowl, 82, 286, false, 2)
   
@@ -391,17 +391,17 @@ function base_camp.Ferry_Action(obj, activator)
   local ferry = CH('Lapras')
   UI:SetSpeaker(ferry)
   if not SV.base_camp.FerryIntroduced then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ferry_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ferry_Line_001']))
 	SV.base_camp.FerryIntroduced = true
   end
   local dungeon_entrances = { 'lava_floe_island', 'castaway_cave', 'eon_island', 'lost_seas', 'inscribed_cave', 'prism_isles' }
   local ground_entrances = {}
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ferry_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ferry_Line_002']))
   
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances, true,
   ferry,
-  STRINGS:Format(MapStrings['Ferry_Line_003']))
+  STRINGS:Format(STRINGS.MapStrings['Ferry_Line_003']))
 end
 
 base_camp.sign_count = 0
@@ -409,7 +409,7 @@ function base_camp.Sign_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   UI:ResetSpeaker()
   UI:SetAutoFinish(true)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sign_Action_Text']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sign_Action_Text']))
   UI:SetAutoFinish(false)
   
   base_camp.sign_count = base_camp.sign_count + 1
@@ -441,7 +441,7 @@ function base_camp.Noctowl_Action(chara, activator)
   UI:SetSpeaker(chara)
   
   if not SV.base_camp.FirstTalkComplete and _DATA.Save:GetDungeonUnlock("champions_road") ~= RogueEssence.Data.GameProgress.UnlockState.Completed and SV.guildmaster_summit.GameComplete then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Action_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Noctowl_Action_Line_001']))
     SV.base_camp.FirstTalkComplete = true
   end
   
@@ -453,7 +453,7 @@ function base_camp.Noctowl_Action(chara, activator)
   
   local result = 2
   while result == 2 do
-    UI:BeginChoiceMenu(STRINGS:Format(MapStrings['Noctowl_Ask_Tutorial'], zone:GetColoredName()), tutorial_choices, 1, 3)
+    UI:BeginChoiceMenu(STRINGS:Format(STRINGS.MapStrings['Noctowl_Ask_Tutorial'], zone:GetColoredName()), tutorial_choices, 1, 3)
     UI:WaitForChoice()
     result = UI:ChoiceResult()
     if result == 1 then
@@ -461,12 +461,12 @@ function base_camp.Noctowl_Action(chara, activator)
       GAME:EnterDungeon('training_maze', 0, 9, 0, RogueEssence.Data.GameProgress.DungeonStakes.None, false, true)
       break
     elseif result == 3 then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Tutorial_End']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Noctowl_Tutorial_End']))
       break
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Tutorial_Line_001'], zone:GetColoredName()))
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Tutorial_Line_002']))
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Tutorial_Line_003']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Noctowl_Tutorial_Line_001'], zone:GetColoredName()))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Noctowl_Tutorial_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Noctowl_Tutorial_Line_003']))
     end
   end
   
@@ -495,7 +495,7 @@ function base_camp.Catch_Action()
   
   GROUND:CharTurnToChar(player, catch1)
   UI:SetSpeaker(catch1)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Catch_Line_001']))
   SOUND:PlayBattleSE("DUN_Throw_Start")
   GROUND:CharSetAnim(catch1, "Rotate", false)
   GAME:WaitFrames(18)
@@ -508,7 +508,7 @@ function base_camp.Catch_Action()
 	
   SOUND:PlayBattleSE("DUN_Equip")
   UI:SetSpeaker(catch2)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Catch_Line_002']))
   SOUND:PlayBattleSE("DUN_Throw_Start")
   GROUND:CharSetAnim(catch2, "Rotate", false)
   GAME:WaitFrames(18)
@@ -535,7 +535,7 @@ function base_camp.NPC_Steel_1_Action(chara, activator)
   if quest == nil then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Steel_Line_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Steel_Line_001']))
 	
 	COMMON.CreateMission(questname,
 	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
@@ -548,7 +548,7 @@ function base_camp.NPC_Steel_1_Action(chara, activator)
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Steel_Line_002']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Steel_Line_002']))
   else
     base_camp.Steel_Complete()
   end
@@ -571,13 +571,13 @@ function base_camp.Steel_Complete()
   GROUND:CharTurnToChar(steel2,player)
   
   UI:SetSpeaker(steel1)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Steel_Complete_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Steel_Complete_Line_001']))
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_steel_silk")
   COMMON.GiftItem(player, receive_item)
   
   UI:SetSpeaker(steel2)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Steel_Complete_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Steel_Complete_Line_002']))
   GROUND:Hide("NPC_Steel_1")
   GROUND:Hide("NPC_Steel_2")
   
@@ -593,27 +593,27 @@ function base_camp.NPC_Entrance_Action(chara, activator)
   local noctowl = CH('Noctowl')
   
   UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Sister_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hint_Sister_Line_001']))
   
   UI:SetSpeaker(noctowl)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Sister_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hint_Sister_Line_002']))
   
   UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Sister_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hint_Sister_Line_003']))
   
   UI:SetSpeaker(noctowl)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Sister_Line_004']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hint_Sister_Line_004']))
   
   UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Sister_Line_005']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hint_Sister_Line_005']))
   else
   
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Warn_Line_001']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Warn_Line_002']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Warn_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Warn_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Warn_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Warn_Line_003']))
   
   end
 end
@@ -625,11 +625,11 @@ function base_camp.NPC_Coast_Action(chara, activator)
 
   if not SV.family.Mother and SV.family.MotherActiveDays >= 3 then
   
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Mother_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hint_Mother_Line_001']))
 	
   else
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Outside_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Outside_Line_001']))
   
   end
   GROUND:EntTurn(chara, Direction.Down)
@@ -644,9 +644,9 @@ function base_camp.NPC_Unlucky_Action(chara, activator)
   SOUND:PlayBattleSE("EVT_Emote_Sweating")
   GROUND:CharSetEmote(chara, "sweating", 1)
   GAME:WaitFrames(30)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Unlucky_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Unlucky_Line_001']))
   UI:SetSpeakerEmotion("Sad")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Unlucky_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Unlucky_Line_002']))
   
   
   if SV.Experimental then
@@ -659,7 +659,7 @@ function base_camp.Statue_Center_Action(obj, activator)
   UI:ResetSpeaker()
   UI:SetAutoFinish(true)
   UI:SetCenter(true)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Statue_Center_Text'], SV.base_camp.CenterStatueDate, GAME:GetTeamName()))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Statue_Center_Text'], SV.base_camp.CenterStatueDate, GAME:GetTeamName()))
   UI:SetAutoFinish(false)
   UI:ResetSpeaker()
 end
@@ -669,7 +669,7 @@ function base_camp.Statue_Left_Action(obj, activator)
   UI:ResetSpeaker()
   UI:SetAutoFinish(true)
   UI:SetCenter(true)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Statue_Left_Text'], SV.base_camp.LeftStatueDate, GAME:GetTeamName()))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Statue_Left_Text'], SV.base_camp.LeftStatueDate, GAME:GetTeamName()))
   UI:SetAutoFinish(false)
   UI:ResetSpeaker()
 end
@@ -679,7 +679,7 @@ function base_camp.Statue_Right_Action(obj, activator)
   UI:ResetSpeaker()
   UI:SetAutoFinish(true)
   UI:SetCenter(true)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Statue_Right_Text'], SV.base_camp.RightStatueDate, GAME:GetTeamName()))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Statue_Right_Text'], SV.base_camp.RightStatueDate, GAME:GetTeamName()))
   UI:SetAutoFinish(false)
   UI:ResetSpeaker()
 end

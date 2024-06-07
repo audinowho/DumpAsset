@@ -1,14 +1,14 @@
 require 'origin.common'
 
 local dev_room = {}
-local MapStrings = {}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
 function dev_room.Init(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo("=>> Init_dev_room")
-  MapStrings = COMMON.AutoLoadLocalizedStrings()
+
 end
 
 function dev_room.Enter(map)

@@ -2,14 +2,14 @@ require 'origin.common'
 require 'origin.menu.team.AssemblySelectMenu'
 
 local luminous_spring = {}
-local MapStrings = {}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
 function luminous_spring.Init(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo("=>> Init_luminous_spring")
-  MapStrings = COMMON.AutoLoadLocalizedStrings()
+
   COMMON.RespawnAllies()
 end
 
@@ -52,35 +52,35 @@ function luminous_spring.Spring_Touch(obj, activator)
 	GROUND:TeleportTo(player, 292, 312, Direction.Down)
 	
 	if not SV.luminous_spring.Returning then
-		UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_Intro_1']))
-		UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_Intro_2']))
+		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Intro_1']))
+		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Intro_2']))
 	end
 	SV.luminous_spring.Returning = true
 	while state > -1 do
 		if state == 0 then
-			local evo_choices = {STRINGS:Format(MapStrings['Evo_Option_Evolve']),
+			local evo_choices = {STRINGS:Format(STRINGS.MapStrings['Evo_Option_Evolve']),
 			STRINGS:FormatKey("MENU_INFO"),
 			STRINGS:FormatKey("MENU_EXIT")}
-			UI:BeginChoiceMenu(STRINGS:Format(MapStrings['Evo_Ask']), evo_choices, 1, 3)
+			UI:BeginChoiceMenu(STRINGS:Format(STRINGS.MapStrings['Evo_Ask']), evo_choices, 1, 3)
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
 			repeated = true
 			if result == 1 then
 				state = 1
 			elseif result == 2 then
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_Info_001']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_Info_002']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_Info_003']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_Info_004']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_Info_005']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_Info_006']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_Info_007']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Info_001']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Info_002']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Info_003']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Info_004']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Info_005']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Info_006']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Info_007']))
 			else
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_End']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_End']))
 				state = -1
 			end
 		elseif state == 1 then
-			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_Ask_Who']))
+			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Ask_Who']))
 			member = AssemblySelectMenu.run()
 			if member then
 				state = 2
@@ -89,12 +89,12 @@ function luminous_spring.Spring_Touch(obj, activator)
 			end
 		elseif state == 2 then
 			if not GAME:CanPromote(member) then
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_None'], member:GetDisplayName(true)))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_None'], member:GetDisplayName(true)))
 				state = 1
 			else
 				local branches = GAME:GetAvailablePromotions(member, "evo_harmony_scarf")
 				if #branches == 0 then
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_None_Now'], member:GetDisplayName(true)))
+					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_None_Now'], member:GetDisplayName(true)))
 					state = 1
 				elseif #branches == 1 then
 					local branch = branches[1]
@@ -113,9 +113,9 @@ function luminous_spring.Spring_Touch(obj, activator)
 					local mon = _DATA:GetMonster(branch.Result)
 					if evo_item ~= "" then
 						local item = _DATA:GetItem(evo_item)
-						UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Evo_Confirm_Item'], member:GetDisplayName(true), item:GetIconName(), mon:GetColoredName()), false)
+						UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Evo_Confirm_Item'], member:GetDisplayName(true), item:GetIconName(), mon:GetColoredName()), false)
 					else
-						UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Evo_Confirm'], member:GetDisplayName(true), mon:GetColoredName()), false)
+						UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Evo_Confirm'], member:GetDisplayName(true), mon:GetColoredName()), false)
 					end
 					UI:WaitForChoice()
 					local result = UI:ChoiceResult()
@@ -132,7 +132,7 @@ function luminous_spring.Spring_Touch(obj, activator)
 						table.insert(evo_names, mon:GetColoredName())
 					end
 					table.insert(evo_names, STRINGS:FormatKey("MENU_CANCEL"))
-					UI:BeginChoiceMenu(STRINGS:Format(MapStrings['Evo_Choice'], member:GetDisplayName(true)), evo_names, 1, #evo_names)
+					UI:BeginChoiceMenu(STRINGS:Format(STRINGS.MapStrings['Evo_Choice'], member:GetDisplayName(true)), evo_names, 1, #evo_names)
 					UI:WaitForChoice()
 					local result = UI:ChoiceResult()
 					if result < #evo_names then
@@ -153,7 +153,7 @@ function luminous_spring.Spring_Touch(obj, activator)
 			GROUND:MoveInDirection(subject, Direction.Up, 60, false, 2)
 			GROUND:EntTurn(subject, Direction.Down)
 			
-			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_Begin']))
+			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Begin']))
 			
 			SOUND:PlayBattleSE("EVT_Evolution_Start")
 			GAME:FadeOut(true, 20)
@@ -173,7 +173,7 @@ function luminous_spring.Spring_Touch(obj, activator)
 			SOUND:PlayFanfare("Fanfare/Promotion")
 			
 			
-			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Evo_Complete'], pastName, mon:GetColoredName()))
+			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Complete'], pastName, mon:GetColoredName()))
 			GAME:CheckLevelSkills(member, 0)
 			if member.Level > 1 then
 				GAME:CheckLevelSkills(member, member.Level-1)

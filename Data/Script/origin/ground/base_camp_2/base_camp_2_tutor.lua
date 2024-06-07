@@ -4,11 +4,8 @@ require 'origin.menu.skill.SkillTutorMenu'
 require 'origin.menu.team.AssemblySelectMenu'
 
 local base_camp_2_tutor = {}
-local MapStrings = {}
 
-function base_camp_2_tutor.InitStrings(mapStrings)
-  MapStrings = mapStrings
-end
+
 
 function base_camp_2_tutor.Tutor_Sequence()
 
@@ -57,13 +54,13 @@ function base_camp_2_tutor.Tutor_Remember_Flow(price)
   local move = ""
 	
 	if price > GAME:GetPlayerMoney() then
-		UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_No_Money']))
+		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_No_Money']))
 		return
 	end
     
 	while state > -1 do
 		if state == 0 then
-			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Who']))
+			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Remember_Who']))
 			local chosen_member = AssemblySelectMenu.run(base_camp_2_tutor.Tutor_Can_Remember, false)
 			
 			if chosen_member ~= nil then
@@ -73,7 +70,7 @@ function base_camp_2_tutor.Tutor_Remember_Flow(price)
 				state = -1
 			end
 		elseif state == 1 then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_What'], member:GetDisplayName(true)))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Remember_What'], member:GetDisplayName(true)))
       local result = SkillSelectMenu.runRelearnMenu(member)
       if result ~= "" then
         move = result
@@ -83,17 +80,17 @@ function base_camp_2_tutor.Tutor_Remember_Flow(price)
       end
 		elseif state == 2 then
         local moveEntry = _DATA:GetSkill(move)
-		    local learnedMove = COMMON.LearnMoveFlow(member, move, STRINGS:Format(MapStrings['Tutor_Remember_Replace']))
+		    local learnedMove = COMMON.LearnMoveFlow(member, move, STRINGS:Format(STRINGS.MapStrings['Tutor_Remember_Replace']))
 			
 			if learnedMove then
 				if price > 0 then
 				  SOUND:PlayBattleSE("DUN_Money")
 				  GAME:RemoveFromPlayerMoney(price)
 				end
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Begin']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Remember_Begin']))
 				base_camp_2_tutor.Tutor_Sequence()
 				SOUND:PlayFanfare("Fanfare/LearnSkill")
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Remember_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
 				state = -1
 			else
 				state = 1
@@ -111,13 +108,13 @@ function base_camp_2_tutor.Tutor_Forget_Flow()
   while state > -1 do
   
     if state == 0 then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_Who']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Forget_Who']))
       local chosen_member = AssemblySelectMenu.run(base_camp_2_tutor.Tutor_Can_Forget, false)
 	  
 	  if chosen_member ~= nil then
 		  state = 1
 		  member = chosen_member
-		  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_What'], member:GetDisplayName(true)))
+		  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Forget_What'], member:GetDisplayName(true)))
 	  else
 		  state = -1
 	  end
@@ -127,13 +124,13 @@ function base_camp_2_tutor.Tutor_Forget_Flow()
       UI:WaitForChoice()
       local result = UI:ChoiceResult()
       if result > -1 then
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_Begin']))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Forget_Begin']))
         move = GAME:GetCharacterSkill(member, result)
         local moveEntry = _DATA:GetSkill(move)
         GAME:ForgetSkill(member, result)
         base_camp_2_tutor.Tutor_Sequence()
         SOUND:PlayFanfare("Fanfare/LearnSkill")
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Forget_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Forget_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
         state = -1
       else
         state = 0
@@ -153,7 +150,7 @@ function base_camp_2_tutor.Tutor_Teach_Flow(tutor_moves)
 	
 	while state > -1 do
 		if state == 0 then
-			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Teach_Who']))
+			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Teach_Who']))
 			local chosen_member = AssemblySelectMenu.run(function(chara) return base_camp_2_tutor.Tutor_Can_Tutor(chara, tutor_moves) end, false)
 			
 			if chosen_member ~= nil then
@@ -164,7 +161,7 @@ function base_camp_2_tutor.Tutor_Teach_Flow(tutor_moves)
 			end
 	  
 		elseif state == 1 then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Teach_What'], member:GetDisplayName(true)))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Teach_What'], member:GetDisplayName(true)))
 	  local valid_moves = COMMON.GetTutorableMoves(member, tutor_moves) --moved out here
 	  local result = SkillTutorMenu.runTutorMenu(valid_moves, "loot_heart_scale")
       if result ~= "" then
@@ -175,7 +172,7 @@ function base_camp_2_tutor.Tutor_Teach_Flow(tutor_moves)
       end
 		elseif state == 2 then
       local moveEntry = _DATA:GetSkill(move)
-			local learnedMove = COMMON.LearnMoveFlow(member, move, STRINGS:Format(MapStrings['Tutor_Remember_Replace']))
+			local learnedMove = COMMON.LearnMoveFlow(member, move, STRINGS:Format(STRINGS.MapStrings['Tutor_Remember_Replace']))
 			
 			if learnedMove then
 				local price = COMMON.TUTOR[move].Cost
@@ -191,10 +188,10 @@ function base_camp_2_tutor.Tutor_Teach_Flow(tutor_moves)
 						GAME:TakePlayerBagItem(item_slot.Slot)
 					end
 				end
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Remember_Begin']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Remember_Begin']))
 				base_camp_2_tutor.Tutor_Sequence()
 				SOUND:PlayFanfare("Fanfare/LearnSkill")
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Teach_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Teach_Success'], member:GetDisplayName(true), moveEntry:GetIconName()))
 				state = -1
 			else
 				state = 1
@@ -223,12 +220,12 @@ function base_camp_2_tutor.Tutor_Action(obj, activator)
   UI:SetSpeaker(chara)
   
   if SV.guildmaster_summit.GameComplete and SV.base_town.FreeRelearn == false then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Now_Free']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Now_Free']))
     SV.base_town.FreeRelearn = true
   end
   
   if can_tutor and SV.base_town.TutorOpen == false then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Now_Teaches']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Now_Teaches']))
 	SV.base_town.TutorOpen = true
   end
   
@@ -239,13 +236,13 @@ function base_camp_2_tutor.Tutor_Action(obj, activator)
   
 	while state > -1 do
 		if state == 0 then
-			local msg = STRINGS:Format(MapStrings['Tutor_Intro'], STRINGS:FormatKey("MONEY_AMOUNT", price))
+			local msg = STRINGS:Format(STRINGS.MapStrings['Tutor_Intro'], STRINGS:FormatKey("MONEY_AMOUNT", price))
 			if price == 0 then
-			  msg = STRINGS:Format(MapStrings['Tutor_Intro_Free'])
+			  msg = STRINGS:Format(STRINGS.MapStrings['Tutor_Intro_Free'])
 			end
 			
 			if repeated == true then
-				msg = STRINGS:Format(MapStrings['Tutor_Intro_Return'])
+				msg = STRINGS:Format(STRINGS.MapStrings['Tutor_Intro_Return'])
 			end
 			
 			local tutor_choices = {}
@@ -253,7 +250,7 @@ function base_camp_2_tutor.Tutor_Action(obj, activator)
 			tutor_choices[2] = RogueEssence.StringKey("MENU_FORGET_SKILL"):ToLocal()
 			
 			if can_tutor then
-				tutor_choices[3] = STRINGS:Format(MapStrings['Tutor_Option_Tutor'])
+				tutor_choices[3] = STRINGS:Format(STRINGS.MapStrings['Tutor_Option_Tutor'])
 			end
 			
 			tutor_choices[4] = STRINGS:FormatKey("MENU_INFO")
@@ -272,17 +269,17 @@ function base_camp_2_tutor.Tutor_Action(obj, activator)
 			elseif result == 3 then
 			    base_camp_2_tutor.Tutor_Teach_Flow(tutor_moves)
 			elseif result == 4 then
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Info_001']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Info_001']))
 				if SV.base_town.FreeRelearn then
-				    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Info_003']))
+				    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Info_003']))
 				else
-				    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Info_002']))
+				    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Info_002']))
 				end
 				if SV.base_town.TutorOpen then
-				    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Info_004']))
+				    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Info_004']))
 				end
 			else
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Goodbye']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Goodbye']))
 				state = -1
 			end
 		end

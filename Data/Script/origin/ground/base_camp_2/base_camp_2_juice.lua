@@ -5,11 +5,7 @@ require 'origin.menu.team.AssemblySelectMenu'
 require 'origin.menu.team.TeamSelectMenu'
 
 local base_camp_2_juice = {}
-local MapStrings = {}
 
-function base_camp_2_juice.InitStrings(mapStrings)
-  MapStrings = mapStrings
-end
 
 
 function base_camp_2_juice.Juice_Owner_Action(chara, activator)
@@ -18,8 +14,8 @@ function base_camp_2_juice.Juice_Owner_Action(chara, activator)
   if SV.base_town.JuiceShop == 0 then
     UI:SetSpeaker(chara)
   
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Intro']))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Setup']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Intro']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Setup']))
   elseif SV.base_town.JuiceShop == 1 then
   
   local questname = "QuestBug"
@@ -28,7 +24,7 @@ function base_camp_2_juice.Juice_Owner_Action(chara, activator)
   if quest == nil then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Help_001']))
 	
 	COMMON.CreateMission(questname,
 	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
@@ -45,7 +41,7 @@ function base_camp_2_juice.Juice_Owner_Action(chara, activator)
     if quest.Complete == COMMON.MISSION_INCOMPLETE then
       UI:SetSpeaker(chara)
       GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_002']))
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Help_002']))
     else
       base_camp_2_juice.Bug_Complete()
     end
@@ -66,12 +62,12 @@ function base_camp_2_juice.Bug_Complete()
   GROUND:CharTurnToChar(juice,player)
   
   UI:SetSpeaker(juice)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Help_003']))
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_bug_silk")
   COMMON.GiftItem(player, receive_item)
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Help_004']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Help_004']))
   
   COMMON.CompleteMission("QuestBug")
   
@@ -564,7 +560,7 @@ function base_camp_2_juice.Drink_Flow(boost, member)
 	end
 	
 	if not any_boost then
-		UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Result_None'], member:GetDisplayName(true)))
+		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Order_Result_None'], member:GetDisplayName(true)))
 	end
 	
 end
@@ -579,7 +575,7 @@ function base_camp_2_juice.Drink_Order_Flow()
   while state > -1 do
   
     if state == 0 then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Who']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Order_Who']))
 	  member = TeamSelectMenu.runPartyMenu()
       if member then
 		state = 1
@@ -587,7 +583,7 @@ function base_camp_2_juice.Drink_Order_Flow()
 		state = -1
 	  end
     elseif state == 1 then
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_What'], STRINGS:LocalKeyString(26)))
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Order_What'], STRINGS:LocalKeyString(26)))
 
 	  local result = JuiceShopMenu.run(STRINGS:FormatKey("MENU_ITEM_TITLE"), member, base_camp_2_juice.boost_tbl, true, SV.base_town.JuiceShop > 2, function(cart, member) return base_camp_2_juice.getTotalBoost(cart, member) end) -- preview is set to be post game only
 
@@ -605,9 +601,9 @@ function base_camp_2_juice.Drink_Order_Flow()
 		end
 		cart = {}
 
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Begin']))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Order_Begin']))
 		SOUND:PlayBattleSE("DUN_Drink")
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Drink'], member:GetDisplayName(true)))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Order_Drink'], member:GetDisplayName(true)))
 		base_camp_2_juice.Drink_Flow(total_boost, member)
         state = -1
       else
@@ -939,7 +935,7 @@ function base_camp_2_juice.Drink_Specialties_Flow()
 		total_boost.Speed = effect.Speed
 	  end
 	  
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Who_Multi'], STRINGS:LocalKeyString(26)))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Order_Who_Multi'], STRINGS:LocalKeyString(26)))
 	  --change this to pick multiple team members.  You may want to make an AssemblySelectMenu instead...
 	  --the filter determines whether the menu option is enabled or not.  We disable choosing those who cannot be boosted further
 	  local members = AssemblyMultiSelectMenu.runMultiMenu(function(target) return base_camp_2_juice.Can_Eat(target, total_boost) end)
@@ -959,7 +955,7 @@ function base_camp_2_juice.Drink_Specialties_Flow()
 			end
 		end
 
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Order_Begin']))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Order_Begin']))
 		SOUND:PlayBattleSE("DUN_Drink")
 		
 		for idx, member in pairs(members) do
@@ -983,23 +979,23 @@ function base_camp_2_juice.Juice_Shop(obj, activator)
   UI:SetSpeaker(chara)
 	
   if SV.guildmaster_summit.GameComplete and SV.base_town.JuiceShop == 2 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Now_Specialty']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Now_Specialty']))
     SV.base_town.JuiceShop = 3
   end
 	
 	while state > -1 do
 		if state == 0 then
-			msg = STRINGS:Format(MapStrings['Juice_Intro'])
+			msg = STRINGS:Format(STRINGS.MapStrings['Juice_Intro'])
 			if repeated == true then
-				msg = STRINGS:Format(MapStrings['Juice_Intro_Return'])
+				msg = STRINGS:Format(STRINGS.MapStrings['Juice_Intro_Return'])
 			end
 			
 			local juice_choices = {}
-			juice_choices[1] = STRINGS:Format(MapStrings['Juice_Option_Order'])
+			juice_choices[1] = STRINGS:Format(STRINGS.MapStrings['Juice_Option_Order'])
 			
 			
 			if SV.base_town.JuiceShop == 3 then
-				juice_choices[2] = STRINGS:Format(MapStrings['Juice_Option_Specialties'])
+				juice_choices[2] = STRINGS:Format(STRINGS.MapStrings['Juice_Option_Specialties'])
 			end
 			
 			juice_choices[3] = STRINGS:FormatKey("MENU_INFO")
@@ -1016,17 +1012,17 @@ function base_camp_2_juice.Juice_Shop(obj, activator)
 				if bag_count > 0 then
 					base_camp_2_juice.Drink_Order_Flow()
 				else
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Bag_Empty']))
+					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Bag_Empty']))
 				end
 			elseif result == 2 then
 				base_camp_2_juice.Drink_Specialties_Flow()
 			elseif result == 3 then
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Info_001']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Info_001']))
 				if SV.base_town.JuiceShop == 3 then
-				    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Info_002']))
+				    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Info_002']))
 				end
 			else
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Juice_Goodbye']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Goodbye']))
 				state = -1
 			end
 		end

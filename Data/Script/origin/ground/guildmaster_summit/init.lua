@@ -1,14 +1,14 @@
 require 'origin.common'
 
 local guildmaster_summit = {}
-local MapStrings = {}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
 function guildmaster_summit.Init(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo("=>> Init_guildmaster_summit")
-  MapStrings = COMMON.AutoLoadLocalizedStrings()
+
   COMMON.RespawnAllies()
 end
 
@@ -85,7 +85,7 @@ function guildmaster_summit.RewardDialogue()
   GAME:FadeIn(20)
 	
   UI:SetSpeaker(noctowl)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Reward_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Noctowl_Reward_Line_001']))
   --UI:WaitShowDialogue("Where did you come from...?")
   --UI:WaitShowDialogue("Could it be...?")
   
@@ -95,11 +95,11 @@ function guildmaster_summit.RewardDialogue()
   --UI:WaitShowDialogue("When the guildmasters first put up the challenge, I was there.")
   --UI:WaitShowDialogue("I witnessed them set off for the summit, never to return.")
   --UI:WaitShowDialogue("Countless others followed, but never succeeded.")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Reward_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Noctowl_Reward_Line_002']))
   
   GROUND:MoveInDirection(noctowl, Direction.Down, 24, false, 2)
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Noctowl_Reward_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Noctowl_Reward_Line_003']))
   
   local receive_item = RogueEssence.Dungeon.InvItem("apricorn_perfect")
   COMMON.GiftItem(player, receive_item)
@@ -168,7 +168,7 @@ function guildmaster_summit.PreBattle(shortened)
   if shortened then
     UI:WaitShowDialogue("Shortened")
   end
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001']))
   GAME:WaitFrames(10)
   GAME:MoveCamera(0, -72, 60, true)
   GAME:WaitFrames(10)
@@ -177,7 +177,7 @@ function guildmaster_summit.PreBattle(shortened)
   GROUND:CharAnimateTurnTo(wigglytuff, Direction.Down, 4)
   GAME:WaitFrames(20)
   UI:SetSpeaker(xatu)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_002']))
   
   
   if _DATA.Save.ActiveTeam.Name == "" then
@@ -187,7 +187,7 @@ function guildmaster_summit.PreBattle(shortened)
   --To follow in our steps is no easy endeavor...
   
 	UI:SetSpeaker(xatu)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_Ask_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_Ask_001']))
 	
     local ch = false
     local name = ""
@@ -197,7 +197,7 @@ function guildmaster_summit.PreBattle(shortened)
       name = UI:ChoiceResult()
     
 	  UI:ResetSpeaker()
-      UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Ending_Cutscene_Line_Ask_002'], name), true)
+      UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_Ask_002'], name), true)
       UI:WaitForChoice()
       ch = UI:ChoiceResult()
     end
@@ -206,25 +206,25 @@ function guildmaster_summit.PreBattle(shortened)
   end
   
   UI:SetSpeaker(xatu)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_003'], GAME:GetTeamName()))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_003'], GAME:GetTeamName()))
   GAME:WaitFrames(10)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_005']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_005']))
   GAME:WaitFrames(10)
   UI:SetSpeaker(lucario)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_006']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_006']))
   GAME:WaitFrames(10)
   UI:SetSpeaker(wigglytuff)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_007']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_007']))
   GAME:WaitFrames(10)
     
   SOUND:FadeOutBGM()
   
   UI:SetSpeaker(xatu)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_008']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_009']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_008']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_009']))
   
   SOUND:PlayBGM("C06. Final Battle.ogg", false)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_010'], GAME:GetTeamName()))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_010'], GAME:GetTeamName()))
   GAME:WaitFrames(10)
   SOUND:PlayBattleSE("DUN_Bird_Caw")
   
@@ -288,22 +288,22 @@ function guildmaster_summit.PostBattle()
   
 
   UI:SetSpeaker(xatu)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_001']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_002']))
   GAME:WaitFrames(10)
   UI:SetSpeaker(lucario)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_003']))
   GAME:WaitFrames(10)
   UI:SetSpeaker(wigglytuff)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_004']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_004']))
   
   UI:SetSpeaker(lucario)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_005']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_006']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_005']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_006']))
   GAME:WaitFrames(10)
   
   UI:SetSpeaker(xatu)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_007'], GAME:GetTeamName()))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_007'], GAME:GetTeamName()))
 
   SOUND:PlayBattleSE("DUN_Bird_Caw")
   local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Shoot")
@@ -316,15 +316,15 @@ function guildmaster_summit.PostBattle()
 
       UI:SetAutoFinish(true)
 	  GAME:WaitFrames(60)
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Ending_Cutscene_Line_008'], GAME:GetTeamName()), -1)
+	  UI:WaitShowVoiceOver(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_008'], GAME:GetTeamName()), -1)
 	  GAME:WaitFrames(20);
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Ending_Cutscene_Line_009']), -1)
+	  UI:WaitShowVoiceOver(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_009']), -1)
 	  GAME:WaitFrames(20);
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Ending_Cutscene_Line_010']), -1)
+	  UI:WaitShowVoiceOver(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_010']), -1)
 	  GAME:WaitFrames(20);
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Ending_Cutscene_Line_011']), -1)
+	  UI:WaitShowVoiceOver(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_011']), -1)
 	  GAME:WaitFrames(20);
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Ending_Cutscene_Line_012']), -1)
+	  UI:WaitShowVoiceOver(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_012']), -1)
       UI:SetAutoFinish(false)
 	  GAME:AddToPlayerMoneyBank(100000)
   else
@@ -354,7 +354,7 @@ end
 function guildmaster_summit.RollCredits()
 
       UI:SetAutoFinish(true)
-	  UI:WaitShowTitle(STRINGS:Format(MapStrings['Credits_Line_001']), 60)
+	  UI:WaitShowTitle(STRINGS:Format(STRINGS.MapStrings['Credits_Line_001']), 60)
 	  GAME:WaitFrames(180)
 	  UI:WaitHideTitle(60)
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
@@ -365,7 +365,7 @@ function guildmaster_summit.RollCredits()
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
 	    return
 	  end
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_002']), 210)
+	  UI:WaitShowVoiceOver(STRINGS:Format(STRINGS.MapStrings['Credits_Line_002']), 210)
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
 	    return
 	  end
@@ -374,7 +374,7 @@ function guildmaster_summit.RollCredits()
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
 	    return
 	  end
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_003']), 210)
+	  UI:WaitShowVoiceOver(STRINGS:Format(STRINGS.MapStrings['Credits_Line_003']), 210)
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
 	    return
 	  end
@@ -383,7 +383,7 @@ function guildmaster_summit.RollCredits()
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
 	    return
 	  end
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_004']), 210)
+	  UI:WaitShowVoiceOver(STRINGS:Format(STRINGS.MapStrings['Credits_Line_004']), 210)
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
 	    return
 	  end
@@ -392,7 +392,7 @@ function guildmaster_summit.RollCredits()
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
 	    return
 	  end
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_005']), 210)
+	  UI:WaitShowVoiceOver(STRINGS:Format(STRINGS.MapStrings['Credits_Line_005']), 210)
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
 	    return
 	  end
@@ -401,7 +401,7 @@ function guildmaster_summit.RollCredits()
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
 	    return
 	  end
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_006']), 210)
+	  UI:WaitShowVoiceOver(STRINGS:Format(STRINGS.MapStrings['Credits_Line_006']), 210)
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
 	    return
 	  end
@@ -410,7 +410,7 @@ function guildmaster_summit.RollCredits()
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
 	    return
 	  end
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_007']), 210)
+	  UI:WaitShowVoiceOver(STRINGS:Format(STRINGS.MapStrings['Credits_Line_007']), 210)
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
 	    return
 	  end
@@ -419,7 +419,7 @@ function guildmaster_summit.RollCredits()
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
 	    return
 	  end
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_008']), 210)
+	  UI:WaitShowVoiceOver(STRINGS:Format(STRINGS.MapStrings['Credits_Line_008']), 210)
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
 	    return
 	  end
@@ -428,7 +428,7 @@ function guildmaster_summit.RollCredits()
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
 	    return
 	  end
-	  UI:WaitShowVoiceOver(STRINGS:Format(MapStrings['Credits_Line_009']), 240)
+	  UI:WaitShowVoiceOver(STRINGS:Format(STRINGS.MapStrings['Credits_Line_009']), 240)
 	  if guildmaster_summit.can_skip == true and guildmaster_summit.credit_skip == true then
 	    return
 	  end
@@ -452,7 +452,7 @@ function guildmaster_summit.NPC_Rival_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_001']))
   
   SV.team_rivals.SpokenTo = true
 end
@@ -461,7 +461,7 @@ function guildmaster_summit.NPC_Rival_2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_001']))
   
   SV.team_rivals.SpokenTo = true
 end
@@ -492,11 +492,11 @@ function guildmaster_summit.NPC_All_Action()
   local storehouse = CH('NPC_Storehouse')
   
   UI:SetSpeaker(storehouse)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Supply_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Supply_Line_001']))
   UI:SetSpeaker(carry)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Supply_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Supply_Line_002']))
   UI:SetSpeaker(deliver)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Supply_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Supply_Line_003']))
 end
 
 

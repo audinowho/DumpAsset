@@ -12,8 +12,8 @@ local end_ambush_forest = {}
 -- Local, localized strings table
 -- Use this to display the named strings you added in the strings files for the map!
 -- Ex:
---      local localizedstring = MapStrings['SomeStringName']
-local MapStrings = {}
+--      local localizedstring = STRINGS.MapStrings['SomeStringName']
+
 
 -------------------------------
 -- Map Callbacks
@@ -24,7 +24,7 @@ function end_ambush_forest.Init(map)
 
   --This will fill the localized strings table automatically based on the locale the game is 
   -- currently in. You can use the MapStrings table after this line!
-  MapStrings = COMMON.AutoLoadLocalizedStrings()
+
 
 end
 
@@ -70,25 +70,25 @@ function end_ambush_forest.PreBattle(shortened)
   if shortened == false then
   
     UI:SetSpeaker(enemy)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001']))
     
     SOUND:PlayBGM("A13. Threat.ogg", false)
     
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002']))
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_003']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_003']))
     
     --also, if the player has already reached the summit, give a reaction
   
   else
     SOUND:PlayBGM("A13. Threat.ogg", false)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Short']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Short']))
   end
   
   
   
   SOUND:PlayBGM("C02. Boss Battle 2.ogg", false)
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_004']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_004']))
   
   GAME:WaitFrames(30)
   
@@ -121,7 +121,7 @@ function end_ambush_forest.PostBattle()
   GAME:WaitFrames(60)
   
   UI:SetSpeaker(enemy)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Ending_Cutscene_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_001']))
   
   GAME:FadeOut(false, 20)
   

@@ -18,14 +18,14 @@ require('common')
 
 local test_grounds = {}
 
-local MapStrings = {}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
 function test_grounds.Init(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo("=>> Init_test_grounds <<=")
-  MapStrings = COMMON.AutoLoadLocalizedStrings()
+
   COMMON.RespawnStarterPartner()
   
   local partner = CH('Partner')
@@ -120,7 +120,7 @@ function test_grounds.Sign1_Action(obj, activator)
   GROUND:TeleportTo(obj, 200, 200, Direction.Right)
   UI:ResetSpeaker()
   UI:SetCenter(true)
-  UI:WaitShowDialogue(MapStrings['Sign1_Action_Line0'])
+  UI:WaitShowDialogue(STRINGS.MapStrings['Sign1_Action_Line0'])
   UI:WaitShowVoiceOver("This room features many[pause=0]\nmechanics useful for scripting.[br]Some of which\n\nmay never be used\nin the final game.[scroll]To enable developer mode,[scroll]run dev.bat in the game folder.", -1)
   GAME:WaitFrames(30)
   UI:SetAutoFinish(true)
@@ -201,7 +201,7 @@ function test_grounds.Sign3_Action(obj, activator)
   PrintInfo('Sign2_Action')
   UI:ResetSpeaker()
   UI:SetAutoFinish(true)
-  UI:WaitShowDialogue(MapStrings['Sign2_Action_Line0'])
+  UI:WaitShowDialogue(STRINGS.MapStrings['Sign2_Action_Line0'])
   GAME:FadeOut(false, 30)
   GAME:MoveCamera(0, 120, 1, true)
   --perform this fade without waiting for its completion
@@ -746,7 +746,7 @@ function test_grounds.Hungrybox_Action(chara, activator)
   --GROUND:Hide("PLAYER")
   GROUND:CharTurnToCharAnimated(hbox, player, 4)
   --UI:SetSpeaker(hbox)
-  --UI:TextDialogue(STRINGS:Format(MapStrings['Hungrybox_Action_Line0']), 120)
+  --UI:TextDialogue(STRINGS:Format(STRINGS.MapStrings['Hungrybox_Action_Line0']), 120)
   --UI:WaitDialog()
   GROUND:CharSetDrawEffect(hbox, DrawEffect.Trembling)
   GAME:WaitFrames(120)
@@ -781,23 +781,23 @@ function test_grounds.Poochy_Action(chara, activator)
   
   if SV.base_camp.AcceptedPooch then
     --If we already talked with poochy and got him to set the ScriptVar
-    UI:TextDialogue(STRINGS:Format(MapStrings['Pooch_Action_Line3']))
+    UI:TextDialogue(STRINGS:Format(STRINGS.MapStrings['Pooch_Action_Line3']))
     UI:WaitDialog()
   else
     --If we haven't gotten poochy to set the script var
     
     if not SV.base_camp.SpokeToPooch then
       --If we never spoke to poochy before
-      UI:TextDialogue(STRINGS:Format(MapStrings['Pooch_Action_Line0A']))
+      UI:TextDialogue(STRINGS:Format(STRINGS.MapStrings['Pooch_Action_Line0A']))
       UI:WaitDialog()
       SV.base_camp.SpokeToPooch = true
     else
       --If we already spoke to poochy before, but didn't get him to set the script var
-      UI:TextDialogue(STRINGS:Format(MapStrings['Pooch_Action_Line0B']))
+      UI:TextDialogue(STRINGS:Format(STRINGS.MapStrings['Pooch_Action_Line0B']))
       UI:WaitDialog()
     end
     
-    UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Pooch_Action_Question1']))
+    UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Pooch_Action_Question1']))
     UI:WaitForChoice()
     local ch = UI:ChoiceResult()
     
@@ -806,10 +806,10 @@ function test_grounds.Poochy_Action(chara, activator)
       SV.base_camp.AcceptedPooch = true
       SOUND:PlayFanfare("Fanfare/MissionClear")
       SOUND:WaitFanfare()
-      UI:TextDialogue(STRINGS:Format(MapStrings['Pooch_Action_Line2A']))
+      UI:TextDialogue(STRINGS:Format(STRINGS.MapStrings['Pooch_Action_Line2A']))
     else
       --The player told poochy NOT to set the script var
-      UI:TextDialogue(STRINGS:Format(MapStrings['Pooch_Action_Line2B']))
+      UI:TextDialogue(STRINGS:Format(STRINGS.MapStrings['Pooch_Action_Line2B']))
     end
     
     UI:WaitDialog()

@@ -1,14 +1,14 @@
 require 'origin.common'
 
 local rest_stop = {}
-local MapStrings = {}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
 function rest_stop.Init(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo("=>> Init_rest_stop")
-  MapStrings = COMMON.AutoLoadLocalizedStrings()
+
   COMMON.RespawnAllies()
 end
 
@@ -186,7 +186,7 @@ function rest_stop.BeginExposition(shortened)
   
   --bosses talk
   UI:ResetSpeaker()
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Boss_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Boss_Line_001']))
   if shortened then
     UI:WaitShowDialogue("Return version")
   end
@@ -210,7 +210,7 @@ function rest_stop.Steelix_Success()
   GAME:FadeIn(20)
   
   UI:ResetSpeaker()
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Boss_Line_Success_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Boss_Line_Success_001']))
   
   GROUND:Hide("Boss_1")
   GROUND:Hide("Boss_2")
@@ -236,7 +236,7 @@ function rest_stop.Rival_1_Action(chara, activator)
   if SV.team_rivals.Status == 4 then
   
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_001']))
   
   SV.team_rivals.SpokenTo = true
   
@@ -249,7 +249,7 @@ function rest_stop.Rival_1_Action(chara, activator)
   if quest == nil then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Help_Line_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Help_Line_001']))
 	
 	COMMON.CreateMission(questname,
 	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
@@ -261,17 +261,17 @@ function rest_stop.Rival_1_Action(chara, activator)
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Help_Line_002']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Help_Line_002']))
   else
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Help_Line_003']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Help_Line_003']))
   end
   
   elseif SV.team_rivals.Status == 6 then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Help_Line_003']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Help_Line_003']))
   end
   
   
@@ -285,7 +285,7 @@ function rest_stop.Rival_2_Action(chara, activator)
   if SV.team_rivals.Status == 4 then
   
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_001']))
   
   SV.team_rivals.SpokenTo = true
   
@@ -293,7 +293,7 @@ function rest_stop.Rival_2_Action(chara, activator)
   
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Help_Line_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Help_Line_001']))
   
     local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_normal_silk")
   COMMON.GiftItem(player, receive_item)
@@ -305,7 +305,7 @@ function rest_stop.Rival_2_Action(chara, activator)
   elseif SV.team_rivals.Status == 6 then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Help_Line_002']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Help_Line_002']))
   end
   
   
@@ -351,7 +351,7 @@ function rest_stop.DragonTalk()
 	
     if quest == nil then
       UI:SetSpeaker(dragon3)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_001']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_001']))
 	  
 	  COMMON.CreateMission(questname,
 	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
@@ -362,25 +362,25 @@ function rest_stop.DragonTalk()
 	)
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
       UI:SetSpeaker(dragon3)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_002']))
     else
       rest_stop.Dragon_Complete()
     end
   
   elseif SV.team_dragon.Status == 4 then
       UI:SetSpeaker(dragon1)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Rescue_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Rescue_Line_002']))
   elseif SV.team_dragon.Status == 6 then
     if SV.team_dragon.SpokenTo == false then
       UI:SetSpeaker(dragon1)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_003']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_003']))
 	else
       UI:SetSpeaker(dragon1)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_004']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_004']))
 	end
   elseif SV.team_dragon.Status == 8 then
     UI:SetSpeaker(dragon1)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_005']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_005']))
   end
   
   SV.team_dragon.SpokenTo = true
@@ -398,7 +398,7 @@ function rest_stop.Dragon_Complete()
   GROUND:Unhide("NPC_Protege_Tutor")
   
   UI:SetSpeaker(dragon1)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Rescue_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Rescue_Line_001']))
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_dragon_silk")
   COMMON.GiftItem(player, receive_item)
@@ -415,10 +415,10 @@ function rest_stop.NPC_Seer_Action(chara, activator)
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
   
   if SV.team_firecracker.Status ~= 5 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seer_Line_001']))
 	SV.team_firecracker.SpokenTo = true
   else
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seer_Line_002']))
   end
 end
 
@@ -428,10 +428,10 @@ function rest_stop.NPC_Conjurer_Action(chara, activator)
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
   
   if SV.team_firecracker.Status ~= 5 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Conjurer_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Conjurer_Line_001']))
 	SV.team_firecracker.SpokenTo = true
   else
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Conjurer_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Conjurer_Line_002']))
   end
 end
 
@@ -442,15 +442,15 @@ function rest_stop.NPC_Storehouse_Action(chara, activator)
   UI:SetSpeaker(chara)
   
   if SV.supply_corps.Status <= 10 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_001']))
     SV.supply_corps.Status = 11
   elseif SV.supply_corps.Status == 11 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_001']))
   elseif SV.supply_corps.Status == 12 then
     local questname = "OutlawMountain1"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_002']))
 	  --add the quest
 	  COMMON.CreateMission(questname,
 	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW,
@@ -460,9 +460,9 @@ function rest_stop.NPC_Storehouse_Action(chara, activator)
       TargetSpecies = RogueEssence.Dungeon.MonsterID("weavile", 0, "normal", Gender.Male) }
 	  )
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_003']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_003']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_004']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_004']))
       --give reward
       local receive_item = RogueEssence.Dungeon.InvItem("tm_sludge_bomb")
       COMMON.GiftItem(player, receive_item)
@@ -471,13 +471,13 @@ function rest_stop.NPC_Storehouse_Action(chara, activator)
       SV.supply_corps.Status = 13
     end
   elseif SV.supply_corps.Status == 13 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_005']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_005']))
   elseif SV.supply_corps.Status == 14 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_006']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_006']))
   elseif SV.supply_corps.Status == 15 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_007']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_007']))
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_Route']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_Route']))
   end
 end
 
@@ -491,21 +491,21 @@ function rest_stop.NPC_Carry_Action(chara, activator)
     local questname = "OutlawMountain1"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_001']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_001']))
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_002']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_003']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_003']))
     end
   elseif SV.supply_corps.Status == 13 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_004']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_004']))
   elseif SV.supply_corps.Status == 14 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_005']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_005']))
     SV.supply_corps.Status = 15
   elseif SV.supply_corps.Status == 15 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_006']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_006']))
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_Route']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_Route']))
   end
   
 end
@@ -520,21 +520,21 @@ function rest_stop.NPC_Deliver_Action(chara, activator)
     local questname = "OutlawMountain1"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_001']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_001']))
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_002']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_003']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_003']))
     end
   elseif SV.supply_corps.Status == 13 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_004']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_004']))
   elseif SV.supply_corps.Status == 14 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_005']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_005']))
     SV.supply_corps.Status = 15
   elseif SV.supply_corps.Status == 15 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_006']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_006']))
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_Route']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_Route']))
   end
 end
 
@@ -556,7 +556,7 @@ function rest_stop.Rock_Boss(chara, activator)
   if quest == nil then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rock_Boss_Line_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rock_Boss_Line_001']))
 	
 	COMMON.CreateMission(questname,
 	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
@@ -568,7 +568,7 @@ function rest_stop.Rock_Boss(chara, activator)
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rock_Boss_Line_002']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rock_Boss_Line_002']))
   else
     rest_stop.Rock_Complete()
   end
@@ -591,7 +591,7 @@ function rest_stop.Screech_Rabble(chara, activator)
     rest_stop.Rock_Complete()
   else
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Screech_Rabble_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Screech_Rabble_Line_001']))
   end
 end
 
@@ -614,7 +614,7 @@ function rest_stop.Loud_Rabble(chara, activator)
     rest_stop.Rock_Complete()
   else
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Loud_Rabble_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Loud_Rabble_Line_001']))
   end
 end
 
@@ -627,17 +627,17 @@ function rest_stop.Rock_Complete()
   local loud_boss = CH('Boss_Loud')
   
   UI:SetSpeaker(loud1)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Loud_Boss_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Loud_Boss_Line_001']))
   
   GROUND:Unhide("Boss_Loud")
   
   GAME:WaitFrames(60)
   
   UI:SetSpeaker(loud_boss)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Loud_Boss_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Loud_Boss_Line_002']))
   
   UI:SetSpeaker(loud1)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Loud_Boss_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Loud_Boss_Line_003']))
   
   GROUND:Hide("Boss_5")
   GROUND:Hide("Boss_6")
@@ -647,10 +647,10 @@ function rest_stop.Rock_Complete()
   
   UI:SetSpeaker(rock1)
   UI:SetSpeakerEmotion("Stunned")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Loud_Boss_Line_004']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Loud_Boss_Line_004']))
   
   UI:SetSpeakerEmotion("Normal")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rock_Boss_Reward']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rock_Boss_Reward']))
   
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_rock_silk")
@@ -678,7 +678,7 @@ function rest_stop.NPC_Strategy_Action(chara, activator)
   
     if SV.team_psychic.SpokenTo then
       UI:SetSpeaker(chara)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_002']))
 	else
       rest_stop.Separate()
 	end
@@ -697,14 +697,14 @@ function rest_stop.NPC_Goals_Action(chara, activator)
   
     if SV.team_psychic.SpokenTo then
       UI:SetSpeaker(chara)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Line_002']))
 	else
       rest_stop.Separate()
 	end
 	
   elseif SV.team_dark.Status == 1 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Line_003']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Line_003']))
 	
   elseif SV.team_dark.Status == 3 then
     
@@ -714,7 +714,7 @@ function rest_stop.NPC_Goals_Action(chara, activator)
   if quest == nil then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Help_Line_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Help_Line_001']))
 	
 	COMMON.CreateMission(questname,
 	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
@@ -726,18 +726,18 @@ function rest_stop.NPC_Goals_Action(chara, activator)
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Help_Line_002']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Help_Line_002']))
   else
     rest_stop.Ice_Complete()
   end
 	
   elseif SV.team_dark.Status == 4 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Line_004']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Line_004']))
 	
   elseif SV.team_dark.Status == 5 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Line_004']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Line_004']))
 	
   end
 end
@@ -748,16 +748,16 @@ function rest_stop.Separate()
   local player = CH('PLAYER')
   
   UI:SetSpeaker(strategy)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_001']))
   
   UI:SetSpeaker(goals)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Line_001']))
   
   UI:SetSpeaker(strategy)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Strategy_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_002']))
   
   UI:SetSpeaker(goals)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Line_002']))
   
   SV.team_psychic.SpokenTo = true
 end
@@ -767,7 +767,7 @@ function rest_stop.Ice_Complete()
   local player = CH('PLAYER')
   
   UI:SetSpeaker(goals)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Goals_Done_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Done_Line_001']))
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_ice_silk")
   COMMON.GiftItem(player, receive_item)

@@ -4,7 +4,7 @@ local base_camp_2_tutor = require 'origin.ground.base_camp_2.base_camp_2_tutor'
 local base_camp_2_juice = require 'origin.ground.base_camp_2.base_camp_2_juice'
 
 local base_camp_2 = {}
-local MapStrings = {}
+
 
 --------------------------------------------------
 -- Map Callbacks
@@ -12,10 +12,7 @@ local MapStrings = {}
 function base_camp_2.Init(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo("=>> Init_base_camp_2")
-  MapStrings = COMMON.AutoLoadLocalizedStrings()
-  base_camp_2_tutor.InitStrings(MapStrings)
-  base_camp_2_juice.InitStrings(MapStrings)
-  
+
   GROUND:RefreshPlayer()
 
   --get assembly ready
@@ -183,7 +180,7 @@ function base_camp_2.Family_Sister_Action(obj, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sister_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sister_Line_001']))
   GROUND:EntTurn(chara, Direction.DownLeft)
 end
 
@@ -197,7 +194,7 @@ function base_camp_2.Family_Mother_Action(obj, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mother_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Mother_Line_001']))
   GROUND:EntTurn(chara, Direction.DownLeft)
 end
 
@@ -211,7 +208,7 @@ function base_camp_2.Family_Father_Action(obj, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Father_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Father_Line_001']))
   GROUND:EntTurn(chara, Direction.DownLeft)
 end
 
@@ -225,7 +222,7 @@ function base_camp_2.Family_Brother_Action(obj, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Brother_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Brother_Line_001']))
   GROUND:EntTurn(chara, Direction.DownLeft)
 end
 
@@ -239,7 +236,7 @@ function base_camp_2.Family_Pet_Action(obj, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pet_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Pet_Line_001']))
   GROUND:EntTurn(chara, Direction.DownLeft)
 end
 
@@ -253,7 +250,7 @@ function base_camp_2.Family_Grandma_Action(obj, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Grandma_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Grandma_Line_001']))
   GROUND:EntTurn(chara, Direction.DownLeft)
 end
 
@@ -263,7 +260,7 @@ function base_camp_2.Isekai_Event()
     if SV.guild_hut.TookCard then
 		UI:ResetSpeaker()
 		SV.family.TalkedReturn = true
-		UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_001']))
+		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Isekai_Line_001']))
 		GAME:FadeOut(false, 20)
 		GAME:FadeIn(20)
 		return true
@@ -272,7 +269,7 @@ function base_camp_2.Isekai_Event()
     if SV.family.Sister and SV.family.Mother and SV.family.Father and SV.family.Brother and SV.family.Pet and SV.family.Grandma then
 		UI:ResetSpeaker()
 		SV.family.Returned = true
-		UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_002']))
+		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Isekai_Line_002']))
 		GAME:FadeOut(false, 20)
 		GAME:EnterGroundMap("guild_hut", "entrance_portal", false)
 	  return true
@@ -287,12 +284,12 @@ function base_camp_2.NPC_Food_Action(chara, activator)
   GROUND:CharTurnToChar(chara,player)
   UI:SetSpeaker(chara)
   if not SV.base_camp.FoodIntro then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Food_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Food_Line_001']))
 	local receive_item = RogueEssence.Dungeon.InvItem("food_apple_big")
 	COMMON.GiftItem(player, receive_item)
 	SV.base_camp.FoodIntro = true
   end
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Food_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Food_Line_002']))
 end
 
 
@@ -300,11 +297,11 @@ function base_camp_2.NPC_Treasure_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_001']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Treasure_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Treasure_Line_002']))
   UI:SetSpeakerEmotion("Happy")
   GROUND:CharSetEmote(chara, "glowing", 4)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Treasure_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Treasure_Line_003']))
 end
 
 
@@ -312,9 +309,9 @@ function base_camp_2.NPC_Nonbeliever_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Nonbeliever_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Nonbeliever_Line_001']))
   UI:SetSpeakerEmotion("Sigh")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Nonbeliever_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Nonbeliever_Line_002']))
   GROUND:EntTurn(chara, Direction.Right)
 end
 
@@ -325,14 +322,14 @@ function base_camp_2.NPC_Storehouse_Action(chara, activator)
   local player = CH('PLAYER')
   UI:SetSpeaker(chara)
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_Route']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_Route']))
 end
 
 function base_camp_2.NPC_Settling_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Settling_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Settling_Line_001']))
 end
 
 
@@ -340,11 +337,11 @@ function base_camp_2.NPC_Broke_Action(chara, activator)
   UI:SetSpeaker(chara)
 
   UI:SetSpeakerEmotion("Sad")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Broke_Line_001']))
   GROUND:CharSetEmote(partner, "sweating", 1)
   SOUND:PlayBattleSE("EVT_Emote_Sweating")
   UI:SetSpeakerEmotion("Crying")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Broke_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Broke_Line_002']))
   
   if SV.Experimental then
     SV.team_hunter.SpokenTo = true
@@ -356,7 +353,7 @@ function base_camp_2.NPC_Hesitant_Action(chara, activator)
   UI:SetSpeaker(chara)
 
   UI:SetSpeakerEmotion("Sigh")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hesitant_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hesitant_Line_001']))
 end
 
 
@@ -364,7 +361,7 @@ function base_camp_2.NPC_Elder_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Elder_Line_001']))
   
   if SV.Experimental then
     SV.town_elder.SpokenTo = true
@@ -379,9 +376,9 @@ function base_camp_2.NPC_Solo_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Solo_Line_001']))
   UI:SetSpeakerEmotion("Worried")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Solo_Line_002']))
   
   
   SV.team_solo.SpokenTo = true
@@ -393,7 +390,7 @@ function base_camp_2.NPC_King_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['King_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['King_Line_001']))
   GROUND:EntTurn(chara, Direction.DownLeft)
 end
 
@@ -402,7 +399,7 @@ function base_camp_2.NPC_Queen_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Queen_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Queen_Line_001']))
   GROUND:EntTurn(chara, Direction.UpRight)
 end
 
@@ -428,7 +425,7 @@ function base_camp_2.Catch_Action()
   
   GROUND:CharTurnToChar(player, catch1)
   UI:SetSpeaker(catch1)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Catch_Line_001']))
   SOUND:PlayBattleSE("DUN_Throw_Start")
   GROUND:CharSetAnim(catch1, "Rotate", false)
   GAME:WaitFrames(18)
@@ -441,7 +438,7 @@ function base_camp_2.Catch_Action()
 	
   SOUND:PlayBattleSE("DUN_Equip")
   UI:SetSpeaker(catch2)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Catch_Line_002']))
   SOUND:PlayBattleSE("DUN_Throw_Start")
   GROUND:CharSetAnim(catch2, "Rotate", false)
   GAME:WaitFrames(18)
@@ -454,7 +451,7 @@ function base_camp_2.Catch_Action()
   
   SOUND:PlayBattleSE("DUN_Equip")
   UI:SetSpeaker(catch1)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Catch_Line_003']))
   SOUND:PlayBattleSE("DUN_Throw_Start")
   GROUND:CharSetAnim(catch1, "Rotate", false)
   GAME:WaitFrames(18)
@@ -467,7 +464,7 @@ function base_camp_2.Catch_Action()
   
   SOUND:PlayBattleSE("DUN_Equip")
   UI:SetSpeaker(catch2)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_004']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Catch_Line_004']))
   SOUND:PlayBattleSE("DUN_Throw_Start")
   GROUND:CharSetAnim(catch2, "Rotate", false)
   GAME:WaitFrames(18)
@@ -480,7 +477,7 @@ function base_camp_2.Catch_Action()
   
   SOUND:PlayBattleSE("DUN_Equip")
   UI:SetSpeaker(catch1)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_005']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Catch_Line_005']))
   
   
   if SV.Experimental then
@@ -547,23 +544,23 @@ function base_camp_2.NPC_Interactive_Action(chara, activator)
 	  local cur_team = _DATA.Save.ActiveTeam.Name
 	  if talk_to.Data.OriginalUUID ~= _DATA.Save.UUID then
 	    local old_team = talk_to.Data.OriginalTeam
-		UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Trade_Line_001'], cur_team, old_team))
+		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Interactive_Trade_Line_001'], cur_team, old_team))
 	  elseif base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == 0 then
-	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_001_Line_001'], zone_name, cur_team))
+	    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Interactive_Phase_001_Line_001'], zone_name, cur_team))
 	  elseif base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == 1 then
-	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_002_Line_001'], zone_name, cur_team))
+	    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Interactive_Phase_002_Line_001'], zone_name, cur_team))
 	    UI:SetSpeakerEmotion("Happy")
-	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_002_Line_002']))
+	    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Interactive_Phase_002_Line_002']))
 	  elseif base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == 2 then
-	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_003_Line_001'], zone_name))
+	    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Interactive_Phase_003_Line_001'], zone_name))
 	    UI:SetSpeakerEmotion("Sigh")
-	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_003_Line_002']))
+	    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Interactive_Phase_003_Line_002']))
 	  elseif base_camp_2.difficulty_tbl[talk_to.Data.MetLoc.ID] == 3 then
-	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_004_Line_001'], zone_name))
+	    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Interactive_Phase_004_Line_001'], zone_name))
 	    UI:SetSpeakerEmotion("Happy")
-	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_004_Line_002'], cur_team))
+	    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Interactive_Phase_004_Line_002'], cur_team))
 	  else
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_005_Line_001'], zone_name))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Interactive_Phase_005_Line_001'], zone_name))
 		
         GAME:WaitFrames(30)
         GROUND:CharSetEmote(chara, "shock", 1)
@@ -571,14 +568,14 @@ function base_camp_2.NPC_Interactive_Action(chara, activator)
         GAME:WaitFrames(30)
   
         UI:SetSpeakerEmotion("Surprised")
-        UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Phase_005_Line_002'], cur_team))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Interactive_Phase_005_Line_002'], cur_team))
 	  end
 	end
   end
   
   if not can_talk_to then
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Interactive_Line_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Interactive_Line_001']))
   end
   
 end
@@ -603,11 +600,11 @@ function base_camp_2.Shop_Action(obj, activator)
   
 	while state > -1 do
 		if state == 0 then
-			local msg = STRINGS:Format(MapStrings['Shop_Intro'])
+			local msg = STRINGS:Format(STRINGS.MapStrings['Shop_Intro'])
 			if repeated == true then
-				msg = STRINGS:Format(MapStrings['Shop_Intro_Return'])
+				msg = STRINGS:Format(STRINGS.MapStrings['Shop_Intro_Return'])
 			end
-			local shop_choices = {STRINGS:Format(MapStrings['Shop_Option_Buy']), STRINGS:Format(MapStrings['Shop_Option_Sell']),
+			local shop_choices = {STRINGS:Format(STRINGS.MapStrings['Shop_Option_Buy']), STRINGS:Format(STRINGS.MapStrings['Shop_Option_Sell']),
 			STRINGS:FormatKey("MENU_INFO"),
 			STRINGS:FormatKey("MENU_EXIT")}
 			UI:BeginChoiceMenu(msg, shop_choices, 1, 4)
@@ -617,30 +614,30 @@ function base_camp_2.Shop_Action(obj, activator)
 			if result == 1 then
 				if #catalog > 0 then
 					--TODO: use the enum instead of a hardcoded number
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shop_Buy'], STRINGS:LocalKeyString(26)))
+					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Buy'], STRINGS:LocalKeyString(26)))
 					state = 1
 				else
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shop_Buy_Empty']))
+					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Buy_Empty']))
 				end
 			elseif result == 2 then
 				local bag_count = GAME:GetPlayerBagCount() + GAME:GetPlayerEquippedCount()
 				if bag_count > 0 then
 					--TODO: use the enum instead of a hardcoded number
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shop_Sell'], STRINGS:LocalKeyString(26)))
+					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Sell'], STRINGS:LocalKeyString(26)))
 					state = 3
 				else
 					UI:SetSpeakerEmotion("Angry")
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shop_Bag_Empty']))
+					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Bag_Empty']))
 					UI:SetSpeakerEmotion("Normal")
 				end
 			elseif result == 3 then
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shop_Info_001']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shop_Info_002']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shop_Info_003']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shop_Info_004']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shop_Info_005']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Info_001']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Info_002']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Info_003']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Info_004']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Info_005']))
 			else
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shop_Goodbye']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Goodbye']))
 				state = -1
 			end
 		elseif state == 1 then
@@ -652,7 +649,7 @@ function base_camp_2.Shop_Action(obj, activator)
 				local bag_cap = GAME:GetPlayerBagLimit()
 				if bag_count == bag_cap then
 					UI:SetSpeakerEmotion("Angry")
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shop_Bag_Full']))
+					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Bag_Full']))
 					UI:SetSpeakerEmotion("Normal")
 				else
 					cart = result
@@ -669,15 +666,15 @@ function base_camp_2.Shop_Action(obj, activator)
 			local msg
 			if total > GAME:GetPlayerMoney() then
 				UI:SetSpeakerEmotion("Angry")
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shop_Buy_No_Money']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Buy_No_Money']))
 				UI:SetSpeakerEmotion("Normal")
 				state = 1
 			else
 				if #cart == 1 then
 					local name = catalog[cart[1]].Item:GetDisplayName()
-					msg = STRINGS:Format(MapStrings['Shop_Buy_One'], STRINGS:FormatKey("MONEY_AMOUNT", total), name)
+					msg = STRINGS:Format(STRINGS.MapStrings['Shop_Buy_One'], STRINGS:FormatKey("MONEY_AMOUNT", total), name)
 				else
-					msg = STRINGS:Format(MapStrings['Shop_Buy_Multi'], STRINGS:FormatKey("MONEY_AMOUNT", total))
+					msg = STRINGS:Format(STRINGS.MapStrings['Shop_Buy_Multi'], STRINGS:FormatKey("MONEY_AMOUNT", total))
 				end
 				UI:ChoiceMenuYesNo(msg, false)
 				UI:WaitForChoice()
@@ -696,7 +693,7 @@ function base_camp_2.Shop_Action(obj, activator)
 					
 					cart = {}
 					SOUND:PlayBattleSE("DUN_Money")
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shop_Buy_Complete']))
+					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Buy_Complete']))
 					state = 0
 				else
 					state = 1
@@ -732,9 +729,9 @@ function base_camp_2.Shop_Action(obj, activator)
 				else
 					item = GAME:GetPlayerBagItem(cart[1].Slot)
 				end
-				msg = STRINGS:Format(MapStrings['Shop_Sell_One'], STRINGS:FormatKey("MONEY_AMOUNT", total), item:GetDisplayName())
+				msg = STRINGS:Format(STRINGS.MapStrings['Shop_Sell_One'], STRINGS:FormatKey("MONEY_AMOUNT", total), item:GetDisplayName())
 			else
-				msg = STRINGS:Format(MapStrings['Shop_Sell_Multi'], STRINGS:FormatKey("MONEY_AMOUNT", total))
+				msg = STRINGS:Format(STRINGS.MapStrings['Shop_Sell_Multi'], STRINGS:FormatKey("MONEY_AMOUNT", total))
 			end
 			UI:ChoiceMenuYesNo(msg, false)
 			UI:WaitForChoice()
@@ -751,7 +748,7 @@ function base_camp_2.Shop_Action(obj, activator)
 				SOUND:PlayBattleSE("DUN_Money")
 				GAME:AddToPlayerMoney(total)
 				cart = {}
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Shop_Sell_Complete']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Sell_Complete']))
 				state = 0
 			else
 				state = 3
@@ -772,11 +769,11 @@ function base_camp_2.Appraisal_Action(obj, activator)
   UI:SetSpeaker(chara)
 	while state > -1 do
 		if state == 0 then
-			local msg = STRINGS:Format(MapStrings['Appraisal_Intro'], STRINGS:FormatKey("MONEY_AMOUNT", price))
+			local msg = STRINGS:Format(STRINGS.MapStrings['Appraisal_Intro'], STRINGS:FormatKey("MONEY_AMOUNT", price))
 			if repeated == true then
-				msg = STRINGS:Format(MapStrings['Appraisal_Return'])
+				msg = STRINGS:Format(STRINGS.MapStrings['Appraisal_Return'])
 			end
-			local shop_choices = {STRINGS:Format(MapStrings['Appraisal_Option_Open']),
+			local shop_choices = {STRINGS:Format(STRINGS.MapStrings['Appraisal_Option_Open']),
 			STRINGS:FormatKey("MENU_INFO"),
 			STRINGS:FormatKey("MENU_EXIT")}
 			UI:BeginChoiceMenu(msg, shop_choices, 1, 3)
@@ -786,18 +783,18 @@ function base_camp_2.Appraisal_Action(obj, activator)
 			if result == 1 then
 				local bag_count = GAME:GetPlayerBagCount() + GAME:GetPlayerEquippedCount()
 				if bag_count > 0 then
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Choose'], STRINGS:LocalKeyString(26)))
+					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_Choose'], STRINGS:LocalKeyString(26)))
 					state = 1
 				else
-					UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Bag_Empty']))
+					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_Bag_Empty']))
 				end
 			elseif result == 2 then
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Info_001']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Info_002']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Info_003']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Info_004'], STRINGS:FormatKey("MONEY_AMOUNT", price)))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_Info_001']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_Info_002']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_Info_003']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_Info_004'], STRINGS:FormatKey("MONEY_AMOUNT", price)))
 			else
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Goodbye']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_Goodbye']))
 				state = -1
 			end
 		elseif state == 1 then
@@ -815,7 +812,7 @@ function base_camp_2.Appraisal_Action(obj, activator)
 			local total = #cart * price
 			
 			if total > GAME:GetPlayerMoney() then
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_No_Money']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_No_Money']))
 				state = 1
 			else
 				local msg
@@ -826,12 +823,12 @@ function base_camp_2.Appraisal_Action(obj, activator)
 					else
 						item = GAME:GetPlayerBagItem(cart[1].Slot)
 					end
-					msg = STRINGS:Format(MapStrings['Appraisal_Choose_One'], STRINGS:FormatKey("MONEY_AMOUNT", total), item:GetDisplayName())
+					msg = STRINGS:Format(STRINGS.MapStrings['Appraisal_Choose_One'], STRINGS:FormatKey("MONEY_AMOUNT", total), item:GetDisplayName())
 				elseif #cart < 24 then
-					msg = STRINGS:Format(MapStrings['Appraisal_Choose_Multi'], STRINGS:FormatKey("MONEY_AMOUNT", total))
+					msg = STRINGS:Format(STRINGS.MapStrings['Appraisal_Choose_Multi'], STRINGS:FormatKey("MONEY_AMOUNT", total))
 				else
 					UI:SetSpeakerEmotion("Surprised")
-					msg = STRINGS:Format(MapStrings['Appraisal_Choose_Max'], STRINGS:FormatKey("MONEY_AMOUNT", total))
+					msg = STRINGS:Format(STRINGS.MapStrings['Appraisal_Choose_Max'], STRINGS:FormatKey("MONEY_AMOUNT", total))
 					
 				end
 				UI:ChoiceMenuYesNo(msg, false)
@@ -868,7 +865,7 @@ function base_camp_2.Appraisal_Action(obj, activator)
 					cart = {}
 					
 					if #treasure >= 24 then
-					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Start_Max']))
+					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_Start_Max']))
 					
 					  GROUND:MoveInDirection(chara, Direction.Up, 18, false, 2)
 					  GROUND:Hide("Appraisal_Owner")
@@ -919,12 +916,12 @@ function base_camp_2.Appraisal_Action(obj, activator)
 					  GAME:FadeIn(60)
 					  GROUND:Unhide("Appraisal_Owner")
 					  GROUND:MoveInDirection(chara, Direction.Down, 36, false, 1)
-					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_End_Max_001']))
+					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_End_Max_001']))
 					  SOUND:PlayFanfare("Fanfare/Treasure")
-					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_End_Max_002']))
+					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_End_Max_002']))
 					
 					elseif #treasure >= 8 then
-					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Start_002']))
+					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_Start_002']))
 					
 					  GROUND:MoveInDirection(chara, Direction.Up, 18, false, 2)
 					  GROUND:Hide("Appraisal_Owner")
@@ -940,9 +937,9 @@ function base_camp_2.Appraisal_Action(obj, activator)
 					  GROUND:Unhide("Appraisal_Owner")
 					  GROUND:MoveInDirection(chara, Direction.Down, 18, false, 2)
 					  SOUND:PlayFanfare("Fanfare/Treasure")
-					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_End']))
+					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_End']))
 					else
-					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_Start_001']))
+					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_Start_001']))
 					
 					  GROUND:MoveInDirection(chara, Direction.Up, 18, false, 2)
 					  GROUND:Hide("Appraisal_Owner")
@@ -954,7 +951,7 @@ function base_camp_2.Appraisal_Action(obj, activator)
 					  GROUND:Unhide("Appraisal_Owner")
 					  GROUND:MoveInDirection(chara, Direction.Down, 18, false, 2)
 					  SOUND:PlayFanfare("Fanfare/Treasure")
-					  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Appraisal_End']))
+					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_End']))
 					end
 
 					UI:SpoilsMenu(treasure)
@@ -1054,11 +1051,11 @@ function base_camp_2.Swap_Action(obj, activator)
   
 	while state > -1 do
 		if state == 0 then
-			local msg = STRINGS:Format(MapStrings['Swap_Intro'])
+			local msg = STRINGS:Format(STRINGS.MapStrings['Swap_Intro'])
 			if repeated == true then
-				msg = STRINGS:Format(MapStrings['Swap_Intro_Return'])
+				msg = STRINGS:Format(STRINGS.MapStrings['Swap_Intro_Return'])
 			end
-			local shop_choices = {STRINGS:Format(MapStrings['Swap_Option_Swap']),
+			local shop_choices = {STRINGS:Format(STRINGS.MapStrings['Swap_Option_Swap']),
 			STRINGS:FormatKey("MENU_INFO"),
 			STRINGS:FormatKey("MENU_EXIT")}
 			UI:BeginChoiceMenu(msg, shop_choices, 1, 3)
@@ -1068,11 +1065,11 @@ function base_camp_2.Swap_Action(obj, activator)
 			if result == 1 then
 				state = 1
 			elseif result == 2 then
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Info_001']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Info_002']))
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Info_003']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Info_001']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Info_002']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Info_003']))
 			else
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Goodbye']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Goodbye']))
 				state = -1
 			end
 		elseif state == 1 then
@@ -1080,11 +1077,11 @@ function base_camp_2.Swap_Action(obj, activator)
 			--allow trade from storage, and find a way around multi-select for storage.
 			if not UI:CanSwapMenu(catalog) then
 				UI:SetSpeakerEmotion("Sigh")
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_None']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_None']))
 				UI:SetSpeaker(chara)
 				state = 0
 			else
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Choose']))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Choose']))
 				UI:SwapMenu(catalog, Prices)
 				UI:WaitForChoice()
 				local result = UI:ChoiceResult()
@@ -1109,7 +1106,7 @@ function base_camp_2.Swap_Action(obj, activator)
 			end
 			
 			if free_slots > 0 then
-				UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Give_Choose'], receive_item:GetDisplayName()))
+				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Give_Choose'], receive_item:GetDisplayName()))
 				--tribute simply aggregates all items period
 				--this means that choosing multiple of one item will be impossible
 				--must choose all DIFFERENT specific items
@@ -1139,8 +1136,8 @@ function base_camp_2.Swap_Action(obj, activator)
 			local itemEntry = _DATA:GetItem(trade.Item)
 			local total = Prices[itemEntry.Rarity]
 			
-			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Confirm_001'], STRINGS:CreateList(give_items), receive_item:GetDisplayName()))
-			UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Swap_Confirm_002'], STRINGS:FormatKey("MONEY_AMOUNT", total)), false)
+			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Confirm_001'], STRINGS:CreateList(give_items), receive_item:GetDisplayName()))
+			UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Swap_Confirm_002'], STRINGS:FormatKey("MONEY_AMOUNT", total)), false)
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
 			
@@ -1169,12 +1166,12 @@ function base_camp_2.Swap_Action(obj, activator)
 				SV.base_town.ValueTradeItem = trade.Item
 				if itemEntry.Rarity == 3 then
 				  UI:SetSpeakerEmotion("Inspired")
-				  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Complete_Max_001']))
+				  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Complete_Max_001']))
 				  
 				  -- sableye gets so obsessed with his treasure he forgets about you, once
 				  if SV.base_town.ValueTraded == false then
 				    UI:SetSpeakerEmotion("Joyous")
-				    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Complete_Max_002']))
+				    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Complete_Max_002']))
 				    return
 				  end
 				end
@@ -1194,27 +1191,27 @@ function base_camp_2.Swap_Action(obj, activator)
 			    GROUND:CharSetEmote(chara, "exclaim", 1)
 			    UI:SetSpeakerEmotion("Stunned")
 			  
-			    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Complete_Max_003']))
+			    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Complete_Max_003']))
 			    UI:SetSpeakerEmotion("Normal")
 			  else
 				
 			    UI:SetSpeakerEmotion("Happy")
-			    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Complete_Max_004']))
+			    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Complete_Max_004']))
 			    UI:SetSpeakerEmotion("Normal")
 			  end
 			  SV.base_town.ValueTraded = true
 			  
 			else
 			  UI:SetSpeakerEmotion("Normal")
-			  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Complete']))
+			  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Complete']))
 			end
 			
 			local receive_item = RogueEssence.Dungeon.InvItem(SV.base_town.ValueTradeItem)
 			UI:ResetSpeaker()
 			SOUND:PlayFanfare("Fanfare/Treasure")
-			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Swap_Give'], player:GetDisplayName(), receive_item:GetDisplayName()))
+			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Give'], player:GetDisplayName(), receive_item:GetDisplayName()))
 			
-			UI:WaitShowDialogue(STRINGS:Format(MapStrings['Item_Give_Storage'], receive_item:GetDisplayName()))
+			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Item_Give_Storage'], receive_item:GetDisplayName()))
 			GAME:GivePlayerStorageItem(SV.base_town.ValueTradeItem, 1, false, "")
 			
 			UI:SetSpeaker(chara)
@@ -1236,7 +1233,7 @@ function base_camp_2.Locator_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   local chara = CH('Locator_Owner')
   UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Locator_Intro']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Locator_Intro']))
   UI:WaitShowDialogue(STRINGS:Format("We're still setting up![pause=0] Come back later!"))
 end
 
@@ -1244,7 +1241,7 @@ function base_camp_2.Music_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   local chara = CH('Music_Owner')
   UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Music_Intro']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Music_Intro']))
   local unlocks = {}
   if SV.cliff_camp.ExpositionComplete then
     table.insert(unlocks, "MAIN_001")
@@ -1255,7 +1252,7 @@ function base_camp_2.Music_Action(obj, activator)
   if result ~= nil then
 	SV.base_town.Song = result
   end
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Music_End']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Music_End']))
 end
 
 function base_camp_2.Tutor_Action(obj, activator)

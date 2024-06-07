@@ -1,14 +1,14 @@
 require 'origin.common'
 
 local final_stop = {}
-local MapStrings = {}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
 function final_stop.Init(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo("=>> Init_final_stop")
-  MapStrings = COMMON.AutoLoadLocalizedStrings()
+
   COMMON.RespawnAllies()
   
   GROUND:AddMapStatus("snow")
@@ -174,8 +174,8 @@ end
 function final_stop.Summit_Fail()
   --everyone is dead
   UI:ResetSpeaker()
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Summit_Fail_Line_001']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Summit_Fail_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Summit_Fail_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Summit_Fail_Line_002']))
   
   GAME:FadeIn(20)
   --get back up
@@ -201,7 +201,7 @@ function final_stop.Rival_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_1_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_001']))
   
   SV.team_rivals.SpokenTo = true
 end
@@ -210,7 +210,7 @@ function final_stop.Rival_2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Rival_2_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_001']))
   
   SV.team_rivals.SpokenTo = true
 end
@@ -222,7 +222,7 @@ function final_stop.NPC_Dragon_1_Action(chara, activator)
     final_stop.DragonTalk()
   elseif SV.team_dragon.Status == 8 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_003']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_003']))
   end
 end
   
@@ -232,7 +232,7 @@ function final_stop.NPC_Dragon_2_Action(chara, activator)
     final_stop.DragonTalk()
   elseif SV.team_dragon.Status == 8 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_004']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_004']))
   end
 end
   
@@ -242,7 +242,7 @@ function final_stop.NPC_Dragon_3_Action(chara, activator)
     final_stop.DragonTalk()
   elseif SV.team_dragon.Status == 8 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_005']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_005']))
   end
 end
   
@@ -262,10 +262,10 @@ function final_stop.NPC_Protege_Tutor_Action(chara, activator)
 	
 	local already_learned = player.Data:HasBaseSkill(tutor_skill)
 	if already_learned then
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Intro'], skillData:GetIconName()))
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Intro'], skillData:GetIconName()))
 	elseif formData:CanLearnSkill(tutor_skill) then
 	  
-	  UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Tutor_Ask'], skillData:GetIconName()), false)
+	  UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Tutor_Ask'], skillData:GetIconName()), false)
 	  UI:WaitForChoice()
 	  result = UI:ChoiceResult()
 	  
@@ -276,7 +276,7 @@ function final_stop.NPC_Protege_Tutor_Action(chara, activator)
 	  end
 	  
 	  if result then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Accept']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Accept']))
       
       --fade out, pause
       local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")
@@ -298,7 +298,7 @@ function final_stop.NPC_Protege_Tutor_Action(chara, activator)
       GAME:FadeIn(30)
 		
 	    --I learned this move from a traveling move tutor.  He said he'd pass by base town after I spoke to him.
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Taught']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Taught']))
 		
       --after teaching, unlock the tutor back at the hub
       --the other moves can be found in dungeons by wandering tutors
@@ -306,12 +306,12 @@ function final_stop.NPC_Protege_Tutor_Action(chara, activator)
       SV.base_town.TutorMoves[tutor_skill] = true
 	  else
 	    --come back if you change your mind.
-	    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Decline']))
+	    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Decline']))
 	  end
 	else
 	  --But the other townsfolk weren't interested in hearing about it.
 	  --If only there was someone I could share this knowledge with.
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Tutor_Intro'], skillData:GetIconName()))
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Intro'], skillData:GetIconName()))
 	end
 	
   end
@@ -325,20 +325,20 @@ function final_stop.DragonTalk()
   
     UI:SetSpeaker(dragon1)
 
-    UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Dragon_Line_001']), true)
+    UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_001']), true)
     UI:WaitForChoice()
     ch = UI:ChoiceResult()
   
     if ch then
       UI:SetSpeaker(dragon1)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Accept']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Accept']))
 	  SV.final_stop.DragonPhase = 1
       SOUND:PlayBattleSE("EVT_Battle_Transition")
       GAME:FadeOut(true, 60)
       GAME:EnterDungeon('guildmaster_island', 0, 7, 0, RogueEssence.Data.GameProgress.DungeonStakes.Progress, true, true)
 	else
       UI:SetSpeaker(dragon1)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Decline']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Decline']))
     end
   
 end
@@ -350,7 +350,7 @@ function final_stop.Dragon_Fail()
   GAME:FadeIn(20)
   local dragon1 = CH('NPC_Dragon_1')
   UI:SetSpeaker(dragon1)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Fail_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Fail_Line_001']))
   --move back into position
 end
 
@@ -363,7 +363,7 @@ function final_stop.Dragon_Success()
   --congrats
   local dragon1 = CH('NPC_Dragon_1')
   UI:SetSpeaker(dragon1)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Dragon_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_002']))
 end
 
 
@@ -379,7 +379,7 @@ function final_stop.NPC_Seer_Action(chara, activator)
     if quest == nil then
       UI:SetSpeaker(chara)
       GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Help_Line_001']))
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seer_Help_Line_001']))
 	
 	  COMMON.CreateMission(questname,
 	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
@@ -391,7 +391,7 @@ function final_stop.NPC_Seer_Action(chara, activator)
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
 	  GROUND:CharTurnToChar(chara,CH('PLAYER'))
       UI:SetSpeaker(chara)
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Help_Line_002']))
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seer_Help_Line_002']))
     else
       final_stop.Fire_Complete()
     end
@@ -399,11 +399,11 @@ function final_stop.NPC_Seer_Action(chara, activator)
   elseif SV.team_firecracker.Status < 5 then
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
     UI:SetSpeaker(chara)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Line_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seer_Line_001']))
   else
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seer_Line_002']))
   end
 end
 
@@ -413,9 +413,9 @@ function final_stop.NPC_Conjurer_Action(chara, activator)
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
   
   if SV.team_firecracker.Status ~= 5 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Conjurer_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Conjurer_Line_001']))
   else
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Conjurer_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Conjurer_Line_002']))
   end
 end
 
@@ -428,31 +428,31 @@ function final_stop.Fire_Complete()
   GROUND:CharTurnToChar(seer,player)
   
   UI:SetSpeaker(seer)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Complete_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seer_Complete_Line_001']))
   
   GROUND:TeleportTo(conjurer, 360, 416, Direction.Up)
   GROUND:Unhide("NPC_Conjurer")
   
   UI:SetSpeaker(conjurer)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Complete_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seer_Complete_Line_002']))
   
   UI:SetSpeaker(seer)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Complete_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seer_Complete_Line_003']))
   
   UI:SetSpeaker(conjurer)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Complete_Line_004']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seer_Complete_Line_004']))
   
   UI:SetSpeaker(seer)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Complete_Line_005']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seer_Complete_Line_005']))
   
   UI:SetSpeaker(conjurer)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Complete_Line_006']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seer_Complete_Line_006']))
   
   GROUND:TeleportTo(conjurer, 392, 368, Direction.Up)
   GROUND:CharTurnToChar(conjurer,seer)
   
   UI:SetSpeaker(seer)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Seer_Complete_Line_007']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seer_Complete_Line_007']))
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_fire_silk")
   COMMON.GiftItem(player, receive_item)
@@ -473,26 +473,26 @@ function final_stop.NPC_Storehouse_Action(chara, activator)
     local questname = "OutlawMountain2"
     local quest = SV.missions.Missions[questname]
     if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_001']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_001']))
       --give reward
       local receive_item = RogueEssence.Dungeon.InvItem("tm_focus_blast")
       COMMON.GiftItem(player, receive_item)
       --complete mission and move to done
 	  COMMON.CompleteMission(questname)
       SV.supply_corps.Status = 17
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_002']))
     end
   elseif SV.supply_corps.Status == 17 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_003']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_003']))
   elseif SV.supply_corps.Status == 18 then
     local unlock = _DATA.Save:GetDungeonUnlock("treacherous_mountain") -- make this the dungeon unlock state
     if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_004']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_004']))
       COMMON.UnlockWithFanfare("treacherous_mountain", false)
     elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_005']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_005']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_006']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_006']))
       --increase rank for bag space
       _DATA.Save.ActiveTeam:SetRank("silver")
       SOUND:PlayFanfare("Fanfare/RankUp")
@@ -502,17 +502,17 @@ function final_stop.NPC_Storehouse_Action(chara, activator)
       UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_BAG_SIZE"):ToLocal(), rank.BagSize))
       UI:SetSpeaker(chara)
       UI:SetCenter(false)
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_007']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_007']))
       SV.supply_corps.Status = 19
     end
   elseif SV.supply_corps.Status == 19 then
     if not SV.guildmaster_summit.GameComplete then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_008']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_008']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_009']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_009']))
     end
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_Route']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_Route']))
   end
 end
 
@@ -527,7 +527,7 @@ function final_stop.NPC_Carry_Action(chara, activator)
     local questname = "OutlawMountain2"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_001']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_001']))
       --add the quest
       COMMON.CreateMission(questname,
 	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_DISGUISE,
@@ -538,29 +538,29 @@ function final_stop.NPC_Carry_Action(chara, activator)
         DisguiseSpecies = RogueEssence.Dungeon.MonsterID("swalot", 0, "normal", Gender.Male), DisguiseTalk = "DisguiseTalk", DisguiseHit = "DisguiseHit" }
 		)
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_002']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_003']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_003']))
     end
   elseif SV.supply_corps.Status == 17 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_004']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_004']))
   elseif SV.supply_corps.Status == 18 then
     local unlock = _DATA.Save:GetDungeonUnlock("treacherous_mountain") -- make this the dungeon unlock state
     if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_005']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_005']))
     elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_006']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_006']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_007']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_007']))
     end
   elseif SV.supply_corps.Status == 19 then
     if not SV.guildmaster_summit.GameComplete then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_008']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_008']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_009']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_009']))
     end
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_Route']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_Route']))
   end
 end
 
@@ -575,31 +575,31 @@ function final_stop.NPC_Deliver_Action(chara, activator)
     local questname = "OutlawMountain2"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_001']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_001']))
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_002']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_003']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_003']))
     end
   elseif SV.supply_corps.Status == 17 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_004']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_004']))
   elseif SV.supply_corps.Status == 18 then
     local unlock = _DATA.Save:GetDungeonUnlock("treacherous_mountain") -- make this the dungeon unlock state
     if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_005']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_005']))
     elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_006']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_006']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_007']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_007']))
     end
   elseif SV.supply_corps.Status == 19 then
     if not SV.guildmaster_summit.GameComplete then
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_008']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_008']))
     else
-      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_009']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_009']))
     end
   elseif SV.supply_corps.Status == 20 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_Route']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_Route']))
   end
 end
 
@@ -610,7 +610,7 @@ function final_stop.NPC_Secluded_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Secluded_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Secluded_Line_001']))
 end
 
 function final_stop.NPC_Forbidden_Action(chara, activator)
@@ -620,12 +620,12 @@ function final_stop.NPC_Forbidden_Action(chara, activator)
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
   
   if not SV.family.Brother and SV.family.BrotherActiveDays >= 3 then
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Brother_Line_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hint_Brother_Line_001']))
   elseif not SV.family.Grandma and SV.family.GrandmaActiveDays >= 3 and SV.family.Sister and SV.family.Mother and SV.family.Father and SV.family.Brother and SV.family.Pet then
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Hint_Grandma_Line_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hint_Grandma_Line_001']))
   else
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Forbidden_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Forbidden_Line_001']))
   
   end
 end

@@ -1,14 +1,14 @@
 require 'origin.common'
 
 local guild_hut = {}
-local MapStrings = {}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
 function guild_hut.Init(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo("=>> Init_guild_hut")
-  MapStrings = COMMON.AutoLoadLocalizedStrings()
+
   
   COMMON.RespawnAllies()
 end
@@ -68,8 +68,8 @@ function guild_hut.BeginExposition()
   GROUND:Unhide("Noctowl")
   
   UI:SetSpeaker(noctowl)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_002']))
   
   GROUND:CharAnimateTurnTo(noctowl, Direction.Down, 4)
   
@@ -119,7 +119,7 @@ function guild_hut.FamilyReturn()
   GAME:FadeIn(20)
   
   UI:ResetSpeaker()
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Isekai_Line_001']))
   
   SOUND:PlayBattleSE("EVT_Evolution_Start")
   GAME:FadeOut(true, 20)
@@ -127,18 +127,18 @@ function guild_hut.FamilyReturn()
   GAME:FadeIn(20)
   
   UI:SetSpeaker(brother)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Isekai_Line_002']))
   
   UI:SetSpeaker(mother)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Isekai_Line_003']))
   
   UI:SetSpeaker(grandma)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_004']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Isekai_Line_004']))
   
   UI:SetSpeaker(noctowl)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_005']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Isekai_Line_005']))
   UI:ResetSpeaker()
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_006']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Isekai_Line_006']))
   
   GROUND:Hide("Family_Sister")
   GROUND:Hide("Family_Mother")
@@ -149,7 +149,7 @@ function guild_hut.FamilyReturn()
   
   
   UI:SetSpeaker(noctowl)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Isekai_Line_007']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Isekai_Line_007']))
   
   GAME:FadeOut(false, 20)
   
@@ -182,14 +182,14 @@ function guild_hut.Journal_Action(obj, activator)
   
   
   --talk about the guild and how the guildmaster left?
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Journal_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Journal_Line_001']))
   --they took all the magnagates and closed the portal
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Journal_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Journal_Line_002']))
   
   if SV.guild_hut.TookCard == false then
     local player = CH('PLAYER')
     
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Journal_Line_Card']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Journal_Line_Card']))
   
     --set the savevar
     SV.guild_hut.TookCard = true
@@ -216,8 +216,8 @@ function guild_hut.Novel_Action(obj, activator)
   
   UI:ResetSpeaker()
   if SV.guild_hut.BookPhase == 0 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Novel_Intro_001'], zone:GetColoredName()))
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Novel_Intro_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Novel_Intro_001'], zone:GetColoredName()))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Novel_Intro_002']))
     GAME:FadeOut(false, 20)
 	  SV.guild_hut.BookPhase = 1
 	  --enter the dungeon with 0 stakes
@@ -231,13 +231,13 @@ function guild_hut.Novel_Action(obj, activator)
     GAME:EnterDungeon('the_neverending_tale', 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.None, true, true)
     return
   else    
-    local book_choices = {STRINGS:Format(MapStrings['Menu_Novel_Read']),
-      STRINGS:Format(MapStrings['Menu_Novel_Notes']),
+    local book_choices = {STRINGS:Format(STRINGS.MapStrings['Menu_Novel_Read']),
+      STRINGS:Format(STRINGS.MapStrings['Menu_Novel_Notes']),
       STRINGS:FormatKey("MENU_CANCEL")}
   
     local result = 2
     while result == 2 do
-      UI:BeginChoiceMenu(STRINGS:Format(MapStrings['Novel_Ask'], zone:GetColoredName()), book_choices, 1, 3)
+      UI:BeginChoiceMenu(STRINGS:Format(STRINGS.MapStrings['Novel_Ask'], zone:GetColoredName()), book_choices, 1, 3)
       UI:WaitForChoice()
       result = UI:ChoiceResult()
       if result == 1 then
@@ -270,8 +270,8 @@ function guild_hut.AfterFirstNovel()
   GROUND:ObjectSetDefaultAnim(obj, 'Diary_Green_Opening', 0, 3, 3, Direction.Left)
   
   GAME:FadeIn(20)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Novel_After_001']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Novel_After_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Novel_After_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Novel_After_002']))
   
   guild_hut.DisplayNotes()
   

@@ -12,8 +12,8 @@ local garden_end = {}
 -- Local, localized strings table
 -- Use this to display the named strings you added in the strings files for the map!
 -- Ex:
---      local localizedstring = MapStrings['SomeStringName']
-local MapStrings = {}
+--      local localizedstring = STRINGS.MapStrings['SomeStringName']
+
 
 -------------------------------
 -- Map Callbacks
@@ -24,7 +24,7 @@ function garden_end.Init(map)
 
   --This will fill the localized strings table automatically based on the locale the game is 
   -- currently in. You can use the MapStrings table after this line!
-  MapStrings = COMMON.AutoLoadLocalizedStrings()
+
   GROUND:RefreshPlayer()
 end
 
@@ -93,15 +93,15 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
   
   -- oh, a visitor?
   UI:SetSpeaker(STRINGS:Format("\\uE040"), true, "shaymin", 0, "normal", RogueEssence.Data.Gender.Unknown)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001']))
   
   GROUND:CharSetEmote(shaymin, "glowing", 4)
   GAME:WaitFrames(30)
   -- introduce self
   UI:SetSpeaker(shaymin)
   UI:SetSpeakerEmotion("Happy")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002'], shaymin:GetDisplayName()))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_002'], shaymin:GetDisplayName()))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_003']))
   
   -- get ready for picnic
   GAME:FadeOut(false, 30)
@@ -117,38 +117,38 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
   
   if GAME:InRogueMode() then
     -- TODO
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_020']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_020']))
     -- if in rogue mode, give different dialogue and bank money
     GAME:AddToPlayerMoneyBank(100000)
   else
     UI:SetSpeakerEmotion("Normal")
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_004']))
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_005']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_004']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_005']))
 	GROUND:CharSetAnim(activator, "Walk", false)
     GAME:WaitFrames(60)
     UI:SetSpeakerEmotion("Happy")
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_006'], _DATA.Save.ActiveTeam.Name))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_006'], _DATA.Save.ActiveTeam.Name))
     GROUND:CharSetEmote(shaymin, "glowing", 4)
     GAME:WaitFrames(60)
     UI:SetSpeakerEmotion("Normal")
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_007']))
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_008']))
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_009']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_007']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_008']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_009']))
     UI:SetSpeakerEmotion("Inspired")
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_010']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_010']))
     GAME:WaitFrames(60)
     GROUND:CharAnimateTurnTo(shaymin, Direction.Up, turnTime)
     GAME:WaitFrames(30)
     UI:SetSpeakerEmotion("Normal")
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_011']))
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_012']))
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_013']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_011']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_012']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_013']))
     GROUND:CharAnimateTurnTo(shaymin, Direction.Right, turnTime)
     UI:SetSpeakerEmotion("Worried")
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_014']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_014']))
     GROUND:CharAnimateTurnTo(shaymin, Direction.DownRight, turnTime)
 	GROUND:CharSetAnim(shaymin, "Walk", false)
     GAME:WaitFrames(30)
@@ -156,11 +156,11 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
 	GROUND:CharSetAnim(shaymin, "Walk", false)
     GAME:WaitFrames(60)
     UI:SetSpeakerEmotion("Normal")
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_015']))
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_016']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_015']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_016']))
     UI:SetSpeakerEmotion("Happy")
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_017']))
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_018']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_017']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_018']))
 	
     GROUND:CharSetEmote(shaymin, "glowing", 4)
     GAME:WaitFrames(30)
@@ -176,9 +176,9 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
   
     UI:SetSpeaker(shaymin)
     UI:SetSpeakerEmotion("Normal")
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_019']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_019']))
     UI:SetSpeakerEmotion("Happy")
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_020']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_020']))
     -- By the way, have you seen my Gracidea?  It should be deeper in the garden...
 	-- Ah, it's nothing...
     -- UI:WaitShowDialogue("By the way, have you seen any Gracidea?")

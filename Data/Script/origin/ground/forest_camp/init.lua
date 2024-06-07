@@ -1,14 +1,14 @@
 require 'origin.common'
 
 local forest_camp = {}
-local MapStrings = {}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
 function forest_camp.Init(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo("=>> Init_forest_camp")
-  MapStrings = COMMON.AutoLoadLocalizedStrings()
+
   COMMON.RespawnAllies()
   
   if SV.forest_child.Status == 0 or SV.forest_child.Status == 3 then
@@ -213,19 +213,19 @@ function forest_camp.Snorlax_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   UI:ResetSpeaker()
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_001']))
   
   if SV.Experimental ~= true then
     return
   end
   
-  UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Sleeper_Line_Ask'], name), true)
+  UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Ask'], name), true)
   UI:WaitForChoice()
   ch = UI:ChoiceResult()
   
   if ch then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_002']))
 	SV.forest_camp.SnorlaxPhase = 1
     SOUND:PlayBattleSE("EVT_Battle_Transition")
     GAME:FadeOut(true, 60)
@@ -239,7 +239,7 @@ function forest_camp.Snorlax_Fail()
   GAME:FadeIn(20)
   --ekans: he doesn't like to have his sleep disturbed
   UI:SetSpeaker(CH("NPC_Deliver"))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_Fail_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Fail_001']))
   --move back to position
 end
 
@@ -248,16 +248,16 @@ function forest_camp.Snorlax_Success()
   
   GAME:FadeIn(20)
   --snorlax runs off
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_Success_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Success_001']))
   GROUND:Hide("Snorlax")
   --the team thanks you, gives you a stock
   UI:SetSpeaker(CH("NPC_Deliver"))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_Success_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Success_002']))
   local receive_item = RogueEssence.Dungeon.InvItem("apricorn_big")
   COMMON.GiftItem(player, receive_item)
   --they head off
   UI:SetSpeaker(CH("NPC_Carry"))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sleeper_Line_Success_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Success_003']))
   GROUND:Hide("NPC_Carry")
   GROUND:Hide("NPC_Deliver")
 end
@@ -268,7 +268,7 @@ function forest_camp.NPC_Storehouse_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Storehouse_Line_Route']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_Route']))
 
 end
 
@@ -280,12 +280,12 @@ function forest_camp.NPC_Carry_Action(chara, activator)
   
   if SV.supply_corps.Status == 0 then
     UI:SetSpeakerEmotion("Angry")
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_001']))
     UI:SetSpeakerEmotion("Stunned")
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_002']))
     GROUND:EntTurn(chara, Direction.Left)
   elseif SV.supply_corps.Status >= 20 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Carry_Line_Route']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_Route']))
   end
   
 
@@ -302,10 +302,10 @@ function forest_camp.NPC_Deliver_Action(chara, activator)
     SOUND:PlayBattleSE("EVT_Emote_Sweating")
     GROUND:CharSetEmote(chara, "sweating", 1)
     GAME:WaitFrames(30)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_001']))
     GROUND:EntTurn(chara, Direction.Right)
   elseif SV.supply_corps.Status >= 20 then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Deliver_Line_Route']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_Route']))
   end
   
 end
@@ -321,7 +321,7 @@ function forest_camp.NPC_Elder_Action(chara, activator)
   if quest == nil then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Line_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Elder_Line_001']))
 	
 	COMMON.CreateMission(questname,
 	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
@@ -337,7 +337,7 @@ function forest_camp.NPC_Elder_Action(chara, activator)
     if quest.Complete == COMMON.MISSION_INCOMPLETE then
       UI:SetSpeaker(chara)
       GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Line_002']))
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Elder_Line_002']))
     else
       forest_camp.Ground_Complete()
     end
@@ -346,7 +346,7 @@ function forest_camp.NPC_Elder_Action(chara, activator)
   elseif SV.town_elder.Status == 2 then
     
 	UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Complete_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Elder_Complete_Line_002']))
   end
   
 end
@@ -358,12 +358,12 @@ function forest_camp.Ground_Complete()
   GROUND:CharTurnToChar(broke,player)
   
   UI:SetSpeaker(broke)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Complete_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Elder_Complete_Line_001']))
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_ground_silk")
   COMMON.GiftItem(player, receive_item)
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Elder_Complete_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Elder_Complete_Line_002']))
   
   COMMON.CompleteMission("QuestGround")
   
@@ -376,9 +376,9 @@ function forest_camp.Speedster_1_Action(chara, activator)
   GROUND:CharTurnToChar(chara,player)
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
 
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_001']))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_002']))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Doduo_Line_003']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Doduo_Line_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Doduo_Line_002']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Doduo_Line_003']))
 	GROUND:EntTurn(chara, Direction.UpLeft)
 end
   
@@ -391,13 +391,13 @@ function forest_camp.Speedster_2_Action(chara, activator)
   local receive_item = RogueEssence.Dungeon.InvItem("orb_escape")
   if not SV.team_retreat.SpokenTo then
     GROUND:CharTurnToChar(chara, player)--make the chara turn to the player
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Pachirisu_Line_001']))
 	COMMON.GiftItem(player, receive_item)
 	
 	SV.team_retreat.SpokenTo = true
   end
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Line_002'], receive_item:GetDisplayName()))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Pachirisu_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Pachirisu_Line_002'], receive_item:GetDisplayName()))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Pachirisu_Line_003']))
   
   GROUND:EntTurn(chara, Direction.DownRight)
 end
@@ -426,7 +426,7 @@ function forest_camp.Talk_Camps()
   
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Camps_Line_001'], zone_summary:GetColoredName(), ground:GetColoredName()))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Camps_Line_001'], zone_summary:GetColoredName(), ground:GetColoredName()))
 end
 
 function forest_camp.NPC_Parent_Action(chara, activator)
@@ -461,10 +461,10 @@ function forest_camp.Parent_Child()
   
   GROUND:CharTurnToChar(player, child)
   UI:SetSpeaker(child)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Parent_Child_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Parent_Child_Line_001']))
   GROUND:CharTurnToChar(player, parent)
   UI:SetSpeaker(parent)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Parent_Child_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Parent_Child_Line_002']))
   
   if SV.Experimental then
     SV.forest_child.SpokenTo = true
@@ -474,10 +474,10 @@ function forest_camp.Parent_Child()
   
   GROUND:CharTurnToChar(player, parent)
   UI:SetSpeaker(parent)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Cure_Line_004']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_004']))
   GROUND:CharTurnToChar(player, child)
   UI:SetSpeaker(child)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Cure_Line_005']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_005']))
   
   end
 end
@@ -496,15 +496,15 @@ function forest_camp.Sick_Child()
 	local player = CH('PLAYER')
 
 	UI:SetSpeaker(parent)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sickness_Line_001']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_001']))
 
 	UI:SetSpeaker(camps)
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sickness_Line_002']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_002']))
 
 	GROUND:CharTurnToChar(player, camps)
 	GROUND:CharTurnToChar(player, parent)
 	local destFloor = 10
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sickness_Line_003'], tostring(destFloor+1)))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_003'], tostring(destFloor+1)))
 
 	
 	COMMON.CreateMission(questname,
@@ -522,7 +522,7 @@ function forest_camp.Sick_Child()
       local camps = CH('NPC_Camps')
       UI:SetSpeaker(camps)
       GROUND:CharTurnToChar(camps,CH('PLAYER'))
-	  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Sickness_Line_004']))
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_004']))
     else
       forest_camp.Grass_Complete()
 	end
@@ -533,7 +533,7 @@ function forest_camp.Sick_Child()
     local parent = CH('NPC_Parent')
     UI:SetSpeaker(parent)
     GROUND:CharTurnToChar(parent,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Cure_Line_003']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_003']))
   end
 end
 
@@ -546,10 +546,10 @@ function forest_camp.Grass_Complete()
   GROUND:CharTurnToChar(camps,player)
   
   UI:SetSpeaker(camps)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Cure_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_001']))
   
   UI:SetSpeaker(parent)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Cure_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_002']))
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_grass_silk")
   COMMON.GiftItem(player, receive_item)
@@ -582,7 +582,7 @@ function forest_camp.Catch_Action()
   
   GROUND:CharTurnToChar(player, catch1)
   UI:SetSpeaker(catch1)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Catch_Line_001']))
   SOUND:PlayBattleSE("DUN_Throw_Start")
   GROUND:CharSetAnim(catch1, "Rotate", false)
   GAME:WaitFrames(18)
@@ -595,7 +595,7 @@ function forest_camp.Catch_Action()
 	
   SOUND:PlayBattleSE("DUN_Equip")
   UI:SetSpeaker(catch2)
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Catch_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Catch_Line_002']))
   SOUND:PlayBattleSE("DUN_Throw_Start")
   GROUND:CharSetAnim(catch2, "Rotate", false)
   GAME:WaitFrames(18)
@@ -621,7 +621,7 @@ function forest_camp.NPC_Unlucky_Action(chara, activator)
   GROUND:CharSetEmote(chara, "sweating", 1)
   GAME:WaitFrames(30)
   UI:SetSpeakerEmotion("Worried")
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Unlucky_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Unlucky_Line_001']))
   
   
   if SV.Experimental then
@@ -633,7 +633,7 @@ function forest_camp.NPC_Solo_Action(chara, activator)
   
   UI:SetSpeaker(chara)
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Solo_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Solo_Line_001']))
   
   GROUND:Hide("NPC_Solo")
   

@@ -12,8 +12,8 @@ local moonlit_end = {}
 -- Local, localized strings table
 -- Use this to display the named strings you added in the strings files for the map!
 -- Ex:
---      local localizedstring = MapStrings['SomeStringName']
-local MapStrings = {}
+--      local localizedstring = STRINGS.MapStrings['SomeStringName']
+
 
 -------------------------------
 -- Map Callbacks
@@ -24,7 +24,7 @@ function moonlit_end.Init(map)
 
   --This will fill the localized strings table automatically based on the locale the game is 
   -- currently in. You can use the MapStrings table after this line!
-  MapStrings = COMMON.AutoLoadLocalizedStrings()
+
 
 end
 
@@ -73,28 +73,28 @@ function moonlit_end.Cutscene_Trigger_Touch(obj, activator)
   UI:SetSpeaker(STRINGS:Format("\\uE040"))
   
   if not SV.moonlit_end.ExpositionComplete then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001']))
   end
   
   UI:SetSpeaker(cresselia)
   if SV.guildmaster_summit.GameComplete then
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002_Postgame'], GAME:GetTeamName()))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_002_Postgame'], GAME:GetTeamName()))
   else
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_002_Default'], GAME:GetTeamName()))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_002_Default'], GAME:GetTeamName()))
   end
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_003']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_003']))
   
-  UI:ChoiceMenuYesNo(STRINGS:Format(MapStrings['Expo_Cutscene_Ask_Join']), false)
+  UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Ask_Join']), false)
   UI:WaitForChoice()
   ch = UI:ChoiceResult()
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_004']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_004']))
   
   SV.moonlit_end.ExpositionComplete = true
   
   if not ch then
     
-	UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_Reject']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_Reject']))
 	
     SOUND:FadeOutBGM()
     GAME:FadeOut(false, 30)
@@ -107,7 +107,7 @@ function moonlit_end.Cutscene_Trigger_Touch(obj, activator)
   end
   
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_Accept']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_Accept']))
   
 
   local mon_id = RogueEssence.Dungeon.MonsterID("cresselia", 0, "normal", Gender.Genderless)
@@ -129,13 +129,13 @@ end
   
 function moonlit_end.StartBattle()
 
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_005']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_005']))
   
   --flash
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_006']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_006']))
   
   --spawn attackers
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_007']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_007']))
   
   --begin the battle
   
@@ -189,8 +189,8 @@ function moonlit_end.PostBattle_Fail()
   
   UI:SetSpeaker(cresselia)
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Post_Cutscene_Line_001']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Post_Cutscene_Line_Fail']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Post_Cutscene_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Post_Cutscene_Line_Fail']))
   
   SOUND:FadeOutBGM()
   GAME:FadeOut(false, 30)
@@ -215,9 +215,9 @@ function moonlit_end.PostBattle_Success()
   
   GAME:FadeIn(20)
   
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Post_Cutscene_Line_001']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Post_Cutscene_Line_Success']))
-  UI:WaitShowDialogue(STRINGS:Format(MapStrings['Expo_Cutscene_Line_Accept']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Post_Cutscene_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Post_Cutscene_Line_Success']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_Accept']))
   
 
   local mon_id = RogueEssence.Dungeon.MonsterID("cresselia", 0, "normal", Gender.Genderless)

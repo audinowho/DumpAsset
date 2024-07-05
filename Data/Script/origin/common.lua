@@ -676,6 +676,7 @@ function COMMON.ThiefReturn()
   local check_status = _DUNGEON:GetMapStatus(thief_check_idx)
   
   local index_from = check_status.StatusStates:Get(luanet.ctype(MapIndexType))
+  UI:SetSpeakerEmotion("Angry")
   UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_SUSPECT_%04d", index_from.Index)):ToLocal()))
   _DUNGEON:LogMsg(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_THIEF_RETURN_%04d", index_from.Index)):ToLocal()))
   

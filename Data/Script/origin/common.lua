@@ -60,7 +60,7 @@ require 'origin.common_tutor'
 
 --Automatically load the appropriate localization for the specified package, or defaults to english!
 function COMMON.AutoLoadLocalizedStrings()
-  PrintInfo("WARNING: AutoLoadLocalizedStrings IS DEPRECATED.  PLEASE USE STRINGS.MapStrings INSTEAD.  MORE INFO AT: ")
+  PrintInfo("WARNING: AutoLoadLocalizedStrings IS DEPRECATED.  PLEASE USE STRINGS.MapStrings INSTEAD.  MORE INFO AT: https://wiki.pmdo.pmdcollab.org/Lua_Script_Migration#Deprecated_MapStrings")
   --Get the package path
   local packagepath = SCRIPT:CurrentScriptDir()
   

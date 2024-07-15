@@ -2051,6 +2051,14 @@
             Sorts items in the inventory STABLELY
             </summary>
         </member>
+        <member name="M:RogueEssence.Dungeon.Team.GetSortMapping(System.Boolean)">
+            <summary>
+            Checks the current order of items and returns a dictionary that maps their current positions with the sorted ones.<br/>
+            It is important to note that this function does NOT actually sort the inventory. It only calculates a preview.<br/>
+            Keys: sorted order; Values: current order.
+            If swap is true, keys and values will be swapped with each other before returning.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Dungeon.AutoTile.Layers">
             <summary>
             If AutoTileSet is set to -1, this variable can be specified to make a hand-crafted texture.
@@ -2345,6 +2353,14 @@
             </summary>
             <param name="type"></param>
             <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.SaveObject(System.Object,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="entry"></param>
+            <param name="path"></param>
+            <param name="diffpath">The base file to diff the json against.  Do not save as a patch if left blank.</param>
         </member>
         <member name="M:RogueEssence.Data.DataManager.GetZone(System.String)">
             <summary>
@@ -2842,6 +2858,12 @@
             <returns></returns>
         </member>
         <member name="M:RogueEssence.Data.ItemData.GetIconName">
+            <summary>
+            Gets the colored text string of the item, with icon included
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.ItemEntrySummary.GetIconName">
             <summary>
             Gets the colored text string of the item, with icon included
             </summary>
@@ -6011,8 +6033,8 @@
             Create the name of a map's expected callback function in its script.
             Each specifc callbacks has its own name and format.
             </summary>
-            <param name="callbackformat"></param>
-            <param name="mapname"></param>
+            <param name="zonename"></param>
+            <param name="callback"></param>
             <returns></returns>
         </member>
         <member name="T:RogueEssence.Script.LuaEngine.EMapCallbacks">
@@ -6084,13 +6106,6 @@
              </summary>
              <returns></returns>
         </member>
-        <member name="M:RogueEssence.Script.LuaEngine.PathToScript(System.String)">
-            <summary>
-            Assemble the path to the specified script
-            </summary>
-            <param name="script">Script to make the path for</param>
-            <returns>The path to the script file.</returns>
-        </member>
         <member name="M:RogueEssence.Script.LuaEngine.#ctor">
             <summary>
             Constructor private, since we don't want to instantiate this more than once! Otherwise bad things will happen.
@@ -6123,6 +6138,17 @@
             <summary>
             Set lua package paths to the ones in the game's files.
             </summary>
+        </member>
+        <member name="M:RogueEssence.Script.LuaEngine.ModLayerTable(System.String,System.String,System.String)">
+            <summary>
+            Assigns a table to the specified variable in layers.
+            First the base game's table is applied
+            then each mod adds on top of it
+            </summary>
+            <param name="loadPath"></param>
+            <param name="importpath"></param>
+            <returns></returns>
+            <exception cref="T:System.IO.InvalidDataException"></exception>
         </member>
         <member name="M:RogueEssence.Script.LuaEngine.FillServiceEventsTable">
             <summary>
@@ -6212,7 +6238,7 @@
             <param name="luatxt">Lua code  to execute.</param>
             <returns>Object array containing the return value of the string's execution.</returns>
         </member>
-        <member name="M:RogueEssence.Script.LuaEngine.MakeZoneScriptPath(System.Boolean,System.String,System.String)">
+        <member name="M:RogueEssence.Script.LuaEngine.MakeZoneScriptPath(System.String,System.String)">
             <summary>
             Makes the full absolute path to the directory a map's script should be in.
             </summary>
@@ -6232,7 +6258,7 @@
             </summary>
             <param name="zoneassetname"></param>
         </member>
-        <member name="M:RogueEssence.Script.LuaEngine.MakeDungeonMapScriptPath(System.Boolean,System.String,System.String)">
+        <member name="M:RogueEssence.Script.LuaEngine.MakeDungeonMapScriptPath(System.String,System.String)">
             <summary>
             Makes the full absolute path to the directory a map's script should be in.
             </summary>
@@ -6253,7 +6279,7 @@
             </summary>
             <param name="zoneassetname"></param>
         </member>
-        <member name="M:RogueEssence.Script.LuaEngine.MakeGroundMapScriptPath(System.Boolean,System.String,System.String)">
+        <member name="M:RogueEssence.Script.LuaEngine.MakeGroundMapScriptPath(System.String,System.String)">
             <summary>
             Makes the full absolute path to the directory a map's script should be in.
             </summary>

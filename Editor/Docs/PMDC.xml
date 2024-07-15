@@ -174,6 +174,14 @@
             Maps monster, rarity to list of applicable items 
             </summary>
         </member>
+        <member name="M:PMDC.Dev.DevHelper.findEvos(RogueEssence.Dungeon.MonsterID,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="encountersOnly">For use for encounter data only.</param>
+            <returns></returns>
+        </member>
         <member name="M:PMDC.Dev.DevHelper.PrintAllUnfinishedMoves">
             <summary>
             Prints all the moves that can appear in the game due to the monsters appearing in the game, and alerts which unfinished ones need to be finished
@@ -655,11 +663,6 @@
         <member name="F:PMDC.Dungeon.StanceChangeEvent.ReqSpecies">
             <summary>
             The required species in order for this ability to activiate
-            </summary>
-        </member>
-        <member name="F:PMDC.Dungeon.StanceChangeEvent.DefenseSkill">
-            <summary>
-            The move that changes the character into its Defense form
             </summary>
         </member>
         <member name="F:PMDC.Dungeon.StanceChangeEvent.DefenseForme">
@@ -1418,6 +1421,11 @@
             </summary>
         </member>
         <member name="T:PMDC.Dungeon.BetterOddsEvent">
+            <summary>
+            Event that makes the move never miss and always land a critical hit if all moves have the same PP
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.FinalOddsEvent">
             <summary>
             Event that makes the move never miss and always land a critical hit if the move is on its last PP
             </summary>
@@ -2738,6 +2746,11 @@
             The level change
             </summary> 
         </member>
+        <member name="F:PMDC.Dungeon.LevelChangeEvent.AffectTarget">
+            <summary>
+            Whether to affect the target or user
+            </summary>
+        </member>
         <member name="T:PMDC.Dungeon.DamageEXPEvent">
             <summary>
             Event that adds EXP to the character based on the damage dealt
@@ -3142,6 +3155,16 @@
         <member name="T:PMDC.Dungeon.PsywaveDamageEvent">
             <summary>
             Event that deals fixed damage depending on the target's distance from the attack and the user's level
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.UserHPDamageEvent">
+            <summary>
+            Event that deals fixed damage based on the user's current HP.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.UserHPDamageEvent.Reverse">
+            <summary>
+            Instead, deal damage based on the HP the user is missing.
             </summary>
         </member>
         <member name="T:PMDC.Dungeon.EndeavorEvent">
@@ -4464,7 +4487,7 @@
         </member>
         <member name="T:PMDC.Dungeon.DestroyItemEvent">
             <summary>
-            Event that destroy's the character item
+            Event that destroy the character's item
             </summary>
         </member>
         <member name="T:PMDC.Dungeon.StealItemEvent">
@@ -4807,6 +4830,16 @@
             The trap being added 
             </summary>
         </member>
+        <member name="F:PMDC.Dungeon.CounterTrapEvent.Emitter">
+            <summary>
+            The particle VFX 
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.CounterTrapEvent.Sound">
+            <summary>
+            The sound effect of the VFX
+            </summary>
+        </member>
         <member name="T:PMDC.Dungeon.TriggerTrapEvent">
             <summary>
             Event that triggers the effects of the trap tile
@@ -4955,6 +4988,16 @@
         <member name="T:PMDC.Dungeon.WithdrawItemEvent">
             <summary>
             Event that withdraws an item from storage using the value in WithdrawStorageContext
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.DepositBoxEvent">
+            <summary>
+            Event that selects the item currently held by the user to send to the storage 
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.StoreItemEvent">
+            <summary>
+            Event that stores an item using the value in DepositStorageContext
             </summary>
         </member>
         <member name="T:PMDC.Dungeon.AssemblyBoxEvent">
@@ -5405,6 +5448,16 @@
             This event transforms a specific tile into another tile.
             </summary>
         </member>
+        <member name="F:PMDC.Dungeon.MonsterHouseOwnerEvent.MobRange">
+            <summary>
+            Number of monsters to spawn.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.MonsterHouseOwnerEvent.ItemPercent">
+            <summary>
+            Percent of monsters carrying items.
+            </summary>
+        </member>
         <member name="F:PMDC.Dungeon.MonsterHouseTableState.MonsterHouseWarningTile">
             <summary>
             If this is set, this tile will be used to display a warning for monster houses.
@@ -5690,7 +5743,7 @@
         </member>
         <member name="T:PMDC.LevelGen.GridPathEdge`1">
             <summary>
-            Populates the empty grid plan of a map by creating a minimum spanning tree of connected rooms and halls.
+            Populates the empty grid plan of a map by putting all rooms on one side of the map.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
@@ -6569,6 +6622,22 @@
             <param name="rand"></param>
             <param name="degreeRotation">Rotation is treated as clockwise from down</param>
             <returns></returns>
+        </member>
+        <member name="T:PMDC.LevelGen.BossBandContextSpawner`1">
+            <summary>
+            Spawns a team by taking X amount of individual mob spawns from the map's respawn table, and adding a mob spawn extra to the leader.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:PMDC.LevelGen.BossBandContextSpawner`1.TeamSize">
+            <summary>
+            This amount is in total team members.
+            </summary>
+        </member>
+        <member name="P:PMDC.LevelGen.BossBandContextSpawner`1.LeaderFeatures">
+            <summary>
+            Additional alterations made to the leader after it is created but before it is spawned.
+            </summary>
         </member>
         <member name="T:PMDC.LevelGen.RescueSpawner`1">
             <summary>

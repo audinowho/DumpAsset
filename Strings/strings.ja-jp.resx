@@ -306,6 +306,12 @@
   <data name="_ENUM_MinimapStyle_White" xml:space="preserve">
     <value>ミニマップ 白</value>
     <comment></comment>  </data>
+  <data name="_ENUM_NetCloseReason_AlreadyConnected_msg" xml:space="preserve">
+    <value>既に別のアプリケーションから接続されています。</value>
+    <comment></comment>  </data>
+  <data name="_ENUM_NetCloseReason_ServerShutdown_msg" xml:space="preserve">
+    <value>サーバーがシャットダウンしました。</value>
+    <comment></comment>  </data>
   <data name="_ENUM_SkillCategory_Magical" xml:space="preserve">
     <value>特殊</value>
     <comment></comment>  </data>
@@ -397,7 +403,7 @@
     <value>脱出しますか？</value>
     <comment></comment>  </data>
   <data name="DLG_ASK_GENDER" xml:space="preserve">
-    <value>男の子にしますか？女の子にしますか？</value>
+    <value>主人公は男性ですか？それとも、女性ですか？</value>
     <comment></comment>  </data>
   <data name="DLG_ASK_LOAD_UPGRADE" xml:space="preserve">
     <value>何らかのMODファイルが欠落しています。[pause=0]本当にファイルをロードしてもよろしいでしょうか？</value>
@@ -558,9 +564,15 @@
   <data name="DLG_RESTRICT_ITEM_ALL" xml:space="preserve">
     <value>全てのもちもの</value>
     <comment>Will be used in the sentence "All items have been stored away." May be used in the middle of a sentence so do not capitalize.</comment>  </data>
+  <data name="DLG_RESTRICT_ITEM_ALL_NON_TREASURE" xml:space="preserve">
+    <value>全てのもちもの（宝箱を除く）</value>
+    <comment></comment>  </data>
   <data name="DLG_RESTRICT_ITEM_SLOT" xml:space="preserve">
     <value>{0}個目以降のもちもの</value>
     <comment>Will be used in the sentence "Items beyond the Xth slot have been stored away." May be used in the middleof a sentence so do not capitalize.</comment>  </data>
+  <data name="DLG_RESTRICT_ITEM_SLOT_NON_TREASURE" xml:space="preserve">
+    <value>{0}番目以降の宝箱以外のアイテム</value>
+    <comment></comment>  </data>
   <data name="DLG_RESTRICT_LEVEL" xml:space="preserve">
     <value>メンバーのレベルが一時的に{0}になりました。</value>
     <comment></comment>  </data>
@@ -676,19 +688,19 @@
     <value>どうしますか？</value>
     <comment></comment>  </data>
   <data name="GAME_ERROR_SPLASH" xml:space="preserve">
-    <value>(エラーだ。再起動しなくちゃ…)</value>
+    <value>えらーだ。再起動しろ。ちなみに日本語化している人の推しはピチューとイーブイ。</value>
     <comment>For chinese, japanese and Korean, try to use as few characters as possible.</comment>  </data>
   <data name="GAME_LOAD_READY" xml:space="preserve">
     <value>何かのキーを押してください</value>
     <comment></comment>  </data>
   <data name="GAME_SPLASH" xml:space="preserve">
-    <value>ポケモンオタク達による二次創作です\n\nPlease support the series\nby purchasing an official game.\n\n\nPokémon Mystery Dungeon is owned by\n\nNintendo\nPokemon\nCreatures Inc\nGAME FREAK Inc\nSpike Chunsoft</value>
+    <value>これは、有志達による無料のファンゲームです。\n\nPlease support the series\nby purchasing an official game.\n\n\nPokémon Mystery Dungeon is owned by\n\nNintendo\nPokemon\nCreatures Inc\nGAME FREAK Inc\nSpike Chunsoft</value>
     <comment>CAREFUL.  A line can only contain up to 40 characters before it overflows the screen!  there are NO ASCII limitations now!</comment>  </data>
   <data name="GAME_TITLE" xml:space="preserve">
     <value>ポケモン不思議のダンジョン:Origins</value>
     <comment>The title of the game.  Based off of "Pokemon Origins" (the anime)</comment>  </data>
   <data name="INPUT_CAN_PASTE" xml:space="preserve">
-    <value>CTRL+Vでペーストです。</value>
+    <value>CTRL+Vでペーストです。（日本語もペーストで入力できます。）</value>
     <comment></comment>  </data>
   <data name="INPUT_CONTACT_TITLE" xml:space="preserve">
     <value>連絡先のIDを入力してください。</value>
@@ -735,6 +747,9 @@
   <data name="MENU_ASSEMBLY_STANDBY" xml:space="preserve">
     <value>たいき</value>
     <comment></comment>  </data>
+  <data name="MENU_ASSEMBLY_TITLE" xml:space="preserve">
+    <value>へんせいじょ</value>
+    <comment>Title of the Assembly menu, for choosing team members in the assembly to add to the team.  Based off of "Chimecho Assembly" as it was called in EN versions.</comment>  </data>
   <data name="MENU_BAG_MONEY" xml:space="preserve">
     <value>お金:{0}</value>
     <comment>For labeling the amount of money the team has on hand</comment>  </data>
@@ -933,6 +948,15 @@
   <data name="MENU_ITEM_SWAP_TITLE" xml:space="preserve">
     <value>入れ替えますか？</value>
     <comment>Title of the item menu when swapping items</comment>  </data>
+  <data name="MENU_ITEM_TAKE" xml:space="preserve">
+    <value>拾う</value>
+    <comment>Menu option to take held item away from a different team member, and put back in bag</comment>  </data>
+  <data name="MENU_ITEM_TARGET_TITLE" xml:space="preserve">
+    <value>誰に？</value>
+    <comment>Title of the menu for choosing who to use an item on</comment>  </data>
+  <data name="MENU_ITEM_TEACH" xml:space="preserve">
+    <value>使う</value>
+    <comment>Menu option to teach someone a TM</comment>  </data>
   <data name="MENU_ITEM_THROW" xml:space="preserve">
     <value>投げる</value>
     <comment>Menu option to throw an item</comment>  </data>
@@ -948,11 +972,20 @@
   <data name="MENU_KEYBOARD_TITLE" xml:space="preserve">
     <value>キーボード</value>
     <comment></comment>  </data>
+  <data name="MENU_LABEL" xml:space="preserve">
+    <value>{0}:</value>
+    <comment>For putting a colon in front as with a labeling stats</comment>  </data>
+  <data name="MENU_LEVEL_UP" xml:space="preserve">
+    <value>{0}のステータス</value>
+    <comment></comment>  </data>
   <data name="MENU_MAIL_AOK_TITLE" xml:space="preserve">
     <value>ふっかつメール</value>
     <comment></comment>  </data>
   <data name="MENU_MAIL_ERROR" xml:space="preserve">
     <value>メールの読み込みエラー</value>
+    <comment></comment>  </data>
+  <data name="MENU_MAIL_INCOMPATIBLE" xml:space="preserve">
+    <value>互換性の無いバージョンです。</value>
     <comment></comment>  </data>
   <data name="MENU_MAIL_SOS_TITLE" xml:space="preserve">
     <value>たすけてメール</value>
@@ -1125,9 +1158,18 @@
   <data name="MENU_RESULTS_QUIT" xml:space="preserve">
     <value>{0}を諦めた。</value>
     <comment>denotes that the team gave up at a certain floor of the dungeon.</comment>  </data>
+  <data name="MENU_RESULTS_RESCUE" xml:space="preserve">
+    <value>{0}での救助完了！</value>
+    <comment></comment>  </data>
   <data name="MENU_RESULTS_SEED" xml:space="preserve">
     <value>シード値:{0}</value>
     <comment>The dungeon seed, used to initialize the dungeon randomizer.  If two dungeon seeds are the same, they will generate exactly the same. Ex. "Seed: 17B7244FC0C0ED"</comment>  </data>
+  <data name="MENU_RESULTS_TIMEOUT" xml:space="preserve">
+    <value>{0}は見えない何かに理不尽にも吹き飛ばされた。</value>
+    <comment></comment>  </data>
+  <data name="MENU_RESULTS_TITLE" xml:space="preserve">
+    <value>前回の成果</value>
+    <comment>Title for the window displaying the overall results of the last outing</comment>  </data>
   <data name="MENU_RESULTS_TOTAL_SCORE" xml:space="preserve">
     <value>トータルスコア:{0}</value>
     <comment>For labeling the total score at the end of an adventure</comment>  </data>
@@ -1383,6 +1425,9 @@
   <data name="MENU_TEAM_SKILLS" xml:space="preserve">
     <value>わざ:{0}</value>
     <comment>For labeling a team member's moves</comment>  </data>
+  <data name="MENU_TEAM_SPECIES" xml:space="preserve">
+    <value>種族:{0}</value>
+    <comment>For labeling the species of a team member</comment>  </data>
   <data name="MENU_TEAM_STATS" xml:space="preserve">
     <value>ステータス:</value>
     <comment>For labeling the team member's stats</comment>  </data>
@@ -1434,6 +1479,9 @@
   <data name="MENU_TRADE_TEAM" xml:space="preserve">
     <value>チームこうかん</value>
     <comment></comment>  </data>
+  <data name="MENU_TRAIL_TITLE" xml:space="preserve">
+    <value>アドベンチャー・トレイル（{0}/{1}）</value>
+    <comment></comment>  </data>
   <data name="MENU_TREASURE_TITLE" xml:space="preserve">
     <value>おたから</value>
     <comment></comment>  </data>
@@ -1449,6 +1497,27 @@
   <data name="MET_AT_START" xml:space="preserve">
     <value>はじまりの場所</value>
     <comment>The "recruit location" of starters, who were recruited into the team from the beginning.</comment>  </data>
+  <data name="MSG_CANT_CHECK_TILE" xml:space="preserve">
+    <value>{0}は今、トリガーすることができません。</value>
+    <comment></comment>  </data>
+  <data name="MSG_CANT_DEQUIP" xml:space="preserve">
+    <value>{0}は今、アイテムを捨てることができません。</value>
+    <comment></comment>  </data>
+  <data name="MSG_CANT_DROP_HERE" xml:space="preserve">
+    <value>このアイテムはここには置けません。</value>
+    <comment></comment>  </data>
+  <data name="MSG_CANT_DROP_ITEM" xml:space="preserve">
+    <value>{0}は今、ここにアイテムを置くことができません。</value>
+    <comment></comment>  </data>
+  <data name="MSG_CANT_PICKUP_ITEM" xml:space="preserve">
+    <value>{0}は今、アイテムを拾うことができません。</value>
+    <comment></comment>  </data>
+  <data name="MSG_CANT_REPLACE_MONEY" xml:space="preserve">
+    <value>おかねとは交換することができません。</value>
+    <comment></comment>  </data>
+  <data name="MSG_CANT_SWAP_ITEM" xml:space="preserve">
+    <value>{0}は今、アイテムを交換することができません。</value>
+    <comment></comment>  </data>
   <data name="MSG_CHARGES_RESTORE" xml:space="preserve">
     <value>{0}のPPが回復した。</value>
     <comment></comment>  </data>
@@ -1479,6 +1548,15 @@
   <data name="MSG_ELEMENT_CHANGE_DUAL" xml:space="preserve">
     <value>{0}は{1}/{2}タイプになった！</value>
     <comment></comment>  </data>
+  <data name="MSG_EXP_GAIN_MEMBER" xml:space="preserve">
+    <value>{0} は経験値[color=#00FFFF]{1}[color]をもらった！</value>
+    <comment></comment>  </data>
+  <data name="MSG_EXP_LOSS_MEMBER" xml:space="preserve">
+    <value>{0} は[color=#00FFFF]{1}[color]経験値失った！</value>
+    <comment></comment>  </data>
+  <data name="MSG_HP_RESTORE" xml:space="preserve">
+    <value>{0} は体力が [color=#00FFFF]{1}[color] 回復した。</value>
+    <comment></comment>  </data>
   <data name="MSG_HUNGER_CRITICAL" xml:space="preserve">
     <value>{0}はお腹が空いてめまいがしてきた…</value>
     <comment></comment>  </data>
@@ -1500,37 +1578,184 @@
   <data name="MSG_INTRINSIC_CHANGE_NONE" xml:space="preserve">
     <value>{0}の能力は変わらなかった！</value>
     <comment></comment>  </data>
+  <data name="MSG_ITEM_GIVE" xml:space="preserve">
+    <value>{0}は{1}を渡した。</value>
+    <comment></comment>  </data>
+  <data name="MSG_JUMP" xml:space="preserve">
+    <value>{0}はおもいっきり飛び跳ねた。</value>
+    <comment>Used for when someone uses Splash, and bounces over the pokemon in front, OR uses U-Turn/Volt Switch and jumps back several steps after hitting.</comment>  </data>
+  <data name="MSG_JUMP_FAIL" xml:space="preserve">
+    <value>ここではジャンプが出来なかった。</value>
+    <comment>Same as above, but didn't find a place to jump to.</comment>  </data>
+  <data name="MSG_LEADER_SWAP" xml:space="preserve">
+    <value>{0}がチームのリーダになった！</value>
+    <comment></comment>  </data>
+  <data name="MSG_LEADER_SWAP_REQ" xml:space="preserve">
+    <value>リーダーチェンジはリーダーのターンでのできます。</value>
+    <comment></comment>  </data>
+  <data name="MSG_MAP_ITEM_GROUND" xml:space="preserve">
+    <value>{0}は地面の上に落ちた。</value>
+    <comment></comment>  </data>
+  <data name="MSG_MAP_ITEM_LOST" xml:space="preserve">
+    <value>{0}は無くなってしまった！</value>
+    <comment></comment>  </data>
+  <data name="MSG_MAP_ITEM_WATER" xml:space="preserve">
+    <value>{0}は水上に落ちた。</value>
+    <comment></comment>  </data>
+  <data name="MSG_NOTHING_UNDERFOOT" xml:space="preserve">
+    <value>{0}の足下にはなにもなかった。</value>
+    <comment></comment>  </data>
   <data name="MSG_OUT_OF_CHARGES" xml:space="preserve">
-    <value>{0}の{1}はPPがきれた！</value>
+    <value>{0}の{1}はPPがなくなった！</value>
     <comment></comment>  </data>
   <data name="MSG_PICKUP_HOLD_ITEM" xml:space="preserve">
     <value>{0}は{1}を拾った。</value>
     <comment></comment>  </data>
+  <data name="MSG_PICKUP_ITEM" xml:space="preserve">
+    <value>{0}は{1}を拾ってトレジャーバックにいれた。</value>
+    <comment></comment>  </data>
   <data name="MSG_PICKUP_MONEY" xml:space="preserve">
     <value>{0}は{1}を拾った。</value>
+    <comment></comment>  </data>
+  <data name="MSG_PLACE_ITEM" xml:space="preserve">
+    <value>{0}は{1}を置いた。</value>
+    <comment></comment>  </data>
+  <data name="MSG_REPLACE_HOLD_ITEM" xml:space="preserve">
+    <value>{0}は{1}と{2}を交換した。</value>
+    <comment></comment>  </data>
+  <data name="MSG_REPLACE_ITEM" xml:space="preserve">
+    <value>{0}と{1}を交換した。</value>
+    <comment></comment>  </data>
+  <data name="MSG_REPLAY_PAUSED" xml:space="preserve">
+    <value>リプレイを一時停止した。</value>
     <comment></comment>  </data>
   <data name="MSG_REPLAY_SPEED" xml:space="preserve">
     <value>速度:{0}</value>
     <comment></comment>  </data>
+  <data name="MSG_REPLAY_UNPAUSED" xml:space="preserve">
+    <value>リプレイを再開した。</value>
+    <comment></comment>  </data>
   <data name="MSG_RESCUED_BY" xml:space="preserve">
     <value>{0}にきゅうじょしてもらった！</value>
     <comment></comment>  </data>
+  <data name="MSG_RESCUES_LEFT" xml:space="preserve">
+    <value>きゅうじょ残り回数:{0}</value>
+    <comment></comment>  </data>
+  <data name="MSG_SKIP_TURN" xml:space="preserve">
+    <value>{0}は様子を見ている。</value>
+    <comment></comment>  </data>
+  <data name="MSG_TEAM_MODE_ALONE" xml:space="preserve">
+    <value>なかまモードは1匹の状態では使用できません。</value>
+    <comment></comment>  </data>
+  <data name="MSG_TEAM_SENT_HOME" xml:space="preserve">
+    <value>{0}はへんせいじょに戻っていった。</value>
+    <comment></comment>  </data>
+  <data name="MSG_TEAM_SENT_HOME_PLURAL" xml:space="preserve">
+    <value>{0}はへんせいじょに戻っていった。</value>
+    <comment>ex. "Pikachu, Charmander, and Bulbasaur were sent back to the assembly."</comment>  </data>
+  <data name="MSG_WARP" xml:space="preserve">
+    <value>{0}はワープした！</value>
+    <comment></comment>  </data>
+  <data name="MSG_WARP_FAIL" xml:space="preserve">
+    <value>{0}はワープができなかった。</value>
+    <comment></comment>  </data>
+  <data name="RANGE_ATTACK_AROUND" xml:space="preserve">
+    <value>近くのポケモン</value>
+    <comment></comment>  </data>
+  <data name="RANGE_ATTACK_CORNER" xml:space="preserve">
+    <value>正面、角抜け</value>
+    <comment></comment>  </data>
+  <data name="RANGE_ATTACK_FRONT" xml:space="preserve">
+    <value>正面</value>
+    <comment></comment>  </data>
+  <data name="RANGE_ATTACK_WIDE" xml:space="preserve">
+    <value>直線上</value>
+    <comment>Ex. "Foe in Front and Sides"</comment>  </data>
   <data name="RANGE_BEAM" xml:space="preserve">
     <value>ビーム</value>
     <comment>Used to describe a beam move. Will have descriptors Ex. "Beam", "Wide-Beam", "Piercing Beam"</comment>  </data>
   <data name="RANGE_DASH" xml:space="preserve">
     <value>ダッシュ</value>
     <comment>Used to describe a dashing move. Will have descriptors Ex. "Dash", "Wide-Dash", "Piercing Dash"</comment>  </data>
+  <data name="RANGE_LINEAR_WIDE" xml:space="preserve">
+    <value>範囲{0}</value>
+    <comment>Adds the "Wide" descriptor to a move target description Ex. "Beam", "Wide-Beam", "Piercing Beam"</comment>  </data>
+  <data name="TARGET_HIT_ALL" xml:space="preserve">
+    <value>全て</value>
+    <comment>For when a move can hit ally, foe, and self. Used in RANGE_ strings</comment>  </data>
+  <data name="TARGET_HIT_ALLY" xml:space="preserve">
+    <value>仲間</value>
+    <comment>For when a move can hit only ally. Used in RANGE_ strings</comment>  </data>
+  <data name="TARGET_HIT_ALLY_PLURAL" xml:space="preserve">
+    <value>仲間</value>
+    <comment>For when a move can hit only ally (plural). Used in RANGE_ strings</comment>  </data>
+  <data name="TARGET_HIT_FOE" xml:space="preserve">
+    <value>敵</value>
+    <comment>For when a move can hit only foe. Used in RANGE_ strings</comment>  </data>
+  <data name="TARGET_HIT_FOE_PLURAL" xml:space="preserve">
+    <value>敵</value>
+    <comment>For when a move can hit only foe (plural). Used in RANGE_ strings</comment>  </data>
+  <data name="TARGET_HIT_NONE" xml:space="preserve">
+    <value>無し</value>
+    <comment>For when a move targets no one. Used in RANGE_ strings</comment>  </data>
+  <data name="TARGET_HIT_OTHER" xml:space="preserve">
+    <value>なかま／敵</value>
+    <comment>For when a move can hit ally and foe. Used in RANGE_ strings</comment>  </data>
+  <data name="TARGET_HIT_OTHER_PLURAL" xml:space="preserve">
+    <value>その他</value>
+    <comment>For when a move can hit ally and foe (plural). Used in RANGE_ strings</comment>  </data>
+  <data name="TARGET_HIT_PARTY" xml:space="preserve">
+    <value>チーム</value>
+    <comment>For when a move can hit ally and self. Used in RANGE_ strings</comment>  </data>
+  <data name="TARGET_HIT_USER" xml:space="preserve">
+    <value>自分</value>
+    <comment>For when a move can hit only self. Used in RANGE_ strings</comment>  </data>
+  <data name="TARGET_HIT_USERFOE" xml:space="preserve">
+    <value>全員</value>
+    <comment>For when a move can hit foe and self. Used in RANGE_ strings</comment>  </data>
+  <data name="TARGET_HIT_USERFOE_PLURAL" xml:space="preserve">
+    <value>全員</value>
+    <comment>For when a move can hit foe and self (plural). Used in RANGE_ strings</comment>  </data>
   <data name="TEAM_NAME" xml:space="preserve">
     <value>チーム{0}</value>
     <comment>For putting together the team name.</comment>  </data>
   <data name="TRANSFER_ALL" xml:space="preserve">
     <value>すべて</value>
     <comment></comment>  </data>
+  <data name="TRANSFER_ITEMS" xml:space="preserve">
+    <value>道具のみ</value>
+    <comment></comment>  </data>
+  <data name="ZONE_EXPECT_LEVEL" xml:space="preserve">
+    <value>平均レベル:{0}</value>
+    <comment></comment>  </data>
+  <data name="ZONE_RESET_MOVESET" xml:space="preserve">
+    <value>わざ初期化</value>
+    <comment></comment>  </data>
+  <data name="ZONE_RESTRICT_ALONE" xml:space="preserve">
+    <value>1人まで</value>
+    <comment></comment>  </data>
   <data name="ZONE_RESTRICT_BAG" xml:space="preserve">
-    <value>バックは{0}こまで</value>
+    <value>バックは{0}個まで</value>
     <comment></comment>  </data>
   <data name="ZONE_RESTRICT_EXP" xml:space="preserve">
     <value>経験値無し</value>
+    <comment></comment>  </data>
+  <data name="ZONE_RESTRICT_ITEM" xml:space="preserve">
+    <value>アイテム数制限:{0}個</value>
+    <comment></comment>  </data>
+  <data name="ZONE_RESTRICT_ITEM_ALL" xml:space="preserve">
+    <value>アイテムを持ち込めない</value>
+    <comment></comment>  </data>
+  <data name="ZONE_RESTRICT_LEVEL" xml:space="preserve">
+    <value>レベル制限:{0}</value>
+    <comment></comment>  </data>
+  <data name="ZONE_RESTRICT_MONEY" xml:space="preserve">
+    <value>おかね所持禁止</value>
+    <comment></comment>  </data>
+  <data name="ZONE_RESTRICT_TEAM" xml:space="preserve">
+    <value>ポケモン数制限:{0}匹まで</value>
+    <comment></comment>  </data>
+  <data name="ZONE_TRANSFER" xml:space="preserve">
+    <value>移行:{0}</value>
     <comment></comment>  </data>
 </root>

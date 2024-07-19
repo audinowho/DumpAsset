@@ -49,11 +49,17 @@ function MenuTools:OnMenuButtonPressed()
   TASK:WaitTask(_MENU:ProcessMenuCoroutine(MenuTools.MainMenu))
 end
 
+--[[---------------------------------------------------------------
+    MenuTools:OnAddMenu(menu)
+      When a menu is about to be added to the menu stack this is called!
+---------------------------------------------------------------]]
 function MenuTools:OnAddMenu(menu)
     local labels = RogueEssence.Menu.MenuLabel
     if RogueEssence.GameManager.Instance.CurrentScene == RogueEssence.Dungeon.DungeonScene.Instance and
                 menu:HasLabel() and menu.Label == labels.OTHERS_MENU then
+        -- put right before Settings if present
         local index = menu:GetChoiceIndexByLabel(labels.OTH_SETTINGS)
+        -- fall back to either 1 or choices count if the check fails
         if index <0 then index = math.min(1, menu.Choices.Count) end
         menu.Choices:Insert(index, RogueEssence.Menu.MenuTextChoice("OTH_RECRUIT", RogueEssence.StringKey("MENU_RECRUITMENT"):ToLocal(), function () _MENU:AddMenu(RecruitmentListMenu:new().menu, false) end))
         menu:InitMenu()

@@ -44,32 +44,33 @@ function MenuTools:OnMenuButtonPressed()
     MenuTools.MainMenu = RogueEssence.Menu.MainMenu()
   end
   MenuTools.MainMenu:SetupChoices()
-  if RogueEssence.GameManager.Instance.CurrentScene == RogueEssence.Dungeon.DungeonScene.Instance then
-    MenuTools.MainMenu.Choices[5] = RogueEssence.Menu.MenuTextChoice(STRINGS:FormatKey("MENU_OTHERS_TITLE"), function () _MENU:AddMenu(MenuTools:OthersMenuWithRecruitScan(), false) end)
-  end
   MenuTools.MainMenu:SetupTitleAndSummary()
   MenuTools.MainMenu:InitMenu()
   TASK:WaitTask(_MENU:ProcessMenuCoroutine(MenuTools.MainMenu))
 end
 
-function MenuTools:OthersMenuWithRecruitScan()
-  -- TODO: Remove this when the memory leak is fixed or confirmed not a leak
-  if MenuTools.OthersMenu == nil then
-    MenuTools.OthersMenu = RogueEssence.Menu.OthersMenu()
-  end
-  MenuTools.OthersMenu:SetupChoices();
-  if RogueEssence.GameManager.Instance.CurrentScene == RogueEssence.Dungeon.DungeonScene.Instance then
-    MenuTools.OthersMenu.Choices:Insert(1, RogueEssence.Menu.MenuTextChoice(RogueEssence.StringKey("MENU_RECRUITMENT"):ToLocal(), function () _MENU:AddMenu(RecruitmentListMenu:new().menu, false) end))
-  end
-  MenuTools.OthersMenu:InitMenu();
-  return MenuTools.OthersMenu
+--[[---------------------------------------------------------------
+    MenuTools:OnAddMenu(menu)
+      When a menu is about to be added to the menu stack this is called!
+---------------------------------------------------------------]]
+function MenuTools:OnAddMenu(menu)
+    local labels = RogueEssence.Menu.MenuLabel
+    if RogueEssence.GameManager.Instance.CurrentScene == RogueEssence.Dungeon.DungeonScene.Instance and
+                menu:HasLabel() and menu.Label == labels.OTHERS_MENU then
+        -- put right before Settings if present
+        local index = menu:GetChoiceIndexByLabel(labels.OTH_SETTINGS)
+        -- fall back to either 1 or choices count if the check fails
+        if index <0 then index = math.min(1, menu.Choices.Count) end
+        menu.Choices:Insert(index, RogueEssence.Menu.MenuTextChoice("OTH_RECRUIT", RogueEssence.StringKey("MENU_RECRUITMENT"):ToLocal(), function () _MENU:AddMenu(RecruitmentListMenu:new().menu, false) end))
+        menu:InitMenu()
+    end
 end
-
 
 ---Summary
 -- Subscribe to all channels this service wants callbacks from
 function MenuTools:Subscribe(med)
   med:Subscribe("MenuTools", EngineServiceEvents.MenuButtonPressed,        function() self.OnMenuButtonPressed() end )
+  med:Subscribe("MenuTools", EngineServiceEvents.AddMenu,                  function(_, args) self:OnAddMenu(args[0]) end )
 end
 
 ---Summary

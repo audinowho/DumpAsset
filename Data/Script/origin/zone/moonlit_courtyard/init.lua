@@ -40,7 +40,7 @@ function moonlit_courtyard.ExitSegment(zone, result, rescue, segmentID, mapID)
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
     if segmentID == 0 then
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 3, 2)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 4, 0)
     elseif segmentID == 1 then
       GAME:EnterZone('moonlit_courtyard', -1, 0, 0)
     else

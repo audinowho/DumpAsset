@@ -124,7 +124,7 @@ function moonlit_end.Cutscene_Trigger_Touch(obj, activator)
 
   SV.moonlit_end.ReturnVisit = true
   
-  COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 3, 2)
+  COMMON.EndDungeonDay(RogueEssence.Data.GameProgress.ResultType.Cleared, 'guildmaster_island', -1, 4, 0)
 end
   
 function moonlit_end.StartBattle()

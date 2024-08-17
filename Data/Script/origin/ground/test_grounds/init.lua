@@ -14,7 +14,7 @@
     
     _SCRIPT_MAP_DIR = global containing the path from the Script root folder to the current folder
 ]]--
-require('common')
+require 'origin.common'
 
 local test_grounds = {}
 

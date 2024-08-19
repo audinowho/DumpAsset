@@ -24,17 +24,19 @@ function MissionMenuTools:OnAddMenu(menu)
     if SV.MissionsEnabled and menu:HasLabel() then
         if RogueEssence.GameManager.Instance.CurrentScene == RogueEssence.Dungeon.DungeonScene.Instance then
             if menu.Label == labels.OTHERS_MENU then
+                local choices = menu:ExportChoices()
                 -- put right after Recruitment Search if present
                 local index = menu:GetChoiceIndexByLabel("OTH_RECRUIT")+1
                 -- if failed, put right before Settings if present
                 if index <0 then index = menu:GetChoiceIndexByLabel(labels.OTH_SETTINGS) end
                 -- fall back to either 1 or choices count if both fail
                 if index <0 then index = math.min(1, menu.Choices.Count) end
-                menu.Choices:Insert(index, RogueEssence.Menu.MenuTextChoice("OTH_MISSION", "Mission Objectives", function () _MENU:AddMenu(DungeonJobList:new().menu, false) end))
-                menu:InitMenu()
+                choices:Insert(index, RogueEssence.Menu.MenuTextChoice("OTH_MISSION", "Mission Objectives", function () _MENU:AddMenu(DungeonJobList:new().menu, false) end))
+                menu:ImportChoices(choices)
             end
         else
             if menu.Label == labels.MAIN_MENU then
+                local choices = menu:ExportChoices()
                 local taken_count = MISSION_GEN.GetTakenCount()
                 local job_list_color = Color.Red
                 if taken_count > 0 then job_list_color = Color.White end
@@ -44,8 +46,8 @@ function MissionMenuTools:OnAddMenu(menu)
                 if index <0 then
                     index = math.min(1, menu.Choices.Count)
                 end
-                menu.Choices:Insert(index, RogueEssence.Menu.MenuTextChoice("MAIN_MISSION", Text.FormatKey("MENU_JOBLIST_TITLE"), function () _MENU:AddMenu(BoardMenu:new(COMMON.MISSION_BOARD_TAKEN, nil, menu).menu, false) end, taken_count > 0, job_list_color))
-                menu:InitMenu()
+                choices:Insert(index, RogueEssence.Menu.MenuTextChoice("MAIN_MISSION", Text.FormatKey("MENU_JOBLIST_TITLE"), function () _MENU:AddMenu(BoardMenu:new(COMMON.MISSION_BOARD_TAKEN, nil, menu).menu, false) end, taken_count > 0, job_list_color))
+                menu:ImportChoices(choices)
             end
         end
     end

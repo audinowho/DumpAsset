@@ -992,7 +992,11 @@ function cliff_camp.NPC_DexRater_Action(chara, activator)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Intro_001']))
   
   local dexCompletion = _DATA.Save:GetTotalMonsterUnlock(RogueEssence.Data.GameProgress.UnlockState.Completed)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Check_001'], GAME:GetTeamName(), dexCompletion))
+  if dexCompletion <= 1 then
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Check_000']))
+  else
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Check_001'], GAME:GetTeamName(), dexCompletion))
+  end
   
   if SV.dex.CurrentRewardIdx > #rewardReqs then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Full_001']))

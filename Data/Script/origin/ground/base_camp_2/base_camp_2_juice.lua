@@ -92,7 +92,7 @@ base_camp_2_juice.boost_tbl["berry_lum"] = { HP = 1 }
 
 base_camp_2_juice.boost_tbl["berry_passho"] = { HP = 1 }
 base_camp_2_juice.boost_tbl["berry_colbur"] = { HP = 1 }
-base_camp_2_juice.boost_tbl["bery_yache"] = { SpDef = 1 }
+base_camp_2_juice.boost_tbl["berry_yache"] = { SpDef = 1 }
 base_camp_2_juice.boost_tbl["berry_rindo"] = { SpDef = 1 }
 base_camp_2_juice.boost_tbl["berry_tanga"] = { Speed = 1 }
 base_camp_2_juice.boost_tbl["berry_shuca"] = { Atk = 1 }

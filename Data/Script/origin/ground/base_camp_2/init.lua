@@ -43,7 +43,7 @@ function base_camp_2.Init(map)
   COMMON.CreateWalkArea("Assembly" .. tostring(10), 96, 176, 32, 72)
   COMMON.CreateWalkArea("Assembly" .. tostring(12), 216, 256, 48, 64)
   COMMON.CreateWalkArea("Assembly" .. tostring(14), 72, 264, 64, 64)
-  COMMON.CreateWalkArea("Assembly" .. tostring(19), 400, 592, 56, 48)
+  COMMON.CreateWalkArea("Assembly" .. tostring(19), 400, 592, 56, 40)
   COMMON.CreateWalkArea("Assembly" .. tostring(22), 728, 352, 64, 48)
   
   COMMON.CreateWalkArea("NPC_Food", 144, 592, 32, 32)

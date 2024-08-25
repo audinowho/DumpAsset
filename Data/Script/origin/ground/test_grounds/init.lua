@@ -477,7 +477,7 @@ function test_grounds.Mew_Action(chara, activator)
   
   local head_pos = GROUND:CharGetAnimPoint(player, RogueEssence.Content.ActionPointType.Head)
   local shadow_pos = GROUND:CharGetAnimPoint(player, RogueEssence.Content.ActionPointType.Shadow)
-  GROUND:ActionToPosition(mew, frameAction, player.MapLoc.X, player.MapLoc.Y, 1, 2, shadow_pos.Y - head_pos.Y + 100)
+  GROUND:ActionToPosition(mew, frameAction, player.MapLoc.X, player.MapLoc.Y, 1, 0.2, shadow_pos.Y - head_pos.Y + 100)
   
   GAME:WaitFrames(30)
   mew.EntOrder = 1

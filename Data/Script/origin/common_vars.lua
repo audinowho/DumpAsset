@@ -146,21 +146,21 @@ function COMMON.UpdateDayEndVars()
   
   if SV.base_camp.CenterStatueDate == nil or SV.base_camp.CenterStatueDate == "" then
     if SV.guildmaster_summit.GameComplete == true then
-      SV.base_camp.CenterStatueDate = os.date("%B %m, %Y")
+      SV.base_camp.CenterStatueDate = os.date("%B %d, %Y")
 	end
   end
   
   if SV.base_camp.LeftStatueDate == nil or SV.base_camp.LeftStatueDate == "" then
     local all_done = false
     if all_done == true then
-      SV.base_camp.LeftStatueDate = os.date("%B %m, %Y")
+      SV.base_camp.LeftStatueDate = os.date("%B %d, %Y")
 	end
   end
   
   if SV.base_camp.RightStatueDate == nil or SV.base_camp.RightStatueDate == "" then
     local all_done = false
     if all_done == true then
-      SV.base_camp.RightStatueDate = os.date("%B %m, %Y")
+      SV.base_camp.RightStatueDate = os.date("%B %d, %Y")
 	end
   end
   

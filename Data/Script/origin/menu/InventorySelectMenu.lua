@@ -17,7 +17,7 @@ InventorySelectMenu = Class("InventorySelectMenu")
 --- @param filter function a function that takes a ``RogueEssence.Dungeon.InvSlot`` object and returns a boolean. Any slot that does not pass this check will have its option disabled in the menu. Defaults to ``return true``.
 --- @param confirm_action function the function called when the selection is confirmed. It will have a table array of ``RogueEssence.Dungeon.InvSlot`` objects passed to it as a parameter.
 --- @param refuse_action function the function called when the player presses the cancel or menu button.
---- @param confirm_button string the text used for the confirm button of ``ItemChosenMenu``.
+--- @param confirm_button string the text used for the confirm button of ``ItemChosenMenu``. If nil, the sub-menu will be skipped entirely.
 --- @param menu_width number the width of this window. Default is 176.
 --- @param include_equips boolean if true, the menu will include equipped items. Defaults to true.
 --- @param max_choices boolean if set, it will never be possible to select more than the amount of items defined here. Defaults to the amount of selectable items.
@@ -49,8 +49,13 @@ function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_ac
                 self.confirmAction(self.choices)
             end
         end
-        local menu = ItemChosenMenu:new(self.choices, self.menu, self.confirm_button, choose)
-        _MENU:AddMenu(menu.menu, true)
+
+        if not self.confirm_button then
+            choose(true)
+        else
+            local menu = ItemChosenMenu:new(self.choices, self.menu, self.confirm_button, choose)
+            _MENU:AddMenu(menu.menu, true)
+        end
     end
 
     self.choices = {} -- result
@@ -269,9 +274,9 @@ end
 --- Creates a basic ``InventorySelectMenu`` instance using the provided parameters, then runs it and returns its output.
 --- @param title string the title this window will have
 --- @param filter function a function that takes a ``RogueEssence.Dungeon.InvSlot`` object and returns a boolean. Any ``InvSlot`` that does not pass this check will have its option disabled in the menu. Defaults to ``return true``.
---- @param confirm_text string the text used by the confirm sub-menu's confirm option
+--- @param confirm_text string the text used by the confirm sub-menu's confirm option. If nil, the sub-menu will be skipped entirely.
 --- @param includeEquips boolean if true, the party's equipped items will be included in the menu. Defaults to true.
---- @param max_choices boolean if set, it will never be possible to select more than the amount of items defined here. Defaults to the amount of selectable items.
+--- @param max_choices number if set, it will never be possible to select more than the amount of items defined here. Defaults to the amount of selectable items.
 --- @return table a table array containing the chosen ``RogueEssence.Dungeon.InvSlot`` objects.
 function InventorySelectMenu.run(title, filter, confirm_text, includeEquips, max_choices)
     local ret = {}

@@ -39,7 +39,7 @@ function JuiceShopMenu:initialize(title, character, ingredients, confirm_action,
         end
     end
 
-    InventorySelectMenu.initialize(self, title, filter, confirm_action, refuse_action, 176, include_equips)
+    InventorySelectMenu.initialize(self, title, filter, confirm_action, refuse_action, STRINGS:FormatKey('MENU_ITEM_GIVE'), 176, include_equips)
 
     if show_preview then
         -- create the summary window

@@ -4,7 +4,7 @@
 
     Opens a menu, potentially with multiple pages, that allows the player to select one or
     more items in their inventory.
-    It contains a run method for quick instantiation.
+    It contains a run method for quick instantiation and an ItemChosenMenu port for confirmation.
     This equivalent is NOT SAFE FOR REPLAYS. Do NOT use in dungeons until further notice.
 ]]
 
@@ -17,9 +17,11 @@ InventorySelectMenu = Class("InventorySelectMenu")
 --- @param filter function a function that takes a ``RogueEssence.Dungeon.InvSlot`` object and returns a boolean. Any slot that does not pass this check will have its option disabled in the menu. Defaults to ``return true``.
 --- @param confirm_action function the function called when the selection is confirmed. It will have a table array of ``RogueEssence.Dungeon.InvSlot`` objects passed to it as a parameter.
 --- @param refuse_action function the function called when the player presses the cancel or menu button.
+--- @param confirm_button string the text used for the confirm button of ``ItemChosenMenu``. If nil, the sub-menu will be skipped entirely.
 --- @param menu_width number the width of this window. Default is 176.
 --- @param include_equips boolean if true, the menu will include equipped items. Defaults to true.
-function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_action, menu_width, include_equips)
+--- @param max_choices boolean if set, it will never be possible to select more than the amount of items defined here. Defaults to the amount of selectable items.
+function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_action, confirm_button, menu_width, include_equips, max_choices)
     if include_equips == nil then include_equips = true end
 
     -- constants
@@ -27,6 +29,7 @@ function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_ac
 
     -- parsing data
     self.title = title
+    self.confirm_button = confirm_button
     self.confirmAction = confirm_action
     self.refuseAction = refuse_action
     self.menuWidth = menu_width or 176
@@ -34,12 +37,25 @@ function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_ac
     self.includeEquips = include_equips
     self.slotList = self:load_slots()
     self.optionsList = self:generate_options()
+    self.max_choices_param = max_choices
     self.max_choices = self:count_valid()
+    if self.max_choices_param and self.max_choices_param < self.max_choices then self.max_choices = self.max_choices_param end
 
     self.multiConfirmAction = function(list)
-        _MENU:RemoveMenu()
         self.choices = self:multiConfirm(list)
-        self.confirmAction(self.choices)
+        local choose = function(answer)
+            if answer then
+                _MENU:RemoveMenu()
+                self.confirmAction(self.choices)
+            end
+        end
+
+        if not self.confirm_button then
+            choose(true)
+        else
+            local menu = ItemChosenMenu:new(self.choices, self.menu, self.confirm_button, choose)
+            _MENU:AddMenu(menu.menu, true)
+        end
     end
 
     self.choices = {} -- result
@@ -192,7 +208,7 @@ end
 --- Returns a newly created copy of this object
 --- @return userdata an ``InventorySelectMenu``.
 function InventorySelectMenu:cloneMenu()
-    return InventorySelectMenu:new(self.title, self.filter, self.confirmAction, self.refuseAction, self.menuWidth, self.includeEquips)
+    return InventorySelectMenu:new(self.title, self.filter, self.confirmAction, self.refuseAction, self.confirm_button, self.menuWidth, self.includeEquips, self.max_choices_param)
 end
 
 --- Updates the summary window.
@@ -215,17 +231,58 @@ end
 
 
 
+
+ItemChosenMenu = Class("ItemChosenMenu")
+
+--- Creates a new ``ItemChosenMenu`` instance using the provided object as parent.
+--- @param slots table the list of selected InvSlots
+--- @param parent userdata the parent menu
+--- @param confirm_text function the confirm button text
+--- @param confirm_action function the function that is called when the confirm button is pressed
+function ItemChosenMenu:initialize(slots, parent, confirm_text, confirm_action)
+    local x, y = parent.Bounds.Right, parent.Bounds.Top
+    local width = 72
+    if slots[1].IsEquipped then
+        self.first_item = _DATA.Save.ActiveTeam.Players[slots[1].Slot].EquippedItem
+    else
+        self.first_item = _DATA.Save.ActiveTeam:GetInv(slots[1].Slot)
+    end
+
+    self.confirmAction = confirm_action
+    local options = {
+        {confirm_text, true, function() self:choose(true) end},
+        {STRINGS:FormatKey("MENU_INFO"),      true, function() _MENU:AddMenu(RogueEssence.Menu.TeachInfoMenu(self.first_item), false) end},
+        {STRINGS:FormatKey("MENU_CANCEL"),    true, function() self:choose(false) end}
+    }
+    if #slots>1 or self.first_item.UsageType ~= RogueEssence.Data.ItemData.UseType.Learn then
+        table.remove(options, 2)
+    end
+
+    self.menu = RogueEssence.Menu.ScriptableSingleStripMenu(x, y, width, options, 0, function() self:choose(false) end)
+end
+
+function ItemChosenMenu:choose(result)
+    _MENU:RemoveMenu()
+    self.confirmAction(result)
+end
+
+
+
+
+
+
 --- Creates a basic ``InventorySelectMenu`` instance using the provided parameters, then runs it and returns its output.
 --- @param title string the title this window will have
 --- @param filter function a function that takes a ``RogueEssence.Dungeon.InvSlot`` object and returns a boolean. Any ``InvSlot`` that does not pass this check will have its option disabled in the menu. Defaults to ``return true``.
+--- @param confirm_text string the text used by the confirm sub-menu's confirm option. If nil, the sub-menu will be skipped entirely.
 --- @param includeEquips boolean if true, the party's equipped items will be included in the menu. Defaults to true.
---- @return userdata a table array containing the chosen ``RogueEssence.Dungeon.InvSlot`` objects.
-function InventorySelectMenu.run(title, filter, includeEquips)
-
+--- @param max_choices number if set, it will never be possible to select more than the amount of items defined here. Defaults to the amount of selectable items.
+--- @return table a table array containing the chosen ``RogueEssence.Dungeon.InvSlot`` objects.
+function InventorySelectMenu.run(title, filter, confirm_text, includeEquips, max_choices)
     local ret = {}
     local choose = function(list) ret = list end
     local refuse = function() _MENU:RemoveMenu() end
-    local menu = InventorySelectMenu:new(title, filter, choose, refuse, includeEquips)
+    local menu = InventorySelectMenu:new(title, filter, choose, refuse, confirm_text, 176, includeEquips, max_choices)
     UI:SetCustomMenu(menu.menu)
     UI:WaitForChoice()
     return ret

@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.8.4.0",
+"Version": "0.8.5.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -14,33 +14,93 @@
 }
 },
 "Desc": {
-"DefaultText": "",
+"DefaultText": "Cloaking itself in psychic energy, the user slams into the target. This also boosts the user’s Defense stat.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 828,
-"BaseCharges": 10,
+"BaseCharges": 12,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
+"$type": "RogueEssence.Dungeon.DashAction, RogueEssence",
+"Anim": {
+"AnimIndex": "Light_Pink",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 128,
+"AnimFlip": 0
+},
+"AnimOffset": 0,
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
 },
 "WideAngle": 0,
-"CharAnimData": {
-"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
-},
-"TargetAlignments": 4,
+"SnapBack": false,
+"CharAnim": 5,
+"AppearanceMod": 0,
+"HitTiles": true,
+"Range": 3,
+"StopAtHit": true,
+"StopAtWall": true,
+"TargetAlignments": 6,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"PreActions": [],
+"PreActions": [
+{
+"Delay": 30,
+"Sound": "_UNK_DUN_Energy",
+"Emitter": {
+"$type": "RogueEssence.Content.ListEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": [
+{
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Light_Pink",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 200,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 2,
+"FrameOffset": 0
+},
+{
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Protect_Blue",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 4,
+"FrameOffset": 0
+}
+],
+"Layer": 2,
+"UseDest": false
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
 "ActionFX": {
 "Delay": 0,
 "Sound": "",
@@ -57,7 +117,7 @@
 "LagBehindTime": 0
 },
 "Explosion": {
-"TargetAlignments": 4,
+"TargetAlignments": 6,
 "HitTiles": false,
 "Range": 0,
 "Speed": 0,
@@ -87,11 +147,18 @@
 "Data": {
 "Element": "psychic",
 "Category": 1,
-"HitRate": 90,
+"HitRate": 100,
 "SkillStates": [
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 70
+"Power": 60
+},
+{
+"$type": "PMDC.Dungeon.AdditionalEffectState, PMDC",
+"EffectChance": 100
+},
+{
+"$type": "PMDC.Dungeon.ContactState, PMDC"
 }
 ],
 "BeforeTryActions": [],
@@ -112,15 +179,92 @@
 }
 ],
 "OnHitTiles": [],
-"AfterActions": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AdditionalEndEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
+"Stack": 1,
+"StatusID": "mod_defense",
+"AffectTarget": false,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": null
+},
+"Anims": []
+}
+]
+}
+}
+],
 "ElementEffects": [],
-"IntroFX": [],
-"HitFX": {
+"IntroFX": [
+{
 "Delay": 0,
 "Sound": "",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Small_Pink_Out",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
+"HitFX": {
+"Delay": 0,
+"Sound": "DUN_Metal_Burst_2",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Blue_Out",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,

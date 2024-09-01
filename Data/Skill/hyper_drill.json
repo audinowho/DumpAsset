@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.8.4.0",
+"Version": "0.8.5.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -14,28 +14,38 @@
 }
 },
 "Desc": {
-"DefaultText": "",
+"DefaultText": "The user spins the pointed part of its body at high speed to pierce the target. This attack can hit a target using a move such as Protect or Detect.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 887,
-"BaseCharges": 5,
+"BaseCharges": 13,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
+"$type": "RogueEssence.Dungeon.DashAction, RogueEssence",
+"Anim": {
+"AnimIndex": "Fury_Attack",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"AnimOffset": 12,
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
 },
-"WideAngle": 0,
-"CharAnimData": {
-"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
-},
-"TargetAlignments": 4,
+"WideAngle": 1,
+"SnapBack": false,
+"CharAnim": 20,
+"AppearanceMod": 0,
+"HitTiles": true,
+"Range": 3,
+"StopAtHit": false,
+"StopAtWall": false,
+"TargetAlignments": 6,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -43,7 +53,7 @@
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Flash_Cannon",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -57,7 +67,7 @@
 "LagBehindTime": 0
 },
 "Explosion": {
-"TargetAlignments": 4,
+"TargetAlignments": 6,
 "HitTiles": false,
 "Range": 0,
 "Speed": 0,
@@ -90,15 +100,91 @@
 "HitRate": 100,
 "SkillStates": [
 {
+"$type": "PMDC.Dungeon.ContactState, PMDC"
+},
+{
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 100
+"Power": 80
 }
 ],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
 "BeforeExplosions": [],
-"BeforeHits": [],
+"BeforeHits": [
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveStatusBattleEvent, PMDC",
+"StatusID": "wide_guard",
+"AffectTarget": true
+}
+},
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveStatusBattleEvent, PMDC",
+"StatusID": "quick_guard",
+"AffectTarget": true
+}
+},
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveStatusBattleEvent, PMDC",
+"StatusID": "protect",
+"AffectTarget": true
+}
+},
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveStatusBattleEvent, PMDC",
+"StatusID": "all_protect",
+"AffectTarget": true
+}
+},
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveStatusBattleEvent, PMDC",
+"StatusID": "detect",
+"AffectTarget": true
+}
+},
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveStatusBattleEvent, PMDC",
+"StatusID": "kings_shield",
+"AffectTarget": true
+}
+}
+],
 "OnHits": [
 {
 "Key": {
@@ -111,7 +197,48 @@
 }
 }
 ],
-"OnHitTiles": [],
+"OnHitTiles": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveTerrainStateEvent, PMDC",
+"States": [
+{
+"assembly": "PMDC, Version=0.8.4.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.WallTerrainState"
+}
+],
+"RemoveSound": "DUN_Rollout",
+"RemoveAnim": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Wall_Break",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+}
+}
+}
+],
 "AfterActions": [],
 "ElementEffects": [],
 "IntroFX": [],

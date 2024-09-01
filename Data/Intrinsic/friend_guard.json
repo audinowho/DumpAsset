@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.8.4.0",
+"Version": "0.8.5.0",
 "Object": {
 "$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
 "Name": {
@@ -69,17 +69,35 @@
 "Denominator": 4,
 "Anims": [
 {
-"$type": "PMDC.Dungeon.MessageOnceEvent, PMDC",
-"AddedState": {
-"$type": "PMDC.Dungeon.FriendGuardProcEvent, PMDC"
+"$type": "PMDC.Dungeon.OwnerBattleAnimEvent, PMDC",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Charge_Up",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
 },
-"Global": false,
-"AffectTarget": true,
-"Message": {
-"Key": null
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
 },
-"Anims": [
+"Layer": 2,
+"UseDest": false
+},
+"Sound": "",
+"Delay": 0
+},
 {
+"$type": "PMDC.Dungeon.BattleAnimEvent, PMDC",
 "Emitter": {
 "$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
 "LocHeight": 0,
@@ -106,8 +124,6 @@
 "Sound": "DUN_Screen_Hit",
 "AffectTarget": true,
 "Delay": 10
-}
-]
 }
 ]
 }

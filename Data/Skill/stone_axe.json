@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.8.4.0",
+"Version": "0.8.5.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -14,39 +14,84 @@
 }
 },
 "Desc": {
-"DefaultText": "",
+"DefaultText": "The user swings its stone axes at the target. Stone splinters left behind by this attack float around the target.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 830,
 "BaseCharges": 15,
 "Strikes": 1,
 "HitboxAction": {
 "$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
+"HitTiles": true,
 "BurstTiles": 0,
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"WideAngle": 0,
+"WideAngle": 2,
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
+"ActionType": 13
 },
 "TargetAlignments": 4,
 "TileEmitter": {
+"$type": "RogueEssence.Content.FiniteAreaEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.EmittingAnim, RogueEssence",
+"ResultAnim": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
+},
+"Layer": 0,
+"Anim": {
+"AnimIndex": "Rock_Climb_Piece",
+"FrameTime": 2,
+"StartFrame": 2,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Range": 12,
+"Speed": 96,
+"TotalParticles": 3,
+"Layer": 2
 },
 "PreActions": [],
 "ActionFX": {
 "Delay": 0,
-"Sound": "",
+"Sound": "DUN_Rock_Climb",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Wide_Slash_Brown",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,
@@ -87,14 +132,17 @@
 "Data": {
 "Element": "rock",
 "Category": 1,
-"HitRate": 90,
+"HitRate": 100,
 "SkillStates": [
+{
+"$type": "PMDC.Dungeon.ContactState, PMDC"
+},
 {
 "$type": "PMDC.Dungeon.BladeState, PMDC"
 },
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 65
+"Power": 70
 }
 ],
 "BeforeTryActions": [],
@@ -114,7 +162,59 @@
 }
 }
 ],
-"OnHitTiles": [],
+"OnHitTiles": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RemoveTerrainStateEvent, PMDC",
+"States": [
+{
+"assembly": "PMDC, Version=0.8.4.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.FoliageTerrainState"
+}
+],
+"RemoveSound": "DUN_Charge_Start",
+"RemoveAnim": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Grass_Clear",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+}
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.SetTrapEvent, PMDC",
+"TrapID": "trap_stealth_rock"
+}
+}
+],
 "AfterActions": [],
 "ElementEffects": [],
 "IntroFX": [],

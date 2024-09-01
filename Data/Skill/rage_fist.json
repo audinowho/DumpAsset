@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.8.4.0",
+"Version": "0.8.5.0",
 "Object": {
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
@@ -14,33 +14,108 @@
 }
 },
 "Desc": {
-"DefaultText": "",
+"DefaultText": "The user converts its rage into energy to attack. The more times the user has been hit before attacking, the greater the move's power.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 889,
-"BaseCharges": 10,
+"BaseCharges": 14,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
+"$type": "RogueEssence.Dungeon.DashAction, RogueEssence",
+"Anim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"AnimOffset": 0,
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
 },
 "WideAngle": 0,
-"CharAnimData": {
-"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
-},
-"TargetAlignments": 4,
+"SnapBack": false,
+"CharAnim": 11,
+"AppearanceMod": 0,
+"HitTiles": true,
+"Range": 2,
+"StopAtHit": true,
+"StopAtWall": true,
+"TargetAlignments": 6,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"PreActions": [],
+"PreActions": [
+{
+"Delay": 0,
+"Sound": "DUN_Foggy",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Shadow_Force_Smoke_Reverse",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 1,
+"UseDest": false
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+{
+"Delay": 40,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Taunt_Veins",
+"FrameTime": 4,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
 "ActionFX": {
 "Delay": 0,
 "Sound": "",
@@ -57,7 +132,7 @@
 "LagBehindTime": 0
 },
 "Explosion": {
-"TargetAlignments": 4,
+"TargetAlignments": 6,
 "HitTiles": false,
 "Range": 0,
 "Speed": 0,
@@ -91,14 +166,35 @@
 "SkillStates": [
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 50
+"Power": 40
+},
+{
+"$type": "PMDC.Dungeon.ContactState, PMDC"
+},
+{
+"$type": "PMDC.Dungeon.FistState, PMDC"
 }
 ],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
 "BeforeExplosions": [],
-"BeforeHits": [],
+"BeforeHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.PrevHitBasePowerEvent, PMDC",
+"AddedPower": 40,
+"MaxStack": 10,
+"FromTarget": false,
+"PrevHitID": "was_hurt_since_attack"
+}
+}
+],
 "OnHits": [
 {
 "Key": {
@@ -114,13 +210,65 @@
 "OnHitTiles": [],
 "AfterActions": [],
 "ElementEffects": [],
-"IntroFX": [],
-"HitFX": {
+"IntroFX": [
+{
 "Delay": 0,
 "Sound": "",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Mega_Background_Light_Blue",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 1,
+"UseDest": false
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
+"HitFX": {
+"Delay": 0,
+"Sound": "DUN_Punch",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Print_Fist",
+"FrameTime": 12,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,

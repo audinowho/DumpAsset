@@ -169,9 +169,9 @@ function DrinkPreviewSummary:initialize(left, top, right, bottom, character, ing
 
     local GraphicsManager = RogueEssence.Content.GraphicsManager
     local x_pos  = GraphicsManager.MenuBG.TileWidth * 2
-    local x_pos2 = (self.window.Bounds.Width + GraphicsManager.MenuBG.TileWidth)//2 -3
-    local x_pos3 = (self.window.Bounds.Width + GraphicsManager.MenuBG.TileWidth)//2 +3
-    local x_pos4 = self.window.Bounds.Width - GraphicsManager.MenuBG.TileWidth * 2
+    local x_pos2 = (self.window.Bounds.Width + GraphicsManager.MenuBG.TileWidth)//2 -6
+    local x_pos3 = (self.window.Bounds.Width + GraphicsManager.MenuBG.TileWidth)//2 
+    local x_pos4 = self.window.Bounds.Width - GraphicsManager.MenuBG.TileWidth * 2 + 1
     self.growth = _DATA:GetGrowth(_DATA:GetMonster(character.BaseForm.Species).EXPTable)
 
     self.window.Elements:Add(RogueEssence.Menu.MenuText(character:GetDisplayName(false), RogueElements.Loc(x_pos, GraphicsManager.MenuBG.TileHeight)))

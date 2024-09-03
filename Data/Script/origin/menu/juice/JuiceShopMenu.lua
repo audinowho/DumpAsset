@@ -169,9 +169,9 @@ function DrinkPreviewSummary:initialize(left, top, right, bottom, character, ing
 
     local GraphicsManager = RogueEssence.Content.GraphicsManager
     local x_pos  = GraphicsManager.MenuBG.TileWidth * 2
-    local x_pos2 = (self.window.Bounds.Width + GraphicsManager.MenuBG.TileWidth)//2 -3
-    local x_pos3 = (self.window.Bounds.Width + GraphicsManager.MenuBG.TileWidth)//2 +3
-    local x_pos4 = self.window.Bounds.Width - GraphicsManager.MenuBG.TileWidth * 2
+    local x_pos2 = (self.window.Bounds.Width + GraphicsManager.MenuBG.TileWidth)//2 -6
+    local x_pos3 = (self.window.Bounds.Width + GraphicsManager.MenuBG.TileWidth)//2 
+    local x_pos4 = self.window.Bounds.Width - GraphicsManager.MenuBG.TileWidth * 2 + 1
     self.growth = _DATA:GetGrowth(_DATA:GetMonster(character.BaseForm.Species).EXPTable)
 
     self.window.Elements:Add(RogueEssence.Menu.MenuText(character:GetDisplayName(false), RogueElements.Loc(x_pos, GraphicsManager.MenuBG.TileHeight)))
@@ -180,10 +180,10 @@ function DrinkPreviewSummary:initialize(left, top, right, bottom, character, ing
     self.window.Elements:Add(RogueEssence.Menu.MenuText(STRINGS:FormatKey("MENU_TEAM_LEVEL")..": ", RogueElements.Loc(x_pos, GraphicsManager.MenuBG.TileHeight + 14)))
     self.window.Elements:Add(self.level_text)
 
-    local exp_text = STRINGS:FormatKey("MENU_TEAM_EXP_SHORT")..": "
+    local exp_text = STRINGS:FormatKey("MENU_TEAM_EXP_SHORT")
     local max = 0
     if self.data.Level<_DATA.Start.MaxLevel then max = self.growth:GetExpToNext(self.data.Level) end
-    local x_offset = GraphicsManager.TextFont:SubstringWidth(exp_text)
+    local x_offset = GraphicsManager.TextFont:SubstringWidth(exp_text) + 3
     local ratio = 1
     if max ~= 0 then ratio = self.data.EXP/max end
     local max_len = self.window.Bounds.Width - GraphicsManager.MenuBG.TileWidth * 4 - x_offset
@@ -430,8 +430,8 @@ function DrinkPreviewSummary:updateMenu()
     if spd_adjust ~= 0   then self.spd_text.Color = getAdjustColor(spd_adjust) end
 
     -- compute exp gauge data
-    local exp_text = STRINGS:FormatKey("MENU_TEAM_EXP_SHORT")..": "
-    local x_offset = GraphicsManager.TextFont:SubstringWidth(exp_text)
+    local exp_text = STRINGS:FormatKey("MENU_TEAM_EXP_SHORT")
+    local x_offset = GraphicsManager.TextFont:SubstringWidth(exp_text) + 3
     local max_len = self.window.Bounds.Width - GraphicsManager.MenuBG.TileWidth * 4 - x_offset
 
     local max = 0

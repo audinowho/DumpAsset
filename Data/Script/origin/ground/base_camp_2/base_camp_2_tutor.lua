@@ -163,7 +163,7 @@ function base_camp_2_tutor.Tutor_Teach_Flow(tutor_moves)
 		elseif state == 1 then
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Teach_What'], member:GetDisplayName(true)))
 	  local valid_moves = COMMON.GetTutorableMoves(member, tutor_moves) --moved out here
-	  local result = SkillTutorMenu.runTutorMenu(valid_moves, "loot_heart_scale")
+	  local result = SkillTutorMenu.runTutorMenu(valid_moves, "loot_heart_scale", false, true)
       if result ~= "" then
         move = result
         state = 2

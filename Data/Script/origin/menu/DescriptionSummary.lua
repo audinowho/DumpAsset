@@ -21,7 +21,7 @@ function DescriptionSummary:initialize(left, top, right, bottom)
     local GraphicsManager = RogueEssence.Content.GraphicsManager
     self.description_box = RogueEssence.Menu.DialogueText("", RogueElements.Rect.FromPoints(
             RogueElements.Loc(GraphicsManager.MenuBG.TileWidth * 2, GraphicsManager.MenuBG.TileHeight),
-            RogueElements.Loc(self.window.Bounds.Width - GraphicsManager.MenuBG.TileWidth * 4, self.window.Bounds.Height - GraphicsManager.MenuBG.TileHeight * 4)),
+            RogueElements.Loc(self.window.Bounds.Width - GraphicsManager.MenuBG.TileWidth * 2, self.window.Bounds.Height - GraphicsManager.MenuBG.TileHeight * 2)),
             12);
     self.window.Elements:Add(self.description_box);
 end

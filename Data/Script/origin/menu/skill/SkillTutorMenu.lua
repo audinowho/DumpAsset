@@ -5,8 +5,7 @@
     Opens a menu with multiple pages that allows the player to select a skill.
     The skills will have a cost in money or items associated with them, and will
     only be possible to choose if the requirement is fulfilled.
-    It contains a run method for quick instantiation, as well as a way to open
-    an (almost) exact equivalent of UI:RelearnMenu.
+    It contains a run method for quick instantiation.
     This equivalent is NOT SAFE FOR REPLAYS. Do not use in dungeons until further notice.
 ]]
 require 'origin.common'
@@ -23,7 +22,9 @@ SkillTutorMenu = Class("SkillTutorMenu", SkillSelectMenu)
 --- @param price_list table a lua array table containing ``{number, string}`` entries.
 --- @param confirm_action function the function called when a slot is chosen. It will have a skill id string passed to it as a parameter.
 --- @param refuse_action function the function called when the player presses the cancel or menu button.
-function SkillTutorMenu:initialize(title, skill_list, price_list, confirm_action, refuse_action)
+--- @param check_bank boolean if true, currencies will also count bank money. Defaults to false.
+--- @param check_storage boolean if true, currencies will also count stored items. Defaults to false.
+function SkillTutorMenu:initialize(title, skill_list, price_list, confirm_action, refuse_action, check_bank, check_storage)
     -- param validity check
     local len = 0
     if type(skill_list) == 'table' then len = #skill_list else len = skill_list.Count end
@@ -34,6 +35,8 @@ function SkillTutorMenu:initialize(title, skill_list, price_list, confirm_action
 
     self.priceList = self:load_prices(price_list)
     self.currencyList = self:load_currencies(price_list)
+    self.check_bank = check_bank or false
+    self.check_storage = check_storage or false
 
     -- superclass init
     SkillSelectMenu.initialize(self, title, nil, skill_list, confirm_action, refuse_action)
@@ -78,8 +81,12 @@ function SkillTutorMenu:load_currencies(price_list)
     for i=1, #price_list, 1 do
         local currency = price_list[i][2]
         if not list[currency] then
-            if currency == "" then list[currency] = GAME:GetPlayerMoney()
-            else list[currency] = COMMON.GetPlayerItemCount(currency) end
+            if currency == "" then
+                list[currency] = GAME:GetPlayerMoney()
+                if self.check_bank then
+                    list[currency] = list[currency] + GAME:GetPlayerMoneyBank()
+                end
+            else list[currency] = COMMON.GetPlayerItemCount(currency, self.check_storage) end
         end
     end
     return list
@@ -164,8 +171,10 @@ end
 --- or if ``price_list`` and ``skill_list`` contain a different number of entries.
 --- @param tutor_moves table the table containing all move data necessary for the menu to function.
 --- @param default_currency string the item id of the currency that will be used by all skills in the menu that do not specify one. ``""`` means money.
+--- @param check_bank boolean if true, currencies will also count bank money. Defaults to false.
+--- @param check_storage boolean if true, currencies will also count stored items. Defaults to false.
 --- @return string the id of the selected skill if one was chosen in the menu; ``""`` otherwise.
-function SkillTutorMenu.runTutorMenu(tutor_moves, default_currency)
+function SkillTutorMenu.runTutorMenu(tutor_moves, default_currency, check_bank, check_storage)
     --moved GetTutorableMoves call to base_camp_2\init, line 1199   -Nebula
     local tutor_skills = {}
     local tutor_prices = {}
@@ -194,7 +203,7 @@ function SkillTutorMenu.runTutorMenu(tutor_moves, default_currency)
     local ret = ""
     local choose = function(move) ret = move end
     local refuse = function() _MENU:RemoveMenu() end
-    local menu = SkillTutorMenu:new(RogueEssence.StringKey("MENU_SKILL_TUTOR"):ToLocal(), tutor_skills, tutor_prices, choose, refuse)
+    local menu = SkillTutorMenu:new(RogueEssence.StringKey("MENU_SKILL_TUTOR"):ToLocal(), tutor_skills, tutor_prices, choose, refuse, check_bank, check_storage)
     UI:SetCustomMenu(menu.menu)
     UI:WaitForChoice()
     return ret

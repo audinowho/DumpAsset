@@ -29,10 +29,26 @@ Press [S] while viewing your Inventory to sort your items.
 [F1] to show FPS counter. and Build data
 
 [TROUBLESHOOTING - for if the game fails to work]
-If you're on Windows, and the game is unable to load certain DLLs, you may need to install Microsoft Visual C++ 2010 Redistributable Package (x86).
-This most commonly occurs on newly installed computers.  You can find an installer at:
-https://www.microsoft.com/en-us/download/details.aspx?id=5555
-https://www.microsoft.com/en-us/download/details.aspx?id=52685
+
+Check to make sure you have minimum system requirements.  They are needed for FNA games in general https://fna-xna.github.io/docs/3%3A-Distributing-FNA-Games/:
+
+Windows:
+OS: Windows 7, fully updated
+Graphics (Minimum): Direct3D 11 support (feature level 10_0)
+Graphics (Recommended): Vulkan support
+
+Linux:
+OS: glibc 2.28+, 64-bit only
+Graphics (Minimum): OpenGL 3.0+ support (2.1 with ARB extensions acceptable)
+Graphics (Recommended): Vulkan support
+
+macOS:
+OS: 10.9 Mavericks and newer
+Graphics (Minimum): OpenGL 3.0+ support (2.1 with ARB extensions acceptable)
+Graphics (Recommended): Metal support
+
+Other: SDL_GameController devices fully supported
+
 
 If you're on Windows, and the audio has a strange crunching sound, you will need the game to run with a different audio driver, most likely wasapi.  You can do this by running the game with "-audiodriver:wasapi" as a command line argument.
 

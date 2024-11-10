@@ -7,7 +7,7 @@ end
 
 PresetMultiTeamSpawnerType = luanet.import_type('RogueEssence.LevelGen.PresetMultiTeamSpawner`1')
 PlaceRandomMobsStepType = luanet.import_type('RogueEssence.LevelGen.PlaceRandomMobsStep`1')
-PlaceEntranceMobsStepType = luanet.import_type('RogueEssence.LevelGen.PlaceNearSpawnableMobsStep`2')
+PlaceNearSpawnableMobsStep = luanet.import_type('RogueEssence.LevelGen.PlaceNearSpawnableMobsStep`2')
 MapEffectStepType = luanet.import_type('RogueEssence.LevelGen.MapEffectStep`1')
 MapGenContextType = luanet.import_type('RogueEssence.LevelGen.ListMapGenContext')
 EntranceType = luanet.import_type('RogueEssence.LevelGen.MapGenEntrance')
@@ -69,7 +69,7 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
         specificTeam.Spawns:Add(post_mob)
         local picker = LUA_ENGINE:MakeGenericType(PresetMultiTeamSpawnerType, { MapGenContextType }, { })
         picker.Spawns:Add(specificTeam)
-        local mobPlacement = LUA_ENGINE:MakeGenericType(PlaceEntranceMobsStepType, { MapGenContextType, EntranceType }, { picker })
+        local mobPlacement = LUA_ENGINE:MakeGenericType(PlaceNearSpawnableMobsStep, { MapGenContextType, EntranceType }, { picker })
 		
         if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
           mobPlacement.Ally = true

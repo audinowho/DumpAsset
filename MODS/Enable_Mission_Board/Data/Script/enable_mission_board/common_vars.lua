@@ -29,8 +29,6 @@ end
 
 function COMMON.ExitDungeonMissionCheckEx(result, rescue, zoneId, segmentID)
     --remove all guests from the dungeon
-    RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS = 4
-
     _DATA.Save.ActiveTeam.Guests:Clear()
 
     --Remove any lost/stolen items. If the item's ID starts with "mission" then delete it on exiting the dungeon.

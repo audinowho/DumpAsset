@@ -26,17 +26,15 @@ function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed
     local escortMissionNum = nil
     local destinationFloor = false
     local outlawFloor = false
-    local escortDeathEvent = false
     local activeEffect = RogueEssence.Data.ActiveEffect()
 
     for _, name in ipairs(COMMON.GetSortedKeys(SV.TakenBoard)) do
         mission = SV.TakenBoard[name]
         if mission.Taken and mission.Completion == COMMON.MISSION_INCOMPLETE and zoneContext.CurrentZone == mission.Zone and mission.BackReference ~= COMMON.FLEE_BACKREFERENCE then
             if mission.Type == COMMON.MISSION_TYPE_ESCORT or mission.Type == COMMON.MISSION_TYPE_EXPLORATION then
-                PrintInfo("Adding escort death event...")
-                escortDeathEvent = true
                 escortMissionNum = name
             end
+			
             if zoneContext.CurrentSegment == mission.Segment and zoneContext.CurrentID + 1 == mission.Floor then
                 curMission = mission
                 missionNum = name
@@ -103,10 +101,6 @@ function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed
         --tbl.MissionNumber = missionNum
     end
 
-    if escortDeathEvent then
-        --tbl.EscortMissionNum = escortMissionNum
-        activeEffect.OnDeaths:Add(6, RogueEssence.Dungeon.SingleCharScriptEvent("MissionGuestCheck", '{ Mission = '..escortMissionNum..' }'))
-    end
     if destinationFloor then
         -- add destination floor notification
         activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("DestinationFloor", '{ Mission = '..missionNum..' }'))
@@ -116,7 +110,6 @@ function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed
             local clientName = curMission.Client
             if escort ~= nil then
                 PrintInfo("Client name: "..clientName)
-                curMission.Completion = 1
                 activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("ExplorationReached", '{  Mission = '..escortMissionNum..' }'))
             end
         elseif missionType == COMMON.MISSION_TYPE_LOST_ITEM then
@@ -148,7 +141,7 @@ function ZONE_GEN_SCRIPT.GenerateMissionFromSV(zoneContext, context, queue, seed
         --tbl.MissionType = COMMON.MISSION_BOARD_MISSION 
     end
 
-    if escortDeathEvent or destinationFloor or outlawFloor then
+    if destinationFloor or outlawFloor then
         local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
         local priority = RogueElements.Priority(-6)
         queue:Enqueue(priority, destNote)

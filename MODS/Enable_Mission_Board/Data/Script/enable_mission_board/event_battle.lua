@@ -190,7 +190,7 @@ function BATTLE_SCRIPT.EscortReached(owner, ownerChar, context, args)
         local mission = SV.TakenBoard[tbl.Mission]
         local escort = COMMON.FindMissionEscort(tbl.Mission)
         local escortName = _DATA:GetMonster(mission.Client):GetColoredName()
-        if escort then
+        if escort and not escort.Dead then
             local oldDir = context.Target.CharDir
             DUNGEON:CharTurnToChar(context.Target, context.User)
             UI:ResetSpeaker()
@@ -211,9 +211,6 @@ function BATTLE_SCRIPT.EscortReached(owner, ownerChar, context, args)
                 UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_DEPART"):ToLocal(), escortName))
                 GAME:WaitFrames(20)
 
-                --Set max team size to 4 as the guest is no longer "taking" up a party slot
-                RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS = 4
-
                 -- warp out
                 TASK:WaitTask(_DUNGEON:ProcessBattleFX(escort, escort, _DATA.SendHomeFX))
                 _DUNGEON:RemoveChar(escort)
@@ -227,6 +224,8 @@ function BATTLE_SCRIPT.EscortReached(owner, ownerChar, context, args)
             else
                 UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_UNAVAILABLE"):ToLocal(), escortName))
             end
+		else
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_UNAVAILABLE"):ToLocal(), escortName))
         end
     end
 end

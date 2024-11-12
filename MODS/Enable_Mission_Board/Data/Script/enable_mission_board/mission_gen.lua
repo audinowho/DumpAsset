@@ -2406,28 +2406,12 @@ function MISSION_GEN.GenerateBoard(result, board_type)
             --2 in 3 chance of normal
             local roll = math.random(1, 10)
             if roll <= 2 then
-                --if there's already an escort or exploration mission generated for this dungeon, don't gen another one and just make it a rescue.
                 if roll == 1 then
                     --1/10 chance of exploration (becomes regular rescue mission)
                     objective = COMMON.MISSION_TYPE_EXPLORATION
                 else
                     --1/10 chance of escort (becomes regular rescue mission)
                     objective = COMMON.MISSION_TYPE_ESCORT
-                end
-
-                --only check from 1 to i-1 to save time.
-                for j = 1, i-1, 1 do
-                    if SV.MissionBoard[j].Zone == dungeon and (SV.MissionBoard[j].Type == COMMON.MISSION_TYPE_ESCORT or SV.MissionBoard[j].Type == COMMON.MISSION_TYPE_EXPLORATION) then
-                        objective = COMMON.MISSION_TYPE_RESCUE
-                        break
-                    end
-                end
-
-                for j = 1, 8, 1 do
-                    if SV.TakenBoard[j].Zone == dungeon and (SV.TakenBoard[j].Type == COMMON.MISSION_TYPE_ESCORT or SV.TakenBoard[j].Type == COMMON.MISSION_TYPE_EXPLORATION) then
-                        objective = COMMON.MISSION_TYPE_RESCUE
-                        break
-                    end
                 end
             elseif roll <= 3 then
                 --1/10 chance of delivery

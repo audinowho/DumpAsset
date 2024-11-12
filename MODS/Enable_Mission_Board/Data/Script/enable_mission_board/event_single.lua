@@ -5,14 +5,18 @@ MobSpawnType = luanet.import_type('RogueEssence.LevelGen.MobSpawn')
 
 
 function SINGLE_CHAR_SCRIPT.ExplorationReached(owner, ownerChar, context, args)
+	if context.User ~= nil then
+		return
+	end
 	local index = args.Mission
 	local mission = SV.TakenBoard[index]
 	local escort = COMMON.FindMissionEscort(index)
 	local escortName = _DATA:GetMonster(mission.Client):GetColoredName()
 	PrintInfo("Exploration reached at index "..index.." !")
-	if escort ~= nil and escortName ~= nil then
+	if escort ~= nil and escortName ~= nil and not escort.Dead then
 		UI:ResetSpeaker()
 		SV.TemporaryFlags.MissionCompleted = true
+        mission.Completion = 1
 		UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_EXPLORATION_REACHED"):ToLocal(), escortName))
 		SV.TemporaryFlags.PriorMapSetting = _DUNGEON.ShowMap
 		_DUNGEON.ShowMap = _DUNGEON.MinimapState.None
@@ -24,9 +28,6 @@ function SINGLE_CHAR_SCRIPT.ExplorationReached(owner, ownerChar, context, args)
 		UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_EXPLORATION_DEPART"):ToLocal(), escortName))
 		GAME:WaitFrames(20)
 
-		--Set max team size to 4 as the guest is no longer "taking" up a party slot
-		RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS = 4
-
 		-- warp out
 		TASK:WaitTask(_DUNGEON:ProcessBattleFX(escort, escort, _DATA.SendHomeFX))
 		_DUNGEON:RemoveChar(escort)
@@ -34,6 +35,8 @@ function SINGLE_CHAR_SCRIPT.ExplorationReached(owner, ownerChar, context, args)
 
 		GAME:WaitFrames(50)
 		COMMON.AskMissionWarpOut()
+	else
+		UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_UNAVAILABLE"):ToLocal(), escortName))
 	end
 end
 

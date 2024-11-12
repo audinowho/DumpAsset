@@ -1058,9 +1058,9 @@
             Character's direction.
             </summary>
         </member>
-        <member name="F:RogueEssence.Dungeon.Character.MustHitNext">
+        <member name="F:RogueEssence.Dungeon.Character.MissChain">
             <summary>
-            Guaranteed to hit next attack
+            Times missed
             </summary>
         </member>
         <member name="P:RogueEssence.Dungeon.Character.TurnWait">
@@ -2354,13 +2354,45 @@
             <param name="type"></param>
             <returns></returns>
         </member>
+        <member name="M:RogueEssence.Data.DataManager.LoadModData``1(RogueEssence.ModHeader,System.String,System.String,System.String)">
+            <summary>
+            Loads the data of the specified mod, and does not fall back to base if there is no mod.
+            Used for reserializing/resaving where either the base or the mod's files ONLY need to be resaved.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="mod"></param>
+            <param name="subpath"></param>
+            <param name="file"></param>
+            <param name="ext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.GetDataModStatus(System.String,System.String,System.String)">
+            <summary>
+            Returns information of how a file has been modded, if at all.
+            </summary>
+            <param name="subpath"></param>
+            <param name="file"></param>
+            <param name="ext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Data.DataManager.SaveData(System.Object,System.String,System.String,System.String,RogueEssence.Data.DataManager.SavePolicy)">
+            <summary>
+            Provides the ability to save it as a file or a mod based on whether it was loaded as a diff or not... aka whether it was a diff as a file or not.
+            Can also save explicitly as a file or diff.
+            </summary>
+            <param name="entry"></param>
+            <param name="subpath"></param>
+            <param name="file"></param>
+            <param name="ext"></param>
+            <param name="savePolicy"></param>
+        </member>
         <member name="M:RogueEssence.Data.DataManager.SaveObject(System.Object,System.String,System.String)">
             <summary>
             
             </summary>
             <param name="entry"></param>
-            <param name="path"></param>
-            <param name="diffpath">The base file to diff the json against.  Do not save as a patch if left blank.</param>
+            <param name="path">The location to save the file if not as a patch.</param>
+            <param name="basePath">The base file to diff the json against.  Do not save as a patch if left blank.</param>
         </member>
         <member name="M:RogueEssence.Data.DataManager.GetZone(System.String)">
             <summary>
@@ -6374,6 +6406,11 @@
             Called when the menu button is pressed!
             </summary>
         </member>
+        <member name="M:RogueEssence.Script.LuaEngine.OnAddMenu(RogueEssence.Menu.IInteractable)">
+            <summary>
+            Called when a menu is about to be added to the menu stack!
+            </summary>
+        </member>
         <member name="M:RogueEssence.Script.LuaEngine.OnMusicChange(System.String,System.String,System.String,System.String,System.String)">
             <summary>
             Called when the music changes!
@@ -8031,11 +8068,11 @@
         <member name="F:RogueEssence.Script.ScriptTask.WaitTask">
             <summary>
             Runs a task and waits for it to complete.
-            Most methods that do not expose themselves to script need ot be wrapped with this.
+            Most methods that do not expose themselves to script need to be wrapped with this.
             </summary>
             <param name="obj">The task to wait on.</param>
             <example>
-            TASK:WaitTask(_DUNGEON:AddMapStatus("rain"))
+            TASK:WaitTask(_DUNGEON:DropMoney(100, RogueElements.Loc(10, 10), RogueElements.Loc(10, 10)))
             </example>
         </member>
         <member name="M:RogueEssence.Script.ScriptTask.StartScriptLocalCoroutine(NLua.LuaFunction,System.Object[])">
@@ -8664,6 +8701,12 @@
             frames between speech blip
             </summary>
         </member>
+        <member name="M:RogueEssence.Menu.MenuBase.GetDrawElements">
+            <summary>
+            Returns an iterator of all elements for the purpose of drawing.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="F:RogueEssence.Menu.DialogueText.textColor">
             <summary>
             Text color starts and stops.
@@ -8699,6 +8742,12 @@
         <member name="M:RogueEssence.Menu.DialogueText.GetLineTrim(System.Int32)">
             <summary>
             When a text is broken up into lines, some trimming occurs at the beginning.  This obtains that value so callers can keep in sync with the character position mappings.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Menu.MenuChoice.GetDrawElements">
+            <summary>
+            Returns an iterator of all elements for the purpose of drawing.
             </summary>
             <returns></returns>
         </member>
@@ -8742,17 +8791,37 @@
             </summary>
             <param name="choice">Choice must be premapped</param>
         </member>
+        <member name="P:RogueEssence.PathMod.BaseNamespace">
+            <summary>
+            The namespace for the base game, relative to mods
+            </summary>
+        </member>
+        <member name="P:RogueEssence.PathMod.BaseScriptNamespaces">
+            <summary>
+            Additional namespaces of the base game, purely for use in scripting
+            </summary>
+        </member>
         <member name="P:RogueEssence.PathMod.Mods">
             <summary>
             Filename of mod relative to executable
             </summary>
         </member>
-        <member name="M:RogueEssence.PathMod.GetRelativePath(System.String)">
+        <member name="M:RogueEssence.PathMod.GetRelativePath(System.String,System.String)">
             <summary>
-            Takes a full path and returns a new path that is relative to the executable folder.
+            Takes a full path and returns a new path that is relative to the relativeFrom folder.
             </summary>
             <param name="path"></param>
             <returns></returns>
+        </member>
+        <member name="M:RogueEssence.PathMod.FallforthScriptMods(System.String)">
+            <summary>
+            Scripts are the ONLY place that use the additional script namespaces, so a special iterator must be used for them.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.PathMod.FallbackScriptMods(System.String)">
+            <summary>
+            Scripts are the ONLY place that use the additional script namespaces, so a special iterator must be used for them.
+            </summary>
         </member>
         <member name="M:RogueEssence.PathMod.DiffModVersions(System.Collections.Generic.List{RogueEssence.ModVersion},System.Collections.Generic.List{RogueEssence.ModVersion})">
             <summary>

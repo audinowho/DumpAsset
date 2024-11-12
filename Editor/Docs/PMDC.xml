@@ -266,6 +266,26 @@
             Whether to restrict the Pokemon's movement on passable terrain as well.
             </summary>
         </member>
+        <member name="F:PMDC.Dungeon.AIPlan.AttackRange">
+            <summary>
+            The minimum range that an opponent must be in, before the AI will consider attacking moves.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIPlan.StatusRange">
+            <summary>
+            The minimum range that an opponent must be in, before the AI will consider enemy-targeting status moves.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIPlan.SelfStatusRange">
+            <summary>
+            The minimum range that an opponent must be in, before the AI will consider self-targeting status moves.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.AIPlan.AbandonRangeOnHit">
+            <summary>
+            If attacked, will attack the opponents from any range regardless of their range limitation.
+            </summary>
+        </member>
         <member name="F:PMDC.Dungeon.AIPlan.AttackChoice.StandardAttack">
             <summary>
             Only chooses standard attack.
@@ -616,6 +636,26 @@
             </summary>
         </member>
         <member name="F:PMDC.Dungeon.BattleAnimEvent.Delay">
+            <summary>
+            The delay after the VFX
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.OwnerBattleAnimEvent">
+            <summary>
+            Event that applies a VFX on the owner character only
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.OwnerBattleAnimEvent.Emitter">
+            <summary>
+            The particle VFX 
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.OwnerBattleAnimEvent.Sound">
+            <summary>
+            The sound effect of the VFX
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.OwnerBattleAnimEvent.Delay">
             <summary>
             The delay after the VFX
             </summary>
@@ -1951,6 +1991,11 @@
             The range modifier
             </summary>
         </member>
+        <member name="F:PMDC.Dungeon.AddRangeEvent.Anims">
+            <summary>
+            The list of battle events that will be applied
+            </summary>
+        </member>
         <member name="T:PMDC.Dungeon.ElementAddRangeEvent">
             <summary>
             Event that modifies the range if the user is the specified type
@@ -1993,6 +2038,21 @@
         <member name="T:PMDC.Dungeon.SheerForceEvent">
             <summary>
             Event that sets the rate in the AdditionalEffectState skill state to 0 and boosts the damage multiplier
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.DistantGuardEvent">
+            <summary>
+            Event that causes the move to miss if the range of the move is executed from a distance greater than the specified amount
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.DistantGuardEvent.Distance">
+            <summary>
+            Attacks greater than this distances will be blocked.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.DistantGuardEvent.Anims">
+            <summary>
+            The list of battle events that will be applied
             </summary>
         </member>
         <member name="T:PMDC.Dungeon.LongRangeGuardEvent">
@@ -2827,6 +2887,26 @@
             </summary>
         </member>
         <member name="F:PMDC.Dungeon.StatBasePowerEvent.FromTarget">
+            <summary>
+            Whether to check the target or user
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.PrevHitBasePowerEvent">
+            <summary>
+            Event that boosts the power of moves depending on the number of times being hit before acting
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.PrevHitBasePowerEvent.AddedPower">
+            <summary>
+            The base power for each stat change
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.PrevHitBasePowerEvent.MaxStack">
+            <summary>
+            The maximum stack limit
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.PrevHitBasePowerEvent.FromTarget">
             <summary>
             Whether to check the target or user
             </summary>
@@ -3994,7 +4074,7 @@
         </member>
         <member name="T:PMDC.Dungeon.RemoveBattleEvent">
             <summary>
-            Event that removes its status from the user 
+            Event that removes its status from the user, automatically determining which ones they are
             This event can only be used on statuses
             </summary>
         </member>
@@ -6418,6 +6498,13 @@
         <member name="F:PMDC.LevelGen.MobCheckSaveVar.SaveVar">
             <summary>
             The savevar to query
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobCheckSaveVar.Status">
+            <summary>
+            The the status to compare to in order to allow the spawn to occur.
+            if it's set to true, it'll spawn only if the savevar is set to true
+            if it's set to false, it'll spawn only if the savevar is set to false
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.MobCheckTimeOfDay">

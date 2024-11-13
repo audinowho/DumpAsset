@@ -351,7 +351,7 @@ function SINGLE_CHAR_SCRIPT.UpdateEscort(owner, ownerChar, context, args)
 	    local mission = SV.missions.Missions[e_tbl.Escort]
 	    if mission ~= nil then
 	      if mission.Type == COMMON.MISSION_TYPE_ESCORT_OUT then
-		    if _ZONE.CurrentMapID.Segment == 0 then
+		    if _ZONE.CurrentMapID.Segment == mission.DestSegment then
 		      mission.DestFloor = _ZONE.CurrentMapID.ID
 		    end
 	      end

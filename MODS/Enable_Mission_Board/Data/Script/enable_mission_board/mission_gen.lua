@@ -3643,7 +3643,7 @@ function DungeonJobList:DrawMenu()
             --only look at jobs in the current dungeon that aren't suspended
             if self.jobs[i].Zone == self.dungeon and self.jobs[i].Taken then
                 if self.jobs[i].Segment == self.section then
-                    local floor = MISSION_GEN.GetStairsType(self.jobs[i].Zone) ..'[color=#00FFFF]' .. tostring(self.jobs[i].Floor) .. "[color]F"
+                    local floor_num = MISSION_GEN.GetStairsType(self.jobs[i].Zone) ..'[color=#00FFFF]' .. tostring(self.jobs[i].Floor) .. "[color]F"
                     local objective = ""
                     local icon = ""
                     local goal = self.jobs[i].Type
@@ -3689,7 +3689,7 @@ function DungeonJobList:DrawMenu()
                     end
 
                     self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(icon, RogueElements.Loc(16, 24 + 14 * count)))
-                    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(floor, RogueElements.Loc(28, 24 + 14 * count)))
+                    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(floor_num, RogueElements.Loc(28, 24 + 14 * count)))
                     self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(objective, RogueElements.Loc(60, 24 + 14 * count)))
 
                     count = count + 1
@@ -3717,8 +3717,25 @@ function DungeonJobList:DrawMenu()
         end
         self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(message, RogueElements.Loc(16, yloc)))
     elseif count == 0 then
-        message = Text.FormatKey("MISSION_OBJECTIVES_DEFAULT")
-        self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(message, RogueElements.Loc(16, 12 + 14)))
+		if _DATA.Save.Rescue ~= nil and _DATA.Save.Rescue.Rescuing then
+			if self.section ~= _DATA.Save.Rescue.SOS.Goal.StructID.Segment then
+				zone_string = _DATA:GetZone(_DATA.Save.Rescue.SOS.Goal.ID).Segments[_DATA.Save.Rescue.SOS.Goal.StructID.Segment]:ToString()
+				zone_string = COMMON.CreateColoredSegmentString(zone_string)
+				
+				self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(message, RogueElements.Loc(16, 12 + 14)))
+			else
+				local floor_num = MISSION_GEN.GetStairsType(_DATA.Save.Rescue.SOS.Goal.ID) ..'[color=#00FFFF]' .. tostring(_DATA.Save.Rescue.SOS.Goal.StructID.ID) .. "[color]F"
+				icon = STRINGS:Format("\\uE10F")--open letter
+				objective = Text.FormatKey("MISSION_OBJECTIVES_RESCUE", _DATA.Save.Rescue.SOS.TeamName)
+				
+				self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(icon, RogueElements.Loc(16, 12 + 14)))
+				self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(floor_num, RogueElements.Loc(28, 12 + 14)))
+				self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(objective, RogueElements.Loc(60, 12 + 14)))
+			end
+		else
+			message = Text.FormatKey("MISSION_OBJECTIVES_DEFAULT")
+			self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(message, RogueElements.Loc(16, 12 + 14)))
+		end
     end
 end
 

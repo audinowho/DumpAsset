@@ -18,6 +18,23 @@ PresetMultiRandType = luanet.import_type('RogueElements.PresetMultiRand`1')
 PresetPickerType = luanet.import_type('RogueElements.PresetPicker`1')
 MapItemType = luanet.import_type('RogueEssence.Dungeon.MapItem')
 
+function ZONE_GEN_SCRIPT.SpawnRescueNote(zoneContext, context, queue, seed, args)
+  if _DATA.Save.Rescue == nil or not _DATA.Save.Rescue.Rescuing then
+    return
+  end
+  
+  if zoneContext.CurrentZone == _DATA.Save.Rescue.SOS.Goal.ID
+	  and zoneContext.CurrentSegment == _DATA.Save.Rescue.SOS.Goal.StructID.Segment and zoneContext.CurrentID == _DATA.Save.Rescue.SOS.Goal.StructID.ID then
+
+    -- add destination floor notification
+    local activeEffect = RogueEssence.Data.ActiveEffect()
+    activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("DestinationFloor"))
+    local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
+    local priority = RogueElements.Priority(-6)
+    queue:Enqueue(priority, destNote)
+	
+  end
+end
 
 function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed, args)
   if _DATA.Save.Rescue ~= nil and _DATA.Save.Rescue.Rescuing then

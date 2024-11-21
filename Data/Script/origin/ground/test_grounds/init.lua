@@ -853,10 +853,34 @@ function test_grounds.Merchant_Action(chara, activator)
   local tutor_choices = {RogueEssence.StringKey("MENU_RECALL_SKILL"):ToLocal(),
   RogueEssence.StringKey("MENU_FORGET_SKILL"):ToLocal(),
   STRINGS:FormatKey("MENU_INFO"),
+  "Test Waits",
   STRINGS:FormatKey("MENU_EXIT")}
-  UI:BeginMultiPageMenu(24, 24, 196, "Title Name", tutor_choices, 8, 1, 4)
+  UI:BeginMultiPageMenu(24, 24, 196, "Title Name", tutor_choices, 8, 1, 5)
   UI:WaitForChoice()
-  PrintInfo(UI:ChoiceResult())
+  local res = UI:ChoiceResult()
+  PrintInfo(res)
+  if res == 4 then
+    UI:WaitShowDialogue("Okay. After this box is gone, press any button to continue.")
+    UI:WaitInput(true)
+    UI:WaitShowDialogue("Now press the Continue button.")
+    UI:WaitInput(false)
+    UI:WaitShowDialogue("Now either TeamMode or SortItems.")
+    UI:WaitForPlayerInput({7, RogueEssence.FrameInput.InputType.SortItems})
+    
+    local stop = false
+    local fun = function()
+        while not stop do
+            GROUND:CharAnimateTurn(activator, Direction.Down, 2, true)
+            GROUND:CharAnimateTurn(activator, Direction.Up, 2, true)
+        end
+    end
+    local coro = TASK:BranchCoroutine(fun)
+    UI:WaitShowDialogue("Press the Cancel button to stop spinning.")
+    UI:WaitForPlayerInput({RogueEssence.FrameInput.InputType.Cancel})
+    stop = true
+    TASK:JoinCoroutines({coro})
+    UI:WaitShowDialogue("Nicely done!")
+  end
 end
 
 --[[

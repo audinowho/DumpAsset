@@ -109,6 +109,8 @@ function test_grounds.Sign1_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo('Sign1_Action')
   
+
+  
   local zone = _DATA:GetZone("faded_trail")
   local cur_floor = zone.Segments[0].Floors[0]
   local priorities = LUA_ENGINE:MakeList(cur_floor.GenSteps)

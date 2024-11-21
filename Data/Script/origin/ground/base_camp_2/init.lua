@@ -1243,8 +1243,32 @@ function base_camp_2.Music_Action(obj, activator)
   UI:SetSpeaker(chara)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Music_Intro']))
   local unlocks = {}
+  table.insert(unlocks, "MAIN_00")
+  if SV.forest_camp.ExpositionComplete then
+    table.insert(unlocks, "MAIN_01")
+  end
   if SV.cliff_camp.ExpositionComplete then
-    table.insert(unlocks, "MAIN_001")
+    table.insert(unlocks, "MAIN_02")
+  end
+  if SV.canyon_camp.ExpositionComplete then
+    table.insert(unlocks, "MAIN_03")
+  end
+  if SV.rest_stop.ExpositionComplete then
+    table.insert(unlocks, "MAIN_04")
+  end
+  if SV.final_stop.ExpositionComplete then
+    table.insert(unlocks, "MAIN_05")
+  end
+  if SV.guildmaster_summit.GameComplete then
+    table.insert(unlocks, "GUILDMASTER")
+  end
+  
+  zones = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:GetOrderedKeys(false)
+  for zone_idx = 0, zones.Count - 1, 1  do
+    zone = zones[zone_idx]
+    if _DATA.Save:GetDungeonUnlock(zone) == RogueEssence.Data.GameProgress.UnlockState.Completed then
+      table.insert(unlocks, "DUN_" .. zone)
+    end
   end
   UI:ShowMusicMenu(unlocks)
   UI:WaitForChoice()

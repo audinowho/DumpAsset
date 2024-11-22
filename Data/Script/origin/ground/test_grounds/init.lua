@@ -31,6 +31,7 @@ function test_grounds.Init(map)
   local partner = CH('Partner')
   AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
   partner.CollisionDisabled = true
+  partner.InteractOrder = 1
 	
   --Set Poochy AI
   local poochy = CH("Poochy")
@@ -690,18 +691,18 @@ function ExampleMenu:initialize()
   self.menu = RogueEssence.Menu.ScriptableMenu(24, 24, 196, 128, function(input) self:Update(input) end)
   
   self.cursor = RogueEssence.Menu.MenuCursor(self.menu)
-  self.menu.MenuElements:Add(self.cursor)
-  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Test String", RogueElements.Loc(16, 8 + 12 * 0)))
-  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Apple", RogueElements.Loc(88, 8 + 12 * 0)))
-  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Test String 2", RogueElements.Loc(16, 8 + 12 * 1)))
-  self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Orange", RogueElements.Loc(88, 8 + 12 * 1)))
+  self.menu.Elements:Add(self.cursor)
+  self.menu.Elements:Add(RogueEssence.Menu.MenuText("Test String", RogueElements.Loc(16, 8 + 12 * 0)))
+  self.menu.Elements:Add(RogueEssence.Menu.MenuText("Apple", RogueElements.Loc(88, 8 + 12 * 0)))
+  self.menu.Elements:Add(RogueEssence.Menu.MenuText("Test String 2", RogueElements.Loc(16, 8 + 12 * 1)))
+  self.menu.Elements:Add(RogueEssence.Menu.MenuText("Orange", RogueElements.Loc(88, 8 + 12 * 1)))
   
   local portrait = RogueEssence.Menu.MenuPortrait(RogueElements.Loc(16, 32), RogueEssence.Dungeon.MonsterID("jigglypuff", 0, "normal", Gender.Male), RogueEssence.Content.EmoteStyle(1, true))
-  self.menu.MenuElements:Add(portrait)
+  self.menu.Elements:Add(portrait)
   local dirtex = RogueEssence.Menu.MenuDirTex(RogueElements.Loc(64, 32), RogueEssence.Menu.MenuDirTex.TexType.Item, RogueEssence.Content.AnimData("Money_Gray", 1))
-  self.menu.MenuElements:Add(dirtex)
+  self.menu.Elements:Add(dirtex)
   local dirtex2 = RogueEssence.Menu.MenuDirTex(RogueElements.Loc(64, 48), RogueEssence.Menu.MenuDirTex.TexType.Icon, RogueEssence.Content.AnimData("Shield_Green", 3))
-  self.menu.MenuElements:Add(dirtex2)
+  self.menu.Elements:Add(dirtex2)
   self.total_items = 4
   self.current_item = 0
   self.cursor.Loc = RogueElements.Loc(8 + 12 * (self.current_item % 2), 8 + 80 * (self.current_item // 2))
@@ -747,9 +748,6 @@ function test_grounds.Hungrybox_Action(chara, activator)
   local olddir = hbox.CharDir
   --GROUND:Hide("PLAYER")
   GROUND:CharTurnToCharAnimated(hbox, player, 4)
-  --UI:SetSpeaker(hbox)
-  --UI:TextDialogue(STRINGS:Format(STRINGS.MapStrings['Hungrybox_Action_Line0']), 120)
-  --UI:WaitDialog()
   GROUND:CharSetDrawEffect(hbox, DrawEffect.Trembling)
   GAME:WaitFrames(120)
   GROUND:CharEndDrawEffect(hbox, DrawEffect.Trembling)
@@ -759,10 +757,24 @@ function test_grounds.Hungrybox_Action(chara, activator)
   
   COMMON.BossTransition()
   
+  local coro1 = TASK:BranchCoroutine(GAME:_FadeOutFront(true, 180))
+
+  UI:SetSpeaker(hbox)
+  UI:TextDialogue("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAA", 180)
+  UI:WaitDialog()
+  
+  TASK:JoinCoroutines({coro1})
+  
+  GAME:WaitFrames(120)
+
+  coro1 = TASK:BranchCoroutine(GAME:_FadeInFront(180))
   
   local menu = ExampleMenu:new()
   UI:SetCustomMenu(menu.menu)
   UI:WaitForChoice()
+  
+  TASK:JoinCoroutines({coro1})
+  
   
   GAME:FadeIn(60)
 end

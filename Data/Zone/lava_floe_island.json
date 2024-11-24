@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.8.6.0",
+"Version": "0.8.7.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -596,6 +596,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -606,8 +607,55 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 6,
-"Max": 9
+"Min": 2,
+"Max": 5
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 0,
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_gust",
+"Revealed": true,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
+}
 }
 }
 }
@@ -1263,6 +1311,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -1273,8 +1322,55 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 6,
-"Max": 9
+"Min": 2,
+"Max": 5
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 0,
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_gust",
+"Revealed": true,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
+}
 }
 }
 }
@@ -1930,6 +2026,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -1940,8 +2037,55 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 6,
-"Max": 9
+"Min": 2,
+"Max": 5
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 0,
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_gust",
+"Revealed": true,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
+}
 }
 }
 }
@@ -2597,6 +2741,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -2607,8 +2752,55 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 6,
-"Max": 9
+"Min": 2,
+"Max": 5
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 0,
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_gust",
+"Revealed": true,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
+}
 }
 }
 }
@@ -3317,6 +3509,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -3327,8 +3520,55 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 6,
-"Max": 9
+"Min": 2,
+"Max": 5
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 0,
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_gust",
+"Revealed": true,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
+}
 }
 }
 }
@@ -3387,6 +3627,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -4152,6 +4393,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -4162,8 +4404,55 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 6,
-"Max": 9
+"Min": 2,
+"Max": 5
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 0,
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_gust",
+"Revealed": true,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
+}
 }
 }
 }
@@ -4222,6 +4511,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -4939,6 +5229,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -4949,8 +5240,55 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 6,
-"Max": 9
+"Min": 2,
+"Max": 5
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 0,
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_gust",
+"Revealed": true,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
+}
 }
 }
 }
@@ -5009,6 +5347,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -5715,6 +6054,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -5725,8 +6065,55 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 6,
-"Max": 9
+"Min": 2,
+"Max": 5
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 0,
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_gust",
+"Revealed": true,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
+}
 }
 }
 }
@@ -5785,6 +6172,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -6491,6 +6879,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -6501,8 +6890,55 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 6,
-"Max": 9
+"Min": 2,
+"Max": 5
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 0,
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_gust",
+"Revealed": true,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
+}
 }
 }
 }
@@ -6561,6 +6997,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -6815,6 +7252,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -6848,6 +7286,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -7539,6 +7978,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -7549,8 +7989,55 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 6,
-"Max": 9
+"Min": 2,
+"Max": 5
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 0,
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_gust",
+"Revealed": true,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
+}
 }
 }
 }
@@ -7609,6 +8096,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -7863,6 +8351,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -7896,6 +8385,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -8587,6 +9077,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -8597,8 +9088,55 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 6,
-"Max": 9
+"Min": 2,
+"Max": 5
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 0,
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_gust",
+"Revealed": true,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
+}
 }
 }
 }
@@ -8657,6 +9195,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -8911,6 +9450,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -8944,6 +9484,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -9635,6 +10176,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -9645,8 +10187,55 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 6,
-"Max": 9
+"Min": 2,
+"Max": 5
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 0,
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_gust",
+"Revealed": true,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
+}
 }
 }
 }
@@ -9705,6 +10294,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -9959,6 +10549,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -9992,6 +10583,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -10683,6 +11275,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -10693,8 +11286,55 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 6,
-"Max": 9
+"Min": 2,
+"Max": 5
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 0,
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_gust",
+"Revealed": true,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
+}
 }
 }
 }
@@ -10753,6 +11393,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -11007,6 +11648,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -11040,6 +11682,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -11731,6 +12374,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -11741,8 +12385,55 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 6,
-"Max": 9
+"Min": 2,
+"Max": 5
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 0,
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_gust",
+"Revealed": true,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
+}
 }
 }
 }
@@ -11801,6 +12492,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -12055,6 +12747,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -12088,6 +12781,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -12779,6 +13473,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -12789,8 +13484,55 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 6,
-"Max": 9
+"Min": 2,
+"Max": 5
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 0,
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_gust",
+"Revealed": true,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
+}
 }
 }
 }
@@ -12849,6 +13591,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -13103,6 +13846,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -13136,6 +13880,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -13827,6 +14572,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -13837,8 +14583,55 @@
 "Spawn": {
 "$type": "RogueElements.ContextSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
 "Amount": {
-"Min": 6,
-"Max": 9
+"Min": 2,
+"Max": 5
+}
+}
+}
+},
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 0,
+"IncludeHalls": false,
+"Filters": [
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 2
+}
+],
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"Spawner": {
+"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_gust",
+"Revealed": true,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10
+}
+]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
+}
 }
 }
 }
@@ -13897,6 +14690,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.InvItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -14151,6 +14945,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -14184,6 +14979,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -14305,7 +15101,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.6.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.7.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -15845,7 +16641,42 @@
 3
 ]
 },
-"Spawns": []
+"Spawns": [
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_mud",
+"Revealed": false,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 16
+}
+},
+{
+"Spawn": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "trap_spin",
+"Revealed": false,
+"Owner": 0,
+"TileStates": []
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 16
+}
+}
+]
 },
 {
 "$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
@@ -16735,7 +17566,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.6.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.7.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": true,
@@ -16776,7 +17607,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.6.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.7.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -16880,7 +17711,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.6.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.7.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ChestModGenState"
 }
 ]
@@ -17006,7 +17837,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.6.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.7.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.StairsModGenState"
 }
 ]
@@ -17814,6 +18645,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -18677,6 +19509,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -19540,6 +20373,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -20403,6 +21237,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -21266,6 +22101,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -22129,6 +22965,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -22992,6 +23829,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -23855,6 +24693,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -24718,6 +25557,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -25581,6 +26421,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.EffectTile, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -25731,7 +26572,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.6.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.7.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -28505,6 +29346,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -30970,6 +31812,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -33435,6 +34278,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -35896,6 +36740,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -38361,6 +39206,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {
@@ -40826,6 +41672,7 @@
 },
 "Value": {
 "$type": "RogueElements.RandomRoomSpawnStep`2[[RogueEssence.LevelGen.MapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"SuccessPercent": 100,
 "IncludeHalls": false,
 "Filters": [
 {

@@ -10,6 +10,7 @@ function guildmaster_summit.Init(map)
   PrintInfo("=>> Init_guildmaster_summit")
 
   COMMON.RespawnAllies()
+  
 end
 
 function guildmaster_summit.Enter(map)
@@ -37,6 +38,13 @@ function guildmaster_summit.Enter(map)
 end
 
 function guildmaster_summit.Update(map, time)
+  
+  if SV.guildmaster_summit.GameComplete and SV.secret.New == false then
+    local cur_date = os.date("%m-%d")
+    if cur_date == "01-01" then
+      guildmaster_summit.SpecialEvent()
+    end
+  end
 end
 
 --------------------------------------------------
@@ -581,5 +589,44 @@ function guildmaster_summit.Teammate3_Action(chara, activator)
   COMMON.GroundInteract(activator, chara)
 end
 
+
+function guildmaster_summit.SpecialEvent()
+  local player = CH('PLAYER')
+  local current_ground = GAME:GetCurrentGround()
+  GAME:FadeOut(true, 20)
+  GAME:CutsceneMode(true)
+  local base_form = RogueEssence.Dungeon.MonsterID("mew", 0, "normal", Gender.Genderless)
+  local temp_char = RogueEssence.Ground.GroundChar(base_form, RogueElements.Loc(196,240), Direction.Down, "Special")
+  current_ground:AddTempChar(temp_char)
+  GROUND:TeleportTo(player, temp_char.MapLoc.X, temp_char.MapLoc.Y + 48, Direction.Up)
+  GAME:WaitFrames(20)
+  GAME:FadeIn(60)
+  
+  SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
+  GROUND:CharSetEmote(player, "exclaim", 1)
+  
+  GAME:WaitFrames(20)
+  
+  UI:SetSpeaker(temp_char)
+  GROUND:CharSetEmote(temp_char, "glowing", 4)
+  UI:SetSpeakerEmotion("Joyous")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Special_Event_001']))
+  UI:SetSpeakerEmotion("Normal")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Special_Event_002']))
+  UI:SetSpeakerEmotion("Joyous")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Special_Event_003']))
+  
+  local recruit = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, base_form, 10, "", 0)
+  local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
+  recruit.ActionEvents:Add(talk_evt)
+  COMMON.JoinTeamWithFanfare(recruit, false)
+  
+  GAME:FadeOut(false, 30)
+  current_ground:RemoveTempChar(temp_char)
+  GAME:CutsceneMode(false)
+  GAME:FadeIn(30)
+  
+  SV.secret.New = true
+end
 
 return guildmaster_summit

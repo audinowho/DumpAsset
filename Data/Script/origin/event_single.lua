@@ -441,6 +441,53 @@ function SINGLE_CHAR_SCRIPT.OutlawClearCheck(owner, ownerChar, context, args)
 end
 
 
+function SINGLE_CHAR_SCRIPT.SeaCradle(owner, ownerChar, context, args)
+  -- Check to ensure you have an item to give.
+  -- A frigid sea current swirls around the pedestal.  Will you place something here?
+  -- open item menu for selection
+  -- If it's the wrong item, say nothing happened.
+  -- If it's the right item, interact with tile
+  
+  _DUNGEON.PendingLeaderAction = _DUNGEON:ProcessPlayerInput(RogueEssence.Dungeon.GameAction(RogueEssence.Dungeon.GameAction.ActionType.Tile, Dir8.None, 1))
+end
+
+function SINGLE_CHAR_SCRIPT.SeaCradle(owner, ownerChar, context, args)
+  SOUND:PlayBGM("", false)
+  GAME:WaitFrames(60)
+  -- turn off music, gradually bubble, before finally hatching manaphy
+  
+  GAME:FadeOut(true, 30)
+  -- hatching will be a fade to white, where the cradle will just be deleted, and manaphy will occupy the spot
+  
+  local mob_data = RogueEssence.Dungeon.CharData()
+  mob_data.BaseForm = RogueEssence.Dungeon.MonsterID("manaphy", 0, "normal", Gender.Genderless)
+  mob_data.Level = 1;
+  mob_data.BaseSkills[0] = RogueEssence.Dungeon.SlotSkill("tail_glow")
+  mob_data.BaseSkills[1] = RogueEssence.Dungeon.SlotSkill("bubble")
+  mob_data.BaseSkills[2] = RogueEssence.Dungeon.SlotSkill("water_sport")
+  mob_data.BaseIntrinsics[0] = "hydration"
+  local new_mob = RogueEssence.Dungeon.Character(mob_data)
+  local tactic = _DATA:GetAITactic("stick_together")
+  new_mob.Tactic = RogueEssence.Data.AITactic(tactic)
+  new_mob.CharLoc = ownerTileLoc
+  new_mob.CharDir = _ZONE.CurrentMap:ApproximateClosestDir8(new_mob.CharLoc, _DUNGEON.ActiveTeam.Leader.CharLoc)
+  new_team.Players:Add(new_mob)
+  
+  _ZONE.CurrentMap.MapTeams:Add(new_team)
+  new_mob:RefreshTraits()
+  
+  GAME:WaitFrames(30)
+	SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
+	GAME:FadeIn(60)
+  
+  TASK:WaitTask(_DUNGEON:SpecialIntro(new_mob))
+  TASK:WaitTask(new_mob:OnMapStart())
+  -- manaphy will say babyspeak, say "mama", and then join the team without asking.
+  -- it's still in the dungeon, and it's level 1.  You should probably send it back
+  
+  TASK:WaitTask(PMDC.Dungeon.BaseRecruitmentEvent.DungeonRecruit(owner, ownerChar, context, RogueEssence.Dungeon.BattleScriptEvent(args.ActionScript)))
+  
+end
 
 function SINGLE_CHAR_SCRIPT.ShowTileName(owner, ownerChar, context, args)
 

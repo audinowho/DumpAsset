@@ -1041,7 +1041,7 @@ function COMMON.Rescued(zone, name, mail)
     SOUND:PlayBattleSE("EVT_Title_Intro")
     GAME:FadeOut(true, 0)
     GAME:FadeIn(20)
-    SOUND:PlayBGM("C05. Rescue.ogg", true)
+    SOUND:PlayBGM("Rescue.ogg", true)
 	_DUNGEON:LogMsg(STRINGS:FormatKey("MSG_RESCUED_BY", name))
   else
                 --//spawn the rescuers based on mail
@@ -1082,7 +1082,7 @@ function COMMON.Rescued(zone, name, mail)
     GAME:FadeIn(20)
                 --yield return CoroutineManager.Instance.StartCoroutine(GameManager.Instance.FadeIn());
 
-    SOUND:PlayBGM("C05. Rescue.ogg", true)
+    SOUND:PlayBGM("Rescue.ogg", true)
     TASK:WaitTask(_MENU:SetDialogue(STRINGS:FormatKey("MSG_RESCUES_LEFT", _DATA.Save.RescuesLeft)))
     GAME:WaitFrames(10)
   

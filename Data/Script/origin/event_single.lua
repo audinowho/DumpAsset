@@ -12,7 +12,7 @@ function SINGLE_CHAR_SCRIPT.CastawayCaveAltMusic(owner, ownerChar, context, args
   if not SV.castaway_cave.TookTreasure then
     --keep the map music as is
   else
-	_ZONE.CurrentMap.Music = "B24. Castaway Cave 2.ogg"
+	_ZONE.CurrentMap.Music = "Castaway Cave 2.ogg"
   end
   
   SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
@@ -43,7 +43,7 @@ function SINGLE_CHAR_SCRIPT.SleepingCalderaAltData(owner, ownerChar, context, ar
     --keep the map music as is
   else
 	_ZONE.CurrentMap.Name = RogueEssence.LocalText(STRINGS:Format(RogueEssence.StringKey("TITLE_ENRAGED_CALDERA"):ToLocal(), _ZONE.CurrentMap.ID + 1))
-	_ZONE.CurrentMap.Music = "B11. Enraged Caldera.ogg"
+	_ZONE.CurrentMap.Music = "Enraged Caldera.ogg"
   end
   
   SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
@@ -377,7 +377,7 @@ function SINGLE_CHAR_SCRIPT.SidequestOutlawFloor(owner, ownerChar, context, args
   end
   
   if not args.Silent then
-    SOUND:PlayBGM("C07. Outlaw.ogg", false)
+    SOUND:PlayBGM("Outlaw.ogg", false)
     UI:ResetSpeaker()
     UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_OUTLAW"):ToLocal()))
   end
@@ -1130,7 +1130,7 @@ function SINGLE_CHAR_SCRIPT.TileTestChange(owner, ownerChar, context, args)
 
 	  SINGLE_CHAR_SCRIPT.SetTileData("rescue_team_maze_wall", "rescue_team_maze_floor", "rescue_team_maze_secondary")
 	elseif SV.test_grounds.Tileset == 60 then
-	  SOUND:PlayBGM("B04. Tropical Path.ogg", true)
+	  SOUND:PlayBGM("Tropical Path.ogg", true)
 
 	  SINGLE_CHAR_SCRIPT.SetTileData("beach_cave_wall", "beach_cave_floor", "beach_cave_secondary")
 	elseif SV.test_grounds.Tileset == 61 then
@@ -1170,7 +1170,7 @@ function SINGLE_CHAR_SCRIPT.TileTestChange(owner, ownerChar, context, args)
 
 	  SINGLE_CHAR_SCRIPT.SetTileData("unused_steam_cave_wall", "unused_steam_cave_floor", "unused_steam_cave_secondary")
 	elseif SV.test_grounds.Tileset == 73 then
-	  SOUND:PlayBGM("B10. Thunderstruck Pass.ogg", true)
+	  SOUND:PlayBGM("Thunderstruck Pass.ogg", true)
 
 	  SINGLE_CHAR_SCRIPT.SetTileData("amp_plains_wall", "amp_plains_floor", "amp_plains_secondary")
 	elseif SV.test_grounds.Tileset == 74 then
@@ -1201,7 +1201,7 @@ function SINGLE_CHAR_SCRIPT.TileTestChange(owner, ownerChar, context, args)
 
 	  SINGLE_CHAR_SCRIPT.SetTileData("crystal_crossing_wall", "crystal_crossing_floor", "crystal_crossing_secondary")
 	elseif SV.test_grounds.Tileset == 83 then
-	  SOUND:PlayBGM("B29. Treacherous Mountain.ogg", true)
+	  SOUND:PlayBGM("Treacherous Mountain.ogg", true)
 
 	  SINGLE_CHAR_SCRIPT.SetTileData("chasm_cave_1_wall", "chasm_cave_1_floor", "chasm_cave_1_floor")
 	elseif SV.test_grounds.Tileset == 84 then
@@ -1302,7 +1302,7 @@ function SINGLE_CHAR_SCRIPT.TileTestChange(owner, ownerChar, context, args)
 
 	  SINGLE_CHAR_SCRIPT.SetTileData("golden_chamber_wall", "golden_chamber_floor", "golden_chamber_secondary")
 	elseif SV.test_grounds.Tileset == 116 then
-	  SOUND:PlayBGM("B22. Overgrown Wilds.ogg", true)
+	  SOUND:PlayBGM("Overgrown Wilds.ogg", true)
 
 	  SINGLE_CHAR_SCRIPT.SetTileData("mystery_jungle_1_wall", "mystery_jungle_1_floor", "mystery_jungle_1_secondary")
 	elseif SV.test_grounds.Tileset == 117 then
@@ -1342,7 +1342,7 @@ function SINGLE_CHAR_SCRIPT.TileTestChange(owner, ownerChar, context, args)
 
 	  SINGLE_CHAR_SCRIPT.SetTileData("steel_aegis_cave_wall", "steel_aegis_cave_floor", "steel_aegis_cave_secondary")
 	elseif SV.test_grounds.Tileset == 129 then
-	  SOUND:PlayBGM("B03. Demonstration 3.ogg", true)
+	  SOUND:PlayBGM("Demonstration 3.ogg", true)
 
 	  SINGLE_CHAR_SCRIPT.SetTileData("murky_forest_wall", "murky_forest_floor", "murky_forest_secondary")
 	elseif SV.test_grounds.Tileset == 130 then

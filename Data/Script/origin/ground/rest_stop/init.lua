@@ -182,7 +182,7 @@ function rest_stop.BeginExposition(shortened)
   GROUND:Unhide("Boss_5")
   GROUND:Unhide("Boss_6")
   
-  SOUND:PlayBGM("A13. Threat.ogg", false)
+  SOUND:PlayBGM("Threat.ogg", false)
   
   --bosses talk
   UI:ResetSpeaker()

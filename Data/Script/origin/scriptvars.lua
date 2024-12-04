@@ -155,7 +155,7 @@ SV.base_camp =
 
 SV.base_town = 
 {
-  Song    = "A02. Base Town.ogg",
+  Song    = "Base Town.ogg",
   ValueTradeItem = "",
   ValueTraded = false,
   FreeRelearn = false,

@@ -68,18 +68,18 @@ function end_treacherous_mountain.PreBattle(shortened)
     UI:SetSpeaker(enemy)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001']))
     
-    SOUND:PlayBGM("A13. Threat.ogg", false)
+    SOUND:PlayBGM("Threat.ogg", false)
     
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_002']))
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_003']))
   
   else
-    SOUND:PlayBGM("A13. Threat.ogg", false)
+    SOUND:PlayBGM("Threat.ogg", false)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Short']))
   end
   
   
-  SOUND:PlayBGM("C02. Boss Battle 2.ogg", false)
+  SOUND:PlayBGM("Boss Battle 2.ogg", false)
   
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_004']))
   

@@ -223,7 +223,7 @@ function guildmaster_summit.PreBattle(shortened)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_008']))
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_009']))
   
-  SOUND:PlayBGM("C06. Final Battle.ogg", false)
+  SOUND:PlayBGM("Final Battle.ogg", false)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_010'], GAME:GetTeamName()))
   GAME:WaitFrames(10)
   SOUND:PlayBattleSE("DUN_Bird_Caw")
@@ -281,7 +281,7 @@ function guildmaster_summit.PostBattle()
   GROUND:EntTurn(lucario, Direction.Down)
   GROUND:EntTurn(wigglytuff, Direction.Down)
   
-  SOUND:PlayBGM("A08. Aftermath.ogg", false)
+  SOUND:PlayBGM("Aftermath.ogg", false)
   
   GAME:MoveCamera(0, -72, 0, true)
   GAME:FadeIn(40)

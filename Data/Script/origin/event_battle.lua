@@ -78,7 +78,12 @@ function BATTLE_SCRIPT.SecretSlab(owner, ownerChar, context, args)
     local zone_step = main_segment.ZoneSteps[ii]
     local step_type = LUA_ENGINE:TypeOf(zone_step)
     if step_type == luanet.ctype(ScriptZoneStepType) and zone_step.Script == "RoamingLegend" then
-      total_str = total_str .. STRINGS:Format(RogueEssence.StringKey("SIGN_SLAB_LEGEND"):ToLocal()) .. "\n"
+      local argtbl = load("return " .. zone_step.ArgTable)()
+      if argtbl.TalkEvent == "ChaseInteract" then
+        total_str = total_str .. STRINGS:Format(RogueEssence.StringKey("SIGN_SLAB_LEGEND_CHASE"):ToLocal()) .. "\n"
+      elseif argtbl.TalkEvent == "LegendInteract" then
+        total_str = total_str .. STRINGS:Format(RogueEssence.StringKey("SIGN_SLAB_LEGEND_HIDE"):ToLocal()) .. "\n"
+      end
     end
   end
   

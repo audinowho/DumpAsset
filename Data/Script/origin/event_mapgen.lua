@@ -243,7 +243,7 @@ function ZONE_GEN_SCRIPT.RoamingLegend(zoneContext, context, queue, seed, args)
   specificTeam.Explorer = true
   local post_mob = RogueEssence.LevelGen.MobSpawn()
   post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(args.Species, 0, "normal", Gender.Genderless)
-  post_mob.Tactic = "patrol"
+  post_mob.Tactic = "retreater"
   post_mob.Level = RogueElements.RandRange(40)
 
   local spawnBoost = PMDC.LevelGen.MobSpawnBoost()
@@ -284,17 +284,16 @@ function ZONE_GEN_SCRIPT.HiddenLegend(zoneContext, context, queue, seed, args)
   local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
   specificTeam.Explorer = true
   local post_mob = RogueEssence.LevelGen.MobSpawn()
-  post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(args.Species, 0, "normal", Gender.Genderless)
+  if args.Species == "latios" then
+    post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(args.Species, 0, "normal", Gender.Male)
+  elseif args.Species == "latias" then
+    post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(args.Species, 0, "normal", Gender.Female)
+  else
+    post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(args.Species, 0, "normal", Gender.Genderless)
+  end
   post_mob.Tactic = "patrol"
-  post_mob.Level = RogueElements.RandRange(40)
+  post_mob.Level = RogueElements.RandRange(20)
 
-  local spawnBoost = PMDC.LevelGen.MobSpawnBoost()
-  spawnBoost.DefBonus = 64
-  spawnBoost.SpDefBonus = 64
-  spawnBoost.SpeedBonus = 256
-  spawnBoost.MaxHPBonus = 128
-  post_mob.SpawnFeatures:Add(spawnBoost)
-  
   local spawn_status = RogueEssence.LevelGen.MobSpawnStatus()
   local status_effect = RogueEssence.Dungeon.StatusEffect("invisible")
   status_effect.StatusStates:Set(RogueEssence.Dungeon.CountDownState(-1))

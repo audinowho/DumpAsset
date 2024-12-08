@@ -361,6 +361,14 @@ function SINGLE_CHAR_SCRIPT.UpdateEscort(owner, ownerChar, context, args)
   end
 end
 
+function SINGLE_CHAR_SCRIPT.LegendFloor(owner, ownerChar, context, args)
+  if context.User ~= nil then
+    return
+  end
+  UI:ResetSpeaker()
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_LEGEND_FLOOR"):ToLocal()))
+end
+
 function SINGLE_CHAR_SCRIPT.DestinationFloor(owner, ownerChar, context, args)
   if context.User ~= nil then
     return
@@ -459,6 +467,7 @@ function SINGLE_CHAR_SCRIPT.SeaCradle(owner, ownerChar, context, args)
   GAME:FadeOut(true, 30)
   -- hatching will be a fade to white, where the cradle will just be deleted, and manaphy will occupy the spot
   
+  local new_team = RogueEssence.Dungeon.MonsterTeam()
   local mob_data = RogueEssence.Dungeon.CharData()
   mob_data.BaseForm = RogueEssence.Dungeon.MonsterID("manaphy", 0, "normal", Gender.Genderless)
   mob_data.Level = 1;
@@ -469,12 +478,17 @@ function SINGLE_CHAR_SCRIPT.SeaCradle(owner, ownerChar, context, args)
   local new_mob = RogueEssence.Dungeon.Character(mob_data)
   local tactic = _DATA:GetAITactic("stick_together")
   new_mob.Tactic = RogueEssence.Data.AITactic(tactic)
-  new_mob.CharLoc = ownerTileLoc
+  new_mob.CharLoc = owner.TileLoc
   new_mob.CharDir = _ZONE.CurrentMap:ApproximateClosestDir8(new_mob.CharLoc, _DUNGEON.ActiveTeam.Leader.CharLoc)
   new_team.Players:Add(new_mob)
   
   _ZONE.CurrentMap.MapTeams:Add(new_team)
   new_mob:RefreshTraits()
+  
+  local tile = ZoneManager.Instance.CurrentMap.GetTile(owner.TileLoc)
+  if tile.Effect == owner then
+      tile.Effect = RogueEssence.Dungeon.EffectTile(owner.TileLoc)
+  end
   
   GAME:WaitFrames(30)
 	SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
@@ -485,7 +499,8 @@ function SINGLE_CHAR_SCRIPT.SeaCradle(owner, ownerChar, context, args)
   -- manaphy will say babyspeak, say "mama", and then join the team without asking.
   -- it's still in the dungeon, and it's level 1.  You should probably send it back
   
-  TASK:WaitTask(PMDC.Dungeon.BaseRecruitmentEvent.DungeonRecruit(owner, ownerChar, context, RogueEssence.Dungeon.BattleScriptEvent(args.ActionScript)))
+  local actionScript = RogueEssence.Dungeon.BattleScriptEvent(args.ActionScript)
+  TASK:WaitTask(PMDC.Dungeon.BaseRecruitmentEvent.DungeonRecruit(owner, ownerChar, new_mob, actionScript))
   
 end
 

@@ -9,6 +9,7 @@ PresetMultiTeamSpawnerType = luanet.import_type('RogueEssence.LevelGen.PresetMul
 PlaceRandomMobsStepType = luanet.import_type('RogueEssence.LevelGen.PlaceRandomMobsStep`1')
 PlaceNearSpawnableMobsStep = luanet.import_type('RogueEssence.LevelGen.PlaceNearSpawnableMobsStep`2')
 MapEffectStepType = luanet.import_type('RogueEssence.LevelGen.MapEffectStep`1')
+MapMusicStepType = luanet.import_type('RogueEssence.LevelGen.MapMusicStep`1')
 MapGenContextType = luanet.import_type('RogueEssence.LevelGen.ListMapGenContext')
 EntranceType = luanet.import_type('RogueEssence.LevelGen.MapGenEntrance')
 
@@ -110,52 +111,52 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
             queue:Enqueue(priority, destNote)
         end
       elseif mission.Type == COMMON.MISSION_TYPE_LOST_ITEM then
-	    local has_item = false
+        local has_item = false
 	    
-		local item_slot = GAME:FindPlayerItem(mission.TargetItem.ID, true, true)
-		if not item_slot:IsValid() then
-			if GAME:GetPlayerStorageItemCount(mission.TargetItem.ID) > 0 then
-			  has_item = true
-			end
-		else
-			has_item = true
-		end
+        local item_slot = GAME:FindPlayerItem(mission.TargetItem.ID, true, true)
+        if not item_slot:IsValid() then
+          if GAME:GetPlayerStorageItemCount(mission.TargetItem.ID) > 0 then
+            has_item = true
+          end
+        else
+          has_item = true
+        end
 		
-		if not has_item then
+      if not has_item then
 		
-		local lost_item = RogueEssence.Dungeon.MapItem(mission.TargetItem)
-		local preset_picker = LUA_ENGINE:MakeGenericType(PresetPickerType, { MapItemType }, { lost_item })
-		local multi_preset_picker = LUA_ENGINE:MakeGenericType(PresetMultiRandType, { MapItemType }, { preset_picker })
-		local picker_spawner = LUA_ENGINE:MakeGenericType(PickerSpawnType, {  MapGenContextType, MapItemType }, { multi_preset_picker })
-		local random_room_spawn = LUA_ENGINE:MakeGenericType(RandomRoomSpawnStepType, { MapGenContextType, MapItemType }, { })
-		random_room_spawn.Spawn = picker_spawner
-		random_room_spawn.Filters:Add(PMDC.LevelGen.RoomFilterConnectivity(PMDC.LevelGen.ConnectivityRoom.Connectivity.Main))
-		local priority = RogueElements.Priority(5, 2, 1)
-		queue:Enqueue(priority, random_room_spawn)
+        local lost_item = RogueEssence.Dungeon.MapItem(mission.TargetItem)
+        local preset_picker = LUA_ENGINE:MakeGenericType(PresetPickerType, { MapItemType }, { lost_item })
+        local multi_preset_picker = LUA_ENGINE:MakeGenericType(PresetMultiRandType, { MapItemType }, { preset_picker })
+        local picker_spawner = LUA_ENGINE:MakeGenericType(PickerSpawnType, {  MapGenContextType, MapItemType }, { multi_preset_picker })
+        local random_room_spawn = LUA_ENGINE:MakeGenericType(RandomRoomSpawnStepType, { MapGenContextType, MapItemType }, { })
+        random_room_spawn.Spawn = picker_spawner
+        random_room_spawn.Filters:Add(PMDC.LevelGen.RoomFilterConnectivity(PMDC.LevelGen.ConnectivityRoom.Connectivity.Main))
+        local priority = RogueElements.Priority(5, 2, 1)
+        queue:Enqueue(priority, random_room_spawn)
 		
         if not mission.FloorUnknown then
           destinationFloor = true
         end
 		
-		end
+      end
 	  else
         post_mob.Tactic = "slow_patrol"
         if mission.Type == COMMON.MISSION_TYPE_RESCUE then -- rescue
-            post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)
+          post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)
           local dialogue = RogueEssence.Dungeon.BattleScriptEvent("SidequestRescueReached")
-            post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
-            post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
-          elseif mission.Type == COMMON.MISSION_TYPE_ESCORT then -- escort
-            post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)
+          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
+          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
+        elseif mission.Type == COMMON.MISSION_TYPE_ESCORT then -- escort
+          post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)
           local dialogue = RogueEssence.Dungeon.BattleScriptEvent("SidequestEscortReached")
-            post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
-            post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
-          elseif mission.Type == COMMON.MISSION_TYPE_ESCORT_OUT then -- escort
-            post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level // 2)
+          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
+          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
+        elseif mission.Type == COMMON.MISSION_TYPE_ESCORT_OUT then -- escort
+          post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level // 2)
           local dialogue = RogueEssence.Dungeon.BattleScriptEvent("SidequestEscortOutReached", Serpent.line(mission.EscortTable))
-            post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
-            post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnMovesOff(0))
-            post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Escort = name })))
+          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
+          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnMovesOff(0))
+          post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Escort = name })))
         end
         specificTeam.Spawns:Add(post_mob)
         local picker = LUA_ENGINE:MakeGenericType(PresetMultiTeamSpawnerType, { MapGenContextType }, { })
@@ -195,6 +196,73 @@ end
 
 
 
+function ZONE_GEN_SCRIPT.RoamingLegend(zoneContext, context, queue, seed, args)
+  if _DATA.Save.Rescue ~= nil and _DATA.Save.Rescue.Rescuing then
+    return
+  end
+  -- check for roaming legend flag
+  local roaming_flag = args.SaveVar
+  if SV.roaming_legends[roaming_flag] == true then
+    -- already did this one
+    return
+  end
+  -- check for correct floor
+  if zoneContext.CurrentID ~= args.FloorNum then
+    return
+  end
+  -- check for music box
+  local item_slot = GAME:FindPlayerItem("loot_music_box", true, true)
+  if not item_slot:IsValid() then
+    return
+  end
+  
+  -- set the map music to Crystal Cavern
+  local musicStep = LUA_ENGINE:MakeGenericType( MapMusicStepType, { MapGenContextType }, { "Luminous Spring.ogg" })
+  local music_priority = RogueElements.Priority(-6)
+  queue:Enqueue(music_priority, musicStep)
+  
+  -- add a map-start message
+  local activeEffect = RogueEssence.Data.ActiveEffect()
+  activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("LegendFloor"))
+  local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
+  local msg_priority = RogueElements.Priority(-6)
+  queue:Enqueue(msg_priority, destNote)
+  
+  -- then, perform a spawn
+  local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
+  specificTeam.Explorer = true
+  local post_mob = RogueEssence.LevelGen.MobSpawn()
+  post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(args.Species, 0, "normal", Gender.Genderless)
+  post_mob.Tactic = "patrol"
+  post_mob.Level = RogueElements.RandRange(40)
+
+  local spawnBoost = PMDC.LevelGen.MobSpawnBoost()
+  spawnBoost.DefBonus = 64
+  spawnBoost.SpDefBonus = 64
+  spawnBoost.SpeedBonus = 256
+  spawnBoost.MaxHPBonus = 128
+  post_mob.SpawnFeatures:Add(spawnBoost)
+  
+  if args.BoostItem ~= "" then
+    local spawn_inv = PMDC.LevelGen.MobSpawnInv(false, args.BoostItem)
+    post_mob.SpawnFeatures:Add(spawn_inv)
+  end
+            
+  local dialogue = RogueEssence.Dungeon.BattleScriptEvent(args.TalkEvent)
+  post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
+  specificTeam.Spawns:Add(post_mob)
+  local picker = LUA_ENGINE:MakeGenericType(PresetMultiTeamSpawnerType, { MapGenContextType }, { })
+  picker.Spawns:Add(specificTeam)
+  local mobPlacement = LUA_ENGINE:MakeGenericType(PlaceRandomMobsStepType, { MapGenContextType }, { picker })
+  mobPlacement.Ally = true
+  mobPlacement.Filters:Add(PMDC.LevelGen.RoomFilterConnectivity(PMDC.LevelGen.ConnectivityRoom.Connectivity.Main))
+  mobPlacement.ClumpFactor = 20
+  -- Priority 5.2.1 is for NPC spawning in PMDO, but any dev can choose to roll with their own standard of priority.
+  local spawn_priority = RogueElements.Priority(5, 2, 1)
+  queue:Enqueue(spawn_priority, mobPlacement)
+end
+
+
 PresetPickerType = luanet.import_type('RogueElements.PresetPicker`1')
 EffectTileType = luanet.import_type('RogueEssence.Dungeon.EffectTile')
 TempTileStepType = luanet.import_type('PMDC.LevelGen.TempTileStep`1')
@@ -215,7 +283,6 @@ function FLOOR_GEN_SCRIPT.Mysteriosity(map, args)
   end
   
 end
-
 
 function FLOOR_GEN_SCRIPT.SpawnRandomTutor(map, args)
   
@@ -492,7 +559,6 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
   --Place the player spawn just above the unbreakable wall (doesn't work if you already have one)
   map.GenEntrances:Add(RogueEssence.LevelGen.MapGenEntrance(RogueElements.Loc(map.Width / 2 - 1, map.Height / 2 - 2), Dir8.UpRight))
 end
-
 
 function FLOOR_GEN_SCRIPT.CastawayCaveRevisit(map, args)
   if not SV.manaphy_egg.Taken then

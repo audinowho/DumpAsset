@@ -104,7 +104,8 @@ SV.roaming_legends =
   Raikou = false,
   Entei = false,
   Suicune = false,
-  Celebi = false,
+  Latios = false,
+  Latias = false,
   Darkrai = false
 }
 

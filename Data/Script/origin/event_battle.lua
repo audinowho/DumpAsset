@@ -4,6 +4,102 @@ function BATTLE_SCRIPT.Test(owner, ownerChar, context, args)
   PrintInfo("Test")
 end
 
+LayeredSegmentType = luanet.import_type('RogueEssence.LevelGen.LayeredSegment')
+SingularSegmentType = luanet.import_type('RogueEssence.LevelGen.SingularSegment')
+LoadGenType = luanet.import_type('RogueEssence.LevelGen.LoadGen')
+ChanceFloorGenType = luanet.import_type('RogueEssence.LevelGen.ChanceFloorGen')
+ScriptZoneStepType = luanet.import_type('RogueEssence.LevelGen.ScriptZoneStep')
+
+function BATTLE_SCRIPT.SecretSlab(owner, ownerChar, context, args)
+  -- Lua script: Will list out all restrictions the player needs to abide by to get to the dungeon's golden chamber, also keep track of which restrictions are met?
+  -- If the dungeon doesn't have a golden chamber, just say it's blank.
+  -- Alternatively, let this one show altpaths, potential raremons, unown, and questmons
+  
+  local emoteData = _DATA:GetEmote("question")
+  context.User:StartEmote(RogueEssence.Content.Emote(emoteData.Anim, emoteData.LocHeight, 1))
+  SOUND:PlayBattleSE("EVT_Emote_Confused")
+  GAME:WaitFrames(60)
+  
+  local total_str = ""
+  local got_unown = false
+  
+  -- iterate all structures past index 1 for the zone
+  for ii=1, _ZONE.CurrentZone.Segments.Count - 1, 1 do
+    
+    local segment = _ZONE.CurrentZone.Segments[ii]
+    local seg_type = LUA_ENGINE:TypeOf(segment)
+    
+    -- is it layered?  there's a secret path
+    if seg_type == luanet.ctype(LayeredSegmentType) then
+      
+      total_str = total_str .. STRINGS:Format(RogueEssence.StringKey("SIGN_SLAB_EXIT_SECRET"):ToLocal()) .. "\n"
+      
+    elseif seg_type == luanet.ctype(SingularSegmentType) then
+      
+      local floor = segment.BaseFloor
+      local floor_type = LUA_ENGINE:TypeOf(floor)
+      
+      -- singular segment that's a single load gen?  it's a secret room
+      if floor_type == luanet.ctype(LoadGenType) then
+        total_str = total_str .. STRINGS:Format(RogueEssence.StringKey("SIGN_SLAB_ROOM_SECRET"):ToLocal()) .. "\n"
+      elseif floor_type == luanet.ctype(ChanceFloorGenType) and got_unown == false then
+        
+        local chance_floor = floor.Spawns:GetSpawn(0)
+        local mob_spawn_priority = RogueElements.Priority(1, 2)
+        local spawn_step = chance_floor.GenSteps:Get(mob_spawn_priority, 0)
+        local pool_spawn = spawn_step.Spawns:GetSpawn(0)
+        
+        local all_unown = ""
+        for jj=0, pool_spawn.Spawns.Count - 1, 1 do
+          local member_spawn = pool_spawn.Spawns:GetSpawn(jj)
+          local spawn = member_spawn.Spawn
+          local mon_id = spawn.BaseForm.Form
+          
+          if mon_id == 26 then
+            all_unown = all_unown .. "!"
+          elseif mon_id == 27 then
+            all_unown = all_unown .. "?"
+          else
+            all_unown = all_unown .. string.char(65 + mon_id)
+          end
+        end
+        
+        
+        total_str = total_str .. STRINGS:Format(RogueEssence.StringKey("SIGN_SLAB_MYSTERIOSITY"):ToLocal(), all_unown) .. "\n"
+        got_unown = true
+      end
+    end
+  
+  end
+  
+  local main_segment = _ZONE.CurrentZone.Segments[0]
+  for ii=1, main_segment.ZoneSteps.Count - 1, 1 do
+    -- check for zone steps on the main path that trigger a legendary encounter, and check against their presence
+    local zone_step = main_segment.ZoneSteps[ii]
+    local step_type = LUA_ENGINE:TypeOf(zone_step)
+    if step_type == luanet.ctype(ScriptZoneStepType) and zone_step.Script == "RoamingLegend" then
+      total_str = total_str .. STRINGS:Format(RogueEssence.StringKey("SIGN_SLAB_LEGEND"):ToLocal()) .. "\n"
+    end
+  end
+  
+  total_str = STRINGS:ShiftString(total_str, 57344)
+  
+  SOUND:PlaySE("Menu/Skip")
+  UI:SetCustomMenu(_MENU:CreateNotice(owner:GetDisplayName(), total_str))
+  UI:WaitForChoice()
+  
+  context.CancelState.Cancel = true
+end
+
+function BATTLE_SCRIPT.ChaseInteract(owner, ownerChar, context, args)
+  
+end
+
+function BATTLE_SCRIPT.LegendInteract(owner, ownerChar, context, args)
+  
+end
+
+
 function BATTLE_SCRIPT.AllyInteract(owner, ownerChar, context, args)
   COMMON.DungeonInteract(context.User, context.Target, context.CancelState, context.TurnCancel)
 end

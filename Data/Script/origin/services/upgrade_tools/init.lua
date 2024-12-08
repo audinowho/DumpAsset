@@ -124,10 +124,17 @@ function UpgradeTools:OnUpgrade()
       Raikou = false,
       Entei = false,
       Suicune = false,
-      Celebi = false,
+      Latios = false,
+      Latias = false,
       Darkrai = false
     }
   end
+  if SV.roaming_legends.Latios == nil then
+    SV.roaming_legends.Latios = false
+    SV.roaming_legends.Latias = false
+  end
+  
+  
   
   if SV.sleeping_caldera == nil then
     SV.sleeping_caldera = 

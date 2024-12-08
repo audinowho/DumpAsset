@@ -77,11 +77,10 @@ function BATTLE_SCRIPT.SecretSlab(owner, ownerChar, context, args)
     -- check for zone steps on the main path that trigger a legendary encounter, and check against their presence
     local zone_step = main_segment.ZoneSteps[ii]
     local step_type = LUA_ENGINE:TypeOf(zone_step)
-    if step_type == luanet.ctype(ScriptZoneStepType) and zone_step.Script == "RoamingLegend" then
-      local argtbl = load("return " .. zone_step.ArgTable)()
-      if argtbl.TalkEvent == "ChaseInteract" then
+    if step_type == luanet.ctype(ScriptZoneStepType) then
+      if zone_step.Script == "RoamingLegend" then
         total_str = total_str .. STRINGS:Format(RogueEssence.StringKey("SIGN_SLAB_LEGEND_CHASE"):ToLocal()) .. "\n"
-      elseif argtbl.TalkEvent == "LegendInteract" then
+      elseif zone_step.Script == "HiddenLegend" then
         total_str = total_str .. STRINGS:Format(RogueEssence.StringKey("SIGN_SLAB_LEGEND_HIDE"):ToLocal()) .. "\n"
       end
     end
@@ -102,6 +101,19 @@ end
 
 function BATTLE_SCRIPT.LegendInteract(owner, ownerChar, context, args)
   
+  TASK:WaitTask(context.Target:RemoveStatusEffect("invisible", false))
+  local emoteData = _DATA:GetEmote("exclaim")
+  context.User:StartEmote(RogueEssence.Content.Emote(emoteData.Anim, emoteData.LocHeight, 1))
+  SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
+  GAME:WaitFrames(60)
+  
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  UI:SetSpeaker(context.Target)
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_LEGEND_HIDE_001"):ToLocal()))
+  
+  local actionScript = RogueEssence.Dungeon.BattleScriptEvent(args.ActionScript)
+  TASK:WaitTask(PMDC.Dungeon.BaseRecruitmentEvent.DungeonRecruit(owner, ownerChar, context.Target, actionScript))
+  SV.roaming_legends[args.SaveVar] = true
 end
 
 

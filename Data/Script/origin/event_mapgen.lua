@@ -9,7 +9,7 @@ PresetMultiTeamSpawnerType = luanet.import_type('RogueEssence.LevelGen.PresetMul
 PlaceRandomMobsStepType = luanet.import_type('RogueEssence.LevelGen.PlaceRandomMobsStep`1')
 PlaceNearSpawnableMobsStep = luanet.import_type('RogueEssence.LevelGen.PlaceNearSpawnableMobsStep`2')
 MapEffectStepType = luanet.import_type('RogueEssence.LevelGen.MapEffectStep`1')
-MapMusicStepType = luanet.import_type('RogueEssence.LevelGen.MapMusicStep`1')
+MapMusicStepType = luanet.import_type('PMDC.LevelGen.MapMusicStep`1')
 MapGenContextType = luanet.import_type('RogueEssence.LevelGen.ListMapGenContext')
 EntranceType = luanet.import_type('RogueEssence.LevelGen.MapGenEntrance')
 
@@ -194,28 +194,29 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
   end
 end
 
-
-
-function ZONE_GEN_SCRIPT.RoamingLegend(zoneContext, context, queue, seed, args)
+function checkRoamingFlags(zoneContext, args)
   if _DATA.Save.Rescue ~= nil and _DATA.Save.Rescue.Rescuing then
-    return
+    return false
   end
   -- check for roaming legend flag
   local roaming_flag = args.SaveVar
   if SV.roaming_legends[roaming_flag] == true then
     -- already did this one
-    return
+    return false
   end
   -- check for correct floor
   if zoneContext.CurrentID ~= args.FloorNum then
-    return
+    return false
   end
   -- check for music box
   local item_slot = GAME:FindPlayerItem("loot_music_box", true, true)
   if not item_slot:IsValid() then
-    return
+    return false
   end
-  
+  return true
+end
+
+function startRoamingFloor(queue)
   -- set the map music to Crystal Cavern
   local musicStep = LUA_ENGINE:MakeGenericType( MapMusicStepType, { MapGenContextType }, { "Luminous Spring.ogg" })
   local music_priority = RogueElements.Priority(-6)
@@ -227,6 +228,15 @@ function ZONE_GEN_SCRIPT.RoamingLegend(zoneContext, context, queue, seed, args)
   local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
   local msg_priority = RogueElements.Priority(-6)
   queue:Enqueue(msg_priority, destNote)
+end
+
+function ZONE_GEN_SCRIPT.RoamingLegend(zoneContext, context, queue, seed, args)
+  
+  if checkRoamingFlags(zoneContext, args) == false then
+    return
+  end
+  
+  startRoamingFloor(queue)
   
   -- then, perform a spawn
   local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
@@ -248,7 +258,7 @@ function ZONE_GEN_SCRIPT.RoamingLegend(zoneContext, context, queue, seed, args)
     post_mob.SpawnFeatures:Add(spawn_inv)
   end
             
-  local dialogue = RogueEssence.Dungeon.BattleScriptEvent(args.TalkEvent)
+  local dialogue = RogueEssence.Dungeon.BattleScriptEvent("ChaseInteract")
   post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
   specificTeam.Spawns:Add(post_mob)
   local picker = LUA_ENGINE:MakeGenericType(PresetMultiTeamSpawnerType, { MapGenContextType }, { })
@@ -262,6 +272,48 @@ function ZONE_GEN_SCRIPT.RoamingLegend(zoneContext, context, queue, seed, args)
   queue:Enqueue(spawn_priority, mobPlacement)
 end
 
+function ZONE_GEN_SCRIPT.HiddenLegend(zoneContext, context, queue, seed, args)
+  
+  if checkRoamingFlags(zoneContext, args) == false then
+    return
+  end
+  
+  startRoamingFloor(queue)
+  
+  -- then, perform a spawn
+  local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
+  specificTeam.Explorer = true
+  local post_mob = RogueEssence.LevelGen.MobSpawn()
+  post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(args.Species, 0, "normal", Gender.Genderless)
+  post_mob.Tactic = "patrol"
+  post_mob.Level = RogueElements.RandRange(40)
+
+  local spawnBoost = PMDC.LevelGen.MobSpawnBoost()
+  spawnBoost.DefBonus = 64
+  spawnBoost.SpDefBonus = 64
+  spawnBoost.SpeedBonus = 256
+  spawnBoost.MaxHPBonus = 128
+  post_mob.SpawnFeatures:Add(spawnBoost)
+  
+  local spawn_status = RogueEssence.LevelGen.MobSpawnStatus()
+  local status_effect = RogueEssence.Dungeon.StatusEffect("invisible")
+  status_effect.StatusStates:Set(RogueEssence.Dungeon.CountDownState(-1))
+  spawn_status.Statuses:Add(status_effect, 10)
+  post_mob.SpawnFeatures:Add(spawn_status)
+            
+  local dialogue = RogueEssence.Dungeon.BattleScriptEvent("LegendInteract", Serpent.line({ ActionScript = args.ActionScript, SaveVar = args.SaveVar }))
+  post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
+  specificTeam.Spawns:Add(post_mob)
+  local picker = LUA_ENGINE:MakeGenericType(PresetMultiTeamSpawnerType, { MapGenContextType }, { })
+  picker.Spawns:Add(specificTeam)
+  local mobPlacement = LUA_ENGINE:MakeGenericType(PlaceRandomMobsStepType, { MapGenContextType }, { picker })
+  mobPlacement.Ally = true
+  mobPlacement.Filters:Add(PMDC.LevelGen.RoomFilterConnectivity(PMDC.LevelGen.ConnectivityRoom.Connectivity.Main))
+  mobPlacement.ClumpFactor = 20
+  -- Priority 5.2.1 is for NPC spawning in PMDO, but any dev can choose to roll with their own standard of priority.
+  local spawn_priority = RogueElements.Priority(5, 2, 1)
+  queue:Enqueue(spawn_priority, mobPlacement)
+end
 
 PresetPickerType = luanet.import_type('RogueElements.PresetPicker`1')
 EffectTileType = luanet.import_type('RogueEssence.Dungeon.EffectTile')

@@ -366,7 +366,9 @@ function SINGLE_CHAR_SCRIPT.LegendFloor(owner, ownerChar, context, args)
     return
   end
   UI:ResetSpeaker()
-  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_LEGEND_FLOOR"):ToLocal()))
+  local item_data = _DATA:GetItem("loot_music_box")
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_LEGEND_FLOOR"):ToLocal(), item_data:GetColoredName()))
+  GAME:WaitFrames(1)
 end
 
 function SINGLE_CHAR_SCRIPT.DestinationFloor(owner, ownerChar, context, args)
@@ -376,6 +378,7 @@ function SINGLE_CHAR_SCRIPT.DestinationFloor(owner, ownerChar, context, args)
   SOUND:PlayFanfare("Fanfare/Note")
   UI:ResetSpeaker()
   UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_MISSION_DESTINATION"):ToLocal()))
+  GAME:WaitFrames(1)
 end
 
 

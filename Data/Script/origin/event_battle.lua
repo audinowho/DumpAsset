@@ -79,9 +79,15 @@ function BATTLE_SCRIPT.SecretSlab(owner, ownerChar, context, args)
     local step_type = LUA_ENGINE:TypeOf(zone_step)
     if step_type == luanet.ctype(ScriptZoneStepType) then
       if zone_step.Script == "RoamingLegend" then
-        total_str = total_str .. STRINGS:Format(RogueEssence.StringKey("SIGN_SLAB_LEGEND_CHASE"):ToLocal()) .. "\n"
+        local roaming_args = load("return " .. zone_step.ArgTable)()
+        if SV.roaming_legends[roaming_args.SaveVar] == false then
+          total_str = total_str .. STRINGS:Format(RogueEssence.StringKey("SIGN_SLAB_LEGEND_CHASE"):ToLocal()) .. "\n"
+        end
       elseif zone_step.Script == "HiddenLegend" then
-        total_str = total_str .. STRINGS:Format(RogueEssence.StringKey("SIGN_SLAB_LEGEND_HIDE"):ToLocal()) .. "\n"
+        local roaming_args = load("return " .. zone_step.ArgTable)()
+        if SV.roaming_legends[roaming_args.SaveVar] == false then
+          total_str = total_str .. STRINGS:Format(RogueEssence.StringKey("SIGN_SLAB_LEGEND_HIDE"):ToLocal()) .. "\n"
+        end
       end
     end
   end
@@ -93,10 +99,6 @@ function BATTLE_SCRIPT.SecretSlab(owner, ownerChar, context, args)
   UI:WaitForChoice()
   
   context.CancelState.Cancel = true
-end
-
-function BATTLE_SCRIPT.ChaseInteract(owner, ownerChar, context, args)
-  
 end
 
 function BATTLE_SCRIPT.LegendInteract(owner, ownerChar, context, args)

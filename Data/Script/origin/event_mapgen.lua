@@ -216,55 +216,46 @@ function checkRoamingFlags(zoneContext, args)
   return true
 end
 
-function startRoamingFloor(queue)
-  -- set the map music to Crystal Cavern
-  local musicStep = LUA_ENGINE:MakeGenericType( MapMusicStepType, { MapGenContextType }, { "Luminous Spring.ogg" })
-  local music_priority = RogueElements.Priority(-6)
-  queue:Enqueue(music_priority, musicStep)
-  
-  -- add a map-start message
-  local activeEffect = RogueEssence.Data.ActiveEffect()
-  activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("LegendFloor"))
-  local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
-  local msg_priority = RogueElements.Priority(-6)
-  queue:Enqueue(msg_priority, destNote)
-end
-
 function ZONE_GEN_SCRIPT.RoamingLegend(zoneContext, context, queue, seed, args)
   
   if checkRoamingFlags(zoneContext, args) == false then
     return
   end
   
-  startRoamingFloor(queue)
+  -- add a map-start message
+  local activeEffect = RogueEssence.Data.ActiveEffect()
+  activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("LegendFloor"))
+  activeEffect.OnMapTurnEnds:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("RoamingFleeStairsCheck", Serpent.line({ Roaming = args.SaveVar })))
+  activeEffect.OnDeaths:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("OnRoamingDeath", Serpent.line({ Roaming = args.SaveVar, ActionScript = args.ActionScript })))
+  local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
+  local msg_priority = RogueElements.Priority(-6)
+  queue:Enqueue(msg_priority, destNote)
   
   -- then, perform a spawn
   local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
   specificTeam.Explorer = true
   local post_mob = RogueEssence.LevelGen.MobSpawn()
   post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(args.Species, 0, "normal", Gender.Genderless)
-  post_mob.Tactic = "retreater"
+  post_mob.Tactic = "fleeing_legendary"
+  post_mob.SpecifiedSkills:Add(args.Move1)
+  post_mob.SpecifiedSkills:Add(args.Move2)
+  post_mob.SpecifiedSkills:Add(args.Move3)
+  post_mob.SpecifiedSkills:Add(args.Move4)
   post_mob.Level = RogueElements.RandRange(40)
+  post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Roaming = args.SaveVar })))
 
   local spawnBoost = PMDC.LevelGen.MobSpawnBoost()
-  spawnBoost.DefBonus = 64
-  spawnBoost.SpDefBonus = 64
   spawnBoost.SpeedBonus = 256
-  spawnBoost.MaxHPBonus = 128
+  spawnBoost.MaxHPBonus = 256
   post_mob.SpawnFeatures:Add(spawnBoost)
   
-  if args.BoostItem ~= "" then
-    local spawn_inv = PMDC.LevelGen.MobSpawnInv(false, args.BoostItem)
-    post_mob.SpawnFeatures:Add(spawn_inv)
-  end
-            
-  local dialogue = RogueEssence.Dungeon.BattleScriptEvent("ChaseInteract")
-  post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
+  local spawn_inv = PMDC.LevelGen.MobSpawnInv(false, args.BoostItem)
+  post_mob.SpawnFeatures:Add(spawn_inv)
+
   specificTeam.Spawns:Add(post_mob)
   local picker = LUA_ENGINE:MakeGenericType(PresetMultiTeamSpawnerType, { MapGenContextType }, { })
   picker.Spawns:Add(specificTeam)
   local mobPlacement = LUA_ENGINE:MakeGenericType(PlaceRandomMobsStepType, { MapGenContextType }, { picker })
-  mobPlacement.Ally = true
   mobPlacement.Filters:Add(PMDC.LevelGen.RoomFilterConnectivity(PMDC.LevelGen.ConnectivityRoom.Connectivity.Main))
   mobPlacement.ClumpFactor = 20
   -- Priority 5.2.1 is for NPC spawning in PMDO, but any dev can choose to roll with their own standard of priority.
@@ -278,7 +269,12 @@ function ZONE_GEN_SCRIPT.HiddenLegend(zoneContext, context, queue, seed, args)
     return
   end
   
-  startRoamingFloor(queue)
+  -- add a map-start message
+  local activeEffect = RogueEssence.Data.ActiveEffect()
+  activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("LegendFloor"))
+  local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
+  local msg_priority = RogueElements.Priority(-6)
+  queue:Enqueue(msg_priority, destNote)
   
   -- then, perform a spawn
   local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
@@ -293,6 +289,7 @@ function ZONE_GEN_SCRIPT.HiddenLegend(zoneContext, context, queue, seed, args)
   end
   post_mob.Tactic = "patrol"
   post_mob.Level = RogueElements.RandRange(20)
+  post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Roaming = args.SaveVar })))
 
   local spawn_status = RogueEssence.LevelGen.MobSpawnStatus()
   local status_effect = RogueEssence.Dungeon.StatusEffect("invisible")

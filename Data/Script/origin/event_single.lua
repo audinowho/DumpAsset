@@ -365,10 +365,63 @@ function SINGLE_CHAR_SCRIPT.LegendFloor(owner, ownerChar, context, args)
   if context.User ~= nil then
     return
   end
+  SOUND:PlayBGM("Luminous Spring.ogg", true)
+  GAME:WaitFrames(20)
   UI:ResetSpeaker()
   local item_data = _DATA:GetItem("loot_music_box")
   UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_LEGEND_FLOOR"):ToLocal(), item_data:GetColoredName()))
   GAME:WaitFrames(1)
+end
+
+function SINGLE_CHAR_SCRIPT.OnRoamingDeath(owner, ownerChar, context, args)
+	
+	local tbl = LTBL(context.User)
+	if tbl.Roaming == args.Roaming then
+    context.User.Dead = false
+    SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
+    GAME:WaitFrames(20)
+		
+    DUNGEON:CharTurnToChar(context.User, _DATA.Save.ActiveTeam.Leader)
+    UI:SetSpeaker(context.User)
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_LEGEND_CHASE_001"):ToLocal()))
+    
+    local actionScript = RogueEssence.Dungeon.BattleScriptEvent(args.ActionScript)
+    context.User.MaxHPBonus = 0
+    context.User.AtkBonus = 0
+    context.User.DefBonus = 0
+    context.User.MAtkBonus = 0
+    context.User.MDefBonus = 0
+    context.User.SpeedBonus = 0
+    TASK:WaitTask(PMDC.Dungeon.BaseRecruitmentEvent.DungeonRecruit(owner, ownerChar, context.User, actionScript))
+    SV.roaming_legends[args.Roaming] = true
+	end
+end
+
+function SINGLE_CHAR_SCRIPT.RoamingFleeStairsCheck(owner, ownerChar, context, args)
+	local stairs_tbl = { }
+	stairs_tbl["stairs_back_down"] = true
+	stairs_tbl["stairs_back_up"] = true
+	stairs_tbl["stairs_exit_down"] = true
+	stairs_tbl["stairs_exit_up"] = true
+	stairs_tbl["stairs_go_up"] = true
+	stairs_tbl["stairs_go_down"] = true
+
+	local found_outlaw = COMMON.FindNpcWithTable(true, "Roaming", args.Roaming)
+
+	if found_outlaw then
+		local map = _ZONE.CurrentMap;
+		local charLoc = found_outlaw.CharLoc
+		local tile = map:GetTile(charLoc)
+		local tile_effect_id = tile.Effect.ID
+		if tile and stairs_tbl[tile_effect_id] == true then
+			GAME:WaitFrames(20)
+			found_outlaw.Dead = true
+			UI:ResetSpeaker()
+			UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_LEGEND_FLOOR_GONE"):ToLocal(), found_outlaw:GetDisplayName(true)))
+			SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
+			GAME:WaitFrames(20)
+		end
+	end
 end
 
 function SINGLE_CHAR_SCRIPT.DestinationFloor(owner, ownerChar, context, args)

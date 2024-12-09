@@ -135,6 +135,15 @@ function UpgradeTools:OnUpgrade()
   end
   
   
+  if SV.secret == nil then
+    SV.secret =
+    {
+      New = false,
+      Time = false,
+      Wish = false
+    }
+  end
+  
   
   if SV.sleeping_caldera == nil then
     SV.sleeping_caldera = 

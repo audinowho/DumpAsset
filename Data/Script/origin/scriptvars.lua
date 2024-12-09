@@ -109,6 +109,13 @@ SV.roaming_legends =
   Darkrai = false
 }
 
+SV.secret =
+{
+  New = false,
+  Time = false,
+  Wish = false
+}
+
 
 SV.castaway_cave = 
 {

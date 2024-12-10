@@ -41,6 +41,7 @@ end
 function rest_stop.Update(map, time)
   
   if SV.rest_stop.ExpositionComplete and SV.secret.Wish == false then
+    local cur_date = os.time()
     local date_diff = os.difftime(cur_date, SV.session_start)
     if date_diff > 604800 then
       rest_stop.SpecialEvent()

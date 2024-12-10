@@ -64,13 +64,13 @@ function DebugTools:OnNewGame()
   if _DATA.Save.ActiveTeam.Players.Count > 0 then
     local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
     _DATA.Save.ActiveTeam.Players[0].ActionEvents:Add(talk_evt)
-	_DATA.Save:RegisterMonster(_DATA.Save.ActiveTeam.Players[0].BaseForm.Species)
-	
-	_DATA.Save.ActiveTeam:SetRank("normal")
-	if not GAME:InRogueMode() then
-      _DATA.Save.ActiveTeam.Bank = 1000
-	end
-	SV.General.Starter = _DATA.Save.ActiveTeam.Players[0].BaseForm
+    _DATA.Save:RegisterMonster(_DATA.Save.ActiveTeam.Players[0].BaseForm.Species)
+    
+    _DATA.Save.ActiveTeam:SetRank("normal")
+    if not GAME:InRogueMode() then
+        _DATA.Save.ActiveTeam.Bank = 1000
+    end
+    SV.General.Starter = _DATA.Save.ActiveTeam.Players[0].BaseForm
   else
     PrintInfo("\n<!> ExampleSvc: Preparing debug save file")
     _DATA.Save.ActiveTeam:SetRank("normal")
@@ -88,19 +88,19 @@ function DebugTools:OnNewGame()
 	
     local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
     _DATA.Save.ActiveTeam.Players[0].ActionEvents:Add(talk_evt)
-	talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
+    talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
     _DATA.Save.ActiveTeam.Players[1].ActionEvents:Add(talk_evt)
-	talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
+    talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
     _DATA.Save.ActiveTeam.Players[2].ActionEvents:Add(talk_evt)
 	
     _DATA.Save.ActiveTeam.Leader.IsFounder = true
 	
-	_DATA.Save:UpdateTeamProfile(true)
-    
-	local dungeon_keys = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:GetOrderedKeys(false)
-	for ii = 0, dungeon_keys.Count-1 ,1 do
-		GAME:UnlockDungeon(dungeon_keys[ii])
-	end
+    _DATA.Save:UpdateTeamProfile(true)
+      
+    local dungeon_keys = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:GetOrderedKeys(false)
+    for ii = 0, dungeon_keys.Count-1 ,1 do
+      GAME:UnlockDungeon(dungeon_keys[ii])
+    end
   
     --for ii = 900, 2370, 1 do
     --  GAME:GivePlayerStorageItem(ii)
@@ -112,17 +112,21 @@ function DebugTools:OnNewGame()
     --  _DATA.Save.ActiveTeam.Assembly:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, "", 0))
     --end
     
-	if SV.base_camp ~= nil then
-      SV.base_camp.ExpositionComplete = true
-      SV.base_camp.IntroComplete = true
-	end
-	if SV.test_grounds ~= nil then
-	  SV.test_grounds.DemoComplete = true
-	end
-	SV.General.Starter = _DATA.Save.ActiveTeam.Players[0].BaseForm
+    if SV.base_camp ~= nil then
+        SV.base_camp.ExpositionComplete = true
+        SV.base_camp.IntroComplete = true
+    end
+    if SV.test_grounds ~= nil then
+      SV.test_grounds.DemoComplete = true
+    end
+    SV.General.Starter = _DATA.Save.ActiveTeam.Players[0].BaseForm
   end
+  SV.session_start = os.time()
 end
 
+function DebugTools:OnLoadSavedData()
+  SV.session_start = os.time()
+end
 
 --[[---------------------------------------------------------------
     DebugTools:OnLossPenalty()
@@ -162,6 +166,7 @@ function DebugTools:Subscribe(med)
   med:Subscribe("DebugTools", EngineServiceEvents.Init,                function() self.OnInit(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.Deinit,              function() self.OnDeinit(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.NewGame,        function() self.OnNewGame(self) end )
+  med:Subscribe("DebugTools", EngineServiceEvents.LoadSavedData,        function() self.OnLoadSavedData(self) end )
   med:Subscribe("DebugTools", EngineServiceEvents.LossPenalty,        function(_, args) self.OnLossPenalty(self, args[0]) end )
 end
 

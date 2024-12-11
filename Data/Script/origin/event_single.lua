@@ -511,7 +511,7 @@ function SINGLE_CHAR_SCRIPT.SeaCradle(owner, ownerChar, context, args)
     return
   end
   
-  SOUND:PlayBGM("", false)
+  SOUND:PlayBGM("", true)
   GAME:WaitFrames(20)
   
   UI:ResetSpeaker()
@@ -562,17 +562,29 @@ function SINGLE_CHAR_SCRIPT.SeaCradle(owner, ownerChar, context, args)
     
     SOUND:PlayBattleSE("EVT_Egg_Single")
     
-    local item_anim = RogueEssence.Content.ItemAnim(start_loc * RogueEssence.Content.GraphicsManager.TileSize + RogueElements.Loc(RogueEssence.Content.GraphicsManager.TileSize / 2), end_loc * RogueEssence.Content.GraphicsManager.TileSize + RogueElements.Loc(RogueEssence.Content.GraphicsManager.TileSize / 2), "Egg_Sea", RogueEssence.Content.GraphicsManager.TileSize / 2, 31)
+    local item_anim = RogueEssence.Content.ItemAnim(start_loc * RogueEssence.Content.GraphicsManager.TileSize + RogueElements.Loc(RogueEssence.Content.GraphicsManager.TileSize / 2), end_loc * RogueEssence.Content.GraphicsManager.TileSize + RogueElements.Loc(RogueEssence.Content.GraphicsManager.TileSize / 2), "Egg_Sea", RogueEssence.Content.GraphicsManager.TileSize / 2, 1)
     _DUNGEON:CreateAnim(item_anim, RogueEssence.Content.DrawLayer.Normal)
     GAME:WaitFrames(20)
     
+	  local arrive_anim = RogueEssence.Content.StaticAnim(RogueEssence.Content.AnimData("Egg_Sea_Hatch", 2), 1)
+	  arrive_anim:SetupEmitted(end_loc * RogueEssence.Content.GraphicsManager.TileSize + RogueElements.Loc(RogueEssence.Content.GraphicsManager.TileSize / 2), 4, RogueElements.Dir8.Down)
+	  DUNGEON:PlayVFXAnim(arrive_anim, RogueEssence.Content.DrawLayer.Front)
+    
+    SOUND:PlayBattleSE("EVT_Egg_Single")
+    GAME:WaitFrames(20)
+    
     SOUND:PlayBattleSE("EVT_Egg_Hatch")
+    
+    GAME:WaitFrames(40)
     -- hatching will be a fade to white, where the cradle will just be deleted, and manaphy will occupy the spot
     
-    GAME:FadeOut(true, 30)
+    GAME:FadeOut(true, 24)
     
-    local new_dir = _ZONE.CurrentMap:ApproximateClosestDir8(context.User.CharLoc, end_loc)
-    context.User.CharDir = new_dir
+    for ii = 0, _DATA.Save.ActiveTeam.Players.Count - 1, 1 do
+      local member = _DATA.Save.ActiveTeam.Players[ii]
+      local new_dir = _ZONE.CurrentMap:ApproximateClosestDir8(member.CharLoc, end_loc)
+      member.CharDir = new_dir
+    end
     
     local new_team = RogueEssence.Dungeon.MonsterTeam()
     new_team.Players:Add(new_mob)
@@ -582,7 +594,7 @@ function SINGLE_CHAR_SCRIPT.SeaCradle(owner, ownerChar, context, args)
     
     --remove the item on the ground
     
-    GAME:WaitFrames(30)
+    GAME:WaitFrames(60)
     SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
     GAME:FadeIn(60)
     
@@ -591,7 +603,7 @@ function SINGLE_CHAR_SCRIPT.SeaCradle(owner, ownerChar, context, args)
     
     UI:SetSpeaker(new_mob)
     
-    local dest_dir = RogueElements.DirExt.Reverse(new_dir)
+    local dest_dir = RogueElements.DirExt.Reverse(context.User.CharDir)
     -- turn downleft, downright
     new_mob.CharDir = RogueElements.DirExt.AddAngles(dest_dir, RogueElements.Dir8.DownLeft)
     UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_LEGEND_SEA_001"):ToLocal()))

@@ -506,57 +506,122 @@ end
 
 
 function SINGLE_CHAR_SCRIPT.SeaCradle(owner, ownerChar, context, args)
-  -- Check to ensure you have an item to give.
-  -- A frigid sea current swirls around the pedestal.  Will you place something here?
-  -- open item menu for selection
-  -- If it's the wrong item, say nothing happened.
-  -- If it's the right item, interact with tile
   
-  _DUNGEON.PendingLeaderAction = _DUNGEON:ProcessPlayerInput(RogueEssence.Dungeon.GameAction(RogueEssence.Dungeon.GameAction.ActionType.Tile, Dir8.None, 1))
-end
-
-function SINGLE_CHAR_SCRIPT.SeaCradle(owner, ownerChar, context, args)
-  SOUND:PlayBGM("", false)
-  GAME:WaitFrames(60)
-  -- turn off music, gradually bubble, before finally hatching manaphy
-  
-  GAME:FadeOut(true, 30)
-  -- hatching will be a fade to white, where the cradle will just be deleted, and manaphy will occupy the spot
-  
-  local new_team = RogueEssence.Dungeon.MonsterTeam()
-  local mob_data = RogueEssence.Dungeon.CharData()
-  mob_data.BaseForm = RogueEssence.Dungeon.MonsterID("manaphy", 0, "normal", Gender.Genderless)
-  mob_data.Level = 1;
-  mob_data.BaseSkills[0] = RogueEssence.Dungeon.SlotSkill("tail_glow")
-  mob_data.BaseSkills[1] = RogueEssence.Dungeon.SlotSkill("bubble")
-  mob_data.BaseSkills[2] = RogueEssence.Dungeon.SlotSkill("water_sport")
-  mob_data.BaseIntrinsics[0] = "hydration"
-  local new_mob = RogueEssence.Dungeon.Character(mob_data)
-  local tactic = _DATA:GetAITactic("stick_together")
-  new_mob.Tactic = RogueEssence.Data.AITactic(tactic)
-  new_mob.CharLoc = owner.TileLoc
-  new_mob.CharDir = _ZONE.CurrentMap:ApproximateClosestDir8(new_mob.CharLoc, _DUNGEON.ActiveTeam.Leader.CharLoc)
-  new_team.Players:Add(new_mob)
-  
-  _ZONE.CurrentMap.MapTeams:Add(new_team)
-  new_mob:RefreshTraits()
-  
-  local tile = ZoneManager.Instance.CurrentMap.GetTile(owner.TileLoc)
-  if tile.Effect == owner then
-      tile.Effect = RogueEssence.Dungeon.EffectTile(owner.TileLoc)
+  if context.User ~= _DATA.Save.ActiveTeam.Leader then
+    return
   end
   
-  GAME:WaitFrames(30)
-	SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
-	GAME:FadeIn(60)
+  SOUND:PlayBGM("", false)
+  GAME:WaitFrames(20)
   
-  TASK:WaitTask(_DUNGEON:SpecialIntro(new_mob))
-  TASK:WaitTask(new_mob:OnMapStart())
-  -- manaphy will say babyspeak, say "mama", and then join the team without asking.
-  -- it's still in the dungeon, and it's level 1.  You should probably send it back
+  UI:ResetSpeaker()
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_CURRENT"):ToLocal()))
   
-  local actionScript = RogueEssence.Dungeon.BattleScriptEvent(args.ActionScript)
-  TASK:WaitTask(PMDC.Dungeon.BaseRecruitmentEvent.DungeonRecruit(owner, ownerChar, new_mob, actionScript))
+  -- if there's an item, act on it
+  local item_slot = GAME:FindPlayerItem("egg_mystery", true, true)
+  if item_slot:IsValid() then
+    -- take the item out (dropped) with a destination of one tile up
+    local inv_item = nil
+    if item_slot.IsEquipped then
+      inv_item = GAME:GetPlayerEquippedItem(item_slot.Slot)
+      GAME:TakePlayerEquippedItem(item_slot.Slot)
+    else
+      inv_item = GAME:GetPlayerBagItem(item_slot.Slot)
+      GAME:TakePlayerBagItem(item_slot.Slot)
+    end
+    
+    -- choose a location free of characters
+    local start_loc = context.User.CharLoc
+    local end_loc = context.User.CharLoc + RogueElements.DirExt.GetLoc(context.User.CharDir)
+    
+    local mob_data = RogueEssence.Dungeon.CharData()
+    mob_data.BaseForm = RogueEssence.Dungeon.MonsterID("manaphy", 0, "normal", Gender.Genderless)
+    mob_data.Level = 1;
+    mob_data.BaseSkills[0] = RogueEssence.Dungeon.SlotSkill("tail_glow")
+    mob_data.BaseSkills[1] = RogueEssence.Dungeon.SlotSkill("bubble")
+    mob_data.BaseSkills[2] = RogueEssence.Dungeon.SlotSkill("water_sport")
+    mob_data.BaseIntrinsics[0] = "hydration"
+    local new_mob = RogueEssence.Dungeon.Character(mob_data)
+    local tactic = _DATA:GetAITactic("stick_together")
+    new_mob.Tactic = RogueEssence.Data.AITactic(tactic)
+    new_mob.CharLoc = end_loc
+    new_mob.CharDir = new_dir
+    new_mob.Discriminator = 256 * 3
+    
+    local result_locs = _ZONE.CurrentMap:FindNearLocs(new_mob, end_loc, 1)
+    end_loc = result_locs[0]
+    new_mob.CharLoc = end_loc
+    
+    SOUND:PlayBattleSE("EVT_Egg_Single")
+    GAME:WaitFrames(90)
+    SOUND:PlayBattleSE("EVT_Egg_Single")
+    GAME:WaitFrames(20)
+    SOUND:PlayBattleSE("EVT_Egg_Single")
+    GAME:WaitFrames(10)
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_CURRENT_OPEN"):ToLocal(), inv_item:GetDisplayName(), _DATA.Save.ActiveTeam.Name))
+    
+    SOUND:PlayBattleSE("EVT_Egg_Single")
+    
+    local item_anim = RogueEssence.Content.ItemAnim(start_loc * RogueEssence.Content.GraphicsManager.TileSize + RogueElements.Loc(RogueEssence.Content.GraphicsManager.TileSize / 2), end_loc * RogueEssence.Content.GraphicsManager.TileSize + RogueElements.Loc(RogueEssence.Content.GraphicsManager.TileSize / 2), "Egg_Sea", RogueEssence.Content.GraphicsManager.TileSize / 2, 31)
+    _DUNGEON:CreateAnim(item_anim, RogueEssence.Content.DrawLayer.Normal)
+    GAME:WaitFrames(20)
+    
+    SOUND:PlayBattleSE("EVT_Egg_Hatch")
+    -- hatching will be a fade to white, where the cradle will just be deleted, and manaphy will occupy the spot
+    
+    GAME:FadeOut(true, 30)
+    
+    local new_dir = _ZONE.CurrentMap:ApproximateClosestDir8(context.User.CharLoc, end_loc)
+    context.User.CharDir = new_dir
+    
+    local new_team = RogueEssence.Dungeon.MonsterTeam()
+    new_team.Players:Add(new_mob)
+    
+    _ZONE.CurrentMap.MapTeams:Add(new_team)
+    new_mob:RefreshTraits()
+    
+    --remove the item on the ground
+    
+    GAME:WaitFrames(30)
+    SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
+    GAME:FadeIn(60)
+    
+    TASK:WaitTask(_DUNGEON:SpecialIntro(new_mob))
+    TASK:WaitTask(new_mob:OnMapStart())
+    
+    UI:SetSpeaker(new_mob)
+    
+    local dest_dir = RogueElements.DirExt.Reverse(new_dir)
+    -- turn downleft, downright
+    new_mob.CharDir = RogueElements.DirExt.AddAngles(dest_dir, RogueElements.Dir8.DownLeft)
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_LEGEND_SEA_001"):ToLocal()))
+    new_mob.CharDir = RogueElements.DirExt.AddAngles(dest_dir, RogueElements.Dir8.DownRight)
+    -- look straight
+    GAME:WaitFrames(30)
+    -- question
+    new_mob.CharDir = dest_dir
+    local emoteData = _DATA:GetEmote("question")
+    new_mob:StartEmote(RogueEssence.Content.Emote(emoteData.Anim, emoteData.LocHeight, 1))
+    SOUND:PlayBattleSE("EVT_Emote_Confused")
+    DUNGEON:CharTurnToChar(new_mob, context.User)
+    GAME:WaitFrames(60)
+    -- glowing
+    emoteData = _DATA:GetEmote("glowing")
+    new_mob:StartEmote(RogueEssence.Content.Emote(emoteData.Anim, emoteData.LocHeight, 4))
+    -- "mama!  mama!"
+    UI:SetSpeakerEmotion("Happy")
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_LEGEND_SEA_002"):ToLocal()))
+    -- it's still in the dungeon, and it's level 1.  You should probably send it back
+    
+    local actionScript = RogueEssence.Dungeon.BattleScriptEvent(args.ActionScript)
+    TASK:WaitTask(PMDC.Dungeon.BaseRecruitmentEvent.DungeonRecruit(owner, ownerChar, new_mob, actionScript))
+    
+  else
+    
+    SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
+    GAME:WaitFrames(1)
+  end
+  
   
 end
 

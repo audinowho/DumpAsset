@@ -226,6 +226,22 @@ function test_grounds.Sign4_Action(obj, activator)
   PrintInfo('Text Tag Regression Test')
   local chara = CH('PLAYER')
   
+  UI:SetSpeaker(chara)
+  UI:WaitShowDialogue("ABCD[scroll]ABCD[scroll]ABCD[scroll]ABCD")
+  UI:SetSpeakerReverse(true)
+  UI:WaitShowDialogue("Normal Normal Normal Normal Normal Normal Normal Normal [pause=0][emote=sad]Sad Sad Sad Sad Sad Sad Sad Sad Sad Sad [emote=special1]Special1 Special1 Special1 Special1 Special1 Special1 Special1[emote=teary-eyed]Teary-Eyed Teary-Eyed Teary-Eyed Teary-Eyed Teary-Eyed Teary-Eyed Teary-Eyed Teary-Eyed")
+  UI:WaitShowDialogue("Normal Normal Normal Normal Normal Normal [speed=3]Fast Fast Fast Fast Fast Fast Fast Fast Fast [speed=0.2]Slow Slow Slow Slow")
+  UI:WaitShowDialogue("THE[pause=0] [color=#FF0000]QUICK[color] BROWN\n FOX [color=#FF0000]JUMPS[color] OVER[pause=0] THE[scroll] LAZY [color=#FF0000]DOG[color].\nTHE [color=#FF0000]QUICK[color] BROWN[pause=0] FOX [color=#FF0000]JUMPS[color].")
+  UI:WaitShowDialogue("Normal Sound Normal Sound Normal Sound Normal Sound Normal Sound Normal Sound Normal Sound")
+  UI:WaitShowDialogue("[sound=Menu/Speak,8]Normal Sound But Slower Normal Sound But Slower Normal Sound But Slower Normal Sound But Slower")
+  UI:WaitShowDialogue("Normal Sound Normal Sound Normal Sound Normal Sound [sound=Battle/_UNK_DUN_Water_Drop]Different Sound Different Sound Different Sound")
+  UI:WaitShowDialogue("[sound=Battle/_UNK_DUN_Water_Drop,7]Different Sound But Slower Different Sound But Slower Different Sound But Slower")
+  
+  UI:SetSe("Menu/Unknown-3", 10)
+  UI:WaitShowDialogue("Beep boop beep boop beep boop beep boop beep boop beep boop beep boop")
+  UI:ResetSe()
+  
+  
   UI:SetBounds(16, 16, 128, 128)
   UI:SetSpeaker(chara)
   UI:WaitShowDialogue("The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog.")
@@ -243,20 +259,7 @@ function test_grounds.Sign4_Action(obj, activator)
   UI:WaitForChoice()
   
   UI:WaitShowDialogue("Hello[pause=120]")
-  UI:SetSpeaker(chara)
-  UI:WaitShowDialogue("ABCD[scroll]ABCD[scroll]ABCD[scroll]ABCD")
-  UI:SetSpeakerReverse(true)
-  UI:WaitShowDialogue("Normal Normal Normal Normal Normal Normal Normal Normal [emote=sad]Sad Sad Sad Sad Sad Sad Sad Sad Sad Sad [emote=special1]Special1 Special1 Special1 Special1 Special1 Special1 Special1[emote=teary-eyed]Teary-Eyed Teary-Eyed Teary-Eyed Teary-Eyed Teary-Eyed Teary-Eyed Teary-Eyed Teary-Eyed")
-  UI:WaitShowDialogue("Normal Normal Normal Normal Normal Normal [speed=3]Fast Fast Fast Fast Fast Fast Fast Fast Fast [speed=0.2]Slow Slow Slow Slow")
-  UI:WaitShowDialogue("THE[pause=0] [color=#FF0000]QUICK[color] BROWN\n FOX [color=#FF0000]JUMPS[color] OVER[pause=0] THE[scroll] LAZY [color=#FF0000]DOG[color].\nTHE [color=#FF0000]QUICK[color] BROWN[pause=0] FOX [color=#FF0000]JUMPS[color].")
-  UI:WaitShowDialogue("Normal Sound Normal Sound Normal Sound Normal Sound Normal Sound Normal Sound Normal Sound")
-  UI:WaitShowDialogue("[sound=Menu/Speak,8]Normal Sound But Slower Normal Sound But Slower Normal Sound But Slower Normal Sound But Slower")
-  UI:WaitShowDialogue("Normal Sound Normal Sound Normal Sound Normal Sound [sound=Battle/_UNK_DUN_Water_Drop]Different Sound Different Sound Different Sound")
-  UI:WaitShowDialogue("[sound=Battle/_UNK_DUN_Water_Drop,7]Different Sound But Slower Different Sound But Slower Different Sound But Slower")
   
-  UI:SetSe("Menu/Unknown-3", 10)
-  UI:WaitShowDialogue("Beep boop beep boop beep boop beep boop beep boop beep boop beep boop")
-  UI:ResetSe()
 end
 
 function test_grounds.Sign5_Action(obj, activator)
@@ -264,17 +267,6 @@ function test_grounds.Sign5_Action(obj, activator)
   PrintInfo('Text Tag Regression Test')
   local chara = CH('PLAYER')
   
-  UI:ResetSpeaker()
-  UI:WaitShowVoiceOver("Our belief is often strongest when it should be weakest. That is the nature of hope.", 130, 150, 20, 100, -1)
-  UI:WaitShowVoiceOver("[speed=0.2]Alright... [speed=7.0]Zooming at the speed of light!\n[speed=0.2]Then... [speed=0.07]Slow as a Slowpoke.", 70)
-  
-  UI:TextPopUp("Everything", 30);
-  GAME:WaitFrames(70)
-  UI:TextPopUp("Everywhere, all at once, and everything that was here, and there, and everywhere", 50, 50, 50, 80, -1, false, false)
-  GAME:WaitFrames(70)
-  UI:TextPopUp("Oh, it can also stretch over here too!", 30, 150, 20, 90, -1, true, false)
-  GAME:WaitFrames(50)
-  UI:WaitShowVoiceOver("Now watch this!", 120, 0, 0, -1, -1)
   function test0()
     UI:WaitShowDialogue("Skip me!")
   end
@@ -294,6 +286,8 @@ function test_grounds.Sign5_Action(obj, activator)
     emitter.LocHeight = 2
     GROUND:PlayVFX(emitter, activator.MapLoc.X, activator.MapLoc.Y)
     GAME:WaitFrames(60)
+  end
+  function test3()
     SOUND:PlayBattleSE("DUN_Explosion")
     emitter = RogueEssence.Content.FiniteAreaEmitter(RogueEssence.Content.AnimData("Explosion", 3))
     emitter.Range = 20
@@ -302,8 +296,21 @@ function test_grounds.Sign5_Action(obj, activator)
     GROUND:PlayVFX(emitter, activator.MapLoc.X, activator.MapLoc.Y)
     GAME:WaitFrames(60)
   end
-  local callbacks = { test0, test1, test2 }
-  UI:WaitShowDialogue("Aha![script=2] You've fallen in my trap![pause=60] Now there is no escape.[script=0][script=1]", callbacks)
+  local callbacks = { test0, test1, test2, test3 }
+  UI:WaitShowDialogue("Aha![script=2] You've fallen in my trap![script=2][pause=0][script=2] Now there is no escape.[script=0][script=1][script=3]", callbacks)
+  
+  UI:ResetSpeaker()
+  UI:WaitShowVoiceOver("Our belief is often strongest when it should be weakest. That is the nature of hope.", 130, 150, 20, 100, -1)
+  UI:WaitShowVoiceOver("[speed=0.2]Alright... [speed=7.0]Zooming at the speed of light!\n[speed=0.2]Then... [speed=0.07]Slow as a Slowpoke.", 70)
+  
+  UI:TextPopUp("Everything", 30);
+  GAME:WaitFrames(70)
+  UI:TextPopUp("Everywhere, all at once, and everything that was here, and there, and everywhere", 50, 50, 50, 80, -1, false, false)
+  GAME:WaitFrames(70)
+  UI:TextPopUp("Oh, it can also stretch over here too!", 30, 150, 20, 90, -1, true, false)
+  GAME:WaitFrames(50)
+  UI:WaitShowVoiceOver("Now watch this!", 120, 0, 0, -1, -1)
+
 end
 
 

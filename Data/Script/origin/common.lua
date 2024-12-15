@@ -438,6 +438,9 @@ end
 
 
 function COMMON.UnlockWithFanfare(dungeon_id, from_dungeon)
+  if GAME:InRogueMode() then
+    return
+  end
   if not GAME:DungeonUnlocked(dungeon_id) then
 	local orig_settings = UI:ExportSpeakerSettings()
 	

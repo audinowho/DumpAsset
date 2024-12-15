@@ -1,14 +1,26 @@
 ﻿{
-"Version": "0.8.7.0",
+"Version": "0.8.8.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
 "DefaultText": "Trap-See Orb",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Détectorbe",
+"de": "Seherorb",
+"it": "Trappolasfera",
+"ko": "함정보임구슬",
+"zh-hans": "陷阱查看之玉"
+}
 },
 "Desc": {
 "DefaultText": "An orb that reveals all traps on the floor.",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Révèle tous les pièges cachés de l'étage.",
+"de": "Ein Orb, welcher alle Fallen auf der Ebene aufdeckt.",
+"it": "Una sfera che rivela tutte le trappole nel piano.",
+"ko": "층에 있는 모든 함정이 보이게 된다.",
+"zh-hans": "一种不可思议之玉，使用后能够看清本层的所有陷阱。"
+}
 },
 "Released": true,
 "Comment": "",
@@ -50,6 +62,7 @@
 "PreActions": [
 {
 "Delay": 10,
+"AbsoluteDelay": false,
 "Sound": "DUN_Move_Start",
 "Emitter": {
 "$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
@@ -83,6 +96,7 @@
 ],
 "ActionFX": {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "DUN_Identify_2",
 "Emitter": {
 "$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
@@ -131,6 +145,7 @@
 "IntroFX": [],
 "ExplodeFX": {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
@@ -187,6 +202,7 @@
 "IntroFX": [],
 "HitFX": {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",

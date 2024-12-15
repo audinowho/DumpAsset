@@ -1,14 +1,25 @@
 ﻿{
-"Version": "0.8.7.0",
+"Version": "0.8.8.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
 "DefaultText": "Scanner Orb",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Révélorbe",
+"de": "Scannerorb",
+"it": "Scannersfera",
+"ko": "스캔구슬",
+"zh-hans": "侦查之玉"
+}
 },
 "Desc": {
 "DefaultText": "An orb that reveals the location of all items and enemies on the floor.",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Signale où se trouvent les objets au sol de l'étage.",
+"de": "Ein Orb, der den Standort aller Items und Gegner auf der Ebene aufdeckt.",
+"it": "Una sfera che rivela l'ubicazione di tutti gli strumenti e dei nemici nel piano.",
+"zh-hans": "一种不可思议之玉，使用后能看见本层所有的道具和对手。"
+}
 },
 "Released": true,
 "Comment": "",
@@ -41,6 +52,7 @@
 "PreActions": [
 {
 "Delay": 10,
+"AbsoluteDelay": false,
 "Sound": "DUN_Move_Start",
 "Emitter": {
 "$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
@@ -74,6 +86,7 @@
 ],
 "ActionFX": {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "DUN_Identify_2",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
@@ -103,6 +116,7 @@
 "IntroFX": [],
 "ExplodeFX": {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
@@ -149,6 +163,7 @@
 "IntroFX": [],
 "HitFX": {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",

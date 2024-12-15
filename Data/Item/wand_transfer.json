@@ -1,14 +1,26 @@
 ﻿{
-"Version": "0.8.7.0",
+"Version": "0.8.8.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
 "DefaultText": "Transfer Wand",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Branche Métamorph",
+"de": "Transferzweig",
+"it": "Ramo Sosia",
+"ja": "へんげのえだ",
+"ja-jp": "へんげのえだ",
+"zh-hans": "变身之杖"
+}
 },
 "Desc": {
 "DefaultText": "A wand to be waved at a Pokémon. It transforms the target into the same Pokémon as the user.",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Une branche que l'on agite vers un Pokémon. Elle transforme la cible en un Pokémon identique à celui de l'utilisateur.",
+"de": "Ein Zweig, der gegen Pokémon geschwungen werden kann. Das Ziel wird in das Pokémon verwandelt, dass den Zweig verwendet.",
+"it": "Un ramo che può essere agitato contro un Pokémon. Trasforma il bersaglio nello stesso Pokémon dell'utilizzatore.",
+"zh-hans": "可以挥向宝可梦的魔杖。能够使目标变成与使用者相同的宝可梦。"
+}
 },
 "Released": true,
 "Comment": "",
@@ -64,6 +76,7 @@
 "PreActions": [
 {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "DUN_Throw_Start",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
@@ -78,6 +91,7 @@
 ],
 "ActionFX": {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "DUN_Blowback_Orb",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
@@ -107,6 +121,7 @@
 "IntroFX": [],
 "ExplodeFX": {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
@@ -150,6 +165,7 @@
 "IntroFX": [],
 "HitFX": {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "DUN_Transform",
 "Emitter": {
 "$type": "RogueEssence.Content.SingleEmitter, RogueEssence",

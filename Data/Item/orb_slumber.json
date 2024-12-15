@@ -1,14 +1,26 @@
 ﻿{
-"Version": "0.8.7.0",
+"Version": "0.8.8.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
 "DefaultText": "Slumber Orb",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Roupillorbe",
+"de": "Schlaforb",
+"it": "Sonnosfera",
+"ko": "잠들기구슬",
+"zh-hans": "催眠之玉"
+}
 },
 "Desc": {
 "DefaultText": "An orb that puts all enemies to sleep. It affects all enemies up to 5 tiles away.",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Endort les ennemis. Affecte tous les ennemis dans un rayon de 5 cases.",
+"de": "Ein Orb, welcher alle Gegner in Schlaf versetzt. Es betrifft alle Gegner in 5 Felder Entfernung.",
+"it": "Una sfera che fa entrare tutti i nemici nello stato di Sonno. Influenza tutti i membri del team che si trovano nel raggio di 5 caselle.",
+"ko": "5칸 범위 내의 모든 적 포켓몬을 잠들게 한다.",
+"zh-hans": "一种不可思议之玉，使用后会使周围5格范围内的对手陷入睡眠状态。"
+}
 },
 "Released": true,
 "Comment": "",
@@ -72,6 +84,7 @@
 "PreActions": [
 {
 "Delay": 10,
+"AbsoluteDelay": false,
 "Sound": "DUN_Move_Start",
 "Emitter": {
 "$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
@@ -105,6 +118,7 @@
 ],
 "ActionFX": {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "DUN_Sweet_Scent",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
@@ -134,6 +148,7 @@
 "IntroFX": [],
 "ExplodeFX": {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
@@ -188,6 +203,7 @@
 "IntroFX": [],
 "HitFX": {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",

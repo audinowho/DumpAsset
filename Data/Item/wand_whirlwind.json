@@ -1,14 +1,26 @@
 ﻿{
-"Version": "0.8.7.0",
+"Version": "0.8.8.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
 "DefaultText": "Whirlwind Wand",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Branche Cyclone",
+"de": "Wirbelzweig",
+"it": "Ramo Turbine",
+"ko": "돌풍지팡이",
+"zh-hans": "吹飞之杖"
+}
 },
 "Desc": {
 "DefaultText": "A wand to be waved at a Pokémon. It knocks the target back.",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Une branche que l'on agite vers un Pokémon. Elle pousse la cible.",
+"de": "Ein Zweig, der gegen Pokémon geschwungen werden kann. Er schlägt das Ziel zurück.",
+"it": "Un ramo che può essere agitato contro un Pokémon. Spinge il bersaglio.",
+"ko": "포켓몬에게 휘두르면 멀리 날려보낸다.",
+"zh-hans": "可以挥向宝可梦的魔杖。能够使目标被吹飞。"
+}
 },
 "Released": true,
 "Comment": "",
@@ -64,6 +76,7 @@
 "PreActions": [
 {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "DUN_Throw_Start",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
@@ -78,6 +91,7 @@
 ],
 "ActionFX": {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "DUN_Blowback_Orb",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
@@ -107,6 +121,7 @@
 "IntroFX": [],
 "ExplodeFX": {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
@@ -148,6 +163,7 @@
 "IntroFX": [],
 "HitFX": {
 "Delay": 0,
+"AbsoluteDelay": false,
 "Sound": "",
 "Emitter": {
 "$type": "RogueEssence.Content.SingleEmitter, RogueEssence",

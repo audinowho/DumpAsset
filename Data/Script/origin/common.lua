@@ -741,6 +741,41 @@ function COMMON.TriggerAdHocMonsterHouse(owner, ownerChar, target)
   
 end
 
+
+
+function COMMON.ProcessOneTimeTreasure(orig_item, result_chest_item, save_var)
+  local got_treasure = false
+  --bag items
+  local inv_count = _DATA.Save.ActiveTeam:GetInvCount() - 1
+  for i = inv_count, 0, -1 do
+  local item = _DATA.Save.ActiveTeam:GetInv(i)
+    if item.ID == "box_deluxe" and item.HiddenValue == "empty" then
+      item.HiddenValue = result_chest_item
+      got_treasure = true
+    end
+    if item.ID == orig_item and item.HiddenValue == "empty" then
+      save_var.TreasureTaken = true
+      got_treasure = true
+    end
+  end
+
+  --equips
+  local player_count = _DATA.Save.ActiveTeam.Players.Count
+  for i = 0, player_count - 1, 1 do 
+    local player = _DATA.Save.ActiveTeam.Players[i]
+    if player.EquippedItem.ID == "box_deluxe" and player.EquippedItem.HiddenValue == "empty" then 
+      player.EquippedItem.HiddenValue = result_chest_item
+      got_treasure = true
+    end
+    if player.EquippedItem.ID == orig_item and player.EquippedItem.HiddenValue == "empty" then 
+      save_var.TreasureTaken = true
+      got_treasure = true
+    end
+  end
+  
+  return got_treasure
+end
+
 function COMMON.CanTalk(chara)
   if chara:GetStatusEffect("sleep") ~= nil then
     return false

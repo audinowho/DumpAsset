@@ -609,22 +609,22 @@ function FLOOR_GEN_SCRIPT.Test(map, args)
 end
 
 function FLOOR_GEN_SCRIPT.CastawayCaveRevisit(map, args)
-  if not SV.manaphy_egg.Taken then
+  if not SV.castaway_cave.TreasureTaken then
     return
   end
   
   local item = nil
   
   for ii = 0, map.Items.Count - 1, 1 do
-	if map.Items[ii].Value == "egg_mystery" then
-	  item = map.Items[ii]
-	  break
-	end
+    if map.Items[ii].Value == "egg_mystery" then
+      item = map.Items[ii]
+      break
+    end
   end
   
   if item ~= nil then
     item.Value = "box_deluxe"
-	item.HiddenValue = "empty"
+    item.HiddenValue = "empty"
   end
   
 end
@@ -638,15 +638,48 @@ function FLOOR_GEN_SCRIPT.SleepingCalderaRevisit(map, args)
   local item = nil
   
   for ii = 0, map.Items.Count - 1, 1 do
-	if map.Items[ii].Value == "loot_secret_slab" then
-	  item = map.Items[ii]
-	  break
-	end
+    if map.Items[ii].Value == "loot_secret_slab" then
+      item = map.Items[ii]
+      break
+    end
   end
   
   if item ~= nil then
     item.Value = "box_deluxe"
-	item.HiddenValue = "xcl_element_fire_dust"
+    item.HiddenValue = "empty"
+  end
+  
+end
+
+
+function FLOOR_GEN_SCRIPT.GeodeUnderpassRevisit(map, args)
+  if not SV.geode_underpass.TreasureTaken then
+    return
+  end
+  
+  local item = nil
+  
+  for ii = 0, map.Items.Count - 1, 1 do
+    if map.Items[ii].Value == "loot_music_box" then
+      item = map.Items[ii]
+      break
+    end
+  end
+  
+  if item ~= nil then
+    item.Value = "box_deluxe"
+    local inside_val = map.Rand:Next(5)
+    if inside_val == 0 then
+      item.HiddenValue = "xcl_element_normal_silk"
+    elseif inside_val == 1 then
+      item.HiddenValue = "xcl_element_fire_silk"
+    elseif inside_val == 2 then
+      item.HiddenValue = "xcl_element_water_silk"
+    elseif inside_val == 3 then
+      item.HiddenValue = "xcl_element_grass_silk"
+    else
+      item.HiddenValue = "xcl_element_electric_silk"
+    end
   end
   
 end

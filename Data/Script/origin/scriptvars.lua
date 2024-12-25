@@ -119,7 +119,8 @@ SV.secret =
 
 SV.castaway_cave = 
 {
-  TookTreasure  = false
+  TookTreasure  = false,
+  TreasureTaken  = false
 }
 
 SV.ambush_forest = 
@@ -146,6 +147,12 @@ SV.sleeping_caldera =
   TookTreasure  = false,
   TreasureTaken  = false,
   GotHeatran = false
+}
+
+SV.geode_underpass = 
+{
+  TookTreasure  = false,
+  TreasureTaken  = false
 }
 
 SV.base_camp = 

@@ -653,7 +653,7 @@ end
 
 
 function FLOOR_GEN_SCRIPT.GeodeUnderpassRevisit(map, args)
-  if not SV.geode_underpass.TreasureTaken then
+  if not SV.geode_crevice.TreasureTaken then
     return
   end
   

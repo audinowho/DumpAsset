@@ -149,9 +149,8 @@ SV.sleeping_caldera =
   GotHeatran = false
 }
 
-SV.geode_underpass = 
+SV.geode_crevice = 
 {
-  TookTreasure  = false,
   TreasureTaken  = false
 }
 

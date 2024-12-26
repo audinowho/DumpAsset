@@ -158,10 +158,9 @@ function UpgradeTools:OnUpgrade()
     }
   end
   
-  if SV.geode_underpass == nil then
-    SV.geode_underpass = 
+  if SV.geode_crevice == nil then
+    SV.geode_crevice = 
     {
-      TookTreasure  = false,
       TreasureTaken  = false
     }
   end

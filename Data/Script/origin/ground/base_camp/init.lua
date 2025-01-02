@@ -394,7 +394,7 @@ function base_camp.Ferry_Action(obj, activator)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ferry_Line_001']))
 	SV.base_camp.FerryIntroduced = true
   end
-  local dungeon_entrances = { 'lava_floe_island', 'castaway_cave', 'eon_island', 'lost_seas', 'inscribed_cave', 'prism_isles' }
+  local dungeon_entrances = { 'lava_floe_island', 'castaway_cave', 'eon_island', 'uncharted_waters', 'inscribed_cave', 'prism_isles' }
   local ground_entrances = {}
   
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ferry_Line_002']))

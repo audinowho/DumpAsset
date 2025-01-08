@@ -28,7 +28,29 @@
 },
 "AnimOffset": 0,
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+"$type": "RogueEssence.Content.AttachReleaseEmitter, RogueEssence",
+"Anims": [
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Hydro_Cannon",
+"FrameTime": 5,
+"StartFrame": 2,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Speed": 60,
+"ParticlesPerBurst": 3,
+"BurstTime": 1,
+"StartDistance": 3,
+"Layer": 2
 },
 "WideAngle": 0,
 "SnapBack": false,
@@ -40,48 +62,14 @@
 "StopAtWall": false,
 "TargetAlignments": 4,
 "TileEmitter": {
-"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
-"LocHeight": 8,
-"finished": false,
-"Offset": 0,
-"Anim": {
-"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
-"Anim": {
-"AnimIndex": "Aqua_Tail_Splash",
-"FrameTime": 3,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": -1,
-"Alpha": 255,
-"AnimFlip": 0
-},
-"TotalTime": 0,
-"Cycles": 1,
-"FrameOffset": 0
-},
-"Layer": 2,
-"UseDest": false
-},
-"PreActions": [
-{
-"Delay": 0,
-"AbsoluteDelay": false,
-"Sound": "DUN_Surf",
-"Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"ScreenMovement": {
-"MinShake": 0,
-"MaxShake": 0,
-"MaxShakeTime": 0
-}
-}
-],
+"PreActions": [],
 "ActionFX": {
 "Delay": 0,
 "AbsoluteDelay": false,
-"Sound": "",
+"Sound": "DUN_Aura_Sphere_2",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0

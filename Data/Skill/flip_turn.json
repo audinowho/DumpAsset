@@ -4,44 +4,47 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Flip Turn",
-"LocalTexts": {
-"fr": "Eau Revoir",
-"de": "Rollwende",
-"es": "Viraje",
-"it": "Virata",
-"ko": "퀵턴",
-"ja": "クイックターン",
-"ja-jp": "クイックターン",
-"zh-hans": "快速折返",
-"zh-hant": "快速折返"
-}
+"LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "After making its attack, the user rushes back to switch places with a party Pokémon in waiting.",
-"LocalTexts": {
-"fr": "Après son attaque, le lanceur revient à toute vitesse et change de place avec un Pokémon de l’équipe prêt au combat.",
-"de": "Nach der Attacke eilt der Anwender zurück und tauscht den Platz mit einem anderen Pokémon.",
-"es": "Tras atacar, el usuario da paso a toda prisa a otro Pokémon del equipo.",
-"it": "Chi usa questa mossa fa marcia indietro per farsi sostituire dopo aver sferrato l’attacco.",
-"ko": "공격한 뒤 굉장한 스피드로 돌아와서 교대 포켓몬과 교체한다.",
-"ja": "こうげきした　あと ものすごい　スピードで　もどってきて ひかえの　ポケモンと　いれかわる。",
-"ja-jp": "攻撃した　あと ものすごい　スピードで　戻ってきて 控えの　ポケモンと　入れ替わる。",
-"zh-hans": "在攻击之后急速返回， 和后备宝可梦进行替换。",
-"zh-hant": "攻擊後迅速返回， 和後備寶可夢進行替換。"
-}
+"DefaultText": "After making its attack, the user jumps back several steps.",
+"LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 812,
 "BaseCharges": 20,
 "Strikes": 1,
 "HitboxAction": {
 "$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
+"HitTiles": true,
 "BurstTiles": 0,
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.FiniteReleaseEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Hydro_Cannon",
+"FrameTime": 5,
+"StartFrame": 2,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Speed": 60,
+"Bursts": 4,
+"ParticlesPerBurst": 2,
+"BurstTime": 2,
+"StartDistance": 4,
+"Layer": 2
 },
 "WideAngle": 0,
 "CharAnimData": {
@@ -57,7 +60,7 @@
 "ActionFX": {
 "Delay": 0,
 "AbsoluteDelay": false,
-"Sound": "",
+"Sound": "DUN_Dragon_Dance",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -105,6 +108,9 @@
 "HitRate": 100,
 "SkillStates": [
 {
+"$type": "PMDC.Dungeon.ContactState, PMDC"
+},
+{
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
 "Power": 60
 }
@@ -127,7 +133,27 @@
 }
 ],
 "OnHitTiles": [],
-"AfterActions": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.OnHitAnyEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.HopEvent, PMDC",
+"Distance": 3,
+"Reverse": true
+}
+],
+"RequireDamage": true,
+"Chance": 100
+}
+}
+],
 "ElementEffects": [],
 "IntroFX": [],
 "HitFX": {

@@ -514,6 +514,31 @@
 "AltColorOdds": 1024,
 "AltColor": "shiny",
 "Challenge": "shiny_square"
+},
+{
+"$type": "PMDC.Dungeon.MonsterHouseTableState, PMDC",
+"MonsterHouseWarningTile": "area_script",
+"ChestAmbushWarningTile": "area_script",
+"NoMonsterHallOnBlockLightTiles": false,
+"NoMonsterHouseEntrances": false
+},
+{
+"$type": "PMDC.Dungeon.NaturalRegenerationRateState, PMDC",
+"HealthPercentRegeneration": 12,
+"HealthPercentRegenerationInBattle": 0,
+"StarvingDamagePercentage": -60,
+"FlatHealthRegeneration": 0,
+"FlatHealthRegenerationInBattle": 0,
+"FlatStarvingDamage": 0
+},
+{
+"$type": "PMDC.Dungeon.HungerConsumptionRateState, PMDC",
+"MaxHunger": 100,
+"LeaderHungerConsumptionRate": 12,
+"PartyHungerConsumptionRate": 0,
+"GuestsHungerConsumptionRate": 0,
+"EnemyHungerConsumptionRate": 0,
+"AllyHungerConsumptionRate": 0
 }
 ],
 "BeforeTryActions": [],
@@ -689,7 +714,28 @@
 }
 ],
 "OnTurnStarts": [],
-"OnTurnEnds": [],
+"OnTurnEnds": [
+{
+"Key": {
+"str": [
+20
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.NaturalHungerUpdateEvent, PMDC"
+}
+},
+{
+"Key": {
+"str": [
+25
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.NaturalRegenerationEvent, PMDC"
+}
+}
+],
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [

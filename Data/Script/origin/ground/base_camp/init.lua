@@ -39,10 +39,10 @@ function base_camp.Enter(map)
   
   if not SV.base_camp.IntroComplete then
     base_camp.PrepareFirstTimeVisit()
-	GAME:FadeIn(20)
+    GAME:FadeIn(20)
   elseif SV.guildmaster_trail.FloorsCleared >= 30 and SV.guildmaster_trail.Rewarded == false then
     base_camp.RewardDialogue()
-	SV.guildmaster_trail.Rewarded = true
+    SV.guildmaster_trail.Rewarded = true
     SV.base_camp.ExpositionComplete = true
   elseif not SV.base_camp.ExpositionComplete then	
     base_camp.SetupNpcs()
@@ -51,7 +51,7 @@ function base_camp.Enter(map)
   else
     base_camp.SetupNpcs()
 	
-	base_camp.CheckMissions()
+    base_camp.CheckMissions()
 	
     GAME:FadeIn(20)
   end

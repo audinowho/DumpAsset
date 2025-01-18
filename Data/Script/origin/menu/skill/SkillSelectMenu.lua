@@ -20,7 +20,8 @@ SkillSelectMenu = Class("SkillSelectMenu")
 --- @param confirm_action function the function called when a slot is chosen. It will have a skill id string passed to it as a parameter.
 --- @param refuse_action function the function called when the player presses the cancel or menu button.
 --- @param menu_width number the width of this window. Default is 152.
-function SkillSelectMenu:initialize(title, character, skill_list, confirm_action, refuse_action, menu_width)
+--- @param label string the label that will be applied to this menu. Defaults to "SKILL_SELECT_MENU_LUA"
+function SkillSelectMenu:initialize(title, character, skill_list, confirm_action, refuse_action, menu_width, label)
     -- param validity check
     local len = 0
     if type(skill_list) == 'table' then len = #skill_list else len = skill_list.Count end
@@ -39,13 +40,14 @@ function SkillSelectMenu:initialize(title, character, skill_list, confirm_action
     self.menuWidth = menu_width or 152
     self.skillList = self:load_skills(skill_list)
     self.optionsList = self:generate_options()
+    label = label or "SKILL_SELECT_MENU_LUA"
 
     self.choice = nil -- result
 
     -- creating the menu
     local origin = RogueElements.Loc(16,16)
     local option_array = luanet.make_array(RogueEssence.Menu.MenuElementChoice, self.optionsList)
-    self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(origin, self.menuWidth, title, option_array, 0, self.MAX_ELEMENTS, refuse_action, refuse_action)
+    self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(label, origin, self.menuWidth, title, option_array, 0, self.MAX_ELEMENTS, refuse_action, refuse_action)
     self.menu.ChoiceChangedFunction = function() self:updateSummary() end
 
     -- creating the summary window

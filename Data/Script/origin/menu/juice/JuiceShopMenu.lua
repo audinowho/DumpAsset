@@ -22,12 +22,14 @@ JuiceShopMenu = Class("JuiceShopMenu", InventorySelectMenu)
 --- @param include_equips boolean if true, the menu will include equipped items.
 --- @param show_preview boolean if true, the preview menu will be shown.
 --- @param boost_function function the function that will be used by the preview window to calculate the total boost.
-function JuiceShopMenu:initialize(title, character, ingredients, confirm_action, refuse_action, include_equips, show_preview, boost_function)
+--- @param label string the label that will be applied to this menu. Defaults to "JUICE_MENU_LUA"
+function JuiceShopMenu:initialize(title, character, ingredients, confirm_action, refuse_action, include_equips, show_preview, boost_function, label)
     -- parsing data
     self.character = character
     self.ingredients = ingredients
     self.show_preview = show_preview
     self.boost_function = boost_function
+    label = label or "JUICE_MENU_LUA"
     -- generate enabled slots filter function
     local filter = function(slot)
         if slot.IsEquipped then
@@ -39,7 +41,7 @@ function JuiceShopMenu:initialize(title, character, ingredients, confirm_action,
         end
     end
 
-    InventorySelectMenu.initialize(self, title, filter, confirm_action, refuse_action, STRINGS:FormatKey('MENU_ITEM_GIVE'), 176, include_equips)
+    InventorySelectMenu.initialize(self, title, filter, confirm_action, refuse_action, STRINGS:FormatKey('MENU_ITEM_GIVE'), 176, include_equips, nil, label)
 
     if show_preview then
         -- create the summary window
@@ -81,7 +83,7 @@ end
 --- Returns a newly created copy of this object
 --- @return table a ``JuiceShopMenu``.
 function JuiceShopMenu:cloneMenu()
-    return JuiceShopMenu:new(self.title, self.character, self.ingredients, self.confirmAction, self.refuseAction, self.includeEquips, self.show_preview, self.boost_function)
+    return JuiceShopMenu:new(self.title, self.character, self.ingredients, self.confirmAction, self.refuseAction, self.includeEquips, self.show_preview, self.boost_function, self.label)
 end
 
 --- Updates the summary window and, if present, the summary window
@@ -108,11 +110,13 @@ DrinkPreviewSummary = Class("DrinkPreviewSummary")
 --- @param bottom number the y coordinate of the bottom side of the window.
 --- @param ingredient_effect_table table a list of key-value pairs where key is an item id and the value is a table of drink effects. See ``ground.base_camp_2.base_camp_2_juice`` for examples.
 --- @param boost_function function the function that will be used by the preview window to calculate the total boost.
-function DrinkPreviewSummary:initialize(left, top, right, bottom, character, ingredient_effect_table, boost_function)
+--- @param label string the label that will be applied to this menu. Defaults to "DRINK_PREVIEW_SUMMARY_LUA"
+function DrinkPreviewSummary:initialize(left, top, right, bottom, character, ingredient_effect_table, boost_function, label)
     self.boost_function = boost_function
     self.character = character
     self.ingredient_effect_table = ingredient_effect_table
-    self.window = RogueEssence.Menu.SummaryMenu(RogueElements.Rect.FromPoints(
+    label = label or "DRINK_PREVIEW_SUMMARY_LUA"
+    self.window = RogueEssence.Menu.SummaryMenu(label, RogueElements.Rect.FromPoints(
             RogueElements.Loc(left, top), RogueElements.Loc(right, bottom)))
 
     -- starting data. only stats should be overwritten to not color them when not changed directly

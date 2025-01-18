@@ -21,7 +21,8 @@ InventorySelectMenu = Class("InventorySelectMenu")
 --- @param menu_width number the width of this window. Default is 176.
 --- @param include_equips boolean if true, the menu will include equipped items. Defaults to true.
 --- @param max_choices boolean if set, it will never be possible to select more than the amount of items defined here. Defaults to the amount of selectable items.
-function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_action, confirm_button, menu_width, include_equips, max_choices)
+--- @param label string the label that will be applied to this menu. Defaults to "INVENTORY_MENU_LUA"
+function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_action, confirm_button, menu_width, include_equips, max_choices, label)
     if include_equips == nil then include_equips = true end
 
     -- constants
@@ -39,6 +40,8 @@ function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_ac
     self.optionsList = self:generate_options()
     self.max_choices_param = max_choices
     self.max_choices = self:count_valid()
+    label = label or "INVENTORY_MENU_LUA"
+    self.label = label
     if self.max_choices_param and self.max_choices_param < self.max_choices then self.max_choices = self.max_choices_param end
 
     self.multiConfirmAction = function(list)
@@ -63,7 +66,7 @@ function InventorySelectMenu:initialize(title, filter, confirm_action, refuse_ac
     -- creating the menu
     local origin = RogueElements.Loc(16,16)
     local option_array = luanet.make_array(RogueEssence.Menu.MenuElementChoice, self.optionsList)
-    self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(origin, self.menuWidth, title, option_array, 0, self.MAX_ELEMENTS, refuse_action, refuse_action, false, self.max_choices, self.multiConfirmAction)
+    self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(label, origin, self.menuWidth, title, option_array, 0, self.MAX_ELEMENTS, refuse_action, refuse_action, false, self.max_choices, self.multiConfirmAction)
     self.menu.ChoiceChangedFunction = function() self:updateSummary() end
 	self.menu.MultiSelectChangedFunction = function() self:updateSummary() end
     self.menu.UpdateFunction = function(input) self:updateFunction(input) end
@@ -208,7 +211,7 @@ end
 --- Returns a newly created copy of this object
 --- @return userdata an ``InventorySelectMenu``.
 function InventorySelectMenu:cloneMenu()
-    return InventorySelectMenu:new(self.title, self.filter, self.confirmAction, self.refuseAction, self.confirm_button, self.menuWidth, self.includeEquips, self.max_choices_param)
+    return InventorySelectMenu:new(self.title, self.filter, self.confirmAction, self.refuseAction, self.confirm_button, self.menuWidth, self.includeEquips, self.max_choices_param, self.label)
 end
 
 --- Updates the summary window.
@@ -239,9 +242,11 @@ ItemChosenMenu = Class("ItemChosenMenu")
 --- @param parent userdata the parent menu
 --- @param confirm_text function the confirm button text
 --- @param confirm_action function the function that is called when the confirm button is pressed
-function ItemChosenMenu:initialize(slots, parent, confirm_text, confirm_action)
+--- @param label string the label that will be applied to this menu. Defaults to "ITEM_CHOSEN_MENU_LUA"
+function ItemChosenMenu:initialize(slots, parent, confirm_text, confirm_action, label)
     local x, y = parent.Bounds.Right, parent.Bounds.Top
     local width = 72
+    label = label or "ITEM_CHOSEN_MENU_LUA"
     if slots[1].IsEquipped then
         self.first_item = _DATA.Save.ActiveTeam.Players[slots[1].Slot].EquippedItem
     else
@@ -258,7 +263,7 @@ function ItemChosenMenu:initialize(slots, parent, confirm_text, confirm_action)
         table.remove(options, 2)
     end
 
-    self.menu = RogueEssence.Menu.ScriptableSingleStripMenu(x, y, width, options, 0, function() self:choose(false) end)
+    self.menu = RogueEssence.Menu.ScriptableSingleStripMenu(label, x, y, width, options, 0, function() self:choose(false) end)
 end
 
 function ItemChosenMenu:choose(result)

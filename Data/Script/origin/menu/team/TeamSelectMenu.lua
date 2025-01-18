@@ -21,7 +21,8 @@ TeamSelectMenu = Class("TeamSelectMenu")
 --- @param refuse_action function the function called when the player presses the cancel or menu button.
 --- @param use_submenu boolean whether or not to call the ``TeamSelectSubMenu`` before returning. Defaults to true.
 --- @param menu_width number the width of this window. Default is 160.
-function TeamSelectMenu:initialize(title, char_list, filter, confirm_action, refuse_action, use_submenu, menu_width)
+--- @param label string the label that will be applied to this menu. Defaults to "TEAM_MENU_LUA"
+function TeamSelectMenu:initialize(title, char_list, filter, confirm_action, refuse_action, use_submenu, menu_width, label)
     -- param validity check
     local len = 0
     if type(char_list) == 'table' then len = #char_list
@@ -43,6 +44,7 @@ function TeamSelectMenu:initialize(title, char_list, filter, confirm_action, ref
     self.filter = filter or function(_) return true end
     self.charList = self:load_chars(char_list)
     self.optionsList = self:generate_options()
+    self.label = label or "TEAM_MENU_LUA"
     if #self.optionsList<self.MAX_ELEMENTS then self.MAX_ELEMENTS = #self.optionsList end
     if self.use_submenu == nil then self.use_submenu = true end
 
@@ -64,7 +66,7 @@ end
 function TeamSelectMenu:createMenu()
     local origin = RogueElements.Loc(16,16)
     local option_array = luanet.make_array(RogueEssence.Menu.MenuElementChoice, self.optionsList)
-    self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(origin, self.menuWidth, self.title, option_array, 0, self.MAX_ELEMENTS, self.refuseAction, self.refuseAction, false)
+    self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(self.label, origin, self.menuWidth, self.title, option_array, 0, self.MAX_ELEMENTS, self.refuseAction, self.refuseAction, false)
     self.menu.ChoiceChangedFunction = function() self:updateSummary() end
 end
 
@@ -149,12 +151,13 @@ TeamMultiSelectMenu = Class("TeamMultiSelectMenu", TeamSelectMenu)
 --- @param confirm_action function the function called when a slot is chosen. It will have a ``RogueEssence.Dungeon.Character`` passed to it as a parameter.
 --- @param refuse_action function the function called when the player presses the cancel or menu button.
 --- @param menu_width number the width of this window. Default is 160.
-function TeamMultiSelectMenu:initialize(title, char_list, filter, confirm_action, refuse_action, menu_width)
+--- @param label string the label that will be applied to this menu. Defaults to "TEAM_MENU_LUA"
+function TeamMultiSelectMenu:initialize(title, char_list, filter, confirm_action, refuse_action, menu_width, label)
     self.multiConfirmAction = function(list)
         self.choice = self:multiConfirm(list)
         self.confirmAction(self.choice)
     end
-    TeamSelectMenu.initialize(self, title, char_list, filter, confirm_action, refuse_action, menu_width)
+    TeamSelectMenu.initialize(self, title, char_list, filter, confirm_action, refuse_action, menu_width, label)
 end
 
 --- Performs the final adjustments and creates the actual menu object.
@@ -162,7 +165,7 @@ function TeamMultiSelectMenu:createMenu()
     local valid = self:count_valid()
     local origin = RogueElements.Loc(16,16)
     local option_array = luanet.make_array(RogueEssence.Menu.MenuElementChoice, self.optionsList)
-    self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(origin, self.menuWidth, self.title, option_array, 0, self.MAX_ELEMENTS, self.refuseAction, self.refuseAction, false, valid, self.multiConfirmAction)
+    self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(self.label, origin, self.menuWidth, self.title, option_array, 0, self.MAX_ELEMENTS, self.refuseAction, self.refuseAction, false, valid, self.multiConfirmAction)
     self.menu.ChoiceChangedFunction = function() self:updateSummary() end
 end
 
@@ -218,8 +221,10 @@ TeamSelectSubMenu = Class("TeamSelectSubMenu")
 --- @param parent table a ``TeamSelectMenu``
 --- @param confirm_action function the function called when the first option is pressed.
 --- @param refuse_action function the function called when the third option or the cancel or menu buttons are pressed.
-function TeamSelectSubMenu:initialize(parent, confirm_action, refuse_action)
+--- @param label string the label that will be applied to this menu. Defaults to "TEAM_CHOSEN_MENU_LUA"
+function TeamSelectSubMenu:initialize(parent, confirm_action, refuse_action, label)
     self.parent = parent
+    label = label or "TEAM_CHOSEN_MENU_LUA"
     local x, y, w = parent.menu.Bounds.Right, parent.menu.Bounds.Top, 64
     local summary_action = function()
         self:openSummary()
@@ -230,7 +235,7 @@ function TeamSelectSubMenu:initialize(parent, confirm_action, refuse_action)
         {STRINGS:FormatKey("MENU_TEAM_SUMMARY"), true, summary_action},
         {STRINGS:FormatKey("MENU_EXIT"),         true, refuse_action}
     }
-    self.menu = RogueEssence.Menu.ScriptableSingleStripMenu(x, y, w, choices, 0, refuse_action)
+    self.menu = RogueEssence.Menu.ScriptableSingleStripMenu(label, x, y, w, choices, 0, refuse_action)
 end
 
 --- Opens the ``RogueEssence.Menu.MemberFeaturesMenu`` of the character selected in the parent menu.

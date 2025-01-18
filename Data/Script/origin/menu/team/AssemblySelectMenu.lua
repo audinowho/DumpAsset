@@ -18,7 +18,10 @@ AssemblySelectMenu = Class("AssemblySelectMenu", TeamSelectMenu)
 --- @param use_submenu boolean whether or not to call the ``AssemblySelectSubMenu`` before returning. Defaults to true.
 --- @param menu_width number the width of this window. Default is 160.
 --- @param sort_mode userdata a ``RogueEssence.Menu.AssemblyMenu.AssemblySortMode`` object. defaults to ``Recent``
-function AssemblySelectMenu:initialize(filter, confirm_action, refuse_action, use_submenu, menu_width, sort_mode)
+--- @param label string the label that will be applied to this menu. Defaults to "ASSEMBLY_MENU_LUA"
+function AssemblySelectMenu:initialize(filter, confirm_action, refuse_action, use_submenu, menu_width, sort_mode, label)
+    label = label or "ASSEMBLY_MENU_LUA"
+
     -- helper structues
     local sort_modes = RogueEssence.Menu.AssemblyMenu.AssemblySortMode
     self.mode_to_int = {}
@@ -44,7 +47,7 @@ function AssemblySelectMenu:initialize(filter, confirm_action, refuse_action, us
     -- call superclass initializer
     local placeholder = {}
     table.insert(placeholder, 0)
-    TeamSelectMenu.initialize(self, STRINGS:FormatKey("MENU_ASSEMBLY_TITLE"), placeholder, filter, confirm_action, refuse_action, use_submenu, menu_width)
+    TeamSelectMenu.initialize(self, STRINGS:FormatKey("MENU_ASSEMBLY_TITLE"), placeholder, filter, confirm_action, refuse_action, use_submenu, menu_width, label)
     self.menu.UpdateFunction = function(input) self:updateFunction(input) end
     self.menu.SummaryMenus:Add(self.portrait_box)
 end
@@ -55,7 +58,7 @@ function AssemblySelectMenu:createMenu()
 
     local origin = RogueElements.Loc(16,16)
     local option_array = luanet.make_array(RogueEssence.Menu.MenuElementChoice, self.optionsList)
-    self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(origin, self.menuWidth, self.title, option_array, 0, self.MAX_ELEMENTS, self.refuseAction, self.refuseAction, true)
+    self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(self.label, origin, self.menuWidth, self.title, option_array, 0, self.MAX_ELEMENTS, self.refuseAction, self.refuseAction, true)
     self.menu.ChoiceChangedFunction = function() self:updateSummary() end
 end
 
@@ -189,12 +192,13 @@ AssemblyMultiSelectMenu = Class("AssemblyMultiSelectMenu", AssemblySelectMenu)
 --- @param use_submenu boolean whether or not to call the ``AssemblySelectSubMenu`` before returning. Defaults to true.
 --- @param menu_width number the width of this window. Default is 160.
 --- @param sort_mode userdata a ``RogueEssence.Menu.AssemblyMenu.AssemblySortMode`` object. defaults to ``Recent``
-function AssemblyMultiSelectMenu:initialize(filter, confirm_action, refuse_action, use_submenu, menu_width, sort_mode)
+--- @param label string the label that will be applied to this menu. Defaults to "ASSEMBLY_MENU_LUA"
+function AssemblyMultiSelectMenu:initialize(filter, confirm_action, refuse_action, use_submenu, menu_width, sort_mode, label)
     self.multiConfirmAction = function(list)
         self.choice = self:multiConfirm(list)
         self.confirmAction(self.choice)
     end
-    AssemblySelectMenu.initialize(self, filter, confirm_action, refuse_action, use_submenu, menu_width, sort_mode)
+    AssemblySelectMenu.initialize(self, filter, confirm_action, refuse_action, use_submenu, menu_width, sort_mode, label)
 end
 
 --- Performs the final adjustments and creates the actual menu object.
@@ -204,7 +208,7 @@ function AssemblyMultiSelectMenu:createMenu()
     local valid = self:count_valid()
     local origin = RogueElements.Loc(16,16)
     local option_array = luanet.make_array(RogueEssence.Menu.MenuElementChoice, self.optionsList)
-    self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(origin, self.menuWidth, self.title, option_array, 0, self.MAX_ELEMENTS, self.refuseAction, self.refuseAction, true, valid, self.multiConfirmAction)
+    self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(self.label, origin, self.menuWidth, self.title, option_array, 0, self.MAX_ELEMENTS, self.refuseAction, self.refuseAction, true, valid, self.multiConfirmAction)
     self.menu.ChoiceChangedFunction = function() self:updateSummary() end
 end
 
@@ -309,8 +313,10 @@ AssemblySelectSubMenu = Class("AssemblySelectSubMenu", TeamSelectSubMenu)
 --- @param parent table an ``AssemblySelectMenu``
 --- @param confirm_action function the function called when the first option is pressed.
 --- @param refuse_action function the function called when the third option or the cancel or menu buttons are pressed.
-function AssemblySelectSubMenu:initialize(parent, confirm_action, refuse_action)
-    TeamSelectSubMenu.initialize(self, parent, confirm_action, refuse_action)
+--- @param label string the label that will be applied to this menu. Defaults to "ASSEMBLY_CHOSEN_MENU_LUA"
+function AssemblySelectSubMenu:initialize(parent, confirm_action, refuse_action, label)
+    label = label or "ASSEMBLY_CHOSEN_MENU_LUA"
+    TeamSelectSubMenu.initialize(self, parent, confirm_action, refuse_action, label)
 end
 
 --- Opens the ``RogueEssence.Menu.MemberFeaturesMenu`` of the character selected in the parent menu.

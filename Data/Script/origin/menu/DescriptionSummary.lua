@@ -14,8 +14,10 @@ DescriptionSummary = Class("DescriptionSummary")
 --- @param top number the y coordinate of the top side of the window.
 --- @param right number the x coordinate of the right side of the window.
 --- @param bottom number the y coordinate of the bottom side of the window.
-function DescriptionSummary:initialize(left, top, right, bottom)
-    self.window = RogueEssence.Menu.SummaryMenu(RogueElements.Rect.FromPoints(
+--- @param label string the label that will be applied to this summary menu. Defaults to "DESCRIPTION_SUMMARY_LUA"
+function DescriptionSummary:initialize(left, top, right, bottom, label)
+    label = label or "DESCRIPTION_SUMMARY_LUA"
+    self.window = RogueEssence.Menu.SummaryMenu(label, RogueElements.Rect.FromPoints(
             RogueElements.Loc(left, top), RogueElements.Loc(right, bottom)))
 
     local GraphicsManager = RogueEssence.Content.GraphicsManager

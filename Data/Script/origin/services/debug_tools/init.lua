@@ -141,7 +141,7 @@ function DebugTools:OnLossPenalty(save)
 
   --remove bag items
   for i = inv_count, 0, -1 do
-    local entry = _DATA:GetItem(save.ActiveTeam:GetInv(i).ID)
+    local entry = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Item]:Get(save.ActiveTeam:GetInv(i).ID)
     if not entry.CannotDrop then
       save.ActiveTeam:RemoveFromInv(i)
     end
@@ -152,7 +152,7 @@ function DebugTools:OnLossPenalty(save)
   for i = 0, player_count - 1, 1 do 
     local player = save.ActiveTeam.Players[i]
     if player.EquippedItem.ID ~= '' and player.EquippedItem.ID ~= nil then 
-      local entry = _DATA:GetItem(player.EquippedItem.ID)
+      local entry = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Item]:Get(player.EquippedItem.ID)
       if not entry.CannotDrop then
          player:SilentDequipItem()
       end

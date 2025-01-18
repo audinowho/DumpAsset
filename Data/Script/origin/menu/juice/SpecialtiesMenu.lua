@@ -19,7 +19,8 @@ SpecialtiesMenu = Class('SpecialtiesMenu')
 --- @param confirm_action function the function called when the selection is confirmed.
 --- @param refuse_action function the function called when the player presses the cancel or menu button.
 --- @param menu_width number the width of this window. Default is 152.
-function SpecialtiesMenu:initialize(title, specialties, confirm_action, refuse_action, menu_width)
+--- @param label string the label that will be applied to this menu. Defaults to "SPECIALTIES_MENU_LUA"
+function SpecialtiesMenu:initialize(title, specialties, confirm_action, refuse_action, menu_width, label)
     -- constants
     self.MAX_ELEMENTS = 8
 
@@ -29,13 +30,14 @@ function SpecialtiesMenu:initialize(title, specialties, confirm_action, refuse_a
     self.menuWidth = menu_width or 152
     self.specialties = specialties
     self.optionsList = self:generate_options()
+    label = label or "JUICE_MENU_LUA_SPECIALTIES"
 
     self.choice = nil -- result
 
     -- creating the menu
     local origin = RogueElements.Loc(16,16)
     local option_array = luanet.make_array(RogueEssence.Menu.MenuElementChoice, self.optionsList)
-    self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(origin, self.menuWidth, title, option_array, 0, self.MAX_ELEMENTS, refuse_action, refuse_action, false)
+    self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(label, origin, self.menuWidth, title, option_array, 0, self.MAX_ELEMENTS, refuse_action, refuse_action, false)
     self.menu.ChoiceChangedFunction = function() self:updateSummary() end
 
     local GraphicsManager = RogueEssence.Content.GraphicsManager
@@ -90,7 +92,8 @@ ServingSizeMenu = Class('ServingSizeMenu')
 --- @param servings table a list of serving sizes. See ``ground.base_camp_2.base_camp_2_juice`` for format examples.
 --- @param confirm_action function the function called when the selection is confirmed.
 --- @param menu_x number the x coordinate of this window's origin point.
-function ServingSizeMenu:initialize(servings, confirm_action, menu_x)
+--- @param label string the label that will be applied to this menu. Defaults to "SERVING_SIZE_MENU_LUA"
+function ServingSizeMenu:initialize(servings, confirm_action, menu_x, label)
     -- constants
     self.MAX_ELEMENTS = 5
     if #servings < 5 then self.MAX_ELEMENTS = #servings end
@@ -102,6 +105,7 @@ function ServingSizeMenu:initialize(servings, confirm_action, menu_x)
     self.servings = servings
     self.optionsList = self:generate_options()
     self.choice = nil -- result
+    label = label or "SERVING_SIZE_MENU_LUA"
 
     -- creating the menu
     local GraphicsManager = RogueEssence.Content.GraphicsManager
@@ -120,7 +124,7 @@ function ServingSizeMenu:initialize(servings, confirm_action, menu_x)
     local menuY = 16 + 14*(8-self.MAX_ELEMENTS)
     local origin = RogueElements.Loc(self.menuX, menuY)
     local option_array = luanet.make_array(RogueEssence.Menu.MenuElementChoice, self.optionsList)
-    self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(origin, menuWidth, "Sizes", option_array, 0, self.MAX_ELEMENTS, self.refuseAction, self.refuseAction, false)
+    self.menu = RogueEssence.Menu.ScriptableMultiPageMenu(label, origin, menuWidth, "Sizes", option_array, 0, self.MAX_ELEMENTS, self.refuseAction, self.refuseAction, false)
     self.menu.ChoiceChangedFunction = function() self:updateSummary() end
 
     self.summary = DescriptionSummary:new(16, self.menu.Bounds.Bottom, GraphicsManager.ScreenWidth-16, GraphicsManager.ScreenHeight-16)

@@ -153,14 +153,15 @@ end
 -- Menu that displays the recruitment list to the player
 RecruitmentListMenu = Class('RecruitmentListMenu')
 
-function RecruitmentListMenu:initialize()
+function RecruitmentListMenu:initialize(label)
     assert(self, "RecruitmentListMenu:initialize(): self is nil!")
+    label = label or "RECRUITS_MENU_LUA"
 
     self.ENTRY_LINES = 10
     self.ENTRY_COLUMNS = 2
     self.ENTRY_LIMIT = self.ENTRY_LINES * self.ENTRY_COLUMNS
 
-    self.menu = RogueEssence.Menu.ScriptableMenu(32, 32, 256, 176, function(input) self:Update(input) end)
+    self.menu = RogueEssence.Menu.ScriptableMenu(label, 32, 32, 256, 176, function(input) self:Update(input) end)
     self.dirPressed = false
     self.list = RECRUIT_LIST.compileCurrentList()
     self.page = 0

@@ -24,7 +24,8 @@ SkillTutorMenu = Class("SkillTutorMenu", SkillSelectMenu)
 --- @param refuse_action function the function called when the player presses the cancel or menu button.
 --- @param check_bank boolean if true, currencies will also count bank money. Defaults to false.
 --- @param check_storage boolean if true, currencies will also count stored items. Defaults to false.
-function SkillTutorMenu:initialize(title, skill_list, price_list, confirm_action, refuse_action, check_bank, check_storage)
+--- @param label string the label that will be applied to this menu. Defaults to "SKILL_TUTOR_MENU_LUA"
+function SkillTutorMenu:initialize(title, skill_list, price_list, confirm_action, refuse_action, check_bank, check_storage, label)
     -- param validity check
     local len = 0
     if type(skill_list) == 'table' then len = #skill_list else len = skill_list.Count end
@@ -37,9 +38,10 @@ function SkillTutorMenu:initialize(title, skill_list, price_list, confirm_action
     self.currencyList = self:load_currencies(price_list)
     self.check_bank = check_bank or false
     self.check_storage = check_storage or false
+    label = label or "SKILL_TUTOR_MENU_LUA"
 
     -- superclass init
-    SkillSelectMenu.initialize(self, title, nil, skill_list, confirm_action, refuse_action)
+    SkillSelectMenu.initialize(self, title, nil, skill_list, confirm_action, refuse_action, nil, label)
 
     -- creating the currency window
     local GraphicsManager = RogueEssence.Content.GraphicsManager

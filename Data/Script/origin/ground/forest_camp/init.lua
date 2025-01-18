@@ -491,41 +491,42 @@ function forest_camp.Sick_Child()
   local quest = SV.missions.Missions[questname]
   
   if quest == nil then
-	local parent = CH('NPC_Parent')
-	local camps = CH('NPC_Camps')
-	local player = CH('PLAYER')
+    local parent = CH('NPC_Parent')
+    local camps = CH('NPC_Camps')
+    local player = CH('PLAYER')
 
-	UI:SetSpeaker(parent)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_001']))
+    UI:SetSpeaker(parent)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_001']))
 
-	UI:SetSpeaker(camps)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_002']))
+    UI:SetSpeaker(camps)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_002']))
 
-	GROUND:CharTurnToChar(player, camps)
-	GROUND:CharTurnToChar(player, parent)
-	local destFloor = 10
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_003'], tostring(destFloor+1)))
+    GROUND:CharTurnToChar(player, camps)
+    GROUND:CharTurnToChar(player, parent)
+    local destFloor = 10
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_003'], tostring(destFloor+1)))
 
 	
-	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
-      DestZone = "sickly_hollow", DestSegment = 0, DestFloor = destFloor,
-      FloorUnknown = false,
-	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_grass"),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("sunflora", 0, "normal", Gender.Male) }
-	)
+    COMMON.CreateMission(questname,
+      { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+          DestZone = "sickly_hollow", DestSegment = 0, DestFloor = destFloor,
+          FloorUnknown = false,
+          TargetItem = RogueEssence.Dungeon.InvItem("lost_item_grass"),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("sunflora", 0, "normal", Gender.Male)
+      }
+    )
   else
   
-	COMMON.TakeMissionItem(quest)
+    COMMON.TakeMissionItem(quest)
 	
     if quest.Complete == COMMON.MISSION_INCOMPLETE then
       local camps = CH('NPC_Camps')
       UI:SetSpeaker(camps)
       GROUND:CharTurnToChar(camps,CH('PLAYER'))
-	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_004']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_004']))
     else
       forest_camp.Grass_Complete()
-	end
+    end
   end
   
   elseif SV.forest_child.Status == 2 then

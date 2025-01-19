@@ -16,7 +16,7 @@ function BATTLE_SCRIPT.EscortInteract(owner, ownerChar, context, args)
     local job = SV.TakenBoard[mission_slot]
 
     if job.Type == COMMON.MISSION_TYPE_EXPLORATION then
-        local zone_string = _DATA:GetZone(job.Zone).Segments[job.Segment]:ToString()
+        local zone_string = GAME:GetCurrentDungeon().Segments[job.Segment]:ToString()
         zone_string = COMMON.CreateColoredSegmentString(zone_string)
         local floor = SV.StairType[job.Zone] .. '[color=#00FFFF]' .. tostring(job.Floor) .. '[color]' .. "F"
         UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_EXPLORATION_INTERACT"):ToLocal(), zone_string , floor))

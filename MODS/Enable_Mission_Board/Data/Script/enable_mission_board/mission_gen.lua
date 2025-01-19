@@ -2316,11 +2316,11 @@ function MISSION_GEN.GenerateBoard(result, board_type)
     local dungeon_candidate_index_cur = 1
     local dungeon_difficulties = MISSION_GEN.ShallowCopy(MISSION_GEN.DIFFICULTY)
     for dungeon_id, cur_dungeon_segments in pairs(SV.MissionPrereq.DungeonsCompleted) do
-        local dungeon_instance = _DATA:GetZone(dungeon_id)
+		local dungeon_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_id)
         local dungeon_segment_index_cur = 1
         if MISSION_GEN.DUNGEON_LIST[dungeon_id] ~= nil then
             --Add the expected level
-            SV.ExpectedLevel[dungeon_id] = dungeon_instance.Level
+            SV.ExpectedLevel[dungeon_id] = dungeon_summary.Level
             dungeon_candidates[dungeon_candidate_index_cur] = dungeon_id
             local default_dungeon_candidate_needed = true
             for dungeon_segment, value in pairs(cur_dungeon_segments) do
@@ -2331,7 +2331,7 @@ function MISSION_GEN.GenerateBoard(result, board_type)
                         dungeon_segments[dungeon_candidate_index_cur] = {}
                     end
 
-                    if dungeon_instance.Segments[dungeon_segment].FloorCount > 1 then
+                    if dungeon_summary:GetFloorCount(dungeon_segment) > 1 then
                         dungeon_segments[dungeon_candidate_index_cur][dungeon_segment_index_cur] = dungeon_segment
                     end
                     default_dungeon_candidate_needed = false
@@ -2347,7 +2347,7 @@ function MISSION_GEN.GenerateBoard(result, board_type)
                         dungeon_segments[dungeon_candidate_index_cur] = {}
                     end
 
-                    if dungeon_instance.Segments[0].FloorCount > 1 then
+                    if dungeon_summary:GetFloorCount(0) > 1 then
                         dungeon_segments[dungeon_candidate_index_cur][dungeon_segment_index_cur] = 0
                     end
                 end

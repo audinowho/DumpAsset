@@ -23,11 +23,11 @@
 
         self.menu = RogueEssence.Menu.ScriptableMenu(24, 24, 164, height, function(input) self:Update(input) end)
         self.cursor = RogueEssence.Menu.MenuCursor(self.menu)
-        self.menu.MenuElements:Add(self.cursor)
+        self.menu.Elements:Add(self.cursor)
 
 
-        self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(GAME:GetTeamName(), RogueElements.Loc(16, 8)))
-        self.menu.MenuElements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(12, 8 + 12), self.menu.Bounds.Width - 12 * 2));
+        self.menu.Elements:Add(RogueEssence.Menu.MenuText(GAME:GetTeamName(), RogueElements.Loc(16, 8)))
+        self.menu.Elements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(12, 8 + 12), self.menu.Bounds.Width - 12 * 2));
 
 
         -- Offset from menu divider and team name
@@ -36,14 +36,14 @@
         for i = 0, player_count - 1, 1 do
             local player = GAME:GetPlayerPartyMember(i)
             if not player.IsPartner then
-                self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(player:GetDisplayName(true), RogueElements.Loc(16 + 8, offset)))
-                self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(STRINGS:FormatKey("MENU_TEAM_LEVEL_SHORT"), RogueElements.Loc(16 + 8 + 100, offset), RogueElements.DirH.Right))
-                self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(tostring(player.Level), RogueElements.Loc(16 + 8 + 100 + 18, offset), RogueElements.DirH.Right))
+                self.menu.Elements:Add(RogueEssence.Menu.MenuText(player:GetDisplayName(true), RogueElements.Loc(16 + 8, offset)))
+                self.menu.Elements:Add(RogueEssence.Menu.MenuText(STRINGS:FormatKey("MENU_TEAM_LEVEL_SHORT"), RogueElements.Loc(16 + 8 + 100, offset), RogueElements.DirH.Right))
+                self.menu.Elements:Add(RogueEssence.Menu.MenuText(tostring(player.Level), RogueElements.Loc(16 + 8 + 100 + 18, offset), RogueElements.DirH.Right))
                 offset = offset + self.spacer
             end
         end
 
-        self.menu.MenuElements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(12, offset), self.menu.Bounds.Width - 12 * 2));
+        self.menu.Elements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(12, offset), self.menu.Bounds.Width - 12 * 2));
         self.current_item = 0
         --self.cursor.Loc = RogueElements.Loc(offset +)
         self.cursor.Loc = RogueElements.Loc(16, 24 + self.spacer * self.current_item)

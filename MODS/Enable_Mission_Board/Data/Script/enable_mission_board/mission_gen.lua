@@ -2887,7 +2887,7 @@ JobMenu = Class('JobMenu')
 function JobMenu:initialize(job_type, job_number, parent_board_menu)
     assert(self, "JobMenu:initialize(): Error, self is nil!")
     self.menu = RogueEssence.Menu.ScriptableMenu(32, 32, 256, 176, function(input) self:Update(input) end)
-    --self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(jobs[i], RogueElements.Loc(16, 8 + 14 * (i-1))))
+    --self.menu.Elements:Add(RogueEssence.Menu.MenuText(jobs[i], RogueElements.Loc(16, 8 + 14 * (i-1))))
 
     local job
 
@@ -2996,32 +2996,32 @@ end
 
 function JobMenu:DrawJob()
     --Standard menu divider. Reuse this whenever you need a menu divider at the top for a title.
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(8, 8 + 12), self.menu.Bounds.Width - 8 * 2))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(8, 8 + 12), self.menu.Bounds.Width - 8 * 2))
 
     --Standard title. Reuse this whenever a title is needed.
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_SUMMARY"), RogueElements.Loc(16, 8)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_SUMMARY"), RogueElements.Loc(16, 8)))
 
     --Accepted element 
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(8, self.menu.Bounds.Height - 24), self.menu.Bounds.Width - 8 * 2))
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_ACCEPTED") .. self.taken_count .. "/8", RogueElements.Loc(96, self.menu.Bounds.Height - 20)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(8, self.menu.Bounds.Height - 24), self.menu.Bounds.Width - 8 * 2))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_ACCEPTED") .. self.taken_count .. "/8", RogueElements.Loc(96, self.menu.Bounds.Height - 20)))
 
 
 
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(self.flavor, RogueElements.Loc(16, 24)))
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_CLIENT"), RogueElements.Loc(16, 54)))
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_OBJECTIVE"), RogueElements.Loc(16, 68)))
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_PLACE"), RogueElements.Loc(16, 82)))
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_DIFFICULTY"), RogueElements.Loc(16, 96)))
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_REWARD"), RogueElements.Loc(16, 110)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(self.flavor, RogueElements.Loc(16, 24)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_CLIENT"), RogueElements.Loc(16, 54)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_OBJECTIVE"), RogueElements.Loc(16, 68)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_PLACE"), RogueElements.Loc(16, 82)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_DIFFICULTY"), RogueElements.Loc(16, 96)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_JOB_REWARD"), RogueElements.Loc(16, 110)))
 
     local client = self.client
     client = string.gsub(client, "Magna", "Magnezone")
 
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(client, RogueElements.Loc(68, 54)))
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(self.objective, RogueElements.Loc(68, 68)))
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(self.zone .. " " .. self.floor, RogueElements.Loc(68, 82)))
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(self.difficulty, RogueElements.Loc(68, 96)))
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(self.reward, RogueElements.Loc(68, 110)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(client, RogueElements.Loc(68, 54)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(self.objective, RogueElements.Loc(68, 68)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(self.zone .. " " .. self.floor, RogueElements.Loc(68, 82)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(self.difficulty, RogueElements.Loc(68, 96)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(self.reward, RogueElements.Loc(68, 110)))
 end
 
 
@@ -3067,13 +3067,13 @@ function JobMenu:DeleteJob()
     MISSION_GEN.SortTaken()
     if self.parent_board_menu ~= nil then
         --redraw board with potentially changed information from job board
-        self.parent_board_menu.menu.MenuElements:Clear()
+        self.parent_board_menu.menu.Elements:Clear()
         self.parent_board_menu:RefreshSelf()
         self.parent_board_menu:DrawBoard()
 
         --redraw selection board with potentially changed information
         if self.parent_board_menu.parent_selection_menu ~= nil then
-            self.parent_board_menu.parent_selection_menu.menu.MenuElements:Clear()
+            self.parent_board_menu.parent_selection_menu.menu.Elements:Clear()
             self.parent_board_menu.parent_selection_menu:DrawMenu()
         end
 
@@ -3102,7 +3102,7 @@ function JobMenu:FlipTakenStatus()
     end
     if self.parent_board_menu ~= nil then
         --redraw board with potentially changed information from job board
-        self.parent_board_menu.menu.MenuElements:Clear()
+        self.parent_board_menu.menu.Elements:Clear()
         self.parent_board_menu:RefreshSelf()
         self.parent_board_menu:DrawBoard()
     end
@@ -3133,13 +3133,13 @@ function JobMenu:AddJobToTaken()
 
     if self.parent_board_menu ~= nil then
         --redraw board with potentially changed information from job board
-        self.parent_board_menu.menu.MenuElements:Clear()
+        self.parent_board_menu.menu.Elements:Clear()
         self.parent_board_menu:RefreshSelf()
         self.parent_board_menu:DrawBoard()
 
         --redraw selection board with potentially changed information
         if self.parent_board_menu.parent_selection_menu ~= nil then
-            self.parent_board_menu.parent_selection_menu.menu.MenuElements:Clear()
+            self.parent_board_menu.parent_selection_menu.menu.Elements:Clear()
             self.parent_board_menu.parent_selection_menu:DrawMenu()
         end
     end
@@ -3314,21 +3314,21 @@ end
 --If you want to edit this, you'll probably have to change most instances of the number 4 here and some references to page. Sorry!
 function BoardMenu:DrawBoard()
     --Standard menu divider. Reuse this whenever you need a menu divider at the top for a title.
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(8, 8 + 12), self.menu.Bounds.Width - 8 * 2))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(8, 8 + 12), self.menu.Bounds.Width - 8 * 2))
 
     --Standard title. Reuse this whenever a title is needed.
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_BOARD_NOTICE"), RogueElements.Loc(16, 8)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_BOARD_NOTICE"), RogueElements.Loc(16, 8)))
 
     --page element
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("(" .. tostring(self.page) .. "/" .. tostring(self.total_pages) .. ")", RogueElements.Loc(self.menu.Bounds.Width - 35, 8)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText("(" .. tostring(self.page) .. "/" .. tostring(self.total_pages) .. ")", RogueElements.Loc(self.menu.Bounds.Width - 35, 8)))
 
 
     --Accepted element 
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(8, self.menu.Bounds.Height - 24), self.menu.Bounds.Width - 8 * 2))
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_BOARD_ACCEPTED") .. tostring(self.taken_count) .. "/8", RogueElements.Loc(96, self.menu.Bounds.Height - 20)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(8, self.menu.Bounds.Height - 24), self.menu.Bounds.Width - 8 * 2))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_BOARD_ACCEPTED") .. tostring(self.taken_count) .. "/8", RogueElements.Loc(96, self.menu.Bounds.Height - 20)))
 
 
-    self.menu.MenuElements:Add(self.cursor)
+    self.menu.Elements:Add(self.cursor)
 
     --populate 4 self.jobs on a page
     for i = (4 * self.page) - 3, 4 * self.page, 1 do
@@ -3384,10 +3384,10 @@ function BoardMenu:DrawBoard()
 
             --modulo the iterator so that if we're on the 2nd page it goes to the right spot
 
-            self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(icon, RogueElements.Loc(21, 26 + 28 * ((i-1) % 4))))
-            self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(title, RogueElements.Loc(33, 26 + 28 * ((i-1) % 4))))
-            self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(location, RogueElements.Loc(33, 38 + 28 * ((i-1) % 4))))
-            self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(difficulty, RogueElements.Loc(self.menu.Bounds.Width - 33, 38 + 28 * ((i-1) % 4))))
+            self.menu.Elements:Add(RogueEssence.Menu.MenuText(icon, RogueElements.Loc(21, 26 + 28 * ((i-1) % 4))))
+            self.menu.Elements:Add(RogueEssence.Menu.MenuText(title, RogueElements.Loc(33, 26 + 28 * ((i-1) % 4))))
+            self.menu.Elements:Add(RogueEssence.Menu.MenuText(location, RogueElements.Loc(33, 38 + 28 * ((i-1) % 4))))
+            self.menu.Elements:Add(RogueEssence.Menu.MenuText(difficulty, RogueElements.Loc(self.menu.Bounds.Width - 33, 38 + 28 * ((i-1) % 4))))
         end
     end
 end
@@ -3449,7 +3449,7 @@ function BoardMenu:Update(input)
                 end
 
 
-                self.menu.MenuElements:Clear()
+                self.menu.Elements:Clear()
                 self:DrawBoard()
             end
         end
@@ -3533,11 +3533,11 @@ function BoardSelectionMenu:DrawMenu()
         self.taken_populated = false
     end
 
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(board_name, RogueElements.Loc(21, 8)))
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(self.job_list, RogueElements.Loc(21, 22)))
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_BOARD_EXIT"), RogueElements.Loc(21, 36)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(board_name, RogueElements.Loc(21, 8)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(self.job_list, RogueElements.Loc(21, 22)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText(Text.FormatKey("MISSION_BOARD_EXIT"), RogueElements.Loc(21, 36)))
 
-    self.menu.MenuElements:Add(self.cursor)
+    self.menu.Elements:Add(self.cursor)
 end
 
 
@@ -3626,10 +3626,10 @@ end
 --refreshes information and draws to the menu. This is important in case there's a change to the taken board
 function DungeonJobList:DrawMenu()
     --Standard menu divider. Reuse this whenever you need a menu divider at the top for a title.
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(8, 8 + 12), self.menu.Bounds.Width - 8 * 2))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuDivider(RogueElements.Loc(8, 8 + 12), self.menu.Bounds.Width - 8 * 2))
 
     --Standard title. Reuse this whenever a title is needed.
-    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText("Mission Objectives", RogueElements.Loc(16, 8)))
+    self.menu.Elements:Add(RogueEssence.Menu.MenuText("Mission Objectives", RogueElements.Loc(16, 8)))
 
     --how many jobs have we populated so far
     local count = 0
@@ -3688,9 +3688,9 @@ function DungeonJobList:DrawMenu()
                         icon = STRINGS:Format("\\uE10A")--check mark
                     end
 
-                    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(icon, RogueElements.Loc(16, 24 + 14 * count)))
-                    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(floor_num, RogueElements.Loc(28, 24 + 14 * count)))
-                    self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(objective, RogueElements.Loc(60, 24 + 14 * count)))
+                    self.menu.Elements:Add(RogueEssence.Menu.MenuText(icon, RogueElements.Loc(16, 24 + 14 * count)))
+                    self.menu.Elements:Add(RogueEssence.Menu.MenuText(floor_num, RogueElements.Loc(28, 24 + 14 * count)))
+                    self.menu.Elements:Add(RogueEssence.Menu.MenuText(objective, RogueElements.Loc(60, 24 + 14 * count)))
 
                     count = count + 1
                 else
@@ -3715,26 +3715,26 @@ function DungeonJobList:DrawMenu()
         if count > 0 then
             yloc = 24 + 14 * count
         end
-        self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(message, RogueElements.Loc(16, yloc)))
+        self.menu.Elements:Add(RogueEssence.Menu.MenuText(message, RogueElements.Loc(16, yloc)))
     elseif count == 0 then
 		if _DATA.Save.Rescue ~= nil and _DATA.Save.Rescue.Rescuing then
 			if self.section ~= _DATA.Save.Rescue.SOS.Goal.StructID.Segment then
 				zone_string = _DATA:GetZone(_DATA.Save.Rescue.SOS.Goal.ID).Segments[_DATA.Save.Rescue.SOS.Goal.StructID.Segment]:ToString()
 				zone_string = COMMON.CreateColoredSegmentString(zone_string)
 				
-				self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(message, RogueElements.Loc(16, 12 + 14)))
+				self.menu.Elements:Add(RogueEssence.Menu.MenuText(message, RogueElements.Loc(16, 12 + 14)))
 			else
 				local floor_num = MISSION_GEN.GetStairsType(_DATA.Save.Rescue.SOS.Goal.ID) ..'[color=#00FFFF]' .. tostring(_DATA.Save.Rescue.SOS.Goal.StructID.ID) .. "[color]F"
 				icon = STRINGS:Format("\\uE10F")--open letter
 				objective = Text.FormatKey("MISSION_OBJECTIVES_RESCUE", _DATA.Save.Rescue.SOS.TeamName)
 				
-				self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(icon, RogueElements.Loc(16, 12 + 14)))
-				self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(floor_num, RogueElements.Loc(28, 12 + 14)))
-				self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(objective, RogueElements.Loc(60, 12 + 14)))
+				self.menu.Elements:Add(RogueEssence.Menu.MenuText(icon, RogueElements.Loc(16, 12 + 14)))
+				self.menu.Elements:Add(RogueEssence.Menu.MenuText(floor_num, RogueElements.Loc(28, 12 + 14)))
+				self.menu.Elements:Add(RogueEssence.Menu.MenuText(objective, RogueElements.Loc(60, 12 + 14)))
 			end
 		else
 			message = Text.FormatKey("MISSION_OBJECTIVES_DEFAULT")
-			self.menu.MenuElements:Add(RogueEssence.Menu.MenuText(message, RogueElements.Loc(16, 12 + 14)))
+			self.menu.Elements:Add(RogueEssence.Menu.MenuText(message, RogueElements.Loc(16, 12 + 14)))
 		end
     end
 end

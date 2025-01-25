@@ -15,7 +15,7 @@
 "KeepSkills": false,
 "TeamRestrict": false,
 "TeamSize": 2,
-"MoneyRestrict": false,
+"MoneyRestrict": true,
 "BagRestrict": 8,
 "KeepTreasure": true,
 "BagSize": -1,
@@ -8663,71 +8663,6 @@
 "Key": {
 "str": [
 6,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.TerrainSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-"Terrain": {
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "water",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Owner": 0,
-"TileStates": []
-}
-},
-"Spawn": {
-"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-"Picker": {
-"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-"Spawner": {
-"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-"$values": [
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "loot_star_piece",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 50
-}
-]
-},
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 0,
-"Max": 2
-}
-}
-}
-}
-},
-{
-"Key": {
-"str": [
-6,
 2
 ]
 },
@@ -9629,71 +9564,6 @@
 "Key": {
 "str": [
 6,
-1
-]
-},
-"Value": {
-"$type": "RogueElements.TerrainSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-"Terrain": {
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "water",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Owner": 0,
-"TileStates": []
-}
-},
-"Spawn": {
-"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-"Picker": {
-"$type": "RogueElements.LoopedRand`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-"Spawner": {
-"$type": "RogueElements.SpawnList`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
-"$values": [
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "loot_star_piece",
-"HiddenValue": "",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 50
-}
-]
-},
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 0,
-"Max": 2
-}
-}
-}
-}
-},
-{
-"Key": {
-"str": [
-6,
 2
 ]
 },
@@ -9995,15 +9865,4021 @@
 "Spawns": []
 },
 {
+"$type": "PMDC.LevelGen.SpreadHouseZoneStep, PMDC",
+"Priority": {
+"str": [
+4,
+1
+]
+},
+"Items": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_fire_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_thunder_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_water_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_moon_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_dusk_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_dawn_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_shiny_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_leaf_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_ice_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "evo_sun_stone",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "apricorn_plain",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "apricorn_blue",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "apricorn_green",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "apricorn_brown",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "apricorn_purple",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "apricorn_red",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "apricorn_white",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "apricorn_yellow",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "apricorn_black",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_earthquake",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_hyper_beam",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_overheat",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_blizzard",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_swords_dance",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_surf",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_dark_pulse",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_psychic",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_thunder",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_shadow_ball",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_ice_beam",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_giga_impact",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_fire_blast",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_dazzling_gleam",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_flash_cannon",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_stone_edge",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_sludge_bomb",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_focus_blast",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_explosion",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_snatch",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_sunny_day",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_rain_dance",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_sandstorm",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_hail",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_x_scissor",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_wild_charge",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_taunt",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_focus_punch",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_safeguard",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_light_screen",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_psyshock",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_will_o_wisp",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_dream_eater",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_nature_power",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_facade",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_swagger",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_captivate",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_rock_slide",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_fling",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_thunderbolt",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_water_pulse",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_shock_wave",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_brick_break",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_payback",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_calm_mind",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_reflect",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_charge_beam",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_flamethrower",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_energy_ball",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_retaliate",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_scald",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_waterfall",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_roost",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_rock_polish",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_acrobatics",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_rock_climb",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_bulk_up",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_pluck",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_psych_up",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_secret_power",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_natural_gift",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_return",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_frustration",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_giga_drain",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_dive",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_poison_jab",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_torment",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_shadow_claw",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_endure",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_echoed_voice",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_gyro_ball",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_recycle",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_false_swipe",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_defog",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_telekinesis",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_double_team",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_thunder_wave",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_attract",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_steel_wing",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_smack_down",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_snarl",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_flame_charge",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_bulldoze",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_substitute",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_iron_tail",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_brine",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_venoshock",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_u_turn",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_aerial_ace",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_hone_claws",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_rock_smash",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_protect",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_round",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_rest",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_hidden_power",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_rock_tomb",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_strength",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_thief",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_dig",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_cut",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_whirlpool",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_grass_knot",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_fly",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_power_up_punch",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_infestation",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_work_up",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_incinerate",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_roar",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_flash",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_bullet_seed",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_blue",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_black",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_clear",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_grass",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_green",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_brown",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_orange",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_gold",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_pink",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_purple",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_red",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_royal",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_silver",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_white",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_yellow",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_sky",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_gray",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_magenta",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_nugget",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "food_banana",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 25,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "key",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "machine_recall_box",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "machine_ability_capsule",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "orb_monster",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "machine_assembly_box",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 10,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "held_friend_bow",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+}
+],
+"ItemThemes": [
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
+"Themes": [
+{
+"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
+"Range": [
+"loot_pearl"
+],
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 1,
+"Max": 4
+}
+},
+{
+"$type": "PMDC.LevelGen.ItemThemeNone, PMDC",
+"SpecialRatio": 50,
+"Amount": {
+"Min": 2,
+"Max": 4
+}
+}
+],
+"Amount": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 20,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.ItemThemeType, PMDC",
+"UseType": 6,
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 3,
+"Max": 5
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.ItemStateType, PMDC",
+"UseType": {
+"assembly": "PMDC, Version=0.8.8.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.GummiState"
+},
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 3,
+"Max": 7
+}
+},
+"Rate": 30,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.ItemStateType, PMDC",
+"UseType": {
+"assembly": "PMDC, Version=0.8.8.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.RecruitState"
+},
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 2,
+"Max": 6
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
+"Themes": [
+{
+"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
+"Range": [
+"loot_pearl"
+],
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 1,
+"Max": 4
+}
+},
+{
+"$type": "PMDC.LevelGen.ItemStateType, PMDC",
+"UseType": {
+"assembly": "PMDC, Version=0.8.8.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.EvoState"
+},
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 2,
+"Max": 4
+}
+}
+],
+"Amount": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 30,
+"Range": {
+"Min": 0,
+"Max": 10
+}
+}
+],
+"Mobs": [],
+"MobThemes": [
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.MobThemeNone, PMDC",
+"SpecialRatio": 0,
+"Amount": {
+"Min": 7,
+"Max": 13
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+}
+],
+"HouseStepSpawns": [
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.MonsterHouseStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+},
+{
+"$type": "PMDC.LevelGen.NoEventRoom, PMDC"
+}
+]
+}
+],
+"Items": [],
+"ItemThemes": [],
+"Mobs": [],
+"MobThemes": []
+},
+"Rate": 10
+}
+],
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanChance, RogueEssence",
+"Chance": 10,
+"FloorRange": {
+"Min": 4,
+"Max": 15
+}
+},
+"ModStates": []
+},
+{
+"$type": "PMDC.LevelGen.SpreadHouseZoneStep, PMDC",
+"Priority": {
+"str": [
+4,
+1
+]
+},
+"Items": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "boost_nectar",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "boost_hp_up",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "boost_protein",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "boost_iron",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "boost_calcium",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "boost_zinc",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "boost_carbos",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_wonder",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_blue",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_black",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_clear",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_grass",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_green",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_brown",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_orange",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_gold",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_pink",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_purple",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_red",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_royal",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_silver",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_white",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_yellow",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_sky",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_gray",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "gummi_magenta",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 4,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "apricorn_big",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "medicine_max_elixir",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 20,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "medicine_max_potion",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 20,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "medicine_amber_tear",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 20,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_nugget",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 20,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "seed_joy",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 15,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "machine_ability_capsule",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 15,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_heart_scale",
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+}
+],
+"ItemThemes": [
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
+"Themes": [
+{
+"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
+"Range": [
+"loot_heart_scale"
+],
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 1,
+"Max": 3
+}
+},
+{
+"$type": "PMDC.LevelGen.ItemStateType, PMDC",
+"UseType": {
+"assembly": "PMDC, Version=0.8.8.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.GummiState"
+},
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 2,
+"Max": 4
+}
+}
+],
+"Amount": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+},
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
+"Themes": [
+{
+"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
+"Range": [
+"loot_heart_scale"
+],
+"UseMapItems": true,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 1,
+"Max": 1
+}
+},
+{
+"$type": "PMDC.LevelGen.ItemThemeNone, PMDC",
+"SpecialRatio": 100,
+"Amount": {
+"Min": 1,
+"Max": 3
+}
+}
+],
+"Amount": {
+"Min": 0,
+"Max": 0
+}
+},
+"Rate": 30,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+}
+],
+"Mobs": [],
+"MobThemes": [],
+"HouseStepSpawns": [
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.ChestStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], PMDC",
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+},
+{
+"$type": "PMDC.LevelGen.NoEventRoom, PMDC"
+}
+]
+}
+],
+"Items": [],
+"ItemThemes": [],
+"Mobs": [],
+"MobThemes": [],
+"Ambush": false
+},
+"Rate": 10
+}
+],
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueEssence.LevelGen.RandDecay, RogueEssence",
+"Min": 1,
+"Max": 5,
+"Rate": 60
+},
+"Replaceable": false,
+"FloorRange": {
+"Min": 4,
+"Max": 12
+}
+},
+"ModStates": [
+{
+"assembly": "PMDC, Version=0.8.8.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.ChestModGenState"
+}
+]
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadStepZoneStep, RogueEssence",
+"StepPriority": {
+"str": [
+6,
+1
+]
+},
+"Spawns": {
+"$type": "RogueElements.SpawnList`1[[RogueElements.IGenStep, RogueElements]], RogueElements",
+"$values": [
+{
+"Spawn": {
+"$type": "RogueElements.RandomSpawnStep`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Spawn": {
+"$type": "RogueElements.PickerSpawner`2[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence],[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"Picker": {
+"$type": "RogueElements.PresetMultiRand`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": [
+{
+"$type": "RogueElements.PresetPicker`1[[RogueEssence.Dungeon.MapItem, RogueEssence]], RogueElements",
+"ToSpawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "key",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+}
+}
+]
+}
+}
+},
+"Rate": 10
+}
+]
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 1
+},
+"Replaceable": false,
+"FloorRange": {
+"Min": 0,
+"Max": 5
+}
+},
+"ModStates": []
+},
+{
 "$type": "RogueEssence.LevelGen.SpreadRoomZoneStep, RogueEssence",
 "Spawns": [
 {
 "Spawn": {
 "GridOption": {
-"$type": "PMDC.LevelGen.RoomGenEvoSmall`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC"
+"$type": "PMDC.LevelGen.RoomGenEvoDiamond`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC"
 },
 "ListOption": {
-"$type": "PMDC.LevelGen.RoomGenEvoSmall`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], PMDC"
+"$type": "PMDC.LevelGen.RoomGenEvoDiamond`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], PMDC"
 },
 "Filters": [
 {
@@ -10049,6 +13925,1842 @@
 }
 },
 "ModStates": []
+},
+{
+"$type": "RogueEssence.LevelGen.SpreadStepRangeZoneStep, RogueEssence",
+"StepPriority": {
+"str": [
+4,
+2
+]
+},
+"Spawns": [
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.ShopStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], PMDC",
+"Items": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_earthquake",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_hyper_beam",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 6000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_overheat",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_blizzard",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_swords_dance",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_surf",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_dark_pulse",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_psychic",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_thunder",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_shadow_ball",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_ice_beam",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_giga_impact",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 6000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_fire_blast",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_dazzling_gleam",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_flash_cannon",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_stone_edge",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_sludge_bomb",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_focus_blast",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_explosion",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_snatch",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_sunny_day",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_rain_dance",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_sandstorm",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_hail",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_x_scissor",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_wild_charge",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_taunt",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_focus_punch",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_safeguard",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_light_screen",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_psyshock",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_will_o_wisp",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_dream_eater",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_nature_power",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_facade",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_swagger",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_captivate",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_rock_slide",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_fling",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_thunderbolt",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_water_pulse",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_shock_wave",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_brick_break",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_payback",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_calm_mind",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_reflect",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_charge_beam",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_flamethrower",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_energy_ball",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_retaliate",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_scald",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_waterfall",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_roost",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_rock_polish",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_acrobatics",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_rock_climb",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_bulk_up",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_pluck",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_psych_up",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_secret_power",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_natural_gift",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_embargo",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 2500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_dragon_claw",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_low_sweep",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 2500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_volt_switch",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_dragon_pulse",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_sludge_wave",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_struggle_bug",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 2500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_avalanche",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 2500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_drain_punch",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_dragon_tail",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_silver_wind",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 5000,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_frost_breath",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 3500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_sky_drop",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 2500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "tm_quash",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 2500,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 2
+}
+],
+"ItemThemes": [
+{
+"Spawn": {
+"$type": "PMDC.LevelGen.ItemThemeType, PMDC",
+"UseType": 6,
+"UseMapItems": false,
+"UseSpecialItems": true,
+"Amount": {
+"Min": 3,
+"Max": 6
+}
+},
+"Rate": 10
+}
+],
+"Mobs": [
+{
+"Spawn": {
+"BaseForm": {
+"Species": "porygon_z",
+"Form": 0,
+"Skin": "normal",
+"Gender": -1
+},
+"Level": {
+"Min": 100,
+"Max": 100
+},
+"SpecifiedSkills": [
+"nasty_plot",
+"hyper_beam",
+"discharge",
+"embargo"
+],
+"Intrinsic": "adaptability",
+"Tactic": "shopkeeper",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnInv, PMDC",
+"Items": [
+{
+"ID": "xcl_family_porygon_00",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_01",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_02",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_03",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+}
+],
+"MapStartOnly": false
+}
+]
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "porygon_z",
+"Form": 0,
+"Skin": "normal",
+"Gender": -1
+},
+"Level": {
+"Min": 100,
+"Max": 100
+},
+"SpecifiedSkills": [
+"conversion",
+"blizzard",
+"discharge",
+"psyshock"
+],
+"Intrinsic": "adaptability",
+"Tactic": "shopkeeper",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnInv, PMDC",
+"Items": [
+{
+"ID": "xcl_family_porygon_00",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_01",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_02",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_03",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+}
+],
+"MapStartOnly": false
+}
+]
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "porygon_z",
+"Form": 0,
+"Skin": "normal",
+"Gender": -1
+},
+"Level": {
+"Min": 100,
+"Max": 100
+},
+"SpecifiedSkills": [
+"nasty_plot",
+"hyper_beam",
+"discharge",
+"embargo"
+],
+"Intrinsic": "adaptability",
+"Tactic": "shopkeeper",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnInv, PMDC",
+"Items": [
+{
+"ID": "xcl_family_porygon_00",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_01",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_02",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_03",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+}
+],
+"MapStartOnly": false
+}
+]
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "porygon_z",
+"Form": 0,
+"Skin": "normal",
+"Gender": -1
+},
+"Level": {
+"Min": 100,
+"Max": 100
+},
+"SpecifiedSkills": [
+"nasty_plot",
+"tri_attack",
+"shadow_ball",
+"embargo"
+],
+"Intrinsic": "adaptability",
+"Tactic": "shopkeeper",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnInv, PMDC",
+"Items": [
+{
+"ID": "xcl_family_porygon_00",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_01",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_02",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_03",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+}
+],
+"MapStartOnly": false
+}
+]
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "porygon_z",
+"Form": 0,
+"Skin": "normal",
+"Gender": -1
+},
+"Level": {
+"Min": 100,
+"Max": 100
+},
+"SpecifiedSkills": [
+"agility",
+"psyshock",
+"signal_beam",
+"embargo"
+],
+"Intrinsic": "download",
+"Tactic": "shopkeeper",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnInv, PMDC",
+"Items": [
+{
+"ID": "xcl_family_porygon_00",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_01",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_02",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_03",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+}
+],
+"MapStartOnly": false
+}
+]
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "porygon2",
+"Form": 0,
+"Skin": "normal",
+"Gender": -1
+},
+"Level": {
+"Min": 100,
+"Max": 100
+},
+"SpecifiedSkills": [
+"conversion_2",
+"recover",
+"psybeam",
+"signal_beam"
+],
+"Intrinsic": "trace",
+"Tactic": "shopkeeper",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnInv, PMDC",
+"Items": [
+{
+"ID": "xcl_family_porygon_00",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_01",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_02",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_03",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+}
+],
+"MapStartOnly": false
+}
+]
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "porygon2",
+"Form": 0,
+"Skin": "normal",
+"Gender": -1
+},
+"Level": {
+"Min": 100,
+"Max": 100
+},
+"SpecifiedSkills": [
+"conversion_2",
+"recover",
+"psybeam",
+"discharge"
+],
+"Intrinsic": "trace",
+"Tactic": "shopkeeper",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnInv, PMDC",
+"Items": [
+{
+"ID": "xcl_family_porygon_00",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_01",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_02",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_03",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+}
+],
+"MapStartOnly": false
+}
+]
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "porygon2",
+"Form": 0,
+"Skin": "normal",
+"Gender": -1
+},
+"Level": {
+"Min": 100,
+"Max": 100
+},
+"SpecifiedSkills": [
+"conversion_2",
+"magic_coat",
+"tri_attack",
+"agility"
+],
+"Intrinsic": "trace",
+"Tactic": "shopkeeper",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnInv, PMDC",
+"Items": [
+{
+"ID": "xcl_family_porygon_00",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_01",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_02",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_03",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+}
+],
+"MapStartOnly": false
+}
+]
+},
+"Rate": 10
+}
+],
+"StartMob": {
+"BaseForm": {
+"Species": "porygon",
+"Form": 0,
+"Skin": "normal",
+"Gender": -1
+},
+"Level": {
+"Min": 100,
+"Max": 100
+},
+"SpecifiedSkills": [
+"agility",
+"blizzard",
+"discharge",
+"psychic"
+],
+"Intrinsic": "trace",
+"Tactic": "shopkeeper",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnBoost, PMDC",
+"MaxHPBonus": 256,
+"AtkBonus": 256,
+"DefBonus": 256,
+"SpAtkBonus": 256,
+"SpDefBonus": 256,
+"SpeedBonus": 256
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnInv, PMDC",
+"Items": [
+{
+"ID": "xcl_family_porygon_00",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_01",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_02",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+{
+"ID": "xcl_family_porygon_03",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+}
+],
+"MapStartOnly": false
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnDiscriminator, PMDC",
+"Discriminator": 2
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnInteractable, PMDC",
+"CheckEvents": [
+{
+"$type": "RogueEssence.Dungeon.BattleScriptEvent, RogueEssence",
+"Script": "ShopkeeperInteract",
+"ArgTable": "{}"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLuaTable, PMDC",
+"LuaTable": "{ Role = \"Shopkeeper\" }"
+}
+]
+},
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+},
+{
+"$type": "PMDC.LevelGen.NoEventRoom, PMDC"
+}
+]
+}
+],
+"SecurityStatus": "shop_security",
+"Personality": 2
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 12
+}
+}
+],
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 1
+},
+"Replaceable": false,
+"FloorRange": {
+"Min": 9,
+"Max": 12
+}
+},
+"ModStates": [
+{
+"assembly": "PMDC, Version=0.8.8.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.ShopModGenState"
+}
+]
 }
 ],
 "IsRelevant": true,

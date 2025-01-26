@@ -4,18 +4,10 @@
 "$type": "RogueEssence.Data.MapStatusData, RogueEssence",
 "Name": {
 "DefaultText": "Snow",
-"LocalTexts": {
-"fr": "Neigeux",
-"de": "Schnee",
-"es": "Nieve",
-"it": "Neve",
-"ja": "ゆき",
-"ja-jp": "ゆき",
-"zh-hans": "下雪"
-}
+"LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "",
+"DefaultText": "The Defense of Ice-types is boosted.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -45,7 +37,15 @@
 "Color": "255, 255, 255, 255"
 },
 "DefaultHidden": false,
-"StatusStates": [],
+"StatusStates": [
+{
+"$type": "RogueEssence.Dungeon.MapWeatherState, RogueEssence"
+},
+{
+"$type": "RogueEssence.Dungeon.MapCountDownState, RogueEssence",
+"Counter": 50
+}
+],
 "OnMapRefresh": [],
 "RepeatMethod": {
 "$type": "PMDC.Dungeon.MapStatusRefreshEvent, PMDC"
@@ -89,12 +89,81 @@
 "BeforeStatusAddings": [],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
-"OnMapStatusAdds": [],
-"OnMapStatusRemoves": [],
+"OnMapStatusAdds": [
+{
+"Key": {
+"str": [
+-5
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.ReplaceStatusGroupEvent, PMDC",
+"States": [
+{
+"assembly": "RogueEssence, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null",
+"type": "RogueEssence.Dungeon.MapWeatherState"
+}
+],
+"Msg": false
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MapStatusSoundEvent, PMDC",
+"Sound": "DUN_Snowy_Weather"
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MapStatusBattleLogEvent, PMDC",
+"Message": {
+"Key": "MSG_SNOW_START"
+},
+"Delay": true
+}
+}
+],
+"OnMapStatusRemoves": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MapStatusBattleLogEvent, PMDC",
+"Message": {
+"Key": "MSG_SNOW_END"
+},
+"Delay": true
+}
+}
+],
 "OnMapStarts": [],
 "OnTurnStarts": [],
 "OnTurnEnds": [],
-"OnMapTurnEnds": [],
+"OnMapTurnEnds": [
+{
+"Key": {
+"str": [
+5
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.MapStatusCountDownEvent, PMDC"
+}
+}
+],
 "OnWalks": [],
 "OnDeaths": [],
 "OnRefresh": [],
@@ -102,7 +171,28 @@
 "BeforeActions": [],
 "OnActions": [],
 "BeforeHittings": [],
-"BeforeBeingHits": [],
+"BeforeBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.CharElementNeededEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.MultiplyCategoryEvent, PMDC",
+"Category": 1,
+"Numerator": 2,
+"Denominator": 3,
+"Anims": []
+}
+],
+"NeededElement": "ice"
+}
+}
+],
 "AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],

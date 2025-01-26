@@ -652,7 +652,7 @@ function FLOOR_GEN_SCRIPT.SleepingCalderaRevisit(map, args)
 end
 
 
-function FLOOR_GEN_SCRIPT.GeodeUnderpassRevisit(map, args)
+function FLOOR_GEN_SCRIPT.GeodeCreviceRevisit(map, args)
   if not SV.geode_crevice.TreasureTaken then
     return
   end

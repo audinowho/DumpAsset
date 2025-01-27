@@ -3,18 +3,18 @@
 "Object": {
 "$type": "RogueEssence.Data.StatusData, RogueEssence",
 "Name": {
-"DefaultText": "Water Pledge",
+"DefaultText": "Cud Chew",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "The Pokémon is ready to unleash a follow-up attack whenever a foe is attacked. This status wears off after a few turns.",
+"DefaultText": "The Pokémon has eaten a berry, and will eat it again a few turns in the future.",
 "LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
 "MenuName": true,
 "CarryOver": false,
-"Emoticon": "Sword_Brown",
+"Emoticon": "Exclaim_Green",
 "DropEmoticon": "",
 "FreeEmote": "",
 "DrawEffect": -1,
@@ -24,8 +24,12 @@
 "$type": "PMDC.Dungeon.TransferStatusState, PMDC"
 },
 {
+"$type": "PMDC.Dungeon.IDState, PMDC",
+"ID": ""
+},
+{
 "$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
-"Counter": 6
+"Counter": 10
 }
 ],
 "OnSkillChanges": [],
@@ -60,8 +64,8 @@
 "RestoreHPs": []
 },
 "ProximityEvent": {
-"Radius": 4,
-"TargetAlignments": 4,
+"Radius": -1,
+"TargetAlignments": 0,
 "BeforeExplosions": [],
 "OnEquips": [],
 "OnPickups": [],
@@ -84,24 +88,7 @@
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],
-"AfterBeingHits": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FollowUpEvent, PMDC",
-"InvokedMove": "water_pledge",
-"AffectTarget": true,
-"FrontOffset": 0,
-"Msg": {
-"Key": "MSG_PLEDGE"
-}
-}
-}
-],
+"AfterBeingHits": [],
 "OnHitTiles": [],
 "AfterActions": [],
 "UserElementEffects": [],
@@ -111,21 +98,7 @@
 },
 "OnEquips": [],
 "OnPickups": [],
-"BeforeStatusAdds": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.SameStatusCheck, PMDC",
-"Message": {
-"Key": "MSG_PLEDGE_ALREADY"
-}
-}
-}
-],
+"BeforeStatusAdds": [],
 "BeforeStatusAddings": [],
 "OnStatusAdds": [
 {
@@ -137,28 +110,13 @@
 "Value": {
 "$type": "PMDC.Dungeon.StatusBattleLogEvent, PMDC",
 "Message": {
-"Key": "MSG_PLEDGE_START"
+"Key": "MSG_CUD_CHEW_START"
 },
 "Delay": true
 }
 }
 ],
-"OnStatusRemoves": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.StatusBattleLogEvent, PMDC",
-"Message": {
-"Key": "MSG_STATUS_END"
-},
-"Delay": false
-}
-}
-],
+"OnStatusRemoves": [],
 "OnMapStatusAdds": [],
 "OnMapStatusRemoves": [],
 "OnMapStarts": [],
@@ -167,12 +125,25 @@
 {
 "Key": {
 "str": [
-0
+1
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.CountDownRemoveEvent, PMDC",
+"$type": "PMDC.Dungeon.CountDownEvent, PMDC",
+"Effects": [
+{
+"$type": "PMDC.Dungeon.RemoveEvent, PMDC",
 "ShowMessage": true
+},
+{
+"$type": "PMDC.Dungeon.UseStateItemEvent, PMDC",
+"UseMsgs": {
+"Eat": {
+"Key": "MSG_CUD_CHEW_ATTACK"
+}
+}
+}
+]
 }
 }
 ],

@@ -7,7 +7,7 @@
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A rare treasure for Luvdisc. When kept in the bag, the Pokémon's Attack Range is increased when the floor has the Rain status.",
+"DefaultText": "A rare treasure for Luvdisc. When kept in the bag, the Pokémon will gradually restore the HP of its allies when its own HP is full.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -191,30 +191,30 @@
 "OnMapStatusRemoves": [],
 "OnMapStarts": [],
 "OnTurnStarts": [],
-"OnTurnEnds": [],
+"OnTurnEnds": [
+{
+"Key": {
+"str": [
+-3
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilySingleEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.RoyalVeilEvent, PMDC",
+"Range": 4,
+"HealHPFraction": 16
+}
+}
+}
+],
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [
-{
-"Key": {
-"str": [
--1
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.WeatherAddRangeEvent, PMDC",
-"WeatherID": "rain",
-"Range": 1
-}
-}
-}
-],
+"OnActions": [],
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],

@@ -7,7 +7,7 @@
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A rare treasure for Shaymin. When kept in the bag, the Pokémon can traverse water, lava, and pits.",
+"DefaultText": "A rare treasure for Shaymin. When kept in the bag, it changes the Pokémon's regular attack into a dash.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -195,53 +195,103 @@
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
-"OnRefresh": [
+"OnRefresh": [],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [
 {
 "Key": {
 "str": [
-0
+-3
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
+"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
-"Mobility": 1
+"$type": "PMDC.Dungeon.RegularAttackNeededEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.ChangeActionEvent, PMDC",
+"NewAction": {
+"$type": "RogueEssence.Dungeon.DashAction, RogueEssence",
+"Anim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"AnimOffset": 0,
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+},
+"WideAngle": 0,
+"SnapBack": false,
+"CharAnim": 5,
+"AppearanceMod": 0,
+"HitTiles": true,
+"Range": 2,
+"StopAtHit": true,
+"StopAtWall": true,
+"TargetAlignments": 4,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"PreActions": [
+{
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "DUN_Attack",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
+"ActionFX": {
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+},
+"LagBehindTime": 0
+}
+}
 }
 }
 },
 {
 "Key": {
 "str": [
-0
+-3
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
+"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
-"Mobility": 4
-}
-}
-},
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
+"$type": "PMDC.Dungeon.RegularAttackNeededEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
-"Mobility": 2
+"$type": "PMDC.Dungeon.TraitorEvent, PMDC"
+}
 }
 }
 }
 ],
-"BeforeTryActions": [],
-"BeforeActions": [],
-"OnActions": [],
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],

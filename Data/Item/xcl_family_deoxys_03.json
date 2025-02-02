@@ -7,7 +7,7 @@
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A rare treasure for Deoxys. When kept in the bag, items thrown by the Pokémon will pierce through enemies.",
+"DefaultText": "A rare treasure for Deoxys. When kept in the bag, the Pokémon will raise the PP usage of opponents that attack it.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -198,7 +198,9 @@
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [
+"OnActions": [],
+"BeforeHittings": [],
+"BeforeBeingHits": [
 {
 "Key": {
 "str": [
@@ -208,19 +210,32 @@
 "Value": {
 "$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.PierceEvent, PMDC",
-"SkillsPierce": false,
-"ItemsPierce": true,
-"PierceEnemies": true,
-"PierceWalls": false
+"$type": "PMDC.Dungeon.AddContextStateEvent, PMDC",
+"AddedState": {
+"$type": "PMDC.Dungeon.PressurePlus, PMDC"
+},
+"Global": false
 }
 }
 }
 ],
-"BeforeHittings": [],
-"BeforeBeingHits": [],
 "AfterHittings": [],
-"AfterBeingHits": [],
+"AfterBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.PressureEvent, PMDC",
+"Amount": 0
+}
+}
+}
+],
 "OnHitTiles": [],
 "AfterActions": [],
 "UserElementEffects": [],

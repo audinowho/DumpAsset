@@ -7,7 +7,7 @@
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A rare treasure for Shaymin. When kept in the bag, it reveals the direction of the staircase whenever the Pokémon reaches a new floor.",
+"DefaultText": "A rare treasure for Shaymin. When kept in the bag, the Pokémon can traverse water, lava, and pits.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -189,7 +189,13 @@
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
 "OnMapStatusRemoves": [],
-"OnMapStarts": [
+"OnMapStarts": [],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
+"OnMapTurnEnds": [],
+"OnWalks": [],
+"OnDeaths": [],
+"OnRefresh": [
 {
 "Key": {
 "str": [
@@ -197,43 +203,42 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.FamilySingleEvent, PMDC",
+"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.StairSensorEvent, PMDC",
-"SniffedStatusID": "stairs_sensed",
-"Emitter": {
-"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
-"LocHeight": 0,
-"finished": false,
-"Offset": 0,
-"Anim": {
-"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
-"Anim": {
-"AnimIndex": "Stair_Sensor_Arrow",
-"FrameTime": 6,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": -1,
-"Alpha": 255,
-"AnimFlip": 0
-},
-"TotalTime": 0,
-"Cycles": 6,
-"FrameOffset": 0
-},
-"Layer": 4,
-"UseDest": false
+"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
+"Mobility": 1
 }
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
+"Mobility": 4
+}
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
+"Mobility": 2
 }
 }
 }
 ],
-"OnTurnStarts": [],
-"OnTurnEnds": [],
-"OnMapTurnEnds": [],
-"OnWalks": [],
-"OnDeaths": [],
-"OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],

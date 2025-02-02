@@ -7,7 +7,7 @@
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A rare treasure for Luvdisc. When kept in the bag, the Pokémon will gradually restore the HP of its allies when its own HP is full.",
+"DefaultText": "A rare treasure for Luvdisc. When kept in the bag, the Pokémon may find a Heart Scale when it enters a new floor.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -189,25 +189,56 @@
 "OnStatusRemoves": [],
 "OnMapStatusAdds": [],
 "OnMapStatusRemoves": [],
-"OnMapStarts": [],
-"OnTurnStarts": [],
-"OnTurnEnds": [
+"OnMapStarts": [
 {
 "Key": {
 "str": [
--3
+0
 ]
 },
 "Value": {
 "$type": "PMDC.Dungeon.FamilySingleEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.RoyalVeilEvent, PMDC",
-"Range": 4,
-"HealHPFraction": 16
+"$type": "PMDC.Dungeon.GatherEvent, PMDC",
+"GatherItems": [
+"loot_heart_scale"
+],
+"Chance": 50,
+"Anims": [
+{
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Small_Blue_In",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"Sound": "",
+"Delay": 0
+}
+]
 }
 }
 }
 ],
+"OnTurnStarts": [],
+"OnTurnEnds": [],
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],

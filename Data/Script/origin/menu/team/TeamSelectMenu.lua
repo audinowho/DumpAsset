@@ -240,7 +240,7 @@ end
 
 --- Opens the ``RogueEssence.Menu.MemberFeaturesMenu`` of the character selected in the parent menu.
 function TeamSelectSubMenu:openSummary()
-    _MENU:AddMenu(RogueEssence.Menu.MemberFeaturesMenu(self.parent.menu.CurrentChoiceTotal, false, false), false)
+    _MENU:AddMenu(RogueEssence.Menu.MemberFeaturesMenu(_DATA.Save.ActiveTeam, self.parent.menu.CurrentChoiceTotal, false, false, false), false)
 end
 
 

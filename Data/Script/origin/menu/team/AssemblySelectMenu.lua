@@ -330,7 +330,7 @@ function AssemblySelectSubMenu:openSummary()
         is_assembly = true
         index = index_list[choice - team_tail_id]
     end
-    _MENU:AddMenu(RogueEssence.Menu.MemberFeaturesMenu(index, is_assembly, _DATA.Save.ActiveTeam.Assembly.Count > 0), false)
+    _MENU:AddMenu(RogueEssence.Menu.MemberFeaturesMenu(_DATA.Save.ActiveTeam, index, is_assembly, _DATA.Save.ActiveTeam.Assembly.Count > 0, false), false)
 end
 
 

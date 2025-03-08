@@ -54,7 +54,7 @@ MISSION_GEN.DUNGEON_LIST["sickly_hollow"] = { [0] = "S" } --Sickly Hollow
 MISSION_GEN.DUNGEON_LIST["secret_garden"] = { [0] = "STAR_3" } --Secret Garden
 MISSION_GEN.DUNGEON_LIST["flyaway_cliffs"] = { [0] = "C" } --Flyaway Cliffs
 MISSION_GEN.DUNGEON_LIST["fertile_valley"] = { [0] = "D", [1] = "C" } --Fertile Valley, Muddy Valley
-MISSION_GEN.DUNGEON_LIST["geode_crevice"] = { [0] = "D" } --Geode Crevice
+MISSION_GEN.DUNGEON_LIST["geode_crevice"] = { [0] = "A" } --Geode Crevice
 MISSION_GEN.DUNGEON_LIST["copper_quarry"] = { [0] = "C", [1] = "B" } --Copper Quarry, Lodestone Quarry
 MISSION_GEN.DUNGEON_LIST["depleted_basin"] = { [0] = "C" } --Depleted Basin
 MISSION_GEN.DUNGEON_LIST["forsaken_desert"] = { [0] = "A" } --Forsaken Desert

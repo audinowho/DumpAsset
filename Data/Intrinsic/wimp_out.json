@@ -7,10 +7,10 @@
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "The Pokémon cowardly switches out when its HP becomes half or less.",
+"DefaultText": "The Pokémon warps away when its HP becomes half or less.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 193,
 "ProximityEvent": {
@@ -67,7 +67,40 @@
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],
-"AfterBeingHits": [],
+"AfterBeingHits": [
+{
+"Key": {
+"str": [
+1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.PinchNeededEvent, PMDC",
+"Denominator": 2,
+"AffectTarget": true,
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.HitCounterEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.RandomWarpEvent, PMDC",
+"Distance": 50,
+"AffectTarget": true,
+"TriggerMsg": {
+"Key": null
+}
+}
+],
+"Targets": 4,
+"RequireDamage": true,
+"RequireContact": false,
+"RequireSurvive": true,
+"Chance": 100
+}
+]
+}
+}
+],
 "OnHitTiles": [],
 "AfterActions": [],
 "UserElementEffects": [],

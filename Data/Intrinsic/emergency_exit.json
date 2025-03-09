@@ -7,10 +7,10 @@
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "The Pokémon, sensing danger, switches out when its HP becomes half or less.",
+"DefaultText": "The Pokémon jumps back when its HP becomes half or less.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 194,
 "ProximityEvent": {
@@ -67,7 +67,38 @@
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],
-"AfterBeingHits": [],
+"AfterBeingHits": [
+{
+"Key": {
+"str": [
+1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.PinchNeededEvent, PMDC",
+"Denominator": 2,
+"AffectTarget": true,
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.HitCounterEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.HopEvent, PMDC",
+"Distance": 5,
+"Reverse": true,
+"AffectTarget": true
+}
+],
+"Targets": 4,
+"RequireDamage": true,
+"RequireContact": false,
+"RequireSurvive": true,
+"Chance": 100
+}
+]
+}
+}
+],
 "OnHitTiles": [],
 "AfterActions": [],
 "UserElementEffects": [],

@@ -49,10 +49,12 @@ MISSION_GEN.DUNGEON_LIST["trickster_woods"] = { [0] = "C", [1] = "B" } --Trickst
 MISSION_GEN.DUNGEON_LIST["overgrown_wilds"] = { [0] = "C", [1] = "B" } --Overgrown Wilds, Exotic Wilds
 MISSION_GEN.DUNGEON_LIST["moonlit_courtyard"] = { [0] = "C", [1] = "A" } --Moonlit Courtyard, Moonlit Temple
 MISSION_GEN.DUNGEON_LIST["ambush_forest"] = { [0] = "B" } --Ambush Forest
+MISSION_GEN.DUNGEON_LIST["tiny_tunnel"] = { [0] = "B" } --Tiny Tunnel
 MISSION_GEN.DUNGEON_LIST["sickly_hollow"] = { [0] = "S" } --Sickly Hollow
 MISSION_GEN.DUNGEON_LIST["secret_garden"] = { [0] = "STAR_3" } --Secret Garden
 MISSION_GEN.DUNGEON_LIST["flyaway_cliffs"] = { [0] = "C" } --Flyaway Cliffs
 MISSION_GEN.DUNGEON_LIST["fertile_valley"] = { [0] = "D", [1] = "C" } --Fertile Valley, Muddy Valley
+MISSION_GEN.DUNGEON_LIST["geode_crevice"] = { [0] = "A" } --Geode Crevice
 MISSION_GEN.DUNGEON_LIST["copper_quarry"] = { [0] = "C", [1] = "B" } --Copper Quarry, Lodestone Quarry
 MISSION_GEN.DUNGEON_LIST["depleted_basin"] = { [0] = "C" } --Depleted Basin
 MISSION_GEN.DUNGEON_LIST["forsaken_desert"] = { [0] = "A" } --Forsaken Desert

@@ -4,50 +4,108 @@
 "$type": "RogueEssence.Data.SkillData, RogueEssence",
 "Name": {
 "DefaultText": "Flower Trick",
-"LocalTexts": {
-"es": "Truco Floral",
-"it": "Prestigiafiore",
-"ja": "トリックフラワー",
-"ja-jp": "トリックフラワー",
-"zh-hans": "千变万花",
-"zh-hant": "千变万花"
-}
-},
-"Desc": {
-"DefaultText": "",
 "LocalTexts": {}
 },
-"Released": false,
+"Desc": {
+"DefaultText": "The user throws a rigged bouquet of flowers at the target. This attack never misses and always lands a critical hit.",
+"LocalTexts": {}
+},
+"Released": true,
 "Comment": "",
 "IndexNum": 870,
-"BaseCharges": 10,
+"BaseCharges": 11,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Dungeon.ThrowAction, RogueEssence",
+"Anim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
 },
-"WideAngle": 0,
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+},
+"Range": 3,
+"Speed": 0,
+"Coverage": 2,
+"ItemSprite": "",
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
+"ActionType": 25
 },
 "TargetAlignments": 4,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
 },
-"PreActions": [],
-"ActionFX": {
+"PreActions": [
+{
 "Delay": 0,
 "AbsoluteDelay": false,
 "Sound": "",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.FiniteOverlayEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"AnimIndex": "White",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"Movement": {
+"X": 0,
+"Y": 0
+},
+"RepeatX": true,
+"RepeatY": true,
+"FadeIn": 10,
+"FadeOut": 0,
+"TotalTime": 60,
+"Layer": 0,
+"Color": "0, 0, 0, 128"
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
+"ActionFX": {
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "_UNK_DUN_Twinkle",
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 12,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Leer",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,
@@ -93,12 +151,24 @@
 "SkillStates": [
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 70
+"Power": 50
 }
 ],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [],
+"OnActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.BoostCriticalEvent, PMDC",
+"AddCrit": 4
+}
+}
+],
 "BeforeExplosions": [],
 "BeforeHits": [],
 "OnHits": [
@@ -122,8 +192,42 @@
 "AbsoluteDelay": false,
 "Sound": "",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.BetweenEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"AnimBack": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Encore_Spotlight_Base",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"AnimFront": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Encore_Spotlight_Front",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"HeightBack": 56,
+"HeightFront": 56,
+"Offset": 0
 },
 "ScreenMovement": {
 "MinShake": 0,

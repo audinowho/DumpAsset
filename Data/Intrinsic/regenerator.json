@@ -4,25 +4,11 @@
 "$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
 "Name": {
 "DefaultText": "Regenerator",
-"LocalTexts": {
-"fr": "Régé-Force",
-"de": "Belebekraft",
-"es": "Regeneración",
-"it": "Rigenergia",
-"ko": "재생력",
-"ja": "さいせいりょく",
-"ja-jp": "さいせいりょく",
-"zh-hans": "再生力",
-"zh-hant": "再生力"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "Restores HP when there are no threats nearby.",
-"LocalTexts": {
-"de": "Heilt KP, wenn keine Gefahren in der Nähe sind.",
-"ko": "근처에 위험이 없을 때 HP를 회복한다.",
-"zh-hans": "当附近没有危险时，会回复HP。"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -78,9 +64,13 @@
 ]
 },
 "Value": {
+"$type": "PMDC.Dungeon.BellyNeededEvent, PMDC",
+"BaseEvent": {
 "$type": "PMDC.Dungeon.RegeneratorEvent, PMDC",
-"Range": 7,
-"HPFraction": 8
+"Range": 5,
+"HPFraction": 16
+},
+"Fullness": 1
 }
 }
 ],

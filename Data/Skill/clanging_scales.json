@@ -30,23 +30,45 @@
 "zh-hant": "摩擦全身鱗片， 發出響亮的聲音並進行攻擊。 攻擊後自己的防禦會降低。"
 }
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 691,
-"BaseCharges": 5,
+"BaseCharges": 8,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
+"$type": "RogueEssence.Dungeon.AreaAction, RogueEssence",
+"Emitter": {
+"$type": "RogueEssence.Content.CircleSquareAreaEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Wave_Circle_Blue",
+"FrameTime": 3,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"ParticlesPerTile": 0.6,
+"RangeDiff": 0,
+"Layer": 2
+},
 "HitTiles": false,
 "BurstTiles": 0,
-"Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
-},
-"WideAngle": 0,
+"HitArea": 1,
+"Range": 3,
+"Speed": 10,
 "CharAnimData": {
 "$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
+"ActionType": 30
 },
 "TargetAlignments": 4,
 "TileEmitter": {
@@ -57,7 +79,7 @@
 "ActionFX": {
 "Delay": 0,
 "AbsoluteDelay": false,
-"Sound": "",
+"Sound": "_UNK_DUN_Clank",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -106,7 +128,10 @@
 "SkillStates": [
 {
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 110
+"Power": 80
+},
+{
+"$type": "PMDC.Dungeon.SoundState, PMDC"
 }
 ],
 "BeforeTryActions": [],
@@ -127,7 +152,39 @@
 }
 ],
 "OnHitTiles": [],
-"AfterActions": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "RogueEssence.Dungeon.BattleScriptEvent, RogueEssence",
+"Script": "",
+"ArgTable": "{}"
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
+"Stack": -1,
+"StatusID": "mod_defense",
+"AffectTarget": false,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": ""
+},
+"Anims": []
+}
+}
+],
 "ElementEffects": [],
 "IntroFX": [],
 "HitFX": {

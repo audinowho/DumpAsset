@@ -3,42 +3,27 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Mew Card",
-"LocalTexts": {
-"fr": "Carte de Mew",
-"de": "Mew Karte",
-"es": "Papiro Mew",
-"it": "Carta Mew",
-"zh-hans": "梦幻卡片"
-}
+"DefaultText": "Mew Seal",
+"LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "An exclusive item for Mew. When kept in the bag, the Pokémon has a higher chance of recruiting wild Pokémon.",
-"LocalTexts": {
-"fr": "Un object exclusif pour Mew. When kept in the bag, the Pokémon has a higher chance of recruiting wild Pokémon.",
-"fr-ca": "Un object exclusif pour Mew When kept in the bag, the Pokémon has a higher chance of recruiting wild Pokémon.",
-"de": "Ein exklusives Item für Mew. Wenn es innerhalb des Beutels getragen wird, hat das Pokémon eine höhere Chance andere wilde Pokémon zu rekrutieren.",
-"es": "Un objeto exclusivo para Mew. Al llevarlo en la bolsa, el Pokémon tiene una mayor posibilidad de reclutar Pokémon salvajes.",
-"pt": "Um item exclusivo para Mew. When kept in the bag, the Pokémon has a higher chance of recruiting wild Pokémon.",
-"it": "Uno strumento esclusivo per Mew. When kept in the bag, the Pokémon has a higher chance of recruiting wild Pokémon.",
-"ko": "뮤에게 한정된 아이템. When kept in the bag, the Pokémon has a higher chance of recruiting wild Pokémon.",
-"zh-hans": "梦幻的专属道具。放在包里时，会更容易招募野生宝可梦。"
-}
+"DefaultText": "A rare treasure for Mew. When kept in the bag, the Pokémon can traverse water, lava, and pits.",
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 800,
-"Rarity": 1,
+"Price": 1600,
+"Rarity": 2,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 4
+"ItemType": 29
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
@@ -210,10 +195,7 @@
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
-"OnRefresh": [],
-"BeforeTryActions": [],
-"BeforeActions": [],
-"OnActions": [
+"OnRefresh": [
 {
 "Key": {
 "str": [
@@ -221,14 +203,45 @@
 ]
 },
 "Value": {
-"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
+"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.FlatRecruitmentEvent, PMDC",
-"RecruitRate": 10
+"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
+"Mobility": 1
+}
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
+"Mobility": 4
+}
+}
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
+"Mobility": 2
 }
 }
 }
 ],
+"BeforeTryActions": [],
+"BeforeActions": [],
+"OnActions": [],
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],

@@ -3,47 +3,33 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Mew Scarf",
-"LocalTexts": {
-"fr": "Mouchoir de Mew",
-"de": "Mew Schal",
-"es": "Pañuelo Mew",
-"it": "Sciarpa Mew",
-"zh-hans": "梦幻围巾"
-}
+"DefaultText": "Mew Hair",
+"LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "An exclusive item for Mew. When kept in the bag, the Pokémon's regular attacks and thrown items have a chance to devolve the target.",
-"LocalTexts": {
-"fr": "Un object exclusif pour Mew. When kept in the bag, the Pokémon's regular attacks and thrown items have a chance to devolve the target.",
-"fr-ca": "Un object exclusif pour Mew When kept in the bag, the Pokémon's regular attacks and thrown items have a chance to devolve the target.",
-"de": "Ein exklusives Item für Mew. Wenn es innerhalb des Beutels getragen wird, können normale Angriffe und geworfene Items des Pokémon die Entwicklungsstufe des Ziels zurücksetzen.",
-"es": "Un objeto exclusivo para Mew. Al llevarlo en la bolsa, los ataques normales del Pokémon y los objetos lanzados tienen la posibilidad de involucionar al objetivo.",
-"pt": "Um item exclusivo para Mew. When kept in the bag, the Pokémon's regular attacks and thrown items have a chance to devolve the target.",
-"it": "Uno strumento esclusivo per Mew. When kept in the bag, the Pokémon's regular attacks and thrown items have a chance to devolve the target.",
-"ko": "뮤에게 한정된 아이템. When kept in the bag, the Pokémon's regular attacks and thrown items have a chance to devolve the target.",
-"zh-hans": "梦幻的专属道具。放在包里时，普通攻击和投掷道具可能使目标退化。"
-}
+"DefaultText": "A rare treasure for Mew, and Mewtwo. When kept in the bag, it changes the Pokémon's regular attack into a short projectile.",
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 1600,
-"Rarity": 2,
+"Price": 800,
+"Rarity": 1,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 49
+"ItemType": 5
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
-"mew"
+"mew",
+"mewtwo"
 ]
 },
 {
@@ -213,14 +199,11 @@
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [],
-"BeforeHittings": [],
-"BeforeBeingHits": [],
-"AfterHittings": [
+"OnActions": [
 {
 "Key": {
 "str": [
-0
+-3
 ]
 },
 "Value": {
@@ -228,48 +211,74 @@
 "BaseEvent": {
 "$type": "PMDC.Dungeon.RegularAttackNeededEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.OnHitEvent, PMDC",
-"BaseEvents": [
-{
-"$type": "PMDC.Dungeon.DevolveEvent, PMDC",
-"SilentCheck": true,
-"StatusID": "transformed",
-"Anims": [
-{
-"Emitter": {
-"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
-"LocHeight": 0,
-"finished": false,
-"Offset": 0,
+"$type": "PMDC.Dungeon.ChangeActionEvent, PMDC",
+"NewAction": {
+"$type": "RogueEssence.Dungeon.ProjectileAction, RogueEssence",
 "Anim": {
-"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
-"Anim": {
-"AnimIndex": "Puff_Green",
-"FrameTime": 3,
+"AnimIndex": "Confuse_Ray",
+"FrameTime": 2,
 "StartFrame": -1,
 "EndFrame": -1,
 "AnimDir": -1,
 "Alpha": 255,
 "AnimFlip": 0
 },
-"TotalTime": 0,
-"Cycles": 1,
-"FrameOffset": 0
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
 },
-"Layer": 2,
-"UseDest": false
+"StreamEmitter": {
+"$type": "RogueEssence.Content.EmptyShootingEmitter, RogueEssence",
+"LocHeight": 0
 },
-"Sound": "DUN_Transform",
-"AffectTarget": true,
-"Delay": 0
+"Rays": 0,
+"Speed": 10,
+"Boomerang": false,
+"ItemSprite": "",
+"CharAnimData": {
+"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
+"ActionType": 7
+},
+"HitTiles": true,
+"Range": 2,
+"StopAtHit": true,
+"StopAtWall": true,
+"TargetAlignments": 4,
+"TileEmitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"PreActions": [
+{
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "DUN_Attack",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
 }
 ],
-"TransformCharges": 5
+"ActionFX": {
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
+"LocHeight": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
 }
-],
-"RequireDamage": true,
-"RequireContact": false,
-"Chance": 35
+},
+"LagBehindTime": 0
+}
 }
 }
 }
@@ -277,61 +286,23 @@
 {
 "Key": {
 "str": [
-0
+-3
 ]
 },
 "Value": {
 "$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.ThrownItemNeededEvent, PMDC",
+"$type": "PMDC.Dungeon.RegularAttackNeededEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.OnHitEvent, PMDC",
-"BaseEvents": [
-{
-"$type": "PMDC.Dungeon.DevolveEvent, PMDC",
-"SilentCheck": true,
-"StatusID": "transformed",
-"Anims": [
-{
-"Emitter": {
-"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
-"LocHeight": 0,
-"finished": false,
-"Offset": 0,
-"Anim": {
-"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
-"Anim": {
-"AnimIndex": "Puff_Green",
-"FrameTime": 3,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": -1,
-"Alpha": 255,
-"AnimFlip": 0
-},
-"TotalTime": 0,
-"Cycles": 1,
-"FrameOffset": 0
-},
-"Layer": 2,
-"UseDest": false
-},
-"Sound": "DUN_Transform",
-"AffectTarget": true,
-"Delay": 0
-}
-],
-"TransformCharges": 5
-}
-],
-"RequireDamage": true,
-"RequireContact": false,
-"Chance": 35
+"$type": "PMDC.Dungeon.TraitorEvent, PMDC"
 }
 }
 }
 }
 ],
+"BeforeHittings": [],
+"BeforeBeingHits": [],
+"AfterHittings": [],
 "AfterBeingHits": [],
 "OnHitTiles": [],
 "AfterActions": [],

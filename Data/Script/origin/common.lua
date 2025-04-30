@@ -53,7 +53,6 @@ end
 ----------------------------------------
 COMMON = {}
 
-require 'origin.common_talk'
 require 'origin.common_shop'
 require 'origin.common_vars'
 require 'origin.common_tutor'
@@ -783,9 +782,6 @@ function COMMON.CanTalk(chara)
   if chara:GetStatusEffect("freeze") ~= nil then
     return false
   end
-  if chara:GetStatusEffect("confuse") ~= nil then
-    return false
-  end
   return true
 end
 
@@ -804,36 +800,37 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
   
     local personality = form:GetPersonalityType(target.Discriminator)
     
-    local personality_group = COMMON.PERSONALITY[personality]
-    local pool = {}
     local key = ""
-    if ratio <= 25 then
+	if target:GetStatusEffect("confuse") ~= nil then
+      UI:SetSpeakerEmotion("Dizzy")
+      key = "TALK_%02d_DIZZY_%03d"
+    elseif ratio <= 25 then
       UI:SetSpeakerEmotion("Pain")
-      pool = personality_group.PINCH
-      key = "TALK_PINCH_%04d"
+      key = "TALK_%02d_PINCH_%03d"
     elseif ratio <= 50 then
       UI:SetSpeakerEmotion("Worried")
-      pool = personality_group.HALF
-      key = "TALK_HALF_%04d"
+      key = "TALK_%02d_HALF_%03d"
     else
-      pool = personality_group.FULL
-      key = "TALK_FULL_%04d"
+      key = "TALK_%02d_FULL_%03d"
     end
     
-    local running_pool = {table.unpack(pool)}
-    local valid_quote = false
-    local chosen_quote = ""
+    local running_pool = {}
+	local pool_idx = 0
     
-    while not valid_quote and #running_pool > 0 do
-      valid_quote = true
-      local chosen_idx = math.random(1, #running_pool)
-  	  local chosen_pool_idx = running_pool[chosen_idx]
-      chosen_quote = RogueEssence.StringKey(string.format(key, chosen_pool_idx)):ToLocal()
+    while true do
+	  
+	  local formatted_key = string.format(key, personality, pool_idx)
+	  if not RogueEssence.StringKey.HasValue(formatted_key) then
+	    break
+	  end
+
+      local valid_quote = true
+      local test_quote = RogueEssence.StringKey(formatted_key):ToLocal()
   	
-      chosen_quote = string.gsub(chosen_quote, "%[player%]", chara:GetDisplayName(true))
-      chosen_quote = string.gsub(chosen_quote, "%[myname%]", target:GetDisplayName(true))
+      test_quote = string.gsub(test_quote, "%[player%]", chara:GetDisplayName(true))
+      test_quote = string.gsub(test_quote, "%[myname%]", target:GetDisplayName(true))
       
-      if string.find(chosen_quote, "%[move%]") then
+      if string.find(test_quote, "%[move%]") then
         local moves = {}
   	    for move_idx = 0, 3 do
   	      if target.BaseSkills[move_idx].SkillNum ~= "" then
@@ -842,20 +839,20 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
   	    end
   	    if #moves > 0 then
   	      local chosen_move = _DATA:GetSkill(moves[math.random(1, #moves)])
-  	      chosen_quote = string.gsub(chosen_quote, "%[move%]", chosen_move:GetIconName())
+  	      test_quote = string.gsub(test_quote, "%[move%]", chosen_move:GetIconName())
   	    else
   	      valid_quote = false
   	    end
       end
       
-      if string.find(chosen_quote, "%[kind%]") then
+      if string.find(test_quote, "%[kind%]") then
   	    if GAME:GetCurrentFloor().TeamSpawns.CanPick then
           local team_spawn = GAME:GetCurrentFloor().TeamSpawns:Pick(GAME.Rand)
   	      local chosen_list = team_spawn:ChooseSpawns(GAME.Rand)
   	      if chosen_list.Count > 0 then
   	        local chosen_mob = chosen_list[math.random(0, chosen_list.Count-1)]
   	        local mon = _DATA:GetMonster(chosen_mob.BaseForm.Species)
-            chosen_quote = string.gsub(chosen_quote, "%[kind%]", mon:GetColoredName())
+            test_quote = string.gsub(test_quote, "%[kind%]", mon:GetColoredName())
   	      else
   	        valid_quote = false
   	      end
@@ -864,20 +861,24 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
   	    end
       end
       
-      if string.find(chosen_quote, "%[item%]") then
+      if string.find(test_quote, "%[item%]") then
         if GAME:GetCurrentFloor().ItemSpawns.CanPick then
           local item = GAME:GetCurrentFloor().ItemSpawns:Pick(GAME.Rand)
-          chosen_quote = string.gsub(chosen_quote, "%[item%]", item:GetDisplayName())
+          test_quote = string.gsub(test_quote, "%[item%]", item:GetDisplayName())
   	    else
   	      valid_quote = false
   	    end
       end
   	
-  	  if not valid_quote then
-  	    table.remove(running_pool, chosen_idx)
-  	    chosen_quote = ""
+  	  if valid_quote then
+		table.insert(running_pool, test_quote)
   	  end
+	  
+	  pool_idx = pool_idx + 1
     end
+	
+	local chosen_idx = math.random(1, #running_pool)
+	local chosen_quote = running_pool[chosen_idx]
 	
 	local oldDir = target.CharDir
     DUNGEON:CharTurnToChar(target, chara)

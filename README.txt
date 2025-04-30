@@ -111,7 +111,8 @@ https://github.com/Parakoopa Parakoopa, for tiles dtef parsing
 Discord:mistressnebula MistressNebula, for code contributions and item design
 https://github.com/Deeshura Deeshura, for item design
 Discord:shitpost_sunkern Shitpost Sunkern, for item design
-https://twitter.com/EthanLac13 FlowerSnek, for item design
+https://twitter.com/EthanLac13 FlowerSnek, for item design, talk strings
+https://www.instagram.com/et3rniti et3rniti, for talk strings
 http://musicalcombusken.deviantart.com/ MusicalCombusken, for the title logo
 https://www.reddit.com/user/SilverDeoxys563 SilverDeoxys563, for various Trap graphics
 http://fable-amare.deviantart.com/ Fable, for custom portraits

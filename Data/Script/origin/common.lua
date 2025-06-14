@@ -791,17 +791,19 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
   -- TODO: create a charstate for being unable to talk and have talk-interfering statuses cause it
   if COMMON.CanTalk(target) then
     
-    local ratio = target.HP * 100 // target.MaxHP
-    
+    UI:SetSpeaker(target)
     local mon = _DATA:GetMonster(target.BaseForm.Species)
     local form = mon.Forms[target.BaseForm.Form]
+    local ratio = target.HP * 100 // target.MaxHP
     
-    UI:SetSpeaker(target)
-  
     local personality = form:GetPersonalityType(target.Discriminator)
     
+    local key_pool = {}
+    
+    
+    
     local key = ""
-	if target:GetStatusEffect("confuse") ~= nil then
+    if target:GetStatusEffect("confuse") ~= nil then
       UI:SetSpeakerEmotion("Dizzy")
       key = "TALK_%02d_DIZZY_%03d"
     elseif ratio <= 25 then
@@ -814,15 +816,26 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
       key = "TALK_%02d_FULL_%03d"
     end
     
-    local running_pool = {}
-	local pool_idx = 0
-    
+    local pool_idx = 0
     while true do
 	  
-	  local formatted_key = string.format(key, personality, pool_idx)
-	  if not RogueEssence.StringKey.HasValue(formatted_key) then
-	    break
-	  end
+      local formatted_key = string.format(key, personality, pool_idx)
+      if not RogueEssence.StringKey.HasValue(formatted_key) then
+        break
+      end
+      
+  	  table.insert(key_pool, formatted_key)
+	  
+      pool_idx = pool_idx + 1
+    end
+    
+    
+    
+    local running_pool = {}
+    
+    for ii = 1, #key_pool, 1 do
+	  
+      local formatted_key = key_pool[ii]
 
       local valid_quote = true
       local test_quote = RogueEssence.StringKey(formatted_key):ToLocal()
@@ -849,6 +862,7 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
   	    if GAME:GetCurrentFloor().TeamSpawns.CanPick then
           local team_spawn = GAME:GetCurrentFloor().TeamSpawns:Pick(GAME.Rand)
   	      local chosen_list = team_spawn:ChooseSpawns(GAME.Rand)
+          
   	      if chosen_list.Count > 0 then
   	        local chosen_mob = chosen_list[math.random(0, chosen_list.Count-1)]
   	        local mon = _DATA:GetMonster(chosen_mob.BaseForm.Species)
@@ -871,16 +885,14 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
       end
   	
   	  if valid_quote then
-		table.insert(running_pool, test_quote)
+        table.insert(running_pool, test_quote)
   	  end
-	  
-	  pool_idx = pool_idx + 1
     end
 	
-	local chosen_idx = math.random(1, #running_pool)
-	local chosen_quote = running_pool[chosen_idx]
+    local chosen_idx = math.random(1, #running_pool)
+    local chosen_quote = running_pool[chosen_idx]
 	
-	local oldDir = target.CharDir
+    local oldDir = target.CharDir
     DUNGEON:CharTurnToChar(target, chara)
   
     UI:WaitShowDialogue(STRINGS:Format(chosen_quote))
@@ -889,10 +901,10 @@ function COMMON.DungeonInteract(chara, target, action_cancel, turn_cancel)
   else
   
     UI:ResetSpeaker()
-	
-	local chosen_quote = RogueEssence.StringKey("TALK_CANT"):ToLocal()
+  
+    local chosen_quote = RogueEssence.StringKey("TALK_CANT"):ToLocal()
     chosen_quote = string.gsub(chosen_quote, "%[myname%]", target:GetDisplayName(true))
-	
+  
     UI:WaitShowDialogue(chosen_quote)
   
   end

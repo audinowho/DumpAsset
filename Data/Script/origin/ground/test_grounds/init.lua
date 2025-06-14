@@ -110,7 +110,23 @@ function test_grounds.Sign1_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo('Sign1_Action')
   
+  local chara = CH('PLAYER')
+  local dialogue = "Well darn![pause=0] We got wiped!"
+  GAME:FadeOut(false, 60)
+    UI:SetSpeaker(chara)
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue(dialogue)
 
+    if _DATA.CurrentReplay == nil then
+      local scripts = RogueEssence.Menu.DialogueBox.CreateScripts({function() return GAME:FadeOutFront(false, 60) end})
+      local empty_action = LUA_ENGINE:MakeLuaAction(function() end)
+      local hackDlg = _MENU:CreateBox(chara.CurrentForm, chara:GetDisplayName(), RogueEssence.Content.EmoteStyle(2), RogueEssence.Menu.SpeakerPortrait.DefaultLoc, false, RogueEssence.Menu.DialogueBox.SOUND_EFFECT, RogueEssence.Menu.DialogueBox.SPEAK_FRAMES, empty_action, 60, false, false, false, RogueEssence.Menu.DialogueBox.DefaultBounds, scripts, dialogue .. "[script=0]")
+      hackDlg:SetTextProgress(string.len(dialogue))
+      UI:SetCustomDialogue(hackDlg)
+      UI:WaitDialog()
+    end
+    
+    GAME:FadeInFront(1)--Quickly undo the fade out on the text layer once the text is cleared - a regular fade out set up on top of this will still be in effect after clearing this
   
   local zone = _DATA:GetZone("faded_trail")
   local cur_floor = zone.Segments[0].Floors[0]

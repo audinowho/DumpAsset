@@ -30,7 +30,7 @@
 "$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
 },
 "Range": 3,
-"Speed": 0,
+"Speed": 8,
 "Coverage": 2,
 "ItemSprite": "",
 "CharAnimData": {
@@ -78,6 +78,54 @@
 "MaxShake": 0,
 "MaxShakeTime": 0
 }
+},
+{
+"Delay": 0,
+"AbsoluteDelay": false,
+"Sound": "",
+"Emitter": {
+"$type": "RogueEssence.Content.BetweenEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"AnimBack": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Encore_Spotlight_Base",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"AnimFront": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Encore_Spotlight_Front",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"HeightBack": 56,
+"HeightFront": 56,
+"Offset": 0
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
 }
 ],
 "ActionFX": {
@@ -113,7 +161,7 @@
 "MaxShakeTime": 0
 }
 },
-"LagBehindTime": 0
+"LagBehindTime": 20
 },
 "Explosion": {
 "TargetAlignments": 4,
@@ -128,14 +176,80 @@
 "$type": "RogueEssence.Content.EmptyCircleSquareEmitter, RogueEssence",
 "LocHeight": 0
 },
-"IntroFX": [],
-"ExplodeFX": {
-"Delay": 0,
-"AbsoluteDelay": false,
-"Sound": "",
+"IntroFX": [
+{
+"Delay": 20,
+"AbsoluteDelay": true,
+"Sound": "DUN_Throw_Arc",
 "Emitter": {
+"$type": "RogueEssence.Content.MoveToEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Anim": {
+"AnimIndex": "Flower_Trick_Bomb",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"OffsetStart": {
+"X": 0,
+"Y": 0
+},
+"OffsetEnd": {
+"X": 0,
+"Y": 0
+},
+"HeightStart": 48,
+"HeightEnd": 0,
+"LingerStart": 0,
+"LingerEnd": 2,
+"MoveTime": 16,
+"ResultAnim": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
+},
+"ResultLayer": 2
+},
+"ScreenMovement": {
+"MinShake": 0,
+"MaxShake": 0,
+"MaxShakeTime": 0
+}
+}
+],
+"ExplodeFX": {
+"Delay": 0,
+"AbsoluteDelay": true,
+"Sound": "DUN_Smokescreen",
+"Emitter": {
+"$type": "RogueEssence.Content.FiniteReleaseEmitter, RogueEssence",
+"LocHeight": 0,
+"Anims": [
+{
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Puff_Green",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Speed": 32,
+"Bursts": 4,
+"ParticlesPerBurst": 1,
+"BurstTime": 4,
+"StartDistance": 6,
+"Layer": 2
 },
 "ScreenMovement": {
 "MinShake": 0,
@@ -192,13 +306,14 @@
 "AbsoluteDelay": false,
 "Sound": "",
 "Emitter": {
-"$type": "RogueEssence.Content.BetweenEmitter, RogueEssence",
-"LocHeight": 0,
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 20,
 "finished": false,
-"AnimBack": {
+"Offset": 0,
+"Anim": {
 "$type": "RogueEssence.Content.StaticAnim, RogueEssence",
 "Anim": {
-"AnimIndex": "Encore_Spotlight_Base",
+"AnimIndex": "Razor_Leaf_Charge",
 "FrameTime": 2,
 "StartFrame": -1,
 "EndFrame": -1,
@@ -210,24 +325,8 @@
 "Cycles": 1,
 "FrameOffset": 0
 },
-"AnimFront": {
-"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
-"Anim": {
-"AnimIndex": "Encore_Spotlight_Front",
-"FrameTime": 2,
-"StartFrame": -1,
-"EndFrame": -1,
-"AnimDir": -1,
-"Alpha": 255,
-"AnimFlip": 0
-},
-"TotalTime": 0,
-"Cycles": 1,
-"FrameOffset": 0
-},
-"HeightBack": 56,
-"HeightFront": 56,
-"Offset": 0
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,

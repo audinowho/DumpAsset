@@ -353,7 +353,7 @@ function canyon_camp.Rival_2_Action(chara, activator)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Help_Line_001']))
 	
 	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
       DestZone = "copper_quarry", DestSegment = 0, DestFloor = 6,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("seviper", 0, "normal", Gender.Female),
@@ -421,7 +421,7 @@ function canyon_camp.NPC_Storehouse_Action(chara, activator)
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_002']))
 	  --add the quest
 	  COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_HOUSE,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_OUTLAW_HOUSE,
       DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6, FloorUnknown = true,
       ClientSpecies = chara.CurrentForm,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("toxicroak", 0, "normal", Gender.Male) }
@@ -846,7 +846,7 @@ function canyon_camp.NPC_Spar_Action(chara, activator)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Spar_Help_Line_001'], days))
 	
 	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
       DestZone = "sleeping_caldera", DestSegment = 0, DestFloor = 8,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("meditite", 0, "normal", Gender.Male),
@@ -915,7 +915,7 @@ function canyon_camp.NPC_Shortcut_Action(chara, activator)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shortcut_Quest_Line_001']))
 	
 	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
       DestZone = "forsaken_desert", DestSegment = 0, DestFloor = 0,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("prinplup", 0, "normal", Gender.Male),
@@ -1102,7 +1102,7 @@ function canyon_camp.NPC_Brains_Action(chara, activator)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Brains_Line_002']))
 	
 	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
       DestZone = "relic_tower", DestSegment = 0, DestFloor = 8,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("kirlia", 0, "normal", Gender.Male),

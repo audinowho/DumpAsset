@@ -17,7 +17,7 @@ function COMMON.UpdateDayEndVars()
           TargetSpecies = RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("chikorita", 0, "normal", Gender.Female),
           Complete = COMMON.MISSION_INCOMPLETE,
-          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          Type = COMMON.SIDEQUEST_TYPE_ESCORT_OUT,
           EscortTable = { EscortStartMsg = "TALK_ESCORT_SISTER_START", EscortAcceptMsg = "TALK_ESCORT_SISTER_ACCEPT", EscortInteract = "EscortInteractSister" }
         }
 		)
@@ -40,7 +40,7 @@ function COMMON.UpdateDayEndVars()
           TargetSpecies = RogueEssence.Dungeon.MonsterID("swellow", 0, "normal", Gender.Female),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("swellow", 0, "normal", Gender.Female),
           Complete = COMMON.MISSION_INCOMPLETE,
-          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          Type = COMMON.SIDEQUEST_TYPE_ESCORT_OUT,
           EscortTable = { EscortStartMsg = "TALK_ESCORT_MOTHER_START", EscortAcceptMsg = "TALK_ESCORT_MOTHER_ACCEPT", EscortInteract = "EscortInteractMother" }
         }
 		)
@@ -63,7 +63,7 @@ function COMMON.UpdateDayEndVars()
           TargetSpecies = RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male),
           Complete = COMMON.MISSION_INCOMPLETE,
-          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          Type = COMMON.SIDEQUEST_TYPE_ESCORT_OUT,
           EscortTable = { EscortStartMsg = "TALK_ESCORT_FATHER_START", EscortAcceptMsg = "TALK_ESCORT_FATHER_ACCEPT", EscortInteract = "EscortInteractFather" }
         }
 		)
@@ -86,7 +86,7 @@ function COMMON.UpdateDayEndVars()
           TargetSpecies = RogueEssence.Dungeon.MonsterID("wooper", 0, "normal", Gender.Male),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("wooper", 0, "normal", Gender.Male),
           Complete = COMMON.MISSION_INCOMPLETE,
-          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          Type = COMMON.SIDEQUEST_TYPE_ESCORT_OUT,
           EscortTable = { EscortStartMsg = "TALK_ESCORT_BROTHER_START", EscortAcceptMsg = "TALK_ESCORT_BROTHER_ACCEPT", EscortInteract = "EscortInteractBrother" }
         }
 		)
@@ -109,7 +109,7 @@ function COMMON.UpdateDayEndVars()
           TargetSpecies = RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male),
           Complete = COMMON.MISSION_INCOMPLETE,
-          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          Type = COMMON.SIDEQUEST_TYPE_ESCORT_OUT,
           EscortTable = { EscortStartMsg = "TALK_ESCORT_PET_START", EscortAcceptMsg = "TALK_ESCORT_PET_ACCEPT", EscortInteract = "EscortInteractPet" }
         }
 		)
@@ -132,7 +132,7 @@ function COMMON.UpdateDayEndVars()
           TargetSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male),
           Complete = COMMON.MISSION_INCOMPLETE,
-          Type = COMMON.MISSION_TYPE_ESCORT_OUT,
+          Type = COMMON.SIDEQUEST_TYPE_ESCORT_OUT,
           EscortTable = { EscortStartMsg = "TALK_ESCORT_GRANDMA_START", EscortAcceptMsg = "TALK_ESCORT_GRANDMA_ACCEPT", EscortInteract = "EscortInteractGrandma" }
         })
       end

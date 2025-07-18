@@ -55,8 +55,8 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
       specificTeam.Explorer = true
       local post_mob = RogueEssence.LevelGen.MobSpawn()
       post_mob.BaseForm = mission.TargetSpecies
-      if mission.Type == COMMON.MISSION_TYPE_OUTLAW or mission.Type == COMMON.MISSION_TYPE_OUTLAW_HOUSE or mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then -- outlaw
-        if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
+      if mission.Type == COMMON.SIDEQUEST_TYPE_OUTLAW or mission.Type == COMMON.SIDEQUEST_TYPE_OUTLAW_HOUSE or mission.Type == COMMON.SIDEQUEST_TYPE_OUTLAW_DISGUISE then -- outlaw
+        if mission.Type == COMMON.SIDEQUEST_TYPE_OUTLAW_DISGUISE then
           post_mob.Tactic = "slow_patrol"
         else
           post_mob.Tactic = "boss"
@@ -69,7 +69,7 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
         boost.SpDefBonus = _ZONE.CurrentZone.Level // 2
         boost.SpeedBonus = _ZONE.CurrentZone.Level // 2
         post_mob.SpawnFeatures:Add(boost)
-        if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
+        if mission.Type == COMMON.SIDEQUEST_TYPE_OUTLAW_DISGUISE then
           local spawn_status = RogueEssence.LevelGen.MobSpawnStatus()
           local status_effect = RogueEssence.Dungeon.StatusEffect("illusion")
           status_effect.StatusStates:Set(PMDC.Dungeon.MonsterIDState(mission.DisguiseSpecies))
@@ -89,7 +89,7 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
         picker.Spawns:Add(specificTeam)
         local mobPlacement = LUA_ENGINE:MakeGenericType(PlaceNearSpawnableMobsStep, { MapGenContextType, EntranceType }, { picker })
 		
-        if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
+        if mission.Type == COMMON.SIDEQUEST_TYPE_OUTLAW_DISGUISE then
           mobPlacement.Ally = true
         end
         -- Priority 5.2.1 is for NPC spawning in PMDO, but any dev can choose to roll with their own standard of priority.
@@ -98,11 +98,11 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
           PrintInfo("Done")
 		
         outlawFloor = true
-        if mission.Type == COMMON.MISSION_TYPE_OUTLAW_DISGUISE then
+        if mission.Type == COMMON.SIDEQUEST_TYPE_OUTLAW_DISGUISE then
             outlawSilent = true
         end
 		
-        if mission.Type == COMMON.MISSION_TYPE_OUTLAW_HOUSE then
+        if mission.Type == COMMON.SIDEQUEST_TYPE_OUTLAW_HOUSE then
           --add house trigger
               local activeEffect = RogueEssence.Data.ActiveEffect()
               activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("OutlawHouse", Serpent.line({ Mission = name})))
@@ -110,7 +110,7 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
             local priority = RogueElements.Priority(-6, 1)
             queue:Enqueue(priority, destNote)
         end
-      elseif mission.Type == COMMON.MISSION_TYPE_LOST_ITEM then
+      elseif mission.Type == COMMON.SIDEQUEST_TYPE_LOST_ITEM then
         local has_item = false
 	    
         local item_slot = GAME:FindPlayerItem(mission.TargetItem.ID, true, true)
@@ -141,17 +141,17 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
       end
 	  else
         post_mob.Tactic = "slow_patrol"
-        if mission.Type == COMMON.MISSION_TYPE_RESCUE then -- rescue
+        if mission.Type == COMMON.SIDEQUEST_TYPE_RESCUE then -- rescue
           post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)
           local dialogue = RogueEssence.Dungeon.BattleScriptEvent("SidequestRescueReached")
           post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
           post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
-        elseif mission.Type == COMMON.MISSION_TYPE_ESCORT then -- escort
+        elseif mission.Type == COMMON.SIDEQUEST_TYPE_ESCORT then -- escort
           post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)
           local dialogue = RogueEssence.Dungeon.BattleScriptEvent("SidequestEscortReached")
           post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
           post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
-        elseif mission.Type == COMMON.MISSION_TYPE_ESCORT_OUT then -- escort
+        elseif mission.Type == COMMON.SIDEQUEST_TYPE_ESCORT_OUT then -- escort
           post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level // 2)
           local dialogue = RogueEssence.Dungeon.BattleScriptEvent("SidequestEscortOutReached", Serpent.line(mission.EscortTable))
           post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))

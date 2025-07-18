@@ -38,7 +38,8 @@ end
 function UpgradeTools:OnUpgrade()
   assert(self, 'UpgradeTools:OnUpgrade() : self is null!')
   
-  PrintInfo("=>> Loading version")
+  
+  PrintInfo("=>> Upgrading version " .. old_ver .. " to " .. new_ver)
   _DATA.Save.NextDest = _DATA.Start.Map
   
   SV.checkpoint = 
@@ -474,9 +475,7 @@ function UpgradeTools:OnUpgrade()
     SV.family.Grandma = true
   end
   
-  if SV.missions.Missions["EscortFather"] ~= nil and SV.missions.Missions["EscortFather"].DestZone == "snowbound_path" then
-    SV.missions.Missions["EscortFather"] = nil
-  end
+  SV.missions.Missions = {}
   
   if SV.family.BrotherActiveDays == nil then
     SV.family.BrotherActiveDays = 0

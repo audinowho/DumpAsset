@@ -262,7 +262,7 @@ function rest_stop.Rival_1_Action(chara, activator)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Help_Line_001']))
 	
 	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
       DestZone = "thunderstruck_pass", DestSegment = 0, DestFloor = 8,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("zangoose", 0, "normal", Gender.Female),
@@ -364,7 +364,7 @@ function rest_stop.DragonTalk()
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dragon_Line_001']))
 	  
 	  COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
       DestZone = "snowbound_path", DestSegment = 0, DestFloor = 14,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("charizard", 0, "normal", Gender.Male),
@@ -463,7 +463,7 @@ function rest_stop.NPC_Storehouse_Action(chara, activator)
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_002']))
 	  --add the quest
 	  COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_OUTLAW,
       DestZone = "copper_quarry", DestSegment = 0, DestFloor = 4,
       FloorUnknown = true,
       ClientSpecies = chara.CurrentForm,
@@ -569,7 +569,7 @@ function rest_stop.Rock_Boss(chara, activator)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rock_Boss_Line_001']))
 	
 	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
       DestZone = "veiled_ridge", DestSegment = 0, DestFloor = 10,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("exploud", 0, "normal", Gender.Male),
@@ -727,7 +727,7 @@ function rest_stop.NPC_Goals_Action(chara, activator)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Help_Line_001']))
 	
 	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
       DestZone = "treacherous_mountain", DestSegment = 0, DestFloor = 9,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("ninetales", 1, "normal", Gender.Male),

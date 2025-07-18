@@ -27,7 +27,7 @@ function base_camp_2_juice.Juice_Owner_Action(chara, activator)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Help_001']))
 	
 	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_LOST_ITEM,
       DestZone = "bramble_woods", DestSegment = 0, DestFloor = 4,
       FloorUnknown = false,
 	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_bug"),

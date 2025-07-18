@@ -77,12 +77,13 @@ function COMMON.GetSortedKeys(dict)
   return keys
 end
 
-COMMON.MISSION_TYPE_RESCUE = 0
-COMMON.MISSION_TYPE_ESCORT = 1
-COMMON.MISSION_TYPE_ESCORT_OUT = 2
-COMMON.MISSION_TYPE_OUTLAW = 3
-COMMON.MISSION_TYPE_OUTLAW_HOUSE = 4
-COMMON.MISSION_TYPE_OUTLAW_DISGUISE = 5
+COMMON.SIDEQUEST_TYPE_RESCUE = 0
+COMMON.SIDEQUEST_TYPE_ESCORT = 1
+COMMON.SIDEQUEST_TYPE_ESCORT_OUT = 2
+COMMON.SIDEQUEST_TYPE_LOST_ITEM = 3
+COMMON.SIDEQUEST_TYPE_OUTLAW = 4
+COMMON.SIDEQUEST_TYPE_OUTLAW_HOUSE = 5
+COMMON.SIDEQUEST_TYPE_OUTLAW_DISGUISE = 6
 
 COMMON.MISSION_INCOMPLETE = 0
 COMMON.MISSION_COMPLETE = 1
@@ -1219,9 +1220,9 @@ function COMMON.ClearEscorts(result, zoneId, segmentID)
 	if e_tbl ~= nil then
 	  local mission = SV.missions.Missions[e_tbl.Escort]
 	  if mission ~= nil then
-	    if mission.Type == COMMON.MISSION_TYPE_ESCORT then
+	    if mission.Type == COMMON.SIDEQUEST_TYPE_ESCORT then
 	      _DUNGEON:RemoveChar(p)
-	    elseif mission.Type == COMMON.MISSION_TYPE_ESCORT_OUT then
+	    elseif mission.Type == COMMON.SIDEQUEST_TYPE_ESCORT_OUT then
 		  if p.Dead == false then
 		    if result == RogueEssence.Data.GameProgress.ResultType.Cleared then
 		      mission.Complete = COMMON.MISSION_COMPLETE

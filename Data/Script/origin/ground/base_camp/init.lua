@@ -538,7 +538,7 @@ function base_camp.NPC_Steel_1_Action(chara, activator)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Steel_Line_001']))
 	
 	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
       DestZone = "guildmaster_trail", DestSegment = 0, DestFloor = 14,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("scizor", 0, "normal", Gender.Male),

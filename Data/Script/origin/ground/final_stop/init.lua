@@ -382,7 +382,7 @@ function final_stop.NPC_Seer_Action(chara, activator)
 	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Seer_Help_Line_001']))
 	
 	  COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
         DestZone = "snowbound_path", DestSegment = 0, DestFloor = 10,
         FloorUnknown = false,
         TargetSpecies = RogueEssence.Dungeon.MonsterID("typhlosion", 1, "normal", Gender.Male),
@@ -530,7 +530,7 @@ function final_stop.NPC_Carry_Action(chara, activator)
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_001']))
       --add the quest
       COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW_DISGUISE,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_OUTLAW_DISGUISE,
         DestZone = "snowbound_path", DestSegment = 0, DestFloor = 12,
         FloorUnknown = true,
         ClientSpecies = chara.CurrentForm,

@@ -322,7 +322,7 @@ function cliff_camp.NPC_Broke_Action(chara, activator)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Broke_Line_001']))
 	
 	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_LOST_ITEM,
       DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6,
       FloorUnknown = false,
 	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_dark"),
@@ -394,7 +394,7 @@ function cliff_camp.Catch_Action()
     cliff_camp.Catch_Trouble()
 	
 	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_LOST_ITEM,
       DestZone = "overgrown_wilds", DestSegment = 0, DestFloor = 6,
       FloorUnknown = false,
 	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_normal"),
@@ -569,7 +569,7 @@ function cliff_camp.NPC_Sightseer_Action(chara, activator)
 	
 	--TODO: later oblivion valley
 	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
       DestZone = "secret_garden", DestSegment = 0, DestFloor = 9,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("meowth", 0, "normal", Gender.Male),
@@ -652,7 +652,7 @@ function cliff_camp.Speedster_2_Action(chara, activator)
 	
 	--TODO: later deserted fortress
 	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
       DestZone = "trickster_woods", DestSegment = 0, DestFloor = 6,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("doduo", 0, "normal", Gender.Male),
@@ -884,7 +884,7 @@ function cliff_camp.NPC_Storehouse_Action(chara, activator)
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_003']))
 	  --add the quest
 	  COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_OUTLAW,
       DestZone = "faded_trail", DestSegment = 0, DestFloor = 5, FloorUnknown = true,
       ClientSpecies = chara.CurrentForm,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("murkrow", 0, "normal", Gender.Male) }

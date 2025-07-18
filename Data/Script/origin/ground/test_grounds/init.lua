@@ -561,7 +561,7 @@ function test_grounds.Magnezone_Action(chara, activator)
     if chres then
 	  -- Type 0 = Rescue
 	  COMMON.CreateMission("OutlawQuest",
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_OUTLAW,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_OUTLAW,
       DestZone = "debug_zone", DestSegment = 4, DestFloor = 9,
       FloorUnknown = true,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("riolu", 0, "normal", Gender.Male),
@@ -607,7 +607,7 @@ function test_grounds.Butterfree_Action(chara, activator)
     if chres then
 	  -- Type 0 = Rescue
 	  COMMON.CreateMission("CaterQuest",
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_RESCUE,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
       DestZone = "debug_zone", DestSegment = 4, DestFloor = 4,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("caterpie", 0, "normal", Gender.Male),
@@ -664,7 +664,7 @@ function test_grounds.Volbeat_Action(chara, activator)
     if chres then
 	  -- Type 1 = Escort
 	  COMMON.CreateMission("VolmiseQuest",
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_ESCORT,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_ESCORT,
       DestZone = "debug_zone", DestSegment = 4, DestFloor = 3,
       FloorUnknown = true,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("illumise", 0, "normal", Gender.Female),

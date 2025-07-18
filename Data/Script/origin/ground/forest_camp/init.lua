@@ -324,7 +324,7 @@ function forest_camp.NPC_Elder_Action(chara, activator)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Elder_Line_001']))
 	
 	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_LOST_ITEM,
       DestZone = "ambush_forest", DestSegment = 0, DestFloor = 11,
       FloorUnknown = false,
 	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_ground"),
@@ -508,7 +508,7 @@ function forest_camp.Sick_Child()
 
 	
     COMMON.CreateMission(questname,
-      { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.MISSION_TYPE_LOST_ITEM,
+      { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_LOST_ITEM,
           DestZone = "sickly_hollow", DestSegment = 0, DestFloor = destFloor,
           FloorUnknown = false,
           TargetItem = RogueEssence.Dungeon.InvItem("lost_item_grass"),

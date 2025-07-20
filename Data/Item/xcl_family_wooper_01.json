@@ -4,34 +4,19 @@
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
 "DefaultText": "Quagsire Tie",
-"LocalTexts": {
-"fr": "Cravate de Maraiste",
-"de": "Morlord Schleife",
-"es": "Fular Quagsire",
-"it": "Cravatta Quagsire",
-"zh-hans": "沼王领带"
-}
+"LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "An exclusive item for the Quagsire family. When kept in the bag, items thrown by the Pokémon will spread out like a fan.",
-"LocalTexts": {
-"fr": "Un objet exclusif pour la famille de Maraiste. When kept in the bag, items thrown by the Pokémon will spread out like a fan.",
-"fr-ca": "Un objet exclusif pour la famille de Quagsire. When kept in the bag, items thrown by the Pokémon will spread out like a fan.",
-"de": "Ein exklusives Item für die Morlord Familie. Wenn es innerhalb des Beutels getragen wird, breiten sich geworfene Items des Pokémon fächerartig aus.",
-"es": "Un objeto exclusivo para la familia Quagsire. When kept in the bag, items thrown by the Pokémon will spread out like a fan.",
-"pt": "Um item exclusivo para a familia Quagsire. When kept in the bag, items thrown by the Pokémon will spread out like a fan.",
-"it": "Uno strumento esclusivo per la famiglia di Quagsire. When kept in the bag, items thrown by the Pokémon will spread out like a fan.",
-"ko": "누오 라인에게 한정된 아이템. When kept in the bag, items thrown by the Pokémon will spread out like a fan.",
-"zh-hans": "沼王一家的专属道具。放在包里时，投掷的道具会像扇子一样散开。"
-}
+"DefaultText": "A rare treasure for the Quagsire family. When kept in the bag, the Pokémon is protected from status conditions when the floor has the Rain status.",
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 1600,
-"Rarity": 2,
+"Price": 2400,
+"Rarity": 3,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
@@ -200,7 +185,66 @@
 },
 "OnEquips": [],
 "OnPickups": [],
-"BeforeStatusAdds": [],
+"BeforeStatusAdds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyStatusEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.WeatherNeededStatusEvent, PMDC",
+"WeatherID": "rain",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StateStatusCheck, PMDC",
+"States": [
+{
+"assembly": "PMDC, Version=0.8.9.0, Culture=neutral, PublicKeyToken=null",
+"type": "PMDC.Dungeon.BadStatusState"
+}
+],
+"Message": {
+"Key": "MSG_PROTECT_STATUS"
+},
+"Anims": [
+{
+"Emitter": {
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Circle_Small_Blue_In",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
+},
+"Sound": "DUN_Screen_Hit",
+"Delay": 10,
+"NeedSelf": false
+}
+]
+}
+]
+}
+}
+}
+],
 "BeforeStatusAddings": [],
 "OnStatusAdds": [],
 "OnStatusRemoves": [],
@@ -215,38 +259,7 @@
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [
-{
-"Key": {
-"str": [
--2
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.ThrowItemPreventDropEvent, PMDC"
-}
-}
-},
-{
-"Key": {
-"str": [
--2
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.ThrownItemNeededEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.SpreadProjectileEvent, PMDC",
-"Rays": 1
-}
-}
-}
-}
-],
+"OnActions": [],
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],

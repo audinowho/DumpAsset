@@ -463,16 +463,16 @@ function BATTLE_SCRIPT.SidequestEscortOutReached(owner, ownerChar, context, args
   
   local tbl = LTBL(context.Target)
   
-    local mission = SV.missions.Missions[tbl.Mission]
-  
-    local oldDir = context.Target.CharDir
-    DUNGEON:CharTurnToChar(context.Target, context.User)
-  
-    UI:SetSpeaker(context.Target)
-    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(args.EscortStartMsg):ToLocal()))
+  local mission = SV.missions.Missions[tbl.Mission]
+
+  local oldDir = context.Target.CharDir
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+
+  UI:SetSpeaker(context.Target)
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(args.EscortStartMsg):ToLocal()))
     
 	-- ask to join
-    UI:ResetSpeaker()
+  UI:ResetSpeaker()
 	UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("TALK_ESCORT_ASK"):ToLocal()), false)
 	UI:WaitForChoice()
 	result = UI:ChoiceResult()
@@ -493,10 +493,10 @@ function BATTLE_SCRIPT.SidequestEscortOutReached(owner, ownerChar, context, args
 	  context.Target.ActionEvents:Add(talk_evt)
 	  
 	  SOUND:PlayFanfare("Fanfare/Note")
-      UI:ResetSpeaker()
+    UI:ResetSpeaker()
 	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT_GUEST"):ToLocal(), context.Target:GetDisplayName(true)))
-      UI:SetSpeaker(context.Target)
-      UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(args.EscortAcceptMsg):ToLocal()))
+    UI:SetSpeaker(context.Target)
+    UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(args.EscortAcceptMsg):ToLocal()))
 	  
 	  context.TurnCancel.Cancel = true
 	else

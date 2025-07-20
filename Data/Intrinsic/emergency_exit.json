@@ -4,17 +4,7 @@
 "$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
 "Name": {
 "DefaultText": "Emergency Exit",
-"LocalTexts": {
-"fr": "Repli Tactique",
-"de": "Rückzug",
-"es": "Retirada",
-"it": "Passoindietro",
-"ko": "위기회피",
-"ja": "ききかいひ",
-"ja-jp": "ききかいひ",
-"zh-hans": "危险回避",
-"zh-hant": "危險迴避"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "The Pokémon jumps back when its HP becomes half or less.",
@@ -65,7 +55,30 @@
 "OnMapStatusAdds": [],
 "OnMapStatusRemoves": [],
 "OnMapStarts": [],
-"OnTurnStarts": [],
+"OnTurnStarts": [
+{
+"Key": {
+"str": [
+1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.ReactToHitEvent, PMDC",
+"HitStatusID": "was_hurt_last_turn",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.PinchNeededSingleEvent, PMDC",
+"Denominator": 2,
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.HopSingleEvent, PMDC",
+"Distance": 5,
+"Reverse": true
+}
+]
+}
+}
+}
+],
 "OnTurnEnds": [],
 "OnMapTurnEnds": [],
 "OnWalks": [],
@@ -77,38 +90,7 @@
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],
-"AfterBeingHits": [
-{
-"Key": {
-"str": [
-1
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.PinchNeededEvent, PMDC",
-"Denominator": 2,
-"AffectTarget": true,
-"BaseEvents": [
-{
-"$type": "PMDC.Dungeon.HitCounterEvent, PMDC",
-"BaseEvents": [
-{
-"$type": "PMDC.Dungeon.HopEvent, PMDC",
-"Distance": 5,
-"Reverse": true,
-"AffectTarget": true
-}
-],
-"Targets": 4,
-"RequireDamage": true,
-"RequireContact": false,
-"RequireSurvive": true,
-"Chance": 100
-}
-]
-}
-}
-],
+"AfterBeingHits": [],
 "OnHitTiles": [],
 "AfterActions": [],
 "UserElementEffects": [],

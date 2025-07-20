@@ -62,7 +62,7 @@ function dev_room.Dev_Note_Action(obj, activator)
   end
   
   UI:ResetSpeaker(true)
-  UI:WaitShowDialogue("There are currently 12 dungeons available![pause=0] Have you found them all?")
+  UI:WaitShowDialogue("There are currently 16 dungeons available![pause=0] Have you found them all?")
   UI:WaitShowDialogue("Some of them are only accessible through secret stairs...")
   UI:WaitShowDialogue("Don't feel pressured to beat them all, though.[scroll]Some of them are meant to be the ultimate dungeons of the full game!")
   

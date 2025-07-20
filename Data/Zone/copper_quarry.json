@@ -4,16 +4,7 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Copper Quarry",
-"LocalTexts": {
-"fr": "Carrière Cuivrée",
-"de": "Kupfersteinbruch",
-"es": "Cantera Bronce",
-"it": "Miniera di Rame",
-"ko": "구리 광산",
-"ja": "サイドーどうざん",
-"ja-jp": "サイドー銅山",
-"zh-hans": "采铜矿场"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -13449,17 +13440,8 @@
 ]
 },
 "Name": {
-"DefaultText": "Copper Quarry\\nB{0}F",
-"LocalTexts": {
-"fr": "Carrière Cuivrée\\n{0}SS",
-"de": "Kupfersteinbruch\\nU{0}",
-"es": "Cantera Bronce\\nP-{0}",
-"it": "Miniera di Rame\\nP-{0}",
-"ko": "구리 광산\\nB{0}F",
-"ja": "サイドーどうざん\\nB{0}かい",
-"ja-jp": "サイドー銅山\\nB{0}階",
-"zh-hans": "采铜矿场\\nB{0}F"
-}
+"DefaultText": "Copper Quarry\nB{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -27914,14 +27896,8 @@
 ]
 },
 "Name": {
-"DefaultText": "Lodestone Quarry\\nB{0}F",
-"LocalTexts": {
-"fr": "Carrière Aimenté\\n{0}",
-"de": "Magnetitsteinbruch\\nU{0}",
-"ja": "ジシャークエリア\\n{0}かい",
-"ja-jp": "ジシャークエリア\\n{0}階",
-"zh-hans": "磁力矿场\\nB{0}F"
-}
+"DefaultText": "Lodestone Quarry\nB{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -32148,6 +32124,69 @@
 "ModStates": []
 },
 {
+"$type": "RogueEssence.LevelGen.SpreadRoomZoneStep, RogueEssence",
+"Spawns": [
+{
+"Spawn": {
+"GridOption": {
+"$type": "PMDC.LevelGen.RoomGenLoadEvo`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], PMDC",
+"PreventChanges": 3,
+"TriggerTile": "tile_evo",
+"MapID": "room_evo_altar_diamond"
+},
+"ListOption": {
+"$type": "PMDC.LevelGen.RoomGenLoadEvo`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], PMDC",
+"PreventChanges": 3,
+"TriggerTile": "tile_evo",
+"MapID": "room_evo_altar_diamond"
+},
+"Filters": [
+{
+"$type": "RogueElements.RoomFilterComponent, RogueElements",
+"Negate": true,
+"Components": [
+{
+"$type": "RogueEssence.LevelGen.ImmutableRoom, RogueEssence"
+}
+]
+},
+{
+"$type": "PMDC.LevelGen.RoomFilterConnectivity, PMDC",
+"Connection": 1
+}
+]
+},
+"Rate": 10
+}
+],
+"PriorityGrid": {
+"str": [
+-4,
+1
+]
+},
+"PriorityList": {
+"str": [
+-2,
+2
+]
+},
+"SpreadPlan": {
+"$type": "RogueEssence.LevelGen.SpreadPlanQuota, RogueEssence",
+"Quota": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 1
+},
+"Replaceable": false,
+"FloorRange": {
+"Min": 0,
+"Max": 4
+}
+},
+"ModStates": []
+},
+{
 "$type": "RogueEssence.LevelGen.SpreadStepRangeZoneStep, RogueEssence",
 "StepPriority": {
 "str": [
@@ -32212,14 +32251,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Secret Room",
-"LocalTexts": {
-"fr": "Salle secrète",
-"de": "Geheimer Raum",
-"es": "Piso Secreto",
-"pt": "Sala Secreta",
-"it": "Stanza Segreta",
-"zh-hans": "秘密之间"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -32586,14 +32618,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"fr": "Passage mysterieux",
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -34261,14 +34286,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"fr": "Passage mysterieux",
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -35952,14 +35970,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"fr": "Passage mysterieux",
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -37655,14 +37666,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"fr": "Passage mysterieux",
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -39330,14 +39334,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"fr": "Passage mysterieux",
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -41021,14 +41018,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"fr": "Passage mysterieux",
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }

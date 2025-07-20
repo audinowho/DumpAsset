@@ -187,15 +187,6 @@ function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
     for name, mission in pairs(SV.TakenBoard) do
         if mission.Taken and mission.Completion == COMMON.MISSION_INCOMPLETE and zoneId == mission.Zone and mission.Client ~= "" then
             if mission.Type == COMMON.MISSION_TYPE_ESCORT or mission.Type == COMMON.MISSION_TYPE_EXPLORATION then -- escort
-                -- add escort to team
-                local player_count = GAME:GetPlayerPartyCount()
-                local guest_count = GAME:GetPlayerGuestCount()
-
-                --check to see if an escort is already in the team. If so, stop right here and don't assign him back in.
-                for i = 0, guest_count - 1, 1 do
-                    local guest_tbl = LTBL(GAME:GetPlayerGuestMember(i))
-                    if guest_tbl.Escort ~= nil then return end
-                end
 
                 local mon_id = RogueEssence.Dungeon.MonsterID(mission.Client, 0, "normal", COMMON.NumToGender(mission.ClientGender))
                 -- set the escort level 20% less than the expected level

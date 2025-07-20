@@ -3,47 +3,32 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Mew Seal",
-"LocalTexts": {
-"fr": "Sceau de Mew",
-"de": "Mew Siegel",
-"es": "Cuño Mew",
-"it": "Sigillo Mew",
-"zh-hans": "梦幻刻印"
-}
+"DefaultText": "Morpeko Bangle",
+"LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "An exclusive item for Mew. When kept in the bag, the Pokémon can traverse water, lava, and pits.",
-"LocalTexts": {
-"fr": "Un object exclusif pour Mew. When kept in the bag, the Pokémon can traverse water, lava, and pits.",
-"fr-ca": "Un object exclusif pour Mew When kept in the bag, the Pokémon can traverse water, lava, and pits.",
-"de": "Ein exklusives Item für Mew. Wenn es innerhalb des Beutels getragen wird, kann das Pokémon über Wasser, Lava und Schluchten laufen.",
-"es": "Un objeto exclusivo para Mew. Al llevarlo en la bolsa, el Pokémon puede atravesar agua, lava y agujeros. ",
-"pt": "Um item exclusivo para Mew. When kept in the bag, the Pokémon can traverse water, lava, and pits.",
-"it": "Uno strumento esclusivo per Mew. Quando tenuto in borsa, il Pokémon può attraversare acqua, lava, e buche.",
-"ko": "뮤에게 한정된 아이템. When kept in the bag, the Pokémon can traverse water, lava, and pits.",
-"zh-hans": "梦幻的专属道具。放在包里时，宝可梦可以穿越水、岩浆和坑。"
-}
+"DefaultText": "A rare treasure for Morpeko. When kept in the bag, the Pokémon's Dark-type moves have a chance to inflict the Paralyzed status.",
+"LocalTexts": {}
 },
-"Released": true,
+"Released": false,
 "Comment": "",
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 1600,
-"Rarity": 2,
+"Price": 2400,
+"Rarity": 3,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 29
+"ItemType": 57
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
-"mew"
+"morpeko"
 ]
 },
 {
@@ -210,56 +195,49 @@
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
-"OnRefresh": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
-"Mobility": 1
-}
-}
-},
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
-"Mobility": 4
-}
-}
-},
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
-"Mobility": 2
-}
-}
-}
-],
+"OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
 "BeforeHittings": [],
 "BeforeBeingHits": [],
-"AfterHittings": [],
+"AfterHittings": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.ElementNeededEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.OnHitEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
+"StatusID": "paralyze",
+"AffectTarget": true,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": "MSG_EXCL_ITEM_TYPE"
+},
+"Anims": []
+}
+],
+"RequireDamage": false,
+"RequireContact": false,
+"Chance": 50
+}
+],
+"NeededElement": "dark"
+}
+}
+}
+],
 "AfterBeingHits": [],
 "OnHitTiles": [],
 "AfterActions": [],

@@ -31,7 +31,7 @@
 }
 },
 "Released": true,
-"Comment": "No Anim",
+"Comment": "",
 "IndexNum": 597,
 "BaseCharges": 12,
 "Strikes": 1,
@@ -47,7 +47,29 @@
 "AnimFlip": 0
 },
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyAttachEmitter, RogueEssence"
+"$type": "RogueEssence.Content.AttachAreaEmitter, RogueEssence",
+"Anims": [
+{
+"$type": "RogueEssence.Content.StaticAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Smoke_Pink",
+"FrameTime": 2,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+}
+],
+"Range": 6,
+"ParticlesPerBurst": 1,
+"AddHeight": 0,
+"BurstTime": 3,
+"Layer": 2
 },
 "StreamEmitter": {
 "$type": "RogueEssence.Content.EmptyShootingEmitter, RogueEssence",
@@ -74,7 +96,7 @@
 "ActionFX": {
 "Delay": 0,
 "AbsoluteDelay": false,
-"Sound": "",
+"Sound": "_UNK_DUN_Spray",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0

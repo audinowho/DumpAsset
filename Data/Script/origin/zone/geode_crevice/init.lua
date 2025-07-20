@@ -48,13 +48,16 @@ function geode_crevice.ExitSegment(zone, result, rescue, segmentID, mapID)
 	
   elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared and result ~= RogueEssence.Data.GameProgress.ResultType.Escaped then
     COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
+  elseif result == RogueEssence.Data.GameProgress.ResultType.Escaped then
+	local got_treasure = COMMON.ProcessOneTimeTreasure("loot_music_box", rand_item, SV.geode_crevice)
+	COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)
   else
-	
     local got_treasure = COMMON.ProcessOneTimeTreasure("loot_music_box", rand_item, SV.geode_crevice)
 	
     if segmentID == 0 then
       COMMON.UnlockWithFanfare('secret_garden', true)
-      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 5, 0)
+      COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 4, 0)
+	  -- COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 5, 0)
     else
       PrintInfo("No exit procedure found!")
 	  COMMON.EndDungeonDay(result, SV.checkpoint.Zone, SV.checkpoint.Segment, SV.checkpoint.Map, SV.checkpoint.Entry)

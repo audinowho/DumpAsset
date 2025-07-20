@@ -301,7 +301,7 @@ function guild_hut.Card_Portal_Touch(obj, activator)
     'copper_quarry', 'depleted_basin', 'forsaken_desert', 'relic_tower', 'sleeping_caldera', 'thunderstruck_pass', 'veiled_ridge',
     'snowbound_path', 'champions_road',
     'ambush_forest', 'treacherous_mountain', 'barren_tundra', 'energy_garden', 'wayward_wetlands', 'sickly_hollow',
-    'cave_of_solace', 'royal_halls', 'the_sky', 'guildmaster_trail', 'secret_garden', 'the_abyss'}
+    'cave_of_solace', 'royal_halls', 'the_sky', 'tiny_tunnel', 'geode_crevice', 'guildmaster_trail', 'secret_garden', 'the_abyss'}
   local ground_entrances = { }
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end

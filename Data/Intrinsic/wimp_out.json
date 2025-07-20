@@ -4,17 +4,7 @@
 "$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
 "Name": {
 "DefaultText": "Wimp Out",
-"LocalTexts": {
-"fr": "Escampette",
-"de": "Reißaus",
-"es": "Huida",
-"it": "Fuggifuggi",
-"ko": "도망태세",
-"ja": "にげごし",
-"ja-jp": "にげごし",
-"zh-hans": "跃跃欲逃",
-"zh-hant": "躍躍欲逃"
-}
+"LocalTexts": {}
 },
 "Desc": {
 "DefaultText": "The Pokémon warps away when its HP becomes half or less.",
@@ -65,7 +55,32 @@
 "OnMapStatusAdds": [],
 "OnMapStatusRemoves": [],
 "OnMapStarts": [],
-"OnTurnStarts": [],
+"OnTurnStarts": [
+{
+"Key": {
+"str": [
+1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.ReactToHitEvent, PMDC",
+"HitStatusID": "was_hurt_last_turn",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.PinchNeededSingleEvent, PMDC",
+"Denominator": 2,
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.RandomWarpSingleEvent, PMDC",
+"Distance": 50,
+"TriggerMsg": {
+"Key": null
+}
+}
+]
+}
+}
+}
+],
 "OnTurnEnds": [],
 "OnMapTurnEnds": [],
 "OnWalks": [],
@@ -77,40 +92,7 @@
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],
-"AfterBeingHits": [
-{
-"Key": {
-"str": [
-1
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.PinchNeededEvent, PMDC",
-"Denominator": 2,
-"AffectTarget": true,
-"BaseEvents": [
-{
-"$type": "PMDC.Dungeon.HitCounterEvent, PMDC",
-"BaseEvents": [
-{
-"$type": "PMDC.Dungeon.RandomWarpEvent, PMDC",
-"Distance": 50,
-"AffectTarget": true,
-"TriggerMsg": {
-"Key": null
-}
-}
-],
-"Targets": 4,
-"RequireDamage": true,
-"RequireContact": false,
-"RequireSurvive": true,
-"Chance": 100
-}
-]
-}
-}
-],
+"AfterBeingHits": [],
 "OnHitTiles": [],
 "AfterActions": [],
 "UserElementEffects": [],

@@ -49,8 +49,7 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
 
   for _, name in ipairs(COMMON.GetSortedKeys(SV.missions.Missions)) do
     mission = SV.missions.Missions[name]
-    if mission.Complete == COMMON.MISSION_INCOMPLETE and zoneContext.CurrentZone == mission.DestZone
-	  and zoneContext.CurrentSegment == mission.DestSegment and zoneContext.CurrentID == mission.DestFloor then
+    if mission.Complete == COMMON.MISSION_INCOMPLETE and zoneContext.CurrentZone == mission.DestZone and zoneContext.CurrentSegment == mission.DestSegment and zoneContext.CurrentID == mission.DestFloor then
       local specificTeam = RogueEssence.LevelGen.SpecificTeamSpawner()
       specificTeam.Explorer = true
       local post_mob = RogueEssence.LevelGen.MobSpawn()
@@ -99,16 +98,16 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
 		
         outlawFloor = true
         if mission.Type == COMMON.SIDEQUEST_TYPE_OUTLAW_DISGUISE then
-            outlawSilent = true
+          outlawSilent = true
         end
 		
         if mission.Type == COMMON.SIDEQUEST_TYPE_OUTLAW_HOUSE then
           --add house trigger
-              local activeEffect = RogueEssence.Data.ActiveEffect()
-              activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("OutlawHouse", Serpent.line({ Mission = name})))
-            local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
-            local priority = RogueElements.Priority(-6, 1)
-            queue:Enqueue(priority, destNote)
+          local activeEffect = RogueEssence.Data.ActiveEffect()
+          activeEffect.OnMapStarts:Add(-6, RogueEssence.Dungeon.SingleCharScriptEvent("OutlawHouse", Serpent.line({ Mission = name})))
+          local destNote = LUA_ENGINE:MakeGenericType( MapEffectStepType, { MapGenContextType }, { activeEffect })
+          local priority = RogueElements.Priority(-6, 1)
+          queue:Enqueue(priority, destNote)
         end
       elseif mission.Type == COMMON.SIDEQUEST_TYPE_LOST_ITEM then
         local has_item = false
@@ -122,24 +121,24 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
           has_item = true
         end
 		
-      if not has_item then
-		
-        local lost_item = RogueEssence.Dungeon.MapItem(mission.TargetItem)
-        local preset_picker = LUA_ENGINE:MakeGenericType(PresetPickerType, { MapItemType }, { lost_item })
-        local multi_preset_picker = LUA_ENGINE:MakeGenericType(PresetMultiRandType, { MapItemType }, { preset_picker })
-        local picker_spawner = LUA_ENGINE:MakeGenericType(PickerSpawnType, {  MapGenContextType, MapItemType }, { multi_preset_picker })
-        local random_room_spawn = LUA_ENGINE:MakeGenericType(RandomRoomSpawnStepType, { MapGenContextType, MapItemType }, { })
-        random_room_spawn.Spawn = picker_spawner
-        random_room_spawn.Filters:Add(PMDC.LevelGen.RoomFilterConnectivity(PMDC.LevelGen.ConnectivityRoom.Connectivity.Main))
-        local priority = RogueElements.Priority(5, 2, 1)
-        queue:Enqueue(priority, random_room_spawn)
-		
-        if not mission.FloorUnknown then
-          destinationFloor = true
+        if not has_item then
+      
+          local lost_item = RogueEssence.Dungeon.MapItem(mission.TargetItem)
+          local preset_picker = LUA_ENGINE:MakeGenericType(PresetPickerType, { MapItemType }, { lost_item })
+          local multi_preset_picker = LUA_ENGINE:MakeGenericType(PresetMultiRandType, { MapItemType }, { preset_picker })
+          local picker_spawner = LUA_ENGINE:MakeGenericType(PickerSpawnType, {  MapGenContextType, MapItemType }, { multi_preset_picker })
+          local random_room_spawn = LUA_ENGINE:MakeGenericType(RandomRoomSpawnStepType, { MapGenContextType, MapItemType }, { })
+          random_room_spawn.Spawn = picker_spawner
+          random_room_spawn.Filters:Add(PMDC.LevelGen.RoomFilterConnectivity(PMDC.LevelGen.ConnectivityRoom.Connectivity.Main))
+          local priority = RogueElements.Priority(5, 2, 1)
+          queue:Enqueue(priority, random_room_spawn)
+      
+          if not mission.FloorUnknown then
+            destinationFloor = true
+          end
+      
         end
-		
-      end
-	  else
+      else
         post_mob.Tactic = "slow_patrol"
         if mission.Type == COMMON.SIDEQUEST_TYPE_RESCUE then -- rescue
           post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)

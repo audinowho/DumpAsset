@@ -884,6 +884,11 @@
             After playing this VFX, will wait this many milliseconds before moving to the next one.
             </summary>
         </member>
+        <member name="F:RogueEssence.Content.BattleFX.AbsoluteDelay">
+            <summary>
+            Do not modify delay due to batle speed
+            </summary>
+        </member>
         <member name="F:RogueEssence.Content.BattleFX.Sound">
             <summary>
             The sound effect of the VFX
@@ -1068,14 +1073,16 @@
             The number of turns this character must wait before being able to move again.
             </summary>
         </member>
-        <member name="P:RogueEssence.Dungeon.Character.TiersUsed">
-            <summary>
-            The number of turn tiers that this character has moved OR acted on.
-            </summary>
-        </member>
         <member name="P:RogueEssence.Dungeon.Character.TurnUsed">
             <summary>
-            Whether the character has made an action during this map turn.  Only one action per map turn permitted.
+            Whether the character has made an action during this map turn.  Refreshed in between player and enemy faction actions on tier 0.
+            Only one action per map turn permitted.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Dungeon.Character.EndTurnLock">
+            <summary>
+            Prevents action like TurnUsed, but is removed before player phase tier 0.
+            Used for enemies that need to be postponed until the next player turn.
             </summary>
         </member>
         <member name="F:RogueEssence.Dungeon.Character.ItemDisabled">
@@ -1118,6 +1125,12 @@
             When the character is removed from the map, we need to revert form changes and remove statuses
             </summary>
         </member>
+        <member name="M:RogueEssence.Dungeon.Character.FullRestore(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="fullRefresh">True if you want to carry out a refresh, false otherwise</param>
+        </member>
         <member name="M:RogueEssence.Dungeon.Character.RestoreForm(System.Boolean)">
             <summary>
             Restores the character's forms and all (or just some) of its details.
@@ -1131,6 +1144,22 @@
             TODO: remove this method, after removing calls from rescue to script
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Dungeon.Character.LearnIntrinsic(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Gives the character a new base intrinsic, updating all current intrinsic backreferences.
+            </summary>
+            <param name="intrinsicNum">The intrinsic to learn</param>
+            <param name="slot">The slot to replace the new intrinsic into.  -1 to add it to the earliest available slot.</param>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:RogueEssence.Dungeon.Character.LearnSkill(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Gives the characetr a new skill, placing it in the earliest available slot.
+            </summary>
+            <param name="skillNum"></param>
+            <param name="enabled"></param>
+            <param name="refresh"></param>
         </member>
         <member name="M:RogueEssence.Dungeon.Character.EditSkill(System.String,System.Int32,System.Boolean)">
             <summary>
@@ -1706,6 +1735,27 @@
             <param name="silent"></param>
             <returns></returns>
         </member>
+        <member name="M:RogueEssence.Dungeon.DungeonScene.SkipToMainLeader">
+            <summary>
+            Forces everyone to skip their turns until the next tier 0 main leader turn.
+            The main leader turn may skip on that point due to other factors, but this ensures that no one acts until that opportunity is reached.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Dungeon.DungeonScene.ResetRound">
+            <summary>
+            Resets the current turn state to blank.
+            Turn order is set to player 0
+            TurnChars are cleared.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Dungeon.DungeonScene.ProcessTurnStart">
+            <summary>
+            Processes the turn start of a faction.
+            Turn starts are given all at once to a whole faction before they move.
+            This is to prevent leaderswap inconsistencies in the turn system.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="F:RogueEssence.Dungeon.DungeonScene.sightRect">
             <summary>
             Rectangle of the tiles that are relevant to sight computation.
@@ -1842,6 +1892,17 @@
             <summary>
             Context states that remain on the main battlecontext even after iterating over different targets.
             Ordinarily, context states are left behind when switching to a new target (in multi-target contexts)
+            </summary>
+        </member>
+        <member name="T:RogueEssence.Dungeon.ScriptedConditionEvent">
+            <summary>
+            Event that activates if the supplied condition script returns true
+            If the script does not return a boolean, it will still count as true as long as it is not nil
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.ScriptedConditionEvent.BaseEvents">
+            <summary>
+            The list of battle events that plays if the condition is met
             </summary>
         </member>
         <member name="P:RogueEssence.Dungeon.UserTargetGameContext.Target">
@@ -2104,19 +2165,20 @@
             The list of characters (represented by index) scheduled to take a turn within the current faction.
             </summary>
         </member>
-        <member name="M:RogueEssence.Dungeon.TurnState.SetTeamRound(RogueEssence.Dungeon.Team,System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="team"></param>
-            <param name="reset">True = Reset everyone's turns.  False = Skip everyone's turns</param>
-        </member>
         <member name="M:RogueEssence.Dungeon.TurnState.UpdateTeamRemoval(RogueEssence.Dungeon.Faction,System.Int32)">
             <summary>
             Assumes the team being removed is empty.
             </summary>
             <param name="faction"></param>
             <param name="removedTeam"></param>
+        </member>
+        <member name="M:RogueEssence.Dungeon.TurnState.GetRemainingTurns(RogueEssence.Dungeon.ITurnChar)">
+            <summary>
+            Gets how many times the character can move within this round, assuming it doesnt attack.
+            Assumes it has not moved on this faction-turn.
+            </summary>
+            <param name="character"></param>
+            <returns></returns>
         </member>
         <member name="M:RogueEssence.Dungeon.TurnState.loadTeamMemberTurnMap(RogueEssence.Dungeon.Faction,System.Int32,System.Boolean,System.Int32,System.Collections.Generic.IList{RogueEssence.Dungeon.Character})">
             <summary>
@@ -2171,6 +2233,11 @@
         <member name="M:RogueEssence.Dungeon.Zone.DevNewGround">
             <summary>
             Creates a new ground map of the specified name into the current zone (temporarily) for dev usage.
+            </summary>
+        </member>
+        <member name="M:RogueEssence.Dungeon.Zone.Unvisit">
+            <summary>
+            Decrement the visit count of the current map, so that GetMap can be called to generate the same layout
             </summary>
         </member>
         <member name="F:RogueEssence.Data.AITactic.Assignable">
@@ -2639,6 +2706,11 @@
             <param name="numeric"></param>
             <returns></returns>
         </member>
+        <member name="F:RogueEssence.Data.GameProgress.Rescue">
+            <summary>
+            Data about the current rescue mission
+            </summary>
+        </member>
         <member name="F:RogueEssence.Data.GameProgress.SessionTime">
             <summary>
             The total play time from past sessions.
@@ -2691,13 +2763,15 @@
             <param name="silent"></param>
             <returns></returns>
         </member>
-        <member name="M:RogueEssence.Data.GameProgress.RestrictCharLevel(RogueEssence.Dungeon.Character,System.Int32,System.Boolean,System.Boolean)">
+        <member name="M:RogueEssence.Data.GameProgress.RestrictCharLevel(RogueEssence.Dungeon.Character,System.Int32,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             
             </summary>
             <param name="character"></param>
             <param name="level"></param>
             <param name="capOnly">Will force lower level to specified level if false.</param>
+            <param name="keepSkills">Turn off to wipe skills to that of the target level.</param>
+            <param name="inTeam">On if it's part of the team, off if it's part of the assembly.  Used for refresh purposes.</param>
         </member>
         <member name="M:RogueEssence.Data.GameProgress.ClearDungeonItems">
             <summary>
@@ -3317,6 +3391,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:RogueEssence.Data.SkillDataSummary.GetIconName">
+            <summary>
+            Gets the colored text string of the skill, with icon included
+            </summary>
+            <returns></returns>
+        </member>
         <member name="F:RogueEssence.Data.SkinData.Symbol">
             <summary>
             The symbol displayed next the characters species name.
@@ -3654,6 +3734,16 @@
             </summary>
             <param name="name">Name of the template to find.</param>
             <returns>BaseTemplate found, or null if not found.</returns>
+        </member>
+        <member name="F:RogueEssence.Dev.RangeBorderAttribute.Index1">
+            <summary>
+            The internal range value is 0-indexed, but the editor value should be 1-indexed.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dev.RangeBorderAttribute.Inclusive">
+            <summary>
+            The internal range value's upper bound is exclusive, but the editor value should display it as inclusive.
+            </summary>
         </member>
         <member name="M:RogueEssence.Dev.DevHelper.RunIndexing(RogueEssence.Data.DataManager.DataType)">
             <summary>
@@ -4276,7 +4366,12 @@
         </member>
         <member name="P:RogueEssence.Ground.GroundEntity.EntOrder">
             <summary>
-            The draw/interaction order of the entity.  Lower values are handled before higher ones.
+            The draw order of the entity.  Lower values are handled before higher ones.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.Ground.GroundEntity.InteractOrder">
+            <summary>
+            The interact order of the entity.  Lower values are handled before higher ones.
             </summary>
         </member>
         <member name="M:RogueEssence.Ground.GroundEntity.GetEntityType">
@@ -4553,6 +4648,15 @@
             Based on pixels.
             </summary>
             <param name="loc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Ground.GroundMap.GetLocInGroundBounds(RogueElements.Loc@)">
+            <summary>
+            Checks to see if the loc is in map's ground bounds.
+            If it's not wrapped, expect normal results.
+            If it's normally out of bounds but wrapped, the loc will be changed and the result will be true.
+            </summary>
+            <param name="loc">The location to test.  Will be wrapped if the map is wrapped.</param>
             <returns></returns>
         </member>
         <member name="M:RogueEssence.Ground.GroundMap.FindPossible(System.Int32,System.Int32,System.Int32,System.Int32)">
@@ -4915,6 +5019,11 @@
             The map's elemental aligment.
             </summary>
         </member>
+        <member name="F:RogueEssence.LevelGen.MapTextureStep`1.Background">
+            <summary>
+            Background behind all floor tiles.
+            </summary>
+        </member>
         <member name="T:RogueEssence.LevelGen.MapDictTextureStep`1">
             <summary>
             Decides the tileset for the walls, ground, etc.
@@ -5023,6 +5132,11 @@
         <member name="F:RogueEssence.LevelGen.RoomGenLoadMapBase`1.MapID">
             <summary>
             Map file to load.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.RoomGenLoadMapBase`1.PreventChanges">
+            <summary>
+            Prevents later steps from changing the tiles or items specified by this room.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.RoomGenPlus`1">
@@ -5271,6 +5385,11 @@
             The possible statuses.  Picks one.
             </summary>
         </member>
+        <member name="T:RogueEssence.LevelGen.MobSpawnScript">
+            <summary>
+            Runs a script to modify the spawning mob.
+            </summary>
+        </member>
         <member name="T:RogueEssence.LevelGen.MoneyDivSpawner`1">
             <summary>
             Divides a given amount of money into a specified number of pickups.
@@ -5285,6 +5404,22 @@
         <member name="T:RogueEssence.LevelGen.MoneySpawnRange">
             <summary>
             Selects a MoneySpawn with an amount in a predefined range.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.LoopedRandTeamSpawner`1">
+            <summary>
+            Spawns mob teams from a specified team builder, at a specified amount.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:RogueEssence.LevelGen.LoopedRandTeamSpawner`1.Picker">
+            <summary>
+            Builds the team to be spawned.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.LoopedRandTeamSpawner`1.AmountSpawner">
+            <summary>
+            Decides how many teams to spawn.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.LoopedTeamSpawner`1">
@@ -5406,6 +5541,11 @@
         <member name="F:RogueEssence.LevelGen.PlaceTerrainMobsStep`1.AcceptedTiles">
             <summary>
             The terrain types to spawn the mobs in.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.PlaceTerrainMobsStep`1.Depth">
+            <summary>
+            How deeply in the terrain it should be spawned in.
             </summary>
         </member>
         <member name="F:RogueEssence.LevelGen.TeamMemberSpawn.MemberRole.Normal">
@@ -5747,6 +5887,11 @@
             <summary>
             The object spawns will never be found LESS than FloorSpacing.Min floors apart,
             and never MORE than FloorSpacing.Max floors apart.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.SpreadPlanSpaced.BeginStart">
+            <summary>
+            Will spawn at the first available floor before rolling for the next floors.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.SpreadPlanQuota">
@@ -6373,6 +6518,17 @@
             Makes a .net Action to be used in lua
             </summary>
             <param name="fun"></param>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueEssence.Script.LuaEngine.MakeLuaArray(NLua.ProxyType,NLua.LuaTable)">
+            <summary>
+            Creates a dotnet array based on the lua table for use by lua.
+            It coerces types to fit for the array, which can be helpful for initializing an int array.
+            However, this is also slower, so it is recommended to use luanet.make_array for all other cases.
+            </summary>
+            <param name="class_type"></param>
+            <param name="table"></param>
             <returns></returns>
         </member>
         <member name="M:RogueEssence.Script.LuaEngine._DummyWait">
@@ -6801,6 +6957,27 @@
             <param name="structureid">The segment within the dungeon to start in.  -1 represents ground maps.</param>
             <param name="mapid">The id of the ground map or dungeon map within the dungeon segment.</param>
             <param name="entry">The entry point on the resulting map</param>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGame.FadeOutFront">
+            <summary>
+            Fade out the screen. Waits to complete before continuing.
+            This fade specifically comes in front of the menu.
+            </summary>
+            <param name="white">Fade to white if set to true.  Fades to black otherwise.</param>
+            <param name="duration">The amount of time to fade in frames.</param>
+            <example>
+            GAME:FadeOutFront(false, 60)
+            </example>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptGame.FadeInFront">
+            <summary>
+            Fade in the screen. Waits to complete before continuing.
+            This fade specifically comes in front of the menu.
+            </summary>
+            <param name="duration">The amount of time to fade in frames.</param>
+            <example>
+            GAME:FadeOutFront(false, 60)
+            </example>
         </member>
         <member name="F:RogueEssence.Script.ScriptGame.FadeOut">
             <summary>
@@ -7404,30 +7581,6 @@
             </summary>
             <param name="entityname">The name of the entity to unhide.</param>
         </member>
-        <member name="M:RogueEssence.Script.ScriptGround.CreateObject(System.String,System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            TODO: WIP
-            </summary>
-            <param name="objtype"></param>
-            <param name="instancename"></param>
-            <param name="x"></param>
-            <param name="y"></param>
-            <param name="w"></param>
-            <param name="h"></param>
-            <returns></returns>
-        </member>
-        <member name="M:RogueEssence.Script.ScriptGround.CreateCharacter(System.String,System.String,System.Int32,System.Int32,System.String,System.String)">
-            <summary>
-            TODO: WIP
-            </summary>
-            <param name="chartype"></param>
-            <param name="instancename"></param>
-            <param name="x"></param>
-            <param name="y"></param>
-            <param name="actionfun"></param>
-            <param name="thinkfun"></param>
-            <returns></returns>
-        </member>
         <member name="M:RogueEssence.Script.ScriptGround.RemoveObject(System.String)">
             <summary>
             Deletes an object from the ground map, identified by its instance name.
@@ -7520,7 +7673,7 @@
             CharTurnToCharAnimated(charFrom, Dir8.Left, 3, true)
             </example>
         </member>
-        <member name="F:RogueEssence.Script.ScriptGround.CharAnimateTurnTo">
+        <member name="M:RogueEssence.Script.ScriptGround._CharAnimateTurnTo(RogueEssence.Ground.GroundChar,RogueElements.Dir8,System.Int32)">
             <summary>
             Makes a character do an animated turn to face a chosen direction over the specified time.
             Waits until the operation is completed.
@@ -7529,7 +7682,7 @@
             <param name="direction">The direction to turn to</param>
             <param name="framedur">The time spent in each intermediate direction, in frames</param>
             <example>
-            CharTurnToCharAnimated(charFrom, Dir8.Left, 3)
+            CharAnimateTurnTo(charFrom, Dir8.Left, 3)
             </example>
         </member>
         <member name="M:RogueEssence.Script.ScriptGround.TeleportTo(RogueEssence.Ground.GroundEntity,System.Int32,System.Int32,RogueElements.Dir8,System.Int32)">
@@ -8113,6 +8266,23 @@
             <summary>
             Waits for the player to press a button before continuing.
             </summary>
+            <param name="anyInput">If false, only the Continue button will let the game continue. If true, any button will work.</param>
+            <example>
+            UI:WaitInput(true)
+            </example>
+        </member>
+        <member name="F:RogueEssence.Script.ScriptUI.WaitForPlayerInput">
+            <summary>
+            Waits for the player to press at least one of the given inputs before continuing.
+            If an empty table is supplied, then this function behaves like WaitInput.
+            </summary>
+            <param name="inputs">A table of inputs, either as InputTypes or as ints. The game will continue if any one of them are hit. If empty, any button will work.</param>
+            <example>
+            local input = RogueEssence.FrameInput.InputType
+            
+            UI:WaitForPlayerInput({}) --This will accept any input
+            UI:WaitForPlayerInput({input.Menu, input.Cancel}) --This only accepts the menu or cancel button specifically
+            </example>
         </member>
         <member name="F:RogueEssence.Script.ScriptUI.WaitShowDialogue">
             <summary>
@@ -8215,6 +8385,14 @@
             Fades out the text set in a title drop.  Requires WaitDialog to actually fade.
             </summary>
             <param name="time">The time for the text to fade in.</param>
+        </member>
+        <member name="M:RogueEssence.Script.ScriptUI.SetCustomDialogue(RogueEssence.Menu.DialogueBox)">
+            <summary>
+            Displays a custom dialogue of the caller's choice.
+            
+            UI:WaitDialog() must be called afterwards for the dialogue to be actually displayed,
+            and for execution to suspend until the dialogue is completed.
+            </summary>
         </member>
         <member name="F:RogueEssence.Script.ScriptUI.WaitShowBG">
             <summary>
@@ -8552,7 +8730,7 @@
             TODO
             </summary>
         </member>
-        <member name="M:RogueEssence.Script.ScriptUI.ShowMusicMenu(NLua.LuaTable)">
+        <member name="M:RogueEssence.Script.ScriptUI.ShowMusicMenu(System.Boolean,NLua.LuaTable)">
             <summary>
             Displays the Music menu to browse music for the game.
             
@@ -8560,6 +8738,7 @@
             and for execution to suspend until the choice is returned.
             Then to recover the string representing the chosen song, UI:ChoiceResult() must be called.
             </summary>
+            <param name="hardMod">Set to true if you want to only include music of the current quest mod.</param>
             <param name="spoilerUnlocks">A lua table of strings representing progression flags that have been completed.
             Any ogg file that uses this tag as a spoiler tag will display in the menu only if the flag has been passed.</param>
         </member>

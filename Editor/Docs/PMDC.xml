@@ -199,6 +199,12 @@
             </summary>
             <param name="path"></param>
         </member>
+        <member name="P:PMDC.Dev.ViewModels.TeamMemberSpawnModel.Max">
+            <summary>
+            Maximums of level ranges are internally stored as exclusive, so the displayed value must be the internal value - 1, but kept above the min to look clean.
+            Conversely, when the value is edited, the internal value must be set to the displayed value + 1.
+            </summary>
+        </member>
         <member name="F:PMDC.Dungeon.AIFlags.TeamPartner">
             <summary>
             will not attack enemyoffriend
@@ -371,6 +377,7 @@
             <param name="ends"></param>
             <param name="freeGoal">Determines whether the goal should be reachable even if blocked.</param>
             <param name="respectPeers">Considers entities as blockers</param>
+            <param name="limit">Max number of paths to find</param>
             <returns></returns>
         </member>
         <member name="M:PMDC.Dungeon.AIPlan.GetPathsImpassable(RogueEssence.Dungeon.Character,System.Collections.Generic.List{RogueElements.Loc})">
@@ -475,6 +482,19 @@
             </summary>
             <param name="controlledChar"></param>
             <returns></returns>
+        </member>
+        <member name="T:PMDC.Dungeon.StalkerPlan">
+            <summary>
+            Stays in designated territory, based on terrain block.
+            Will never get within 1 tile of non-traversible terrain.
+            Always knows where the player team is, and will move towards it in naive pathing.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.StalkerPlan.DarkRange">
+            <summary>
+            How many tiles away this mob can see when stalking.
+            Does not respect vision limitations.
+            </summary>
         </member>
         <member name="T:PMDC.Dungeon.ThiefPlan">
             <summary>
@@ -2346,6 +2366,16 @@
             The list of battle VFXs played if the condition is met
             </summary>
         </member>
+        <member name="T:PMDC.Dungeon.CancelActionEvent">
+            <summary>
+            Event that cancels the action (intended to be used with -Needed events)
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.CancelActionEvent.Message">
+            <summary>
+            The message displayed in the dungeon log 
+            </summary>
+        </member>
         <member name="T:PMDC.Dungeon.PreventActionEvent">
             <summary>
             Event that prevents the character from doing certain battle action types
@@ -3347,14 +3377,14 @@
             Event that prevents the character from using the move if the specified map status is not present
             </summary> 
         </member>
-        <member name="F:PMDC.Dungeon.WeatherRequiredEvent.WeatherID">
+        <member name="F:PMDC.Dungeon.WeatherRequiredEvent.AcceptedWeather">
             <summary>
-            The status ID to check for
+            The status IDs to check for
             </summary> 
         </member>
         <member name="F:PMDC.Dungeon.WeatherRequiredEvent.Message">
             <summary>
-            The message displayed in the dungeon log if the conditon is met 
+            The message displayed in the dungeon log if the conditon is not met 
             </summary> 
         </member>
         <member name="T:PMDC.Dungeon.CritNeededEvent">
@@ -3369,7 +3399,7 @@
         </member>
         <member name="T:PMDC.Dungeon.CharElementNeededEvent">
             <summary>
-            Event that groups multiple battle events into one event, but only applies if the target's type matches the specified type
+            Event that groups multiple battle events into one event, but only applies if the character's type matches the specified type
             </summary>
         </member>
         <member name="F:PMDC.Dungeon.CharElementNeededEvent.BaseEvents">
@@ -3380,6 +3410,16 @@
         <member name="F:PMDC.Dungeon.CharElementNeededEvent.NeededElement">
             <summary>
             The type to check for 
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.CharElementNeededEvent.AffectTarget">
+            <summary>
+            Whether to run the type check on the user or target
+            </summary> 
+        </member>
+        <member name="F:PMDC.Dungeon.CharElementNeededEvent.Inverted">
+            <summary>
+            If set, the events will only be applied if none of the character's types match the specified type
             </summary>
         </member>
         <member name="T:PMDC.Dungeon.ElementNeededEvent">
@@ -3474,6 +3514,17 @@
             </summary>
         </member>
         <member name="F:PMDC.Dungeon.OnSelfActionEvent.BaseEvents">
+            <summary>
+            The list of battle events that will be applied if the condition is met 
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.BerryNeededEvent">
+            <summary>
+            Event that groups multiple battle events into one event,
+            but only applies when the hitbox action is an item or throw action that has a berry
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.BerryNeededEvent.BaseEvents">
             <summary>
             The list of battle events that will be applied if the condition is met 
             </summary>
@@ -3725,6 +3776,11 @@
         <member name="T:PMDC.Dungeon.StatusStateBattleEvent">
             <summary>
             Event that adds status states when the status is applied
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.StatusItemBattleEvent">
+            <summary>
+            Event that sets the value in the SlotState based on what move slot was used when the status is applied
             </summary>
         </member>
         <member name="T:PMDC.Dungeon.DisableBattleEvent">
@@ -4272,6 +4328,11 @@
         <member name="F:PMDC.Dungeon.HopEvent.Reverse">
             <summary>
             Whether to hop forwards or backwards
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.HopEvent.AffectTarget">
+            <summary>
+            Whether to affect the user or target
             </summary>
         </member>
         <member name="T:PMDC.Dungeon.PounceEvent">
@@ -5287,7 +5348,7 @@
         </member>
         <member name="F:PMDC.Dungeon.HandoutExpEvent.IgnoreMark">
             <summary>
-            
+            Give EXP regardless of marking.
             </summary>
         </member>
         <member name="T:PMDC.Dungeon.HandoutScaledExpEvent">
@@ -5395,6 +5456,51 @@
         <member name="F:PMDC.Dungeon.AutoReviveEvent.DefaultYes">
             <summary>
             For ask to use only: defaults to automatically choosing yes for players and enemies that know how to use it.
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.RandomWarpSingleEvent">
+            <summary>
+            Event that warps a character to a random location within the specified distance
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.RandomWarpSingleEvent.Distance">
+            <summary>
+            The max warp distance 
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.RandomWarpSingleEvent.TriggerMsg">
+            <summary>
+            The message displayed in the dungeon log 
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.HopSingleEvent">
+            <summary>
+            Event that makes the user hop by the specified distance
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.HopSingleEvent.Distance">
+            <summary>
+            The total distance to hop
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.HopSingleEvent.Reverse">
+            <summary>
+            Whether to hop forwards or backwards
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.PinchNeededSingleEvent">
+            <summary>
+            Event that activates if the user's HP is below threshold
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.PinchNeededSingleEvent.Denominator">
+            <summary>
+            The denominator of the HP percentage 
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.PinchNeededSingleEvent.BaseEvents">
+            <summary>
+            The list of battle events applied if the condition is met
             </summary>
         </member>
         <member name="F:PMDC.Dungeon.CompassEvent.EligibleTiles">
@@ -5536,6 +5642,76 @@
         <member name="F:PMDC.Dungeon.MonsterHouseOwnerEvent.ItemPercent">
             <summary>
             Percent of monsters carrying items.
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.NaturalPercentRegenEvent">
+            <summary>
+            Calculates regeneration, used for end-of-turn.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.NaturalPercentRegenEvent.RegenPercent">
+            <summary>
+            The percentage amount of HP recovered by characters every turn when out of battle. 10 means 1%. Negative values drain HP instead.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.NaturalPercentRegenEvent.RegenPercentCombat">
+            <summary>
+            The percentage amount of HP recovered by characters every turn during battle. 10 means 1%. Negative values drain HP instead.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.NaturalPercentRegenEvent.StarvePercent">
+            <summary>
+            The percentage amount of HP recovered by characters every turn while at 0 belly. 10 means 1%. Negative values drain HP instead.
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.NaturalHungerEvent">
+            <summary>
+            Decrements hunger, used for end-of-turn.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.NaturalHungerEvent.LeaderHungerRate">
+            <summary>
+            The amount of hunger consumed by the leader every turn. How much rate amounts to 1 belly point is determined by Denominator.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.NaturalHungerEvent.PartyHungerRate">
+            <summary>
+            The amount of hunger consumed by non-leader party members every turn. How much rate amounts to 1 belly point is determined by Denominator.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.NaturalHungerEvent.GuestsHungerRate">
+            <summary>
+            The amount of hunger consumed by guest party members every turn. How much rate amounts to 1 belly point is determined by Denominator.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.NaturalHungerEvent.EnemyHungerRate">
+            <summary>
+            The amount of hunger consumed by enemies every turn. How much rate amounts to 1 belly point is determined by Denominator.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.NaturalHungerEvent.AllyHungerRate">
+            <summary>
+            The amount of hunger consumed by ally characters every turn. How much rate amounts to 1 belly point is determined by Denominator.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.NaturalHungerEvent.Denominator">
+            <summary>
+            The amount of Hunger Rate that amounts to one belly point.
+            </summary>
+        </member>
+        <member name="T:PMDC.Dungeon.MultiplyHungerEvent">
+            <summary>
+            Event that boosts/reduces the amount of hunger consumed by NaturalHungerUpdateEvent.
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.MultiplyHungerEvent.Numerator">
+            <summary>
+            The numerator of the modifier
+            </summary>
+        </member>
+        <member name="F:PMDC.Dungeon.MultiplyHungerEvent.Denominator">
+            <summary>
+            The denominator of the modififer
             </summary>
         </member>
         <member name="F:PMDC.Dungeon.MonsterHouseTableState.MonsterHouseWarningTile">
@@ -5712,7 +5888,7 @@
         <member name="T:PMDC.LevelGen.FloorStairsDistanceStep`3">
             <summary>
             Adds the entrance and exit to the floor.  Is room-conscious.
-            The algorithm will try to place them within and outside of a certain specified range.
+            The algorithm will try to place them within and outside of a certain specified range in tiles.
             </summary>
             <typeparam name="TGenContext"></typeparam>
             <typeparam name="TEntrance"></typeparam>
@@ -5720,7 +5896,7 @@
         </member>
         <member name="P:PMDC.LevelGen.FloorStairsDistanceStep`3.Distance">
             <summary>
-            Range of distance in tiles that entrances and exits mut be apart.  start-inclusive, end-exclusive
+            Range of distance in tiles that entrances and exits must be apart.  start-inclusive, end-exclusive
             </summary>
         </member>
         <member name="M:PMDC.LevelGen.FloorStairsDistanceStep`3.GetOutlet``1(`0,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32})">
@@ -6004,6 +6180,17 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="T:PMDC.LevelGen.MapMusicStep`1">
+            <summary>
+            Sets music about the map.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.MapMusicStep`1.Music">
+            <summary>
+            The default map music.
+            </summary>
+        </member>
         <member name="T:PMDC.LevelGen.MapTileStep`1">
             <summary>
             Sets tile in a room to a certain value.
@@ -6106,6 +6293,11 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="P:PMDC.LevelGen.PatternPlacerStep`1.IncludeHalls">
+            <summary>
+            Allows halls as spawn.
+            </summary>
+        </member>
         <member name="P:PMDC.LevelGen.PatternPlacerStep`1.AllowTerminal">
             <summary>
             Allows terminal rooms as spawn.
@@ -6133,7 +6325,6 @@
             Litters placeables on a room in specified patterns.
             </summary>
             <typeparam name="TGenContext"></typeparam>
-            <typeparam name="TSpawnable"></typeparam>
         </member>
         <member name="P:PMDC.LevelGen.PatternTerrainStep`1.Terrain">
             <summary>
@@ -6178,21 +6369,61 @@
         </member>
         <member name="T:PMDC.LevelGen.RoomGenEvo`1">
             <summary>
+            THIS CLASS IS DEPRECATED.  Use RoomGenLoadEvo with a custom map using this shape instead.
             Generates an evolution room.  It's 7x6 in size and hardcoded to look a specific way.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
         <member name="T:PMDC.LevelGen.RoomGenEvoSmall`1">
             <summary>
+            THIS CLASS IS DEPRECATED.  Use RoomGenLoadEvo with a custom map using this shape instead.
             Generates an evolution room.  It's 5x6 in size and hardcoded to look a specific way.
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:PMDC.LevelGen.RoomGenLoadEvo`1">
+            <summary>
+            Generates an evo room by loading a map as the room.
+            Includes tiles, items, enemies, and mapstarts.
+            Borders are specified by the walkable tile.
+            Also, this will specifically apply postproc mask to terrain that is not the RoomTerrain
+            Also, will apply postproc mask to the 3x2 tile area around the evo platform.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:PMDC.LevelGen.RoomGenLoadEvo`1.TriggerTile">
+            <summary>
+            The ID of the tile used for evo.
+            </summary>
         </member>
         <member name="T:PMDC.LevelGen.RoomGenGuardedCave`1">
             <summary>
             Generates a cave guarded by a single mob.  It's hardcoded to look a specific way.
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:PMDC.LevelGen.RoomGenLoadBoss`1">
+            <summary>
+            Generates a room by loading a map as the room.
+            Includes tiles, items, enemies, and mapstarts.
+            Borders are specified by a tile.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:PMDC.LevelGen.RoomGenLoadBoss`1.RoomTerrain">
+            <summary>
+            The terrain that counts as room.  Halls will only attach to room tiles, or tiles specified with Borders.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.RoomGenLoadBoss`1.TriggerTile">
+            <summary>
+            The ID of the tile used to trigger the boss battle.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.RoomGenLoadBoss`1.SpawnDetails">
+            <summary>
+            NOTE: this is a temporary feature that will be removed when boss rooms can take in mob spawns!
+            </summary>
         </member>
         <member name="T:PMDC.LevelGen.RoomGenOasis`1">
             <summary>
@@ -6219,7 +6450,7 @@
         <member name="T:PMDC.LevelGen.RoomGenSpecificBoss`1">
             <summary>
             Generates a boss room with specific tiles and mobs.
-            EDITOR UNFRIENDLY
+            DEPRECATED
             </summary>
             <typeparam name="T"></typeparam>
         </member>
@@ -6326,7 +6557,7 @@
         <member name="T:PMDC.LevelGen.GuardSealStep`1">
             <summary>
             One part of several steps used to create a sealed key room, or several thereof.
-            This step takes the target rooms and surrounds them with unbreakable walls, with one key block used to unlock them.
+            This step takes the target rooms and surrounds them with unbreakable walls, with several guards used to unlock them.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
@@ -6507,6 +6738,11 @@
             if it's set to false, it'll spawn only if the savevar is set to false
             </summary>
         </member>
+        <member name="T:PMDC.LevelGen.MobCheckMapStart">
+            <summary>
+            Spawns the mob if the map hasnt started yet.  DOESNT WORK.
+            </summary>
+        </member>
         <member name="T:PMDC.LevelGen.MobCheckTimeOfDay">
             <summary>
             Spawns the mob if the time of day is right.  DOESNT WORK.
@@ -6631,6 +6867,11 @@
             The floor to start scaling level at.
             </summary>
         </member>
+        <member name="F:PMDC.LevelGen.MobSpawnLevelScale.MinLevel">
+            <summary>
+            The level to start scaling at.
+            </summary>
+        </member>
         <member name="F:PMDC.LevelGen.MobSpawnLevelScale.AddNumerator">
             <summary>
             The numerator for the fractional level to add per floor.
@@ -6639,6 +6880,11 @@
         <member name="F:PMDC.LevelGen.MobSpawnLevelScale.AddDenominator">
             <summary>
             The denominator for the fractional level to add per floor.
+            </summary>
+        </member>
+        <member name="F:PMDC.LevelGen.MobSpawnLevelScale.RerollSkills">
+            <summary>
+            Reroll the skills to be that of the resulting level.
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.MobSpawnLoc">
@@ -6684,6 +6930,11 @@
         <member name="T:PMDC.LevelGen.MobSpawnDiscriminator">
             <summary>
             Spawn the mob with a discriminator.  This is used for personality calculations.
+            </summary>
+        </member>
+        <member name="T:PMDC.LevelGen.Intrinsic3Chance">
+            <summary>
+            Allow mob to spawn with a chance to roll for Intrinsic3.
             </summary>
         </member>
         <member name="T:PMDC.LevelGen.MoneyTrailSpawnStep`2">
@@ -6895,7 +7146,7 @@
         </member>
         <member name="P:PMDC.Properties.Resources.Icon">
             <summary>
-              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+              Looks up a localized resource of type System.Byte[].
             </summary>
         </member>
     </members>

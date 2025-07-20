@@ -23,6 +23,27 @@
             <param name="range">-1 for infinite range.</param>
             <returns></returns>
         </member>
+        <member name="M:RogueElements.Collision.Collides(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Checks if two bounds collide
+            </summary>
+            <param name="start1">Start of bounds 1</param>
+            <param name="size1">Size of bounds 1</param>
+            <param name="start2">Start of bounds 2</param>
+            <param name="size2">Size of bounds 2</param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueElements.Collision.GetIntersection(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Calculates the amount of intersection between two bounds.
+            If they don't intersect, the number is negative and represents their distance from intersecting.
+            </summary>
+            <param name="start1">Start of bounds 1</param>
+            <param name="size1">Size of bounds 1</param>
+            <param name="start2">Start of bounds 2</param>
+            <param name="size2">Size of bounds 2</param>
+            <returns></returns>
+        </member>
         <member name="M:RogueElements.Detection.DetectDisconnect(RogueElements.Rect,RogueElements.Grid.LocTest,RogueElements.Loc,RogueElements.Loc,RogueElements.Grid.LocTest,System.Boolean)">
             <summary>
             Detects if an added blob of tiles disconnects the map's existing connectivity.
@@ -169,7 +190,7 @@
             <param name="checkBlock">The operation determining if a tile is nontraversible.</param>
             <param name="checkDiagBlock">The operation determining if a tile is nontraversible, diagonally.</param>
             <param name="fillOp">The fill operation.</param>
-            <param name="loc"></param>
+            <param name="loc">Location to start the flood</param>
         </member>
         <member name="M:RogueElements.Grid.FindClosestConnectedTile(RogueElements.Loc,RogueElements.Loc,RogueElements.Grid.LocTest,RogueElements.Grid.LocTest,RogueElements.Grid.LocTest,RogueElements.Loc)">
             <summary>
@@ -311,14 +332,50 @@
         <member name="T:RogueElements.AddDisconnectedRoomsRandStep`1">
             <summary>
             Takes the current floor plan and adds new rooms that are disconnected from existing rooms.
+            Randomly picks a location to spawn a new room in a finite number of times before giving up.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
         <member name="T:RogueElements.AddDisconnectedRoomsStep`1">
             <summary>
             Takes the current floor plan and adds new rooms that are disconnected from existing rooms.
+            Sweeps through the entire floor to fit in the new rooms.
+            Guaranteed to spawn the room, but can cause performance problems for larger floors.
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:RogueElements.BaseFloorStairsStep`3">
+            <summary>
+            Adds the entrance and exit to the floor.  Is room-conscious.
+            </summary>
+            <typeparam name="TGenContext"></typeparam>
+            <typeparam name="TEntrance"></typeparam>
+            <typeparam name="TExit"></typeparam>
+        </member>
+        <member name="P:RogueElements.BaseFloorStairsStep`3.Entrances">
+            <summary>
+            List of entrance objects to spawn.
+            </summary>
+        </member>
+        <member name="P:RogueElements.BaseFloorStairsStep`3.Exits">
+            <summary>
+            List of exit objects to spawn.
+            </summary>
+        </member>
+        <member name="P:RogueElements.BaseFloorStairsStep`3.Filters">
+            <summary>
+            Used to filter out rooms that do not make suitable entrances/exits, such as boss rooms.
+            </summary>
+        </member>
+        <member name="M:RogueElements.BaseFloorStairsStep`3.GetOutlet``1(`0,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Attempt to choose an outlet in a room with no entrance/exit, and updates their availability.  If none exists, default to null.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="map"></param>
+            <param name="free_indices"></param>
+            <param name="used_indices"></param>
+            <returns></returns>
         </member>
         <member name="T:RogueElements.ClampFloorStep`1">
             <summary>
@@ -435,24 +492,14 @@
             <typeparam name="TEntrance"></typeparam>
             <typeparam name="TExit"></typeparam>
         </member>
-        <member name="P:RogueElements.FloorStairsStep`3.Entrances">
+        <member name="P:RogueElements.FloorStairsStep`3.MinDistance">
             <summary>
-            List of entrance objects to spawn.
-            </summary>
-        </member>
-        <member name="P:RogueElements.FloorStairsStep`3.Exits">
-            <summary>
-            List of exit objects to spawn.
-            </summary>
-        </member>
-        <member name="P:RogueElements.FloorStairsStep`3.Filters">
-            <summary>
-            Used to filter out rooms that do not make suitable entrances/exits, such as boss rooms.
+            The minimum distance in room adjacencies that starts and ends should be placed from each other.
             </summary>
         </member>
         <member name="M:RogueElements.FloorStairsStep`3.GetOutlet``1(`0,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32})">
             <summary>
-            Attempt to choose an outlet in a room with no entrance/exit, and updates their availability.  If none exists, default to a chosen room.
+            Attempt to choose an outlet in a room with no entrance/exit, and updates their availability.  If none exists, default to null.
             </summary>
             <typeparam name="T"></typeparam>
             <param name="map"></param>
@@ -1237,6 +1284,7 @@
             <summary>
             Tiles that, if touched during this room's gen, signify that the req has been filled
             "the req" refers to the roomSideReqs for that side.
+            Always a subset of FulfillableBorder.
             </summary>
         </member>
         <member name="P:RogueElements.RoomGen`1.FulfillableBorder">
@@ -1324,8 +1372,8 @@
             Will add a sidereq and consider all tiles in the range as eligible for fulfillment of that sidereq.
             Assumes that the borders are touching.  Unwrapped.
             </summary>
-            <param name="range"></param>
-            <param name="dir"></param>
+            <param name="range">Range to ask from this room.  Absolute coordinates.</param>
+            <param name="dir">The direction from this room's to the range.</param>
         </member>
         <member name="M:RogueElements.RoomGen`1.AskBorderFromRoom(RogueElements.Rect,System.Func{RogueElements.Dir4,System.Int32,System.Boolean},RogueElements.Dir4)">
             <summary>
@@ -1544,6 +1592,12 @@
             <typeparam name="TGenContext"></typeparam>
             <typeparam name="TSpawnable"></typeparam>
         </member>
+        <member name="P:RogueElements.RandomRoomSpawnStep`2.SuccessPercent">
+            <summary>
+            The percentage chance to multiply a room's spawning chance when it successfully spawns an item.
+            0 means it will never spawn in that room again.
+            </summary>
+        </member>
         <member name="P:RogueElements.RandomRoomSpawnStep`2.IncludeHalls">
             <summary>
             Makes halls eligible for spawn.
@@ -1668,6 +1722,7 @@
             <summary>
             A filter for determining the eligible tiles for an operation.
             Checking the bounds is checking each individual tile.
+            The amount of tiles in the blob placement that pass the stencil test must be over the specified percent.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
@@ -2381,6 +2436,17 @@
             <param name="pt">Unwrapped position</param>
             <returns></returns>
         </member>
+        <member name="M:RogueElements.WrappedCollision.GetClosestBounds(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets the unwrapped version of start2 that is closest to start1.
+            </summary>
+            <param name="wrapSize">Size of wrapped area</param>
+            <param name="start1">Unwrapped start of bounds 1, the bounds to get close to.</param>
+            <param name="size1">Size of bounds 1</param>
+            <param name="start2">Unwrapped start of bounds 2, the bounds to get a close version of.</param>
+            <param name="size2">Size of bounds 2</param>
+            <returns>The unwrapped version of start2 that is closest to start1</returns>
+        </member>
         <member name="M:RogueElements.WrappedCollision.GetClosestWrap(RogueElements.Loc,RogueElements.Loc,RogueElements.Loc)">
             <summary>
             Gets the unwrapped version of pt2 that is closest to pt1.
@@ -2397,6 +2463,16 @@
             <param name="wrapSize"></param>
             <param name="pt1">The point to get close to.  Unwrapped.</param>
             <param name="pt2">The point to get a close version of.  Unwrapped.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RogueElements.WrappedCollision.GetClosestDirWrap(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets the unwrapped version of pt2 that is closest to pt1 in a specified direction.
+            </summary>
+            <param name="wrapSize"></param>
+            <param name="pt1">The point to get close to.  Unwrapped.</param>
+            <param name="pt2">The point to get a close version of.  Unwrapped.</param>
+            <param name="dirSign">The direction relative to pt1 that pt2 must be in, expressed as a sign.</param>
             <returns></returns>
         </member>
         <member name="M:RogueElements.WrappedCollision.IteratePointsInBounds(System.Int32,System.Int32,System.Int32,System.Int32)">

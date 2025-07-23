@@ -38,8 +38,9 @@ end
 function UpgradeTools:OnUpgrade()
   assert(self, 'UpgradeTools:OnUpgrade() : self is null!')
   
-  
-  PrintInfo("=>> Upgrading version " .. old_ver .. " to " .. new_ver)
+  local old_ver = _DATA.Save:GetVersion(System.Guid.Empty)
+  local new_ver = RogueEssence.PathMod.GetVersion(System.Guid.Empty)
+  PrintInfo("=>> Upgrading version " .. old_ver:ToString() .. " to " .. new_ver:ToString())
   _DATA.Save.NextDest = _DATA.Start.Map
   
   SV.checkpoint = 
@@ -475,7 +476,9 @@ function UpgradeTools:OnUpgrade()
     SV.family.Grandma = true
   end
   
-  SV.missions.Missions = {}
+  if old_ver < System.Version("0.8.10") then
+    SV.missions.Missions = {}
+  end
   
   if SV.family.BrotherActiveDays == nil then
     SV.family.BrotherActiveDays = 0

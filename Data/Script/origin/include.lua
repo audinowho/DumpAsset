@@ -6,6 +6,7 @@
 ]]--
 
 
+System    = luanet.namespace('System')
 FNA = import 'FNA'
 Microsoft = luanet.namespace('Microsoft')
 Microsoft.Xna = luanet.namespace('Microsoft.Xna')

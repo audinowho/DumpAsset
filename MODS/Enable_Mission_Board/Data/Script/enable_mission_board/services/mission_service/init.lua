@@ -49,6 +49,9 @@ end
 function MissionService:OnUpgrade()
   assert(self, 'MissionService:OnUpgrade() : self is null!')
   
+  local self_guid = System.Guid("55887EBE-E6E9-408B-A8DC-ADC9D6A5F67C")
+  local old_ver = _DATA.Save:GetVersion(self_guid)
+  local new_ver = RogueEssence.PathMod.GetVersion(self_guid)
   
   if SV.MissionsEnabled == nil then
     SV.MissionPrereq =
@@ -549,8 +552,8 @@ function MissionService:OnUpgrade()
     }
   end
   
-	-- TODO: remoe after release
-  
+	-- TODO: remove after release
+  if old_ver < System.Version("1.2") then
     SV.TakenBoard =
     {
         {

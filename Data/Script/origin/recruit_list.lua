@@ -33,10 +33,10 @@ RECRUIT_LIST.colorList = {'#FFFFFF', '#FFFFFF', '#00FFFF', '#FFFF00', '#FFFFA0',
 -- Functions
 -- -----------------------------------------------
 
--- Wraps a string with a color bracket corresponding to mode. If mode is 1, the
+-- Wraps a MonsterID form name with a color bracket corresponding to mode. If mode is 1, the
 -- string is replaced with "???" before wrapping
-function RECRUIT_LIST.colorName(monster, mode, asterisk)
-    local name = _DATA:GetMonster(monster).Name:ToLocal()
+function RECRUIT_LIST.colorName(form, mode, asterisk)
+    local name = _DATA:GetMonster(form.Species).Forms[form.Form].FormName:ToLocal()
     if asterisk then name = "\u{E111}"..name end -- asterisk is for mons that are not in the spawn list but spawned at floor start
     if mode == RECRUIT_LIST.undiscovered then name = '???' end
     local color = RECRUIT_LIST.colorList[mode]
@@ -70,7 +70,7 @@ function RECRUIT_LIST.compileInitialFloorList()
 
             -- only include if conditions are met
             if spawn:CanSpawn() then
-                local member = spawn.BaseForm.Species
+                local member = spawn.BaseForm
                 local hide = false
 
                 -- check if the mon is recruitable
@@ -82,9 +82,15 @@ function RECRUIT_LIST.compileInitialFloorList()
                 end
 
                 -- add the member and its display mode to the list
-                if not hide and list.entries[member] == nil then
-                    table.insert(list.keys, member)
-                    list.entries[member] = false
+                if not hide then
+                    local MID = RogueEssence.Dungeon.MonsterID(member.Species, member.Form, "", Gender.Unknown)
+                    if list.entries[MID.Species] == nil then
+                        list.entries[MID.Species] = {}
+                    end
+                    if list.entries[MID.Species][MID.Form] == nil then
+                        table.insert(list.keys, MID)
+                        list.entries[MID.Species][MID.Form] = false
+                    end
                 end
             end
         end
@@ -95,23 +101,33 @@ function RECRUIT_LIST.compileInitialFloorList()
     for i = 0, teams.Count-1, 1 do
         local team = teams[i].Players
         for j = 0, team.Count-1, 1 do
-            local member = team[j].BaseForm.Species
+            local member = team[j].BaseForm
             local hide = false
 
             -- do not show in recruit list if cannot recruit
             if team[j].Unrecruitable then hide = true end
 
             -- add the member and its display mode to the list
-            if not hide and list.entries[member] == nil then
-                table.insert(list.keys, member)
-                list.entries[member] = true
+            if not hide then
+                local MID = RogueEssence.Dungeon.MonsterID(member.Species, member.Form, "", Gender.Unknown)
+                if list.entries[MID.Species] == nil then
+                    list.entries[MID.Species] = {}
+                end
+                if list.entries[MID.Species][MID.Form] == nil then
+                    table.insert(list.keys, MID)
+                    list.entries[MID.Species][MID.Form] = true
+                end
             end
         end
     end
 
     -- sort spawn list
     table.sort(list.keys, function (a, b)
-        return _DATA:GetMonster(a).IndexNum < _DATA:GetMonster(b).IndexNum
+        if a.Species == b.Species then
+            return a.Form < b.Form
+        else
+            return _DATA:GetMonster(a.Species).IndexNum < _DATA:GetMonster(b.Species).IndexNum
+        end
     end)
 
     return list
@@ -126,7 +142,7 @@ function RECRUIT_LIST.compileCurrentList()
     -- turn first list into final output
     local ret = {}
     for _,key in pairs(list.keys) do
-        local state = _DATA.Save:GetMonsterUnlock(key)
+        local state = _DATA.Save:GetMonsterFormUnlock(key)
         local mode = RECRUIT_LIST.undiscovered -- default is to "???" list 1 mons if unknown
 
         -- check if the mon has been seen or obtained
@@ -137,9 +153,9 @@ function RECRUIT_LIST.compileCurrentList()
         end
 
         local entry = {
-            species = key,
+            form = key,
             mode = mode,
-            asterisk = list.entries[key]
+            asterisk = list.entries[key.Species][key.Form]
         }
         table.insert(ret,entry)
     end
@@ -151,7 +167,7 @@ end
 -- Recruitment List Menu
 -- -----------------------------------------------
 -- Menu that displays the recruitment list to the player
-RecruitmentListMenu = Class('RecruitmentListMenu')
+RecruitmentListMenu = Class('RecruitmentListMenu') --TODO test everything
 
 function RecruitmentListMenu:initialize(label)
     assert(self, "RecruitmentListMenu:initialize(): self is nil!")
@@ -213,7 +229,7 @@ function RecruitmentListMenu:DrawMenu()
         -- add element
         local x = xpad + xdist * col
         local y = ypad + ydist * line
-        local text = RECRUIT_LIST.colorName(self.list[i].species, self.list[i].mode, self.list[i].asterisk)
+        local text = RECRUIT_LIST.colorName(self.list[i].form, self.list[i].mode, self.list[i].asterisk)
         self.menu.Elements:Add(RogueEssence.Menu.MenuText(text, RogueElements.Loc(x, y)))
         count = count + 1
     end

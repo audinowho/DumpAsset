@@ -479,7 +479,7 @@ function SINGLE_CHAR_SCRIPT.OutlawClearCheck(owner, ownerChar, context, args)
 	  if not found_outlaw then
 	    found_outlaw = COMMON.FindNpcWithTable(false, "Mission", name)
 	  end
-      if found_outlaw then
+      if found_outlaw and not found_outlaw.Dead then
         remaining_outlaw = true
       else
         -- if no outlaws of the mission list, mark quest as complete

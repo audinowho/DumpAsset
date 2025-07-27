@@ -1,10 +1,16 @@
 ﻿{
-"Version": "0.8.9.0",
+"Version": "0.8.10.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Inscribed Cave",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Grotte Inscrite ",
+"de": "Beschriftete Höhle",
+"es": "Cueva Inscrita",
+"it": "Caverna Incisa",
+"zh-hans": "刻文洞穴"
+}
 },
 "Released": false,
 "Comment": "",
@@ -438,7 +444,30 @@
 "WaterTileset": "test_dungeon_secondary",
 "LayeredGround": false,
 "IndependentGround": false,
-"GroundElement": "normal"
+"GroundElement": "normal",
+"Background": {
+"$type": "RogueEssence.Dungeon.MapBG, RogueEssence",
+"MapLoc": {
+"X": 0,
+"Y": 0
+},
+"BGAnim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"BGMovement": {
+"X": 0,
+"Y": 0
+},
+"Parallax": "0, 0",
+"RepeatX": false,
+"RepeatY": false
+}
 }
 },
 {
@@ -1009,7 +1038,30 @@
 "WaterTileset": "test_dungeon_secondary",
 "LayeredGround": false,
 "IndependentGround": false,
-"GroundElement": "normal"
+"GroundElement": "normal",
+"Background": {
+"$type": "RogueEssence.Dungeon.MapBG, RogueEssence",
+"MapLoc": {
+"X": 0,
+"Y": 0
+},
+"BGAnim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"BGMovement": {
+"X": 0,
+"Y": 0
+},
+"Parallax": "0, 0",
+"RepeatX": false,
+"RepeatY": false
+}
 }
 },
 {
@@ -1580,7 +1632,30 @@
 "WaterTileset": "test_dungeon_secondary",
 "LayeredGround": false,
 "IndependentGround": false,
-"GroundElement": "normal"
+"GroundElement": "normal",
+"Background": {
+"$type": "RogueEssence.Dungeon.MapBG, RogueEssence",
+"MapLoc": {
+"X": 0,
+"Y": 0
+},
+"BGAnim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"BGMovement": {
+"X": 0,
+"Y": 0
+},
+"Parallax": "0, 0",
+"RepeatX": false,
+"RepeatY": false
+}
 }
 },
 {
@@ -1758,8 +1833,14 @@
 ]
 },
 "Name": {
-"DefaultText": "Inscribed Cave\nB{0}F",
-"LocalTexts": {}
+"DefaultText": "Inscribed Cave\\nB{0}F",
+"LocalTexts": {
+"fr": "Grotte Inscrite\\n{0}SS",
+"de": "Beschriftete Höhle\\nU{0}",
+"es": "Cueva Inscrita\\nP-{0}",
+"it": "Caverna Incisa\\nP-{0}",
+"zh-hans": "刻文洞穴\\nB{0}F"
+}
 },
 "Priority": {
 "str": [
@@ -1784,7 +1865,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.9.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]

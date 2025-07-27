@@ -1,10 +1,18 @@
 ﻿{
-"Version": "0.8.9.0",
+"Version": "0.8.10.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Champion's Road",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Route des Champions",
+"de": "Pass des Champions",
+"es": "Ruta del Campeón",
+"it": "Percorso dei Campioni",
+"ja": "コパニンロード",
+"ja-jp": "コパニンロード",
+"zh-hans": "冠军之路"
+}
 },
 "Released": true,
 "Comment": "",
@@ -33107,7 +33115,30 @@
 "WaterTileset": "sky_ruins_secondary",
 "LayeredGround": true,
 "IndependentGround": false,
-"GroundElement": "flying"
+"GroundElement": "flying",
+"Background": {
+"$type": "RogueEssence.Dungeon.MapBG, RogueEssence",
+"MapLoc": {
+"X": 0,
+"Y": 0
+},
+"BGAnim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"BGMovement": {
+"X": 0,
+"Y": 0
+},
+"Parallax": "0, 0",
+"RepeatX": false,
+"RepeatY": false
+}
 }
 }
 ],
@@ -33132,8 +33163,16 @@
 ]
 },
 "Name": {
-"DefaultText": "Champion's Road\n{0}F",
-"LocalTexts": {}
+"DefaultText": "Champion's Road\\n{0}F",
+"LocalTexts": {
+"fr": "Route des Champions\\n{0}E",
+"de": "Pass des Champions\\nE{0}",
+"es": "Ruta del Campeón\\nP{0}",
+"it": "Percorso dei Campioni\\nP{0}",
+"ja": "コパニンロード\\n{0}かい",
+"ja-jp": "コパニンロード\\n{0}階",
+"zh-hans": "冠军之路\\n{0}F"
+}
 },
 "Priority": {
 "str": [
@@ -33158,7 +33197,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.9.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -40364,7 +40403,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.9.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -41263,7 +41302,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.9.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -41367,7 +41406,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.9.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ChestModGenState"
 }
 ]
@@ -44588,7 +44627,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.9.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": true,
@@ -44638,7 +44677,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.9.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": true,
@@ -44852,186 +44891,6 @@
 "IsMoney": false,
 "Cursed": false,
 "Value": "box_deluxe",
-"HiddenValue": "xcl_family_ho_oh_beasts_12",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_ho_oh_beasts_13",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_ho_oh_beasts_08",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_ho_oh_beasts_09",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_ho_oh_beasts_16",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_ho_oh_beasts_17",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_regi_trio_06",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_regi_trio_07",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_regi_trio_10",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_regi_trio_11",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_regi_trio_14",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_regi_trio_15",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
 "HiddenValue": "xcl_family_lati_duo_04",
 "Amount": 0,
 "Price": 0,
@@ -45078,96 +44937,6 @@
 "Cursed": false,
 "Value": "box_deluxe",
 "HiddenValue": "xcl_family_lati_duo_05",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_lake_trio_06",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_lake_trio_07",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_lake_trio_06",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_lake_trio_07",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_lake_trio_06",
-"Amount": 0,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "box_deluxe",
-"HiddenValue": "xcl_family_lake_trio_07",
 "Amount": 0,
 "Price": 0,
 "TileLoc": {
@@ -45228,6 +44997,66 @@
 "Cursed": false,
 "Value": "box_deluxe",
 "HiddenValue": "xcl_family_manaphy_phione_04",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "box_deluxe",
+"HiddenValue": "xcl_family_regieleki_02",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "box_deluxe",
+"HiddenValue": "xcl_family_regieleki_03",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "box_deluxe",
+"HiddenValue": "xcl_family_regidrago_02",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+},
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "box_deluxe",
+"HiddenValue": "xcl_family_regidrago_03",
 "Amount": 0,
 "Price": 0,
 "TileLoc": {
@@ -45855,7 +45684,30 @@
 "WaterTileset": "sky_tower_secondary",
 "LayeredGround": false,
 "IndependentGround": false,
-"GroundElement": "flying"
+"GroundElement": "flying",
+"Background": {
+"$type": "RogueEssence.Dungeon.MapBG, RogueEssence",
+"MapLoc": {
+"X": 0,
+"Y": 0
+},
+"BGAnim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"BGMovement": {
+"X": 0,
+"Y": 0
+},
+"Parallax": "0, 0",
+"RepeatX": false,
+"RepeatY": false
+}
 }
 },
 {
@@ -46567,7 +46419,30 @@
 "WaterTileset": "sky_tower_secondary",
 "LayeredGround": false,
 "IndependentGround": false,
-"GroundElement": "flying"
+"GroundElement": "flying",
+"Background": {
+"$type": "RogueEssence.Dungeon.MapBG, RogueEssence",
+"MapLoc": {
+"X": 0,
+"Y": 0
+},
+"BGAnim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"BGMovement": {
+"X": 0,
+"Y": 0
+},
+"Parallax": "0, 0",
+"RepeatX": false,
+"RepeatY": false
+}
 }
 },
 {
@@ -47417,7 +47292,30 @@
 "WaterTileset": "sky_tower_secondary",
 "LayeredGround": false,
 "IndependentGround": false,
-"GroundElement": "flying"
+"GroundElement": "flying",
+"Background": {
+"$type": "RogueEssence.Dungeon.MapBG, RogueEssence",
+"MapLoc": {
+"X": 0,
+"Y": 0
+},
+"BGAnim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"BGMovement": {
+"X": 0,
+"Y": 0
+},
+"Parallax": "0, 0",
+"RepeatX": false,
+"RepeatY": false
+}
 }
 },
 {
@@ -48267,7 +48165,30 @@
 "WaterTileset": "sky_tower_secondary",
 "LayeredGround": false,
 "IndependentGround": false,
-"GroundElement": "flying"
+"GroundElement": "flying",
+"Background": {
+"$type": "RogueEssence.Dungeon.MapBG, RogueEssence",
+"MapLoc": {
+"X": 0,
+"Y": 0
+},
+"BGAnim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"BGMovement": {
+"X": 0,
+"Y": 0
+},
+"Parallax": "0, 0",
+"RepeatX": false,
+"RepeatY": false
+}
 }
 },
 {
@@ -48548,8 +48469,16 @@
 ]
 },
 "Name": {
-"DefaultText": "Clouded Road\n{0}F",
-"LocalTexts": {}
+"DefaultText": "Clouded Road\\n{0}F",
+"LocalTexts": {
+"fr": "Route Embrumée\\n{0}E",
+"de": "Bewölkter Pass\\nE{0}",
+"es": "Camino Nublado\\nP{0}",
+"it": "Cammino Nuvoloso\\nP{0}",
+"ja": "クラウデロード\\n{0}かい",
+"ja-jp": "クラウデロード\\n{0}階",
+"zh-hans": "阴云之路\\n{0}F"
+}
 },
 "Priority": {
 "str": [
@@ -48574,7 +48503,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.9.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -48848,7 +48777,14 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Passage mysterieux",
+"de": "Mysteriöse Passage",
+"es": "Pasaje Misterioso",
+"pt": "Passagem Misteriosa",
+"it": "Passaggio Misterioso",
+"zh-hans": "秘密通道"
+}
 },
 "IDOffset": 0
 }
@@ -49613,7 +49549,30 @@
 "WaterTileset": "the_nightmare_secondary",
 "LayeredGround": false,
 "IndependentGround": false,
-"GroundElement": "normal"
+"GroundElement": "normal",
+"Background": {
+"$type": "RogueEssence.Dungeon.MapBG, RogueEssence",
+"MapLoc": {
+"X": 0,
+"Y": 0
+},
+"BGAnim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"BGMovement": {
+"X": 0,
+"Y": 0
+},
+"Parallax": "0, 0",
+"RepeatX": false,
+"RepeatY": false
+}
 }
 },
 {

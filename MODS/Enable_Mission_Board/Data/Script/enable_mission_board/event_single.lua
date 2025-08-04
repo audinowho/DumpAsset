@@ -109,15 +109,6 @@ function SpawnOutlaw(origin, radius, mission_num)
 	local ability = form:RollIntrinsic(_DATA.Save.Rand, 3)
 	mob_data.BaseIntrinsics[0] = ability
 	local new_mob = RogueEssence.Dungeon.Character(mob_data)
-	--Old move learning logic
-	--StringType = luanet.import_type('System.String')
-	--local extra_moves = LUA_ENGINE:MakeGenericType(ListType, { StringType }, { })
-	--local final_skills = form:RollLatestSkills(new_mob.Level, extra_moves)
-
-	--for i = 0, final_skills.Count - 1, 1 do
-	--	local skill = final_skills[i]
-	--	new_mob:LearnSkill(skill, true)
-	--end
 
 
 	--TODO: Add logic to make sure outlaw has at least one decent attacking move based on their level.
@@ -131,9 +122,10 @@ function SpawnOutlaw(origin, radius, mission_num)
 
 	--print("Outlaw level is!: " .. tostring(mob_data.Level))
 	--generate the skill candidate list based on level and the blacklist
-	for i = 0,  _DATA:GetMonster(new_mob.BaseForm.Species).Forms[new_mob.BaseForm.Form].LevelSkills.Count - 1, 1 do
-		local skill =_DATA:GetMonster(new_mob.BaseForm.Species).Forms[new_mob.BaseForm.Form].LevelSkills[i].Skill
-		if _DATA:GetMonster(new_mob.BaseForm.Species).Forms[new_mob.BaseForm.Form].LevelSkills[i].Level <= new_mob.Level and not COMMON.InArray(skill, skill_blacklist) then
+  local outlaw_form = _DATA:GetMonster(new_mob.BaseForm.Species).Forms[new_mob.BaseForm.Form]
+	for i = 0,  outlaw_form.LevelSkills.Count - 1, 1 do
+		local skill = outlaw_form.LevelSkills[i].Skill
+		if outlaw_form.LevelSkills[i].Level <= new_mob.Level and not COMMON.InArray(skill, skill_blacklist) then
 			--print("new skill candidate!: " .. skill)
 			table.insert(skill_candidates, skill)
 		end
@@ -141,15 +133,19 @@ function SpawnOutlaw(origin, radius, mission_num)
 
 	--learn as many skills as we can from the candidate list.
 	local learn_count = 0
-	while learn_count < 4 and #skill_candidates > 0 do
-		local randval = _DATA.Save.Rand:Next(1, #skill_candidates)
-		local learned_skill = skill_candidates[randval]
-		new_mob:LearnSkill(learned_skill, true)
-		learn_count = learn_count + 1
-		--print("Outlaw learned " .. learned_skill)
-		table.remove(skill_candidates, randval)
+	while learn_count < 4 do
+    if #skill_candidates > 0 then
+      local randval = _DATA.Save.Rand:Next(1, #skill_candidates)
+      local learned_skill = skill_candidates[randval]
+      mob_data.BaseSkills[learn_count] = RogueEssence.Dungeon.SlotSkill(learned_skill)
+      new_mob:LearnSkill(learned_skill, true)
+      learn_count = learn_count + 1
+      --print("Outlaw learned " .. learned_skill)
+      table.remove(skill_candidates, randval)
+    else
+      mob_data.BaseSkills[learn_count] = RogueEssence.Dungeon.SlotSkill()
+    end
 	end
-
 
 	local tactic = nil
 	if mission.Type == COMMON.MISSION_TYPE_OUTLAW_FLEE then

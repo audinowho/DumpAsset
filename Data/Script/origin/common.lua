@@ -1181,31 +1181,33 @@ function COMMON.EndRescue(zone, result, rescue, segmentID)
 end
 
 function COMMON.BeginDungeon(zoneId, segmentID, mapId)
-  COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
+  if _DATA.Save.TotalTurns == 0 then
+    COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
+  end
 end
 
 function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
 
   for _, name in ipairs(COMMON.GetSortedKeys(SV.missions.Missions)) do
     mission = SV.missions.Missions[name]
-	if mission.Complete == COMMON.MISSION_INCOMPLETE and zoneId == mission.DestZone and segmentID == mission.DestSegment then
-	  if mission.Type == 1 then -- escort
-		
-		-- add escort to team
-		local mon_id = mission.EscortSpecies
+    if mission.Complete == COMMON.MISSION_INCOMPLETE and zoneId == mission.DestZone and segmentID == mission.DestSegment then
+      if mission.Type == 1 then -- escort
+      
+        -- add escort to team
+        local mon_id = mission.EscortSpecies
         local new_mob = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 50, "", -1)
         _DATA.Save.ActiveTeam.Guests:Add(new_mob)
-		
-		local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("EscortInteract")
+        
+        local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("EscortInteract")
         new_mob.ActionEvents:Add(talk_evt)
-		
-		local tbl = LTBL(new_mob)
-		tbl.Escort = name
-	    
+        
+        local tbl = LTBL(new_mob)
+        tbl.Escort = name
+          
         UI:ResetSpeaker()
         UI:WaitShowDialogue("Added ".. new_mob.Name .." to the party as a guest.")
-	  end
-	end
+      end
+    end
   end
 end
 

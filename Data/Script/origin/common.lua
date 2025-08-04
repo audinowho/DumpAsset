@@ -1057,31 +1057,32 @@ function COMMON.GroundInteract(chara, target)
   local form = mon.Forms[target.CurrentForm.Form]
   
   local personality = form:GetPersonalityType(target.Data.Discriminator)
+  local key = "TALK_%02d_WAIT_%03d"
   
-  local personality_group = COMMON.PERSONALITY[personality]
-  local pool = personality_group.WAIT
-  local key = "TALK_WAIT_%04d"
+  local running_pool = {}
+  local pool_idx = 0
   
-  local running_pool = {table.unpack(pool)}
-  
-  --TODO: valid quote filtering
-  local valid_quote = false
-  local chosen_quote = ""
-  
-  while not valid_quote and #running_pool > 0 do
-    valid_quote = true
-    local chosen_idx = math.random(1, #running_pool)
-	local chosen_pool_idx = running_pool[chosen_idx]
-    chosen_quote = RogueEssence.StringKey(string.format(key, chosen_pool_idx)):ToLocal()
-	
-    chosen_quote = string.gsub(chosen_quote, "%[hero%]", chara:GetDisplayName())
+  while true do
+	  local formatted_key = string.format(key, personality, pool_idx)
+
+	  if not RogueEssence.StringKey.HasValue(formatted_key) then
+	    break
+    end
+
+    local valid_quote = true
+    local test_quote = RogueEssence.StringKey(formatted_key):ToLocal()
+    test_quote = string.gsub(test_quote, "%[hero%]", chara:GetDisplayName())
     
-	if not valid_quote then
-	  table.remove(running_pool, chosen_idx)
-	  chosen_quote = ""
-	end
+    -- there might be other checks against a quote being invalid in the future...
+    
+    if valid_quote then
+      table.insert(running_pool, test_quote)
+    end
+    pool_idx = pool_idx + 1
   end
   
+  local chosen_idx = math.random(1, #running_pool)
+  local chosen_quote = running_pool[chosen_idx]
   
   UI:WaitShowDialogue(STRINGS:Format(chosen_quote))
 end

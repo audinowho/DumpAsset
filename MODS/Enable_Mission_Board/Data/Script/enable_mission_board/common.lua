@@ -184,28 +184,28 @@ function COMMON.ShowDestinationMenu(dungeon_entrances, ground_entrances, force_l
 end
 
 function COMMON.EnterDungeonMissionCheck(zoneId, segmentID)
-    for name, mission in pairs(SV.TakenBoard) do
-        if mission.Taken and mission.Completion == COMMON.MISSION_INCOMPLETE and zoneId == mission.Zone and mission.Client ~= "" then
-            if mission.Type == COMMON.MISSION_TYPE_ESCORT or mission.Type == COMMON.MISSION_TYPE_EXPLORATION then -- escort
+  for name, mission in pairs(SV.TakenBoard) do
+    if mission.Taken and mission.Completion == COMMON.MISSION_INCOMPLETE and zoneId == mission.Zone and mission.Client ~= "" then
+      if mission.Type == COMMON.MISSION_TYPE_ESCORT or mission.Type == COMMON.MISSION_TYPE_EXPLORATION then -- escort
 
-                local mon_id = RogueEssence.Dungeon.MonsterID(mission.Client, 0, "normal", COMMON.NumToGender(mission.ClientGender))
-                -- set the escort level 20% less than the expected level
-                local level = math.floor(SV.ExpectedLevel[mission.Zone] * 0.80)
-                local new_mob = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, level, "", -1)
-                local tactic = _DATA:GetAITactic("stick_together")
-                new_mob.Tactic = RogueEssence.Data.AITactic(tactic);
-                _DATA.Save.ActiveTeam.Guests:Add(new_mob)
-                local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("EscortInteract")
-                new_mob.ActionEvents:Add(talk_evt)
+        local mon_id = RogueEssence.Dungeon.MonsterID(mission.Client, 0, "normal", COMMON.NumToGender(mission.ClientGender))
+        -- set the escort level 20% less than the expected level
+        local level = math.floor(SV.ExpectedLevel[mission.Zone] * 0.80)
+        local new_mob = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, level, "", -1)
+        local tactic = _DATA:GetAITactic("stick_together")
+        new_mob.Tactic = RogueEssence.Data.AITactic(tactic);
+        _DATA.Save.ActiveTeam.Guests:Add(new_mob)
+        local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("EscortInteract")
+        new_mob.ActionEvents:Add(talk_evt)
 
-                local tbl = LTBL(new_mob)
-                tbl.Escort = name
+        local tbl = LTBL(new_mob)
+        tbl.Escort = name
 
-                UI:ResetSpeaker()
-                UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_ADD"):ToLocal(), new_mob.Name))
-            end
-        end
+        UI:ResetSpeaker()
+        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MISSION_ESCORT_ADD"):ToLocal(), new_mob.Name))
+      end
     end
+  end
 end
 
 function COMMON.NumToGender(num)

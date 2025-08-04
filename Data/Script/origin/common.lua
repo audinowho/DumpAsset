@@ -421,7 +421,7 @@ function COMMON.JoinTeamWithFanfare(recruit, from_dungeon)
     _DATA.Save.ActiveTeam.Assembly:Add(recruit)
   end
   SOUND:PlayFanfare("Fanfare/JoinTeam")
-  _DATA.Save:RegisterMonster(recruit.BaseForm.Species)
+  _DATA.Save:RegisterMonster(recruit.BaseForm)
   _DATA.Save:RogueUnlockMonster(recruit.BaseForm.Species)
 	
   UI:ResetSpeaker(false)

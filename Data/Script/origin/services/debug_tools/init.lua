@@ -64,7 +64,7 @@ function DebugTools:OnNewGame()
   if _DATA.Save.ActiveTeam.Players.Count > 0 then
     local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
     _DATA.Save.ActiveTeam.Players[0].ActionEvents:Add(talk_evt)
-    _DATA.Save:RegisterMonster(_DATA.Save.ActiveTeam.Players[0].BaseForm.Species)
+    _DATA.Save:RegisterMonster(_DATA.Save.ActiveTeam.Players[0].BaseForm)
     
     _DATA.Save.ActiveTeam:SetRank("normal")
     if not GAME:InRogueMode() then

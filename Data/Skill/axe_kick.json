@@ -14,28 +14,42 @@
 }
 },
 "Desc": {
-"DefaultText": "",
+"DefaultText": "The user jumps high, then slams its heel down upon the target. This may also confuse the target. If it misses, the user takes damage instead.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 853,
 "BaseCharges": 10,
 "Strikes": 1,
 "HitboxAction": {
-"$type": "RogueEssence.Dungeon.AttackAction, RogueEssence",
-"HitTiles": false,
-"BurstTiles": 0,
+"$type": "RogueEssence.Dungeon.DashAction, RogueEssence",
+"Anim": {
+"AnimIndex": "",
+"FrameTime": 1,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"AnimOffset": 0,
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.AfterImageEmitter, RogueEssence",
+"AnimTime": 8,
+"BurstTime": 2,
+"Alpha": 40,
+"AlphaSpeed": 0
 },
 "WideAngle": 0,
-"CharAnimData": {
-"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
-"ActionType": 5
-},
-"TargetAlignments": 4,
+"SnapBack": false,
+"CharAnim": 21,
+"AppearanceMod": 0,
+"HitTiles": true,
+"Range": 3,
+"StopAtHit": true,
+"StopAtWall": true,
+"TargetAlignments": 6,
 "TileEmitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -44,7 +58,7 @@
 "ActionFX": {
 "Delay": 0,
 "AbsoluteDelay": false,
-"Sound": "",
+"Sound": "DUN_Cross_Chop",
 "Emitter": {
 "$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
 "LocHeight": 0
@@ -58,7 +72,7 @@
 "LagBehindTime": 0
 },
 "Explosion": {
-"TargetAlignments": 4,
+"TargetAlignments": 6,
 "HitTiles": false,
 "Range": 0,
 "Speed": 0,
@@ -89,11 +103,18 @@
 "Data": {
 "Element": "fighting",
 "Category": 1,
-"HitRate": 90,
+"HitRate": 80,
 "SkillStates": [
 {
+"$type": "PMDC.Dungeon.ContactState, PMDC"
+},
+{
 "$type": "RogueEssence.Dungeon.BasePowerState, RogueEssence",
-"Power": 120
+"Power": 90
+},
+{
+"$type": "PMDC.Dungeon.AdditionalEffectState, PMDC",
+"EffectChance": 50
 }
 ],
 "BeforeTryActions": [],
@@ -111,19 +132,73 @@
 "Value": {
 "$type": "PMDC.Dungeon.DamageFormulaEvent, PMDC"
 }
+},
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.AdditionalEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
+"StatusID": "confuse",
+"AffectTarget": true,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": ""
+},
+"Anims": []
+}
+]
+}
 }
 ],
 "OnHitTiles": [],
-"AfterActions": [],
+"AfterActions": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.CrashLandEvent, PMDC",
+"HPFraction": 4
+}
+}
+],
 "ElementEffects": [],
 "IntroFX": [],
 "HitFX": {
 "Delay": 0,
 "AbsoluteDelay": false,
-"Sound": "",
+"Sound": "DUN_Punch",
 "Emitter": {
-"$type": "RogueEssence.Content.EmptyFiniteEmitter, RogueEssence",
-"LocHeight": 0
+"$type": "RogueEssence.Content.SingleEmitter, RogueEssence",
+"LocHeight": 0,
+"finished": false,
+"Offset": 0,
+"Anim": {
+"$type": "RogueEssence.Content.ParticleAnim, RogueEssence",
+"Anim": {
+"AnimIndex": "Print_Foot",
+"FrameTime": 12,
+"StartFrame": -1,
+"EndFrame": -1,
+"AnimDir": -1,
+"Alpha": 255,
+"AnimFlip": 0
+},
+"TotalTime": 0,
+"Cycles": 1,
+"FrameOffset": 0
+},
+"Layer": 2,
+"UseDest": false
 },
 "ScreenMovement": {
 "MinShake": 0,
@@ -132,9 +207,8 @@
 }
 },
 "HitCharAction": {
-"$type": "RogueEssence.Dungeon.CharAnimProcess, RogueEssence",
-"Process": 0,
-"AnimOverride": 0
+"$type": "RogueEssence.Dungeon.CharAnimFrameType, RogueEssence",
+"ActionType": 0
 }
 }
 }

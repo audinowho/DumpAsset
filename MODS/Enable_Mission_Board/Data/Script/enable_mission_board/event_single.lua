@@ -139,12 +139,11 @@ function SpawnOutlaw(origin, radius, mission_num)
       local learned_skill = skill_candidates[randval]
       mob_data.BaseSkills[learn_count] = RogueEssence.Dungeon.SlotSkill(learned_skill)
       new_mob:LearnSkill(learned_skill, true)
-      learn_count = learn_count + 1
-      --print("Outlaw learned " .. learned_skill)
       table.remove(skill_candidates, randval)
     else
       mob_data.BaseSkills[learn_count] = RogueEssence.Dungeon.SlotSkill()
     end
+    learn_count = learn_count + 1
 	end
 
 	local tactic = nil

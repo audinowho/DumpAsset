@@ -44,7 +44,7 @@ function MAP_STATUS_SCRIPT.SetShopkeeperHostile(owner, ownerChar, character, sta
 	TASK:WaitTask(found_shopkeep:AddStatusEffect(nil, berserk, false))
   end
   -- force everyone to skip their turn for this entire session
-  _DUNGEON:SkipRemainingTurns()
+  _DUNGEON:SkipToMainLeader()
 end
 
 function ITEM_SCRIPT.Test(owner, ownerChar, context, args)

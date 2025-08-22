@@ -202,15 +202,23 @@ function base_camp.BeginExposition()
     COMMON.RespawnAllies()
 	
 	
-  local noctowl = CH('Noctowl')
-  local player = CH('PLAYER')
+    local noctowl = CH('Noctowl')
+    local player = CH('PLAYER')
+	
+	local floor_record = 1
   
 	
     GAME:CutsceneMode(true)
     UI:SetSpeaker(STRINGS:Format("\\uE040"), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	
     local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get('guildmaster_trail')
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001'], zone:GetColoredName()))
+	if floor_record < 9 then
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001'], zone:GetColoredName()))
+	elseif floor_record < 19 then
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Achieved_01_Line_001'], zone:GetColoredName()))
+	else
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Achieved_02_Line_001'], zone:GetColoredName()))
+	end
     --move the noctowl to a new position
     GROUND:TeleportTo(noctowl, 244, 286, Direction.Up)
     GAME:FadeIn(20)
@@ -218,14 +226,23 @@ function base_camp.BeginExposition()
 
   UI:SetSpeaker(noctowl)
   
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_002']))
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_003']))
+  if floor_record < 19 then
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_003']))
+  else
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Achieved_02_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Achieved_02_Line_003']))
+  end
   
   GROUND:CharSetEmote(player, "shock", 1)
   SOUND:PlayBattleSE("EVT_Emote_Shock_Bad")
   GAME:WaitFrames(60)
   
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_004']))
+  if floor_record < 19 then
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_004']))
+  else
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Achieved_02_Line_004']))
+  end
     
   local ch = false
   local name = ""

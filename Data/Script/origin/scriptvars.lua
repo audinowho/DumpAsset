@@ -68,14 +68,15 @@ SV.base_trades = {
 	{ Item="xcl_family_squirtle_02", ReqItem={"",""}}
 }
 
-SV.unlocked_trades = {
-}
+SV.unlocked_trades = { }
 
 SV.missions =
 {
   Missions = { },
   FinishedMissions = { },
 }
+
+SV.floor_records = { }
 
 SV.magnagate =
 {

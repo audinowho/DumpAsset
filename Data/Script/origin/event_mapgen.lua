@@ -310,6 +310,19 @@ function ZONE_GEN_SCRIPT.HiddenLegend(zoneContext, context, queue, seed, args)
   queue:Enqueue(spawn_priority, mobPlacement)
 end
 
+
+function ZONE_GEN_SCRIPT.FloorRecord(zoneContext, context, queue, seed, args)
+  local recordNum = zoneContext.CurrentID
+  local segmentNum = zoneContext.CurrentSegment
+  local dungeonId = zoneContext.CurrentZone
+  local dungeon_segment = dungeonId .. "-" .. segmentNum
+  
+  if SV.floor_records[dungeon_segment] ~= nil then
+    recordNum = math.max(SV.floor_records[dungeon_segment], recordNum)
+  end
+  SV.floor_records[dungeon_segment] = recordNum
+end
+
 PresetPickerType = luanet.import_type('RogueElements.PresetPicker`1')
 EffectTileType = luanet.import_type('RogueEssence.Dungeon.EffectTile')
 TempTileStepType = luanet.import_type('PMDC.LevelGen.TempTileStep`1')

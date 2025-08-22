@@ -96,6 +96,9 @@ function UpgradeTools:OnUpgrade()
 	ValueTradeItem = ""
   end
   
+  if SV.floor_records == nil then
+    SV.floor_records = { }
+  end
   
   if SV.magnagate == nil or SV.magnagate.Cards == nil then
     SV.magnagate =

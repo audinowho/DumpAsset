@@ -205,7 +205,10 @@ function base_camp.BeginExposition()
     local noctowl = CH('Noctowl')
     local player = CH('PLAYER')
 	
-	local floor_record = 1
+	local floor_record = 0
+	if SV.floor_records["guildmaster_trail-0"] ~= nil then
+	  floor_record = SV.floor_records["guildmaster_trail-0"]
+	end
   
 	
     GAME:CutsceneMode(true)
@@ -228,11 +231,10 @@ function base_camp.BeginExposition()
   
   if floor_record < 19 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_002']))
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_003']))
   else
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Achieved_02_Line_002']))
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Achieved_02_Line_003']))
   end
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_003']))
   
   GROUND:CharSetEmote(player, "shock", 1)
   SOUND:PlayBattleSE("EVT_Emote_Shock_Bad")

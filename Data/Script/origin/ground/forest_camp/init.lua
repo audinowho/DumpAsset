@@ -283,8 +283,8 @@ function forest_camp.NPC_Carry_Action(chara, activator)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_001']))
     UI:SetSpeakerEmotion("Stunned")
 	
-	local skill_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Skill]:Get("wake_up_slap")
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_002'], skill_summary:GetColoredName()))
+	--local skill_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Skill]:Get("wake_up_slap")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_002']))
     GROUND:EntTurn(chara, Direction.Left)
   elseif SV.supply_corps.Status >= 20 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_Route']))

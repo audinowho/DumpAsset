@@ -1,6 +1,23 @@
 require 'origin.common'
 
 local base_camp = {}
+--------------------------------------------------
+-- Variables
+--------------------------------------------------
+local helper = {}
+
+local CAMP_DUN_ENTRANCES = { 'tropical_path', 'faultline_ridge', 'guildmaster_trail' }
+local CAMP_GRO_ENTRANCES = {
+  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=0},
+  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=0},
+  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
+  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
+  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
+  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}
+}
+
+local FERRY_DUN_ENTRANCES = { 'lava_floe_island', 'castaway_cave', 'eon_island', 'uncharted_waters', 'inscribed_cave', 'prism_isles' }
+local FERRY_GRO_ENTRANCES = {}
 
 --------------------------------------------------
 -- Map Callbacks
@@ -44,15 +61,15 @@ function base_camp.Enter(map)
     base_camp.RewardDialogue()
     SV.guildmaster_trail.Rewarded = true
     SV.base_camp.ExpositionComplete = true
-  elseif not SV.base_camp.ExpositionComplete then	
+  elseif not SV.base_camp.ExpositionComplete then 
     base_camp.SetupNpcs()
     base_camp.BeginExposition()
     SV.base_camp.ExpositionComplete = true
   else
     base_camp.SetupNpcs()
-	
+  
     base_camp.CheckMissions()
-	
+  
     GAME:FadeIn(20)
   end
   
@@ -86,21 +103,21 @@ function base_camp.SetupNpcs()
   --Noctowl: 64, 252
   --Luxio: 104, 252
   if not SV.family.Sister and SV.family.SisterActiveDays >= 3 then
-	local noctowl = CH('Noctowl')
-	local entrance = CH('NPC_Entrance')
-	GROUND:TeleportTo(noctowl, 64, 252, Direction.Right)
-	GROUND:TeleportTo(entrance, 104, 252, Direction.Left)
+  local noctowl = CH('Noctowl')
+  local entrance = CH('NPC_Entrance')
+  GROUND:TeleportTo(noctowl, 64, 252, Direction.Right)
+  GROUND:TeleportTo(entrance, 104, 252, Direction.Left)
   end
   
   --Wingull: 344, 264
   if not SV.family.Mother and SV.family.MotherActiveDays >= 3 then
-	local coast = CH('NPC_Coast')
-	GROUND:TeleportTo(coast, 232, 456, Direction.Down)
+  local coast = CH('NPC_Coast')
+  GROUND:TeleportTo(coast, 232, 456, Direction.Down)
   end
   
   if SV.team_catch.Status == 1 then
     GROUND:Unhide("NPC_Catch_1")
-	GROUND:Unhide("NPC_Catch_2")
+  GROUND:Unhide("NPC_Catch_2")
   elseif SV.team_catch.Status == 4 then
     -- TODO cycling
   end
@@ -113,11 +130,11 @@ function base_camp.SetupNpcs()
   
   if SV.team_steel.DaysSinceArgue >= 2 and not SV.team_steel.Rescued then
     GROUND:Unhide("NPC_Steel_1")
-	local questname = "QuestSteel"
+  local questname = "QuestSteel"
     local quest = SV.missions.Missions[questname]
-	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
-	  GROUND:Unhide("NPC_Steel_2")
-	end
+  if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+    GROUND:Unhide("NPC_Steel_2")
+  end
   end
   
   if SV.guildmaster_summit.GameComplete then
@@ -126,10 +143,10 @@ function base_camp.SetupNpcs()
   end
   
   if not SV.family.Sister and SV.family.SisterActiveDays >= 3 then
-	local noctowl = CH('Noctowl')
-	local entrance = CH('NPC_Entrance')
-	GROUND:CharTurnToChar(noctowl,entrance)
-	GROUND:CharTurnToChar(entrance,noctowl)
+  local noctowl = CH('Noctowl')
+  local entrance = CH('NPC_Entrance')
+  GROUND:CharTurnToChar(noctowl,entrance)
+  GROUND:CharTurnToChar(entrance,noctowl)
   end
 end
 
@@ -140,8 +157,8 @@ function base_camp.CheckMissions()
   local quest = SV.missions.Missions["EscortMother"]
   if quest ~= nil then
     if quest.Complete == COMMON.MISSION_COMPLETE then
-	
-      --spawn her	  
+  
+      --spawn her   
       
       GAME:FadeIn(20)
       UI:WaitShowDialogue("Escort mission state: Complete.")
@@ -150,78 +167,78 @@ function base_camp.CheckMissions()
       UI:WaitShowDialogue("The mother drops something as she runs off.")
       
       SV.magnagate.Cards = SV.magnagate.Cards + 1
-	  SV.family.Mother = true
+    SV.family.Mother = true
       COMMON.GiftKeyItem(player, RogueEssence.StringKey("ITEM_KEY_CARD_WATER"):ToLocal())
-	  COMMON.CompleteMission("EscortMother")
-	  
+    COMMON.CompleteMission("EscortMother")
+    
     end
   end
 end
 
 function base_camp.BeginExposition()  
 
-	-- move founder to team if not in party
-	-- get party
-	local party_table = GAME:GetPlayerPartyTable()
-	-- check for presence
-	local in_party = false
-	for ii = 1, #party_table, 1 do
-	  local ent = party_table[ii]
-	  if ent.IsFounder then
-	    in_party = true
-		break
-	  end
-	end
-	
-	-- if no, search assembly and then add to party
-	if not in_party then
-	  local assemblyCount = GAME:GetPlayerAssemblyCount()
+  -- move founder to team if not in party
+  -- get party
+  local party_table = GAME:GetPlayerPartyTable()
+  -- check for presence
+  local in_party = false
+  for ii = 1, #party_table, 1 do
+    local ent = party_table[ii]
+    if ent.IsFounder then
+      in_party = true
+    break
+    end
+  end
+  
+  -- if no, search assembly and then add to party
+  if not in_party then
+    local assemblyCount = GAME:GetPlayerAssemblyCount()
   
       for i = assemblyCount,1,-1 do
         p = GAME:GetPlayerAssemblyMember(i-1)
-		if p.IsFounder then
-		  GAME:RemovePlayerAssembly(i-1)
-		  GAME:AddPlayerTeam(p)
-		end
+    if p.IsFounder then
+      GAME:RemovePlayerAssembly(i-1)
+      GAME:AddPlayerTeam(p)
+    end
       end
-	end
-	
-	-- move everyone else into assembly
-	local partyCount = GAME:GetPlayerPartyCount()
+  end
+  
+  -- move everyone else into assembly
+  local partyCount = GAME:GetPlayerPartyCount()
     for i = partyCount,1,-1 do
       p = GAME:GetPlayerPartyMember(i-1)
-	  if not p.IsFounder then
-		GAME:RemovePlayerTeam(i-1)
-		GAME:AddPlayerAssembly(p)
-	  end
+    if not p.IsFounder then
+    GAME:RemovePlayerTeam(i-1)
+    GAME:AddPlayerAssembly(p)
     end
-	
-	-- make leader
-	GAME:SetTeamLeaderIndex(0)
-	-- update team
+    end
+  
+  -- make leader
+  GAME:SetTeamLeaderIndex(0)
+  -- update team
     COMMON.RespawnAllies()
-	
-	
+  
+  
     local noctowl = CH('Noctowl')
     local player = CH('PLAYER')
-	
-	local floor_record = 0
-	if SV.floor_records["guildmaster_trail-0"] ~= nil then
-	  floor_record = SV.floor_records["guildmaster_trail-0"]
-	end
   
-	
+  local floor_record = 0
+  if SV.floor_records["guildmaster_trail-0"] ~= nil then
+    floor_record = SV.floor_records["guildmaster_trail-0"]
+  end
+  
+  
     GAME:CutsceneMode(true)
     UI:SetSpeaker(STRINGS:Format("\\uE040"), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
-	
+  
     local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get('guildmaster_trail')
-	if floor_record < 9 then
+  if floor_record < 9 then
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001'], zone:GetColoredName()))
-	elseif floor_record < 19 then
-	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Achieved_01_Line_001'], zone:GetColoredName()))
-	else
-	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Achieved_02_Line_001'], zone:GetColoredName()))
-	end
+  elseif floor_record < 19 then
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Achieved_01_Line_001'], zone:GetColoredName()))
+  else
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Achieved_02_Line_001'], zone:GetColoredName()))
+  end
     --move the noctowl to a new position
     GROUND:TeleportTo(noctowl, 244, 286, Direction.Up)
     GAME:FadeIn(20)
@@ -250,11 +267,11 @@ function base_camp.BeginExposition()
   local name = ""
   while not ch do
     name = ""
-	while name == "" do
+  while name == "" do
       UI:NameMenu(STRINGS:FormatKey("INPUT_TEAM_TITLE"), "")
       UI:WaitForChoice()
       name = UI:ChoiceResult()
-	end
+  end
     --UI:WaitShowDialogue("I see... {0}? [Exactly.] [Actually, it's...]")
     
 
@@ -325,9 +342,9 @@ function base_camp.RewardDialogue()
   local noctowl = CH('Noctowl')
     
   GROUND:TeleportTo(noctowl, 244, 286, Direction.Up)
-	
+  
   GAME:FadeIn(20)
-	
+  
   UI:SetSpeaker(noctowl)
   
   UI:WaitShowDialogue("Your badge... that insignia!")
@@ -361,18 +378,47 @@ function base_camp.RewardDialogue()
 end
 
 --------------------------------------------------
+-- Helpers
+--------------------------------------------------
+-- these should probably be stuffed in some common location!
+function helper.HelperDeepClone(target)
+  local clone = {}
+  if target then
+    for i=1,#target do
+      clone[#clone+1] = target[i]
+    end
+  end
+  return clone
+end
+
+function helper.HelperMerge(tableAddedTo, tableTakenFrom)
+  if tableAddedTo and tableTakenFrom then
+    for i=1,#tableTakenFrom do
+      tableAddedTo[#tableAddedTo+1] = tableTakenFrom[i]
+    end
+  end
+end
+
+--------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
 
-function base_camp.North_Exit_Touch(obj, activator)
+-- go take in any patched new dungeons and grouns and add them too!
+function base_camp.North_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  local dungeon_entrances = { 'tropical_path', 'faultline_ridge', 'guildmaster_trail' }
-  local ground_entrances = {{Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=0},
-  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=0},
-  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
-  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
-  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
-  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
+
+  -- do a deep clone to avoid shennaigans
+  -- improvement: cacheing of some sort, probs
+  local dungeon_entrances = helper.HelperDeepClone(CAMP_DUN_ENTRANCES)
+  -- merge these together
+  helper.HelperMerge(dungeon_entrances, newDunEnts)
+  -- todo
+  -- table.sort(dungeon_entrance,somefuncforcolorsorting)
+
+-- same for ground
+  local ground_entrances = helper.HelperDeepClone(CAMP_GRO_ENTRANCES)
+  helper.HelperMerge(ground_entrances, newGroEnts)
+
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
@@ -387,7 +433,7 @@ function base_camp.First_North_Exit_Touch(obj, activator)
   ch = UI:ChoiceResult()
   if ch then
     _DATA:PreLoadZone('guildmaster_trail')
-	SOUND:PlayBGM("", true)
+  SOUND:PlayBGM("", true)
     GAME:FadeOut(false, 20)
     GAME:EnterDungeon('guildmaster_trail', 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, true)
   end
@@ -405,16 +451,30 @@ function base_camp.East_Exit_Touch(obj, activator)
   GAME:EnterGroundMap("base_camp_2", "entrance_west", true)
 end
 
-function base_camp.Ferry_Action(obj, activator)
+function base_camp.Ferry_Action(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   local ferry = CH('Lapras')
   UI:SetSpeaker(ferry)
   if not SV.base_camp.FerryIntroduced then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ferry_Line_001']))
-	SV.base_camp.FerryIntroduced = true
+  SV.base_camp.FerryIntroduced = true
   end
-  local dungeon_entrances = { 'lava_floe_island', 'castaway_cave', 'eon_island', 'uncharted_waters', 'inscribed_cave', 'prism_isles' }
-  local ground_entrances = {}
+
+ -- do a deep clone to avoid shennaigans
+  -- improvement: cacheing of some sort, probs
+  local dungeon_entrances = helper.HelperDeepClone(FERRY_DUN_ENTRANCES)
+  -- merge these together
+  helper.HelperMerge(dungeon_entrances, newDunEnts)
+  -- todo
+  -- table.sort(dungeon_entrance,somefuncforcolorsorting)
+
+-- same for ground
+  local ground_entrances = helper.HelperDeepClone(FERRY_GRO_ENTRANCES)
+  helper.HelperMerge(ground_entrances, newGroEnts)
+
+  -- work for entrances
+  local dungeon_entrances = FERRY_DUN_ENTRANCES
+  local ground_entrances = FERRY_GRO_ENTRANCES 
   
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ferry_Line_002']))
   
@@ -436,10 +496,10 @@ function base_camp.Sign_Action(obj, activator)
     UI:ChoiceMenuYesNo("UNLOCK THE HALF FINISHED STORY? NO TURNING OFF.", true)
     UI:WaitForChoice()
     ch = UI:ChoiceResult()
-	if ch then
-	  SV.Experimental = true
-	  UI:WaitShowDialogue("UNLOCKED")
-	end
+  if ch then
+    SV.Experimental = true
+    UI:WaitShowDialogue("UNLOCKED")
+  end
   end
 end
 
@@ -524,7 +584,7 @@ function base_camp.Catch_Action()
   
   GROUND:CharTurnToChar(player, catch2)
   GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
-	
+  
   SOUND:PlayBattleSE("DUN_Equip")
   UI:SetSpeaker(catch2)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Catch_Line_002']))
@@ -549,25 +609,25 @@ function base_camp.NPC_Steel_1_Action(chara, activator)
   
   local questname = "QuestSteel"
   local quest = SV.missions.Missions[questname]
-	
+  
   
   if quest == nil then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Steel_Line_001']))
-	
-	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Steel_Line_001']))
+  
+  COMMON.CreateMission(questname,
+  { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
       DestZone = "guildmaster_trail", DestSegment = 0, DestFloor = 14,
       FloorUnknown = false,
       TargetSpecies = RogueEssence.Dungeon.MonsterID("scizor", 0, "normal", Gender.Male),
       ClientSpecies = RogueEssence.Dungeon.MonsterID("steelix", 0, "normal", Gender.Male) }
-	  )
-	
+    )
+  
   elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Steel_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Steel_Line_002']))
   else
     base_camp.Steel_Complete()
   end
@@ -645,7 +705,7 @@ function base_camp.NPC_Coast_Action(chara, activator)
   if not SV.family.Mother and SV.family.MotherActiveDays >= 3 then
   
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hint_Mother_Line_001']))
-	
+  
   else
 
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Outside_Line_001']))

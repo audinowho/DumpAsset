@@ -1,6 +1,49 @@
 require 'origin.common'
 
 local rest_stop = {}
+--------------------------------------------------
+-- Variables
+--------------------------------------------------
+local helper = {}
+
+-- north
+local NORTH_DUN_ENTRANCES = { 
+'thunderstruck_pass', 'veiled_ridge', 'snowbound_path', 
+'treacherous_mountain', 'hope_road', 'cave_of_whispers' }
+local NORTH_GRO_ENTRANCES = {
+  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
+  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}
+}
+
+-- south
+local SOUTH_DUN_ENTRANCES = {}
+local SOUTH_GRO_ENTRANCES = {
+  {Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
+  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
+  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2},
+  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=2}
+}
+--------------------------------------------------
+-- Helpers
+--------------------------------------------------
+-- these should probably be stuffed in some common location!
+function helper.HelperDeepClone(target)
+  local clone = {}
+  if target then
+    for i=1,#target do
+      clone[#clone+1] = target[i]
+    end
+  end
+  return clone
+end
+
+function helper.HelperMerge(tableAddedTo, tableTakenFrom)
+  if tableAddedTo and tableTakenFrom then
+    for i=1,#tableTakenFrom do
+      tableAddedTo[#tableAddedTo+1] = tableTakenFrom[i]
+    end
+  end
+end
 
 --------------------------------------------------
 -- Map Callbacks
@@ -788,25 +831,30 @@ function rest_stop.Ice_Complete()
   SV.team_dark.Status = 5
 end
 
-function rest_stop.North_Exit_Touch(obj, activator)
+function rest_stop.North_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  UI:ResetSpeaker()
   
-  local dungeon_entrances = { 'thunderstruck_pass', 'veiled_ridge', 'snowbound_path', 'treacherous_mountain', 'hope_road', 'cave_of_whispers' }
+  local dungeon_entrances = helper.HelperDeepClone(NORTH_DUN_ENTRANCES)
+  helper.HelperMerge(dungeon_entrances, newDunEnts)
+  local ground_entrances = helper.HelperDeepClone(NORTH_GRO_ENTRANCES)
+  helper.HelperMerge(ground_entrances, newGroEnts)
+
   --also dungeon 21: royal halls, is accessible by ???
   --also dungeon 22: cave of solace, is accessible by having 8 key items
-  local ground_entrances = {{Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
-  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
+  
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
-function rest_stop.South_Exit_Touch(obj, activator)
+function rest_stop.South_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  local dungeon_entrances = { }
-  local ground_entrances = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
-  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
-  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2},
-  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=2}}
+  UI:ResetSpeaker()
+
+  local dungeon_entrances = helper.HelperDeepClone(SOUTH_DUN_ENTRANCES)
+  helper.HelperMerge(dungeon_entrances, newDunEnts)
+  local ground_entrances = helper.HelperDeepClone(SOUTH_GRO_ENTRANCES)
+  helper.HelperMerge(ground_entrances, newGroEnts)
+
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 

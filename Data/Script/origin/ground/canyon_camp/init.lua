@@ -22,6 +22,28 @@ local WEST_GRO_ENTRANCES = {
 }
 
 --------------------------------------------------
+-- Helpers
+--------------------------------------------------
+-- these should probably be stuffed in some common location!
+function helper.HelperDeepClone(target)
+  local clone = {}
+  if target then
+    for i=1,#target do
+      clone[#clone+1] = target[i]
+    end
+  end
+  return clone
+end
+
+function helper.HelperMerge(tableAddedTo, tableTakenFrom)
+  if tableAddedTo and tableTakenFrom then
+    for i=1,#tableTakenFrom do
+      tableAddedTo[#tableAddedTo+1] = tableTakenFrom[i]
+    end
+  end
+end
+
+--------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
 function canyon_camp.Init(map)
@@ -310,7 +332,6 @@ end
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
-
 
   
 function canyon_camp.Rival_1_Action(chara, activator)
@@ -1187,9 +1208,9 @@ end
 function canyon_camp.East_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local dungeon_entrances = helper.HelperClone(EAST_DUN_ENTRANCES)
+  local dungeon_entrances = helper.HelperDeepClone(EAST_DUN_ENTRANCES)
   helper.HelperMerge(dungeon_entrances,newDunEnts)
-  local ground_entrances = helper.HelperClone(EAST_GRO_ENTRANCES)
+  local ground_entrances = helper.HelperDeepClone(EAST_GRO_ENTRANCES)
   helper.HelperMerge(ground_entrances,newGroEnts)
 
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
@@ -1198,9 +1219,9 @@ end
 function canyon_camp.West_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local dungeon_entrances = helper.HelperClone(WEST_DUN_ENTRANCES)
+  local dungeon_entrances = helper.HelperDeepClone(WEST_DUN_ENTRANCES)
   helper.HelperMerge(dungeon_entrances,newDunEnts)
-  local ground_entrances = helper.HelperClone(WEST_GRO_ENTRANCES)
+  local ground_entrances = helper.HelperDeepClone(WEST_GRO_ENTRANCES)
   helper.HelperMerge(ground_entrances,newGroEnts)
 
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)

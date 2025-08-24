@@ -1,6 +1,25 @@
 require 'origin.common'
 
 local canyon_camp = {}
+--------------------------------------------------
+-- Variables
+--------------------------------------------------
+local helper = {}
+
+local EAST_DUN_ENTRANCES = { 'copper_quarry', 'depleted_basin', 'forsaken_desert',
+'relic_tower', 'sleeping_caldera', 'royal_halls', 'starfall_heights', 'wisdom_road', 'sacred_tower'}
+local EAST_GRO_ENTRANCES = {
+  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
+  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
+  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}
+}
+
+local WEST_DUN_ENTRANCES = {}
+local WEST_GRO_ENTRANCES = {
+  {Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
+  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
+  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2}
+}
 
 --------------------------------------------------
 -- Map Callbacks
@@ -1165,23 +1184,25 @@ function canyon_camp.Aggron_Fail()
   --get back up
 end
 
-function canyon_camp.East_Exit_Touch(obj, activator)
+function canyon_camp.East_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local dungeon_entrances = { 'copper_quarry', 'depleted_basin', 'forsaken_desert', 'relic_tower', 'sleeping_caldera', 'royal_halls', 'starfall_heights', 'wisdom_road', 'sacred_tower'}
-  local ground_entrances = {{Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
-  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
-  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
+  local dungeon_entrances = helper.HelperClone(EAST_DUN_ENTRANCES)
+  helper.HelperMerge(dungeon_entrances,newDunEnts)
+  local ground_entrances = helper.HelperClone(EAST_GRO_ENTRANCES)
+  helper.HelperMerge(ground_entrances,newGroEnts)
+
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 
-function canyon_camp.West_Exit_Touch(obj, activator)
+function canyon_camp.West_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local dungeon_entrances = { }
-  local ground_entrances = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
-  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
-  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2}}
+  local dungeon_entrances = helper.HelperClone(WEST_DUN_ENTRANCES)
+  helper.HelperMerge(dungeon_entrances,newDunEnts)
+  local ground_entrances = helper.HelperClone(WEST_GRO_ENTRANCES)
+  helper.HelperMerge(ground_entrances,newGroEnts)
+
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 end
 

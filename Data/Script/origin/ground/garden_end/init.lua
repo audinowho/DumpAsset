@@ -113,19 +113,18 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
   GROUND:Unhide("Berry_Basket_Blue_4")
   
   GAME:WaitFrames(60)
+  
+  local ground = _DATA:GetGround("forest_camp")
   GAME:FadeIn(30)
   
-  if GAME:InRogueMode() then
-    -- TODO
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001']))
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001']))
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001']))
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_020']))
-    -- if in rogue mode, give different dialogue and bank money
-    GAME:AddToPlayerMoneyBank(100000)
-  else
+  local thanks = false
+  
     UI:SetSpeakerEmotion("Normal")
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_004']))
+	if thanks then
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Alt_Line_004'], ground:GetColoredName()))
+	else
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_004']))
+	end
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_005']))
 	GROUND:CharSetAnim(activator, "Walk", false)
     GAME:WaitFrames(60)
@@ -157,10 +156,19 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
     GAME:WaitFrames(60)
     UI:SetSpeakerEmotion("Normal")
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_015']))
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_016']))
+	if thanks then
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Alt_Line_016']))
+	else
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_016']))
+	end
     UI:SetSpeakerEmotion("Happy")
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_017']))
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_018']))
+	if thanks then
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Alt_Line_017']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Alt_Line_018']))
+	else
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_017']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_018']))
+	end
 	
     GROUND:CharSetEmote(shaymin, "glowing", 4)
     GAME:WaitFrames(30)
@@ -186,7 +194,6 @@ function garden_end.Cutscene_Trigger_Touch(obj, activator)
 	-- By the way, that Gracidea you have there...
 	-- I'm thankful that you've found it.
 	-- When I use that flower, my appearance changes! I can show you when we go on an adventure together.
-  end
   
   SV.garden_end.ExpositionComplete = true
   

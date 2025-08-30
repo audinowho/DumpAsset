@@ -426,7 +426,7 @@ function base_camp.Ferry_Action(obj, activator, newDunEnts, newGroEnts)
   
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ferry_Line_002']))
   
-  COMMON.JuncPatchSupport(obj, activator, newDunEnts, newGroEnts, FERRY_DUN_ENTRANCE, FERRY_GRO_ENTRANCES, true, ferry, STRINGS:Format(STRINGS.MapStrings['Ferry_Line_003']))
+  COMMON.JuncPatchSupport(obj, activator, newDunEnts, newGroEnts, FERRY_DUN_ENTRANCES, FERRY_GRO_ENTRANCES, true, ferry, STRINGS:Format(STRINGS.MapStrings['Ferry_Line_003']))
   
 end
 

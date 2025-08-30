@@ -4,8 +4,6 @@ local rest_stop = {}
 --------------------------------------------------
 -- Variables
 --------------------------------------------------
-local helper = {}
-
 -- north
 local NORTH_DUN_ENTRANCES = { 
 'thunderstruck_pass', 'veiled_ridge', 'snowbound_path', 
@@ -23,28 +21,6 @@ local SOUTH_GRO_ENTRANCES = {
   {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2},
   {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=2}
 }
---------------------------------------------------
--- Helpers
---------------------------------------------------
--- these should probably be stuffed in some common location!
-function helper.HelperDeepClone(target)
-  local clone = {}
-  if target then
-    for i=1,#target do
-      clone[#clone+1] = target[i]
-    end
-  end
-  return clone
-end
-
-function helper.HelperMerge(tableAddedTo, tableTakenFrom)
-  if tableAddedTo and tableTakenFrom then
-    for i=1,#tableTakenFrom do
-      tableAddedTo[#tableAddedTo+1] = tableTakenFrom[i]
-    end
-  end
-end
-
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
@@ -833,29 +809,18 @@ end
 
 function rest_stop.North_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  UI:ResetSpeaker()
   
-  local dungeon_entrances = helper.HelperDeepClone(NORTH_DUN_ENTRANCES)
-  helper.HelperMerge(dungeon_entrances, newDunEnts)
-  local ground_entrances = helper.HelperDeepClone(NORTH_GRO_ENTRANCES)
-  helper.HelperMerge(ground_entrances, newGroEnts)
+  COMMON.JuncPatchSupport(obj, activator, newDunEnts, newGroEnts, NORTH_DUN_ENTRANCES, NORTH_GRO_ENTRANCES)
 
   --also dungeon 21: royal halls, is accessible by ???
   --also dungeon 22: cave of solace, is accessible by having 8 key items
-  
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+
 end
 
 function rest_stop.South_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  UI:ResetSpeaker()
-
-  local dungeon_entrances = helper.HelperDeepClone(SOUTH_DUN_ENTRANCES)
-  helper.HelperMerge(dungeon_entrances, newDunEnts)
-  local ground_entrances = helper.HelperDeepClone(SOUTH_GRO_ENTRANCES)
-  helper.HelperMerge(ground_entrances, newGroEnts)
-
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  
+  COMMON.JuncPatchSupport(obj, activator, newDunEnts, newGroEnts, SOUTH_DUN_ENTRANCES, SOUTH_GRO_ENTRANCES)
 end
 
 function rest_stop.Assembly_Action(obj, activator)

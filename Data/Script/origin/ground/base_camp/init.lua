@@ -4,8 +4,6 @@ local base_camp = {}
 --------------------------------------------------
 -- Variables
 --------------------------------------------------
-local helper = {}
-
 local CAMP_DUN_ENTRANCES = { 'tropical_path', 'faultline_ridge', 'guildmaster_trail' }
 local CAMP_GRO_ENTRANCES = {
   {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=0},
@@ -378,48 +376,14 @@ function base_camp.RewardDialogue()
 end
 
 --------------------------------------------------
--- Helpers
---------------------------------------------------
--- these should probably be stuffed in some common location!
-function helper.HelperDeepClone(target)
-  local clone = {}
-  if target then
-    for i=1,#target do
-      clone[#clone+1] = target[i]
-    end
-  end
-  return clone
-end
-
-function helper.HelperMerge(tableAddedTo, tableTakenFrom)
-  if tableAddedTo and tableTakenFrom then
-    for i=1,#tableTakenFrom do
-      tableAddedTo[#tableAddedTo+1] = tableTakenFrom[i]
-    end
-  end
-end
-
---------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
 
 -- go take in any patched new dungeons and grouns and add them too!
 function base_camp.North_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-
-  -- do a deep clone to avoid shennaigans
-  -- improvement: cacheing of some sort, probs
-  local dungeon_entrances = helper.HelperDeepClone(CAMP_DUN_ENTRANCES)
-  -- merge these together
-  helper.HelperMerge(dungeon_entrances, newDunEnts)
-  -- todo
-  -- table.sort(dungeon_entrance,somefuncforcolorsorting)
-
--- same for ground
-  local ground_entrances = helper.HelperDeepClone(CAMP_GRO_ENTRANCES)
-  helper.HelperMerge(ground_entrances, newGroEnts)
-
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  
+  COMMON.JuncPatchSupport(obj, activator, newDunEnts, newGroEnts, CAMP_DUN_ENTRANCES, CAMP_GRO_ENTRANCES)
 end
 
 function base_camp.First_North_Exit_Touch(obj, activator)  
@@ -459,28 +423,11 @@ function base_camp.Ferry_Action(obj, activator, newDunEnts, newGroEnts)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ferry_Line_001']))
   SV.base_camp.FerryIntroduced = true
   end
-
- -- do a deep clone to avoid shennaigans
-  -- improvement: cacheing of some sort, probs
-  local dungeon_entrances = helper.HelperDeepClone(FERRY_DUN_ENTRANCES)
-  -- merge these together
-  helper.HelperMerge(dungeon_entrances, newDunEnts)
-  -- todo
-  -- table.sort(dungeon_entrance,somefuncforcolorsorting)
-
--- same for ground
-  local ground_entrances = helper.HelperDeepClone(FERRY_GRO_ENTRANCES)
-  helper.HelperMerge(ground_entrances, newGroEnts)
-
-  -- work for entrances
-  local dungeon_entrances = FERRY_DUN_ENTRANCES
-  local ground_entrances = FERRY_GRO_ENTRANCES 
   
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ferry_Line_002']))
   
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances, true,
-  ferry,
-  STRINGS:Format(STRINGS.MapStrings['Ferry_Line_003']))
+  COMMON.JuncPatchSupport(obj, activator, newDunEnts, newGroEnts, FERRY_DUN_ENTRANCE, FERRY_GRO_ENTRANCES, true, ferry, STRINGS:Format(STRINGS.MapStrings['Ferry_Line_003']))
+  
 end
 
 base_camp.sign_count = 0

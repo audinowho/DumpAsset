@@ -224,26 +224,14 @@ end
 --------------------------------------------------
 function forest_camp.North_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  UI:ResetSpeaker()
   
-  local dungeon_entrances = helper.HelperDeepClone(NORTH_DUN_ENTRANCES)
-  helper.HelperMerge(dungeon_entrances, newDunEnts)
-  local ground_entrances = helper.HelperDeepClone(NORTH_GRO_ENTRANCES)
-  helper.HelperMerge(ground_entrances, newGroEnts)
-  
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  COMMON.JuncPatchSupport(obj, activator, newDunEnts, newGroEnts, NORTH_DUN_ENTRANCES, NORTH_GRO_ENTRANCES)
 end
 
 function forest_camp.South_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  UI:ResetSpeaker()
-
-  local dungeon_entrances = helper.HelperDeepClone(SOUTH_DUN_ENTRANCES)
-  helper.HelperMerge(dungeon_entrances, newDunEnts)
-  local ground_entrances = helper.HelperDeepClone(SOUTH_GRO_ENTRANCES)
-  helper.HelperMerge(ground_entrances, newGroEnts)
-
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  
+  COMMON.JuncPatchSupport(obj, activator, newDunEnts, newGroEnts, SOUTH_DUN_ENTRANCES, SOUTH_GRO_ENTRANCES)
 end
 
 function forest_camp.Assembly_Action(obj, activator)

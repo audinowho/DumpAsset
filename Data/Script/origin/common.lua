@@ -1498,10 +1498,10 @@ function COMMON.DoJuncPatch(obj, activator, other_new_dungeons, other_new_ground
 		-- If not, just copy grounds_to_add
 		local groEnts = {}
 		if other_new_grounds then
-			copy(other_new_grounds)
+			groEnts = copy(other_new_grounds)
 			merge(groEnts,grounds_to_add)
 		else
-			dunEnts = copy(grounds_to_add)
+			groEnts = copy(grounds_to_add)
 		end
 		
 		base_script_func(obj, activator, dunEnts, groEnts)

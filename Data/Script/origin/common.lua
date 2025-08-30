@@ -1402,7 +1402,7 @@ function COMMON.EndDayCycle()
     type_count = 6
   else
     type_count = 7
-  end
+end
   
 	for ii = 1, type_count, 1 do
 		local idx = math.random(1, #catalog)
@@ -1413,4 +1413,99 @@ function COMMON.EndDayCycle()
 	
 	
   COMMON.UpdateDayEndVars()
+end
+
+function COMMON.JuncPatchSupport(obj, activator, other_new_dungeons, other_new_grounds, base_dungeon_entrances, base_ground_entrances, force_list, speaker, confirm_msg)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local DoMerge = function (tableAddedTo, tableTakenFrom)
+		if tableAddedTo and tableTakenFrom then
+		for i=1,#tableTakenFrom do
+		  tableAddedTo[#tableAddedTo+1] = tableTakenFrom[i]
+		end
+	  end
+  end
+  
+  local DeepClone = function (target)
+	  local clone = {}
+	  if target then
+		for i=1,#target do
+		  clone[#clone+1] = target[i]
+		end
+	  end
+	  return clone
+  end
+  -- do a deep clone to avoid shennaigans
+  -- improvement: cacheing of some sort, probs
+  local dungeon_entrances = DeepClone(base_dungeon_entrances)
+  -- merge these together
+  DoMerge(dungeon_entrances, other_new_dungeons)
+  -- todo: sort dungeon entrances by how their names are coloured
+  -- table.sort(dungeon_entrance,somefuncforcolorsorting)
+
+ -- same for ground
+  local ground_entrances = DeepClone(base_ground_entrances)
+  DoMerge(ground_entrances,  other_new_grounds)
+
+	-- go show the destination menu itself
+  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances,force_list,speaker,confirm_msg)
+end
+
+-- Does the process of patching the junction function.
+-- This should "replace" the base script when doing CURMAPSCR patching.
+-- It is pretty much an extender to a ground map action.
+-- Fields:
+-- * obj: The object being activated. Pass the obj from the replacer of the ground map action. Should be part of replacer function's arguments. 
+-- * activator: The thing that activated the object. Pass the activator from the replacer of the ground map action. 
+-- * other_new_dungeons: Potential new dungeon entrances that may have been passed through other mods. 
+-- * other_new_grounds: Potential new ground entrances thay may have been passed through other mods. Should be part of replacer function's arguments. 
+-- * dungeons_to_add: A table of the new zones (aka dungeons) in their ID form that are to be added to the navigation menu. Leave "nil" if no such dungeons.
+-- * grounds_to_add: A table of the new grounds that are to be added to the navigation menu. More complicated than working with dungeons. Leave "nil" if no such grounds.
+-- * base_script_func: The base map function from the map being patched, obtained by using CURMAPSCR. 
+-- Returns: N/A
+function COMMON.DoJuncPatch(obj, activator, other_new_dungeons, other_new_grounds, dungeons_to_add, grounds_to_add, base_script_func)
+	-- Make sure base_script_func actually exists before doing anything
+	if base_script_func then	
+		local copy = function (target)
+			local clone = {}
+			if target then
+				for i=1,#target do
+				  clone[#clone+1] = target[i]
+				end
+			end
+			return clone
+		end
+
+		local merge = function (tableAddedTo, tableTakenFrom)
+			  if tableAddedTo and tableTakenFrom then
+				for i=1,#tableTakenFrom do
+				  tableAddedTo[#tableAddedTo+1] = tableTakenFrom[i]
+				end
+			  end
+			end
+		
+		-- If new dun ents, then merge
+		-- If not, just copy dungeons_to_add
+		local dunEnts = {}
+		if other_new_dungeons then
+			dunEnts = copy(other_new_dungeons)
+			merge(dunEnts,dungeons_to_add)
+		else
+			dunEnts = copy(dungeons_to_add)
+		end
+
+		-- If new ground ents, then merge
+		-- If not, just copy grounds_to_add
+		local groEnts = {}
+		if other_new_grounds then
+			copy(other_new_grounds)
+			merge(groEnts,grounds_to_add)
+		else
+			dunEnts = copy(grounds_to_add)
+		end
+		
+		base_script_func(obj, activator, dunEnts, groEnts)
+	else -- Tell the user about it!
+		print('Exception: DoJuncPatch was called, but no BaseFun was passed!\r\n\t Please edit the script to pass it using CURMAPSCR ')
+	end
 end

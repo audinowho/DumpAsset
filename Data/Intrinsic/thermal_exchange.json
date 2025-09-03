@@ -15,10 +15,10 @@
 }
 },
 "Desc": {
-"DefaultText": "",
+"DefaultText": "Boosts the Attack stat when the Pokémon is hit by a Fire-type move.",
 "LocalTexts": {}
 },
-"Released": false,
+"Released": true,
 "Comment": "",
 "IndexNum": 270,
 "ProximityEvent": {
@@ -75,7 +75,49 @@
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],
-"AfterBeingHits": [],
+"AfterBeingHits": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.OnMoveUseEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.HitCounterEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.ElementNeededEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusStackBattleEvent, PMDC",
+"Stack": 1,
+"StatusID": "mod_attack",
+"AffectTarget": true,
+"SelfInflicted": false,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": "MSG_ABILITY_ATK_BOOST"
+},
+"Anims": []
+}
+],
+"NeededElement": "fire"
+}
+],
+"Targets": 6,
+"RequireDamage": false,
+"RequireContact": false,
+"RequireSurvive": true,
+"Chance": 100
+}
+]
+}
+}
+],
 "OnHitTiles": [],
 "AfterActions": [],
 "UserElementEffects": [],

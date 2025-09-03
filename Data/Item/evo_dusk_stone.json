@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.8.10.0",
+"Version": "0.8.11.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
@@ -17,18 +17,8 @@
 }
 },
 "Desc": {
-"DefaultText": "An odd stone with a mesmerizing darkness. It allows certain kinds of Pokémon to evolve.",
-"LocalTexts": {
-"fr": "Une pierre étrange qui fait évoluer certaines espèces de Pokémon. Elle est sombre comme une nuit sans lune.",
-"de": "Dieser besondere, düstere Stein hilft manchen Pokémon bei ihrer Evolution.",
-"es": "Una piedra peculiar que hace evolucionar a algunos Pokémon. Es oscura como la noche.",
-"it": "Una pietra particolare che fa evolvere determinate specie di Pokémon. È scura come le tenebre.",
-"ko": "어느 특정 포켓몬을 진화시키는 이상한 돌. 빠져들게 되는 어두운 색이다.",
-"ja": "ある　とくていの　ポケモンを しんかさせる　ふしぎな　いし。 やみのように　くらい。",
-"ja-jp": "ある　特定の　ポケモンを 進化させる　不思議な　石。 やみのように　暗い。",
-"zh-hans": "能让某些特定宝可梦进化的神奇石头。像黑夜一般漆黑。",
-"zh-hant": "能讓特定寶可夢 進化的神奇石頭。 像黑暗一般漆黑。"
-}
+"DefaultText": "An odd stone with a mesmerizing darkness. It allows certain kinds of Pokémon to evolve. If held, it changes the Pokémon's regular attacks and thrown items to Ghost-type.",
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -211,7 +201,38 @@
 "OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
-"OnActions": [],
+"OnActions": [
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.RegularAttackNeededEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.ChangeMoveElementEvent, PMDC",
+"ElementFrom": "none",
+"ElementTo": "ghost"
+}
+}
+},
+{
+"Key": {
+"str": [
+-1
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.ThrownItemNeededEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.ChangeMoveElementEvent, PMDC",
+"ElementFrom": "none",
+"ElementTo": "ghost"
+}
+}
+}
+],
 "BeforeHittings": [],
 "BeforeBeingHits": [],
 "AfterHittings": [],

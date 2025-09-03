@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.8.10.0",
+"Version": "0.8.11.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -36464,6 +36464,16 @@
 },
 {
 "Spawn": {
+"ID": "held_fickle_lens",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 3
+},
+{
+"Spawn": {
 "ID": "held_life_orb",
 "Cursed": false,
 "HiddenValue": "",
@@ -39358,6 +39368,16 @@
 },
 {
 "Spawn": {
+"ID": "held_fickle_lens",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 3
+},
+{
+"Spawn": {
 "ID": "held_life_orb",
 "Cursed": false,
 "HiddenValue": "",
@@ -42243,6 +42263,16 @@
 {
 "Spawn": {
 "ID": "held_assault_vest",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 3
+},
+{
+"Spawn": {
+"ID": "held_fickle_lens",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,
@@ -65369,13 +65399,14 @@
 ],
 "ZoneSteps": [
 {
-"$type": "PMDC.LevelGen.SaveVarsZoneStep, PMDC",
-"Priority": {
-"str": [
-2,
-1
-]
-}
+"$type": "RogueEssence.LevelGen.ScriptZoneStep, RogueEssence",
+"Script": "SpawnMissionNpcFromSV",
+"ArgTable": "{}"
+},
+{
+"$type": "RogueEssence.LevelGen.ScriptZoneStep, RogueEssence",
+"Script": "FloorRecord",
+"ArgTable": "{}"
 },
 {
 "$type": "PMDC.LevelGen.FloorNameDropZoneStep, PMDC",
@@ -65417,7 +65448,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -68928,6 +68959,20 @@
 },
 {
 "Spawn": {
+"ID": "held_fickle_lens",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 2,
+"Range": {
+"Min": 0,
+"Max": 15
+}
+},
+{
+"Spawn": {
 "ID": "held_life_orb",
 "Cursed": false,
 "HiddenValue": "",
@@ -69027,6 +69072,20 @@
 {
 "Spawn": {
 "ID": "held_assault_vest",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 1,
+"Range": {
+"Min": 15,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"ID": "held_fickle_lens",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,
@@ -71752,7 +71811,7 @@
 "Spawn": {
 "Spawn": {
 "BaseForm": {
-"Species": "cyndaquil",
+"Species": "treecko",
 "Form": 0,
 "Skin": "",
 "Gender": -1
@@ -71762,7 +71821,63 @@
 "Max": 10
 },
 "SpecifiedSkills": [
-"leer",
+"absorb",
+"quick_attack"
+],
+"Intrinsic": "",
+"Tactic": "wander_normal",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 2,
+"Remove": false
+},
+{
+"$type": "RogueEssence.LevelGen.MobSpawnStatus, RogueEssence",
+"Statuses": [
+{
+"Spawn": {
+"ID": "sleep",
+"StatusStates": [
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": -1
+}
+]
+},
+"Rate": 10
+}
+]
+}
+]
+},
+"Role": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 3,
+"Max": 5
+}
+},
+{
+"Spawn": {
+"Spawn": {
+"BaseForm": {
+"Species": "torchic",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 10,
+"Max": 10
+},
+"SpecifiedSkills": [
+"growl",
 "ember"
 ],
 "Intrinsic": "",
@@ -71808,7 +71923,7 @@
 "Spawn": {
 "Spawn": {
 "BaseForm": {
-"Species": "chikorita",
+"Species": "mudkip",
 "Form": 0,
 "Skin": "",
 "Gender": -1
@@ -71818,63 +71933,7 @@
 "Max": 10
 },
 "SpecifiedSkills": [
-"poison_powder",
-"vine_whip"
-],
-"Intrinsic": "",
-"Tactic": "wander_normal",
-"SpawnConditions": [],
-"SpawnFeatures": [
-{
-"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
-},
-{
-"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
-"StartAt": 2,
-"Remove": false
-},
-{
-"$type": "RogueEssence.LevelGen.MobSpawnStatus, RogueEssence",
-"Statuses": [
-{
-"Spawn": {
-"ID": "sleep",
-"StatusStates": [
-{
-"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
-"Counter": -1
-}
-]
-},
-"Rate": 10
-}
-]
-}
-]
-},
-"Role": 0
-},
-"Rate": 10,
-"Range": {
-"Min": 3,
-"Max": 5
-}
-},
-{
-"Spawn": {
-"Spawn": {
-"BaseForm": {
-"Species": "totodile",
-"Form": 0,
-"Skin": "",
-"Gender": -1
-},
-"Level": {
-"Min": 10,
-"Max": 10
-},
-"SpecifiedSkills": [
-"bite",
+"mud_slap",
 "water_gun"
 ],
 "Intrinsic": "",
@@ -81223,25 +81282,6 @@
 "Spawn": {
 "IsMoney": false,
 "Cursed": false,
-"Value": "loot_pearl",
-"HiddenValue": "",
-"Amount": 2,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
 "Value": "food_banana",
 "HiddenValue": "",
 "Amount": 0,
@@ -81378,12 +81418,24 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
 "Min": 1,
 "Max": 4
@@ -81430,7 +81482,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -81450,7 +81502,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.RecruitState"
 },
 "UseMapItems": true,
@@ -81471,12 +81523,24 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
 "Min": 1,
 "Max": 4
@@ -81485,7 +81549,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": true,
@@ -81512,12 +81576,24 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
 "Min": 1,
 "Max": 4
@@ -81526,7 +81602,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": true,
@@ -82166,6 +82242,330 @@
 "Spawn": {
 "BaseForm": {
 "Species": "feraligatr",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "treecko",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "grovyle",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "sceptile",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "torchic",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "combusken",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "blaziken",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "mudkip",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "marshtomp",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "swampert",
 "Form": 0,
 "Skin": "",
 "Gender": -1
@@ -90891,12 +91291,24 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
 "Min": 1,
 "Max": 4
@@ -91099,7 +91511,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -91196,7 +91608,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -91246,7 +91658,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.RecruitState"
 },
 "UseMapItems": true,
@@ -91273,12 +91685,24 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
 "Min": 1,
 "Max": 4
@@ -91287,7 +91711,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": true,
@@ -91314,12 +91738,24 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
 "Min": 1,
 "Max": 4
@@ -91328,7 +91764,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": true,
@@ -91968,6 +92404,330 @@
 "Spawn": {
 "BaseForm": {
 "Species": "feraligatr",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "treecko",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "grovyle",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "sceptile",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "torchic",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "combusken",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "blaziken",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "mudkip",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "marshtomp",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "swampert",
 "Form": 0,
 "Skin": "",
 "Gender": -1
@@ -100591,7 +101351,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EquipState"
 },
 "UseMapItems": true,
@@ -100664,7 +101424,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -100684,7 +101444,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.RecruitState"
 },
 "UseMapItems": true,
@@ -100745,7 +101505,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ChestModGenState"
 }
 ]
@@ -103290,25 +104050,6 @@
 "Spawn": {
 "IsMoney": false,
 "Cursed": false,
-"Value": "loot_pearl",
-"HiddenValue": "",
-"Amount": 2,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 5,
-"Range": {
-"Min": 0,
-"Max": 30
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
 "Value": "medicine_amber_tear",
 "HiddenValue": "",
 "Amount": 1,
@@ -103483,15 +104224,27 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
-"Min": 2,
-"Max": 5
+"Min": 4,
+"Max": 10
 }
 },
 {
@@ -103519,15 +104272,27 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
-"Min": 2,
-"Max": 5
+"Min": 4,
+"Max": 10
 }
 },
 {
@@ -103559,15 +104324,27 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
-"Min": 2,
-"Max": 5
+"Min": 4,
+"Max": 10
 }
 },
 {
@@ -103599,15 +104376,27 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
-"Min": 2,
-"Max": 5
+"Min": 4,
+"Max": 10
 }
 },
 {
@@ -103639,15 +104428,27 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
-"Min": 2,
-"Max": 5
+"Min": 4,
+"Max": 10
 }
 },
 {
@@ -103679,15 +104480,27 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
-"Min": 2,
-"Max": 5
+"Min": 4,
+"Max": 10
 }
 },
 {
@@ -103732,21 +104545,33 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
-"Min": 2,
-"Max": 5
+"Min": 4,
+"Max": 10
 }
 },
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EquipState"
 },
 "UseMapItems": true,
@@ -103773,15 +104598,27 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
-"Min": 2,
-"Max": 5
+"Min": 4,
+"Max": 10
 }
 },
 {
@@ -103830,15 +104667,27 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
-"Min": 2,
-"Max": 5
+"Min": 4,
+"Max": 10
 }
 },
 {
@@ -103868,21 +104717,33 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
-"Min": 2,
-"Max": 5
+"Min": 4,
+"Max": 10
 }
 },
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -103909,21 +104770,33 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
-"Min": 2,
-"Max": 5
+"Min": 4,
+"Max": 10
 }
 },
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.RecruitState"
 },
 "UseMapItems": true,
@@ -104563,6 +105436,330 @@
 "Spawn": {
 "BaseForm": {
 "Species": "feraligatr",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "treecko",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "grovyle",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "sceptile",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "torchic",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "combusken",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "blaziken",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "mudkip",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "marshtomp",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 1,
+"Max": 1
+},
+"SpecifiedSkills": [],
+"Intrinsic": "",
+"Tactic": "wander_smart",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnLevelScale, PMDC",
+"StartFromID": 0,
+"MinLevel": 1,
+"AddNumerator": 4,
+"AddDenominator": 3,
+"RerollSkills": true
+}
+]
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 30
+}
+},
+{
+"Spawn": {
+"BaseForm": {
+"Species": "swampert",
 "Form": 0,
 "Skin": "",
 "Gender": -1
@@ -110281,7 +111478,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ChestModGenState"
 }
 ]
@@ -118537,7 +119734,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": false,
@@ -121913,7 +123110,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": false,
@@ -122222,7 +123419,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ShopModGenState"
 }
 ]

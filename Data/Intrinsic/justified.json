@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.8.10.0",
+"Version": "0.8.11.0",
 "Object": {
 "$type": "RogueEssence.Data.IntrinsicData, RogueEssence",
 "Name": {
@@ -98,6 +98,9 @@
 "$type": "PMDC.Dungeon.OnMoveUseEvent, PMDC",
 "BaseEvents": [
 {
+"$type": "PMDC.Dungeon.HitCounterEvent, PMDC",
+"BaseEvents": [
+{
 "$type": "PMDC.Dungeon.ElementNeededEvent, PMDC",
 "BaseEvents": [
 {
@@ -105,6 +108,7 @@
 "Stack": 1,
 "StatusID": "mod_attack",
 "AffectTarget": true,
+"SelfInflicted": false,
 "SilentCheck": true,
 "Anonymous": false,
 "TriggerMsg": {
@@ -114,6 +118,13 @@
 }
 ],
 "NeededElement": "dark"
+}
+],
+"Targets": 6,
+"RequireDamage": false,
+"RequireContact": false,
+"RequireSurvive": true,
+"Chance": 100
 }
 ]
 }

@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.8.10.0",
+"Version": "0.8.11.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -16141,7 +16141,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -17007,6 +17007,20 @@
 {
 "Spawn": {
 "ID": "held_assault_vest",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 0,
+"Max": 14
+}
+},
+{
+"Spawn": {
+"ID": "held_fickle_lens",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,
@@ -18497,7 +18511,7 @@
 "Items": [
 {
 "Spawn": {
-"ID": "held_wide_lens",
+"ID": "held_fickle_lens",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,
@@ -19126,25 +19140,6 @@
 "Spawn": {
 "IsMoney": false,
 "Cursed": false,
-"Value": "loot_pearl",
-"HiddenValue": "",
-"Amount": 2,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 14
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
 "Value": "food_banana",
 "HiddenValue": "",
 "Amount": 0,
@@ -19642,12 +19637,24 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_pearl"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_pearl",
+"HiddenValue": "",
+"Amount": 2,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
 "Min": 1,
 "Max": 4
@@ -19677,7 +19684,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -19697,7 +19704,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.RecruitState"
 },
 "UseMapItems": true,
@@ -22103,7 +22110,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ShopModGenState"
 }
 ]
@@ -25269,7 +25276,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.StairsModGenState"
 }
 ]

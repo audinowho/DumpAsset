@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.8.10.0",
+"Version": "0.8.11.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -15119,7 +15119,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -17547,25 +17547,6 @@
 "Min": 0,
 "Max": 16
 }
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
-"Value": "loot_heart_scale",
-"HiddenValue": "",
-"Amount": 2,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 16
-}
 }
 ],
 "ItemThemes": [
@@ -17574,21 +17555,33 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_heart_scale"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_heart_scale",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
-"Min": 2,
-"Max": 2
+"Min": 3,
+"Max": 3
 }
 },
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": true,
@@ -17615,21 +17608,33 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_heart_scale"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_heart_scale",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
-"Min": 1,
-"Max": 3
+"Min": 2,
+"Max": 4
 }
 },
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -17656,15 +17661,27 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_heart_scale"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_heart_scale",
+"HiddenValue": "",
+"Amount": 1,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
-"Min": 1,
-"Max": 1
+"Min": 2,
+"Max": 2
 }
 },
 {
@@ -17733,7 +17750,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ChestModGenState"
 }
 ]
@@ -17866,7 +17883,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.StairsModGenState"
 }
 ]
@@ -26819,7 +26836,7 @@
 "Name": {
 "DefaultText": "Abyssal Island\\nB{0}F",
 "LocalTexts": {
-"fr": "Île Abyssale\\n{0}E",
+"fr": "Île Abyssale\\n{0}SS",
 "de": "Tiefseeinsel\\nU{0}",
 "it": "Isola Abissale\\nP-{0}",
 "zh-hans": "深渊之岛\\nB{0}F"
@@ -26848,7 +26865,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]

@@ -1,12 +1,12 @@
 ﻿{
-"Version": "0.8.10.0",
+"Version": "0.8.11.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Geode Crevice",
 "LocalTexts": {
 "fr": "Fissure Geode",
-"zh-hans": "水晶裂口"
+"zh-hans": "水晶裂谷"
 }
 },
 "Released": true,
@@ -12238,7 +12238,7 @@
 "DefaultText": "Geode Crevice\\nB{0}F",
 "LocalTexts": {
 "fr": "Fissure Geode\\n{0}SS",
-"zh-hans": "水晶裂口\\nB{0}F"
+"zh-hans": "水晶裂谷\\nB{0}F"
 }
 },
 "Priority": {
@@ -12264,7 +12264,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -15082,6 +15082,20 @@
 {
 "Spawn": {
 "ID": "held_assault_vest",
+"Cursed": false,
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0
+},
+"Rate": 1,
+"Range": {
+"Min": 0,
+"Max": 13
+}
+},
+{
+"Spawn": {
+"ID": "held_fickle_lens",
 "Cursed": false,
 "HiddenValue": "",
 "Amount": 0,
@@ -22096,25 +22110,6 @@
 "Spawn": {
 "IsMoney": false,
 "Cursed": false,
-"Value": "loot_pearl",
-"HiddenValue": "",
-"Amount": 2,
-"Price": 0,
-"TileLoc": {
-"X": 0,
-"Y": 0
-}
-},
-"Rate": 10,
-"Range": {
-"Min": 0,
-"Max": 13
-}
-},
-{
-"Spawn": {
-"IsMoney": false,
-"Cursed": false,
 "Value": "food_banana",
 "HiddenValue": "",
 "Amount": 0,
@@ -22251,12 +22246,24 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_star_piece"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_star_piece",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
 "Min": 1,
 "Max": 1
@@ -22303,7 +22310,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -22323,7 +22330,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.RecruitState"
 },
 "UseMapItems": true,
@@ -22344,12 +22351,24 @@
 "$type": "PMDC.LevelGen.ItemThemeMultiple, PMDC",
 "Themes": [
 {
-"$type": "PMDC.LevelGen.ItemThemeRange, PMDC",
-"Range": [
-"loot_star_piece"
+"$type": "PMDC.LevelGen.ItemThemeDirect, PMDC",
+"DirectList": [
+{
+"Spawn": {
+"IsMoney": false,
+"Cursed": false,
+"Value": "loot_star_piece",
+"HiddenValue": "",
+"Amount": 0,
+"Price": 0,
+"TileLoc": {
+"X": 0,
+"Y": 0
+}
+},
+"Rate": 10
+}
 ],
-"UseMapItems": true,
-"UseSpecialItems": true,
 "Amount": {
 "Min": 1,
 "Max": 1
@@ -22358,7 +22377,7 @@
 {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.EvoState"
 },
 "UseMapItems": true,
@@ -26989,7 +27008,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ShopModGenState"
 }
 ]

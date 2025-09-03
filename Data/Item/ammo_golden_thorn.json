@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.8.10.0",
+"Version": "0.8.11.0",
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
@@ -15,7 +15,7 @@
 }
 },
 "Desc": {
-"DefaultText": "A brilliantly shining thorn crafted from solid gold. It is a fantastically precious item that gives its owner serious bragging rights. When hurled, it flies in a straight line to inflict damage on any Pokémon it hits, scattering coins everywhere.",
+"DefaultText": "A brilliantly shining thorn crafted from solid gold. When hurled, it flies in a straight line to inflict damage on any Pokémon it hits, scattering coins everywhere.",
 "LocalTexts": {
 "fr": "Epine en or massif brillant d'un vif éclat. Il s'agit d'un objet très précieux qui suscite une immense fierté chez son détenteur. Projetée, elle file en ligne droite et inflige des dégâts au Pokémon qu'elle touche. Dépose des Poké sur le sol.",
 "de": "Ein brilliant scheinender Dorn, welcher aus festem Gold hergestellt wurde. Es ist ein fantastisch kostbares Item, mit dem der Besitzer das Recht hat anzugeben. Wenn dieser geworfen wird, fliegt er in einer geraden Linie, fügt jedem getroffenen Pokémon Schaden zu und verstreut überall Münzen.",
@@ -121,6 +121,16 @@
 {
 "Key": {
 "str": [
+-11
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.BestCategoryEvent, PMDC"
+}
+},
+{
+"Key": {
+"str": [
 0
 ]
 },
@@ -145,10 +155,7 @@
 "Value": {
 "$type": "PMDC.Dungeon.DamageFormulaEvent, PMDC"
 }
-}
-],
-"OnHitTiles": [],
-"AfterActions": [
+},
 {
 "Key": {
 "str": [
@@ -157,10 +164,13 @@
 },
 "Value": {
 "$type": "PMDC.Dungeon.DamageMoneyEvent, PMDC",
-"Multiplier": 10
+"Numerator": 1,
+"Denominator": 10
 }
 }
 ],
+"OnHitTiles": [],
+"AfterActions": [],
 "ElementEffects": [],
 "IntroFX": [],
 "HitFX": {

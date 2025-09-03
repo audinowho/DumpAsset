@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.8.10.0",
+"Version": "0.8.11.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
@@ -6137,7 +6137,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.10.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -7942,6 +7942,44 @@
 {
 "$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
 "StartAt": 3,
+"Remove": false
+}
+]
+},
+"Role": 0
+},
+"Rate": 10,
+"Range": {
+"Min": 7,
+"Max": 8
+}
+},
+{
+"Spawn": {
+"Spawn": {
+"BaseForm": {
+"Species": "snom",
+"Form": 0,
+"Skin": "",
+"Gender": -1
+},
+"Level": {
+"Min": 14,
+"Max": 14
+},
+"SpecifiedSkills": [
+"powder_snow"
+],
+"Intrinsic": "",
+"Tactic": "wander_normal",
+"SpawnConditions": [],
+"SpawnFeatures": [
+{
+"$type": "PMDC.LevelGen.MobSpawnWeak, PMDC"
+},
+{
+"$type": "PMDC.LevelGen.MobSpawnMovesOff, PMDC",
+"StartAt": 1,
 "Remove": false
 }
 ]

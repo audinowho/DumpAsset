@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.8.10.0",
+"Version": "0.8.11.0",
 "Object": {
 "$type": "RogueEssence.Data.StatusData, RogueEssence",
 "Name": {
@@ -29,6 +29,10 @@
 {
 "$type": "PMDC.Dungeon.HPState, PMDC",
 "HP": 0
+},
+{
+"$type": "RogueEssence.Dungeon.CountDownState, RogueEssence",
+"Counter": 0
 }
 ],
 "OnSkillChanges": [],
@@ -105,7 +109,18 @@
 "OnMapStatusRemoves": [],
 "OnMapStarts": [],
 "OnTurnStarts": [],
-"OnTurnEnds": [],
+"OnTurnEnds": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.CountUpEvent, PMDC"
+}
+}
+],
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],

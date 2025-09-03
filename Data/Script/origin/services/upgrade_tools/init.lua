@@ -479,7 +479,7 @@ function UpgradeTools:OnUpgrade()
     SV.family.Grandma = true
   end
   
-  if old_ver < System.Version("0.8.10") then
+  if old_ver < System.Version("0.8.11") then
     SV.missions.Missions = {}
   end
   

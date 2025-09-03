@@ -74,18 +74,20 @@ function rest_stop.SetupNpcs()
   end
 
 
-  if SV.team_psychic.Status == 2 then
-    GROUND:Unhide("NPC_Strategy")
-    GROUND:Unhide("NPC_Goals")
-  elseif SV.team_dark.Status == 1 then
-    GROUND:Unhide("NPC_Goals")
+  if SV.team_dark.Status == 1 then
+    GROUND:Unhide("NPC_GangOut")
+	local questname = "QuestIce"
+    local quest = SV.missions.Missions[questname]
+	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+	  GROUND:Unhide("NPC_GangIn")
+	end
+  elseif SV.team_dark.Status == 2 then
+    GROUND:Unhide("NPC_GangOut")
+	GROUND:Unhide("NPC_GangIn")
   elseif SV.team_dark.Status == 3 then
-    GROUND:Unhide("NPC_Goals")
+    -- absent; they're laying low
   elseif SV.team_dark.Status == 4 then
-    GROUND:Unhide("NPC_Goals")
-  elseif SV.team_psychic.Status == 5 then
     -- TODO cycling
-    GROUND:Unhide("NPC_Goals")
   end
 
 
@@ -178,11 +180,15 @@ function rest_stop.BeginExposition(shortened)
   UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
   GAME:WaitFrames(30)
   UI:WaitHideTitle(20)
+  
+  --camerawork
+  GAME:MoveCamera(228, 300, 1, false)
   GAME:FadeIn(20)
   
   
-  --camerawork
   --walk in
+  local player = CH('PLAYER')
+  rest_stop.Concurrent_Sequence(player)
   
   --bosses appear
   GROUND:Unhide("Boss_1")
@@ -205,6 +211,21 @@ function rest_stop.BeginExposition(shortened)
   SV.rest_stop.BossPhase = 1
   COMMON.BossTransition()
   GAME:EnterDungeon('guildmaster_island', 0, 6, 0, RogueEssence.Data.GameProgress.DungeonStakes.Progress, true, true)
+end
+
+
+function rest_stop.Concurrent_Sequence(chara)
+  local turnTime = 4
+  GROUND:MoveToPosition(chara, 220, 292, false, 2)
+  GROUND:CharAnimateTurnTo(chara, Direction.Left, turnTime)
+  GAME:WaitFrames(20)
+  GROUND:CharAnimateTurn(chara, Direction.Right, turnTime, false)
+  GAME:WaitFrames(20)
+  GROUND:CharAnimateTurn(chara, Direction.Left, turnTime, true)
+  GAME:WaitFrames(20)
+  GROUND:CharAnimateTurn(chara, Direction.Right, turnTime, false)
+  GAME:WaitFrames(20)
+  GROUND:CharAnimateTurnTo(chara, Direction.Up, turnTime)
 end
 
 function rest_stop.Steelix_Success()
@@ -679,105 +700,76 @@ function rest_stop.Rock_Complete()
 end
 
 
-function rest_stop.NPC_Strategy_Action(chara, activator)
+function rest_stop.NPC_GangIn_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local player = CH('PLAYER')
-  
-  if SV.team_psychic.Status == 2 then
-  
-    if SV.team_psychic.SpokenTo then
-      UI:SetSpeaker(chara)
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_002']))
-	else
-      rest_stop.Separate()
-	end
-	
-  elseif SV.team_psychic.Status == 6 then
-    --cycle?
+  -- complete the mission
+  if SV.team_dark.Status == 1 then
+    
+	rest_stop.Ice_Complete()
+  else
+
+	UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GangIn_Line_001']))
   end
 end
 
-function rest_stop.NPC_Goals_Action(chara, activator)
+function rest_stop.NPC_GangOut_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local player = CH('PLAYER')
+  if SV.team_dark.Status == 1 then
   
-  if SV.team_psychic.Status == 2 then
-  
-    if SV.team_psychic.SpokenTo then
-      UI:SetSpeaker(chara)
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Line_002']))
-	else
-      rest_stop.Separate()
-	end
-	
-  elseif SV.team_dark.Status == 1 then
-    UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Line_003']))
-	
-  elseif SV.team_dark.Status == 3 then
-    
   local questname = "QuestIce"
   local quest = SV.missions.Missions[questname]
-	
+  
   if quest == nil then
     UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Help_Line_001']))
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GangOut_Line_001']))
 	
 	COMMON.CreateMission(questname,
 	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
       DestZone = "treacherous_mountain", DestSegment = 0, DestFloor = 9,
       FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("ninetales", 1, "normal", Gender.Male),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("sneasel", 0, "normal", Gender.Male) }
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("sneasel", 1, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("sneasel", 0, "normal", Gender.Male)
+	}
 	)
-  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Help_Line_002']))
-  else
-    rest_stop.Ice_Complete()
+  else if quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GangOut_Line_002']))
+    else
+      rest_stop.Ice_Complete()
+    end
   end
-	
-  elseif SV.team_dark.Status == 4 then
-    UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Line_004']))
-	
-  elseif SV.team_dark.Status == 5 then
-    UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Line_004']))
-	
+  
+  elseif SV.team_dark.Status == 2 then
+    
+	UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GangOut_Line_003']))
   end
+  
 end
 
-function rest_stop.Separate()
-  local strategy = CH('NPC_Strategy')
-  local goals = CH('NPC_Goals')
-  local player = CH('PLAYER')
-  
-  UI:SetSpeaker(strategy)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_001']))
-  
-  UI:SetSpeaker(goals)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Line_001']))
-  
-  UI:SetSpeaker(strategy)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_002']))
-  
-  UI:SetSpeaker(goals)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Line_002']))
-  
-  SV.team_psychic.SpokenTo = true
-end
 
 function rest_stop.Ice_Complete()
-  local goals = CH('NPC_Goals')
+  local gang_in = CH('NPC_GangIn')
+  local gang_out = CH('NPC_GangOut')
   local player = CH('PLAYER')
   
-  UI:SetSpeaker(goals)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Done_Line_001']))
+  UI:SetSpeaker(gang_out)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GangOut_Done_Line_001']))
+  UI:SetSpeaker(gang_in)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GangIn_Done_Line_001']))
+  
+  
+  UI:SetSpeaker(gang_out)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GangOut_Done_Line_002']))
+  
+  -- turn to player
+  UI:SetSpeaker(gang_out)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GangOut_Done_Line_003']))
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_ice_silk")
   COMMON.GiftItem(player, receive_item)
@@ -785,7 +777,7 @@ function rest_stop.Ice_Complete()
   
   COMMON.CompleteMission("QuestIce")
   
-  SV.team_dark.Status = 5
+  SV.team_dark.Status = 2
 end
 
 function rest_stop.North_Exit_Touch(obj, activator)

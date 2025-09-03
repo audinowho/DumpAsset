@@ -85,9 +85,15 @@ function forest_camp.SetupNpcs()
     local parent = CH('NPC_Parent')
 	GROUND:EntTurn(parent, Direction.Right)
 	local camps = CH('NPC_Camps')
-	GROUND:TeleportTo(camps, 200, 336, Direction.Left)
+	GROUND:TeleportTo(camps, 248, 336, Direction.Left)
   elseif SV.forest_child.Status == 3 then
     GROUND:Unhide("NPC_Child")
+  elseif SV.forest_child.Status >= 4 then
+    local parent = CH('NPC_Parent')
+	GROUND:EntTurn(parent, Direction.DownRight)
+	GROUND:Unhide("NPC_Child")
+	local child = CH('NPC_Child')
+	GROUND:TeleportTo(child, 408, 368, Direction.Down)
   end
   
 
@@ -221,7 +227,7 @@ function forest_camp.Snorlax_Action(chara, activator)
   
   UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Ask'], name), true)
   UI:WaitForChoice()
-  ch = UI:ChoiceResult()
+  local ch = UI:ChoiceResult()
   
   if ch then
     UI:SetSpeaker(chara)
@@ -415,7 +421,7 @@ function forest_camp.NPC_Camps_Action(chara, activator)
     forest_camp.Sick_Child()
   elseif SV.forest_child.Status == 2 then
     forest_camp.Sick_Child()
-  elseif SV.forest_child.Status == 3 then
+  else
     forest_camp.Talk_Camps()
   end
   
@@ -442,14 +448,24 @@ function forest_camp.NPC_Parent_Action(chara, activator)
     forest_camp.Sick_Child()
   elseif SV.forest_child.Status == 3 then
     forest_camp.Parent_Child()
+  else
+    local parent = CH('NPC_Parent')
+	GROUND:CharTurnToChar(parent,CH('PLAYER'))
+    UI:SetSpeaker(parent)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Parent_Line_001']))
   end
 end
 
 function forest_camp.NPC_Child_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  forest_camp.Parent_Child()
+  if SV.forest_child.Status >= 4 then
+    forest_camp.Child_Secret()
+  else
+    forest_camp.Parent_Child()
+  end
 end
+
 
 
 function forest_camp.Parent_Child()
@@ -476,10 +492,10 @@ function forest_camp.Parent_Child()
   
   GROUND:CharTurnToChar(player, parent)
   UI:SetSpeaker(parent)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_004']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_After_Line_001'], _DATA.Save.ActiveTeam.Name))
   GROUND:CharTurnToChar(player, child)
   UI:SetSpeaker(child)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_005']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_After_Line_002']))
   
   end
 end
@@ -492,6 +508,8 @@ function forest_camp.Sick_Child()
   local questname = "QuestGrass"
   local quest = SV.missions.Missions[questname]
   
+  local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("sickly_hollow")
+  
   if quest == nil then
     local parent = CH('NPC_Parent')
     local camps = CH('NPC_Camps')
@@ -501,7 +519,7 @@ function forest_camp.Sick_Child()
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_001']))
 
     UI:SetSpeaker(camps)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_002'], zone_summary:GetColoredName()))
 
     GROUND:CharTurnToChar(player, camps)
     GROUND:CharTurnToChar(player, parent)
@@ -525,7 +543,7 @@ function forest_camp.Sick_Child()
       local camps = CH('NPC_Camps')
       UI:SetSpeaker(camps)
       GROUND:CharTurnToChar(camps,CH('PLAYER'))
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_004']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_004'], zone_summary:GetColoredName()))
     else
       forest_camp.Grass_Complete()
     end
@@ -536,7 +554,7 @@ function forest_camp.Sick_Child()
     local parent = CH('NPC_Parent')
     UI:SetSpeaker(parent)
     GROUND:CharTurnToChar(parent,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_003']))
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Done_Line_001']))
   end
 end
 
@@ -644,6 +662,220 @@ function forest_camp.NPC_Solo_Action(chara, activator)
   
 end
 
+forest_camp.guiding = false
+function forest_camp.Child_Secret()
+  
+  local child = CH('NPC_Child')
+  GROUND:CharTurnToChar(child,CH('PLAYER'))
+  UI:SetSpeaker(child)
+  if SV.forest_child.Status >= 5 then
+    --ask the revisit qustion
+	local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("secret_garden")
+    UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Ask_Again']), false)
+  else
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Line_001']))
+	
+    UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Ask']), false)
+  end
+  
+  -- set to "started showing secret garden"
+  SV.forest_child.Status = 5
+  
+  UI:WaitForChoice()
+  local ch = UI:ChoiceResult()
+  
+  if ch then
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Checkpoint_001']))
+	
+	-- make the sunkern intangible
+	child.CollisionDisabled = true
+	
+	-- move the sunkern in
+	GROUND:MoveToPosition(child, 424, 384, false, 2)
+    GROUND:MoveToPosition(child, 472, 384, false, 2)
+	
+	GROUND:Unhide("NPC_Child")
+	
+	--activate checkpoint 1
+	GROUND:Unhide("Guide_1")
+	GROUND:Unhide("Guide_2")
+	GROUND:Unhide("Guide_3")
+	GROUND:Unhide("Guide_4")
+	
+	forest_camp.guiding = true
+  end
+end
+
+function forest_camp.Guide_1_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  -- give the next instructions
+  local child = CH('NPC_Child')
+  UI:SetSpeaker(child)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Checkpoint_002']))
+  GROUND:Hide("Guide_1")
+end
+
+function forest_camp.Guide_2_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  -- give the next instructions
+  local child = CH('NPC_Child')
+  UI:SetSpeaker(child)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Checkpoint_003']))
+  GROUND:Hide("Guide_2")
+end
+
+function forest_camp.Guide_3_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  -- give the next instructions
+  local child = CH('NPC_Child')
+  UI:SetSpeaker(child)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Checkpoint_004']))
+  GROUND:Hide("Guide_3")
+end
+
+function forest_camp.Guide_4_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  -- give the next instructions
+  local child = CH('NPC_Child')
+  UI:SetSpeaker(child)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Checkpoint_005']))
+  GROUND:Hide("Guide_4")
+end
+
+function forest_camp.Secret_Mistake()
+
+  if forest_camp.guiding == true then
+    local child = CH('NPC_Child')
+    UI:SetSpeaker(child)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Mistake_001']))
+	
+	forest_camp.Secret_End()
+  end
+end
+
+
+function forest_camp.Secret_Complete()
+
+  if forest_camp.guiding == true then
+    local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("secret_garden")
+    local child = CH('NPC_Child')
+    UI:SetSpeaker(child)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Complete_001'], zone_summary:GetColoredName()))
+	
+	if SV.forest_child.Status == 5 then
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Complete_002'], zone_summary:GetColoredName()))
+	  SV.forest_child.Status = 6
+	end
+	
+	forest_camp.Secret_End()
+  end
+end
+
+function forest_camp.Secret_End()
+  local child = CH('NPC_Child')
+  
+  -- move the child back
+  GROUND:Unhide("NPC_Child")
+  child.CollisionDisabled = false
+  GROUND:MoveToPosition(child, 424, 384, false, 2)
+  GROUND:MoveToPosition(child, 408, 368, false, 2)
+  GROUND:EntTurn(child, Direction.Down)
+  
+  GROUND:Hide("Guide_1")
+  GROUND:Hide("Guide_2")
+  GROUND:Hide("Guide_3")
+  GROUND:Hide("Guide_4")
+  forest_camp.guiding = false
+end
+
+function forest_camp.Reset_Gate_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:Unhide("Block_Gate_Up")
+  GROUND:Unhide("Block_Gate_Down")
+  GROUND:Unhide("Open_Gate")
+  GROUND:Hide("Block_Gate_1")
+  GROUND:Hide("Block_Gate_2")
+  GROUND:Unhide("Close_Gate_1")
+  GROUND:Unhide("Close_Gate_2")
+  GROUND:Unhide("Close_Gate_5")
+end
+
+function forest_camp.Open_Gate_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:Hide("Block_Gate_Up")
+  GROUND:Hide("Block_Gate_Down")
+  GROUND:Hide("Close_Gate_1")
+  GROUND:Hide("Close_Gate_2")
+end
+
+function forest_camp.Close_Gate_1_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:Unhide("Block_Gate_1")
+  forest_camp.Secret_Mistake()
+end
+
+function forest_camp.Close_Gate_2_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:Unhide("Block_Gate_1")
+  forest_camp.Secret_Mistake()
+end
+
+
+function forest_camp.Close_Gate_3_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:Unhide("Block_Gate_2")
+  forest_camp.Secret_Mistake()
+end
+
+function forest_camp.Close_Gate_4_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:Unhide("Block_Gate_2")
+  forest_camp.Secret_Mistake()
+end
+
+
+function forest_camp.Close_Gate_5_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:Hide("Open_Gate")
+  forest_camp.Secret_Mistake()
+end
+
+function forest_camp.Close_Gate_6_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:Hide("Open_Gate")
+  forest_camp.Secret_Mistake()
+end
+
+function forest_camp.Pre_Open_Gate_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  GROUND:Hide("Close_Gate_5")
+end
+
+
+function forest_camp.Secret_Exit_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  COMMON.UnlockWithFanfare("secret_garden", false)
+  
+  forest_camp.Secret_Complete()
+  
+  local dungeon_entrances = { 'secret_garden' }
+  local ground_entrances = { }
+  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+end
 
 function forest_camp.Teammate1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

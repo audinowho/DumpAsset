@@ -60,7 +60,11 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
         else
           post_mob.Tactic = "boss"
         end
-        post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level + 5)
+		local target_level = mission.TargetLevel
+		if target_level == nil then
+		  target_level = _ZONE.CurrentZone.Level + 5
+		end
+        post_mob.Level = RogueElements.RandRange(target_level)
         post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
         local boost = PMDC.LevelGen.MobSpawnBoost()
         boost.MaxHPBonus = _ZONE.CurrentZone.Level + 20
@@ -140,18 +144,22 @@ function ZONE_GEN_SCRIPT.SpawnMissionNpcFromSV(zoneContext, context, queue, seed
         end
       else
         post_mob.Tactic = "slow_patrol"
+		local target_level = mission.TargetLevel
+		if target_level == nil then
+		  target_level = _ZONE.CurrentZone.Level - 5
+		end
         if mission.Type == COMMON.SIDEQUEST_TYPE_RESCUE then -- rescue
-          post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)
+          post_mob.Level = RogueElements.RandRange(target_level)
           local dialogue = RogueEssence.Dungeon.BattleScriptEvent("SidequestRescueReached")
           post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
           post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
         elseif mission.Type == COMMON.SIDEQUEST_TYPE_ESCORT then -- escort
-          post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level - 5)
+          post_mob.Level = RogueElements.RandRange(target_level)
           local dialogue = RogueEssence.Dungeon.BattleScriptEvent("SidequestEscortReached")
           post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
           post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable(Serpent.line({ Mission = name })))
         elseif mission.Type == COMMON.SIDEQUEST_TYPE_ESCORT_OUT then -- escort
-          post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level // 2)
+          post_mob.Level = RogueElements.RandRange(target_level)
           local dialogue = RogueEssence.Dungeon.BattleScriptEvent("SidequestEscortOutReached", Serpent.line(mission.EscortTable))
           post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
           post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnMovesOff(0))

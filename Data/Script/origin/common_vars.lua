@@ -59,6 +59,7 @@ function COMMON.UpdateDayEndVars()
           DestZone = "overgrown_wilds",
           DestSegment = 1,
           DestFloor = 1,
+		  TargetLevel = 35,
           FloorUnknown = true,
           TargetSpecies = RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male),
@@ -98,13 +99,14 @@ function COMMON.UpdateDayEndVars()
     end
 	
 	-- TODO: should be wayward_wetlands
-    if _DATA.Save:GetDungeonUnlock("veiled_ridge") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+    if _DATA.Save:GetDungeonUnlock("wayward_wetlands") ~= RogueEssence.Data.GameProgress.UnlockState.None then
       if SV.missions.Missions["EscortPet"] == nil and SV.missions.FinishedMissions["EscortPet"] == nil then
 	    COMMON.CreateMission("EscortPet",
         {
-          DestZone = "veiled_ridge",
-          DestSegment = 1,
-          DestFloor = 1,
+          DestZone = "wayward_wetlands",
+          DestSegment = 0,
+          DestFloor = 10,
+		  TargetLevel = 35,
           FloorUnknown = true,
           TargetSpecies = RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male),
@@ -182,10 +184,12 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.town_elder, 1)
   end
   
-  if SV.forest_child.Status == 0 and SV.forest_child.SpokenTo and SV.rest_stop.ExpositionComplete then
+  if SV.forest_child.Status == 0 and SV.forest_child.SpokenTo and _DATA.Save:GetDungeonUnlock("sickly_hollow") ~= RogueEssence.Data.GameProgress.UnlockState.None then
     COMMON.UpdateCheckpointStatus(SV.forest_child, 3)
   elseif SV.forest_child.Status == 2 then
     COMMON.UpdateCheckpointStatus(SV.forest_child, 1)
+  elseif SV.forest_child.Status == 3 then
+    COMMON.UpdateCheckpointStatus(SV.forest_child, 5)
   end
   
   if SV.team_catch.Status == 0 and SV.team_catch.SpokenTo then
@@ -280,10 +284,9 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
   elseif SV.team_psychic.Status == 1 and SV.rest_stop.ExpositionComplete then
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
-  elseif SV.team_psychic.Status == 2 and SV.team_psychic.SpokenTo then
+  elseif SV.team_psychic.Status == 2 and _DATA.Save:GetDungeonUnlock("relic_tower") ~= RogueEssence.Data.GameProgress.UnlockState.None then
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
-    COMMON.UpdateCheckpointStatus(SV.team_dark, 1)
-  elseif SV.team_psychic.Status == 3 and _DATA.Save:GetDungeonUnlock("relic_tower") ~= RogueEssence.Data.GameProgress.UnlockState.None then
+  elseif SV.team_psychic.Status == 3 then
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 2)
   elseif SV.team_psychic.Status == 5 then
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
@@ -291,16 +294,15 @@ function COMMON.UpdateDayEndVars()
 	SV.team_psychic.Cycle = math.random(3, 6)
   end
   
-  if SV.team_dark.Status == 1 then
+  if SV.team_dark.Status == 0 and _DATA.Save:GetDungeonUnlock("treacherous_mountain") == RogueEssence.Data.GameProgress.UnlockState.Completed then
     COMMON.UpdateCheckpointStatus(SV.team_dark, 3)
   elseif SV.team_dark.Status == 2 then
-    COMMON.UpdateCheckpointStatus(SV.team_dark, 3)
-  elseif SV.team_dark.Status == 4 then
     COMMON.UpdateCheckpointStatus(SV.team_dark, 1)
-  elseif SV.team_dragon.Status == 5 then
-	SV.team_dragon.Cycle = math.random(3, 6)
+  --elseif SV.team_dark.Status == 3 and bandit kings defeated then
+  --  COMMON.UpdateCheckpointStatus(SV.team_dark, 1)
+  elseif SV.team_dark.Status == 4 then
+	SV.team_dark.Cycle = math.random(3, 6)
   end
-  
   
   if SV.team_dragon.Status == 0 and SV.team_dragon.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_dragon, 1)

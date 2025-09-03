@@ -243,7 +243,10 @@ SV.forest_child =
   --0 = Forest Camp, talking about playing
   --1 = Forest Camp, sick.  Mission given
   --2 = Forest Camp, recovering
-  --3 = Post-recovery, also plays catch with the kids sometimes
+  --3 = Post-recovery
+  --4 = ready to show secret garden
+  --5 = asked to show secret garden already
+  --6 = successfully showed secret garden
   Status = 0,
   SpokenTo = false,
   DaysSinceCheckpoint = 0
@@ -384,9 +387,9 @@ SV.team_solo =
 
 SV.team_psychic =
 {
-  --0 = Ravine Camp, strategizing about sleeping caldera
+  --0 = Ravine Camp, strategizing about depleted basin
   --1 = Ravine Camp, strategizing about copper quary
-  --2 = Cave Camp, splitting due to different wants
+  --2 = Ravine Camp, strategizing about forsaken desert
   --3 = Ravine Camp, strategizing about relic tower
   --4 = Ravine Camp, needs your help with kirlia at relic tower
   --5 = Ravine Camp, thanks for rescue at relic tower
@@ -405,12 +408,11 @@ SV.team_psychic =
 
 SV.team_dark =
 {
-  --0 = Not yet started
-  --1 = In Cave Camp, pushing for the next dungeon
-  --2 = Disappeared
-  --3 = Returned, needs mission
-  --4 = Mission complete
-  --5 = Ended
+  --0 = Didn't appear yet
+  --1 = Rest Camp, wants you to kidnap someone.  Mission given
+  --2 = Rest Camp, reunited with cousin
+  --3 = Disappeared
+  --4 = Cycling?  Only after the bandit clans are taken away.
   Status = 0,
   SpokenTo = false,
   DaysSinceCheckpoint = 0,

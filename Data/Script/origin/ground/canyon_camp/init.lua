@@ -144,14 +144,11 @@ function canyon_camp.SetupNpcs()
     GROUND:Unhide("NPC_Solo")
   end
   
-  if SV.team_psychic.Status == 0 or SV.team_psychic.Status == 1 then
+  if SV.team_psychic.Status <= 3 then
     GROUND:Unhide("NPC_Strategy")
-    GROUND:Unhide("NPC_Goals")
-  elseif SV.team_psychic.Status == 3 then
-    GROUND:Unhide("NPC_Strategy")
-    GROUND:Unhide("NPC_Brains")
+    GROUND:Unhide("NPC_Curious")
   elseif SV.team_psychic.Status == 4 then
-    GROUND:Unhide("NPC_Brains")
+    GROUND:Unhide("NPC_Curious")
 	
 	local questname = "QuestPsychic"
     local quest = SV.missions.Missions[questname]
@@ -160,11 +157,11 @@ function canyon_camp.SetupNpcs()
 	end
   elseif SV.team_psychic.Status == 5 then
     GROUND:Unhide("NPC_Strategy")
-    GROUND:Unhide("NPC_Brains")
+    GROUND:Unhide("NPC_Curious")
   elseif SV.team_psychic.Status == 6 then
     -- TODO cycling
     GROUND:Unhide("NPC_Strategy")
-    GROUND:Unhide("NPC_Brains")
+    GROUND:Unhide("NPC_Curious")
   end
   
   if SV.team_dragon.Status == 0 then
@@ -1030,23 +1027,64 @@ function canyon_camp.NPC_NextCamp_Action(chara, activator)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Desert_Line_001']))
 	COMMON.UnlockWithFanfare("forsaken_desert", false)
   else
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Desert_Line_002']))
+    local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("forsaken_desert")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Desert_Line_002'], zone_summary:GetColoredName()))
   end
 end
   
   
-function canyon_camp.NPC_Goals_Action(chara, activator)
+function canyon_camp.NPC_Curious_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   local player = CH('PLAYER')
   
   if SV.team_psychic.Status == 0 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Curious_Line_001']))
 	
   elseif SV.team_psychic.Status == 1 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Goals_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Curious_Line_002']))
+  elseif SV.team_psychic.Status == 2 then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Curious_Line_003']))
+  elseif SV.team_psychic.Status == 3 then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Curious_Line_004']))
+	
+  elseif SV.team_psychic.Status == 4 then
+	
+  local questname = "QuestPsychic"
+  local quest = SV.missions.Missions[questname]
+	
+  if quest == nil then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Curious_Line_005']))
+	
+	COMMON.CreateMission(questname,
+	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
+      DestZone = "relic_tower", DestSegment = 0, DestFloor = 8,
+      FloorUnknown = false,
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("kirlia", 0, "normal", Gender.Male),
+      ClientSpecies = RogueEssence.Dungeon.MonsterID("meowstic", 0, "normal", Gender.Male) }
+	)
+  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+    UI:SetSpeaker(chara)
+    GROUND:CharTurnToChar(chara,player)
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Curious_Line_006']))
+  else
+    canyon_camp.Psychic_Complete()
+  end
+	
+  elseif SV.team_psychic.Status == 5 then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Curious_Line_007']))
+	
+  elseif SV.team_psychic.Status == 6 then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Curious_Line_007']))
+	
   end
 end
 
@@ -1064,65 +1102,24 @@ function canyon_camp.NPC_Strategy_Action(chara, activator)
     UI:SetSpeaker(chara)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_002']))
 	
-  elseif SV.team_psychic.Status == 3 then
+  elseif SV.team_psychic.Status == 2 then
     UI:SetSpeaker(chara)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_003']))
+	
+  elseif SV.team_psychic.Status == 3 then
+    UI:SetSpeaker(chara)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_004']))
 	
 	SV.team_psychic.SpokenTo = true
   elseif SV.team_psychic.Status == 4 then
 	canyon_camp.Psychic_Complete()
   elseif SV.team_psychic.Status == 5 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_004']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_005']))
 	
   elseif SV.team_psychic.Status == 6 then
     UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_004']))
-	
-  end
-end
-
-function canyon_camp.NPC_Brains_Action(chara, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  local player = CH('PLAYER')
-  
-  if SV.team_psychic.Status == 3 then
-    UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Brains_Line_001']))
-	
-  elseif SV.team_psychic.Status == 4 then
-	
-  local questname = "QuestPsychic"
-  local quest = SV.missions.Missions[questname]
-	
-  if quest == nil then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Brains_Line_002']))
-	
-	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
-      DestZone = "relic_tower", DestSegment = 0, DestFloor = 8,
-      FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("kirlia", 0, "normal", Gender.Male),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("girafarig", 0, "normal", Gender.Male) }
-	)
-  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Brains_Line_003']))
-  else
-    canyon_camp.Psychic_Complete()
-  end
-	
-  elseif SV.team_psychic.Status == 5 then
-    UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Brains_Line_004']))
-	
-  elseif SV.team_psychic.Status == 6 then
-    UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Brains_Line_004']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Strategy_Line_005']))
 	
   end
 end

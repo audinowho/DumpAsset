@@ -1,7 +1,50 @@
 require 'origin.common'
 
 local forest_camp = {}
+--------------------------------------------------
+-- Variables
+--------------------------------------------------
+local helper = {}
 
+-- north
+local NORTH_DUN_ENTRANCES = {
+'faded_trail', 'bramble_woods', 'trickster_woods', 'overgrown_wilds', 
+'moonlit_courtyard', 'ambush_forest', 'tiny_tunnel', 'energy_garden',
+'sickly_hollow', 'secret_garden'}
+local NORTH_GRO_ENTRANCES = {
+  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=0},
+  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
+  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
+  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
+  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}
+}
+
+-- south
+local SOUTH_DUN_ENTRANCES = {}
+local SOUTH_GRO_ENTRANCES = {
+  {Flag=true,Zone='guildmaster_island',ID=1,Entry=3}
+}
+--------------------------------------------------
+-- Helpers
+--------------------------------------------------
+-- these should probably be stuffed in some common location!
+function helper.HelperDeepClone(target)
+  local clone = {}
+  if target then
+    for i=1,#target do
+      clone[#clone+1] = target[i]
+    end
+  end
+  return clone
+end
+
+function helper.HelperMerge(tableAddedTo, tableTakenFrom)
+  if tableAddedTo and tableTakenFrom then
+    for i=1,#tableTakenFrom do
+      tableAddedTo[#tableAddedTo+1] = tableTakenFrom[i]
+    end
+  end
+end
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
@@ -185,23 +228,16 @@ end
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
-function forest_camp.North_Exit_Touch(obj, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  local dungeon_entrances = { 'faded_trail', 'bramble_woods', 'trickster_woods', 'overgrown_wilds', 'moonlit_courtyard', 'ambush_forest', 'tiny_tunnel', 'energy_garden', 'sickly_hollow', 'secret_garden'}
-  local ground_entrances = {{Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=0},
-  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
-  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
-  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
-  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
-end
-
-function forest_camp.South_Exit_Touch(obj, activator)
+function forest_camp.North_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local dungeon_entrances = { }
-  local ground_entrances = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  COMMON.JuncPatchSupport(obj, activator, newDunEnts, newGroEnts, NORTH_DUN_ENTRANCES, NORTH_GRO_ENTRANCES)
+end
+
+function forest_camp.South_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  COMMON.JuncPatchSupport(obj, activator, newDunEnts, newGroEnts, SOUTH_DUN_ENTRANCES, SOUTH_GRO_ENTRANCES)
 end
 
 function forest_camp.Assembly_Action(obj, activator)
@@ -288,8 +324,6 @@ function forest_camp.NPC_Carry_Action(chara, activator)
     UI:SetSpeakerEmotion("Angry")
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_001']))
     UI:SetSpeakerEmotion("Stunned")
-	
-	--local skill_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Skill]:Get("wake_up_slap")
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_002']))
     GROUND:EntTurn(chara, Direction.Left)
   elseif SV.supply_corps.Status >= 20 then

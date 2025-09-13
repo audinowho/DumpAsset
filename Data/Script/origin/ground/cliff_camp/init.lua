@@ -1,7 +1,24 @@
 require 'origin.common'
 
 local cliff_camp = {}
+--------------------------------------------------
+-- Variables
+--------------------------------------------------
+local EAST_DUN_ENTRANCES = {
+'fertile_valley', 'flyaway_cliffs', 'wayward_wetlands', 'deserted_fortress',
+ 'bravery_road', 'geode_crevice', 'the_sky' }
+local EAST_GRO_ENTRANCES = {
+  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
+  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
+  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
+  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}
+}
 
+local WEST_DUN_ENTRANCES = {}
+local WEST_GRO_ENTRANCES = {
+  {Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
+  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2}
+}
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
@@ -259,24 +276,16 @@ end
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
-function cliff_camp.East_Exit_Touch(obj, activator)
+function cliff_camp.East_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  UI:ResetSpeaker()
   
-  local dungeon_entrances = { 'fertile_valley', 'flyaway_cliffs', 'wayward_wetlands', 'deserted_fortress', 'bravery_road', 'geode_crevice', 'the_sky' }
-  local ground_entrances = {{Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
-  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
-  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
-  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  COMMON.JuncPatchSupport(obj, activator, newDunEnts, newGroEnts, EAST_DUN_ENTRANCES, EAST_GRO_ENTRANCES)
 end
 
-function cliff_camp.West_Exit_Touch(obj, activator)
+function cliff_camp.West_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  local dungeon_entrances = { }
-  local ground_entrances = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
-  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  
+  COMMON.JuncPatchSupport(obj, activator, newDunEnts, newGroEnts, WEST_DUN_ENTRANCES, WEST_GRO_ENTRANCES)
 end
 
 

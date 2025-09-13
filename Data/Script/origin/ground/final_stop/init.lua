@@ -1,6 +1,25 @@
 require 'origin.common'
 
 local final_stop = {}
+--------------------------------------------------
+-- Variables
+--------------------------------------------------
+-- north
+local NORTH_DUN_ENTRANCES = {
+'champions_road', 'barren_tundra', 'cave_of_solace', 'labyrinth_of_the_lost' }
+local NORTH_GRO_ENTRANCES = {
+  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}
+}
+
+-- south
+local SOUTH_DUN_ENTRANCES = {}
+local SOUTH_GRO_ENTRANCES = {
+  {Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
+  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
+  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2},
+  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=2},
+  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=2}
+}
 
 --------------------------------------------------
 -- Map Callbacks
@@ -630,23 +649,16 @@ function final_stop.NPC_Forbidden_Action(chara, activator)
   end
 end
 
-function final_stop.North_Exit_Touch(obj, activator)
+function final_stop.North_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local dungeon_entrances = { 'champions_road', 'barren_tundra', 'cave_of_solace', 'labyrinth_of_the_lost' }
-  local ground_entrances = {{Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  COMMON.JuncPatchSupport(obj, activator, newDunEnts, newGroEnts, NORTH_DUN_ENTRANCES, NORTH_GRO_ENTRANCES)
 end
 
-function final_stop.South_Exit_Touch(obj, activator)
+function final_stop.South_Exit_Touch(obj, activator, newDunEnts, newGroEnts)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  local dungeon_entrances = { }
-  local ground_entrances = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
-  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
-  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2},
-  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=2},
-  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=2}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  
+  COMMON.JuncPatchSupport(obj, activator, newDunEnts, newGroEnts, SOUTH_DUN_ENTRANCES, SOUTH_GRO_ENTRANCES)
 end
 
 

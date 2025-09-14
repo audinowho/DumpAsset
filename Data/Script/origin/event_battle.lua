@@ -684,7 +684,6 @@ function BATTLE_SCRIPT.TutorTalk(owner, ownerChar, context, args)
 		  DUNGEON:CharTurnToChar(context.User, context.Target)
 		  
 		  tbl.TaughtMove = true
-		  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_VISIT"):ToLocal()))
 		else
 		  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_DECLINE"):ToLocal(), skill_data:GetIconName()))
 		end

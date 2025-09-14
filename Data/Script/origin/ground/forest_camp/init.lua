@@ -187,7 +187,7 @@ end
 --------------------------------------------------
 function forest_camp.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  local dungeon_entrances = { 'faded_trail', 'bramble_woods', 'trickster_woods', 'overgrown_wilds', 'moonlit_courtyard', 'ambush_forest', 'tiny_tunnel', 'energy_garden', 'sickly_hollow', 'secret_garden'}
+  local dungeon_entrances = { 'faded_trail', 'bramble_woods', 'trickster_woods', 'overgrown_wilds', 'moonlit_courtyard', 'ambush_forest', 'tiny_tunnel', 'energy_garden', 'sickly_hollow'}
   local ground_entrances = {{Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=0},
   {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
   {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
@@ -418,9 +418,9 @@ function forest_camp.NPC_Camps_Action(chara, activator)
   if SV.forest_child.Status == 0 then
     forest_camp.Talk_Camps()
   elseif SV.forest_child.Status == 1 then
-    forest_camp.Sick_Child()
+    forest_camp.Sick_Child(chara)
   elseif SV.forest_child.Status == 2 then
-    forest_camp.Sick_Child()
+    forest_camp.Sick_Child(chara)
   else
     forest_camp.Talk_Camps()
   end
@@ -443,9 +443,9 @@ function forest_camp.NPC_Parent_Action(chara, activator)
   if SV.forest_child.Status == 0 then
     forest_camp.Parent_Child()
   elseif SV.forest_child.Status == 1 then
-    forest_camp.Sick_Child()
+    forest_camp.Sick_Child(chara)
   elseif SV.forest_child.Status == 2 then
-    forest_camp.Sick_Child()
+    forest_camp.Sick_Child(chara)
   elseif SV.forest_child.Status == 3 then
     forest_camp.Parent_Child()
   else
@@ -492,7 +492,7 @@ function forest_camp.Parent_Child()
   
   GROUND:CharTurnToChar(player, parent)
   UI:SetSpeaker(parent)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_After_Line_001'], _DATA.Save.ActiveTeam.Name))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_After_Line_001'], child:GetDisplayName(), _DATA.Save.ActiveTeam.Name))
   GROUND:CharTurnToChar(player, child)
   UI:SetSpeaker(child)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_After_Line_002']))
@@ -500,31 +500,60 @@ function forest_camp.Parent_Child()
   end
 end
 
-function forest_camp.Sick_Child()
+function forest_camp.Sick_Child(chara)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+    local parent = CH('NPC_Parent')
+    local child = CH('NPC_Child')
+    local camps = CH('NPC_Camps')
+    local player = CH('PLAYER')
+	
   if SV.forest_child.Status == 1 then
   
   local questname = "QuestGrass"
   local quest = SV.missions.Missions[questname]
   
   local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("sickly_hollow")
+
   
   if quest == nil then
-    local parent = CH('NPC_Parent')
-    local camps = CH('NPC_Camps')
-    local player = CH('PLAYER')
+
 
     UI:SetSpeaker(parent)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_001'], child:GetDisplayName()))
 
     UI:SetSpeaker(camps)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_002'], zone_summary:GetColoredName()))
+	
+    UI:SetSpeaker(parent)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_003'], zone_summary:GetColoredName()))
 
-    GROUND:CharTurnToChar(player, camps)
-    GROUND:CharTurnToChar(player, parent)
+    UI:SetSpeaker(camps)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_004']))
+
+    UI:SetSpeaker(parent)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_005'], zone_summary:GetColoredName()))
+
+    UI:SetSpeaker(camps)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_006']))
+	
+	-- sweating
+	
+    GROUND:CharTurnToChar(camps, player)
+    GROUND:CharTurnToChar(parent, player)
+	local experienced = false
+	
+    UI:SetSpeaker(camps)
+	if experienced then
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_007_Skilled'], _DATA.Save.ActiveTeam.Name, zone_summary:GetColoredName()))
+	else
+	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_007'], _DATA.Save.ActiveTeam.Name, zone_summary:GetColoredName()))
+	end
+	
+    UI:SetSpeaker(camps)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_008'], zone_summary:GetColoredName(), child:GetDisplayName()))
+
     local destFloor = 10
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_003'], tostring(destFloor+1)))
 
 	
     COMMON.CreateMission(questname,
@@ -541,36 +570,57 @@ function forest_camp.Sick_Child()
 	
     if quest.Complete == COMMON.MISSION_INCOMPLETE then
       local camps = CH('NPC_Camps')
-      UI:SetSpeaker(camps)
-      GROUND:CharTurnToChar(camps,CH('PLAYER'))
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_004'], zone_summary:GetColoredName()))
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	  
+	  if chara == camps then
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Camps_Sickness_Line_001'], quest.DestFloor, zone_summary:GetColoredName()))
+	  else
+	    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Parent_Sickness_Line_001']))
+	  end
     else
       forest_camp.Grass_Complete()
     end
   end
   
   elseif SV.forest_child.Status == 2 then
-    
-    local parent = CH('NPC_Parent')
-    UI:SetSpeaker(parent)
-    GROUND:CharTurnToChar(parent,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Done_Line_001']))
+  
+      local camps = CH('NPC_Camps')
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+	  
+	  if chara == camps then
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Done_Line_001'], child:GetDisplayName()))
+	  else
+	    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Done_Line_002']))
+	  end
   end
 end
 
 function forest_camp.Grass_Complete()
-	local parent = CH('NPC_Parent')
-	local camps = CH('NPC_Camps')
-	local player = CH('PLAYER')
+  local parent = CH('NPC_Parent')
+  local child = CH('NPC_Child')
+  local camps = CH('NPC_Camps')
+  local player = CH('PLAYER')
   
   GROUND:CharTurnToChar(parent,player)
   GROUND:CharTurnToChar(camps,player)
   
+  SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
+  GROUND:CharSetEmote(camps, "exclaim", 1)
+  
+  GAME:WaitFrames(40)
+  
   UI:SetSpeaker(camps)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_001']))
+  local quest_item = RogueEssence.Dungeon.InvItem("lost_item_grass")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_001'], quest_item:GetDisplayName()))
+  
+  --fade, sfx
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_002'], child:GetDisplayName()))
+  
   
   UI:SetSpeaker(parent)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_003'], _DATA.Save.ActiveTeam.Name))
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_grass_silk")
   COMMON.GiftItem(player, receive_item)
@@ -701,6 +751,8 @@ function forest_camp.Child_Secret()
 	GROUND:Unhide("Guide_2")
 	GROUND:Unhide("Guide_3")
 	GROUND:Unhide("Guide_4")
+	GROUND:Unhide("Guide_5")
+	GROUND:Unhide("Guide_End")
 	
 	forest_camp.guiding = true
   end
@@ -746,6 +798,22 @@ function forest_camp.Guide_4_Touch(obj, activator)
   GROUND:Hide("Guide_4")
 end
 
+function forest_camp.Guide_5_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  -- give the next instructions
+  local child = CH('NPC_Child')
+  UI:SetSpeaker(child)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Checkpoint_006']))
+  GROUND:Hide("Guide_5")
+end
+
+function forest_camp.Guide_End_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  forest_camp.Secret_Complete()
+end
+
 function forest_camp.Secret_Mistake()
 
   if forest_camp.guiding == true then
@@ -789,6 +857,8 @@ function forest_camp.Secret_End()
   GROUND:Hide("Guide_2")
   GROUND:Hide("Guide_3")
   GROUND:Hide("Guide_4")
+  GROUND:Hide("Guide_5")
+  GROUND:Hide("Guide_End")
   forest_camp.guiding = false
 end
 
@@ -797,7 +867,6 @@ function forest_camp.Reset_Gate_Touch(obj, activator)
   
   GROUND:Unhide("Block_Gate_Up")
   GROUND:Unhide("Block_Gate_Down")
-  GROUND:Unhide("Open_Gate")
   GROUND:Hide("Block_Gate_1")
   GROUND:Hide("Block_Gate_2")
   GROUND:Unhide("Close_Gate_1")
@@ -858,23 +927,27 @@ function forest_camp.Close_Gate_6_Touch(obj, activator)
   forest_camp.Secret_Mistake()
 end
 
-function forest_camp.Pre_Open_Gate_Touch(obj, activator)
-  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  GROUND:Hide("Close_Gate_5")
-end
-
 
 function forest_camp.Secret_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  COMMON.UnlockWithFanfare("secret_garden", false)
-  
-  forest_camp.Secret_Complete()
+  GAME:UnlockDungeon('secret_garden')
   
   local dungeon_entrances = { 'secret_garden' }
   local ground_entrances = { }
   COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+end
+
+
+function forest_camp.Assembly_Secret_Action(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  UI:ResetSpeaker()
+  COMMON.ShowTeamAssemblyMenu(obj, COMMON.RespawnAllies)
+end
+
+function forest_camp.Storage_Secret_Action(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  COMMON:ShowTeamStorageMenu()
 end
 
 function forest_camp.Teammate1_Action(chara, activator)

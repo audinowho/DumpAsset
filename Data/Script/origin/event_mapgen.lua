@@ -452,6 +452,7 @@ function FLOOR_GEN_SCRIPT.SpawnRandomTutor(map, args)
 	  post_mob.BaseForm = tutor_id
 	  post_mob.SpecifiedSkills:Add(tutor_move)
 	  
+	  post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnDiscriminator(args.Discriminator))
 	  post_mob.Tactic = "slow_patrol"
 	  post_mob.Level = RogueElements.RandRange(_ZONE.CurrentZone.Level + 5)
 	  local dialogue = RogueEssence.Dungeon.BattleScriptEvent("TutorTalk")

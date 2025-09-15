@@ -606,8 +606,10 @@ function BATTLE_SCRIPT.TutorTalk(owner, ownerChar, context, args)
 	
 	local tbl = LTBL(context.Target)
 	
+	
 	if tbl.TaughtMove ~= nil then
-	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_DONE"):ToLocal()))
+	  local talk_str = string.format("TALK_TUTOR_DONE_%04d", context.Target.Discriminator)
+	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(talk_str):ToLocal()))
 	  
 	  context.Target.CharDir = oldDir
 	  context.CancelState.Cancel = true
@@ -619,7 +621,8 @@ function BATTLE_SCRIPT.TutorTalk(owner, ownerChar, context, args)
 	
 	local already_learned = context.User:HasBaseSkill(move_idx)
 	if already_learned then
-	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_ALREADY"):ToLocal(), skill_data:GetIconName()))
+	  local talk_str = string.format("TALK_TUTOR_ALREADY_%04d", context.Target.Discriminator)
+	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(talk_str):ToLocal(), skill_data:GetIconName()))
 
 	  SV.base_town.TutorMoves[move_idx] = true
 		context.TurnCancel.Cancel = true
@@ -652,18 +655,21 @@ function BATTLE_SCRIPT.TutorTalk(owner, ownerChar, context, args)
 	  end
 	
 	if can_learn then
-		UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_ASK"):ToLocal(), skill_data:GetIconName()), false)
+	    local ask_str = string.format("TALK_TUTOR_ASK_%04d", context.Target.Discriminator)
+		UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey(ask_str):ToLocal(), skill_data:GetIconName()), false)
 		UI:WaitForChoice()
 		result = UI:ChoiceResult()
 		
 		if result then
-		  local replace_msg = STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_REPLACE"):ToLocal(), skill_data:GetIconName())
+		  local talk_str = string.format("TALK_TUTOR_REPLACE_%04d", context.Target.Discriminator)
+		  local replace_msg = STRINGS:Format(RogueEssence.StringKey(talk_str):ToLocal(), skill_data:GetIconName())
 		  result = COMMON.LearnMoveFlow(context.User, move_idx, replace_msg)
 		end
 		
 		if result then
 		  -- attempt to learn move
-		  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_ACCEPT"):ToLocal(), skill_data:GetIconName()))
+		  local talk_str = string.format("TALK_TUTOR_ACCEPT_%04d", context.Target.Discriminator)
+		  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(talk_str):ToLocal(), skill_data:GetIconName()))
 		  
 		  --attack in a 90-degree turn from the talk
 		  context.Target.CharDir = Direction.Down
@@ -685,14 +691,16 @@ function BATTLE_SCRIPT.TutorTalk(owner, ownerChar, context, args)
 		  
 		  tbl.TaughtMove = true
 		else
-		  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_DECLINE"):ToLocal(), skill_data:GetIconName()))
+		  local talk_str = string.format("TALK_TUTOR_DECLINE_%04d", context.Target.Discriminator)
+		  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(talk_str):ToLocal(), skill_data:GetIconName()))
 		end
 		
 		SV.base_town.TutorMoves[move_idx] = true
 		
 		context.TurnCancel.Cancel = true
 	else
-	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR"):ToLocal(), skill_data:GetIconName()))
+	  local talk_str = string.format("TALK_TUTOR_%04d", context.Target.Discriminator)
+	  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey(talk_str):ToLocal(), skill_data:GetIconName()))
 
 	  context.Target.CharDir = oldDir
 	  context.CancelState.Cancel = true

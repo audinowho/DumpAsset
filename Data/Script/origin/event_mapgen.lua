@@ -353,11 +353,7 @@ function FLOOR_GEN_SCRIPT.Mysteriosity(map, args)
 end
 
 function FLOOR_GEN_SCRIPT.SpawnRandomTutor(map, args)
-  
-  if SV.Experimental ~= true then
-    return
-  end
-  
+    
   local valid_moves = {}
   --iterate through all tutor moves
 

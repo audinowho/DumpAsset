@@ -661,8 +661,7 @@ function BATTLE_SCRIPT.TutorTalk(owner, ownerChar, context, args)
 		result = UI:ChoiceResult()
 		
 		if result then
-		  local talk_str = string.format("TALK_TUTOR_REPLACE_%04d", context.Target.Discriminator)
-		  local replace_msg = STRINGS:Format(RogueEssence.StringKey(talk_str):ToLocal(), skill_data:GetIconName())
+		  local replace_msg = STRINGS:Format(RogueEssence.StringKey("TALK_TUTOR_REPLACE"):ToLocal(), skill_data:GetIconName())
 		  result = COMMON.LearnMoveFlow(context.User, move_idx, replace_msg)
 		end
 		

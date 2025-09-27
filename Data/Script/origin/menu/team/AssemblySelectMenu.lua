@@ -8,6 +8,7 @@
 ]]
 require 'origin.menu.team.TeamSelectMenu'
 
+local monster_index = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]
 --- Menu for selecting a character from the assembly.
 AssemblySelectMenu = Class("AssemblySelectMenu", TeamSelectMenu)
 
@@ -81,10 +82,10 @@ end
 function AssemblySelectMenu:load_chars(_)
     local list = {}
 
-    self.assemblyIndexes = self:getSortedAssembly()
-    for char in luanet.each(LUA_ENGINE:MakeList(_DATA.Save.ActiveTeam.Players)) do table.insert(list, char) end
-    for index = 1, #self.assemblyIndexes, 1 do
-        local char = _DATA.Save.ActiveTeam.Assembly[self.assemblyIndexes[index]]
+    self.assemblyIndices = self:getSortedAssembly()
+    for char in luanet.each(_DATA.Save.ActiveTeam.Players) do table.insert(list, char) end
+    for index = 1, #self.assemblyIndices, 1 do
+        local char = GAME:GetPlayerAssemblyMember(self.assemblyIndices[index])
         table.insert(list, char)
     end
 
@@ -93,7 +94,7 @@ end
 
 function AssemblySelectMenu:getSortedAssembly()
     local sortedAssembly = {}
-    for i = 0, _DATA.Save.ActiveTeam.Assembly.Count-1, 1 do
+    for i = 0, GAME:GetPlayerAssemblyCount()-1, 1 do
         table.insert(sortedAssembly, i)
     end
     table.sort(sortedAssembly, function(a, b) return self:assemblyCompare(a, b) end)
@@ -101,10 +102,8 @@ function AssemblySelectMenu:getSortedAssembly()
 end
 
 function AssemblySelectMenu:assemblyCompare(a, b)
-    local assembly = _DATA.Save.ActiveTeam.Assembly
-
-    local char_a = assembly[a]
-    local char_b = assembly[b]
+    local char_a = GAME:GetPlayerAssemblyMember(a)
+    local char_b = GAME:GetPlayerAssemblyMember(b)
     if char_a.IsFavorite ~= char_b.IsFavorite then
         return char_a.IsFavorite
     end
@@ -114,9 +113,8 @@ function AssemblySelectMenu:assemblyCompare(a, b)
     elseif self.sort_mode == RogueEssence.Menu.AssemblyMenu.AssemblySortMode.Nickname then
         return char_a.BaseName < char_b.BaseName
     elseif self.sort_mode == RogueEssence.Menu.AssemblyMenu.AssemblySortMode.Species then
-        local monster = RogueEssence.Data.DataManager.DataType.Monster
-        local dex1 = _DATA.DataIndices[monster]:Get(char_a.BaseForm.Species).SortOrder
-        local dex2 = _DATA.DataIndices[monster]:Get(char_b.BaseForm.Species).SortOrder
+        local dex1 = monster_index:Get(char_a.BaseForm.Species).SortOrder
+        local dex2 = monster_index:Get(char_b.BaseForm.Species).SortOrder
         return dex1 < dex2
     end
 
@@ -131,8 +129,8 @@ function AssemblySelectMenu:generate_options()
         local char = self.charList[i]
         local enabled = self.filter(char)
         local color = Color.White
-        if i == _DATA.Save.ActiveTeam.LeaderIndex+1 then color = RogueEssence.Menu.MenuBase.TextIndigo
-        elseif i<=_DATA.Save.ActiveTeam.Players.Count then color = Color.Lime
+        if i == GAME:GetTeamLeaderIndex()+1 then color = RogueEssence.Menu.MenuBase.TextIndigo
+        elseif i <= GAME:GetPlayerPartyCount() then color = Color.Lime
         elseif char.IsFavorite then color = Color.Yellow end
         if not enabled then color = Color.Red end
 
@@ -244,7 +242,7 @@ function AssemblyMultiSelectMenu:choose(index)
 end
 
 --- Extract the list of selected slots.
---- @param list table a table array containing the menu indexes of the chosen items.
+--- @param list table a table array containing the menu indices of the chosen items.
 --- @return table a table array containing ``RogueEssence.Dungeon.InvSlot`` objects.
 function AssemblyMultiSelectMenu:multiConfirm(list)
     local result = {}
@@ -265,37 +263,37 @@ function AssemblyMultiSelectMenu:cloneMenu(new_mode)
     return new_menu
 end
 
---- Takes the currently selected assembly and team indexes and stores them in lists.
---- @return table, table the list of selected team indexes, the list of selected assembly indexes
+--- Takes the currently selected assembly and team indices and stores them in lists.
+--- @return table, table the list of selected team indices, the list of selected assembly indices
 function AssemblyMultiSelectMenu:saveSelectedMembers()
     local selected = {}
     local selected_team = {}
 
-    local num = _DATA.Save.ActiveTeam.Players.Count
+    local num = GAME:GetPlayerPartyCount()
     for index, option in pairs(self.optionsList) do
         if option.Selected then
             if index <= num then
                 table.insert(selected_team, index)
             else
                 local i = index - num
-                table.insert(selected, self.assemblyIndexes[i])
+                table.insert(selected, self.assemblyIndices[i])
             end
         end
     end
     return selected_team, selected
 end
 
---- Takes a list of assembly indexes and selects the corresponding options.
---- @param selected_team table a list of integer team indexes to be selected
---- @param selected table a list of integer assembly indexes to be selected
+--- Takes a list of assembly indices and selects the corresponding options.
+--- @param selected_team table a list of integer team indices to be selected
+--- @param selected table a list of integer assembly indices to be selected
 function AssemblyMultiSelectMenu:loadSelectedMembers(selected_team, selected)
-    local num = _DATA.Save.ActiveTeam.Players.Count
+    local num = GAME:GetPlayerPartyCount()
     for _, index in pairs(selected_team) do
         self.optionsList[index]:SilentSelect(true)
     end
-    for i=1, #self.assemblyIndexes, 1 do
+    for i=1, #self.assemblyIndices, 1 do
         for pos, val in pairs(selected) do
-            if val == self.assemblyIndexes[i] then
+            if val == self.assemblyIndices[i] then
                 table.remove(selected, pos)
                 self.optionsList[i+num]:SilentSelect(true)
                 break
@@ -322,15 +320,15 @@ end
 --- Opens the ``RogueEssence.Menu.MemberFeaturesMenu`` of the character selected in the parent menu.
 function AssemblySelectSubMenu:openSummary()
     local choice = self.parent.menu.CurrentChoiceTotal
-    local index_list = self.parent.assemblyIndexes
-    local team_tail_id = _DATA.Save.ActiveTeam.Players.Count-1
+    local index_list = self.parent.assemblyIndices
+    local team_tail_id = GAME:GetPlayerPartyCount()-1
     local is_assembly = false
     local index = choice
     if choice > team_tail_id then
         is_assembly = true
         index = index_list[choice - team_tail_id]
     end
-    _MENU:AddMenu(RogueEssence.Menu.MemberFeaturesMenu(_DATA.Save.ActiveTeam, index, is_assembly, _DATA.Save.ActiveTeam.Assembly.Count > 0, false), false)
+    _MENU:AddMenu(RogueEssence.Menu.MemberFeaturesMenu(_DATA.Save.ActiveTeam, index, is_assembly, GAME:GetPlayerAssemblyCount() > 0, false), false)
 end
 
 
@@ -340,7 +338,7 @@ end
 
 
 
---- Creates a basic ``TeamSelectMenu`` instance using the provided list and callbacks, then runs it and returns its output.
+--- Creates a basic ``AssemblySelectMenu`` instance using the provided list and callbacks, then runs it and returns its output.
 --- @param filter function a function that takes a ``RogueEssence.Dungeon.Character`` object and returns a boolean. Any character that does not pass this check will have its option disabled in the menu. Defaults to ``return true``.
 --- @param use_submenu boolean whether or not to call the ``AssemblySelectSubMenu`` before returning. Defaults to true.
 --- @return userdata the selected character if one was chosen in the menu; ``nil`` otherwise.
@@ -358,7 +356,7 @@ function AssemblySelectMenu.run(filter, use_submenu)
 end
 
 
---- Creates a basic ``TeamMultiSelectMenu`` instance using the provided list and callbacks, then runs it and returns its output.
+--- Creates a basic ``AssemblyMultiSelectMenu`` instance using the provided list and callbacks, then runs it and returns its output.
 --- @param filter function a function that takes a ``RogueEssence.Dungeon.Character`` object and returns a boolean. Any character that does not pass this check will have its option disabled in the menu. Defaults to ``return true``.
 --- @param use_submenu boolean whether or not to call the ``AssemblySelectSubMenu`` before returning. Defaults to true. Only appears if a character is chosen without selecting.
 --- @return table the list of selected characters if at least one was chosen in the menu; ``nil`` otherwise.

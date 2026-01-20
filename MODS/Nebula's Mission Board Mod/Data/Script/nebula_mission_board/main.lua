@@ -9,5 +9,4 @@
 --------------------------------------------------------------------------------------------------------------
 -- Service Packages
 --------------------------------------------------------------------------------------------------------------
-require 'enable_mission_board.services.mission_menu_tools'
-require 'enable_mission_board.services.mission_service'
+require 'missiongen_lib.missiongen_service'

@@ -148,6 +148,7 @@ Translation:
 [JA] https://www.pixiv.net/users/75745630 ｷﾇ
 [KO] https://www.reddit.com/user/Bashful_Barry/ Barry
 [PT] https://twitter.com/SquishyTheMew Squishy
+[PT] https://twitter.com/MoitinhaAnimado Moita
 [ZH] Discord:lazychehra Chehra
 [ZH] https://twitter.com/Dewpoleon Dew
 [ZH] kaitensekai@qq.com 域外創音(IkigaiSouon)

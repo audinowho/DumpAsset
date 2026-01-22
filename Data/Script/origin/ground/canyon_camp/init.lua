@@ -15,26 +15,29 @@ function canyon_camp.Init(map)
   local tutor = CH('NPC_Tutor')
   
   local charData = RogueEssence.Dungeon.CharData()
+  local mon = _DATA:GetMonster(SV.General.Starter.Species)
+  local form = mon.Forms[SV.General.Starter.Form]
+  
   local tutor_species = "missingno"
-  if SV.General.Starter.Species == "bulbasaur" then
+  if form.Element1 == "grass" then
     if SV.StarterTutor.Evolved then
-      tutor_species = "meganium"
+      tutor_species = "sceptile"
 	else
-	  tutor_species = "bayleef"
+	  tutor_species = "grovyle"
 	end
-  elseif SV.General.Starter.Species == "charmander" then
+  elseif form.Element1 == "fire" then
     if SV.StarterTutor.Evolved then
-      tutor_species = "typhlosion"
+      tutor_species = "blaziken"
 	else
-	  tutor_species = "quilava"
+	  tutor_species = "combusken"
 	end
-  elseif SV.General.Starter.Species == "squirtle" then
+  elseif form.Element1 == "water" then
     if SV.StarterTutor.Evolved then
-      tutor_species = "feraligatr"
+      tutor_species = "swampert"
 	else
-	  tutor_species = "croconaw"
+	  tutor_species = "marshtomp"
 	end
-  else --if SV.General.Starter.Species == "pikachu" then
+  else
     tutor_species = "raichu"
   end
   charData.BaseForm = RogueEssence.Dungeon.MonsterID(tutor_species, 0, "normal", Gender.Female)
@@ -654,14 +657,18 @@ end
 function canyon_camp.NPC_Tutor_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  local charData = RogueEssence.Dungeon.CharData()
+  local mon = _DATA:GetMonster(SV.General.Starter.Species)
+  local form = mon.Forms[SV.General.Starter.Form]
+  
   local tutor_skill = "struggle"
-  if SV.General.Starter.Species == "bulbasaur" then
+  if form.Element1 == "grass" then
     tutor_skill = "grass_pledge"
-  elseif SV.General.Starter.Species == "charmander" then
+  elseif form.Element1 == "fire" then
     tutor_skill = "fire_pledge"
-  elseif SV.General.Starter.Species == "squirtle" then
+  elseif form.Element1 == "water" then
     tutor_skill = "water_pledge"
-  else --if SV.General.Starter.Species == "pikachu" then
+  else
     tutor_skill = "volt_tackle"
   end
   

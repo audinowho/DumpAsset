@@ -79,7 +79,7 @@ function TeamSelectMenu:load_chars(char_list)
     if type(char_list) == 'table' then
         for _, char in pairs(char_list) do table.insert(list, char) end
     else
-        for char in luanet.each(LUA_ENGINE:MakeList(char_list)) do table.insert(list, char) end
+        for char in luanet.each(char_list) do table.insert(list, char) end
     end
     return list
 end

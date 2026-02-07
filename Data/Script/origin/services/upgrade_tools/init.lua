@@ -483,6 +483,12 @@ function UpgradeTools:OnUpgrade()
     SV.missions.Missions = {}
   end
   
+  if old_ver < System.Version("0.8.12") then
+    if SV.dex.CurrentRewardIdx > 3 then
+      SV.dex.CurrentRewardIdx = 3
+	end
+  end
+  
   if SV.family.BrotherActiveDays == nil then
     SV.family.BrotherActiveDays = 0
 	SV.family.Brother = false

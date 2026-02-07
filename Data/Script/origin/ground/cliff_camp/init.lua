@@ -971,12 +971,65 @@ function cliff_camp.NPC_DexRater_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   --ability capsule
-  --magenta silk
+  --normal silk
+  
   --bravery road
+  
+  --grass silk
+  --fire silk
+  --water silk
+  --electric silk
+  
   --friend bow
   
-  local rewardReqs = { 15, 30, 60 }
-  --local rewardReqs = { 15, 30, 60, 100, 151, 251, 386 }
+  --flying silk
+  --ground silk
+  --rock silk
+  --fighting silk
+  
+  -- something
+  
+  --bug silk
+  --fairy silk
+  --poison silk
+  
+  --psychic silk
+  --ghost silk
+  --dark silk
+  
+  --ice silk
+  --steel silk
+  --dragon silk
+  
+  --challenge dungeon
+  
+  
+  local rewardReqs = {
+	{ Req= 15, Reward = "lava_floe_island", IsDungeon = true },
+	{ Req= 30, Reward = "machine_ability_capsule", IsDungeon = false },
+	{ Req= 40, Reward = "xcl_element_normal_silk", IsDungeon = false },
+	--{ Req= 50, Reward = "bravery_road", IsDungeon = true },
+	{ Req= 60, Reward = "xcl_element_grass_silk", IsDungeon = false },
+	{ Req= 70, Reward = "xcl_element_fire_silk", IsDungeon = false },
+	{ Req= 80, Reward = "xcl_element_water_silk", IsDungeon = false },
+	{ Req= 90, Reward = "xcl_element_electric_silk", IsDungeon = false },
+	{ Req= 100, Reward = "held_friend_bow", IsDungeon = false },
+	{ Req= 110, Reward = "xcl_element_flying_silk", IsDungeon = false },
+	{ Req= 120, Reward = "xcl_element_ground_silk", IsDungeon = false },
+	{ Req= 130, Reward = "xcl_element_rock_silk", IsDungeon = false },
+	{ Req= 140, Reward = "xcl_element_fighting_silk", IsDungeon = false },
+	-- something
+	{ Req= 160, Reward = "xcl_element_bug_silk", IsDungeon = false },
+	{ Req= 170, Reward = "xcl_element_fairy_silk", IsDungeon = false },
+	{ Req= 180, Reward = "xcl_element_poison_silk", IsDungeon = false },
+	{ Req= 190, Reward = "xcl_element_psychic_silk", IsDungeon = false },
+	{ Req= 200, Reward = "xcl_element_ghost_silk", IsDungeon = false },
+	{ Req= 210, Reward = "xcl_element_dark_silk", IsDungeon = false },
+	{ Req= 220, Reward = "xcl_element_ice_silk", IsDungeon = false },
+	{ Req= 230, Reward = "xcl_element_steel_silk", IsDungeon = false },
+	{ Req= 240, Reward = "xcl_element_dragon_silk", IsDungeon = false },
+	-- challenge dungeon labyrinth_of_the_lost?
+  }
   
   UI:SetSpeaker(chara)
   local player = CH('PLAYER')
@@ -1002,29 +1055,17 @@ function cliff_camp.NPC_DexRater_Action(chara, activator)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Full_001']))
   else 
     suffix = ""
-    while SV.dex.CurrentRewardIdx <= #rewardReqs and dexCompletion >= rewardReqs[SV.dex.CurrentRewardIdx] do
-	  if SV.dex.CurrentRewardIdx == 1 then
+    while SV.dex.CurrentRewardIdx <= #rewardReqs and dexCompletion >= rewardReqs[SV.dex.CurrentRewardIdx].Req do
+	  reward_dungeon = rewardReqs[SV.dex.CurrentRewardIdx].IsDungeon
+	  reward = rewardReqs[SV.dex.CurrentRewardIdx].Reward
+	  if reward_dungeon then
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Reward_Dungeon'..suffix]))
-		COMMON.UnlockWithFanfare("lava_floe_island", false)
+		COMMON.UnlockWithFanfare(reward, false)
 		SV.base_camp.FerryUnlocked = true
-	  elseif SV.dex.CurrentRewardIdx == 2 then
-		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Reward_Item'..suffix]))
-		local receive_item = RogueEssence.Dungeon.InvItem("machine_ability_capsule")
+	  else
+	  	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Reward_Item'..suffix]))
+		local receive_item = RogueEssence.Dungeon.InvItem(reward)
 		COMMON.GiftItem(player, receive_item)
-	  elseif SV.dex.CurrentRewardIdx == 3 then
-		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Reward_Item'..suffix]))
-		local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_fairy_silk")
-		COMMON.GiftItem(player, receive_item)
-	  elseif SV.dex.CurrentRewardIdx == 4 then
-		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Reward_Dungeon'..suffix]))
-		COMMON.UnlockWithFanfare("bravery_road", false)
-	  elseif SV.dex.CurrentRewardIdx == 5 then
-		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Reward_Item'..suffix]))
-		local receive_item = RogueEssence.Dungeon.InvItem("held_friend_bow")
-		COMMON.GiftItem(player, receive_item)
-	  elseif SV.dex.CurrentRewardIdx == 6 then
-		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Reward_Dungeon'..suffix]))
-		COMMON.UnlockWithFanfare("labyrinth_of_the_lost", false)
 	  end
 	  SV.dex.CurrentRewardIdx = SV.dex.CurrentRewardIdx + 1
 	  suffix = "_Alt"

@@ -131,8 +131,8 @@ function COMMON.UpdateDayEndVars()
           DestSegment = 1,
           DestFloor = 1,
           FloorUnknown = true,
-          TargetSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male),
-          ClientSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male),
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Female),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Female),
           Complete = COMMON.MISSION_INCOMPLETE,
           Type = COMMON.SIDEQUEST_TYPE_ESCORT_OUT,
           EscortTable = { EscortStartMsg = "TALK_ESCORT_GRANDMA_START", EscortAcceptMsg = "TALK_ESCORT_GRANDMA_ACCEPT", EscortInteract = "EscortInteractGrandma" }

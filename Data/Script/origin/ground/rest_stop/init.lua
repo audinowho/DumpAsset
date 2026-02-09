@@ -488,7 +488,7 @@ function rest_stop.NPC_Storehouse_Action(chara, activator)
       DestZone = "copper_quarry", DestSegment = 0, DestFloor = 4,
       FloorUnknown = true,
       ClientSpecies = chara.CurrentForm,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("weavile", 0, "normal", Gender.Male) }
+      TargetSpecies = RogueEssence.Dungeon.MonsterID("weavile", 0, "normal", Gender.Female) }
 	  )
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_003']))

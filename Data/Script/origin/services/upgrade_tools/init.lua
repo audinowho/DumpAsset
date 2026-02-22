@@ -314,13 +314,20 @@ function UpgradeTools:OnUpgrade()
   end
 
   if SV.team_rivals == nil then
-	SV.team_rivals =
-	{
-	  Status = 0,
-	  SpokenTo = false,
-	  DaysSinceCheckpoint = 0,
-	  Cycle = 0
-	}
+    SV.team_rivals =
+    {
+      Status = 0,
+      SpokenTo = false,
+      DaysSinceCheckpoint = 0,
+      SpokenToEnd1 = false,
+      SpokenToEnd2 = false,
+      Cycle = 0
+    }
+  else
+    if SV.team_rivals.SpokenToEnd1 == nil then
+      SV.team_rivals.SpokenToEnd1 = false
+      SV.team_rivals.SpokenToEnd2 = false
+    end
   end
 
 
@@ -365,12 +372,17 @@ function UpgradeTools:OnUpgrade()
   end
 
   if SV.team_steel == nil then
-	SV.team_steel =
-	{
-	  Argued = false,
-	  DaysSinceArgue = 0,
-	  Rescued = false
-	}
+    SV.team_steel =
+    {
+      Argued = false,
+      DaysSinceArgue = 0,
+      Rescued = false,
+      InCycle = false
+    }
+  end
+
+  if SV.team_steel.InCycle == nil then
+    SV.team_steel.InCycle = false
   end
 
   if SV.team_solo == nil then

@@ -458,20 +458,64 @@ end
   
 function guildmaster_summit.NPC_Rival_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  local enemy = CH('NPC_Rival_2')
+  if not SV.team_rivals.SpokenToEnd1 then
+    UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_001'], enemy:GetDisplayName()))
   
-  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_001']))
-  
-  SV.team_rivals.SpokenTo = true
+    GAME:WaitFrames(30)
+    
+    SOUND:PlayBattleSE("EVT_Emote_Sweating")
+    GROUND:CharSetEmote(chara, "sweating", 1)
+    GAME:WaitFrames(30)
+    
+    UI:SetSpeakerEmotion("Sigh")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_002'], enemy:GetDisplayName()))
+    
+    SV.team_rivals.SpokenToEnd1 = true
+  else
+    
+    UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+    UI:SetSpeakerEmotion("Determined")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_003'], enemy:GetDisplayName()))    
+  end
 end
   
 function guildmaster_summit.NPC_Rival_2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_001']))
-  
-  SV.team_rivals.SpokenTo = true
+  local enemy = CH('NPC_Rival_1')
+  if not SV.team_rivals.SpokenToEnd2 then
+    UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+    UI:SetSpeakerEmotion("Sigh")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_001'], enemy:GetDisplayName()))
+    
+    local old_dir = chara.CharDir
+    GROUND:CharAnimateTurnTo(chara, Direction.Left, 4)
+    GAME:WaitFrames(60)
+    
+    GROUND:CharAnimateTurnTo(chara, old_dir, 4)
+    
+    GAME:WaitFrames(30)
+    
+    UI:SetSpeakerEmotion("Angry")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_002'], enemy:GetDisplayName()))
+    
+    SV.team_rivals.SpokenToEnd2 = true
+  else
+    UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_003'], enemy:GetDisplayName()))
+
+    local old_dir = chara.CharDir
+    GROUND:CharAnimateTurnTo(chara, Direction.Left, 4)
+    GAME:WaitFrames(60)
+    
+    GROUND:CharAnimateTurnTo(chara, old_dir, 4)
+    
+    GAME:WaitFrames(30)
+    
+    UI:SetSpeakerEmotion("Angry")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_002'], enemy:GetDisplayName()))
+  end
 end
 
 function guildmaster_summit.NPC_Storehouse_Action(chara, activator)

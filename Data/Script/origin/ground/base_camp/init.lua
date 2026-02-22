@@ -113,11 +113,13 @@ function base_camp.SetupNpcs()
   
   if SV.team_steel.DaysSinceArgue >= 2 and not SV.team_steel.Rescued then
     GROUND:Unhide("NPC_Steel_1")
-	local questname = "QuestSteel"
+    local questname = "QuestSteel"
     local quest = SV.missions.Missions[questname]
-	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
-	  GROUND:Unhide("NPC_Steel_2")
-	end
+    if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+      GROUND:Unhide("NPC_Steel_2")
+    elseif SV.team_steel.Rescued then
+      GROUND:Unhide("NPC_Steel_2")
+    end
   end
   
   if SV.guildmaster_summit.GameComplete then
@@ -547,37 +549,42 @@ function base_camp.NPC_Steel_1_Action(chara, activator)
 
   local player = CH('PLAYER')
   
-  local questname = "QuestSteel"
-  local quest = SV.missions.Missions[questname]
-	
-  
-  if quest == nil then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Steel_Line_001']))
-	
-	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
-      DestZone = "guildmaster_trail", DestSegment = 0, DestFloor = 14,
-      FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("scizor", 0, "normal", Gender.Male),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("steelix", 0, "normal", Gender.Male) }
-	  )
-	
-  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Steel_Line_002']))
+  if not SV.team_steel.Rescued then
+    local questname = "QuestSteel"
+    local quest = SV.missions.Missions[questname]
+    
+    
+    if quest == nil then
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,player)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Steel_Line_001']))
+    
+    COMMON.CreateMission(questname,
+    { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
+        DestZone = "guildmaster_trail", DestSegment = 0, DestFloor = 14,
+        FloorUnknown = false,
+        TargetSpecies = RogueEssence.Dungeon.MonsterID("scizor", 0, "normal", Gender.Male),
+        ClientSpecies = RogueEssence.Dungeon.MonsterID("steelix", 0, "normal", Gender.Male) }
+      )
+    
+    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,player)
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Steel_Line_002']))
+    else
+      base_camp.Steel_Complete()
+    end
   else
-    base_camp.Steel_Complete()
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Steel_1_Finished_Line_001']))
   end
-  
   
 end
 
 function base_camp.NPC_Steel_2_Action(chara, activator)
   if not SV.team_steel.Rescued then
     base_camp.Steel_Complete()
+  else
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Steel_2_Finished_Line_001']))
   end
 end
 
@@ -596,9 +603,6 @@ function base_camp.Steel_Complete()
   COMMON.GiftItem(player, receive_item)
   
   UI:SetSpeaker(steel2)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Steel_Complete_Line_002']))
-  GROUND:Hide("NPC_Steel_1")
-  GROUND:Hide("NPC_Steel_2")
   
   COMMON.CompleteMission("QuestSteel")
   

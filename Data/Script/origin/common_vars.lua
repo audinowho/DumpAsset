@@ -263,6 +263,8 @@ function COMMON.UpdateDayEndVars()
   if SV.team_steel.Argued then
     if not SV.team_steel.Rescued then
       SV.team_steel.DaysSinceArgue = SV.team_steel.DaysSinceArgue + 1
+	else
+	  SV.team_steel.InCycle = true
 	end
   end
   
@@ -270,7 +272,7 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
   elseif SV.team_solo.Status == 1 and SV.team_solo.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
-  elseif SV.team_solo.Status == 2 and SV.team_solo.SpokenTo and _DATA.Save:GetDungeonUnlock("forsaken_desert") == RogueEssence.Data.GameProgress.UnlockState.Completed then
+  elseif SV.team_solo.Status == 2 and SV.team_solo.SpokenTo and _DATA.Save:GetDungeonUnlock("forsaken_desert") ~= RogueEssence.Data.GameProgress.UnlockState.None then
     COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
   elseif SV.team_solo.Status == 3 and SV.team_solo.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_solo, 2)
@@ -287,7 +289,7 @@ function COMMON.UpdateDayEndVars()
   elseif SV.team_psychic.Status == 2 and _DATA.Save:GetDungeonUnlock("relic_tower") ~= RogueEssence.Data.GameProgress.UnlockState.None then
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
   elseif SV.team_psychic.Status == 3 then
-    COMMON.UpdateCheckpointStatus(SV.team_psychic, 2)
+    COMMON.UpdateCheckpointStatus(SV.team_psychic, 3)
   elseif SV.team_psychic.Status == 5 then
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
   elseif SV.team_psychic.Status == 6 then
@@ -312,7 +314,7 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.team_dragon, 1)
   elseif SV.team_dragon.Status == 4 then
     COMMON.UpdateCheckpointStatus(SV.team_dragon, 1)
-  elseif SV.team_dragon.Status == 5 and SV.team_dragon.SpokenTo and SV.guildmaster_summit.GameComplete then
+  elseif SV.team_dragon.Status == 5 and SV.guildmaster_summit.GameComplete then
     COMMON.UpdateCheckpointStatus(SV.team_dragon, 1)
   elseif SV.team_dragon.Status == 6 and SV.team_dragon.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_dragon, 1)

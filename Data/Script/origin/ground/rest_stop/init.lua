@@ -58,17 +58,19 @@ function rest_stop.SetupNpcs()
   
   if SV.team_rivals.Status == 4 then
     GROUND:Unhide("Rival_1")
-	GROUND:Unhide("Rival_2")
+    GROUND:Unhide("Rival_2")
   elseif SV.team_rivals.Status == 5 then
     GROUND:Unhide("Rival_1")
-	local questname = "QuestRival2"
+    local rival1 = CH('Rival_1')
+    GROUND:TeleportTo(rival1, 232, 328, Direction.Left)
+    local questname = "QuestRival2"
     local quest = SV.missions.Missions[questname]
-	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
-	  GROUND:Unhide("Rival_2")
-	end
+    if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+      GROUND:Unhide("Rival_2")
+    end
   elseif SV.team_rivals.Status == 6 then
     GROUND:Unhide("Rival_1")
-	GROUND:Unhide("Rival_2")
+    GROUND:Unhide("Rival_2")
   elseif SV.team_rivals.Status == 8 then
     -- TODO cycling
   end
@@ -171,6 +173,11 @@ function rest_stop.SetupNpcs()
     GROUND:Unhide("Boss_4")
     GROUND:Unhide("Boss_5")
     GROUND:Unhide("Boss_6")
+  elseif SV.rest_stop.BossSolved then
+    GROUND:Unhide("Boss_1")
+    GROUND:Unhide("Boss_2")
+    GROUND:Unhide("Boss_3")
+    GROUND:Unhide("Boss_4")
   end
   
 end
@@ -262,47 +269,60 @@ end
 function rest_stop.Rival_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  local enemy = CH('Rival_2')
   local player = CH('PLAYER')
 
   if SV.team_rivals.Status == 4 then
   
-  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_001']))
-  
-  SV.team_rivals.SpokenTo = true
+    UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+    UI:SetSpeakerEmotion("Determined")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_001'], enemy:GetDisplayName()))
+    
+    SV.team_rivals.SpokenTo = true
   
   elseif SV.team_rivals.Status == 5 then
   
-  local questname = "QuestRival2"
-  local quest = SV.missions.Missions[questname]
-	
-  
-  if quest == nil then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Help_Line_001']))
-	
-	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
-      DestZone = "thunderstruck_pass", DestSegment = 0, DestFloor = 8,
-      FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("zangoose", 0, "normal", Gender.Female),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("seviper", 0, "normal", Gender.Female) }
-	)
-  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Help_Line_002']))
-  else
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Help_Line_003']))
-  end
+    local questname = "QuestRival2"
+    local quest = SV.missions.Missions[questname]
+    
+    local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("thunderstruck_pass")
+    
+    if quest == nil then
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,player)
+      UI:SetSpeakerEmotion("Worried")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Help_Line_001'], enemy:GetDisplayName(), zone_summary:GetColoredName()))
+    
+      COMMON.CreateMission(questname,
+      { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
+          DestZone = "thunderstruck_pass", DestSegment = 0, DestFloor = 8,
+          FloorUnknown = false,
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("zangoose", 0, "normal", Gender.Female),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("seviper", 0, "normal", Gender.Female) }
+      )
+    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,player)
+      UI:SetSpeakerEmotion("Pain")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Help_Line_002'], enemy:GetDisplayName(), zone_summary:GetColoredName()))
+    else
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,player)
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Complete_Line_001'], enemy:GetDisplayName()))
+
+      local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_poison_silk")
+      COMMON.GiftItem(player, receive_item)
+    
+      COMMON.CompleteMission("QuestRival2")
+    
+      SV.team_rivals.Status = 6
+    end
   
   elseif SV.team_rivals.Status == 6 then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Help_Line_003']))
+    UI:SetSpeakerEmotion("Determined")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Complete_Line_002'], enemy:GetDisplayName()))
   end
   
   
@@ -311,34 +331,25 @@ end
 function rest_stop.Rival_2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  local enemy = CH('Rival_1')
   local player = CH('PLAYER')
 
   if SV.team_rivals.Status == 4 then
   
-  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_001']))
+    UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+    UI:SetSpeakerEmotion("Determined")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_001'], enemy:GetDisplayName()))
+    
+    SV.team_rivals.SpokenTo = true
   
-  SV.team_rivals.SpokenTo = true
-  
-  elseif SV.team_rivals.Status == 5 then
+  elseif SV.team_rivals.Status == 5 or SV.team_rivals.Status == 6 then
   
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Help_Line_001']))
-  
-    local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_normal_silk")
-  COMMON.GiftItem(player, receive_item)
-  
-  COMMON.CompleteMission("QuestRival2")
-  
-  SV.team_rivals.Status = 6
-  
-  elseif SV.team_rivals.Status == 6 then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Help_Line_002']))
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Help_Line_001'], enemy:GetDisplayName()))
+    
   end
-  
   
   
 end
@@ -571,11 +582,19 @@ end
 
 
 function rest_stop.Boss_1_Action(chara, activator)
-  rest_stop.Rock_Boss(chara, activator)
+  if SV.rest_stop.BossSolved then
+    
+  else
+    rest_stop.Rock_Boss(chara, activator)
+  end
 end
 
 function rest_stop.Boss_2_Action(chara, activator)
-  rest_stop.Rock_Boss(chara, activator)
+  if SV.rest_stop.BossSolved then
+    
+  else
+    rest_stop.Rock_Boss(chara, activator)
+  end
 end
 
 function rest_stop.Rock_Boss(chara, activator)
@@ -606,11 +625,19 @@ function rest_stop.Rock_Boss(chara, activator)
 end
 
 function rest_stop.Boss_3_Action(chara, activator)
-  rest_stop.Screech_Rabble(chara, activator)
+  if SV.rest_stop.BossSolved then
+    
+  else
+    rest_stop.Screech_Rabble(chara, activator)
+  end
 end
 
 function rest_stop.Boss_4_Action(chara, activator)
-  rest_stop.Screech_Rabble(chara, activator)
+  if SV.rest_stop.BossSolved then
+    
+  else
+    rest_stop.Screech_Rabble(chara, activator)
+  end
 end
 
 function rest_stop.Screech_Rabble(chara, activator)
@@ -688,12 +715,6 @@ function rest_stop.Rock_Complete()
   COMMON.GiftItem(player, receive_item)
   
   
-  GROUND:Hide("Boss_1")
-  GROUND:Hide("Boss_2")
-  
-  GROUND:Hide("Boss_3")
-  GROUND:Hide("Boss_4")
-  
   COMMON.CompleteMission("QuestRock")
   
   SV.rest_stop.BossSolved = true
@@ -763,6 +784,9 @@ function rest_stop.Ice_Complete()
   UI:SetSpeaker(gang_in)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GangIn_Done_Line_001']))
   
+  GAME:WaitFrames(60)
+  
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GangIn_Done_Line_002']))
   
   UI:SetSpeaker(gang_out)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GangOut_Done_Line_002']))

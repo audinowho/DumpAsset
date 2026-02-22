@@ -287,6 +287,8 @@ SV.team_rivals =
   Status = 0,
   SpokenTo = false,
   DaysSinceCheckpoint = 0,
+  SpokenToEnd1 = false,
+  SpokenToEnd2 = false,
   
   -- TODO
   --3 = canyon camp
@@ -361,7 +363,8 @@ SV.team_steel =
 {
   Argued = false,
   DaysSinceArgue = 0,
-  Rescued = false
+  Rescued = false,
+  InCycle = false
 }
 
 SV.team_solo =

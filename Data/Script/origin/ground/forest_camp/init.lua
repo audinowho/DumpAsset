@@ -477,25 +477,26 @@ function forest_camp.Parent_Child()
   
   if SV.forest_child.Status == 0 then
   
-  GROUND:CharTurnToChar(player, child)
-  UI:SetSpeaker(child)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Parent_Child_Line_001']))
-  GROUND:CharTurnToChar(player, parent)
-  UI:SetSpeaker(parent)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Parent_Child_Line_002']))
-  
-  if SV.Experimental then
-    SV.forest_child.SpokenTo = true
-  end
+    GROUND:CharTurnToChar(player, child)
+    UI:SetSpeaker(child)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Parent_Child_Line_001']))
+    GROUND:CharTurnToChar(player, parent)
+    UI:SetSpeaker(parent)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Parent_Child_Line_002']))
+    
+    if SV.Experimental then
+      SV.forest_child.SpokenTo = true
+    end
   
   elseif SV.forest_child.Status == 3 then
   
-  GROUND:CharTurnToChar(player, parent)
-  UI:SetSpeaker(parent)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_After_Line_001'], child:GetDisplayName(), _DATA.Save.ActiveTeam.Name))
-  GROUND:CharTurnToChar(player, child)
-  UI:SetSpeaker(child)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_After_Line_002']))
+    GROUND:CharTurnToChar(parent, player)
+    UI:SetSpeaker(parent)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_After_Line_001'], child:GetDisplayName(), _DATA.Save.ActiveTeam.Name))
+    GROUND:CharTurnToChar(child, player)
+    UI:SetSpeaker(child)
+    UI:SetSpeakerEmotion("Inspired")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_After_Line_002']))
   
   end
 end
@@ -503,85 +504,105 @@ end
 function forest_camp.Sick_Child(chara)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-    local parent = CH('NPC_Parent')
-    local child = CH('NPC_Child')
-    local camps = CH('NPC_Camps')
-    local player = CH('PLAYER')
+  local parent = CH('NPC_Parent')
+  local child = CH('NPC_Child')
+  local camps = CH('NPC_Camps')
+  local player = CH('PLAYER')
 	
   if SV.forest_child.Status == 1 then
   
-  local questname = "QuestGrass"
-  local quest = SV.missions.Missions[questname]
-  
-  local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("sickly_hollow")
+    local questname = "QuestGrass"
+    local quest = SV.missions.Missions[questname]
+    
+    local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("sickly_hollow")
 
   
-  if quest == nil then
+    if quest == nil then
+      
+      SOUND:PlayBattleSE("EVT_Emote_Sweating")
+      GROUND:CharSetEmote(parent, "sweating", 1)
+      GAME:WaitFrames(30)
+      
+      UI:SetSpeaker(parent)
+      UI:SetSpeakerEmotion("Worried")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_001'], child:GetDisplayName()))
 
+      UI:SetSpeaker(camps)
+      UI:SetSpeakerEmotion("Worried")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_002'], zone_summary:GetColoredName()))
+      
+      GROUND:CharSetEmote(parent, "shock", 1)
+      SOUND:PlayBattleSE("EVT_Emote_Shock")
+      GAME:WaitFrames(60)
+      
+      UI:SetSpeaker(parent)
+      UI:SetSpeakerEmotion("Surprised")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_003'], zone_summary:GetColoredName()))
 
-    UI:SetSpeaker(parent)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_001'], child:GetDisplayName()))
+      UI:SetSpeaker(camps)
+      UI:SetSpeakerEmotion("Worried")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_004']))
 
-    UI:SetSpeaker(camps)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_002'], zone_summary:GetColoredName()))
-	
-    UI:SetSpeaker(parent)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_003'], zone_summary:GetColoredName()))
+      UI:SetSpeaker(parent)
+      UI:SetSpeakerEmotion("Shouting")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_005'], zone_summary:GetColoredName()))
 
-    UI:SetSpeaker(camps)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_004']))
+      UI:SetSpeaker(camps)
+      UI:SetSpeakerEmotion("Pain")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_006']))
+    
+      SOUND:PlayBattleSE("EVT_Emote_Sweating")
+      GROUND:CharSetEmote(camps, "sweating", 1)
+      GAME:WaitFrames(30)
+    
+      GROUND:CharTurnToChar(camps, player)
+      GROUND:CharTurnToChar(parent, player)
+      local experienced = false
+    
+      UI:SetSpeaker(camps)
+      UI:SetSpeakerEmotion("Worried")
+      if experienced then
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_007_Skilled'], _DATA.Save.ActiveTeam.Name, zone_summary:GetColoredName()))
+      else
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_007'], _DATA.Save.ActiveTeam.Name, zone_summary:GetColoredName()))
+      end
+    
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_008'], zone_summary:GetColoredName(), child:GetDisplayName()))
 
-    UI:SetSpeaker(parent)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_005'], zone_summary:GetColoredName()))
+      local destFloor = 10
 
-    UI:SetSpeaker(camps)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_006']))
-	
-	-- sweating
-	
-    GROUND:CharTurnToChar(camps, player)
-    GROUND:CharTurnToChar(parent, player)
-	local experienced = false
-	
-    UI:SetSpeaker(camps)
-	if experienced then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_007_Skilled'], _DATA.Save.ActiveTeam.Name, zone_summary:GetColoredName()))
-	else
-	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_007'], _DATA.Save.ActiveTeam.Name, zone_summary:GetColoredName()))
-	end
-	
-    UI:SetSpeaker(camps)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_008'], zone_summary:GetColoredName(), child:GetDisplayName()))
-
-    local destFloor = 10
-
-	
-    COMMON.CreateMission(questname,
-      { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_LOST_ITEM,
-          DestZone = "sickly_hollow", DestSegment = 0, DestFloor = destFloor,
-          FloorUnknown = false,
-          TargetItem = RogueEssence.Dungeon.InvItem("lost_item_grass"),
-          ClientSpecies = RogueEssence.Dungeon.MonsterID("sunflora", 0, "normal", Gender.Male)
-      }
-    )
-  else
-  
-    COMMON.TakeMissionItem(quest)
-	
-    if quest.Complete == COMMON.MISSION_INCOMPLETE then
-      local camps = CH('NPC_Camps')
-      UI:SetSpeaker(chara)
-      GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	  
-	  if chara == camps then
-        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Camps_Sickness_Line_001'], quest.DestFloor, zone_summary:GetColoredName()))
-	  else
-	    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Parent_Sickness_Line_001']))
-	  end
+    
+      COMMON.CreateMission(questname,
+        { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_LOST_ITEM,
+            DestZone = "sickly_hollow", DestSegment = 0, DestFloor = destFloor,
+            FloorUnknown = false,
+            TargetItem = RogueEssence.Dungeon.InvItem("lost_item_grass"),
+            ClientSpecies = RogueEssence.Dungeon.MonsterID("sunflora", 0, "normal", Gender.Male)
+        }
+      )
     else
-      forest_camp.Grass_Complete()
+    
+      COMMON.TakeMissionItem(quest)
+    
+      if quest.Complete == COMMON.MISSION_INCOMPLETE then
+        local camps = CH('NPC_Camps')
+        UI:SetSpeaker(chara)
+        GROUND:CharTurnToChar(chara,CH('PLAYER'))
+      
+        if chara == camps then
+          UI:SetSpeakerEmotion("Worried")
+          UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Camps_Sickness_Line_001'], quest.DestFloor + 1, zone_summary:GetColoredName()))
+        else
+          SOUND:PlayBattleSE("EVT_Emote_Sweating")
+          GROUND:CharSetEmote(parent, "sweating", 1)
+          GAME:WaitFrames(30)
+          UI:SetSpeakerEmotion("Sad")
+          UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Parent_Sickness_Line_001']))
+        end
+      else
+        forest_camp.Grass_Complete()
+      end
     end
-  end
   
   elseif SV.forest_child.Status == 2 then
   
@@ -612,14 +633,29 @@ function forest_camp.Grass_Complete()
   GAME:WaitFrames(40)
   
   UI:SetSpeaker(camps)
+  UI:SetSpeakerEmotion("Surprised")
   local quest_item = RogueEssence.Dungeon.InvItem("lost_item_grass")
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_001'], quest_item:GetDisplayName()))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_001'], quest_item:GetDisplayName(), child:GetDisplayName()))
   
-  --fade, sfx
+  GAME:FadeOut(false, 30)
+  
+  SOUND:PlayBattleSE("DUN_Aromatherapy")
+  GAME:WaitFrames(60)
+  
+  GROUND:TeleportTo(player, 240, 352, Direction.UpLeft)
+  GROUND:TeleportTo(parent, 200, 336, Direction.UpRight)
+  GROUND:TeleportTo(camps, 216, 328, Direction.UpLeft)
+  
+  GAME:FadeIn(30)
+  
+  GROUND:CharAnimateTurnTo(camps, Direction.DownRight, 4)
+  
+  UI:SetSpeakerEmotion("Sigh")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_002'], child:GetDisplayName()))
   
-  
+  GROUND:CharTurnToChar(parent,player)
   UI:SetSpeaker(parent)
+  UI:SetSpeakerEmotion("Teary-Eyed")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_Line_003'], _DATA.Save.ActiveTeam.Name))
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_grass_silk")
@@ -720,16 +756,21 @@ function forest_camp.Child_Secret()
   UI:SetSpeaker(child)
   if SV.forest_child.Status >= 5 then
     --ask the revisit qustion
-	local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("secret_garden")
+    local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("secret_garden")
     UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Ask_Again']), false)
   else
+    GROUND:CharSetEmote(child, "glowing", 4)
+    UI:SetSpeakerEmotion("Joyous")
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Line_001']))
-	
+    
+    UI:SetSpeakerEmotion("Normal")
     UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Ask']), false)
+    
+    -- set to "started showing secret garden"
+    SV.forest_child.Status = 5
   end
   
-  -- set to "started showing secret garden"
-  SV.forest_child.Status = 5
+
   
   UI:WaitForChoice()
   local ch = UI:ChoiceResult()
@@ -737,24 +778,24 @@ function forest_camp.Child_Secret()
   if ch then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Checkpoint_001']))
 	
-	-- make the sunkern intangible
-	child.CollisionDisabled = true
+    -- make the sunkern intangible
+    child.CollisionDisabled = true
 	
-	-- move the sunkern in
-	GROUND:MoveToPosition(child, 424, 384, false, 2)
+    -- move the sunkern in
+    GROUND:MoveToPosition(child, 424, 384, false, 2)
     GROUND:MoveToPosition(child, 472, 384, false, 2)
 	
-	GROUND:Unhide("NPC_Child")
-	
-	--activate checkpoint 1
-	GROUND:Unhide("Guide_1")
-	GROUND:Unhide("Guide_2")
-	GROUND:Unhide("Guide_3")
-	GROUND:Unhide("Guide_4")
-	GROUND:Unhide("Guide_5")
-	GROUND:Unhide("Guide_End")
-	
-	forest_camp.guiding = true
+    GROUND:Unhide("NPC_Child")
+    
+    --activate checkpoint 1
+    GROUND:Unhide("Guide_1")
+    GROUND:Unhide("Guide_2")
+    GROUND:Unhide("Guide_3")
+    GROUND:Unhide("Guide_4")
+    GROUND:Unhide("Guide_5")
+    GROUND:Unhide("Guide_End")
+    
+    forest_camp.guiding = true
   end
 end
 
@@ -819,6 +860,7 @@ function forest_camp.Secret_Mistake()
   if forest_camp.guiding == true then
     local child = CH('NPC_Child')
     UI:SetSpeaker(child)
+    UI:SetSpeakerEmotion("Stunned")
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Mistake_001']))
 	
 	forest_camp.Secret_End()
@@ -832,14 +874,16 @@ function forest_camp.Secret_Complete()
     local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("secret_garden")
     local child = CH('NPC_Child')
     UI:SetSpeaker(child)
+    UI:SetSpeakerEmotion("Joyous")
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Complete_001'], zone_summary:GetColoredName()))
 	
-	if SV.forest_child.Status == 5 then
-	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Complete_002'], zone_summary:GetColoredName()))
-	  SV.forest_child.Status = 6
-	end
-	
-	forest_camp.Secret_End()
+    if SV.forest_child.Status == 5 then
+      UI:SetSpeakerEmotion("Normal")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Child_Secret_Complete_002'], zone_summary:GetColoredName()))
+      SV.forest_child.Status = 6
+    end
+    
+    forest_camp.Secret_End()
   end
 end
 

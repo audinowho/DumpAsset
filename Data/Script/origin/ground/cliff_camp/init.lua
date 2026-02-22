@@ -95,7 +95,7 @@ function cliff_camp.SetupNpcs()
   
   if SV.Experimental and SV.team_rivals.Status == 0 then
     GROUND:Unhide("Rival_1")
-	GROUND:Unhide("Rival_2")
+    GROUND:Unhide("Rival_2")
   elseif SV.team_rivals.Status == 9 then
     -- TODO cycling
   end
@@ -567,21 +567,21 @@ function cliff_camp.NPC_Sightseer_Action(chara, activator)
     UI:SetSpeaker(chara)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sightseer_Quest_Line_001']))
 	
-	--TODO: later oblivion valley
-	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
-      DestZone = "secret_garden", DestSegment = 0, DestFloor = 9,
-      FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("meowth", 0, "normal", Gender.Male),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("pidgeotto", 0, "normal", Gender.Male) }
-	)
-  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-    UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sightseer_Quest_Line_002']))
-  else
-    UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sightseer_Quest_Line_003']))
-  end
+    --TODO: later oblivion valley
+    COMMON.CreateMission(questname,
+    { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
+        DestZone = "secret_garden", DestSegment = 0, DestFloor = 9,
+        FloorUnknown = false,
+        TargetSpecies = RogueEssence.Dungeon.MonsterID("meowth", 0, "normal", Gender.Male),
+        ClientSpecies = RogueEssence.Dungeon.MonsterID("pidgeotto", 0, "normal", Gender.Male) }
+    )
+    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:SetSpeaker(chara)
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sightseer_Quest_Line_002']))
+    else
+      UI:SetSpeaker(chara)
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sightseer_Quest_Line_003']))
+    end
 	
   elseif SV.team_kidnapped.Status == 4 then
   
@@ -589,11 +589,11 @@ function cliff_camp.NPC_Sightseer_Action(chara, activator)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sightseer_Quest_Line_003']))
   else
 
-  UI:SetSpeaker(chara)
-  local player = CH('PLAYER')
-  GROUND:CharTurnToChar(chara, player)
-  
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sightseer_Line_001']))
+    UI:SetSpeaker(chara)
+    local player = CH('PLAYER')
+    GROUND:CharTurnToChar(chara, player)
+    
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sightseer_Line_001']))
   
   end
   
@@ -606,21 +606,21 @@ function cliff_camp.Speedster_1_Action(chara, activator)
   
   if SV.team_retreat.Status == 1 then
 
-  local player = CH('PLAYER')
-  GROUND:CharTurnToChar(chara,player)
-  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Doduo_Line_001']))
-  SV.team_retreat.SpokenTo = true
+    local player = CH('PLAYER')
+    GROUND:CharTurnToChar(chara,player)
+    UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Doduo_Line_001']))
+    SV.team_retreat.SpokenTo = true
   
   elseif SV.team_retreat.Status == 2 then
     cliff_camp.Electric_Complete()
   elseif SV.team_retreat.Status == 3 then
     UI:SetSpeaker(chara)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Doduo_Line_002']))
-  else
-	--TODO: cycling
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Doduo_Line_002']))
+    else
+    --TODO: cycling
     UI:SetSpeaker(chara)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Doduo_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Doduo_Line_002']))
   end
   
 end
@@ -633,46 +633,46 @@ function cliff_camp.Speedster_2_Action(chara, activator)
   if SV.team_retreat.Status == 1 then
 
   
-  GROUND:CharTurnToChar(chara,player)
-  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Pachirisu_Line_001']))
+    GROUND:CharTurnToChar(chara,player)
+    UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Pachirisu_Line_001']))
   SV.team_retreat.SpokenTo = true
   
   elseif SV.team_retreat.Status == 2 then
     --give mission
 	
-  local questname = "QuestElectric"
-  local quest = SV.missions.Missions[questname]
-	
-  
-  if quest == nil then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Pachirisu_Help_Line_001']))
-	
-	--TODO: later deserted fortress
-	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
-      DestZone = "trickster_woods", DestSegment = 0, DestFloor = 6,
-      FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("doduo", 0, "normal", Gender.Male),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("pachirisu", 0, "normal", Gender.Male) }
-	)
-  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Pachirisu_Help_Line_002']))
-  else
-    cliff_camp.Electric_Complete()
-  end
+    local questname = "QuestElectric"
+    local quest = SV.missions.Missions[questname]
+    
+    
+    if quest == nil then
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,player)
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Pachirisu_Help_Line_001']))
+    
+    --TODO: later deserted fortress
+    COMMON.CreateMission(questname,
+    { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
+        DestZone = "trickster_woods", DestSegment = 0, DestFloor = 6,
+        FloorUnknown = false,
+        TargetSpecies = RogueEssence.Dungeon.MonsterID("doduo", 0, "normal", Gender.Male),
+        ClientSpecies = RogueEssence.Dungeon.MonsterID("pachirisu", 0, "normal", Gender.Male) }
+    )
+    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,player)
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Pachirisu_Help_Line_002']))
+    else
+      cliff_camp.Electric_Complete()
+    end
 	
   elseif SV.team_retreat.Status == 3 then
     UI:SetSpeaker(chara)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Pachirisu_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Pachirisu_Line_002']))
   else
-	--TODO: cycling
+    --TODO: cycling
     UI:SetSpeaker(chara)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Pachirisu_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Pachirisu_Line_002']))
   
   end
 
@@ -721,16 +721,16 @@ function cliff_camp.NPC_Undergrowth_1_Action(chara, activator)
     cliff_camp.NPC_Undergrowth_Concern()
   else
   
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
-  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  if not SV.cliff_camp.TeamUndergrowthIntro then
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Undergrowth_Intro_001']))
-	SV.cliff_camp.TeamUndergrowthIntro = true
-  end
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bellsprout_Line_001']))
-  UI:SetSpeakerEmotion("Worried")
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bellsprout_Line_002']))
-  GROUND:EntTurn(chara, Direction.DownRight)
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))--make the chara turn to the player
+    UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+    if not SV.cliff_camp.TeamUndergrowthIntro then
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Undergrowth_Intro_001']))
+      SV.cliff_camp.TeamUndergrowthIntro = true
+    end
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bellsprout_Line_001']))
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bellsprout_Line_002']))
+    GROUND:EntTurn(chara, Direction.DownRight)
   
   end
 end
@@ -744,16 +744,16 @@ function cliff_camp.NPC_Undergrowth_2_Action(chara, activator)
     cliff_camp.NPC_Undergrowth_Concern()
   else
   
-  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shroomish_Line_001']))
-  
-  local partner = CH('NPC_Undergrowth_1')
-  UI:SetSpeaker(partner)
-  UI:SetSpeakerEmotion("Pain")
-  GROUND:CharSetEmote(partner, "sweating", 1)
-  SOUND:PlayBattleSE("EVT_Emote_Sweating")
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bellsprout_Line_003']))
+    UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+    
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shroomish_Line_001']))
+    
+    local partner = CH('NPC_Undergrowth_1')
+    UI:SetSpeaker(partner)
+    UI:SetSpeakerEmotion("Pain")
+    GROUND:CharSetEmote(partner, "sweating", 1)
+    SOUND:PlayBattleSE("EVT_Emote_Sweating")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bellsprout_Line_003']))
   
   end
 end
@@ -765,19 +765,19 @@ function cliff_camp.NPC_Undergrowth_Concern()
   
   if not SV.family.Father and SV.family.FatherActiveDays >= 3 then
     
-	UI:SetSpeaker(undergrowth1)
+    UI:SetSpeaker(undergrowth1)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hint_Father_Line_001']))
 	
-	UI:SetSpeaker(undergrowth2)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hint_Father_Line_002']))
+    UI:SetSpeaker(undergrowth2)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hint_Father_Line_002']))
 	
   elseif not SV.family.Pet and SV.family.PetActiveDays >= 3 and SV.family.Sister and SV.family.Mother and SV.family.Father and SV.family.Brother then
   
-	UI:SetSpeaker(undergrowth1)
+    UI:SetSpeaker(undergrowth1)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hint_Pet_Line_001']))
 	
-	UI:SetSpeaker(undergrowth2)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hint_Pet_Line_002']))
+    UI:SetSpeaker(undergrowth2)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hint_Pet_Line_002']))
 	
   end
   
@@ -786,17 +786,20 @@ end
 function cliff_camp.Rival_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  local enemy = CH('Rival_2')
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_001']))
+  UI:SetSpeakerEmotion("Angry")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_001'], enemy:GetDisplayName()))
   
   SV.team_rivals.SpokenTo = true
 end
   
 function cliff_camp.Rival_2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+  local enemy = CH('Rival_1')
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_001']))
+  UI:SetSpeakerEmotion("Angry")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_001'], enemy:GetDisplayName()))
   
   SV.team_rivals.SpokenTo = true
 end

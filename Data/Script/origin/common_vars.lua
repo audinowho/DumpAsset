@@ -214,7 +214,7 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.team_rivals, 1)
   elseif SV.team_rivals.Status == 7 and SV.guildmaster_summit.GameComplete then
     COMMON.UpdateCheckpointStatus(SV.team_rivals, 4)
-  elseif SV.team_rivals.Status == 8 and SV.team_rivals.SpokenTo then
+  elseif SV.team_rivals.Status == 8 and (SV.team_rivals.SpokenToEnd1 or SV.team_rivals.SpokenToEnd2) then
     COMMON.UpdateCheckpointStatus(SV.team_rivals, 1)
   elseif SV.team_rivals.Status == 9 then
 	SV.team_rivals.Cycle = math.random(1, 6)

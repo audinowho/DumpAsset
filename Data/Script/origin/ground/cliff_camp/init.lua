@@ -313,38 +313,57 @@ function cliff_camp.NPC_Broke_Action(chara, activator)
   
   if SV.team_hunter.Status == 1 then
   
-  local questname = "QuestDark"
-  local quest = SV.missions.Missions[questname]
-  
-  if quest == nil then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Broke_Line_001']))
-	
-	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_LOST_ITEM,
-      DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6,
-      FloorUnknown = false,
-	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_dark"),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("mightyena", 0, "normal", Gender.Male) }
-	)
-  else
-  
-	COMMON.TakeMissionItem(quest)
-	
-    if quest.Complete == COMMON.MISSION_INCOMPLETE then
+    local questname = "QuestDark"
+    local quest = SV.missions.Missions[questname]
+    
+    local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("flyaway_cliffs")
+    
+    if quest == nil then
+      
+      SOUND:PlayBattleSE("EVT_Emote_Sweating")
+      GROUND:CharSetEmote(chara, "sweating", 1)
+      GAME:WaitFrames(30)
+      
       UI:SetSpeaker(chara)
+      UI:SetSpeakerEmotion("Pain")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Broke_Line_001']))
+      
       GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Broke_Line_002']))
+      
+      SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
+      GROUND:CharSetEmote(chara, "exclaim", 1)
+      
+      GAME:WaitFrames(40)
+      UI:SetSpeakerEmotion("Normal")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Broke_Line_002'], zone_summary:GetColoredName()))
+      
+      COMMON.CreateMission(questname,
+      { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_LOST_ITEM,
+          DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6,
+          FloorUnknown = false,
+        TargetItem = RogueEssence.Dungeon.InvItem("lost_item_dark"),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("mightyena", 0, "normal", Gender.Male) }
+      )
     else
-      cliff_camp.Dark_Complete()
-	end
-  end
+    
+      COMMON.TakeMissionItem(quest)
+    
+      if quest.Complete == COMMON.MISSION_INCOMPLETE then
+        UI:SetSpeaker(chara)
+        GROUND:CharTurnToChar(chara,CH('PLAYER'))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Broke_Line_003'], zone_summary:GetColoredName()))
+      else
+        cliff_camp.Dark_Complete()
+      end
+    end
   
   elseif SV.team_hunter.Status == 2 then
     
-	UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Broke_Line_004']))
+    GROUND:CharTurnToChar(broke,player)
+    
+    UI:SetSpeaker(chara)
+    UI:SetSpeakerEmotion("Happy")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Broke_Line_006']))
   elseif SV.team_hunter.Status == 3 then
     
 	--TODO: cycling
@@ -356,15 +375,35 @@ function cliff_camp.Dark_Complete()
   local broke = CH('NPC_Broke')
   local player = CH('PLAYER')
   
+  local reward_item_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Item]:Get("xcl_element_dark_silk")
+  
   GROUND:CharTurnToChar(broke,player)
   
+  SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
+  GROUND:CharSetEmote(broke, "exclaim", 1)
+  GAME:WaitFrames(40)
+  
   UI:SetSpeaker(broke)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Broke_Line_003']))
+  
+  UI:SetSpeakerEmotion("Happy")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Broke_Line_004']))
+  
+  --wiggle a bit
+  local turnTime = 4
+  SOUND:PlayBattleSE("EVT_Emote_Confused")
+  GROUND:CharAnimateTurnTo(broke, Direction.DownLeft, turnTime)
+  GAME:WaitFrames(20)
+  SOUND:PlayBattleSE("EVT_Emote_Confused")
+  GROUND:CharAnimateTurnTo(broke, Direction.DownRight, turnTime)
+  GAME:WaitFrames(60)
+  
+  GROUND:CharTurnToChar(broke,player)
+  
+  UI:SetSpeakerEmotion("Sigh")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Broke_Line_005'], reward_item_summary:GetIconName()))
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_dark_silk")
   COMMON.GiftItem(player, receive_item)
-  
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Broke_Line_004']))
   
   COMMON.CompleteMission("QuestDark")
   
@@ -862,7 +901,7 @@ function cliff_camp.NPC_Conjurer_Action(chara, activator)
   
   if SV.team_firecracker.Status ~= 5 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Conjurer_Line_001']))
-	SV.team_firecracker.SpokenTo = true
+    SV.team_firecracker.SpokenTo = true
   else
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Conjurer_Line_002']))
   end
@@ -879,30 +918,43 @@ function cliff_camp.NPC_Storehouse_Action(chara, activator)
   if SV.supply_corps.Status <= 0 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_001'], carry:GetDisplayName(), deliver:GetDisplayName()))
   elseif SV.supply_corps.Status == 1 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_002']))
+    --UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_001'], carry:GetDisplayName(), deliver:GetDisplayName()))
   elseif SV.supply_corps.Status == 2 then
     local questname = "OutlawForest1"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
+      --Machop, Ponyta, you're late!  And there's inventory missing!
+      --What do you have to say for yourselves?
+      --We can explain!  The shipment was low... there was a snorlax blocking our way.
+      --And what's more, we were accosted by a bandit out in Faded Trail!
+      --He said the woods belonged to his clan, and we needed to pay a fee to pass, We had no choice!
+      --A fee?  How dare they!  They won't get away with this!
+      --I don't think we should cross them unless we've got some muscle... they mean business.
+      --if only someone could teach those crooks a lesson.
+      --Hey, you're from {0}!  Thanks for helping us with the Snorlax.  Can you help us with the stolen package?
+      
+      --It's a shame he didn't have it on him, but at least the route's safe.  You can have this as a reward.
+      
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_003']))
-	  --add the quest
-	  COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_OUTLAW,
-      DestZone = "faded_trail", DestSegment = 0, DestFloor = 5, FloorUnknown = true,
-      ClientSpecies = chara.CurrentForm,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("murkrow", 0, "normal", Gender.Male) }
-	  )
-	elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_004']))
-	else
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_005']))
-	  --give reward
+      --add the quest
+      COMMON.CreateMission(questname,
+      { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_OUTLAW,
+        DestZone = "faded_trail", DestSegment = 0, DestFloor = 5, FloorUnknown = true,
+        ClientSpecies = chara.CurrentForm,
+        TargetSpecies = RogueEssence.Dungeon.MonsterID("murkrow", 0, "normal", Gender.Male) }
+      )
+    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_004']))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_005']))
+      --give reward
       local receive_item = RogueEssence.Dungeon.InvItem("food_apple_huge")
       COMMON.GiftItem(player, receive_item)
-	  --complete mission and move to done
-	  COMMON.CompleteMission(questname)
-	  SV.supply_corps.Status = 3
-	end
+      --complete mission and move to done
+      COMMON.CompleteMission(questname)
+      SV.supply_corps.Status = 3
+    end
   elseif SV.supply_corps.Status == 3 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_006']))
   elseif SV.supply_corps.Status == 20 then

@@ -89,7 +89,7 @@ function base_camp_2.SetupNpcs()
   GROUND:Unhide("NPC_Queen")
   GROUND:Unhide("NPC_King")
   
-  
+  GROUND:Unhide("NPC_Treasure")
   GROUND:Unhide("NPC_Settling")
   GROUND:Unhide("NPC_Nonbeliever")
   GROUND:Unhide("NPC_Hesitant")
@@ -128,7 +128,9 @@ function base_camp_2.SetupNpcs()
   end
 
   if SV.team_solo.Status == 0 then
-    GROUND:Unhide("NPC_Solo")
+    if not SV.team_solo.SpokenTo then
+      GROUND:Unhide("NPC_Solo")
+    end
   elseif SV.team_solo.Status == 6 then
     -- TODO cycling
   end
@@ -298,10 +300,9 @@ function base_camp_2.NPC_Treasure_Action(chara, activator)
   UI:SetSpeaker(chara)
 
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Treasure_Line_001']))
+  UI:SetSpeakerEmotion("Worried")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Treasure_Line_002']))
-  UI:SetSpeakerEmotion("Happy")
-  GROUND:CharSetEmote(chara, "glowing", 4)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Treasure_Line_003']))
+  
 end
 
 
@@ -373,13 +374,25 @@ end
 
 
 function base_camp_2.NPC_Solo_Action(chara, activator)
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Solo_Line_001']))
-  UI:SetSpeakerEmotion("Worried")
+  GROUND:CharAnimateTurnTo(chara, Direction.Down, 4)
+  
+  GAME:WaitFrames(30)
+  GROUND:CharSetEmote(chara, "happy", 3)
+  local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")
+  GROUND:CharSetAction(chara, RogueEssence.Ground.PoseGroundAction(chara.Position, chara.Direction, animId))
+  UI:SetSpeakerEmotion("Determined")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Solo_Line_002']))
   
+  chara.CollisionDisabled = true
+  
+  GROUND:MoveToPosition(chara, 760, 288, true, 4)
+  GROUND:MoveToPosition(chara, 688, 360, true, 4)
+  GROUND:MoveToPosition(chara, 576, 360, true, 4)
+
+  GROUND:Hide("NPC_Solo")
   
   SV.team_solo.SpokenTo = true
   

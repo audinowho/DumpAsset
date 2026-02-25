@@ -234,6 +234,10 @@ function UpgradeTools:OnUpgrade()
   if SV.forest_camp.SnorlaxPhase == nil then
     SV.forest_camp.SnorlaxPhase = 0
   end
+  
+  if SV.forest_camp.SnorlaxAttempted == nil then
+    SV.forest_camp.SnorlaxAttempted = false
+  end
 
   if SV.forest_camp.TeamRetreatIntro == nil then
     SV.forest_camp.TeamRetreatIntro = false

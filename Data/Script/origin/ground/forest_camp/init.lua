@@ -40,16 +40,15 @@ function forest_camp.Enter(map)
   elseif SV.forest_camp.SnorlaxPhase == 2 then
     forest_camp.SetupNpcs()
     forest_camp.Snorlax_Fail()
-	SV.forest_camp.SnorlaxPhase = 1
+    SV.forest_camp.SnorlaxPhase = 1
   elseif SV.forest_camp.SnorlaxPhase == 3 then
     forest_camp.SetupNpcs()
     forest_camp.Snorlax_Success()
-	SV.forest_camp.SnorlaxPhase = 4
-	SV.supply_corps.Status = 1
+    SV.forest_camp.SnorlaxPhase = 4
+    SV.supply_corps.Status = 1
   else
     forest_camp.SetupNpcs()
-	
-	forest_camp.CheckMissions()
+    forest_camp.CheckMissions()
 	
     GAME:FadeIn(20)
   end
@@ -230,42 +229,201 @@ function forest_camp.Snorlax_Action(chara, activator)
   local ch = UI:ChoiceResult()
   
   if ch then
+    SOUND:PlayBGM("", true)
+    --start wiggling
+    GROUND:CharSetDrawEffect(chara, DrawEffect.Trembling)
     UI:SetSpeaker(chara)
+    UI:SetSpeakerEmotion("Sad")
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_002']))
-	SV.forest_camp.SnorlaxPhase = 1
+    --pose in anger
+    local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Shoot")
+    GROUND:CharSetAction(chara, RogueEssence.Ground.FrameGroundAction(chara.Position, chara.Direction, animId, 0))
+    SOUND:PlayBattleSE("EVT_Roar")
+    UI:SetSpeaker(chara, false)
+    UI:SetSpeakerEmotion("Angry")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_003']))
+    SV.forest_camp.SnorlaxPhase = 1
+    
+    local deliver = CH("NPC_Deliver")
+    local carry = CH("NPC_Carry")
+    local player = CH('PLAYER')
+    GROUND:CharTurnToChar(deliver, player)
+    GROUND:CharTurnToChar(carry, player)
+    
+    GROUND:CharSetEmote(deliver, "sweating", 1)
+    GROUND:CharSetEmote(carry, "sweating", 1)
+    
     SOUND:PlayBattleSE("EVT_Battle_Transition")
     GAME:FadeOut(true, 60)
+    GROUND:CharEndDrawEffect(chara, DrawEffect.Trembling)
     GAME:EnterDungeon('guildmaster_island', 0, 3, 0, RogueEssence.Data.GameProgress.DungeonStakes.Progress, true, true)
   end
 end
 
 function forest_camp.Snorlax_Fail()
-  --snorlax collapses back
+  local player = CH('PLAYER')
+  local snorlax = CH("Snorlax")
+  local deliver = CH("NPC_Deliver")
+  local carry = CH("NPC_Carry")
+  SOUND:PlayBGM("", true)
+  
+  GROUND:CharTurnToChar(deliver, player)
+  GROUND:CharTurnToChar(carry, player)
+  
   --everyone is dead
+  GROUND:CharSetDrawEffect(snorlax, DrawEffect.Trembling)
+  local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Shoot")
+  GROUND:CharSetAction(snorlax, RogueEssence.Ground.FrameGroundAction(snorlax.Position, snorlax.Direction, animId, 0))
+  
+  local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Pain")
+  GROUND:CharSetAction(player, RogueEssence.Ground.FrameGroundAction(player.Position, player.Direction, animId, 10))
   GAME:FadeIn(20)
-  --ekans: he doesn't like to have his sleep disturbed
-  UI:SetSpeaker(CH("NPC_Deliver"))
+  
+  UI:SetSpeaker(snorlax)
+  UI:SetSpeakerEmotion("Angry")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Fail_001']))
-  --move back to position
+  GAME:WaitFrames(10)
+  
+  --snorlax collapses back
+  SOUND:PlayBattleSE("_UNK_EVT_018")
+  GROUND:CharEndDrawEffect(snorlax, DrawEffect.Trembling)
+  GROUND:CharSetAnim(snorlax, "Sleep", true)
+  
+  GAME:WaitFrames(60)
+  SOUND:PlayBGM(_ZONE.CurrentGround.Music, true)
+  
+  if SV.forest_camp.SnorlaxAttempted then
+    GROUND:CharEndAnim(player)
+    GROUND:CharAnimateTurnTo(player, Direction.Down, 4)
+  else
+    -- camera down
+    GAME:MoveCamera(0, 60, 40, true)
+    
+    SOUND:PlayBattleSE("EVT_Emote_Sweatdrop")
+    GROUND:CharSetEmote(deliver, "sweatdrop", 1)
+    GAME:WaitFrames(30)
+    UI:SetSpeaker(deliver)
+    UI:SetSpeakerEmotion("Stunned")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Fail_002']))
+    
+    GROUND:CharEndAnim(player)
+    GROUND:CharAnimateTurnTo(player, Direction.Down, 4)
+
+    UI:SetSpeaker(carry)
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Fail_003'], snorlax:GetDisplayName()))
+    --move back to position
+    
+    GAME:MoveCamera(0, 0, 40, true)
+    SV.forest_camp.SnorlaxAttempted = true
+  end
 end
 
 function forest_camp.Snorlax_Success()
+  local ground = _DATA:GetGround("forest_camp")
+  
   local player = CH('PLAYER')
   
+  local snorlax = CH("Snorlax")
+  local deliver = CH("NPC_Deliver")
+  local storehouse = CH("NPC_Storehouse")
+  local carry = CH("NPC_Carry")
+  
+  GROUND:TeleportTo(deliver, 348, 344, Direction.Up)
+  GROUND:TeleportTo(carry, 380, 344, Direction.Up)
+  
+  GROUND:CharSetDrawEffect(snorlax, DrawEffect.Trembling)
+  local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Shoot")
+  GROUND:CharSetAction(snorlax, RogueEssence.Ground.FrameGroundAction(snorlax.Position, snorlax.Direction, animId, 0))
+  
   GAME:FadeIn(20)
-  --snorlax runs off
+  
+  UI:SetSpeaker(snorlax)
+  UI:SetSpeakerEmotion("Shouting")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Success_001']))
+  GROUND:CharEndDrawEffect(snorlax, DrawEffect.Trembling)
+  SOUND:PlayBattleSE("_UNK_EVT_069")
+  GROUND:MoveToPosition(snorlax, 292, 316, true, 4)
+  GROUND:MoveToPosition(snorlax, 292, 432, true, 4)
+  --snorlax runs off
   GROUND:Hide("Snorlax")
-  --the team thanks you, gives you a stock
+  --the team walks up (semi-parallel)
+  GAME:WaitFrames(30)
+  
+  local coro1 = TASK:BranchCoroutine(function() forest_camp.Carry_Sequence_1(carry) end)
+  GAME:WaitFrames(20)
+  local coro2 = TASK:BranchCoroutine(function() forest_camp.Deliver_Sequence_1(deliver) end)
+  -- wait to join coroutines before giving control back to the player
+  TASK:JoinCoroutines({coro1, coro2})
+  
+  UI:SetSpeaker(CH("NPC_Carry"))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Success_002'], snorlax:GetDisplayName()))
   UI:SetSpeaker(CH("NPC_Deliver"))
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Success_002']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Success_003'], ground:GetColoredName()))
+  
+  --they rummage the tent
+  GROUND:CharAnimateTurnTo(deliver, Direction.UpRight, 4)
+  GROUND:CharAnimateTurnTo(carry, Direction.UpLeft, 4)
+  
+  GROUND:CharSetAnim(deliver, "Walk", true)
+  GROUND:CharSetAnim(carry, "Walk", true)
+  --rummaging sounds
+  SOUND:PlayBattleSE("_UNK_EVT_116")
+  GAME:WaitFrames(30)
+  SOUND:PlayBattleSE("_UNK_EVT_010")
+  GAME:WaitFrames(10)
+  SOUND:PlayBattleSE("_UNK_EVT_010")
+  GAME:WaitFrames(20)
+  SOUND:PlayBattleSE("_UNK_EVT_128")
+  GAME:WaitFrames(10)
+  GROUND:CharEndAnim(carry)
+  GROUND:CharEndAnim(deliver)
+  GAME:WaitFrames(30)
+  
+  GROUND:CharAnimateTurnTo(deliver, Direction.Right, 4)
+  UI:SetSpeaker(CH("NPC_Deliver"))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Success_004'], carry:GetDisplayName(), storehouse:GetDisplayName()))
+  
+  GROUND:CharAnimateTurnTo(carry, Direction.DownLeft, 4)
+  UI:SetSpeaker(CH("NPC_Carry"))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Success_005']))
   local receive_item = RogueEssence.Dungeon.InvItem("apricorn_big")
   COMMON.GiftItem(player, receive_item)
+  
+
+  local coro1 = TASK:BranchCoroutine(function() forest_camp.Carry_Sequence_2(carry) end)
+  local coro2 = TASK:BranchCoroutine(function() forest_camp.Deliver_Sequence_2(deliver) end)
+  -- wait to join coroutines before giving control back to the player
+  TASK:JoinCoroutines({coro1, coro2})
+  
+end
+
+function forest_camp.Deliver_Sequence_1(deliver)
+
+  deliver.CollisionDisabled = true
+  GROUND:MoveToPosition(deliver, 348, 248, false, 2)
+  GROUND:CharAnimateTurnTo(deliver, Direction.DownRight, 4)
+end
+
+function forest_camp.Carry_Sequence_1(carry)
+  carry.CollisionDisabled = true
+  GROUND:MoveToPosition(carry, 380, 256, false, 2)
+  GROUND:CharAnimateTurnTo(carry, Direction.DownLeft, 4)
+end
+
+function forest_camp.Deliver_Sequence_2(deliver)
   --they head off
-  UI:SetSpeaker(CH("NPC_Carry"))
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Success_003']))
-  GROUND:Hide("NPC_Carry")
+  GROUND:MoveToPosition(deliver, 328, 248, false, 2)
+  GROUND:MoveToPosition(deliver, 292, 220, false, 2)
+  GROUND:MoveToPosition(deliver, 292, 120, false, 2)
   GROUND:Hide("NPC_Deliver")
+end
+
+function forest_camp.Carry_Sequence_2(carry)
+  GROUND:MoveToPosition(carry, 336, 256, false, 2)
+  GROUND:MoveToPosition(carry, 292, 220, false, 2)
+  GROUND:MoveToPosition(carry, 292, 120, false, 2)
+  GROUND:Hide("NPC_Carry")
 end
 
 function forest_camp.NPC_Storehouse_Action(chara, activator)
@@ -285,13 +443,16 @@ function forest_camp.NPC_Carry_Action(chara, activator)
   UI:SetSpeaker(chara)
   
   if SV.supply_corps.Status == 0 then
-    UI:SetSpeakerEmotion("Angry")
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_001']))
-    UI:SetSpeakerEmotion("Stunned")
-	
-	--local skill_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Skill]:Get("wake_up_slap")
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_002']))
-    GROUND:EntTurn(chara, Direction.Left)
+    local snorlax = CH("Snorlax")
+    if SV.forest_camp.SnorlaxAttempted then
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_003'], snorlax:GetDisplayName()))
+    else
+      UI:SetSpeakerEmotion("Angry")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_001'], snorlax:GetDisplayName()))
+      UI:SetSpeakerEmotion("Stunned")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_002']))
+      GROUND:EntTurn(chara, Direction.Left)
+    end
   elseif SV.supply_corps.Status >= 20 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_Route']))
   end
@@ -306,12 +467,18 @@ function forest_camp.NPC_Deliver_Action(chara, activator)
   UI:SetSpeaker(chara)
   
   if SV.supply_corps.Status == 0 then
-    UI:SetSpeakerEmotion("Pain")
-    SOUND:PlayBattleSE("EVT_Emote_Sweating")
-    GROUND:CharSetEmote(chara, "sweating", 1)
-    GAME:WaitFrames(30)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_001']))
-    GROUND:EntTurn(chara, Direction.Right)
+    local snorlax = CH("Snorlax")
+    if SV.forest_camp.SnorlaxAttempted then
+      UI:SetSpeakerEmotion("Sad")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_002'], snorlax:GetDisplayName()))
+    else
+      UI:SetSpeakerEmotion("Pain")
+      SOUND:PlayBattleSE("EVT_Emote_Sweating")
+      GROUND:CharSetEmote(chara, "sweating", 1)
+      GAME:WaitFrames(30)
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_001']))
+      GROUND:EntTurn(chara, Direction.Right)
+    end
   elseif SV.supply_corps.Status >= 20 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_Route']))
   end
@@ -321,51 +488,57 @@ end
 
 function forest_camp.NPC_Elder_Action(chara, activator)
   
+  local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("ambush_forest")
+  
   if SV.town_elder.Status == 1 then
   
-  local questname = "QuestGround"
-  local quest = SV.missions.Missions[questname]
-  
-  if quest == nil then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Elder_Line_001']))
-	
-	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_LOST_ITEM,
-      DestZone = "ambush_forest", DestSegment = 0, DestFloor = 11,
-      FloorUnknown = false,
-	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_ground"),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("donphan", 0, "normal", Gender.Male) }
-	)
-  else
-  
-	COMMON.TakeMissionItem(quest)
-	
-    if quest.Complete == COMMON.MISSION_INCOMPLETE then
+    local questname = "QuestGround"
+    local quest = SV.missions.Missions[questname]
+    
+    if quest == nil then
       UI:SetSpeaker(chara)
       GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Elder_Line_002']))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Elder_Line_001'], GAME:GetTeamName(), zone_summary:GetColoredName()))
+      
+      COMMON.CreateMission(questname,
+      { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_LOST_ITEM,
+          DestZone = "ambush_forest", DestSegment = 0, DestFloor = 11,
+          FloorUnknown = false,
+        TargetItem = RogueEssence.Dungeon.InvItem("lost_item_ground"),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("donphan", 0, "normal", Gender.Male) }
+      )
     else
-      forest_camp.Ground_Complete()
+    
+      COMMON.TakeMissionItem(quest)
+    
+      if quest.Complete == COMMON.MISSION_INCOMPLETE then
+        UI:SetSpeaker(chara)
+        GROUND:CharTurnToChar(chara,CH('PLAYER'))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Elder_Line_002'], zone_summary:GetColoredName()))
+      else
+        forest_camp.Ground_Complete()
+      end
     end
-  end
   
   elseif SV.town_elder.Status == 2 then
     
-	UI:SetSpeaker(chara)
+    UI:SetSpeaker(chara)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Elder_Complete_Line_002']))
   end
   
 end
 
 function forest_camp.Ground_Complete()
-  local broke = CH('NPC_Elder')
+  local elder = CH('NPC_Elder')
   local player = CH('PLAYER')
   
-  GROUND:CharTurnToChar(broke,player)
+  GROUND:CharTurnToChar(elder,player)
   
-  UI:SetSpeaker(broke)
+  SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
+  GROUND:CharSetEmote(elder, "exclaim", 1)
+  GAME:WaitFrames(40)
+  
+  UI:SetSpeaker(elder)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Elder_Complete_Line_001']))
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_ground_silk")

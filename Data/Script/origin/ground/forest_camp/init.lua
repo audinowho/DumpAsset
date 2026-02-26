@@ -218,13 +218,13 @@ function forest_camp.Snorlax_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
   UI:ResetSpeaker()
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_001']))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_001'], chara:GetDisplayName()))
   
   if SV.Experimental ~= true then
     return
   end
   
-  UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Ask'], name), true)
+  UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Ask']), true)
   UI:WaitForChoice()
   local ch = UI:ChoiceResult()
   
@@ -665,7 +665,7 @@ function forest_camp.Parent_Child()
   
     GROUND:CharTurnToChar(parent, player)
     UI:SetSpeaker(parent)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_After_Line_001'], child:GetDisplayName(), _DATA.Save.ActiveTeam.Name))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Cure_After_Line_001'], child:GetDisplayName(), GAME:GetTeamName()))
     GROUND:CharTurnToChar(child, player)
     UI:SetSpeaker(child)
     UI:SetSpeakerEmotion("Inspired")
@@ -735,9 +735,9 @@ function forest_camp.Sick_Child(chara)
       UI:SetSpeaker(camps)
       UI:SetSpeakerEmotion("Worried")
       if experienced then
-        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_007_Skilled'], _DATA.Save.ActiveTeam.Name, zone_summary:GetColoredName()))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_007_Skilled'], GAME:GetTeamName(), zone_summary:GetColoredName()))
       else
-        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_007'], _DATA.Save.ActiveTeam.Name, zone_summary:GetColoredName()))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_007'], GAME:GetTeamName(), zone_summary:GetColoredName()))
       end
     
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sickness_Line_008'], zone_summary:GetColoredName(), child:GetDisplayName()))

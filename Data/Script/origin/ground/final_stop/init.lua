@@ -477,7 +477,17 @@ function final_stop.NPC_Storehouse_Action(chara, activator)
     if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_001']))
       --give reward
-      local receive_item = RogueEssence.Dungeon.InvItem("tm_focus_blast")
+      local receive_item = RogueEssence.Dungeon.InvItem("boost_hp_up")
+      COMMON.GiftItem(player, receive_item)
+      receive_item = RogueEssence.Dungeon.InvItem("boost_protein")
+      COMMON.GiftItem(player, receive_item)
+      receive_item = RogueEssence.Dungeon.InvItem("boost_iron")
+      COMMON.GiftItem(player, receive_item)
+      receive_item = RogueEssence.Dungeon.InvItem("boost_calcium")
+      COMMON.GiftItem(player, receive_item)
+      receive_item = RogueEssence.Dungeon.InvItem("boost_zinc")
+      COMMON.GiftItem(player, receive_item)
+      receive_item = RogueEssence.Dungeon.InvItem("boost_carbos")
       COMMON.GiftItem(player, receive_item)
       --complete mission and move to done
 	  COMMON.CompleteMission(questname)

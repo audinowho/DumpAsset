@@ -506,7 +506,17 @@ function rest_stop.NPC_Storehouse_Action(chara, activator)
     else
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_004']))
       --give reward
-      local receive_item = RogueEssence.Dungeon.InvItem("tm_sludge_bomb")
+      local receive_item = RogueEssence.Dungeon.InvItem("berry_liechi")
+      COMMON.GiftItem(player, receive_item)
+      receive_item = RogueEssence.Dungeon.InvItem("berry_ganlon")
+      COMMON.GiftItem(player, receive_item)
+      receive_item = RogueEssence.Dungeon.InvItem("berry_petaya")
+      COMMON.GiftItem(player, receive_item)
+      receive_item = RogueEssence.Dungeon.InvItem("berry_apicot")
+      COMMON.GiftItem(player, receive_item)
+      receive_item = RogueEssence.Dungeon.InvItem("berry_salac")
+      COMMON.GiftItem(player, receive_item)
+      receive_item = RogueEssence.Dungeon.InvItem("berry_starf")
       COMMON.GiftItem(player, receive_item)
       --complete mission and move to done
 	  COMMON.CompleteMission(questname)

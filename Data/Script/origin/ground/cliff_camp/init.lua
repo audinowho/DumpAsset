@@ -159,20 +159,20 @@ function cliff_camp.SetupNpcs()
   
   if SV.Experimental and SV.team_firecracker.Status == 0 then
     GROUND:Unhide("NPC_Seer")
-	GROUND:Unhide("NPC_Conjurer")
+    GROUND:Unhide("NPC_Conjurer")
   elseif SV.team_firecracker.Status == 5 and SV.team_firecracker.Cycle == 2 then
     GROUND:Unhide("NPC_Seer")
-	GROUND:Unhide("NPC_Conjurer")
-	
-	local seer = CH('NPC_Seer')
-	local seerData = RogueEssence.Dungeon.CharData()
-	seerData.BaseForm = RogueEssence.Dungeon.MonsterID("delphox", 0, "normal", Gender.Male)
-	seer.Data = seerData
+    GROUND:Unhide("NPC_Conjurer")
+    
+    local seer = CH('NPC_Seer')
+    local seerData = RogueEssence.Dungeon.CharData()
+    seerData.BaseForm = RogueEssence.Dungeon.MonsterID("delphox", 0, "normal", Gender.Male)
+    seer.Data = seerData
 
-	local conjurer = CH('NPC_Conjurer')
-	local conjurerData = RogueEssence.Dungeon.CharData()
-	conjurerData.BaseForm = RogueEssence.Dungeon.MonsterID("typhlosion", 1, "normal", Gender.Male)
-	conjurer.Data = conjurerData
+    local conjurer = CH('NPC_Conjurer')
+    local conjurerData = RogueEssence.Dungeon.CharData()
+    conjurerData.BaseForm = RogueEssence.Dungeon.MonsterID("typhlosion", 1, "normal", Gender.Male)
+    conjurer.Data = conjurerData
   end
   
   if SV.supply_corps.Status <= 1 then
@@ -181,7 +181,13 @@ function cliff_camp.SetupNpcs()
     GROUND:Unhide("NPC_Storehouse")
     GROUND:Unhide("NPC_Carry")
     GROUND:Unhide("NPC_Deliver")
-  elseif SV.supply_corps.Status <= 5 then
+    if SV.supply_corps.Status == 2 then
+      local carry = CH('NPC_Carry')
+      local deliver = CH('NPC_Deliver')
+      GROUND:TeleportTo(carry, 524, 248, Direction.UpLeft)
+      GROUND:TeleportTo(deliver, 542, 236, Direction.UpLeft)
+    end
+  elseif SV.supply_corps.Status == 5 then
     GROUND:Unhide("NPC_Carry")
     GROUND:Unhide("NPC_Deliver")
   elseif SV.supply_corps.Status >= 20 then
@@ -339,7 +345,7 @@ function cliff_camp.NPC_Broke_Action(chara, activator)
       
       COMMON.CreateMission(questname,
       { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_LOST_ITEM,
-          DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6,
+          DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 4,
           FloorUnknown = false,
         TargetItem = RogueEssence.Dungeon.InvItem("lost_item_dark"),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("mightyena", 0, "normal", Gender.Male) }
@@ -598,22 +604,22 @@ function cliff_camp.NPC_Sightseer_Action(chara, activator)
   
   if SV.team_kidnapped.Status == 3 then
   
-  local questname = "QuestGhost"
-  local quest = SV.missions.Missions[questname]
+    local questname = "QuestGhost"
+    local quest = SV.missions.Missions[questname]
   
-  if quest == nil then
+    if quest == nil then
 
-    UI:SetSpeaker(chara)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sightseer_Quest_Line_001']))
-	
-    --TODO: later oblivion valley
-    COMMON.CreateMission(questname,
-    { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
-        DestZone = "secret_garden", DestSegment = 0, DestFloor = 9,
-        FloorUnknown = false,
-        TargetSpecies = RogueEssence.Dungeon.MonsterID("meowth", 0, "normal", Gender.Male),
-        ClientSpecies = RogueEssence.Dungeon.MonsterID("pidgeotto", 0, "normal", Gender.Male) }
-    )
+      UI:SetSpeaker(chara)
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sightseer_Quest_Line_001']))
+    
+      --TODO: later oblivion valley
+      COMMON.CreateMission(questname,
+      { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
+          DestZone = "secret_garden", DestSegment = 0, DestFloor = 9,
+          FloorUnknown = false,
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("meowth", 0, "normal", Gender.Male),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("pidgeotto", 0, "normal", Gender.Male) }
+      )
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
       UI:SetSpeaker(chara)
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sightseer_Quest_Line_002']))
@@ -632,7 +638,8 @@ function cliff_camp.NPC_Sightseer_Action(chara, activator)
     local player = CH('PLAYER')
     GROUND:CharTurnToChar(chara, player)
     
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sightseer_Line_001']))
+    local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("fertile_valley")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sightseer_Line_001'], zone_summary:GetColoredName()))
   
   end
   
@@ -910,9 +917,10 @@ end
 function cliff_camp.NPC_Storehouse_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("faded_trail")
+  local outlaw_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]:Get("murkrow")
+  
   local player = CH('PLAYER')
-  local carry = CH('NPC_Carry')
-  local deliver = CH('NPC_Deliver')
   UI:SetSpeaker(chara)
   
   if SV.supply_corps.Status <= 0 then
@@ -924,40 +932,19 @@ function cliff_camp.NPC_Storehouse_Action(chara, activator)
     local questname = "OutlawForest1"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      --Machop, Ponyta, you're late!  And there's inventory missing!
-      --What do you have to say for yourselves?
-      --We can explain!  The shipment was low... there was a snorlax blocking our way.
-      --And what's more, we were accosted by a bandit out in Faded Trail!
-      --He said the woods belonged to his clan, and we needed to pay a fee to pass, We had no choice!
-      --A fee?  How dare they!  They won't get away with this!
-      --I don't think we should cross them unless we've got some muscle... they mean business.
-      --if only someone could teach those crooks a lesson.
-      --Hey, you're from {0}!  Thanks for helping us with the Snorlax.  Can you help us with the stolen package?
       
-      --It's a shame he didn't have it on him, but at least the route's safe.  You can have this as a reward.
-      
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_003']))
-      --add the quest
-      COMMON.CreateMission(questname,
-      { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_OUTLAW,
-        DestZone = "faded_trail", DestSegment = 0, DestFloor = 5, FloorUnknown = true,
-        ClientSpecies = chara.CurrentForm,
-        TargetSpecies = RogueEssence.Dungeon.MonsterID("murkrow", 0, "normal", Gender.Male) }
-      )
+      cliff_camp.Supply_Start(questname)
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_004']))
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_003'], outlaw_summary:GetColoredName(), zone_summary:GetColoredName()))
     else
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_005']))
-      --give reward
-      local receive_item = RogueEssence.Dungeon.InvItem("food_apple_huge")
-      COMMON.GiftItem(player, receive_item)
-      --complete mission and move to done
-      COMMON.CompleteMission(questname)
-      SV.supply_corps.Status = 3
+      cliff_camp.Supply_Complete(questname)
     end
   elseif SV.supply_corps.Status == 3 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_006']))
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_004']))
   elseif SV.supply_corps.Status == 20 then
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_Route']))
   end
 end
@@ -966,7 +953,6 @@ end
 function cliff_camp.NPC_Carry_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
   
   
@@ -974,19 +960,21 @@ function cliff_camp.NPC_Carry_Action(chara, activator)
     local questname = "OutlawForest1"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_001']))
-    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_002']))
+      cliff_camp.Supply_Start(questname)
     else
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_003']))
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+      local outlaw_team_name = "[color=#FFA5FF]" .. RogueEssence.StringKey("TEAM_FOREST"):ToLocal() .. "[color]"
+      UI:SetSpeakerEmotion("Worried")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_001'], outlaw_team_name))
     end
   elseif SV.supply_corps.Status == 3 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_004']))
-  elseif SV.supply_corps.Status == 4 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_005']))
-	SV.supply_corps.Status = 5
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    local outlaw_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]:Get("murkrow")
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_003'], outlaw_summary:GetColoredName()))
   elseif SV.supply_corps.Status == 5 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_005']))
+    local ground = _DATA:GetGround("canyon_camp")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_004'], ground:GetColoredName()))
   elseif SV.supply_corps.Status == 20 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_Route']))
   end
@@ -996,31 +984,101 @@ end
 function cliff_camp.NPC_Deliver_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
   
   if SV.supply_corps.Status == 2 then
     local questname = "OutlawForest1"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_001']))
-    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_002']))
+      cliff_camp.Supply_Start(questname)
     else
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_003']))
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+      local storehouse = CH('NPC_Storehouse')
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_001'], storehouse:GetDisplayName()))
     end
   elseif SV.supply_corps.Status == 3 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_004']))
-  elseif SV.supply_corps.Status == 4 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_005']))
-    SV.supply_corps.Status = 5
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_003']))
   elseif SV.supply_corps.Status == 5 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_005']))
+    local ground = _DATA:GetGround("canyon_camp")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_004'], ground:GetColoredName()))
   elseif SV.supply_corps.Status == 20 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_Route']))
   end
 end
 
+function cliff_camp.Supply_Start(questname)
+  local player = CH('PLAYER')
+  local carry = CH('NPC_Carry')
+  local deliver = CH('NPC_Deliver')
+  local storehouse = CH('NPC_Storehouse')
+  
+  local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("faded_trail")
+  
+  local outlaw_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]:Get("murkrow")
+  local monster_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]:Get("snorlax")
+  local outlaw_team_name = "[color=#FFA5FF]" .. RogueEssence.StringKey("TEAM_FOREST"):ToLocal() .. "[color]"
+  
+  UI:SetSpeaker(storehouse)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_001'], monster_summary:GetColoredName()))
+  UI:SetSpeaker(carry)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_002'], GAME:GetTeamName()))
+  UI:SetSpeaker(storehouse)
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_003']))
+  UI:SetSpeaker(carry)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_004'], outlaw_summary:GetColoredName(), zone_summary:GetColoredName(), outlaw_team_name))
+  UI:SetSpeaker(storehouse)
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_005'], outlaw_team_name))
+  UI:SetSpeaker(deliver)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_006']))
+  UI:SetSpeaker(storehouse)
+  
+  GROUND:CharSetEmote(storehouse, "angry", 4)
+  UI:SetSpeakerEmotion("Angry")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_007']))
+  UI:SetSpeaker(deliver)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_008']))
+  UI:SetSpeaker(storehouse)
+  UI:SetSpeakerEmotion("Angry")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_009']))
+  
+  GROUND:CharTurnToChar(storehouse, player)
+  GAME:WaitFrames(60)
+  
+  UI:SetSpeaker(storehouse)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_010'], GAME:GetTeamName(), monster_summary:GetColoredName(), outlaw_summary:GetColoredName()))
+  --add the quest
+  COMMON.CreateMission(questname,
+  { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_OUTLAW,
+    DestZone = "faded_trail", DestSegment = 0, DestFloor = 5, FloorUnknown = true,
+    ClientSpecies = storehouse.CurrentForm,
+    TargetSpecies = RogueEssence.Dungeon.MonsterID("murkrow", 0, "normal", Gender.Male) }
+  )
+end
+
+function cliff_camp.Supply_Complete(questname)
+  local player = CH('PLAYER')
+  local carry = CH('NPC_Carry')
+  local deliver = CH('NPC_Deliver')
+  local storehouse = CH('NPC_Storehouse')
+  
+  GROUND:CharTurnToChar(storehouse,CH('PLAYER'))
+  UI:SetSpeaker(storehouse)
+  --It's a shame he didn't have the P he stole from us, but at least the route's safe.  You can have this as a reward.
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Complete_001'], _ZONE.CurrentGround:GetColoredName()))
+  --give reward
+  local receive_item = RogueEssence.Dungeon.InvItem("food_apple_big")
+  COMMON.GiftItem(player, receive_item)
+  receive_item = RogueEssence.Dungeon.InvItem("food_apple_huge")
+  COMMON.GiftItem(player, receive_item)
+  receive_item = RogueEssence.Dungeon.InvItem("boost_nectar")
+  COMMON.GiftItem(player, receive_item)
+  --complete mission and move to done
+  COMMON.CompleteMission(questname)
+  SV.supply_corps.Status = 3
+end
 
 function cliff_camp.NPC_DexRater_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine

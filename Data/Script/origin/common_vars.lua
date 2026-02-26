@@ -59,7 +59,7 @@ function COMMON.UpdateDayEndVars()
           DestZone = "overgrown_wilds",
           DestSegment = 1,
           DestFloor = 1,
-		  TargetLevel = 35,
+		  TargetLevel = 40,
           FloorUnknown = true,
           TargetSpecies = RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male),
@@ -106,7 +106,7 @@ function COMMON.UpdateDayEndVars()
           DestZone = "wayward_wetlands",
           DestSegment = 0,
           DestFloor = 10,
-		  TargetLevel = 35,
+		  TargetLevel = 48,
           FloorUnknown = true,
           TargetSpecies = RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male),
@@ -130,6 +130,7 @@ function COMMON.UpdateDayEndVars()
           DestZone = "champions_road",
           DestSegment = 1,
           DestFloor = 1,
+		  TargetLevel = 35,
           FloorUnknown = true,
           TargetSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Female),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Female),
@@ -347,7 +348,9 @@ function COMMON.UpdateDayEndVars()
   if SV.supply_corps.Status == 1 then
     SV.supply_corps.Status = 2
   elseif SV.supply_corps.Status == 3 then
-    SV.supply_corps.Status = 4
+    COMMON.UpdateCheckpointStatus(SV.supply_corps, 1)
+  elseif SV.supply_corps.Status == 4 then
+    COMMON.UpdateCheckpointStatus(SV.supply_corps, 2)
   elseif SV.supply_corps.Status == 5 then
     SV.supply_corps.Status = 6
   elseif SV.supply_corps.Status == 7 then

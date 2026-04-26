@@ -354,7 +354,7 @@ function COMMON.UpdateDayEndVars()
   elseif SV.supply_corps.Status == 5 then
     SV.supply_corps.Status = 6
   elseif SV.supply_corps.Status == 7 then
-    SV.supply_corps.Status = 8
+    COMMON.UpdateCheckpointStatus(SV.supply_corps, 3)
   elseif SV.supply_corps.Status == 9 and SV.rest_stop.ExpositionComplete then
     SV.supply_corps.Status = 10
   elseif SV.supply_corps.Status == 11 then

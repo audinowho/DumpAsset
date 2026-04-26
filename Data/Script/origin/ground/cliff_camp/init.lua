@@ -1019,6 +1019,23 @@ function cliff_camp.Supply_Start(questname)
   local monster_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]:Get("snorlax")
   local outlaw_team_name = "[color=#FFA5FF]" .. RogueEssence.StringKey("TEAM_FOREST"):ToLocal() .. "[color]"
   
+  --But that wasn't the end of it...
+  --In Faded Trail, we were stopped by Murkrow, and forced to give him a cut of the supplies!
+  --In Faded Trail, we were stopped by Murkrow
+  --That pesky bird again!  What did he want?
+  --Same as he always did... a cut of the supplies for the Forest Clan.
+  --That bird has been plucking away at our supply chain for ages.
+  --They say they own the place, but they're nothing more than a bunch of bandits!
+  --If only someone would do something about them...
+  --He wouldn't let us go until we gave him a cut of the supplies!
+  --If you think that's bad, wait till you hear what happened in faded trail!
+  
+  --Only half the supplies, and several days late!  You'd better have a good explanation for this!
+  
+  --But that's not all.  We were intercepted by Murkrow again, and 
+  --That lousy bandit! He won't get away with this!
+  
+  
   UI:SetSpeaker(storehouse)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_001'], monster_summary:GetColoredName()))
   UI:SetSpeaker(carry)

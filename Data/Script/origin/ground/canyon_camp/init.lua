@@ -188,10 +188,10 @@ function canyon_camp.SetupNpcs()
     GROUND:Unhide("NPC_Dragon_2")
     GROUND:Unhide("NPC_Dragon_3")
 	
-	local protege = CH('NPC_Protege')
-	local protegeTutor = CH('NPC_Protege_Tutor')
-	GROUND:TeleportTo(protege, 496, 368, Direction.Up)
-	GROUND:TeleportTo(protegeTutor, 512, 368, Direction.Up)
+    local protege = CH('NPC_Protege')
+    local protegeTutor = CH('NPC_Protege_Tutor')
+    GROUND:TeleportTo(protege, 496, 368, Direction.Up)
+    GROUND:TeleportTo(protegeTutor, 512, 368, Direction.Up)
     GROUND:Unhide("NPC_Protege")
     GROUND:Unhide("NPC_Protege_Tutor")
 	
@@ -250,6 +250,12 @@ function canyon_camp.SetupNpcs()
     GROUND:Unhide("NPC_Storehouse")
     GROUND:Unhide("NPC_Carry")
     GROUND:Unhide("NPC_Deliver")
+    local carry = CH('NPC_Carry')
+    local deliver = CH('NPC_Deliver')
+    local storehouse = CH('NPC_Storehouse')
+    GROUND:TeleportTo(storehouse, 800, 356, Direction.Down)
+    GROUND:TeleportTo(carry, 784, 368, Direction.Up)
+    GROUND:TeleportTo(deliver, 816, 368, Direction.Up)
   elseif SV.supply_corps.Status <= 11 then
     GROUND:Unhide("NPC_Carry")
     GROUND:Unhide("NPC_Deliver")
@@ -458,26 +464,18 @@ function canyon_camp.NPC_Storehouse_Action(chara, activator)
   elseif SV.supply_corps.Status == 8 then
     local unlock = _DATA.Save:GetDungeonUnlock("ambush_forest") -- make this the dungeon unlock state
     if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_007']))
-      COMMON.UnlockWithFanfare("ambush_forest", false)
+      canyon_camp.Ambush_Start()
     elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_008']))
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+      local outlaw_team_name = "[color=#FFA5FF]" .. RogueEssence.StringKey("TEAM_FOREST"):ToLocal() .. "[color]"
+      UI:SetSpeakerEmotion("Determined")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_004'], outlaw_team_name))
     else
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_009']))
-      --increase rank for bag space
-      _DATA.Save.ActiveTeam:SetRank("bronze")
-      SOUND:PlayFanfare("Fanfare/RankUp")
-      UI:ResetSpeaker(false)
-      UI:SetCenter(true)
-	  local rank = _DATA:GetRank(_DATA.Save.ActiveTeam.Rank)
-      UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_BAG_SIZE"):ToLocal(), rank.BagSize))
-      UI:SetSpeaker(chara)
-      UI:SetCenter(false)
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_010']))
-      SV.supply_corps.Status = 9
+      canyon_camp.Ambush_Complete()
     end
   elseif SV.supply_corps.Status == 9 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_011']))
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_005']))
   elseif SV.supply_corps.Status == 20 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_Route']))
   end
@@ -506,14 +504,18 @@ function canyon_camp.NPC_Carry_Action(chara, activator)
   elseif SV.supply_corps.Status == 8 then
     local unlock = _DATA.Save:GetDungeonUnlock("ambush_forest") -- make this the dungeon unlock state
     if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_005']))
+      canyon_camp.Ambush_Start()
     elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_006']))
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+      local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("ambush_forest")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_004'], zone_summary:GetColoredName()))
     else
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_007']))
+      canyon_camp.Ambush_Complete()
     end
   elseif SV.supply_corps.Status == 9 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_008']))
+    local outlaw_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]:Get("honchkrow")
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_005'], outlaw_summary:GetDisplayName()))
   elseif SV.supply_corps.Status == 10 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_009']))
     SV.supply_corps.Status = 11
@@ -528,7 +530,6 @@ end
 function canyon_camp.NPC_Deliver_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
   
   if SV.supply_corps.Status == 6 then
@@ -550,14 +551,23 @@ function canyon_camp.NPC_Deliver_Action(chara, activator)
   elseif SV.supply_corps.Status == 8 then
     local unlock = _DATA.Save:GetDungeonUnlock("ambush_forest") -- make this the dungeon unlock state
     if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_005']))
+      canyon_camp.Ambush_Start()
     elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_006']))
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+      local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("ambush_forest")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_004'], zone_summary:GetColoredName()))
     else
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_007']))
+      canyon_camp.Ambush_Complete()
     end
   elseif SV.supply_corps.Status == 9 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_008']))
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_005']))
+    if SV.guildmaster_summit.GameComplete then
+      UI:SetSpeakerEmotion("Happy")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_006_Master'], GAME:GetTeamName()))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_006']))
+    end
   elseif SV.supply_corps.Status == 10 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_009']))
 	SV.supply_corps.Status = 11
@@ -637,6 +647,88 @@ function canyon_camp.Supply_Complete(questname)
   
   UI:SetSpeakerEmotion("Happy")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_003']))
+end
+
+function canyon_camp.Ambush_Start()
+  local player = CH('PLAYER')
+  local carry = CH('NPC_Carry')
+  local deliver = CH('NPC_Deliver')
+  local storehouse = CH('NPC_Storehouse')
+  local outlaw_team_name = "[color=#FFA5FF]" .. RogueEssence.StringKey("TEAM_FOREST"):ToLocal() .. "[color]"
+  local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("ambush_forest")
+  
+  GROUND:CharTurnToChar(storehouse,player)
+  GROUND:CharTurnToChar(deliver,player)
+  GROUND:CharTurnToChar(carry,player)
+  
+  --Machop and Ponyta have been scouting the routes where the Forest Clan's been sighted.
+  UI:SetSpeaker(storehouse)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Ambush_001'], carry:GetDisplayName(), deliver:GetDisplayName(), outlaw_team_name))
+  --It looks like they're a whole guild of thieves,[pause=0] and they all answer to their one big boss.
+  UI:SetSpeaker(deliver)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Ambush_002']))
+  --We found where their hideout is too,[pause=0] a shady neck of the woods they call Ambush Forest!
+  UI:SetSpeaker(carry)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Ambush_003'], zone_summary:GetColoredName()))
+  --{0},[pause=0] we need your help to take them down!
+  UI:SetSpeaker(storehouse)
+  UI:SetSpeakerEmotion("Determined")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Ambush_004'], GAME:GetTeamName()))
+  
+  COMMON.UnlockWithFanfare("ambush_forest", false)
+  
+  UI:SetSpeakerEmotion("Determined")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_004'], outlaw_team_name))
+end
+
+function canyon_camp.Ambush_Complete()
+  local player = CH('PLAYER')
+  local carry = CH('NPC_Carry')
+  local deliver = CH('NPC_Deliver')
+  local storehouse = CH('NPC_Storehouse')
+
+  GROUND:CharTurnToChar(storehouse,player)
+  GROUND:CharTurnToChar(deliver,player)
+  GROUND:CharTurnToChar(carry,player)
+  
+  local outlaw_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]:Get("honchkrow")
+  local outlaw_team_name = "[color=#FFA5FF]" .. RogueEssence.StringKey("TEAM_FOREST"):ToLocal() .. "[color]"
+  
+  GROUND:CharSetEmote(storehouse, "happy", 4)
+  GROUND:CharSetEmote(deliver, "happy", 4)
+  GROUND:CharSetEmote(carry, "happy", 4)
+  
+  --It's {0}![pause=0] We can't thank you enough for fighting off the Forest Clan.
+  UI:SetSpeaker(storehouse)
+  UI:SetSpeakerEmotion("Happy")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Ambush_Complete_001'], GAME:GetTeamName(), outlaw_team_name))
+  
+  --It's a shame that Honchkrow got away.[pause=0] But since his defeat,[pause=30] the whole clan has retreated from the trail.
+  UI:SetSpeaker(carry)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Ambush_Complete_002'], outlaw_summary:GetColoredName()))
+  
+  --You've been as much a help to us as any member of the supply corps!
+  UI:SetSpeaker(deliver)
+  UI:SetSpeakerEmotion("Happy")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Ambush_Complete_003']))
+  
+  --Well,[pause=30] if we're going to consider you an honorary member of the supply corps,[pause=30] you should get this!
+  UI:SetSpeaker(storehouse)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Ambush_Complete_004']))
+  
+  --increase rank for bag space
+  _DATA.Save.ActiveTeam:SetRank("bronze")
+  SOUND:PlayFanfare("Fanfare/RankUp")
+  UI:ResetSpeaker(false)
+  UI:SetCenter(true)
+  local rank = _DATA:GetRank(_DATA.Save.ActiveTeam.Rank)
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_BAG_SIZE"):ToLocal(), rank.BagSize))
+  UI:SetSpeaker(chara)
+  UI:SetCenter(false)
+  SV.supply_corps.Status = 9
+  
+  UI:SetSpeaker(storehouse)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_005']))
 end
 
 function canyon_camp.NPC_Dragon_1_Action(chara, activator)

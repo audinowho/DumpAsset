@@ -364,7 +364,7 @@
     <value>{0}用{1}吸收了伤害！</value>
     <comment></comment>  </data>
   <data name="MSG_ACUTE_SNIFFER" xml:space="preserve">
-    <value>{0}用{1}在本层发现了{2}！</value>
+    <value>{0}用{1}在本层发现了{2}个道具！</value>
     <comment></comment>  </data>
   <data name="MSG_AIR_LOCK" xml:space="preserve">
     <value>{0}的特性 气闸 使天气消失了！</value>
@@ -1051,7 +1051,7 @@
     <value>{0}的特性 发光 召集了宝可梦到它身边！</value>
     <comment></comment>  </data>
   <data name="MSG_ILLUSION_START" xml:space="preserve">
-    <value>{0}隐藏在了幻觉后面！</value>
+    <value>{0}隐藏在了幻觉中！</value>
     <comment></comment>  </data>
   <data name="MSG_IMMOBILIZE_ALREADY" xml:space="preserve">
     <value>{0}已经被禁足了！</value>
@@ -1078,7 +1078,7 @@
     <value>{0}被纠缠了！</value>
     <comment></comment>  </data>
   <data name="MSG_INFILTRATOR" xml:space="preserve">
-    <value>由于{0}的特性 穿透，穿过了{1}！</value>
+    <value>{0}由于特性 穿透，穿过了{1}！</value>
     <comment></comment>  </data>
   <data name="MSG_INFILTRATOR_SKILL" xml:space="preserve">
     <value>攻击穿过了{1}！</value>
@@ -1121,6 +1121,9 @@
     <comment></comment>  </data>
   <data name="MSG_ITEM_NO_EFFECT" xml:space="preserve">
     <value>即使使用，也不会对{0}有任何效果。</value>
+    <comment></comment>  </data>
+  <data name="MSG_JUSTIFIED" xml:space="preserve">
+    <value>{0}的特性{1}使攻击提高了！</value>
     <comment></comment>  </data>
   <data name="MSG_KEY_MISS" xml:space="preserve">
     <value>没有东西需要开锁！</value>
@@ -2064,6 +2067,9 @@
   <data name="MSG_VITAL_SPIRIT_DROWSY" xml:space="preserve">
     <value>由于特性 干劲，{0}不会打瞌睡！</value>
     <comment></comment>  </data>
+  <data name="MSG_WATER_VEIL" xml:space="preserve">
+    <value>由于特性 {1}，{0}没有灼伤！</value>
+    <comment></comment>  </data>
   <data name="MSG_WEAK_ARMOR" xml:space="preserve">
     <value>{0}的 碎裂铠甲 脱落了！</value>
     <comment></comment>  </data>
@@ -2541,6 +2547,9 @@
   <data name="TALK_05_DIZZY_002" xml:space="preserve">
     <value>看什么看，怎么了！</value>
     <comment></comment>  </data>
+  <data name="TALK_05_FULL_000" xml:space="preserve">
+    <value>不论[player]去哪里，我都会跟上！</value>
+    <comment></comment>  </data>
   <data name="TALK_05_FULL_001" xml:space="preserve">
     <value>不可能？[myname]的眼中就没有什么“不可能”！</value>
     <comment></comment>  </data>
@@ -2600,6 +2609,9 @@
     <comment></comment>  </data>
   <data name="TALK_06_FULL_005" xml:space="preserve">
     <value>和[player]一起非常开心！</value>
+    <comment></comment>  </data>
+  <data name="TALK_06_FULL_006" xml:space="preserve">
+    <value>接下来会有什么？</value>
     <comment></comment>  </data>
   <data name="TALK_06_HALF_000" xml:space="preserve">
     <value>稍微有点不行了……</value>
@@ -3136,7 +3148,7 @@
     <value>[player]啊，别让我拖你的后腿哦……</value>
     <comment></comment>  </data>
   <data name="TALK_15_DIZZY_001" xml:space="preserve">
-    <value>[myname]啊，做事要好好地哦……</value>
+    <value>[myname]啊，做事要认真哦……</value>
     <comment></comment>  </data>
   <data name="TALK_15_DIZZY_002" xml:space="preserve">
     <value>[move]，要当心点哦……</value>
@@ -3601,7 +3613,7 @@
     <value>混乱有限，而我无限！</value>
     <comment></comment>  </data>
   <data name="TALK_32_DIZZY_001" xml:space="preserve">
-    <value>迷惑我么，何等愚昧！</value>
+    <value>迷惑我的视线么，何等愚昧！</value>
     <comment></comment>  </data>
   <data name="TALK_32_DIZZY_002" xml:space="preserve">
     <value>凌驾于此之上的力量啊！</value>
@@ -3723,179 +3735,209 @@
   <data name="TALK_33_WAIT_003" xml:space="preserve">
     <value>赶紧走人！</value>
     <comment></comment>  </data>
+  <data name="TALK_34_DIZZY_000" xml:space="preserve">
+    <value>迷失了方向……</value>
+    <comment></comment>  </data>
+  <data name="TALK_34_DIZZY_001" xml:space="preserve">
+    <value>必须校准……</value>
+    <comment></comment>  </data>
+  <data name="TALK_34_DIZZY_002" xml:space="preserve">
+    <value>吾在旋转……</value>
+    <comment></comment>  </data>
   <data name="TALK_34_FULL_000" xml:space="preserve">
-    <value>援助……将给予……援助……</value>
+    <value>吾将守护尔等进行探险。</value>
     <comment></comment>  </data>
   <data name="TALK_34_FULL_001" xml:space="preserve">
-    <value>我的力量……你的……力量……你的……</value>
+    <value>将所有的力量献予尔等吧。</value>
     <comment></comment>  </data>
   <data name="TALK_34_FULL_002" xml:space="preserve">
-    <value>RRRRR... RRRRR... RRRRR...</value>
+    <value>嘎啊啊啊啊啊啊啊啊啊啊啊！！</value>
     <comment></comment>  </data>
   <data name="TALK_34_FULL_003" xml:space="preserve">
-    <value>小心……[kind]……要小心……</value>
+    <value>对[kind]要小心！</value>
     <comment></comment>  </data>
   <data name="TALK_34_FULL_004" xml:space="preserve">
-    <value>看到……看……孤零零的[item]……</value>
+    <value>能看见[item]在某个地方……</value>
     <comment></comment>  </data>
   <data name="TALK_34_FULL_005" xml:space="preserve">
-    <value>继……续……继……续……</value>
+    <value>向前进发啊！</value>
     <comment></comment>  </data>
   <data name="TALK_34_HALF_000" xml:space="preserve">
-    <value>进度……受阻……</value>
+    <value>变得有点辛苦了……</value>
     <comment></comment>  </data>
   <data name="TALK_34_HALF_001" xml:space="preserve">
-    <value>我很好……担心不必……</value>
+    <value>没问题，不必担心。</value>
     <comment></comment>  </data>
   <data name="TALK_34_HALF_002" xml:space="preserve">
-    <value>痛……痛……</value>
+    <value>有点痛苦啊……</value>
     <comment></comment>  </data>
   <data name="TALK_34_HALF_003" xml:space="preserve">
-    <value>持续受损……持续受损……</value>
+    <value>好像稍微受到了伤害呢……</value>
     <comment></comment>  </data>
   <data name="TALK_34_PINCH_000" xml:space="preserve">
-    <value>不-不……刚好……刚好……能忍受……</value>
+    <value>不……不行了……快要倒下了……</value>
     <comment></comment>  </data>
   <data name="TALK_34_PINCH_001" xml:space="preserve">
-    <value>我恳求……治疗……我恳求……</value>
+    <value>抱……抱歉了。需要恢复……</value>
     <comment></comment>  </data>
   <data name="TALK_34_PINCH_002" xml:space="preserve">
-    <value>野蛮道路……野蛮道路……</value>
+    <value>变得相当痛苦了……</value>
     <comment></comment>  </data>
   <data name="TALK_34_PINCH_003" xml:space="preserve">
-    <value>这就是……这就是……我倒下了……？</value>
+    <value>吾要在此地倒下了吗……</value>
     <comment></comment>  </data>
   <data name="TALK_34_WAIT_000" xml:space="preserve">
-    <value>认真……出发……</value>
+    <value>准备完毕。</value>
     <comment></comment>  </data>
   <data name="TALK_34_WAIT_001" xml:space="preserve">
-    <value>准备……准备……</value>
+    <value>吾随时都可以出发。</value>
     <comment></comment>  </data>
   <data name="TALK_34_WAIT_002" xml:space="preserve">
-    <value>为何……为何……等待？</value>
+    <value>还不出发吗？</value>
     <comment></comment>  </data>
   <data name="TALK_34_WAIT_003" xml:space="preserve">
-    <value>跟随你……</value>
+    <value>无论何处吾都跟随。</value>
+    <comment></comment>  </data>
+  <data name="TALK_35_DIZZY_000" xml:space="preserve">
+    <value>啊，可悲啊……</value>
+    <comment></comment>  </data>
+  <data name="TALK_35_DIZZY_001" xml:space="preserve">
+    <value>旋转并不能阻止我的成功……</value>
+    <comment></comment>  </data>
+  <data name="TALK_35_DIZZY_002" xml:space="preserve">
+    <value>摇摇晃晃也就是这样而已……</value>
     <comment></comment>  </data>
   <data name="TALK_35_FULL_000" xml:space="preserve">
-    <value>我不在乎等待我们的是哪些敌人。</value>
+    <value>无论对手是谁都无所谓。</value>
     <comment></comment>  </data>
   <data name="TALK_35_FULL_001" xml:space="preserve">
-    <value>黑暗在我心中膨胀……</value>
+    <value>黑暗的力量正在充盈……</value>
     <comment></comment>  </data>
   <data name="TALK_35_FULL_002" xml:space="preserve">
-    <value>就这样吧！你将见证我的力量！</value>
+    <value>就让你见识一下吧！我的力量！</value>
     <comment></comment>  </data>
   <data name="TALK_35_FULL_003" xml:space="preserve">
-    <value>我们的进展……令人满意。</value>
+    <value>……感觉不错。</value>
     <comment></comment>  </data>
   <data name="TALK_35_FULL_004" xml:space="preserve">
-    <value>我只看见了一个[item]……</value>
+    <value>能看到一个[item]……</value>
     <comment></comment>  </data>
   <data name="TALK_35_FULL_005" xml:space="preserve">
-    <value>击败我？那肯定的不可能。</value>
+    <value>你是无法打败我的。绝对。</value>
     <comment></comment>  </data>
   <data name="TALK_35_HALF_000" xml:space="preserve">
-    <value>看来我受到了一些伤害……</value>
+    <value>似乎受到了一些伤害……</value>
     <comment></comment>  </data>
   <data name="TALK_35_HALF_001" xml:space="preserve">
-    <value>你真没想到我会被这阻碍吗？</value>
+    <value>你以为我就会这样倒下吗？</value>
     <comment></comment>  </data>
   <data name="TALK_35_HALF_002" xml:space="preserve">
-    <value>我的伤口很浅，不必害怕。</value>
+    <value>伤很浅，不必担心。</value>
     <comment></comment>  </data>
   <data name="TALK_35_HALF_003" xml:space="preserve">
-    <value>只要我受的伤在最小值，那就没事。</value>
+    <value>是我的话就没问题的，是这种程度的话。</value>
     <comment></comment>  </data>
   <data name="TALK_35_PINCH_000" xml:space="preserve">
-    <value>啊！我受的伤比我预想的要多……</value>
+    <value>啊……受到了相当大的伤害啊……</value>
     <comment></comment>  </data>
   <data name="TALK_35_PINCH_001" xml:space="preserve">
-    <value>我受伤了……但一定有办法的……</value>
+    <value>虽然很痛苦……但应该还能做点什么……</value>
     <comment></comment>  </data>
   <data name="TALK_35_PINCH_002" xml:space="preserve">
-    <value>我的健康在闪烁……如果不治疗……</value>
+    <value>体力已经消耗了很多……这样下去的话……</value>
     <comment></comment>  </data>
   <data name="TALK_35_PINCH_003" xml:space="preserve">
-    <value>我受了不少伤……我是否低估了这场挑战……？</value>
+    <value>相当大的伤害……是我有点轻敌了吗……</value>
     <comment></comment>  </data>
   <data name="TALK_35_WAIT_000" xml:space="preserve">
-    <value>我已经准备好了。</value>
+    <value>准备已经做好了。</value>
     <comment></comment>  </data>
   <data name="TALK_35_WAIT_001" xml:space="preserve">
-    <value>无论你去往何处，我都会同你一路。让我着重声明：不论何处！</value>
+    <value>我会随你去任何地方……无论何处。</value>
     <comment></comment>  </data>
   <data name="TALK_35_WAIT_002" xml:space="preserve">
-    <value>黑暗沉睡在我的内心……我有时仍能感觉到……</value>
+    <value>偶尔还能感觉到，黑暗沉睡在我内心……</value>
     <comment></comment>  </data>
   <data name="TALK_35_WAIT_003" xml:space="preserve">
-    <value>你准备好离开了吗？那我们走吧。</value>
+    <value>能出发了吗？快点走吧。</value>
+    <comment></comment>  </data>
+  <data name="TALK_36_DIZZY_000" xml:space="preserve">
+    <value>哎呀，我的头好晕哦~</value>
+    <comment></comment>  </data>
+  <data name="TALK_36_DIZZY_001" xml:space="preserve">
+    <value>哎呀，好像有点打不准了~</value>
+    <comment></comment>  </data>
+  <data name="TALK_36_DIZZY_002" xml:space="preserve">
+    <value>哎呀，有点站不稳了啊~</value>
     <comment></comment>  </data>
   <data name="TALK_36_FULL_000" xml:space="preserve">
-    <value>宝藏！\u266A 宝藏！\u266A</value>
+    <value>宝藏~\u266A 宝藏~\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_36_FULL_001" xml:space="preserve">
-    <value>我有多么美好的爱！\u266A 所有样式的道具都得带！\u266A</value>
+    <value>我呢，最喜欢道具了~\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_36_FULL_002" xml:space="preserve">
-    <value>一如既往！我将尽力献出微薄力量！\u266A</value>
+    <value>今天也要加油哦~\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_36_FULL_003" xml:space="preserve">
-    <value>谨慎！凝神！[kind]！畜生！</value>
+    <value>务必要当心[kind]哦~\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_36_FULL_004" xml:space="preserve">
-    <value>我懂得探险是多么动人心弦！\u266A</value>
+    <value>探险真的是好兴奋呢~\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_36_FULL_005" xml:space="preserve">
-    <value>现需赴往何方？\u266A</value>
+    <value>好了，那么接下来要去哪边呢~？</value>
     <comment></comment>  </data>
   <data name="TALK_36_HALF_000" xml:space="preserve">
-    <value>现在这里有点不友好！</value>
+    <value>感觉状态有点不太好了呢~</value>
     <comment></comment>  </data>
   <data name="TALK_36_HALF_001" xml:space="preserve">
-    <value>哦不！哦不！我的健康状况下降了！</value>
+    <value>哎呀呀，体力开始减少了呢~</value>
     <comment></comment>  </data>
   <data name="TALK_36_HALF_002" xml:space="preserve">
-    <value>哦不！哦不！我受伤了！</value>
+    <value>啊呀呀~！我受伤了~！</value>
     <comment></comment>  </data>
   <data name="TALK_36_HALF_003" xml:space="preserve">
-    <value>我们的旅程或被坏。\u266A 但这场游戏我仍在！\u266A</value>
+    <value>虽然有点吃力了，但我会继续加油的~！</value>
     <comment></comment>  </data>
   <data name="TALK_36_PINCH_000" xml:space="preserve">
-    <value>事情看起来很糟糕……</value>
+    <value>相当难受起来了……</value>
     <comment></comment>  </data>
   <data name="TALK_36_PINCH_001" xml:space="preserve">
-    <value>我感觉很晕……请帮帮我……</value>
+    <value>马上就要倒下了……救……救命啊~</value>
     <comment></comment>  </data>
   <data name="TALK_36_PINCH_002" xml:space="preserve">
-    <value>我已经到了极限……</value>
+    <value>差不多到极限了……</value>
     <comment></comment>  </data>
   <data name="TALK_36_PINCH_003" xml:space="preserve">
-    <value>我就要瘫倒了……快来救我……</value>
+    <value>已经没有力气了……谁……谁来恢复一下啊~</value>
     <comment></comment>  </data>
   <data name="TALK_36_WAIT_000" xml:space="preserve">
-    <value>我要去探险！\u266A</value>
+    <value>说到要去探险，真的是非常心潮澎湃呢~\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_36_WAIT_001" xml:space="preserve">
-    <value>我们要出发吗？\u266A</value>
+    <value>我们还没有出发吗~\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_36_WAIT_002" xml:space="preserve">
-    <value>我等着呢！我等着呢！\u266A</value>
+    <value>我想快点去探险，已经坐立不安了呢~\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_36_WAIT_003" xml:space="preserve">
-    <value>全都准备好了！很彻底！\u266A</value>
+    <value>出发的准备已经做好了哦~\u266A</value>
+    <comment></comment>  </data>
+  <data name="TALK_37_DIZZY_000" xml:space="preserve">
+    <value>哎呀，好晕啊！</value>
     <comment></comment>  </data>
   <data name="TALK_37_FULL_000" xml:space="preserve">
-    <value>我指望你了！</value>
+    <value>请多关照哦！</value>
     <comment></comment>  </data>
   <data name="TALK_37_HALF_000" xml:space="preserve">
-    <value>现在甚至更困难了。</value>
+    <value>稍微有点吃力了呢。</value>
     <comment></comment>  </data>
   <data name="TALK_37_PINCH_000" xml:space="preserve">
-    <value>我可能无法继续……</value>
+    <value>好像有点不行了……</value>
     <comment></comment>  </data>
   <data name="TALK_37_WAIT_000" xml:space="preserve">
-    <value>很高兴见到你！</value>
+    <value>请多多关照哦！</value>
     <comment></comment>  </data>
   <data name="TALK_ADVICE_EXP" xml:space="preserve">
     <value>这里的宝可梦真的很弱，[pause=0]我都能用普通攻击把它们干掉。[br]但如果我一直不用招式，[pause=0]我就得不到经验值了……</value>
@@ -3925,7 +3967,7 @@
     <value>哇哦，这招可真管用！[pause=0]为什么不拿着这个呢？</value>
     <comment></comment>  </data>
   <data name="TALK_ADVICE_STAT_DROP" xml:space="preserve">
-    <value>呃，有个长尾怪手往我的眼睛里扔了些沙子，现在我更难命中了！[br]我得去找个不可思议地板……</value>
+    <value>呃，有个长尾怪手往我的眼睛里扔了些沙子，现在我更难命中目标了！[br]我得去找个不可思议地板……</value>
     <comment></comment>  </data>
   <data name="TALK_ADVICE_STAT_DROP_CLEAR" xml:space="preserve">
     <value>呼，[pause=0]现在沙子都跑出来了！[pause=0]太谢谢你了！[br]顺带一提，[pause=30]如果你不知道自己的能力变化，[pause=0]就去看看队伍菜单里的状态页面吧。</value>
@@ -3969,6 +4011,12 @@
   <data name="TALK_ESCORT_SISTER_START" xml:space="preserve">
     <value>[tmp]我这是在哪里？我在做梦吗？我感觉有阵微风掠过……</value>
     <comment></comment>  </data>
+  <data name="TALK_LEGEND_CHASE_001" xml:space="preserve">
+    <value>……厉害。[pause=0]能战胜我就已非同小可，[pause=0]而又能追上我更是前无先例！[br]我不会看错，你就是公会会长的后继者！[br]你的经历一定能成为传奇。[pause=0]让我参与其中吧。</value>
+    <comment></comment>  </data>
+  <data name="TALK_LEGEND_HIDE_001" xml:space="preserve">
+    <value>好惊讶，[pause=0]你竟然真的能发现我？[scroll]你们不是普通的救助队。[pause=0]你演奏的就是我原来公会的领袖演奏的曲子。[br]我们等待公会领袖的后继者已经等了很久了。\n[pause=0]我请求你，让我加入你们的冒险吧。</value>
+    <comment></comment>  </data>
   <data name="TALK_LEGEND_SEA_001" xml:space="preserve">
     <value>哇！[pause=0]哇哇！</value>
     <comment></comment>  </data>
@@ -3994,7 +4042,7 @@
     <value>[tmp]什么？你是怎么……！？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0001_VAR_00" xml:space="preserve">
-    <value>种子富含营养！</value>
+    <value>我的种子里富含营养！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0002_VAR_00" xml:space="preserve">
     <value>硕大的花蕾绽放了幸福！</value>
@@ -4003,13 +4051,16 @@
     <value>背上的花！盛开了！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0003_00_2_VAR_00" xml:space="preserve">
-    <value>永不停息！</value>
+    <value>一鼓作气地前进吧！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0004_VAR_00" xml:space="preserve">
     <value>尾巴上的火焰是活力的象征！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0005_VAR_00" xml:space="preserve">
     <value>冒险！激情燃烧！如同尾巴那样！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0006_VAR_00" xml:space="preserve">
+    <value>就放心地跟着我来吧！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0007_VAR_00" xml:space="preserve">
     <value>有坚硬的外壳真是感到骄傲！</value>
@@ -4084,19 +4135,19 @@
     <value>我的电囊噼啪作响！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0026_01_1_VAR_00" xml:space="preserve">
-    <value>冲浪吧！[pause=0]要想不从尾巴上掉下来，还得要疯狂的练习！</value>
+    <value>冲浪吧！[pause=0]要想不从尾巴上掉下来，还需要疯狂的练习！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0026_01_2_VAR_00" xml:space="preserve">
     <value>真的好想去吃煎饼啊……</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0027_01_VAR_00" xml:space="preserve">
-    <value>请不要碰我的肚子！[pause=0]太软了！[br]……而且我怕痒。</value>
+    <value>请不要碰我的肚子！[pause=0]那是弱点！[br]……而且我怕痒。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0027_VAR_00" xml:space="preserve">
     <value>我喜欢把自己团成一个球！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0028_01_VAR_00" xml:space="preserve">
-    <value>我是[color=#00FFFF]穿山鼠[color]，大山的恐惧所在！[br][emote=Worried]……为什么我不改名叫[color=#00FFFF]穿冰鼠[color]？</value>
+    <value>我是[color=#00FFFF]穿山王[color]，大山的恐惧所在！[br][emote=Worried]……为什么我不改名叫[color=#00FFFF]穿冰王[color]？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0028_VAR_00" xml:space="preserve">
     <value>我的招式能瞬间斩你于刀下！</value>
@@ -4139,6 +4190,9 @@
     <comment></comment>  </data>
   <data name="TALK_REST_0039_VAR_00" xml:space="preserve">
     <value>我爱唱歌！\u266A没错吧？\u266A</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0040_VAR_00" xml:space="preserve">
+    <value>好朋友！好朋友～～～～！！哟————哈！！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0041_VAR_00" xml:space="preserve">
     <value>还有多久才天黑呢……</value>
@@ -4267,7 +4321,7 @@
     <value>无论如何，我可不是小石子！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0075_01_VAR_00" xml:space="preserve">
-    <value>你有镁电气石吗？[pause=0]我明天还你。</value>
+    <value>你有镁电气石吗？[pause=0]先借我，明天还你。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0075_VAR_00" xml:space="preserve">
     <value>也许看起来不像，但我真的是探险家！嘎哈哈哈哈！</value>
@@ -4468,7 +4522,7 @@
     <value>吐出火焰！热辣滚烫！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0127_VAR_00" xml:space="preserve">
-    <value>我为我巨大的钳角感到骄傲！你不会想看我的十字钳！</value>
+    <value>我的骄傲！嗖嗖！我巨大的钳角！搭拉！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0128_01_VAR_00" xml:space="preserve">
     <value>我是斗战种！[pause=0]我要……[br]……[br][emote=Worried]我要……[pause=0]呃……[pause=0]让我想想……</value>
@@ -4667,6 +4721,9 @@
     <comment></comment>  </data>
   <data name="TALK_REST_0185_VAR_00" xml:space="preserve">
     <value>胡说！\u266A假的！\u266A都是假的！\u266A你可要当心这些谣言了！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0186_VAR_00" xml:space="preserve">
+    <value>我要加油了蛙！现在就开始——蛙！！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0187_VAR_00" xml:space="preserve">
     <value>乘着风儿轻飘飘～\u266A轻飘飘～\u266A</value>
@@ -4926,8 +4983,11 @@
   <data name="TALK_REST_0239_VAR_00" xml:space="preserve">
     <value>我通过挥动手臂来充电！就像这样！滋嗡！滋嗡！</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0240_VAR_00" xml:space="preserve">
+    <value>要小心哦，我的鼻子和嘴巴里都能喷出火焰。</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0241_VAR_00" xml:space="preserve">
-    <value>每天早上都喝了哞哞鲜奶吗？它能够让你打起精神来\u266A</value>
+    <value>每天早上都喝了哞哞鲜奶吗？它能让你打起精神来\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0242_VAR_00" xml:space="preserve">
     <value>我要笑容满面，全力以赴！</value>
@@ -5002,10 +5062,13 @@
     <value>致胜的关键就是团结协作！默契地战斗吧！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0263_01_VAR_00" xml:space="preserve">
-    <value>喔，你个丑八怪！[pause=0][color=#00FF00]臭臭泥[color]都比你好看10000倍！[br]……[br]</value>
+    <value>喔，你个丑八怪！[pause=0][color=#00FF00]臭臭泥[color]都比你好看10000倍！[br]……[br]竟然不打我吗？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0263_VAR_00" xml:space="preserve">
     <value>喂，大家都来转成直角吧！来嘛！像之字形那样走路！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0264_01_VAR_00" xml:space="preserve">
+    <value>来一个，打一个！[pause=0]谁惹我，我就将它撕碎！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0264_VAR_00" xml:space="preserve">
     <value>我不想浪费时间！为什么道路总是歪歪扭扭的！？</value>
@@ -5034,6 +5097,9 @@
   <data name="TALK_REST_0272_VAR_00" xml:space="preserve">
     <value>哦耶！舞蹈！舞蹈！天乐河童舞蹈！哦耶！</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0273_VAR_00" xml:space="preserve">
+    <value>不介意的话，我可以帮助你们做探索工作。</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0274_VAR_00" xml:space="preserve">
     <value>我会照顾好你的！也许我们该动身了！</value>
     <comment></comment>  </data>
@@ -5054,6 +5120,9 @@
     <comment></comment>  </data>
   <data name="TALK_REST_0280_VAR_00" xml:space="preserve">
     <value>我会把全身心投入一切！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0281_VAR_00" xml:space="preserve">
+    <value>我们要一起开开心心地加油哦！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0282_VAR_00" xml:space="preserve">
     <value>我是沙奈朵！[br]我来一边关注各位的招式，一边争取出奇制胜！[br]请多关照！</value>
@@ -5083,7 +5152,10 @@
     <value>土遁忍者，土居忍士参上！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0291_VAR_00" xml:space="preserve">
-    <value>极速忍者，铁面忍者参上！[br]跟上我的动作了吗？</value>
+    <value>极速忍者，铁面忍者参上！跟上我的动作了吗？</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0292_VAR_00" xml:space="preserve">
+    <value>脱壳忍者，脱壳忍者参上！我最喜欢的口头禅是All·Or·Nothing!</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0293_VAR_00" xml:space="preserve">
     <value>我……会……尽力……（咕哝）。</value>
@@ -5097,8 +5169,17 @@
   <data name="TALK_REST_0296_VAR_00" xml:space="preserve">
     <value>我这一身是正常体型！</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0297_VAR_00" xml:space="preserve">
+    <value>呼哈……承让了！嗬哟，嗬哟！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0298_VAR_00" xml:space="preserve">
     <value>好想试试冒险的滋味！\u266A 耶！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0299_VAR_00" xml:space="preserve">
+    <value>专心去冒险吗？[pause=0]要是能顺便做生意的话也挺好的啊。</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0300_VAR_00" xml:space="preserve">
+    <value>哪里有逗猫棒呢？好想“喵——”地扑上去啊\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0301_VAR_00" xml:space="preserve">
     <value>没有谁能超越我的魅力！\u266A</value>
@@ -5130,17 +5211,47 @@
   <data name="TALK_REST_0310_VAR_00" xml:space="preserve">
     <value>我的鬓毛能够产生电流。[pause=0]要小心哟。</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0311_VAR_00" xml:space="preserve">
+    <value>我和负电拍拍为你一起声援！要加油哦！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0312_VAR_00" xml:space="preserve">
+    <value>加油！加油！卯足干劲！拿出骨气！我也要加油！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0313_VAR_00" xml:space="preserve">
+    <value>我最喜欢甜甜萤了！[pause=0]只要看到她，我的屁股就会兴奋得一闪一闪的！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0314_VAR_00" xml:space="preserve">
+    <value>和电萤虫一起，编织美丽的夜景，这就是我的爱好哦\u266A</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0315_VAR_00" xml:space="preserve">
+    <value>偶尔也得离开村子运动一下才行呢。</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0316_VAR_00" xml:space="preserve">
     <value>我今天会出去的，或许也不会……我自己也不太确定……</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0317_VAR_00" xml:space="preserve">
     <value>吞食兽！张大了嘴巴！</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0318_VAR_00" xml:space="preserve">
+    <value>今天的牙齿感觉也超锋利呀！利牙————！！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0319_VAR_00" xml:space="preserve">
     <value>大家都说咱是海中霸主。[pause=0]咱也不知道到底是不是。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0320_VAR_00" xml:space="preserve">
     <value>快看看我，像皮球一样弹来弹去！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0321_VAR_00" xml:space="preserve">
+    <value>看我荡起波浪吼噢噢噢噢！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0322_VAR_00" xml:space="preserve">
+    <value>大家都说我动作很迟钝哦，真的是这样吗？</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0323_VAR_00" xml:space="preserve">
+    <value>火驼——大喷发——！！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0324_VAR_00" xml:space="preserve">
+    <value>我并不能泡温泉，所以经常在温泉的周围做岩盘浴。呵呵。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0325_VAR_00" xml:space="preserve">
     <value>我想把我的珍珠带到迷宫里卖掉。[pause=0]你相信我可以的吧？</value>
@@ -5158,7 +5269,16 @@
     <value>我总是不停地抖动着翅膀。[br]不不，我的翅膀没有过敏。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0330_VAR_00" xml:space="preserve">
-    <value>我扇动翅膀，卷起沙暴！</value>
+    <value>只要我拍打翅膀，就能卷起沙暴！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0331_VAR_00" xml:space="preserve">
+    <value>我是从沙漠里来的！[pause=0]锋利的刺就是亮点！[pause=0]请多指教！沙漠沙沙漠——</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0332_VAR_00" xml:space="preserve">
+    <value>太阳落下，太阳又升起……世界又被崭新的光芒包裹着……</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0333_VAR_00" xml:space="preserve">
+    <value>我是青绵鸟哦\u266A 羽毛像棉花一样松软哦\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0334_VAR_00" xml:space="preserve">
     <value>我的翅膀真是非常蓬松吧\u266A 要不要摸摸看有多软呢？</value>
@@ -5180,6 +5300,12 @@
     <comment></comment>  </data>
   <data name="TALK_REST_0340_VAR_00" xml:space="preserve">
     <value>我是鲶鱼王，曾是一片水塘的主人。呵呵呵，有没有兴趣听听故事呢？</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0341_VAR_00" xml:space="preserve">
+    <value>嘿、嘿！这么说来，公会会长去哪里了呢？</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0342_VAR_00" xml:space="preserve">
+    <value>头顶上闪耀着的星星！铁螯——</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0343_VAR_00" xml:space="preserve">
     <value>我是从某个遗迹里来的～去随便转悠转悠吧～</value>
@@ -5214,8 +5340,14 @@
   <data name="TALK_REST_0353_VAR_00" xml:space="preserve">
     <value>我头上的角能够感知到其他人的情感！[pause=0]有没有心生嫉妒呢？</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0354_VAR_00" xml:space="preserve">
+    <value>我是以诅咒作为能量源活动的啊。[br]需要很多啊，还要更多啊，全部都来吧。</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0355_VAR_00" xml:space="preserve">
     <value>将财宝永远囤积起来吧！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0356_VAR_00" xml:space="preserve">
+    <value>在各种地方都感到彷徨！人生也就是这样的彷徨！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0357_VAR_00" xml:space="preserve">
     <value>要不要尝尝我脖子上的水果呀？很好吃的哦！</value>
@@ -5234,6 +5366,15 @@
     <comment></comment>  </data>
   <data name="TALK_REST_0361_00_2_VAR_00" xml:space="preserve">
     <value>每当下起雪来，我都会高兴得手舞足蹈！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0362_VAR_00" xml:space="preserve">
+    <value>冰鬼！冰鬼！要冻结一切冰鬼！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0363_VAR_00" xml:space="preserve">
+    <value>豹球！豹球！像球一样滚来滚去真的很好玩豹球！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0364_VAR_00" xml:space="preserve">
+    <value>想要旋转东西！我想要用鼻尖旋转东西！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0365_VAR_00" xml:space="preserve">
     <value>我还不能输给寒冷！也还不能输给年轻人！</value>
@@ -5265,8 +5406,47 @@
   <data name="TALK_REST_0374_VAR_00" xml:space="preserve">
     <value>我的身体是由磁铁组成的！[pause=0]……磁铁是什么啊？</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0375_VAR_00" xml:space="preserve">
+    <value>我很喜欢我的爪子！但也很喜欢我尖尖得不明所以的鼻子！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0376_VAR_00" xml:space="preserve">
     <value>我的脸上有个大叉！为什么是叉？</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0377_VAR_00" xml:space="preserve">
+    <value>我在寻找新的岩石。你知道哪里有优质的岩石吗？</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0378_VAR_00" xml:space="preserve">
+    <value>我身体的冰是很久以前的东西了。连我自己都记不清楚那是什么时候。</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0379_VAR_00" xml:space="preserve">
+    <value>揉蹭我身体的话会发出很吵的金属声音。你想试试看吗？</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0380_VAR_00" xml:space="preserve">
+    <value>拜托了，向我展示你的心灵。</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0381_VAR_00" xml:space="preserve">
+    <value>飞翔的力量助你实现梦想！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0382_VAR_00" xml:space="preserve">
+    <value>吾乃海洋之化身！唤起风暴，拓宽大海吧！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0383_VAR_00" xml:space="preserve">
+    <value>吾名为固拉多！隆起陆地，驱散雨云，大地的化身！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0384_VAR_00" xml:space="preserve">
+    <value>吾高居天外！几亿年持续飞翔在臭氧层中！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0385_VAR_00" xml:space="preserve">
+    <value>偶尔冒险真不赖！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0386_VAR_00" xml:space="preserve">
+    <value>我将心念集中在胸口的水晶上时，能感受宇宙的力量！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0387_VAR_00" xml:space="preserve">
+    <value>头顶的嫩苗沐浴在太阳的照射下的时候，心情好舒畅……</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0388_VAR_00" xml:space="preserve">
+    <value>我想宁静地生活在森林里。[pause=0]在有碧波荡漾的湖泊旁。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0389_VAR_00" xml:space="preserve">
     <value>我们与森林同生，与森林同行。</value>
@@ -5277,20 +5457,38 @@
   <data name="TALK_REST_0391_VAR_00" xml:space="preserve">
     <value>俺天性就好爱玩耍！没有谁能比得上！</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0392_VAR_00" xml:space="preserve">
+    <value>俺就是火焰的格斗家！以迅雷不及掩耳之势，将烈火狠狠地砸向敌人！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0393_VAR_00" xml:space="preserve">
+    <value>受烦扰好讨厌，但是我又好想被呵护……</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0394_VAR_00" xml:space="preserve">
     <value>我是世上最伟大的宝可梦。[br]虽然不知道为什么会这么想，但至少鼓舞了我的自尊心！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0395_VAR_00" xml:space="preserve">
+    <value>3根角是强壮力量的证明！恐吓我伙伴的人由我来做对手！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0396_VAR_00" xml:space="preserve">
     <value>到处游走，到处游走。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0397_VAR_00" xml:space="preserve">
-    <value>旅行、冒险、征程……在某些层面上都是一样的。一样令人兴奋，没错吧？</value>
+    <value>旅行、冒险、调查……在某些层面上都是一样的。一样令人兴奋，没错吧？</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0398_VAR_00" xml:space="preserve">
+    <value>我对巢穴的形状很挑剔！来看看！很酷吧？</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0399_VAR_00" xml:space="preserve">
+    <value>喔～！俺可能很愚钝，但是俺相信勤能补拙喔～！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0400_VAR_00" xml:space="preserve">
     <value>去冒险吧？别看我呆呆的模样，可不要小瞧我哦！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0401_VAR_00" xml:space="preserve">
     <value>美妙的乐音也能抚慰大家的心灵。多么不可思议啊。</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0402_VAR_00" xml:space="preserve">
+    <value>音乐就是爆炸～～</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0403_VAR_00" xml:space="preserve">
     <value>要发电吗？这有什么难的吗！</value>
@@ -5340,6 +5538,12 @@
   <data name="TALK_REST_0414_VAR_00" xml:space="preserve">
     <value>最喜欢三蜜蜂制作的蜂蜜了！</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0415_00_1_VAR_00" xml:space="preserve">
+    <value>三蜜蜂，三份力量！今天也要加油！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0415_00_2_VAR_00" xml:space="preserve">
+    <value>要赶紧把蜂蜜做出来才行！好忙好忙！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0416_VAR_00" xml:space="preserve">
     <value>我是蜂巢的女王。[pause=0]对我们来说，制作蜂蜜可是很重要的。</value>
     <comment></comment>  </data>
@@ -5361,6 +5565,9 @@
   <data name="TALK_REST_0420_VAR_00" xml:space="preserve">
     <value>我晒红在了日光下\u266A</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0421_VAR_00" xml:space="preserve">
+    <value>看不见我看不见我……[pause=0]哇啊！[pause=0]和我玩这个怎么样？\u266A</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0422_01_VAR_00" xml:space="preserve">
     <value>我经常听到有人把自己的不良行为归咎于环境……[pause=0]但这取决于你自己，不是吗？</value>
     <comment></comment>  </data>
@@ -5373,6 +5580,15 @@
   <data name="TALK_REST_0424_VAR_00" xml:space="preserve">
     <value>我光靠尾巴就能做到任何事情，所以我不用手。 我不知道这是好事还是坏事。</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0425_VAR_00" xml:space="preserve">
+    <value>飘浮～飘浮～～</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0426_VAR_00" xml:space="preserve">
+    <value>飘荡～飘荡～～</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0427_VAR_00" xml:space="preserve">
+    <value>我很中意我卷起来的耳朵\u266A 很可爱对不对？\u2661</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0428_VAR_00" xml:space="preserve">
     <value>出发冒险吧！一起结伴前行，我们的字典里就没有不可能！\u2661</value>
     <comment></comment>  </data>
@@ -5382,11 +5598,17 @@
   <data name="TALK_REST_0430_VAR_00" xml:space="preserve">
     <value>我是乌鸦头头！是黑暗鸦的老大！</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0431_VAR_00" xml:space="preserve">
+    <value>又任性又受宠又傲娇。那，又怎么样？</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0432_VAR_00" xml:space="preserve">
     <value>什么？胖？你从哪看出来的？能不能有点礼貌？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0433_VAR_00" xml:space="preserve">
     <value>我跳起来就能发出铃声\u266A 叮铃\u266A 叮铃铃\u266A</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0434_VAR_00" xml:space="preserve">
+    <value>从那里，那里能放出臭气……[pause=0]嗯？不让我继续说了？好吧。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0435_VAR_00" xml:space="preserve">
     <value>哦-呵-呵！</value>
@@ -5396,6 +5618,12 @@
     <comment></comment>  </data>
   <data name="TALK_REST_0437_VAR_00" xml:space="preserve">
     <value>我已经睡了2000多年了吗？[pause=0]这有点睡过头了吧！？</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0438_VAR_00" xml:space="preserve">
+    <value>才……才没有在哭！不过是把水分从身体里排出去而已！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0439_VAR_00" xml:space="preserve">
+    <value>我喜欢模仿！先来唱首歌吧！第一首叫做……</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0440_VAR_00" xml:space="preserve">
     <value>白色的圆圆的东西好可爱哦\u266A 我就是很喜欢\u266A</value>
@@ -5410,22 +5638,49 @@
     <value>我的嘴很大。头也是一样。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0444_VAR_00" xml:space="preserve">
-    <value>我喜欢闪闪发亮的东西！也许我该收集起来了……</value>
+    <value>我喜欢闪闪发亮的东西！也许是时候该收集起来了……</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0445_VAR_00" xml:space="preserve">
+    <value>我很快！而且很强大！！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0446_VAR_00" xml:space="preserve">
-    <value>小卡比兽肚子饿了……你有什么吃的吗？</value>
+    <value>小卡比兽肚子饿了……你有吃的吗？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0447_VAR_00" xml:space="preserve">
-    <value>迷路的话，就跟随波导走吧。</value>
+    <value>迷惘的时候，就跟随波导走吧。</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0448_VAR_00" xml:space="preserve">
+    <value>一切的道路尽由波导开拓！时刻如此！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0449_00_1_VAR_00" xml:space="preserve">
+    <value>集中精神，努力喷沙！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0449_00_2_VAR_00" xml:space="preserve">
-    <value>太干燥了对皮肤不好。但我喜欢！</value>
+    <value>太干燥了对皮肤不好。但我喜欢干燥的地方！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0450_00_1_VAR_00" xml:space="preserve">
+    <value>卷起沙子，让沙子风暴吹起来吧！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0450_00_2_VAR_00" xml:space="preserve">
+    <value>用沙子洗澡会让我变漂亮～\u266A</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0451_VAR_00" xml:space="preserve">
+    <value>从暗处发动针刺伏击是我的乐趣。</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0452_VAR_00" xml:space="preserve">
+    <value>盲点？什么叫盲点？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0453_VAR_00" xml:space="preserve">
     <value>两手可是浸了毒的哦……咩呵呵。</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0454_VAR_00" xml:space="preserve">
+    <value>毒毒毒！毒爪攻击是我的特长！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0455_VAR_00" xml:space="preserve">
     <value>先用甜甜的味道把人家引诱过来，接下来就得靠自己的魅力了\u266A</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0456_VAR_00" xml:space="preserve">
+    <value>我如此美丽，你说是不是？\u266A经常有人这样说我呢。\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0457_VAR_00" xml:space="preserve">
     <value>我的花纹会在深海下发光\u266A 你想看看吗？</value>
@@ -5619,11 +5874,17 @@
   <data name="TALK_REST_0514_VAR_00" xml:space="preserve">
     <value>我看上去很没精打采吗？[pause=0]没错，我真的没有动力。</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0515_VAR_00" xml:space="preserve">
+    <value>来看看！看我表演小技巧！嘿！头顶喷水！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0516_VAR_00" xml:space="preserve">
     <value>自己思考，自己决定。毕竟，这是你的冒险。别忘了玩得开心！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0517_VAR_00" xml:space="preserve">
     <value>大家充满希望的世界……[pause=0]我相信终有一天将会到来。</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0518_VAR_00" xml:space="preserve">
+    <value>额头上飘出的烟是由梦境组成的！\u266A不必害怕哦！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0519_VAR_00" xml:space="preserve">
     <value>感觉最近有点健忘了。这是不是很危险啊！？</value>
@@ -5631,17 +5892,29 @@
   <data name="TALK_REST_0520_VAR_00" xml:space="preserve">
     <value>真不敢相信我们之中竟有人没有方向感！但迷路也许很有趣吧\u266A</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0521_00_1_VAR_00" xml:space="preserve">
+    <value>怎么能说我自信的头冠是徒有其表呢！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0521_00_2_VAR_00" xml:space="preserve">
+    <value>就算看上去平平无奇，可不要低估我的实力哦！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0522_VAR_00" xml:space="preserve">
     <value>看我的鬃毛多闪亮！酷吧？</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0523_VAR_00" xml:space="preserve">
+    <value>我跑起来的时候会发出雷鸣的声响！！[br]……虽然我也不知道这样会有什么用……</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0524_VAR_00" xml:space="preserve">
-    <value>要是碰上稀有矿石，我就想把它们收集起来！</value>
+    <value>我一碰上稀有矿石，就想把它们收集起来！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0525_VAR_00" xml:space="preserve">
     <value>橙色结晶完全充能！地幔——岩！！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0526_VAR_00" xml:space="preserve">
     <value>我看起来是这副模样，但其实非常胆小的！基嘎嘎……</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0527_VAR_00" xml:space="preserve">
+    <value>从我鼻孔里发出的超声波是心形的！接招吧！我的爱！\u2661</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0528_VAR_00" xml:space="preserve">
     <value>用鼻孔发出超声波！而且是心形的！换句话说，这是爱的呼唤！（羞羞）</value>
@@ -5658,6 +5931,27 @@
   <data name="TALK_REST_0532_VAR_00" xml:space="preserve">
     <value>要是规划了要建的建筑就来找我！我来效劳！</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0533_VAR_00" xml:space="preserve">
+    <value>拆东西我最擅长了！嗷——！！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0534_VAR_00" xml:space="preserve">
+    <value>想挥舞柱子不需要什么力量。需要的是窍门，是窍门。</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0535_VAR_00" xml:space="preserve">
+    <value>蹦呀～！蹦呀～！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0536_VAR_00" xml:space="preserve">
+    <value>惊！南北蓝蟾蜍难产出，北蓝蟾蜍拦怒蟾蜍铲除南蓝蟾蜍！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0537_VAR_00" xml:space="preserve">
+    <value>我能让头上的凸起震动哦呱！你能感受到吗呱！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0538_VAR_00" xml:space="preserve">
+    <value>心境澄明！[pause=0]道法自然！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0539_VAR_00" xml:space="preserve">
+    <value>一击必杀！那就是我的目标！手刀——！！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0540_VAR_00" xml:space="preserve">
     <value>妈妈给我做了一套绿叶装！很好看吧\u266A</value>
     <comment></comment>  </data>
@@ -5666,6 +5960,9 @@
     <comment></comment>  </data>
   <data name="TALK_REST_0542_VAR_00" xml:space="preserve">
     <value>虽然马上就要准备晚饭了，但是冒险也会加油的！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0543_VAR_00" xml:space="preserve">
+    <value>喂！大家！努力上吧！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0544_VAR_00" xml:space="preserve">
     <value>像车轮一样滚动！但撞上了可就不好了哦！？</value>
@@ -5697,6 +5994,9 @@
   <data name="TALK_REST_0550_VAR_00" xml:space="preserve">
     <value>那些蓝条纹的野蛮鲈鱼真是惹人恼怒。不知道为什么，出于某些原因，就是很让我不爽。</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0551_VAR_00" xml:space="preserve">
+    <value>迷宫的敌人可不会吓到我！上吧！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0552_VAR_00" xml:space="preserve">
     <value>搞什么？你想要我怎样？今天就放你一马！</value>
     <comment></comment>  </data>
@@ -5704,7 +6004,7 @@
     <value>今天也要打工偷懒……不对！我会尽力的！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0554_01_VAR_00" xml:space="preserve">
-    <value>你要来打雪仗吗？[pause=0]记住，不许用石头！</value>
+    <value>你要来打雪仗吗？[pause=0]还有，不许用石头！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0554_VAR_00" xml:space="preserve">
     <value>身体内部是一团火红的火焰！</value>
@@ -5733,11 +6033,20 @@
   <data name="TALK_REST_0561_VAR_00" xml:space="preserve">
     <value>我们代代守护着古代圣地。[br]那份记忆仍将继续传递下去。</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0562_01_VAR_00" xml:space="preserve">
+    <value>溢出的活力就赠与你吧……[pause=0]我还是受伤一些的好……</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0562_VAR_00" xml:space="preserve">
     <value>喂，我拿着的面具是怎么回事啊？[pause=0]好可怕啊！哇哇！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0563_VAR_00" xml:space="preserve">
     <value>[emote=special2]冒险？听上去不错～我和你一起吧！喔吼吼！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0564_VAR_00" xml:space="preserve">
+    <value>我可以潜到很深很深的地方！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0565_VAR_00" xml:space="preserve">
+    <value>老夫筋骨还硬朗哦！耐心些等等我嘛。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0566_VAR_00" xml:space="preserve">
     <value>好！加油探险吧！</value>
@@ -5748,14 +6057,17 @@
   <data name="TALK_REST_0568_VAR_00" xml:space="preserve">
     <value>哪里有不卫生的环境破破？我我正在旅行呢破破。</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0569_VAR_00" xml:space="preserve">
+    <value>我喜欢垃圾。你有在哪里看到垃圾吗？</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0570_01_VAR_00" xml:space="preserve">
-    <value>彭！[pause=0]我的幻觉吓到你了吗？</value>
+    <value>嘭！[pause=0]我的幻觉吓到你了吗？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0570_VAR_00" xml:space="preserve">
     <value>我能幻化成各种宝可梦的样子！很神奇吧！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0571_01_VAR_00" xml:space="preserve">
-    <value>呵呵呵……我？[pause=0]搞事？[pause=0]想得美。</value>
+    <value>呵呵呵……我？[pause=0]搞事？[pause=0]才不会哦。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0571_VAR_00" xml:space="preserve">
     <value>幻象的景观……幻觉——[pause=0]给你见识一下吧！</value>
@@ -5782,7 +6094,10 @@
     <value>听说我拥有两个大脑。那是什么意思啊？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0579_VAR_00" xml:space="preserve">
-    <value>哎？我的身体很软弹吗？[pause=0]我也想知道为什么……</value>
+    <value>哎？我的身体很Q弹吗？[pause=0]我也想知道为什么……</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0580_VAR_00" xml:space="preserve">
+    <value>我去过很多地方旅行。很多地方嘎嘎好！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0581_VAR_00" xml:space="preserve">
     <value>我的双翼能带我飞跃千里。</value>
@@ -5808,8 +6123,14 @@
   <data name="TALK_REST_0588_VAR_00" xml:space="preserve">
     <value>帽子是要戴的东西，[pause=0]头盔也要戴上，[pause=0]还有假发……</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0589_VAR_00" xml:space="preserve">
+    <value>双手的长枪猛突向前！[pause=0]刺啊！刺啊！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0590_VAR_00" xml:space="preserve">
     <value>经常被人说像是某个东西。是什么呢？就是那个……</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0591_VAR_00" xml:space="preserve">
+    <value>看我这模样是不是很会跳舞？[pause=0]你不要不相信嘛！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0592_00_1_VAR_00" xml:space="preserve">
     <value>我很想去把我的朋友给缠住。但我最近反省了自己，也许我不应该这样缠人的。</value>
@@ -5822,6 +6143,9 @@
     <comment></comment>  </data>
   <data name="TALK_REST_0593_00_2_VAR_00" xml:space="preserve">
     <value>海底真是宁静啊，心境也随之舒缓下来了。</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0594_VAR_00" xml:space="preserve">
+    <value>在海中漂流。任洋流带我去何方。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0595_VAR_00" xml:space="preserve">
     <value>我不能自己发电。有谁能分我一点啊？</value>
@@ -5880,17 +6204,44 @@
   <data name="TALK_REST_0613_VAR_00" xml:space="preserve">
     <value>你是不是感冒了？大家都这样担心着，但我并没有感冒。</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0614_VAR_00" xml:space="preserve">
+    <value>下巴冻冻！冻原熊！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0615_VAR_00" xml:space="preserve">
     <value>我……我的体温升得太高后，就会蒸发掉消失！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0616_VAR_00" xml:space="preserve">
     <value>冒险啊……好吧，既然你邀请了我，那我就尽力而为吧！</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0617_VAR_00" xml:space="preserve">
+    <value>正义的伙伴，敏捷虫参上！[pause=0]好孩子们，有没有好好刷牙呀？</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0618_VAR_00" xml:space="preserve">
+    <value>我经常被大家踩到，不过还是因为我太扁了。</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0619_VAR_00" xml:space="preserve">
+    <value>上吧！我来用我的格斗招式加油！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0620_VAR_00" xml:space="preserve">
     <value>我的武术可是掌握得炉火纯青！你想看看哪些招式？</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0621_VAR_00" xml:space="preserve">
+    <value>谁说我刺刺的呀，我这最多只能算凹凹凸凸的好吧？</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0622_VAR_00" xml:space="preserve">
+    <value>泥偶小人，努力工作中！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0623_VAR_00" xml:space="preserve">
+    <value>很酷吗？不过我才不是超级机器人什么的！当啷！当啷！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0624_VAR_00" xml:space="preserve">
     <value>要……要绝对服从劈斩司令的命令！除非你想被剁了！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0625_VAR_00" xml:space="preserve">
+    <value>哟，好孩子们！有没有精神啊！[pause=0]大家一起喊！“劈斩司令”！来呀！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0626_VAR_00" xml:space="preserve">
+    <value>[emote=normal]蓬头很柔软，所以不会撞到头疼哦！[br][emote=happy]完全不会头疼哦！？[br][emote=pain]啊哈哈！[pause=0]哈哈哈哈哈……！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0627_VAR_00" xml:space="preserve">
     <value>我很勇敢！无论面对什么样的对手！[pause=0]……都……都不会怕。</value>
@@ -5946,8 +6297,20 @@
   <data name="TALK_REST_0644_VAR_00" xml:space="preserve">
     <value>吾就是雷电的化身！漆黑的闪电将整个世界都击碎！</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0645_VAR_00" xml:space="preserve">
+    <value>老夫是丰饶之神！恩惠大地！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0646_VAR_00" xml:space="preserve">
+    <value>我能看透未来！[br]而抵御那未来的家伙，我将不留情面地击败！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0647_VAR_00" xml:space="preserve">
+    <value>冒险果然还是很开心！[pause=0]能看到各种东西很让人激动！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0648_VAR_00" xml:space="preserve">
     <value>没错！音乐的力量无限大∞！！来吧，与我一起歌唱吧！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0649_VAR_00" xml:space="preserve">
+    <value>嗯？很在意我背上的大炮吗？[pause=0]不用担心，我不会瞄准你的！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0650_VAR_00" xml:space="preserve">
     <value>头上的刺扎不痛的哦！平常是很软的！</value>
@@ -6184,13 +6547,13 @@
     <value>我的羽毛上有什么脏东西吗？[pause=0]请务必告知我。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0724_01_VAR_00" xml:space="preserve">
-    <value>那是我的错觉，还是今天真的太热了？</value>
+    <value>是我的错觉吗？今天好像有点热。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0724_VAR_00" xml:space="preserve">
     <value>[emote=Surprised]哇！不要像那样偷偷摸摸地靠近我！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0725_VAR_00" xml:space="preserve">
-    <value>[emote=Shouting]喝啊啊啊！[br][emote=Normal]抱歉，我吃了一个毛球。[pause=0]你有什么需要吗？</value>
+    <value>[emote=Shouting]喝啊啊啊！[br][emote=Normal]抱歉，我把一个毛球吃了。[pause=0]你有什么需要吗？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0726_VAR_00" xml:space="preserve">
     <value>虽然我脖子上的火焰袋看起来很别致，但还请不要碰。</value>
@@ -6258,6 +6621,9 @@
   <data name="TALK_REST_0745_01_VAR_00" xml:space="preserve">
     <value>带我去迷宫里面！[pause=0]给我打！[pause=0]让我来听听它们的【惨叫】！！</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0745_02_VAR_00" xml:space="preserve">
+    <value>谁都不能阻挡我利爪的力量。</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0745_VAR_00" xml:space="preserve">
     <value>重要的是何时给予关键一击。</value>
     <comment></comment>  </data>
@@ -6310,7 +6676,7 @@
     <value>[emote=Happy]谁要来一个抱抱？！[br][emote=Worried]不？你不想要抱抱吗？[br][emote=Sad]为什么大家都这么冷漠？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0761_VAR_00" xml:space="preserve">
-    <value>我的浑身上下都怀揣甜心！\u266A[br][emote=Worried]但我不喜欢鸟宝可梦。</value>
+    <value>我浑身上下都怀揣甜心！\u266A[br][emote=Worried]但我不喜欢鸟类宝可梦。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0762_VAR_00" xml:space="preserve">
     <value>来一起玩吧！\u266A</value>
@@ -6328,10 +6694,10 @@
     <value>要组建队伍去迷宫里吗？[pause=0]我会是你的首选！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0767_VAR_00" xml:space="preserve">
-    <value>[emote=Surprised]啊啊啊啊！别伤害我，不要不要不要啊啊！[br][emote=Normal]对不起，我习惯了。</value>
+    <value>[emote=Surprised]啊啊啊啊！别打我，不要不要不要啊啊！[br][emote=Normal]对不起，我习惯了。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0768_VAR_00" xml:space="preserve">
-    <value>[emote=Surprised]啊啊啊啊！别伤害我，不要不要不要啊啊！[br][emote=Normal]对不起，我是说……[br][emote=Determined]我巨大的爪子能把一切都劈成两半！</value>
+    <value>[emote=Surprised]啊啊啊啊！别打我，不要不要不要啊啊！[br][emote=Normal]对不起，我的意思是……[br][emote=Determined]我巨大的爪子能把一切都劈成两半！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0769_VAR_00" xml:space="preserve">
     <value>我想知道我头上的这个东西是哪里来的？不过，我喜欢。</value>
@@ -6349,13 +6715,16 @@
     <value>[emote=Joyous]我自由啦！我自由啦！我自由啦！！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0774_VAR_00" xml:space="preserve">
-    <value>太空，太空！要上到太空！</value>
+    <value>太空，太空！要飞到太空！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0775_VAR_00" xml:space="preserve">
     <value>很奇怪。[pause=0]我通常不会在梦里见到像你这样的宝可梦……</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0776_VAR_00" xml:space="preserve">
     <value>我希望今天不会下雨。要是下雨，我们就去洞穴的迷宫吧。</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0777_VAR_00" xml:space="preserve">
+    <value>托戈！托戈！\u266A 我们去到处都是电属性宝可梦的地方吧！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0778_VAR_00" xml:space="preserve">
     <value>皮卡皮卡！</value>
@@ -6367,7 +6736,7 @@
     <value>呵呵！没什么可担心的，我的孩子。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0781_VAR_00" xml:space="preserve">
-    <value>啊啊啊！别给我抛下锚！</value>
+    <value>啊啊啊！别给我整抛锚！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0782_VAR_00" xml:space="preserve">
     <value>我想去战斗啊！</value>
@@ -6403,7 +6772,10 @@
     <value>大家称呼我为邀引月亮之兽。[pause=0]我来自另一个世界。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0793_VAR_00" xml:space="preserve">
-    <value>Rurururiiii...</value>
+    <value>溜溜溜哩……</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0794_VAR_00" xml:space="preserve">
+    <value>你希望自己也能变成这样！你希望！！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0795_VAR_00" xml:space="preserve">
     <value>我不想把自己弄得脏兮兮的。[pause=0]不过，我想这在不可思议迷宫中也无法避免。</value>
@@ -6412,10 +6784,10 @@
     <value>倒计时300秒后起飞。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0798_VAR_00" xml:space="preserve">
-    <value>我又一次切开了一个毫无价值的东西。</value>
+    <value>又斩了些无聊的东西。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0799_VAR_00" xml:space="preserve">
-    <value>戈嘎嘎嘎啊啊啊啊！！！[pause=0]我被我家乡纬度的所有自助餐厅拉进了黑名单！</value>
+    <value>戈嘎嘎嘎啊啊啊啊！！！[pause=0]我被我老家的所有自助餐厅拉进了黑名单！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0800_01_VAR_00" xml:space="preserve">
     <value>吞噬太阳之兽已经被我吞噬……[pause=0]还要更多更多的光！</value>
@@ -6447,14 +6819,20 @@
   <data name="TALK_REST_0806_VAR_00" xml:space="preserve">
     <value>我有个厉害的绝招会让你大吃一惊！[pause=0]连我自己都怕！</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0807_VAR_00" xml:space="preserve">
+    <value>我心情不好。真想拿迷宫里的宝可梦出出气！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0808_VAR_00" xml:space="preserve">
     <value>我对金属制品情有独钟！有勺子吗？那齿轮呢？</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0809_VAR_00" xml:space="preserve">
+    <value>团结就是力量！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0810_VAR_00" xml:space="preserve">
     <value>砰！砰！砰！你可以跟着我的节拍唱！\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0811_VAR_00" xml:space="preserve">
-    <value>一旦我开始打击木棒，就丧失了理智！[pause=0]打击已与我合二为一！</value>
+    <value>从敲击开始，我就陷入了疯狂！[pause=0]打击与我意念合一！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0812_VAR_00" xml:space="preserve">
     <value>总有一天，我会与一位[color=#00FF00]西狮海壬[color]和[color=#00FF00]骨纹巨声鳄[color]组建一支乐队。</value>
@@ -6463,7 +6841,7 @@
     <value>跟我跑起来！\u266A 我们得为下一场外出热身！\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0814_VAR_00" xml:space="preserve">
-    <value>喜欢我的连帽衫吗？[pause=0]是纯天然材料！</value>
+    <value>我的连帽衫酷吗？[pause=0]是纯天然材料！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0815_VAR_00" xml:space="preserve">
     <value>我的射门无人能挡！[pause=0]又进一球！</value>
@@ -6472,7 +6850,7 @@
     <value>我很害怕，但我尽力不哭出来！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0817_VAR_00" xml:space="preserve">
-    <value>为什么要去迷宫里面？[pause=0]为什么不设陷阱来等那些宝可梦来找我们？</value>
+    <value>去迷宫里面干嘛？[pause=0]想打的话就搞点陷阱守株待兔呗？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0818_VAR_00" xml:space="preserve">
     <value>我叫千役。[color=#00FFFF]千面避役[color]。</value>
@@ -6481,19 +6859,22 @@
     <value>有很多宝可梦都跟我一样！我得赶在他们之前拿到树果！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0820_VAR_00" xml:space="preserve">
-    <value>我尾巴里的树果怎么少了？我得去摘更多的来！</value>
+    <value>我尾巴里的树果怎么少了？我得再摘点来！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0821_VAR_00" xml:space="preserve">
-    <value>我还只是个弱鸡，但有坏蛋什么的，碰上我就别想逃了！</value>
+    <value>我还只是个弱鸡，但任何黑恶势力我都不怕！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0823_VAR_00" xml:space="preserve">
-    <value>[emote=Worried][color=#00FFFF]巨锻匠[color]应该不在这附近吧……[pause=0]也许我终于可以休息一下了……</value>
+    <value>[emote=Worried][color=#00FFFF]巨锻匠[color]应该不在这附近吧……[pause=0]那我终于可以休息一下了……</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0824_VAR_00" xml:space="preserve">
     <value>哇……这里有这么多的情报要收集！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0825_VAR_00" xml:space="preserve">
     <value>我能用超能力把你的敌人弄得晕头转向。</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0826_VAR_00" xml:space="preserve">
+    <value>令人着迷。看来，不可思议迷宫还有很多秘密有待揭开。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0827_VAR_00" xml:space="preserve">
     <value>唰——唰！唰——唰！我连一个脚印都不会留下！</value>
@@ -6511,7 +6892,16 @@
     <value>我和[color=#00FFFF]咩利羊[color]是朋友！\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0832_VAR_00" xml:space="preserve">
-    <value>别跟我作对。[br]我认真的。真的不行。我不能用它们打架。</value>
+    <value>别跟我作对。[br]我认真的。真的不行。我的角不能用来打架。</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0833_VAR_00" xml:space="preserve">
+    <value>咬！嚼！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0834_VAR_00" xml:space="preserve">
+    <value>在我周围要小心哦！我可以够到看上去够不到的地方！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0835_VAR_00" xml:space="preserve">
+    <value>好想被摸摸，好想吃饱饱！\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0836_VAR_00" xml:space="preserve">
     <value>那个[color=#00FFFF]狡大狐[color]……[pause=0]我会找到他的，会逮着他的。</value>
@@ -6559,13 +6949,19 @@
     <value>[emote=Determined]别挡我的路！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0850_VAR_00" xml:space="preserve">
-    <value>我这样的身材用来做菜简直太完美了！</value>
+    <value>我的身体用来烹饪简直完美！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0851_VAR_00" xml:space="preserve">
+    <value>大家都叫我[color=#00FFFF]焚焰蚣[color]，可我明明只有二十条腿啊……</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0852_VAR_00" xml:space="preserve">
+    <value>阿打！阿打！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0853_VAR_00" xml:space="preserve">
     <value>我更擅长在陆地上对决。[pause=0]喂，我很像水属性的吗？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0854_VAR_00" xml:space="preserve">
-    <value>来嘛，喝一口！[pause=0]结果能有多糟呢？</value>
+    <value>来嘛，喝一口！[pause=0]会坏到哪里去呢？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0855_VAR_00" xml:space="preserve">
     <value>干杯！[pause=0]要来杯茶吗？</value>
@@ -6583,7 +6979,7 @@
     <value>你把东西放在哪里？[pause=0]只是好奇。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0860_VAR_00" xml:space="preserve">
-    <value>那边那个宝可梦……[pause=0]说了你的什么坏话。[pause=0]呵呵呵……</value>
+    <value>那边那个宝可梦……[pause=0]在说你的坏话。[pause=0]呵呵呵……</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0861_VAR_00" xml:space="preserve">
     <value>我美丽的毛发可不仅仅是摆设！[pause=0]它们还能帮我对决打赢怪力！</value>
@@ -6595,13 +6991,13 @@
     <value>战斗的荣耀是任何[color=#00FF00]猫老大[color]都不懂的东西！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0864_VAR_00" xml:space="preserve">
-    <value>下一次满月要等到什么时候？</value>
+    <value>下一次满月是什么时候？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0865_VAR_00" xml:space="preserve">
     <value>我的朋友们，你们做得很好。[pause=0]我们会永远携手共进，直到哪天我倒在了战场上。[br]啊？我只是在和我翅膀上的这两个讲话。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0866_VAR_00" xml:space="preserve">
-    <value>我有娴熟的脚步！[pause=0]看着我跳舞真的是享受啊！</value>
+    <value>我的舞步相当精湛！[pause=0]观看我跳舞绝对是享受啊！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0867_VAR_00" xml:space="preserve">
     <value>了解我的诅咒……</value>
@@ -6610,7 +7006,7 @@
     <value>我的甜度足够了吗？来，尝尝。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0869_VAR_00" xml:space="preserve">
-    <value>你最喜欢什么口味的？我知道我的口味！</value>
+    <value>你最喜欢哪种口味呢？我的最爱已经选过了！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0870_VAR_00" xml:space="preserve">
     <value>这些是我的部队。他们的表现永远不会让我失望，因为我也不会让他们失望！</value>
@@ -6625,10 +7021,10 @@
     <value>我保护着苔原，绝不能让那些破坏自然的家伙得逞。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0874_VAR_00" xml:space="preserve">
-    <value>一年一度，我和我的伙伴们围在一起，紧握着手。[br]为什么？[pause=0]好啦，我可不想破坏这个惊喜啊。</value>
+    <value>一年一度，我和我的伙伴们围在一起，手拉着手。[br]为什么？[pause=0]好啦，这毕竟是仪式感啦。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0875_VAR_00" xml:space="preserve">
-    <value>冰砖头？你说谁是冰砖呢？</value>
+    <value>冰脑壳儿？你说谁是冰脑壳儿？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0876_VAR_00" xml:space="preserve">
     <value>能为大家服务是我的荣幸。</value>
@@ -6649,10 +7045,10 @@
     <value>噗……阿嚏！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0882_VAR_00" xml:space="preserve">
-    <value>[emote=Pain]了解我的痛苦吧……[pause=0]求你了……</value>
+    <value>[emote=Pain]了结我的痛苦吧……[pause=0]求你了……</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0883_VAR_00" xml:space="preserve">
-    <value>你这是怎么回事？你这么看我好像我的脑袋没拧紧似的！</value>
+    <value>你这是怎么回事？你这样好像脑袋没拧紧似的！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0884_VAR_00" xml:space="preserve">
     <value>我还是小孩子啦，不过[color=#00FF00]班基拉斯[color]什么的，根本不在话下！</value>
@@ -6678,11 +7074,14 @@
   <data name="TALK_REST_0889_VAR_00" xml:space="preserve">
     <value>我的盾牌……[pause=0]我无法发挥出真正的力量……[pause=0]没有它的话……</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0891_VAR_00" xml:space="preserve">
+    <value>我每天都训练变强！每次遇到失败，就再来加倍努力！！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0892_01_VAR_00" xml:space="preserve">
     <value>跟随汹涌河流的智慧，用一连串的打击将对手击倒！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0892_VAR_00" xml:space="preserve">
-    <value>一拳，撂倒。[pause=0]遵循这一点，就能做得很好了。</value>
+    <value>一拳，撂倒。[pause=0]贯彻这一点，就能做得很好了。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0893_VAR_00" xml:space="preserve">
     <value>要是我的同伴们都能跟着一起来，我们很快就能抵达山顶的！</value>
@@ -6691,10 +7090,10 @@
     <value>等到这些功率限制器关掉的时候……[pause=0]啊，天啊，我等不及要大开杀戒了！\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0895_VAR_00" xml:space="preserve">
-    <value>现在到出发的时候了。我不会是跑龙套的！</value>
+    <value>现在到出发时间了。我不会跑龙套的！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0896_VAR_00" xml:space="preserve">
-    <value>我要冲进迷宫里面夺取我想要的一切！[br]要是谁敢拦我，我就撞给他看！</value>
+    <value>我要撞进迷宫里，夺取我想要的一切！[br]谁敢挡我，我也撞给他看！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0897_VAR_00" xml:space="preserve">
     <value>出去……出去……</value>
@@ -6712,7 +7111,7 @@
     <value>留胡子一点也不奇怪。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0900_VAR_00" xml:space="preserve">
-    <value>当心我斧头上掉下来的石片！[pause=0]我劈得太厉害了，隐形岩到处都是！</value>
+    <value>当心我斧头上掉下来的石片！[pause=0]我劈得太厉害了，到处都是隐形岩！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0901_01_VAR_00" xml:space="preserve">
     <value>血月赫然升起……[pause=0]感受到它的力量了吗？</value>
@@ -6742,10 +7141,10 @@
     <value>如何把花炸弹贴在敌人身上呢？[br]哈哈——[pause=0]伟大的魔术师从不显露他们的伎俩。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0909_VAR_00" xml:space="preserve">
-    <value>要咬你呆！\u266A</value>
+    <value>咬咬你呆！\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0910_VAR_00" xml:space="preserve">
-    <value>我头上那个不是蛋！</value>
+    <value>我头上那个不是鸟巢，也没有蛋！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0911_VAR_00" xml:space="preserve">
     <value>[emote=Happy]热身结束后，由我来献上一曲美妙的旋律吧！\u266A</value>
@@ -6760,7 +7159,7 @@
     <value>舞蹈呢，看似是有趣的游戏，但想要跳得好，却需要认真投入。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0915_VAR_00" xml:space="preserve">
-    <value>在你问之前，我先声明：我身上的是肌肉。</value>
+    <value>在你开口前，我先声明：我身上的是肌肉。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0916_00_1_VAR_00" xml:space="preserve">
     <value>喜欢我的香味吗？女生们对此可是欲罢不能啊！[br]至少……我是这么希望的……</value>
@@ -6769,46 +7168,46 @@
     <value>我必须得保持整洁。我得去找找[color=#00FFFF]大尾立[color]和[color=#00FFFF]一家鼠[color]请教请教清洁技巧……</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0917_VAR_00" xml:space="preserve">
-    <value>真希望[color=#00FFFF]向尾喵[color]不要再来打我了。[br][emote=Worried]不过，我想这总比被[color=#00FFFF]飞天螳螂[color]追着我打要好吧……</value>
+    <value>真希望[color=#00FFFF]向尾喵[color]不要再来打我了。[br][emote=Worried]不过这总比被[color=#00FFFF]飞天螳螂[color]追杀要好……</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0918_VAR_00" xml:space="preserve">
     <value>我是设置和解除陷阱的高手！[br][emote=Pain]（如果我们外出时踩到了陷阱……[pause=0]我会非常尴尬的……）</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0919_VAR_00" xml:space="preserve">
-    <value>我有多能斗？我的名字就是答案！</value>
+    <value>我有多能斗？我的名字已经告诉你了！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0920_VAR_00" xml:space="preserve">
-    <value>我就凭我强大的脚力，为所有宝可梦的自由而战！</value>
+    <value>我就凭我强大的踢腿，为所有宝可梦的自由而战！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0921_VAR_00" xml:space="preserve">
-    <value>我用手掌摩擦着脸颊来制造电力！[br]不过还不太熟练，所以我还不能用超级厉害的电击！</value>
+    <value>我用手掌摩擦着脸颊来制造电力！[br]不过我还不太熟练，所以还不能用超级厉害的电击！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0922_VAR_00" xml:space="preserve">
-    <value>要努力达成多才多艺！[br]我用手臂攻击和电击招式击倒对手。</value>
+    <value>做事要力求活学活用！[br]我同时用手臂和电击击倒对手。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0923_VAR_00" xml:space="preserve">
-    <value>我不仅擅长格斗。如果你被击倒了，我可以帮助你继续训练！</value>
+    <value>我不仅只擅长格斗。如果你被击倒了，我也可以做你的教练！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0924_VAR_00" xml:space="preserve">
-    <value>我们平分食物，共同分享！[pause=0]不好意思，意思是没你的份。</value>
+    <value>我们平分食物，共同分担压力！[pause=0]不好意思，意思是没你的份。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0925_01_VAR_00" xml:space="preserve">
-    <value>我们在养家糊口。[pause=0]想一同参与我们的家事吗？</value>
+    <value>我们在养家糊口。[pause=0]你想一同参与我们的家事吗？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0925_VAR_00" xml:space="preserve">
-    <value>我们愿意付出一切来保护我们的宝宝不受伤害。[pause=0]但我们也必须教会它生存。</value>
+    <value>我们愿意付出一切来保护我们的宝宝免受伤害。[pause=0]但我们也必须教会他生存。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0926_VAR_00" xml:space="preserve">
     <value>把我放进去烤两个小时～\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0927_VAR_00" xml:space="preserve">
-    <value>如果我的笑话变味了，麻烦告诉我。</value>
+    <value>如果我讲的笑话过期了，麻烦告诉我。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0928_VAR_00" xml:space="preserve">
     <value>如果我活得足够久，我会变成[color=#00FF00]巨大芙[color]吗？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0929_VAR_00" xml:space="preserve">
-    <value>快来，这里有油！\u266A</value>
+    <value>过来，喝点油吧！\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0930_VAR_00" xml:space="preserve">
     <value>你感觉虚弱吗？我的油能够让伤病员恢复体力。</value>
@@ -6826,31 +7225,31 @@
     <value>像我这样的[color=#00FF00]怒鹦哥[color]拥有最庞大的势力！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0932_VAR_00" xml:space="preserve">
-    <value>谁想要香料？一点点盐就能为一道菜增色不少。</value>
+    <value>谁需要香料？一点点盐就能为一道菜增色不少。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0933_VAR_00" xml:space="preserve">
     <value>咣啷！[color=#00FF00]盐石垒[color]攻击！我还会回来的！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0934_VAR_00" xml:space="preserve">
-    <value>很多宝可梦都围着我来舔我的盐。[pause=0]真希望我能跑得快点，然后甩掉他们……</value>
+    <value>很多宝可梦都围着我来舔我的盐。[pause=0]真想跑快点啊……</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0935_VAR_00" xml:space="preserve">
-    <value>我们去探险吧！在那之后，我们就用文柚果作晚餐吧！</value>
+    <value>我们去探险吧！然后晚餐就吃文柚果吧！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0936_VAR_00" xml:space="preserve">
-    <value>迷宫里的宝可梦是没有荣誉感的。[pause=0]起码外边还有人在乎着骑士精神……</value>
+    <value>迷宫里的宝可梦是没有荣誉感的。[pause=0]起码外边还是有人在乎着骑士精神的……</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0937_VAR_00" xml:space="preserve">
-    <value>战斗和胜利，就是我活着的目的！[pause=0]为了胜利我也愿意倾注一切……！</value>
+    <value>战斗、胜利，就是我活着的目的！[pause=0]为了胜利我也愿意倾注一切……！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0938_VAR_00" xml:space="preserve">
-    <value>要是有什么危险，我就闪烁我的脑袋来告知你！[pause=0]*闪——闪*</value>
+    <value>要是有危险，我就闪烁我的脑袋来报警！[pause=0]*闪——闪*</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0939_VAR_00" xml:space="preserve">
-    <value>感受到我对你们队伍的忠诚了吗？[pause=0]看着我的眼睛！[br]……[br]喂喂，是说我的真眼睛！</value>
+    <value>感觉到小的对彼此的忠心了吗？[pause=0]看着我的眼睛！[br]……[br]喂喂，不是那里！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0940_VAR_00" xml:space="preserve">
-    <value>出于某种原因，[color=#00FF00]长翅鸥[color]很害怕我的样子。这是为什么呢？</value>
+    <value>出于某种原因，[color=#00FF00]长翅鸥[color]很害怕我的样子。所以说是什么原因呢？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0941_VAR_00" xml:space="preserve">
     <value>虽然身为电属性宝可梦，但我在都是水的迷宫里就是会很烦。溺水了怎么办啊！</value>
@@ -6888,6 +7287,9 @@
   <data name="TALK_REST_0953_VAR_00" xml:space="preserve">
     <value>没必要觉得恶心，这只是我的泥球。[br][emote=Inspired]你没看到它有多美吗？！</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0954_VAR_00" xml:space="preserve">
+    <value>睡个好觉，小家伙。[pause=0]很快，你将会唤醒……</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0955_VAR_00" xml:space="preserve">
     <value>你敢拿我的树果试试！</value>
     <comment></comment>  </data>
@@ -6913,7 +7315,7 @@
     <value>小心下面，[pause=0]嘿嘿嘿……</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0963_VAR_00" xml:space="preserve">
-    <value>你感觉……[pause=0]在渴望我们下一次的冒险，没错吧？</value>
+    <value>你在想……[pause=0]在渴望下一次的冒险，没错吧？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0964_VAR_00" xml:space="preserve">
     <value>别害怕！[color=#00FFFF]海豚侠[color]在这里！</value>
@@ -6925,7 +7327,7 @@
     <value>我的生活就是在开阔的道路上驰骋！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0967_VAR_00" xml:space="preserve">
-    <value>想搭车吗？[pause=0]如果你想，我想开去一个阳光明媚的地方。</value>
+    <value>想搭车吗？[pause=0]如果可以的话，我想去一个阳光明媚的地方。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0968_VAR_00" xml:space="preserve">
     <value>嗯嗯嗯！这里的土真好吃！来点吗？</value>
@@ -6937,10 +7339,10 @@
     <value>我的体内蕴藏着结晶的毒之能量。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0971_VAR_00" xml:space="preserve">
-    <value>我可以跟你去任何地方！[pause=0]求求你了，带我一起去嘛！</value>
+    <value>我可以一直跟在你的身边！[pause=0]拜托了，就让我跟着嘛！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0972_VAR_00" xml:space="preserve">
-    <value>咯嗒——咯嗒！如果你下去了，我会向你致以最后的敬意！</value>
+    <value>咯嗒咯嗒！如果你下去了，我会好好为你送行的！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0974_VAR_00" xml:space="preserve">
     <value>冬天一到，我就迫不及待地要去玩雪了！\u266A</value>
@@ -6961,16 +7363,25 @@
     <value>伸展伸展！鸟类宝可梦对我可是欲罢不能呢！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0978_VAR_00" xml:space="preserve">
-    <value>大家总是小瞧我，[pause=0]但要是[color=#00FF00]吃吼霸[color]在的话，情况就不一样了！</value>
+    <value>大家总是小瞧我，[pause=0]可要是[color=#00FF00]吃吼霸[color]在的话，情况就不一样了！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0979_VAR_00" xml:space="preserve">
+    <value>我的拳头，怒不可遏！！！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0980_VAR_00" xml:space="preserve">
     <value>我比看上去更加棘手，嗯哼。[br]……[br][emote=Worried]我刚才在说什么来着？</value>
     <comment></comment>  </data>
+  <data name="TALK_REST_0981_VAR_00" xml:space="preserve">
+    <value>齐心协力，我们能为你挡住任何远程攻击！</value>
+    <comment></comment>  </data>
   <data name="TALK_REST_0982_01_VAR_00" xml:space="preserve">
-    <value>我想成为世界一流的探险家！[br]虽然还有很长的路要走……但我会尽力的！[br]……抱歉，我真的没有什么要说的了。</value>
+    <value>我想成为世界一流的冒险家！[br]虽然还有很长的路要走……但我会尽力的！[br]……抱歉，我真的没有什么要说的了。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0982_VAR_00" xml:space="preserve">
-    <value>我想成为世界一流的探险家！[br]虽然还有很长的路要走……但我会尽力的！[br]……抱歉，我没有什么要说的了。</value>
+    <value>我想成为世界一流的冒险家！[br]虽然还有很长的路要走……但我会尽力的！[br]……抱歉，我没有什么要说的了。</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_0983_VAR_00" xml:space="preserve">
+    <value>听从我的命令，我们就一定能让敌人吃一记将军。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0984_VAR_00" xml:space="preserve">
     <value>我就是最强的地面宝可梦！[pause=0]我比[color=#00FF00]土地云[color]还要强大！</value>
@@ -6982,7 +7393,7 @@
     <value>我粉碎，我快乐！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0987_VAR_00" xml:space="preserve">
-    <value>看我一眼那些龙宝可梦就会给吓死了呢！振振~</value>
+    <value>光是瞥我一眼，就足以让任何龙宝可梦吓破胆了吧！呼呼~</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0988_VAR_00" xml:space="preserve">
     <value>我的大翅膀和毛茸茸的身体刚出道就备受青睐，不是吗？</value>
@@ -6996,14 +7407,11 @@
   <data name="TALK_REST_0991_VAR_00" xml:space="preserve">
     <value>正在访问面部记录……[pause=0]数据库“淘气列表”不包含此条目。</value>
     <comment></comment>  </data>
-  <data name="TALK_REST_0992_VAR_00" xml:space="preserve">
-    <value>有人说我对机器很在行！</value>
-    <comment></comment>  </data>
   <data name="TALK_REST_0993_VAR_00" xml:space="preserve">
-    <value>我的身体是靠液压驱动的！[br]……[br]我没有被设定为讲笑话。</value>
+    <value>我的身体是靠液压驱动的！[br]……[br]我没有被设定为讲笑话模式。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0994_VAR_00" xml:space="preserve">
-    <value>当你的星星熄灭了，我将仍会照亮！</value>
+    <value>当你的星星熄灭了，我仍会散发光芒！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_0995_VAR_00" xml:space="preserve">
     <value>我最喜欢的投掷道具？不得不说……[pause=0]银钉。</value>
@@ -7057,22 +7465,28 @@
     <value>如果您能帮助我避免固件错误，我将不胜感激。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_1011_VAR_00" xml:space="preserve">
-    <value>(嘿！我推着这个苹果累死了！[pause=0]你推一会儿！)[br](不行！[pause=0]我昨天推了一整天了，什么话都没讲！)[br](骗人！[pause=0]再吵我就找一个新苹果住！)[br][emote=Surprised]呃……[pause=0]你没听到什么吧？</value>
+    <value>(嘿！我推着这个苹果累死了！[pause=0]你推一会儿！)[br](不行！[pause=0]昨天一整天都是我推，我说什么了吗！)[br](放屁！[pause=0]再吵我就搬出去个新苹果住！)[br][emote=Surprised]呃……[pause=0]你没听到什么吧？</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_1012_VAR_00" xml:space="preserve">
+    <value>下次冒险必须完美无缺。我不会接受任何比这差的结果！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_1013_VAR_00" xml:space="preserve">
     <value>这里太热太亮了。等天黑了我们再出去吧！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_1014_VAR_00" xml:space="preserve">
-    <value>今天真是够——赞啊，从窝囊废那里偷东西的好日子！</value>
+    <value>今天真是够——赞啊，从废物那里偷东西的好日子！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_1015_VAR_00" xml:space="preserve">
     <value>按我说的做，愿吧？</value>
     <comment></comment>  </data>
   <data name="TALK_REST_1016_VAR_00" xml:space="preserve">
-    <value>我比那个鬼漂亮多了，叽叽喳喳！</value>
+    <value>我比那个橘子鬼漂亮多了，叽叽喳喳！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_1017_01_VAR_00" xml:space="preserve">
     <value>带着这个面具，我不禁想起……[pause=0]我逝去的……[pause=0]搭档……[pause=0]*抽泣*</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_1017_02_VAR_00" xml:space="preserve">
+    <value>带着这个面具，我充满了对偷我东西的小偷的怒火！</value>
     <comment></comment>  </data>
   <data name="TALK_REST_1017_03_VAR_00" xml:space="preserve">
     <value>带着这个面具，我复仇的决心坚如磐石！</value>
@@ -7084,7 +7498,13 @@
     <value>重要的是不要过河拆桥。[br]好吧，这点伎俩根本就伤不到我，但这种事仍不应该做。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_1019_VAR_00" xml:space="preserve">
-    <value>今天，我们苹果里的七个蛇虫虫，要……[br]……[br][emote=Worried]（嘿，兄弟们？[pause=0]我们又要做决定吗？）[br][emote=Normal]（唧唧……喳喳……咕哝咕哝……）[br]我们将征服一切！耶！[br][emote=Worried]（抱歉……）</value>
+    <value>今天，我们苹果里的七个蛇虫虫，要……[br]……[br][emote=Worried]（嘿，兄弟们？[pause=0]又要开会了？）[br][emote=Normal]（唧唧……喳喳……咕哝咕哝……）[br]我们将征服一切！耶！[br][emote=Worried]（抱歉……）</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_1020_VAR_00" xml:space="preserve">
+    <value>我利爪的力量就如火山爆发！我是无敌的！</value>
+    <comment></comment>  </data>
+  <data name="TALK_REST_1021_VAR_00" xml:space="preserve">
+    <value>不论滚烫酷热还是瓢泼大雨，我的能量都势不可挡。</value>
     <comment></comment>  </data>
   <data name="TALK_REST_1022_VAR_00" xml:space="preserve">
     <value>经过改造，我看到了真相。[pause=0]肉体是脆弱的！</value>
@@ -7096,7 +7516,7 @@
     <value>我已经寂寞了许久，但能有你这样的宝可梦真好！\u266A</value>
     <comment></comment>  </data>
   <data name="TALK_REST_1025_VAR_00" xml:space="preserve">
-    <value>肚子饿了的话，来尝尝我的粘糕呗！桃……桃……</value>
+    <value>肚子饿了的话，来尝尝我的粘糕呗！[pause=0]桃……桃……</value>
     <comment></comment>  </data>
   <data name="TALK_SHOP_0000" xml:space="preserve">
     <value>总能微笑为您服务！～\u266A</value>
@@ -7120,7 +7540,7 @@
     <value>那件商品是{0}。要买下吗？</value>
     <comment></comment>  </data>
   <data name="TALK_SHOP_PAY_0001" xml:space="preserve">
-    <value>一……[pause=10]二……[pause=10]三……[pause=10]那将是{0}！</value>
+    <value>一……[pause=10]二……[pause=10]三……[pause=10]一共是{0}！</value>
     <comment></comment>  </data>
   <data name="TALK_SHOP_PAY_0002" xml:space="preserve">
     <value>您的账单总额为{0}。\n请确认您的订单。</value>
@@ -7180,7 +7600,7 @@
     <value>光临，尊贵的客户。</value>
     <comment></comment>  </data>
   <data name="TALK_SHOP_SUSPECT_0000" xml:space="preserve">
-    <value>你当我傻吗？[pause=0]\n迷宫里的大家都知道你曾经干过什么。</value>
+    <value>有钱还钱！[pause=0]我兄弟可没有放过你！</value>
     <comment></comment>  </data>
   <data name="TALK_SHOP_SUSPECT_0001" xml:space="preserve">
     <value>嘿，等等！[pause=10]我听过你！[pause=0]\n你偷了我朋友的东西！</value>

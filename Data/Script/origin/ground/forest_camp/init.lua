@@ -219,11 +219,7 @@ function forest_camp.Snorlax_Action(chara, activator)
   
   UI:ResetSpeaker()
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_001'], chara:GetDisplayName()))
-  
-  if SV.Experimental ~= true then
-    return
-  end
-  
+    
   UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Sleeper_Line_Ask']), true)
   UI:WaitForChoice()
   local ch = UI:ChoiceResult()
@@ -657,9 +653,7 @@ function forest_camp.Parent_Child()
     UI:SetSpeaker(parent)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Parent_Child_Line_002']))
     
-    if SV.Experimental then
-      SV.forest_child.SpokenTo = true
-    end
+    SV.forest_child.SpokenTo = true
   
   elseif SV.forest_child.Status == 3 then
   

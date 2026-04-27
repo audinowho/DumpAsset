@@ -136,7 +136,7 @@ function base_camp_2.SetupNpcs()
 	GROUND:Unhide("NPC_Catch_2")
   end
 
-  if SV.team_solo.Status == 0 then
+  if SV.Experimental and SV.team_solo.Status == 0 then
     if not SV.team_solo.SpokenTo then
       GROUND:Unhide("NPC_Solo")
     end
@@ -162,24 +162,24 @@ function base_camp_2.SetupNpcs()
   -- family appears if Returned = false
   if SV.family.Returned == false then
     -- and if they've been saved individually
-    if SV.family.Sister then
-	  GROUND:Unhide("Family_Sister")
-	end
-    if SV.family.Mother then
-	  GROUND:Unhide("Family_Mother")
-	end
-    if SV.family.Father then
-	  GROUND:Unhide("Family_Father")
-	end
-    if SV.family.Brother then
-	  GROUND:Unhide("Family_Brother")
-	end
-    if SV.family.Pet then
-	  GROUND:Unhide("Family_Pet")
-	end
-    if SV.family.Grandma then
-	  GROUND:Unhide("Family_Grandma")
-	end
+    if SV.family.Sister == true then
+      GROUND:Unhide("Family_Sister")
+    end
+    if SV.family.Mother == true then
+      GROUND:Unhide("Family_Mother")
+    end
+    if SV.family.Father == true then
+      GROUND:Unhide("Family_Father")
+    end
+    if SV.family.Brother == true then
+      GROUND:Unhide("Family_Brother")
+    end
+    if SV.family.Pet == true then
+      GROUND:Unhide("Family_Pet")
+    end
+    if SV.family.Grandma == true then
+      GROUND:Unhide("Family_Grandma")
+    end
   end
 end
 
@@ -384,10 +384,7 @@ function base_camp_2.NPC_Broke_Action(chara, activator)
   SOUND:PlayBattleSE("EVT_Emote_Sweating")
   UI:SetSpeakerEmotion("Crying")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Broke_Line_002']))
-  
-  if SV.Experimental then
-    SV.team_hunter.SpokenTo = true
-  end
+  SV.team_hunter.SpokenTo = true
 end
 
 

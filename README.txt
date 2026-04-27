@@ -98,28 +98,29 @@ To deploy the server on a linux machine:
 
 [CREDITS AND ATTRIBUTIONS - for the indespensible contributors]
 For modifications of this software, these attributions are not to be removed.
-https://github.com/PsyCommando PsyCommando, for code contributions and PMD insight
-https://github.com/AntyMew AntyMew, for code contributions and platform compatibility insight
-https://github.com/purpasmart96 Rev, for code contributions
-https://github.com/fa6ex Rings, for code contributions
-https://github.com/Buwwet Buwwet, for code contributions
-https://github.com/DoubleTrio Trio~, for code contributions
-Discord:touhou_project TouhouProject, for code contributions 
-Alexander Groeger, for code contributions 
-https://twitter.com/_palika_ Palika, for script contributions
-https://github.com/Parakoopa Parakoopa, for tiles dtef parsing
-Discord:mistressnebula MistressNebula, for code contributions and item design
-https://github.com/Deeshura Deeshura, for item design
-Discord:shitpost_sunkern Shitpost Sunkern, for item design
-https://twitter.com/EthanLac13 FlowerSnek, for item design, talk strings
-https://www.instagram.com/et3rniti et3rniti, for talk strings
-http://musicalcombusken.deviantart.com/ MusicalCombusken, for the title logo
-https://www.reddit.com/user/SilverDeoxys563 SilverDeoxys563, for various Trap graphics
-http://fable-amare.deviantart.com/ Fable, for custom portraits
-http://poyo-journal.tumblr.com/ Lurils, for custom map edits
-https://twitter.com/RaoKurai Rao Kurai, for custom sprites, music
-https://soundcloud.com/skelothan Skelothan, for custom music
-Chi, Lovi, Zefa, Reppamon, and 3 Anonymous, for custom sprites and portraits
+https://github.com/PsyCommando PsyCommando: code contributions, PMD insight
+https://github.com/AntyMew AntyMew: code contributions, platform compatibility insight
+https://github.com/purpasmart96 Rev: code contributions
+https://github.com/fa6ex Rings: code contributions
+https://github.com/Buwwet Buwwet: code contributions
+https://github.com/DoubleTrio Trio~: code contributions
+Discord:touhou_project TouhouProject: code contributions 
+Alexander Groeger: code contributions 
+https://twitter.com/_palika_ Palika: script contributions
+https://github.com/Parakoopa Parakoopa: tiles dtef parsing
+Discord:mistressnebula MistressNebula: code contributions and item design
+https://github.com/Deeshura Deeshura: item design
+Discord:shitpost_sunkern Shitpost Sunkern: item design
+https://twitter.com/EthanLac13 FlowerSnek: item design, dialogue
+MintyFrog: dialogue
+Imbion: dialogue
+https://www.instagram.com/et3rniti et3rniti: for dialogue
+http://musicalcombusken.deviantart.com/ MusicalCombusken: the title logo
+https://www.reddit.com/user/SilverDeoxys563 SilverDeoxys563: various Trap graphics
+http://poyo-journal.tumblr.com/ Lurils: custom map edits
+https://twitter.com/RaoKurai Rao Kurai: custom sprites, music
+https://soundcloud.com/skelothan Skelothan: custom music
+Chi, Lovi, Zefa, Reppamon, and 3 Anonymous: custom sprites and portraits
 
 
 Translation:
@@ -134,6 +135,8 @@ Translation:
 [ES] https://twitter.com/lagpu1 lagpu1
 [ES] https://www.reddit.com/u/thedask Dask
 [ES] https://discord.gg/PokemonRP Vioshim
+[FR] DSE76
+[FR] Dp=mz
 [FR] https://www.vg-resource.com/user-25643.html Van-Tazen
 [FR] https://www.twitter.com/Kuramarts Kurama
 [FR] https://www.twitter.com/Vladcik Aligatueur
@@ -146,9 +149,11 @@ Translation:
 [IT] Discord:digital_hazard Digital Hazard
 [IT] Discord:saiphdeer Saiph
 [JA] https://www.pixiv.net/users/75745630 ｷﾇ
+[JA] Noise Ikigai
 [KO] https://www.reddit.com/user/Bashful_Barry/ Barry
 [PT] https://twitter.com/SquishyTheMew Squishy
 [PT] https://twitter.com/MoitinhaAnimado Moita
+[PT] Moita
 [ZH] Discord:lazychehra Chehra
 [ZH] https://twitter.com/Dewpoleon Dew
 [ZH] kaitensekai@qq.com 域外創音(IkigaiSouon)

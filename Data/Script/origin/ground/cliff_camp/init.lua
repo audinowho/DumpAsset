@@ -93,7 +93,7 @@ function cliff_camp.SetupNpcs()
     -- TODO cycling
   end
   
-  if SV.Experimental and SV.team_rivals.Status == 0 then
+  if SV.team_rivals.Status == 0 then
     GROUND:Unhide("Rival_1")
     GROUND:Unhide("Rival_2")
   elseif SV.team_rivals.Status == 9 then
@@ -917,6 +917,8 @@ end
 function cliff_camp.NPC_Storehouse_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  local carry = CH('NPC_Carry')
+  local deliver = CH('NPC_Deliver')
   local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("faded_trail")
   local outlaw_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]:Get("murkrow")
   

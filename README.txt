@@ -136,7 +136,7 @@ Translation:
 [ES] https://www.reddit.com/u/thedask Dask
 [ES] https://discord.gg/PokemonRP Vioshim
 [FR] DSE76
-[FR] Dp=mz
+[FR] Silver976
 [FR] https://www.vg-resource.com/user-25643.html Van-Tazen
 [FR] https://www.twitter.com/Kuramarts Kurama
 [FR] https://www.twitter.com/Vladcik Aligatueur
@@ -149,7 +149,7 @@ Translation:
 [IT] Discord:digital_hazard Digital Hazard
 [IT] Discord:saiphdeer Saiph
 [JA] https://www.pixiv.net/users/75745630 ｷﾇ
-[JA] Noise Ikigai
+[JA] kaitensekai@qq.com Ikigai Souon
 [KO] https://www.reddit.com/user/Bashful_Barry/ Barry
 [PT] https://twitter.com/SquishyTheMew Squishy
 [PT] https://twitter.com/MoitinhaAnimado Moita

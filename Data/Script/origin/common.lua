@@ -1414,3 +1414,20 @@ function COMMON.EndDayCycle()
 	
   COMMON.UpdateDayEndVars()
 end
+
+-- Adds the list of dungeons to the enterable dungeons on the current ground map, through the exit junction
+function COMMON.AddDungeonsToExitJunction(list_of_dungeons)
+  for key,value in pairs(list_of_dungeons) do
+    table.insert(CURMAPSCR.dungeons_exit, value)
+  end
+end
+
+-- Adds the list of ground map entries to the enterable ground maps on the current ground map's exit
+-- These entries must fit a certain format.
+-- Each entry should be a table with the Flag, Zone, ID, and Entry fields.
+-- Exactly like how the vanilla groundmaps are defined
+function COMMON.AddGroundmapsToExitJunction(table_of_groundmaps)
+  for key,value in pairs(table_of_groundmaps) do
+    table.insert(CURMAPSCR.groundmaps_exit, value)
+  end
+end

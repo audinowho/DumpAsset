@@ -1,30 +1,17 @@
 require 'origin.common'
 
-base_camp_patch = {}
 local base_camp = {}
 
 --------------------------------------------------
--- Junction patch management
+-- Tables for this map's junctions
 --------------------------------------------------
-local dungeon_entrances = {}
-local ground_entrances = {}
-
--- Mutator: Add each of the dungeons from the table passed in to the dungeon junction on this map.
--- Dungeons are identified by their zone ID.
-function base_camp_patch.Add_Dungeons(table_of_zone_IDs)
-  for key,value in pairs(table_of_zone_IDs) do
-    dungeon_entrances[#dungeon_entrances+1]=value
-  end
-end
-
--- Mutator: Add a ground map to the ground map junction.
--- This is "spread out" to ensure modders understand that they need to add all of these vars for sanity.
-function base_camp_patch.Add_Groundmap(unlock_flag, zone, id, entry_value)
-  ground_entrances[#ground_entrances+1] = {Flag = unlock_flag,
-    Zone = zone,
-    ID = id,
-    Entry = entry_value}
-end
+base_camp.dungeons_exit = { 'tropical_path', 'faultline_ridge', 'guildmaster_trail' }
+base_camp.groundmaps_exit = {{Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=0},
+{Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=0},
+{Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
+{Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
+{Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
+{Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
 
 --------------------------------------------------
 -- Map Callbacks
@@ -32,15 +19,6 @@ end
 function base_camp.Init(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo("=>> Init_base_camp")
-
-    -- Initalize the data for the junctions to the base game content
-    dungeon_entrances = { 'tropical_path', 'faultline_ridge', 'guildmaster_trail' }
-    ground_entrances = {{Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=0},
-    {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=0},
-    {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
-    {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
-    {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
-    {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
   
   COMMON.RespawnAllies()
 end
@@ -400,7 +378,7 @@ end
 
 function base_camp.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  COMMON.ShowDestinationMenu(base_camp.dungeons_exit,base_camp.groundmaps_exit)
 end
 
 function base_camp.First_North_Exit_Touch(obj, activator)  

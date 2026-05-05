@@ -1414,20 +1414,39 @@ function COMMON.EndDayCycle()
 	
   COMMON.UpdateDayEndVars()
 end
+-- Adds the list of dungeons to the enterable dungeons on the specified junction.
+-- See each map for possible junctions, a message is printed to console if that junction doesn't exist.
+-- Most of them are directionally labeled.
+function COMMON.AddDungeonsToJunction(list_of_dungeons, target_junction)
+  -- Sanity check: Check that target_junction actually corresponds to an entry.
+  local junc = CURMAPSCR.junction[target_junction]
 
--- Adds the list of dungeons to the enterable dungeons on the current ground map, through the exit junction
-function COMMON.AddDungeonsToExitJunction(list_of_dungeons)
-  for key,value in pairs(list_of_dungeons) do
-    table.insert(CURMAPSCR.dungeons_exit, value)
+  if junc then
+    local target = junc.dungeons
+    for key,value in pairs(list_of_dungeons) do
+      table.insert(target, value)
+    end
+  else
+        PrintInfo("WARNING: AddDungeonsToJunction was called with a target_junction that does not exist on the map! Stopped insert process.")
   end
 end
 
--- Adds the list of ground map entries to the enterable ground maps on the current ground map's exit
+-- Adds the list of ground maps to the enterable ground mapson the specified junction.
+-- See each map for possible junctions, a message is printed to console if that junction doesn't exist.
+-- Most of them are directionally labeled.
 -- These entries must fit a certain format.
 -- Each entry should be a table with the Flag, Zone, ID, and Entry fields.
 -- Exactly like how the vanilla groundmaps are defined
-function COMMON.AddGroundmapsToExitJunction(table_of_groundmaps)
-  for key,value in pairs(table_of_groundmaps) do
-    table.insert(CURMAPSCR.groundmaps_exit, value)
+function COMMON.AddGroundmapsToJunction(list_of_groundmaps, target_junction)
+  -- Sanity check: Check that target_junction actually corresponds to an entry.
+  local junc = CURMAPSCR.junction[target_junction]
+
+  if junc then
+    local target = junc.groundmaps
+    for key,value in pairs(list_of_groundmaps) do
+      table.insert(target, value)
+    end
+  else
+    PrintInfo("WARNING: AddGroundmapsToJunction was called with a target_junction that does not exist on the map! Stopped insert process.")
   end
 end

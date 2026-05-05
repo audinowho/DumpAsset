@@ -2,16 +2,27 @@ require 'origin.common'
 
 local base_camp = {}
 
---------------------------------------------------
 -- Tables for this map's junctions
---------------------------------------------------
-base_camp.dungeons_exit = { 'tropical_path', 'faultline_ridge', 'guildmaster_trail' }
-base_camp.groundmaps_exit = {{Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=0},
-{Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=0},
-{Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
-{Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
-{Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
-{Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
+base_camp.junction = {}
+
+-- North junction - standard exist
+base_camp.junction.north =
+{
+  dungeons =  { 'tropical_path', 'faultline_ridge', 'guildmaster_trail' },
+  groundmaps = {{Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=0},
+  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=0},
+  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
+  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
+  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
+  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
+}
+
+-- Ferry
+base_camp.junction.ferry =
+{
+  dungeons = { 'lava_floe_island', 'castaway_cave', 'eon_island', 'uncharted_waters', 'inscribed_cave', 'prism_isles' },
+  groundmaps = {}
+}
 
 --------------------------------------------------
 -- Map Callbacks
@@ -378,7 +389,7 @@ end
 
 function base_camp.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  COMMON.ShowDestinationMenu(base_camp.dungeons_exit,base_camp.groundmaps_exit)
+  COMMON.ShowDestinationMenu(base_camp.junction.north.dungeons, base_camp.junction.north.groundmaps)
 end
 
 function base_camp.First_North_Exit_Touch(obj, activator)  
@@ -417,12 +428,10 @@ function base_camp.Ferry_Action(obj, activator)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ferry_Line_001']))
 	SV.base_camp.FerryIntroduced = true
   end
-  local dungeon_entrances = { 'lava_floe_island', 'castaway_cave', 'eon_island', 'uncharted_waters', 'inscribed_cave', 'prism_isles' }
-  local ground_entrances = {}
   
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ferry_Line_002']))
   
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances, true,
+  COMMON.ShowDestinationMenu(base_camp.junction.ferry.dungeons,base_camp.junction.ferry.groundmaps, true,
   ferry,
   STRINGS:Format(STRINGS.MapStrings['Ferry_Line_003']))
 end

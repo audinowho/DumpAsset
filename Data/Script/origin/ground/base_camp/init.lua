@@ -5,7 +5,7 @@ local base_camp = {}
 -- Tables for this map's junctions
 base_camp.junction = {}
 
--- North junction - standard exist
+-- North junction - standard exit
 base_camp.junction.north =
 {
   dungeons =  { 'tropical_path', 'faultline_ridge', 'guildmaster_trail' },

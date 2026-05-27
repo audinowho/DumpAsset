@@ -1204,7 +1204,7 @@ function cliff_camp.NPC_DexRater_Action(chara, activator)
 	end
 	
 	if SV.dex.CurrentRewardIdx <= #rewardReqs then
-	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Next_001'], rewardReqs[SV.dex.CurrentRewardIdx]))
+		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Next_001'], (rewardReqs[SV.dex.CurrentRewardIdx]).Req))
 	end
   end
   

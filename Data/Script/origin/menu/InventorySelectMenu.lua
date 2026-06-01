@@ -218,7 +218,7 @@ end
 function InventorySelectMenu:updateSummary()
     local selected = self.slotList[self.menu.CurrentChoiceTotal+1]
     if selected.IsEquipped then
-        self.summary:SetItem(_DATA.Save.ActiveTeam.Players.EquippedItem(selected.Slot))
+        self.summary:SetItem(GAME:GetPlayerEquippedItem(selected.Slot))
     else
         self.summary:SetItem(_DATA.Save.ActiveTeam:GetInv(selected.Slot))
     end

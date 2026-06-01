@@ -234,6 +234,10 @@ function UpgradeTools:OnUpgrade()
   if SV.forest_camp.SnorlaxPhase == nil then
     SV.forest_camp.SnorlaxPhase = 0
   end
+  
+  if SV.forest_camp.SnorlaxAttempted == nil then
+    SV.forest_camp.SnorlaxAttempted = false
+  end
 
   if SV.forest_camp.TeamRetreatIntro == nil then
     SV.forest_camp.TeamRetreatIntro = false
@@ -314,13 +318,20 @@ function UpgradeTools:OnUpgrade()
   end
 
   if SV.team_rivals == nil then
-	SV.team_rivals =
-	{
-	  Status = 0,
-	  SpokenTo = false,
-	  DaysSinceCheckpoint = 0,
-	  Cycle = 0
-	}
+    SV.team_rivals =
+    {
+      Status = 0,
+      SpokenTo = false,
+      DaysSinceCheckpoint = 0,
+      SpokenToEnd1 = false,
+      SpokenToEnd2 = false,
+      Cycle = 0
+    }
+  else
+    if SV.team_rivals.SpokenToEnd1 == nil then
+      SV.team_rivals.SpokenToEnd1 = false
+      SV.team_rivals.SpokenToEnd2 = false
+    end
   end
 
 
@@ -365,12 +376,17 @@ function UpgradeTools:OnUpgrade()
   end
 
   if SV.team_steel == nil then
-	SV.team_steel =
-	{
-	  Argued = false,
-	  DaysSinceArgue = 0,
-	  Rescued = false
-	}
+    SV.team_steel =
+    {
+      Argued = false,
+      DaysSinceArgue = 0,
+      Rescued = false,
+      InCycle = false
+    }
+  end
+
+  if SV.team_steel.InCycle == nil then
+    SV.team_steel.InCycle = false
   end
 
   if SV.team_solo == nil then
@@ -479,8 +495,14 @@ function UpgradeTools:OnUpgrade()
     SV.family.Grandma = true
   end
   
-  if old_ver < System.Version("0.8.10") then
+  if old_ver < System.Version("0.8.11") then
     SV.missions.Missions = {}
+  end
+  
+  if old_ver < System.Version("0.8.12") then
+    if SV.dex.CurrentRewardIdx > 3 then
+      SV.dex.CurrentRewardIdx = 3
+	end
   end
   
   if SV.family.BrotherActiveDays == nil then

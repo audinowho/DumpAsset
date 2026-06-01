@@ -174,6 +174,10 @@ function guildmaster_summit.PreBattle(shortened)
   -- trigger the battle and set a variable indicating its triggering
   UI:SetSpeaker("*", true, -1)
   if shortened then
+    --Team X, we meet again.
+    --what have you learned since your last visit?
+    --will it be enough to surpass us?
+    --prove it, now!
     UI:WaitShowDialogue("Shortened")
   end
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001']))
@@ -190,12 +194,12 @@ function guildmaster_summit.PreBattle(shortened)
   
   if _DATA.Save.ActiveTeam.Name == "" then
     
-  --Who are the ones that stand before us?
-  --What do you call your team?
-  --To follow in our steps is no easy endeavor...
-  
-	UI:SetSpeaker(xatu)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_Ask_001']))
+    --Who are the ones that stand before us?
+    --What do you call your team?
+    --To follow in our steps is no easy endeavor...
+    
+    UI:SetSpeaker(xatu)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_Ask_001']))
 	
     local ch = false
     local name = ""
@@ -204,7 +208,7 @@ function guildmaster_summit.PreBattle(shortened)
       UI:WaitForChoice()
       name = UI:ChoiceResult()
     
-	  UI:ResetSpeaker()
+      UI:ResetSpeaker()
       UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_Ask_002'], name), true)
       UI:WaitForChoice()
       ch = UI:ChoiceResult()
@@ -322,7 +326,7 @@ function guildmaster_summit.PostBattle()
 
   if GAME:InRogueMode() then
 
-      UI:SetAutoFinish(true)
+    UI:SetAutoFinish(true)
 	  GAME:WaitFrames(60)
 	  UI:WaitShowVoiceOver(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_008'], GAME:GetTeamName()), -1)
 	  GAME:WaitFrames(20);
@@ -337,7 +341,7 @@ function guildmaster_summit.PostBattle()
 	  GAME:AddToPlayerMoneyBank(100000)
   else
       guildmaster_summit.can_skip = false
-	  GAME:WaitFrames(180)
+      GAME:WaitFrames(180)
       guildmaster_summit.RollCredits()
   end
   
@@ -458,20 +462,64 @@ end
   
 function guildmaster_summit.NPC_Rival_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  local enemy = CH('NPC_Rival_2')
+  if not SV.team_rivals.SpokenToEnd1 then
+    UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_001'], enemy:GetDisplayName()))
   
-  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_001']))
-  
-  SV.team_rivals.SpokenTo = true
+    GAME:WaitFrames(30)
+    
+    SOUND:PlayBattleSE("EVT_Emote_Sweating")
+    GROUND:CharSetEmote(chara, "sweating", 1)
+    GAME:WaitFrames(30)
+    
+    UI:SetSpeakerEmotion("Sigh")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_002'], enemy:GetDisplayName()))
+    
+    SV.team_rivals.SpokenToEnd1 = true
+  else
+    
+    UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+    UI:SetSpeakerEmotion("Determined")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_003'], enemy:GetDisplayName()))    
+  end
 end
   
 function guildmaster_summit.NPC_Rival_2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_001']))
-  
-  SV.team_rivals.SpokenTo = true
+  local enemy = CH('NPC_Rival_1')
+  if not SV.team_rivals.SpokenToEnd2 then
+    UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+    UI:SetSpeakerEmotion("Sigh")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_001'], enemy:GetDisplayName()))
+    
+    local old_dir = chara.CharDir
+    GROUND:CharAnimateTurnTo(chara, Direction.Left, 4)
+    GAME:WaitFrames(60)
+    
+    GROUND:CharAnimateTurnTo(chara, old_dir, 4)
+    
+    GAME:WaitFrames(30)
+    
+    UI:SetSpeakerEmotion("Angry")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_002'], enemy:GetDisplayName()))
+    
+    SV.team_rivals.SpokenToEnd2 = true
+  else
+    UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_003'], enemy:GetDisplayName()))
+
+    local old_dir = chara.CharDir
+    GROUND:CharAnimateTurnTo(chara, Direction.Left, 4)
+    GAME:WaitFrames(60)
+    
+    GROUND:CharAnimateTurnTo(chara, old_dir, 4)
+    
+    GAME:WaitFrames(30)
+    
+    UI:SetSpeakerEmotion("Angry")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_002'], enemy:GetDisplayName()))
+  end
 end
 
 function guildmaster_summit.NPC_Storehouse_Action(chara, activator)

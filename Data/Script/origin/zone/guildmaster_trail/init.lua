@@ -58,11 +58,11 @@ function guildmaster_trail.ExitSegment(zone, result, rescue, segmentID, mapID)
 	    else
 		  --didnt clear the game yet?  Go to the summit for the final test
 		  if SV.Experimental then
-			if mapID >= SV.guildmaster_trail.FloorsCleared then
-			  SV.guildmaster_trail.FloorsCleared = mapID
-			end  
-			SV.guildmaster_summit.ClearedFromTrail = true
-	        GAME:EnterZone('guildmaster_trail',-1,0,0)
+        if mapID >= SV.guildmaster_trail.FloorsCleared then
+          SV.guildmaster_trail.FloorsCleared = mapID
+        end  
+        SV.guildmaster_summit.ClearedFromTrail = true
+        GAME:EnterZone('guildmaster_trail',-1,0,0)
 		  else
 		    GAME:UnlockDungeon('tropical_path')
 		    SV.base_camp.ExpositionComplete = true

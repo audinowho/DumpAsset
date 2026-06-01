@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.8.10.0",
+"Version": "0.8.12.0",
 "Object": {
 "$type": "RogueEssence.Dungeon.Map, RogueEssence",
 "Name": {
@@ -19,12 +19,11 @@
 "Element2": "none",
 "TurnWait": 0,
 "TurnUsed": false,
-"EndTurnLock": false,
 "movementSpeed": 0,
 "dead": false,
 "serializationLoc": {
-"X": 5,
-"Y": 2
+"X": 2,
+"Y": 4
 },
 "serializationDir": 0,
 "ProxyName": "",
@@ -168,6 +167,7 @@
 "IntrinsicDisabled": false,
 "CanRemoveStuck": false,
 "StopItemAtHit": false,
+"ForceAI": false,
 "MovesScrambled": false,
 "ChargeSaver": false,
 "WaitToAttack": false,
@@ -184,7 +184,6 @@
 "SeeTraps": false,
 "CharStates": [],
 "BackRef": {
-"Assembly": false,
 "Index": -1
 },
 "Nickname": "",
@@ -263,12 +262,11 @@
 "Element2": "ice",
 "TurnWait": 0,
 "TurnUsed": false,
-"EndTurnLock": false,
 "movementSpeed": 0,
 "dead": false,
 "serializationLoc": {
-"X": 2,
-"Y": 4
+"X": 5,
+"Y": 2
 },
 "serializationDir": 0,
 "ProxyName": "",
@@ -412,6 +410,7 @@
 "IntrinsicDisabled": false,
 "CanRemoveStuck": false,
 "StopItemAtHit": false,
+"ForceAI": false,
 "MovesScrambled": false,
 "ChargeSaver": false,
 "WaitToAttack": false,
@@ -428,7 +427,6 @@
 "SeeTraps": false,
 "CharStates": [],
 "BackRef": {
-"Assembly": false,
 "Index": -1
 },
 "Nickname": "",
@@ -507,7 +505,6 @@
 "Element2": "dark",
 "TurnWait": 0,
 "TurnUsed": false,
-"EndTurnLock": false,
 "movementSpeed": 0,
 "dead": false,
 "serializationLoc": {
@@ -526,7 +523,7 @@
 "Species": "drapion",
 "Form": 0,
 "Skin": "normal",
-"Gender": 2
+"Gender": 1
 },
 "ProxyAtk": -1,
 "ProxyDef": -1,
@@ -656,6 +653,7 @@
 "IntrinsicDisabled": false,
 "CanRemoveStuck": false,
 "StopItemAtHit": false,
+"ForceAI": false,
 "MovesScrambled": false,
 "ChargeSaver": false,
 "WaitToAttack": false,
@@ -670,9 +668,12 @@
 "SeeItems": false,
 "SeeWallItems": false,
 "SeeTraps": false,
-"CharStates": [],
+"CharStates": [
+{
+"$type": "PMDC.Dungeon.SnipeState, PMDC"
+}
+],
 "BackRef": {
-"Assembly": false,
 "Index": -1
 },
 "Nickname": "",
@@ -682,7 +683,7 @@
 "Species": "drapion",
 "Form": 0,
 "Skin": "normal",
-"Gender": 2
+"Gender": 1
 },
 "Level": 1,
 "EXP": 0,

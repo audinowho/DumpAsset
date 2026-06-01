@@ -225,7 +225,8 @@ function base_camp_2_tutor.Tutor_Action(obj, activator)
   end
   
   if can_tutor and SV.base_town.TutorOpen == false then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Now_Teaches']))
+    local item_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Item]:Get("loot_heart_scale")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Now_Teaches'], item_summary:GetIconName()))
 	SV.base_town.TutorOpen = true
   end
   

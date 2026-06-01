@@ -15,37 +15,43 @@ function base_camp_2_juice.Juice_Owner_Action(chara, activator)
     UI:SetSpeaker(chara)
   
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Intro']))
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Setup']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Setup']))
   elseif SV.base_town.JuiceShop == 1 then
   
-  local questname = "QuestBug"
-  local quest = SV.missions.Missions[questname]
-  
-  if quest == nil then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Help_001']))
-	
-	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_LOST_ITEM,
-      DestZone = "bramble_woods", DestSegment = 0, DestFloor = 4,
-      FloorUnknown = false,
-	  TargetItem = RogueEssence.Dungeon.InvItem("lost_item_bug"),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("shuckle", 0, "normal", Gender.Male) }
-	  )
-	
-  else
-  
-	COMMON.TakeMissionItem(quest)
-	
-    if quest.Complete == COMMON.MISSION_INCOMPLETE then
+    local questname = "QuestBug"
+    local quest = SV.missions.Missions[questname]
+    
+    local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("bramble_woods")
+    local quest_item_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Item]:Get("lost_item_bug")
+    local reward_item_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Item]:Get("xcl_element_bug_silk")
+    
+    if quest == nil then
       UI:SetSpeaker(chara)
       GROUND:CharTurnToChar(chara,CH('PLAYER'))
-	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Help_002']))
+      UI:SetSpeakerEmotion("Worried")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Help_001'], quest_item_summary:GetIconName(), zone_summary:GetColoredName(), reward_item_summary:GetIconName()))
+    
+      COMMON.CreateMission(questname,
+      { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_LOST_ITEM,
+        DestZone = "bramble_woods", DestSegment = 0, DestFloor = 4,
+        FloorUnknown = false,
+        TargetItem = RogueEssence.Dungeon.InvItem("lost_item_bug"),
+        ClientSpecies = RogueEssence.Dungeon.MonsterID("shuckle", 0, "normal", Gender.Male) }
+      )
+    
     else
-      base_camp_2_juice.Bug_Complete()
+    
+      COMMON.TakeMissionItem(quest)
+    
+      if quest.Complete == COMMON.MISSION_INCOMPLETE then
+        
+        UI:SetSpeaker(chara)
+        GROUND:CharTurnToChar(chara,CH('PLAYER'))
+        UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Help_002'], quest_item_summary:GetIconName(), zone_summary:GetColoredName()))
+      else
+        base_camp_2_juice.Bug_Complete()
+      end
     end
-  end
   
   elseif SV.base_town.JuiceShop >= 2 then
 
@@ -59,19 +65,32 @@ function base_camp_2_juice.Bug_Complete()
   local juice = CH('Juice_Owner')
   local player = CH('PLAYER')
   
-  GROUND:CharTurnToChar(juice,player)
+  local quest_item_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Item]:Get("lost_item_bug")
+  local reward_item_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Item]:Get("xcl_element_bug_silk")
   
+  GROUND:CharTurnToChar(juice,player)
+        
+  SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
+  GROUND:CharSetEmote(juice, "exclaim", 1)
+  GAME:WaitFrames(40)
+
   UI:SetSpeaker(juice)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Help_003']))
+  UI:SetSpeakerEmotion("Inspired")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Help_003'], quest_item_summary:GetIconName(), reward_item_summary:GetIconName()))
   
   local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_bug_silk")
   COMMON.GiftItem(player, receive_item)
   
+  UI:SetSpeakerEmotion("Happy")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Help_004']))
   
   COMMON.CompleteMission("QuestBug")
   
   SV.base_town.JuiceShop = 2
+  
+  if SV.guildmaster_summit.GameComplete then
+    SV.base_town.JuiceShop = 3
+  end
 end
 
 base_camp_2_juice.boost_tbl = { }
@@ -979,7 +998,8 @@ function base_camp_2_juice.Juice_Shop(obj, activator)
   UI:SetSpeaker(chara)
 	
   if SV.guildmaster_summit.GameComplete and SV.base_town.JuiceShop == 2 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Now_Specialty']))
+    UI:SetSpeakerEmotion("Inspired")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Now_Specialty'], GAME:GetTeamName()))
     SV.base_town.JuiceShop = 3
   end
 	

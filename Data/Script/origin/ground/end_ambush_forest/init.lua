@@ -49,10 +49,12 @@ function end_ambush_forest.PreBattle(shortened)
 
   local player = CH("PLAYER")
   local enemy = CH("Honchkrow")
+  local crony1 = CH("Murkrow_1")
+  local crony2 = CH("Murkrow_2")
   
   GAME:CutsceneMode(true)
   
-  GAME:MoveCamera(204, 192, 1, false)
+  GAME:MoveCamera(204, 216, 1, false)
   
   GROUND:Unhide("Honchkrow")
   GROUND:Unhide("Murkrow_1")
@@ -68,27 +70,250 @@ function end_ambush_forest.PreBattle(shortened)
   GROUND:MoveToPosition(player, 196, 240, false, 2)
   
   if shortened == false then
+    
+    --Greetings, {0}.  My name is Honchkrow.
+    --what an unfortunate state of affairs this is...
+    --you come into my hideout unannounced
+    --this island has been our territory for three generations
+    
+    --We, the Forest Clan, are the rightful owners of this island, descended from the legendary guildmaster!
+    --Our founder laid claim to this land and all its treasures three generations ago!
+    --You fancy yourselves heroes, standing up for the supply corps?
+    --Don't be ridiculous, they refused to pay the fee.
+    --These are my lands, and I choose to tax them as I please
+    --Our guild rations have been low... the supply corps have an obligation to provide for us!
+    --Know this, {0}.
+    
+    
+    --The clan has owned this island for three generations, inherited from the legendary guildmaster.
+    
+    
+    --You must be {0}...
+    
+    --What an unfortunate state of affairs this is...
+    --My name is Honchkrow, leader of the Forest Clan.
+    
+    --And we...[pause=0] are the rightful owners of this island,[pause=0] inherited from the legendary guildmaster.
+    --The land,[pause=0] the dungeons,[pause=0] and all their treasures...
+    --They've been in our family's name for three generations.
+    
+    --So what does that make you?
+    
+    --Tresspassers!  Smugglers!
+    
+    --If that little cargo group wants to set up a supply route in my woods, they deserve to pay a tithe.
+    
+    --I expected a little fuss,[pause=0] but it was truly disrespectful for them to resort to this.
+    --Smuggling goods through my routes, attacking my associates, and now a bounty...
+    --{0}...
+    --You've made a mistake in taking up their offer...
+    --So allow me to give you a better one... an offer you can't refuse!
+    
+    
+    --Otherwise, that makes you trespassers.
+    --And those who trespass... will be punished severely!
+    
+    
+    
+    --This is our turf, and those who trespass... will be punished severely!
+    
+    
+    --Greetings, {0}.  My name is Honchkrow.
+    --We, the Forest Clan, are the rightful owners of this island, descended from the legendary guildmaster!
+    
+    --Team X, do you understand what that means?
+    --That makes you[pause=0] tresspasers.
+    
+    --Or else... you've seen what we do to those that don't.
+    --A little birdie's told us your plans to set up a supply route, don't you think they should pay a tithe to the owners of the forest?
+    
+    --Those who trespass... will be punished severely.
+    
+    --It was foolish of you to take up their bounty.
+    --But if you insist...
+    --Allow me to propose a counter-offer...
+    --An offer you cann't refuse!
+    
+    
+    
+    --but let's be frank here, you never wanted my friendship, and you were afraid to be in my debt
+    --you don't give respect
+    --what have I ever done to make you treat me so disrespectfully?
+    --how did things ever get so far?
+    --it was so unfortunate, so unnecessary...
+    --I hoped we could come and reason together
+    --and as a reasonable man I'm willing to do whatever's necessary
+    --but if some unlucky accident should befall him, - then that I do not forgive.
+    
+    --The clan's needs take precedent over their camps, they should have known better...
+    
+    --honchkrow introduces himself, talks about the forest clan's claim, talks about their food troubles
+    --{0}, is it?
+    --But that's not why you're here, isn't it?
+    
+    --We have business with the supply corps.
+    
+    --What have I ever done to make you treat me so disrespectfully?
+    
+    
+    
+    
+    
+    --I can't let the blatant trespass go unpunished
+    --you've come into my headquarters unannounced, and laid hands on my family
+    --that I do not forgive
+    
+    --It's so unfortunate, so unnecessary...
+    
+    --There is no reward they can offer that is worth the pain you will suffer here.
+    --Your crusade ends here.
+    
+    --Coming into my headquarters unannounced
+    --That tells me you're here to do a different kind of business
+    
+    --that the supply corps made you shoulder this burden
+    --threatening the supply corps individuals
+    
+    --it's so unfortunate, so unnecessary...
+    --that I'll have to put you under to make an example of you
+    --"that I cannot forgive"
+    
+    --Their disrespect will cost them dearly.
+    
+    --You will learn there's no reward they can offer that is worth the pain you will suffer here.
+    
+    
+    
+    --boss music
+    --You've made a mistake taking up their request when all they offer is rations.
+    --all they offer is rations
+    --I'll give you an offer you can't refuse!
+    --if you still think their bounty will be worth it,
+    
+    --I'll make you rethink that bounty of theirs, and give you an offer you can't refuse!
+    
+    --the supply corps offered you a bounty, but I'll give you an offer you can't refuse.
+    
+    --If you're looking to hunt for a bargain, I'll give you an offer you can't refuse!
   
+  
+    --Ugh... You drive a hard bargain.
+    --Very well... we'll retreat for now.
+    --But remember that we are the true inheritors of this island, and one day you will all see the truth.
+    
+    
+    
+    --introduced with back turned
+    
+    --What an unfortunate state of affairs...
+    
+    --turn around
+    
+    --I am Honchkrow, leader of the Forest Clan, the owner of Guildmaster Island.
+    --This island has been our turf for three generations, passed down from the exploration team of legend.
+    --Our journey to the peak will clear all doubts once and for all, but our efforts require provisions.
+    --The clan's needs take precedent over the camps. The Supply Corps should have known better than to withold them from us.
+    
+    --two murkrows fly in, and walk closer
+    
+    --threat music
+    
+    --It was truly disrespectful for them to resort to this.
+    --Smuggling goods through my routes, attacking my associates, and now a bounty...
+    --{0}...
+    --You've made a mistake in taking up their offer, when all they can provide is food.
+    
+    --if you must continue this unnecessary strife...
+    --Then I will give you an offer you can't refuse.
+    
+    --Allow me to give you different one...
+    --An offer that you can't refuse!
+    
+    --In that case...
+    --I'll give you an offer you can't refuse!
+    
+    --Then you will pay with...
+    --All your Money
+    --All your Items
+    --And all your hopes of adventuring ever again!
+    
+    local outlaw_team_name = "[color=#FFA5FF]" .. RogueEssence.StringKey("TEAM_FOREST"):ToLocal() .. "[color]"
+    
     UI:SetSpeaker(enemy)
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_001'], GAME:GetTeamName()))
     
-    SOUND:PlayBGM("Threat.ogg", false)
+    GAME:WaitFrames(30)
     
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_002']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_002'], enemy:GetDisplayName(), outlaw_team_name))
+    
+    SOUND:PlayBGM("Threat.ogg", true)
+    --murkrows walk down
+    
+    local coro1 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(crony1, 172, 196, false, 2) end)
+    local coro2 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(crony2, 220, 196, false, 2) end)
+    -- wait to join coroutines before giving control back to the player
+    TASK:JoinCoroutines({coro1, coro2})
+    
+    GAME:WaitFrames(30)
+    
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_003']))
     
+    --wing flap
+    SOUND:PlayBattleSE("EVT_Chatot_Flutter")
+    GROUND:CharSetAnim(crony1, "Attack", false)
+    GAME:WaitFrames(30)
+    UI:SetSpeaker(crony1)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_004']))
+    
+    --wing flap
+    SOUND:PlayBattleSE("EVT_Chatot_Flutter")
+    GROUND:CharSetAnim(crony2, "Attack", false)
+    GAME:WaitFrames(30)
+    UI:SetSpeakerReverse(true)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_005']))
+    
+    GAME:WaitFrames(30)
+    
+    UI:SetSpeaker(enemy)
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_006'], GAME:GetTeamName()))
+    
     --also, if the player has already reached the summit, give a reaction
+    
+    --wait, that mark on your badge...
+    --the summit, was it already conquered!?
+    --...no, it can't be true.
+    --it must not be true.
+    --You are but charlatans!
+    --(tresspassers!)
+    --(outlaws!)
+    --I will destroy you in battle, and claim my right as the true owner of Guildmaster Island!
   
   else
-    SOUND:PlayBGM("Threat.ogg", false)
+    SOUND:PlayBGM("Threat.ogg", true)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Short']))
+    --rush in
+    --(tresspassers!)
+    --(outlaws!)
+    --I will destroy you in battle, and claim my right as the true owner of Guildmaster Island!
+    --music
+    --action
+    
+    ---
+    
+    --(tresspassers!)
+    --(outlaws!)
+    --How disrespectful for them to resort to this.
+    --You've made a mistake in taking up that little cargo group's offer...
+    --So allow me to give you a better one...[pause=60]\nan offer you can't refuse!
   end
   
   
   
-  SOUND:PlayBGM("Boss Battle 2.ogg", false)
+  SOUND:PlayBGM("Boss Battle 2.ogg", true)
   
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_004']))
+  GAME:WaitFrames(30)
+  
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_007']))
   
   GAME:WaitFrames(30)
   
@@ -122,6 +347,29 @@ function end_ambush_forest.PostBattle()
   
   UI:SetSpeaker(enemy)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_001']))
+  
+  --what have I ever done to make you treat me so disrespectfully?
+  
+  
+  
+  --Mark my words, 
+  --I hoped we could come and reason together
+  --and as a reasonable man I'm willing to do whatever's necessary
+  
+  
+  --How did things ever get so far?
+  --Very well, you've made your terms clear.
+  --We'll clear out from the routes, but mark my words we'll be back.
+  
+  
+  --Enough, you've made your terms clear.
+  --This is so unfortunate, so unnecessary...
+  --We'll retreat for now, but don't think you've bested the Forest Clan.
+  
+  --[Haze]
+  
+  --This, I do not forgive.
+  
   
   GAME:FadeOut(false, 20)
   

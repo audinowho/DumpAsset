@@ -55,7 +55,6 @@ function geode_crevice.ExitSegment(zone, result, rescue, segmentID, mapID)
     local got_treasure = COMMON.ProcessOneTimeTreasure("loot_music_box", rand_item, SV.geode_crevice)
 	
     if segmentID == 0 then
-      COMMON.UnlockWithFanfare('secret_garden', true)
       COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 4, 0)
 	  -- COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 5, 0)
     else

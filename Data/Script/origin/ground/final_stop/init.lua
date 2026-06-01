@@ -2,6 +2,27 @@ require 'origin.common'
 
 local final_stop = {}
 
+-- Tables for this map's junctions
+final_stop.junction = {}
+
+-- South junction
+final_stop.junction.south =
+{
+  dungeons = {},
+  groundmaps = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
+  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
+  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2},
+  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=2},
+  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=2}}
+}
+
+-- North junction
+final_stop.junction.north =
+{
+  dungeons = { 'champions_road', 'barren_tundra', 'cave_of_solace', 'labyrinth_of_the_lost' },
+  groundmaps = {{Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
+}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
@@ -199,18 +220,20 @@ end
   
 function final_stop.Rival_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+  local enemy = CH('Rival_2')
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_001']))
+  UI:SetSpeakerEmotion("Determined")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_001'], enemy:GetDisplayName()))
   
   SV.team_rivals.SpokenTo = true
 end
   
 function final_stop.Rival_2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+  local enemy = CH('Rival_1')
   UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_001']))
+  UI:SetSpeakerEmotion("Determined")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_001'], enemy:GetDisplayName()))
   
   SV.team_rivals.SpokenTo = true
 end
@@ -475,7 +498,17 @@ function final_stop.NPC_Storehouse_Action(chara, activator)
     if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_001']))
       --give reward
-      local receive_item = RogueEssence.Dungeon.InvItem("tm_focus_blast")
+      local receive_item = RogueEssence.Dungeon.InvItem("boost_hp_up")
+      COMMON.GiftItem(player, receive_item)
+      receive_item = RogueEssence.Dungeon.InvItem("boost_protein")
+      COMMON.GiftItem(player, receive_item)
+      receive_item = RogueEssence.Dungeon.InvItem("boost_iron")
+      COMMON.GiftItem(player, receive_item)
+      receive_item = RogueEssence.Dungeon.InvItem("boost_calcium")
+      COMMON.GiftItem(player, receive_item)
+      receive_item = RogueEssence.Dungeon.InvItem("boost_zinc")
+      COMMON.GiftItem(player, receive_item)
+      receive_item = RogueEssence.Dungeon.InvItem("boost_carbos")
       COMMON.GiftItem(player, receive_item)
       --complete mission and move to done
 	  COMMON.CompleteMission(questname)
@@ -632,21 +665,12 @@ end
 
 function final_stop.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  local dungeon_entrances = { 'champions_road', 'barren_tundra', 'cave_of_solace', 'labyrinth_of_the_lost' }
-  local ground_entrances = {{Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  COMMON.ShowDestinationMenu(final_stop.junction.north.dungeons, final_stop.junction.north.groundmaps)
 end
 
 function final_stop.South_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  local dungeon_entrances = { }
-  local ground_entrances = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
-  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
-  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2},
-  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=2},
-  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=2}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  COMMON.ShowDestinationMenu(final_stop.junction.south.dungeons, final_stop.junction.south.groundmaps)
 end
 
 

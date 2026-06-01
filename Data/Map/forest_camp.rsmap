@@ -1,5 +1,5 @@
 ﻿{
-"Version": "0.8.10.0",
+"Version": "0.8.12.0",
 "Object": {
 "$type": "RogueEssence.Dungeon.Map, RogueEssence",
 "Name": {
@@ -26,7 +26,6 @@
 "Element2": "none",
 "TurnWait": 0,
 "TurnUsed": false,
-"EndTurnLock": false,
 "movementSpeed": 0,
 "dead": false,
 "serializationLoc": {
@@ -55,8 +54,8 @@
 "Skills": [
 {
 "Element": {
-"SkillNum": "defense_curl",
-"Charges": 21,
+"SkillNum": "amnesia",
+"Charges": 14,
 "Enabled": true,
 "Sealed": false
 },
@@ -73,8 +72,8 @@
 },
 {
 "Element": {
-"SkillNum": "yawn",
-"Charges": 15,
+"SkillNum": "rock_smash",
+"Charges": 25,
 "Enabled": true,
 "Sealed": false
 },
@@ -107,7 +106,7 @@
 },
 "Absentee": false,
 "ChargeBoost": 0,
-"HP": 86,
+"HP": 91,
 "HPRemainder": 0,
 "Fullness": 100,
 "FullnessRemainder": 0,
@@ -117,35 +116,55 @@
 "EXPMarked": false,
 "Tactic": {
 "Name": {
-"DefaultText": "Staged Boss",
+"DefaultText": "Normal Wander",
 "LocalTexts": {}
 },
 "Released": false,
 "Comment": "",
-"ID": "staged_boss",
+"ID": "wander_normal",
 "Assignable": false,
 "Plans": [
 {
-"$type": "PMDC.Dungeon.BossPlan, PMDC",
-"AttackPattern": 4,
-"PositionPattern": 2,
-"IQ": 253,
+"$type": "PMDC.Dungeon.AttackFoesPlan, PMDC",
+"AttackPattern": 2,
+"PositionPattern": 1,
+"IQ": 100,
 "RestrictedMobilityTypes": 0,
 "RestrictMobilityPassable": false,
 "AttackRange": 0,
 "StatusRange": 0,
-"SelfStatusRange": 0,
+"SelfStatusRange": 4,
 "AbandonRangeOnHit": true
 },
 {
-"$type": "PMDC.Dungeon.WaitPlan, PMDC",
-"IQ": 253,
+"$type": "PMDC.Dungeon.FollowLeaderPlan, PMDC",
+"IQ": 228,
 "RestrictedMobilityTypes": 0,
 "RestrictMobilityPassable": false,
 "AttackRange": 0,
 "StatusRange": 0,
 "SelfStatusRange": 0,
-"AbandonRangeOnHit": true
+"AbandonRangeOnHit": false
+},
+{
+"$type": "PMDC.Dungeon.ExplorePlan, PMDC",
+"IQ": 228,
+"RestrictedMobilityTypes": 0,
+"RestrictMobilityPassable": false,
+"AttackRange": 0,
+"StatusRange": 0,
+"SelfStatusRange": 0,
+"AbandonRangeOnHit": false
+},
+{
+"$type": "PMDC.Dungeon.WaitPlan, PMDC",
+"IQ": 228,
+"RestrictedMobilityTypes": 0,
+"RestrictMobilityPassable": false,
+"AttackRange": 0,
+"StatusRange": 0,
+"SelfStatusRange": 0,
+"AbandonRangeOnHit": false
 }
 ]
 },
@@ -155,6 +174,7 @@
 "IntrinsicDisabled": false,
 "CanRemoveStuck": false,
 "StopItemAtHit": false,
+"ForceAI": false,
 "MovesScrambled": false,
 "ChargeSaver": false,
 "WaitToAttack": false,
@@ -171,7 +191,6 @@
 "SeeTraps": false,
 "CharStates": [],
 "BackRef": {
-"Assembly": false,
 "Index": -1
 },
 "Nickname": "",
@@ -183,7 +202,7 @@
 "Skin": "normal",
 "Gender": 1
 },
-"Level": 20,
+"Level": 22,
 "EXP": 0,
 "MaxHPBonus": 16,
 "AtkBonus": 0,
@@ -193,8 +212,8 @@
 "SpeedBonus": 0,
 "BaseSkills": [
 {
-"SkillNum": "defense_curl",
-"Charges": 21,
+"SkillNum": "amnesia",
+"Charges": 14,
 "CanForget": true
 },
 {
@@ -203,8 +222,8 @@
 "CanForget": true
 },
 {
-"SkillNum": "yawn",
-"Charges": 15,
+"SkillNum": "rock_smash",
+"Charges": 25,
 "CanForget": true
 },
 {
@@ -216,7 +235,7 @@
 "BaseIntrinsics": [
 "thick_fat"
 ],
-"FormIntrinsicSlot": -1,
+"FormIntrinsicSlot": 1,
 "Relearnables": {},
 "Discriminator": 0,
 "MetAt": "",
@@ -256,6 +275,7 @@
 "Money": 0,
 "Fame": 0,
 "RankExtra": 0,
+"BackupList": [],
 "Name": "",
 "LeaderIndex": 0,
 "FoeConflict": false
@@ -973,884 +993,6 @@
 {
 "Sheet": "ForestCamp",
 "TexLoc": {
-"X": 0,
-"Y": 0
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 1
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 2
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 3
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 4
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 5
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 6
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 7
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 8
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 9
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 10
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 11
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 12
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 13
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 14
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 15
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 16
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 17
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 18
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 19
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 20
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 21
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 0,
-"Y": 22
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-}
-],
-[
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 0
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 1
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 2
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 3
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 4
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 5
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 6
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 7
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 8
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 9
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 10
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 11
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 12
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 13
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 14
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 15
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 16
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 17
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 18
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 19
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 20
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 21
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-},
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
-"X": 1,
-"Y": 22
-}
-}
-],
-"FrameLength": 60
-}
-],
-"NeighborCode": -1
-}
-],
-[
-{
-"AutoTileset": "",
-"Associates": [],
-"Layers": [
-{
-"Frames": [
-{
-"Sheet": "ForestCamp",
-"TexLoc": {
 "X": 2,
 "Y": 0
 }
@@ -10172,6 +9314,884 @@
 "Sheet": "ForestCamp",
 "TexLoc": {
 "X": 20,
+"Y": 22
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+}
+],
+[
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 0
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 1
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 2
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 3
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 4
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 5
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 6
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 7
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 8
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 9
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 10
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 11
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 12
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 13
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 14
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 15
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 16
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 17
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 18
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 19
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 20
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 21
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 21,
+"Y": 22
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+}
+],
+[
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 0
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 1
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 2
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 3
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 4
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 5
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 6
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 7
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 8
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 9
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 10
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 11
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 12
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 13
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 14
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 15
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 16
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 17
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 18
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 19
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 20
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
+"Y": 21
+}
+}
+],
+"FrameLength": 60
+}
+],
+"NeighborCode": -1
+},
+{
+"AutoTileset": "",
+"Associates": [],
+"Layers": [
+{
+"Frames": [
+{
+"Sheet": "ForestCamp",
+"TexLoc": {
+"X": 22,
 "Y": 22
 }
 }
@@ -12896,7 +12916,7 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -13006,7 +13026,7 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -13160,7 +13180,7 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -13514,7 +13534,7 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -13912,7 +13932,7 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -14420,7 +14440,7 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -16452,7 +16472,7 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -16960,7 +16980,7 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -17468,7 +17488,7 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -17490,7 +17510,7 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -17512,7 +17532,7 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -17976,7 +17996,7 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -17998,7 +18018,7 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -18020,7 +18040,7 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],
@@ -18240,7 +18260,7 @@
 },
 {
 "Data": {
-"ID": "unbreakable",
+"ID": "floor",
 "TileTex": {
 "AutoTileset": "",
 "Associates": [],

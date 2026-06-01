@@ -89,7 +89,7 @@ function base_camp_2.SetupNpcs()
   GROUND:Unhide("NPC_Queen")
   GROUND:Unhide("NPC_King")
   
-  
+  GROUND:Unhide("NPC_Treasure")
   GROUND:Unhide("NPC_Settling")
   GROUND:Unhide("NPC_Nonbeliever")
   GROUND:Unhide("NPC_Hesitant")
@@ -110,6 +110,15 @@ function base_camp_2.SetupNpcs()
   elseif SV.team_hunter.Status == 3 then
     -- TODO cycling
   end
+  
+  if SV.team_hunter.Status > 0 and SV.base_town.JuiceShop >= 2 then
+    local hesitant = CH('NPC_Hesitant')
+    GROUND:EntTurn(hesitant, Direction.Up)
+  end
+  
+  if SV.team_hunter.Status > 0 and SV.base_town.JuiceShop >= 2 and SV.forest_camp.SnorlaxPhase >= 4 then
+    GROUND:Unhide("Snorlax")
+  end
 
   if SV.town_elder.Status == 0 then
     GROUND:Unhide("NPC_Elder")
@@ -127,41 +136,50 @@ function base_camp_2.SetupNpcs()
 	GROUND:Unhide("NPC_Catch_2")
   end
 
-  if SV.team_solo.Status == 0 then
-    GROUND:Unhide("NPC_Solo")
+  if SV.Experimental and SV.team_solo.Status == 0 then
+    if not SV.team_solo.SpokenTo then
+      GROUND:Unhide("NPC_Solo")
+    end
   elseif SV.team_solo.Status == 6 then
     -- TODO cycling
   end
 
-  if SV.supply_corps.Status >= 20 then
-	if SV.supply_corps.ManagerCycle == 0 then
-	  GROUND:Unhide("NPC_Carry")
-	  GROUND:Unhide("NPC_Deliver")
-	  GROUND:Unhide("NPC_Storehouse")
-	end
+  if SV.supply_corps.Status == 4 then
+      GROUND:Unhide("NPC_Carry")
+      GROUND:Unhide("NPC_Deliver")
+      local carry = CH('NPC_Carry')
+      local deliver = CH('NPC_Deliver')
+      GROUND:TeleportTo(carry, 176, 392, Direction.DownRight)
+      GROUND:TeleportTo(deliver, 200, 384, Direction.DownRight)
+  elseif SV.supply_corps.Status >= 20 then
+    if SV.supply_corps.ManagerCycle == 0 then
+      GROUND:Unhide("NPC_Carry")
+      GROUND:Unhide("NPC_Deliver")
+      GROUND:Unhide("NPC_Storehouse")
+    end
   end
   
   -- family appears if Returned = false
   if SV.family.Returned == false then
     -- and if they've been saved individually
-    if SV.family.Sister then
-	  GROUND:Unhide("Family_Sister")
-	end
-    if SV.family.Mother then
-	  GROUND:Unhide("Family_Mother")
-	end
-    if SV.family.Father then
-	  GROUND:Unhide("Family_Father")
-	end
-    if SV.family.Brother then
-	  GROUND:Unhide("Family_Brother")
-	end
-    if SV.family.Pet then
-	  GROUND:Unhide("Family_Pet")
-	end
-    if SV.family.Grandma then
-	  GROUND:Unhide("Family_Grandma")
-	end
+    if SV.family.Sister == true then
+      GROUND:Unhide("Family_Sister")
+    end
+    if SV.family.Mother == true then
+      GROUND:Unhide("Family_Mother")
+    end
+    if SV.family.Father == true then
+      GROUND:Unhide("Family_Father")
+    end
+    if SV.family.Brother == true then
+      GROUND:Unhide("Family_Brother")
+    end
+    if SV.family.Pet == true then
+      GROUND:Unhide("Family_Pet")
+    end
+    if SV.family.Grandma == true then
+      GROUND:Unhide("Family_Grandma")
+    end
   end
 end
 
@@ -298,10 +316,9 @@ function base_camp_2.NPC_Treasure_Action(chara, activator)
   UI:SetSpeaker(chara)
 
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Treasure_Line_001']))
+  UI:SetSpeakerEmotion("Worried")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Treasure_Line_002']))
-  UI:SetSpeakerEmotion("Happy")
-  GROUND:CharSetEmote(chara, "glowing", 4)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Treasure_Line_003']))
+  
 end
 
 
@@ -325,10 +342,35 @@ function base_camp_2.NPC_Storehouse_Action(chara, activator)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_Route']))
 end
 
+
+function base_camp_2.NPC_Carry_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  
+  local ground = _DATA:GetGround("canyon_camp")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_001'], ground:GetColoredName(), _ZONE.CurrentGround:GetColoredName()))
+end
+
+
+function base_camp_2.NPC_Deliver_Action(chara, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  
+  local player = CH('PLAYER')
+  local shopkeeper = CH('Shop_Owner')
+  
+  GROUND:CharTurnToChar(chara,CH('PLAYER'))
+  UI:SetSpeaker(chara)
+  
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_001'], shopkeeper:GetDisplayName()))
+end
+
 function base_camp_2.NPC_Settling_Action(chara, activator)
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
-
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Settling_Line_001']))
 end
 
@@ -342,18 +384,31 @@ function base_camp_2.NPC_Broke_Action(chara, activator)
   SOUND:PlayBattleSE("EVT_Emote_Sweating")
   UI:SetSpeakerEmotion("Crying")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Broke_Line_002']))
-  
-  if SV.Experimental then
-    SV.team_hunter.SpokenTo = true
-  end
+  SV.team_hunter.SpokenTo = true
 end
 
 
+function base_camp_2.Snorlax_Action(chara, activator)
+  
+  UI:SetSpeaker(chara)
+  UI:SetSpeakerEmotion("Happy")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Snorlax_Line_001']))
+  GROUND:CharSetEmote(chara, "glowing", 4)
+  UI:SetSpeakerEmotion("Joyous")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Snorlax_Line_002']))
+end
+
 function base_camp_2.NPC_Hesitant_Action(chara, activator)
   UI:SetSpeaker(chara)
-
-  UI:SetSpeakerEmotion("Sigh")
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hesitant_Line_001']))
+  
+  if SV.team_hunter.Status > 0 and SV.base_town.JuiceShop >= 2 then
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    local herb = RogueEssence.Dungeon.InvItem("herb_white")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hesitant_Line_002'], herb:GetDisplayName()))
+  else
+    UI:SetSpeakerEmotion("Worried")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Hesitant_Line_001']))
+  end
 end
 
 
@@ -373,13 +428,25 @@ end
 
 
 function base_camp_2.NPC_Solo_Action(chara, activator)
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Solo_Line_001']))
-  UI:SetSpeakerEmotion("Worried")
+  GROUND:CharAnimateTurnTo(chara, Direction.Down, 4)
+  
+  GAME:WaitFrames(30)
+  GROUND:CharSetEmote(chara, "happy", 3)
+  local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")
+  GROUND:CharSetAction(chara, RogueEssence.Ground.PoseGroundAction(chara.Position, chara.Direction, animId))
+  UI:SetSpeakerEmotion("Determined")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Solo_Line_002']))
   
+  chara.CollisionDisabled = true
+  
+  GROUND:MoveToPosition(chara, 760, 288, true, 4)
+  GROUND:MoveToPosition(chara, 688, 360, true, 4)
+  GROUND:MoveToPosition(chara, 576, 360, true, 4)
+
+  GROUND:Hide("NPC_Solo")
   
   SV.team_solo.SpokenTo = true
   

@@ -2,6 +2,27 @@ require 'origin.common'
 
 local final_stop = {}
 
+-- Tables for this map's junctions
+final_stop.junction = {}
+
+-- South junction
+final_stop.junction.south =
+{
+  dungeons = {},
+  groundmaps = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
+  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
+  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2},
+  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=2},
+  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=2}}
+}
+
+-- North junction
+final_stop.junction.north =
+{
+  dungeons = { 'champions_road', 'barren_tundra', 'cave_of_solace', 'labyrinth_of_the_lost' },
+  groundmaps = {{Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
+}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
@@ -644,21 +665,12 @@ end
 
 function final_stop.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  local dungeon_entrances = { 'champions_road', 'barren_tundra', 'cave_of_solace', 'labyrinth_of_the_lost' }
-  local ground_entrances = {{Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  COMMON.ShowDestinationMenu(final_stop.junction.north.dungeons, final_stop.junction.north.groundmaps)
 end
 
 function final_stop.South_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  local dungeon_entrances = { }
-  local ground_entrances = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
-  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
-  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2},
-  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=2},
-  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=2}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  COMMON.ShowDestinationMenu(final_stop.junction.south.dungeons, final_stop.junction.south.groundmaps)
 end
 
 

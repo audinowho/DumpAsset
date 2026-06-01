@@ -2,6 +2,29 @@ require 'origin.common'
 
 local rest_stop = {}
 
+-- tables for this map's junctions
+rest_stop.junction = {}
+
+-- south junction
+rest_stop.junction.south =
+{
+  dungeons = {},
+  groundmaps = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
+  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
+  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2},
+  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=2}}
+}
+
+-- north junction
+rest_stop.junction.north =
+{
+  dungeons = { 'thunderstruck_pass', 'veiled_ridge', 'snowbound_path', 'treacherous_mountain', 'hope_road', 'cave_of_whispers' },
+  --also dungeon 21: royal halls, is accessible by ???
+  --also dungeon 22: cave of solace, is accessible by having 8 key items
+  groundmaps ={{Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
+  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
+}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
@@ -816,24 +839,12 @@ end
 
 function rest_stop.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  local dungeon_entrances = { 'thunderstruck_pass', 'veiled_ridge', 'snowbound_path', 'treacherous_mountain', 'hope_road', 'cave_of_whispers' }
-  --also dungeon 21: royal halls, is accessible by ???
-  --also dungeon 22: cave of solace, is accessible by having 8 key items
-  local ground_entrances = {{Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
-  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  COMMON.ShowDestinationMenu(rest_stop.junction.north.dungeons, rest_stop.junction.north.groundmaps)
 end
 
 function rest_stop.South_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
-  local dungeon_entrances = { }
-  local ground_entrances = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
-  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
-  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2},
-  {Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=2}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  COMMON.ShowDestinationMenu(rest_stop.junction.south.dungeons, rest_stop.junction.south.groundmaps)
 end
 
 function rest_stop.Assembly_Action(obj, activator)

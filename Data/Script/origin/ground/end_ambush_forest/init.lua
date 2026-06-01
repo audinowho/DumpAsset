@@ -278,10 +278,33 @@ function end_ambush_forest.PreBattle(shortened)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Line_006'], GAME:GetTeamName()))
     
     --also, if the player has already reached the summit, give a reaction
+    
+    --wait, that mark on your badge...
+    --the summit, was it already conquered!?
+    --...no, it can't be true.
+    --it must not be true.
+    --You are but charlatans!
+    --(tresspassers!)
+    --(outlaws!)
+    --I will destroy you in battle, and claim my right as the true owner of Guildmaster Island!
   
   else
     SOUND:PlayBGM("Threat.ogg", true)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Expo_Cutscene_Short']))
+    --rush in
+    --(tresspassers!)
+    --(outlaws!)
+    --I will destroy you in battle, and claim my right as the true owner of Guildmaster Island!
+    --music
+    --action
+    
+    ---
+    
+    --(tresspassers!)
+    --(outlaws!)
+    --How disrespectful for them to resort to this.
+    --You've made a mistake in taking up that little cargo group's offer...
+    --So allow me to give you a better one...[pause=60]\nan offer you can't refuse!
   end
   
   
@@ -324,6 +347,29 @@ function end_ambush_forest.PostBattle()
   
   UI:SetSpeaker(enemy)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Ending_Cutscene_Line_001']))
+  
+  --what have I ever done to make you treat me so disrespectfully?
+  
+  
+  
+  --Mark my words, 
+  --I hoped we could come and reason together
+  --and as a reasonable man I'm willing to do whatever's necessary
+  
+  
+  --How did things ever get so far?
+  --Very well, you've made your terms clear.
+  --We'll clear out from the routes, but mark my words we'll be back.
+  
+  
+  --Enough, you've made your terms clear.
+  --This is so unfortunate, so unnecessary...
+  --We'll retreat for now, but don't think you've bested the Forest Clan.
+  
+  --[Haze]
+  
+  --This, I do not forgive.
+  
   
   GAME:FadeOut(false, 20)
   

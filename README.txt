@@ -116,7 +116,7 @@ MintyFrog: dialogue
 Imbion: dialogue
 https://www.instagram.com/et3rniti et3rniti: for dialogue
 http://musicalcombusken.deviantart.com/ MusicalCombusken: the title logo
-https://www.reddit.com/user/SilverDeoxys563 SilverDeoxys563: various Trap graphics
+https://www.reddit.com/user/SilverDeoxys563 SilverDeoxys563: various trap, storage box, and custom berry graphics
 http://poyo-journal.tumblr.com/ Lurils: custom map edits
 https://twitter.com/RaoKurai Rao Kurai: custom sprites, music
 https://soundcloud.com/skelothan Skelothan: custom music

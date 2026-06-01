@@ -517,7 +517,7 @@ function canyon_camp.NPC_Carry_Action(chara, activator)
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_005'], outlaw_summary:GetDisplayName()))
   elseif SV.supply_corps.Status == 10 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_009']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_006']))
     SV.supply_corps.Status = 11
   elseif SV.supply_corps.Status == 11 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_009']))
@@ -569,8 +569,8 @@ function canyon_camp.NPC_Deliver_Action(chara, activator)
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_006']))
     end
   elseif SV.supply_corps.Status == 10 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_009']))
-	SV.supply_corps.Status = 11
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_007']))
+    SV.supply_corps.Status = 11
   elseif SV.supply_corps.Status == 11 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_009']))
   elseif SV.supply_corps.Status == 20 then

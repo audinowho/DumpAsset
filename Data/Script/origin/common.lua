@@ -1414,3 +1414,39 @@ function COMMON.EndDayCycle()
 	
   COMMON.UpdateDayEndVars()
 end
+-- Adds the list of dungeons to the enterable dungeons on the specified junction.
+-- See each map for possible junctions, a message is printed to console if that junction doesn't exist.
+-- Most of them are directionally labeled.
+function COMMON.AddDungeonsToJunction(list_of_dungeons, target_junction)
+  -- Sanity check: Check that target_junction actually corresponds to an entry.
+  local junc = CURMAPSCR.junction[target_junction]
+
+  if junc then
+    local target = junc.dungeons
+    for key,value in pairs(list_of_dungeons) do
+      table.insert(target, value)
+    end
+  else
+        PrintInfo("WARNING: AddDungeonsToJunction was called with a target_junction that does not exist on the map! Stopped insert process.")
+  end
+end
+
+-- Adds the list of ground maps to the enterable ground mapson the specified junction.
+-- See each map for possible junctions, a message is printed to console if that junction doesn't exist.
+-- Most of them are directionally labeled.
+-- These entries must fit a certain format.
+-- Each entry should be a table with the Flag, Zone, ID, and Entry fields.
+-- Exactly like how the vanilla groundmaps are defined
+function COMMON.AddGroundmapsToJunction(list_of_groundmaps, target_junction)
+  -- Sanity check: Check that target_junction actually corresponds to an entry.
+  local junc = CURMAPSCR.junction[target_junction]
+
+  if junc then
+    local target = junc.groundmaps
+    for key,value in pairs(list_of_groundmaps) do
+      table.insert(target, value)
+    end
+  else
+    PrintInfo("WARNING: AddGroundmapsToJunction was called with a target_junction that does not exist on the map! Stopped insert process.")
+  end
+end

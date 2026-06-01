@@ -2,6 +2,27 @@ require 'origin.common'
 
 local cliff_camp = {}
 
+-- Tables for this map's junctions
+cliff_camp.junction = {}
+
+-- West junction
+cliff_camp.junction.west =
+{
+  dungeons = {},
+  groundmaps = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
+  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2}}
+}
+
+-- East junction
+cliff_camp.junction.east =
+{
+  dungeons = { 'fertile_valley', 'flyaway_cliffs', 'wayward_wetlands', 'deserted_fortress', 'bravery_road', 'geode_crevice', 'the_sky' },
+  groundmaps = {{Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
+  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
+  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
+  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
+}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
@@ -268,21 +289,13 @@ end
 function cliff_camp.East_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   UI:ResetSpeaker()
-  
-  local dungeon_entrances = { 'fertile_valley', 'flyaway_cliffs', 'wayward_wetlands', 'deserted_fortress', 'bravery_road', 'geode_crevice', 'the_sky' }
-  local ground_entrances = {{Flag=SV.canyon_camp.ExpositionComplete,Zone='guildmaster_island',ID=5,Entry=0},
-  {Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
-  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
-  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  COMMON.ShowDestinationMenu(cliff_camp.junction.east.dungeons,cliff_camp.junction.east.groundmaps)
 end
 
 function cliff_camp.West_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  local dungeon_entrances = { }
-  local ground_entrances = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
-  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  UI:ResetSpeaker()
+  COMMON.ShowDestinationMenu(cliff_camp.junction.west.dungeons,cliff_camp.junction.west.groundmaps)
 end
 
 
@@ -1204,7 +1217,7 @@ function cliff_camp.NPC_DexRater_Action(chara, activator)
 	end
 	
 	if SV.dex.CurrentRewardIdx <= #rewardReqs then
-	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Next_001'], rewardReqs[SV.dex.CurrentRewardIdx]))
+		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['DexRater_Next_001'], (rewardReqs[SV.dex.CurrentRewardIdx]).Req))
 	end
   end
   

@@ -216,7 +216,12 @@ end
 
 --- Updates the summary window.
 function InventorySelectMenu:updateSummary()
-    self.summary:SetItem(_DATA.Save.ActiveTeam:GetInv(self.slotList[self.menu.CurrentChoiceTotal+1].Slot))
+    local selected = self.slotList[self.menu.CurrentChoiceTotal+1]
+    if selected.IsEquipped then
+        self.summary:SetItem(_DATA.Save.ActiveTeam.Players.EquippedItem(selected.Slot))
+    else
+        self.summary:SetItem(_DATA.Save.ActiveTeam:GetInv(selected.Slot))
+    end
 end
 
 --- Extract the list of selected slots.

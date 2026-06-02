@@ -217,6 +217,10 @@ end
 --- @param reset_page boolean if true, sets the current page to 0, otherwise it just refreshes the current page. defaults to true.
 function WithdrawMenu:ApplyFilter(index, reset_page)
     if index == self.currentFilter then return end
+    self:ForceApplyFilter(index, reset_page)
+end
+
+function WithdrawMenu:ForceApplyFilter(index, reset_page)
     if reset_page~=false then reset_page = true end
     if index < 0 or index > #WithdrawMenu.Filters then return end
     self.currentFilter = index
@@ -266,9 +270,9 @@ function WithdrawMenu:reinitialize()
     -- regenerating data
     self:generate_options()
     if self:CanApplyFilter(self.currentFilter) then
-        self:ApplyFilter(self.currentFilter, false)
+        self:ForceApplyFilter(self.currentFilter, false)
     else
-        self:ApplyFilter(0)
+        self:ForceApplyFilter(0)
         self.menu:SetCurrentPage(0)
     end
     self.max_choices = self:count_valid()

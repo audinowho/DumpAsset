@@ -287,6 +287,8 @@ SV.team_rivals =
   Status = 0,
   SpokenTo = false,
   DaysSinceCheckpoint = 0,
+  SpokenToEnd1 = false,
+  SpokenToEnd2 = false,
   
   -- TODO
   --3 = canyon camp
@@ -361,7 +363,8 @@ SV.team_steel =
 {
   Argued = false,
   DaysSinceArgue = 0,
-  Rescued = false
+  Rescued = false,
+  InCycle = false
 }
 
 SV.team_solo =
@@ -475,8 +478,8 @@ SV.supply_corps =
   --2 = deliver had package stolen
   --2 (completed) = deliver had package returned,
   --3 = deliver thanks given for return,
-  --4 = manager moved to canyon camp with deliver,
-  --5 = spoke at canyon camp,
+  --4 = swalot at canyon, carry/deliver at base shop
+  --5 = swalot at canyon, carry/deliver at cliff camp
   --6 = carry had package stolen,
   --6 (completed) = carry had package returned,
   --7 = carry thanks given for return,

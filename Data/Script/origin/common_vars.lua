@@ -59,7 +59,7 @@ function COMMON.UpdateDayEndVars()
           DestZone = "overgrown_wilds",
           DestSegment = 1,
           DestFloor = 1,
-		  TargetLevel = 35,
+		  TargetLevel = 40,
           FloorUnknown = true,
           TargetSpecies = RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("azumarill", 0, "normal", Gender.Male),
@@ -106,7 +106,7 @@ function COMMON.UpdateDayEndVars()
           DestZone = "wayward_wetlands",
           DestSegment = 0,
           DestFloor = 10,
-		  TargetLevel = 35,
+		  TargetLevel = 48,
           FloorUnknown = true,
           TargetSpecies = RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male),
           ClientSpecies = RogueEssence.Dungeon.MonsterID("haxorus", 0, "normal", Gender.Male),
@@ -130,9 +130,10 @@ function COMMON.UpdateDayEndVars()
           DestZone = "champions_road",
           DestSegment = 1,
           DestFloor = 1,
+		  TargetLevel = 35,
           FloorUnknown = true,
-          TargetSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male),
-          ClientSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Male),
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Female),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("carbink", 0, "normal", Gender.Female),
           Complete = COMMON.MISSION_INCOMPLETE,
           Type = COMMON.SIDEQUEST_TYPE_ESCORT_OUT,
           EscortTable = { EscortStartMsg = "TALK_ESCORT_GRANDMA_START", EscortAcceptMsg = "TALK_ESCORT_GRANDMA_ACCEPT", EscortInteract = "EscortInteractGrandma" }
@@ -149,26 +150,24 @@ function COMMON.UpdateDayEndVars()
   if SV.base_camp.CenterStatueDate == nil or SV.base_camp.CenterStatueDate == "" then
     if SV.guildmaster_summit.GameComplete == true then
       SV.base_camp.CenterStatueDate = os.date("%B %d, %Y")
-	end
+    end
   end
   
   if SV.base_camp.LeftStatueDate == nil or SV.base_camp.LeftStatueDate == "" then
     local all_done = false
     if all_done == true then
       SV.base_camp.LeftStatueDate = os.date("%B %d, %Y")
-	end
+    end
   end
   
   if SV.base_camp.RightStatueDate == nil or SV.base_camp.RightStatueDate == "" then
     local all_done = false
     if all_done == true then
       SV.base_camp.RightStatueDate = os.date("%B %d, %Y")
-	end
+    end
   end
   
-  if SV.Experimental then
-  
-  if SV.base_town.JuiceShop == 0 and SV.forest_camp.ExpositionComplete then
+  if SV.Experimental and SV.base_town.JuiceShop == 0 and SV.forest_camp.ExpositionComplete then
     SV.base_town.JuiceShop = 1
   end
   
@@ -199,7 +198,7 @@ function COMMON.UpdateDayEndVars()
   elseif SV.team_catch.Status == 2 and SV.team_catch.SpokenTo and _DATA.Save:GetDungeonUnlock("overgrown_wilds") ~= RogueEssence.Data.GameProgress.UnlockState.None then
     COMMON.UpdateCheckpointStatus(SV.team_catch, 1)
   elseif SV.team_catch.Status == 4 then
-	SV.team_catch.Cycle = math.random(1, 6)
+    SV.team_catch.Cycle = math.random(1, 6)
   end
   
   if SV.team_rivals.Status == 0 and SV.team_rivals.SpokenTo then
@@ -214,10 +213,10 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.team_rivals, 1)
   elseif SV.team_rivals.Status == 7 and SV.guildmaster_summit.GameComplete then
     COMMON.UpdateCheckpointStatus(SV.team_rivals, 4)
-  elseif SV.team_rivals.Status == 8 and SV.team_rivals.SpokenTo then
+  elseif SV.team_rivals.Status == 8 and (SV.team_rivals.SpokenToEnd1 or SV.team_rivals.SpokenToEnd2) then
     COMMON.UpdateCheckpointStatus(SV.team_rivals, 1)
   elseif SV.team_rivals.Status == 9 then
-	SV.team_rivals.Cycle = math.random(1, 6)
+    SV.team_rivals.Cycle = math.random(1, 6)
   end
   
   if SV.team_kidnapped.Status == 0 and SV.team_kidnapped.SpokenTo then
@@ -230,10 +229,10 @@ function COMMON.UpdateDayEndVars()
   elseif SV.team_kidnapped.Status == 4 then
     COMMON.UpdateCheckpointStatus(SV.team_kidnapped, 1)
   elseif SV.team_kidnapped.Status == 5 then
-	SV.team_kidnapped.Cycle = math.random(1, 6)
+    SV.team_kidnapped.Cycle = math.random(1, 6)
   end
   
-  if SV.team_retreat.Status == 0 and SV.team_retreat.SpokenTo then
+  if SV.Experimental and SV.team_retreat.Status == 0 and SV.team_retreat.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_retreat, 2)
 	
 	-- TODO: should be deserted_fortress
@@ -242,7 +241,7 @@ function COMMON.UpdateDayEndVars()
   elseif SV.team_retreat.Status == 3 then
     COMMON.UpdateCheckpointStatus(SV.team_retreat, 1)
   elseif SV.team_retreat.Status == 4 then
-	SV.team_retreat.Cycle = math.random(1, 6)
+    SV.team_retreat.Cycle = math.random(1, 6)
   end
   
   if SV.team_meditate.Status == 0 and SV.team_meditate.SpokenTo then
@@ -256,28 +255,30 @@ function COMMON.UpdateDayEndVars()
   elseif SV.team_meditate.Status == 4 then
     COMMON.UpdateCheckpointStatus(SV.team_meditate, 1)
   elseif SV.team_meditate.Status == 6 then
-	SV.team_meditate.Cycle = math.random(3, 6)
+    SV.team_meditate.Cycle = math.random(3, 6)
   end
   
 
   if SV.team_steel.Argued then
     if not SV.team_steel.Rescued then
       SV.team_steel.DaysSinceArgue = SV.team_steel.DaysSinceArgue + 1
-	end
+    else
+      SV.team_steel.InCycle = true
+    end
   end
   
-  if SV.team_solo.Status == 0 and SV.team_solo.SpokenTo then
+  if SV.Experimental and SV.team_solo.Status == 0 and SV.team_solo.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
   elseif SV.team_solo.Status == 1 and SV.team_solo.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
-  elseif SV.team_solo.Status == 2 and SV.team_solo.SpokenTo and _DATA.Save:GetDungeonUnlock("forsaken_desert") == RogueEssence.Data.GameProgress.UnlockState.Completed then
+  elseif SV.team_solo.Status == 2 and SV.team_solo.SpokenTo and _DATA.Save:GetDungeonUnlock("forsaken_desert") ~= RogueEssence.Data.GameProgress.UnlockState.None then
     COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
   elseif SV.team_solo.Status == 3 and SV.team_solo.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_solo, 2)
   elseif SV.team_solo.Status == 5 then
     COMMON.UpdateCheckpointStatus(SV.team_solo, 1)
   elseif SV.team_solo.Status == 6 then
-	SV.team_solo.Cycle = math.random(3, 6)
+    SV.team_solo.Cycle = math.random(3, 6)
   end
   
   if SV.team_psychic.Status == 0 and _DATA.Save:GetDungeonUnlock("depleted_basin") == RogueEssence.Data.GameProgress.UnlockState.Completed then
@@ -287,21 +288,21 @@ function COMMON.UpdateDayEndVars()
   elseif SV.team_psychic.Status == 2 and _DATA.Save:GetDungeonUnlock("relic_tower") ~= RogueEssence.Data.GameProgress.UnlockState.None then
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
   elseif SV.team_psychic.Status == 3 then
-    COMMON.UpdateCheckpointStatus(SV.team_psychic, 2)
+    COMMON.UpdateCheckpointStatus(SV.team_psychic, 3)
   elseif SV.team_psychic.Status == 5 then
     COMMON.UpdateCheckpointStatus(SV.team_psychic, 1)
   elseif SV.team_psychic.Status == 6 then
-	SV.team_psychic.Cycle = math.random(3, 6)
+    SV.team_psychic.Cycle = math.random(3, 6)
   end
   
   if SV.team_dark.Status == 0 and _DATA.Save:GetDungeonUnlock("treacherous_mountain") == RogueEssence.Data.GameProgress.UnlockState.Completed then
     COMMON.UpdateCheckpointStatus(SV.team_dark, 3)
   elseif SV.team_dark.Status == 2 then
     COMMON.UpdateCheckpointStatus(SV.team_dark, 1)
-  --elseif SV.team_dark.Status == 3 and bandit kings defeated then
-  --  COMMON.UpdateCheckpointStatus(SV.team_dark, 1)
+    --elseif SV.team_dark.Status == 3 and bandit kings defeated then
+    --  COMMON.UpdateCheckpointStatus(SV.team_dark, 1)
   elseif SV.team_dark.Status == 4 then
-	SV.team_dark.Cycle = math.random(3, 6)
+    SV.team_dark.Cycle = math.random(3, 6)
   end
   
   if SV.team_dragon.Status == 0 and SV.team_dragon.SpokenTo then
@@ -312,12 +313,12 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.team_dragon, 1)
   elseif SV.team_dragon.Status == 4 then
     COMMON.UpdateCheckpointStatus(SV.team_dragon, 1)
-  elseif SV.team_dragon.Status == 5 and SV.team_dragon.SpokenTo and SV.guildmaster_summit.GameComplete then
+  elseif SV.team_dragon.Status == 5 and SV.guildmaster_summit.GameComplete then
     COMMON.UpdateCheckpointStatus(SV.team_dragon, 1)
   elseif SV.team_dragon.Status == 6 and SV.team_dragon.SpokenTo then
     COMMON.UpdateCheckpointStatus(SV.team_dragon, 1)
   elseif SV.team_dragon.Status == 8 then
-	SV.team_dragon.Cycle = math.random(3, 6)
+    SV.team_dragon.Cycle = math.random(3, 6)
   end
   
   
@@ -329,27 +330,28 @@ function COMMON.UpdateDayEndVars()
     COMMON.UpdateCheckpointStatus(SV.team_firecracker, 3)
   elseif SV.team_firecracker.Status == 4 then
     SV.team_firecracker.Status = 5
-	SV.team_firecracker.DaysSinceCheckpoint = 0
-	SV.team_firecracker.SpokenTo = false
-	SV.team_firecracker.Cycle = 2
+    SV.team_firecracker.DaysSinceCheckpoint = 0
+    SV.team_firecracker.SpokenTo = false
+    SV.team_firecracker.Cycle = 2
   elseif SV.team_firecracker.Status == 5 then
     local max_cycle = 5
-	if SV.guildmaster_summit.GameComplete then
-	  max_cycle = 6
-	end
-	SV.team_firecracker.Cycle = math.random(2, max_cycle)
+    if SV.guildmaster_summit.GameComplete then
+      max_cycle = 6
+    end
+    SV.team_firecracker.Cycle = math.random(2, max_cycle)
   end
   
-  end
   
   if SV.supply_corps.Status == 1 then
     SV.supply_corps.Status = 2
   elseif SV.supply_corps.Status == 3 then
-    SV.supply_corps.Status = 4
+    COMMON.UpdateCheckpointStatus(SV.supply_corps, 1)
+  elseif SV.supply_corps.Status == 4 then
+    COMMON.UpdateCheckpointStatus(SV.supply_corps, 2)
   elseif SV.supply_corps.Status == 5 then
     SV.supply_corps.Status = 6
   elseif SV.supply_corps.Status == 7 then
-    SV.supply_corps.Status = 8
+    COMMON.UpdateCheckpointStatus(SV.supply_corps, 3)
   elseif SV.supply_corps.Status == 9 and SV.rest_stop.ExpositionComplete then
     SV.supply_corps.Status = 10
   elseif SV.supply_corps.Status == 11 then
@@ -363,14 +365,14 @@ function COMMON.UpdateDayEndVars()
   elseif SV.supply_corps.Status == 19 and SV.guildmaster_summit.GameComplete then
     SV.supply_corps.Status = 20
   elseif SV.supply_corps.Status == 20 then
-    --cycle
-	SV.supply_corps.DaysSinceCheckpoint = SV.supply_corps.DaysSinceCheckpoint + 1
-	SV.supply_corps.CarryCycle = SV.supply_corps.DaysSinceCheckpoint % 5 + 1
-	SV.supply_corps.DeliverCycle = math.random(1, 5)
-	SV.supply_corps.ManagerCycle = SV.supply_corps.DaysSinceCheckpoint % 12
-	if SV.supply_corps.ManagerCycle > 6 then
-	  SV.supply_corps.ManagerCycle = 6 - (SV.supply_corps.ManagerCycle - 6)
-	end
+  --cycle
+    SV.supply_corps.DaysSinceCheckpoint = SV.supply_corps.DaysSinceCheckpoint + 1
+    SV.supply_corps.CarryCycle = SV.supply_corps.DaysSinceCheckpoint % 5 + 1
+    SV.supply_corps.DeliverCycle = math.random(1, 5)
+    SV.supply_corps.ManagerCycle = SV.supply_corps.DaysSinceCheckpoint % 12
+    if SV.supply_corps.ManagerCycle > 6 then
+      SV.supply_corps.ManagerCycle = 6 - (SV.supply_corps.ManagerCycle - 6)
+    end
   end
   
   if SV.canyon_camp.ExpositionComplete then
@@ -380,7 +382,7 @@ function COMMON.UpdateDayEndVars()
   if SV.rest_stop.ExpositionComplete then
     if not SV.rest_stop.BossSolved then
       SV.rest_stop.DaysSinceBoss = SV.rest_stop.DaysSinceBoss + 1
-	end
+    end
   end
   
 end

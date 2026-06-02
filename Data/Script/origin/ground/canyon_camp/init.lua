@@ -2,6 +2,28 @@ require 'origin.common'
 
 local canyon_camp = {}
 
+-- Tables for this map's junctions
+canyon_camp.junction = {}
+
+-- West junction
+canyon_camp.junction.west =
+{
+  dungeons = {},
+  groundmaps = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
+  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
+  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2}}
+}
+
+-- East junction
+
+canyon_camp.junction.east =
+{
+  dungeons = { 'copper_quarry', 'depleted_basin', 'forsaken_desert', 'relic_tower', 'sleeping_caldera', 'royal_halls', 'starfall_heights', 'wisdom_road', 'sacred_tower'},
+  groundmaps = {{Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
+  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
+  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
+}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
@@ -15,26 +37,29 @@ function canyon_camp.Init(map)
   local tutor = CH('NPC_Tutor')
   
   local charData = RogueEssence.Dungeon.CharData()
+  local mon = _DATA:GetMonster(SV.General.Starter.Species)
+  local form = mon.Forms[SV.General.Starter.Form]
+  
   local tutor_species = "missingno"
-  if SV.General.Starter.Species == "bulbasaur" then
+  if form.Element1 == "grass" then
     if SV.StarterTutor.Evolved then
-      tutor_species = "meganium"
+      tutor_species = "sceptile"
 	else
-	  tutor_species = "bayleef"
+	  tutor_species = "grovyle"
 	end
-  elseif SV.General.Starter.Species == "charmander" then
+  elseif form.Element1 == "fire" then
     if SV.StarterTutor.Evolved then
-      tutor_species = "typhlosion"
+      tutor_species = "blaziken"
 	else
-	  tutor_species = "quilava"
+	  tutor_species = "combusken"
 	end
-  elseif SV.General.Starter.Species == "squirtle" then
+  elseif form.Element1 == "water" then
     if SV.StarterTutor.Evolved then
-      tutor_species = "feraligatr"
+      tutor_species = "swampert"
 	else
-	  tutor_species = "croconaw"
+	  tutor_species = "marshtomp"
 	end
-  else --if SV.General.Starter.Species == "pikachu" then
+  else
     tutor_species = "raichu"
   end
   charData.BaseForm = RogueEssence.Dungeon.MonsterID(tutor_species, 0, "normal", Gender.Female)
@@ -84,18 +109,20 @@ function canyon_camp.SetupNpcs()
   
   if SV.team_rivals.Status == 1 then
     GROUND:Unhide("Rival_1")
-	GROUND:Unhide("Rival_2")
+    GROUND:Unhide("Rival_2")
   elseif SV.team_rivals.Status == 2 then
     GROUND:Unhide("Rival_2")
+    local rival2 = CH('Rival_2')
+    GROUND:TeleportTo(rival2, 600, 374, Direction.Down)
 	
-	local questname = "QuestRival1"
+    local questname = "QuestRival1"
     local quest = SV.missions.Missions[questname]
-	if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
-	  GROUND:Unhide("Rival_1")
-	end
+    if quest ~= nil and quest.Complete == COMMON.MISSION_COMPLETE then
+      GROUND:Unhide("Rival_1")
+    end
   elseif SV.team_rivals.Status == 3 then
     GROUND:Unhide("Rival_1")
-	GROUND:Unhide("Rival_2")
+    GROUND:Unhide("Rival_2")
   elseif SV.team_rivals.Status == 8 then
     -- TODO cycling
   end
@@ -183,10 +210,10 @@ function canyon_camp.SetupNpcs()
     GROUND:Unhide("NPC_Dragon_2")
     GROUND:Unhide("NPC_Dragon_3")
 	
-	local protege = CH('NPC_Protege')
-	local protegeTutor = CH('NPC_Protege_Tutor')
-	GROUND:TeleportTo(protege, 496, 368, Direction.Up)
-	GROUND:TeleportTo(protegeTutor, 512, 368, Direction.Up)
+    local protege = CH('NPC_Protege')
+    local protegeTutor = CH('NPC_Protege_Tutor')
+    GROUND:TeleportTo(protege, 496, 368, Direction.Up)
+    GROUND:TeleportTo(protegeTutor, 512, 368, Direction.Up)
     GROUND:Unhide("NPC_Protege")
     GROUND:Unhide("NPC_Protege_Tutor")
 	
@@ -205,48 +232,70 @@ function canyon_camp.SetupNpcs()
   
   if SV.team_firecracker.Status == 1 then
     GROUND:Unhide("NPC_Seer")
-	GROUND:Unhide("NPC_Conjurer")
+    GROUND:Unhide("NPC_Conjurer")
   elseif SV.team_firecracker.Status == 5 and SV.team_firecracker.Cycle == 3 then
     GROUND:Unhide("NPC_Seer")
-	GROUND:Unhide("NPC_Conjurer")
+    GROUND:Unhide("NPC_Conjurer")
 	
-	local seer = CH('NPC_Seer')
-	local seerData = RogueEssence.Dungeon.CharData()
-	seerData.BaseForm = RogueEssence.Dungeon.MonsterID("delphox", 0, "normal", Gender.Male)
-	seer.Data = seerData
+    local seer = CH('NPC_Seer')
+    local seerData = RogueEssence.Dungeon.CharData()
+    seerData.BaseForm = RogueEssence.Dungeon.MonsterID("delphox", 0, "normal", Gender.Male)
+    seer.Data = seerData
 
-	local conjurer = CH('NPC_Conjurer')
-	local conjurerData = RogueEssence.Dungeon.CharData()
-	conjurerData.BaseForm = RogueEssence.Dungeon.MonsterID("typhlosion", 1, "normal", Gender.Male)
-	conjurer.Data = conjurerData
+    local conjurer = CH('NPC_Conjurer')
+    local conjurerData = RogueEssence.Dungeon.CharData()
+    conjurerData.BaseForm = RogueEssence.Dungeon.MonsterID("typhlosion", 1, "normal", Gender.Male)
+    conjurer.Data = conjurerData
   end
   
   if SV.supply_corps.Status < 4 then
     --pass
   elseif SV.supply_corps.Status <= 5 then
     GROUND:Unhide("NPC_Storehouse")
+  elseif SV.supply_corps.Status == 6 then
+    GROUND:Unhide("NPC_Storehouse")
+    GROUND:Unhide("NPC_Carry")
+    GROUND:Unhide("NPC_Deliver")
+
+    local questname = "OutlawForest2"
+    local quest = SV.missions.Missions[questname]
+    if quest == nil or quest.Complete == COMMON.MISSION_INCOMPLETE then
+      local carry = CH('NPC_Carry')
+      local deliver = CH('NPC_Deliver')
+      local storehouse = CH('NPC_Storehouse')
+      GROUND:CharTurnToChar(storehouse,carry)
+      GROUND:CharTurnToChar(deliver,carry)
+      local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Pain")
+      GROUND:CharSetAction(carry, RogueEssence.Ground.FrameGroundAction(carry.Position, carry.Direction, animId, 10))
+    end
   elseif SV.supply_corps.Status <= 9 then
     GROUND:Unhide("NPC_Storehouse")
     GROUND:Unhide("NPC_Carry")
     GROUND:Unhide("NPC_Deliver")
+    local carry = CH('NPC_Carry')
+    local deliver = CH('NPC_Deliver')
+    local storehouse = CH('NPC_Storehouse')
+    GROUND:TeleportTo(storehouse, 800, 356, Direction.Down)
+    GROUND:TeleportTo(carry, 784, 368, Direction.Up)
+    GROUND:TeleportTo(deliver, 816, 368, Direction.Up)
   elseif SV.supply_corps.Status <= 11 then
     GROUND:Unhide("NPC_Carry")
     GROUND:Unhide("NPC_Deliver")
   elseif SV.supply_corps.Status >= 20 then
     --cycle appearances
-	if SV.supply_corps.ManagerCycle == 0 or SV.supply_corps.ManagerCycle == 6 then
-	
-	else
-	  if SV.supply_corps.CarryCycle == 3 then
-	    GROUND:Unhide("NPC_Carry")
-	  end
-	  if SV.supply_corps.DeliverCycle == 3 then
-	    GROUND:Unhide("NPC_Deliver")
-	  end
-	  if SV.supply_corps.ManagerCycle == 3 then
-	    GROUND:Unhide("NPC_Storehouse")
-	  end
-	end
+    if SV.supply_corps.ManagerCycle == 0 or SV.supply_corps.ManagerCycle == 6 then
+    
+    else
+      if SV.supply_corps.CarryCycle == 3 then
+        GROUND:Unhide("NPC_Carry")
+      end
+      if SV.supply_corps.DeliverCycle == 3 then
+        GROUND:Unhide("NPC_Deliver")
+      end
+      if SV.supply_corps.ManagerCycle == 3 then
+        GROUND:Unhide("NPC_Storehouse")
+      end
+    end
   end
 end
 
@@ -294,32 +343,23 @@ end
 function canyon_camp.Rival_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  local enemy = CH('Rival_2')
   local player = CH('PLAYER')
 
   if SV.team_rivals.Status == 1 then
   
-  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_001']))
+    UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+    UI:SetSpeakerEmotion("Angry")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Line_001'], enemy:GetDisplayName()))
+    
+    SV.team_rivals.SpokenTo = true
   
-  SV.team_rivals.SpokenTo = true
-  
-  elseif SV.team_rivals.Status == 2 then
+  elseif SV.team_rivals.Status == 2 or SV.team_rivals.Status == 3 then
   
     UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Help_Line_001']))
-  
-    local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_poison_silk")
-  COMMON.GiftItem(player, receive_item)
-  
-  COMMON.CompleteMission("QuestRival1")
-  
-  SV.team_rivals.Status = 3
-  
-  elseif SV.team_rivals.Status == 3 then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Help_Line_002']))
+    GROUND:CharTurnToChar(chara, player)
+    UI:SetSpeakerEmotion("Pain")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_1_Help_Line_001']))
   end
   
   
@@ -329,47 +369,63 @@ end
 function canyon_camp.Rival_2_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  local enemy = CH('Rival_1')
   local player = CH('PLAYER')
 
   if SV.team_rivals.Status == 1 then
   
-  UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_001']))
-  
-  SV.team_rivals.SpokenTo = true
+    UI:SetSpeaker(chara)--set the dialogue box's speaker to the character
+    UI:SetSpeakerEmotion("Angry")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Line_001'], enemy:GetDisplayName()))
+    
+    SV.team_rivals.SpokenTo = true
   
   elseif SV.team_rivals.Status == 2 then
   
-  local questname = "QuestRival1"
-  local quest = SV.missions.Missions[questname]
-	
-  
-  if quest == nil then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Help_Line_001']))
-	
-	COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
-      DestZone = "copper_quarry", DestSegment = 0, DestFloor = 6,
-      FloorUnknown = false,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("seviper", 0, "normal", Gender.Female),
-      ClientSpecies = RogueEssence.Dungeon.MonsterID("zangoose", 0, "normal", Gender.Female) }
-	)
-  elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Help_Line_002']))
-  else
-    UI:SetSpeaker(chara)
-    GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Help_Line_003']))
-  end
+    local questname = "QuestRival1"
+    local quest = SV.missions.Missions[questname]
+    
+    local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("copper_quarry")
+    if quest == nil then
+      
+      
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,player)
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Help_Line_001'], enemy:GetDisplayName(), zone_summary:GetColoredName()))
+    
+      COMMON.CreateMission(questname,
+      { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_RESCUE,
+          DestZone = "copper_quarry", DestSegment = 0, DestFloor = 6,
+          FloorUnknown = false,
+          TargetSpecies = RogueEssence.Dungeon.MonsterID("seviper", 0, "normal", Gender.Female),
+          ClientSpecies = RogueEssence.Dungeon.MonsterID("zangoose", 0, "normal", Gender.Female) }
+      )
+    elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,player)
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Help_Line_002'], enemy:GetDisplayName(), zone_summary:GetColoredName()))
+    else
+      
+      UI:SetSpeaker(chara)
+      GROUND:CharTurnToChar(chara,player)
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Complete_Line_001'], enemy:GetDisplayName()))
+      
+      local receive_item = RogueEssence.Dungeon.InvItem("xcl_element_normal_silk")
+      COMMON.GiftItem(player, receive_item)
+      
+      UI:SetSpeakerEmotion("Determined")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Complete_Line_002']))
+    
+      COMMON.CompleteMission("QuestRival1")
+    
+      SV.team_rivals.Status = 3
+    end
   
   elseif SV.team_rivals.Status == 3 then
     UI:SetSpeaker(chara)
     GROUND:CharTurnToChar(chara,player)
-	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Help_Line_003']))
+    UI:SetSpeakerEmotion("Determined")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Rival_2_Complete_Line_003'], enemy:GetDisplayName()))
   end
   
 end
@@ -402,64 +458,46 @@ end
 
 function canyon_camp.NPC_Storehouse_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+   
   
   local player = CH('PLAYER')
   UI:SetSpeaker(chara)
 	
-  if SV.supply_corps.Status <= 4 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_001']))
-    SV.supply_corps.Status = 5
-  elseif SV.supply_corps.Status == 5 then
+  if SV.supply_corps.Status <= 5 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_001']))
   elseif SV.supply_corps.Status == 6 then
     local questname = "OutlawForest2"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_002']))
-	  --add the quest
-	  COMMON.CreateMission(questname,
-	{ Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_OUTLAW_HOUSE,
-      DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6, FloorUnknown = true,
-      ClientSpecies = chara.CurrentForm,
-      TargetSpecies = RogueEssence.Dungeon.MonsterID("toxicroak", 0, "normal", Gender.Male) }
-	  )
+      canyon_camp.Supply_Start(questname)
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_003']))
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+      local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("flyaway_cliffs")
+      local outlaw_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]:Get("toxicroak")
+      UI:SetSpeakerEmotion("Determined")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_002'], outlaw_summary:GetColoredName(), zone_summary:GetColoredName()))
     else
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_004']))
-      --give reward
-        local receive_item = RogueEssence.Dungeon.InvItem("food_banana_big")
-        COMMON.GiftItem(player, receive_item)
-      --complete mission and move to done
-	  COMMON.CompleteMission(questname)
-      SV.supply_corps.Status = 7
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_005']))
+      canyon_camp.Supply_Complete(questname)
     end
   elseif SV.supply_corps.Status == 7 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_006']))
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:SetSpeakerEmotion("Happy")
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_003']))
   elseif SV.supply_corps.Status == 8 then
     local unlock = _DATA.Save:GetDungeonUnlock("ambush_forest") -- make this the dungeon unlock state
     if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_007']))
-      COMMON.UnlockWithFanfare("ambush_forest", false)
+      canyon_camp.Ambush_Start()
     elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_008']))
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+      local outlaw_team_name = "[color=#FFA5FF]" .. RogueEssence.StringKey("TEAM_FOREST"):ToLocal() .. "[color]"
+      UI:SetSpeakerEmotion("Determined")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_004'], outlaw_team_name))
     else
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_009']))
-      --increase rank for bag space
-      _DATA.Save.ActiveTeam:SetRank("bronze")
-      SOUND:PlayFanfare("Fanfare/RankUp")
-      UI:ResetSpeaker(false)
-      UI:SetCenter(true)
-	  local rank = _DATA:GetRank(_DATA.Save.ActiveTeam.Rank)
-      UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_BAG_SIZE"):ToLocal(), rank.BagSize))
-      UI:SetSpeaker(chara)
-      UI:SetCenter(false)
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_010']))
-      SV.supply_corps.Status = 9
+      canyon_camp.Ambush_Complete()
     end
   elseif SV.supply_corps.Status == 9 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_011']))
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_005']))
   elseif SV.supply_corps.Status == 20 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_Route']))
   end
@@ -468,34 +506,40 @@ end
 function canyon_camp.NPC_Carry_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
   
   if SV.supply_corps.Status == 6 then
     local questname = "OutlawForest2"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_001']))
+      canyon_camp.Supply_Start(questname)
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_002']))
+      UI:SetSpeakerEmotion("Pain")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_001']))
     else
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_003']))
     end
   elseif SV.supply_corps.Status == 7 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_004']))
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_003']))
   elseif SV.supply_corps.Status == 8 then
     local unlock = _DATA.Save:GetDungeonUnlock("ambush_forest") -- make this the dungeon unlock state
     if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_005']))
+      canyon_camp.Ambush_Start()
     elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_006']))
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+      local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("ambush_forest")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_004'], zone_summary:GetColoredName()))
     else
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_007']))
+      canyon_camp.Ambush_Complete()
     end
   elseif SV.supply_corps.Status == 9 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_008']))
+    local outlaw_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]:Get("honchkrow")
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_005'], outlaw_summary:GetDisplayName()))
   elseif SV.supply_corps.Status == 10 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_009']))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_006']))
     SV.supply_corps.Status = 11
   elseif SV.supply_corps.Status == 11 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_009']))
@@ -508,35 +552,47 @@ end
 function canyon_camp.NPC_Deliver_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
   
   if SV.supply_corps.Status == 6 then
     local questname = "OutlawForest2"
     local quest = SV.missions.Missions[questname]
     if quest == nil then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_001']))
+      canyon_camp.Supply_Start(questname)
     elseif quest.Complete == COMMON.MISSION_INCOMPLETE then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_002']))
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+      UI:SetSpeakerEmotion("Worried")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_001']))
     else
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
       UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_003']))
     end
   elseif SV.supply_corps.Status == 7 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_004']))
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_003']))
   elseif SV.supply_corps.Status == 8 then
     local unlock = _DATA.Save:GetDungeonUnlock("ambush_forest") -- make this the dungeon unlock state
     if unlock == RogueEssence.Data.GameProgress.UnlockState.None then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_005']))
+      canyon_camp.Ambush_Start()
     elseif unlock == RogueEssence.Data.GameProgress.UnlockState.Discovered then
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_006']))
+      GROUND:CharTurnToChar(chara,CH('PLAYER'))
+      local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("ambush_forest")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_004'], zone_summary:GetColoredName()))
     else
-      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_007']))
+      canyon_camp.Ambush_Complete()
     end
   elseif SV.supply_corps.Status == 9 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_008']))
+    GROUND:CharTurnToChar(chara,CH('PLAYER'))
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_005']))
+    if SV.guildmaster_summit.GameComplete then
+      UI:SetSpeakerEmotion("Happy")
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_006_Master'], GAME:GetTeamName()))
+    else
+      UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_006']))
+    end
   elseif SV.supply_corps.Status == 10 then
-    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_009']))
-	SV.supply_corps.Status = 11
+    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_007']))
+    SV.supply_corps.Status = 11
   elseif SV.supply_corps.Status == 11 then
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_009']))
   elseif SV.supply_corps.Status == 20 then
@@ -544,7 +600,159 @@ function canyon_camp.NPC_Deliver_Action(chara, activator)
   end
 end
 
+function canyon_camp.Supply_Start(questname)
   
+  local player = CH('PLAYER')
+  local carry = CH('NPC_Carry')
+  local deliver = CH('NPC_Deliver')
+  local storehouse = CH('NPC_Storehouse')
+  
+  local outlaw_team_name = "[color=#FFA5FF]" .. RogueEssence.StringKey("TEAM_FOREST"):ToLocal() .. "[color]"
+  local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("flyaway_cliffs")
+  local outlaw_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]:Get("toxicroak")
+
+  --Machop, what happened to you?
+  UI:SetSpeaker(storehouse)
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_001']))
+  --In Flyaway Cliffs... it was an ambush.[pause=0]We were attacked by a Toxicroak and his cohorts!
+  UI:SetSpeaker(carry)
+  UI:SetSpeakerEmotion("Pain")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_002'], zone_summary:GetColoredName(), outlaw_summary:GetColoredName()))
+  --They raided our entire shipment,[pause=0] said it was payback for the last time.
+  UI:SetSpeaker(deliver)
+  UI:SetSpeakerEmotion("Sad")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_003']))
+  --Payback?[pause=0] Why,[pause=30] this must be the work of the Forest Clan!
+  UI:SetSpeaker(storehouse)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_004'], outlaw_team_name))
+  --I knew we shouldn't have messed with them,[pause=0] now all of their goons are chasing us down!
+  UI:SetSpeaker(carry)
+  UI:SetSpeakerEmotion("Pain")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_005']))
+  --I will not be intimidated by the likes of them!
+  --If they're going to put a target on our backs, we're going to do the same!
+  --A bounty will go to the exploration team that can take down that Toxicroak![br]My goods will have justice!
+  GROUND:CharSetEmote(storehouse, "angry", 4)
+  UI:SetSpeaker(storehouse)
+  UI:SetSpeakerEmotion("Angry")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Help_006'], outlaw_summary:GetColoredName()))
+  
+  --add the quest
+  COMMON.CreateMission(questname,
+  { Complete = COMMON.MISSION_INCOMPLETE, Type = COMMON.SIDEQUEST_TYPE_OUTLAW_HOUSE,
+    DestZone = "flyaway_cliffs", DestSegment = 0, DestFloor = 6, FloorUnknown = true,
+    ClientSpecies = storehouse.CurrentForm,
+    TargetSpecies = RogueEssence.Dungeon.MonsterID("toxicroak", 0, "normal", Gender.Female) }
+  )
+end
+
+function canyon_camp.Supply_Complete(questname)
+  
+  local player = CH('PLAYER')
+  local storehouse = CH('NPC_Storehouse')
+  
+  local outlaw_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]:Get("toxicroak")
+  
+  GROUND:CharTurnToChar(storehouse,CH('PLAYER'))
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Complete_001'], GAME:GetTeamName(), outlaw_summary:GetColoredName()))
+  --give reward
+  local receive_item = RogueEssence.Dungeon.InvItem("food_banana")
+  COMMON.GiftItem(player, receive_item)
+  receive_item = RogueEssence.Dungeon.InvItem("food_banana_big")
+  COMMON.GiftItem(player, receive_item)
+  receive_item = RogueEssence.Dungeon.InvItem("gummi_wonder")
+  COMMON.GiftItem(player, receive_item)
+  --complete mission and move to done
+  COMMON.CompleteMission(questname)
+  SV.supply_corps.Status = 7
+  
+  UI:SetSpeakerEmotion("Happy")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_003']))
+end
+
+function canyon_camp.Ambush_Start()
+  local player = CH('PLAYER')
+  local carry = CH('NPC_Carry')
+  local deliver = CH('NPC_Deliver')
+  local storehouse = CH('NPC_Storehouse')
+  local outlaw_team_name = "[color=#FFA5FF]" .. RogueEssence.StringKey("TEAM_FOREST"):ToLocal() .. "[color]"
+  local zone_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("ambush_forest")
+  
+  GROUND:CharTurnToChar(storehouse,player)
+  GROUND:CharTurnToChar(deliver,player)
+  GROUND:CharTurnToChar(carry,player)
+  
+  --Machop and Ponyta have been scouting the routes where the Forest Clan's been sighted.
+  UI:SetSpeaker(storehouse)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Ambush_001'], carry:GetDisplayName(), deliver:GetDisplayName(), outlaw_team_name))
+  --It looks like they're a whole guild of thieves,[pause=0] and they all answer to their one big boss.
+  UI:SetSpeaker(deliver)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Ambush_002']))
+  --We found where their hideout is too,[pause=0] a shady neck of the woods they call Ambush Forest!
+  UI:SetSpeaker(carry)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Ambush_003'], zone_summary:GetColoredName()))
+  --{0},[pause=0] we need your help to take them down!
+  UI:SetSpeaker(storehouse)
+  UI:SetSpeakerEmotion("Determined")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Ambush_004'], GAME:GetTeamName()))
+  
+  COMMON.UnlockWithFanfare("ambush_forest", false)
+  
+  UI:SetSpeakerEmotion("Determined")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_004'], outlaw_team_name))
+end
+
+function canyon_camp.Ambush_Complete()
+  local player = CH('PLAYER')
+  local carry = CH('NPC_Carry')
+  local deliver = CH('NPC_Deliver')
+  local storehouse = CH('NPC_Storehouse')
+
+  GROUND:CharTurnToChar(storehouse,player)
+  GROUND:CharTurnToChar(deliver,player)
+  GROUND:CharTurnToChar(carry,player)
+  
+  local outlaw_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]:Get("honchkrow")
+  local outlaw_team_name = "[color=#FFA5FF]" .. RogueEssence.StringKey("TEAM_FOREST"):ToLocal() .. "[color]"
+  
+  GROUND:CharSetEmote(storehouse, "happy", 4)
+  GROUND:CharSetEmote(deliver, "happy", 4)
+  GROUND:CharSetEmote(carry, "happy", 4)
+  
+  --It's {0}![pause=0] We can't thank you enough for fighting off the Forest Clan.
+  UI:SetSpeaker(storehouse)
+  UI:SetSpeakerEmotion("Happy")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Ambush_Complete_001'], GAME:GetTeamName(), outlaw_team_name))
+  
+  --It's a shame that Honchkrow got away.[pause=0] But since his defeat,[pause=30] the whole clan has retreated from the trail.
+  UI:SetSpeaker(carry)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Ambush_Complete_002'], outlaw_summary:GetColoredName()))
+  
+  --You've been as much a help to us as any member of the supply corps!
+  UI:SetSpeaker(deliver)
+  UI:SetSpeakerEmotion("Happy")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Ambush_Complete_003']))
+  
+  --Well,[pause=30] if we're going to consider you an honorary member of the supply corps,[pause=30] you should get this!
+  UI:SetSpeaker(storehouse)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Ambush_Complete_004']))
+  
+  --increase rank for bag space
+  _DATA.Save.ActiveTeam:SetRank("bronze")
+  SOUND:PlayFanfare("Fanfare/RankUp")
+  UI:ResetSpeaker(false)
+  UI:SetCenter(true)
+  local rank = _DATA:GetRank(_DATA.Save.ActiveTeam.Rank)
+  UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("DLG_BAG_SIZE"):ToLocal(), rank.BagSize))
+  UI:SetSpeaker(chara)
+  UI:SetCenter(false)
+  SV.supply_corps.Status = 9
+  
+  UI:SetSpeaker(storehouse)
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_005']))
+end
+
 function canyon_camp.NPC_Dragon_1_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   canyon_camp.DragonTalk()
@@ -654,14 +862,18 @@ end
 function canyon_camp.NPC_Tutor_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
+  local charData = RogueEssence.Dungeon.CharData()
+  local mon = _DATA:GetMonster(SV.General.Starter.Species)
+  local form = mon.Forms[SV.General.Starter.Form]
+  
   local tutor_skill = "struggle"
-  if SV.General.Starter.Species == "bulbasaur" then
+  if form.Element1 == "grass" then
     tutor_skill = "grass_pledge"
-  elseif SV.General.Starter.Species == "charmander" then
+  elseif form.Element1 == "fire" then
     tutor_skill = "fire_pledge"
-  elseif SV.General.Starter.Species == "squirtle" then
+  elseif form.Element1 == "water" then
     tutor_skill = "water_pledge"
-  else --if SV.General.Starter.Species == "pikachu" then
+  else
     tutor_skill = "volt_tackle"
   end
   
@@ -1165,21 +1377,13 @@ end
 function canyon_camp.East_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local dungeon_entrances = { 'copper_quarry', 'depleted_basin', 'forsaken_desert', 'relic_tower', 'sleeping_caldera', 'royal_halls', 'starfall_heights', 'wisdom_road', 'sacred_tower'}
-  local ground_entrances = {{Flag=SV.rest_stop.ExpositionComplete,Zone='guildmaster_island',ID=6,Entry=0},
-  {Flag=SV.final_stop.ExpositionComplete,Zone='guildmaster_island',ID=7,Entry=0},
-  {Flag=SV.guildmaster_summit.GameComplete,Zone='guildmaster_island',ID=8,Entry=0}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  COMMON.ShowDestinationMenu(base_camp.junction.east.dungeons,base_camp.junction.east.groundmaps)
 end
 
 function canyon_camp.West_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   
-  local dungeon_entrances = { }
-  local ground_entrances = {{Flag=true,Zone='guildmaster_island',ID=1,Entry=3},
-  {Flag=SV.forest_camp.ExpositionComplete,Zone='guildmaster_island',ID=3,Entry=2},
-  {Flag=SV.cliff_camp.ExpositionComplete,Zone='guildmaster_island',ID=4,Entry=2}}
-  COMMON.ShowDestinationMenu(dungeon_entrances,ground_entrances)
+  COMMON.ShowDestinationMenu(canyon_camp.junction.west.dungeons, canyon_camp.junction.west.groundmaps)
 end
 
 

@@ -56,6 +56,7 @@ COMMON = {}
 require 'origin.common_shop'
 require 'origin.common_vars'
 require 'origin.common_tutor'
+require 'origin.menu.storage.WithdrawMenu'
 
 --Automatically load the appropriate localization for the specified package, or defaults to english!
 function COMMON.AutoLoadLocalizedStrings()
@@ -1029,8 +1030,8 @@ function COMMON.ShowTeamStorageMenu()
 	  UI:StorageMenu()
 	  UI:WaitForChoice()
 	elseif result == 2 then
-	  UI:WithdrawMenu()
-	  UI:WaitForChoice()
+	  WithdrawMenu.run()
+    
     elseif result == 3 then
 	    UI:ChoiceMenuYesNo(STRINGS:FormatKey('DLG_STORE_ALL_CONFIRM'), false);
 	    UI:WaitForChoice()

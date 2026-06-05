@@ -93,116 +93,6 @@ function base_camp_2_juice.Bug_Complete()
   end
 end
 
-base_camp_2_juice.boost_tbl = { }
---{ Level = 0, EXP = 100, HP = 0, Atk = 0, Def = 0, SpAtk = 0, SpDef = 0, Speed = 0, NegateExp = false, NegateStat = false, GummiEffect = nil}
-base_camp_2_juice.boost_tbl["food_apple"] = { EXP = 100 }
-base_camp_2_juice.boost_tbl["food_apple_big"] = { EXP = 300 }
-base_camp_2_juice.boost_tbl["food_apple_huge"] = { EXP = 2500 }
-base_camp_2_juice.boost_tbl["food_apple_perfect"] = { EXP = 25000 }
-base_camp_2_juice.boost_tbl["food_apple_golden"] = { Level = 100 }
-base_camp_2_juice.boost_tbl["food_banana"] = { EXP = 1000 }
-base_camp_2_juice.boost_tbl["food_banana_big"] = { EXP = 5000 }
-base_camp_2_juice.boost_tbl["food_banana_golden"] = { Level = 100 }
-
-base_camp_2_juice.boost_tbl["berry_oran"] = { HP = 1 }
-base_camp_2_juice.boost_tbl["berry_leppa"] = { HP = 1 }
-base_camp_2_juice.boost_tbl["berry_sitrus"] = { HP = 1 }
-base_camp_2_juice.boost_tbl["berry_lum"] = { HP = 1 }
-
-base_camp_2_juice.boost_tbl["berry_passho"] = { HP = 1 }
-base_camp_2_juice.boost_tbl["berry_colbur"] = { HP = 1 }
-base_camp_2_juice.boost_tbl["berry_yache"] = { SpDef = 1 }
-base_camp_2_juice.boost_tbl["berry_rindo"] = { SpDef = 1 }
-base_camp_2_juice.boost_tbl["berry_tanga"] = { Speed = 1 }
-base_camp_2_juice.boost_tbl["berry_shuca"] = { Atk = 1 }
-base_camp_2_juice.boost_tbl["berry_chople"] = { Atk = 1 }
-base_camp_2_juice.boost_tbl["berry_payapa"] = { SpAtk = 1 }
-base_camp_2_juice.boost_tbl["berry_kebia"] = { Def = 1 }
-base_camp_2_juice.boost_tbl["berry_kasib"] = { SpAtk = 1 }
-base_camp_2_juice.boost_tbl["berry_occa"] = { SpAtk = 1 }
-base_camp_2_juice.boost_tbl["berry_haban"] = { Atk = 1 }
-base_camp_2_juice.boost_tbl["berry_babiri"] = { Def = 1 }
-base_camp_2_juice.boost_tbl["berry_chilan"] = { HP = 1 }
-base_camp_2_juice.boost_tbl["berry_wacan"] = { Speed = 1 }
-base_camp_2_juice.boost_tbl["berry_coba"] = { Speed = 1 }
-base_camp_2_juice.boost_tbl["berry_charti"] = { Def = 1 }
-base_camp_2_juice.boost_tbl["berry_roseli"] = { SpDef = 1 }
-
-base_camp_2_juice.boost_tbl["berry_jaboca"] = { Def = 1 }
-base_camp_2_juice.boost_tbl["berry_rowap"] = { SpDef = 1 }
-
-base_camp_2_juice.boost_tbl["berry_liechi"] = { Atk = 2 }
-base_camp_2_juice.boost_tbl["berry_ganlon"] = { Def = 2 }
-base_camp_2_juice.boost_tbl["berry_petaya"] = { SpAtk = 2 }
-base_camp_2_juice.boost_tbl["berry_apicot"] = { SpDef = 2 }
-base_camp_2_juice.boost_tbl["berry_salac"] = { Speed = 2 }
-base_camp_2_juice.boost_tbl["berry_starf"] = { HP = 2 }
-base_camp_2_juice.boost_tbl["berry_micle"] = { Atk = 1, SpAtk = 1 }
-
-base_camp_2_juice.boost_tbl["berry_enigma"] = { HP = 1 }
-
-base_camp_2_juice.boost_tbl["gummi_wonder"] = { HP = 2, Atk = 2, Def = 2, SpAtk = 2, SpDef = 2, Speed = 2 }
-
-base_camp_2_juice.boost_tbl["gummi_blue"] = { HP = 2, GummiEffect = 'water' }
-base_camp_2_juice.boost_tbl["gummi_black"] = { HP = 2, GummiEffect = 'dark' }
-base_camp_2_juice.boost_tbl["gummi_clear"] = { SpDef = 2, GummiEffect = 'ice' }
-base_camp_2_juice.boost_tbl["gummi_grass"] = { SpDef = 2, GummiEffect = 'grass' }
-base_camp_2_juice.boost_tbl["gummi_green"] = { Speed = 2, GummiEffect = 'bug' }
-base_camp_2_juice.boost_tbl["gummi_brown"] = { Atk = 2, GummiEffect = 'ground' }
-base_camp_2_juice.boost_tbl["gummi_orange"] = { Atk = 2, GummiEffect = 'fighting' }
-base_camp_2_juice.boost_tbl["gummi_gold"] = { SpAtk = 2, GummiEffect = 'psychic' }
-base_camp_2_juice.boost_tbl["gummi_pink"] = { Def = 2, GummiEffect = 'poison' }
-base_camp_2_juice.boost_tbl["gummi_purple"] = { SpAtk = 2, GummiEffect = 'ghost' }
-base_camp_2_juice.boost_tbl["gummi_red"] = { SpAtk = 2, GummiEffect = 'fire' }
-base_camp_2_juice.boost_tbl["gummi_royal"] = { Atk = 2, GummiEffect = 'dragon' }
-base_camp_2_juice.boost_tbl["gummi_silver"] = { Def = 2, GummiEffect = 'steel' }
-base_camp_2_juice.boost_tbl["gummi_white"] = { HP = 2, GummiEffect = 'normal' }
-base_camp_2_juice.boost_tbl["gummi_yellow"] = { Speed = 2, GummiEffect = 'electric' }
-base_camp_2_juice.boost_tbl["gummi_sky"] = { Speed = 2, GummiEffect = 'flying' }
-base_camp_2_juice.boost_tbl["gummi_gray"] = { Def = 2, GummiEffect = 'rock' }
-base_camp_2_juice.boost_tbl["gummi_magenta"] = { SpDef = 2, GummiEffect = 'fairy' }
-
-base_camp_2_juice.boost_tbl["seed_plain"] = { EXP = 100 }
-base_camp_2_juice.boost_tbl["seed_reviver"] = { EXP = 800 }
-
-base_camp_2_juice.boost_tbl["seed_joy"] = { Level = 1 }
-base_camp_2_juice.boost_tbl["seed_golden"] = { Level = 5 }
-base_camp_2_juice.boost_tbl["seed_doom"] = { Level = -5 }
-
-base_camp_2_juice.boost_tbl["seed_hunger"] = { EXP = 500 }
-
-base_camp_2_juice.boost_tbl["seed_warp"] = { Speed = 1 }
-base_camp_2_juice.boost_tbl["seed_sleep"] = { HP = 1 }
-base_camp_2_juice.boost_tbl["seed_vile"] = { Def = 1, SpDef = 1 }
-base_camp_2_juice.boost_tbl["seed_blast"] = { Atk = 1 }
-base_camp_2_juice.boost_tbl["seed_blinker"] = { Speed = 1 }
-
-base_camp_2_juice.boost_tbl["seed_pure"] = { EXP = 100 }
-base_camp_2_juice.boost_tbl["seed_ice"] = { Speed = 1 }
-base_camp_2_juice.boost_tbl["seed_decoy"] = { SpDef = 1 }
-base_camp_2_juice.boost_tbl["seed_last_chance"] = { Atk = 1, SpAtk = 1 }
-base_camp_2_juice.boost_tbl["seed_ban"] = { EXP = 100 }
-
-base_camp_2_juice.boost_tbl["boost_nectar"] = { HP = 1, Atk = 1, Def = 1, SpAtk = 1, SpDef = 1, Speed = 1 }
-
-base_camp_2_juice.boost_tbl["boost_hp_up"] = { HP = 8 }
-base_camp_2_juice.boost_tbl["boost_protein"] = { Atk = 8 }
-base_camp_2_juice.boost_tbl["boost_iron"] = { Def = 8 }
-base_camp_2_juice.boost_tbl["boost_calcium"] = { SpAtk = 8 }
-base_camp_2_juice.boost_tbl["boost_zinc"] = { SpDef = 8 }
-base_camp_2_juice.boost_tbl["boost_carbos"] = { Speed = 8 }
-
-base_camp_2_juice.boost_tbl["medicine_amber_tear"] = { HP = 1, Atk = 1, Def = 1, SpAtk = 1, SpDef = 1, Speed = 1 }
-
-base_camp_2_juice.boost_tbl["herb_mental"] = { NegateStatA = true }
-base_camp_2_juice.boost_tbl["herb_power"] = { NegateStatB = true }
-base_camp_2_juice.boost_tbl["herb_white"] = { NegateStatC = true }
-
-base_camp_2_juice.boost_tbl["food_grimy"] = { NegateExp = true }
-
-
-
-
 
 function base_camp_2_juice.getTotalBoost(cart, member)
 	local playerMonId = member.BaseForm
@@ -223,7 +113,7 @@ function base_camp_2_juice.getTotalBoost(cart, member)
 		else
 			item = GAME:GetPlayerBagItem(cart[ii].Slot)
 		end
-		local boost = base_camp_2_juice.boost_tbl[item.ID]
+		local boost = COMMON.JUICE.BOOSTS[item.ID]
 		
 		if boost ~= nil then
 			if boost.GummiEffect ~= nil then
@@ -604,7 +494,7 @@ function base_camp_2_juice.Drink_Order_Flow()
     elseif state == 1 then
 	  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Juice_Order_What'], STRINGS:LocalKeyString(26)))
 
-	  local result = JuiceShopMenu.run(STRINGS:FormatKey("MENU_ITEM_TITLE"), member, base_camp_2_juice.boost_tbl, true, SV.base_town.JuiceShop > 2, function(cart, member) return base_camp_2_juice.getTotalBoost(cart, member) end) -- preview is set to be post game only
+	  local result = JuiceShopMenu.run(STRINGS:FormatKey("MENU_ITEM_TITLE"), member, COMMON.JUICE.BOOSTS, true, SV.base_town.JuiceShop > 2, function(cart, member) return base_camp_2_juice.getTotalBoost(cart, member) end) -- preview is set to be post game only
 
 	  if #result > 0 then
 		cart = result
@@ -634,218 +524,6 @@ function base_camp_2_juice.Drink_Order_Flow()
   
 end
 
-
-base_camp_2_juice.specialties = { 
-	{ 
-		Name = "Ambrosia",
-		Desc = "Flavor Text here. Boosts level to 100 and maximizes all stats.",
-		Sizes = 
-		{
-			{ Name = "One Size for All", Desc = "Boosts level to 100 and maximizes all stats.", Effect = { Level = 100, HP = 256, Atk = 256, Def = 256, SpAtk = 256, SpDef = 256, Speed = 256 } }
-		}
-	},
-	{ 
-		Name = "+Lv Dish",
-		Desc = "Flavor Text here. Increases Level.",
-		Sizes = 
-		{
-			{ Name = "Small", Desc = "Boosts level by 1.", Effect = { Level = 1 } },
-			{ Name = "Medium", Desc = "Boosts level by 5.", Effect = { Level = 5 } },
-			{ Name = "Large", Desc = "Boosts level by 10.", Effect = { Level = 10 } },
-			{ Name = "Super", Desc = "Boosts level by 25.", Effect = { Level = 25 } },
-			{ Name = "MAX", Desc = "Boosts level to 100.", Effect = { Level = 100 } }
-		}
-	},
-	{ 
-		Name = "+All EV Dish",
-		Desc = "Flavor Text here. Increases Stats.",
-		Sizes = 
-		{
-			{ Name = "Small", Desc = "Boosts all stat EVs by 8.", Effect = { HP = 8, Atk = 8, Def = 8, SpAtk = 8, SpDef = 8, Speed = 8 } },
-			{ Name = "Medium", Desc = "Boosts all stat EVs by 16.", Effect = { HP = 16, Atk = 16, Def = 16, SpAtk = 16, SpDef = 16, Speed = 16 } },
-			{ Name = "Large", Desc = "Boosts all stat EVs by 32.", Effect = { HP = 32, Atk = 32, Def = 32, SpAtk = 32, SpDef = 32, Speed = 32 } },
-			{ Name = "Super", Desc = "Boosts all stat EVs by 64.", Effect = { HP = 64, Atk = 64, Def = 64, SpAtk = 64, SpDef = 64, Speed = 64 } },
-			{ Name = "MAX", Desc = "Maximizes all stats.", Effect = { HP = 256, Atk = 256, Def = 256, SpAtk = 256, SpDef = 256, Speed = 256 } }
-		}
-	},
-	{ 
-		Name = "+HP EV Dish",
-		Desc = "Flavor Text here. Increases HP.",
-		Sizes =
-		{
-			{ Name = "Small", Desc = "Boosts HP EVs by 8.", Effect = { HP = 8 } },
-			{ Name = "Medium", Desc = "Boosts HP EVs by 16.", Effect = { HP = 16 } },
-			{ Name = "Large", Desc = "Boosts HP EVs by 32.", Effect = { HP = 32 } },
-			{ Name = "Super", Desc = "Boosts HP EVs by 64.", Effect = { HP = 64 } },
-			{ Name = "MAX", Desc = "Maximizes HP EVs.", Effect = { HP = 256 } }
-		}
-	},
-	{ 
-		Name = "+ATK EV Dish",
-		Desc = "Flavor Text here. Increases Atk.",
-		Sizes = 
-		{
-			{ Name = "Small", Desc = "Boosts Atk EVs by 8.", Effect = { Atk = 8 } },
-			{ Name = "Medium", Desc = "Boosts Atk EVs by 16.", Effect = { Atk = 16 } },
-			{ Name = "Large", Desc = "Boosts Atk EVs by 32.", Effect = { Atk = 32 } },
-			{ Name = "Super", Desc = "Boosts Atk EVs by 64.", Effect = { Atk = 64 } },
-			{ Name = "MAX", Desc = "Maximizes Atk EVs.", Effect = { Atk = 256 } }
-		}
-	},
-	{ 
-		Name = "+DEF EV Dish",
-		Desc = "Flavor Text here. Increases Def.",
-		Sizes = 
-		{
-			{ Name = "Small", Desc = "Boosts Def EVs by 8.", Effect = { Def = 8 } },
-			{ Name = "Medium", Desc = "Boosts Def EVs by 16.", Effect = { Def = 16 } },
-			{ Name = "Large", Desc = "Boosts Def EVs by 32.", Effect = { Def = 32 } },
-			{ Name = "Super", Desc = "Boosts Def EVs by 64.", Effect = { Def = 64 } },
-			{ Name = "MAX", Desc = "Maximizes Def EVs.", Effect = { Def = 256 } }
-		}
-	},
-	{ 
-		Name = "+SP.ATK EV Dish",
-		Desc = "Flavor Text here. Increases Sp.Atk.",
-		Sizes = 
-		{
-			{ Name = "Small", Desc = "Boosts Sp.Atk EVs by 8.", Effect = { SpAtk = 8 } },
-			{ Name = "Medium", Desc = "Boosts Sp.Atk EVs by 16.", Effect = { SpAtk = 16 } },
-			{ Name = "Large", Desc = "Boosts Sp.Atk EVs by 32.", Effect = { SpAtk = 32 } },
-			{ Name = "Super", Desc = "Boosts Sp.Atk EVs by 64.", Effect = { SpAtk = 64 } },
-			{ Name = "MAX", Desc = "Maximizes Sp.Atk EVs.", Effect = { SpAtk = 256 } }
-		}
-	},
-	{ 
-		Name = "+SP.DEF EV Dish",
-		Desc = "Flavor Text here. Increases Sp.Def.",
-		Sizes = 
-		{
-			{ Name = "Small", Desc = "Boosts Sp.Def EVs by 8.", Effect = { SpDef = 8 } },
-			{ Name = "Medium", Desc = "Boosts Sp.Def EVs by 16.", Effect = { SpDef = 16 } },
-			{ Name = "Large", Desc = "Boosts Sp.Def EVs by 32.", Effect = { SpDef = 32 } },
-			{ Name = "Super", Desc = "Boosts Sp.Def EVs by 64.", Effect = { SpDef = 64 } },
-			{ Name = "MAX", Desc = "Maximizes Sp.Def EVs.", Effect = { SpDef = 256 } }
-		}
-	},
-	{ 
-		Name = "+SPEED EV Dish",
-		Desc = "Flavor Text here. Increases Speed.",
-		Sizes = 
-		{
-			{ Name = "Small", Desc = "Boosts Speed EVs by 8.", Effect = { Speed = 8 } },
-			{ Name = "Medium", Desc = "Boosts Speed EVs by 16.", Effect = { Speed = 16 } },
-			{ Name = "Large", Desc = "Boosts Speed EVs by 32.", Effect = { Speed = 32 } },
-			{ Name = "Super", Desc = "Boosts Speed EVs by 64.", Effect = { Speed = 64 } },
-			{ Name = "MAX", Desc = "Maximizes Speed EVs.", Effect = { Speed = 256 } }
-		}
-	},
-
-	{ 
-		Name = "-Lv Dish",
-		Desc = "Flavor Text here. Decreases Level.",
-		Sizes = 
-		{
-			{ Name = "Small", Desc = "Boosts level by 1.", Effect = { Level = -1 } },
-			{ Name = "Medium", Desc = "Boosts level by 5.", Effect = { Level = -5 } },
-			{ Name = "Large", Desc = "Boosts level by 10.", Effect = { Level = -10 } },
-			{ Name = "Super", Desc = "Boosts level by 25.", Effect = { Level = -25 } },
-			{ Name = "MAX", Desc = "Boosts level to 100.", Effect = { Level = -100 } }
-		}
-	},
-	{ 
-		Name = "-All EV Dish",
-		Desc = "Flavor Text here. Decreases Stats.",
-		Sizes = 
-		{
-			{ Name = "Small", Desc = "Drops all stat EVs by 8.", Effect = { HP = -8, Atk = -8, Def = -8, SpAtk = -8, SpDef = -8, Speed = -8 } },
-			{ Name = "Medium", Desc = "Drops all stat EVs by 16.", Effect = { HP = -16, Atk = -16, Def = -16, SpAtk = -16, SpDef = -16, Speed = -16 } },
-			{ Name = "Large", Desc = "Drops all stat EVs by 32.", Effect = { HP = -32, Atk = -32, Def = -32, SpAtk = -32, SpDef = -32, Speed = -32 } },
-			{ Name = "Super", Desc = "Drops all stat EVs by 64.", Effect = { HP = -64, Atk = -64, Def = -64, SpAtk = -64, SpDef = -64, Speed = -64 } },
-			{ Name = "MAX", Desc = "Clears all stat EVs.", Effect = { HP = -256, Atk = -256, Def = -256, SpAtk = -256, SpDef = -256, Speed = -256 } }
-		}
-	},
-	{ 
-		Name = "-HP EV Dish",
-		Desc = "Flavor Text here. Decreases HP.",
-		Sizes = 
-		{
-			{ Name = "Small", Desc = "Drops HP EVs by 8.", Effect = { HP = -8 } },
-			{ Name = "Medium", Desc = "Drops HP EVs by 16.", Effect = { HP = -16 } },
-			{ Name = "Large", Desc = "Drops HP EVs by 32.", Effect = { HP = -32 } },
-			{ Name = "Super", Desc = "Drops HP EVs by 64.", Effect = { HP = -64 } },
-			{ Name = "MAX", Desc = "Clears all HP EVs.", Effect = { HP = -256 } }
-		}
-	},
-	{ 
-		Name = "-ATK EV Dish",
-		Desc = "Flavor Text here. Decreases Atk.",
-		Sizes = 
-		{
-			{ Name = "Small", Desc = "Drops Atk EVs by 8.", Effect = { Atk = -8 } },
-			{ Name = "Medium", Desc = "Drops Atk EVs by 16.", Effect = { Atk = -16 } },
-			{ Name = "Large", Desc = "Drops Atk EVs by 32.", Effect = { Atk = -32 } },
-			{ Name = "Super", Desc = "Drops Atk EVs by 64.", Effect = { Atk = -64 } },
-			{ Name = "MAX", Desc = "Clears all Atk EVs.", Effect = { Atk = -256 } }
-		}
-	},
-	{ 
-		Name = "-DEF EV Dish",
-		Desc = "Flavor Text here. Decreases Def.",
-		Sizes = 
-		{
-			{ Name = "Small", Desc = "Drops Def EVs by 8.", Effect = { Def = -8 } },
-			{ Name = "Medium", Desc = "Drops Def EVs by 16.", Effect = { Def = -16 } },
-			{ Name = "Large", Desc = "Drops Def EVs by 32.", Effect = { Def = -32 } },
-			{ Name = "Super", Desc = "Drops Def EVs by 64.", Effect = { Def = -64 } },
-			{ Name = "MAX", Desc = "Clears all Def EVs.", Effect = { Def = -256 } }
-		}
-	},
-	{ 
-		Name = "-SP.ATK EV Dish",
-		Desc = "Flavor Text here. Decreases Sp.Atk.",
-		Sizes = 
-		{
-			{ Name = "Small", Desc = "Drops Sp.Atk EVs by 8.", Effect = { SpAtk = -8 } },
-			{ Name = "Medium", Desc = "Drops Sp.Atk EVs by 16.", Effect = { SpAtk = -16 } },
-			{ Name = "Large", Desc = "Drops Sp.Atk EVs by 32.", Effect = { SpAtk = -32 } },
-			{ Name = "Super", Desc = "Drops Sp.Atk EVs by 64.", Effect = { SpAtk = -64 } },
-			{ Name = "MAX", Desc = "Clears all Sp.Atk EVs.", Effect = { SpAtk = -256 } }
-		}
-	},
-	{ 
-		Name = "-SP.DEF EV Dish",
-		Desc = "Flavor Text here. Decreases Sp.Def.",
-		Sizes = 
-		{
-			{ Name = "Small", Desc = "Drops Sp.Def EVs by 8.", Effect = { SpDef = -8 } },
-			{ Name = "Medium", Desc = "Drops Sp.Def EVs by 16.", Effect = { SpDef = -16 } },
-			{ Name = "Large", Desc = "Drops Sp.Def EVs by 32.", Effect = { SpDef = -32 } },
-			{ Name = "Super", Desc = "Drops Sp.Def EVs by 64.", Effect = { SpDef = -64 } },
-			{ Name = "MAX", Desc = "Clears all Sp.Def EVs.", Effect = { SpDef = -256 } }
-		}
-	},
-	{ 
-		Name = "-SPEED EV Dish",
-		Desc = "Flavor Text here. Decreases Speed.",
-		Sizes = 
-		{
-			{ Name = "Small", Desc = "Drops Speed EVs by 8.", Effect = { Speed = -8 } },
-			{ Name = "Medium", Desc = "Drops Speed EVs by 16.", Effect = { Speed = -16 } },
-			{ Name = "Large", Desc = "Drops Speed EVs by 32.", Effect = { Speed = -32 } },
-			{ Name = "Super", Desc = "Drops Speed EVs by 64.", Effect = { Speed = -64 } },
-			{ Name = "MAX", Desc = "Clears all Speed EVs.", Effect = { Speed = -256 } }
-		}
-	},
-	{ 
-		Name = "Grimace Shake",
-		Desc = "Flavor text here. Removes all EVs and resets level to 1.",
-		Sizes = 
-		{
-			{ Name = "One Size for All", Desc = "Removes all EVs and resets level to 1.", Effect = { Level = -100, HP = -256, Atk = -256, Def = -256, SpAtk = -256, SpDef = -256, Speed = -256 } }
-		}
-	}
-}
 
 --will eating this have ANY effect?
 function base_camp_2_juice.Can_Eat(target, effect)
@@ -923,14 +601,14 @@ function base_camp_2_juice.Drink_Specialties_Flow()
   while state > -1 do
   
     if state == 0 then
-      selection = SpecialtiesMenu.run("Specialties", base_camp_2_juice.specialties)
+      selection = SpecialtiesMenu.run("Specialties", COMMON.JUICE.SPECIALTIES)
       if selection then
 		state = 1
 	  else
 		state = -1
 	  end
     elseif state == 1 then
-	  local effect = base_camp_2_juice.specialties[selection.Choice].Sizes[selection.Size].Effect
+	  local effect = COMMON.JUICE.SPECIALTIES[selection.Choice].Sizes[selection.Size].Effect
 	  local total_boost = { EXP = 0, Level = 0, HP = 0, Atk = 0, Def = 0, SpAtk = 0, SpDef = 0, Speed = 0 }
 	  if effect.Level ~= nil then
 		total_boost.Level = effect.Level

@@ -3,6 +3,15 @@ require 'origin.menu.team.AssemblySelectMenu'
 
 local luminous_spring = {}
 
+-- Tables for the junctions on this map
+luminous_spring.junction = {}
+
+luminous_spring.junction.south =
+{
+	dungeons = {},
+	groundmaps = {{Flag=true,Zone="guildmaster_island", ID=2,Entry=1}}
+}
+
 --------------------------------------------------
 -- Map Callbacks
 --------------------------------------------------
@@ -11,7 +20,7 @@ function luminous_spring.Init(map)
   PrintInfo("=>> Init_luminous_spring")
 
   COMMON.RespawnAllies()
-  
+
 end
 
 function luminous_spring.Enter(map)
@@ -40,24 +49,28 @@ end
 
 function luminous_spring.South_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  GAME:FadeOut(false, 20)
-  GAME:EnterGroundMap("base_camp_2", "entrance_north")
+  if((#luminous_spring.junction.south.dungeons == 0) and (#luminous_spring.junction.south.groundmaps == 1)) then
+	GAME:FadeOut(false, 20)
+    GAME:EnterGroundMap("base_camp_2", "entrance_north")
+   else
+	  COMMON.ShowDestinationMenu(luminous_spring.junction.south.dungeons, luminous_spring.junction.south.groundmaps)
+   end
 end
 
 function luminous_spring.Spring_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
 	UI:ResetSpeaker()
-	
+
 	local state = 0
 	local repeated = false
 	local member = nil
 	local evo = nil
 	local player = CH('PLAYER')
-	
+
 	GAME:CutsceneMode(true)
 	GAME:MoveCamera(300, 152, 90, false)
 	GROUND:TeleportTo(player, 292, 312, Direction.Down)
-	
+
 	if not SV.luminous_spring.Returning then
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Intro_1']))
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Intro_2']))
@@ -153,18 +166,18 @@ function luminous_spring.Spring_Touch(obj, activator)
 		elseif state == 3 then
 			--execute evolution
 			local mon = _DATA:GetMonster(evo.Result)
-			
+
 			GROUND:SpawnerSetSpawn("EVO_SUBJECT",member)
 			local subject = GROUND:SpawnerDoSpawn("EVO_SUBJECT")
-			
+
 			GROUND:MoveInDirection(subject, Direction.Up, 60, false, 2)
 			GROUND:EntTurn(subject, Direction.Down)
-			
+
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Begin']))
-			
+
 			SOUND:PlayBattleSE("EVT_Evolution_Start")
 			GAME:FadeOut(true, 20)
-			
+
 			local pastName = member:GetDisplayName(true)
 			GAME:PromoteCharacter(member, evo, "evo_harmony_scarf")
 			COMMON.RespawnAllies()
@@ -172,28 +185,28 @@ function luminous_spring.Spring_Touch(obj, activator)
 			--GROUND:SpawnerSetSpawn("EVO_SUBJECT",member)
 			subject = GROUND:SpawnerDoSpawn("EVO_SUBJECT")
 			GROUND:TeleportTo(subject, 292, 192, Direction.Down)
-			
+
 			GAME:WaitFrames(30)
-			
+
 			SOUND:PlayBattleSE("EVT_Title_Intro")
 			GAME:FadeIn(20)
 			SOUND:PlayFanfare("Fanfare/Promotion")
-			
-			
+
+
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Complete'], pastName, mon:GetColoredName()))
 			GAME:CheckLevelSkills(member, 0)
 			if member.Level > 1 then
 				GAME:CheckLevelSkills(member, member.Level-1)
 			end
-			
+
 			GROUND:MoveInDirection(subject, Direction.Down, 60, false, 2)
-			
+
 			GROUND:RemoveCharacter("EvoSubject")
-			
+
 			state = 0
 		end
 	end
-	
+
 	GAME:MoveCamera(0, 0, 90, true)
 	GAME:CutsceneMode(false)
 end
@@ -236,13 +249,13 @@ function luminous_spring.SpecialEvent(cur_date)
   GROUND:TeleportTo(player, temp_char.MapLoc.X, temp_char.MapLoc.Y + 48, Direction.Up)
   GAME:WaitFrames(20)
   GAME:FadeIn(60)
-  
+
   SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
   GROUND:CharSetEmote(player, "exclaim", 1)
   GROUND:CharSetEmote(temp_char, "exclaim", 1)
-  
+
   GAME:WaitFrames(20)
-  
+
   UI:SetSpeaker(temp_char)
   UI:SetSpeakerEmotion("Surprised")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Special_Event_001']))
@@ -251,17 +264,17 @@ function luminous_spring.SpecialEvent(cur_date)
     UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Special_Event_002']))
   end
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Special_Event_003']))
-  
+
   local recruit = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, base_form, 10, "", 0)
   local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("AllyInteract")
   recruit.ActionEvents:Add(talk_evt)
   COMMON.JoinTeamWithFanfare(recruit, false)
-  
+
   GAME:FadeOut(false, 30)
   current_ground:RemoveTempChar(temp_char)
   GAME:CutsceneMode(false)
   GAME:FadeIn(30)
-  
+
   SV.secret.Time = true
 end
 

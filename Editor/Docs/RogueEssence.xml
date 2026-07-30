@@ -1075,14 +1075,7 @@
         </member>
         <member name="P:RogueEssence.Dungeon.Character.TurnUsed">
             <summary>
-            Whether the character has made an action during this map turn.  Refreshed in between player and enemy faction actions on tier 0.
-            Only one action per map turn permitted.
-            </summary>
-        </member>
-        <member name="P:RogueEssence.Dungeon.Character.EndTurnLock">
-            <summary>
-            Prevents action like TurnUsed, but is removed before player phase tier 0.
-            Used for enemies that need to be postponed until the next player turn.
+            Whether the character has made an action during this map turn.  Only one action per map turn permitted.
             </summary>
         </member>
         <member name="F:RogueEssence.Dungeon.Character.ItemDisabled">
@@ -1093,6 +1086,11 @@
         <member name="F:RogueEssence.Dungeon.Character.IntrinsicDisabled">
             <summary>
             Prevents passive intrinsic effects
+            </summary>
+        </member>
+        <member name="F:RogueEssence.Dungeon.Character.ForceAI">
+            <summary>
+            Will act as AI even if controlled
             </summary>
         </member>
         <member name="F:RogueEssence.Dungeon.Character.MovesScrambled">
@@ -1735,12 +1733,6 @@
             <param name="silent"></param>
             <returns></returns>
         </member>
-        <member name="M:RogueEssence.Dungeon.DungeonScene.SkipToMainLeader">
-            <summary>
-            Forces everyone to skip their turns until the next tier 0 main leader turn.
-            The main leader turn may skip on that point due to other factors, but this ensures that no one acts until that opportunity is reached.
-            </summary>
-        </member>
         <member name="M:RogueEssence.Dungeon.DungeonScene.ResetRound">
             <summary>
             Resets the current turn state to blank.
@@ -2120,6 +2112,13 @@
             If swap is true, keys and values will be swapped with each other before returning.
             </summary>
         </member>
+        <member name="F:RogueEssence.Dungeon.ExplorerTeam.BackupList">
+            <summary>
+            When a character is temporarily set to a level, a backup of the character pre-reset is created and added to this list.
+            The resetted character will carry a reference to its backup's index in this list.
+            It will be used when levels are restored.
+            </summary>
+        </member>
         <member name="F:RogueEssence.Dungeon.AutoTile.Layers">
             <summary>
             If AutoTileSet is set to -1, this variable can be specified to make a hand-crafted texture.
@@ -2143,7 +2142,7 @@
             Gets a variant code based on a randomly given code and the base neighborcode.
             If the input is already a variant code (ie, upper bits are nonzero), it recomputes it.
             </summary>
-            <param name="rand"></param>
+            <param name="randCode"></param>
             <param name="neighborCode"></param>
             <returns></returns>
         </member>
@@ -2151,7 +2150,7 @@
             <summary>
             Every variant is half as likely as the variant before it.
             </summary>
-            <param name="rand"></param>
+            <param name="randCode"></param>
             <param name="count"></param>
             <returns></returns>
         </member>
@@ -2164,6 +2163,13 @@
             <summary>
             The list of characters (represented by index) scheduled to take a turn within the current faction.
             </summary>
+        </member>
+        <member name="M:RogueEssence.Dungeon.TurnState.SetTeamRound(RogueEssence.Dungeon.Team,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="team"></param>
+            <param name="reset">True = Reset everyone's turns.  False = Skip everyone's turns</param>
         </member>
         <member name="M:RogueEssence.Dungeon.TurnState.UpdateTeamRemoval(RogueEssence.Dungeon.Faction,System.Int32)">
             <summary>
@@ -2732,6 +2738,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:RogueEssence.Data.GameProgress.GetDefaultEnable(System.String)">
+            <summary>
+            Used for learning new skills.  Determines whether the newly learned skill should be switched on or off.
+            </summary>
+            <param name="moveIndex"></param>
+            <returns></returns>
+        </member>
         <member name="M:RogueEssence.Data.GameProgress.BeginSession">
             <summary>
             Begin counting play time for session
@@ -2755,12 +2768,13 @@
         </member>
         <member name="M:RogueEssence.Data.GameProgress.RestrictLevel(System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
-            
+            Restricts the entire team's level
             </summary>
-            <param name="zone"></param>
-            <param name="capOnly">Will force lower level to specified level if false.</param>
+            <param name="level"></param>
+            <param name="capOnly">Teammates below the capped level will not be leveled up if set to true.</param>
             <param name="permanent"></param>
             <param name="silent"></param>
+            <param name="keepSkills"></param>
             <returns></returns>
         </member>
         <member name="M:RogueEssence.Data.GameProgress.RestrictCharLevel(RogueEssence.Dungeon.Character,System.Int32,System.Boolean,System.Boolean,System.Boolean)">
@@ -5075,6 +5089,31 @@
             A rectangular brush for painting hallways.
             </summary>
         </member>
+        <member name="T:RogueEssence.LevelGen.IndexRoom">
+            <summary>
+            A component that marks a room with a numeric value that can be referenced later.
+            </summary>
+        </member>
+        <member name="F:RogueEssence.LevelGen.IndexRoom.Index">
+            <summary>
+            The index to mark the room with.
+            </summary>
+        </member>
+        <member name="T:RogueEssence.LevelGen.RoomFilterIndex">
+            <summary>
+            Filters for rooms that have an IndexRoom component, with a specific numeric value.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.RoomFilterIndex.Negate">
+            <summary>
+            Negates the condition if turned on.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.RoomFilterIndex.Indices">
+            <summary>
+            The numeric index values to filter for.
+            </summary>
+        </member>
         <member name="T:RogueEssence.LevelGen.RoomGenCoated`1">
             <summary>
             Generates a room, and then coats it with additional tiles.
@@ -5217,19 +5256,23 @@
         </member>
         <member name="T:RogueEssence.LevelGen.LoadBlobStep`1">
             <summary>
-            Turns the tiles at the edge of the map into the Unbreakable terrain.
-            Thickness can be customized.
+            Paints blobs of a chosen terrain onto the map, based on maps loaded from files.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
         <member name="F:RogueEssence.LevelGen.LoadBlobStep`1.Maps">
             <summary>
-            Map filea to load.
+            Map files to load.
             </summary>
         </member>
         <member name="P:RogueEssence.LevelGen.LoadBlobStep`1.TerrainStencil">
             <summary>
             Determines which tiles are eligible to be painted on.
+            </summary>
+        </member>
+        <member name="P:RogueEssence.LevelGen.LoadBlobStep`1.Amount">
+            <summary>
+            Number of blobs to place.
             </summary>
         </member>
         <member name="T:RogueEssence.LevelGen.UnbreakableBorderStep`1">

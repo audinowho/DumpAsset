@@ -320,12 +320,15 @@
         <member name="T:RogueElements.AddConnectedRoomsRandStep`1">
             <summary>
             Takes the current floor plan and adds new rooms that are connected to existing rooms.
+            Each addition attempt has it choose randomly from existing rooms to extend from.
+            It will try a finite number of times before it gives up.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
         <member name="T:RogueElements.AddConnectedRoomsStep`1">
             <summary>
             Takes the current floor plan and adds new rooms that are connected to existing rooms.
+            It gathers all possible places to add a room, and picks one.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
@@ -639,7 +642,7 @@
         </member>
         <member name="P:RogueElements.FloorPathBranch`1.HallPercent">
             <summary>
-            The chance that rooms are attached ot each other using an intermediate hallway.
+            The chance that rooms are attached to each other using an intermediate hallway.
             </summary>
         </member>
         <member name="P:RogueElements.FloorPathBranch`1.BranchRatio">
@@ -675,6 +678,18 @@
             <param name="floorPlan"></param>
             <param name="availableExpansions"></param>
             <returns>A set of instructions on how to expand the path.</returns>
+        </member>
+        <member name="M:RogueElements.FloorPathBranch`1.ChooseRoomExpansion(RogueElements.IRoomGen,RogueElements.IRoomGen,RogueElements.IRandom,RogueElements.FloorPlan,System.Collections.Generic.List{RogueElements.RoomHallIndex})">
+            <summary>
+            Chooses a node to expand the path from based on the specified branch setting.
+            Tries all possible expansions.
+            </summary>
+            <param name="room"></param>
+            <param name="hall"></param>
+            <param name="rand"></param>
+            <param name="floorPlan"></param>
+            <param name="availableExpansions"></param>
+            <returns></returns>
         </member>
         <member name="M:RogueElements.FloorPathBranch`1.PrepareRoom(RogueElements.IRandom,RogueElements.FloorPlan,System.Boolean)">
             <summary>
@@ -1241,6 +1256,11 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="T:RogueElements.RoomFilterComponent">
+            <summary>
+            Filters for rooms that have a specific group of components.
+            </summary>
+        </member>
         <member name="T:RogueElements.RoomFilterDefaultGen">
             <summary>
             Filters for rooms using the default generator.
@@ -1759,6 +1779,16 @@
             Blob-wide stencil.  All-or-nothing: If the blob position passes this stencil, it is drawn.  Otherwise it is not.
             </summary>
         </member>
+        <member name="M:RogueElements.BlobWaterStep`1.AttemptBlob(`0,RogueElements.BlobMap,System.Int32,RogueElements.Loc)">
+            <summary>
+            Attempts to place a blob from the blob map.
+            </summary>
+            <param name="map"></param>
+            <param name="blobMap"></param>
+            <param name="blobIdx"></param>
+            <param name="offset"></param>
+            <returns></returns>
+        </member>
         <member name="T:RogueElements.BorderTerrainStencil`1">
             <summary>
             A filter for determining the eligible tiles for an operation.
@@ -1874,6 +1904,11 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="P:RogueElements.NoChokepointTerrainStencil`1.TileStencil">
+            <summary>
+            Filters for valid path tiles
+            </summary>
+        </member>
         <member name="P:RogueElements.NoChokepointTerrainStencil`1.Global">
             <summary>
             Determines if the entire map should be checked for connectivity, or just the immediate surrounding tiles.
@@ -1915,6 +1950,14 @@
             <summary>
             Determines which tiles are eligible to be painted on.
             </summary>
+        </member>
+        <member name="M:RogueElements.WaterStep`1.DrawBlob(`0,RogueElements.Rect,RogueElements.Grid.LocTest)">
+            <summary>
+            Draws a blob with the specified bounds and test method
+            </summary>
+            <param name="map"></param>
+            <param name="rect"></param>
+            <param name="blobTest">The method to test for terrain presence.  Passes in global location on the map.</param>
         </member>
         <member name="M:RogueElements.MathUtils.ChooseFromHash``1(System.Collections.Generic.HashSet{``0},RogueElements.IRandom)">
             <summary>

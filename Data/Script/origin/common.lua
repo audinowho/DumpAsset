@@ -65,7 +65,7 @@ function COMMON.AutoLoadLocalizedStrings()
   local packagepath = SCRIPT:CurrentScriptDir()
   
   --After we made the path, load the file
-  return STRINGS:MakePackageStringTable(packagepath)
+  return STRINGS.MapStrings
 end
 
 function COMMON.GetSortedKeys(dict)

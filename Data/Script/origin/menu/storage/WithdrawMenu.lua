@@ -13,7 +13,7 @@ local EdibleStateType = luanet.import_type('PMDC.Dungeon.EdibleState')
 local OrbStateType = luanet.import_type('PMDC.Dungeon.OrbState')
 local WandStateType = luanet.import_type('PMDC.Dungeon.WandState')
 local ExclusiveStateType = luanet.import_type('PMDC.Dungeon.ExclusiveState')
-local item_index = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Item]
+local item_index = nil --it will be loded at the first menu call
 local UseTypes = RogueEssence.Data.ItemData.UseType
 
 local hasState = function(item_summary, stateType)
@@ -42,6 +42,10 @@ WithdrawMenu.Filters = {
 --- @param continueOnChoose boolean if true, the menu will not be closed after selecting a target.
 --- @param filter_index number the index of the filter to load by default, counting from 1. 0 corresponds to the full unfiltered list. Defaults to 0.
 function WithdrawMenu:initialize(defaultChoice, continueOnChoose, filter_index)
+    -- load item_index
+    if(item_index == nil) then
+        item_index = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Item]
+    end
     -- constants
     self.MAX_ELEMENTS = 8
 
@@ -56,7 +60,7 @@ function WithdrawMenu:initialize(defaultChoice, continueOnChoose, filter_index)
     self.currentSlots = {}
     self.filterFlags = {}
     self:MakeCurrentFilteredLists()
-    if #self.currentOptions<=0 then --TODO understand why this isn't firing
+    if #self.currentOptions<=0 then
         self.currentFilter = 0
         self:MakeCurrentFilteredLists()
     end
@@ -355,7 +359,7 @@ function WithdrawChosenMenu:confirm(result)
     end
 end
 
-function WithdrawChosenMenu:TakeMultiple(amount) --TODO fix this shit
+function WithdrawChosenMenu:TakeMultiple(amount)
     local slots = {}
     for i = 1, amount, 1 do
         table.insert(slots, self.slots[1])

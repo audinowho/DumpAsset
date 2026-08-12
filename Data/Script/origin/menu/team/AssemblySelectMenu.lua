@@ -8,7 +8,7 @@
 ]]
 require 'origin.menu.team.TeamSelectMenu'
 
-local monster_index = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]
+local monster_index = nil--initialized at first call
 --- Menu for selecting a character from the assembly.
 AssemblySelectMenu = Class("AssemblySelectMenu", TeamSelectMenu)
 
@@ -21,6 +21,11 @@ AssemblySelectMenu = Class("AssemblySelectMenu", TeamSelectMenu)
 --- @param sort_mode userdata a ``RogueEssence.Menu.AssemblyMenu.AssemblySortMode`` object. defaults to ``Recent``
 --- @param label string the label that will be applied to this menu. Defaults to "ASSEMBLY_MENU_LUA"
 function AssemblySelectMenu:initialize(filter, confirm_action, refuse_action, use_submenu, menu_width, sort_mode, label)
+    -- load monster_index
+    if(monster_index == nil) then
+        monster_index = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]
+    end
+	
     label = label or "ASSEMBLY_MENU_LUA"
 
     -- helper structues

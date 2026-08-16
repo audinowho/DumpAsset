@@ -5,6 +5,23 @@ local base_camp_2_juice = require 'origin.ground.base_camp_2.base_camp_2_juice'
 
 local base_camp_2 = {}
 
+-- Tables for the junctions on this map
+base_camp_2.junction = {}
+
+-- West - standard entrance
+base_camp_2.junction.west =
+{
+	dungeons = {},
+	groundmaps = {{Flag=true,Zone="guildmaster_island", ID=1, Entry=1}}
+}
+
+-- North - evolution area
+base_camp_2.junction.north =
+{
+	dungeons = {},
+	groundmaps = {{Flag=true,Zone="guildmaster_island", ID=11, Entry=0}}
+}
+
 
 --------------------------------------------------
 -- Map Callbacks
@@ -17,25 +34,25 @@ function base_camp_2.Init(map)
 
   --get assembly ready
   local assemblyCount = GAME:GetPlayerAssemblyCount()
-  
+
   local total = assemblyCount
   if total > 26 then
     total = 26
   end
-  
+
   --Place player teammates
   for i = 1,total,1 do
     GROUND:RemoveCharacter("Assembly" .. tostring(i))
   end
   --TODO: randomly add the spawns
-  
+
   for i = 1,total,1 do
     p = GAME:GetPlayerAssemblyMember(i-1)
     GROUND:SpawnerSetSpawn("ASSEMBLY_" .. tostring(i),p)
     local chara = GROUND:SpawnerDoSpawn("ASSEMBLY_" .. tostring(i))
     --GROUND:GiveCharIdleChatter(chara)
   end
-  
+
   COMMON.CreateWalkArea("Assembly" .. tostring(2), 424, 384, 48, 48)
   COMMON.CreateWalkArea("Assembly" .. tostring(4), 576, 272, 56, 64)
   COMMON.CreateWalkArea("Assembly" .. tostring(5), 336, 208, 64, 80)
@@ -45,12 +62,12 @@ function base_camp_2.Init(map)
   COMMON.CreateWalkArea("Assembly" .. tostring(14), 72, 264, 64, 64)
   COMMON.CreateWalkArea("Assembly" .. tostring(19), 400, 592, 56, 40)
   COMMON.CreateWalkArea("Assembly" .. tostring(22), 728, 352, 64, 48)
-  
+
   COMMON.CreateWalkArea("NPC_Food", 144, 592, 32, 32)
   COMMON.CreateWalkArea("NPC_Settling", 344, 288, 48, 48)
-  
+
   local can_talk_to = false
-  
+
   if total >= 3 then
     local talk_to = CH('Assembly3')
     --local tbl = LTBL(talk_to)
@@ -60,24 +77,24 @@ function base_camp_2.Init(map)
 	  end
 	end
   end
-  
+
   if can_talk_to then
     local talker = CH('NPC_Interactive')
 	GROUND:EntTurn(talker, Direction.UpRight)
   end
-  
+
   if SOUND:GetCurrentSong() ~= SV.base_town.Song then
     SOUND:PlayBGM(SV.base_town.Song, true)
   end
-  
+
   GROUND:AddMapStatus("clouds_overhead")
 end
 
 function base_camp_2.Enter(map)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+
   base_camp_2.SetupNpcs()
-  
+
   GAME:FadeIn(20)
 end
 
@@ -88,15 +105,15 @@ function base_camp_2.SetupNpcs()
   GROUND:Unhide("NPC_Food")
   GROUND:Unhide("NPC_Queen")
   GROUND:Unhide("NPC_King")
-  
+
   GROUND:Unhide("NPC_Treasure")
   GROUND:Unhide("NPC_Settling")
   GROUND:Unhide("NPC_Nonbeliever")
   GROUND:Unhide("NPC_Hesitant")
 
-  
+
   if SV.base_town.JuiceShop == 1 then
-    
+
 	local questname = "QuestBug"
     local quest = SV.missions.Missions[questname]
 	if quest == nil then
@@ -110,12 +127,12 @@ function base_camp_2.SetupNpcs()
   elseif SV.team_hunter.Status == 3 then
     -- TODO cycling
   end
-  
+
   if SV.team_hunter.Status > 0 and SV.base_town.JuiceShop >= 2 then
     local hesitant = CH('NPC_Hesitant')
     GROUND:EntTurn(hesitant, Direction.Up)
   end
-  
+
   if SV.team_hunter.Status > 0 and SV.base_town.JuiceShop >= 2 and SV.forest_camp.SnorlaxPhase >= 4 then
     GROUND:Unhide("Snorlax")
   end
@@ -158,7 +175,7 @@ function base_camp_2.SetupNpcs()
       GROUND:Unhide("NPC_Storehouse")
     end
   end
-  
+
   -- family appears if Returned = false
   if SV.family.Returned == false then
     -- and if they've been saved individually
@@ -189,12 +206,12 @@ end
 
 
 function base_camp_2.Family_Sister_Action(obj, activator)
-  
+
   local group_check = base_camp_2.Isekai_Event()
   if group_check then
     return
   end
-  
+
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
@@ -208,7 +225,7 @@ function base_camp_2.Family_Mother_Action(obj, activator)
   if group_check then
     return
   end
-  
+
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
@@ -222,7 +239,7 @@ function base_camp_2.Family_Father_Action(obj, activator)
   if group_check then
     return
   end
-  
+
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
@@ -236,7 +253,7 @@ function base_camp_2.Family_Brother_Action(obj, activator)
   if group_check then
     return
   end
-  
+
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
@@ -250,7 +267,7 @@ function base_camp_2.Family_Pet_Action(obj, activator)
   if group_check then
     return
   end
-  
+
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
@@ -264,7 +281,7 @@ function base_camp_2.Family_Grandma_Action(obj, activator)
   if group_check then
     return
   end
-  
+
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
 
@@ -273,7 +290,7 @@ function base_camp_2.Family_Grandma_Action(obj, activator)
 end
 
 function base_camp_2.Isekai_Event()
-  
+
   if SV.family.TalkedReturn == false then
     if SV.guild_hut.TookCard then
 		UI:ResetSpeaker()
@@ -293,7 +310,7 @@ function base_camp_2.Isekai_Event()
 	  return true
 	end
   end
-  
+
   return false
 end
 
@@ -318,7 +335,7 @@ function base_camp_2.NPC_Treasure_Action(chara, activator)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Treasure_Line_001']))
   UI:SetSpeakerEmotion("Worried")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Treasure_Line_002']))
-  
+
 end
 
 
@@ -335,22 +352,22 @@ end
 
 function base_camp_2.NPC_Storehouse_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+
   local player = CH('PLAYER')
   UI:SetSpeaker(chara)
-  
+
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storehouse_Line_Route']))
 end
 
 
 function base_camp_2.NPC_Carry_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+
   local player = CH('PLAYER')
-  
+
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
-  
+
   local ground = _DATA:GetGround("canyon_camp")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Carry_Line_001'], ground:GetColoredName(), _ZONE.CurrentGround:GetColoredName()))
 end
@@ -358,13 +375,13 @@ end
 
 function base_camp_2.NPC_Deliver_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+
   local player = CH('PLAYER')
   local shopkeeper = CH('Shop_Owner')
-  
+
   GROUND:CharTurnToChar(chara,CH('PLAYER'))
   UI:SetSpeaker(chara)
-  
+
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Deliver_Line_001'], shopkeeper:GetDisplayName()))
 end
 
@@ -389,7 +406,7 @@ end
 
 
 function base_camp_2.Snorlax_Action(chara, activator)
-  
+
   UI:SetSpeaker(chara)
   UI:SetSpeakerEmotion("Happy")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Snorlax_Line_001']))
@@ -400,7 +417,7 @@ end
 
 function base_camp_2.NPC_Hesitant_Action(chara, activator)
   UI:SetSpeaker(chara)
-  
+
   if SV.team_hunter.Status > 0 and SV.base_town.JuiceShop >= 2 then
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
     local herb = RogueEssence.Dungeon.InvItem("herb_white")
@@ -417,13 +434,13 @@ function base_camp_2.NPC_Elder_Action(chara, activator)
   UI:SetSpeaker(chara)
 
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Elder_Line_001']))
-  
+
   if SV.Experimental then
     SV.town_elder.SpokenTo = true
   end
-  
+
   --TODO: make him do something else after his mission?
-  
+
 end
 
 
@@ -432,24 +449,24 @@ function base_camp_2.NPC_Solo_Action(chara, activator)
 
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Solo_Line_001']))
   GROUND:CharAnimateTurnTo(chara, Direction.Down, 4)
-  
+
   GAME:WaitFrames(30)
   GROUND:CharSetEmote(chara, "happy", 3)
   local animId = RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")
   GROUND:CharSetAction(chara, RogueEssence.Ground.PoseGroundAction(chara.Position, chara.Direction, animId))
   UI:SetSpeakerEmotion("Determined")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Solo_Line_002']))
-  
+
   chara.CollisionDisabled = true
-  
+
   GROUND:MoveToPosition(chara, 760, 288, true, 4)
   GROUND:MoveToPosition(chara, 688, 360, true, 4)
   GROUND:MoveToPosition(chara, 576, 360, true, 4)
 
   GROUND:Hide("NPC_Solo")
-  
+
   SV.team_solo.SpokenTo = true
-  
+
 end
 
 
@@ -472,24 +489,24 @@ end
 
 function base_camp_2.NPC_Catch_1_Action(chara, activator)
   DEBUG.EnableDbgCoro()
-  
+
   base_camp_2.Catch_Action()
 end
 
 function base_camp_2.NPC_Catch_2_Action(chara, activator)
   DEBUG.EnableDbgCoro()
   base_camp_2.Catch_Action()
-  
+
 end
 
 function base_camp_2.Catch_Action()
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+
   local catch1 = CH('NPC_Catch_1')
   local catch2 = CH('NPC_Catch_2')
   local player = CH('PLAYER')
   local itemAnim = nil
-  
+
   GROUND:CharTurnToChar(player, catch1)
   UI:SetSpeaker(catch1)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Catch_Line_001']))
@@ -499,10 +516,10 @@ function base_camp_2.Catch_Action()
   SOUND:PlayBattleSE("DUN_Throw_Arc")
   itemAnim = RogueEssence.Content.ItemAnim(catch1.Bounds.Center, catch2.Bounds.Center, "Rock_Gray", 48, 1)
   GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
-  
+
   GROUND:CharTurnToChar(player, catch2)
   GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
-	
+
   SOUND:PlayBattleSE("DUN_Equip")
   UI:SetSpeaker(catch2)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Catch_Line_002']))
@@ -512,10 +529,10 @@ function base_camp_2.Catch_Action()
   SOUND:PlayBattleSE("DUN_Throw_Arc")
   itemAnim = RogueEssence.Content.ItemAnim(catch2.Bounds.Center, catch1.Bounds.Center, "Rock_Gray", 48, 1)
   GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
-  
+
   GROUND:CharTurnToChar(player, catch1)
   GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
-  
+
   SOUND:PlayBattleSE("DUN_Equip")
   UI:SetSpeaker(catch1)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Catch_Line_003']))
@@ -525,10 +542,10 @@ function base_camp_2.Catch_Action()
   SOUND:PlayBattleSE("DUN_Throw_Arc")
   itemAnim = RogueEssence.Content.ItemAnim(catch1.Bounds.Center, catch2.Bounds.Center, "Rock_Gray", 48, 1)
   GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
-  
+
   GROUND:CharTurnToChar(player, catch2)
   GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
-  
+
   SOUND:PlayBattleSE("DUN_Equip")
   UI:SetSpeaker(catch2)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Catch_Line_004']))
@@ -538,20 +555,20 @@ function base_camp_2.Catch_Action()
   SOUND:PlayBattleSE("DUN_Throw_Arc")
   itemAnim = RogueEssence.Content.ItemAnim(catch2.Bounds.Center, catch1.Bounds.Center, "Rock_Gray", 48, 1)
   GROUND:PlayVFXAnim(itemAnim, RogueEssence.Content.DrawLayer.Normal)
-  
+
   GROUND:CharTurnToChar(player, catch1)
   GAME:WaitFrames(RogueEssence.Content.ItemAnim.ITEM_ACTION_TIME)
-  
+
   SOUND:PlayBattleSE("DUN_Equip")
   UI:SetSpeaker(catch1)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Catch_Line_005']))
-  
-  
+
+
   if SV.Experimental then
     SV.team_catch.SpokenTo = true
   end
-  
-  
+
+
   -- TODO cycling
 end
 
@@ -593,11 +610,11 @@ base_camp_2.difficulty_tbl["bramble_woods"] = 1
 base_camp_2.difficulty_tbl["sickly_hollow"] = 1
 
 function base_camp_2.NPC_Interactive_Action(chara, activator)
-  
+
   local assemblyCount = GAME:GetPlayerAssemblyCount()
   UI:SetSpeaker(chara)
-  
-  
+
+
   local can_talk_to = false
   if assemblyCount >= 3 then
     talk_to = CH('Assembly3')
@@ -628,29 +645,29 @@ function base_camp_2.NPC_Interactive_Action(chara, activator)
 	    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Interactive_Phase_004_Line_002'], cur_team))
 	  else
         UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Interactive_Phase_005_Line_001'], zone_name))
-		
+
         GAME:WaitFrames(30)
         GROUND:CharSetEmote(chara, "shock", 1)
         SOUND:PlayBattleSE("EVT_Emote_Shock_Bad")
         GAME:WaitFrames(30)
-  
+
         UI:SetSpeakerEmotion("Surprised")
         UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Interactive_Phase_005_Line_002'], cur_team))
 	  end
 	end
   end
-  
+
   if not can_talk_to then
     GROUND:CharTurnToChar(chara,CH('PLAYER'))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Interactive_Line_001']))
   end
-  
+
 end
 
 
 function base_camp_2.Shop_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+
   local state = 0
   local repeated = false
   local cart = {}
@@ -660,11 +677,11 @@ function base_camp_2.Shop_Action(obj, activator)
 	local item_data = { Item = RogueEssence.Dungeon.InvItem(base_data.Index, false, base_data.Amount), Price = base_data.Price }
 	table.insert(catalog, item_data)
   end
-  
-  
+
+
   local chara = CH('Shop_Owner')
   UI:SetSpeaker(chara)
-  
+
 	while state > -1 do
 		if state == 0 then
 			local msg = STRINGS:Format(STRINGS.MapStrings['Shop_Intro'])
@@ -746,7 +763,7 @@ function base_camp_2.Shop_Action(obj, activator)
 				UI:ChoiceMenuYesNo(msg, false)
 				UI:WaitForChoice()
 				result = UI:ChoiceResult()
-				
+
 				if result then
 					GAME:RemoveFromPlayerMoney(total)
 					for ii = 1, #cart, 1 do
@@ -757,7 +774,7 @@ function base_camp_2.Shop_Action(obj, activator)
 						table.remove(catalog, cart[ii])
 						table.remove(SV.base_shop, cart[ii])
 					end
-					
+
 					cart = {}
 					SOUND:PlayBattleSE("DUN_Money")
 					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Buy_Complete']))
@@ -770,7 +787,7 @@ function base_camp_2.Shop_Action(obj, activator)
 			UI:SellMenu()
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
-			
+
 			if #result > 0 then
 				cart = result
 				state = 4
@@ -803,7 +820,7 @@ function base_camp_2.Shop_Action(obj, activator)
 			UI:ChoiceMenuYesNo(msg, false)
 			UI:WaitForChoice()
 			result = UI:ChoiceResult()
-			
+
 			if result then
 				for ii = #cart, 1, -1 do
 					if cart[ii].IsEquipped then
@@ -827,7 +844,7 @@ end
 
 function base_camp_2.Appraisal_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+
   local state = 0
   local repeated = false
   local cart = {}
@@ -868,7 +885,7 @@ function base_camp_2.Appraisal_Action(obj, activator)
 			UI:AppraiseMenu()
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
-			
+
 			if #result > 0 then
 				cart = result
 				state = 2
@@ -877,7 +894,7 @@ function base_camp_2.Appraisal_Action(obj, activator)
 			end
 		elseif state == 2 then
 			local total = #cart * price
-			
+
 			if total > GAME:GetPlayerMoney() then
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_No_Money']))
 				state = 1
@@ -896,14 +913,14 @@ function base_camp_2.Appraisal_Action(obj, activator)
 				else
 					UI:SetSpeakerEmotion("Surprised")
 					msg = STRINGS:Format(STRINGS.MapStrings['Appraisal_Choose_Max'], STRINGS:FormatKey("MONEY_AMOUNT", total))
-					
+
 				end
 				UI:ChoiceMenuYesNo(msg, false)
 				UI:WaitForChoice()
 				result = UI:ChoiceResult()
-				
+
 				UI:SetSpeakerEmotion("Normal")
-				
+
 				local treasure = {}
 				if result then
 					for ii = #cart, 1, -1 do
@@ -916,12 +933,12 @@ function base_camp_2.Appraisal_Action(obj, activator)
 							box = GAME:GetPlayerBagItem(cart[ii].Slot)
 							GAME:TakePlayerBagItem(cart[ii].Slot, true)
 						end
-						
+
 						local treasure_item = box.HiddenValue
 						local itemEntry = _DATA:GetItem(treasure_item)
 						local treasure_choice = { Box = box, Item = RogueEssence.Dungeon.InvItem(treasure_item,false,itemEntry.MaxStack)}
 						table.insert(treasure, treasure_choice)
-						
+
 						-- note high rarity items
 						if itemEntry.Rarity > 0 then
 							SV.unlocked_trades[treasure_item] = true
@@ -930,10 +947,10 @@ function base_camp_2.Appraisal_Action(obj, activator)
 					SOUND:PlayBattleSE("DUN_Money")
 					GAME:RemoveFromPlayerMoney(total)
 					cart = {}
-					
+
 					if #treasure >= 24 then
 					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_Start_Max']))
-					
+
 					  GROUND:MoveInDirection(chara, Direction.Up, 18, false, 2)
 					  GROUND:Hide("Appraisal_Owner")
 					  GAME:WaitFrames(10)
@@ -971,14 +988,14 @@ function base_camp_2.Appraisal_Action(obj, activator)
 					  SOUND:PlayBattleSE("DUN_Explosion")
 					  TASK:JoinCoroutines({coro1})
 					  GAME:WaitFrames(30)
-					  
+
 					  emitter = RogueEssence.Content.StaticAreaEmitter(RogueEssence.Content.AnimData("Smoke_White", 3))
 					  emitter.Range = 72
 					  emitter.Bursts = 30
 					  emitter.BurstTime = 2
 					  emitter.ParticlesPerBurst = 1
 					  GROUND:PlayVFX(emitter, chara.MapLoc.X, chara.MapLoc.Y - 32)
-					  
+
 					  GAME:WaitFrames(30)
 					  GAME:FadeIn(60)
 					  GROUND:Unhide("Appraisal_Owner")
@@ -986,10 +1003,10 @@ function base_camp_2.Appraisal_Action(obj, activator)
 					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_End_Max_001']))
 					  SOUND:PlayFanfare("Fanfare/Treasure")
 					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_End_Max_002']))
-					
+
 					elseif #treasure >= 8 then
 					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_Start_002']))
-					
+
 					  GROUND:MoveInDirection(chara, Direction.Up, 18, false, 2)
 					  GROUND:Hide("Appraisal_Owner")
 					  GAME:WaitFrames(20)
@@ -1007,7 +1024,7 @@ function base_camp_2.Appraisal_Action(obj, activator)
 					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_End']))
 					else
 					  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_Start_001']))
-					
+
 					  GROUND:MoveInDirection(chara, Direction.Up, 18, false, 2)
 					  GROUND:Hide("Appraisal_Owner")
 					  GAME:WaitFrames(10)
@@ -1023,13 +1040,13 @@ function base_camp_2.Appraisal_Action(obj, activator)
 
 					UI:SpoilsMenu(treasure)
 					UI:WaitForChoice()
-					
+
 					for ii = 1, #treasure, 1 do
 						local item = treasure[ii].Item
-						
+
 						GAME:GivePlayerItem(item.ID, item.Amount, false, item.HiddenValue)
 					end
-					
+
 					state = 0
 				else
 					state = 1
@@ -1041,7 +1058,7 @@ end
 
 function base_camp_2.Compute_Swap_Catalog()
   --silk/dust/gem/globes
-  local catalog = { 
+  local catalog = {
 	{ Item="xcl_element_bug_gem", ReqItem={"xcl_element_bug_silk","xcl_element_bug_dust"}},
 	{ Item="xcl_element_bug_globe", ReqItem={"xcl_element_bug_silk", "xcl_element_bug_dust", "xcl_element_bug_gem"}},
 	{ Item="xcl_element_dark_gem", ReqItem={"xcl_element_dark_silk","xcl_element_dark_dust"}},
@@ -1085,7 +1102,7 @@ function base_camp_2.Compute_Swap_Catalog()
 	local base_data = COMMON_GEN.TRADES[ii]
 	table.insert(catalog, base_data)
   end
-  
+
   --random trades
   for ii = 1, #SV.base_trades, 1 do
 	local base_data = SV.base_trades[ii]
@@ -1096,26 +1113,26 @@ end
 
 function base_camp_2.Swap_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+
   local catalog = base_camp_2.Compute_Swap_Catalog()
-  
+
   local state = 0
   local repeated = false
   local cart = -1 --catalog element chosen to trade for
   local tribute = {} --item IDs chosen to trade in
-  
+
   -- for special case when spoken to after forgetting to hold up their end of the trade, one off gag
   if SV.base_town.ValueTradeItem ~= "" then
     state = 4
 	repeated = true
   end
 
-  
+
   local Prices = { 1000, 5000, 25000 }
   local player = CH('PLAYER')
   local chara = CH('Swap_Owner')
   UI:SetSpeaker(chara)
-  
+
 	while state > -1 do
 		if state == 0 then
 			local msg = STRINGS:Format(STRINGS.MapStrings['Swap_Intro'])
@@ -1171,7 +1188,7 @@ function base_camp_2.Swap_Action(obj, activator)
 					table.insert(tribute, trade.ReqItem[ii])
 				end
 			end
-			
+
 			if free_slots > 0 then
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Give_Choose'], receive_item:GetDisplayName()))
 				--tribute simply aggregates all items period
@@ -1199,15 +1216,15 @@ function base_camp_2.Swap_Action(obj, activator)
 				local give_item = RogueEssence.Dungeon.InvItem(tribute[ii])
 				table.insert(give_items, give_item:GetDisplayName())
 			end
-			
+
 			local itemEntry = _DATA:GetItem(trade.Item)
 			local total = Prices[itemEntry.Rarity]
-			
+
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Confirm_001'], STRINGS:CreateList(give_items), receive_item:GetDisplayName()))
 			UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Swap_Confirm_002'], STRINGS:FormatKey("MONEY_AMOUNT", total)), false)
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
-			
+
 			if result then
 				for ii = #tribute, 1, -1 do
 					local item_slot = GAME:FindPlayerItem(tribute[ii], true, true)
@@ -1222,19 +1239,19 @@ function base_camp_2.Swap_Action(obj, activator)
 				end
 				SOUND:PlayBattleSE("DUN_Money")
 				GAME:RemoveFromPlayerMoney(total)
-				
-				
+
+
 				--remove the trade if it was a base trade
 				local base_trade_idx = cart - (#catalog - #SV.base_trades)
 				if base_trade_idx > 0 then
 					table.remove(SV.base_trades, base_trade_idx)
 				end
-				
+
 				SV.base_town.ValueTradeItem = trade.Item
 				if itemEntry.Rarity == 3 then
 				  UI:SetSpeakerEmotion("Inspired")
 				  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Complete_Max_001']))
-				  
+
 				  -- sableye gets so obsessed with his treasure he forgets about you, once
 				  if SV.base_town.ValueTraded == false then
 				    UI:SetSpeakerEmotion("Joyous")
@@ -1242,54 +1259,54 @@ function base_camp_2.Swap_Action(obj, activator)
 				    return
 				  end
 				end
-				
+
 				state = 4
 			else
 				state = 1
 			end
-				
+
 		elseif state == 4 then
-			
+
 			local itemEntry = _DATA:GetItem(SV.base_town.ValueTradeItem)
 			if itemEntry.Rarity == 3 then
 			  if SV.base_town.ValueTraded == false then
-			  
+
 			    SOUND:PlayBattleSE("EVT_Emote_Exclaim_2")
 			    GROUND:CharSetEmote(chara, "exclaim", 1)
 			    UI:SetSpeakerEmotion("Stunned")
-			  
+
 			    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Complete_Max_003']))
 			    UI:SetSpeakerEmotion("Normal")
 			  else
-				
+
 			    UI:SetSpeakerEmotion("Happy")
 			    UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Complete_Max_004']))
 			    UI:SetSpeakerEmotion("Normal")
 			  end
 			  SV.base_town.ValueTraded = true
-			  
+
 			else
 			  UI:SetSpeakerEmotion("Normal")
 			  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Complete']))
 			end
-			
+
 			local receive_item = RogueEssence.Dungeon.InvItem(SV.base_town.ValueTradeItem)
 			UI:ResetSpeaker()
 			SOUND:PlayFanfare("Fanfare/Treasure")
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Give'], player:GetDisplayName(), receive_item:GetDisplayName()))
-			
+
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Item_Give_Storage'], receive_item:GetDisplayName()))
 			GAME:GivePlayerStorageItem(SV.base_town.ValueTradeItem, 1, false, "")
-			
+
 			UI:SetSpeaker(chara)
-			
+
 			-- recompute the available trades
 			catalog = base_camp_2.Compute_Swap_Catalog()
 			SV.base_town.ValueTradeItem = ""
-			
+
 			tribute = {}
 			cart = -1
-			
+
 			state = 0
 		end
 	end
@@ -1391,7 +1408,7 @@ function base_camp_2.Music_Action(obj, activator)
   if SV.guildmaster_summit.GameComplete then
     unlocks["GUILDMASTER"] = true
   end
-  
+
   zones = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:GetOrderedKeys(false)
   for zone_idx = 0, zones.Count - 1, 1  do
     zone = zones[zone_idx]
@@ -1399,8 +1416,8 @@ function base_camp_2.Music_Action(obj, activator)
       unlocks["DUN_" .. zone] = true
     end
   end
-  
-  
+
+
   local spoilers = {}
   for key, unlock_reqs in pairs(base_camp_2.music_tbl) do
     contains_unlock = false
@@ -1413,8 +1430,8 @@ function base_camp_2.Music_Action(obj, activator)
       table.insert(spoilers, key)
     end
   end
-  
-  
+
+
   UI:ShowMusicMenu(false, spoilers)
   UI:WaitForChoice()
   local result = UI:ChoiceResult()
@@ -1442,14 +1459,22 @@ end
 
 function base_camp_2.West_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  GAME:FadeOut(false, 20)
-  GAME:EnterGroundMap("base_camp", "entrance_east")
+  if((#base_camp_2.junction.west.dungeons == 0) and (#base_camp_2.junction.west.groundmaps == 1)) then
+	GAME:FadeOut(false, 20)
+	GAME:EnterGroundMap("base_camp", "entrance_east")
+  else
+	 COMMON.ShowDestinationMenu(base_camp_2.junction.west.dungeons, base_camp_2.junction.west.groundmaps)
+   end
 end
 
 function base_camp_2.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  GAME:FadeOut(false, 20)
-  GAME:EnterGroundMap("luminous_spring", "entrance_south")
+  if((#base_camp_2.junction.north.dungeons == 0) and (#base_camp_2.junction.north.groundmaps == 1)) then
+	GAME:FadeOut(false, 20)
+	GAME:EnterGroundMap("luminous_spring", "entrance_south")
+   else
+	  COMMON.ShowDestinationMenu(base_camp_2.junction.north.dungeons, base_camp_2.junction.north.groundmaps)
+   end
 end
 
 function base_camp_2.Post_Office_Entrance_Touch(obj, activator)
@@ -1461,14 +1486,14 @@ end
 function base_camp_2.AssemblyInteract(chara, target)
   GROUND:CharTurnToChar(target, chara)
   UI:SetSpeaker(target)
-  
+
   local mon = _DATA:GetMonster(target.CurrentForm.Species)
   local form = mon.Forms[target.CurrentForm.Form]
-  
+
   local personality = form:GetPersonalityType(target.Data.Discriminator)
-  
+
   local talk_string = nil
-  
+
   --TODO: accept variations of the talkstrings (VAR_XX)
   --look for a talkstring of this species, form, gender
   if talk_string == nil then
@@ -1477,7 +1502,7 @@ function base_camp_2.AssemblyInteract(chara, target)
       talk_string = RogueEssence.Text.StringsEx[var_key]
     end
   end
-  
+
   if talk_string == nil then
     --if talkstring is nil, look for a talkstring of this species, form
 	local var_key = string.format("TALK_REST_%04d_%02d_VAR_00", mon.IndexNum, target.CurrentForm.Form)
@@ -1485,7 +1510,7 @@ function base_camp_2.AssemblyInteract(chara, target)
       talk_string = RogueEssence.Text.StringsEx[var_key]
     end
   end
-  
+
   if talk_string == nil then
     --if talkstring is nil, look for a talkstring of this species
 	local var_key = string.format("TALK_REST_%04d_VAR_00", mon.IndexNum)
@@ -1493,7 +1518,7 @@ function base_camp_2.AssemblyInteract(chara, target)
       talk_string = RogueEssence.Text.StringsEx[var_key]
     end
   end
-  
+
   if talk_string == nil then
     --if talkstring is still nil, fall back to groundinteract
 	COMMON.GroundInteract(chara, target)
@@ -1501,8 +1526,8 @@ function base_camp_2.AssemblyInteract(chara, target)
     --otherwise, print the talkstring
 	UI:WaitShowDialogue(STRINGS:Format(talk_string))
   end
-  
-  
+
+
 end
 
 
@@ -1705,8 +1730,5 @@ function base_camp_2.Assembly40_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   base_camp_2.AssemblyInteract(activator, chara)
 end
-
-
-
 
 return base_camp_2

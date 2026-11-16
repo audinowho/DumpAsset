@@ -3,11 +3,11 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Weavile Scarf",
+"DefaultText": "Ruin Armlet",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A rare treasure for the Weavile family. When kept in the bag, the Pokémon will raise the PP usage of opponents that attack it.",
+"DefaultText": "A rare treasure for Sneasel, and Weavile. When kept in the bag, it prevents the Pokémon from fainting to Fighting-type moves, leaving it with 1 HP.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -23,14 +23,13 @@
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 49
+"ItemType": 0
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
 "sneasel",
-"weavile",
-"sneasler"
+"weavile"
 ]
 },
 {
@@ -212,32 +211,19 @@
 "Value": {
 "$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.AddContextStateEvent, PMDC",
-"AddedState": {
-"$type": "PMDC.Dungeon.PressurePlus, PMDC"
-},
-"Global": false
+"$type": "PMDC.Dungeon.OnMoveUseEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.EndureElementEvent, PMDC",
+"Element": "fighting"
+}
+]
 }
 }
 }
 ],
 "AfterHittings": [],
-"AfterBeingHits": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.PressureEvent, PMDC",
-"Amount": 0
-}
-}
-}
-],
+"AfterBeingHits": [],
 "OnHitTiles": [],
 "AfterActions": [],
 "UserElementEffects": [],

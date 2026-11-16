@@ -3,11 +3,11 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Cofagrigus Seal",
+"DefaultText": "Cofagrigus Mask",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A rare treasure for the Cofagrigus family. When kept in the bag, the Pokémon can traverse water, lava, and pits.",
+"DefaultText": "A rare treasure for Yamask, and Cofagrigus. When kept in the bag, it allows Ghost-type moves to hit Normal-type Pokémon.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -23,14 +23,13 @@
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 29
+"ItemType": 63
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
 "yamask",
-"cofagrigus",
-"runerigus"
+"cofagrigus"
 ]
 },
 {
@@ -197,50 +196,7 @@
 "OnMapTurnEnds": [],
 "OnWalks": [],
 "OnDeaths": [],
-"OnRefresh": [
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
-"Mobility": 1
-}
-}
-},
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
-"Mobility": 4
-}
-}
-},
-{
-"Key": {
-"str": [
-0
-]
-},
-"Value": {
-"$type": "PMDC.Dungeon.FamilyRefreshEvent, PMDC",
-"BaseEvent": {
-"$type": "PMDC.Dungeon.AddMobilityEvent, PMDC",
-"Mobility": 2
-}
-}
-}
-],
+"OnRefresh": [],
 "BeforeTryActions": [],
 "BeforeActions": [],
 "OnActions": [],
@@ -250,7 +206,23 @@
 "AfterBeingHits": [],
 "OnHitTiles": [],
 "AfterActions": [],
-"UserElementEffects": [],
+"UserElementEffects": [
+{
+"Key": {
+"str": [
+0
+]
+},
+"Value": {
+"$type": "PMDC.Dungeon.FamilyMatchupEvent, PMDC",
+"BaseEvent": {
+"$type": "PMDC.Dungeon.LessImmunityEvent, PMDC",
+"AttackElement": "ghost",
+"TargetElement": "normal"
+}
+}
+}
+],
 "TargetElementEffects": [],
 "ModifyHPs": [],
 "RestoreHPs": []

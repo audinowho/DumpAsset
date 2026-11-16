@@ -3,11 +3,11 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Persian Ruff",
+"DefaultText": "Noble Scarf",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A rare treasure for the Persian family. When kept in the bag, the Pokémon is more likely to evade attacks from close up.",
+"DefaultText": "A rare treasure for Meowth, and Persian. When kept in the bag, the Pokémon gains the Focus Energy status after using a Status move.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -15,22 +15,21 @@
 "Sprite": "Box_Yellow",
 "Icon": 10,
 "SortCategory": 17,
-"Price": 1600,
-"Rarity": 2,
+"Price": 2400,
+"Rarity": 3,
 "MaxStack": 0,
 "CannotDrop": true,
 "BagEffect": true,
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 53
+"ItemType": 0
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
 "meowth",
-"persian",
-"perrserker"
+"persian"
 ]
 },
 {
@@ -202,7 +201,11 @@
 "BeforeActions": [],
 "OnActions": [],
 "BeforeHittings": [],
-"BeforeBeingHits": [
+"BeforeBeingHits": [],
+"AfterHittings": [],
+"AfterBeingHits": [],
+"OnHitTiles": [],
+"AfterActions": [
 {
 "Key": {
 "str": [
@@ -212,15 +215,26 @@
 "Value": {
 "$type": "PMDC.Dungeon.FamilyBattleEvent, PMDC",
 "BaseEvent": {
-"$type": "PMDC.Dungeon.EvasiveCloseUpEvent, PMDC"
+"$type": "PMDC.Dungeon.CategoryNeededEvent, PMDC",
+"BaseEvents": [
+{
+"$type": "PMDC.Dungeon.StatusBattleEvent, PMDC",
+"StatusID": "focus_energy",
+"AffectTarget": false,
+"SelfInflicted": true,
+"SilentCheck": true,
+"Anonymous": false,
+"TriggerMsg": {
+"Key": "MSG_EXCL_ITEM_TYPE"
+},
+"Anims": []
+}
+],
+"NeededCategory": 3
 }
 }
 }
 ],
-"AfterHittings": [],
-"AfterBeingHits": [],
-"OnHitTiles": [],
-"AfterActions": [],
 "UserElementEffects": [],
 "TargetElementEffects": [],
 "ModifyHPs": [],

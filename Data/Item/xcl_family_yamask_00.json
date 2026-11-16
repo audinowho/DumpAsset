@@ -3,11 +3,11 @@
 "Object": {
 "$type": "RogueEssence.Data.ItemData, RogueEssence",
 "Name": {
-"DefaultText": "Cofagrigus Mask",
+"DefaultText": "Pharaoh Sigil",
 "LocalTexts": {}
 },
 "Desc": {
-"DefaultText": "A rare treasure for the Cofagrigus family. When kept in the bag, it allows Ghost-type moves to hit Normal-type Pokémon.",
+"DefaultText": "A rare treasure for Yamask, and Runerigus. When kept in the bag, it allows Ground-type moves to hit Flying-type Pokémon.",
 "LocalTexts": {}
 },
 "Released": true,
@@ -23,13 +23,12 @@
 "ItemStates": [
 {
 "$type": "PMDC.Dungeon.ExclusiveState, PMDC",
-"ItemType": 63
+"ItemType": 0
 },
 {
 "$type": "PMDC.Dungeon.FamilyState, PMDC",
 "Members": [
 "yamask",
-"cofagrigus",
 "runerigus"
 ]
 },
@@ -218,8 +217,8 @@
 "$type": "PMDC.Dungeon.FamilyMatchupEvent, PMDC",
 "BaseEvent": {
 "$type": "PMDC.Dungeon.LessImmunityEvent, PMDC",
-"AttackElement": "ghost",
-"TargetElement": "normal"
+"AttackElement": "ground",
+"TargetElement": "flying"
 }
 }
 }

@@ -4,13 +4,7 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Depleted Basin",
-"LocalTexts": {
-"fr": "Bassin Vidé",
-"ko": "고갈된 분지",
-"ja": "ハテアレぼんち",
-"ja-jp": "ハテアレ盆地",
-"zh-hans": "枯竭盆地"
-}
+"LocalTexts": {}
 },
 "Released": true,
 "Comment": "",
@@ -48,6 +42,8 @@
 "TimeLimit": 1500,
 "TileSight": 0,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -1252,6 +1248,8 @@
 "TimeLimit": 1500,
 "TileSight": 0,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -2456,6 +2454,8 @@
 "TimeLimit": 1500,
 "TileSight": 0,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -3660,6 +3660,8 @@
 "TimeLimit": 1500,
 "TileSight": 0,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -4864,6 +4866,8 @@
 "TimeLimit": 1500,
 "TileSight": 0,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -6169,6 +6173,8 @@
 "TimeLimit": 1500,
 "TileSight": 0,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -7438,6 +7444,8 @@
 "TimeLimit": 1500,
 "TileSight": 0,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -8707,6 +8715,8 @@
 "TimeLimit": 1500,
 "TileSight": 0,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -9976,6 +9986,8 @@
 "TimeLimit": 1500,
 "TileSight": 0,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -11441,14 +11453,8 @@
 ]
 },
 "Name": {
-"DefaultText": "Depleted Basin\\nB{0}F",
-"LocalTexts": {
-"fr": "Bassin Vidé\\n{0}SS",
-"ko": "고갈된 분지\\nB{0}F",
-"ja": "ハテアレぼんち\\nB{0}かい",
-"ja-jp": "ハテアレ盆地\\nB{0}階",
-"zh-hans": "枯竭盆地\\nB{0}F"
-}
+"DefaultText": "Depleted Basin\nB{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -11473,7 +11479,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -13479,7 +13485,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.StairsModGenState"
 }
 ]
@@ -15164,7 +15170,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -15184,7 +15190,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.RecruitState"
 },
 "UseMapItems": true,
@@ -16098,7 +16104,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.ShopModGenState"
 }
 ]
@@ -16222,6 +16228,8 @@
 "TimeLimit": 1000,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -16729,13 +16737,34 @@
 },
 "Value": {
 "$type": "RogueEssence.LevelGen.PlaceTerrainMobsStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"AcceptedTiles": [
+{
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Owner": 0,
+"TileStates": []
+}
+}
+],
+"Depth": 1,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 46,
-"Max": 50
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -16819,35 +16848,14 @@
 "Rate": 1
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 46,
+"Max": 50
 }
 },
-"Ally": false,
-"AcceptedTiles": [
-{
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "wall",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Owner": 0,
-"TileStates": []
-}
-}
-],
-"Depth": 1
+"Ally": false
 }
 }
 ],
@@ -16868,6 +16876,8 @@
 "TimeLimit": 1000,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -17375,13 +17385,34 @@
 },
 "Value": {
 "$type": "RogueEssence.LevelGen.PlaceTerrainMobsStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"AcceptedTiles": [
+{
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Owner": 0,
+"TileStates": []
+}
+}
+],
+"Depth": 1,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 46,
-"Max": 50
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -17465,35 +17496,14 @@
 "Rate": 1
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 46,
+"Max": 50
 }
 },
-"Ally": false,
-"AcceptedTiles": [
-{
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "wall",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Owner": 0,
-"TileStates": []
-}
-}
-],
-"Depth": 1
+"Ally": false
 }
 }
 ],
@@ -17514,6 +17524,8 @@
 "TimeLimit": 1000,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -18021,13 +18033,34 @@
 },
 "Value": {
 "$type": "RogueEssence.LevelGen.PlaceTerrainMobsStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"AcceptedTiles": [
+{
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Owner": 0,
+"TileStates": []
+}
+}
+],
+"Depth": 1,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 46,
-"Max": 50
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -18111,35 +18144,14 @@
 "Rate": 1
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 46,
+"Max": 50
 }
 },
-"Ally": false,
-"AcceptedTiles": [
-{
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "wall",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Owner": 0,
-"TileStates": []
-}
-}
-],
-"Depth": 1
+"Ally": false
 }
 }
 ],
@@ -18160,6 +18172,8 @@
 "TimeLimit": 1000,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -18667,13 +18681,34 @@
 },
 "Value": {
 "$type": "RogueEssence.LevelGen.PlaceTerrainMobsStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"AcceptedTiles": [
+{
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "wall",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Owner": 0,
+"TileStates": []
+}
+}
+],
+"Depth": 1,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 46,
-"Max": 50
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -18757,35 +18792,14 @@
 "Rate": 1
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 46,
+"Max": 50
 }
 },
-"Ally": false,
-"AcceptedTiles": [
-{
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "wall",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Owner": 0,
-"TileStates": []
-}
-}
-],
-"Depth": 1
+"Ally": false
 }
 }
 ],
@@ -18810,13 +18824,8 @@
 ]
 },
 "Name": {
-"DefaultText": "Cratered Basin\\nB{0}F",
-"LocalTexts": {
-"fr": "Bassin Cratérisé\\n{0}SS ",
-"ja": "クリスタおうち\\n{0}かい",
-"ja-jp": "クリスタ凹地\\n{0}階",
-"zh-hans": "陨击盆地\\nB{0}F"
-}
+"DefaultText": "Cratered Basin\nB{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [
@@ -18841,7 +18850,7 @@
 },
 "ModStates": [
 {
-"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.CoinModGenState"
 }
 ]
@@ -20181,7 +20190,7 @@
 "Spawn": {
 "$type": "PMDC.LevelGen.ItemStateType, PMDC",
 "UseType": {
-"assembly": "PMDC, Version=0.8.11.0, Culture=neutral, PublicKeyToken=null",
+"assembly": "PMDC, Version=0.8.12.0, Culture=neutral, PublicKeyToken=null",
 "type": "PMDC.Dungeon.GummiState"
 },
 "UseMapItems": true,
@@ -20383,14 +20392,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Secret Room",
-"LocalTexts": {
-"fr": "Salle secrète",
-"de": "Geheimer Raum",
-"es": "Piso Secreto",
-"pt": "Sala Secreta",
-"it": "Stanza Segreta",
-"zh-hans": "秘密之间"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -20719,13 +20721,34 @@
 },
 "Value": {
 "$type": "RogueEssence.LevelGen.PlaceTerrainMobsStep`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
+"AcceptedTiles": [
+{
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "floor",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Owner": 0,
+"TileStates": []
+}
+}
+],
+"Depth": 0,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapLoadContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 1,
-"Max": 3
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -20774,35 +20797,14 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 3
 }
 },
-"Ally": false,
-"AcceptedTiles": [
-{
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "floor",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Owner": 0,
-"TileStates": []
-}
-}
-],
-"Depth": 0
+"Ally": false
 }
 }
 ],
@@ -20832,14 +20834,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"fr": "Passage mystérieux",
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -20922,6 +20917,8 @@
 "TimeLimit": 800,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -21532,11 +21529,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -21583,6 +21575,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -21597,11 +21594,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -21648,6 +21640,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -21662,11 +21659,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -21713,6 +21705,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -21727,11 +21724,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -21778,6 +21770,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -21792,11 +21789,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -21843,6 +21835,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -21857,11 +21854,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -21908,6 +21900,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -22506,11 +22503,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 1,
-"Max": 4
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -22556,6 +22548,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 4
 }
 },
 "Ally": false,
@@ -22581,14 +22578,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"fr": "Passage mystérieux",
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -22671,6 +22661,8 @@
 "TimeLimit": 800,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -23297,11 +23289,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -23348,6 +23335,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -23362,11 +23354,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -23413,6 +23400,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -23427,11 +23419,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -23478,6 +23465,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -23492,11 +23484,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -23543,6 +23530,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -23557,11 +23549,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -23608,6 +23595,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -23622,11 +23614,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -23673,6 +23660,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -24271,11 +24263,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 1,
-"Max": 4
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -24321,6 +24308,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 4
 }
 },
 "Ally": false,
@@ -24346,14 +24338,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"fr": "Passage mystérieux",
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -24436,6 +24421,8 @@
 "TimeLimit": 800,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -25062,11 +25049,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -25113,6 +25095,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -25127,11 +25114,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -25178,6 +25160,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -25192,11 +25179,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -25243,6 +25225,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -25257,11 +25244,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -25308,6 +25290,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -25322,11 +25309,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -25373,6 +25355,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -25387,11 +25374,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -25438,6 +25420,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -26036,11 +26023,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 1,
-"Max": 4
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -26086,6 +26068,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 4
 }
 },
 "Ally": false,
@@ -26123,14 +26110,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"fr": "Passage mystérieux",
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -26213,6 +26193,8 @@
 "TimeLimit": 800,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -26823,11 +26805,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -26874,6 +26851,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -26888,11 +26870,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -26939,6 +26916,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -26953,11 +26935,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -27004,6 +26981,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -27018,11 +27000,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -27069,6 +27046,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -27083,11 +27065,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -27134,6 +27111,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -27148,11 +27130,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -27199,6 +27176,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -27797,11 +27779,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 1,
-"Max": 4
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -27847,6 +27824,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 4
 }
 },
 "Ally": false,
@@ -27872,14 +27854,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"fr": "Passage mystérieux",
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -27962,6 +27937,8 @@
 "TimeLimit": 800,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -28588,11 +28565,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -28639,6 +28611,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -28653,11 +28630,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -28704,6 +28676,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -28718,11 +28695,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -28769,6 +28741,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -28783,11 +28760,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -28834,6 +28806,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -28848,11 +28825,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -28899,6 +28871,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -28913,11 +28890,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -28964,6 +28936,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -29562,11 +29539,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 1,
-"Max": 4
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -29612,6 +29584,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 4
 }
 },
 "Ally": false,
@@ -29637,14 +29614,7 @@
 "$type": "RogueEssence.LevelGen.MapNameIDStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
 "Name": {
 "DefaultText": "Mysterious Passage",
-"LocalTexts": {
-"fr": "Passage mystérieux",
-"de": "Mysteriöse Passage",
-"es": "Pasaje Misterioso",
-"pt": "Passagem Misteriosa",
-"it": "Passaggio Misterioso",
-"zh-hans": "秘密通道"
-}
+"LocalTexts": {}
 },
 "IDOffset": 0
 }
@@ -29727,6 +29697,8 @@
 "TimeLimit": 800,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -30353,11 +30325,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -30404,6 +30371,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -30418,11 +30390,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -30469,6 +30436,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -30483,11 +30455,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -30534,6 +30501,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -30548,11 +30520,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -30599,6 +30566,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -30613,11 +30585,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -30664,6 +30631,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -30678,11 +30650,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 2
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -30729,6 +30696,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 2
 }
 },
 "Ally": false,
@@ -31327,11 +31299,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 1,
-"Max": 4
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.PoolTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -31377,6 +31344,11 @@
 "Rate": 12
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 4
 }
 },
 "Ally": false,

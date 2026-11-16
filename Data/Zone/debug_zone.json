@@ -4,16 +4,7 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Debug Zone",
-"LocalTexts": {
-"fr": "Zone Déboguage",
-"de": "Debug Zone",
-"es": "Zona de Debug",
-"it": "Zona di Debug",
-"ko": "디버그 존",
-"ja": "でばっくぞぉーん",
-"ja-jp": "でばっくぞぉーん",
-"zh-hans": "Debug区域"
-}
+"LocalTexts": {}
 },
 "Released": false,
 "Comment": "",
@@ -81,6 +72,8 @@
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -83066,6 +83059,8 @@
 "TimeLimit": 500,
 "TileSight": 0,
 "CharSight": 0,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -83876,6 +83871,8 @@
 "TimeLimit": 500,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -86679,11 +86676,6 @@
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 12,
-"Max": 18
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.SpecificTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -86715,6 +86707,11 @@
 ]
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 12,
+"Max": 18
 }
 },
 "Ally": false,
@@ -86769,6 +86766,8 @@
 "TimeLimit": 500,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -87648,6 +87647,8 @@
 "TimeLimit": 500,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -88468,6 +88469,8 @@
 "TimeLimit": 500,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -89357,6 +89360,8 @@
 "TimeLimit": 1000,
 "TileSight": 0,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -91795,6 +91800,8 @@ false
 "TimeLimit": 1000,
 "TileSight": 0,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -94985,6 +94992,8 @@ false
 "TimeLimit": 2000,
 "TileSight": 0,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -95746,11 +95755,6 @@ false
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 2,
-"Max": 4
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.SpecificTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -95785,6 +95789,11 @@ false
 ]
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 2,
+"Max": 4
 }
 },
 "Ally": false,
@@ -95873,13 +95882,34 @@ false
 },
 "Value": {
 "$type": "RogueEssence.LevelGen.PlaceTerrainMobsStep`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
+"AcceptedTiles": [
+{
+"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
+"Data": {
+"ID": "pit",
+"TileTex": {
+"AutoTileset": "",
+"Associates": [],
+"Layers": [],
+"NeighborCode": -1
+},
+"StableTex": false
+},
+"Effect": {
+"TileLoc": {
+"X": 0,
+"Y": 0
+},
+"ID": "",
+"Revealed": false,
+"Owner": 0,
+"TileStates": []
+}
+}
+],
+"Depth": 0,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.ListMapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 10,
-"Max": 13
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.SpecificTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -95914,35 +95944,14 @@ false
 ]
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 10,
+"Max": 13
 }
 },
-"Ally": false,
-"AcceptedTiles": [
-{
-"$type": "RogueEssence.Dungeon.Tile, RogueEssence",
-"Data": {
-"ID": "pit",
-"TileTex": {
-"AutoTileset": "",
-"Associates": [],
-"Layers": [],
-"NeighborCode": -1
-},
-"StableTex": false
-},
-"Effect": {
-"TileLoc": {
-"X": 0,
-"Y": 0
-},
-"ID": "",
-"Revealed": false,
-"Owner": 0,
-"TileStates": []
-}
-}
-],
-"Depth": 0
+"Ally": false
 }
 },
 {
@@ -96003,6 +96012,8 @@ false
 "TimeLimit": 1000,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -96918,11 +96929,6 @@ false
 "IncludeHalls": false,
 "Spawn": {
 "$type": "RogueEssence.LevelGen.LoopedTeamSpawner`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
-"AmountSpawner": {
-"$type": "RogueElements.RandRange, RogueElements",
-"Min": 1,
-"Max": 1
-},
 "Picker": {
 "$type": "RogueEssence.LevelGen.SpecificTeamSpawner, RogueEssence",
 "Explorer": false,
@@ -96979,6 +96985,11 @@ false
 ]
 }
 ]
+},
+"AmountSpawner": {
+"$type": "RogueElements.RandRange, RogueElements",
+"Min": 1,
+"Max": 1
 }
 },
 "Ally": false,
@@ -97043,6 +97054,8 @@ false
 "TimeLimit": 2000,
 "TileSight": 0,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -98003,6 +98016,8 @@ false
 "TimeLimit": 1000,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -98773,6 +98788,8 @@ false
 "TimeLimit": 1000,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -99366,6 +99383,8 @@ false
 "TimeLimit": 1000,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -99949,6 +99968,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -104670,6 +104691,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -125732,6 +125755,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -146794,6 +146819,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -167856,6 +167883,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -188918,6 +188947,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -209988,6 +210019,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -252340,6 +252373,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -294692,6 +294727,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -337054,6 +337091,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -337880,6 +337919,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -338706,6 +338747,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -339532,6 +339575,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -340358,6 +340403,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -341184,6 +341231,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -341823,6 +341872,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -342462,6 +342513,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -343101,6 +343154,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -343740,6 +343795,8 @@ false
 "TimeLimit": -1,
 "TileSight": 1,
 "CharSight": 1,
+"TileSightRadius": -1,
+"CharSightRadius": -1,
 "ClampCamera": false
 }
 },
@@ -344374,17 +344431,8 @@ false
 ]
 },
 "Name": {
-"DefaultText": "Replay Test Zone\\n{0}F",
-"LocalTexts": {
-"fr": "Zone de Replay Test\\n{0}E",
-"de": "Wiederholungstest Zone\\nE{0}",
-"es": "Zona de Prueba de Replay\\nP{0}",
-"it": "Zona di test Replay\\nP{0}",
-"ko": "리플레이 테스트 존\\n{0}F",
-"ja": "リプレイテストぞーん\\n{0}かい",
-"ja-jp": "リプレイテストゾーン\\n{0}階",
-"zh-hans": "回放测试区域\\n{0}F"
-}
+"DefaultText": "Replay Test Zone\n{0}F",
+"LocalTexts": {}
 },
 "Priority": {
 "str": [

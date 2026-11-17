@@ -220,10 +220,10 @@
     <value>确定</value>
     <comment></comment>  </data>
   <data name="_ENUM_InputType_Diagonal" xml:space="preserve">
-    <value>对角线</value>
+    <value>斜向移动</value>
     <comment></comment>  </data>
   <data name="_ENUM_InputType_ItemMenu" xml:space="preserve">
-    <value>道具菜单</value>
+    <value>道具选项</value>
     <comment></comment>  </data>
   <data name="_ENUM_InputType_LeaderSwap1" xml:space="preserve">
     <value>1号领队</value>
@@ -271,7 +271,7 @@
     <value>招式 4</value>
     <comment></comment>  </data>
   <data name="_ENUM_InputType_SkillMenu" xml:space="preserve">
-    <value>招式菜单</value>
+    <value>招式选项</value>
     <comment></comment>  </data>
   <data name="_ENUM_InputType_SkillPreview" xml:space="preserve">
     <value>招式预览</value>
@@ -286,10 +286,10 @@
     <value>START</value>
     <comment></comment>  </data>
   <data name="_ENUM_InputType_TacticMenu" xml:space="preserve">
-    <value>战术菜单</value>
+    <value>战术选项</value>
     <comment></comment>  </data>
   <data name="_ENUM_InputType_TeamMenu" xml:space="preserve">
-    <value>队伍菜单</value>
+    <value>队伍选项</value>
     <comment></comment>  </data>
   <data name="_ENUM_InputType_TeamMode" xml:space="preserve">
     <value>团队模式</value>
@@ -361,6 +361,9 @@
     <value>命中率</value>
     <comment></comment>  </data>
   <data name="_ENUM_Stat_HP" xml:space="preserve">
+    <value>HP</value>
+    <comment></comment>  </data>
+  <data name="_ENUM_Stat_HP_tinier" xml:space="preserve">
     <value>HP</value>
     <comment></comment>  </data>
   <data name="_ENUM_Stat_MAtk" xml:space="preserve">
@@ -894,6 +897,33 @@
   <data name="MENU_FAVORITE_OFF" xml:space="preserve">
     <value>取消收藏</value>
     <comment></comment>  </data>
+  <data name="MENU_FILTER_ALL" xml:space="preserve">
+    <value>全部</value>
+    <comment></comment>  </data>
+  <data name="MENU_FILTER_BOXES" xml:space="preserve">
+    <value>宝箱</value>
+    <comment></comment>  </data>
+  <data name="MENU_FILTER_EQUIP" xml:space="preserve">
+    <value>装备</value>
+    <comment></comment>  </data>
+  <data name="MENU_FILTER_EXCL" xml:space="preserve">
+    <value>专属</value>
+    <comment></comment>  </data>
+  <data name="MENU_FILTER_FOOD" xml:space="preserve">
+    <value>食物</value>
+    <comment></comment>  </data>
+  <data name="MENU_FILTER_OTHER" xml:space="preserve">
+    <value>其他</value>
+    <comment></comment>  </data>
+  <data name="MENU_FILTER_THROW" xml:space="preserve">
+    <value>投掷</value>
+    <comment></comment>  </data>
+  <data name="MENU_FILTER_TM" xml:space="preserve">
+    <value>招式</value>
+    <comment></comment>  </data>
+  <data name="MENU_FILTER_TOOLS" xml:space="preserve">
+    <value>工具</value>
+    <comment></comment>  </data>
   <data name="MENU_GAMEPAD_TITLE" xml:space="preserve">
     <value>游戏手柄</value>
     <comment></comment>  </data>
@@ -943,7 +973,7 @@
     <value>食用</value>
     <comment>Menu option to eat item</comment>  </data>
   <data name="MENU_ITEM_GIVE" xml:space="preserve">
-    <value>携带</value>
+    <value>转交</value>
     <comment>Menu option to give item to a different team member to hold</comment>  </data>
   <data name="MENU_ITEM_HELD_TITLE" xml:space="preserve">
     <value>{0}的道具</value>
@@ -970,7 +1000,7 @@
     <value>存放</value>
     <comment></comment>  </data>
   <data name="MENU_ITEM_SWAP" xml:space="preserve">
-    <value>交换</value>
+    <value>替换</value>
     <comment>menu option to swap a team member's held item with an item in the inventory</comment>  </data>
   <data name="MENU_ITEM_SWAP_TITLE" xml:space="preserve">
     <value>哪一个？</value>
@@ -1057,13 +1087,13 @@
     <value>Mod加载错误</value>
     <comment></comment>  </data>
   <data name="MENU_MODS_AUTHOR" xml:space="preserve">
-    <value>By: {0}</value>
+    <value>作者 {0}</value>
     <comment></comment>  </data>
   <data name="MENU_MODS_DIFF" xml:space="preserve">
     <value>版本差异</value>
     <comment></comment>  </data>
   <data name="MENU_MODS_MISSING" xml:space="preserve">
-    <value>Missing Mods</value>
+    <value>缺少Mod</value>
     <comment></comment>  </data>
   <data name="MENU_MODS_TITLE" xml:space="preserve">
     <value>Mods</value>
@@ -1474,7 +1504,7 @@
     <value>Lv.</value>
     <comment>For labeling a team member's current level</comment>  </data>
   <data name="MENU_TEAM_MAX" xml:space="preserve">
-    <value>满</value>
+    <value>Max</value>
     <comment></comment>  </data>
   <data name="MENU_TEAM_MET_AT" xml:space="preserve">
     <value>加入于: {0}</value>
@@ -1490,9 +1520,6 @@
     <comment></comment>  </data>
   <data name="MENU_TEAM_PROMOTE_NONE" xml:space="preserve">
     <value>无</value>
-    <comment></comment>  </data>
-  <data name="MENU_TEAM_PROMOTE_SHORT" xml:space="preserve">
-    <value>进化</value>
     <comment></comment>  </data>
   <data name="MENU_TEAM_PROMOTION" xml:space="preserve">
     <value>进化:</value>
@@ -1585,7 +1612,7 @@
     <value>{0}现在无法取下道具。</value>
     <comment></comment>  </data>
   <data name="MSG_CANT_DROP_HERE" xml:space="preserve">
-    <value>道具不能丢在这里。</value>
+    <value>道具不能放在这里。</value>
     <comment></comment>  </data>
   <data name="MSG_CANT_DROP_ITEM" xml:space="preserve">
     <value>{0}现在无法放置道具。</value>
@@ -1843,7 +1870,7 @@
     <value>前方{1}格的{2} {0}</value>
     <comment>Ex. "Foes in 6-Tile Shot", "Foes in 3-Tile Piercing Dash", "Others in 8-Tile Wide-Beam"</comment>  </data>
   <data name="RANGE_LINEAR_PASS" xml:space="preserve">
-    <value>{0} ，可穿墙</value>
+    <value>{0}，可穿墙</value>
     <comment>Takes the phrase created by RANGE_LINEAR and adds "Passes walls" to it if the move passes through walls</comment>  </data>
   <data name="RANGE_LINEAR_PHASE" xml:space="preserve">
     <value>透墙{0}</value>

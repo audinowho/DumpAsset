@@ -54,11 +54,6 @@ function MissionService:OnUpgrade()
   local new_ver = RogueEssence.PathMod.GetVersion(self_guid)
   
   if SV.MissionsEnabled == nil then
-    SV.MissionPrereq =
-    {
-        DungeonsCompleted = {}, --Uses a bitmap to determine which sections are complete (
-        NumDungeonsCompleted = 0
-    }
     SV.DestinationFloorNotified = false
     SV.MonsterHouseMessageNotified = false
     SV.OutlawDefeated = false

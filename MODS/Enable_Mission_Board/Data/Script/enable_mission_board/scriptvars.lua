@@ -17,12 +17,6 @@
 
 SV.MissionsEnabled = false
 
-SV.MissionPrereq =
-{
-    DungeonsCompleted = {}, --Uses a bitmap to determine which sections are complete (
-    NumDungeonsCompleted = 0
-}
-
 SV.DestinationFloorNotified = false
 SV.MonsterHouseMessageNotified = false
 SV.OutlawDefeated = false

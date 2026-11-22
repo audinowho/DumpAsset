@@ -43,25 +43,26 @@ MISSION_GEN.DUNGEON_LIST["faultline_ridge"] = { [0] = "D" } --Faultline Ridge
 MISSION_GEN.DUNGEON_LIST["guildmaster_trail"] = { [0] = "STAR_2" } --Guildmaster Trail
 MISSION_GEN.DUNGEON_LIST["lava_floe_island"] = { [0] = "C", [1] = "STAR_1" } --Lava Floe Island, Abyssal Island
 MISSION_GEN.DUNGEON_LIST["castaway_cave"] = { [0] = "B" } --Castaway Cave
-MISSION_GEN.DUNGEON_LIST["faded_trail"] = { [0] = "E", [1] = "D" } --Faded Trail, Hidden Trail
+MISSION_GEN.DUNGEON_LIST["faded_trail"] = { [0] = "E" } --Faded Trail, Hidden Trail
 MISSION_GEN.DUNGEON_LIST["bramble_woods"] = { [0] = "E", [1] = "D" } --Bramble Woods, Bramble Thicket
 MISSION_GEN.DUNGEON_LIST["trickster_woods"] = { [0] = "C", [1] = "B" } --Trickster Woods, Trickster Maze
 MISSION_GEN.DUNGEON_LIST["overgrown_wilds"] = { [0] = "C", [1] = "B" } --Overgrown Wilds, Exotic Wilds
-MISSION_GEN.DUNGEON_LIST["moonlit_courtyard"] = { [0] = "C", [1] = "A" } --Moonlit Courtyard, Moonlit Temple
+MISSION_GEN.DUNGEON_LIST["moonlit_courtyard"] = { [0] = "C" } --Moonlit Courtyard, Moonlit Temple
 MISSION_GEN.DUNGEON_LIST["ambush_forest"] = { [0] = "B" } --Ambush Forest
 MISSION_GEN.DUNGEON_LIST["tiny_tunnel"] = { [0] = "B" } --Tiny Tunnel
 MISSION_GEN.DUNGEON_LIST["sickly_hollow"] = { [0] = "S" } --Sickly Hollow
 MISSION_GEN.DUNGEON_LIST["secret_garden"] = { [0] = "STAR_3" } --Secret Garden
 MISSION_GEN.DUNGEON_LIST["flyaway_cliffs"] = { [0] = "C" } --Flyaway Cliffs
 MISSION_GEN.DUNGEON_LIST["fertile_valley"] = { [0] = "D", [1] = "C" } --Fertile Valley, Muddy Valley
+MISSION_GEN.DUNGEON_LIST["wayward_wetlands"] = { [0] = "S" }
 MISSION_GEN.DUNGEON_LIST["geode_crevice"] = { [0] = "A" } --Geode Crevice
-MISSION_GEN.DUNGEON_LIST["copper_quarry"] = { [0] = "C", [1] = "B" } --Copper Quarry, Lodestone Quarry
+MISSION_GEN.DUNGEON_LIST["copper_quarry"] = { [0] = "C" } --Copper Quarry, Lodestone Quarry
 MISSION_GEN.DUNGEON_LIST["depleted_basin"] = { [0] = "C" } --Depleted Basin
-MISSION_GEN.DUNGEON_LIST["forsaken_desert"] = { [0] = "A" } --Forsaken Desert
+MISSION_GEN.DUNGEON_LIST["forsaken_desert"] = { [0] = "S" } --Forsaken Desert
 MISSION_GEN.DUNGEON_LIST["relic_tower"] = { [0] = "S" } --Relic Tower
 MISSION_GEN.DUNGEON_LIST["sleeping_caldera"] = { [0] = "B" } --Sleeping Caldera
 MISSION_GEN.DUNGEON_LIST["thunderstruck_pass"] = { [0] = "B" } --Thunderstruck Pass
-MISSION_GEN.DUNGEON_LIST["veiled_ridge"] = { [0] = "B", [1] = "A" } --Veiled Ridge, Illusion Ridge
+MISSION_GEN.DUNGEON_LIST["veiled_ridge"] = { [0] = "B" } --Veiled Ridge, Illusion Ridge
 MISSION_GEN.DUNGEON_LIST["snowbound_path"] = { [0] = "A", [1] = "S" } --Snowbound Path, Glacial Path
 MISSION_GEN.DUNGEON_LIST["treacherous_mountain"] = { [0] = "A" } --Treacherous Mountain
 MISSION_GEN.DUNGEON_LIST["champions_road"] = { [0] = "S" } --Champion's Road (Clouded Road is not eligible for missions)
@@ -2310,49 +2311,31 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 
     --default to mission.
     local mission_type = COMMON.MISSION_BOARD_MISSION
-    if board_type == COMMON.MISSION_BOARD_OUTLAW then mission_type = COMMON.MISSION_BOARD_OUTLAW end
+    if board_type == COMMON.MISSION_BOARD_OUTLAW then
+	  mission_type = COMMON.MISSION_BOARD_OUTLAW
+	end
 
     --get list of potential dungeons for missions, remove any that haven't been completed yet.
     local dungeon_candidates = {}
     local dungeon_segments = {}
     local dungeon_candidate_index_cur = 1
-    local dungeon_difficulties = MISSION_GEN.ShallowCopy(MISSION_GEN.DIFFICULTY)
-    for dungeon_id, cur_dungeon_segments in pairs(SV.MissionPrereq.DungeonsCompleted) do
-		local dungeon_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_id)
+    for dungeon_id, mission_data in pairs(MISSION_GEN.DUNGEON_LIST) do
+        local dungeon_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_id)
         local dungeon_segment_index_cur = 1
-        if MISSION_GEN.DUNGEON_LIST[dungeon_id] ~= nil then
+        if _DATA.Save:GetDungeonUnlock(dungeon_id) == RogueEssence.Data.GameProgress.UnlockState.Completed then
             --Add the expected level
             SV.ExpectedLevel[dungeon_id] = dungeon_summary.Level
             dungeon_candidates[dungeon_candidate_index_cur] = dungeon_id
-            local default_dungeon_candidate_needed = true
-            for dungeon_segment, value in pairs(cur_dungeon_segments) do
-                if MISSION_GEN.DUNGEON_LIST[dungeon_id][dungeon_segment] ~= nil then
-                    local cur_difficulty = MISSION_GEN.DUNGEON_LIST[dungeon_id][dungeon_segment]
+            for dungeon_segment, difficulty in pairs(mission_data) do
 
-                    if dungeon_segments[dungeon_candidate_index_cur] == nil then
-                        dungeon_segments[dungeon_candidate_index_cur] = {}
-                    end
+				if dungeon_segments[dungeon_candidate_index_cur] == nil then
+					dungeon_segments[dungeon_candidate_index_cur] = {}
+				end
 
-                    if dungeon_summary:GetFloorCount(dungeon_segment) > 1 then
-                        dungeon_segments[dungeon_candidate_index_cur][dungeon_segment_index_cur] = dungeon_segment
-                    end
-                    default_dungeon_candidate_needed = false
-					dungeon_segment_index_cur = dungeon_segment_index_cur + 1
-                end
-            end
-
-            if default_dungeon_candidate_needed == true then
-                if MISSION_GEN.DUNGEON_LIST[dungeon_id][0] ~= nil then
-                    local cur_difficulty = MISSION_GEN.DUNGEON_LIST[dungeon_id][0]
-
-                    if dungeon_segments[dungeon_candidate_index_cur] == nil then
-                        dungeon_segments[dungeon_candidate_index_cur] = {}
-                    end
-
-                    if dungeon_summary:GetFloorCount(0) > 1 then
-                        dungeon_segments[dungeon_candidate_index_cur][dungeon_segment_index_cur] = 0
-                    end
-                end
+				if dungeon_summary:GetFloorCount(dungeon_segment) > 1 then
+					dungeon_segments[dungeon_candidate_index_cur][dungeon_segment_index_cur] = dungeon_segment
+				end
+				dungeon_segment_index_cur = dungeon_segment_index_cur + 1
             end
             dungeon_candidate_index_cur = dungeon_candidate_index_cur + 1
         end
@@ -3775,20 +3758,6 @@ function MISSION_GEN.RemoveMissionBackReference()
 end
 
 function MISSION_GEN.EndOfDay(result, segmentID)
-    --Mark the current dungeon as visited
-
-    local cur_zone_name = _ZONE.CurrentZoneID
-
-    if result == RogueEssence.Data.GameProgress.ResultType.Cleared then
-        PrintInfo("Completed zone "..cur_zone_name.." with segment "..segmentID)
-        if SV.MissionPrereq.DungeonsCompleted[cur_zone_name] == nil then
-            SV.MissionPrereq.DungeonsCompleted[cur_zone_name] = { }
-            SV.MissionPrereq.DungeonsCompleted[cur_zone_name][segmentID] = 1
-            SV.MissionPrereq.NumDungeonsCompleted = SV.MissionPrereq.NumDungeonsCompleted + 1
-        elseif SV.MissionPrereq.DungeonsCompleted[cur_zone_name][segmentID] == nil then
-            SV.MissionPrereq.DungeonsCompleted[cur_zone_name][segmentID] = 1
-        end
-    end
 
     MISSION_GEN.RegenerateJobs(result)
 end

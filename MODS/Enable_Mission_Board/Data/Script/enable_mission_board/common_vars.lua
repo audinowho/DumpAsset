@@ -46,22 +46,16 @@ function COMMON.ExitDungeonMissionCheckEx(result, rescue, zoneId, segmentID)
         end
     end
 
-    --send equipped items to storage
+    --take equipped items
     for i = 1, GAME:GetPlayerPartyCount(), 1 do
         item = GAME:GetPlayerEquippedItem(i-1)
         if string.sub(item.ID, 1, 7) == "mission" then
             GAME:TakePlayerEquippedItem(i-1)
         end
     end
-
+	
     if SV.MissionsEnabled then
-
-        MISSION_GEN.EndOfDay(result, segmentID)
-
-        if SV.TemporaryFlags.MissionCompleted then
-            COMMON.EndDungeonDay(result, 'guildmaster_island', -1, 2, 0)
-            return true
-        end
+      MISSION_GEN.EndOfDay(result, segmentID)
     end
 
     return false

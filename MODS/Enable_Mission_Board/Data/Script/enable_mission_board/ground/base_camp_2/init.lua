@@ -20,10 +20,6 @@ function base_camp_2_bulletin.Enter(map)
         GROUND:Unhide("Mission_Board")
     end
 
-    if SV.TemporaryFlags.MissionCompleted then
-        base_camp_2_bulletin.Hand_In_Missions()
-    end
-
   base_enter(map)
 end
 
@@ -31,19 +27,33 @@ end
 function base_camp_2_bulletin.Mission_Board_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
 
+
+  if SV.TemporaryFlags.MissionCompleted then
+    SOUND:FadeOutBGM(40)
+    GAME:FadeOut(false, 40)
+    base_camp_2_bulletin.Hand_In_Missions()
+	return
+  end
   local dungeons_needed = 3 --Number of dungeons needed to unlock the Mission Board
 
   local hero = CH('PLAYER')
   GROUND:CharSetAnim(hero, 'None', true)
-
-  if SV.MissionPrereq.NumDungeonsCompleted >= dungeons_needed then
+  
+  local dungeons_completed = 0
+  for key, value in pairs(MISSION_GEN.DUNGEON_LIST) do
+    if _DATA.Save:GetDungeonUnlock(key) == RogueEssence.Data.GameProgress.UnlockState.Completed then
+	  dungeons_completed = dungeons_completed + 1
+	end
+  end
+  
+  if dungeons_completed >= dungeons_needed then
     local menu = BoardSelectionMenu:new(COMMON.MISSION_BOARD_MISSION)
     UI:SetCustomMenu(menu.menu)
     UI:WaitForChoice()
   else
     UI:ResetSpeaker()
     UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Board_Locked']))
-    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Board_Locked_2'], dungeons_needed - SV.MissionPrereq.NumDungeonsCompleted))
+    UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Board_Locked_2'], dungeons_needed - dungeons_completed))
   end
 
   GROUND:CharEndAnim(hero)

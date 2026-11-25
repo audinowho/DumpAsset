@@ -51,6 +51,8 @@ SV.TakenBoard =
         ClientGender = -1,
         TargetGender = -1,
         BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false,
         BackReference = -1
     },
     {
@@ -71,6 +73,8 @@ SV.TakenBoard =
         ClientGender = -1,
         TargetGender = -1,
         BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false,
         BackReference = -1
     },
     {
@@ -91,6 +95,8 @@ SV.TakenBoard =
         ClientGender = -1,
         TargetGender = -1,
         BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false,
         BackReference = -1
     },
     {
@@ -111,6 +117,8 @@ SV.TakenBoard =
         ClientGender = -1,
         TargetGender = -1,
         BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false,
         BackReference = -1
     },
     {
@@ -131,6 +139,8 @@ SV.TakenBoard =
         ClientGender = -1,
         TargetGender = -1,
         BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false,
         BackReference = -1
     },
     {
@@ -151,6 +161,8 @@ SV.TakenBoard =
         ClientGender = -1,
         TargetGender = -1,
         BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false,
         BackReference = -1
     },
     {
@@ -171,6 +183,8 @@ SV.TakenBoard =
         ClientGender = -1,
         TargetGender = -1,
         BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false,
         BackReference = -1
     },
     {
@@ -191,6 +205,8 @@ SV.TakenBoard =
         ClientGender = -1,
         TargetGender = -1,
         BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false,
         BackReference = -1
     }
 
@@ -221,7 +237,9 @@ SV.MissionBoard =
         Special = "",
         ClientGender = -1,
         TargetGender = -1,
-        BonusReward = ""
+        BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false
     },
     {
         Client = "",
@@ -240,7 +258,9 @@ SV.MissionBoard =
         Special = "",
         ClientGender = -1,
         TargetGender = -1,
-        BonusReward = ""
+        BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false
     },
     {
         Client = "",
@@ -259,7 +279,9 @@ SV.MissionBoard =
         Special = "",
         ClientGender = -1,
         TargetGender = -1,
-        BonusReward = ""
+        BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false
     },
     {
         Client = "",
@@ -278,7 +300,9 @@ SV.MissionBoard =
         Special = "",
         ClientGender = -1,
         TargetGender = -1,
-        BonusReward = ""
+        BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false
     },
     {
         Client = "",
@@ -297,7 +321,9 @@ SV.MissionBoard =
         Special = "",
         ClientGender = -1,
         TargetGender = -1,
-        BonusReward = ""
+        BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false
     },
     {
         Client = "",
@@ -316,7 +342,9 @@ SV.MissionBoard =
         Special = "",
         ClientGender = -1,
         TargetGender = -1,
-        BonusReward = ""
+        BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false
     },
     {
         Client = "",
@@ -335,7 +363,9 @@ SV.MissionBoard =
         Special = "",
         ClientGender = -1,
         TargetGender = -1,
-        BonusReward = ""
+        BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false
     },
     {
         Client = "",
@@ -354,7 +384,9 @@ SV.MissionBoard =
         Special = "",
         ClientGender = -1,
         TargetGender = -1,
-        BonusReward = ""
+        BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false
     }
 
 }
@@ -379,7 +411,9 @@ SV.OutlawBoard =
         Special = "",
         ClientGender = -1,
         TargetGender = -1,
-        BonusReward = ""
+        BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false
     },
     {
         Client = "",
@@ -398,7 +432,9 @@ SV.OutlawBoard =
         Special = "",
         ClientGender = -1,
         TargetGender = -1,
-        BonusReward = ""
+        BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false
     },
     {
         Client = "",
@@ -417,7 +453,9 @@ SV.OutlawBoard =
         Special = "",
         ClientGender = -1,
         TargetGender = -1,
-        BonusReward = ""
+        BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false
     },
     {
         Client = "",
@@ -436,7 +474,9 @@ SV.OutlawBoard =
         Special = "",
         ClientGender = -1,
         TargetGender = -1,
-        BonusReward = ""
+        BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false
     },
     {
         Client = "",
@@ -455,7 +495,9 @@ SV.OutlawBoard =
         Special = "",
         ClientGender = -1,
         TargetGender = -1,
-        BonusReward = ""
+        BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false
     },
     {
         Client = "",
@@ -474,7 +516,9 @@ SV.OutlawBoard =
         Special = "",
         ClientGender = -1,
         TargetGender = -1,
-        BonusReward = ""
+        BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false
     },
     {
         Client = "",
@@ -493,7 +537,9 @@ SV.OutlawBoard =
         Special = "",
         ClientGender = -1,
         TargetGender = -1,
-        BonusReward = ""
+        BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false
     },
     {
         Client = "",
@@ -512,6 +558,8 @@ SV.OutlawBoard =
         Special = "",
         ClientGender = -1,
         TargetGender = -1,
-        BonusReward = ""
+        BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false
     }
 }

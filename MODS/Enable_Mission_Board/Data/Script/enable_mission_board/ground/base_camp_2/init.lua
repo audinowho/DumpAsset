@@ -32,6 +32,7 @@ function base_camp_2_bulletin.Mission_Board_Action(obj, activator)
     SOUND:FadeOutBGM(40)
     GAME:FadeOut(false, 40)
     base_camp_2_bulletin.Hand_In_Missions()
+	GAME:FadeIn(20)
 	return
   end
   local dungeons_needed = 3 --Number of dungeons needed to unlock the Mission Board
@@ -90,6 +91,8 @@ function base_camp_2_bulletin.Hand_In_Missions()
         ClientGender = -1,
         TargetGender = -1,
         BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false,
         BackReference = -1
       }
     end
@@ -105,14 +108,47 @@ function base_camp_2_bulletin.Hand_In_Missions()
   MISSION_GEN.SortTaken()
 end
 
+
+function base_camp_2_bulletin.GiveExcl(species)
+	  local rarity = _DATA.UniversalData:Get(luanet.ctype(RarityType))
+	  
+	  local item_pool = {}
+	  for ii = 1, 1, 1 do
+	    if rarity.RarityMap:ContainsKey(species) then
+	      local rarity_dict = rarity.RarityMap[species]
+		  if rarity_dict:ContainsKey(ii) then
+		    local items = rarity_dict[ii]
+			for jj = 0, items.Count - 1, 1 do
+			  local item_id = items[jj]
+			  local summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Item]:Get(item_id)
+			  if summary.Released then
+			    table.insert(item_pool, item_id)
+			  end
+			end
+		  end
+	    end
+	  end
+	  
+	  if #item_pool == 0 then
+	    -- Give the dust of the target's primary type
+		local form = _DATA:GetMonster(species).Forms[0]
+		table.insert(item_pool, "xcl_element_" .. form.Element1 .. "_dust")
+	  end
+	  
+	  local rand_idx = math.random(1, #item_pool)
+	  return item_pool[rand_idx]
+end
+
+RarityType = luanet.import_type('PMDC.Data.RarityData')
+
 --takes a job and plays an outlaw reward scene depending on the job.
 function base_camp_2_bulletin.Outlaw_Job_Clear(job)
   local hero = CH('PLAYER')
   GAME:CutsceneMode(true)
   UI:ResetSpeaker()
 
-  GROUND:TeleportTo(hero, 100, 600, Direction.Up)
-  GAME:MoveCamera(90, 565, 1, false)
+  GROUND:TeleportTo(hero, 100, 592, Direction.Up)
+  GAME:MoveCamera(90, 564, 1, false)
 
   SOUND:StopBGM()
 
@@ -124,9 +160,9 @@ function base_camp_2_bulletin.Outlaw_Job_Clear(job)
     local magnemite_left, magnemite_right, magna =
     COMMON.MakeCharactersFromList({
       --{'Sandile', 100, 555, Direction.Down},
-      {'Magnemite_Left', 80, 555, Direction.Down},
-      {'Magnemite_Right', 120, 555, Direction.Down},
-      {'Magnezone', 100, 575, Direction.Down}
+      {'Magnemite_Left', 80, 544, Direction.Down},
+      {'Magnemite_Right', 120, 544, Direction.Down},
+      {'Magnezone', 100, 564, Direction.Down}
     })
 
     local outlaw_gender = job.TargetGender
@@ -134,7 +170,7 @@ function base_camp_2_bulletin.Outlaw_Job_Clear(job)
 
     local outlaw_monster = RogueEssence.Dungeon.MonsterID(job.Target, 0, "normal", outlaw_gender)
 
-    local outlaw = RogueEssence.Ground.GroundChar(outlaw_monster, RogueElements.Loc(100, 555), Direction.Down, outlaw_monster.Species, 'Outlaw')
+    local outlaw = RogueEssence.Ground.GroundChar(outlaw_monster, RogueElements.Loc(100, 544), Direction.Down, outlaw_monster.Species, 'Outlaw')
     outlaw:ReloadEvents()
     GAME:GetCurrentGround():AddTempChar(outlaw)
 
@@ -163,6 +199,19 @@ function base_camp_2_bulletin.Outlaw_Job_Clear(job)
       GAME:WaitFrames(20)
       COMMON.RewardItem(job.BonusReward)
     end
+	
+	if job.RecruitReward then
+		print("RECRUITED " .. outlaw_monster.Species)
+	end
+	if job.ExclReward then
+	  local excl_reward = base_camp_2_bulletin.GiveExcl(outlaw_monster.Species)
+	  
+      UI:SetSpeaker(magna)
+      GAME:WaitFrames(20)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Generic_Reward_2']))
+      GAME:WaitFrames(20)
+      COMMON.RewardItem(excl_reward)
+	end
 
     GAME:WaitFrames(20)
     base_camp_2_bulletin.RewardEXP(job)
@@ -203,9 +252,11 @@ function base_camp_2_bulletin.Outlaw_Job_Clear(job)
     client_gender = COMMON.NumToGender(client_gender)
     client_gender = client_gender
 
+    local outlaw_monster = RogueEssence.Dungeon.MonsterID(job.Target, 0, "normal", outlaw_gender)
+
     local client_monster = RogueEssence.Dungeon.MonsterID(job.Client, 0, "normal", client_gender)
 
-    local client = RogueEssence.Ground.GroundChar(client_monster, RogueElements.Loc(100, 575), Direction.Down, job.Client:gsub("^%l", string.upper), client_monster.Species)
+    local client = RogueEssence.Ground.GroundChar(client_monster, RogueElements.Loc(100, 564), Direction.Down, job.Client:gsub("^%l", string.upper), client_monster.Species)
     client:ReloadEvents()
     GAME:GetCurrentGround():AddTempChar(client)
 
@@ -234,7 +285,20 @@ function base_camp_2_bulletin.Outlaw_Job_Clear(job)
       GAME:WaitFrames(20)
       COMMON.RewardItem(job.BonusReward)
     end
-
+	
+	if job.RecruitReward then
+		print("RECRUITED " .. outlaw_monster.Species)
+	end
+	if job.ExclReward then
+	  local excl_reward = base_camp_2_bulletin.GiveExcl(outlaw_monster.Species)
+	  
+      UI:SetSpeaker(client)
+      GAME:WaitFrames(20)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Generic_Reward_2']))
+      GAME:WaitFrames(20)
+      COMMON.RewardItem(excl_reward)
+	end
+	
     GAME:WaitFrames(20)
     base_camp_2_bulletin.RewardEXP(job)
     GAME:WaitFrames(20)
@@ -254,8 +318,8 @@ function base_camp_2_bulletin.Mission_Job_Clear(job)
   GAME:CutsceneMode(true)
   UI:ResetSpeaker()
 
-  GROUND:TeleportTo(hero, 100, 600, Direction.Up)
-  GAME:MoveCamera(90, 565, 1, false)
+  GROUND:TeleportTo(hero, 100, 592, Direction.Up)
+  GAME:MoveCamera(90, 564, 1, false)
   SOUND:StopBGM()
 
   local money = false
@@ -267,7 +331,7 @@ function base_camp_2_bulletin.Mission_Job_Clear(job)
     client_gender = COMMON.NumToGender(client_gender)
 
     local client_monster = RogueEssence.Dungeon.MonsterID(job.Client, 0, "normal", client_gender)
-    local client = RogueEssence.Ground.GroundChar(client_monster, RogueElements.Loc(100, 575), Direction.Down, job.Client:gsub("^%l", string.upper), client_monster.Species)
+    local client = RogueEssence.Ground.GroundChar(client_monster, RogueElements.Loc(100, 564), Direction.Down, job.Client:gsub("^%l", string.upper), client_monster.Species)
     client:ReloadEvents()
     GAME:GetCurrentGround():AddTempChar(client)
 
@@ -307,7 +371,20 @@ function base_camp_2_bulletin.Mission_Job_Clear(job)
       GAME:WaitFrames(20)
       COMMON.RewardItem(job.BonusReward)
     end
-
+	
+	if job.RecruitReward then
+		print("RECRUITED " .. client_monster.Species)
+	end
+	if job.ExclReward then
+	  local excl_reward = base_camp_2_bulletin.GiveExcl(client_monster.Species)
+	  
+      UI:SetSpeaker(client)
+      GAME:WaitFrames(20)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Generic_Reward_2']))
+      GAME:WaitFrames(20)
+      COMMON.RewardItem(excl_reward)
+	end
+	
     GAME:WaitFrames(20)
     base_camp_2_bulletin.RewardEXP(job)
     GAME:WaitFrames(20)
@@ -327,7 +404,7 @@ function base_camp_2_bulletin.Mission_Job_Clear(job)
 
     local client_monster = RogueEssence.Dungeon.MonsterID(job.Client, 0, "normal", client_gender)
 
-    local client = RogueEssence.Ground.GroundChar(client_monster, RogueElements.Loc(80, 575), Direction.Down, job.Client:gsub("^%l", string.upper), client_monster.Species)
+    local client = RogueEssence.Ground.GroundChar(client_monster, RogueElements.Loc(80, 564), Direction.Down, job.Client:gsub("^%l", string.upper), client_monster.Species)
     client:ReloadEvents()
     GAME:GetCurrentGround():AddTempChar(client)
 
@@ -337,7 +414,7 @@ function base_camp_2_bulletin.Mission_Job_Clear(job)
     local target_monster = RogueEssence.Dungeon.MonsterID(job.Target, 0, "normal", target_gender)
     target_monster.Gender = _DATA:GetMonster(job.Target).Forms[0]:RollGender(_ZONE.CurrentGround.Rand)
 
-    local target = RogueEssence.Ground.GroundChar(target_monster, RogueElements.Loc(120, 575), Direction.Down, job.Target:gsub("^%l", string.upper), target_monster.Species)
+    local target = RogueEssence.Ground.GroundChar(target_monster, RogueElements.Loc(120, 564), Direction.Down, job.Target:gsub("^%l", string.upper), target_monster.Species)
     target:ReloadEvents()
     GAME:GetCurrentGround():AddTempChar(target)
 
@@ -377,7 +454,20 @@ function base_camp_2_bulletin.Mission_Job_Clear(job)
       GAME:WaitFrames(20)
       COMMON.RewardItem(job.BonusReward)
     end
-
+	
+	if job.RecruitReward then
+		print("RECRUITED " .. client_monster.Species)
+	end
+	if job.ExclReward then
+	  local excl_reward = base_camp_2_bulletin.GiveExcl(client_monster.Species)
+	  
+      UI:SetSpeaker(client)
+      GAME:WaitFrames(20)
+      UI:WaitShowDialogue(STRINGS:Format(MapStrings['Mission_Generic_Reward_2']))
+      GAME:WaitFrames(20)
+      COMMON.RewardItem(excl_reward)
+	end
+	
     GAME:WaitFrames(20)
     base_camp_2_bulletin.RewardEXP(job)
     GAME:WaitFrames(20)

@@ -61,6 +61,9 @@ function ITEM_SCRIPT.CastawayCaveShift(owner, ownerChar, context, args)
 	  GAME:WaitFrames(60)
 	  _ZONE.CurrentMap.Music = "Castaway Cave 2.ogg"
 	  SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
+	  local escape_status = RogueEssence.Dungeon.MapStatus("escape_sequence")
+      escape_status:LoadFromData()
+      TASK:WaitTask(_DUNGEON:AddMapStatus(escape_status))
 	  _ZONE.CurrentMap.MapEffect.OnMapTurnEnds:Add(RogueElements.Priority(15), PMDC.Dungeon.RespawnFromEligibleEvent(9, 50))
 	  for ii = 1, 3, 1 do
 		PMDC.Dungeon.RespawnFromEligibleEvent.Respawn()
@@ -132,6 +135,10 @@ function ITEM_SCRIPT.SleepingCalderaShift(owner, ownerChar, context, args)
 	  --call recalculate all autotiles for the entire map
 	  _ZONE.CurrentMap:CalculateAutotiles(RogueElements.Loc(0, 0), RogueElements.Loc(_ZONE.CurrentMap.Width, _ZONE.CurrentMap.Height))
 	  _ZONE.CurrentMap:CalculateTerrainAutotiles(RogueElements.Loc(0, 0), RogueElements.Loc(_ZONE.CurrentMap.Width, _ZONE.CurrentMap.Height))
+	  
+	  local escape_status = RogueEssence.Dungeon.MapStatus("escape_sequence")
+      escape_status:LoadFromData()
+      TASK:WaitTask(_DUNGEON:AddMapStatus(escape_status))
 	  
 	  _ZONE.CurrentMap.MapEffect.OnMapTurnEnds:Add(RogueElements.Priority(15), PMDC.Dungeon.RespawnFromEligibleEvent(15, 160))
 	  for ii = 1, 3, 1 do

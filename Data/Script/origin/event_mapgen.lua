@@ -685,7 +685,18 @@ function FLOOR_GEN_SCRIPT.GeodeCreviceRevisit(map, args)
   
   if item ~= nil then
     item.Value = "box_deluxe"
-    item.HiddenValue = "empty"
+	local inside_val = _DATA.Save.Rand:Next(5)
+    if inside_val == 0 then
+      item.HiddenValue = "xcl_element_electric_silk"
+    elseif inside_val == 1 then
+      item.HiddenValue = "xcl_element_fire_silk"
+    elseif inside_val == 2 then
+      item.HiddenValue = "xcl_element_water_silk"
+    elseif inside_val == 3 then
+      item.HiddenValue = "xcl_element_grass_silk"
+    else
+      item.HiddenValue = "xcl_element_normal_silk"
+  end
   end
   
 end

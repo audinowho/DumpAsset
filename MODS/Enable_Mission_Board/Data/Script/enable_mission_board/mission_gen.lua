@@ -27,6 +27,8 @@
 --Difficulty's point ranks
 MISSION_GEN = {}
 
+require 'enable_mission_board.client_gen'
+
 --MISSION_GEN.DUNGEON_LIST = {'tropical_path', 'faultline_ridge', 'tiny_tunnel', 'guildmaster_trail',
 --							'lava_floe_island', 'castaway_cave', 'eon_island', 'lost_seas', 'inscribed_cave', 'prism_isles',
 --							'faded_trail', 'bramble_woods', 'trickster_woods', 'overgrown_wilds', 'moonlit_courtyard', 'ambush_forest', 'energy_garden', 'sickly_hollow', 'secret_garden',
@@ -43,25 +45,26 @@ MISSION_GEN.DUNGEON_LIST["faultline_ridge"] = { [0] = "D" } --Faultline Ridge
 MISSION_GEN.DUNGEON_LIST["guildmaster_trail"] = { [0] = "STAR_2" } --Guildmaster Trail
 MISSION_GEN.DUNGEON_LIST["lava_floe_island"] = { [0] = "C", [1] = "STAR_1" } --Lava Floe Island, Abyssal Island
 MISSION_GEN.DUNGEON_LIST["castaway_cave"] = { [0] = "B" } --Castaway Cave
-MISSION_GEN.DUNGEON_LIST["faded_trail"] = { [0] = "E", [1] = "D" } --Faded Trail, Hidden Trail
+MISSION_GEN.DUNGEON_LIST["faded_trail"] = { [0] = "E" } --Faded Trail, Hidden Trail
 MISSION_GEN.DUNGEON_LIST["bramble_woods"] = { [0] = "E", [1] = "D" } --Bramble Woods, Bramble Thicket
 MISSION_GEN.DUNGEON_LIST["trickster_woods"] = { [0] = "C", [1] = "B" } --Trickster Woods, Trickster Maze
 MISSION_GEN.DUNGEON_LIST["overgrown_wilds"] = { [0] = "C", [1] = "B" } --Overgrown Wilds, Exotic Wilds
-MISSION_GEN.DUNGEON_LIST["moonlit_courtyard"] = { [0] = "C", [1] = "A" } --Moonlit Courtyard, Moonlit Temple
+MISSION_GEN.DUNGEON_LIST["moonlit_courtyard"] = { [0] = "C" } --Moonlit Courtyard, Moonlit Temple
 MISSION_GEN.DUNGEON_LIST["ambush_forest"] = { [0] = "B" } --Ambush Forest
 MISSION_GEN.DUNGEON_LIST["tiny_tunnel"] = { [0] = "B" } --Tiny Tunnel
 MISSION_GEN.DUNGEON_LIST["sickly_hollow"] = { [0] = "S" } --Sickly Hollow
 MISSION_GEN.DUNGEON_LIST["secret_garden"] = { [0] = "STAR_3" } --Secret Garden
 MISSION_GEN.DUNGEON_LIST["flyaway_cliffs"] = { [0] = "C" } --Flyaway Cliffs
 MISSION_GEN.DUNGEON_LIST["fertile_valley"] = { [0] = "D", [1] = "C" } --Fertile Valley, Muddy Valley
+MISSION_GEN.DUNGEON_LIST["wayward_wetlands"] = { [0] = "S" }
 MISSION_GEN.DUNGEON_LIST["geode_crevice"] = { [0] = "A" } --Geode Crevice
-MISSION_GEN.DUNGEON_LIST["copper_quarry"] = { [0] = "C", [1] = "B" } --Copper Quarry, Lodestone Quarry
+MISSION_GEN.DUNGEON_LIST["copper_quarry"] = { [0] = "C" } --Copper Quarry, Lodestone Quarry
 MISSION_GEN.DUNGEON_LIST["depleted_basin"] = { [0] = "C" } --Depleted Basin
-MISSION_GEN.DUNGEON_LIST["forsaken_desert"] = { [0] = "A" } --Forsaken Desert
+MISSION_GEN.DUNGEON_LIST["forsaken_desert"] = { [0] = "S" } --Forsaken Desert
 MISSION_GEN.DUNGEON_LIST["relic_tower"] = { [0] = "S" } --Relic Tower
 MISSION_GEN.DUNGEON_LIST["sleeping_caldera"] = { [0] = "B" } --Sleeping Caldera
 MISSION_GEN.DUNGEON_LIST["thunderstruck_pass"] = { [0] = "B" } --Thunderstruck Pass
-MISSION_GEN.DUNGEON_LIST["veiled_ridge"] = { [0] = "B", [1] = "A" } --Veiled Ridge, Illusion Ridge
+MISSION_GEN.DUNGEON_LIST["veiled_ridge"] = { [0] = "B" } --Veiled Ridge, Illusion Ridge
 MISSION_GEN.DUNGEON_LIST["snowbound_path"] = { [0] = "A", [1] = "S" } --Snowbound Path, Glacial Path
 MISSION_GEN.DUNGEON_LIST["treacherous_mountain"] = { [0] = "A" } --Treacherous Mountain
 MISSION_GEN.DUNGEON_LIST["champions_road"] = { [0] = "S" } --Champion's Road (Clouded Road is not eligible for missions)
@@ -440,94 +443,7 @@ MISSION_GEN.FLAVOR_BOTTOM =  {
     }
 }
 
-MISSION_GEN.POKEMON = {
-    --weak mons for easy missions
-    TIER_LOW =
-    {"abra","amaura","anorith","applin","archen","aron","arrokuda","axew","azurill",
-     "baltoy","bagon","barboach","bayleef","beldum","bellsprout","bidoof","bonsly","bounsweet","bronzor","budew","buizel","bulbasaur","buneary","burmy",
-     "cacnea","carvanha","cascoon","caterpie","charcadet","charmander","cherubi","chespin","chikorita","chimchar","chinchou","chingling","clamperl","clauncher","cleffa","clobbopus","combee","corphish","cottonee","cranidos","croagunk","cubchoo","cutiefly","cyndaquil",
-     "darumaka","deerling","deino","diglett","doduo","dratini","drifloon","dreepy","drowzee","duskull",
-     "ekans","electrike","elekid","elgyem","espurr","exeggcute",
-     "feebas","fennekin","ferroseed","fidough","finneon","flabebe","fletchling","fomantis","foongus","froakie","fuecoco",
-     "gastly","geodude","gible","glameow","goldeen","goomy","gothita","grimer","growlithe","gulpin",
-     "happiny","hatenna","helioptile","hippopotas","honedge","hoothoot","hoppip","horsea","houndour",
-     "igglybuff",
-     "jangmo_o","joltik",
-     "kabuto","kakuna","koffing","krabby","kricketot",
-     "larvesta","larvitar","ledyba","lileep","lillipup","litleo","litten","litwick","lotad","luvdisc",
-     "machop","magby","magikarp","magnemite","makuhita","mankey","mantyke","mareanie","mareep","meditite","metapod","mienfoo","mime_jr","minccino","morelull","mudbray","munna","mudkip","murkrow",
-     "natu","nickit","nincada","noibat","nosepass","numel","nymble",
-     "oddish","omanyte","onix","oshawott",
-     "pansear","paras","patrat","pawmi","pawniard","petilil","phantump","pidgey","pidove","pineco","piplup","poliwag","ponyta","poochyena","popplio","porygon","psyduck","pumpkaboo","purrloin",
-     "quaxly",
-     "ralts","rattata","remoraid","rhyhorn","roggenrola","rowlet",
-     "salandit","sandile","sandshrew","sandygast","scraggy","seedot","seel","sentret","sewaddle","shellder","shellos","shieldon","shinx","shroomish","shuppet","silcoon","sinistea","skorupi","slakoth","slowpoke","slugma","smoochum","sneasel","snivy","snom","snorunt","snover","snubbull","sobble","solosis","spearow","spheal","spinarak","spoink","sprigatito","spritzee","squirtle","starly","staryu","stufful","stunky","sunkern","surskit","swablu","swinub","swirlix",
-     "taillow","teddiursa","tentacool","tepig","tinkatink","torchic","togepi","totodile","trapinch","treecko","trubbish","turtwig","tympole","tyrogue",
 
-     "vanillite","venonat","voltorb",
-     "wailmer","watchog","weedle","whismur","woobat","wooloo","wooper","wurmple","wynaut",
-
-
-     "zigzagoon","zubat"},
-
-    --middling mons for medium missions
-    TIER_MID =
-    {"aipom","arbok","ariados","audino",
-     "beautifly","beedrill","bibarel","bisharp","braixen","breloom","brionne","butterfree",
-     "carbink","carnivine","castform","chansey","charmeleon","chatot","cherrim","chimecho","clefairy","combusken","comfey","corsola","cramorant","croconaw",
-     "dartrix","delibird","dewott","dhelmise","ditto","dodrio","doublade","dragalge","dragonair","drakloak","dunsparce","duosion","dustox",
-     "eiscue","electabuzz","emboar","emolga",
-     "farfetchd","finizen","flaaffy","flapple","floette","fraxure","furret","furfrou",
-     "gabite","girafarig","gligar","gloom","golbat","gothorita","granbull","graveler","grotle","grovyle",
-     "hattrem","hakamo_o","haunter","herdier",
-     "illumise","indeedee","ivysaur",
-     "jigglypuff","jynx",
-     "kadabra","kangaskhan","kirlia","klefki","kricketune",
-     "lairon","lampent","ledian","liepard","linoone","lombre","loudred","lunatone","luxio",
-     "machoke","magmar","magneton","maractus","marill","marshtomp","masquerain","mawile","metang","mightyena","miltank","mimikyu","minior","minun","misdreavus","monferno","morgrem","morpeko","mothim","mr_mime","munchlax",
-     "nidorina","nidorino","ninjask","noctowl","nuzleaf",
-
-     "pachirisu","palpitoad","parasect","pidgeotto","pignite","piloswine","plusle","poliwhirl","porygon2","prinplup","pupitar",
-     "quilava","qwilfish",
-     "raboot","raticate","relicanth","ribombee","roselia",
-     "sableye","scyther","seadra","sealeo","servine","seviper","shedinja","shelgon","shuckle","skiploom","sliggoo","smeargle","solrock","spinda","stantler","staravia","steenee","sudowoodo","sunflora","swadloon",
-     "tangela","thievul","tinkatuff","togedemaru","togetic","torkoal","tropius",
-
-     "vanillish","venomoth","vespiquen","vibrava","vigoroth","volbeat",
-     "wartortle","weepinbell","wobbuffet","wormadam",
-
-     "yanma",
-     "zangoose","zorua","zweilous"},
-
-    --strong pokemon for difficult missions
-    TIER_HIGH =
-    {"absol","aerodactyl","aegislash","aggron","alakazam","alcremie","altaria","ambipom","ampharos","appletun","arcanine","archeops","armaldo","aurorus","azumarill",
-     "banette","bastiodon","bellibolt","bellossom","blissey","blastoise","blaziken","braviary","bronzong",
-     "cacturne","camerupt","chandelure","charizard","cinderace","clawitzer","claydol","clefable","cloyster","corviknight","cradily","crawdaunt","crobat","cursola",
-     "decidueye","delphox","dewgong","donphan","dragapult","dragonite","drampa","drapion","drifblim","dugtrio","dusclops","dusknoir",
-     "eldegoss","electivire","empoleon","escavalier","exeggutor","exploud",
-     "fearow","feraligatr","ferrothorn","floatzel","florges","flygon","forretress","froslass","frosmoth",
-     "gallade","galvantula","garchomp","gardevoir","gastrodon","gengar","glalie","glimmora","gliscor","golduck","golem","golisopod","goodra","gorebyss","gothitelle","gourgeist","greninja","grumpig","gyarados",
-     "hariyama","hatterene","haxorus","heliolisk","heracross","hippowdon","hitmonchan","hitmonlee","hitmontop","honchkrow","houndoom","huntail","hydreigon","hypno",
-     "incineroar","infernape",
-     "jumpluff",
-     "kabutops","kingdra","kingambit","kingler","kommo_o",
-     "lanturn","lapras","leavanny","lilligant","lopunny","ludicolo","lumineon","lurantis","luxray","lycanroc",
-     "machamp","magcargo","magmortar","magnezone","mamoswine","mandibuzz","manectric","mantine","maushold","medicham","meganium","meowstic","metagross","mienshao","milotic","mismagius","muk","musharna",
-     "nidoking","nidoqueen","noivern",
-     "octillery","omastar","overqwil",
-     "pawmot","pidgeot","pinsir","politoed","poliwrath","porygon_z","primarina","primeape","probopass","purugly",
-     "quagsire",
-     "rampardos","rapidash","reuniclus","rhydon","rhyperior","roserade",
-     "salamence","salazzle","samurott","sandslash","sawsbuck","sceptile","scizor","scolipede","scorbunny","scrafty","seaking","serperior","sharpedo","shiftry","sirfetchd","skarmory","skuntank","slaking","slowbro","slowking","snorlax","spiritomb","staraptor","starmie","steelix","stoutland","swalot","swampert","swellow","swoobat",
-     "tangrowth","tauros","tentacruel","tinkaton","togekiss","torterra","toxicroak","toxtricity","tsareena","typhlosion","tyranitar",
-     "ursaring",
-     "vanilluxe","venusaur","victreebel","vileplume","volcanion",
-     "wailord","walrein","weezing","whimsicott","whiscash","wigglytuff",
-     "xatu",
-     "yamask","yanmega",
-     "zoroark"}
-}
 
 --weighting of possible client/target pokemon based on difficulty of mission
 MISSION_GEN.DIFF_POKEMON = {
@@ -1957,9 +1873,9 @@ function MISSION_GEN.ResetBoards()
     SV.StairType = {}
 
     --jobs on the mission board.
-    SV.MissionBoard =
-    {
-        {
+    SV.MissionBoard = { }
+	for i = 8, 1, -1 do
+	  SV.MissionBoard[i] =  {
             Client = "",
             Target = "",
             Flavor = "",
@@ -1976,148 +1892,16 @@ function MISSION_GEN.ResetBoards()
             Special = "",
             ClientGender = -1,
             TargetGender = -1,
-            BonusReward = ""
-        },
-        {
-            Client = "",
-            Target = "",
-            Flavor = "",
-            Title = "",
-            Zone = "",
-            Segment = -1,
-            Floor = -1,
-            Reward = "",
-            Type = -1,
-            Completion = -1,
-            Taken = false,
-            Difficulty = "",
-            Item = "",
-            Special = "",
-            ClientGender = -1,
-            TargetGender = -1,
-            BonusReward = ""
-        },
-        {
-            Client = "",
-            Target = "",
-            Flavor = "",
-            Title = "",
-            Zone = "",
-            Segment = -1,
-            Floor = -1,
-            Reward = "",
-            Type = -1,
-            Completion = -1,
-            Taken = false,
-            Difficulty = "",
-            Item = "",
-            Special = "",
-            ClientGender = -1,
-            TargetGender = -1,
-            BonusReward = ""
-        },
-        {
-            Client = "",
-            Target = "",
-            Flavor = "",
-            Title = "",
-            Zone = "",
-            Segment = -1,
-            Floor = -1,
-            Reward = "",
-            Type = -1,
-            Completion = -1,
-            Taken = false,
-            Difficulty = "",
-            Item = "",
-            Special = "",
-            ClientGender = -1,
-            TargetGender = -1,
-            BonusReward = ""
-        },
-        {
-            Client = "",
-            Target = "",
-            Flavor = "",
-            Title = "",
-            Zone = "",
-            Segment = -1,
-            Floor = -1,
-            Reward = "",
-            Type = -1,
-            Completion = -1,
-            Taken = false,
-            Difficulty = "",
-            Item = "",
-            Special = "",
-            ClientGender = -1,
-            TargetGender = -1,
-            BonusReward = ""
-        },
-        {
-            Client = "",
-            Target = "",
-            Flavor = "",
-            Title = "",
-            Zone = "",
-            Segment = -1,
-            Floor = -1,
-            Reward = "",
-            Type = -1,
-            Completion = -1,
-            Taken = false,
-            Difficulty = "",
-            Item = "",
-            Special = "",
-            ClientGender = -1,
-            TargetGender = -1,
-            BonusReward = ""
-        },
-        {
-            Client = "",
-            Target = "",
-            Flavor = "",
-            Title = "",
-            Zone = "",
-            Segment = -1,
-            Floor = -1,
-            Reward = "",
-            Type = -1,
-            Completion = -1,
-            Taken = false,
-            Difficulty = "",
-            Item = "",
-            Special = "",
-            ClientGender = -1,
-            TargetGender = -1,
-            BonusReward = ""
-        },
-        {
-            Client = "",
-            Target = "",
-            Flavor = "",
-            Title = "",
-            Zone = "",
-            Segment = -1,
-            Floor = -1,
-            Reward = "",
-            Type = -1,
-            Completion = -1,
-            Taken = false,
-            Difficulty = "",
-            Item = "",
-            Special = "",
-            ClientGender = -1,
-            TargetGender = -1,
-            BonusReward = ""
+            BonusReward = "",
+            RecruitReward = false,
+            ExclReward = false,
         }
-
-    }
+	end
 
     --Jobs on the outlaw board.
-    SV.OutlawBoard =
-    {
-        {
+    SV.OutlawBoard = { }
+	for i = 8, 1, -1 do
+	  SV.OutlawBoard[i] =  {
             Client = "",
             Target = "",
             Flavor = "",
@@ -2134,142 +1918,11 @@ function MISSION_GEN.ResetBoards()
             Special = "",
             ClientGender = -1,
             TargetGender = -1,
-            BonusReward = ""
-        },
-        {
-            Client = "",
-            Target = "",
-            Flavor = "",
-            Title = "",
-            Zone = "",
-            Segment = -1,
-            Floor = -1,
-            Reward = "",
-            Type = -1,
-            Completion = -1,
-            Taken = false,
-            Difficulty = "",
-            Item = "",
-            Special = "",
-            ClientGender = -1,
-            TargetGender = -1,
-            BonusReward = ""
-        },
-        {
-            Client = "",
-            Target = "",
-            Flavor = "",
-            Title = "",
-            Zone = "",
-            Segment = -1,
-            Floor = -1,
-            Reward = "",
-            Type = -1,
-            Completion = -1,
-            Taken = false,
-            Difficulty = "",
-            Item = "",
-            Special = "",
-            ClientGender = -1,
-            TargetGender = -1,
-            BonusReward = ""
-        },
-        {
-            Client = "",
-            Target = "",
-            Flavor = "",
-            Title = "",
-            Zone = "",
-            Segment = -1,
-            Floor = -1,
-            Reward = "",
-            Type = -1,
-            Completion = -1,
-            Taken = false,
-            Difficulty = "",
-            Item = "",
-            Special = "",
-            ClientGender = -1,
-            TargetGender = -1,
-            BonusReward = ""
-        },
-        {
-            Client = "",
-            Target = "",
-            Flavor = "",
-            Title = "",
-            Zone = "",
-            Segment = -1,
-            Floor = -1,
-            Reward = "",
-            Type = -1,
-            Completion = -1,
-            Taken = false,
-            Difficulty = "",
-            Item = "",
-            Special = "",
-            ClientGender = -1,
-            TargetGender = -1,
-            BonusReward = ""
-        },
-        {
-            Client = "",
-            Target = "",
-            Flavor = "",
-            Title = "",
-            Zone = "",
-            Segment = -1,
-            Floor = -1,
-            Reward = "",
-            Type = -1,
-            Completion = -1,
-            Taken = false,
-            Difficulty = "",
-            Item = "",
-            Special = "",
-            ClientGender = -1,
-            TargetGender = -1,
-            BonusReward = ""
-        },
-        {
-            Client = "",
-            Target = "",
-            Flavor = "",
-            Title = "",
-            Zone = "",
-            Segment = -1,
-            Floor = -1,
-            Reward = "",
-            Type = -1,
-            Completion = -1,
-            Taken = false,
-            Difficulty = "",
-            Item = "",
-            Special = "",
-            ClientGender = -1,
-            TargetGender = -1,
-            BonusReward = ""
-        },
-        {
-            Client = "",
-            Target = "",
-            Flavor = "",
-            Title = "",
-            Zone = "",
-            Segment = -1,
-            Floor = -1,
-            Reward = "",
-            Type = -1,
-            Completion = -1,
-            Taken = false,
-            Difficulty = "",
-            Item = "",
-            Special = "",
-            ClientGender = -1,
-            TargetGender = -1,
-            BonusReward = ""
+            BonusReward = "",
+            RecruitReward = false,
+            ExclReward = false,
         }
-    }
+	end
 
 end
 
@@ -2310,49 +1963,31 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 
     --default to mission.
     local mission_type = COMMON.MISSION_BOARD_MISSION
-    if board_type == COMMON.MISSION_BOARD_OUTLAW then mission_type = COMMON.MISSION_BOARD_OUTLAW end
+    if board_type == COMMON.MISSION_BOARD_OUTLAW then
+	  mission_type = COMMON.MISSION_BOARD_OUTLAW
+	end
 
     --get list of potential dungeons for missions, remove any that haven't been completed yet.
     local dungeon_candidates = {}
     local dungeon_segments = {}
     local dungeon_candidate_index_cur = 1
-    local dungeon_difficulties = MISSION_GEN.ShallowCopy(MISSION_GEN.DIFFICULTY)
-    for dungeon_id, cur_dungeon_segments in pairs(SV.MissionPrereq.DungeonsCompleted) do
-		local dungeon_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_id)
+    for dungeon_id, mission_data in pairs(MISSION_GEN.DUNGEON_LIST) do
+        local dungeon_summary = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(dungeon_id)
         local dungeon_segment_index_cur = 1
-        if MISSION_GEN.DUNGEON_LIST[dungeon_id] ~= nil then
+        if _DATA.Save:GetDungeonUnlock(dungeon_id) == RogueEssence.Data.GameProgress.UnlockState.Completed then
             --Add the expected level
             SV.ExpectedLevel[dungeon_id] = dungeon_summary.Level
             dungeon_candidates[dungeon_candidate_index_cur] = dungeon_id
-            local default_dungeon_candidate_needed = true
-            for dungeon_segment, value in pairs(cur_dungeon_segments) do
-                if MISSION_GEN.DUNGEON_LIST[dungeon_id][dungeon_segment] ~= nil then
-                    local cur_difficulty = MISSION_GEN.DUNGEON_LIST[dungeon_id][dungeon_segment]
+            for dungeon_segment, difficulty in pairs(mission_data) do
 
-                    if dungeon_segments[dungeon_candidate_index_cur] == nil then
-                        dungeon_segments[dungeon_candidate_index_cur] = {}
-                    end
+				if dungeon_segments[dungeon_candidate_index_cur] == nil then
+					dungeon_segments[dungeon_candidate_index_cur] = {}
+				end
 
-                    if dungeon_summary:GetFloorCount(dungeon_segment) > 1 then
-                        dungeon_segments[dungeon_candidate_index_cur][dungeon_segment_index_cur] = dungeon_segment
-                    end
-                    default_dungeon_candidate_needed = false
-					dungeon_segment_index_cur = dungeon_segment_index_cur + 1
-                end
-            end
-
-            if default_dungeon_candidate_needed == true then
-                if MISSION_GEN.DUNGEON_LIST[dungeon_id][0] ~= nil then
-                    local cur_difficulty = MISSION_GEN.DUNGEON_LIST[dungeon_id][0]
-
-                    if dungeon_segments[dungeon_candidate_index_cur] == nil then
-                        dungeon_segments[dungeon_candidate_index_cur] = {}
-                    end
-
-                    if dungeon_summary:GetFloorCount(0) > 1 then
-                        dungeon_segments[dungeon_candidate_index_cur][dungeon_segment_index_cur] = 0
-                    end
-                end
+				if dungeon_summary:GetFloorCount(dungeon_segment) > 1 then
+					dungeon_segments[dungeon_candidate_index_cur][dungeon_segment_index_cur] = dungeon_segment
+				end
+				dungeon_segment_index_cur = dungeon_segment_index_cur + 1
             end
             dungeon_candidate_index_cur = dungeon_candidate_index_cur + 1
         end
@@ -2565,18 +2200,56 @@ function MISSION_GEN.GenerateBoard(result, board_type)
         local reward = "money"
         --1/4 chance you get money instead of an item
 
-        if math.random(1, 4) > 1 then
+        if math.random(1, 4) > 4 then
             local reward_pool = MISSION_GEN.REWARDS[MISSION_GEN.WeightedRandom(MISSION_GEN.DIFF_REWARDS[difficulty])]
             reward = MISSION_GEN.WeightedRandom(reward_pool)
+			
         end
 
         --1/3 chance you get a bonus reward. Bonus reward is always an item, never money 
+		--1/6, 2/6, or 3/6 chance you get an exclusive item or recruitment, depending on mission type
         local bonus_reward = ""
-
-        if math.random(1,3) == 1 then
+		local recruit_reward = false
+		local excl_reward = false
+		local extra_rand = math.random(1,6)
+        if extra_rand <= 2 then
             local reward_pool = MISSION_GEN.REWARDS[MISSION_GEN.WeightedRandom(MISSION_GEN.DIFF_REWARDS[difficulty])]
             bonus_reward = MISSION_GEN.WeightedRandom(reward_pool)
+		else
+			if mission_type == COMMON.MISSION_BOARD_OUTLAW then
+				if objective == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then
+					if extra_rand <= 6 then
+						excl_reward = true
+					end
+				else
+					if extra_rand <= 5 then
+						excl_reward = true
+					end
+				end
+			else
+				if objective == COMMON.MISSION_TYPE_ESCORT then
+					if extra_rand <= 5 then
+						recruit_reward = true
+					end
+				elseif objective == COMMON.MISSION_TYPE_EXPLORATION then
+					if extra_rand <= 5 then
+						recruit_reward = true
+					end
+				else
+					if extra_rand <= 4 then
+						recruit_reward = true
+					end
+				end
+			end
         end
+		
+		if mission_type == COMMON.MISSION_BOARD_OUTLAW then
+		  if math.random(1, 10) == 1 then
+			local form = _DATA:GetMonster(target).Forms[0]
+			reward = "xcl_element_" .. form.Element1 .. "_dust"
+			bonus_reward = ''
+		  end
+		end
 
         --Choose a random title that's appropriate.
         local title_candidates = {}
@@ -2757,6 +2430,8 @@ function MISSION_GEN.GenerateBoard(result, board_type)
                 SV.OutlawBoard[i].ClientGender = client_gender
                 SV.OutlawBoard[i].TargetGender = target_gender
                 SV.OutlawBoard[i].BonusReward = bonus_reward
+				SV.OutlawBoard[i].RecruitReward = recruit_reward
+				SV.OutlawBoard[i].ExclReward = excl_reward
             else
                 PrintInfo("Creating new mission for index "..i.." with client "..client.." difficulty "..difficulty.." title "..title.." and dungeon "..dungeon.." and segment "..segment.." and floor "..mission_floor)
                 SV.MissionBoard[i].Client = client
@@ -2776,6 +2451,8 @@ function MISSION_GEN.GenerateBoard(result, board_type)
                 SV.MissionBoard[i].ClientGender = client_gender
                 SV.MissionBoard[i].TargetGender = target_gender
                 SV.MissionBoard[i].BonusReward = bonus_reward
+				SV.MissionBoard[i].RecruitReward = recruit_reward
+				SV.MissionBoard[i].ExclReward = excl_reward
             end
         end
 
@@ -2987,9 +2664,17 @@ function JobMenu:initialize(job_type, job_number, parent_board_menu)
 
     --add in the ??? for a bonus reward if one exists
     if job.BonusReward ~= "" then
-        self.reward = self.reward .. ' + ?'
+		local reward_amount = 1
+		--Reward amount should be 3 for multi-stack items
+		if RogueEssence.Data.DataManager.Instance:GetItem(job.BonusReward).MaxStack >= 3 then
+			reward_amount = 3
+		end
+        self.reward = self.reward .. ' + ' .. RogueEssence.Dungeon.InvItem(job.BonusReward, false, reward_amount):GetDisplayName()
     end
-
+	
+	if job.RecruitReward or job.ExclReward then
+		self.reward = self.reward .. ' + ???'
+	end
 
     self:DrawJob()
 
@@ -3063,6 +2748,8 @@ function JobMenu:DeleteJob()
         ClientGender = -1,
         TargetGender = -1,
         BonusReward = "",
+        RecruitReward = false,
+        ExclReward = false,
         BackReference = -1
     }
 
@@ -3177,7 +2864,7 @@ function JobMenu:OpenSubMenu()
                        {Text.FormatKey("MISSION_BOARD_CANCEL"), true, function() _MENU:RemoveMenu() _MENU:RemoveMenu() end} }
         end
 
-        submenu = RogueEssence.Menu.ScriptableSingleStripMenu(232, 138, 24, choices, 0, function() _MENU:RemoveMenu() _MENU:RemoveMenu() end)
+        submenu = RogueEssence.Menu.ScriptableSingleStripMenu(232, 154, 24, choices, 0, function() _MENU:RemoveMenu() _MENU:RemoveMenu() end)
         _MENU:AddMenu(submenu, true)
 
     end
@@ -3775,20 +3462,6 @@ function MISSION_GEN.RemoveMissionBackReference()
 end
 
 function MISSION_GEN.EndOfDay(result, segmentID)
-    --Mark the current dungeon as visited
-
-    local cur_zone_name = _ZONE.CurrentZoneID
-
-    if result == RogueEssence.Data.GameProgress.ResultType.Cleared then
-        PrintInfo("Completed zone "..cur_zone_name.." with segment "..segmentID)
-        if SV.MissionPrereq.DungeonsCompleted[cur_zone_name] == nil then
-            SV.MissionPrereq.DungeonsCompleted[cur_zone_name] = { }
-            SV.MissionPrereq.DungeonsCompleted[cur_zone_name][segmentID] = 1
-            SV.MissionPrereq.NumDungeonsCompleted = SV.MissionPrereq.NumDungeonsCompleted + 1
-        elseif SV.MissionPrereq.DungeonsCompleted[cur_zone_name][segmentID] == nil then
-            SV.MissionPrereq.DungeonsCompleted[cur_zone_name][segmentID] = 1
-        end
-    end
 
     MISSION_GEN.RegenerateJobs(result)
 end
@@ -3841,6 +3514,8 @@ function MISSION_GEN.GetDebugMissionInfo(board, slot)
             print("Non valid gender!!!!!!")
         end
         print("Bonus = " .. SV.OutlawBoard[slot].BonusReward)
+        print("Recruit = " .. SV.OutlawBoard[slot].RecruitReward)
+        print("Exclusive Item = " .. SV.OutlawBoard[slot].ExclReward)
 
     elseif board == "mission" then
         print("client = " .. SV.MissionBoard[slot].Client)
@@ -3879,6 +3554,8 @@ function MISSION_GEN.GetDebugMissionInfo(board, slot)
             print("Non valid gender!!!!!!")
         end
         print("Bonus = " .. SV.MissionBoard[slot].BonusReward)
+        print("Recruit = " .. SV.MissionBoard[slot].RecruitReward)
+        print("Exclusive Item = " .. SV.MissionBoard[slot].ExclReward)
     else
         print("client = " .. SV.TakenBoard[slot].Client)
         print("target = " .. SV.TakenBoard[slot].Target)
@@ -3917,5 +3594,7 @@ function MISSION_GEN.GetDebugMissionInfo(board, slot)
             print("Non valid gender!!!!!!")
         end
         print("Bonus = " .. SV.TakenBoard[slot].BonusReward)
+        print("Recruit = " .. SV.TakenBoard[slot].RecruitReward)
+        print("Exclusive Item = " .. SV.TakenBoard[slot].ExclReward)
     end
 end

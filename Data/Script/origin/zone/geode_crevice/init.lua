@@ -19,27 +19,12 @@ function geode_crevice.EnterSegment(zone, rescuing, segmentID, mapID)
   if rescuing ~= true then
     COMMON.BeginDungeon(zone.ID, segmentID, mapID)
   end
-  SV.geode_crevice.TookTreasure = false
 end
 
 function geode_crevice.ExitSegment(zone, result, rescue, segmentID, mapID)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   PrintInfo("=>> ExitSegment_geode_crevice result "..tostring(result).." segment "..tostring(segmentID))
-  
-  local rand_item = "xcl_element_normal_silk"
-  local inside_val = _DATA.Save.Rand:Next(5)
-  if inside_val == 0 then
-    rand_item = "xcl_element_electric_silk"
-  elseif inside_val == 1 then
-    rand_item = "xcl_element_fire_silk"
-  elseif inside_val == 2 then
-    rand_item = "xcl_element_water_silk"
-  elseif inside_val == 3 then
-    rand_item = "xcl_element_grass_silk"
-  else
-    rand_item = "xcl_element_normal_silk"
-  end
-  
+    
   --first check for rescue flag; if we're in rescue mode then take a different path
   local exited = COMMON.ExitDungeonMissionCheck(result, rescue, zone.ID, segmentID)
   if exited == true then

@@ -2246,7 +2246,7 @@ function MISSION_GEN.GenerateBoard(result, board_type)
 		if mission_type == COMMON.MISSION_BOARD_OUTLAW then
 		  if math.random(1, 10) == 1 then
 			local form = _DATA:GetMonster(target).Forms[0]
-			reward = "xcl_element_" .. form.Element1 .. "_dust"
+			reward = "xcl_element_" .. form.Element1 .. "_silk"
 			bonus_reward = ''
 		  end
 		end

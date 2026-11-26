@@ -1,89 +1,15 @@
+--[[
+    client_gen.lua
+    A generated collection of rescuees/outlaws
+]]--
+MISSION_GEN.POKEMON = {}
 
-MISSION_GEN.POKEMON = {
-    --weak mons for easy missions
-    TIER_LOW =
-    {"abra","amaura","anorith","applin","archen","aron","arrokuda","axew","azurill",
-     "baltoy","bagon","barboach","bayleef","beldum","bellsprout","bidoof","bonsly","bounsweet","bronzor","budew","buizel","bulbasaur","buneary","burmy",
-     "cacnea","carvanha","cascoon","caterpie","charcadet","charmander","cherubi","chespin","chikorita","chimchar","chinchou","chingling","clamperl","clauncher","cleffa","clobbopus","combee","corphish","cottonee","cranidos","croagunk","cubchoo","cutiefly","cyndaquil",
-     "darumaka","deerling","deino","diglett","doduo","dratini","drifloon","dreepy","drowzee","duskull",
-     "ekans","electrike","elekid","elgyem","espurr","exeggcute",
-     "feebas","fennekin","ferroseed","fidough","finneon","flabebe","fletchling","fomantis","foongus","froakie","fuecoco",
-     "gastly","geodude","gible","glameow","goldeen","goomy","gothita","grimer","growlithe","gulpin",
-     "happiny","hatenna","helioptile","hippopotas","honedge","hoothoot","hoppip","horsea","houndour",
-     "igglybuff",
-     "jangmo_o","joltik",
-     "kabuto","kakuna","koffing","krabby","kricketot",
-     "larvesta","larvitar","ledyba","lileep","lillipup","litleo","litten","litwick","lotad","luvdisc",
-     "machop","magby","magikarp","magnemite","makuhita","mankey","mantyke","mareanie","mareep","meditite","metapod","mienfoo","mime_jr","minccino","morelull","mudbray","munna","mudkip","murkrow",
-     "natu","nickit","nincada","noibat","nosepass","numel","nymble",
-     "oddish","omanyte","onix","oshawott",
-     "pansear","paras","patrat","pawmi","pawniard","petilil","phantump","pidgey","pidove","pineco","piplup","poliwag","ponyta","poochyena","popplio","porygon","psyduck","pumpkaboo","purrloin",
-     "quaxly",
-     "ralts","rattata","remoraid","rhyhorn","roggenrola","rowlet",
-     "salandit","sandile","sandshrew","sandygast","scraggy","seedot","seel","sentret","sewaddle","shellder","shellos","shieldon","shinx","shroomish","shuppet","silcoon","sinistea","skorupi","slakoth","slowpoke","slugma","smoochum","sneasel","snivy","snom","snorunt","snover","snubbull","sobble","solosis","spearow","spheal","spinarak","spoink","sprigatito","spritzee","squirtle","starly","staryu","stufful","stunky","sunkern","surskit","swablu","swinub","swirlix",
-     "taillow","teddiursa","tentacool","tepig","tinkatink","torchic","togepi","totodile","trapinch","treecko","trubbish","turtwig","tympole","tyrogue",
+MISSION_GEN.POKEMON["TIER_LOW"] = {
+"caterpie", "metapod", "weedle", "kakuna", "pidgey", "rattata", "spearow", "ekans", "pikachu", "sandshrew", "nidoran_f", "nidoran_m", "clefairy", "vulpix", "jigglypuff", "zubat", "oddish", "paras", "venonat", "diglett", "meowth", "psyduck", "mankey", "poliwag", "abra", "machop", "bellsprout", "geodude", "slowpoke", "magnemite", "doduo", "seel", "grimer", "shellder", "gastly", "drowzee", "krabby", "voltorb", "exeggcute", "cubone", "horsea", "goldeen", "magikarp", "sentret", "hoothoot", "ledyba", "spinarak", "chinchou", "pichu", "cleffa", "igglybuff", "togepi", "natu", "mareep", "marill", "hoppip", "sunkern", "wooper", "pineco", "snubbull", "teddiursa", "slugma", "swinub", "remoraid", "houndour", "phanpy", "tyrogue", "poochyena", "zigzagoon", "wurmple", "silcoon", "cascoon", "lotad", "seedot", "taillow", "wingull", "ralts", "kirlia", "surskit", "shroomish", "slakoth", "nincada", "whismur", "makuhita", "azurill", "skitty", "aron", "meditite", "electrike", "gulpin", "carvanha", "numel", "spoink", "trapinch", "swablu", "barboach", "corphish", "baltoy", "feebas", "shuppet", "duskull", "wynaut", "snorunt", "spheal", "starly", "bidoof", "kricketot", "shinx", "budew", "burmy", "combee", "buizel", "cherubi", "shellos", "glameow", "chingling", "stunky", "bronzor", "bonsly", "mime_jr", "happiny", "riolu", "hippopotas", "skorupi", "croagunk", "finneon", "snover", "patrat", "lillipup", "purrloin", "pansage", "munna", "roggenrola", "woobat", "drilbur", "timburr", "tympole", "sewaddle", "venipede", "petilil", "sandile", "darumaka", "yamask", "trubbish", "zorua", "minccino", "gothita", "solosis", "ducklett", "vanillite", "karrablast", "ferroseed", "klink", "tynamo", "litwick", "axew", "cubchoo", "golett", "bunnelby", "fletchling", "scatterbug", "spewpa", "flabebe", "honedge", "inkay", "binacle", "skrelp", "clauncher", "helioptile", "phantump", "noibat", "grubbin", "cutiefly", "rockruff", "mareanie", "dewpider", "fomantis", "salandit", "bounsweet", "steenee", "wimpod", "sandygast", "skwovet", "rookidee", "blipbug", "nickit", "gossifleur", "wooloo", "chewtle", "yamper", "applin", "silicobra", "arrokuda", "toxel", "sizzlipede", "clobbopus", "sinistea", "hatenna", "impidimp", "milcery", "snom", "lechonk", "nymble", "pawmi", "tandemaus", "fidough", "nacli", "tadbulb", "wattrel", "capsakid", "tinkatink", "wiglett", "finizen", "varoom", "greavard", "cetoddle"}
 
-     "vanillite","venonat","voltorb",
-     "wailmer","watchog","weedle","whismur","woobat","wooloo","wooper","wurmple","wynaut",
+MISSION_GEN.POKEMON["TIER_MID"] = {
+"bulbasaur", "charmander", "squirtle", "pidgeotto", "raticate", "fearow", "arbok", "raichu", "sandslash", "nidorina", "nidorino", "wigglytuff", "golbat", "gloom", "parasect", "venomoth", "dugtrio", "persian", "primeape", "growlithe", "poliwhirl", "kadabra", "machoke", "weepinbell", "tentacool", "graveler", "ponyta", "slowbro", "magneton", "dewgong", "haunter", "hypno", "kingler", "electrode", "marowak", "koffing", "weezing", "rhyhorn", "rhydon", "seadra", "seaking", "staryu", "eevee", "dratini", "chikorita", "cyndaquil", "totodile", "furret", "noctowl", "ledian", "ariados", "lanturn", "togetic", "xatu", "flaaffy", "azumarill", "sudowoodo", "skiploom", "sunflora", "yanma", "quagsire", "slowking", "girafarig", "forretress", "dunsparce", "gligar", "granbull", "sneasel", "magcargo", "piloswine", "corsola", "octillery", "smoochum", "larvitar", "treecko", "torchic", "mudkip", "mightyena", "linoone", "lombre", "nuzleaf", "masquerain", "breloom", "vigoroth", "ninjask", "shedinja", "loudred", "hariyama", "nosepass", "delcatty", "lairon", "medicham", "plusle", "minun", "volbeat", "illumise", "roselia", "swalot", "sharpedo", "wailmer", "camerupt", "torkoal", "grumpig", "spinda", "vibrava", "cacnea", "cacturne", "zangoose", "seviper", "whiscash", "crawdaunt", "kecleon", "dusclops", "tropius", "glalie", "sealeo", "clamperl", "huntail", "gorebyss", "luvdisc", "bagon", "beldum", "turtwig", "chimchar", "piplup", "staravia", "bibarel", "luxio", "pachirisu", "floatzel", "cherrim", "gastrodon", "drifloon", "drifblim", "buneary", "lopunny", "purugly", "skuntank", "spiritomb", "gible", "munchlax", "toxicroak", "carnivine", "lumineon", "abomasnow", "froslass", "snivy", "tepig", "oshawott", "watchog", "herdier", "liepard", "simisage", "musharna", "boldore", "audino", "gurdurr", "palpitoad", "swadloon", "whirlipede", "lilligant", "krokorok", "darmanitan", "maractus", "scraggy", "scrafty", "cofagrigus", "garbodor", "cinccino", "gothorita", "gothitelle", "duosion", "reuniclus", "vanillish", "deerling", "sawsbuck", "emolga", "escavalier", "alomomola", "ferrothorn", "klang", "eelektrik", "elgyem", "beheeyem", "lampent", "fraxure", "mienfoo", "golurk", "pawniard", "rufflet", "vullaby", "heatmor", "durant", "deino", "chespin", "fennekin", "froakie", "diggersby", "fletchinder", "floette", "skiddo", "pancham", "pangoro", "furfrou", "espurr", "meowstic", "doublade", "spritzee", "aromatisse", "swirlix", "slurpuff", "malamar", "dragalge", "heliolisk", "dedenne", "goomy", "klefki", "trevenant", "pumpkaboo", "gourgeist", "rowlet", "litten", "popplio", "charjabug", "crabrawler", "crabominable", "ribombee", "lycanroc", "wishiwashi", "toxapex", "mudbray", "araquanid", "lurantis", "stufful", "comfey", "palossand", "pyukumuku", "turtonator", "togedemaru", "bruxish", "drampa", "jangmo_o", "grookey", "scorbunny", "sobble", "greedent", "corvisquire", "dottler", "thievul", "eldegoss", "dubwool", "drednaw", "barraskewda", "hattrem", "morgrem", "perrserker", "runerigus", "alcremie", "pincurchin", "frosmoth", "stonjourner", "eiscue", "morpeko", "dreepy", "sprigatito", "fuecoco", "quaxly", "oinkologne", "pawmo", "maushold", "dachsbun", "naclstack", "bellibolt", "kilowattrel", "scovillain", "tinkatuff", "wugtrio", "glimmet", "houndstone", "veluza", "tatsugiri", "clodsire", "frigibax", "gimmighoul"}
 
+MISSION_GEN.POKEMON["TIER_HIGH"] = {
+"ivysaur", "venusaur", "charmeleon", "charizard", "wartortle", "blastoise", "butterfree", "beedrill", "pidgeot", "nidoqueen", "nidoking", "clefable", "ninetales", "vileplume", "golduck", "arcanine", "poliwrath", "alakazam", "machamp", "victreebel", "tentacruel", "golem", "rapidash", "farfetchd", "dodrio", "muk", "cloyster", "gengar", "onix", "exeggutor", "hitmonlee", "hitmonchan", "lickitung", "chansey", "tangela", "kangaskhan", "starmie", "mr_mime", "scyther", "jynx", "electabuzz", "magmar", "pinsir", "tauros", "gyarados", "lapras", "ditto", "vaporeon", "jolteon", "flareon", "porygon", "omanyte", "omastar", "kabuto", "kabutops", "aerodactyl", "snorlax", "dragonair", "dragonite", "bayleef", "meganium", "quilava", "typhlosion", "croconaw", "feraligatr", "crobat", "ampharos", "bellossom", "politoed", "jumpluff", "aipom", "espeon", "umbreon", "murkrow", "misdreavus", "wobbuffet", "steelix", "qwilfish", "scizor", "shuckle", "heracross", "ursaring", "delibird", "mantine", "skarmory", "houndoom", "kingdra", "donphan", "porygon2", "stantler", "smeargle", "hitmontop", "elekid", "magby", "miltank", "blissey", "pupitar", "tyranitar", "grovyle", "sceptile", "combusken", "blaziken", "marshtomp", "swampert", "beautifly", "dustox", "ludicolo", "shiftry", "swellow", "pelipper", "gardevoir", "slaking", "exploud", "sableye", "mawile", "aggron", "manectric", "wailord", "flygon", "altaria", "lunatone", "solrock", "claydol", "lileep", "cradily", "anorith", "armaldo", "milotic", "castform", "banette", "chimecho", "absol", "walrein", "relicanth", "shelgon", "salamence", "metang", "metagross", "grotle", "torterra", "monferno", "infernape", "prinplup", "empoleon", "staraptor", "kricketune", "luxray", "roserade", "cranidos", "rampardos", "shieldon", "bastiodon", "wormadam", "mothim", "vespiquen", "ambipom", "mismagius", "honchkrow", "bronzong", "chatot", "gabite", "garchomp", "lucario", "hippowdon", "drapion", "mantyke", "weavile", "magnezone", "lickilicky", "rhyperior", "tangrowth", "electivire", "magmortar", "togekiss", "yanmega", "leafeon", "glaceon", "gliscor", "mamoswine", "porygon_z", "gallade", "probopass", "dusknoir", "rotom", "servine", "serperior", "pignite", "emboar", "dewott", "samurott", "stoutland", "gigalith", "swoobat", "excadrill", "conkeldurr", "seismitoad", "sawk", "leavanny", "scolipede", "basculin", "krookodile", "sigilyph", "archen", "archeops", "zoroark", "swanna", "vanilluxe", "klinklang", "eelektross", "chandelure", "haxorus", "beartic", "cryogonal", "mienshao", "druddigon", "bisharp", "braviary", "mandibuzz", "zweilous", "hydreigon", "larvesta", "volcarona", "quilladin", "chesnaught", "braixen", "delphox", "frogadier", "greninja", "talonflame", "vivillon", "florges", "gogoat", "aegislash", "barbaracle", "clawitzer", "tyrunt", "tyrantrum", "amaura", "aurorus", "sylveon", "hawlucha", "carbink", "sliggoo", "goodra", "noivern", "dartrix", "decidueye", "torracat", "incineroar", "brionne", "primarina", "vikavolt", "oricorio", "mudsdale", "salazzle", "bewear", "tsareena", "passimian", "golisopod", "type_null", "silvally", "minior", "komala", "mimikyu", "dhelmise", "hakamo_o", "kommo_o", "thwackey", "rillaboom", "raboot", "cinderace", "drizzile", "inteleon", "corviknight", "orbeetle", "boltund", "flapple", "appletun", "sandaconda", "cramorant", "toxtricity", "centiskorch", "grapploct", "polteageist", "hatterene", "grimmsnarl", "obstagoon", "indeedee", "dracozolt", "arctozolt", "dracovish", "duraludon", "drakloak", "dragapult", "wyrdeer", "kleavor", "ursaluna", "basculegion", "sneasler", "overqwil", "floragato", "meowscarada", "crocalor", "skeledirge", "quaxwell", "quaquaval", "lokix", "pawmot", "garganacl", "ceruledge", "tinkaton", "bombirdier", "palafin", "revavroom", "cyclizar", "orthworm", "glimmora", "cetitan", "dondozo", "annihilape", "farigiraf", "kingambit", "arctibax", "baxcalibur", "gholdengo"}
 
-     "zigzagoon","zubat"},
-
-    --middling mons for medium missions
-    TIER_MID =
-    {"aipom","arbok","ariados","audino",
-     "beautifly","beedrill","bibarel","bisharp","braixen","breloom","brionne","butterfree",
-     "carbink","carnivine","castform","chansey","charmeleon","chatot","cherrim","chimecho","clefairy","combusken","comfey","corsola","cramorant","croconaw",
-     "dartrix","delibird","dewott","dhelmise","ditto","dodrio","doublade","dragalge","dragonair","drakloak","dunsparce","duosion","dustox",
-     "eiscue","electabuzz","emboar","emolga",
-     "farfetchd","finizen","flaaffy","flapple","floette","fraxure","furret","furfrou",
-     "gabite","girafarig","gligar","gloom","golbat","gothorita","granbull","graveler","grotle","grovyle",
-     "hattrem","hakamo_o","haunter","herdier",
-     "illumise","indeedee","ivysaur",
-     "jigglypuff","jynx",
-     "kadabra","kangaskhan","kirlia","klefki","kricketune",
-     "lairon","lampent","ledian","liepard","linoone","lombre","loudred","lunatone","luxio",
-     "machoke","magmar","magneton","maractus","marill","marshtomp","masquerain","mawile","metang","mightyena","miltank","mimikyu","minior","minun","misdreavus","monferno","morgrem","morpeko","mothim","mr_mime","munchlax",
-     "nidorina","nidorino","ninjask","noctowl","nuzleaf",
-
-     "pachirisu","palpitoad","parasect","pidgeotto","pignite","piloswine","plusle","poliwhirl","porygon2","prinplup","pupitar",
-     "quilava","qwilfish",
-     "raboot","raticate","relicanth","ribombee","roselia",
-     "sableye","scyther","seadra","sealeo","servine","seviper","shedinja","shelgon","shuckle","skiploom","sliggoo","smeargle","solrock","spinda","stantler","staravia","steenee","sudowoodo","sunflora","swadloon",
-     "tangela","thievul","tinkatuff","togedemaru","togetic","torkoal","tropius",
-
-     "vanillish","venomoth","vespiquen","vibrava","vigoroth","volbeat",
-     "wartortle","weepinbell","wobbuffet","wormadam",
-
-     "yanma",
-     "zangoose","zorua","zweilous"},
-
-    --strong pokemon for difficult missions
-    TIER_HIGH =
-    {"absol","aerodactyl","aegislash","aggron","alakazam","alcremie","altaria","ambipom","ampharos","appletun","arcanine","archeops","armaldo","aurorus","azumarill",
-     "banette","bastiodon","bellibolt","bellossom","blissey","blastoise","blaziken","braviary","bronzong",
-     "cacturne","camerupt","chandelure","charizard","cinderace","clawitzer","claydol","clefable","cloyster","corviknight","cradily","crawdaunt","crobat","cursola",
-     "decidueye","delphox","dewgong","donphan","dragapult","dragonite","drampa","drapion","drifblim","dugtrio","dusclops","dusknoir",
-     "eldegoss","electivire","empoleon","escavalier","exeggutor","exploud",
-     "fearow","feraligatr","ferrothorn","floatzel","florges","flygon","forretress","froslass","frosmoth",
-     "gallade","galvantula","garchomp","gardevoir","gastrodon","gengar","glalie","glimmora","gliscor","golduck","golem","golisopod","goodra","gorebyss","gothitelle","gourgeist","greninja","grumpig","gyarados",
-     "hariyama","hatterene","haxorus","heliolisk","heracross","hippowdon","hitmonchan","hitmonlee","hitmontop","honchkrow","houndoom","huntail","hydreigon","hypno",
-     "incineroar","infernape",
-     "jumpluff",
-     "kabutops","kingdra","kingambit","kingler","kommo_o",
-     "lanturn","lapras","leavanny","lilligant","lopunny","ludicolo","lumineon","lurantis","luxray","lycanroc",
-     "machamp","magcargo","magmortar","magnezone","mamoswine","mandibuzz","manectric","mantine","maushold","medicham","meganium","meowstic","metagross","mienshao","milotic","mismagius","muk","musharna",
-     "nidoking","nidoqueen","noivern",
-     "octillery","omastar","overqwil",
-     "pawmot","pidgeot","pinsir","politoed","poliwrath","porygon_z","primarina","primeape","probopass","purugly",
-     "quagsire",
-     "rampardos","rapidash","reuniclus","rhydon","rhyperior","roserade",
-     "salamence","salazzle","samurott","sandslash","sawsbuck","sceptile","scizor","scolipede","scorbunny","scrafty","seaking","serperior","sharpedo","shiftry","sirfetchd","skarmory","skuntank","slaking","slowbro","slowking","snorlax","spiritomb","staraptor","starmie","steelix","stoutland","swalot","swampert","swellow","swoobat",
-     "tangrowth","tauros","tentacruel","tinkaton","togekiss","torterra","toxicroak","toxtricity","tsareena","typhlosion","tyranitar",
-     "ursaring",
-     "vanilluxe","venusaur","victreebel","vileplume","volcanion",
-     "wailord","walrein","weezing","whimsicott","whiscash","wigglytuff",
-     "xatu",
-     "yamask","yanmega",
-     "zoroark"}
-}

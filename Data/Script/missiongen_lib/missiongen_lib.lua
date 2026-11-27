@@ -80,10 +80,10 @@ globals.reward_types.money =      {false, false, false, false, "REWARD_SINGLE"}
 globals.reward_types.item_item =  {true,  true,  false, false, "REWARD_DOUBLE"}
 globals.reward_types.money_item = {false, true,  false, false, "REWARD_DOUBLE"}
 globals.reward_types.client =     {false, false, false, false, "REWARD_UNKNOWN"}
-globals.reward_types.exclusive =  {true,  false, true, false, "REWARD_UNKNOWN"}
-globals.reward_types.element =  {false,  false, false, true, "REWARD_UNKNOWN"}
+globals.reward_types.exclusive =  {true,  false, true,  false, "REWARD_UNKNOWN"}
+globals.reward_types.element =    {false, false, false, true,  "REWARD_UNKNOWN"}
 --- Supported job types data
----@type table<string,{req_target:boolean,req_target_item:boolean,has_guest:boolean,target_outlaw:boolean,law_enforcement:boolean,can_hide_floor:boolean,boss:boolean}>
+---@type table<string,table<jobFlag,boolean>>
 globals.job_types = {}
 globals.job_types.RESCUE_SELF =          {req_target = false, req_target_item = false, has_guest = false, target_outlaw = false, law_enforcement = false, can_hide_floor = false, boss = false}
 globals.job_types.RESCUE_FRIEND =        {req_target = true,  req_target_item = false, has_guest = false, target_outlaw = false, law_enforcement = false, can_hide_floor = true,  boss = false}
@@ -1431,15 +1431,24 @@ end
 --- @param jobType jobType a job type id string
 --- @return boolean #true if the job type requires is marked as a law enforcement job, false otherwise
 function library:JobTypeIsLawEnforcement(jobType)
-    return globals.job_types[jobType].law_enforcement
+    return self:JobTypeHasFlag(jobType, "law_enforcement")
 end
 
---- Checks if the provided job type has an arbitrary req flag.
+--- Checks if the provided job type matches an arbitrary flag or flag list.
 --- @param jobType jobType a job type id string
---- @param reqFlag jobType a req flag string
---- @return boolean #true if the job type requires is marked as a law enforcement job, false otherwise
+--- @param reqFlag jobFlag|jobFlag[] a flag string
+--- @return boolean #true if the job type is marked with the given flag, or all given flags if a list is provided, false otherwise
 function library:JobTypeHasFlag(jobType, reqFlag)
-    return globals.job_types[jobType][reqFlag]
+    if type(reqFlag)=="table" then
+        for _, flag in ipairs(reqFlag) do
+            if not globals.job_types[jobType][flag] then
+                return false
+            end
+        end
+        return true
+    else
+        return globals.job_types[jobType][reqFlag]
+    end
 end
 
 --- Checks if two jobs are equal. It compares location, job type, client and target data to do so.
@@ -2522,7 +2531,7 @@ local setupRewards = function(job, type, items)
                     end
                 elseif globals.reward_types[job.RewardType][4] then
                     local form = _DATA:GetMonster(species).Forms[0]
-                    for _, item_id in ipairs(element_items[form.Element1]) do
+                    for _, item_id in ipairs(library.data.element_items[form.Element1]) do
                         table.insert(possibleItems, item_id)
                     end
                 end

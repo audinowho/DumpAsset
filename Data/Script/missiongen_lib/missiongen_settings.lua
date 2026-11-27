@@ -9,7 +9,8 @@
 -- use require to load your copy. Make sure to do so before save load or it will not work.
 
 --- @alias jobType "RESCUE_SELF"|"RESCUE_FRIEND"|"ESCORT"|"EXPLORATION"|"DELIVERY"|"LOST_ITEM"|"OUTLAW"|"OUTLAW_ITEM"|"OUTLAW_ITEM_UNK"|"OUTLAW_MONSTER_HOUSE"|"OUTLAW_FLEE"
---- @alias rewardType "money"|"item"|"money_item"|"item_item"|"client"|"exclusive"
+--- @alias jobFlag "req_target"|"req_target_item"|"has_guest"|"target_outlaw"|"law_enforcement"|"can_hide_floor"|"boss"
+--- @alias rewardType "money"|"item"|"money_item"|"item_item"|"client"|"exclusive"|"element"
 --- @alias emotionType "Normal"|"Happy"|"Pain"|"Angry"|"Worried"|"Sad"|"Crying"|"Shouting"|"Teary-Eyed"|"Determined"|"Joyous"|"Inspired"|"Surprised"|"Dizzy"|"Special0"|"Special1"|"Sigh"|"Stunned"|"Special2"|"Special3"
 --- @alias eventId "JobTake"|"JobActivate"|"JobDeactivate"|"DungeonStart"|"DungeonEnd"|"FloorStart"|"JobComplete"|"JobFail"|"BeforeReward"|"AfterReward"
 --- @alias AgentIDTable {Species:string, Form:integer|nil, Skin:string|nil, Gender:integer, Weight:integer|nil, Unique:boolean|nil}
@@ -301,11 +302,13 @@ local settings = {
     hidden_floor_chance = 0.15,
     --- A list of all types of rewards to be offered to players.
     --- Format: {id = string, weight = integer, min_rank = string}
-    --- * id: one of the supported reward types. You can use duplicate values to alter odds depending on job rank.
+    --- * id: one of the supported reward types. You can use duplicate values to alter odds depending on job rank, type or flag.
     --- Supported reward types are: item, money, item_item, money_item, client, exclusive, element
     --- * weight: Chance of appearing. Set to 0 or delete altogether to stop a type of reward from being offered.
     --- * min_rank: optional. If set, this type of reward will only be offered if the job is this rank or higher.
-    ---@type {id:rewardType, weight:integer, min_rank:string|nil}[]
+    --- * job_type: optional. If set, this type of reward will only be offered if the job is of this type.
+    --- * req_flag: optional. If set, this type of reward will only be offered if the job type has this flag, or all these flags if a list is used.
+    ---@type {id:rewardType, weight:integer, min_rank:string|nil, job_type:jobType, req_flag:jobFlag|jobFlag[]}[]
     reward_types = {
         {id = "item", weight = 6},
         {id = "money", weight = 2},
@@ -1391,8 +1394,10 @@ local settings = {
             {id = "apricorn_perfect", weight = 1}
         }
     },
-	
-	--- Ids of items rewarded based on element (type) of the client, or target in the case of an outlaw.
+    --- List of "element" type rewards, that is, items rewarded based on element (type) of the client, or target in the case of an outlaw. 
+    --- Format: \<element_id> = <item_id>[]
+    --- * \<element_id> = the id of an element defined in PMDO.
+    --- * <item_id> = item_id of the reward.
 	---@type table<string, string[]>
 	element_items = {
         bug = {
@@ -1450,7 +1455,6 @@ local settings = {
 			"xcl_element_water_dust"
 		}
 	},
-	
     --- Ids of items that can be used as targets, divided depending on the job type.
     --- Make sure they're either easy enough to obtain or impossible to lose, depending on the job.
     --- Using stackable items is highly discouraged for all job types, as it may result in odd behaviors.

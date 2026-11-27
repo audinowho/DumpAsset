@@ -12,15 +12,12 @@ local base_enter = CURMAPSCR.Enter
 function base_camp_2_bulletin.Enter(map)
     DEBUG.EnableDbgCoro() --Enable debugging this coroutine
     GROUND:Unhide("Mission_Board")
-    if MISSION_GEN:HasCompletedMissions() then
-        MISSION_GEN:PlayJobsCompletedCutscene(base_camp_2_bulletin.Hand_In_Missions)
-    end
 
     local species = "murkrow"
     local nickname = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]:Get(species).Name:ToLocal()
     local name = "NPC_Reroll"
     local temp_monster = RogueEssence.Dungeon.MonsterID(species, 0, "normal", Gender.Genderless)
-    local npc = RogueEssence.Ground.GroundChar(temp_monster, RogueElements.Loc(80, 528), Direction.DownLeft, nickname, name)
+    local npc = RogueEssence.Ground.GroundChar(temp_monster, RogueElements.Loc(80, 520), Direction.DownLeft, nickname, name)
     npc:ReloadEvents()
     GAME:GetCurrentGround():AddMapChar(npc)
 
@@ -31,6 +28,14 @@ end
 function base_camp_2_bulletin.Mission_Board_Action(obj, activator)
     DEBUG.EnableDbgCoro()   --Enable debugging this coroutine
 
+    if MISSION_GEN:HasCompletedMissions() then
+		SOUND:FadeOutBGM(40)
+		GAME:FadeOut(false, 40)
+        MISSION_GEN:PlayJobsCompletedCutscene(base_camp_2_bulletin.Hand_In_Missions)
+		GAME:FadeIn(20)
+		return
+    end
+	
     local dungeons_needed = 3 --Number of dungeons needed to unlock the Mission Board
 
     local hero = CH('PLAYER')
@@ -149,8 +154,6 @@ function base_camp_2_bulletin.Hand_In_Missions(job, npcs)
         GROUND:TeleportTo(npcs[1], 100, 575, Direction.Down) --client
     end
 
-    UI:ResetSpeaker()
-    GAME:MoveCamera(90, 565, 1, false)
     SOUND:StopBGM()
 
     GAME:FadeIn(40)

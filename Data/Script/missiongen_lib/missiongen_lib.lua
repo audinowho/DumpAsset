@@ -72,15 +72,16 @@ globals.ctypes.AddContextStateEvent = luanet.import_type('PMDC.Dungeon.AddContex
 globals.ctypes.MajorStatusState = luanet.import_type('PMDC.Dungeon.MajorStatusState')
 globals.ctypes.SleepAttack = luanet.import_type('PMDC.Dungeon.SleepAttack')
 ---Supported reward types data
----Hardcoded properties: item1, item2, exclusive, display_key_pointer
----@type table<string,{[1]:boolean,[2]:boolean,[3]:boolean,[4]:string}>
+---Hardcoded properties: item1, item2, exclusive, element, display_key_pointer
+---@type table<string,{[1]:boolean,[2]:boolean,[3]:boolean,[4]:boolean,[5]:string}>
 globals.reward_types = {}
-globals.reward_types.item =       {true,  false, false, "REWARD_SINGLE"}
-globals.reward_types.money =      {false, false, false, "REWARD_SINGLE"}
-globals.reward_types.item_item =  {true,  true,  false, "REWARD_DOUBLE"}
-globals.reward_types.money_item = {false, true,  false, "REWARD_DOUBLE"}
-globals.reward_types.client =     {false, false, false, "REWARD_UNKNOWN"}
-globals.reward_types.exclusive =  {true,  false, true,  "REWARD_UNKNOWN"}
+globals.reward_types.item =       {true,  false, false, false, "REWARD_SINGLE"}
+globals.reward_types.money =      {false, false, false, false, "REWARD_SINGLE"}
+globals.reward_types.item_item =  {true,  true,  false, false, "REWARD_DOUBLE"}
+globals.reward_types.money_item = {false, true,  false, false, "REWARD_DOUBLE"}
+globals.reward_types.client =     {false, false, false, false, "REWARD_UNKNOWN"}
+globals.reward_types.exclusive =  {true,  false, true, false, "REWARD_UNKNOWN"}
+globals.reward_types.element =  {false,  false, false, true, "REWARD_UNKNOWN"}
 --- Supported job types data
 ---@type table<string,{req_target:boolean,req_target_item:boolean,has_guest:boolean,target_outlaw:boolean,law_enforcement:boolean,can_hide_floor:boolean,boss:boolean}>
 globals.job_types = {}
@@ -1433,6 +1434,14 @@ function library:JobTypeIsLawEnforcement(jobType)
     return globals.job_types[jobType].law_enforcement
 end
 
+--- Checks if the provided job type has an arbitrary req flag.
+--- @param jobType jobType a job type id string
+--- @param reqFlag jobType a req flag string
+--- @return boolean #true if the job type requires is marked as a law enforcement job, false otherwise
+function library:JobTypeHasFlag(jobType, reqFlag)
+    return globals.job_types[jobType][reqFlag]
+end
+
 --- Checks if two jobs are equal. It compares location, job type, client and target data to do so.
 --- @param j1 jobTable a job
 --- @param j2 jobTable another job
@@ -1658,7 +1667,7 @@ function library:GetRewardString(job)
     if globals.reward_types[job.RewardType][2] then
         reward2 = self:GetItemName(job.Reward2)
     end
-    local pointer = globals.reward_types[job.RewardType][4]
+    local pointer = globals.reward_types[job.RewardType][5]
     local key = globals.keys[pointer]
     if job.MenuOverrides and job.MenuOverrides[globals.overrides.REWARD] then
         key = STRINGS:FormatKey(job.MenuOverrides[globals.overrides.REWARD])
@@ -2467,10 +2476,15 @@ local setupRewards = function(job, type, items)
             if not globals.reward_types[reward_type_entry.id] then
                 logError(globals.error_types.DATA, "\"" .. reward_type_entry.id .. "\" is not a valid reward type and will be ignored.")
                 table.remove(globals.reward_types, i)
-            elseif not reward_type_entry.min_rank or job.Difficulty >= library:DifficultyToNum(reward_type_entry.min_rank)
-                and (not library:JobTypeIsLawEnforcement(job.Type) or reward_type_entry.id ~= "client")
-                and ((reward_type_entry.id ~= "client" and reward_type_entry.id ~= "exclusive") or library:IsSpeciesRegistered(job.Client.Species)) then
-                table.insert(possible_reward_types, reward_type_entry)
+            elseif (not reward_type_entry.min_rank or job.Difficulty >= library:DifficultyToNum(reward_type_entry.min_rank))
+                and (not reward_type_entry.job_type or job.Type == reward_type_entry.job_type)
+                and (not reward_type_entry.req_flag or library:JobTypeHasFlag(job.Type, reward_type_entry.req_flag)) then
+          
+                if library:JobTypeIsLawEnforcement(job.Type) and reward_type_entry.id == "client" then
+                    -- We can't have law enforcement characters join the team
+                else
+                    table.insert(possible_reward_types, reward_type_entry)
+                end
             end
         end
         if #possible_reward_types <= 0 then
@@ -2487,25 +2501,34 @@ local setupRewards = function(job, type, items)
     local difficulty_id = library:NumToDifficulty(job.Difficulty)
     for i = 1, 2, 1 do
         if globals.reward_types[job.RewardType][i] then
-            if globals.reward_types[job.RewardType][3] and not xcl then         -- if reward type specifies exclusive and it's not set yet
-                local rarityData = _DATA.UniversalData:Get(luanet.ctype(globals.ctypes.RarityData))
-                local possibleItems = {}
+            if not xcl then         -- if reward type specifies exclusive and it's not set yet
                 local species = job.Client.Species
                 if globals.job_types[job.Type].law_enforcement then
                     species = job.Target.Species
                 end
-                if rarityData.RarityMap:ContainsKey(species) then
-                    local rarityTable = rarityData.RarityMap[species]
-                    if rarityTable:ContainsKey(1) then
-                        for item_id in luanet.each(rarityTable[1]) do
-                            if _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Item]:Get(item_id).Released then
-                                table.insert(possibleItems, item_id)
+                local possibleItems = {}
+                if globals.reward_types[job.RewardType][3] then
+                    local rarityData = _DATA.UniversalData:Get(luanet.ctype(globals.ctypes.RarityData))
+                    
+                    if rarityData.RarityMap:ContainsKey(species) then
+                        local rarityTable = rarityData.RarityMap[species]
+                        if rarityTable:ContainsKey(1) then
+                            for item_id in luanet.each(rarityTable[1]) do
+                                if _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Item]:Get(item_id).Released then
+                                    table.insert(possibleItems, item_id)
+                                end
                             end
                         end
                     end
-                    if #possibleItems > 0 then
-                        items[i] = {id = library:WeightlessRandom(possibleItems) --[[@as string]]}
+                elseif globals.reward_types[job.RewardType][4] then
+                    local form = _DATA:GetMonster(species).Forms[0]
+                    for _, item_id in ipairs(element_items[form.Element1]) do
+                        table.insert(possibleItems, item_id)
                     end
+                end
+                
+                if #possibleItems > 0 then
+                    items[i] = {id = library:WeightlessRandom(possibleItems) --[[@as string]]}
                 else
                     if i == 1 then
                         job.RewardType = "item"
@@ -3462,13 +3485,7 @@ function library:AwardChar(job, char, talk)
 
         local new_mob = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mId, level, "", -1)
         new_mob.Nickname = nickname
-        _DATA.Save.ActiveTeam.Assembly:Add(new_mob)
-
-        UI:ResetSpeaker(false) --disable text noise
-        UI:SetCenter(true)
-        UI:WaitShowDialogue(STRINGS:Format(RogueEssence.StringKey("MSG_RECRUIT"):ToLocal(), self:GetCharacterName(job.Client), GAME:GetTeamName()))
-        UI:SetCenter(false)
-        UI:ResetSpeaker()
+        COMMON.JoinTeamWithFanfare(new_mob, false)
         return true
     end
     return false

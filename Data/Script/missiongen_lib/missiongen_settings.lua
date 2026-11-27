@@ -302,7 +302,7 @@ local settings = {
     --- A list of all types of rewards to be offered to players.
     --- Format: {id = string, weight = integer, min_rank = string}
     --- * id: one of the supported reward types. You can use duplicate values to alter odds depending on job rank.
-    --- Supported reward types are: item, money, item_item, money_item, client, exclusive
+    --- Supported reward types are: item, money, item_item, money_item, client, exclusive, element
     --- * weight: Chance of appearing. Set to 0 or delete altogether to stop a type of reward from being offered.
     --- * min_rank: optional. If set, this type of reward will only be offered if the job is this rank or higher.
     ---@type {id:rewardType, weight:integer, min_rank:string|nil}[]
@@ -311,8 +311,18 @@ local settings = {
         {id = "money", weight = 2},
         {id = "item_item", weight = 3},  -- second item hidden
         {id = "money_item", weight = 1}, -- item is hidden
-        {id = "client", weight = 1, min_rank = "STAR_1"},     -- appears as ???
-        {id = "exclusive", weight = 1, min_rank = "STAR_4"}   -- appears as ???. Award a 1* xcl item of client, or of target if law enforcement mission.
+        {id = "client", weight = 1, job_type = "RESCUE_SELF" },     -- appears as ???
+        {id = "client", weight = 1, job_type = "RESCUE_FRIEND" },     -- appears as ???
+        {id = "client", weight = 6, job_type = "ESCORT" },     -- appears as ???
+        {id = "client", weight = 4, job_type = "EXPLORATION" },     -- appears as ???
+        {id = "client", weight = 2, job_type = "DELIVERY" },     -- appears as ???
+        {id = "client", weight = 3, job_type = "LOST_ITEM" },     -- appears as ???
+        {id = "exclusive", weight = 2, job_type = "OUTLAW"},   -- appears as ???
+        {id = "exclusive", weight = 2, job_type = "OUTLAW_ITEM"},   -- appears as ???
+        {id = "exclusive", weight = 2, job_type = "OUTLAW_ITEM_UNK"},   -- appears as ???
+        {id = "exclusive", weight = 4, job_type = "OUTLAW_FLEE"},   -- appears as ???
+        {id = "exclusive", weight = 6, job_type = "OUTLAW_MONSTER_HOUSE"},   -- appears as ???
+        {id = "element", weight = 1, min_rank = "STAR_1", req_flag = "target_outlaw"}   -- appears as ???
     },
     --- The type of extra reward for all quests. It can be "none", "rank" or "exp". Any other value will result in "none".
     ---@type "none"|"rank"|"exp"
@@ -1237,7 +1247,6 @@ local settings = {
         },
         WANDS_HIGH = {
             {id = "wand_lure", count = 3, weight = 5},
-            {id = "wand_stayaway", count = 3, weight = 5},
             {id = "wand_transfer", count = 3, weight = 5},
             {id = "wand_vanish", count = 3, weight = 5}
         },
@@ -1382,6 +1391,66 @@ local settings = {
             {id = "apricorn_perfect", weight = 1}
         }
     },
+	
+	--- Ids of items rewarded based on element (type) of the client, or target in the case of an outlaw.
+	---@type table<string, string[]>
+	element_items = {
+        bug = {
+			"xcl_element_bug_dust"
+		},
+		dark = {
+			"xcl_element_dark_dust"
+		},
+		dragon = {
+			"xcl_element_dragon_dust"
+		},
+		electric = {
+			"xcl_element_electric_dust"
+		},
+		fairy = {
+			"xcl_element_fairy_dust"
+		},
+		fighting = {
+			"xcl_element_fighting_dust"
+		},
+		fire = {
+			"xcl_element_fire_dust"
+		},
+		flying = {
+			"xcl_element_flying_dust"
+		},
+		ghost = {
+			"xcl_element_ghost_dust"
+		},
+		grass = {
+			"xcl_element_grass_dust"
+		},
+		ground = {
+			"xcl_element_ground_dust"
+		},
+		ice = {
+			"xcl_element_ice_dust"
+		},
+		normal = {
+			"xcl_element_normal_dust"
+		},
+		poison = {
+			"xcl_element_poison_dust"
+		},
+		psychic = {
+			"xcl_element_psychic_dust"
+		},
+		rock = {
+			"xcl_element_rock_dust"
+		},
+		steel = {
+			"xcl_element_steel_dust"
+		},
+		water = {
+			"xcl_element_water_dust"
+		}
+	},
+	
     --- Ids of items that can be used as targets, divided depending on the job type.
     --- Make sure they're either easy enough to obtain or impossible to lose, depending on the job.
     --- Using stackable items is highly discouraged for all job types, as it may result in odd behaviors.
@@ -1437,34 +1506,34 @@ local settings = {
             {id = "TIER_HIGH", weight = 0}
         },
         B = {
-            {id = "TIER_LOW", weight = 2},
+            {id = "TIER_LOW", weight = 4},
             {id = "TIER_MID", weight = 6},
-            {id = "TIER_HIGH", weight = 2}
+            {id = "TIER_HIGH", weight = 0}
         },
         A = {
-            {id = "TIER_LOW", weight = 1},
-            {id = "TIER_MID", weight = 5},
-            {id = "TIER_HIGH", weight = 4}
+            {id = "TIER_LOW", weight = 2},
+            {id = "TIER_MID", weight = 7},
+            {id = "TIER_HIGH", weight = 1}
         },
         S = {
+            {id = "TIER_LOW", weight = 0},
+            {id = "TIER_MID", weight = 7},
+            {id = "TIER_HIGH", weight = 3}
+        },
+        STAR_1 = {
             {id = "TIER_LOW", weight = 0},
             {id = "TIER_MID", weight = 5},
             {id = "TIER_HIGH", weight = 5}
         },
-        STAR_1 = {
+        STAR_2 = {
             {id = "TIER_LOW", weight = 0},
             {id = "TIER_MID", weight = 3},
             {id = "TIER_HIGH", weight = 7}
         },
-        STAR_2 = {
+        STAR_3 = {
             {id = "TIER_LOW", weight = 0},
             {id = "TIER_MID", weight = 1},
             {id = "TIER_HIGH", weight = 9}
-        },
-        STAR_3 = {
-            {id = "TIER_LOW", weight = 0},
-            {id = "TIER_MID", weight = 0},
-            {id = "TIER_HIGH", weight = 10}
         },
         STAR_4 = {
             {id = "TIER_LOW", weight = 0},

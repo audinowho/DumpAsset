@@ -9,7 +9,6 @@
 -- manually. More specifically, you should require this file from inside your mod's
 -- main.lua file.
 
-require 'nebula_mission_board.common'
 require 'origin.services.baseservice'
 
 local MissionTools = Class('MissionTools', BaseService)

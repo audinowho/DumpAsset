@@ -1,4 +1,4 @@
-require 'nebula_mission_board.event_single'
-require 'nebula_mission_board.event_battle'
-require 'nebula_mission_board.event_mapgen'
+require 'mission_board_mod.event_single'
+require 'mission_board_mod.event_battle'
+require 'mission_board_mod.event_mapgen'
 

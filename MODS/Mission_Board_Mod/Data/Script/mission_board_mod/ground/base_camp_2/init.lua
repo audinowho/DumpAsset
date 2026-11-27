@@ -1,4 +1,4 @@
-﻿require 'nebula_mission_board.common'
+﻿require 'mission_board_mod.common'
 
 
 local base_camp_2_bulletin = {}

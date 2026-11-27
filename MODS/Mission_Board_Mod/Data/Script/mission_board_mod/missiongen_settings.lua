@@ -2389,4 +2389,4 @@ settings.AddDungeonSection("champions_road", 0, 19, "STAR_1")
 
 MISSION_GEN_DATA = settings
 
-require 'nebula_mission_board.client_gen'
+require 'mission_board_mod.client_gen'

@@ -77,11 +77,11 @@ globals.ctypes.SleepAttack = luanet.import_type('PMDC.Dungeon.SleepAttack')
 globals.reward_types = {}
 globals.reward_types.item =       {true,  false, false, false, "REWARD_SINGLE"}
 globals.reward_types.money =      {false, false, false, false, "REWARD_SINGLE"}
-globals.reward_types.item_item =  {true,  true,  false, false, "REWARD_DOUBLE"}
+globals.reward_types.item_item =  {true,  true,  false, false, "REWARD_DOUBLE_UNK"}
 globals.reward_types.money_item = {false, true,  false, false, "REWARD_DOUBLE"}
 globals.reward_types.client =     {false, false, false, false, "REWARD_UNKNOWN"}
 globals.reward_types.exclusive =  {true,  false, true,  false, "REWARD_UNKNOWN"}
-globals.reward_types.element =    {false, false, false, true,  "REWARD_UNKNOWN"}
+globals.reward_types.element =    {true, false, false, true,  "REWARD_UNKNOWN"}
 --- Supported job types data
 ---@type table<string,table<jobFlag,boolean>>
 globals.job_types = {}

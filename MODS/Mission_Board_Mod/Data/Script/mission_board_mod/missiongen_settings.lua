@@ -313,13 +313,13 @@ local settings = {
     reward_types = {
         {id = "item", weight = 6},
         {id = "money", weight = 2},
-        {id = "item_item", weight = 3},  -- second item hidden
+        -- {id = "item_item", weight = 3},  -- second item hidden, not used in here
         {id = "money_item", weight = 1}, -- item is hidden
         {id = "client", weight = 1, job_type = "RESCUE_SELF" },     -- appears as ???
         {id = "client", weight = 1, job_type = "RESCUE_FRIEND" },     -- appears as ???
         {id = "client", weight = 6, job_type = "ESCORT" },     -- appears as ???
-        {id = "client", weight = 4, job_type = "EXPLORATION" },     -- appears as ???
-        {id = "client", weight = 2, job_type = "DELIVERY" },     -- appears as ???
+        {id = "client", weight = 3, job_type = "EXPLORATION" },     -- appears as ???
+        {id = "client", weight = 4, job_type = "DELIVERY" },     -- appears as ???
         {id = "client", weight = 3, job_type = "LOST_ITEM" },     -- appears as ???
         {id = "exclusive", weight = 2, job_type = "OUTLAW"},   -- appears as ???
         {id = "exclusive", weight = 2, job_type = "OUTLAW_ITEM"},   -- appears as ???
